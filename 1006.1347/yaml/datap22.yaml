@@ -1,0 +1,46 @@
+independent_variables:
+- header: {name: pout}
+  values:
+  - {value: 0.25}
+  - {value: 0.75}
+  - {value: 1.25}
+  - {value: 1.75}
+  - {value: 2.5}
+  - {value: 4}
+  - {value: 6}
+  - {value: 8.5}
+dependent_variables:
+- header: {name: 1/Ntrig dN/dpout}
+  values:
+  - value: 0.0669093
+    errors:
+    - {symerror: 0.0104948, label : stat}
+    - {symerror: 0.00448192, label : sys}
+  - value: 0.0491522
+    errors:
+    - {symerror: 0.00910624, label : stat}
+    - {symerror: 0.0036591, label : sys}
+  - value: 0.0401119
+    errors:
+    - {symerror: 0.00733649, label : stat}
+    - {symerror: 0.00175676, label : sys}
+  - value: 0.028662
+    errors:
+    - {symerror: 0.00734438, label : stat}
+    - {symerror: 0.00132828, label : sys}
+  - value: 0.0129622
+    errors:
+    - {symerror: 0.00460451, label : stat}
+    - {symerror: 0.000772392, label : sys}
+  - value: 0.00294504
+    errors:
+    - {symerror: 0.00132287, label : stat}
+    - {symerror: 0.000181733, label : sys}
+  - value: 0.000501953
+    errors:
+    - {symerror: 0.000366427, label : stat}
+    - {symerror: 2.97753e-05, label : sys}
+  - value: -7.00359e-07
+    errors:
+    - {symerror: 7.00359e-07, label : stat}
+    - {symerror: 9.1677e-08, label : sys}

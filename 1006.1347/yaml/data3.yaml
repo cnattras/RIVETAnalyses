@@ -1,0 +1,30 @@
+independent_variables:
+- header: {name: x_E}
+  values:
+  - {value: 0.175}
+  - {value: 0.25}
+  - {value: 0.35}
+  - {value: 0.45}
+  - {value: 0.55}
+  - {value: 0.7}
+dependent_variables:
+- header: {name: 1/Ntrig dN/dX_E}
+  values:
+  - value: 2.25349
+    errors:
+    - {symerror: 0.0819547, label : stat}
+  - value: 1.12522
+    errors:
+    - {symerror: 0.0392999, label : stat}
+  - value: 0.454771
+    errors:
+    - {symerror: 0.0245677, label : stat}
+  - value: 0.271041
+    errors:
+    - {symerror: 0.0191504, label : stat}
+  - value: 0.154987
+    errors:
+    - {symerror: 0.0143736, label : stat}
+  - value: 0.0721248
+    errors:
+    - {symerror: 0.00674935, label : stat}

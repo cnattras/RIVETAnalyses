@@ -1,0 +1,170 @@
+comment: |
+  BNL-RHIC.  Correlations of charged hadrons of 1 < pT < 10 GeV/c with high pT direct photons and pi0 mesons in the range 5 < pT < 15 GeV/c are used to study jet fragmentation in the gamma+jet and dijet channels, respectively.  The magnitude of the partonic transverse momentum, kT, is obtained by comparing to a model incorporating a Gaussian kT smearing.  The sensitivity of the associated charged hadron spectra to the underlying fragmentation function is tested and the data are compared to calculations using recent global fit results.  The shape of the direct photon-associated hadron spectrum as well as its charge asymmetry are found to be consistent with a sample dominated by quark-gluon Compton scattering.  No significant evidence of fragmentation photon correlated production is observed within experimental uncertainties.
+record_ids:
+- {id: 857187, type: inspire}
+additional_resources: # additional references (e.g. experiment page for analysis)
+  - {location: "https://www.phenix.bnl.gov/phenix/WWW/info/data/ppg095_data.html", description: "web page with auxiliary material"}
+
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 1.
+name: " Pi0 - Hadron 5 < pT,trigger < 7 GeV/c"
+location: Data from Fig. 9
+description: Away-side charged hadron yield per π 0 trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [5 to 7 GeV/c]}
+ 
+data_file: data1.yaml
+
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 2.
+name: " Pi0 - Hadron 7 < pT,trigger < 9 GeV/c"
+location: Data from Fig. 9
+description: Away-side charged hadron yield per π 0 trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [7 to 9 GeV/c]}
+ 
+data_file: data2.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 3.
+name: " Pi0 - Hadron 9 < pT,trigger < 12 GeV/c"
+location: Data from Fig. 9
+description: Away-side charged hadron yield per π 0 trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [9 to 12 GeV/c]}
+ 
+data_file: data3.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 4.
+name: " Pi0 - Hadron 12 < pT,trigger < 15 GeV/c"
+location: Data from Fig. 9
+description: Away-side charged hadron yield per π 0 trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [12 to 15 GeV/c]}
+ 
+data_file: data4.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 5.
+name: " Isolated Direct Photon - Hadron 5 < pT,trigger < 7 GeV/c"
+location: Data from Fig. 9
+description: Away-side isolated direct photon trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [5 to 7 GeV/c]}
+ 
+data_file: datap1.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 6.
+name: " Isolated Direct Photon - Hadron 7 < pT,trigger < 9 GeV/c"
+location: Data from Fig. 9
+description: Away-side isolated direct photon trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [7 to 9 GeV/c]}
+ 
+data_file: datap2.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 7.
+name: " Isolated Direct Photon - Hadron 9 < pT,trigger < 12 GeV/c"
+location: Data from Fig. 9
+description: Away-side isolated direct photon trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [9 to 12 GeV/c]}
+ 
+data_file: datap3.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 8.
+name: " Isolated Direct Photon - Hadron 12 < pT,trigger < 15 GeV/c"
+location: Data from Fig. 9
+description: Away-side isolated direct photon trigger as a function of xE, which is equivalent to zT in the collinear limit cos(∆φ) = 1. 
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [12 to 15 GeV/c]}
+ 
+data_file: datap4.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 9.
+name: " Pi0 - Hadron 5 < pT,t < 7"
+location: Data from Fig. 12
+description: p_{out} distributions for pi0 trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [5 to 7 GeV/c]}
+ 
+data_file: data21.yaml
+
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 10.
+name: " Pi0 - Hadron 7 < pT,t < 9"
+location: Data from Fig. 12
+description: p_{out} distributions for pi0 trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [7 to 9 GeV/c]}
+ 
+data_file: data22.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 11.
+name: " Pi0 - Hadron 9 < pT,t < 12"
+location: Data from Fig. 12
+description: p_{out} distributions for pi0 trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [9 to 12 GeV/c]}
+ 
+data_file: data23.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 12.
+name: " Pi0 - Hadron 12 < pT,t < 15"
+location: Data from Fig. 12
+description: p_{out} distributions for pi0 trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [12 to 15 GeV/c]}
+ 
+data_file: data24.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 13.
+name: " Isolated Direct Photon - Hadron 5 < pT,t < 7"
+location: Data from Fig. 12
+description: p_{out} distributions for direct photon trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [5 to 7 GeV/c]}
+ 
+data_file: datap21.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 14.
+name: " Isolated Direct Photon - Hadron 7 < pT,t < 9"
+location: Data from Fig. 12
+description: p_{out} distributions for direct photon trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [7 to 9 GeV/c]}
+ 
+data_file: datap22.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 15.
+name: " Isolated Direct Photon - Hadron 9 < pT,t < 12"
+location: Data from Fig. 12
+description: p_{out} distributions for direct photon trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [9 to 12 GeV/c]}
+ 
+data_file: datap23.yaml
+---
+# Start a new YAML document to indicate a new data table.
+# This is Table 16.
+name: " Isolated Direct Photon - Hadron 12 < pT,t < 15"
+location: Data from Fig. 12
+description: p_{out} distributions for direct photon trigger
+keywords: # used for searching, possibly multiple values for each keyword
+  - {name: reactions, values: [12 to 15 GeV/c]}
+ 
+data_file: datap24.yaml
+
