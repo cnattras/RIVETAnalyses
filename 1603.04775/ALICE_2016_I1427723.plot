@@ -5,13 +5,13 @@ YLabel=$\langleN_{\mathrm{part}\rangle$},
 END PLOT
 
 BEGIN PLOT /ALICE_2016_I1427723/d01-x01-y02
-Title= $\langle $d$E_{\mathrm T}/$d$\eta \rangle / (\langle N_{\mathrm{part}}/2\rangle)$ versus $N_{\mathrm{part}}$, $\langle $d$E_{\mathrm T}/$d$\eta \rangle / (\langle N_{\mathrm{quark}}/2\rangle)$, and $\epsilon\tau$ versus $N_{\mathrm{part}}$ at midrapidity calculated from the tracking detectors,.  
+Title= $\langle $d$E_{\mathrm T}/$d$\eta \rangle$ versus centrality  at midrapidity calculated from the tracking detectors,.  
 XLabel=centrality}
 YLabel=$E_{T}$},   
 END PLOT
 
 BEGIN PLOT /ALICE_2016_I1427723/d01-x01-y03
-Title= $\langle $d$E_{\mathrm T}/$d$\eta \rangle / (\langle N_{\mathrm{part}}/2\rangle)$ versus $N_{\mathrm{part}}$, $\langle $d$E_{\mathrm T}/$d$\eta \rangle / (\langle N_{\mathrm{quark}}/2\rangle)$, and $\epsilon\tau$ versus $N_{\mathrm{part}}$ at midrapidity calculated from the tracking detectors,.  
+Title= $\langle $d$E_{\mathrm T}/$d$\eta \rangle / (\langle N_{\mathrm{part}}/2\rangle)$ versus centrality at midrapidity calculated from the tracking detectors,.  
 XLabel=centrality}
 YLabel=$\langle$d$E_{\mathrmT}/$d$\eta\rangle/(\langleN_{\mathrm{part}/2\rangle)$},   
 END PLOT
