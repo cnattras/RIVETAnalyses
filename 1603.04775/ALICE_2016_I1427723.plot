@@ -53,9 +53,9 @@ YLabel=centrality}
 END PLOT
 
 BEGIN PLOT /ALICE_2016_I1427723/d03-x01-y01
-Title= $\langle $d$E_{\mathrm T}/$d$\eta \rangle$/$\langle $d$N_{\mathrm{ch}}/$d$\eta \rangle$ versus$N_{part}$.  
-XLabel=$N_{part}$}
-YLabel=$\langle$d$E_{\mathrmT}/$d$\eta\rangle$/$\langle$d$N_{\mathrm{ch}/$d$\eta,   
+Title= $\langle $d$E_{\mathrm T}/$d$\eta \rangle/\langle $d$N_{\mathrm{ch}}/$d$\eta \rangle$ versus $N_{part}$.  
+XLabel=centrality
+YLabel=$\langle$d$E_{\mathrm T}/$d$\eta\rangle/\langle $d$N_{\mathrm{ch}}/$d$\eta$
 END PLOT
 
 BEGIN PLOT /ALICE_2016_I1427723/d03-x01-y02
