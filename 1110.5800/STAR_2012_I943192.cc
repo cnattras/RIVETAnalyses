@@ -50,12 +50,12 @@ namespace Rivet {
       return -1;
     }
     int GetCentBin(float cent){
-      if(cent<pTCentBins[0]){
+      if(cent<centBins[0]){
 	cerr<<"Warning: cent "<<cent<<" is less than the minimum centrality bin! "<<endl;
 	return -1;
       }
-      for(int i=0;i<numCentPtBins;i++){
-	if(cent<pTCentBins[i+1]) return i;
+      for(int i=0;i<numCentBins;i++){
+	if(cent<centBins[i+1]) return i;
       }
       cerr<<"Warning: cent "<<cent<<" is greater than the maximum centrality bin!"<<endl;
       return -1;
