@@ -1,15 +1,18 @@
+
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
+#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include <fstream>
+#include <iostream>
+#include <math.h>
+#define _USE_MATH_DEFINES
 
+using namespace std;
 namespace Rivet {
 
-
-  /// @brief Add a short analysis description here
   class PHENIX_2009_I815824 : public Analysis {
   public:
 
@@ -17,78 +20,433 @@ namespace Rivet {
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2009_I815824);
 
 
-    /// @name Analysis methods
-    //@{
+    /// name Analysis methods
 
     /// Book histograms and initialise projections before the run
     void init() {
 
       // Initialise and register projections
 
-      // the basic final-state projection: 
-      // all final-state particles within 
-      // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      // the basic final-state projection: all final-state particles within the given eta acceptance
 
-      // the final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
+      const ChargedFinalState cfs(Cuts::abseta < 5 && Cuts::pT > 100*MeV);
+      declare(cfs, "CFS");
 
-      // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // dress the prompt bare leptons with prompt photons within dR < 0.1
-      // apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
-
-      // missing momentum
-      declare(MissingMomentum(fs), "MET");
+      // Declare centrality projection
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
 
       // Book histograms
-      // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
-
+				 book(_h["0111"], 1, 1, 1);
+	 book(_h["0112"], 1, 1, 2);
+	 book(_h["0211"], 2, 1, 1);
+	 book(_h["0212"], 2, 1, 2);
+	 book(_h["0311"], 3, 1, 1);
+	 book(_h["0312"], 3, 1, 2);
+	 book(_h["0411"], 4, 1, 1);
+	 book(_h["0412"], 4, 1, 2);
+	 book(_h["0511"], 5, 1, 1);
+	 book(_h["0512"], 5, 1, 2);
+	 book(_h["0611"], 6, 1, 1);
+	 book(_h["0612"], 6, 1, 2);
+	 book(_h["0711"], 7, 1, 1);
+	 book(_h["0712"], 7, 1, 2);
+	 book(_h["0811"], 8, 1, 1);
+	 book(_h["0812"], 8, 1, 2);
+	 book(_h["0911"], 9, 1, 1);
+	 book(_h["0912"], 9, 1, 2);
+	 book(_h["1011"], 10, 1, 1);
+	 book(_h["1012"], 10, 1, 2);
+	 book(_h["1111"], 11, 1, 1);
+	 book(_h["1112"], 11, 1, 2);
+	 book(_h["1211"], 12, 1, 1);
+	 book(_h["1212"], 12, 1, 2);
+	 book(_h["1311"], 13, 1, 1);
+	 book(_h["1411"], 14, 1, 1);
+	 book(_h["1511"], 15, 1, 1);
+	 book(_h["1611"], 16, 1, 1);
+	 book(_h["1711"], 17, 1, 1);
+	 book(_h["1811"], 18, 1, 1);
+	 book(_h["1911"], 19, 1, 1);
+	 book(_h["2011"], 20, 1, 1);
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      /// @todo Do the event by event analysis here
+      const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
 
-      // retrieve dressed leptons, sorted by pT
-      vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
+      // Prepare centrality projection and value
+      const CentralityProjection& centrProj = apply<CentralityProjection>(event, "V0M");
+      double centr = centrProj();
 
-      // retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+      // Veto event for too large centralities since those are not used in the analysis at all
+      if ((centr < 0.) || (centr > 80.)){
+        vetoEvent;
+      }
 
-      // remove all jets within dR < 0.2 of a dressed lepton
-      idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
 
-      // select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, [](const Jet& jet) {
-        return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-      });
+    // loop over charged final state particles
+      for(const Particle& p : cfs.particles()) {
 
-      // veto event if there are no b-jets
-      if (bjets.empty())  vetoEvent;
+	       // protections against mc generators decaying long-lived particles
+	        if (!( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
+	           p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
+	           p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
+	           p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
+	           p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
+	           p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
+	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+	        {
+          if (centr >= 0. && centr <= 5.) {
+            switch (p.pid()) {
+              	case 211: // pi+
+              	  {
 
-      // apply a missing-momentum cut
-      if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
+              	    break;
+              	  }
+              	case -211: // pi-
+              	  {
 
-      // fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
+              	    break;
+              	  }
+              	case 2212: // proton
+              	  {
+
+              	    break;
+              	  }
+              	case -2212: // anti-proton
+                  {
+
+              	    break;
+              	  }
+              	case 321: // K+
+              	  {
+
+              	    break;
+              	  }
+              	case -321: // K-
+              	  {
+
+              	    break;
+              	  }
+              }
+          }
+
+          if (centr > 5. && centr <= 10.) {
+            	switch (p.pid()) {
+                      	case 211: // pi+
+                      	  {
+
+                      	    break;
+                      	  }
+                      	case -211: // pi-
+                      	  {
+
+                      	    break;
+                      	  }
+                      	case 2212: // proton
+                      	  {
+
+                      	    break;
+                      	  }
+                      	case -2212: // anti-proton
+                          {
+
+                      	    break;
+                      	  }
+                      	case 321: // K+
+                      	  {
+
+                      	    break;
+                      	  }
+                      	case -321: // K-
+                      	  {
+
+                      	    break;
+                      	  }
+                }
+            }
+
+          if (centr > 10. && centr <= 20.) {
+            switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+
+          if (centr > 20. && centr <= 30.) {
+              switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+          if (centr > 30. && centr <= 40.) {
+              switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+          if (centr > 40. && centr <= 50.) {
+              switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+          if (centr > 50. && centr <= 60.) {
+              switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+          if (centr > 60. && centr <= 70.) {
+            switch (p.pid()) {
+              case 211: // pi+
+                {
+
+                  break;
+                }
+              case -211: // pi-
+                {
+
+                  break;
+                }
+              case 2212: // proton
+                {
+
+                  break;
+                }
+              case -2212: // anti-proton
+                {
+
+                  break;
+                }
+              case 321: // K+
+                {
+
+                  break;
+                }
+              case -321: // K-
+                {
+
+                  break;
+                }
+            }
+          }
+          if (centr > 70. && centr <= 80.) {
+              switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+          if (centr > 80. && centr <= 90.) {
+              switch (p.pid()) {
+                case 211: // pi+
+                  {
+
+                    break;
+                  }
+                case -211: // pi-
+                  {
+
+                    break;
+                  }
+                case 2212: // proton
+                  {
+
+                    break;
+                  }
+                case -2212: // anti-proton
+                  {
+
+                    break;
+                  }
+                case 321: // K+
+                  {
+
+                    break;
+                  }
+                case -321: // K-
+                  {
+
+                    break;
+                  }
+              }
+          }
+
+
+	          // particle switch
+         } // primaty pi, K, p only
+
+      } // particle loop
 
     }
 
@@ -96,20 +454,20 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      normalize(_h["YYYY"]); // normalize to unity
-      scale(_h["ZZZZ"], crossSection()/picobarn/sumOfWeights()); // norm to cross section
+      double norm = sumOfWeights() *2.*M_PI;
+      //scale(_h["0111"], 1./norm);
 
     }
 
     //@}
 
 
-    /// @name Histograms
-    //@{
+    /// name Histograms
+    //{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    //@}
+    //}
 
 
   };
