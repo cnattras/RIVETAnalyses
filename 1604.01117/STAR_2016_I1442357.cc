@@ -42,19 +42,19 @@ namespace Rivet {
     /// name Analysis methods
 int GetTrigBin(float trigpT){
       if(trigpT<pTTrigBins[0]){
-  cerr<<"Warning: trigpT "<<trigpT<<" is less than the minimum trigger momentum!"<<endl;
-  return -1;
+        cerr<<"Warning: trigpT "<<trigpT<<" is less than the minimum trigger momentum!"<<endl;
+        return -1;
       }
       for(int i=0;i<numTrigPtBins;i++){
-  if(trigpT<pTTrigBins[i+1]) return i;
+        if(trigpT<pTTrigBins[i+1]) return i;
       }
       cerr<<"Warning: trigpT "<<trigpT<<" is greater than the maximum trigger momentum!"<<endl;
       return -1;
     }
     int GetAssocBin(float assocpT){
       if(assocpT<pTAssocBins[0]){
-  cerr<<"Warning: assocpT "<<assocpT<<" is less than the minimum associated momentum! "<<endl;
-  return -1;
+        cerr<<"Warning: assocpT "<<assocpT<<" is less than the minimum associated momentum! "<<endl;
+        return -1;
       }
       for(int i=0;i<numAssocPtBins;i++){
         if(assocpT<pTAssocBins[i+1]) return i;
@@ -64,11 +64,11 @@ int GetTrigBin(float trigpT){
     }
     int GetCentBin(float cent){
       if(cent<centBins[0]){
-  cerr<<"Warning: cent "<<cent<<" is less than the minimum centrality bin! "<<endl;
-  return -1;
+        cerr<<"Warning: cent "<<cent<<" is less than the minimum centrality bin! "<<endl;
+        return -1;
       }
       for(int i=0;i<numCentBins;i++){
-  if(cent<centBins[i+1]) return i;
+        if(cent<centBins[i+1]) return i;
       }
       cerr<<"Warning: cent "<<cent<<" is greater than the maximum centrality bin!"<<endl;
       return -1;
@@ -80,12 +80,11 @@ int GetTrigBin(float trigpT){
 
       // the basic final-state projection: all final-state particles within the given eta acceptance
 
-      const ChargedFinalState cfs(Cuts::abseta < 5 && Cuts::pT > 100*MeV); /////// LOOK IN PAPER TO FIGURE OUT CUTS**********
+      
+      const ChargedFinalState cfs(Cuts::abseta < 1.0 && Cuts::pT > 1*GeV);
       declare(cfs, "CFS");
-      ////const ChargedFinalState cfs(Cuts::abseta < 1.0 && Cuts::pT > 1*GeV);
-      ////declare(cfs, "CFS");
-      ////const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
-      ////declare(cfsTrig, "CFSTrig");
+      const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
+      declare(cfsTrig, "CFSTrig");
       // FinalState of prompt photons and bare muons and electrons in the event
       PromptFinalState photons(Cuts::abspid == PID::PHOTON);
       // pi0 also
@@ -98,6 +97,7 @@ int GetTrigBin(float trigpT){
       // Book histograms
 
 	 //*****FIGURE 1, Delta_phi(rad) // The Azimuthal correlation functions of charged hadrons per trigger,12 < pT^trig < 20 GeV/c
+   //per trigger Yields (rad^-1)
    //Data from Fig. 1a
    book(_h["0111"], 1, 1, 1); //AuAu, 1.2<pT^assoc<3 GeV/c, gamma
    book(_h["0211"], 2, 1, 1); //AuAu, 1.2<pT^assoc<3 GeV/c, pi0
@@ -112,6 +112,7 @@ int GetTrigBin(float trigpT){
    book(_h["0811"], 8, 1, 1); //pp, 3<pT^assoc<5 GeV/c, pi0
    
    //*****FIGURE 2, zT //pi0-hadron correlations**************************************************
+   //D(zT)
    //Data from Fig. 2a
    book(_h["0911"], 9, 1, 1);  //Away-side, Au+Au
    book(_h["1011"], 10, 1, 1); //Away-side, p+p
@@ -120,21 +121,26 @@ int GetTrigBin(float trigpT){
    book(_h["1211"], 12, 1, 1); //Near-side, p+p
    
    //*****FIGURE 3, zT //Direct Photon-hadron correlations****************************************
+   //D(zT)
    book(_h["1311"], 13, 1, 1); //Away-side, AuAu 
    book(_h["1411"], 14, 1, 1); //Away-side, pp
    
    //*****FIGURE 4, zT_corr **********************************************************************
+   //D(zT_Corr)
    book(_h["1511"], 15, 1, 1); //Pi0-hadron correlations, Away-side, pp
    
    //*****FIGURE 5, zT ***************************************************************************
+   //I_AA
    book(_h["1611"], 16, 1, 1); //gamma, Away-side, I_AA
    book(_h["1711"], 17, 1, 1); //pi0, Away-side, I_AA
    
    //*****FIGURE 6, zT ***************************************************************************
+   //Ratio
    book(_h["1811"], 18, 1, 1); //gamma
    book(_h["1911"], 19, 1, 1); //pi0
    
    //*****FIGURE 7 *******************************************************************************
+   //I_AA
    book(_h["2011"], 20, 1, 1); //gamma, Away-side, I_AA (pT^trig)
    book(_h["2111"], 21, 1, 1); //gamma, Away-side, I_AA (pT^assoc)
    
