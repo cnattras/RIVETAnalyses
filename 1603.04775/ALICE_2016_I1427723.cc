@@ -102,6 +102,13 @@ namespace Rivet {
 	//nEvents[centralityBins[i]] = bookCounter("nEvents_" + toString(i));
 	//nCh[centralityBins[i]] = bookCounter("nCh_" + toString(i));
       //}
+      //for (int i = 0;i < nCentralityBins; ++i)
+      //{
+      // book(nEvents[centralityBins[i]], "nEvents_" + toString(i)); 
+      //book(nEvents[centralityBins[i]], "nCh_" + toString(i)); 
+	//nEvents[centralityBins[i]] = bookCounter("nEvents_" + toString(i));
+	//nCh[centralityBins[i]] = bookCounter("nCh_" + toString(i));
+      //}
     }
 
 
@@ -119,13 +126,16 @@ namespace Rivet {
         vetoEvent;
       }
 
-//       // Find the correct sow.
-//       auto eventsItr = nEvents.upper_bound(centr);
-//       if (eventsItr == nEvents.end()) return;
-//       eventsItr->second->fill();
+//       // Find the correct centrality bin and count the number of events
+      //auto eventsItr = nEvents.upper_bound(centr);
+       //if (eventsItr == nEvents.end()) return;
+       //eventsItr->second->fill();
 
       //cout<<"Hi"<<endl;
       //calculate ET in the event
+      int centbin = ((int)centr/2.5);
+      float mynpart = 1;
+      if(centbin<nCentralityBins) mynpart = npart[centbin];
       float et = 0;
       for(const Particle& p : fs.particles()) {
 	et = et+ p.momentum().Et()/GeV;
@@ -135,10 +145,10 @@ namespace Rivet {
 	mult++;
       }
       _h["et"]->fill(centr,et);
-      _h["etovernpart"]->fill(centr,et);
-      _h["etovernch"]->fill(centr,et);
+      _h["etovernpart"]->fill(centr,et/(mynpart/2));
+      _h["etovernch"]->fill(centr,et/mult);
       //ANTONIO - this is where I would fill the event and Nch histograms
-      cout<<"et "<<et<<" mult "<<mult<<" et/mult "<<et/mult<<endl;
+      //cout<<"et "<<et<<" mult "<<mult<<" et/mult "<<et/mult<<" centrality "<<centr<<" cent bin "<<((int)centr/2.5)<<endl;
     }
 
 
@@ -155,8 +165,9 @@ namespace Rivet {
     vector<double> npart;
     /// @name Histograms
     //@{
-    map<string, Histo1DPtr> _h;
+    map<string, Profile1DPtr> _h;
     //map<string, Profile1DPtr> _p;
+    //map<double, CounterPtr> nEvents;
     //map<double, CounterPtr> nEvents;
     //map<double, CounterPtr> nCh;
     //@}

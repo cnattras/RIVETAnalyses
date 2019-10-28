@@ -14,7 +14,8 @@ static const int numTrigPtBins = 7;
 static const float pTTrigBins[] = {2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0};
 static const int numAssocPtBins = 9;
 static const float pTAssocBins[] = {1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0};
-
+static const int numCentBins = 9;
+static const int centBins[] = {0,5,10,20, 30,40,50,60, 70,80};
 using namespace std;
 namespace Rivet {
 
@@ -26,6 +27,39 @@ namespace Rivet {
 
 
     /// name Analysis methods
+    int GetTrigBin(float trigpT){
+      if(trigpT<pTTrigBins[0]){
+	cerr<<"Warning: trigpT "<<trigpT<<" is less than the minimum trigger momentum!"<<endl;
+	return -1;
+      }
+      for(int i=0;i<numTrigPtBins;i++){
+	if(trigpT<pTTrigBins[i+1]) return i;
+      }
+      cerr<<"Warning: trigpT "<<trigpT<<" is greater than the maximum trigger momentum!"<<endl;
+      return -1;
+    }
+    int GetAssocBin(float assocpT){
+      if(assocpT<pTAssocBins[0]){
+	cerr<<"Warning: assocpT "<<assocpT<<" is less than the minimum associated momentum! "<<endl;
+	return -1;
+      }
+      for(int i=0;i<numAssocPtBins;i++){
+	if(assocpT<pTAssocBins[i+1]) return i;
+      }
+      cerr<<"Warning: assocpT "<<assocpT<<" is greater than the maximum associated momentum!"<<endl;
+      return -1;
+    }
+    int GetCentBin(float cent){
+      if(cent<centBins[0]){
+	cerr<<"Warning: cent "<<cent<<" is less than the minimum centrality bin! "<<endl;
+	return -1;
+      }
+      for(int i=0;i<numCentBins;i++){
+	if(cent<centBins[i+1]) return i;
+      }
+      cerr<<"Warning: cent "<<cent<<" is greater than the maximum centrality bin!"<<endl;
+      return -1;
+    }
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -38,6 +72,8 @@ namespace Rivet {
       declare(cfs, "CFS");
       const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
       declare(cfsTrig, "CFSTrig");
+      // FinalState of prompt photons and bare muons and electrons in the event
+      //PromptFinalState photons(Cuts::abspid == PID::PHOTON);
 
       // Declare centrality projection
       //LATER FIX TO USE STAR
@@ -49,112 +85,131 @@ namespace Rivet {
       //correlation functions in Au-Au before and after track merging, demonstrates the method
       //book(_h["0211"], 2, 1, 1);
       //book(_h["0212"], 2, 1, 2);
-      //sample correlation functions in delta eta before background subtraction
+      //Order of histograms:
+      //Cu+Cu 62.4 GeV 0-60%
+      //Au+Au 62.4 GeV 0-80$
+      //d+Au 200 GeV
+      //Cu+Cu 200 GeV 0-60%
+      //Au+Au 200 GeV 40-80%
+      //Au+Au 200 GeV 0-12%
+      //For Npart histogram, 5th data set is all Au+Au and centrality bin ranges are not relevant
+      //sample correlation functions in delta eta before background subtraction (Fig. 5)
       book(_h["0311"], 3, 1, 1);
       book(_h["0312"], 3, 1, 2);
-	 book(_h["0313"], 3, 1, 3);
-	 book(_h["0314"], 3, 1, 4);
-	 book(_h["0315"], 3, 1, 5);
-	 book(_h["0316"], 3, 1, 6);
-	 //sample correlation functions in delta phi before background subtraction
-	 book(_h["0411"], 4, 1, 1);
-	 book(_h["0412"], 4, 1, 2);
-	 book(_h["0413"], 4, 1, 3);
-	 book(_h["0414"], 4, 1, 4);
-	 book(_h["0415"], 4, 1, 5);
-	 book(_h["0416"], 4, 1, 6);
-	 //sample correlation functions in delta eta after background subtraction	 
-	 book(_h["0511"], 5, 1, 1);
-	 book(_h["0512"], 5, 1, 2);
-	 book(_h["0513"], 5, 1, 3);
-	 book(_h["0514"], 5, 1, 4);
-	 book(_h["0515"], 5, 1, 5);
-	 book(_h["0516"], 5, 1, 6);
-	 //sample correlation functions in delta phi before background subtraction
-	 book(_h["0611"], 6, 1, 1);
-	 book(_h["0612"], 6, 1, 2);
-	 book(_h["0613"], 6, 1, 3);
-	 book(_h["0614"], 6, 1, 4);
-	 book(_h["0615"], 6, 1, 5);
-	 book(_h["0616"], 6, 1, 6);
-	 //
-	 book(_h["0711"], 7, 1, 1);
-	 book(_h["0811"], 8, 1, 1);
-	 book(_h["0911"], 9, 1, 1);
-	 book(_h["1011"], 10, 1, 1);
-	 book(_h["1111"], 11, 1, 1);
-	 book(_h["1211"], 12, 1, 1);
-	 book(_h["1212"], 12, 1, 2);
-	 book(_h["1213"], 12, 1, 3);
-	 book(_h["1214"], 12, 1, 4);
-	 book(_h["1215"], 12, 1, 5);
-	 book(_h["1216"], 12, 1, 6);
-	 book(_h["1217"], 12, 1, 7);
-	 book(_h["1218"], 12, 1, 8);
-	 book(_h["1311"], 13, 1, 1);
-	 book(_h["1312"], 13, 1, 2);
-	 book(_h["1313"], 13, 1, 3);
-	 book(_h["1314"], 13, 1, 4);
-	 book(_h["1315"], 13, 1, 5);
-	 book(_h["1316"], 13, 1, 6);
-	 book(_h["1317"], 13, 1, 7);
-	 book(_h["1318"], 13, 1, 8);
-	 book(_h["1411"], 14, 1, 1);
-	 book(_h["1412"], 14, 1, 2);
-	 book(_h["1413"], 14, 1, 3);
-	 book(_h["1414"], 14, 1, 4);
-	 book(_h["1415"], 14, 1, 5);
-	 book(_h["1416"], 14, 1, 6);
-	 book(_h["1417"], 14, 1, 7);
-	 book(_h["1418"], 14, 1, 8);
-	 book(_h["1511"], 15, 1, 1);
-	 book(_h["1512"], 15, 1, 2);
-	 book(_h["1513"], 15, 1, 3);
-	 book(_h["1514"], 15, 1, 4);
-	 book(_h["1515"], 15, 1, 5);
-	 book(_h["1516"], 15, 1, 6);
-	 book(_h["1517"], 15, 1, 7);
-	 book(_h["1518"], 15, 1, 8);
-	 book(_h["1611"], 16, 1, 1);
-	 book(_h["1711"], 17, 1, 1);
-	 book(_h["1811"], 18, 1, 1);
-	 book(_h["1911"], 19, 1, 1);
-	 book(_h["2011"], 20, 1, 1);
-	 book(_h["2111"], 21, 1, 1);
-	 book(_h["2112"], 21, 1, 2);
-	 book(_h["2113"], 21, 1, 3);
-	 book(_h["2114"], 21, 1, 4);
-	 book(_h["2115"], 21, 1, 5);
-	 book(_h["2116"], 21, 1, 6);
-	 book(_h["2117"], 21, 1, 7);
-	 book(_h["2118"], 21, 1, 8);
-	 book(_h["2211"], 22, 1, 1);
-	 book(_h["2212"], 22, 1, 2);
-	 book(_h["2213"], 22, 1, 3);
-	 book(_h["2214"], 22, 1, 4);
-	 book(_h["2215"], 22, 1, 5);
-	 book(_h["2216"], 22, 1, 6);
-	 book(_h["2217"], 22, 1, 7);
-	 book(_h["2218"], 22, 1, 8);
-	 book(_h["2311"], 23, 1, 1);
-	 book(_h["2411"], 24, 1, 1);
-	 book(_h["2511"], 25, 1, 1);
-	 book(_h["2611"], 26, 1, 1);
-	 book(_h["2711"], 27, 1, 1);
-	 book(_h["2811"], 28, 1, 1);
-	 book(_h["2911"], 29, 1, 1);
-	 book(_h["3011"], 30, 1, 1);
-	 book(_h["3111"], 31, 1, 1);
-	 book(_h["3211"], 32, 1, 1);
-	 book(_h["3311"], 33, 1, 1);
-	 book(_h["3411"], 34, 1, 1);
-	 book(_h["3511"], 35, 1, 1);
-	 book(_h["3611"], 36, 1, 1);
-	 book(_h["3711"], 37, 1, 1);
-	 book(_h["3811"], 38, 1, 1);
-	 book(_h["3911"], 39, 1, 1);
-	 book(_h["4011"], 40, 1, 1);
-	 //Add declaration of histograms for correlation functions with all correlation functions
+      book(_h["0313"], 3, 1, 3);
+      book(_h["0314"], 3, 1, 4);
+      book(_h["0315"], 3, 1, 5);
+      book(_h["0316"], 3, 1, 6);
+      //sample correlation functions in delta phi before background subtraction (Fig. 6)
+      book(_h["0411"], 4, 1, 1);
+      book(_h["0412"], 4, 1, 2);
+      book(_h["0413"], 4, 1, 3);
+      book(_h["0414"], 4, 1, 4);
+      book(_h["0415"], 4, 1, 5);
+      book(_h["0416"], 4, 1, 6);
+      //sample correlation functions in delta eta after background subtraction	  (Fig. 7)
+      book(_h["0511"], 5, 1, 1);
+      book(_h["0512"], 5, 1, 2);
+      book(_h["0513"], 5, 1, 3);
+      book(_h["0514"], 5, 1, 4);
+      book(_h["0515"], 5, 1, 5);
+      book(_h["0516"], 5, 1, 6);
+      //sample correlation functions in delta phi before background subtraction (Fig. 7)
+      book(_h["0611"], 6, 1, 1);
+      book(_h["0612"], 6, 1, 2);
+      book(_h["0613"], 6, 1, 3);
+      book(_h["0614"], 6, 1, 4);
+      book(_h["0615"], 6, 1, 5);
+      book(_h["0616"], 6, 1, 6);
+      //yield vs Npart (Fig. 8)
+      book(_h["0711"], 7, 1, 1);
+      book(_h["0811"], 8, 1, 1);
+      book(_h["0911"], 9, 1, 1);
+      book(_h["1011"], 10, 1, 1);
+      book(_h["1111"], 11, 1, 1);
+      //yield vs pTtrig (Fig. 9)
+      book(_h["1211"], 12, 1, 1);
+      book(_h["1212"], 12, 1, 2);
+      book(_h["1213"], 12, 1, 3);
+      book(_h["1214"], 12, 1, 4);
+      book(_h["1215"], 12, 1, 5);
+      book(_h["1216"], 12, 1, 6);
+      book(_h["1217"], 12, 1, 7);
+      book(_h["1218"], 12, 1, 8);
+      //Yield vs pTassoc (Fig. 10).  Commented out histograms are PYTHIA
+      //book(_h["1311"], 13, 1, 1);
+      book(_h["1312"], 13, 1, 2);
+      book(_h["1313"], 13, 1, 3);
+      //book(_h["1314"], 13, 1, 4);
+      book(_h["1315"], 13, 1, 5);
+      book(_h["1316"], 13, 1, 6);
+      book(_h["1317"], 13, 1, 7);
+      book(_h["1318"], 13, 1, 8);
+      //Delta Phis Widths vs pTtrigger (Fig. 11a).  PYTHIA commended out.
+      //book(_h["1411"], 14, 1, 1);
+      book(_h["1412"], 14, 1, 2);
+      book(_h["1413"], 14, 1, 3);
+      //book(_h["1414"], 14, 1, 4);
+      book(_h["1415"], 14, 1, 5);
+      book(_h["1416"], 14, 1, 6);
+      book(_h["1417"], 14, 1, 7);
+      book(_h["1418"], 14, 1, 8);
+      //Delta Phis Widths vs pTassoc (Fig. 11b).  PYTHIA commended out.
+      //book(_h["1511"], 15, 1, 1);
+      book(_h["1512"], 15, 1, 2);
+      book(_h["1513"], 15, 1, 3);
+      //book(_h["1514"], 15, 1, 4);
+      book(_h["1515"], 15, 1, 5);
+      book(_h["1516"], 15, 1, 6);
+      book(_h["1517"], 15, 1, 7);
+      book(_h["1518"], 15, 1, 8);
+      //Delta Phis Widths vs Npart (Fig. 11c).
+      book(_h["1611"], 16, 1, 1);
+      book(_h["1711"], 17, 1, 1);
+      book(_h["1811"], 18, 1, 1);
+      book(_h["1911"], 19, 1, 1);
+      book(_h["2011"], 20, 1, 1);
+      //Delta Eta Widths vs pTtrig (Fig. 11d).  PYTHIA commended out.
+      //book(_h["2111"], 21, 1, 1);
+      book(_h["2112"], 21, 1, 2);
+      book(_h["2113"], 21, 1, 3);
+      //book(_h["2114"], 21, 1, 4);
+      book(_h["2115"], 21, 1, 5);
+      book(_h["2116"], 21, 1, 6);
+      book(_h["2117"], 21, 1, 7);
+      book(_h["2118"], 21, 1, 8);
+      //Delta Eta Widths vs pTassoc (Fig. 11e).  PYTHIA commended out.
+      //book(_h["2211"], 22, 1, 1);
+      book(_h["2212"], 22, 1, 2);
+      book(_h["2213"], 22, 1, 3);
+      //book(_h["2214"], 22, 1, 4);
+      book(_h["2215"], 22, 1, 5);
+      book(_h["2216"], 22, 1, 6);
+      book(_h["2217"], 22, 1, 7);
+      book(_h["2218"], 22, 1, 8);
+      //Delta Eta Widths vs Npart (Fig. 11f)
+      book(_h["2311"], 23, 1, 1);
+      book(_h["2411"], 24, 1, 1);
+      book(_h["2511"], 25, 1, 1);
+      book(_h["2611"], 26, 1, 1);
+      book(_h["2711"], 27, 1, 1);
+      //Figure 12 - ridge yields, obsolete, not implementing!
+      //book(_h["2811"], 28, 1, 1);
+      //book(_h["2911"], 29, 1, 1);
+      //book(_h["3011"], 30, 1, 1);
+      //book(_h["3111"], 31, 1, 1);
+      //Figure 13 - ridge/jet yields, obsolete, not implementing!
+      //book(_h["3211"], 32, 1, 1);
+      //book(_h["3311"], 33, 1, 1);
+      //book(_h["3411"], 34, 1, 1);
+      //book(_h["3511"], 35, 1, 1);
+      //Fig. 14 v3^2/v2^2, mostly obsolete but not easy to implement anyways - not implementing!
+      //book(_h["3611"], 36, 1, 1);
+      //book(_h["3711"], 37, 1, 1);
+      //book(_h["3811"], 38, 1, 1);
+      //book(_h["3911"], 39, 1, 1);
+      //book(_h["4011"], 40, 1, 1);
+      //Add declaration of histograms for correlation functions with all correlation functions
     }
 
 
@@ -173,6 +228,7 @@ namespace Rivet {
         vetoEvent;
       }
       cout<<"Hi"<<endl;
+      int mycb = GetCentBin(centr);
 
       vector<int> triggerPhis[numTrigPtBins];
     // loop over charged final state particles
@@ -203,12 +259,13 @@ namespace Rivet {
 			     pAssoc.hasAncestor(3334) || pAssoc.hasAncestor(-3334) ))    // Omega-/+
 			{
 			  if( abs(pAssoc.pid())==211 || abs(pAssoc.pid())==2212 || abs(pAssoc.pid())==321){
+			    int mybin = GetTrigBin(pTrig.pt());
+			    int mybina = GetAssocBin(pAssoc.pt());
 
 			    //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
-
 			    double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
 			    double dEta = deltaEta(pTrig, pAssoc);
-			    cout<<" pTTrig "<<pTrig.momentum().pt()<<" pTassoc "<<pAssoc.momentum().pt()<<"dphi "<<dPhi<<" dEta "<<dEta<<endl;
+			    cout<<" pTTrig "<<pTrig.momentum().pt()<<" pTassoc "<<pAssoc.momentum().pt()<<"dphi "<<dPhi<<" dEta "<<dEta<<" trigpT bin "<<mybin<<" bina "<<mybina<<endl;
 			    //for this analysis we divide by the acceptance in delta eta as well when we fill
 			    double acceptance  = -dEta/2.0 + 1.0;
 			    //fill histogram with 1.0/acceptance
