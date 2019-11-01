@@ -3,7 +3,7 @@
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
 #include "Rivet/Projections/ImpactParameterProjection.hh"
-#include "Rivet/Projections/RHICCentrality.hh"
+#include "../RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
 namespace Rivet {  

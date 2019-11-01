@@ -8,7 +8,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector> 
-#include "Rivet/Projections/RHICCentrality.hh"
+#include "RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
 using namespace std;
