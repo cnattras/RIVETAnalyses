@@ -3,6 +3,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
 #include <fstream>
@@ -40,7 +41,19 @@ namespace Rivet {
 
 
     /// name Analysis methods
-int GetTrigBin(float trigpT){
+    // zT
+    int GetzTBin(float zT){
+      if(zT<zTBins[0]){
+        cerr<<"Warning: zT "<<zT<<" is less than the minimum zT!"<<endl;
+        return -1;
+      }
+      for(int i=0;i<numzTBins;i++){
+        if(zT<zTBins[i+1]) return i;
+      }
+      cerr<<"Warning: zT "<<zT<<" is greater than the maximum zT!"<<endl;
+      return -1;
+  }
+    int GetTrigBin(float trigpT){
       if(trigpT<pTTrigBins[0]){
         cerr<<"Warning: trigpT "<<trigpT<<" is less than the minimum trigger momentum!"<<endl;
         return -1;
@@ -86,7 +99,8 @@ int GetTrigBin(float trigpT){
       const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
       declare(cfsTrig, "CFSTrig");
       // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
+      const PromptFinalState pfsTrig(Cuts::abspid == PID::PHOTON);
+      declare(pfsTrig, "PFSTrig");
       // pi0 also
 
 
@@ -151,7 +165,7 @@ int GetTrigBin(float trigpT){
     void analyze(const Event& event) {
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      ///////const ChargedFinalState& cfsTrig = apply<ChargedFinalState>(event, "CFSTrig");
+      const PromptFinalState& pfsTrig = apply<PromptFinalState>(event, "PFSTrig");
 
 
       /// DO NOT MESS WITH THIS
@@ -183,9 +197,10 @@ int GetTrigBin(float trigpT){
 	           p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
 	           p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
 	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
-	        
-      } // particle loop
+	        {
 
+      } // particle loop
+    }
     }
 
 
