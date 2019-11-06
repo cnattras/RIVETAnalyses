@@ -337,10 +337,15 @@ namespace Rivet {
           CollSystem = "AuAu";
           nNucleons = 197.;
       }
-      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630) 
+      else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630) 
       {
           CollSystem = "CuCu";
           nNucleons = 63.;
+      }
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) 
+      {
+          CollSystem = "pp";
+          nNucleons = 1.;
       }
       //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
       //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
@@ -348,7 +353,7 @@ namespace Rivet {
       
       string cmsEnergy = "Empty";
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
-      if (fuzzyEquals(sqrtS()/GeV, 62*nNucleons, 1E-3)) cmsEnergy = "62GeV";
+      if (fuzzyEquals(sqrtS()/GeV, 62.3*nNucleons, 1E-3)) cmsEnergy = "62GeV";
       if(cmsEnergy.compare("Empty") == 0) return;
       
       string SysAndEnergy = CollSystem + cmsEnergy;
