@@ -37,9 +37,11 @@ namespace Rivet {
 
       const ChargedFinalState cfs(Cuts::abseta < 5 && Cuts::pT > 100*MeV);
       declare(cfs, "CFS");
+      const ChargedFinalState cfsTrig(Cuts::abseta < 5 && Cuts::pT > 2*GeV);
+      declare(cfsTrig, "CFSTrig");
 
       // Declare centrality projection
-      //declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
 
       // Book histograms 
 	// book(_h["0111"], 1, 1, 1);
@@ -70,22 +72,22 @@ namespace Rivet {
 	//in 40-80% Au+Au collision
 	 book(_h["0611"], 6, 1, 1);
 	 book(_h["0612"], 6, 1, 2);
-	//(Fig.4)
-	//jet-like yeild as a function of trigger particles for charged mesons and charged baryons
-	//in 0-12% Au+Au collision
-	 book(_h["0711"], 7, 1, 1);
-	//(Fig.5)
-	//centrality dependence of the jet-like yield of charged mesons and charged baryons in Cu+Cu
-	//collisions 
-	 book(_h["0811"], 8, 1, 1);
-	//(Fig.5)
-	//centrality dependence of the jet-like yield of charged mesons and charged baryons in Au+Au
-	//collisions
-	 book(_h["0911"], 9, 1, 1);
-	//(Fig.5)
-	//centrality dependence of the jet-like yield of charged mesons and charged baryons in d+Au
-	//collisions
-	 book(_h["1011"], 10, 1, 1);
+// 	//(Fig.4)
+// 	//jet-like yeild as a function of trigger particles for charged mesons and charged baryons
+// 	//in 0-12% Au+Au collision
+// 	 book(_h["0711"], 7, 1, 1);
+// 	//(Fig.5)
+// 	//centrality dependence of the jet-like yield of charged mesons and charged baryons in Cu+Cu
+// 	//collisions 
+// 	 book(_h["0811"], 8, 1, 1);
+// 	//(Fig.5)
+// 	//centrality dependence of the jet-like yield of charged mesons and charged baryons in Au+Au
+// 	//collisions
+// 	 book(_h["0911"], 9, 1, 1);
+// 	//(Fig.5)
+// 	//centrality dependence of the jet-like yield of charged mesons and charged baryons in d+Au
+// 	//collisions
+// 	 book(_h["1011"], 10, 1, 1);
 	//(Fig.6)
 	//jet-like yeild as a function of associated trigger particles for charged mesons and charged
 	//baryons in d+Au and 0-60% Cu+Cu collisions  
