@@ -12,8 +12,8 @@ Authors:
 #- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
 #- '<Example: arXiv:1605.03814>'
 RunInfo: <Describe event types, cuts, and other general generator config tips.>
-Beams: [[Au, Au], [Cu, Cu]]
-Energies: 39400
+Beams: [[Au, Au], [Cu, Cu], [p, p]]
+Energies: [39400, 3931.2, 200]
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
 Options:
  - cent=REF,GEN,IMP,USR
