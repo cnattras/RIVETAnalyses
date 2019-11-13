@@ -43,7 +43,7 @@ namespace Rivet {
       // Declare centrality projection
       declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
 
-      // Book histograms 
+      //       // Book histograms 
 	// book(_h["0111"], 1, 1, 1);
 	//(Fig.2)
 	//correlations functions for charged baryons and charged mesons for 0-20% Cu-Cu collisions
@@ -88,13 +88,13 @@ namespace Rivet {
 // 	//centrality dependence of the jet-like yield of charged mesons and charged baryons in d+Au
 // 	//collisions
 // 	 book(_h["1011"], 10, 1, 1);
-	//(Fig.6)
-	//jet-like yeild as a function of associated trigger particles for charged mesons and charged
-	//baryons in d+Au and 0-60% Cu+Cu collisions  
-	 book(_h["1111"], 11, 1, 1);
-	 book(_h["1112"], 11, 1, 2);
-	 book(_h["1113"], 11, 1, 3);
-	 book(_h["1114"], 11, 1, 4);
+// 	//(Fig.6)
+// 	//jet-like yeild as a function of associated trigger particles for charged mesons and charged
+// 	//baryons in d+Au and 0-60% Cu+Cu collisions  
+ 	 book(_h["1111"], 11, 1, 1);
+ 	 book(_h["1112"], 11, 1, 2);
+ 	 book(_h["1113"], 11, 1, 3);
+ 	 book(_h["1114"], 11, 1, 4);
     }
 
 
