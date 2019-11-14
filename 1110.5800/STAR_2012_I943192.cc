@@ -122,6 +122,92 @@ namespace Rivet {
         else return false;
         
     }
+    
+    double CalculateVn(YODA::Histo1D& hist, int nth)
+    {
+        int nBins = hist.numBins();
+
+        double integral = 0.;
+        
+        double Vn = 0.;
+
+        for (int i = 0; i < nBins; i++)
+        {
+            integral += hist.bin(i).sumW();
+            Vn += hist.bin(i).sumW()*cos(nth*hist.bin(i).xMid());
+        }
+
+        Vn /= integral;
+        return Vn;
+    }
+    
+    int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
+    {
+        int minBin = -1;
+        double minVal = 999.;
+        
+        for(unsigned int i = 0; i < hist.numBins(); i++)
+        {
+            if(hist.bin(i).xMid() < bmin || hist.bin(i).xMid() > bmax) continue;
+            if( (hist.bin(i).sumW()/hist.bin(i).xWidth()) < minVal )
+            {
+                minVal = hist.bin(i).sumW()/hist.bin(i).xWidth();
+                minBin = i;
+            }
+        }
+        
+        return minBin;
+        
+    }
+    
+    void SubtractBackground(YODA::Histo1D& fullHist, YODA::Histo1D& hist, vector<int> n, double bmin, double bmax)
+    {
+        vector<double> Vn(n.size(), 0);
+        for(unsigned int i = 0; i < n.size(); i++)
+        {
+            Vn[i] = CalculateVn(fullHist, n[i]);
+        }
+        
+        double bmod = 1.;
+        int minBin = FindBinAtMinimum(fullHist, bmin, bmax);
+        
+        for(unsigned int i = 0; i < Vn.size(); i++)
+        {
+            bmod += 2*Vn[i]*cos(n[i]*fullHist.bin(minBin).xMid());
+        }
+        
+        double b = (fullHist.bin(minBin).sumW()/fullHist.bin(minBin).xWidth())/bmod; //Divided by bin width in order to generalize it and enable it to be used for histograms with different binning
+                
+        for(unsigned int ibin = 0; ibin < hist.numBins(); ibin++)
+        {
+            double modulation = 1;
+            for(unsigned int i = 0; i < Vn.size(); i++)
+            {
+                modulation += 2*Vn[i]*cos(n[i]*hist.bin(ibin).xMid());
+            }
+            modulation *= b;
+            hist.bin(ibin).scaleW(1 - (modulation/(hist.bin(ibin).sumW()/hist.bin(ibin).xWidth()))); //Divided by bin width to compensate the calculation of "b"
+        }
+        
+    }
+    //Instead of directly taking the calculated Delta_eta, this method takes the center of the bin associated to the Delta_eta.
+    //This is done to avoid values of zero efficiency when |Delta_eta| is close to maxDeltaEta
+    double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
+    {
+        double maxDeltaEta = 2.;
+        
+        int binEta = hist.binIndexAt(deltaEta);
+        
+        if(binEta < 0)
+        {
+            MSG_INFO("Eta is out of bounds!");
+            return 0.;
+        }
+        
+        double binCenterEta = hist.bin(binEta).xMid();
+        
+        return 1. - (1./maxDeltaEta)*abs(binCenterEta);
+    }
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -311,6 +397,10 @@ namespace Rivet {
           book(sow[i],"sow" + to_string(i));
           book(_h["031" + to_string(i)], 3, 1, i);
           book(_h["041" + to_string(i)], 4, 1, i);
+          book(_h["061" + to_string(i)], 6, 1, i);
+          book(_DeltaPhi[i], "DeltaPhi" + to_string(i), 24, 0, M_PI);
+          book(_DeltaPhiSub[i], "DeltaPhiSub" + to_string(i), 24, 0, M_PI);
+          book(_DeltaEta[i], "DeltaEta" + to_string(i), 20, 0, 2);
       }
       
       nEvents.assign(Correlators.size()+1, 0); 
@@ -428,14 +518,19 @@ namespace Rivet {
                 {
                     if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
                     
+                    double etaCorrection = EtaEffCorrection(abs(dEta), *_DeltaEta[corr.GetIndex()]);
+                    
                     if(abs(dPhi) < 0.78)
                     {
-                        _h["031" + to_string(corr.GetIndex())]->fill(-abs(dEta), 0.5);
+                        _h["031" + to_string(corr.GetIndex())]->fill(-abs(dEta), 0.5/etaCorrection);
                     }
                     
-                    if(abs(dEta) < 0.78)
+                    if(abs(dEta) < 1.78)
                     {
                         _h["041" + to_string(corr.GetIndex())]->fill(-abs(dPhi), 0.5);
+                        _h["061" + to_string(corr.GetIndex())]->fill(-abs(dPhi), 0.5/etaCorrection);
+                        _DeltaPhi[corr.GetIndex()]->fill(abs(dPhi), 0.5/etaCorrection);
+                        _DeltaPhiSub[corr.GetIndex()]->fill(abs(dPhi), 0.5/etaCorrection);
                     }
                     
                 } //end of correlators loop 
@@ -457,6 +552,14 @@ namespace Rivet {
             {
                 _h["031" + to_string(i)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
                 _h["041" + to_string(i)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                _h["061" + to_string(i)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                
+                _DeltaPhi[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                _DeltaPhiSub[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                
+                vector<int> n{2,3};
+                SubtractBackground(*_DeltaPhi[i], *_h["061" + to_string(i)], n, 0.63, 2.51);
+                SubtractBackground(*_DeltaPhi[i], *_DeltaPhiSub[i], n, 0.63, 2.51);
             }
             
         }
@@ -473,6 +576,9 @@ namespace Rivet {
     //Histograms and variables
     map<string, Histo1DPtr> _h;
     map<int, CounterPtr> sow;
+    map<int, Histo1DPtr> _DeltaPhi;
+    map<int, Histo1DPtr> _DeltaEta;
+    map<int, Histo1DPtr> _DeltaPhiSub;
     bool fillTrigger = true;
     vector<int> nTriggers;
     vector<int> nEvents;
