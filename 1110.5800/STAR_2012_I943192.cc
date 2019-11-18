@@ -208,6 +208,48 @@ namespace Rivet {
         
         return 1. - (1./maxDeltaEta)*abs(binCenterEta);
     }
+    
+    //bmin and bmax are included in the integral. Range = [bmin, bmax]
+    //Give the min and max bins to calculate the integral
+    double GetYieldInBinRange(YODA::Histo1D& hist, int bmin, int bmax)
+    {
+        double integral = 0.;
+        
+        if(bmin < 0 || bmax >= (int)hist.numBins())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+        }
+        
+        return integral;
+        
+    }
+    
+    //vmin is included in the integral, but vmax is not. Range = [vmin, vmax[
+    //Give the min and max values to calculate the integral
+    double GetYieldInUserRange(YODA::Histo1D& hist, double vmin, double vmax)
+    {
+        double integral = 0.;
+        
+        if(hist.binIndexAt(vmin) < 0 || hist.binIndexAt(vmax) < 0)
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+        
+        for(int i = hist.binIndexAt(vmin); i < hist.binIndexAt(vmax); i++)
+        {
+            integral += hist.bin(i).sumW();
+        }
+        
+        return integral;
+        
+    }
 
     /// Book histograms and initialise projections before the run
     void init() {
