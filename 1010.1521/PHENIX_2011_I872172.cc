@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/ChargedFinalState.hh" // Added by me. Not rivet generated.
+#include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
@@ -189,7 +189,7 @@ namespace Rivet {
         const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
         declare(cfsTrig, "CFSTrig");
         
-        //declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+        declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
         //==================================================
         // Create one correlator for each set of Collisions System / Beam Energy / Centrality Interval / Trigger pT interval / Associated pT interval
@@ -250,9 +250,9 @@ namespace Rivet {
         // Fig 13. "cfsall_00-20 3-4"
         Correlator d3x1y1(311);
         d3x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y1.SetCentrality(0.0, 20.0);
-        d3x1y1.SetTriggerRange(4.0, 7.0);
-        d3x1y1.SetAssociatedRange(3.0, 4.0);
+        d3x1y1.SetCentrality(0.0, 100.0);
+        d3x1y1.SetTriggerRange(0.0, 7.0);
+        d3x1y1.SetAssociatedRange(0.0, 7.0);
         d3x1y1.SetAzimuthalRange(0.0, 15.0);
         Correlators.push_back(d3x1y1);
         
@@ -697,9 +697,11 @@ namespace Rivet {
                 for (Correlator& corr : Correlators) {
                   if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
                     
-                  _h[to_string(corr.GetIndex())]->fill(-abs(dPhi), 0.5);
-                  _DeltaPhi[corr.GetIndex()]->fill(abs(dPhi), 0.5);
-                  _DeltaPhiSub[corr.GetIndex()]->fill(abs(dPhi), 0.5);
+                  if (abs(dEta) < 1.78) {
+                    _h[to_string(corr.GetIndex())]->fill(-abs(dPhi), 0.5);
+                    _DeltaPhi[corr.GetIndex()]->fill(abs(dPhi), 0.5);
+                    _DeltaPhiSub[corr.GetIndex()]->fill(abs(dPhi), 0.5);
+                  }
                 }
               }
             } // End of pAssoc loop.
