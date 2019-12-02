@@ -11,6 +11,7 @@
 #include "RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
+//Christine was here
 using namespace std;
 namespace Rivet {
     
