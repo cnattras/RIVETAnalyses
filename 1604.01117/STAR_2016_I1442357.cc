@@ -13,37 +13,12 @@
 #include "Rivet/Projections/RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
-/*
-// Delta_phi(rad) bins
-static const int numDelta_phiBins = 29;
-static const float Delta_phiBins[] = {-1.4,-1.2,-1.0,-0.8,-0.6,-0.4,-0.2,0.0,0.2,0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.2,2.4,2.6,2.8,3.0,3.2,3.4,3.6,3.8,4.0,4.2,4.4,4.6};
-// zT bins
-static const int numzTBins = 8;
-static const float zTBins[] = {0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9};
-// zT_corr bins 
-static const int numzT_corrBins = 12;
-static const float zT_corrBins[] = {0.09,0.14,0.19,0.24,0.29,0.34,0.39,0.44,0.49,0.54,0.59,0.64,0.69};
-// pT_trig(GeV/c) bins 
-static const int numTrigPtBins = 3;
-static const float pTTrigBins[] = {9.0,12.0,15.0,18.0}; 
-// pT_assoc(GeV/c) bins 
-static const int numAssocPtBins = 3;    
-static const float pTAssocBins[] = {0.0,3.0,6.0,9.0};  
-// centrality bins
-static const int numCentBins = 9;
-static const int centBins[] = {0,5,10,20,30,40,50,60,70,80};
-
-*/
-
 using namespace std;
-
 namespace Rivet {
-   
    //------------------------------------------------------------------------------------------------------------------------ 
     class Correlator {
   
   public:
-    
     /// Constructor
 
     Correlator(int index) {
@@ -138,54 +113,7 @@ namespace Rivet {
 
 
 
-/*
-    /// name Analysis methods
-    // zT
-    int GetzTBin(float zT){
-      if(zT<zTBins[0]){
-        cerr<<"Warning: zT "<<zT<<" is less than the minimum zT!"<<endl;
-        return -1;
-      }
-      for(int i=0;i<numzTBins;i++){
-        if(zT<zTBins[i+1]) return i;
-      }
-      cerr<<"Warning: zT "<<zT<<" is greater than the maximum zT!"<<endl;
-      return -1;
-  }
-    int GetTrigBin(float trigpT){
-      if(trigpT<pTTrigBins[0]){
-        cerr<<"Warning: trigpT "<<trigpT<<" is less than the minimum trigger momentum!"<<endl;
-        return -1;
-      }
-      for(int i=0;i<numTrigPtBins;i++){
-        if(trigpT<pTTrigBins[i+1]) return i;
-      }
-      cerr<<"Warning: trigpT "<<trigpT<<" is greater than the maximum trigger momentum!"<<endl;
-      return -1;
-    }
-    int GetAssocBin(float assocpT){
-      if(assocpT<pTAssocBins[0]){
-        cerr<<"Warning: assocpT "<<assocpT<<" is less than the minimum associated momentum! "<<endl;
-        return -1;
-      }
-      for(int i=0;i<numAssocPtBins;i++){
-        if(assocpT<pTAssocBins[i+1]) return i;
-      }
-      cerr<<"Warning: assocpT "<<assocpT<<" is greater than the maximum associated momentum!"<<endl;
-      return -1;
-    }
-    int GetCentBin(float cent){
-      if(cent<centBins[0]){
-        cerr<<"Warning: cent "<<cent<<" is less than the minimum centrality bin! "<<endl;
-        return -1;
-      }
-      for(int i=0;i<numCentBins;i++){
-        if(cent<centBins[i+1]) return i;
-      }
-      cerr<<"Warning: cent "<<cent<<" is greater than the maximum centrality bin!"<<endl;
-      return -1;
-    }
-    */
+
 
  bool isSameParticle(const Particle& p1, const Particle& p2)
     {
@@ -213,6 +141,137 @@ namespace Rivet {
         
     }
 
+double CalculateVn(YODA::Histo1D& hist, int nth)
+    {
+        int nBins = hist.numBins();
+
+        double integral = 0.;
+        
+        double Vn = 0.;
+
+        for (int i = 0; i < nBins; i++)
+        {
+            integral += hist.bin(i).sumW();
+            Vn += hist.bin(i).sumW()*cos(nth*hist.bin(i).xMid());
+        }
+
+        Vn /= integral;
+        return Vn;
+    }
+    
+    int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
+    {
+        int minBin = -1;
+        double minVal = 999.;
+      
+        for(unsigned int i = 0; i < hist.numBins(); i++)
+        {
+            if(hist.bin(i).xMid() < bmin || hist.bin(i).xMid() > bmax) continue;
+            if( (hist.bin(i).sumW()/hist.bin(i).xWidth()) < minVal )
+            {
+                minVal = hist.bin(i).sumW()/hist.bin(i).xWidth();
+                minBin = i;
+            }
+        }
+        
+        return minBin;
+        
+    }
+    
+
+
+    void SubtractBackground(YODA::Histo1D& fullHist, YODA::Histo1D& hist, vector<int> n, double bmin, double bmax)
+    {
+        vector<double> Vn(n.size(), 0);
+        for(unsigned int i = 0; i < n.size(); i++)
+        {
+            Vn[i] = CalculateVn(fullHist, n[i]);
+        }
+        
+        double bmod = 1.;
+        int minBin = FindBinAtMinimum(fullHist, bmin, bmax);
+        
+        for(unsigned int i = 0; i < Vn.size(); i++)
+        {
+            bmod += 2*Vn[i]*cos(n[i]*fullHist.bin(minBin).xMid());
+        }
+        
+        double b = (fullHist.bin(minBin).sumW()/fullHist.bin(minBin).xWidth())/bmod; //Divided by bin width in order to generalize it and enable it to be used for histograms with different binning
+                
+        for(unsigned int ibin = 0; ibin < hist.numBins(); ibin++)
+        {
+            double modulation = 1;
+            for(unsigned int i = 0; i < Vn.size(); i++)
+            {
+                modulation += 2*Vn[i]*cos(n[i]*hist.bin(ibin).xMid());
+            }
+            modulation *= b;
+            hist.bin(ibin).scaleW(1 - (modulation/(hist.bin(ibin).sumW()/hist.bin(ibin).xWidth()))); //Divided by bin width to compensate the calculation of "b"
+        }
+        
+    }
+
+    //Instead of directly taking the calculated Delta_eta, this method takes the center of the bin associated to the Delta_eta.
+    //This is done to avoid values of zero efficiency when |Delta_eta| is close to maxDeltaEta
+    double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
+    {
+        double maxDeltaEta = 2.;
+        
+        int binEta = hist.binIndexAt(deltaEta);
+        
+        if(binEta < 0)
+        {
+            MSG_INFO("Eta is out of bounds!");
+            return 0.;
+        }
+        
+        double binCenterEta = hist.bin(binEta).xMid();
+        
+        return 1. - (1./maxDeltaEta)*abs(binCenterEta);
+    }
+
+    //bmin and bmax are included in the integral. Range = [bmin, bmax]
+    //Give the min and max bins to calculate the integral
+    double GetYieldInBinRange(YODA::Histo1D& hist, int bmin, int bmax)
+    {
+        double integral = 0.;
+        
+        if(bmin < 0 || bmax >= (int)hist.numBins())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+        }
+        
+        return integral;
+        
+    }
+
+    //vmin is included in the integral, but vmax is not. Range = [vmin, vmax[
+    //Give the min and max values to calculate the integral
+    double GetYieldInUserRange(YODA::Histo1D& hist, double vmin, double vmax)
+    {
+        double integral = 0.;
+        
+        if(hist.binIndexAt(vmin) < 0 || hist.binIndexAt(vmax) < 0)
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+        
+        for(int i = hist.binIndexAt(vmin); i < hist.binIndexAt(vmax); i++)
+        {
+            integral += hist.bin(i).sumW();
+        }
+        
+        return integral;
+        
+    }
+
 
     /// Book histograms and initialise projections before the run
     void init() {             
@@ -229,8 +288,6 @@ namespace Rivet {
 
 
       // Declare centrality projection
-      //LATER FIX TO USE STAR
-      //declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M"); 
       declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
 
@@ -409,6 +466,8 @@ namespace Rivet {
       c1.SetAssociatedRange(0.65, 0.70); // zT
       Correlators.push_back(c24);
 
+
+
       for(unsigned int i = 1; i<= Correlators.size(); i++)
       {
         book(sow[i],"sow" + to_string(i));
@@ -537,7 +596,7 @@ namespace Rivet {
       if ((centr < 0.) || (centr > 12.)){
         vetoEvent;
       }
-      cout<<"Hi"<<endl;
+    
 
     double triggerptMin = 999.;
     double triggerptMax = -999.;
@@ -621,6 +680,7 @@ namespace Rivet {
 
       }
 
+
     /// Normalise histograms etc., after the run
     void finalize() {
         
@@ -636,22 +696,16 @@ namespace Rivet {
                 vector<int> n{2,3};
                // SubtractBackground(*_DeltaPhi[i], *_h["061" + to_string(i)], n, 0.63, 2.51);
                // SubtractBackground(*_DeltaPhi[i], *_DeltaPhiSub[i], n, 0.63, 2.51);
-            }
-            
+            }    
         }
         
       //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
       //do background subtraction ala zyam
       //calculate yields
 
-
     } //end void finalize
 
-
-
-  // The hook for the plugin system
-  //DECLARE_RIVET_PLUGIN(STAR_2016_I1442357);
-
 };
-  DECLARE_RIVET_PLUGIN(STAR_2016_I1442357);}
+  DECLARE_RIVET_PLUGIN(STAR_2016_I1442357);
+}
 
