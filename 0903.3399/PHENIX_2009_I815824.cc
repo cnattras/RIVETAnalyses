@@ -600,15 +600,16 @@ namespace Rivet {
 	 
 	  for(unsigned int i = 1; i<= Correlators.size(); i++)
       {
+		  book(sow[i],"sow" + to_string(i));
 		  if (i < 10 ){
-			book(sow[i],"sow" + to_string(i));
-			book(_h["0" + to_string(i) + "11"], i, 1, 1);
-			book(_h["0" + to_string(i) + "11"], i, 1, 2);
+			//book(sow[i],"sow" + to_string(i));
+			//book(_h["0" + to_string(i) + "11"], i, 1, 1);
+			//book(_h["0" + to_string(i) + "11"], i, 1, 2);
 		  }
 		  else {
-			book(sow[i],"sow" + to_string(i));
-			book(_h[to_string(i) + "11"], i, 1, 2);
-			book(_h[to_string(i) + "11"], i, 1, 1);
+			//book(sow[i],"sow" + to_string(i));
+			
+			//book(_h[to_string(i) + "11"], i, 1, 1);
 		  }
       }
       
