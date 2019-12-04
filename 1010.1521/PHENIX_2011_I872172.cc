@@ -541,7 +541,7 @@ namespace Rivet {
         d8x1y6.SetAzimuthalRange(75.0, 90.0);
         Correlators.push_back(d8x1y6);
 
-        for(unsigned int i = 1; i <= Correlators.size(); i++)
+        for(vector<Correlator>::size_type i = 0; i < Correlators.size(); i++)
         {
           //book(sow[i],"sow" + to_string(i));
           book(sow[Correlators[i].GetIndex()], "sow" + to_string(Correlators[i].GetIndex()));
@@ -711,7 +711,7 @@ namespace Rivet {
 
       void finalize() {
       
-        for (unsigned int i = 1; i <= Correlators.size(); i++) {
+        for (vector<Correlator>::size_type i = 0; i < Correlators.size(); i++) {
           int index = Correlators[i].GetIndex();
           if (nTriggers[index] > 0) {
             _h["0" + to_string(index)]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
