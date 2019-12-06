@@ -1,4 +1,10 @@
-// -*- C++ -*-
+// Andrew Bryant -- abryan39
+// 6 December 2019
+//
+// This code implements an analysis for the 1010.1521 paper. Much of the code
+// is adapted from the 1010.5800 analysis and tweaked for use in this analysis. 
+// https://github.com/cnattras/RIVETAnalyses/tree/master/1110.5800
+
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
@@ -114,13 +120,12 @@ namespace Rivet {
       map<string, Histo1DPtr> _h;
       map<int, CounterPtr> sow;
       map<int, Histo1DPtr> _DeltaPhi;
-      map<int, Histo1DPtr> _DeltaEta;
-      map<int, Histo1DPtr> _DeltaPhiSub;
+      // Unlike the code found in the 1110.5800 analysis, we use a map instead of a vector.
+      // This is because y-axis values are not unique and using the full histogram index is easier.
       map<int, int> nTriggers;
       map<int, int> nEvents;
       bool fillTrigger = true;
       vector<Correlator> Correlators;
-
 
     public:
 
@@ -182,7 +187,6 @@ namespace Rivet {
         // missing momentum
         declare(MissingMomentum(fs), "MET");
 
-
         // the basic final-state projection: all final-state particles within the given eta acceptance
         const ChargedFinalState cfs(Cuts::pT > 1*GeV); //Not cutting in eta, so no need to correct for pair acceptance
         declare(cfs, "CFS");
@@ -192,413 +196,136 @@ namespace Rivet {
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
         //==================================================
-        // Create one correlator for each set of Collisions System / Beam Energy / Centrality Interval / Trigger pT interval / Associated pT interval
-        // The number used in the constructor is the y-axis index of the histograms (d00-x00-y00) of the paper
-        // Ex.: Correlator c1(1); -> is the correlator for histograms _h["0311"], _h["0411"], etc
-        // Ex.: Correlator c2(2); -> is the correlator for histograms _h["0312"], _h["0412"], etc
+        // Create a correlator for each histogram. A different correlator must be created for each beam, centrality, and range.
+        // The number used in the constructor is a representation of the histograms d00-x00-y00 format.
+        // Ex. index 311 corresponds to histogram d03-x01-y01.      
         //==================================================
         
-        /*
-        // Fig 2. "cfs" phi 0-15 and 75-90
-        Correlator d1x1y1(1);
-        d1x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d1x1y1.SetCentrality(0.0, 20.0);
-        d1x1y1.SetTriggerRange(4.0, 7.0);
-        d1x1y1.SetAssociatedRange(3.0, 4.0);
-        d1x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d1x1y1);
-        
-        Correlator d1x1y2(2);
-        d1x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d1x1y2.SetCentrality(20.0, 60.0);
-        d1x1y2.SetTriggerRange(4.0, 7.0);
-        d1x1y2.SetAssociatedRange(3.0, 4.0);
-        d1x1y2.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d1x1y2);
-        
-        Correlator d1x1y3(3);
-        d1x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d1x1y3.SetCentrality(0.0, 20.0);
-        d1x1y3.SetTriggerRange(4.0, 7.0);
-        d1x1y3.SetAssociatedRange(3.0, 4.0);
-        Correlators.push_back(d1x1y3);
-        
-        Correlator d1x1y4(4);
-        d1x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d1x1y4.SetCentrality(0.0, 20.0);
-        d1x1y4.SetTriggerRange(4.0, 7.0);
-        d1x1y4.SetAssociatedRange(3.0, 4.0);
-        Correlators.push_back(d1x1y4);  
-        
-        // Fig 3. "cfs_ave" phi 0-90
-        Correlator d2x1y1(1);
-        d2x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d2x1y1.SetCentrality(0.0, 20.0);
-        d2x1y1.SetTriggerRange(4.0, 7.0);
-        d2x1y1.SetAssociatedRange(3.0, 4.0);
-        d2x1y2.SetAzimuthalRange(0.0, 90.0);
-        Correlators.push_back(d2x1y1);
-        
-        Correlator d2x1y2(2);
-        d2x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d2x1y2.SetCentrality(20.0, 60.0);
-        d2x1y2.SetTriggerRange(4.0, 7.0);
-        d2x1y2.SetAssociatedRange(3.0, 4.0);
-        d2x1y2.SetAzimuthalRange(0.0, 90.0);
-        Correlators.push_back(d2x1y2);
-        */
         // Fig 13. "cfsall_00-20 3-4"
-        Correlator d3x1y1(311);
-        d3x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y1.SetCentrality(0.0, 100.0);
-        d3x1y1.SetTriggerRange(0.0, 7.0);
-        d3x1y1.SetAssociatedRange(0.0, 7.0);
-        d3x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d3x1y1);
-        
-        Correlator d3x1y2(312);
-        d3x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y2.SetCentrality(0.0, 20.0);
-        d3x1y2.SetTriggerRange(4.0, 7.0);
-        d3x1y2.SetAssociatedRange(3.0, 4.0);
-        d3x1y2.SetAzimuthalRange(15.0, 30.0);
-        Correlators.push_back(d3x1y2);
-        
-        Correlator d3x1y3(313);
-        d3x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y3.SetCentrality(0.0, 20.0);
-        d3x1y3.SetTriggerRange(4.0, 7.0);
-        d3x1y3.SetAssociatedRange(3.0, 4.0);
-        d3x1y3.SetAzimuthalRange(30.0, 45.0);
-        Correlators.push_back(d3x1y3);
-        
-        Correlator d3x1y4(314);
-        d3x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y4.SetCentrality(0.0, 20.0);
-        d3x1y4.SetTriggerRange(4.0, 7.0);
-        d3x1y4.SetAssociatedRange(3.0, 4.0);
-        d3x1y4.SetAzimuthalRange(45.0, 60.0);
-        Correlators.push_back(d3x1y4);
-        
-        Correlator d3x1y5(315);
-        d3x1y5.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y5.SetCentrality(0.0, 20.0);
-        d3x1y5.SetTriggerRange(4.0, 7.0);
-        d3x1y5.SetAssociatedRange(3.0, 4.0);
-        d3x1y5.SetAzimuthalRange(60.0, 75.0);
-        Correlators.push_back(d3x1y5);
-        
-        Correlator d3x1y6(316);
-        d3x1y6.SetCollSystemAndEnergy("AuAu200GeV");
-        d3x1y6.SetCentrality(0.0, 20.0);
-        d3x1y6.SetTriggerRange(4.0, 7.0);
-        d3x1y6.SetAssociatedRange(3.0, 4.0);
-        d3x1y6.SetAzimuthalRange(75.0, 90.0);
-        Correlators.push_back(d3x1y6);
-        
-        // Fig 14. cfsall_20-60 3-4
-        Correlator d4x1y1(411);
-        d4x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d4x1y1.SetCentrality(0.0, 20.0);
-        d4x1y1.SetTriggerRange(4.0, 7.0);
-        d4x1y1.SetAssociatedRange(4.0, 5.0);
-        d4x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d4x1y1);
-        
-        Correlator d4x1y2(412);
-        d4x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d4x1y2.SetCentrality(0.0, 20.0);
-        d4x1y2.SetTriggerRange(4.0, 7.0);
-        d4x1y2.SetAssociatedRange(4.0, 5.0);
-        d4x1y2.SetAzimuthalRange(15.0, 30.0);
-        Correlators.push_back(d4x1y2);
-        
-        Correlator d4x1y3(413);
-        d4x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d4x1y3.SetCentrality(0.0, 20.0);
-        d4x1y3.SetTriggerRange(4.0, 7.0);
-        d4x1y3.SetAssociatedRange(4.0, 5.0);
-        d4x1y3.SetAzimuthalRange(30.0, 45.0);
-        Correlators.push_back(d4x1y3);
-        
-        Correlator d4x1y4(414);
-        d4x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d4x1y4.SetCentrality(0.0, 20.0);
-        d4x1y4.SetTriggerRange(4.0, 7.0);
-        d4x1y4.SetAssociatedRange(4.0, 5.0);
-        d4x1y4.SetAzimuthalRange(45.0, 60.0);
-        Correlators.push_back(d4x1y4);
-        
-        Correlator d4x1y5(415);
-        d4x1y5.SetCollSystemAndEnergy("AuAu200GeV");
-        d4x1y5.SetCentrality(0.0, 20.0);
-        d4x1y5.SetTriggerRange(4.0, 7.0);
-        d4x1y5.SetAssociatedRange(4.0, 5.0);
-        d4x1y5.SetAzimuthalRange(60.0, 75.0);
-        Correlators.push_back(d4x1y5);
-
-        Correlator d4x1y6(416);
-        d4x1y6.SetCollSystemAndEnergy("AuAu200GeV");
-        d4x1y6.SetCentrality(0.0, 20.0);
-        d4x1y6.SetTriggerRange(4.0, 7.0);
-        d4x1y6.SetAssociatedRange(4.0, 5.0);
-        d4x1y6.SetAzimuthalRange(75.0, 90.0);
-        Correlators.push_back(d4x1y6);
-        
-        // Fig 13. cfsall_00-20 5-7
-        Correlator d5x1y1(511);
-        d5x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d5x1y1.SetCentrality(0.0, 20.0);
-        d5x1y1.SetTriggerRange(4.0, 7.0);
-        d5x1y1.SetAssociatedRange(5.0, 7.0);
-        d5x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d5x1y1);
-
-        Correlator d5x1y2(512);
-        d5x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d5x1y2.SetCentrality(0.0, 20.0);
-        d5x1y2.SetTriggerRange(4.0, 7.0);
-        d5x1y2.SetAssociatedRange(5.0, 7.0);
-        d5x1y2.SetAzimuthalRange(15.0, 30.0);
-        Correlators.push_back(d5x1y2);
-
-        Correlator d5x1y3(513);
-        d5x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d5x1y3.SetCentrality(0.0, 20.0);
-        d5x1y3.SetTriggerRange(4.0, 7.0);
-        d5x1y3.SetAssociatedRange(5.0, 7.0);
-        d5x1y3.SetAzimuthalRange(30.0, 45.0);
-        Correlators.push_back(d5x1y3);
-
-        Correlator d5x1y4(514);
-        d5x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d5x1y4.SetCentrality(0.0, 20.0);
-        d5x1y4.SetTriggerRange(4.0, 7.0);
-        d5x1y4.SetAssociatedRange(5.0, 7.0);
-        d5x1y4.SetAzimuthalRange(45.0, 60.0);
-        Correlators.push_back(d5x1y4);
-
-        Correlator d5x1y5(515);
-        d5x1y5.SetCollSystemAndEnergy("AuAu200GeV");
-        d5x1y5.SetCentrality(0.0, 20.0);
-        d5x1y5.SetTriggerRange(4.0, 7.0);
-        d5x1y5.SetAssociatedRange(5.0, 7.0);
-        d5x1y5.SetAzimuthalRange(60.0, 75.0);
-        Correlators.push_back(d5x1y5);
-
-        Correlator d5x1y6(516);
-        d5x1y6.SetCollSystemAndEnergy("AuAu200GeV");
-        d5x1y6.SetCentrality(0.0, 20.0);
-        d5x1y6.SetTriggerRange(4.0, 7.0);
-        d5x1y6.SetAssociatedRange(5.0, 7.0);
-        d5x1y6.SetAzimuthalRange(75.0, 90.0);
-        Correlators.push_back(d5x1y6);
+        for (int index = 311; index < 317; index++) {
+          for (double azimuthal = 0.0; azimuthal < 90.0; azimuthal += 15.0) {
+            Correlator corr(index);
+            corr.SetCollSystemAndEnergy("AuAu200GeV");
+            corr.SetCentrality(0.0, 20.0);
+            corr.SetTriggerRange(4.0, 7.0);
+            corr.SetAssociatedRange(3.0, 4.0);
+            corr.SetAzimuthalRange(azimuthal, azimuthal+15.0);
+            Correlators.push_back(corr);
+          }
+        }      
         
         // Fig 13. cfsall_00-20 4-5
-        Correlator d6x1y1(611);
-        d6x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d6x1y1.SetCentrality(20.0, 60.0);
-        d6x1y1.SetTriggerRange(4.0, 7.0);
-        d6x1y1.SetAssociatedRange(3.0, 4.0);
-        d6x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d6x1y1);
-
-        Correlator d6x1y2(612);
-        d6x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d6x1y2.SetCentrality(20.0, 60.0);
-        d6x1y2.SetTriggerRange(4.0, 7.0);
-        d6x1y2.SetAssociatedRange(3.0, 4.0);
-        d6x1y2.SetAzimuthalRange(15.0, 30.0);
-        Correlators.push_back(d6x1y2);
-
-        Correlator d6x1y3(613);
-        d6x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d6x1y3.SetCentrality(20.0, 60.0);
-        d6x1y3.SetTriggerRange(4.0, 7.0);
-        d6x1y3.SetAssociatedRange(3.0, 4.0);
-        d6x1y3.SetAzimuthalRange(30.0, 45.0);
-        Correlators.push_back(d6x1y3);
-
-        Correlator d6x1y4(614);
-        d6x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d6x1y4.SetCentrality(20.0, 60.0);
-        d6x1y4.SetTriggerRange(4.0, 7.0);
-        d6x1y4.SetAssociatedRange(3.0, 4.0);
-        d6x1y4.SetAzimuthalRange(45.0, 60.0);
-        Correlators.push_back(d6x1y4);
-
-        Correlator d6x1y5(615);
-        d6x1y5.SetCollSystemAndEnergy("AuAu200GeV");
-        d6x1y5.SetCentrality(20.0, 60.0);
-        d6x1y5.SetTriggerRange(4.0, 7.0);
-        d6x1y5.SetAssociatedRange(3.0, 4.0);
-        d6x1y5.SetAzimuthalRange(60.0, 75.0);
-        Correlators.push_back(d6x1y5);
-
-        Correlator d6x1y6(616);
-        d6x1y6.SetCollSystemAndEnergy("AuAu200GeV");
-        d6x1y6.SetCentrality(20.0, 60.0);
-        d6x1y6.SetTriggerRange(4.0, 7.0);
-        d6x1y6.SetAssociatedRange(3.0, 4.0);
-        d6x1y6.SetAzimuthalRange(75.0, 90.0);
-        Correlators.push_back(d6x1y6);
-        
-        // Fig 14. cfs_20-60 4-5
-        Correlator d7x1y1(711);
-        d7x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d7x1y1.SetCentrality(20.0, 60.0);
-        d7x1y1.SetTriggerRange(4.0, 7.0);
-        d7x1y1.SetAssociatedRange(4.0, 5.0);
-        d7x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d7x1y1);
-
-        Correlator d7x1y2(712);
-        d7x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d7x1y2.SetCentrality(20.0, 60.0);
-        d7x1y2.SetTriggerRange(4.0, 7.0);
-        d7x1y2.SetAssociatedRange(4.0, 5.0);
-        d7x1y2.SetAzimuthalRange(15.0, 30.0);
-        Correlators.push_back(d7x1y2);
-
-        Correlator d7x1y3(713);
-        d7x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d7x1y3.SetCentrality(20.0, 60.0);
-        d7x1y3.SetTriggerRange(4.0, 7.0);
-        d7x1y3.SetAssociatedRange(4.0, 5.0);
-        d7x1y3.SetAzimuthalRange(30.0, 45.0);
-        Correlators.push_back(d7x1y3);
-
-        Correlator d7x1y4(714);
-        d7x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d7x1y4.SetCentrality(20.0, 60.0);
-        d7x1y4.SetTriggerRange(4.0, 7.0);
-        d7x1y4.SetAssociatedRange(4.0, 5.0);
-        d7x1y4.SetAzimuthalRange(45.0, 60.0);
-        Correlators.push_back(d7x1y4);
-
-        Correlator d7x1y5(715);
-        d7x1y5.SetCollSystemAndEnergy("AuAu200GeV");
-        d7x1y5.SetCentrality(20.0, 60.0);
-        d7x1y5.SetTriggerRange(4.0, 7.0);
-        d7x1y5.SetAssociatedRange(4.0, 5.0);
-        d7x1y5.SetAzimuthalRange(60.0, 75.0);
-        Correlators.push_back(d7x1y5);
-
-        Correlator d7x1y6(716);
-        d7x1y6.SetCollSystemAndEnergy("AuAu200GeV");
-        d7x1y6.SetCentrality(20.0, 60.0);
-        d7x1y6.SetTriggerRange(4.0, 7.0);
-        d7x1y6.SetAssociatedRange(4.0, 5.0);
-        d7x1y6.SetAzimuthalRange(75.0, 90.0);
-        Correlators.push_back(d7x1y6);
-        
-        // Fig 14. cfs_20-60 5-7
-        Correlator d8x1y1(811);
-        d8x1y1.SetCollSystemAndEnergy("AuAu200GeV");
-        d8x1y1.SetCentrality(20.0, 60.0);
-        d8x1y1.SetTriggerRange(4.0, 7.0);
-        d8x1y1.SetAssociatedRange(5.0, 7.0);
-        d8x1y1.SetAzimuthalRange(0.0, 15.0);
-        Correlators.push_back(d8x1y1);
-
-        Correlator d8x1y2(812);
-        d8x1y2.SetCollSystemAndEnergy("AuAu200GeV");
-        d8x1y2.SetCentrality(20.0, 60.0);
-        d8x1y2.SetTriggerRange(4.0, 7.0);
-        d8x1y2.SetAssociatedRange(5.0, 7.0);
-        d8x1y2.SetAzimuthalRange(15.0, 30.0);
-        Correlators.push_back(d8x1y2);
-
-        Correlator d8x1y3(813);
-        d8x1y3.SetCollSystemAndEnergy("AuAu200GeV");
-        d8x1y3.SetCentrality(20.0, 60.0);
-        d8x1y3.SetTriggerRange(4.0, 7.0);
-        d8x1y3.SetAssociatedRange(5.0, 7.0);
-        d8x1y3.SetAzimuthalRange(30.0, 45.0);
-        Correlators.push_back(d8x1y3);
-
-        Correlator d8x1y4(814);
-        d8x1y4.SetCollSystemAndEnergy("AuAu200GeV");
-        d8x1y4.SetCentrality(20.0, 60.0);
-        d8x1y4.SetTriggerRange(4.0, 7.0);
-        d8x1y4.SetAssociatedRange(5.0, 7.0);
-        d8x1y4.SetAzimuthalRange(45.0, 60.0);
-        Correlators.push_back(d8x1y4);
-
-        Correlator d8x1y5(815);
-        d8x1y5.SetCollSystemAndEnergy("AuAu200GeV");
-        d8x1y5.SetCentrality(20.0, 60.0);
-        d8x1y5.SetTriggerRange(4.0, 7.0);
-        d8x1y5.SetAssociatedRange(5.0, 7.0);
-        d8x1y5.SetAzimuthalRange(60.0, 75.0);
-        Correlators.push_back(d8x1y5);
-
-        Correlator d8x1y6(816);
-        d8x1y6.SetCollSystemAndEnergy("AuAu200GeV");
-        d8x1y6.SetCentrality(20.0, 60.0);
-        d8x1y6.SetTriggerRange(4.0, 7.0);
-        d8x1y6.SetAssociatedRange(5.0, 7.0);
-        d8x1y6.SetAzimuthalRange(75.0, 90.0);
-        Correlators.push_back(d8x1y6);
-
-        for(vector<Correlator>::size_type i = 0; i < Correlators.size(); i++)
-        {
-          //book(sow[i],"sow" + to_string(i));
-          book(sow[Correlators[i].GetIndex()], "sow" + to_string(Correlators[i].GetIndex()));
-          //book(_h[to_string(Correlators[i].GetIndex())]);
-          //book(_h["031" + to_string(i)], 3, 1, i);
-          //book(_h["041" + to_string(i)], 4, 1, i);
+        for (int index = 411; index < 417; index++) {
+          for (double azimuthal = 0.0; azimuthal < 90.0; azimuthal += 15.0) {
+            Correlator corr(index);
+            corr.SetCollSystemAndEnergy("AuAu200GeV");
+            corr.SetCentrality(0.0, 20.0);
+            corr.SetTriggerRange(4.0, 7.0);
+            corr.SetAssociatedRange(4.0, 5.0);
+            corr.SetAzimuthalRange(azimuthal, azimuthal+15.0);
+            Correlators.push_back(corr);
+          }
         }
         
-        // Fig 13
-        book(_h["0311"], 3, 1, 1);
-        book(_h["0312"], 3, 1, 2);
-        book(_h["0313"], 3, 1, 3);
-        book(_h["0314"], 3, 1, 4);
-        book(_h["0315"], 3, 1, 5);
-        book(_h["0316"], 3, 1, 6);
-        book(_h["0411"], 4, 1, 1);
-        book(_h["0412"], 4, 1, 2);
-        book(_h["0413"], 4, 1, 3);
-        book(_h["0414"], 4, 1, 4);
-        book(_h["0415"], 4, 1, 5);
-        book(_h["0416"], 4, 1, 6);
-        book(_h["0511"], 5, 1, 1);
-        book(_h["0512"], 5, 1, 2);
-        book(_h["0513"], 5, 1, 3);
-        book(_h["0514"], 5, 1, 4);
-        book(_h["0515"], 5, 1, 5);
-        book(_h["0516"], 5, 1, 6);
-        book(_h["0611"], 6, 1, 1);
-        book(_h["0612"], 6, 1, 2);
-        book(_h["0613"], 6, 1, 3);
-        book(_h["0614"], 6, 1, 4);
-        book(_h["0615"], 6, 1, 5);
-        book(_h["0616"], 6, 1, 6);
-        book(_h["0711"], 7, 1, 1);
-        book(_h["0712"], 7, 1, 2);
-        book(_h["0713"], 7, 1, 3);
-        book(_h["0714"], 7, 1, 4);
-        book(_h["0715"], 7, 1, 5);
-        book(_h["0716"], 7, 1, 6);
-        book(_h["0811"], 8, 1, 1);
-        book(_h["0812"], 8, 1, 2);
-        book(_h["0813"], 8, 1, 3);
-        book(_h["0814"], 8, 1, 4);
-        book(_h["0815"], 8, 1, 5);
-        book(_h["0816"], 8, 1, 6);
+        // Fig 13. cfsall_00-20 5-7
+        for (int index = 511; index < 517; index++) {
+          for (double azimuthal = 0.0; azimuthal < 90.0; azimuthal += 15.0) {
+            Correlator corr(index);
+            corr.SetCollSystemAndEnergy("AuAu200GeV");
+            corr.SetCentrality(0.0, 20.0);
+            corr.SetTriggerRange(4.0, 7.0);
+            corr.SetAssociatedRange(5.0, 7.0);
+            corr.SetAzimuthalRange(azimuthal, azimuthal+15.0);
+            Correlators.push_back(corr);
+          }
+        }
         
+        // Fig 14. cfsall_20-60 3-4
+        for (int index = 611; index < 617; index++) {
+          for (double azimuthal = 0.0; azimuthal < 90.0; azimuthal += 15.0) {
+            Correlator corr(index);
+            corr.SetCollSystemAndEnergy("AuAu200GeV");
+            corr.SetCentrality(20.0, 60.0);
+            corr.SetTriggerRange(4.0, 7.0);
+            corr.SetAssociatedRange(3.0, 4.0);
+            corr.SetAzimuthalRange(azimuthal, azimuthal+15.0);
+            Correlators.push_back(corr);
+          }
+        }
+        
+        // Fig 14. cfs_20-60 4-5
+        for (int index = 711; index < 717; index++) {
+          for (double azimuthal = 0.0; azimuthal < 90.0; azimuthal += 15.0) {
+            Correlator corr(index);
+            corr.SetCollSystemAndEnergy("AuAu200GeV");
+            corr.SetCentrality(20.0, 60.0);
+            corr.SetTriggerRange(4.0, 7.0);
+            corr.SetAssociatedRange(4.0, 5.0);
+            corr.SetAzimuthalRange(azimuthal, azimuthal+15.0);
+            Correlators.push_back(corr);
+          }
+        }
+        
+        // Fig 14. cfs_20-60 5-7        
+        for (int index = 811; index < 817; index++) {
+          for (double azimuthal = 0.0; azimuthal < 90.0; azimuthal += 15.0) {
+            Correlator corr(index);
+            corr.SetCollSystemAndEnergy("AuAu200GeV");
+            corr.SetCentrality(20.0, 60.0);
+            corr.SetTriggerRange(4.0, 7.0);
+            corr.SetAssociatedRange(5.0, 7.0);
+            corr.SetAzimuthalRange(azimuthal, azimuthal+15.0);
+            Correlators.push_back(corr);
+          }
+        }
+        
+        // Create sum_of_weights and delta phi books that can be filled.
+        for(vector<Correlator>::size_type i = 0; i < Correlators.size(); i++) {
+          int index = Correlators[i].GetIndex();
+          book(sow[index], "sow" + to_string(index));
+          book(_DeltaPhi[index], "DeltaPhi" + to_string(index), 24, 0, M_PI);
+        }
+        
+        //*******************************
+        // Book histrograms to be filled.
+        //*******************************
+        
+        // y-axis ranges of the histograms to be booked.
+        // The position of the pair in the vector + 1 is the data set.
+        // histogram_ranges[1] corresponds to d01-x01-y01 - d01-x01-y04.
+        vector<pair<int, int>> histogram_ranges = { make_pair(1, 4), make_pair(1, 2), make_pair(1, 6), 
+                                                    make_pair(1, 6), make_pair(1, 6), make_pair(1, 6),
+                                                    make_pair(1, 6), make_pair(1, 6), make_pair(1, 2),
+                                                    make_pair(1, 2), make_pair(1, 4), make_pair(1, 4),
+                                                    make_pair(1, 4), make_pair(1, 2), make_pair(1, 4),
+                                                    make_pair(1, 4), make_pair(1, 6), make_pair(1, 6),
+                                                    make_pair(1, 6), make_pair(1, 6), make_pair(1, 6),
+                                                    make_pair(1, 6)
+                                                  };
+       
+        for (vector<pair<int,int>>::size_type d = 0; d < histogram_ranges.size(); d++) {
+          for (int y = histogram_ranges[d].first; y <= histogram_ranges[d].second; y++) {
+            book(_h[to_string(static_cast<int>(d)+1) + "1" + to_string(y)], static_cast<int>(d)+1, 1, y);
+          }
+        }
+        
+        // Initialize the nEvents and nTriggers maps.
         for (vector<Correlator>::size_type i = 0; i < Correlators.size(); i++) {
           nEvents[Correlators[i].GetIndex()] = 0;
           nTriggers[Correlators[i].GetIndex()] = 0;
         }
 
-      }
+      } // End of init()
 
       void analyze(const Event& event) {
-
+      
         const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
         const ChargedFinalState& cfsTrig = apply<ChargedFinalState>(event, "CFSTrig");
+        
+        double triggerptMin = 999.;
+        double triggerptMax = -999.;
+        double associatedptMin = 999.;
+        double associatedptMax = -999.;
         
         // Determine the beam system and energy being used. 
         double nNucleons = 0;
@@ -629,12 +356,7 @@ namespace Rivet {
           vetoEvent;
         }
         
-        double triggerptMin = 999.;
-        double triggerptMax = -999.;
-        double associatedptMin = 999.;
-        double associatedptMax = -999.;
-        
-        // Prepare centrality projection and value
+        // Prepare centrality projection and value.
         const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
         double centr = centProj();
         
@@ -650,7 +372,7 @@ namespace Rivet {
           if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
           if(!corr.CheckCentrality(centr)) continue;
         
-          //If event is accepted for the correlator, fill event weights
+          //If the event is accepted for the correlator, fill event weights.
           sow[corr.GetIndex()]->fill();
           nEvents[corr.GetIndex()]++;
         
@@ -672,6 +394,8 @@ namespace Rivet {
           if (pTrig.pt()/GeV < triggerptMin || pTrig.pt()/GeV > triggerptMax) continue;
           if (isSecondary(pTrig)) continue;
           
+          // https://home.fnal.gov/~mrenna/lutp0613man2/node44.html
+          // 211 = pi+, 2212 = p+, 321 = K+
           if (abs(pTrig.pid()) == 211 || abs(pTrig.pid()) == 2212 || abs(pTrig.pid()) == 321) {
           
             for (Correlator& corr : Correlators) {
@@ -684,11 +408,7 @@ namespace Rivet {
               if(isSameParticle(pTrig,pAssoc)) continue;
               if(isSecondary(pAssoc)) continue;
               
-              // https://home.fnal.gov/~mrenna/lutp0613man2/node44.html
-              // 211 = pi+, 2212 = p+, 321 = K+
               if(abs(pAssoc.pid()) == 211 || abs(pAssoc.pid()) == 2212 || abs(pAssoc.pid()) == 321) {
-                //int mybin = GetTrigBin(pTrig.pt());
-                //int mybina = GetAssocBin(pAssoc.pt());
 
                 //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
                 double dPhi = deltaPhi(pTrig, pAssoc, true); //this does NOT rotate the delta phi to be in a given range
@@ -696,33 +416,28 @@ namespace Rivet {
               
                 for (Correlator& corr : Correlators) {
                   if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
-                    
+
                   if (abs(dEta) < 1.78) {
                     _h[to_string(corr.GetIndex())]->fill(-abs(dPhi), 0.5);
                     _DeltaPhi[corr.GetIndex()]->fill(abs(dPhi), 0.5);
-                    _DeltaPhiSub[corr.GetIndex()]->fill(abs(dPhi), 0.5);
                   }
                 }
               }
             } // End of pAssoc loop.
           }
-        } // End of pTrig loop.
+        } // End of pTrig loop.    
       } // End of analysis()
-
-      void finalize() {
       
+      void finalize() { 
         for (vector<Correlator>::size_type i = 0; i < Correlators.size(); i++) {
           int index = Correlators[i].GetIndex();
+
           if (nTriggers[index] > 0) {
-            _h["0" + to_string(index)]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
+            _h[to_string(index)]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
             _DeltaPhi[index]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
-            _DeltaPhiSub[index]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
-          }
-            
+          }  
         }
-
-      } // End of finalize()
-
+      } // End of finalize()    
     
   }; // End of PHENIX_2011_I872172
 
