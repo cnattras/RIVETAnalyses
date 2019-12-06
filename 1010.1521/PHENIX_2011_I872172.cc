@@ -292,7 +292,7 @@ namespace Rivet {
         
         // y-axis ranges of the histograms to be booked.
         // The position of the pair in the vector + 1 is the data set.
-        // histogram_ranges[1] corresponds to d01-x01-y01 - d01-x01-y04.
+        // histogram_ranges[0] corresponds to d01-x01-y01 - d01-x01-y04.
         vector<pair<int, int>> histogram_ranges = { make_pair(1, 4), make_pair(1, 2), make_pair(1, 6), 
                                                     make_pair(1, 6), make_pair(1, 6), make_pair(1, 6),
                                                     make_pair(1, 6), make_pair(1, 6), make_pair(1, 2),
