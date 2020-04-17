@@ -22,33 +22,25 @@ namespace Rivet {
     
     void BuildResponseMatrix(YODA::Histo1D& DeltaPt, YODA::Histo2D& RM)
     {
-        
-        YODA::Histo1D axisX(RM.numBinsX()-1, RM.xMin(), RM.xMax());
-        YODA::Histo1D axisY(RM.numBinsY()-1, RM.yMin(), RM.yMax());
-                
-        for(int iBinY = 0; iBinY < RM.numBinsY(); iBinY++)
+        for(auto &bin : RM.bins())
         {
-            double binYCenter = (axisY.bin(iBinY).xMax() + axisY.bin(iBinY).xMin())/2.;
-            
-            for(int iBinX = 0; iBinX < RM.numBinsX(); iBinX++)
-            {
-                double binXCenter = (axisX.bin(iBinX).xMax() + axisX.bin(iBinX).xMin())/2.;
-                double binValue = 0.;
-                int entries = 0;
+            double binYCenter = bin.yMid();
+            double binXCenter = bin.xMid();
+        
+            double binValue = 0.;
+            int entries = 0;
                                 
-                for(int i = 0; i < DeltaPt.numBins(); i++)
+            for(int i = 0; i < DeltaPt.numBins(); i++)
+            {
+                if(DeltaPt.bin(i).xMin() >= (bin.xMin()-binYCenter) && DeltaPt.bin(i).xMax() <= (bin.xMax()-binYCenter))
                 {
-                    if(DeltaPt.bin(i).xMin() >= (axisX.bin(iBinX).xMin()-binYCenter) && DeltaPt.bin(i).xMax() <= (axisX.bin(iBinX).xMax()-binYCenter))
-                    {
-                        binValue += DeltaPt.bin(i).sumW();
-                        entries += DeltaPt.bin(i).numEntries();
-                    }
-                    
+                    binValue += DeltaPt.bin(i).sumW();
+                    entries += DeltaPt.bin(i).numEntries();
                 }
-                
-                RM.fill(binXCenter, binYCenter, binValue, entries);
-                
+                    
             }
+                
+            RM.fill(binXCenter, binYCenter, binValue, entries);
         }
     }
     
