@@ -326,9 +326,9 @@ namespace Rivet {
 
       // the basic final-state projection: all final-state particles within the given eta acceptance
 
-      const ChargedFinalState cfs(Cuts::pT > 1*GeV); //Not cutting in eta, so no need to correct for pair acceptance
+      const ChargedFinalState cfs(Cuts::abseta < 1.0 && Cuts::pT > 1*GeV && Cuts::abscharge > 0);
       declare(cfs, "CFS");
-      const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
+      const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV && Cuts::abscharge > 0);
       declare(cfsTrig, "CFSTrig");
 
       // Declare centrality projection

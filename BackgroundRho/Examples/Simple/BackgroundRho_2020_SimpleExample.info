@@ -1,0 +1,45 @@
+Name: BackgroundRho_2020_SimpleExample
+Year: 2012
+Summary: <Insert short BackgroundRho_2020_SimpleExample description>
+Experiment: ALICE
+Collider: LHC
+InspireID: 1084331
+Status: UNVALIDATED
+Authors:
+ - Your Name <your@email.address>
+#References:
+#- '<Example: Eur.Phys.J. C76 (2016) no.7, 392>'
+#- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
+#- '<Example: arXiv:1605.03814>'
+RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: <Insert beam pair(s), e.g. [p+, p+] or [[p-, e-], [p-, e+]]>
+#Energies: <Run energies or beam energy pairs in GeV, e.g. [13000] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
+Options:
+ - cent=GEN
+#Luminosity_fb: <Insert integrated luminosity, in inverse fb>
+Description:
+  '<A fairly long description, including what is measured
+  and if possible what it is useful for in terms of MC validation
+  and tuning. Use LaTeX for maths like $\pT > 50\;\GeV$.>'
+Keywords: []
+BibKey: Abelev:2012ej
+BibTeX: '@article{Abelev:2012ej,
+      author         = "Abelev, Betty and others",
+      title          = "{Measurement of Event Background Fluctuations for Charged
+                        Particle Jet Reconstruction in Pb-Pb collisions at
+                        $\sqrt{s_{NN}} = 2.76$ TeV}",
+      collaboration  = "ALICE",
+      journal        = "JHEP",
+      volume         = "03",
+      year           = "2012",
+      pages          = "053",
+      doi            = "10.1007/JHEP03(2012)053",
+      eprint         = "1201.2423",
+      archivePrefix  = "arXiv",
+      primaryClass   = "hep-ex",
+      reportNumber   = "CERN-PH-EP-2012-002",
+      SLACcitation   = "%%CITATION = ARXIV:1201.2423;%%"
+}'
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
