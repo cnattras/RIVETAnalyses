@@ -17,6 +17,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
+ - beam=PP,AUAU200
 Description:
   'The PHENIX experiment has measured the suppression of semi-inclusive single high transverse momentum $\pi^0$’s in Au+Au collisions at %\sqrt{sNN}=200$ GeV. The present understanding of this suppression is in terms of energy-loss of the parent (fragmenting) parton in a dense color-charge medium. We have performed a quantitative comparison between various parton energy-loss models and our experimental data. The statistical point-to-point uncorrelated as well as correlated systematic uncertainties are taken into account in the comparison. We detail this methodology and the resulting constraint on the model parameters, such as the initial color-charge density $dN^g/dy$, the medium transport coefficient $\langle \hat{q} \rangle, or the initial energy-loss parameter $\epsilon_0$. We find that high transverse momentum $\pi^0$ suppression in Au+Au collisions has sufficient precision to constrain these model dependent parameters at the $\pm 20–25\%$ (one standard deviation) level. These constraints include only the experimental uncertainties, and further studies are needed to compute the corresponding theoretical uncertainties.'
 ValidationInfo:

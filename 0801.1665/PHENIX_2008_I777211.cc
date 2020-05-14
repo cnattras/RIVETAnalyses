@@ -2,7 +2,7 @@
 
 //need to remove unused packages
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/FinalState.hh"
+#include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
@@ -12,6 +12,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
+#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #define _USE_MATH_DEFINES
 
@@ -30,55 +31,98 @@ namespace Rivet {
 
     void init() {
 
-
-      //needs centrality for PHENIX
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M","V0M");
-
+      std::initializer_list<int> pdgIds = {111};  // Pion 0
       //not sure about abscharge. does this relate to the neutral pions?
-      const FinalState fs(Cuts::abseta < 0.35 && Cuts::abscharge == 0);
+      const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
       declare(fs, "fs");
+      
+      beamOpt = getOption<string>("beam","NONE");
+            
+      if(beamOpt=="PP") collSys = pp;
+      else if(beamOpt=="AUAU200") collSys = AuAu200;
+      
+      //Centrality
+      if(!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      
+      string refnameRaa = mkAxisCode(1,1,1);
+      const Scatter2D& refdataRaa =refData(refnameRaa);
 
-      book(hPion0Pt, 1, 1, 1);
-      book(sow,"sow");
+      book(hPion0Pt["Pion0Pt_AuAu"], refnameRaa + "_AuAu", refdataRaa);
+      book(hPion0Pt["Pion0Pt_pp"], refnameRaa + "_pp", refdataRaa);
+      book(hRaa, refnameRaa);
+      
+      book(sow["sow_AuAu"],"sow_AuAu");
+      book(sow["sow_pp"],"sow_pp");
 
     }
 
 
     void analyze(const Event& event) {
 
-      const CentralityProjection& centProj = apply<CentralityProjection>(event,"V0M");
-      const double cent = centProj();
+      //renamed for neutral particle (it was chargedParticlesY05. what is the Y05?)
+      Particles neutralParticles = applyProjection<PrimaryParticles>(event,"fs").particles();  
+        
+      if(collSys==pp)
+      {
+          sow["sow_pp"]->fill();
+          for(Particle p : neutralParticles)
+          {
+              hPion0Pt["Pion0Pt_pp"]->fill(p.pT()/GeV);
+          }
+          return;
+      }  
+        
+        
+      const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
+      const double c = cent();
 
       //centrality for 0-5%
-      if (cent > 5.) vetoEvent;
-      sow->fill();
+      if (c > 5.) vetoEvent;
+      sow["sow_AuAu"]->fill();
 
-      //renamed for neutral particle (it was chargedParticlesY05. what is the Y05?)
-      Particles neutralParticlesY05 = applyProjection<FinalState>(event,"fs").particles();
-
-      for(const Particle& p : neutralParticlesY05)
+      for(const Particle& p : neutralParticles)
       {
-        if(p.pid() == 111)
-        {
-    	     double partPt = p.pT()/GeV;
-           //need to talk about the paper's weight. not sure if it is the same as here.
-           double pt_weight = 1./(partPt*2.*M_PI);
-    	     hPion0Pt->fill(partPt, pt_weight);
-         }
-       }
+          hPion0Pt["Pion0Pt_AuAu"]->fill(p.pT()/GeV);
+      }
+    
+        
     }
-
-
 
     void finalize() {
-      //need to talk about this too.
-      hPion0Pt->scaleW(1./sow->sumW());
+        
+      bool AuAu200_available = false;
+      bool pp200_available = false;
+            
+      for(auto element : hPion0Pt)
+      {
+          string name = element.second->name();
+          if(name.find("AuAu") != std::string::npos)
+          {
+              if(element.second->numEntries() > 0) AuAu200_available = true;
+          }
+          else if(name.find("pp") != std::string::npos)
+          {
+              if(element.second->numEntries() > 0) pp200_available = true;
+          }
+      }
+      
+      if(!(AuAu200_available && pp200_available)) return;
+  
+      hPion0Pt["Pion0Pt_AuAu"]->scaleW(1./sow["sow_AuAu"]->sumW());
+      hPion0Pt["Pion0Pt_pp"]->scaleW(1./sow["sow_pp"]->sumW());
+      
+      divide(hPion0Pt["Pion0Pt_AuAu"],hPion0Pt["Pion0Pt_pp"],hRaa);
+      hRaa->scaleY(1./1051.3);
 
     }
 
 
-    Histo1DPtr hPion0Pt;
-    CounterPtr sow;
+    map<string, Histo1DPtr> hPion0Pt;
+    Scatter2DPtr hRaa;
+    map<string, CounterPtr> sow;
+    string beamOpt;
+    enum CollisionSystem {pp, AuAu200};
+    CollisionSystem collSys;
 
 
   };
