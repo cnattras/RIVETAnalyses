@@ -1,6 +1,5 @@
 // -*- C++ -*-
 
-//need to remove unused packages
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
@@ -32,7 +31,7 @@ namespace Rivet {
     void init() {
 
       std::initializer_list<int> pdgIds = {111};  // Pion 0
-      //not sure about abscharge. does this relate to the neutral pions?
+     
       const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
       declare(fs, "fs");
       
@@ -41,7 +40,7 @@ namespace Rivet {
       if(beamOpt=="PP") collSys = pp;
       else if(beamOpt=="AUAU200") collSys = AuAu200;
       
-      //Centrality
+      
       if(!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       
       string refnameRaa = mkAxisCode(1,1,1);
@@ -59,7 +58,7 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      //renamed for neutral particle (it was chargedParticlesY05. what is the Y05?)
+      
       Particles neutralParticles = applyProjection<PrimaryParticles>(event,"fs").particles();  
         
       if(collSys==pp)
@@ -76,7 +75,7 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
       const double c = cent();
 
-      //centrality for 0-5%
+      
       if (c > 5.) vetoEvent;
       sow["sow_AuAu"]->fill();
 
