@@ -6,7 +6,7 @@ Collider: <Insert the collider name>
 InspireID: 777211
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Christine Nattrass <cnattras@utk.edu>, Christal Martin <cbaillar@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>, Christal Martin <cbaillar@vols.utk.edu>, Christine Nattrass <cnattras@utk.edu>
 References:
  - '<Phys.Rev.C 77 (2008) 064907>'
  - '<DOI: 10.1103/PhysRevC.77.064907>'
