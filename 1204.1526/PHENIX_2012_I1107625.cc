@@ -77,7 +77,7 @@ namespace Rivet {
       book(ptRAA62c86, 8, 1, 1);
       book(ptRAA62call, 7, 1, 5);
 
-      //Dont know how to change this for this analyze
+      //Dont know how to change this for this analysis
       string refnameRaa = mkAxisCode(1,1,1);
             const Scatter2D& refdataRaa =refData(refnameRaa);
       book(hPion0Pt["Pion0Pt_AuAu"], refnameRaa + "_AuAu", refdataRaa);
