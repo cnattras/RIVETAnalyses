@@ -33,12 +33,13 @@ namespace Rivet {
       beamOpt = getOption<string>("beam","NONE");
 
 
-      if(beamOpt=="PP") collSys = pp;
-        else if(beamOpt=="AUAU39") collSys = AuAu39;
-        else if(beamOpt=="AUAU62") collSys = AuAu62;
+      if(beamOpt=="PP39") collSys = pp39;
+      else if(beamOpt=="PP62") collSys = pp62;
+      else if(beamOpt=="AUAU39") collSys = AuAu39;
+      else if(beamOpt=="AUAU62") collSys = AuAu62;
 
 
-      if(!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      if(!(collSys == pp39 || collSys == pp62)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       //Yields_________________
       book(hPion0Pt["ptyields39c10"], 1, 1, 1);
@@ -67,110 +68,114 @@ namespace Rivet {
       book(sow["sow_62c40"],"sow_62c40");
       book(sow["sow_62c60"],"sow_62c60");
       book(sow["sow_62c86"],"sow_62c86");
-      book(sow["sow_39call"],"sow_39call");
+      book(sow["sow_62call"],"sow_62call");
 
       //RAA _______________________________
 
       string refnameRaa1 = mkAxisCode(5,1,1);
             const Scatter2D& refdataRaa1 =refData(refnameRaa1);
       book(hPion0Pt["c10Pt_AuAu39"], refnameRaa1 + "_AuAu39", refdataRaa1);
-      book(hPion0Pt["c10Pt39_pp"], refnameRaa1 + "_pp", refdataRaa1);
-      book(hRaa1, refnameRaa1);
+      book(hPion0Pt["c10Pt39_pp"], refnameRaa1 + "_pp39", refdataRaa1);
+      book(hRaa["Raa_c010_AuAu39"], refnameRaa1);
 
       string refnameRaa2 = mkAxisCode(5,1,2);
             const Scatter2D& refdataRaa2 =refData(refnameRaa2);
       book(hPion0Pt["c20Pt_AuAu39"], refnameRaa2 + "_AuAu39", refdataRaa2);
-      book(hPion0Pt["c20Pt39_pp"], refnameRaa2 + "_pp", refdataRaa2);
-      book(hRaa2, refnameRaa2);
+      book(hPion0Pt["c20Pt39_pp"], refnameRaa2 + "_pp39", refdataRaa2);
+      book(hRaa["Raa_c1020_AuAu39"], refnameRaa2);
 
       string refnameRaa3 = mkAxisCode(6,1,1);
             const Scatter2D& refdataRaa3 =refData(refnameRaa3);
       book(hPion0Pt["c40Pt_AuAu39"], refnameRaa3 + "_AuAu39", refdataRaa3);
-      book(hPion0Pt["c40Pt39_pp"], refnameRaa3 + "_pp", refdataRaa3);
-      book(hRaa3, refnameRaa3);
+      book(hPion0Pt["c40Pt39_pp"], refnameRaa3 + "_pp39", refdataRaa3);
+      book(hRaa["Raa_c2040_AuAu39"], refnameRaa3);
 
       string refnameRaa4 = mkAxisCode(5,1,3);
             const Scatter2D& refdataRaa4 =refData(refnameRaa4);
       book(hPion0Pt["c60Pt_AuAu39"], refnameRaa4 + "_AuAu39", refdataRaa4);
-      book(hPion0Pt["c60Pt39_pp"], refnameRaa4 + "_pp", refdataRaa4);
-      book(hRaa4, refnameRaa4);
+      book(hPion0Pt["c60Pt39_pp"], refnameRaa4 + "_pp39", refdataRaa4);
+      book(hRaa["Raa_c4060_AuAu39"], refnameRaa4);
 
       string refnameRaa5 = mkAxisCode(5,1,4);
             const Scatter2D& refdataRaa5 =refData(refnameRaa5);
       book(hPion0Pt["c86Pt_AuAu39"], refnameRaa5 + "_AuAu39", refdataRaa5);
-      book(hPion0Pt["c86Pt39_pp"], refnameRaa5 + "_pp", refdataRaa5);
-      book(hRaa5, refnameRaa5);
+      book(hPion0Pt["c86Pt39_pp"], refnameRaa5 + "_pp39", refdataRaa5);
+      book(hRaa["Raa_c6086_AuAu39"], refnameRaa5);
 
       string refnameRaa6 = mkAxisCode(6,1,2);
             const Scatter2D& refdataRaa6 =refData(refnameRaa6);
       book(hPion0Pt["callPt_AuAu39"], refnameRaa6 + "_AuAu39", refdataRaa6);
-      book(hPion0Pt["callPt39_pp"], refnameRaa6 + "_pp", refdataRaa6);
-      book(hRaa6, refnameRaa6);
+      book(hPion0Pt["callPt39_pp"], refnameRaa6 + "_pp39", refdataRaa6);
+      book(hRaa["Raa_minbias_AuAu39"], refnameRaa6);
 
       string refnameRaa7 = mkAxisCode(7,1,1);
-            const Scatter2D& refdataRaa7 =refData(refnameRaa2);
+            const Scatter2D& refdataRaa7 =refData(refnameRaa7);
       book(hPion0Pt["c10Pt_AuAu62"], refnameRaa7 + "_AuAu62", refdataRaa7);
-      book(hPion0Pt["c10Pt62_pp"], refnameRaa7 + "_pp", refdataRaa7);
-      book(hRaa7, refnameRaa7);
-
+      book(hPion0Pt["c10Pt62_pp"], refnameRaa7 + "_pp62", refdataRaa7);
+      book(hRaa["Raa_c010_AuAu62"], refnameRaa7);
+      
       string refnameRaa8 = mkAxisCode(7,1,2);
             const Scatter2D& refdataRaa8 =refData(refnameRaa8);
       book(hPion0Pt["c20Pt_AuAu62"], refnameRaa8 + "_AuAu62", refdataRaa8);
-      book(hPion0Pt["c20Pt62_pp"], refnameRaa8 + "_pp", refdataRaa8);
-      book(hRaa8, refnameRaa8);
+      book(hPion0Pt["c20Pt62_pp"], refnameRaa8 + "_pp62", refdataRaa8);
+      book(hRaa["Raa_c1020_AuAu62"], refnameRaa8);
 
       string refnameRaa9 = mkAxisCode(7,1,3);
-            const Scatter2D& refdataRaa9 =refData(refnameRaa29);
+            const Scatter2D& refdataRaa9 =refData(refnameRaa9);
       book(hPion0Pt["c40Pt_AuAu62"], refnameRaa9 + "_AuAu62", refdataRaa9);
-      book(hPion0Pt["c40Pt62_pp"], refnameRaa9 + "_pp", refdataRaa9);
-      book(hRaa9, refnameRaa9);
+      book(hPion0Pt["c40Pt62_pp"], refnameRaa9 + "_pp62", refdataRaa9);
+      book(hRaa["Raa_c2040_AuAu62"], refnameRaa9);
 
       string refnameRaa10 = mkAxisCode(7,1,4);
             const Scatter2D& refdataRaa10 =refData(refnameRaa10);
       book(hPion0Pt["c60Pt_AuAu62"], refnameRaa10 + "_AuAu62", refdataRaa10);
-      book(hPion0Pt["c60Pt62_pp"], refnameRaa10 + "_pp", refdataRaa10);
-      book(hRaa10, refnameRaa10);
+      book(hPion0Pt["c60Pt62_pp"], refnameRaa10 + "_pp62", refdataRaa10);
+      book(hRaa["Raa_c4060_AuAu62"], refnameRaa10);
 
       string refnameRaa11 = mkAxisCode(8,1,1);
             const Scatter2D& refdataRaa11 =refData(refnameRaa11);
       book(hPion0Pt["c86Pt_AuAu62"], refnameRaa11 + "_AuAu62", refdataRaa11);
-      book(hPion0Pt["c86Pt62_pp"], refnameRaa11 + "_pp", refdataRaa11);
-      book(hRaa11, refnameRaa11);
+      book(hPion0Pt["c86Pt62_pp"], refnameRaa11 + "_pp62", refdataRaa11);
+      book(hRaa["Raa_c6086_AuAu62"], refnameRaa11);
 
       string refnameRaa12 = mkAxisCode(7,1,5);
             const Scatter2D& refdataRaa12 =refData(refnameRaa12);
       book(hPion0Pt["callPt_AuAu62"], refnameRaa12 + "_AuAu62", refdataRaa12);
-      book(hPion0Pt["callPt62_pp"], refnameRaa12 + "_pp", refdataRaa12);
-      book(hRaa12, refnameRaa12);
+      book(hPion0Pt["callPt62_pp"], refnameRaa12 + "_pp62", refdataRaa12);
+      book(hRaa["Raa_minbias_AuAu62"], refnameRaa12);
 
-      book(sow["sow_pp"],"sow_pp");
+      book(sow["sow_pp39"],"sow_pp39");
+      book(sow["sow_pp62"],"sow_pp62");
 
 
 //Centrality vs RAA
 
       string refnameRaa13 = mkAxisCode(9,1,1);
-            const Scatter2D& refdataRaa13 =refData(refnameRaa13);
-      book(hPion0Pt["pt6centRAA_AuAu39"], refnameRaa13 + "_AuAu62", refdataRaa13);
-      book(hPion0Pt["pt6centRAA39_pp"], refnameRaa13 + "_pp", refdataRaa13);
-      book(hRaa13, refnameRaa13);
+      const Scatter2D& refdataRaa13 =refData(refnameRaa13);
+      book(hRaaNpart["Raa_pt46_AuAu39"], refnameRaa13, refdataRaa13);
 
-      string refnameRaa14 = mkAxisCode(9,1,3);
-            const Scatter2D& refdataRaa14 =refData(refnameRaa14);
-      book(hPion0Pt["pt6centRAA_AuAu62"], refnameRaa14 + "_AuAu62", refdataRaa14);
-      book(hPion0Pt["pt6centRAA62_pp"], refnameRaa14 + "_pp", refdataRaa14);
-      book(hRaa14, refnameRaa14);
+      string refnameRaa14 = mkAxisCode(9,1,2);
+      const Scatter2D& refdataRaa14 =refData(refnameRaa14);
+      book(hRaaNpart["Raa_pt610_AuAu39"], refnameRaa14, refdataRaa14);
 
-      string refnameRaa15 = mkAxisCode(9,1,2);
-            const Scatter2D& refdataRaa15 =refData(refnameRaa15);
-      book(hPion0Pt["pt10centRAA_AuAu39"], refnameRaa15 + "_AuAu62", refdataRaa15);
-      book(hPion0Pt["pt10centRAA39_pp"], refnameRaa15 + "_pp", refdataRaa15);
-      book(hRaa15, refnameRaa15);
+      string refnameRaa15 = mkAxisCode(9,1,3);
+      const Scatter2D& refdataRaa15 =refData(refnameRaa15);
+      book(hRaaNpart["Raa_pt46_AuAu62"], refnameRaa15, refdataRaa15);
 
       string refnameRaa16 = mkAxisCode(9,1,4);
-            const Scatter2D& refdataRaa16 =refData(refnameRaa16);
-      book(hPion0Pt["pt10centRAA_AuAu62"], refnameRaa16 + "_AuAu62", refdataRaa16);
-      book(hPion0Pt["pt10centRAA62_pp"], refnameRaa16 + "_pp", refdataRaa16);
-      book(hRaa16, refnameRaa16);
+      const Scatter2D& refdataRaa16 =refData(refnameRaa16);
+      book(hRaaNpart["Raa_pt610_AuAu62"], refnameRaa16, refdataRaa16);
+      
+      centBins.insert(pair<string, int>("Raa_c010_AuAu39",0));
+      centBins.insert(pair<string, int>("Raa_c1020_AuAu39",1));
+      centBins.insert(pair<string, int>("Raa_c2040_AuAu39",2));
+      centBins.insert(pair<string, int>("Raa_c4060_AuAu39",3));
+      centBins.insert(pair<string, int>("Raa_c6086_AuAu39",4));
+      centBins.insert(pair<string, int>("Raa_c010_AuAu62",0));
+      centBins.insert(pair<string, int>("Raa_c1020_AuAu62",1));
+      centBins.insert(pair<string, int>("Raa_c2040_AuAu62",2));
+      centBins.insert(pair<string, int>("Raa_c4060_AuAu62",3));
+      centBins.insert(pair<string, int>("Raa_c6086_AuAu62",4));
 
     }
 
@@ -180,9 +185,9 @@ namespace Rivet {
 
             Particles neutralParticles = applyProjection<PrimaryParticles>(event,"fs").particles();
 
-            if(collSys==pp)
+            if(collSys==pp39)
             {
-                sow["sow_pp"]->fill();
+                sow["sow_pp39"]->fill();
                 for(Particle p : neutralParticles)
                 {
                     hPion0Pt["c10Pt39_pp"]->fill(p.pT()/GeV);
@@ -191,142 +196,185 @@ namespace Rivet {
                     hPion0Pt["c60Pt39_pp"]->fill(p.pT()/GeV);
                     hPion0Pt["c86Pt39_pp"]->fill(p.pT()/GeV);
                     hPion0Pt["callPt39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["c10Pt39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["c20Pt39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["c40Pt39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["c60Pt39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["c86Pt39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["callPt39_pp"]->fill(p.pT()/GeV);
-
-                    //Antonio is cheking on this
-                    hPion0Pt["pt6centRAA39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["pt6centRAA62_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["pt10centRAA39_pp"]->fill(p.pT()/GeV);
-                    hPion0Pt["pt10centRAA62_pp"]->fill(p.pT()/GeV);
 
                 }
                 return;
             }
+            
+            if(collSys==pp62)
+            {
+                sow["sow_pp62"]->fill();
+                for(Particle p : neutralParticles)
+                {
+                    hPion0Pt["c10Pt62_pp"]->fill(p.pT()/GeV);
+                    hPion0Pt["c20Pt62_pp"]->fill(p.pT()/GeV);
+                    hPion0Pt["c40Pt62_pp"]->fill(p.pT()/GeV);
+                    hPion0Pt["c60Pt62_pp"]->fill(p.pT()/GeV);
+                    hPion0Pt["c86Pt62_pp"]->fill(p.pT()/GeV);
+                    hPion0Pt["callPt62_pp"]->fill(p.pT()/GeV);
+
+                }
+                return;
+            }
+            
             const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
             const double c = cent();
+            
+            if ((c < 0.) || (c > 86.)) vetoEvent;
+                        
             if (collSys==AuAu39)
             {
+                sow["sow_39call"]->fill();
 
-              if ((c < 0.) || (c > 86.)) vetoEvent;
-
-              sow["sow_AuAu39"]->fill();
-
-              for(const Particle& p : neutralParticles)
-              {
-                  double partPt = p.pT()/GeV;
-                  double pt_weight = 1./(partPt*2.*M_PI);
-
-                  sow["sow_39call"]->fill();
-                  hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
-
-                  if ((partPt > 4.) && (partPt < 6.))
-                  {
-                  hPion0Pt["pt6centRAA_AuAu39"]->fill(c);
-                  }
-                  if ((partPt > 6.) && (partPt < 10.))
-                  {
-                    hPion0Pt["pt10centRAA_AuAu39"]->fill(c);
-                  }
-
-                  if ((c >= 0.) && (c < 10.))
-                  {
-                    sow["sow_39c10"]->fill();
-                    hPion0Pt["ptyields39c10"]->fill(partPt, pt_weight);
-                    hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
-                  }
-                  if ((c >= 10.) && (c < 20.))
-                  {
-                    sow["sow_39c20"]->fill();
-                    hPion0Pt["ptyields39c20"]->fill(partPt, pt_weight);
-                    hPion0Pt["c20Pt_AuAu39"]->fill(p.pT()/GeV);
-                  }
-                  if ((c >= 20.) && (c < 40.))
-                  {
-                    sow["sow_39c40"]->fill();
-                    hPion0Pt["ptyields39c40"]->fill(partPt, pt_weight);
-                    hPion0Pt["c40Pt_AuAu39"]->fill(p.pT()/GeV);
-                  }
-                  if ((c >= 40.) && (c < 60.))
-                  {
-                    sow["sow_39c60"]->fill();
-                    hPion0Pt["ptyields39c60"]->fill(partPt, pt_weight);
-                    hPion0Pt["c60Pt_AuAu39"]->fill(p.pT()/GeV);
-                  }
-                  if ((c >= 60.) && (c < 86.))
-                  {
-                    sow["sow_39c86"]->fill();
-                    hPion0Pt["ptyields39c86"]->fill(partPt, pt_weight);
-                    hPion0Pt["c86Pt_AuAu39"]->fill(p.pT()/GeV);
-                  }
-                }
-              }
-
-              if (collSys==AuAu62)
-              {
-                if ((c < 0.) || (c > 86.)) vetoEvent;
-
-                sow["sow_AuAu62"]->fill();
-
-                for(const Particle& p : neutralParticles)
+                if((c >= 0.) && (c < 10.))
                 {
-                    double partPt = p.pT()/GeV;
-                    double pt_weight = 1./(partPt*2.*M_PI);
-
-                    sow["sow_62call"]->fill();
-                    hPion0Pt["callPt_AuAu62"]->fill(p.pT()/GeV);
-
-                    if ((partPt > 4.) && (partPt < 6.))
+                    sow["sow_39c10"]->fill();
+                    for(const Particle& p : neutralParticles)
                     {
-                    hPion0Pt["pt6centRAA_AuAu62"]->fill(c);
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields39c10"]->fill(partPt, pt_weight);
+                        hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
                     }
-                    if ((partPt > 6.) && (partPt < 10.))
-                    {
-                      hPion0Pt["pt10centRAA_AuAu62"]->fill(c);
-                    }
-
-                    if ((c >= 0.) && (c < 10.))
-                    {
-                      sow["sow_62c10"]->fill();
-                      hPion0Pt["ptyields62c10"]->fill(partPt, pt_weight);
-                      hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
-                    }
-                    if ((c >= 10.) && (c < 20.))
-                    {
-                      sow["sow_62c20"]->fill();
-                      hPion0Pt["ptyields62c20"]->fill(partPt, pt_weight);
-                      hPion0Pt["c20Pt_AuAu39"]->fill(p.pT()/GeV);
-                    }
-                    if ((c >= 20.) && (c < 40.))
-                    {
-                      sow["sow_62c40"]->fill();
-                      hPion0Pt["ptyields62c40"]->fill(partPt, pt_weight);
-                      hPion0Pt["c40Pt_AuAu39"]->fill(p.pT()/GeV);
-                    }
-                    if ((c >= 40.) && (c < 60.))
-                    {
-                      sow["sow_62c60"]->fill();
-                      hPion0Pt["ptyields62c60"]->fill(partPt, pt_weight);
-                      hPion0Pt["c60Pt_AuAu39"]->fill(p.pT()/GeV);
-                    }
-                    if ((c >= 60.) && (c < 86.))
-                    {
-                      sow["sow_62c86"]->fill();
-                      hPion0Pt["ptyields62c86"]->fill(partPt, pt_weight);
-                      hPion0Pt["c86Pt_AuAu39"]->fill(p.pT()/GeV);
-                    }
-                  }
                 }
+                else if((c >= 10.) && (c < 20.))
+                {
+                    sow["sow_39c20"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields39c20"]->fill(partPt, pt_weight);
+                        hPion0Pt["c20Pt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 20.) && (c < 40.))
+                {
+                    sow["sow_39c40"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields39c40"]->fill(partPt, pt_weight);
+                        hPion0Pt["c40Pt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 40.) && (c < 60.))
+                {
+                    sow["sow_39c60"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields39c60"]->fill(partPt, pt_weight);
+                        hPion0Pt["c60Pt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 60.) && (c < 86.))
+                {
+                    sow["sow_39c86"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields39c86"]->fill(partPt, pt_weight);
+                        hPion0Pt["c86Pt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                return;
+            }
+            
+
+            if (collSys==AuAu62)
+            {
+                sow["sow_62call"]->fill();
+
+                if((c >= 0.) && (c < 10.))
+                {
+                    sow["sow_62c10"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields62c10"]->fill(partPt, pt_weight);
+                        hPion0Pt["c10Pt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields62call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 10.) && (c < 20.))
+                {
+                    sow["sow_62c20"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields62c20"]->fill(partPt, pt_weight);
+                        hPion0Pt["c20Pt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields62call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 20.) && (c < 40.))
+                {
+                    sow["sow_62c40"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields62c40"]->fill(partPt, pt_weight);
+                        hPion0Pt["c40Pt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields62call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 40.) && (c < 60.))
+                {
+                    sow["sow_62c60"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields62c60"]->fill(partPt, pt_weight);
+                        hPion0Pt["c60Pt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields62call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                else if((c >= 60.) && (c < 86.))
+                {
+                    sow["sow_62c86"]->fill();
+                    for(const Particle& p : neutralParticles)
+                    {
+                        double partPt = p.pT()/GeV;
+                        double pt_weight = 1./(partPt*2.*M_PI);
+                        hPion0Pt["ptyields62c86"]->fill(partPt, pt_weight);
+                        hPion0Pt["c86Pt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["callPt_AuAu62"]->fill(p.pT()/GeV);
+                        hPion0Pt["ptyields62call"]->fill(p.pT()/GeV, pt_weight);
+                    }
+                }
+                return;
+            }
+              
     }
 
     void finalize() {
+        
       bool AuAu39_available = false;
       bool AuAu62_available = false;
-      bool pp200_available = false;
+      bool pp39_available = false;
+      bool pp62_available = false;
 
       for(auto element : hPion0Pt)
       {
@@ -339,14 +387,18 @@ namespace Rivet {
           {
               if(element.second->numEntries() > 0) AuAu62_available = true;
           }
-          else if(name.find("pp") != std::string::npos)
+          else if(name.find("pp39") != std::string::npos)
           {
-              if(element.second->numEntries() > 0) pp200_available = true;
+              if(element.second->numEntries() > 0) pp39_available = true;
+          }
+          else if(name.find("pp62") != std::string::npos)
+          {
+              if(element.second->numEntries() > 0) pp62_available = true;
           }
       }
 
-      if(!(AuAu200_available && pp200_available)) return;
-
+      if(!(AuAu62_available && AuAu39_available && pp39_available && pp62_available)) return;
+      
 //Yields_________________
       hPion0Pt["ptyields39c10"]->scaleW(1./sow["sow_39c10"]->sumW());
       hPion0Pt["ptyields39c20"]->scaleW(1./sow["sow_39c20"]->sumW());
@@ -360,99 +412,136 @@ namespace Rivet {
       hPion0Pt["ptyields62c40"]->scaleW(1./sow["sow_62c40"]->sumW());
       hPion0Pt["ptyields62c60"]->scaleW(1./sow["sow_62c60"]->sumW());
       hPion0Pt["ptyields62c86"]->scaleW(1./sow["sow_62c86"]->sumW());
-      hPion0Pt["ptyields39call"]->scaleW(1./sow["sow_39call"]->sumW());
+      hPion0Pt["ptyields62call"]->scaleW(1./sow["sow_62call"]->sumW());
 
 
 //RAA _______________________________
+      
+      hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_39c10"]->sumW());
+      hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_39c20"]->sumW());
+      hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_39c40"]->sumW());
+      hPion0Pt["c60Pt_AuAu39"]->scaleW(1./sow["sow_39c60"]->sumW());
+      hPion0Pt["c86Pt_AuAu39"]->scaleW(1./sow["sow_39c86"]->sumW());
+      hPion0Pt["callPt_AuAu39"]->scaleW(1./sow["sow_39call"]->sumW());
 
+      hPion0Pt["c10Pt_AuAu62"]->scaleW(1./sow["sow_62c10"]->sumW());
+      hPion0Pt["c20Pt_AuAu62"]->scaleW(1./sow["sow_62c20"]->sumW());
+      hPion0Pt["c40Pt_AuAu62"]->scaleW(1./sow["sow_62c40"]->sumW());
+      hPion0Pt["c60Pt_AuAu62"]->scaleW(1./sow["sow_62c60"]->sumW());
+      hPion0Pt["c86Pt_AuAu62"]->scaleW(1./sow["sow_62c86"]->sumW());
+      hPion0Pt["callPt_AuAu62"]->scaleW(1./sow["sow_62call"]->sumW());
+      
+      hPion0Pt["c10Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
+      hPion0Pt["c20Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
+      hPion0Pt["c40Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
+      hPion0Pt["c60Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
+      hPion0Pt["c86Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
+      hPion0Pt["callPt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
 
-      hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["c60Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["c86Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["callPt_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
+      hPion0Pt["c10Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
+      hPion0Pt["c20Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
+      hPion0Pt["c40Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
+      hPion0Pt["c60Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
+      hPion0Pt["c86Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
+      hPion0Pt["callPt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
+      
+      divide(hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa["Raa_c010_AuAu39"]);
+      divide(hPion0Pt["c20Pt_AuAu39"],hPion0Pt["c20Pt39_pp"],hRaa["Raa_c1020_AuAu39"]);
+      divide(hPion0Pt["c40Pt_AuAu39"],hPion0Pt["c40Pt39_pp"],hRaa["Raa_c2040_AuAu39"]);
+      divide(hPion0Pt["c60Pt_AuAu39"],hPion0Pt["c60Pt39_pp"],hRaa["Raa_c4060_AuAu39"]);
+      divide(hPion0Pt["c86Pt_AuAu39"],hPion0Pt["c86Pt39_pp"],hRaa["Raa_c6086_AuAu39"]);
+      divide(hPion0Pt["callPt_AuAu39"],hPion0Pt["callPt39_pp"],hRaa["Raa_minbias_AuAu39"]);
 
-      hPion0Pt["c10Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-      hPion0Pt["c20Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-      hPion0Pt["c40Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-      hPion0Pt["c60Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-      hPion0Pt["c86Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-      hPion0Pt["callPt_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
+      divide(hPion0Pt["c10Pt_AuAu62"],hPion0Pt["c10Pt62_pp"],hRaa["Raa_c010_AuAu62"]);
+      divide(hPion0Pt["c20Pt_AuAu62"],hPion0Pt["c20Pt62_pp"],hRaa["Raa_c1020_AuAu62"]);
+      divide(hPion0Pt["c40Pt_AuAu62"],hPion0Pt["c40Pt62_pp"],hRaa["Raa_c2040_AuAu62"]);
+      divide(hPion0Pt["c60Pt_AuAu62"],hPion0Pt["c60Pt62_pp"],hRaa["Raa_c4060_AuAu62"]);
+      divide(hPion0Pt["c86Pt_AuAu62"],hPion0Pt["c86Pt62_pp"],hRaa["Raa_c6086_AuAu62"]);
+      divide(hPion0Pt["callPt_AuAu62"],hPion0Pt["callPt62_pp"],hRaa["Raa_minbias_AuAu62"]);
+      
+      hRaa["Raa_c010_AuAu39"]->scaleY(1./777.2);
+      hRaa["Raa_c1020_AuAu39"]->scaleY(1./496.7);
+      hRaa["Raa_c2040_AuAu39"]->scaleY(1./253.6);
+      hRaa["Raa_c4060_AuAu39"]->scaleY(1./81.81);
+      hRaa["Raa_c6086_AuAu39"]->scaleY(1./13.88);
+      hRaa["Raa_minbias_AuAu39"]->scaleY(1./401.6);
 
-      hPion0Pt["c10Pt39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c20Pt39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c40Pt39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c60Pt39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c86Pt39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["callPt39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-
-      hPion0Pt["c10Pt62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c20Pt62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c40Pt62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c60Pt62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["c86Pt62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["callPt62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-
-      divide(hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa1);
-      divide(hPion0Pt["c20Pt_AuAu39"],hPion0Pt["c20Pt39_pp"],hRaa2);
-      divide(hPion0Pt["c40Pt_AuAu39"],hPion0Pt["c40Pt39_pp"],hRaa3);
-      divide(hPion0Pt["c60Pt_AuAu39"],hPion0Pt["c60Pt39_pp"],hRaa4);
-      divide(hPion0Pt["c86Pt_AuAu39"],hPion0Pt["c86Pt39_pp"],hRaa5);
-      divide(hPion0Pt["callPt_AuAu39"],hPion0Pt["callPt39_pp"],hRaa6);
-
-      divide(hPion0Pt["c10Pt_AuAu62"],hPion0Pt["c10Pt62_pp"],hRaa7);
-      divide(hPion0Pt["c20Pt_AuAu62"],hPion0Pt["c20Pt62_pp"],hRaa8);
-      divide(hPion0Pt["c40Pt_AuAu62"],hPion0Pt["c40Pt62_pp"],hRaa9);
-      divide(hPion0Pt["c60Pt_AuAu62"],hPion0Pt["c60Pt62_pp"],hRaa10);
-      divide(hPion0Pt["c86Pt_AuAu62"],hPion0Pt["c86Pt62_pp"],hRaa11);
-      divide(hPion0Pt["callPt_AuAu62"],hPion0Pt["callPt62_pp"],hRaa12);
-
-      hRaa1->scaleY(1./777.2);
-      hRaa2->scaleY(1./496.7);
-      hRaa3->scaleY(1./253.6);
-      hRaa4->scaleY(1./81.81);
-      hRaa5->scaleY(1./13.88);
-      hRaa6->scaleY(1./401.6);
-
-      hRaa7->scaleY(1./843.0);
-      hRaa8->scaleY(1./535.8);
-      hRaa9->scaleY(1./270.5);
-      hRaa10->scaleY(1./85.71);
-      hRaa11->scaleY(1./14.29);
-      hRaa12->scaleY(1./426.9);
+      hRaa["Raa_c010_AuAu62"]->scaleY(1./843.0);
+      hRaa["Raa_c1020_AuAu62"]->scaleY(1./535.8);
+      hRaa["Raa_c2040_AuAu62"]->scaleY(1./270.5);
+      hRaa["Raa_c4060_AuAu62"]->scaleY(1./85.71);
+      hRaa["Raa_c6086_AuAu62"]->scaleY(1./14.29);
+      hRaa["Raa_minbias_AuAu62"]->scaleY(1./426.9);
 
 //Centrality vs RAA_______________________________
 
-      hPion0Pt["pt6centRAA_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["pt6centRAA_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-      hPion0Pt["pt10centRAA_AuAu39"]->scaleW(1./sow["sow_AuAu39"]->sumW());
-      hPion0Pt["pt10centRAA_AuAu62"]->scaleW(1./sow["sow_AuAu62"]->sumW());
-
-      hPion0Pt["pt6centRAA39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["pt6centRAA62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["pt10centRAA39_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPion0Pt["pt10centRAA62_pp"]->scaleW(1./sow["sow_pp"]->sumW());
-
-      divide(hPion0Pt["pt6centRAA_AuAu39"],hPion0Pt["pt6centRAA39_pp"],hRaa13);
-      divide(hPion0Pt["pt6centRAA_AuAu62"],hPion0Pt["pt6centRAA62_pp"],hRaa14);
-      divide(hPion0Pt["pt10centRAA_AuAu39"],hPion0Pt["pt10centRAA39_pp"],hRaa15);
-      divide(hPion0Pt["pt10centRAA_AuAu62"],hPion0Pt["pt10centRAA62_pp"],hRaa16);
-
-      //needs be fixed
-      hRaa13->scaleY(1./1051.3);
-      hRaa14->scaleY(1./1051.3);
-      hRaa15->scaleY(1./1051.3);
-      hRaa16->scaleY(1./1051.3);
+      for(auto element : hRaa)
+      {
+          string name = element.first;
+          if(name.find("Raa_minbias_AuAu") != std::string::npos) continue;
+          
+          YODA::Scatter2D yodaRaa = *element.second;
+              
+          double averageRaaPt46 = 0.;
+          double averageRaaPt610 = 0.;
+          double averageRaaPt46Error = 0.;
+          double averageRaaPt610Error = 0.;
+          int nbinsPt46 = 0;
+          int nbinsPt610 = 0;
+              
+          for(auto &point : yodaRaa.points())
+          {
+              
+              if(point.x() > 4. && point.x() < 6.)
+              {
+                  if(!isnan(point.y()))
+                  {
+                      averageRaaPt46 += point.y();
+                      averageRaaPt46Error += point.yErrPlus()*point.yErrPlus();
+                      nbinsPt46++;
+                  }
+                  
+              }
+              if(point.x() > 6.)
+              {
+                  if(!isnan(point.y()))
+                  {
+                      averageRaaPt610 += point.y();
+                      averageRaaPt610Error += point.yErrPlus()*point.yErrPlus();
+                      nbinsPt610++;
+                  }
+              }
+          }
+          
+              
+          if(name.find("39") != std::string::npos)
+          {
+              hRaaNpart["Raa_pt46_AuAu39"]->point(centBins[name]).setY(averageRaaPt46/nbinsPt46);
+              hRaaNpart["Raa_pt46_AuAu39"]->point(centBins[name]).setYErr(sqrt(averageRaaPt46Error)/nbinsPt46);
+              hRaaNpart["Raa_pt610_AuAu39"]->point(centBins[name]).setY(averageRaaPt610/nbinsPt610);
+              hRaaNpart["Raa_pt610_AuAu39"]->point(centBins[name]).setYErr(sqrt(averageRaaPt610Error)/nbinsPt610);
+          }
+          else if(name.find("62") != std::string::npos)
+          {
+              hRaaNpart["Raa_pt46_AuAu62"]->point(centBins[name]).setY(averageRaaPt46/nbinsPt46);
+              hRaaNpart["Raa_pt46_AuAu62"]->point(centBins[name]).setYErr(sqrt(averageRaaPt46Error)/nbinsPt46);
+              hRaaNpart["Raa_pt610_AuAu62"]->point(centBins[name]).setY(averageRaaPt610/nbinsPt610);
+              hRaaNpart["Raa_pt610_AuAu62"]->point(centBins[name]).setYErr(sqrt(averageRaaPt610Error)/nbinsPt610);
+          }
+          
+      }
+      
 
     }
 
 
     map<string, Histo1DPtr> hPion0Pt;
-    Scatter2DPtr hRaa;
+    map<string, Scatter2DPtr> hRaa;
     map<string, CounterPtr> sow;
+    map<string, Scatter2DPtr> hRaaNpart;
+    map<string, int> centBins;
     string beamOpt;
-    enum CollisionSystem {pp, AuAu39, AuAu62};
+    enum CollisionSystem {pp39, pp62, AuAu39, AuAu62};
     CollisionSystem collSys;
 
   };

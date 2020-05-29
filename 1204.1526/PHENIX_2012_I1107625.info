@@ -17,7 +17,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP,AUAU62,AUAU39
+ - beam=PP39,PP62,AUAU39,AUAU62
 Description:
   'Neutral-pion, $\pi^0$, spectra were measured at midrapidity ($|y| < 0.35$) in Au+Au collisions at $\sqrt{sNN}=$ 39 and 62.4 GeV and compared to earlier measurements at 200 GeV in the $1 < p_T < 10$ GeV/c transverse-momentum ($p_T$) range. The high-$p_T$ tail is well described by a power law in all cases and the powers decrease significantly with decreasing center-of-mass energy. The change of powers is very similar to that observed in the corresponding p+p-collision spectra. The nuclear-modification factors (RAA) show significant suppression and a distinct energy dependence at moderate $p_T$ in central collisions. At high $p_T$, RAA is similar for 62.4 and 200 GeV at all centralities. Perturbative-quantumchromodynamics calculations that describe RAA well at 200 GeV, fail to describe the 39 GeV data, raising the possibility that the relative importance of initial-state effects and soft processes increases at lower energies. A conclusion that the region where hard processes are dominant is reached only at higher $p_T$, is also supported by the $x_T$ dependence of the $x_T$-scaling power-law exponent.'
 ValidationInfo:
