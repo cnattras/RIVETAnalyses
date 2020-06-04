@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+//#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -44,6 +44,20 @@ namespace Rivet {
 
 
       //v_2_________________
+
+      book(hPion0Pt["ptv2c0005"], 1, 1, 1);
+      book(hPion0Pt["ptv2c0510"], 1, 1, 2);
+
+      for(int i = 0, N = CentralityBins.size();i < N-2; ++i)
+      {
+        book(hPion0Pt["ptv2c" + std::to_string(CentralityBins[i+2])], 1, 1, i+3);
+      }
+
+      book(hPion0Pt["ptv2c0020"], 2, 1, 1);
+      book(hPion0Pt["ptv2c2040"], 2, 1, 2);
+      book(hPion0Pt["ptv2c4060"], 2, 1, 3);
+      book(hPion0Pt["ptv2c0092"], 2, 1, 4);
+
 
       //RAA _______________________________
       for(int i = 0, N = CentralityBins.size();i < N-2; ++i)
