@@ -9,7 +9,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
-#include "Rivet/Projections/RHICCentrality.hh"
+#include "RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 static const int numTrigPtBins = 4;
 static const float pTTrigBins[] = {5.0,7.0,9.0,12.0,15.0};
