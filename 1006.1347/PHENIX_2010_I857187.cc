@@ -384,9 +384,9 @@ namespace Rivet {
       {
         book(sow[i],"sow" + to_string(i));
         if (i <= 9) {
-          book(_h["0" + to_string(i) + "11"], i, 1, 1);
+          //book(_h["0" + to_string(i) + "11"], i, 1, 1);
         } else {
-          book(_h[to_string(i) + "11"], i, 1, 1);
+          //book(_h[to_string(i) + "11"], i, 1, 1);
         }
           book(_DeltaPhi[i], "DeltaPhi" + to_string(i), 24, 0, M_PI);
           book(_DeltaPhiSub[i], "DeltaPhiSub" + to_string(i), 24, 0, M_PI);
@@ -503,10 +503,10 @@ namespace Rivet {
                     
         
                 if (corr.GetIndex() <= 9) {
-                  _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                  //_h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
                }
                 else {
-                  _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+		  // _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
                }
             
                     
@@ -526,10 +526,10 @@ namespace Rivet {
             if(nTriggers[i] > 0)
             {
               if (i <= 9) {
-                _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                //_h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
               }
               else {
-                _h[to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                //_h[to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
               }
               _DeltaPhi[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
               _DeltaPhiSub[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
