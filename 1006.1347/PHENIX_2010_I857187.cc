@@ -380,12 +380,52 @@ namespace Rivet {
     }
   */
 
-      for(unsigned int i = 1; i<= Correlators.size()+8; i++)
+      for(unsigned int i = 1; i<= 10; i++)
       {
         book(sow[i],"sow" + to_string(i));
-        if (i <= 9) {
-          //book(_h["0" + to_string(i) + "11"], i, 1, 1);
-        } else {
+        switch (i) {
+          case 1:
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+            }
+            break;
+          case 2:
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+            }
+            break;
+          case 3:
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+            }
+            break;
+          case 4:
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+            }
+            break;
+          case 5:
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+            }
+            break;
+          case 6:
+            book(_h["0" + to_string(i) + "11"], i, 1, 1);
+            break;
+          case 7:
+            book(_h["0" + to_string(i) + "11"], i, 1, 1);
+            break;
+          case 8:
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+            }
+            break;
+          case 9:
+            book(_h["0" + to_string(i) + "11"], i, 1, 1);
+            break;
+          case 10:
+            book(_h[to_string(i) + "11"], i, 1, 1);
+            break;
           //book(_h[to_string(i) + "11"], i, 1, 1);
         }
           book(_DeltaPhi[i], "DeltaPhi" + to_string(i), 24, 0, M_PI);

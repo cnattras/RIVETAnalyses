@@ -1,0 +1,80 @@
+dependent_variables:
+- header: {name: $dN/x_E$}
+  qualifiers:
+  - {name: $x_E$, value: '$\pi_0 \, - \, \textrm{Hadron} \, 9 \, < \, p_T, \, trigger
+      \, < \, 12 \, \textrm{GeV}/c$'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.0819547}
+    - {label: syserrlo, symerror: 0}
+    - {label: syserrhi, symerror: 0}
+    value: 2.25349
+  - errors:
+    - {label: stat, symerror: 0.0392999}
+    - {label: syserrlo, symerror: 0}
+    - {label: syserrhi, symerror: 0}
+    value: 1.12522
+  - errors:
+    - {label: stat, symerror: 0.0245677}
+    - {label: syserrlo, symerror: 0}
+    - {label: syserrhi, symerror: 0}
+    value: 0.454771
+  - errors:
+    - {label: stat, symerror: 0.0191504}
+    - {label: syserrlo, symerror: 0}
+    - {label: syserrhi, symerror: 0}
+    value: 0.271041
+  - errors:
+    - {label: stat, symerror: 0.0143736}
+    - {label: syserrlo, symerror: 0}
+    - {label: syserrhi, symerror: 0}
+    value: 0.154987
+  - errors:
+    - {label: stat, symerror: 0.00674935}
+    - {label: syserrlo, symerror: 0}
+    - {label: syserrhi, symerror: 0}
+    value: 0.0721248
+- header: {name: $dN/x_E$}
+  qualifiers:
+  - {name: $x_E$, value: '$\textrm{Isolated Direct Photon} \, - \, \textrm{Hadron}
+      \, 9 \, < \, p_T, \,trigger \, < \, 12 \, \textrm{GeV}/c$'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.219601}
+    - {label: syserrlo, symerror: 0.0575172}
+    - {label: syserrhi, symerror: 0.0581416}
+    value: 1.35884
+  - errors:
+    - {label: stat, symerror: 0.105639}
+    - {label: syserrlo, symerror: 0.0299071}
+    - {label: syserrhi, symerror: 0.0310152}
+    value: 0.634859
+  - errors:
+    - {label: stat, symerror: 0.0651597}
+    - {label: syserrlo, symerror: 0.0101736}
+    - {label: syserrhi, symerror: 0.0104792}
+    value: 0.303496
+  - errors:
+    - {label: stat, symerror: 0.0419452}
+    - {label: syserrlo, symerror: 0.00408712}
+    - {label: syserrhi, symerror: 0.00418867}
+    value: 0.137196
+  - errors:
+    - {label: stat, symerror: 0.0297143}
+    - {label: syserrlo, symerror: 0.00254843}
+    - {label: syserrhi, symerror: 0.00260168}
+    value: 0.0525438
+  - errors:
+    - {label: stat, symerror: 0.0139088}
+    - {label: syserrlo, symerror: 0.00100965}
+    - {label: syserrhi, symerror: 0.00107795}
+    value: 0.0291138
+independent_variables:
+- header: {name: $x_E$}
+  values:
+  - {high: 0.2, low: 0.1}
+  - {high: 0.3, low: 0.2}
+  - {high: 0.4, low: 0.3}
+  - {high: 0.5, low: 0.4}
+  - {high: 0.6, low: 0.5}
+  - {high: 0.8, low: 0.6}

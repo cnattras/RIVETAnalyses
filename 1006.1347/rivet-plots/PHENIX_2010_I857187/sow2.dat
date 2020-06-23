@@ -1,0 +1,16 @@
+# BEGIN PLOT
+LegendOnly=//home/jacob/Desktop/Work/Testing/1006.1347/Rivet.yoda/PHENIX_2010_I857187:cent=GEN/sow2
+DrawOnly=//home/jacob/Desktop/Work/Testing/1006.1347/Rivet.yoda/PHENIX_2010_I857187:cent=GEN/sow2
+Legend=1
+LogY=1
+# END PLOT
+
+# BEGIN COUNTER //home/jacob/Desktop/Work/Testing/1006.1347/Rivet.yoda/PHENIX_2010_I857187:cent=GEN/sow2
+LineColor=red
+LineStyle=solid
+Path=//home/jacob/Desktop/Work/Testing/1006.1347/Rivet.yoda/PHENIX_2010_I857187:cent=GEN/sow2
+Title=Rivet
+# value	 error
+0.000000e+00	0.000000e+00
+# END COUNTER
+

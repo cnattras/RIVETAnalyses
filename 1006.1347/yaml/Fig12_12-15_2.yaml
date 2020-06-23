@@ -1,0 +1,51 @@
+dependent_variables:
+- header: {name: '$dN/p_{out}$'}
+  qualifiers:
+  - {name: '$p_{out}$', value: '$\textrm{Isolated Direct Photon} \, - \, \textrm{Hadron}
+      \, 7 \, < \, p_T, \,t \, < \, 9$'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.0438131}
+    - {label: syserrlo, symerror: 0.00846729}
+    - {label: syserrhi, symerror: 0.00727712}
+    value: 0.137579
+  - errors:
+    - {label: stat, symerror: 0.0342527}
+    - {label: syserrlo, symerror: 0.0049756}
+    - {label: syserrhi, symerror: 0.00432144}
+    value: 0.0890001
+  - errors:
+    - {label: stat, symerror: 0.0261899}
+    - {label: syserrlo, symerror: 0.00263989}
+    - {label: syserrhi, symerror: 0.00231158}
+    value: 0.0505515
+  - errors:
+    - {label: stat, symerror: 0.0217594}
+    - {label: syserrlo, symerror: 0.00271854}
+    - {label: syserrhi, symerror: 0.0022529}
+    value: 0.0282035
+  - errors:
+    - {label: stat, symerror: 0.00920205}
+    - {label: syserrlo, symerror: 0.000802164}
+    - {label: syserrhi, symerror: 0.000668435}
+    value: 0.00820556
+  - errors:
+    - {label: stat, symerror: 0.0053943}
+    - {label: syserrlo, symerror: 0.000794425}
+    - {label: syserrhi, symerror: 0.000807914}
+    value: 0.00685889
+  - errors:
+    - {label: stat, symerror: 9.70523e-05}
+    - {label: syserrlo, symerror: 1.80699e-05}
+    - {label: syserrhi, symerror: 1.38913e-05}
+    value: -0.000107303
+independent_variables:
+- header: {name: '$p_{out}$'}
+  values:
+  - {high: 0.5, low: 0.0}
+  - {high: 1.0, low: 0.5}
+  - {high: 1.5, low: 1.0}
+  - {high: 2.0, low: 1.5}
+  - {high: 3.0, low: 2.0}
+  - {high: 5.0, low: 3.0}
+  - {high: 7.0, low: 5.0}

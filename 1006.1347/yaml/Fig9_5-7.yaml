@@ -1,0 +1,146 @@
+dependent_variables:
+- header: {name: $dN/x_E$}
+  qualifiers:
+  - {name: $x_E$, value: '$\pi_0 \, - \, \textrm{Hadron} \, 5 \, < \, p_T, \, trigger
+      \, < \, 7 \, \textrm{GeV}/c$'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.0130169}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 1.42876
+  - errors:
+    - {label: stat, symerror: 0.00986508}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.874442
+  - errors:
+    - {label: stat, symerror: 0.00765857}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.553399
+  - errors:
+    - {label: stat, symerror: 0.00627016}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.380346
+  - errors:
+    - {label: stat, symerror: 0.00525076}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.272981
+  - errors:
+    - {label: stat, symerror: 0.00431982}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.186023
+  - errors:
+    - {label: stat, symerror: 0.0024832}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.125977
+  - errors:
+    - {label: stat, symerror: 0.00188246}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.0733799
+  - errors:
+    - {label: stat, symerror: 0.0014613}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.0447565
+  - errors:
+    - {label: stat, symerror: 0.000726821}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.0229487
+  - errors:
+    - {label: stat, symerror: 0.000488543}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.0103272
+  - errors:
+    - {label: stat, symerror: 0.00039141}
+    - {label: syserrlo, symerror: 0.0}
+    - {label: syserrhi, symerror: 0.0}
+    value: 0.00653981
+- header: {name: $dN/x_E$}
+  qualifiers:
+  - {name: $x_E$, value: '$\textrm{Isolated Direct Photon} \, - \, \textrm{Hadron}
+      \, 5 \, < \, p_T, \,trigger \, < \, 7 \, \textrm{GeV}/c$'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.0694164}
+    - {label: syserrlo, symerror: 0.0889679}
+    - {label: syserrhi, symerror: 0.0899672}
+    value: 1.25585
+  - errors:
+    - {label: stat, symerror: 0.051486}
+    - {label: syserrlo, symerror: 0.0536048}
+    - {label: syserrhi, symerror: 0.05414}
+    value: 0.721926
+  - errors:
+    - {label: stat, symerror: 0.0390369}
+    - {label: syserrlo, symerror: 0.0326485}
+    - {label: syserrhi, symerror: 0.0329402}
+    value: 0.463128
+  - errors:
+    - {label: stat, symerror: 0.0308396}
+    - {label: syserrlo, symerror: 0.0216881}
+    - {label: syserrhi, symerror: 0.0218625}
+    value: 0.320423
+  - errors:
+    - {label: stat, symerror: 0.0251142}
+    - {label: syserrlo, symerror: 0.0148289}
+    - {label: syserrhi, symerror: 0.0149368}
+    value: 0.198155
+  - errors:
+    - {label: stat, symerror: 0.0209135}
+    - {label: syserrlo, symerror: 0.0105068}
+    - {label: syserrhi, symerror: 0.0105763}
+    value: 0.15327
+  - errors:
+    - {label: stat, symerror: 0.011125}
+    - {label: syserrlo, symerror: 0.0067207}
+    - {label: syserrhi, symerror: 0.00687736}
+    value: 0.0812734
+  - errors:
+    - {label: stat, symerror: 0.00847184}
+    - {label: syserrlo, symerror: 0.00402804}
+    - {label: syserrhi, symerror: 0.00410742}
+    value: 0.0490198
+  - errors:
+    - {label: stat, symerror: 0.00603063}
+    - {label: syserrlo, symerror: 0.00244785}
+    - {label: syserrhi, symerror: 0.00248918}
+    value: 0.0199626
+  - errors:
+    - {label: stat, symerror: 0.00282435}
+    - {label: syserrlo, symerror: 0.00107477}
+    - {label: syserrhi, symerror: 0.00113462}
+    value: 0.00942685
+  - errors:
+    - {label: stat, symerror: 0.00188459}
+    - {label: syserrlo, symerror: 0.000623328}
+    - {label: syserrhi, symerror: 0.000650219}
+    value: 0.00464977
+  - errors:
+    - {label: stat, symerror: 0.00116047}
+    - {label: syserrlo, symerror: 0.000268059}
+    - {label: syserrhi, symerror: 0.000277286}
+    value: 0.000890186
+independent_variables:
+- header: {name: $x_E$}
+  values:
+  - {high: 0.25, low: 0.2}
+  - {high: 0.3, low: 0.25}
+  - {high: 0.35, low: 0.3}
+  - {high: 0.4, low: 0.35}
+  - {high: 0.45, low: 0.4}
+  - {high: 0.5, low: 0.45}
+  - {high: 0.6, low: 0.5}
+  - {high: 0.7, low: 0.6}
+  - {high: 0.8, low: 0.7}
+  - {high: 0.95, low: 0.8}
+  - {high: 1.2, low: 0.95}
+  - {high: 1.3, low: 1.2}

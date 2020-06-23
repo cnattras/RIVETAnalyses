@@ -1,0 +1,33 @@
+dependent_variables:
+- header: {name: '$dN/p_{out}$'}
+  qualifiers:
+  - {name: '$p_{out}$', value: '$\pi_0 \, - \, \textrm{Hadron} \, 12 \, < \, p_T,
+      \, t \, < \, 15$'}
+  values:
+  - errors:
+    - {label: stat, symerror: 0.0260408}
+    value: 0.355922
+  - errors:
+    - {label: stat, symerror: 0.0176126}
+    value: 0.165382
+  - errors:
+    - {label: stat, symerror: 0.0131894}
+    value: 0.0927818
+  - errors:
+    - {label: stat, symerror: 0.0134111}
+    value: 0.0771451
+  - errors:
+    - {label: stat, symerror: 0.00680846}
+    value: 0.0267768
+  - errors:
+    - {label: stat, symerror: 0.00284416}
+    value: 0.00593913
+independent_variables:
+- header: {name: '$p_{out}$'}
+  values:
+  - {high: 0.5, low: 0.0}
+  - {high: 1.0, low: 0.5}
+  - {high: 1.5, low: 1.0}
+  - {high: 2.0, low: 1.5}
+  - {high: 3.0, low: 2.0}
+  - {high: 5.0, low: 3.0}
