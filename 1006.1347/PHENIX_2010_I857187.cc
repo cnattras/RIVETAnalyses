@@ -386,27 +386,27 @@ namespace Rivet {
         switch (i) {
           case 1:
             for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
             break;
           case 2:
             for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
             break;
           case 3:
             for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
             break;
           case 4:
             for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
             break;
           case 5:
             for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
             break;
           case 6:
@@ -417,7 +417,7 @@ namespace Rivet {
             break;
           case 8:
             for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "11"], i, 1, ii);
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
             break;
           case 9:
@@ -525,29 +525,106 @@ namespace Rivet {
 
             //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
             double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
-            /*double dEta = deltaEta(pTrig, pAssoc);*/
+            double dEta = deltaEta(pTrig, pAssoc);
           
             for(Correlator& corr : Correlators)
             {
               if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
                     
-              /*if(abs(dPhi) < 0.78)
+              if(abs(dPhi) < 0.78)
               {
-                if (corr.GetIndex() <= 9) {
-                  _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                switch(corr.GetIndex()) {
+                  
+                  case 1:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                    }
+                    break;
+                  case 2:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                    }
+                    break;
+                  case 3:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                    }
+                    break;
+                  case 4:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                    }
+                    break;
+                  case 5:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                    }
+                    break;
+                  case 6:
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    break;
+                  case 7:
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    break;
+                  case 8:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                    }
+                    break;
+                  case 9:
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    break;
+                  case 10:
+                    _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    break;
                 }
-                else {
-                  _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+              }
+                switch(corr.GetIndex()) {
+                  
+                  case 1:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                    }
+                    break;
+                  case 2:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                    }
+                    break;
+                  case 3:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                    }
+                    break;
+                  case 4:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                    }
+                    break;
+                  case 5:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                    }
+                    break;
+                  case 6:
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    break;
+                  case 7:
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    break;
+                  case 8:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                    }
+                    break;
+                  case 9:
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    break;
+                  case 10:
+                    _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    break;
                 }
-              }*/
-                    
-        
-                if (corr.GetIndex() <= 9) {
-                  //_h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
-               }
-                else {
-		  // _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
-               }
+              
             
                     
             } //end of correlators loop 
@@ -561,22 +638,70 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
         
-        for(unsigned int i = 1; i <= Correlators.size(); i++)
+        for(unsigned int i = 1; i <= 9; i++) /*I set the the range to i <= 10 at first, but then I ran the
+                                              code and there were issues. So I made it leass than 10, i.e. 9,
+                                              but it gives me nan for each entry in the Rivet.yoda file.*/
         {
-            if(nTriggers[i] > 0)
+           switch(i) {
+                  
+                  case 1:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
+                    break;
+                  case 2:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
+                    break;
+                  case 3:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
+                    break;
+                  case 4:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
+                    break;
+                  case 5:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
+                    break;
+                  case 6:
+                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    break;
+                  case 7:
+                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    break;
+                  case 8:
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
+                    break;
+                  case 9:
+                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    break;
+                  case 10:
+                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    break;
+              }
+          //This is the old code. I switched it with the code above, but running an analysis with the code above game me some issues.
+            /*if(nTriggers[i] > 0)
             {
               if (i <= 9) {
                 //_h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
               }
               else {
                 //_h[to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-              }
+              }*/
               _DeltaPhi[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
               _DeltaPhiSub[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
 
-              vector<int> n{2,3};
-              SubtractBackground(*_DeltaPhi[i], *_DeltaPhiSub[i], n, 0.63, 2.51);
-            }
+              //vector<int> n{2,3};
+              //SubtractBackground(*_DeltaPhi[i], *_DeltaPhiSub[i], n, 0.63, 2.51);
+            
             
         }
         
