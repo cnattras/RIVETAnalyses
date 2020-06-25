@@ -211,9 +211,9 @@ namespace Rivet {
 
         // the basic final-state projection: all final-state particles within the given eta acceptance
 
-        const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 5*GeV);
+        const ChargedFinalState cfs(Cuts::abseta < 0.35);
         declare(cfs, "CFS");
-        const ChargedFinalState cfsTrig(Cuts::abseta < 0.35 && Cuts::pT > 5*GeV);
+        const ChargedFinalState cfsTrig(Cuts::abseta < 0.35);
         declare(cfsTrig, "CFSTrig");
 
         // the basic final-state projection: all final-state photon within the given eta acceptance
@@ -288,56 +288,56 @@ namespace Rivet {
       
       //Debug correlators
       Correlator c1(1);
-      c1.SetCollSystemAndEnergy("pp200Gev");
+      c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(0., 7.);
-      c1.SetAssociatedRange(0., 7.);
+      c1.SetTriggerRange(1., 7.);
+      c1.SetAssociatedRange(1., 2.);
       Correlators.push_back(c1);
       
       Correlator c2(2);
-      c2.SetCollSystemAndEnergy("pp200Gev");
+      c2.SetCollSystemAndEnergy("pp200GeV");
       c2.SetCentrality(0., 100.);
       c2.SetTriggerRange(0., 9.);
       c2.SetAssociatedRange(0., 9.);
       Correlators.push_back(c2);
       
       Correlator c3(3);
-      c3.SetCollSystemAndEnergy("pp200Gev");
+      c3.SetCollSystemAndEnergy("pp200GeV");
       c3.SetCentrality(0., 100.);
       c3.SetTriggerRange(0., 12.);
       c3.SetAssociatedRange(0., 12.);
       Correlators.push_back(c3);
       
       Correlator c4(4);
-      c4.SetCollSystemAndEnergy("pp200Gev");
+      c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 100.);
       c4.SetTriggerRange(0., 15.);
       c4.SetAssociatedRange(0., 15.);
       Correlators.push_back(c4);
       
       Correlator c5(5);
-      c5.SetCollSystemAndEnergy("pp200Gev");
+      c5.SetCollSystemAndEnergy("pp200GeV");
       c5.SetCentrality(0., 100.);
       c5.SetTriggerRange(0., 7.);
       c5.SetAssociatedRange(0., 7.);
       Correlators.push_back(c5);
       
       Correlator c6(6);
-      c6.SetCollSystemAndEnergy("pp200Gev");
+      c6.SetCollSystemAndEnergy("pp200GeV");
       c6.SetCentrality(0., 100.);
       c6.SetTriggerRange(0., 9.);
       c6.SetAssociatedRange(0., 9.);
       Correlators.push_back(c6);
 
       Correlator c7(7);
-      c7.SetCollSystemAndEnergy("pp200Gev");
+      c7.SetCollSystemAndEnergy("pp200GeV");
       c7.SetCentrality(0., 100.);
       c7.SetTriggerRange(0., 12.);
       c7.SetAssociatedRange(0., 12.);
       Correlators.push_back(c7);
 
       Correlator c8(8);
-      c8.SetCollSystemAndEnergy("pp200Gev");
+      c8.SetCollSystemAndEnergy("pp200GeV");
       c8.SetCentrality(0., 100.);
       c8.SetTriggerRange(0., 15.);
       c8.SetAssociatedRange(0., 15.);
@@ -451,7 +451,7 @@ namespace Rivet {
       string CollSystem = "Empty";
       const ParticlePair& beam = beams();
           CollSystem = "pp";
-          nNucleons = 197.;
+          nNucleons = 1.;
       //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
       //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
       
@@ -474,7 +474,7 @@ namespace Rivet {
       for(Correlator& corr : Correlators)
       {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
-        if(!corr.CheckCentrality(centr)) continue;
+        //if(!corr.CheckCentrality(centr)) continue;
         
         //If event is accepted for the correlator, fill event weights
         sow[corr.GetIndex()]->fill();
@@ -494,9 +494,9 @@ namespace Rivet {
     
       // loop over charged final state particles
       for(const Particle& pTrig : cfsTrig.particles()) {
-
+        //cout << "trigger loop" << endl;
         if(pTrig.pt()/GeV < triggerptMin || pTrig.pt()/GeV > triggerptMax) continue;
-
+        //cout << "trigger pt: " << pTrig.pT()/GeV << endl;
           //Check if is secondary
         if(isSecondary(pTrig)) continue;
           
@@ -504,13 +504,13 @@ namespace Rivet {
 
           for(Correlator& corr : Correlators)
           {
-            if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+            //if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
             nTriggers[corr.GetIndex()]++;
           }
 
           // Hadron loop
           for(const Particle& pAssoc : cfs.particles()) {
-                
+                //cout << "Assoc loop" << endl;
             if(pAssoc.pt()/GeV < associatedptMin || pAssoc.pt()/GeV > pTrig.pt()/GeV) continue;
                 
             //Check if Trigger and Associated are the same particle
@@ -527,9 +527,10 @@ namespace Rivet {
             double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
             double dEta = deltaEta(pTrig, pAssoc);
           
+            //cout << "dPhi: " << dPhi << " dEta: " << dEta << endl;
             for(Correlator& corr : Correlators)
             {
-              if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
+              //if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
                     
               if(abs(dPhi) < 0.78)
               {
@@ -537,45 +538,46 @@ namespace Rivet {
                   
                   case 1:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                        //cout << "Filling histogram" << endl;
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
                     break;
                   case 2:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
                     break;
                   case 3:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
                     break;
                   case 4:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
                     break;
                   case 5:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
                     break;
                   case 6:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
                     break;
                   case 7:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
                     break;
                   case 8:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dEta), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
                     break;
                   case 9:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
                     break;
                   case 10:
-                    _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dEta), 0.5);
+                    _h[to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
                     break;
                 }
               }
@@ -583,45 +585,45 @@ namespace Rivet {
                   
                   case 1:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
                     break;
                   case 2:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
                     break;
                   case 3:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
                     break;
                   case 4:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
                     break;
                   case 5:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
                     break;
                   case 6:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
                     break;
                   case 7:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
                     break;
                   case 8:
                     for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(-abs(dPhi), 0.5);
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
                     break;
                   case 9:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
                     break;
                   case 10:
-                    _h[to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi), 0.5);
+                    _h[to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
                     break;
                 }
               
