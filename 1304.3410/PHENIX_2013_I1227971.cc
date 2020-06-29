@@ -130,9 +130,9 @@ namespace Rivet {
 				
 				string refnamep_pi = mkAxisCode(16, 1, 1 + i);
 					const Scatter2D& refdatap_pi = refData(refnamep_pi);
-				book(rppi_Proton["dAuc + std::to_string(AUAUCentralityBins[i])"], refnamep_pi + "_protons", refdatap_pi);
-				book(rppi_Pion["dAuc + std::to_string(AUAUCentralityBins[i])"], refnamep_pi + "_pions", refdatap_pi);
-				book(ratiop_pi["dAuc + std::to_string(AUAUCentralityBins[i])"], refnamep_pi);
+				book(rppi_Proton["dAuc + std::to_string(dAUCentralityBins[i])"], refnamep_pi + "_protons", refdatap_pi);
+				book(rppi_Pion["dAuc + std::to_string(dAUCentralityBins[i])"], refnamep_pi + "_pions", refdatap_pi);
+				book(ratiop_pi["dAuc + std::to_string(dAUCentralityBins[i])"], refnamep_pi);
 
 				//RCP (fig 10) _________________(Assuming booking is the same as RAA)
 			
