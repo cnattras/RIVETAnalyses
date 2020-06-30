@@ -3,6 +3,7 @@
 #define RIVET_RHICCENTRALITY_HH
 
 #include "Rivet/Projections/PercentileProjection.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include <map>
@@ -28,7 +29,7 @@ public:
     }
     else if(name == "CMS")
     {
-        c = c = Cuts::abseta > 3 && Cuts::abseta < 5 && Cuts::abspid == PID::PIPLUS && Cuts::abspid == PID::KPLUS && Cuts::abspid == PID::PROTON;
+        c = Cuts::abseta > 3 && Cuts::abseta < 5;
         expName = "CMS";
     }
     
