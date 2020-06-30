@@ -28,7 +28,7 @@ public:
     }
     else if(name == "CMS")
     {
-        c = c = Cuts::abseta > 3 && Cuts::abseta < 5 && Cuts::abspid == PID::PIPLUS && Cuts::abspid == PID::KPLUS && Cuts::abspid == PID::PROTON;
+        c = Cuts::abseta > 3 && Cuts::abseta < 5;
         expName = "CMS";
     }
     
