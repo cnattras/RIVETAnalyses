@@ -3,6 +3,7 @@
 #define RIVET_RHICCENTRALITY_HH
 
 #include "Rivet/Projections/PercentileProjection.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/RivetYODA.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include <map>
