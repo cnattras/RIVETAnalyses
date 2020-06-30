@@ -290,8 +290,8 @@ namespace Rivet {
       Correlator c1(1);
       c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(1., 7.);
-      c1.SetAssociatedRange(1., 2.);
+      c1.SetTriggerRange(0., 7.);
+      c1.SetAssociatedRange(0., 7.);
       Correlators.push_back(c1);
       
       Correlator c2(2);
@@ -380,7 +380,7 @@ namespace Rivet {
     }
   */
 
-      for(unsigned int i = 1; i<= 10; i++)
+      for(unsigned int i = 1; i<= 8; i++)
       {
         book(sow[i],"sow" + to_string(i));
         switch (i) {
@@ -410,21 +410,19 @@ namespace Rivet {
             }
             break;
           case 6:
-            book(_h["0" + to_string(i) + "11"], i, 1, 1);
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
+            }
             break;
           case 7:
-            book(_h["0" + to_string(i) + "11"], i, 1, 1);
+            for(int ii=1; ii<= 2; ii++){
+              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
+            }
             break;
           case 8:
             for(int ii=1; ii<= 2; ii++){
               book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
             }
-            break;
-          case 9:
-            book(_h["0" + to_string(i) + "11"], i, 1, 1);
-            break;
-          case 10:
-            book(_h[to_string(i) + "11"], i, 1, 1);
             break;
           //book(_h[to_string(i) + "11"], i, 1, 1);
         }
@@ -563,21 +561,19 @@ namespace Rivet {
                     }
                     break;
                   case 6:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
+                    }
                     break;
                   case 7:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
+                    }
                     break;
                   case 8:
                     for(int ii=1; ii<= 2; ii++){
                       _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
                     }
-                    break;
-                  case 9:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
-                    break;
-                  case 10:
-                    _h[to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
                     break;
                 }
               }
@@ -609,21 +605,19 @@ namespace Rivet {
                     }
                     break;
                   case 6:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
+                    }
                     break;
                   case 7:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
+                    }
                     break;
                   case 8:
                     for(int ii=1; ii<= 2; ii++){
                       _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
                     }
-                    break;
-                  case 9:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
-                    break;
-                  case 10:
-                    _h[to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
                     break;
                 }
               
@@ -640,7 +634,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
         
-        for(unsigned int i = 1; i <= 9; i++) /*I set the the range to i <= 10 at first, but then I ran the
+        for(unsigned int i = 1; i <= 8; i++) /*I set the the range to i <= 10 at first, but then I ran the
                                               code and there were issues. So I made it leass than 10, i.e. 9,
                                               but it gives me nan for each entry in the Rivet.yoda file.*/
         {
@@ -672,21 +666,19 @@ namespace Rivet {
                     }
                     break;
                   case 6:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
                     break;
                   case 7:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    for(int ii=1; ii<= 2; ii++){
+                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
+                    }
                     break;
                   case 8:
                     for(int ii=1; ii<= 2; ii++){
                       _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
                     }
-                    break;
-                  case 9:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    break;
-                  case 10:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
                     break;
               }
           //This is the old code. I switched it with the code above, but running an analysis with the code above game me some issues.

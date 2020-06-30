@@ -217,11 +217,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d07-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d06-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.0104948, up: 0.0104948}, syserrhi: {dn: -0.00432009, up: 0.00432009}, syserrlo: {dn: -0.00448192, up: 0.00448192}}, 1: {stat: {dn: -0.00910624, up: 0.00910624}, syserrhi: {dn: -0.0034897, up: 0.0034897}, syserrlo: {dn: -0.0036591, up: 0.0036591}}, 2: {stat: {dn: -0.00733649, up: 0.00733649}, syserrhi: {dn: -0.00175635, up: 0.00175635}, syserrlo: {dn: -0.00175676, up: 0.00175676}}, 3: {stat: {dn: -0.00734438, up: 0.00734438}, syserrhi: {dn: -0.00132494, up: 0.00132494}, syserrlo: {dn: -0.00132828, up: 0.00132828}}, 4: {stat: {dn: -0.00460451, up: 0.00460451}, syserrhi: {dn: -0.000776847, up: 0.000776847}, syserrlo: {dn: -0.000772392, up: 0.000772392}}, 5: {stat: {dn: -0.00132287, up: 0.00132287}, syserrhi: {dn: -0.000193153, up: 0.000193153}, syserrlo: {dn: -0.000181733, up: 0.000181733}}, 6: {stat: {dn: -0.000366427, up: 0.000366427}, syserrhi: {dn: -3.48214e-05, up: 3.48214e-05}, syserrlo: {dn: -2.97753e-05, up: 2.97753e-05}}, 7: {stat: {dn: -7.00359e-07, up: 7.00359e-07}, syserrhi: {dn: -7.46035e-08, up: 7.46035e-08}, syserrlo: {dn: -9.1677e-08, up: 9.1677e-08}}}
 IsRef: 1
-Path: /REF/PHENIX_2010_I857187/d07-x01-y01
+Path: /REF/PHENIX_2010_I857187/d06-x01-y02
 Title:  Isolated Direct Photon - Hadron 7 < pT,t < 9
 Type: Scatter2D
 ---
@@ -237,11 +237,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d08-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d07-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.00779865, up: 0.00779865}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}, 1: {stat: {dn: -0.00601365, up: 0.00601365}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}, 2: {stat: {dn: -0.00452026, up: 0.00452026}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}, 3: {stat: {dn: -0.00417151, up: 0.00417151}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}, 4: {stat: {dn: -0.00193316, up: 0.00193316}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}, 5: {stat: {dn: -0.000436076, up: 0.000436076}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}, 6: {stat: {dn: -0.000256142, up: 0.000256142}, syserrhi: {dn: 0, up: 0}, syserrlo: {dn: 0, up: 0}}}
 IsRef: 1
-Path: /REF/PHENIX_2010_I857187/d08-x01-y01
+Path: /REF/PHENIX_2010_I857187/d07-x01-y01
 Title:  Pi0 & IDP - Hadron 9 < pT,t < 12
 Type: Scatter2D
 ---
@@ -256,11 +256,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d08-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d07-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.0192155, up: 0.0192155}, syserrhi: {dn: -0.0050246, up: 0.0050246}, syserrlo: {dn: -0.0052775, up: 0.0052775}}, 1: {stat: {dn: -0.0150308, up: 0.0150308}, syserrhi: {dn: -0.00296795, up: 0.00296795}, syserrlo: {dn: -0.00308252, up: 0.00308252}}, 2: {stat: {dn: -0.013668, up: 0.013668}, syserrhi: {dn: -0.00182572, up: 0.00182572}, syserrlo: {dn: -0.00182124, up: 0.00182124}}, 3: {stat: {dn: -0.012743, up: 0.012743}, syserrhi: {dn: -0.00151254, up: 0.00151254}, syserrlo: {dn: -0.00158086, up: 0.00158086}}, 4: {stat: {dn: -0.0072878, up: 0.0072878}, syserrhi: {dn: -0.000578664, up: 0.000578664}, syserrlo: {dn: -0.000586985, up: 0.000586985}}, 5: {stat: {dn: -0.00145834, up: 0.00145834}, syserrhi: {dn: -0.000131008, up: 0.000131008}, syserrlo: {dn: -0.000140466, up: 0.000140466}}, 6: {stat: {dn: -0.00120626, up: 0.00120626}, syserrhi: {dn: -5.79661e-05, up: 5.79661e-05}, syserrlo: {dn: -5.02819e-05, up: 5.02819e-05}}}
 IsRef: 1
-Path: /REF/PHENIX_2010_I857187/d08-x01-y02
+Path: /REF/PHENIX_2010_I857187/d07-x01-y02
 Title:  Pi0 & IDP - Hadron 9 < pT,t < 12
 Type: Scatter2D
 ---
@@ -275,11 +275,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d09-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d08-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.0260408, up: 0.0260408}}, 1: {stat: {dn: -0.0176126, up: 0.0176126}}, 2: {stat: {dn: -0.0131894, up: 0.0131894}}, 3: {stat: {dn: -0.0134111, up: 0.0134111}}, 4: {stat: {dn: -0.00680846, up: 0.00680846}}, 5: {stat: {dn: -0.00284416, up: 0.00284416}}}
 IsRef: 1
-Path: /REF/PHENIX_2010_I857187/d09-x01-y01
+Path: /REF/PHENIX_2010_I857187/d08-x01-y01
 Title:  Pi0 - Hadron 12 < pT,t < 15
 Type: Scatter2D
 ---
@@ -293,11 +293,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d10-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2010_I857187/d08-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.0438131, up: 0.0438131}, syserrhi: {dn: -0.00727712, up: 0.00727712}, syserrlo: {dn: -0.00846729, up: 0.00846729}}, 1: {stat: {dn: -0.0342527, up: 0.0342527}, syserrhi: {dn: -0.00432144, up: 0.00432144}, syserrlo: {dn: -0.0049756, up: 0.0049756}}, 2: {stat: {dn: -0.0261899, up: 0.0261899}, syserrhi: {dn: -0.00231158, up: 0.00231158}, syserrlo: {dn: -0.00263989, up: 0.00263989}}, 3: {stat: {dn: -0.0217594, up: 0.0217594}, syserrhi: {dn: -0.0022529, up: 0.0022529}, syserrlo: {dn: -0.00271854, up: 0.00271854}}, 4: {stat: {dn: -0.00920205, up: 0.00920205}, syserrhi: {dn: -0.000668435, up: 0.000668435}, syserrlo: {dn: -0.000802164, up: 0.000802164}}, 5: {stat: {dn: -0.0053943, up: 0.0053943}, syserrhi: {dn: -0.000807914, up: 0.000807914}, syserrlo: {dn: -0.000794425, up: 0.000794425}}, 6: {stat: {dn: -9.70523e-05, up: 9.70523e-05}, syserrhi: {dn: -1.38913e-05, up: 1.38913e-05}, syserrlo: {dn: -1.80699e-05, up: 1.80699e-05}}}
 IsRef: 1
-Path: /REF/PHENIX_2010_I857187/d10-x01-y01
+Path: /REF/PHENIX_2010_I857187/d08-x01-y02
 Title:  Isolated Direct Photon - Hadron 12 < pT,t < 15
 Type: Scatter2D
 ---
