@@ -67,183 +67,207 @@ namespace Rivet {
 				//Ratio of yields (figs 5-9)_________________
 			
 				//Histograms for the ratios Neg/Pos			
-				string refnameK_K = mkAxisCode(7, 1, 1 + i);
-					const Scatter2D& refdataK_K = refData(refnameK_K);
-				book(rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnameK_K + "_KaonNeg", refdataK_K);
-				book(rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnameK_K + "_KaonPos", refdataK_K);
-				book(RatioKaon["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnameK_K);
+				string refname = mkAxisCode(7, 1, 1 + i);
+					const Scatter2D& refdata = refData(refname);
+				book(rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_KaonNeg", refdata);
+				book(rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_KaonPos", refdata);
+				book(RatioKaon["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
 
-				string refnameK_K = mkAxisCode(8, 1, 1 + i);
-					const Scatter2D& refdataK_K = refData(refnameK_K);
-				book(rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refnameK_K + "_KaonNeg", refdataK_K);
-				book(rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refnameK_K + "_KaonPos", refdataK_K);
-				book(RatioKaon["dAuc" + std::to_string(dAUCentralityBins[i])], refnameK_K);
+				refname = mkAxisCode(8, 1, 1 + i);
+					refdata = refData(refname);
+				book(rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_KaonNeg", refdata);
+				book(rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_KaonPos", refdata);
+				book(RatioKaon["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
 				
-				string refnamepi_pi = mkAxisCode(9, 1, 1 + i);
-					const Scatter2D& refdatapi_pi = refData(refnamepi_pi);
-				book(rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamepi_pi + "_PionNeg", refdatapi_pi);
-				book(rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamepi_pi + "_PionPos", refdatapi_pi);
-				book(RatioPion["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamepi_pi);
+				refname = mkAxisCode(9, 1, 1 + i);
+					refdata = refData(refname);
+				book(rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_PionNeg", refdata);
+				book(rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_PionPos", refdata);
+				book(RatioPion["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
 
-				string refnamepi_pi = mkAxisCode(10, 1, 1 + i);
-					const Scatter2D& refdatapi_pi = refData(refnamepi_pi);
-				book(rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refnamepi_pi + "_PionNeg", refdatapi_pi);
-				book(rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refnamepi_pi + "_PionPos", refdatapi_pi);
-				book(RatioPion["dAuc" + std::to_string(dAUCentralityBins[i])], refnamepi_pi);
+				refname = mkAxisCode(10, 1, 1 + i);
+					refdata = refData(refname);
+				book(rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_PionNeg", refdata);
+				book(rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_PionPos", refdata);
+				book(RatioPion["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
 
-				string refnamep_p = mkAxisCode(11, 1, 1 + i);
-					const Scatter2D& refdatap_p = refData(refnamep_p);
-				book(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamep_p + "_ProtNeg", refdatap_p);
-				book(rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamep_p + "_ProtPos", refdatap_p);
-				book(RatioProt["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamep_p);
+				refname = mkAxisCode(11, 1, 1 + i);
+					refdata = refData(refname);
+				book(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_ProtNeg", refdata);
+				book(rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_ProtPos", refdata);
+				book(RatioProt["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
 
-				string refnamep_p = mkAxisCode(12, 1, 1 + i);
-					const Scatter2D& refdatap_p = refData(refnamep_p);
-				book(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refnamep_p + "_ProtNeg", refdatap_p);
-				book(rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], refnamep_p + "_ProtPos", refdatap_p);
-				book(RatioProt["dAuc" + std::to_string(dAUCentralityBins[i])], refnamep_p);
+				refname = mkAxisCode(12, 1, 1 + i);
+					refdata = refData(refname);
+				book(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_ProtNeg", refdata);
+				book(rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_ProtPos", refdata);
+				book(RatioProt["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
 						
 				//Histograms for the ratios Kaon/Pion 
-				string refnameK_pi = mkAxisCode(13, 1, 1 + i);
-					const Scatter2D& refdataK_pi = refData(refnameK_pi);
-				book(rKpi_Kaon["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnameK_pi + "_kaons", refdataK_pi);
-				book(rKpi_Pion["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnameK_pi + "_pions", refdataK_pi);
-				book(RatioK_pi["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnameK_pi);
+				refname = mkAxisCode(13, 1, 1 + i);
+					refdata = refData(refname);
+				book(rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_kaons", refdata);
+				book(rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_pions", refdata);
+				book(RatioK_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
 
-				string refnameK_pi = mkAxisCode(14, 1, 1 + i);
-					const Scatter2D& refdataK_pi = refData(refnameK_pi);
-				book(rKpi_Kaon["dAuc" + std::to_string(dAUCentralityBins[i])], refnameK_pi + "_kaons", refdataK_pi);
-				book(rKpi_Pion["dAuc" + std::to_string(dAUCentralityBins[i])], refnameK_pi + "_pions", refdataK_pi);
-				book(RatioK_pi["dAuc" + std::to_string(dAUCentralityBins[i])], refnameK_pi);
+				refname = mkAxisCode(13, 1, 6 + i);
+					refdata = refData(refname);
+				book(rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_kaons", refdata);
+				book(rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_pions", refdata);
+				book(RatioK_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
+
+				refname = mkAxisCode(14, 1, 1 + i);
+					refdata = refData(refname);
+				book(rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_kaons", refdata);
+				book(rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_pions", refdata);
+				book(RatioK_pipos["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
+				
+				refname = mkAxisCode(14, 1, 6 + i);
+					refdata = refData(refname);
+				book(rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_kaons", refdata);
+				book(rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_pions", refdata);
+				book(RatioK_pineg["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
 
 				//Histograms for the ratios Proton/Pion 
-				string refnamep_pi = mkAxisCode(15, 1, 1 + i);
-					const Scatter2D& refdatap_pi = refData(refnamep_pi);
-				book(rppi_Proton["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamep_pi + "_protons", refdatap_pi);
-				book(rppi_Pion["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamep_pi + "_pions", refdatap_pi);
-				book(Ratiop_pi["AuAuc" + std::to_string(AUAUCentralityBins[i])], refnamep_pi);
+				refname = mkAxisCode(15, 1, 1 + i);
+					refdata = refData(refname);
+				book(rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_protons", refdata);
+				book(rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_pions", refdata);
+				book(Ratiop_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
+
+				refname = mkAxisCode(15, 1, 6 + i);
+					refdata = refData(refname);
+				book(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_protons", refdata);
+				book(rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname + "_pions", refdata);
+				book(Ratiop_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname);
 				
-				string refnamep_pi = mkAxisCode(16, 1, 1 + i);
-					const Scatter2D& refdatap_pi = refData(refnamep_pi);
-				book(rppi_Proton["dAuc" + std::to_string(dAUCentralityBins[i])], refnamep_pi + "_protons", refdatap_pi);
-				book(rppi_Pion["dAuc" + std::to_string(dAUCentralityBins[i])], refnamep_pi + "_pions", refdatap_pi);
-				book(Ratiop_pi["dAuc" + std::to_string(dAUCentralityBins[i])], refnamep_pi);
+				refname = mkAxisCode(16, 1, 1 + i);
+					refdata = refData(refname);
+				book(rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_protons", refdata);
+				book(rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_pions", refdata);
+				book(Ratiop_pipos["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
+
+				refname = mkAxisCode(16, 1, 6 + i);
+					refdata = refData(refname);
+				book(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_protons", refdata);
+				book(rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname + "_pions", refdata);
+				book(Ratiop_piNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname);
 
 
 				//RAA (fig 11)_________________
 				
-				string refnameRaa = mkAxisCode(20, 1, 1 + i);
-					const Scatter2D& refdataRaa = refData(refnameRaa);
-				book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refnameRaa + "_AuAu", refdataRaa);
-				book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refnameRaa + "_pp", refdataRaa);
-				book(hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refnameRaa);
+				refname = mkAxisCode(20, 1, 1 + i);
+					refdata = refData(refname);
+				book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname + "_AuAu", refdata);
+				book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refname + "_pp", refdata);
+				book(hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname);
 
-				string refnameRaa = mkAxisCode(21, 1, 1 + i);
-					const Scatter2D& refdataRaa = refData(refnameRaa);
-				book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refnameRaa + "_AuAu", refdataRaa);
-				book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refnameRaa + "_pp", refdataRaa);
-				book(hRaa["pi_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refnameRaa);
+				refname = mkAxisCode(21, 1, 1 + i);
+					refdata = refData(refname);
+				book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname + "_AuAu", refdata);
+				book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refname + "_pp", refdata);
+				book(hRaa["pi_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname);
 
-				string refnameRaa = mkAxisCode(22, 1, 1 + i);
-					const Scatter2D& refdataRaa = refData(refnameRaa);
-				book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refnameRaa + "_AuAu", refdataRaa);
-				book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refnameRaa + "_pp", refdataRaa);
-				book(hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refnameRaa);
+				refname = mkAxisCode(22, 1, 1 + i);
+					refdata = refData(refname);
+				book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname + "_AuAu", refdata);
+				book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refname + "_pp", refdata);
+				book(hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname);
 			
 
 				//RdA (fig 12)_________________
 			
-				string refnameRda = mkAxisCode(23, 1, 1 + i);
-					const Scatter2D& refdataRda = refData(refnameRda);
-				book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refnameRda + "_dAu", refdataRda);
-				book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refnameRda + "_pp", refdataRda);
-				book(hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refnameRda);
+				refname = mkAxisCode(23, 1, 1 + i);
+					refdata = refData(refname);
+				book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname + "_dAu", refdata);
+				book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refname + "_pp", refdata);
+				book(hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname);
 
-				string refnameRda = mkAxisCode(24, 1, 1 + i);
-					const Scatter2D& refdataRda = refData(refnameRda);
-				book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refnameRda + "_dAu", refdataRda);
-				book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refnameRda + "_pp", refdataRda);
-				book(hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refnameRda);
+				refname = mkAxisCode(24, 1, 1 + i);
+					refdata = refData(refname);
+				book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname + "_dAu", refdata);
+				book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refname + "_pp", refdata);
+				book(hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname);
 
-				string refnameRda = mkAxisCode(25, 1, 1 + i);
-					const Scatter2D& refdataRda = refData(refnameRda);
-				book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refnameRda + "_dAu", refdataRda);
-				book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refnameRda + "_pp", refdataRda);
-				book(hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refnameRda);
+				refname = mkAxisCode(25, 1, 1 + i);
+					refdata = refData(refname);
+				book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname + "_dAu", refdata);
+				book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refname + "_pp", refdata);
+				book(hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname);
 
 
 			}
 
 				//RCP (fig 10) _________________ Need to check if this is correct
 							   
-				string refname = mkAxisCode(17, 1, 1);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(17, 1, 1);
+					refdata = refData(refname);
 				book(hKaonPosPt["AuAuc0010a"], refname + "_KaonPos", refdata);
 				book(hKaonPosPt["AuAuc4060"], refname + "_KaonPos", refdata);
 				book(hRcp["Kpos_c00104060_AuAu"], refname);
 				
-				string refname = mkAxisCode(17, 1, 2);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(17, 1, 2);
+					refdata = refData(refname);
 				book(hKaonPosPt["AuAuc0010b"], refname + "_KaonPos", refdata);
 				book(hKaonPosPt["AuAuc6092"], refname + "_KaonPos", refdata);
 				book(hRcp["Kpos_c00106092_AuAu"], refname);
 				
-				string refname = mkAxisCode(17, 1, 3);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(17, 1, 3);
+					refdata = refData(refname);
 				book(hKaonNegPt["AuAuc0010a"], refname + "_KaonNeg", refdata);
 				book(hKaonNegPt["AuAuc4060"], refname + "_KaonNeg", refdata);
 				book(hRcp["Kneg_c00104060_AuAu"], refname);
 
-				string refname = mkAxisCode(17, 1, 4);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(17, 1, 4);
+					refdata = refData(refname);
 				book(hKaonNegPt["AuAuc0010b"], refname + "_KaonNeg", refdata);
 				book(hKaonNegPt["AuAuc6092"], refname + "_KaonNeg", refdata);
-				book(hRcp["Kneg_c00106092" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname);
+				book(hRcp["Kneg_c00106092_AuAu"], refname);
 
-				string refname = mkAxisCode(18, 1, 1);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(18, 1, 1);
+					refdata = refData(refname);
 				book(hPionPosPt["AuAuc0010a"], refname + "_PionPos", refdata);
 				book(hPionPosPt["AuAuc4060"], refname + "_PionPos", refdata);
 				book(hRcp["pipos_c00104060_AuAu"], refname);
 
-				string refname = mkAxisCode(18, 1, 2);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(18, 1, 2);
+					refdata = refData(refname);
 				book(hPionPosPt["AuAuc0010b"], refname + "_PionPos", refdata);
 				book(hPionPosPt["AuAuc6092"], refname + "_PionPos", refdata);
 				book(hRcp["pipos_c00106092 _AuAu"], refname);
 
-				string refname = mkAxisCode(18, 1, 3);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(18, 1, 3);
+					refdata = refData(refname);
 				book(hPionNegPt["AuAuc0010a"], refname + "_PionNeg", refdata);
 				book(hPionNegPt["AuAuc4060"], refname + "_PionNeg", refdata);
 				book(hRcp["pineg_c00104060_AuAu"], refname);
 
-				string refname = mkAxisCode(18, 1, 4);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(18, 1, 4);
+					refdata = refData(refname);
 				book(hPionNegPt["AuAuc0010b"], refname + "_PionNeg", refdata);
 				book(hPionNegPt["AuAuc6092"], refname + "_PionNeg", refdata);
 				book(hRcp["pineg_c00106092_AuAu"], refname);
 
-				string refname = mkAxisCode(19, 1, 1);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(19, 1, 1);
+					refdata = refData(refname);
 				book(hProtPosPt["AuAuc0010a"], refname + "_ProtPos", refdata);
 				book(hProtPosPt["AuAuc4060"], refname + "_ProtPos", refdata);
 				book(hRcp["ppos_c00104060_AuAu"], refname);
 
-				string refname = mkAxisCode(19, 1, 2);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(19, 1, 2);
+					refdata = refData(refname);
 				book(hProtPosPt["AuAuc0010b"], refname + "_ProtPos", refdata);
 				book(hProtPosPt["AuAuc6092"], refname + "_ProtPos", refdata);
 				book(hRcp["ppos_c00106092_AuAu"], refname);
 
-				string refname = mkAxisCode(19, 1, 3);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(19, 1, 3);
+					refdata = refData(refname);
 				book(hProtNegPt["AuAuc0010a"], refname + "_ProtNeg", refdata);
 				book(hProtNegPt["AuAuc4060"], refname + "_ProtNeg", refdata);
 				book(hRcp["pneg_c00104060_AuAu"], refname);
 
-				string refname = mkAxisCode(19, 1, 4);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(19, 1, 4);
+					refdata = refData(refname);
 				book(hProtNegPt["AuAuc0010b"], refname + "_ProtNeg", refdata);
 				book(hProtNegPt["AuAuc6092"], refname + "_ProtNeg", refdata);
 				book(hRcp["pneg_c00106092_AuAu"], refname);
@@ -251,20 +275,20 @@ namespace Rivet {
 
 				// Ratio of Spectra(fig 15)_________________
 				
-				string refname = mkAxisCode(26, 1, 1);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(26, 1, 1);
+					refdata = refData(refname);
 				book(hKaonPt["AuAuc6092"], refname + "_Kaon", refdata);
 				book(hKaonPt["dAuc0020"], refname + "_Kaon", refdata);
 				book(RatioK["AuAuc/dAU"], refname);
 
-				string refname = mkAxisCode(27, 1, 1);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(27, 1, 1);
+					refdata = refData(refname);
 				book(hPionPt["AuAuc6092"], refname + "_Pion", refdata);
 				book(hPionPt["dAuc0020"], refname + "_Pion", refdata);
 				book(Ratiopi["AuAuc/dAU"], refname);
 
-				string refname = mkAxisCode(28, 1, 1);
-					const Scatter2D& refdata = refData(refname);
+				refname = mkAxisCode(28, 1, 1);
+					refdata = refData(refname);
 				book(hProtPt["AuAuc6092"], refname + "_Prot", refdata);
 				book(hProtPt["dAuc0020"], refname + "_Prot", refdata);
 				book(Ratiop["AuAuc/dAU"], refname);
@@ -283,8 +307,101 @@ namespace Rivet {
 			for (Particle p : chargedParticles)
 			{
 				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
-				hPion0Pt["c" + std::to_string(CentralityBins[i + 2]) + "pt_pp"]->fill(partPt, pt_weight);
+				
+				switch (p.pid()) {
+				case 211: // pi+
+				{
+					hPionPt["Raa_c10_pp"]->fill(partPt);
+					hPionPt["Raa_c20_pp"]->fill(partPt);
+					hPionPt["Raa_c40_pp"]->fill(partPt);
+					hPionPt["Raa_c60_pp"]->fill(partPt);
+					hPionPt["Raa_c92_pp"]->fill(partPt);
+
+					hPionPt["Rda_c100_pp"]->fill(partPt);
+					hPionPt["Rda_c20_pp"]->fill(partPt);
+					hPionPt["Rda_c40_pp"]->fill(partPt);
+					hPionPt["Rda_c60_pp"]->fill(partPt);
+					hPionPt["Rda_c88_pp"]->fill(partPt);
+					break;
+				}
+				case -211: // pi-
+				{
+					hPionPt["Raa_c10_pp"]->fill(partPt);
+					hPionPt["Raa_c20_pp"]->fill(partPt);
+					hPionPt["Raa_c40_pp"]->fill(partPt);
+					hPionPt["Raa_c60_pp"]->fill(partPt);
+					hPionPt["Raa_c92_pp"]->fill(partPt);
+
+					hPionPt["Rda_c100_pp"]->fill(partPt);
+					hPionPt["Rda_c20_pp"]->fill(partPt);
+					hPionPt["Rda_c40_pp"]->fill(partPt);
+					hPionPt["Rda_c60_pp"]->fill(partPt);
+					hPionPt["Rda_c88_pp"]->fill(partPt);
+					break;
+				}
+				case  321: // K+
+				{	
+					hKaonPt["Raa_c10_pp"]->fill(partPt);
+					hKaonPt["Raa_c20_pp"]->fill(partPt);
+					hKaonPt["Raa_c40_pp"]->fill(partPt);
+					hKaonPt["Raa_c60_pp"]->fill(partPt);
+					hKaonPt["Raa_c92_pp"]->fill(partPt);
+
+					hKaonPt["Rda_c100_pp"]->fill(partPt);
+					hKaonPt["Rda_c20_pp"]->fill(partPt);
+					hKaonPt["Rda_c40_pp"]->fill(partPt);
+					hKaonPt["Rda_c60_pp"]->fill(partPt);
+					hKaonPt["Rda_c88_pp"]->fill(partPt);
+
+					break;
+				}
+				case  -321: // K-
+				{
+					hKaonPt["Raa_c10_pp"]->fill(partPt);
+					hKaonPt["Raa_c20_pp"]->fill(partPt);
+					hKaonPt["Raa_c40_pp"]->fill(partPt);
+					hKaonPt["Raa_c60_pp"]->fill(partPt);
+					hKaonPt["Raa_c92_pp"]->fill(partPt);
+
+					hKaonPt["Rda_c100_pp"]->fill(partPt);
+					hKaonPt["Rda_c20_pp"]->fill(partPt);
+					hKaonPt["Rda_c40_pp"]->fill(partPt);
+					hKaonPt["Rda_c60_pp"]->fill(partPt);
+					hKaonPt["Rda_c88_pp"]->fill(partPt);
+
+					break;
+				}
+				case 2212: // proton
+				{
+					hProtPt["Raa_c10_pp"]->fill(partPt);
+					hProtPt["Raa_c20_pp"]->fill(partPt);
+					hProtPt["Raa_c40_pp"]->fill(partPt);
+					hProtPt["Raa_c60_pp"]->fill(partPt);
+					hProtPt["Raa_c92_pp"]->fill(partPt);
+
+					hProtPt["Rda_c100_pp"]->fill(partPt);
+					hProtPt["Rda_c20_pp"]->fill(partPt);
+					hProtPt["Rda_c40_pp"]->fill(partPt);
+					hProtPt["Rda_c60_pp"]->fill(partPt);
+					hProtPt["Rda_c88_pp"]->fill(partPt);
+					break;
+				}
+				case -2212: // anti-proton
+				{
+					hProtPt["Raa_c10_pp"]->fill(partPt);
+					hProtPt["Raa_c20_pp"]->fill(partPt);
+					hProtPt["Raa_c40_pp"]->fill(partPt);
+					hProtPt["Raa_c60_pp"]->fill(partPt);
+					hProtPt["Raa_c92_pp"]->fill(partPt);
+
+					hProtPt["Rda_c100_pp"]->fill(partPt);
+					hProtPt["Rda_c20_pp"]->fill(partPt);
+					hProtPt["Rda_c40_pp"]->fill(partPt);
+					hProtPt["Rda_c60_pp"]->fill(partPt);
+					hProtPt["Rda_c88_pp"]->fill(partPt);
+					break;
+				}
+				}
 			}
 			return;
 		}
@@ -297,573 +414,687 @@ namespace Rivet {
 		if (collSys == AuAu200)
 		{
 			if ((c < 0.) || (c > 92.)) vetoEvent;
-			
-			//sow["sow_AuAu"]->fill();
+
 			double partPt = p.pT() / GeV;
 			double pt_weight = 1. / (partPt * 2. * M_PI);
 
-			for (const Particle& p : chargedParticles)
+			if ((c >= 0.) && (c < 10.))
 			{
-
-				//hPion0Pt["Pion0Pt_AuAu"]->fill(partPt, pt_weight);
-			}
-
-
-
-			switch (p.pid()) {
-			case 211: // pi+
-			{
-				if ((c >= 0.) && (c < 10.))
+				sow["sow_AUAUc10"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_AUAUc10"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
 					{
-						hPionPosPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);	
+						hPionPosPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+						rpipi_PionPos["AuAuc10"]->fill(partPt);
+						rKpi_PionPos["AuAuc10"]->fill(partPt);
+						rppi_PionPos["AuAuc10"]->fill(partPt);
+						hPionPt["Raa_c10_AuAu"]->fill(partPt);
+						hPionPosPt["AuAuc0010a"]->fill(partPt);
+						hPionPosPt["AuAuc0010b"]->fill(partPt);
+						break;
 					}
-				}
-				
-				else if ((c >= 10.) && (c < 20.))
-				{
-					sow["sow_AUAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_AUAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-				
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_AUAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 60.) && (c < 92.))
-				{
-					sow["sow_AUAUc92"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
-					}
-				}
-
-				break;
-			}
-			case -211: // pi-
-			{
-				if ((c >= 0.) && (c < 10.))
-				{
-					sow["sow_AUAUc10"]->fill();
-					for (const Particle& p : chargedParticles)
+					case -211: // pi-
 					{
 						hPionNegPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["AuAuc10"]->fill(partPt);
+						rKpi_PionNeg["AuAuc10"]->fill(partPt);
+						rppi_PionNeg["AuAuc10"]->fill(partPt);
+						hPionPt["Raa_c10_AuAu"]->fill(partPt);
+						hPionNegPt["AuAuc0010a"]->fill(partPt);
+						hPionNegPt["AuAuc0010b"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 10.) && (c < 20.))
-				{
-					sow["sow_AUAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_AUAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_AUAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 60.) && (c < 92.))
-				{
-					sow["sow_AUAUc92"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
-					}
-				}
-
-				break;
-			}
-			case 321: // K+
-			{
-				if ((c >= 0.) && (c < 10.))
-				{
-					sow["sow_AUAUc10"]->fill();
-					for (const Particle& p : chargedParticles)
+					case 321: // K+
 					{
 						hKaonPosPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+						rKK_KaonPos["AuAuc10"]->fill(partPt);
+						rKpi_KaonPos["AuAuc10"]->fill(partPt);
+						hKaonPt["Raa_c10_AuAu"]->fill(partPt);
+						hKaonPosPt["AuAuc0010a"]->fill(partPt);
+						hKaonPosPt["AuAuc0010b"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 10.) && (c < 20.))
-				{
-					sow["sow_AUAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_AUAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_AUAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 60.) && (c < 92.))
-				{
-					sow["sow_AUAUc92"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
-					}
-				}
-
-				break;
-			}
-			case -321: // K-
-			{
-				if ((c >= 0.) && (c < 10.))
-				{
-					sow["sow_AUAUc10"]->fill();
-					for (const Particle& p : chargedParticles)
+					case -321: // K-
 					{
 						hKaonNegPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["AuAuc10"]->fill(partPt);
+						rKpi_KaonNeg["AuAuc10"]->fill(partPt);
+						hKaonPt["Raa_c10_AuAu"]->fill(partPt);
+						hKaonNegPt["AuAuc0010a"]->fill(partPt);
+						hKaonNegPt["AuAuc0010b"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 10.) && (c < 20.))
-				{
-					sow["sow_AUAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_AUAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_AUAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 60.) && (c < 92.))
-				{
-					sow["sow_AUAUc92"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
-					}
-				}
-
-				break;
-			}
-			case 2212: // proton
-			{
-				if ((c >= 0.) && (c < 10.))
-				{
-					sow["sow_AUAUc10"]->fill();
-					for (const Particle& p : chargedParticles)
+					case 2212: // proton
 					{
 						hProtPosPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+						rKK_ProtPos["AuAuc10"]->fill(partPt);
+						rppi_ProtonPos["AuAuc10"]->fill(partPt);
+						hProtPt["Raa_c10_AuAu"]->fill(partPt);
+						hProtPosPt["AuAuc0010a"]->fill(partPt);
+						hProtPosPt["AuAuc0010b"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 10.) && (c < 20.))
-				{
-					sow["sow_AUAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_AUAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_AUAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 60.) && (c < 92.))
-				{
-					sow["sow_AUAUc92"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
-					}
-				}
-
-				break;
-			}
-			case -2212: // anti-proton
-			{
-				if ((c >= 0.) && (c < 10.))
-				{
-					sow["sow_AUAUc10"]->fill();
-					for (const Particle& p : chargedParticles)
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["AuAuc10"]->fill(partPt);
+						rppi_ProtonNeg["AuAuc10"]->fill(partPt);
+						hProtPt["Raa_c10_AuAu"]->fill(partPt);
+						hProtNegPt["AuAuc0010a"]->fill(partPt);
+						hProtNegPt["AuAuc0010b"]->fill(partPt);
+						break;
+					}
 					}
 				}
-
-				else if ((c >= 10.) && (c < 20.))
+			}
+			else if ((c >= 10.) && (c < 20.))
+			{
+				sow["sow_AUAUc20"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_AUAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+						rpipi_PionPos["AuAuc20"]->fill(partPt);
+						rKpi_PionPos["AuAuc20"]->fill(partPt);
+						rppi_PionPos["AuAuc20"]->fill(partPt);
+						hPionPt["Raa_c20_AuAu"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["AuAuc20"]->fill(partPt);
+						rKpi_PionNeg["AuAuc20"]->fill(partPt);
+						rppi_PionNeg["AuAuc20"]->fill(partPt);
+						hPionPt["Raa_c20_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+						rKK_KaonPos["AuAuc20"]->fill(partPt);
+						rKpi_KaonPos["AuAuc20"]->fill(partPt);
+						hKaonPt["Raa_c20_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["AuAuc20"]->fill(partPt);
+						rKpi_KaonNeg["AuAuc20"]->fill(partPt);
+						hKaonPt["Raa_c20_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+						rKK_ProtPos["AuAuc20"]->fill(partPt);
+						rppi_ProtonPos["AuAuc20"]->fill(partPt);
+						hProtPt["Raa_c20_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["AuAuc20"]->fill(partPt);
+						rppi_ProtonNeg["AuAuc20"]->fill(partPt);
+						hProtPt["Raa_c20_AuAu"]->fill(partPt);
+						break;
+					}
 					}
 				}
-				else if ((c >= 20.) && (c < 40.))
+			}
+			else if ((c >= 20.) && (c < 40.))
+			{
+				sow["sow_AUAUc40"]->fill();
+
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_AUAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+						rpipi_PionPos["AuAuc40"]->fill(partPt);
+						rKpi_PionPos["AuAuc40"]->fill(partPt);
+						rppi_PionPos["AuAuc40"]->fill(partPt);
+						hPionPt["Raa_c40_AuAu"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["AuAuc40"]->fill(partPt);
+						rKpi_PionNeg["AuAuc40"]->fill(partPt);
+						rppi_PionNeg["AuAuc40"]->fill(partPt);
+						hPionPt["Raa_c40_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+						rKK_KaonPos["AuAuc40"]->fill(partPt);
+						rKpi_KaonPos["AuAuc40"]->fill(partPt);
+						hKaonPt["Raa_c40_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["AuAuc40"]->fill(partPt);
+						rKpi_KaonNeg["AuAuc40"]->fill(partPt);
+						hKaonPt["Raa_c40_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+						rKK_ProtPos["AuAuc40"]->fill(partPt);
+						rppi_ProtonPos["AuAuc40"]->fill(partPt);
+						hProtPt["Raa_c40_AuAu"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["AuAuc40"]->fill(partPt);
+						rppi_ProtonNeg["AuAuc40"]->fill(partPt);
+						hProtPt["Raa_c40_AuAu"]->fill(partPt);
+						break;
+					}
 					}
 				}
-
-				else if ((c >= 40.) && (c < 60.))
+			}
+			else if ((c >= 40.) && (c < 60.))
+			{
+				sow["sow_AUAUc60"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_AUAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+						rpipi_PionPos["AuAuc60"]->fill(partPt);
+						rKpi_PionPos["AuAuc60"]->fill(partPt);
+						rppi_PionPos["AuAuc60"]->fill(partPt);
+						hPionPt["Raa_c60_AuAu"]->fill(partPt);
+						hPionPosPt["AuAuc4060"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["AuAuc60"]->fill(partPt);
+						rKpi_PionNeg["AuAuc60"]->fill(partPt);
+						rppi_PionNeg["AuAuc60"]->fill(partPt);
+						hPionPt["Raa_c60_AuAu"]->fill(partPt);
+						hPionNegPt["AuAuc4060"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+						rKK_KaonPos["AuAuc60"]->fill(partPt);
+						rKpi_KaonPos["AuAuc60"]->fill(partPt);
+						hKaonPt["Raa_c60_AuAu"]->fill(partPt);
+						hKaonPosPt["AuAuc4060"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["AuAuc60"]->fill(partPt);
+						rKpi_KaonNeg["AuAuc60"]->fill(partPt);
+						hKaonPt["Raa_c60_AuAu"]->fill(partPt);
+						hKaonNegPt["AuAuc4060"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+						rKK_ProtPos["AuAuc60"]->fill(partPt);
+						rppi_ProtonPos["AuAuc60"]->fill(partPt);
+						hProtPt["Raa_c60_AuAu"]->fill(partPt);
+						hProtPosPt["AuAuc4060"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["AuAuc60"]->fill(partPt);
+						rppi_ProtonNeg["AuAuc60"]->fill(partPt);
+						hProtPt["Raa_c60_AuAu"]->fill(partPt);
+						hProtNegPt["AuAuc4060"]->fill(partPt);
+						break;
+					}
 					}
 				}
-				else if ((c >= 60.) && (c < 92.))
+			}
+			else if ((c >= 60.) && (c < 92.))
+			{
+				sow["sow_AUAUc92"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_AUAUc92"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
+						rpipi_PionPos["AuAuc92"]->fill(partPt);
+						rKpi_PionPos["AuAuc92"]->fill(partPt);
+						rppi_PionPos["AuAuc92"]->fill(partPt);
+						hPionPt["Raa_c92_AuAu"]->fill(partPt);
+						hPionPosPt["AuAuc6092"]->fill(partPt);
+						hPionPt["AuAuc6092"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["AuAuc92"]->fill(partPt);
+						rKpi_PionNeg["AuAuc92"]->fill(partPt);
+						rppi_PionNeg["AuAuc92"]->fill(partPt);
+						hPionPt["Raa_c92_AuAu"]->fill(partPt);
+						hPionNegPt["AuAuc6092"]->fill(partPt);
+						hPionPt["AuAuc6092"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
+						rKK_KaonPos["AuAuc92"]->fill(partPt);
+						rKpi_KaonPos["AuAuc92"]->fill(partPt);
+						hKaonPt["Raa_c92_AuAu"]->fill(partPt);
+						hKaonPosPt["AuAuc6092"]->fill(partPt);
+						hKaonPt["AuAuc6092"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["AuAuc92"]->fill(partPt);
+						rKpi_KaonNeg["AuAuc92"]->fill(partPt);
+						hKaonPt["Raa_c92_AuAu"]->fill(partPt);
+						hKaonNegPt["AuAuc6092"]->fill(partPt);
+						hKaonPt["AuAuc6092"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
+						rKK_ProtPos["AuAuc92"]->fill(partPt);
+						rppi_ProtonPos["AuAuc92"]->fill(partPt);
+						hProtPt["Raa_c92_AuAu"]->fill(partPt);
+						hProtPosPt["AuAuc6092"]->fill(partPt);
+						hProtPt["AuAuc6092"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsAuAuc92"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["AuAuc92"]->fill(partPt);
+						rppi_ProtonNeg["AuAuc92"]->fill(partPt);
+						hProtPt["Raa_c92_AuAu"]->fill(partPt);
+						hProtNegPt["AuAuc6092"]->fill(partPt);
+						hProtPt["AuAuc6092"]->fill(partPt);
+						break;
+					}
 					}
 				}
-
-				break;
 			}
-			}
+			return;
 		}
-
-		}
+		
 		if (collSys == dAu200)
 		{
 			if ((c < 0.) || (c > 100.)) vetoEvent;
 
-			//sow["sow_AuAu"]->fill();
 			double partPt = p.pT() / GeV;
 			double pt_weight = 1. / (partPt * 2. * M_PI);
 
+			sow["sow_dAuc100"]->fill();
 			for (const Particle& p : chargedParticles)
 			{
-				//hPion0Pt["Pion0Pt_AuAu"]->fill(partPt, pt_weight);
+				switch (p.pid()) {
+				case 211: // pi+
+				{
+					hPionPosPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
+					rpipi_PionPos["dAuc100"]->fill(partPt);
+					rKpi_PionPos["dAuc100"]->fill(partPt);
+					rppi_PionPos["dAuc100"]->fill(partPt);
+					hPionPt["Rda_c100_dAu"]->fill(partPt);
+					break;
+				}
+				case -211: // pi-
+				{
+					hPionNegPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
+					rpipi_PionNeg["dAuc100"]->fill(partPt);
+					rKpi_PionNeg["dAuc100"]->fill(partPt);
+					rppi_PionNeg["dAuc100"]->fill(partPt);
+					hPionPt["Rda_c100_dAu"]->fill(partPt);
+					break;
+				}
+
+				case 321: // K+
+				{
+					hKaonPosPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
+					rKK_KaonPos["dAuc100"]->fill(partPt);
+					rKpi_KaonPos["dAuc100"]->fill(partPt);
+					hKaonPt["Rda_c100_dAu"]->fill(partPt);
+					break;
+				}
+
+				case -321: // K-
+				{
+					hKaonNegPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
+					rKK_KaonNeg["dAuc100"]->fill(partPt);
+					rKpi_KaonNeg["dAuc100"]->fill(partPt);
+					hKaonPt["Rda_c100_dAu"]->fill(partPt);
+					break;
+				}
+
+				case 2212: // proton
+				{
+					hProtPosPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
+					rKK_ProtPos["dAuc100"]->fill(partPt);
+					rppi_ProtonPos["dAuc100"]->fill(partPt);
+					hProtPt["Rda_c100_dAu"]->fill(partPt);
+					break;
+				}
+
+				case -2212: // anti-proton
+				{
+					hProtNegPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
+					rKK_ProtNeg["dAuc100"]->fill(partPt);
+					rppi_ProtonNeg["dAuc100"]->fill(partPt);
+					hProtPt["Rda_c100_dAu"]->fill(partPt);
+					break;
+				}
+				}
 			}
 
-
-
-			switch (p.pid()) {
-			case 211: // pi+
+			if ((c >= 0.) && (c < 20.))
 			{
-				sow["sow_dAUc100"]->fill();
-				hPionPosPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
-
-				if ((c >= 0.) && (c < 20.))
+				sow["sow_dAuc20"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_dAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
 					{
 						hPionPosPt["ptyieldsdAuc20"]->fill(partPt, pt_weight);
+						rpipi_PionPos["dAuc20"]->fill(partPt);
+						rKpi_PionPos["dAuc20"]->fill(partPt);
+						rppi_PionPos["dAuc20"]->fill(partPt);
+						hPionPt["Rda_c20_dAu"]->fill(partPt);
+						hPionPt["dAuc0020"]->fill(partPt);
+						break;
 					}
-				}
-
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_dAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_dAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 60.) && (c < 88.))
-				{
-					sow["sow_dAUc88"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionPosPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
-					}
-				}
-				break;
-			}
-			case -211: // pi-
-			{
-				sow["sow_dAUc100"]->fill();
-				hPionNegPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
-
-				if ((c >= 0.) && (c < 20.))
-				{
-					sow["sow_dAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					case -211: // pi-
 					{
 						hPionNegPt["ptyieldsdAuc20"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["dAuc20"]->fill(partPt);
+						rKpi_PionNeg["dAuc20"]->fill(partPt);
+						rppi_PionNeg["dAuc20"]->fill(partPt);
+						hPionPt["Rda_c20_dAu"]->fill(partPt);
+						hPionPt["dAuc0020"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_dAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_dAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 60.) && (c < 88.))
-				{
-					sow["sow_dAUc88"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hPionNegPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
-					}
-				}
-				break;
-			}
-			case 321: // K+
-			{
-				sow["sow_dAUc100"]->fill();
-				hKaonPosPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
-
-				if ((c >= 0.) && (c < 20.))
-				{
-
-					sow["sow_dAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					case 321: // K+
 					{
 						hKaonPosPt["ptyieldsdAuc20"]->fill(partPt, pt_weight);
+						rKK_KaonPos["dAuc20"]->fill(partPt);
+						rKpi_KaonPos["dAuc20"]->fill(partPt);
+						hKaonPt["Rda_c20_dAu"]->fill(partPt);
+						hKaonPt["dAuc0020"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_dAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_dAUc60"]->fill();
-
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 60.) && (c < 88.))
-				{
-					sow["sow_dAUc88"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonPosPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
-					}
-				}
-				break;
-			}
-			case -321: // K-
-			{
-				sow["sow_dAUc100"]->fill();
-				hKaonNegPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
-
-				if ((c >= 0.) && (c < 20.))
-				{
-					sow["sow_dAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					case -321: // K-
 					{
 						hKaonNegPt["ptyieldsdAuc20"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["dAuc20"]->fill(partPt);
+						rKpi_KaonNeg["dAuc20"]->fill(partPt);
+						hKaonPt["Rda_c20_dAu"]->fill(partPt);
+						hKaonPt["dAuc0020"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_dAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_dAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 60.) && (c < 88.))
-				{
-					sow["sow_dAUc88"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hKaonNegPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
-					}
-				}
-				break;
-			}
-			case 2212: // proton
-			{
-				sow["sow_dAUc100"]->fill();
-				hProtPosPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
-
-				if ((c >= 0.) && (c < 20.))
-				{
-					sow["sow_dAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					case 2212: // proton
 					{
 						hProtPosPt["ptyieldsdAuc20"]->fill(partPt, pt_weight);
+						rKK_ProtPos["dAuc20"]->fill(partPt);
+						rppi_ProtonPos["dAuc20"]->fill(partPt);
+						hProtPt["Rda_c20_dAu"]->fill(partPt);
+						hProtPt["dAuc0020"]->fill(partPt);
+						break;
 					}
-				}
 
-				else if ((c >= 20.) && (c < 40.))
-				{
-					sow["sow_dAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
-					}
-				}
-				else if ((c >= 40.) && (c < 60.))
-				{
-					sow["sow_dAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
-					}
-				}
-
-				else if ((c >= 60.) && (c < 88.))
-				{
-					sow["sow_dAUc88"]->fill();
-					for (const Particle& p : chargedParticles)
-					{
-						hProtPosPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
-					}
-				}
-				break;
-			}
-			case -2212: // anti-proton
-			{
-				sow["sow_dAUc100"]->fill();
-				hProtNegPt["ptyieldsdAuc100"]->fill(partPt, pt_weight);
-
-				if ((c >= 0.) && (c < 20.))
-				{
-					sow["sow_dAUc20"]->fill();
-					for (const Particle& p : chargedParticles)
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsdAuc20"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["dAuc20"]->fill(partPt);
+						rppi_ProtonNeg["dAuc20"]->fill(partPt);
+						hProtPt["Rda_c20_dAu"]->fill(partPt);
+						hProtPt["dAuc0020"]->fill(partPt);
+						break;
+					}
 					}
 				}
-
-				else if ((c >= 20.) && (c < 40.))
+			}
+			else if ((c >= 20.) && (c < 40.))
+			{
+				sow["sow_dAuc40"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_dAUc40"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
+						rpipi_PionPos["dAuc40"]->fill(partPt);
+						rKpi_PionPos["dAuc40"]->fill(partPt);
+						rppi_PionPos["dAuc40"]->fill(partPt);
+						hPionPt["Rda_c40_dAu"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["dAuc40"]->fill(partPt);
+						rKpi_PionNeg["dAuc40"]->fill(partPt);
+						rppi_PionNeg["dAuc40"]->fill(partPt);
+						hPionPt["Rda_c40_dAu"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
+						rKK_KaonPos["dAuc40"]->fill(partPt);
+						rKpi_KaonPos["dAuc40"]->fill(partPt);
+						hKaonPt["Rda_c40_dAu"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["dAuc40"]->fill(partPt);
+						rKpi_KaonNeg["dAuc40"]->fill(partPt);
+						hKaonPt["Rda_c40_dAu"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
+						rKK_ProtPos["dAuc40"]->fill(partPt);
+						rppi_ProtonPos["dAuc40"]->fill(partPt);
+						hProtPt["Rda_c40_dAu"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsdAuc40"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["dAuc40"]->fill(partPt);
+						rppi_ProtonNeg["dAuc40"]->fill(partPt);
+						hProtPt["Rda_c40_dAu"]->fill(partPt);
+						break;
+					}
 					}
 				}
-				else if ((c >= 40.) && (c < 60.))
+			}
+			else if ((c >= 40.) && (c < 60.))
+			{
+				sow["sow_dAuc60"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_dAUc60"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
+						rpipi_PionPos["dAuc60"]->fill(partPt);
+						rKpi_PionPos["dAuc60"]->fill(partPt);
+						rppi_PionPos["dAuc60"]->fill(partPt);
+						hPionPt["Rda_c60_dAu"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["dAuc60"]->fill(partPt);
+						rKpi_PionNeg["dAuc60"]->fill(partPt);
+						rppi_PionNeg["dAuc60"]->fill(partPt);
+						hPionPt["Rda_c60_dAu"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
+						rKK_KaonPos["dAuc60"]->fill(partPt);
+						rKpi_KaonPos["dAuc60"]->fill(partPt);
+						hKaonPt["Rda_c60_dAu"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["dAuc60"]->fill(partPt);
+						rKpi_KaonNeg["dAuc60"]->fill(partPt);
+						hKaonPt["Rda_c60_dAu"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
+						rKK_ProtPos["dAuc60"]->fill(partPt);
+						rppi_ProtonPos["dAuc60"]->fill(partPt);
+						hProtPt["Rda_c60_dAu"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsdAuc60"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["dAuc60"]->fill(partPt);
+						rppi_ProtonNeg["dAuc60"]->fill(partPt);
+						hProtPt["Rda_c60_dAu"]->fill(partPt);
+						break;
+					}
 					}
 				}
+			}
 
-				else if ((c >= 60.) && (c < 88.))
+			else if ((c >= 60.) && (c < 88.))
+			{
+				sow["sow_dAuc88"]->fill();
+				for (const Particle& p : chargedParticles)
 				{
-					sow["sow_dAUc88"]->fill();
-					for (const Particle& p : chargedParticles)
+					switch (p.pid()) {
+					case 211: // pi+
+					{
+						hPionPosPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
+						rpipi_PionPos["dAuc88"]->fill(partPt);
+						rKpi_PionPos["dAuc88"]->fill(partPt);
+						rppi_PionPos["dAuc88"]->fill(partPt);
+						hPionPt["Rda_c88_dAu"]->fill(partPt);
+						break;
+					}
+					case -211: // pi-
+					{
+						hPionNegPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
+						rpipi_PionNeg["dAuc88"]->fill(partPt);
+						rKpi_PionNeg["dAuc88"]->fill(partPt);
+						rppi_PionNeg["dAuc88"]->fill(partPt);
+						hPionPt["Rda_c88_dAu"]->fill(partPt);
+						break;
+					}
+
+					case 321: // K+
+					{
+						hKaonPosPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
+						rKK_KaonPos["dAuc88"]->fill(partPt);
+						rKpi_KaonPos["dAuc88"]->fill(partPt);
+						hKaonPt["Rda_c88_dAu"]->fill(partPt);
+						break;
+					}
+
+					case -321: // K-
+					{
+						hKaonNegPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
+						rKK_KaonNeg["dAuc88"]->fill(partPt);
+						rKpi_KaonNeg["dAuc88"]->fill(partPt);
+						hKaonPt["Rda_c88_dAu"]->fill(partPt);
+						break;
+					}
+
+					case 2212: // proton
+					{
+						hProtPosPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
+						rKK_ProtPos["dAuc88"]->fill(partPt);
+						rppi_ProtonPos["dAuc88"]->fill(partPt);
+						hProtPt["Rda_c88_dAu"]->fill(partPt);
+						break;
+					}
+
+					case -2212: // anti-proton
 					{
 						hProtNegPt["ptyieldsdAuc88"]->fill(partPt, pt_weight);
+						rKK_ProtNeg["dAuc88"]->fill(partPt);
+						rppi_ProtonNeg["dAuc88"]->fill(partPt);
+						hProtPt["Rda_c88_dAu"]->fill(partPt);
+						break;
+					}
 					}
 				}
-				break;
 			}
-			}
-			
-
+			return;
 		}
 
 	}
@@ -881,14 +1112,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hKaonPosPt)
@@ -897,14 +1143,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hPionNegPt)
@@ -913,14 +1174,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hPionPosPt)
@@ -929,14 +1205,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hProtNegPt)
@@ -945,14 +1236,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hProtPosPt)
@@ -961,14 +1267,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hKaonPt)
@@ -977,14 +1298,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hPionPt)
@@ -993,14 +1329,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 		for (auto element : hProtPt)
@@ -1009,14 +1360,29 @@ namespace Rivet {
 			if (name.find("AuAu") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) AuAu200_available = true;
+				else
+				{
+					AuAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("dAu") != std::string::npos)
 			{
-				if (element.second->numEntries() > 0) dAu_available = true;
+				if (element.second->numEntries() > 0) dAu200_available = true;
+				else
+				{
+					dAu200_available = false;
+					break;
+				}
 			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
+				else
+				{
+					pp_available = false;
+					break;
+				}
 			}
 		}
 
@@ -1049,11 +1415,17 @@ namespace Rivet {
 			divide(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioProt["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 			divide(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioProt["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
-			divide(rKpi_Kaon["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_Pion["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pi["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
-			divide(rKpi_Kaon["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_Pion["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pi["dAuc" + std::to_string(dAUCentralityBins[i])]);
+			divide(rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+			divide(rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pipos["dAuc" + std::to_string(dAUCentralityBins[i])]);
+			
+			divide(rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+			divide(rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
-			divide(rppi_Proton["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_Pion["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pi["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
-			divide(rppi_Proton["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_Pion["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pi["dAuc" + std::to_string(dAUCentralityBins[i])]);
+			divide(rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+			divide(rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pipos["dAuc" + std::to_string(dAUCentralityBins[i])]);
+
+			divide(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+			divide(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
 			//RAA (fig 11)_________________(need scaling (will be out of for loop))		
 			hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i]]->sumW());
@@ -1140,9 +1512,6 @@ namespace Rivet {
 		divide(hProtNegPt["AuAuc0010b"], hProtNegPt["AuAuc6092"], hRcp["pneg_c00106092_AuAu"]);
 
 
-
-
-
 		// Ratio of Spectra(fig 15)_________________(Do I treat this the same as ratio of yields section?)
 
 		divide(hKaonPt["AuAuc6092"], hKaonPt["dAuc0020"], RatioK["AuAuc/dAU"]);
@@ -1151,13 +1520,13 @@ namespace Rivet {
 
 
 		//scaling for Raa and Rda
-		hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleY(1. / 777.2);
-		hRaa["pi_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleY(1. / 777.2);
-		hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleY(1. / 777.2);
+		//hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleY(1. / 777.2);
+		//hRaa["pi_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleY(1. / 777.2);
+		//hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleY(1. / 777.2);
 
-		hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleY(1. / 777.2);
-		hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleY(1. / 777.2);
-		hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleY(1. / 777.2);
+		//hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleY(1. / 777.2);
+		//hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleY(1. / 777.2);
+		//hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleY(1. / 777.2);
 
 
 	}
@@ -1187,13 +1556,21 @@ namespace Rivet {
 	map<double, Histo1DPtr> rpp_ProtPos;
 	map<double, Scatter2DPtr> RatioProt;
 
-	map<double, Histo1DPtr> rKPi_Kaon;
-	map<double, Histo1DPtr> rKPi_Pion;
-	map<double, Scatter2DPtr> RatioKpi;
+	map<double, Histo1DPtr> rKPi_KaonPos;
+	map<double, Histo1DPtr> rKPi_PionPos;
+	map<double, Scatter2DPtr> RatioKpipos;
 
-	map<double, Histo1DPtr> rKPi_Prot;
-	map<double, Histo1DPtr> rKPi_Pion;
-	map<double, Scatter2DPtr> Ratioppi;
+	map<double, Histo1DPtr> rKPi_KaonNeg;
+	map<double, Histo1DPtr> rKPi_PionNeg;
+	map<double, Scatter2DPtr> RatioKpineg;
+
+	map<double, Histo1DPtr> rKPi_ProtPos;
+	map<double, Histo1DPtr> rKPi_PionPos;
+	map<double, Scatter2DPtr> Ratioppipos;
+
+	map<double, Histo1DPtr> rKPi_ProtNeg;
+	map<double, Histo1DPtr> rKPi_PionNeg;
+	map<double, Scatter2DPtr> Ratioppineg;
 
 	map<double, Scatter2DPtr> RatioK;
 	map<double, Scatter2DPtr> Ratiopi;
