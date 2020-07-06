@@ -34,7 +34,7 @@ namespace Rivet {
       // Declare centrality projection
       const FinalState fs(Cuts::abseta < 0.6);
       declare(fs, "FS");
-      const ChargedFinalState cfs(Cuts::abseta < 0.5);
+      const ChargedFinalState cfs(Cuts::abseta < 0.6);
       declare(cfs, "CFS");
 
       declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
@@ -104,6 +104,7 @@ namespace Rivet {
         _h["et"]->scaleY(1./1.2);
         _h["etovernpart"]->scaleY(1./1.2);
         _h["mean_et_ratio"]->scaleY(1./1.2);
+        _h["mean_chpart_ratio"]->scaleY(1./1.2);
         divide(_h["mean_et_ratio"],_h["mean_chpart_ratio"],MeanEtChpart);
     }
 
