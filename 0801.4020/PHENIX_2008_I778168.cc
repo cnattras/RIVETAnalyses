@@ -32,9 +32,7 @@ namespace Rivet {
     //@{
 
     /// Constructor
-    PHENIX_2008_I778168()
-      : Analysis("PHENIX_2008_I778168")
-    {    }
+    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I778168); 
 
     //@}
 
@@ -472,9 +470,7 @@ namespace Rivet {
 //       hRaa["Raa_c8092_AuAu"]->scaleY(1./13.88);
 //       hRaa["Raa_minbias_AuAu"]->scaleY(1./401.6);
 
-    }
-
-//Centrality vs RAA_______________________________
+    //Centrality vs RAA_______________________________
 
 //       for(auto element : hRaa)
 //       {
@@ -531,8 +527,7 @@ namespace Rivet {
 //           }
 //           */
 //       }
-      
-
+    
     }
 
 
@@ -578,6 +573,6 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(Rivet::PHENIX_2008_I778168);
+  DECLARE_RIVET_PLUGIN(PHENIX_2008_I778168);
 
 }
