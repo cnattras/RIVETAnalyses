@@ -12,6 +12,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Projections/AliceCommon.hh"
