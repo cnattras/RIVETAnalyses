@@ -471,18 +471,18 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       for(unsigned int i = 1; i<= Correlators.size(); i++)
       {
         book(sow[i],"sow" + to_string(i));
-        book(_DeltaPhi[i], "DeltaPhi" + to_string(i), 24, 0, M_PI);
-        book(_DeltaPhiSub[i], "DeltaPhiSub" + to_string(i), 24, 0, M_PI);
-      }
+      //  book(_DeltaPhi[i], "DeltaPhi" + to_string(i), 24, 0, M_PI);
+     //   book(_DeltaPhiSub[i], "DeltaPhiSub" + to_string(i), 24, 0, M_PI);
+      
 
-      for(unsigned int i = 1; i<= 21; i++)
-      {
-          book(_h[to_string(i) + "11"], i, 1, 1); 
-      }
+     	 for(unsigned int j = 1; j<= 21; j++)
+     	 {
+        	  book(_h["0" + to_string(j) + "11"], j, 1, 1); 
+     	 }
       
-      nEvents.assign(Correlators.size()+1, 0); 
-      nTriggers.assign(Correlators.size()+1, 0); 
-      
+     	 nEvents.assign(Correlators.size()+1, 0); 
+     	 nTriggers.assign(Correlators.size()+1, 0); 
+      } //moved from being above second for statement
     }
       // Book histograms
 /*
