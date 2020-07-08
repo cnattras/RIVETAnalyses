@@ -5,11 +5,13 @@
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/PrimaryParticles.hh"
 #include <fstream>
 #include <iostream>
 #include <math.h>
 #include <vector>
-#include "RHICCentrality.hh"
+//#include "RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 static const int numTrigPtBins = 4;
 static const float pTTrigBins[] = {5.0,7.0,9.0,12.0,15.0};
@@ -28,22 +30,26 @@ namespace Rivet {
     private:
 
       int _index;
+      int _subindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
+      vector<int> _pid;
 
     public:
     
       /// Constructor
-      Correlator(int index) {
+      Correlator(int index, int subindex) {
         _index = index;
+        _subindex = subindex;
       }
 
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
+      void SetPID(std::initializer_list<int> pid){ _pid = pid; }
     
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -55,14 +61,41 @@ namespace Rivet {
       pair<double,double> GetAssociatedRange(){ return _associatedRange; }
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
+      vector<int> GetPID(){ return _pid; }
     
       int GetIndex(){ return _index; }
+      int GetSubIndex(){ return _subindex; }
+      string GetFullIndex()
+      {
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
+          return fullIndex;
+      }
     
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
       bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
       bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
+      bool CheckPID(std::initializer_list<int> pid)
+      {
+          
+          bool inList = false;
+          
+          for(int id : pid)
+          {
+              auto it = std::find(_pid.begin(), _pid.end(), id);
+              
+              if(it != _pid.end())
+              {
+                  inList = true;
+                  break;
+              }
+          }
+          
+          return inList;
+          
+      }
+      
       bool CheckConditions(string s, double cent, double tpt, double apt)
       {
         if(!CheckConditions(s, cent, tpt)) return false;
@@ -136,7 +169,7 @@ namespace Rivet {
         
       }
 
-          double CalculateVn(YODA::Histo1D& hist, int nth)
+    double CalculateVn(YODA::Histo1D& hist, int nth)
     {
         int nBins = hist.numBins();
 
@@ -203,6 +236,112 @@ namespace Rivet {
         }
         
     }
+    
+    double GetXE(Particle pTrig, Particle pAssoc)
+    {
+        double xE = -(pAssoc.pT()/pTrig.pT())*cos(pTrig.phi()-pAssoc.phi());
+                
+        return xE;
+    }
+    
+    bool FindHistoXE(YODA::Histo1D hist, double xE, string &histoID)
+    {
+                
+        for(auto &bin : hist.bins())
+        {
+            if(xE < bin.xMin() || xE > bin.xMax()) continue;
+            else
+            {
+                histoID += to_string(bin.xMin()) + "_" + to_string(bin.xMax());
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
+    
+    //vmin is included in the integral, but vmax is not. Range = [vmin, vmax[
+    //Give the min and max values to calculate the integral
+    double GetYieldInUserRange(YODA::Histo1D& hist, double vmin, double vmax, double &n)
+    {        
+        double integral = 0.;
+        double entries = 0.;
+        
+        if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+                
+        int bmin = hist.binIndexAt(vmin);
+        int bmax = hist.binIndexAt(vmax);
+        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+            entries += hist.bin(i).numEntries();
+        }
+        
+        n = entries;
+        
+        return integral;
+        
+    }
+    
+    double GetYieldInUserRangeZYAM(YODA::Histo1D& hist, double vmin, double vmax, double &n)
+    {        
+        double integral = 0.;
+        double entries = 0.;
+        
+        if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+                
+        int bmin = hist.binIndexAt(vmin);
+        int bmax = hist.binIndexAt(vmax);
+        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        
+        double nbins = 0.;
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+            entries += hist.bin(i).numEntries();
+            nbins += 1.;
+        }
+        
+        n = entries;
+        
+        double minValue = sqrt(-2);
+        
+        for(auto &bin : hist.bins())
+        {
+            if(std::isnan(minValue)) minValue = bin.sumW();
+            if(bin.sumW() < minValue) minValue = bin.sumW();
+        }
+        
+        if(std::isnan(minValue))
+        {
+            MSG_ERROR("Not possible to apply ZYAM! Returning integral without underlying event subtraction!");
+            return integral;
+        }
+                
+        integral -= nbins*minValue;
+        
+        return integral;
+        
+    }
+    
+    double GetPout(Particle pTrig, Particle pAssoc)
+    {
+        double pout = (pAssoc.pT()/GeV)*sin(pTrig.phi()-pAssoc.phi());
+                
+        return abs(pout);
+    }
 
       /// Book histograms and initialise projections before the run
       void init() {
@@ -210,17 +349,21 @@ namespace Rivet {
         // Initialise and register projections
 
         // the basic final-state projection: all final-state particles within the given eta acceptance
-
+        
         const ChargedFinalState cfs(Cuts::abseta < 0.35);
         declare(cfs, "CFS");
-        const ChargedFinalState cfsTrig(Cuts::abseta < 0.35);
-        declare(cfsTrig, "CFSTrig");
-
+        
+        const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
+        declare(pp, "PP");
+        
+        const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
+        declare(pfs, "PFS");
+        
         // the basic final-state projection: all final-state photon within the given eta acceptance
 
 
         // Declare centrality projection
-        declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+        //declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       //==================================================
       // Create one correlator for each set of Collisions System / Beam Energy / Centrality Interval / Trigger pT interval / Associated pT interval
@@ -229,211 +372,85 @@ namespace Rivet {
       // Ex.: Correlator c2(2); -> is the correlator for histograms _h["0312"], _h["0412"], etc
       //==================================================
       
-      //Real correlators
-      /*Correlator c1(1);
-      c1.SetCollSystemAndEnergy("pp200Gev");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(5., 7.);
-      c1.SetAssociatedRange(5., 7.);
-      Correlators.push_back(c1);
-      
-      Correlator c2(2);
-      c2.SetCollSystemAndEnergy("pp200Gev");
-      c2.SetCentrality(0., 100.);
-      c2.SetTriggerRange(7., 9.);
-      c2.SetAssociatedRange(7., 9.);
-      Correlators.push_back(c2);
-      
-      Correlator c3(3);
-      c3.SetCollSystemAndEnergy("pp200Gev");
-      c3.SetCentrality(0., 100.);
-      c3.SetTriggerRange(9., 12.);
-      c3.SetAssociatedRange(9., 12.);
-      Correlators.push_back(c3);
-      
-      Correlator c4(4);
-      c4.SetCollSystemAndEnergy("pp200Gev");
-      c4.SetCentrality(0., 100.);
-      c4.SetTriggerRange(12., 15.);
-      c4.SetAssociatedRange(12., 15.);
-      Correlators.push_back(c4);
-      
-      Correlator c5(5);
-      c5.SetCollSystemAndEnergy("pp200Gev");
-      c5.SetCentrality(0., 100.);
-      c5.SetTriggerRange(5., 7.);
-      c5.SetAssociatedRange(5., 7.);
-      Correlators.push_back(c5);
-      
-      Correlator c6(6);
-      c6.SetCollSystemAndEnergy("pp200Gev");
-      c6.SetCentrality(0., 100.);
-      c6.SetTriggerRange(7., 9.);
-      c6.SetAssociatedRange(7., 9.);
-      Correlators.push_back(c6);
-
-      Correlator c7(7);
-      c7.SetCollSystemAndEnergy("pp200Gev");
-      c7.SetCentrality(0., 100.);
-      c7.SetTriggerRange(9., 12.);
-      c7.SetAssociatedRange(9., 12.);
-      Correlators.push_back(c7);
-
-      Correlator c8(8);
-      c8.SetCollSystemAndEnergy("pp200Gev");
-      c8.SetCentrality(0., 100.);
-      c8.SetTriggerRange(12., 15.);
-      c8.SetAssociatedRange(12., 15.);
-      Correlators.push_back(c8);*/
-      
-      //Debug correlators
-      Correlator c1(1);
+      //Correlators
+      Correlator c1(1,1);
       c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(1., 7.);
-      c1.SetAssociatedRange(1., 2.);
+      c1.SetTriggerRange(5., 7.);
+      //c1.SetAssociatedRange(0., 999.);
+      c1.SetPID(pdgPi0);
       Correlators.push_back(c1);
       
-      Correlator c2(2);
+      Correlator c2(1,2);
       c2.SetCollSystemAndEnergy("pp200GeV");
       c2.SetCentrality(0., 100.);
-      c2.SetTriggerRange(0., 9.);
-      c2.SetAssociatedRange(0., 9.);
+      c2.SetTriggerRange(5., 7.);
+      //c2.SetAssociatedRange(0., 7.);
+      c2.SetPID(pdgPhoton);
       Correlators.push_back(c2);
       
-      Correlator c3(3);
+      Correlator c3(2,1);
       c3.SetCollSystemAndEnergy("pp200GeV");
       c3.SetCentrality(0., 100.);
-      c3.SetTriggerRange(0., 12.);
-      c3.SetAssociatedRange(0., 12.);
+      c3.SetTriggerRange(7., 9.);
+      //c3.SetAssociatedRange(0., 999.);
+      c3.SetPID(pdgPi0);
       Correlators.push_back(c3);
       
-      Correlator c4(4);
+      Correlator c4(2,2);
       c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 100.);
-      c4.SetTriggerRange(0., 15.);
-      c4.SetAssociatedRange(0., 15.);
+      c4.SetTriggerRange(7., 9.);
+      //c4.SetAssociatedRange(0., 9.);
+      c4.SetPID(pdgPhoton);
       Correlators.push_back(c4);
       
-      Correlator c5(5);
+      Correlator c5(3,1);
       c5.SetCollSystemAndEnergy("pp200GeV");
       c5.SetCentrality(0., 100.);
-      c5.SetTriggerRange(0., 7.);
-      c5.SetAssociatedRange(0., 7.);
+      c5.SetTriggerRange(9., 12.);
+      //c5.SetAssociatedRange(0., 999.);
+      c5.SetPID(pdgPi0);
       Correlators.push_back(c5);
       
-      Correlator c6(6);
+      Correlator c6(3,2);
       c6.SetCollSystemAndEnergy("pp200GeV");
       c6.SetCentrality(0., 100.);
-      c6.SetTriggerRange(0., 9.);
-      c6.SetAssociatedRange(0., 9.);
+      c6.SetTriggerRange(9., 12.);
+      //c6.SetAssociatedRange(0., 12.);
+      c6.SetPID(pdgPhoton);
       Correlators.push_back(c6);
-
-      Correlator c7(7);
+      
+      Correlator c7(4,1);
       c7.SetCollSystemAndEnergy("pp200GeV");
       c7.SetCentrality(0., 100.);
-      c7.SetTriggerRange(0., 12.);
-      c7.SetAssociatedRange(0., 12.);
+      c7.SetTriggerRange(12., 15.);
+      //c7.SetAssociatedRange(0., 999.);
+      c7.SetPID(pdgPi0);
       Correlators.push_back(c7);
-
-      Correlator c8(8);
+      
+      Correlator c8(4,2);
       c8.SetCollSystemAndEnergy("pp200GeV");
       c8.SetCentrality(0., 100.);
-      c8.SetTriggerRange(0., 15.);
-      c8.SetAssociatedRange(0., 15.);
+      c8.SetTriggerRange(12., 15.);
+      //c8.SetAssociatedRange(0., 15.);
+      c8.SetPID(pdgPhoton);
       Correlators.push_back(c8);
 
- /* Old booking code! 
-      // Book histograms
-      //Pi0 - Hadron 5 < pT,trigger < 7 GeV/c
-  book(_h["0111"], 1, 1, 1);
-   // Pi0 - Hadron 7 < pT,trigger < 9 GeV/c
-	 book(_h["0211"], 2, 1, 1);
-   //Pi0 - Hadron 9 < pT,trigger < 12 GeV/c
-	 book(_h["0311"], 3, 1, 1);
-   //Pi0 - Hadron 12 < pT,trigger < 15 GeV/c
-	 book(_h["0411"], 4, 1, 1);
-   //Isolated Direct Photon - Hadron 5 < pT,trigger < 7 GeV/c
-	 book(_h["0511"], 5, 1, 1);
-   //Isolated Direct Photon - Hadron 7 < pT,trigger < 9 GeV/c
-	 book(_h["0611"], 6, 1, 1);
-   //Isolated Direct Photon - Hadron 9 < pT,trigger < 12 GeV/c
-	 book(_h["0711"], 7, 1, 1);
-   //Isolated Direct Photon - Hadron 12 < pT,trigger < 15 GeV/c
-	 book(_h["0811"], 8, 1, 1);
-   //Pi0 - Hadron 5 < pT,t < 7
-	 book(_h["0911"], 9, 1, 1);
-   //Pi0 - Hadron 7 < pT,t < 9
-	 book(_h["1011"], 10, 1, 1);
-   //Pi0 - Hadron 9 < pT,t < 12
-	 book(_h["1111"], 11, 1, 1);
-   //Pi0 - Hadron 12 < pT,t < 15
-	 book(_h["1211"], 12, 1, 1);
-   //Isolated Direct Photon - Hadron 5 < pT,t < 7
-	 book(_h["1311"], 13, 1, 1);
-   //Isolated Direct Photon - Hadron 7 < pT,t < 9
-	 book(_h["1411"], 14, 1, 1);
-   //Isolated Direct Photon - Hadron 9 < pT,t < 12
-	 book(_h["1511"], 15, 1, 1);
-   //Isolated Direct Photon - Hadron 12 < pT,t < 15
-	 book(_h["1611"], 16, 1, 1);
-    }
-  */
-
-      for(unsigned int i = 1; i<= 10; i++)
+      for(Correlator& corr : Correlators)
       {
-        book(sow[i],"sow" + to_string(i));
-        switch (i) {
-          case 1:
-            for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
-            }
-            break;
-          case 2:
-            for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
-            }
-            break;
-          case 3:
-            for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
-            }
-            break;
-          case 4:
-            for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
-            }
-            break;
-          case 5:
-            for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
-            }
-            break;
-          case 6:
-            book(_h["0" + to_string(i) + "11"], i, 1, 1);
-            break;
-          case 7:
-            book(_h["0" + to_string(i) + "11"], i, 1, 1);
-            break;
-          case 8:
-            for(int ii=1; ii<= 2; ii++){
-              book(_h["0" + to_string(i) + "1" + to_string(ii)], i, 1, ii);
-            }
-            break;
-          case 9:
-            book(_h["0" + to_string(i) + "11"], i, 1, 1);
-            break;
-          case 10:
-            book(_h[to_string(i) + "11"], i, 1, 1);
-            break;
-          //book(_h[to_string(i) + "11"], i, 1, 1);
-        }
-          book(_DeltaPhi[i], "DeltaPhi" + to_string(i), 24, 0, M_PI);
-          book(_DeltaPhiSub[i], "DeltaPhiSub" + to_string(i), 24, 0, M_PI);
+          book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
+          book(_h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())], corr.GetIndex(), 1, corr.GetSubIndex());
+          book(_h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())], corr.GetIndex()+4, 1, corr.GetSubIndex());
+          
+          string refname = mkAxisCode(corr.GetIndex(), 1, corr.GetSubIndex());
+          const Histo1D& refdata = refData(refname);
+          for(auto &bin : refdata.bins())
+          {
+              book(_DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, 0, M_PI);
+          }
+          nTriggers[corr.GetFullIndex()] = 0;
       }
-      
-      nEvents.assign(Correlators.size()+1, 0); 
-      nTriggers.assign(Correlators.size()+1, 0); 
       
     } // End of init
 
@@ -441,7 +458,8 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      const ChargedFinalState& cfsTrig = apply<ChargedFinalState>(event, "CFSTrig");
+      const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
+      const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
 
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
@@ -460,9 +478,6 @@ namespace Rivet {
       
       string SysAndEnergy = CollSystem + cmsEnergy;
 
-      // Prepare centrality projection and value
-      const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
-      double centr = centProj();
     
       double triggerptMin = 999.;
       double triggerptMax = -999.;
@@ -477,8 +492,7 @@ namespace Rivet {
         //if(!corr.CheckCentrality(centr)) continue;
         
         //If event is accepted for the correlator, fill event weights
-        sow[corr.GetIndex()]->fill();
-        nEvents[corr.GetIndex()]++;
+        sow[corr.GetFullIndex()]->fill();
         
         isVeto = false;
         
@@ -492,227 +506,147 @@ namespace Rivet {
     
       if(isVeto) vetoEvent;
     
-      // loop over charged final state particles
-      for(const Particle& pTrig : cfsTrig.particles()) {
-        //cout << "trigger loop" << endl;
-        if(pTrig.pt()/GeV < triggerptMin || pTrig.pt()/GeV > triggerptMax) continue;
-        //cout << "trigger pt: " << pTrig.pT()/GeV << endl;
-          //Check if is secondary
+    // loop over charged final state particles - PI0
+    for(const Particle& pTrig : ppTrigPi0.particles())
+    {
+        //Check if is secondary
         if(isSecondary(pTrig)) continue;
           
-        if( abs(pTrig.pid())==211 || abs(pTrig.pid())==2212 || abs(pTrig.pid())==321){
+        
+        for(Correlator& corr : Correlators)
+        {
+            if(!corr.CheckPID(pdgPi0)) continue;
+            if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
+            nTriggers[corr.GetFullIndex()]++;
+        }
 
-          for(Correlator& corr : Correlators)
-          {
-            //if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
-            nTriggers[corr.GetIndex()]++;
-          }
-
-          // Hadron loop
-          for(const Particle& pAssoc : cfs.particles()) {
-                //cout << "Assoc loop" << endl;
-            if(pAssoc.pt()/GeV < associatedptMin || pAssoc.pt()/GeV > pTrig.pt()/GeV) continue;
+        // Hadron loop
+        for(const Particle& pAssoc : cfs.particles())
+        {
                 
             //Check if Trigger and Associated are the same particle
             if(isSameParticle(pTrig,pAssoc)) continue;
                 
             //Check if is secondary
             if(isSecondary(pAssoc)) continue;
-                
-            if(abs(pAssoc.pid())==211 || abs(pAssoc.pid())==2212 || abs(pAssoc.pid())==321) {
-            //int mybin = GetTrigBin(pTrig.pt());
-            //int mybina = GetAssocBin(pAssoc.pt());
 
             //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
             double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
-            double dEta = deltaEta(pTrig, pAssoc);
-          
-            //cout << "dPhi: " << dPhi << " dEta: " << dEta << endl;
+                        
+            double xE = GetXE(pTrig,pAssoc);
+            
             for(Correlator& corr : Correlators)
             {
-              //if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
-                    
-              if(abs(dPhi) < 0.78)
-              {
-                switch(corr.GetIndex()) {
-                  
-                  case 1:
-                    for(int ii=1; ii<= 2; ii++){
-                        //cout << "Filling histogram" << endl;
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
-                    }
-                    break;
-                  case 2:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
-                    }
-                    break;
-                  case 3:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
-                    }
-                    break;
-                  case 4:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
-                    }
-                    break;
-                  case 5:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
-                    }
-                    break;
-                  case 6:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
-                    break;
-                  case 7:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
-                    break;
-                  case 8:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dEta), 0.5);
-                    }
-                    break;
-                  case 9:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
-                    break;
-                  case 10:
-                    _h[to_string(corr.GetIndex()) + "11"]->fill(abs(dEta), 0.5);
-                    break;
+                if(!corr.CheckPID(pdgPi0)) continue;
+                
+                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                
+                if(xE > 0.)
+                {
+                    string histoID = "xE_";
+                    if(!FindHistoXE(*_h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())], xE, histoID)) continue;
+                    _DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + histoID]->fill(abs(dPhi));
                 }
-              }
-                switch(corr.GetIndex()) {
-                  
-                  case 1:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
-                    }
-                    break;
-                  case 2:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
-                    }
-                    break;
-                  case 3:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
-                    }
-                    break;
-                  case 4:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
-                    }
-                    break;
-                  case 5:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
-                    }
-                    break;
-                  case 6:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
-                    break;
-                  case 7:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
-                    break;
-                  case 8:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(corr.GetIndex()) + "1" + to_string(ii)]->fill(abs(dPhi), 0.5);
-                    }
-                    break;
-                  case 9:
-                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
-                    break;
-                  case 10:
-                    _h[to_string(corr.GetIndex()) + "11"]->fill(abs(dPhi), 0.5);
-                    break;
+                
+                if(pAssoc.pT()/GeV > 2. && pAssoc.pT()/GeV < 10.)
+                {
+                    double pout = GetPout(pTrig,pAssoc);
+                    _h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())]->fill(pout);
                 }
-              
-            
-                    
+                
             } //end of correlators loop 
                 
-          } // associated hadrons
         } // end of loop over associated particles
-      } // trigger hadrons
 
     } // particle loop
+    
+    
+    // loop over charged final state particles - PHOTONS
+    for(const Particle& pTrig : pfsTrigPhotons.particles())
+    {
+        //Check if is secondary
+        if(isSecondary(pTrig)) continue;
+          
+        
+        for(Correlator& corr : Correlators)
+        {
+            if(!corr.CheckPID(pdgPhoton)) continue;
+            if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
+            nTriggers[corr.GetFullIndex()]++;
+        }
+        
+        // Hadron loop
+        for(const Particle& pAssoc : cfs.particles())
+        {
+                
+            //Check if Trigger and Associated are the same particle
+            if(isSameParticle(pTrig,pAssoc)) continue;
+                
+            //Check if is secondary
+            if(isSecondary(pAssoc)) continue;
+
+            //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+            double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                        
+            double xE = GetXE(pTrig,pAssoc);
+            
+            
+            
+            for(Correlator& corr : Correlators)
+            {
+                if(!corr.CheckPID(pdgPhoton)) continue;
+                
+                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                
+                if(xE > 0.)
+                {
+                    //cout << "xE: " << xE << endl;
+                    //cout << "DeltaPhi: " << dPhi << endl;
+                    string histoID = "xE_";
+                    if(!FindHistoXE(*_h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())], xE, histoID)) continue;
+                    _DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + histoID]->fill(abs(dPhi));
+                }
+                
+                
+                if(pAssoc.pT()/GeV > 2. && pAssoc.pT()/GeV < 10.)
+                {
+                    double pout = GetPout(pTrig,pAssoc);
+                    _h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())]->fill(pout);
+                        
+                }
+                
+                
+            } //end of correlators loop 
+                
+        } // end of loop over associated particles
+
+    } // particle loop
+    
+    
+    
+    
+    
   }
     /// Normalise histograms etc., after the run
     void finalize() {
         
-        for(unsigned int i = 1; i <= 9; i++) /*I set the the range to i <= 10 at first, but then I ran the
-                                              code and there were issues. So I made it leass than 10, i.e. 9,
-                                              but it gives me nan for each entry in the Rivet.yoda file.*/
+        for(Correlator& corr : Correlators)
         {
-           switch(i) {
-                  
-                  case 1:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    }
-                    break;
-                  case 2:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    }
-                    break;
-                  case 3:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    }
-                    break;
-                  case 4:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    }
-                    break;
-                  case 5:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    }
-                    break;
-                  case 6:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    break;
-                  case 7:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    break;
-                  case 8:
-                    for(int ii=1; ii<= 2; ii++){
-                      _h["0" + to_string(i) + "1" + to_string(ii)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    }
-                    break;
-                  case 9:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    break;
-                  case 10:
-                    _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-                    break;
-              }
-          //This is the old code. I switched it with the code above, but running an analysis with the code above game me some issues.
-            /*if(nTriggers[i] > 0)
+            string refname = mkAxisCode(corr.GetIndex(), 1, corr.GetSubIndex());
+            const Histo1D& refdata = refData(refname);
+            for(auto &bin : refdata.bins())
             {
-              if (i <= 9) {
-                //_h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-              }
-              else {
-                //_h[to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-              }*/
-              _DeltaPhi[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-              _DeltaPhiSub[i]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-
-              //vector<int> n{2,3};
-              //SubtractBackground(*_DeltaPhi[i], *_DeltaPhiSub[i], n, 0.63, 2.51);
+                _DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
+                double entries = 0.;
+                double yield = GetYieldInUserRangeZYAM(*_DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], M_PI/2., M_PI, entries);
+                _h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())]->fillBin(_h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())]->binIndexAt(bin.xMid()),yield/entries, entries);
+                    
+            }
             
+            _h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
             
         }
         
-      //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
-      //do background subtraction ala zyam
-      //calculate yields
-
-      //double norm = sumOfWeights() *2.*M_PI;
-      //scale(_h["0111"], 1./norm);
 
     }
 
@@ -720,22 +654,14 @@ namespace Rivet {
     //Histograms and variables
 
     map<string, Histo1DPtr> _h;
-    map<int, CounterPtr> sow;
-    map<int, Histo1DPtr> _DeltaPhi;
+    map<string, CounterPtr> sow;
+    map<string, Histo1DPtr> _DeltaPhixE;
     map<int, Histo1DPtr> _DeltaPhiSub;
-    bool fillTrigger = true;
-    vector<int> nTriggers;
-    vector<int> nEvents;
+    map<string, int> nTriggers;
     vector<Correlator> Correlators;
+    std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
+    std::initializer_list<int> pdgPhoton = {22};  // Pion 0
 
-    /* 
-    map<string, Histo1DPtr> _h;
-    map<int, CounterPtr> sow;
-    bool fillTrigger = true;
-    vector<int> nTriggers;
-    vector<int> nEvents;
-    vector<Correlator> Correlators;
-    */
 
   };
 
