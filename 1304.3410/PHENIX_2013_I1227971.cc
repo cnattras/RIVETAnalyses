@@ -19,7 +19,6 @@
 
 namespace Rivet {
 
-	FINISHED
 		class PHENIX_2013_I1227971 : public Analysis {
 		public:
 
