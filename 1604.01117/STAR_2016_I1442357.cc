@@ -17,7 +17,16 @@ using namespace std;
 namespace Rivet {
    //------------------------------------------------------------------------------------------------------------------------ 
     class Correlator {
-  
+
+  private:
+	
+      int _subindex;
+      string _collSystemAndEnergy;
+      pair<double,double> _centrality;
+      pair<double,double> _triggerRange;
+      pair<double,double> _associatedRange;
+      vector<int> _pid; 
+ 
   public:
     /// Constructor
 
@@ -29,6 +38,7 @@ namespace Rivet {
     void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
     void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
     void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
+    void SetPID(std::initializer_list<int> pid){ _pid = pid; }
     
     string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
     pair<double,double> GetCentrality(){ return _centrality; }
@@ -82,12 +92,6 @@ namespace Rivet {
 
         return true;
     }
-
-    int _index;
-    string _collSystemAndEnergy;
-    pair<double,double> _centrality;
-    pair<double,double> _triggerRange;
-    pair<double,double> _associatedRange;
 
   };
 
@@ -297,6 +301,8 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       // Ex.: Correlator c1(1); -> is the correlator for histograms _h["0311"], _h["0411"], etc
       // Ex.: Correlator c2(2); -> is the correlator for histograms _h["0312"], _h["0412"], etc
        //==================================================
+/*
+	Old correlators 
 
       Correlator c1(1); 
       c1.SetCollSystemAndEnergy("AuAu200GeV");
@@ -465,8 +471,163 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       c1.SetTriggerRange(12., 20.);  //pT_trig
       c1.SetAssociatedRange(0.65, 0.70); // zT
       Correlators.push_back(c24);
+*/
+	Correlator c1(1);
+	c1.SetCollSystemAndEnergy("AuAu200GeV");
+	c1.SetCentrality(0., 12.);
+	c1.SetTriggerRange(12., 20.);  //pT_trig
+	c1.SetAssociatedRange(1.2, 3.); // zT
+	//c1.SetPID(pdgGamma)
+	Correlators.push_back(c1);
+
+	Correlator c2(2);
+        c2.SetCollSystemAndEnergy("AuAu200GeV");
+        c2.SetCentrality(0., 12.);
+        c2.SetTriggerRange(12., 20.);  //pT_trig
+        c2.SetAssociatedRange(1.2, 3.); // zT
+        //c2.SetPID(pdgPi0)
+        Correlators.push_back(c2);
+
+	Correlator c3(3);
+        c3.SetCollSystemAndEnergy("AuAu200GeV");
+        c3.SetCentrality(0., 12.);
+        c3.SetTriggerRange(12., 20.);  //pT_trig
+        c3.SetAssociatedRange(3., 5.); // zT
+        //c3.SetPID(pdgGamma)
+        Correlators.push_back(c3);
+
+	Correlator c4(4);
+        c4.SetCollSystemAndEnergy("AuAu200GeV");
+        c4.SetCentrality(0., 12.);
+        c4.SetTriggerRange(12., 20.);  //pT_trig
+        c4.SetAssociatedRange(3., 5.); // zT
+        //c4.SetPID(pdgPi0)
+        Correlators.push_back(c4);
+
+	Correlator c5(5);
+        c5.SetCollSystemAndEnergy("pp200GeV");
+        c5.SetCentrality(0., 100.);
+        c5.SetTriggerRange(12., 20.);  //pT_trig
+        c5.SetAssociatedRange(1.2, 3.); // zT
+        //c5.SetPID(pdgGamma)
+        Correlators.push_back(c5);
+
+	Correlator c6(6);
+        c6.SetCollSystemAndEnergy("pp200GeV");
+        c6.SetCentrality(0., 100.);
+        c6.SetTriggerRange(12., 20.);  //pT_trig
+        c6.SetAssociatedRange(1.2, 3.); // zT
+        //c6.SetPID(pdgPi0)
+        Correlators.push_back(c6);
+
+	Correlator c7(7);
+        c7.SetCollSystemAndEnergy("pp200GeV");
+        c7.SetCentrality(0., 100.);
+        c7.SetTriggerRange(12., 20.);  //pT_trig
+        c7.SetAssociatedRange(3., 5.); // zT
+        //c7.SetPID(pdgGamma)
+        Correlators.push_back(c7);
+
+	Correlator c8(8);
+        c8.SetCollSystemAndEnergy("pp200GeV");
+        c8.SetCentrality(0., 100.);
+        c8.SetTriggerRange(12., 20.);  //pT_trig
+        c8.SetAssociatedRange(3., 5.); // zT
+        //c8.SetPID(pdgPi0)
+        Correlators.push_back(c8);
+
+	Correlator c9(9);	//11,1 & 13,1 are the same
+        c9.SetCollSystemAndEnergy("AuAu200GeV");
+        c9.SetCentrality(0., 12.);
+        c9.SetTriggerRange(12., 20.);  //pT_trig
+        c9.SetAssociatedRange(1.2, 100.); // zT
+        //c9.SetPID(pdgAu)
+        Correlators.push_back(c9);
+
+	Correlator c10(10);	//12,1 & 14,1 are the same
+        c10.SetCollSystemAndEnergy("pp200GeV");
+        c10.SetCentrality(0., 100.);
+        c10.SetTriggerRange(12., 20.);  //pT_trig
+        c10.SetAssociatedRange(1.2, 100.); // zT
+        //c10.SetPID(pdgpp)
+        Correlators.push_back(c10);
+	
+	Correlator c11(11);
+	c11.SetCollSystemAndEnergy("pp200GeV");
+        c11.SetCentrality(0., 100.);
+        c11.SetTriggerRange(12., 20.);  //pT_trig
+        c11.SetAssociatedRange(1.2, 100.); // zT
+        //c11.SetPID(pdgProton)
+        Correlators.push_back(c11);
+
+	Correlator c12(12);	//18,1 is the same
+        c12.SetCollSystemAndEnergy("AuAu200GeV");
+        c12.SetCentrality(0., 12.);
+        c12.SetTriggerRange(12., 20.);  //pT_trig
+        c12.SetAssociatedRange(1.2, 100.); // zT
+        //c12.SetPID(pdgPhoton)
+        Correlators.push_back(c12);
+
+	Correlator c13(13);	//19,1 is the same
+        c13.SetCollSystemAndEnergy("AuAu200GeV");
+        c13.SetCentrality(0., 12.);
+        c13.SetTriggerRange(12., 20.);  //pT_trig
+        c13.SetAssociatedRange(1.2, 100.); // zT
+        //c13.SetPID(pdgPi0)
+        Correlators.push_back(c13);
+
+	Correlator c14(14);	
+        c14.SetCollSystemAndEnergy("AuAu200GeV");
+        c14.SetCentrality(0., 12.);
+        c14.SetTriggerRange(12., 20.);  //pT_trig
+        c14.SetAssociatedRange(1.2, 100.); // zT
+        //c14.SetPID(pdgTrig)
+        Correlators.push_back(c14);
+
+	Correlator c15(15);
+        c15.SetCollSystemAndEnergy("Au200GeV");
+        c15.SetCentrality(0., 12.);
+        c15.SetTriggerRange(12., 20.);  //pT_trig
+        c15.SetAssociatedRange(1.2, 100.); // zT
+        //c15.SetPID(pdgAssoc)
+        Correlators.push_back(c15);
 
 
+
+	for(Correlator& corr : Correlators)
+	{	cout<<"booking for"<<corr.GetIndex()<<endl;
+		book(sow[corr.GetIndex()],"sow" + corr.GetIndex());
+
+		if(corr.GetIndex() == 9 || corr.GetIndex() == 10)
+		{
+			book(_h["0" + to_string(corr.GetIndex()) + "1" + "1"]);
+			book(_h["0" + to_string(corr.GetIndex()+2) + "1" + "1"]);
+			book(_h["0" + to_string(corr.GetIndex()+4) + "1" + "1"]);
+		}
+		
+		else if(corr.GetIndex() == 11)
+		{
+			book(_h["0" + to_string(corr.GetIndex()+4) + "1" + "1"]);
+		}
+
+		 else if(corr.GetIndex() == 12 || corr.GetIndex() == 13)
+                {
+                        book(_h["0" + to_string(corr.GetIndex()+4) + "1" + "1"]);
+			book(_h["0" + to_string(corr.GetIndex()+6) + "1" + "1"]);
+                }
+
+		 else if(corr.GetIndex() == 14 || corr.GetIndex() == 15)
+                {
+                        book(_h["0" + to_string(corr.GetIndex()+6) + "1" + "1"]);
+                }
+
+		else
+		{
+			book(_h["0" + to_string(corr.GetIndex()) + "1" + "1"]);
+		}
+
+	}
+/* Old Booking
 
       for(unsigned int i = 1; i<= Correlators.size(); i++)
       {
@@ -485,6 +646,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       } //moved from being above second for statement
     }
       // Book histograms
+*/
 /*
 	 // *****FIGURE 1, Delta_phi(rad) // The Azimuthal correlation functions of charged hadrons per trigger,12 < pT^trig < 20 GeV/c
    ////// DO NOT NEED THIS FIGURE ///////////
