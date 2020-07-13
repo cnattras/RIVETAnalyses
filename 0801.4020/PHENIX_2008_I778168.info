@@ -15,13 +15,13 @@ References:
 NumEvents: 1000000
 NeedCrossSection: no
 #Beams: <[AU, AU]>
-#Energies: <Insert list of run energies or beam energy pairs in GeV,
-#           e.g. [1960] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
+#Energies: <[200]>
+#      
 #PtCuts: <[5, 20]>
 #NeedCrossSection: True
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP200,AUAU200
+ - beam=PP,AUAU
 Description:
   'For Au + Au collisions at 200 GeV we measure neutral pion production with good statistics for transverse momentum, $p_T$, up to 20 GeV/c. A fivefold suppression is found, which is essentially constant for $5 < p_T < 20$ GeV/c. Experimental uncertainties are small enough to constrain any model-dependent parameterization for the transport coefficient of the medium, e.g. $\langle \hat{q} \rangle$ in the parton quenching model. The spectral shape is similar for all collision classes, and the suppression does not saturate in Au+Au collisions; instead, it increases proportional to the number of participating nucleons, as $N^{2/3}_{part}$.'
 BibKey: 
