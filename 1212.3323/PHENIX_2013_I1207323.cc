@@ -457,18 +457,10 @@ namespace Rivet {
       // //Don't know 
       // book(_h["2011"], 20, 1, 1);
 
-      for(unsigned int i = 1; i<= Correlators.size(); i++)
+      for(unsigned int i = 1; i<= Correlators.size() + 5; i++)
       {
-        
-          if (i>0 && i<10){
            book(sow[i],"sow" + to_string(i));
-           book(_h["0" + to_string(i) + "11"], i, 1, 1);
-          }
-          else {
-           book(sow[i],"sow" + to_string(i));
-           book(_h[to_string(i) + "11"], i, 1, 1);
-          }
-        
+           book(_h["011" + to_string(i)], 1, 1, i);
       }
       
       nEvents.assign(Correlators.size()+1, 0); 
@@ -596,25 +588,19 @@ namespace Rivet {
     void finalize() {
         
         
-       // for(unsigned int i = 1; i <= Correlators.size(); i++)
-       //  {
+        for(unsigned int i = 1; i <= Correlators.size() + 5; i++)
+         {
           
-       //          if(nTriggers[i]>0 && nTriggers[i]<10 && sow[i]->sumW()>0){
-       //          _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-       //          }
-       //          else{                
-       //          _h[to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-       //          }
+                 _h["011" + to_string(i)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
             
-            
-       //  }
+         }
         
       //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
       //do background subtraction ala zyam
       //calculate yields
 
-      //double norm = sumOfWeights() *2.*M_PI;
-      //scale(_h["0111"], 1./norm);
+      /*double norm = sumOfWeights() *2.*M_PI;
+      scale(_h["0111"], 1./norm);*/
 
     }
     
