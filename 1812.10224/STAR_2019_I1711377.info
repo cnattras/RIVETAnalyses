@@ -1,0 +1,34 @@
+Name: STAR_2019_I1711377
+Year: 2019
+Summary: <Centrality and transverse momentum dependence of $D^0$-meson production at mid-rapidity in Au+Au collisions at $\sqrt{s_{NN}}=200$ GeV>
+Experiment: STAR
+Collider: <Insert the collider name>
+InspireID: 1711377
+Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Authors:
+ - Antonio Silva <antonio.silva@cern.ch>, Christal Martin <cbaillar@vols.utk.edu>, Christine Nattrass <cnattras@utk.edu>
+References:
+ - '<Phys. Rev. C 99, 034908 (2019)>'
+ - '<DOI:10.1103/PhysRevC.99.034908>'
+ - '<arXiv:1812.10224>'
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [AU, AU]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=PP,AUAU200
+Description:
+  'We report a new measurement of $D^0$-meson production at mid-rapidity ($|y|<1$) in Au+Au collisions at $\sqrt{s_{NN}} = 200$ GeV utilizing the Heavy Flavor Tracker, a high resolution silicon detector at the STAR experiment. Invariant yields of $D^0$-mesons with transverse momentum $p_T < 9$ GeV/c are reported in various centrality bins ($0-10\%$, $10-20\%$, $20-40\%$, $40-60\%$ and $60-80\%$). Blast-Wave thermal models are used to fit the $D^0$-meson $p_T$ spectra to study $D^0$ hadron kinetic freeze-out properties. The average radial flow velocity extracted from the fit is considerably smaller than that of light hadrons ($\pi$, $K$ and $p$), but comparable to that of hadrons containing multiple strange quarks ($\phi$, $\Xi^-$), indicating that $D^0$ mesons kinetically decouple from the system earlier than light hadrons. The calculated $D^0$ nuclear modification factors re-affirm that charm quarks suffer large amount of energy loss in the medium, similar to those of light quarks for $p_T >4$ GeV/c in central $0-10\%$ Au+Au collisions. At low $p_T$ , the nuclear modification factors show a characteristic structure qualitatively consistent with the expectation from model predictions that charm quarks gain sizable collective motion during the medium evolution. The improved measurements are expected to offer new constraints to model calculations and help gain further insights into the hot and dense medium created in these collisions.'
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: ''
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
