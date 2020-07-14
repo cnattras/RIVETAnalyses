@@ -439,10 +439,10 @@ namespace Rivet {
 
 			hD0Pt["ptyieldspp"]->scaleW(1. / sow["sow_pp"]->sumW());
 
-			//scaling for RAA (NEED Ncoll values)
-			//hRaa["D0_c10_AuAu"]->scaleY(1. / 960.2);
-			//hRaa["D0_c40_AuAu"]->scaleY(1. / 609.5);
-			//hRaa["D0_c80_AuAu"]->scaleY(1. / 300.8);
+			//scaling for RAA 
+			hRaa["D0_c10_AuAu"]->scaleY(1. / 938.8);
+			//hRaa["D0_c40_AuAu"]->scaleY(1. / 609.5); \\ 10-20: 579.9 and 20-40: 288.3
+			//hRaa["D0_c80_AuAu"]->scaleY(1. / 300.8); \\ 40-60: 91.3 and 60-80: 21.3
 
 		}
 
