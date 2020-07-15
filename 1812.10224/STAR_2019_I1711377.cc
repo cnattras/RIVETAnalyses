@@ -44,6 +44,10 @@ namespace Rivet {
 
 			for (int i = 0, N = AUAUCentralityBins.size(); i < N; ++i)
 			{
+
+				//yields (fig 22)_________________
+				book(hD0D0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])], 1, 1, 1 + i);
+
 				//yields (fig 33)_________________
 				book(hD0Pt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])], 6, 1, 1 + i);
 				book(hD0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])], 6, 1, 5 + i);
@@ -58,6 +62,10 @@ namespace Rivet {
 				book(RatioD0barD0["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1);
 
 			}
+
+			//yields (fig 22)_________________
+			book(hD0D0barPt["ptyieldsAuAuc1040"], 1, 1, 6);
+			book(hD0D0barPt["ptyieldsAuAuc4080"], 1, 1, 7);
 
 			//RAA (fig 31)_________________
 			string refname2 = mkAxisCode(5, 1, 1);
@@ -178,6 +186,8 @@ namespace Rivet {
 						switch (p.pid()) {
 						case 421: // D0
 						{
+							hD0D0barPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc1040"]->fill(partPt, pt_weight);
 							hD0Pt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
 							r_D0["AuAuc10"]->fill(partPt);
 							hD0Pt["Raa_c10_AuAu"]->fill(partPt);
@@ -188,6 +198,8 @@ namespace Rivet {
 						}
 						case -421: // D0bar
 						{
+							hD0D0barPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc1040"]->fill(partPt, pt_weight);
 							hD0barPt["ptyieldsAuAuc10"]->fill(partPt, pt_weight);
 							r_D0bar["AuAuc10"]->fill(partPt);
 
@@ -209,6 +221,8 @@ namespace Rivet {
 						switch (p.pid()) {
 						case 421: // D0
 						{
+							hD0D0barPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc1040"]->fill(partPt, pt_weight);
 							hD0Pt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
 							r_D0["AuAuc20"]->fill(partPt);
 							hD0Pt["Raa_c40_AuAu"]->fill(partPt);
@@ -220,6 +234,8 @@ namespace Rivet {
 						}
 						case -421: // D0bar
 						{
+							hD0D0barPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc1040"]->fill(partPt, pt_weight);
 							hD0barPt["ptyieldsAuAuc20"]->fill(partPt, pt_weight);
 							r_D0bar["AuAuc20"]->fill(partPt);
 
@@ -241,6 +257,8 @@ namespace Rivet {
 						switch (p.pid()) {
 						case 421: // D0
 						{
+							hD0D0barPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc1040"]->fill(partPt, pt_weight);
 							hD0Pt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
 							r_D0["AuAuc40"]->fill(partPt);
 							hD0Pt["Raa_c40_AuAu"]->fill(partPt);
@@ -251,6 +269,8 @@ namespace Rivet {
 						}
 						case -421: // D0bar
 						{
+							hD0D0barPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc1040"]->fill(partPt, pt_weight);
 							hD0barPt["ptyieldsAuAuc40"]->fill(partPt, pt_weight);
 							r_D0bar["AuAuc40"]->fill(partPt);
 
@@ -271,6 +291,8 @@ namespace Rivet {
 						switch (p.pid()) {
 						case 421: // D0
 						{
+							hD0D0barPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc4080"]->fill(partPt, pt_weight);
 							hD0Pt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
 							r_D0["AuAuc60"]->fill(partPt);
 							hD0Pt["Raa_c80_AuAu"]->fill(partPt);
@@ -283,6 +305,8 @@ namespace Rivet {
 						}
 						case -421: // D0bar
 						{
+							hD0D0barPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc4080"]->fill(partPt, pt_weight);
 							hD0barPt["ptyieldsAuAuc60"]->fill(partPt, pt_weight);
 							r_D0bar["AuAuc60"]->fill(partPt);
 
@@ -304,6 +328,8 @@ namespace Rivet {
 						switch (p.pid()) {
 						case 421: // D0
 						{
+							hD0D0barPt["ptyieldsAuAuc80"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc4080"]->fill(partPt, pt_weight);
 							hD0Pt["ptyieldsAuAuc80"]->fill(partPt, pt_weight);
 							r_D0["AuAuc80"]->fill(partPt);
 							hD0Pt["Raa_c80_AuAu"]->fill(partPt);
@@ -317,6 +343,8 @@ namespace Rivet {
 						}
 						case -421: // D0bar
 						{
+							hD0D0barPt["ptyieldsAuAuc80"]->fill(partPt, pt_weight);
+							hD0D0barPt["ptyieldsAuAuc4080"]->fill(partPt, pt_weight);
 							hD0barPt["ptyieldsAuAuc80"]->fill(partPt, pt_weight);
 							r_D0bar["AuAuc80"]->fill(partPt);
 
@@ -386,12 +414,17 @@ namespace Rivet {
 			for (int i = 0, N = AUAUCentralityBins.size(); i < N; ++i)
 			{
 				//yields _________________
+				hD0D0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / (2. * sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])])->sumW());
 				hD0Pt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 				hD0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 
 				//Ratio of yields 
 				divide(r_D0bar["AuAuc" + std::to_string(AUAUCentralityBins[i])], r_D0["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioD0barD0["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 			}
+			
+			//yields _________________
+			hD0D0barPt["ptyieldsAuAuc1040"]->scaleW(1. / (2. * sow["sow_AUAUc1040"])->sumW());
+			hD0D0barPt["ptyieldsAuAuc4080"]->scaleW(1. / (2. * sow["sow_AUAUc4080"])->sumW());
 
 			//RAA
 			hD0Pt["Raa_c10_AuAu"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
@@ -446,6 +479,7 @@ namespace Rivet {
 
 		}
 
+		map<string, Histo1DPtr> hD0D0barPt;
 		map<string, Histo1DPtr> hD0Pt;
 		map<string, Histo1DPtr> hD0barPt;
 
