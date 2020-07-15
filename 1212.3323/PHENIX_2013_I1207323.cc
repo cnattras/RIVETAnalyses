@@ -26,12 +26,23 @@ using namespace std;
 namespace Rivet {
 
   class Correlator {
+
+  private:
+
+    int _index;
+    int _subindex;
+    string _collSystemAndEnergy;
+    pair<double,double> _centrality;
+    pair<double,double> _triggerRange;
+    pair<double,double> _associatedRange;
+    pair<double,double> _xiRange;
   
   public:
     
     /// Constructor
-    Correlator(int index) {
+    Correlator(int index, int subindex) {
       _index = index;
+      _subindex = subindex;
     }
 
     void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
@@ -55,6 +66,12 @@ namespace Rivet {
     double GerXiRangeMax(){ return _xiRange.second; }
     
     int GetIndex(){ return _index; }
+    int GetSubIndex(){ return _subindex; }
+    string GetFullIndex()
+    {
+        string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
+        return fullIndex;
+    }
     
     bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
     bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
@@ -98,14 +115,6 @@ namespace Rivet {
         
     }
     
-    int _index;
-    string _collSystemAndEnergy;
-    pair<double,double> _centrality;
-    pair<double,double> _triggerRange;
-    pair<double,double> _associatedRange;
-    pair<double,double> _xiRange; 
-
-  
   };
 
 
@@ -300,7 +309,7 @@ namespace Rivet {
        // Ex.: Correlator c2(2); -> is the correlator for histograms _h["0312"], _h["0412"], etc
         //==================================================
       
-      Correlator c1(1);
+      Correlator c1(1,1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetCentrality(0., 40.);
       c1.SetXiRange(0., 0.4);
@@ -308,7 +317,7 @@ namespace Rivet {
       c1.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c1);
       
-      Correlator c2(2);
+      Correlator c2(1,2);
       c2.SetCollSystemAndEnergy("pp200GeV");
       c2.SetCentrality(0., 40.);
       c2.SetXiRange(0., 0.4);
@@ -316,7 +325,7 @@ namespace Rivet {
       c2.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c2);
       
-      Correlator c3(3);
+      Correlator c3(1,3);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetCentrality(0., 40.);
       c3.SetXiRange(0.4, 0.8);
@@ -324,7 +333,7 @@ namespace Rivet {
       c3.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c3);
       
-      Correlator c4(4);
+      Correlator c4(1,4);
       c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 40.);
       c4.SetXiRange(0.4, 0.8);
@@ -332,7 +341,7 @@ namespace Rivet {
       c4.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c4);
       
-      Correlator c5(5);
+      Correlator c5(1,5);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetCentrality(0., 40.);
       c3.SetXiRange(0.8, 1.2);
@@ -340,7 +349,7 @@ namespace Rivet {
       c3.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c5);
       
-      Correlator c6(6);
+      Correlator c6(1,6);
       c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 40.);
       c4.SetXiRange(0.8, 1.2);
@@ -348,7 +357,7 @@ namespace Rivet {
       c4.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c6);
 
-      Correlator c7(7);
+      Correlator c7(1,7);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetCentrality(0., 40.);
       c1.SetXiRange(1.2, 1.6);
@@ -356,7 +365,7 @@ namespace Rivet {
       c1.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c7);
       
-      Correlator c8(8);
+      Correlator c8(1,8);
       c2.SetCollSystemAndEnergy("pp200GeV");
       c2.SetCentrality(0., 40.);
       c2.SetXiRange(1.2, 1.6);
@@ -364,7 +373,7 @@ namespace Rivet {
       c2.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c8);
       
-      Correlator c9(9);
+      Correlator c9(1,9);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetCentrality(0., 40.);
       c3.SetXiRange(1.6, 2.0);
@@ -372,7 +381,7 @@ namespace Rivet {
       c3.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c9);
       
-      Correlator c10(10);
+      Correlator c10(1,10);
       c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 40.);
       c4.SetXiRange(1.6, 2.0);
@@ -380,7 +389,7 @@ namespace Rivet {
       c4.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c10);
       
-      Correlator c11(11);
+      Correlator c11(1,11);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetCentrality(0., 40.);
       c3.SetXiRange(2.0, 2.4);
@@ -388,7 +397,7 @@ namespace Rivet {
       c3.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c11);
       
-      Correlator c12(12);
+      Correlator c12(1,12);
       c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 40.);
       c4.SetXiRange(2.0, 2.4);
@@ -396,7 +405,7 @@ namespace Rivet {
       c4.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c12);
 
-      Correlator c13(13);
+      Correlator c13(1,13);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetCentrality(0., 40.);
       c3.SetXiRange(0.2, 2.2);
@@ -404,7 +413,7 @@ namespace Rivet {
       c3.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c13);
       
-      Correlator c14(14);
+      Correlator c14(1,14);
       c4.SetCollSystemAndEnergy("pp200GeV");
       c4.SetCentrality(0., 40.);
       c4.SetXiRange(0.2, 2.2);
@@ -457,24 +466,22 @@ namespace Rivet {
       // //Don't know 
       // book(_h["2011"], 20, 1, 1);
 
-      for(unsigned int i = 1; i<= Correlators.size(); i++)
+      for(Correlator& corr : Correlators)
       {
-        
-          if (i>0 && i<10){
-           book(sow[i],"sow" + to_string(i));
-           book(_h["0" + to_string(i) + "11"], i, 1, 1);
+        book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
+        book(_h["011" + to_string(corr.GetSubIndex())], 1, 1, corr.GetSubIndex());
+
+        string refname = mkAxisCode(1, 1, corr.GetSubIndex());
+          const Histo1D& refdata = refData(refname);
+          for(auto &bin : refdata.bins())
+          {
+              book(_DeltaPhixi["011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, 0, M_PI);          
           }
-          else {
-           book(sow[i],"sow" + to_string(i));
-           book(_h[to_string(i) + "11"], i, 1, 1);
-          }
-        
+          nTriggers[corr.GetFullIndex()] = 0;
       }
       
-      nEvents.assign(Correlators.size()+1, 0); 
-      nTriggers.assign(Correlators.size()+1, 0); 
 
-    }
+    } // End of init
 
 
     /// Perform the per-event analysis
@@ -531,8 +538,8 @@ namespace Rivet {
         if(!corr.CheckCentrality(centr)) continue;
         
         //If event is accepted for the correlator, fill event weights
-        sow[corr.GetIndex()]->fill();
-        nEvents[corr.GetIndex()]++;
+        //sow[corr.GetIndex()]->fill();
+        //nEvents[corr.GetIndex()]++;
         
         isVeto = false;
         
@@ -559,7 +566,7 @@ namespace Rivet {
             for(Correlator& corr : Correlators)
             {
                 if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
-                nTriggers[corr.GetIndex()]++;
+                //nTriggers[corr.GetIndex()]++;
             }
 
             for(const Particle& pAssoc : cfs.particles()) {
@@ -593,40 +600,36 @@ namespace Rivet {
 
 
     /// Normalise histograms etc., after the run
-    void finalize() {
+    /*void finalize() {
         
         
-       // for(unsigned int i = 1; i <= Correlators.size(); i++)
-       //  {
+        for(unsigned int i = 1; i <= Correlators.size() + 5; i++)
+         {
           
-       //          if(nTriggers[i]>0 && nTriggers[i]<10 && sow[i]->sumW()>0){
-       //          _h["0" + to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-       //          }
-       //          else{                
-       //          _h[to_string(i) + "11"]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-       //          }
+                 _h["011" + to_string(i)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
             
-            
-       //  }
+         }
         
       //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
       //do background subtraction ala zyam
       //calculate yields
 
-      //double norm = sumOfWeights() *2.*M_PI;
-      //scale(_h["0111"], 1./norm);
+      double norm = sumOfWeights() *2.*M_PI;
+      scale(_h["0111"], 1./norm);
 
-    }
+    }*/
     
     // Histograms and variables
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    
-    map<int, CounterPtr> sow;
+    map<string, Histo1DPtr> _DeltaPhi;
+    map<string, Histo1DPtr> _DeltaPhixi;
+    map<int, Histo1DPtr> _DeltaPhiSub;
+    map<string, CounterPtr> sow;
     bool fillTrigger = true;
-    vector<int> nTriggers;
-    vector<int> nEvents;
+    map<string, int> nTriggers;
+    //vector<int> nEvents;
     vector<Correlator> Correlators;
 
    };
