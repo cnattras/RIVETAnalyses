@@ -1,49 +1,49 @@
-BEGIN PLOT /STAR_2016_I1442357/d01-x01-y01
-Title= comment: |  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+BEGIN PLOT /ALICE_2013_I1222333/d01-x01-y01
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d02-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d03-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d04-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d05-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d06-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d07-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d08-x01-y01
-Title= keywords:  
-XLabel=Delta_phi(rad)}
-YLabel=pertriggerYields(rad^-1)},   
+Title=   
+XLabel=DeltaPhi
+YLabel=Entries   
 END PLOT
 
 BEGIN PLOT /STAR_2016_I1442357/d09-x01-y01

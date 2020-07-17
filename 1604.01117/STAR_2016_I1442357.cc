@@ -15,31 +15,33 @@
 
 using namespace std;
 namespace Rivet {
-   //------------------------------------------------------------------------------------------------------------------------ 
-    class Correlator {
-
-  
     
- 
-  public:
-  int _index;
-      int _subindex;
+   //------------------------------------------------------------------------------------------------------------------------ 
+  class Correlator {
+      
+    private:
+    
+      int _index;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
-      vector<int> _pid; 
-    /// Constructor
+      vector<int> _pid;
+      bool _noCentrality = false;
+  
+    public:
+    
+      /// Constructor
+      Correlator(int index) {
+          _index = index;
+      }
 
-    Correlator(int index) {
-      _index = index;
-    }
-
-    void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
-    void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
-    void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
-    void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
-    void SetPID(std::initializer_list<int> pid){ _pid = pid; }
+      void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
+      void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
+      void SetNoCentrality(){ _noCentrality = true; }
+      void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
+      void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
+      void SetPID(std::initializer_list<int> pid){ _pid = pid; }
     
     string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
     pair<double,double> GetCentrality(){ return _centrality; }
@@ -55,12 +57,31 @@ namespace Rivet {
     int GetIndex(){ return _index; }
     
     bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
-    bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
+    bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
     bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
     bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second) ? true : false; }
     bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
+    bool CheckPID(std::initializer_list<int> pid)
+    {
+        bool inList = false;
+          
+        for(int id : pid)
+        {
+            auto it = std::find(_pid.begin(), _pid.end(), id);
+              
+            if(it != _pid.end())
+            {
+                inList = true;
+                break;
+            }
+        }
+          
+        return inList;
+          
+    }
+    
+    
     bool CheckConditions(string s, double cent, double tpt, double apt)
-
     {
         if(!CheckConditions(s, cent, tpt)) return false;
         if(!CheckAssociatedRange(apt)) return false;
@@ -103,21 +124,6 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2016_I1442357);
-
- //Histograms and variables
-
-    map<string, Histo1DPtr> _h;
-    map<int, CounterPtr> sow;
-    map<int, Histo1DPtr> _DeltaPhi;
-    map<int, Histo1DPtr> _DeltaEta;
-    map<int, Histo1DPtr> _DeltaPhiSub;
-    bool fillTrigger = true;
-    vector<int> nTriggers;
-    vector<int> nEvents;
-    vector<Correlator> Correlators;
-
-
-
 
 
  bool isSameParticle(const Particle& p1, const Particle& p2)
@@ -276,6 +282,41 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
         return integral;
         
     }
+    
+    double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+    {
+        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                    
+        if(dPhi < -M_PI/2.)
+        {
+            dPhi += 2.*M_PI;
+        }
+        else if(dPhi > 3.*M_PI/2.)
+        {
+            dPhi -= 2*M_PI;
+        }
+                    
+        return dPhi;            
+        
+    }
+    
+    bool FindHistoZT(YODA::Histo1D hist, double zT, string &histoID)
+    {
+                
+        for(auto &bin : hist.bins())
+        {
+            if(zT < bin.xMin() || zT > bin.xMax()) continue;
+            else
+            {
+                histoID += to_string(bin.xMin()) + "_" + to_string(bin.xMax());
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
 
 
     /// Book histograms and initialise projections before the run
@@ -291,6 +332,18 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       declare(pfsTrig, "PFSTrig");
       // pi0 also
       
+      const PrimaryParticles primp(pdgPi0, Cuts::abseta < 1.);
+      declare(primp, "PP");
+        
+      const PromptFinalState pfs(Cuts::abseta < 1. && Cuts::pid == 22);
+      declare(pfs, "PFS");
+      
+      beamOpt = getOption<string>("beam","NONE");
+
+
+      if(beamOpt=="PP") collSys = pp;
+      else if(beamOpt=="AUAU") collSys = AuAu;
+      
 
 
       // Declare centrality projection
@@ -303,309 +356,146 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       // Ex.: Correlator c1(1); -> is the correlator for histograms _h["0311"], _h["0411"], etc
       // Ex.: Correlator c2(2); -> is the correlator for histograms _h["0312"], _h["0412"], etc
        //==================================================
-/*
-	Old correlators 
-
-      Correlator c1(1); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.1, 0.2); // zT
-      Correlators.push_back(c1);
-
-      Correlator c2(2); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.2, 0.3); // zT
-      Correlators.push_back(c2);
-
-      Correlator c3(3); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.3, 0.4); // zT
-      Correlators.push_back(c3);
-
-      Correlator c4(4); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.4, 0.5); // zT
-      Correlators.push_back(c4);
-
-      Correlator c5(5); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.5, 0.6); // zT
-      Correlators.push_back(c5);
-
-      Correlator c6(6); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.6, 0.7); // zT
-      Correlators.push_back(c6);
-      
-      Correlator c7(7); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.7, 0.8); // zT
-      Correlators.push_back(c7);
-
-      Correlator c8(8); 
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0., 12.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.8, 0.9); // zT
-      Correlators.push_back(c8);
-// pp
-      Correlator c9(9); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.1, 0.2); // zT
-      Correlators.push_back(c9);
-
-      Correlator c10(10); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.2, 0.3); // zT
-      Correlators.push_back(c10);
-
-      Correlator c11(11); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.3, 0.4); // zT
-      Correlators.push_back(c11);
-
-      Correlator c12(12); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.4, 0.5); // zT
-      Correlators.push_back(c12);
-
-      Correlator c13(13); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.5, 0.6); // zT
-      Correlators.push_back(c13);
-
-      Correlator c14(14); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.6, 0.7); // zT
-      Correlators.push_back(c14);
-      
-      Correlator c15(15); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.7, 0.8); // zT
-      Correlators.push_back(c15);
-
-      Correlator c16(16); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.8, 0.9); // zT
-      Correlators.push_back(c16);
-
-      Correlator c17(17); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.10, 0.18); // zT
-      Correlators.push_back(c17);
-
-      Correlator c18(18); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.18, 0.20); // zT
-      Correlators.push_back(c18);
-
-      Correlator c19(19); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.20, 0.30); // zT
-      Correlators.push_back(c19);
-
-      Correlator c20(20); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.30, 0.40); // zT
-      Correlators.push_back(c20);
-      
-      Correlator c21(21); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.40, 0.50); // zT
-      Correlators.push_back(c21);
-
-      Correlator c22(22); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.50, 0.59); // zT
-      Correlators.push_back(c22);
-
-      Correlator c23(23); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.59, 0.65); // zT
-      Correlators.push_back(c23);
-
-      Correlator c24(24); 
-      c1.SetCollSystemAndEnergy("pp200GeV");
-      c1.SetCentrality(0., 100.);
-      c1.SetTriggerRange(12., 20.);  //pT_trig
-      c1.SetAssociatedRange(0.65, 0.70); // zT
-      Correlators.push_back(c24);
-*/
-	initializer_list<int> pdgGamma={1};
-    initializer_list<int> pdgPi0={2};
-    initializer_list<int> pdgAu={3};
-    initializer_list<int> pdgProton={4};
-    initializer_list<int> pdgPhoton={5};
-    initializer_list<int> pdgTrig={6};
-    initializer_list<int> pdgAssoc={7};
-    initializer_list<int> pdgpp={8};
 
     
-    Correlator c1(1);
-	c1.SetCollSystemAndEnergy("AuAu200GeV");
-	c1.SetCentrality(0., 12.);
-	c1.SetTriggerRange(12., 20.);  //pT_trig
-	c1.SetAssociatedRange(1.2, 3.); // zT
-	c1.SetPID(pdgGamma);
-	Correlators.push_back(c1);
+    Correlator b1(1);
+	b1.SetCollSystemAndEnergy("AuAu200GeV");
+	b1.SetCentrality(0., 12.);
+	b1.SetTriggerRange(1., 20.);  //pT_trig
+	b1.SetAssociatedRange(1.2, 3.); // zT
+	b1.SetPID(pdgPhoton);
+	CorrelatorsB.push_back(b1);
 
-	Correlator c2(2);
-        c2.SetCollSystemAndEnergy("AuAu200GeV");
-        c2.SetCentrality(0., 12.);
-        c2.SetTriggerRange(12., 20.);  //pT_trig
-        c2.SetAssociatedRange(1.2, 3.); // zT
-        c2.SetPID(pdgPi0);
-        Correlators.push_back(c2);
+	Correlator b2(2);
+    b2.SetCollSystemAndEnergy("AuAu200GeV");
+    b2.SetCentrality(0., 12.);
+    b2.SetTriggerRange(1., 20.);  //pT_trig
+    b2.SetAssociatedRange(1.2, 3.); // zT
+    b2.SetPID(pdgPi0);
+    CorrelatorsB.push_back(b2);
 
-	Correlator c3(3);
-        c3.SetCollSystemAndEnergy("AuAu200GeV");
-        c3.SetCentrality(0., 12.);
-        c3.SetTriggerRange(12., 20.);  //pT_trig
-        c3.SetAssociatedRange(3., 5.); // zT
-        c3.SetPID(pdgGamma);
-        Correlators.push_back(c3);
+	Correlator b3(3);
+    b3.SetCollSystemAndEnergy("AuAu200GeV");
+    b3.SetCentrality(0., 12.);
+    b3.SetTriggerRange(1., 20.);  //pT_trig
+    b3.SetAssociatedRange(3., 5.); // zT
+    b3.SetPID(pdgPhoton);
+    CorrelatorsB.push_back(b3);
 
-	Correlator c4(4);
-        c4.SetCollSystemAndEnergy("AuAu200GeV");
-        c4.SetCentrality(0., 12.);
-        c4.SetTriggerRange(12., 20.);  //pT_trig
-        c4.SetAssociatedRange(3., 5.); // zT
-        c4.SetPID(pdgPi0);
-        Correlators.push_back(c4);
+	Correlator b4(4);
+    b4.SetCollSystemAndEnergy("AuAu200GeV");
+    b4.SetCentrality(0., 12.);
+    b4.SetTriggerRange(1., 20.);  //pT_trig
+    b4.SetAssociatedRange(3., 5.); // zT
+    b4.SetPID(pdgPi0);
+    CorrelatorsB.push_back(b4);
 
-	Correlator c5(5);
-        c5.SetCollSystemAndEnergy("pp200GeV");
-        c5.SetCentrality(0., 100.);
-        c5.SetTriggerRange(12., 20.);  //pT_trig
-        c5.SetAssociatedRange(1.2, 3.); // zT
-        c5.SetPID(pdgGamma);
-        Correlators.push_back(c5);
+	Correlator b5(5);
+    b5.SetCollSystemAndEnergy("pp200GeV");
+    b5.SetNoCentrality();
+    b5.SetTriggerRange(1., 20.);  //pT_trig
+    b5.SetAssociatedRange(1.2, 3.); // zT
+    b5.SetPID(pdgPhoton);
+    CorrelatorsB.push_back(b5);
 
-	Correlator c6(6);
-        c6.SetCollSystemAndEnergy("pp200GeV");
-        c6.SetCentrality(0., 100.);
-        c6.SetTriggerRange(12., 20.);  //pT_trig
-        c6.SetAssociatedRange(1.2, 3.); // zT
-        c6.SetPID(pdgPi0);
-        Correlators.push_back(c6);
+	Correlator b6(6);
+    b6.SetCollSystemAndEnergy("pp200GeV");
+    b6.SetNoCentrality();
+    b6.SetTriggerRange(1., 20.);  //pT_trig
+    b6.SetAssociatedRange(1.2, 3.); // zT
+    b6.SetPID(pdgPi0);
+    CorrelatorsB.push_back(b6);
 
-	Correlator c7(7);
-        c7.SetCollSystemAndEnergy("pp200GeV");
-        c7.SetCentrality(0., 100.);
-        c7.SetTriggerRange(12., 20.);  //pT_trig
-        c7.SetAssociatedRange(3., 5.); // zT
-        c7.SetPID(pdgGamma);
-        Correlators.push_back(c7);
+	Correlator b7(7);
+    b7.SetCollSystemAndEnergy("pp200GeV");
+    b7.SetNoCentrality();
+    b7.SetTriggerRange(1., 20.);  //pT_trig
+    b7.SetAssociatedRange(3., 5.); // zT
+    b7.SetPID(pdgPhoton);
+    CorrelatorsB.push_back(b7);
 
-	Correlator c8(8);
-        c8.SetCollSystemAndEnergy("pp200GeV");
-        c8.SetCentrality(0., 100.);
-        c8.SetTriggerRange(12., 20.);  //pT_trig
-        c8.SetAssociatedRange(3., 5.); // zT
-        c8.SetPID(pdgPi0);
-        Correlators.push_back(c8);
+	Correlator b8(8);
+    b8.SetCollSystemAndEnergy("pp200GeV");
+    b8.SetNoCentrality();
+    b8.SetTriggerRange(1., 20.);  //pT_trig
+    b8.SetAssociatedRange(3., 5.); // zT
+    b8.SetPID(pdgPi0);
+    CorrelatorsB.push_back(b8);
+    
+    //This will book the histograms of figure 1
+    for(Correlator& corr : CorrelatorsB)
+	{
+        book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1);
+        book(sow[corr.GetIndex()],"sow" + to_string(corr.GetIndex()));
+        nTriggers[corr.GetIndex()] = 0;
+    }
+    
 
 	Correlator c9(9);	//11,1 & 13,1 are the same
-        c9.SetCollSystemAndEnergy("AuAu200GeV");
-        c9.SetCentrality(0., 12.);
-        c9.SetTriggerRange(12., 20.);  //pT_trig
-        c9.SetAssociatedRange(1.2, 100.); // zT
-        c9.SetPID(pdgAu);
-        Correlators.push_back(c9);
+    c9.SetCollSystemAndEnergy("AuAu200GeV");
+    c9.SetCentrality(0., 12.);
+    c9.SetTriggerRange(1., 20.);  //pT_trig
+    c9.SetAssociatedRange(1.2, 999.); // zT
+    c9.SetPID(pdgPi0);
+    CorrelatorsPi0.push_back(c9);
 
 	Correlator c10(10);	//12,1 & 14,1 are the same
-        c10.SetCollSystemAndEnergy("pp200GeV");
-        c10.SetCentrality(0., 100.);
-        c10.SetTriggerRange(12., 20.);  //pT_trig
-        c10.SetAssociatedRange(1.2, 100.); // zT
-        c10.SetPID(pdgpp);
-        Correlators.push_back(c10);
+    c10.SetCollSystemAndEnergy("pp200GeV");
+    c10.SetNoCentrality();
+    c10.SetTriggerRange(1., 20.);  //pT_trig
+    c10.SetAssociatedRange(1.2, 999.); // zT
+    c10.SetPID(pdgPi0);
+    CorrelatorsPi0.push_back(c10);
+    
+    for(Correlator& corr : CorrelatorsPi0)
+	{
+        book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1);
+        book(_h["0" + to_string(corr.GetIndex()+2) + "11"], corr.GetIndex(), 1, 1);
+        
+        string refname = mkAxisCode(corr.GetIndex(), 1, 1);
+        const Histo1D& refdata = refData(refname);
+        for(auto &bin : refdata.bins())
+        {
+            book(_DeltaPhizT["0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, -M_PI/2., 3.*M_PI/2.);
+        }
+        
+        book(sow[corr.GetIndex()],"sow" + to_string(corr.GetIndex()));
+        nTriggers[corr.GetIndex()] = 0;
+    }
 	
-	Correlator c11(11);
-	c11.SetCollSystemAndEnergy("pp200GeV");
-        c11.SetCentrality(0., 100.);
-        c11.SetTriggerRange(12., 20.);  //pT_trig
-        c11.SetAssociatedRange(1.2, 100.); // zT
-        c11.SetPID(pdgProton);
-        Correlators.push_back(c11);
+	Correlator c11(13);
+	c11.SetCollSystemAndEnergy("AuAu200GeV");
+    c11.SetCentrality(0., 12.);
+    c11.SetTriggerRange(1., 20.);  //pT_trig
+    c11.SetAssociatedRange(1.2, 999.); // zT
+    c11.SetPID(pdgPhoton);
+    CorrelatorsPhoton.push_back(c11);
 
-	Correlator c12(12);	//18,1 is the same
-        c12.SetCollSystemAndEnergy("AuAu200GeV");
-        c12.SetCentrality(0., 12.);
-        c12.SetTriggerRange(12., 20.);  //pT_trig
-        c12.SetAssociatedRange(1.2, 100.); // zT
-        c12.SetPID(pdgPhoton);
-        Correlators.push_back(c12);
-
-	Correlator c13(13);	//19,1 is the same
-        c13.SetCollSystemAndEnergy("AuAu200GeV");
-        c13.SetCentrality(0., 12.);
-        c13.SetTriggerRange(12., 20.);  //pT_trig
-        c13.SetAssociatedRange(1.2, 100.); // zT
-        c13.SetPID(pdgPi0);
-        Correlators.push_back(c13);
-
-	Correlator c14(14);	
-        c14.SetCollSystemAndEnergy("AuAu200GeV");
-        c14.SetCentrality(0., 12.);
-        c14.SetTriggerRange(12., 20.);  //pT_trig
-        c14.SetAssociatedRange(1.2, 100.); // zT
-        c14.SetPID(pdgTrig);
-        Correlators.push_back(c14);
-
-	Correlator c15(15);
-        c15.SetCollSystemAndEnergy("Au200GeV");
-        c15.SetCentrality(0., 12.);
-        c15.SetTriggerRange(12., 20.);  //pT_trig
-        c15.SetAssociatedRange(1.2, 100.); // zT
-        c15.SetPID(pdgAssoc);
-        Correlators.push_back(c15);
+	Correlator c12(14);	//18,1 is the same
+    c12.SetCollSystemAndEnergy("pp200GeV");
+    c12.SetNoCentrality();
+    c12.SetTriggerRange(1., 20.);  //pT_trig
+    c12.SetAssociatedRange(1.2, 999.); // zT
+    c12.SetPID(pdgPhoton);
+    CorrelatorsPhoton.push_back(c12);
+    
+    for(Correlator& corr : CorrelatorsPhoton)
+	{
+        book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1);
+        
+        string refname = mkAxisCode(corr.GetIndex(), 1, 1);
+        const Histo1D& refdata = refData(refname);
+        for(auto &bin : refdata.bins())
+        {
+            book(_DeltaPhizT["0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, -M_PI/2., 3.*M_PI/2);
+        }
+        
+        book(sow[corr.GetIndex()],"sow" + to_string(corr.GetIndex()));
+        nTriggers[corr.GetIndex()] = 0;
+    }
 
 
-
+    /*
 	for(Correlator& corr : Correlators)
 	{	
 		//book(sow[corr.GetIndex()],"sow" + corr.GetIndex());
@@ -641,6 +531,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
 		}
 
 	}
+	*/
 /* Old Booking
 
       for(unsigned int i = 1; i<= Correlators.size(); i++)
@@ -730,17 +621,23 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+        
 
-        cout<<"We are analyzing"<<endl; // NEW 7/15/20
+        //cout<<"We are analyzing"<<endl; // NEW 7/15/20
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       const PromptFinalState& pfsTrig = apply<PromptFinalState>(event, "PFSTrig");
       const ChargedFinalState& cfsTrig = apply<ChargedFinalState>(event, "CFSTrig");
+      
+      const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
+      const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
 
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
       //==================================================
+      
+      /*
       double nNucleons = 0.;
       string CollSystem = "Empty";
       const ParticlePair& beam = beams();
@@ -761,71 +658,93 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       string cmsEnergy = "Empty";
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
       if(cmsEnergy.compare("Empty") == 0) return;
+      */
       
-      string SysAndEnergy = CollSystem + cmsEnergy;
+      
+      
+      if(collSys == pp) SysAndEnergy = "pp200GeV";
+      else if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
+      
 
 
       /// DO NOT MESS WITH THIS
       // Prepare centrality projection and value
       const CentralityProjection& centrProj = apply<CentralityProjection>(event, "CMULT");
       double centr = centrProj();
-
+      
+      //cout<<"We are analyzing  2"<<endl;
+      
       // Veto event for too large centralities since those are not used in the analysis at all
       if ((centr < 0.) || (centr > 12.)){
         vetoEvent;
       }
     
 
-    double triggerptMin = 999.;
-    double triggerptMax = -999.;
-    double associatedptMin = 999.;
-    double associatedptMax = -999.;
+    double triggerptMin = 1.;
+    double triggerptMax = 20.;
+    double associatedptMin = 1.2;
+    double associatedptMax = 999.;
 
     bool isVeto = true;
-
-
-     for(Correlator& corr : Correlators)
+    
+    for(Correlator& corr : CorrelatorsB)
     {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
         if(!corr.CheckCentrality(centr)) continue;
         
-        //If event is accepted for the correlator, fill event weights
         sow[corr.GetIndex()]->fill();
-        nEvents[corr.GetIndex()]++;
         
         isVeto = false;
-        
-        //Check min and max of the trigger and associated particles in order to speed up the particle loops
-        if(corr.GetTriggerRangeMin() < triggerptMin) triggerptMin = corr.GetTriggerRangeMin();
-        if(corr.GetTriggerRangeMax() > triggerptMax) triggerptMax = corr.GetTriggerRangeMax();
-        
-        if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
-        if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
     }
-
-    if(isVeto) vetoEvent;
-
     
+    for(Correlator& corr : CorrelatorsPi0)
+    {
+        if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+        if(!corr.CheckCentrality(centr)) continue;
+        
+        sow[corr.GetIndex()]->fill();
+        
+        isVeto = false;
+    }
+    
+    for(Correlator& corr : CorrelatorsPhoton)
+    {
+        if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+        if(!corr.CheckCentrality(centr)) continue;
+        
+        sow[corr.GetIndex()]->fill();
+        
+        isVeto = false;
+    }
+    
+    if(isVeto) vetoEvent;
+    
+    //PHOTON
     // loop over charged final state particles
-      for(const Particle& pTrig : cfsTrig.particles()) {
-
-         if(pTrig.pt()/GeV < triggerptMin || pTrig.pt()/GeV > triggerptMax) continue;
-
-          //Check if is secondary
-          if(isSecondary(pTrig)) continue;
-          
-      if( abs(pTrig.pid())==211 || abs(pTrig.pid())==2212 || abs(pTrig.pid())==321){
-
-            for(Correlator& corr : Correlators)
+    for(const Particle& pTrig : pfsTrigPhotons.particles()) {
+        
+        if(pTrig.pt()/GeV < triggerptMin || pTrig.pt()/GeV > triggerptMax) continue;
+        
+        //Check if is secondary
+        if(isSecondary(pTrig)) continue;
+                      
+            for(Correlator& corr : CorrelatorsB)
+            {
+                if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                if(!corr.CheckPID(pdgPhoton)) continue;
+                nTriggers[corr.GetIndex()]++;
+            }
+            
+            for(Correlator& corr : CorrelatorsPhoton)
             {
                 if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
                 nTriggers[corr.GetIndex()]++;
             }
 
-        for(const Particle& pAssoc : cfs.particles()) {
+            for(const Particle& pAssoc : cfs.particles()) {
                 
-                cout<<"z_T is "<<pAssoc.pt()/pTrig.pt()<<endl;   // NEW 7/15/20
-                if(pAssoc.pt()/GeV < associatedptMin || pAssoc.pt()/GeV > pTrig.pt()/GeV) continue;
+                //cout<<"z_T is "<<pAssoc.pt()/pTrig.pt()<<endl;   // NEW 7/15/20
+                if(pAssoc.pt()/GeV < associatedptMin || pAssoc.pt()/GeV > associatedptMax) continue;
                 
                 //Check if Trigger and Associated are the same particle
                 if(isSameParticle(pTrig,pAssoc)) continue;
@@ -833,36 +752,118 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
                 //Check if is secondary
                 if(isSecondary(pAssoc)) continue;
                 
-        if( abs(pAssoc.pid())==211 || abs(pAssoc.pid())==2212 || abs(pAssoc.pid())==321){
-          //int mybin = GetTrigBin(pTrig.pt());
-          //int mybina = GetAssocBin(pAssoc.pt());
-
-          //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
-          double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
-          
-                for(Correlator& corr : Correlators)
+                double dPhi = GetDeltaPhi(pTrig, pAssoc);
+                
+                for(Correlator& corr : CorrelatorsB)
                 {
-                    if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
-                    
-                    //double etaCorrection = EtaEffCorrection(abs(dEta), *_DeltaEta[corr.GetIndex()]);
+                    if(!corr.CheckPID(pdgPhoton)) continue;
+                    if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
                 
-                        _h["0" + to_string(corr.GetIndex()) + "11"]->fill(-abs(dPhi),0.5); 
-                        //_DeltaPhi[corr.GetIndex()]->fill(abs(dPhi), 0.5/etaCorrection);
-                        //_DeltaPhiSub[corr.GetIndex()]->fill(abs(dPhi), 0.5/etaCorrection);
-                    
-                } //end of correlators loop 
-                
-        } // associated hadrons
-        } // end of loop over associated particles
-      } // trigger hadrons
-      } // particle loop
+                    if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                        
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(dPhi);                    
+                }
 
-      }
+                for(Correlator& corr : CorrelatorsPhoton)
+                {
+                    if(!corr.CheckPID(pdgPhoton)) continue;
+                    if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
+                    if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                
+                    double zT = pAssoc.pT()/pTrig.pT();
+                    string histoID = "zT_";
+                    if(!FindHistoZT(*_h["0" + to_string(corr.GetIndex()) + "11"], zT, histoID)) continue;
+                    _DeltaPhizT["0" + to_string(corr.GetIndex()) + "11" + histoID]->fill(dPhi);
+                    
+                }
+                
+                
+            } // end of loop over associated particles
+      } // particle loop
+        
+    //PI0
+    // loop over charged final state particles
+    for(const Particle& pTrig : ppTrigPi0.particles()) {
+        
+        if(pTrig.pt()/GeV < triggerptMin || pTrig.pt()/GeV > triggerptMax) continue;
+
+        //cout << "pT_trigeer: " << pTrig.pt()/GeV << endl;
+        
+        //Check if is secondary
+        if(isSecondary(pTrig)) continue;
+                      
+            for(Correlator& corr : CorrelatorsB)
+            {
+                if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                if(!corr.CheckPID(pdgPi0)) continue;
+                nTriggers[corr.GetIndex()]++;
+            }
+            
+            for(Correlator& corr : CorrelatorsPi0)
+            {
+                if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                nTriggers[corr.GetIndex()]++;
+            }
+            
+
+            for(const Particle& pAssoc : cfs.particles()) {
+                
+                //cout<<"z_T is "<<pAssoc.pt()/pTrig.pt()<<endl;   // NEW 7/15/20
+                if(pAssoc.pt()/GeV < associatedptMin || pAssoc.pt()/GeV > associatedptMax) continue;
+                
+                //Check if Trigger and Associated are the same particle
+                if(isSameParticle(pTrig,pAssoc)) continue;
+                
+                //Check if is secondary
+                if(isSecondary(pAssoc)) continue;
+                
+                double dPhi = GetDeltaPhi(pTrig, pAssoc);
+                
+                for(Correlator& corr : CorrelatorsB)
+                {
+                    if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                    if(!corr.CheckPID(pdgPi0)) continue;
+                    if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
+                        
+                    _h["0" + to_string(corr.GetIndex()) + "11"]->fill(dPhi);
+                }
+                
+                for(Correlator& corr : CorrelatorsPi0)
+                {
+                    if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
+                    if(!corr.CheckPID(pdgPi0)) continue;
+                    if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
+                
+                    double zT = pAssoc.pT()/pTrig.pT();
+                    string histoID = "zT_";
+                    if(!FindHistoZT(*_h["0" + to_string(corr.GetIndex()) + "11"], zT, histoID)) continue;
+                    _DeltaPhizT["0" + to_string(corr.GetIndex()) + "11" + histoID]->fill(dPhi);
+                }
+                
+                
+            } // end of loop over associated particles
+      } // particle loop
+        
+        
+        
+        
+        
+        
+        
+    }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
         
+        for(Correlator& corr : CorrelatorsB)
+        {
+            cout << "Entries: " << sow[corr.GetIndex()]->numEntries() << " Triggers: " <<  nTriggers[corr.GetIndex()] << endl;
+            _h["0" + to_string(corr.GetIndex()) + "11"]->scaleW(sow[corr.GetIndex()]->numEntries()/(nTriggers[corr.GetIndex()]*sow[corr.GetIndex()]->sumW()));
+        }
+        
+        
+        /*
         for(unsigned int i = 1; i <= Correlators.size(); i++)
         {
             if(nTriggers[i] > 0)
@@ -877,14 +878,31 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
                // SubtractBackground(*_DeltaPhi[i], *_DeltaPhiSub[i], n, 0.63, 2.51);
             }    
         }
-        
+        */
       //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
       //do background subtraction ala zyam
       //calculate yields
 
     } //end void finalize
+    
+    //Histograms and variables
+
+    map<string, Histo1DPtr> _h;
+    map<int, CounterPtr> sow;
+    map<string, Histo1DPtr> _DeltaPhizT;
+    map<int, Histo1DPtr> _DeltaPhi;
+    map<int, int> nTriggers;
+    vector<Correlator> CorrelatorsPi0;
+    vector<Correlator> CorrelatorsPhoton;
+    vector<Correlator> CorrelatorsB;
+    
+    initializer_list<int> pdgPi0={111, -111};
+    initializer_list<int> pdgPhoton={22};
+    enum CollisionSystem {pp, AuAu};
+    CollisionSystem collSys;
+    string SysAndEnergy = "";
+    string beamOpt;
 
 };
   DECLARE_RIVET_PLUGIN(STAR_2016_I1442357);
 }
-

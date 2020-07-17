@@ -17,7 +17,7 @@ RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP,AUAU200
+ - beam=PP,AUAU
 Description:
   '<A fairly long description, including what is measured
   and if possible what it is useful for in terms of MC validation
