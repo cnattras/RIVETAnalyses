@@ -279,6 +279,81 @@ namespace Rivet {
         
     }
 
+    //vmin is included in the integral, but vmax is not. Range = [vmin, vmax[
+    //Give the min and max values to calculate the integral
+    double GetYieldInUserRange(YODA::Histo1D& hist, double vmin, double vmax, double &n)
+    {        
+        double integral = 0.;
+        double entries = 0.;
+        
+        if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+                
+        int bmin = hist.binIndexAt(vmin);
+        int bmax = hist.binIndexAt(vmax);
+        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+            entries += hist.bin(i).numEntries();
+        }
+        
+        n = entries;
+        
+        return integral;
+        
+    }
+    
+    double GetYieldInUserRangeZYAM(YODA::Histo1D& hist, double vmin, double vmax, double &n)
+    {        
+        double integral = 0.;
+        double entries = 0.;
+        
+        if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+                
+        int bmin = hist.binIndexAt(vmin);
+        int bmax = hist.binIndexAt(vmax);
+        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        
+        double nbins = 0.;
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+            entries += hist.bin(i).numEntries();
+            nbins += 1.;
+        }
+        
+        n = entries;
+        
+        double minValue = sqrt(-2);
+        
+        for(auto &bin : hist.bins())
+        {
+            if(std::isnan(minValue)) minValue = bin.sumW();
+            if(bin.sumW() < minValue) minValue = bin.sumW();
+        }
+        
+        if(std::isnan(minValue))
+        {
+            MSG_ERROR("Not possible to apply ZYAM! Returning integral without underlying event subtraction!");
+            return integral;
+        }
+                
+        integral -= nbins*minValue;
+        
+        return integral;
+        
+    }
+
     /// Book histograms and initialise projections before the run
     void init() {
       // the basic final-state projection: all final-state particles within the given eta acceptance
@@ -404,22 +479,6 @@ namespace Rivet {
       c4.SetTriggerRange(5., 9.);
       c4.SetAssociatedRange(0.5, 7.0);
       Correlators.push_back(c12);
-
-      Correlator c13(1,13);
-      c3.SetCollSystemAndEnergy("AuAu200GeV");
-      c3.SetCentrality(0., 40.);
-      c3.SetXiRange(0.2, 2.2);
-      c3.SetTriggerRange(5., 9.);
-      c3.SetAssociatedRange(0.5, 7.0);
-      Correlators.push_back(c13);
-      
-      Correlator c14(1,14);
-      c4.SetCollSystemAndEnergy("pp200GeV");
-      c4.SetCentrality(0., 40.);
-      c4.SetXiRange(0.2, 2.2);
-      c4.SetTriggerRange(5., 9.);
-      c4.SetAssociatedRange(0.5, 7.0);
-      Correlators.push_back(c14);
 
 
       // Book histograms
@@ -600,24 +659,32 @@ namespace Rivet {
 
 
     /// Normalise histograms etc., after the run
-    /*void finalize() {
+    void finalize() {
         
+        for(Correlator& corr : Correlators)
+      {
+        string refname = mkAxisCode(1, 1, corr.GetSubIndex());
+        const Histo1D& refdata = refData(refname);
+        for(auto &bin : refdata.bins())
+          {
+              _DeltaPhixi["011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
+              double entries = 0.;
+              double yield = GetYieldInUserRangeZYAM(*_DeltaPhixi["011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], M_PI/2., M_PI, entries);
+              _h["011" + to_string(corr.GetSubIndex())]->fillBin(_h["011" + to_string(corr.GetSubIndex())]->binIndexAt(bin.xMid()),yield/entries, entries);
+          }
+
+          //_h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
+      }
         
-        for(unsigned int i = 1; i <= Correlators.size() + 5; i++)
-         {
-          
-                 _h["011" + to_string(i)]->scaleW((double)nEvents[i]/(nTriggers[i]*sow[i]->sumW()));
-            
-         }
         
       //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
       //do background subtraction ala zyam
       //calculate yields
 
-      double norm = sumOfWeights() *2.*M_PI;
-      scale(_h["0111"], 1./norm);
+      //double norm = sumOfWeights() *2.*M_PI;
+      //scale(_h["0111"], 1./norm);
 
-    }*/
+    }
     
     // Histograms and variables
     map<string, Histo1DPtr> _h;
