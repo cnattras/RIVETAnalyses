@@ -1127,7 +1127,7 @@ namespace Rivet {
 				bool dAu200_available = false;
 				bool pp_available = false;
 
-				//check if this is correct
+			
 				for (auto element : hKaonNegPt)
 				{
 					string name = element.second->name();
@@ -1449,7 +1449,7 @@ namespace Rivet {
 					divide(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
-					//RAA (fig 11)_________________(need scaling (will be out of for loop))
+					//RAA (fig 11)_________________
 					hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 					hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
@@ -1462,7 +1462,7 @@ namespace Rivet {
 					hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
 
-					//RdA (fig 12)_________________(need scaling (will be out of for loop))
+					//RdA (fig 12)________________
 
 					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc " + std::to_string(dAUCentralityBins[i])]->sumW());
 					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
