@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-//#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -47,7 +47,7 @@ namespace Rivet {
 		else if (beamOpt == "AUAU200") collSys = AuAu200;
 
 
-		//if (!(collSys == pp)) declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+		if (!(collSys == pp)) declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
 
 		book(sow["sow_pp"], "sow_pp");
