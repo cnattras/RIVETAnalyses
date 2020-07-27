@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+//#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -47,7 +47,7 @@ namespace Rivet {
 		else if (beamOpt == "AUAU200") collSys = AuAu200;
 
 
-		if (!(collSys == pp)) declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+		//if (!(collSys == pp)) declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
 
 		book(sow["sow_pp"], "sow_pp");
@@ -62,7 +62,7 @@ namespace Rivet {
 		book(hProtNegPt["ptyieldspp"], 1, 1, 6);
 		book(hKaon0SPt["ptyieldspp"], 2, 1, 1);
 		book(hRho0Pt["ptyieldspp"], 3, 1, 1);
-		
+
 		//Figure 1 Yield AUAU
 		book(hKpPosPt["ptyieldsAuAuc12"], 4, 1, 1);
 		book(hKpNegPt["ptyieldsAuAuc12"], 4, 1, 2);
@@ -153,15 +153,15 @@ namespace Rivet {
 
 		//Figure 3 RAA Ratio ?? Best way to do Raa ratio?
 
-		
+
     }
 
 
-   
+
     void analyze(const Event& event) {
 		Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
 		Particles neutralParticles = applyProjection<PrimaryParticles>(event, "np").particles();
-		
+
 		if (collSys == pp)
 		{
 			sow["sow_pp"]->fill();
@@ -170,11 +170,11 @@ namespace Rivet {
 				double partPt = p.pT() / GeV;
 				double pt_weight = 1. / (partPt * 2. * M_PI);
 
-				switch (p.pid()) {						
+				switch (p.pid()) {
 
 				case 211: // pi+
 				{
-					hPionPosPt["ptyieldspp"]->fill(partPt, pt_weight);					
+					hPionPosPt["ptyieldspp"]->fill(partPt, pt_weight);
 					hPionPosPt["pp1"]->fill(partPt);
 					hPionPosPt["pp2"]->fill(partPt);
 					hPionPt["pp1"]->fill(partPt);
@@ -194,7 +194,7 @@ namespace Rivet {
 				}
 				case  321: // K+
 				{
-					hKaonPosPt["ptyieldspp"]->fill(partPt, pt_weight);					
+					hKaonPosPt["ptyieldspp"]->fill(partPt, pt_weight);
 					hKaonPosPt["pp"]->fill(partPt);
 					hKaonPt["pp"]->fill(partPt);
 
@@ -210,7 +210,7 @@ namespace Rivet {
 				}
 				case 2212: // proton
 				{
-					hProtPosPt["ptyieldspp"]->fill(partPt, pt_weight);					
+					hProtPosPt["ptyieldspp"]->fill(partPt, pt_weight);
 					hProtPosPt["pp1"]->fill(partPt);
 					hProtPosPt["pp2"]->fill(partPt);
 					hKpPt["Raa_c12_pp"]->fill(partPt);
@@ -256,12 +256,12 @@ namespace Rivet {
 		const double c = cent();
 
 		if (collSys == AuAu200)
-						
+
 		{
 			if ((c < 0.) || (c > 12.)) vetoEvent;
 			sow["sow_AuAuc12"]->fill();
 			for (Particle p : chargedParticles)
-			{				
+			{
 				double partPt = p.pT() / GeV;
 				double pt_weight = 1. / (partPt * 2. * M_PI);
 
@@ -332,7 +332,7 @@ namespace Rivet {
 
 			return;
 		}
-     
+
 
     }
 
@@ -374,7 +374,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -418,7 +418,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -440,7 +440,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -462,7 +462,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -484,7 +484,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -506,7 +506,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -528,7 +528,7 @@ namespace Rivet {
 					AuAu200_available = false;
 					break;
 				}
-			}			
+			}
 			else if (name.find("pp") != std::string::npos)
 			{
 				if (element.second->numEntries() > 0) pp_available = true;
@@ -604,29 +604,29 @@ namespace Rivet {
 		hKaon0SPt["ptyieldsAuAuc12"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 
 		//Figure 2 Yield Ratio pp
-		divide(hPionNegPt["pp1"], hPionPosPt["pp1"], RatioPion["pp"]);				
-		divide(hProtNegPt["pp1"], hProtPosPt["pp1"], RatioProt["pp"]);		
-		divide(hKaonNegPt["pp"], hKaonPosPt["pp"], RatioKaon["pp"]);		
-		divide(hProtPosPt["pp2"], hPionPosPt["pp2"], Ratioppipos["pp"]);		
-		divide(hProtNegPt["pp2"], hPionNegPt["pp2"], Ratioppineg["pp"]);		
-		divide(hKaonPt["pp"], hPionPt["pp1"], RatioKpi["pp"]);		
+		divide(hPionNegPt["pp1"], hPionPosPt["pp1"], RatioPion["pp"]);
+		divide(hProtNegPt["pp1"], hProtPosPt["pp1"], RatioProt["pp"]);
+		divide(hKaonNegPt["pp"], hKaonPosPt["pp"], RatioKaon["pp"]);
+		divide(hProtPosPt["pp2"], hPionPosPt["pp2"], Ratioppipos["pp"]);
+		divide(hProtNegPt["pp2"], hPionNegPt["pp2"], Ratioppineg["pp"]);
+		divide(hKaonPt["pp"], hPionPt["pp1"], RatioKpi["pp"]);
 		divide(hKaon0SPt["pp"], hPionPt["pp2"], RatioK0spi["pp"]);
 
 		//Figure 2 Yield Ratio AUAU
-		divide(hProtPosPt["AuAuc12"], hPionPosPt["AuAuc12"], Ratioppipos["AuAuc12"]);		
+		divide(hProtPosPt["AuAuc12"], hPionPosPt["AuAuc12"], Ratioppipos["AuAuc12"]);
 		divide(hProtNegPt["AuAuc12"], hPionNegPt["AuAuc12"], Ratioppineg["AuAuc12"]);
 
 		//Figure 3 RAA
 		hPionPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hPionPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
-		divide(hPionPt["Raa_c12_AuAu"], hPionPt["Raa_c12_pp"], hRaa["pi_c12_AuAu"]));
+		divide(hPionPt["Raa_c12_AuAu"], hPionPt["Raa_c12_pp"], hRaa["pi_c12_AuAu"]);
 		//hRaa["pi_c12_AuAu"]->scaleY(1. / 960.2);
-		
+
 		hKpPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hKpPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hKpPt["Raa_c12_AuAu"], hKpPt["Raa_c12_pp"], hRaa["Kp_c12_AuAu"]);
 		//hRaa["Kp_c12_AuAu"]->scaleY(1. / 960.2);
-		
+
 		hKaon0SPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hKaon0SPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hKaon0SPt["Raa_c12_AuAu"], hKaon0SPt["Raa_c12_pp"], hRaa["K0S_c12_AuAu"]);
@@ -653,20 +653,21 @@ namespace Rivet {
 	map<string, Histo1DPtr> hKpPosPt;
 	map<string, Histo1DPtr> hKpPt;
 
+
 	map<string, Histo1DPtr> hKaonPt;
 	map<string, Histo1DPtr> hPionPt;
 	map<string, Histo1DPtr> hProtPt;
 
-
-	
 	map<string, Scatter2DPtr> RatioPion;
 	map<string, Scatter2DPtr> RatioProt;
 	map<string, Scatter2DPtr> RatioKaon;
 	map<string, Scatter2DPtr> Ratioppipos;
 	map<string, Scatter2DPtr> Ratioppineg;
+  map<string, Scatter2DPtr> RatioKpi;
+  map<string, Scatter2DPtr> RatioK0spi;
 
 	map<string, Scatter2DPtr> hRaa;
-		
+
 
 	map<string, CounterPtr> sow;
 	string beamOpt;
