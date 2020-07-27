@@ -636,6 +636,8 @@ namespace Rivet {
 		hRho0Pt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c13_pp"], hRaa["Rho0_c13_AuAu"]);
 		//hRaa["Rho0_c13_AuAu"]->scaleY(1. / 960.2);
+	    
+	    	//Figure 3 RAA Ratio_____________Need to implement
 
 
     }
@@ -663,8 +665,8 @@ namespace Rivet {
 	map<string, Scatter2DPtr> RatioKaon;
 	map<string, Scatter2DPtr> Ratioppipos;
 	map<string, Scatter2DPtr> Ratioppineg;
-  map<string, Scatter2DPtr> RatioKpi;
-  map<string, Scatter2DPtr> RatioK0spi;
+  	map<string, Scatter2DPtr> RatioKpi;
+  	map<string, Scatter2DPtr> RatioK0spi;
 
 	map<string, Scatter2DPtr> hRaa;
 
