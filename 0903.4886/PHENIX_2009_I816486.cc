@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-//#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -43,7 +43,7 @@ namespace Rivet {
 
 
 
-      //v_2_________________
+      //v_2_________________NEEDS TO BE CORRECTED
 
       book(hPion0Pt["ptv2c0005"], 1, 1, 1);
       book(hPion0Pt["ptv2c0510"], 1, 1, 2);
@@ -75,10 +75,9 @@ namespace Rivet {
 
 
 
-      //dphi vs RAA
+      //dphi vs RAA_______________ NEEDS TO BE CORRECTED
       int h;
 
-              //hope this works
       for(int j = 0, N = PtBins.size();j < N; ++j)
       {
         for(int i = 0, M = CentralityBins.size();i < M-3; ++i)
@@ -120,8 +119,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c10pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c10pt_AuAu200"]->fill(partPt);
                     }
                 }
                 else if((c >= 5.) && (c < 10.))
@@ -129,8 +128,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c10pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c10pt_AuAu200"]->fill(partPt);
                     }
                 }
                 else if((c >= 10.) && (c < 20.))
@@ -138,8 +137,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c20pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c20pt_AuAu200"]->fill(partPt);
                     }
                 }
                 else if((c >= 20.) && (c < 30.))
@@ -147,8 +146,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c30pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c30pt_AuAu200"]->fill(partPt);
                     }
                 }
                 else if((c >= 30.) && (c < 40.))
@@ -156,8 +155,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c40pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c40pt_AuAu200"]->fill(partPt);
                     }
                 }
                 else if((c >= 40.) && (c < 50.))
@@ -165,8 +164,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c50pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c50pt_AuAu200"]->fill(partPt);
                     }
                 }
                 else if((c >= 50.) && (c < 60.))
@@ -174,8 +173,8 @@ namespace Rivet {
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-                        hPion0Pt["c60pt_AuAu200"]->fill(p.pT()/GeV);
+
+                        hPion0Pt["c60pt_AuAu200"]->fill(partPt);
                     }
                 }
 
@@ -188,7 +187,7 @@ namespace Rivet {
     void finalize() {
 
 
-      //v_2_________________
+      //v_2_________________NEEDS TO BE IMPLEMENTED
 
 
 
@@ -210,7 +209,7 @@ namespace Rivet {
       hRaa["Raa60"]->scaleY(1./777.2);
 
 
-      //dphi vs RAA_______________________________
+      //dphi vs RAA_______________________________NEEDS TO BE IMPLEMENTED
 
 
 
