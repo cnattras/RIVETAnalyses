@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+#include "/home/antoniosilva/RivetWorkdir/Christal/1304.3410/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -29,7 +29,7 @@ namespace Rivet {
 
 				std::initializer_list<int> pdgIds = { 321, -321, 211, -211, 2212, -2212 };
 
-				const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge < 0);
+				const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge > 0);
 				declare(fs, "fs");
 
 				beamOpt = getOption<string>("beam", "NONE");
@@ -150,7 +150,7 @@ namespace Rivet {
 					const Scatter2D& refdata14 = refData(refname14);
 					book(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14 + "_protons", refdata14);
 					book(rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14 + "_pions", refdata14);
-					book(Ratiop_piNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14);
+					book(Ratiop_pineg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14);
 
 
 					//RAA (fig 11)_________________
@@ -233,7 +233,7 @@ namespace Rivet {
 				const Scatter2D& refdata26 = refData(refname26);
 				book(hPionPosPt["AuAuc0010b"], refname26 + "_PionPos", refdata26);
 				book(hPionPosPt["AuAuc6092"], refname26 + "_PionPos", refdata26);
-				book(hRcp["pipos_c00106092 _AuAu"], refname26);
+				book(hRcp["pipos_c00106092_AuAu"], refname26);
 
 				string refname27 = mkAxisCode(18, 1, 3);
 				const Scatter2D& refdata27 = refData(refname27);
@@ -783,11 +783,15 @@ namespace Rivet {
 					if ((c < 0.) || (c > 100.)) vetoEvent;
 
 
-					sow["sow_dAuc100"]->fill();
+                    //cout << "Centrality: " << c << endl;
+                    
+					sow["sow_dAUc100"]->fill();
 					for (const Particle& p : chargedParticles)
 					{
 						double partPt = p.pT() / GeV;
 						double pt_weight = 1. / (partPt * 2. * M_PI);
+                        
+                        //cout << "PID: " << p.pid() << endl;
 
 						switch (p.pid()) {
 						case 211: // pi+
@@ -849,7 +853,7 @@ namespace Rivet {
 
 					if ((c >= 0.) && (c < 20.))
 					{
-						sow["sow_dAuc20"]->fill();
+						sow["sow_dAUc20"]->fill();
 						for (const Particle& p : chargedParticles)
 						{
 							double partPt = p.pT() / GeV;
@@ -921,7 +925,7 @@ namespace Rivet {
 					}
 					else if ((c >= 20.) && (c < 40.))
 					{
-						sow["sow_dAuc40"]->fill();
+						sow["sow_dAUc40"]->fill();
 						for (const Particle& p : chargedParticles)
 						{
 							double partPt = p.pT() / GeV;
@@ -987,7 +991,7 @@ namespace Rivet {
 					}
 					else if ((c >= 40.) && (c < 60.))
 					{
-						sow["sow_dAuc60"]->fill();
+						sow["sow_dAUc60"]->fill();
 						for (const Particle& p : chargedParticles)
 						{
 							double partPt = p.pT() / GeV;
@@ -1054,7 +1058,7 @@ namespace Rivet {
 
 					else if ((c >= 60.) && (c < 88.))
 					{
-						sow["sow_dAuc88"]->fill();
+						sow["sow_dAUc88"]->fill();
 						for (const Particle& p : chargedParticles)
 						{
 							double partPt = p.pT() / GeV;
@@ -1411,6 +1415,8 @@ namespace Rivet {
 				if (!(AuAu200_available && dAu200_available && pp_available)) return;
 
 
+                
+                
 				for (int i = 0, N = AUAUCentralityBins.size(); i < N; ++i)
 				{
 					//yields (fig 4)_________________
@@ -1426,29 +1432,29 @@ namespace Rivet {
 					hKaonPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hPionPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hProtPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
-
+                    
 					//Ratio of yields (figs 5-9)_________________(Do I need to scale Neg and Pos particles first (like yields section)?)
 					divide(rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioKaon["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioKaon["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					divide(rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioPion["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioPion["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					divide(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioProt["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioProt["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					divide(rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pipos["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					divide(rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					divide(rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pipos["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					divide(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
-
+                    
 					//RAA (fig 11)_________________
 					hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 					hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
@@ -1463,22 +1469,21 @@ namespace Rivet {
 					divide(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
 
 					//RdA (fig 12)________________
-
-					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc " + std::to_string(dAUCentralityBins[i])]->sumW());
+                    
+					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
-
-					hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc " + std::to_string(dAUCentralityBins[i])]->sumW());
+                    
+					hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
-					divide(hPionPt["Raa_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
-
-					hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc " + std::to_string(dAUCentralityBins[i])]->sumW());
+					divide(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
+                    
+					hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
 
 				}
-
-
+                
 				//RCP (fig 10) _________________(is ->scaleY needed?)
 
 				hKaonPosPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
@@ -1497,25 +1502,31 @@ namespace Rivet {
 				hKaonNegPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hKaonNegPt["AuAuc0010b"], hKaonNegPt["AuAuc6092"], hRcp["Kneg_c00106092_AuAu"]);
 
-
+                cout << "Here 2 ************" << endl;
 
 				hPionPosPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionPosPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionPosPt["AuAuc0010a"], hPionPosPt["AuAuc4060"], hRcp["pipos_c00104060_AuAu"]);
 
+                cout << "Here 2.1 ************" << endl;
+                
 				hPionPosPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionPosPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionPosPt["AuAuc0010b"], hPionPosPt["AuAuc6092"], hRcp["pipos_c00106092_AuAu"]);
 
+                cout << "Here 2.2 ************" << endl;
+                
 				hPionNegPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionNegPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionNegPt["AuAuc0010a"], hPionNegPt["AuAuc4060"], hRcp["pineg_c00104060_AuAu"]);
 
+                cout << "Here 2.3 ************" << endl;
+                
 				hPionNegPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionNegPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionNegPt["AuAuc0010b"], hPionNegPt["AuAuc6092"], hRcp["pineg_c00106092_AuAu"]);
 
-
+                cout << "Here 3 ************" << endl;
 
 				hProtPosPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hProtPosPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
@@ -1533,7 +1544,7 @@ namespace Rivet {
 				hProtNegPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hProtNegPt["AuAuc0010b"], hProtNegPt["AuAuc6092"], hRcp["pneg_c00106092_AuAu"]);
 
-
+                cout << "Here 4 ************" << endl;
 				// Ratio of Spectra(fig 15)_________________(Do I treat this the same as ratio of yields section?)
 
 				divide(hKaonPt["AuAuc6092"], hKaonPt["dAuc0020"], RatioK["AuAuc/dAU"]);
