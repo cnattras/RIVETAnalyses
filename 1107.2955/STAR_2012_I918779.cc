@@ -951,17 +951,17 @@ namespace Rivet {
 		}
 		
 		//Figure 2 spectra/Npart _______________
-		hKaon0SPt["spectraCuCuc10"]->scaleY(1. / 99);
-		hKaon0SPt["spectraAuAuc40"]->scaleY(1. / 141);
+		hKaon0SPt["spectraCuCuc10"]->scaleW(1. / 99);
+		hKaon0SPt["spectraAuAuc40"]->scaleW(1. / 141);
 
-		hLambdaPt["spectraCuCuc10"]->scaleY(1. / 99);
-		hLambdaPt["spectraAuAuc40"]->scaleY(1. / 141);
+		hLambdaPt["spectraCuCuc10"]->scaleW(1. / 99);
+		hLambdaPt["spectraAuAuc40"]->scaleW(1. / 141);
 
-		hXiPt["spectraCuCuc10"]->scaleY(1. / 99);
-		hXiPt["spectraAuAuc40"]->scaleY(1. / 141);
+		hXiPt["spectraCuCuc10"]->scaleW(1. / 99);
+		hXiPt["spectraAuAuc40"]->scaleW(1. / 141);
 
-		hOmegaPt["spectraCuCuc10"]->scaleY(1. / 99);
-		hOmegaPt["spectraAuAuc40"]->scaleY(1. / 141);
+		hOmegaPt["spectraCuCuc10"]->scaleW(1. / 99);
+		hOmegaPt["spectraAuAuc40"]->scaleW(1. / 141);
 
 
 
@@ -977,7 +977,7 @@ namespace Rivet {
 
 	map<string, CounterPtr> sow;
 	string beamOpt;
-	enum CollisionSystem { CuCu200, AuAu200 };
+	enum CollisionSystem { pp, CuCu200, AuAu200 };
 	CollisionSystem collSys;
 	vector<int> CUCUCentralityBins{ 10, 20, 30, 40, 60 };
 	vector<int> AUAUCentralityBins{ 5, 20, 40, 60, 80 };
