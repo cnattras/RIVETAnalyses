@@ -1,0 +1,68 @@
+independent_variables:
+- header: {name: '$p_T$'}
+  values:
+  - {low: 2.25, high: 3.25}
+  - {low: 2.75, high: 3.75}
+  - {low: 3.25, high: 4.25}
+  - {low: 3.75, high: 4.75}
+  - {low: 4.25, high: 5.25}
+  - {low: 4.75, high: 5.75}
+  - {low: 5.25, high: 6.25}
+  - {low: 6, high: 7}
+  - {low: 7, high: 8}
+  - {low: 8, high: 9}
+  - {low: 9, high: 10}
+  - {low: 10.5, high: 11.5}
+dependent_variables:
+- header: {name: '$\eta/\pi^{0}$'}
+  qualifiers:
+  - {name: '$p_T$', value: 'p+p at $\sqrt{s}=$ 200GeV'}
+  values:
+  - value: 0.44
+    errors:
+    - {symerror: 0.076, label: 'stat'}
+    - {symerror: 0.107, label: 'type B'}
+  - value: 0.421
+    errors:
+    - {symerror: 0.009, label: 'stat'}
+    - {symerror: 0.04, label: 'type B'}
+  - value: 0.446
+    errors:
+    - {symerror: 0.012, label: 'stat'}
+    - {symerror: 0.03, label: 'type B'}
+  - value: 0.473
+    errors:
+    - {symerror: 0.016, label: 'stat'}
+    - {symerror: 0.031, label: 'type B'}
+  - value: 0.468
+    errors:
+    - {symerror: 0.022, label: 'stat'}
+    - {symerror: 0.029, label: 'type B'}
+  - value: 0.51
+    errors:
+    - {symerror: 0.032, label: 'stat'}
+    - {symerror: 0.031, label: 'type B'}
+  - value: 0.561
+    errors:
+    - {symerror: 0.044, label: 'stat'}
+    - {symerror: 0.034, label: 'type B'}
+  - value: 0.54
+    errors:
+    - {symerror: 0.047, label: 'stat'}
+    - {symerror: 0.033, label: 'type B'}
+  - value: 0.596
+    errors:
+    - {symerror: 0.078, label: 'stat'}
+    - {symerror: 0.037, label: 'type B'}
+  - value: 0.426
+    errors:
+    - {symerror: 0.095, label: 'stat'}
+    - {symerror: 0.027, label: 'type B'}
+  - value: 0.588
+    errors:
+    - {symerror: 0.162, label: 'stat'}
+    - {symerror: 0.039, label: 'type B'}
+  - value: 0.419
+    errors:
+    - {symerror: 0.162, label: 'stat'}
+    - {symerror: 0.029, label: 'type B'}

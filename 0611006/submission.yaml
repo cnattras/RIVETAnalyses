@@ -1,0 +1,81 @@
+comment: |
+  BNL-RHIC.  Inclusive transverse momentum spectra of $\eta$ mesons in the range $p_T\approx$ 2-12 GeV/$c$ have been measured at mid-rapidity (|$\eta$| < 0.35) by the PHENIX experiment at RHIC in p+p, d+Au and Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV. The $\eta$ mesons are reconstructed through their $\eta\rightarrow\gamma\gamma$ channel for the three colliding systems as well as through the $\eta\rightarrow\pi^{0}\pi^{+}\pi^{-}$ decay mode in p+p and d+Au collisions. The nuclear modification factor in d+Au collisions, $R_{dAu}(p_T)\approx$ 1.0-1.1, suggests at most only modest $p_T$ broadening ("Cronin enhancement"). In central Au+Au reactions, the $\eta$ yields are significantly suppressed, with $R_{AuAu}(p_T)\approx$ 0.2. The ratio of $\eta$ to $\pi^{0}$ yields is approximately constant as a function of $p_T$ for the three colliding systems in agreement with the high-$p_T$ world average of $R_{\eta/\pi^{0}}\approx$ 0.5 in hadron-hadron, hadron-nucleus, and nucleus-nucleus collisions for a wide range of center-of-mass energies [$\sqrt{s_{NN}}\approx$ 3-1800 GeV] as well as, for high scaled momentum $x_p$, in $e^{+}e^{-}$ annihilations at $\sqrt{s}$ = 91.2 GeV. These results are consistent with a scenario where high-$p_T$ $\eta$ production in nuclear collisions at RHIC is largely unaffected by initial-state effects, but where light-quark mesons ($\pi^{0}$;$\eta$) are equally suppressed due to final-state interactions of the parent partons in the dense medium produced in Au+Au reactions.
+additional_resources:
+  - {location: "https://www.phenix-intra.sdcc.bnl.gov/WWW/info/data/ppg055_data.html", description: "web page with data points"}
+---
+name: "Figure 12.1"
+description: 'Inelastic cross section measured in p+p at $\sqrt{s}$=200 GeV through $\eta \rightarrow \gamma \gamma$'
+keywords:
+  - {name: reactions, values: [p p --> $\eta$ --> $\gamma \gamma$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table12.1.yaml
+---
+name: "Figure 12.2"
+description: 'Inelastic cross section measured in p+p at $\sqrt{s}$=200 GeV through $\eta \rightarrow \pi^{0} \pi^{+} \pi^{-}$'
+keywords:
+  - {name: reactions, values: [p p --> $\eta$ --> $\pi^0\pi^+\pi^-$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table12.2.yaml
+---
+name: "Figure 13"
+description: 'Inelastic cross section measured in d+Au at $\sqrt{s}$=200 GeV through $\eta \rightarrow \gamma \gamma$'
+keywords:
+  - {name: reactions, values: [d Au --> $\eta$ --> $\gamma \gamma$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table13.1.yaml
+---
+name: "Figure 13"
+description: 'Inelastic cross section measured in d+Au at $\sqrt{s}$=200 GeV through $\eta \rightarrow \pi^{0} \pi^{+} \pi^{-}$'
+keywords:
+  - {name: reactions, values: [d Au --> $\eta$ --> $\pi^0\pi^+\pi^-$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table13.2.yaml
+---
+name: "Figure 14"
+description: 'Invariant yields measured in d+Au for different centrality classes'
+keywords:
+  - {name: reactions, values: [d Au --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table14.yaml
+---
+name: "Figure 15"
+description: 'Invariant yields measured in Au+Au for different centrality classes'
+keywords:
+  - {name: reactions, values: [Au Au --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table15.yaml
+---
+name: "Figure 16"
+description: 'Nuclear modification factor $R_{dA}$ for $\eta$ measured in d+Au for different centrality classes'
+keywords:
+  - {name: reactions, values: [d Au --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table16.yaml
+---
+name: "Figure 17"
+description: 'Nuclear modification factor $R_{AA}(p_T)$ for $\eta$ measured in Au+Au for different centrality classes'
+keywords:
+  - {name: reactions, values: [Au Au --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table17.yaml
+---
+name: "Figure 18"
+description: 'Ratio of $\eta$ and $\pi^{0}$ measured in p+p at $\sqrt{s}$=200 GeV'
+keywords:
+  - {name: reactions, values: [p p --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table18.yaml
+---
+name: "Figure 19"
+description: 'Ratio of $\eta$ and $\pi^{0}$ measured in d+Au for different centrality classes'
+keywords:
+  - {name: reactions, values: [d Au --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table19.yaml
+---
+name: "Figure 20"
+description: 'Ratio of $\eta$ and $\pi^{0}$ measured in Au+Au for different centrality classes'
+keywords:
+  - {name: reactions, values: [Au Au --> $\eta$]}
+  - {name: cmenergies, values: [200.0]}
+data_file: Table20.yaml

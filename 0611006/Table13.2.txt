@@ -1,0 +1,23 @@
+$p_T$
+1
+$\sigma$
+d+Au at $\sqrt{s}=$200GeV $\eta\rightarrow\pi^{0}\pi^{+}\pi^{-}$
+yes
+none
+none
+5
+stat
+symmetric
+sys
+symmetric
+type A
+symmetric
+type B
+symmetric
+type C
+symmetric
+4.5-5.5 1.10E-02 5.70E-03 5.10E-03 3.70E-03 3.20E-03 9.90E-04
+5.5-6.5 2.70E-03 1.20E-03 1.00E-03 6.90E-04 7.30E-04 2.40E-04
+6.5-7.5 5.80E-04 3.90E-04 1.90E-04 1.30E-04 1.30E-04 5.10E-05
+7.5-8.5 2.40E-04 1.10E-04 8.40E-05 6.10E-05 5.40E-05 2.10E-05
+***

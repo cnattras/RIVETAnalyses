@@ -1,0 +1,293 @@
+independent_variables:
+- header: {name: '$p_T$'}
+  values:
+  - {low: 1.75, high: 2.75}
+  - {low: 2.25, high: 3.25}
+  - {low: 2.75, high: 3.75}
+  - {low: 3.25, high: 4.25}
+  - {low: 3.75, high: 4.75}
+  - {low: 4.25, high: 5.25}
+  - {low: 4.75, high: 5.75}
+  - {low: 5.25, high: 6.25}
+  - {low: 6, high: 7}
+  - {low: 7, high: 8}
+  - {low: 8, high: 9}
+  - {low: 9, high: 10}
+  - {low: 10.5, high: 11.5}
+dependent_variables:
+- header: {name: 'Inv. Yields in d+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$0-20\%$ centrality'}
+  values:
+  - value: 1.59E-03
+    errors:
+    - {symerror: 1.85E-04, label: 'stat'}
+    - {symerror: 5.67E-04, label: 'sys'}
+    - {symerror: 5.67E-04, label: 'type B'}
+  - value: 5.46E-04
+    errors:
+    - {symerror: 5.65E-05, label: 'stat'}
+    - {symerror: 8.49E-05, label: 'sys'}
+    - {symerror: 8.49E-05, label: 'type B'}
+  - value: 1.27E-04
+    errors:
+    - {symerror: 2.05E-05, label: 'stat'}
+    - {symerror: 1.42E-05, label: 'sys'}
+    - {symerror: 1.42E-05, label: 'type B'}
+  - value: 5.84E-05
+    errors:
+    - {symerror: 2.43E-06, label: 'stat'}
+    - {symerror: 6.45E-06, label: 'sys'}
+    - {symerror: 6.45E-06, label: 'type B'}
+  - value: 2.22E-05
+    errors:
+    - {symerror: 9.62E-07, label: 'stat'}
+    - {symerror: 2.48E-06, label: 'sys'}
+    - {symerror: 2.48E-06, label: 'type B'}
+  - value: 9.26E-06
+    errors:
+    - {symerror: 4.61E-07, label: 'stat'}
+    - {symerror: 1.06E-06, label: 'sys'}
+    - {symerror: 1.06E-06, label: 'type B'}
+  - value: 3.85E-06
+    errors:
+    - {symerror: 2.36E-07, label: 'stat'}
+    - {symerror: 4.32E-07, label: 'sys'}
+    - {symerror: 4.32E-07, label: 'type B'}
+  - value: 1.97E-06
+    errors:
+    - {symerror: 1.47E-07, label: 'stat'}
+    - {symerror: 2.26E-07, label: 'sys'}
+    - {symerror: 2.26E-07, label: 'type B'}
+  - value: 7.29E-07
+    errors:
+    - {symerror: 6.15E-08, label: 'stat'}
+    - {symerror: 8.60E-08, label: 'sys'}
+    - {symerror: 8.60E-08, label: 'type B'}
+  - value: 2.26E-07
+    errors:
+    - {symerror: 3.64E-08, label: 'stat'}
+    - {symerror: 2.76E-08, label: 'sys'}
+    - {symerror: 2.76E-08, label: 'type B'}
+  - value: 5.29E-08
+    errors:
+    - {symerror: 1.19E-08, label: 'stat'}
+    - {symerror: 6.65E-09, label: 'sys'}
+    - {symerror: 6.65E-09, label: 'type B'}
+  - value: 3.31E-08
+    errors:
+    - {symerror: 7.06E-09, label: 'stat'}
+    - {symerror: 4.27E-09, label: 'sys'}
+    - {symerror: 4.27E-09, label: 'type B'}
+  - value: 1.05E-08
+    errors:
+    - {symerror: 2.47E-09, label: 'stat'}
+    - {symerror: 1.41E-09, label: 'sys'}
+    - {symerror: 1.41E-09, label: 'type B'}
+- header: {name: 'Inv. Yields in d+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$20-40\%$ centrality'}
+  values:
+  - value: 1.18E-03
+    errors:
+    - {symerror: 1.37E-04, label: 'stat'}
+    - {symerror: 4.16E-04, label: 'sys'}
+    - {symerror: 4.16E-04, label: 'type B'}
+  - value: 4.02E-04
+    errors:
+    - {symerror: 4.36E-05, label: 'stat'}
+    - {symerror: 6.13E-05, label: 'sys'}
+    - {symerror: 6.13E-05, label: 'type B'}
+  - value: 1.02E-04
+    errors:
+    - {symerror: 1.59E-05, label: 'stat'}
+    - {symerror: 1.09E-05, label: 'sys'}
+    - {symerror: 1.09E-05, label: 'type B'}
+  - value: 3.92E-05
+    errors:
+    - {symerror: 1.90E-06, label: 'stat'}
+    - {symerror: 4.18E-06, label: 'sys'}
+    - {symerror: 4.18E-06, label: 'type B'}
+  - value: 1.47E-05
+    errors:
+    - {symerror: 7.97E-07, label: 'stat'}
+    - {symerror: 1.59E-06, label: 'sys'}
+    - {symerror: 1.59E-06, label: 'type B'}
+  - value: 5.89E-06
+    errors:
+    - {symerror: 3.79E-07, label: 'stat'}
+    - {symerror: 6.50E-07, label: 'sys'}
+    - {symerror: 6.50E-07, label: 'type B'}
+  - value: 2.99E-06
+    errors:
+    - {symerror: 2.35E-07, label: 'stat'}
+    - {symerror: 3.25E-07, label: 'sys'}
+    - {symerror: 3.25E-07, label: 'type B'}
+  - value: 1.45E-06
+    errors:
+    - {symerror: 1.28E-07, label: 'stat'}
+    - {symerror: 1.61E-07, label: 'sys'}
+    - {symerror: 1.61E-07, label: 'type B'}
+  - value: 5.44E-07
+    errors:
+    - {symerror: 5.41E-08, label: 'stat'}
+    - {symerror: 6.22E-08, label: 'sys'}
+    - {symerror: 6.22E-08, label: 'type B'}
+  - value: 1.68E-07
+    errors:
+    - {symerror: 3.11E-08, label: 'stat'}
+    - {symerror: 1.99E-08, label: 'sys'}
+    - {symerror: 1.99E-08, label: 'type B'}
+  - value: 5.91E-08
+    errors:
+    - {symerror: 1.07E-08, label: 'stat'}
+    - {symerror: 7.23E-09, label: 'sys'}
+    - {symerror: 7.23E-09, label: 'type B'}
+  - value: 1.92E-08
+    errors:
+    - {symerror: 7.35E-09, label: 'stat'}
+    - {symerror: 2.42E-09, label: 'sys'}
+    - {symerror: 2.42E-09, label: 'type B'}
+  - value: 1.19E-08
+    errors:
+    - {symerror: 2.45E-09, label: 'stat'}
+    - {symerror: 1.55E-09, label: 'sys'}
+    - {symerror: 1.55E-09, label: 'type B'}
+- header: {name: 'Inv. Yields in d+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$40-60\%$ centrality'}
+  values:
+  - value: 9.14E-04
+    errors:
+    - {symerror: 1.03E-04, label: 'stat'}
+    - {symerror: 3.24E-04, label: 'sys'}
+    - {symerror: 3.24E-04, label: 'type B'}
+  - value: 1.85E-04
+    errors:
+    - {symerror: 3.25E-05, label: 'stat'}
+    - {symerror: 2.83E-05, label: 'sys'}
+    - {symerror: 2.83E-05, label: 'type B'}
+  - value: 7.17E-05
+    errors:
+    - {symerror: 1.25E-05, label: 'stat'}
+    - {symerror: 7.73E-06, label: 'sys'}
+    - {symerror: 7.73E-06, label: 'type B'}
+  - value: 2.46E-05
+    errors:
+    - {symerror: 1.47E-06, label: 'stat'}
+    - {symerror: 2.62E-06, label: 'sys'}
+    - {symerror: 2.62E-06, label: 'type B'}
+  - value: 9.73E-06
+    errors:
+    - {symerror: 6.23E-07, label: 'stat'}
+    - {symerror: 1.05E-06, label: 'sys'}
+    - {symerror: 1.05E-06, label: 'type B'}
+  - value: 4.19E-06
+    errors:
+    - {symerror: 3.27E-07, label: 'stat'}
+    - {symerror: 4.63E-07, label: 'sys'}
+    - {symerror: 4.63E-07, label: 'type B'}
+  - value: 1.71E-06
+    errors:
+    - {symerror: 1.95E-07, label: 'stat'}
+    - {symerror: 1.85E-07, label: 'sys'}
+    - {symerror: 1.85E-07, label: 'type B'}
+  - value: 9.73E-07
+    errors:
+    - {symerror: 1.33E-07, label: 'stat'}
+    - {symerror: 1.08E-07, label: 'sys'}
+    - {symerror: 1.08E-07, label: 'type B'}
+  - value: 3.84E-07
+    errors:
+    - {symerror: 4.29E-08, label: 'stat'}
+    - {symerror: 4.39E-08, label: 'sys'}
+    - {symerror: 4.39E-08, label: 'type B'}
+  - value: 1.07E-07
+    errors:
+    - {symerror: 2.87E-08, label: 'stat'}
+    - {symerror: 1.27E-08, label: 'sys'}
+    - {symerror: 1.27E-08, label: 'type B'}
+  - value: 3.69E-08
+    errors:
+    - {symerror: 1.06E-08, label: 'stat'}
+    - {symerror: 4.52E-09, label: 'sys'}
+    - {symerror: 4.52E-09, label: 'type B'}
+  - value: 1.41E-08
+    errors:
+    - {symerror: 6.06E-09, label: 'stat'}
+    - {symerror: 1.77E-09, label: 'sys'}
+    - {symerror: 1.77E-09, label: 'type B'}
+  - value: 2.56E-09
+    errors:
+    - {symerror: 2.09E-09, label: 'stat'}
+    - {symerror: 3.35E-10, label: 'sys'}
+    - {symerror: 3.35E-10, label: 'type B'}
+- header: {name: 'Inv. Yields in d+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$60-88\%$ centrality'}
+  values:
+  - value: 4.07E-04
+    errors:
+    - {symerror: 5.17E-05, label: 'stat'}
+    - {symerror: 1.45E-04, label: 'sys'}
+    - {symerror: 1.45E-04, label: 'type B'}
+  - value: 1.27E-04
+    errors:
+    - {symerror: 1.75E-05, label: 'stat'}
+    - {symerror: 1.97E-05, label: 'sys'}
+    - {symerror: 1.97E-05, label: 'type B'}
+  - value: 3.52E-05
+    errors:
+    - {symerror: 6.66E-06, label: 'stat'}
+    - {symerror: 3.90E-06, label: 'sys'}
+    - {symerror: 3.90E-06, label: 'type B'}
+  - value: 1.11E-05
+    errors:
+    - {symerror: 7.84E-07, label: 'stat'}
+    - {symerror: 1.22E-06, label: 'sys'}
+    - {symerror: 1.22E-06, label: 'type B'}
+  - value: 4.55E-06
+    errors:
+    - {symerror: 3.40E-07, label: 'stat'}
+    - {symerror: 5.06E-07, label: 'sys'}
+    - {symerror: 5.06E-07, label: 'type B'}
+  - value: 1.88E-06
+    errors:
+    - {symerror: 1.68E-07, label: 'stat'}
+    - {symerror: 2.13E-07, label: 'sys'}
+    - {symerror: 2.13E-07, label: 'type B'}
+  - value: 6.34E-07
+    errors:
+    - {symerror: 9.76E-08, label: 'stat'}
+    - {symerror: 7.10E-08, label: 'sys'}
+    - {symerror: 7.10E-08, label: 'type B'}
+  - value: 4.65E-07
+    errors:
+    - {symerror: 6.17E-08, label: 'stat'}
+    - {symerror: 5.31E-08, label: 'sys'}
+    - {symerror: 5.31E-08, label: 'type B'}
+  - value: 2.27E-07
+    errors:
+    - {symerror: 3.34E-08, label: 'stat'}
+    - {symerror: 2.66E-08, label: 'sys'}
+    - {symerror: 2.66E-08, label: 'type B'}
+  - value: 4.83E-08
+    errors:
+    - {symerror: 1.01E-08, label: 'stat'}
+    - {symerror: 5.87E-09, label: 'sys'}
+    - {symerror: 5.87E-09, label: 'type B'}
+  - value: 1.18E-08
+    errors:
+    - {symerror: 6.44E-09, label: 'stat'}
+    - {symerror: 1.48E-09, label: 'sys'}
+    - {symerror: 1.48E-09, label: 'type B'}
+  - value: 6.33E-09
+    errors:
+    - {symerror: 3.67E-09, label: 'stat'}
+    - {symerror: 8.15E-10, label: 'sys'}
+    - {symerror: 8.15E-10, label: 'type B'}
+  - value: --
+    errors:
+    - {symerror: --, label: 'stat'}
+    - {symerror: --, label: 'sys'}
+    - {symerror: --, label: 'type B'}

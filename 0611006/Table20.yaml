@@ -1,0 +1,150 @@
+independent_variables:
+- header: {name: '$p_T$'}
+  values:
+  - {low: 1.75, high: 2.75}
+  - {low: 2.25, high: 3.25}
+  - {low: 2.75, high: 3.75}
+  - {low: 3.25, high: 4.25}
+  - {low: 4, high: 5}
+  - {low: 5, high: 6}
+  - {low: 6, high: 7}
+  - {low: 7, high: 8}
+  - {low: 8, high: 9}
+  - {low: 9, high: 10}
+dependent_variables:
+- header: {name: '$\eta/\pi^{0}$ in Au+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$0-92\%$ centrality (MB)'}
+  values:
+  - value: 0.32
+    errors:
+    - {symerror: 0.09, label: 'total'}
+  - value: 0.41
+    errors:
+    - {symerror: 0.12, label: 'total'}
+  - value: 0.34
+    errors:
+    - {symerror: 0.06, label: 'total'}
+  - value: 0.29
+    errors:
+    - {symerror: 0.058, label: 'total'}
+  - value: 0.35
+    errors:
+    - {symerror: 0.083, label: 'total'}
+  - value: 0.35
+    errors:
+    - {symerror: 0.072, label: 'total'}
+  - value: 0.35
+    errors:
+    - {symerror: 0.13, label: 'total'}
+  - value: 0.56
+    errors:
+    - {symerror: 0.1, label: 'total'}
+  - value: 0.48
+    errors:
+    - {symerror: 0.21, label: 'total'}
+  - value: 0.49
+    errors:
+    - {symerror: 0.25, label: 'total'}
+- header: {name: '$\eta/\pi^{0}$ in Au+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$0-20\%$ centrality'}
+  values:
+  - value: 0.4
+    errors:
+    - {symerror: 0.12, label: 'total'}
+  - value: 0.55
+    errors:
+    - {symerror: 0.17, label: 'total'}
+  - value: 0.37
+    errors:
+    - {symerror: 0.11, label: 'total'}
+  - value: 0.24
+    errors:
+    - {symerror: 0.11, label: 'total'}
+  - value: 0.36
+    errors:
+    - {symerror: 0.11, label: 'total'}
+  - value: 0.38
+    errors:
+    - {symerror: 0.11, label: 'total'}
+  - value: 0.35
+    errors:
+    - {symerror: 0.16, label: 'total'}
+  - value: 0.53
+    errors:
+    - {symerror: 0.13, label: 'total'}
+  - value: 0.47
+    errors:
+    - {symerror: 0.24, label: 'total'}
+  - value: 0.49
+    errors:
+    - {symerror: 0.28, label: 'total'}
+- header: {name: '$\eta/\pi^{0}$ in Au+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$20-60\%$ centrality'}
+  values:
+  - value: 0.36
+    errors:
+    - {symerror: 0.1, label: 'total'}
+  - value: 0.34
+    errors:
+    - {symerror: 0.1, label: 'total'}
+  - value: 0.37
+    errors:
+    - {symerror: 0.07, label: 'total'}
+  - value: 0.34
+    errors:
+    - {symerror: 0.066, label: 'total'}
+  - value: 0.41
+    errors:
+    - {symerror: 0.096, label: 'total'}
+  - value: 0.49
+    errors:
+    - {symerror: 0.096, label: 'total'}
+  - value: 0.42
+    errors:
+    - {symerror: 0.16, label: 'total'}
+  - value: 0.43
+    errors:
+    - {symerror: 0.098, label: 'total'}
+  - value: 0.38
+    errors:
+    - {symerror: 0.17, label: 'total'}
+  - value: 0.4
+    errors:
+    - {symerror: 0.2, label: 'total'}
+- header: {name: '$\eta/\pi^{0}$ in Au+Au'}
+  qualifiers:
+  - {name: '$p_T$', value: '$60-92\%$ centrality'}
+  values:
+  - value: 0.312
+    errors:
+    - {symerror: 0.094, label: 'total'}
+  - value: 0.383
+    errors:
+    - {symerror: 0.11, label: 'total'}
+  - value: 0.404
+    errors:
+    - {symerror: 0.081, label: 'total'}
+  - value: 0.438
+    errors:
+    - {symerror: 0.093, label: 'total'}
+  - value: 0.542
+    errors:
+    - {symerror: 0.139, label: 'total'}
+  - value: 0.404
+    errors:
+    - {symerror: 0.257, label: 'total'}
+  - value: --
+    errors:
+    - {symerror: --, label: 'total'}
+  - value: --
+    errors:
+    - {symerror: --, label: 'total'}
+  - value: --
+    errors:
+    - {symerror: --, label: 'total'}
+  - value: --
+    errors:
+    - {symerror: --, label: 'total'}
