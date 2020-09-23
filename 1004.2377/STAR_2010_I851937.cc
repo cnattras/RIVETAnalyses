@@ -14,7 +14,7 @@
 #include "../Centralities/RHICCentrality.hh"
 
 
-
+#define _USE_MATH_DEFINES
 using namespace std;
 namespace Rivet {
 

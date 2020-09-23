@@ -9,9 +9,9 @@ Authors:
  - Eden Ross <eross14@vols.utk.edu>
  - Christine Nattrass <cnattras@vols.utk.edu>
 References:
- - '(2010) Example: Eur.Phys.J. C76 (2016) no.7, 392'
+ - 'Phys. Rev. C 82 (2010) 24912'
  - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'arXiv:1004.2377'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
