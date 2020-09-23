@@ -12,11 +12,120 @@
 #include <math.h>
 #include <vector>
 #include "../Centralities/RHICCentrality.hh"
-//marked for deletion
 
+#define _USE_MATH_DEFINES
+
+using namespace std;
 
 namespace Rivet {
 
+   
+  class Correlator {
+     
+    private:
+      int _index;
+      int _subindex;
+      string _collSystemAndEnergy;
+      pair<double,double> _centrality;
+      pair<double,double> _triggerRange;
+      pair<double,double> _associatedRange;
+      vector<int> _pid;
+    public:
+   
+      /// Constructor
+      Correlator(int index, int subindex) {
+        _index = index;
+        _subindex = subindex;
+      }
+      void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
+      void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
+      void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
+      void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
+      void SetPID(std::initializer_list<int> pid){ _pid = pid; }
+   
+      string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
+      pair<double,double> GetCentrality(){ return _centrality; }
+      double GetCentralityMin(){ return _centrality.first; }
+      double GetCentralityMax(){ return _centrality.second; }
+      pair<double,double> GetTriggerRange(){ return _triggerRange; }
+      double GetTriggerRangeMin(){ return _triggerRange.first; }
+      double GetTriggerRangeMax(){ return _triggerRange.second; }
+      pair<double,double> GetAssociatedRange(){ return _associatedRange; }
+      double GetAssociatedRangeMin(){ return _associatedRange.first; }
+      double GetAssociatedRangeMax(){ return _associatedRange.second; }
+      vector<int> GetPID(){ return _pid; }
+   
+      int GetIndex(){ return _index; }
+      int GetSubIndex(){ return _subindex; }
+      string GetFullIndex()
+      {
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
+          return fullIndex;
+      }
+   
+      bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
+      bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
+      bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
+      bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second) ? true : false; }
+      bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
+      bool CheckPID(std::initializer_list<int> pid)
+      {
+         
+          bool inList = false;
+         
+          for(int id : pid)
+          {
+              auto it = std::find(_pid.begin(), _pid.end(), id);
+             
+              if(it != _pid.end())
+              {
+                  inList = true;
+                  break;
+              }
+          }
+         
+          return inList;
+         
+      }
+     
+      bool CheckConditions(string s, double cent, double tpt, double apt)
+      {
+        if(!CheckConditions(s, cent, tpt)) return false;
+        if(!CheckAssociatedRange(apt)) return false;
+       
+        return true;
+       
+      }
+   
+      bool CheckConditions(string s, double cent, double tpt)
+      {
+        if(!CheckConditions(s, cent)) return false;
+        if(!CheckTriggerRange(tpt)) return false;
+       
+        return true;
+       
+      }
+   
+      bool CheckConditions(string s, double cent)
+      {
+        if(!CheckCollSystemAndEnergy(s)) return false;
+        if(!CheckCentrality(cent)) return false;
+       
+        return true;
+       
+      }
+     
+      bool CheckConditionsMaxTrigger(string s, double cent, double tpt, double apt)
+      {
+        if(!CheckCollSystemAndEnergy(s)) return false;
+        if(!CheckCentrality(cent)) return false;
+        if(!CheckTriggerRange(tpt)) return false;
+        if(!CheckAssociatedRangeMaxTrigger(apt,tpt)) return false;
+       
+        return true;
+       
+      }
+  };
 
   /// @brief Add a short analysis description here
   class PHENIX_2008_I778396 : public Analysis {
