@@ -2,19 +2,23 @@ Name: STAR_2010_I851937
 Year: 2010
 Summary: <A one-line informative STAR_2010_I851937 headline>
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: <Relativistic Heavy Ion Collider (RHIC)>
 InspireID: 851937
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Eden Ross <eross14@vols.utk.edu>
+ - Christine Nattrass <cnattras@vols.utk.edu>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
+ - '(2010) Example: Eur.Phys.J. C76 (2016) no.7, 392'
  - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
  - 'Example: arXiv:1605.03814'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=dAU,AUAU
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
