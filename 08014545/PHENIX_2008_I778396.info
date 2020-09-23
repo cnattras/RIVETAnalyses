@@ -2,19 +2,23 @@ Name: PHENIX_2008_I778396
 Year: 2008
 Summary: <A one-line informative PHENIX_2008_I778396 headline>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider
 InspireID: 778396
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Nora Bauer <nbauer1@vols.utk.edu>
+ - Christine Nattrass <cnattras@utk.edu>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'Phys. Rev C. 78 (2008) 014901'
+ - '10.1103/PhysRevC.78.014901'
+ - 'arXiv:0801.4545'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=PP,AUAU
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
