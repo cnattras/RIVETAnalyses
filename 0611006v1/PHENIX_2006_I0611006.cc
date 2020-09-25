@@ -11,7 +11,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "/home/antoniosilva/RivetWorkdir/Christal/1304.3410/RHICCentrality.hh" //external header for Centrality calculation
+#include "RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -32,12 +32,12 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-    	//Particles: eta, pi^+, pi^-, pi^0, gamma (Not listed: deuteron, Au)
+    	//Particles: eta, pi^+, pi^-, pi^0, gamma
     	std::initializer_list<int> pdgIds = { 221, 211, -211, 111, 22};
-    	const PrimaryParticles fs(Cuts::abseta < 0.35 && Cuts::abscharge > 0);
+    	const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge > 0);
     	declare(fs, "fs");
     	
-    	const PrimaryParticles ns(Cuts::abseta < 0.35 && Cuts::abscharge == 0);
+    	const PrimaryParticles ns(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
     	declare(ns, "ns");
     	
     	beamOpt = getOption<string>("beam", "NONE");
@@ -62,69 +62,43 @@ namespace Rivet {
     	//--------Begin booking histograms-----------
     	
     	//Cross sections in pp (fig 12.1)
-    	string refname1 = mkAxisCode(1, 1, 1);
-	const Scatter2D& refdata1 = refData(refname1);
-	book(hCrossSec["xSection_pp_GammaGamma"], refname1 + "_pp", refdata1);
+	book(hCrossSec["xSection_pp_GammaGamma"], 1, 1, 1);
 	
 	//Cross sections in pp (fig 12.2)
-	string refname2 = mkAxisCode(1, 1, 2);
-	const Scatter2D& refdata2 = refData(refname2);
-	book(hCrossSec["xSection_pp_Pions"], refname2 + "_pp", refdata2);
+	book(hCrossSec["xSection_pp_Pions"], 2, 1, 1);
 	
 	//Cross sections in dAu (fig 13.1)
-    	string refname3 = mkAxisCode(2, 1, 1);
-	const Scatter2D& refdata3 = refData(refname3);
-	book(hCrossSec["xSection_dAu_GammaGamma"], refname3 + "_dAu", refdata3);
+	book(hCrossSec["xSection_dAu_GammaGamma"], 3, 1, 1);
 	
 	//Cross sections in dAu (fig 13.2)
-	string refname4 = mkAxisCode(2, 1, 2);
-	const Scatter2D& refdata4 = refData(refname4);
-	book(hCrossSec["xSection_dAu_Pions"], refname4 + "_dAu", refdata4);
+	book(hCrossSec["xSection_dAu_Pions"], 4, 1, 1);
 	
 	//Ratio eta/pi^0 in pp (fig 18)
-	string refname5 = mkAxisCode(9, 1, 1);
-	const Scatter2D& refdata5 = refData(refname5);
-	book(hRatiopp["ratioEtaPi0_pp"], refname5 + "_pp", refdata5);
+	book(hRatiopp["ratioEtaPi0_pp"], 9, 1, 1);
 	
 	//R_dAu 0-20 (fig 16)
-	string refname6 = mkAxisCode(7, 1, 2);
-	const Scatter2d& refdata6 = refData(refname6);
-	book(hRdAu20["RdAu_c20"], refname6 + "_dAu", refdata6);
+	book(hRdAu20["RdAu_c20"], 7, 1, 2);
 	
 	//R_dAu 20-40 (fig 16)
-	string refname7 = mkAxisCode(7, 1, 3);
-	const Scatter2d& refdata7 = refData(refname7);
-	book(hRdAu40["RdAu_c40"], refname7 + "_dAu", refdata7);
+	book(hRdAu40["RdAu_c40"], 7, 1, 3);
 	
 	//R_dAu 40-60 (fig 16)
-	string refname8 = mkAxisCode(7, 1, 4);
-	const Scatter2d& refdata8 = refData(refname8);
-	book(hRdAu60["RdAu_c60"], refname8 + "_dAu", refdata8);
+	book(hRdAu60["RdAu_c60"], 7, 1, 4);
 	
 	//R_dAu 60-88 (fig 16)
-	string refname9 = mkAxisCode(7, 1, 5);
-	const Scatter2d& refdata9 = refData(refname9);
-	book(hRdAu88["RdAu_c88"], refname9 + "_dAu", refdata9);
+	book(hRdAu88["RdAu_cMB"], 7, 1, 5);
 	
 	//R_dAu 0-88(MB) (fig 16)
-	string refname10 = mkAxisCode(7, 1, 1);
-	const Scatter2d& refdata10 = refData(refname10);
-	book(hRdAuMB["RdAu_cMB"], refname10 + "_dAu", refdata10);
+	book(hRdAuMB["RdAu_cMB"], 7, 1, 1);
 	
 	//R_AuAu 0-20 (fig 17)
-	string refname15 = mkAxisCode(8, 1, 1);
-	const Scatter2d& refdata15 = refData(refname15);
-	book(hRAuAu["RAuAu_c20"], refname15 + "_AuAu", refdata15);
+	book(hRAuAu["RAuAu_c20"], 8, 1, 1);
 	
 	//R_AuAu 20-60 (fig 17)
-	string refname16 = mkAxisCode(8, 1, 2);
-	const Scatter2d& refdata16 = refData(refname16);
-	book(hRAuAu["RAuAu_c60"], refname16 + "_AuAu", refdata16);
+	book(hRAuAu["RAuAu_c60"], 8, 1, 2);
 	
 	//R_AuAu 60-92 (fig 17)
-	string refname17 = mkAxisCode(8, 1, 3);
-	const Scatter2d& refdata17 = refData(refname17);
-	book(hRAuAu["RAuAu_c92"], refname17 + "_AuAu", refdata17);
+	book(hRAuAu["RAuAu_c92"], 8, 1, 3);
 	
 	//Ratio eta/pi^0 in Au+Au 0-92 MB (fig 20) ***UNUSED IN HISTO***
 	//string refname31 = mkAxisCode(11, 1, 1);
@@ -132,64 +106,40 @@ namespace Rivet {
 	//book(hRatioAuAu["ratioEtaPi0_cMB"], refname31 + "_AuAu", refdata31);
 	
 	//Ratio eta/pi^0 in Au+Au 0-20 (fig 20)
-	string refname11 = mkAxisCode(11, 1, 2);
-	const Scatter2d& refdata11 = refData(refname11);
-	book(hRatioAuAu["ratioEtaPi0_c20"], refname11 + "_AuAu", refdata11);
+	book(hRatioAuAu["ratioEtaPi0_c20"], 11, 1, 2);
 	
 	//Ratio eta/pi^0 in Au+Au 20-60 (fig 20)
-	string refname12 = mkAxisCode(11, 1, 3);
-	const Scatter2d& refdata12 = refData(refname12);
-	book(hRatioAuAu["ratioEtaPi0_c60"], refname12 + "_AuAu", refdata12);
+	book(hRatioAuAu["ratioEtaPi0_c60"], 11, 1, 3);
 	
 	//Ratio eta/pi^0 in Au+Au 60-92 (fig 20)
-	string refname13 = mkAxisCode(11, 1, 4);
-	const Scatter2d& refdata13 = refData(refname13);
-	book(hRatioAuAu["ratioEtaPi0_c92"], refname13 + "_AuAu", refdata13);
+	book(hRatioAuAu["ratioEtaPi0_c92"], 11, 1, 4);
 	
 	//Ratio eta/pi^0 in Au+Au d+Au MB comparison (fig 20) 
-	string refname14 = mkAxisCode(10, 1, 1);
-	const Scatter2d& refdata14 = refData(refname14);
-	book(hRatioAuAu["ratioEtaPi0_cMB_dAu"], refname11 + "_dAu", refdata11);
+	book(hRatioAuAu["ratioEtaPi0_cMB_dAu"], 10, 1, 1);
 	
 	//invariant yields in d+Au 0-20 (fig 14)
-	string refname18 = mkAxisCode(5, 1, 1);
-	const Scatter2d& refdata18 = refData(refname18);
-	book(hdAuYields["pTyields_c20"], refname18 + "_dAu", refdata18);
+	book(hdAuYields["pTyields_c20"], 5, 1, 1);
 	
 	//invariant yields in d+Au 20-40 (fig 14)
-	string refname19 = mkAxisCode(5, 1, 2);
-	const Scatter2d& refdata19 = refData(refname19);
-	book(hdAuYields["pTyields_c40"], refname19 + "_dAu", refdata19);
+	book(hdAuYields["pTyields_c40"], 5, 1, 2);
 	
 	//invariant yields in d+Au 40-60 (fig 14)
-	string refname20 = mkAxisCode(5, 1, 3);
-	const Scatter2d& refdata20 = refData(refname20);
-	book(hdAuYields["pTyields_c60"], refname20 + "_dAu", refdata20);
+	book(hdAuYields["pTyields_c60"], 5, 1, 3);
 	
 	//invariant yields in d+Au 60-88 (fig 14)
-	string refname21 = mkAxisCode(5, 1, 4);
-	const Scatter2d& refdata21 = refData(refname21);
-	book(hdAuYields["pTyields_c88"], refname21 + "_dAu", refdata21);
+	book(hdAuYields["pTyields_c88"], 5, 1, 4);
 	
 	//invariant yields in Au+Au 0-92 (fig 15)
-	string refname22 = mkAxisCode(6, 1, 1);
-	const Scatter2d& refdata22 = refData(refname22);
-	book(hAuAuYields["pTyields_cMB"], refname22 + "_AuAu", refdata22);
+	book(hAuAuYields["pTyields_cMB"], 6, 1, 1);
 	
 	//invariant yields in Au+Au 0-20 (fig 15)
-	string refname23 = mkAxisCode(6, 1, 2);
-	const Scatter2d& refdata23 = refData(refname23);
-	book(hAuAuYields["pTyields_c20"], refname23 + "_AuAu", refdata23);
+	book(hAuAuYields["pTyields_c20"], 6, 1, 2);
 	
 	//invariant yields in Au+Au 20-40 (fig 15)
-	string refname24 = mkAxisCode(6, 1, 3);
-	const Scatter2d& refdata24 = refData(refname24);
-	book(hAuAuYields["pTyields_c40"], refname24 + "_AuAu", refdata24);
+	book(hAuAuYields["pTyields_c40"], 6, 1, 3);
 	
 	//invariant yields in Au+Au 60-92 (fig 15)
-	string refname25 = mkAxisCode(6, 1, 4);
-	const Scatter2d& refdata25 = refData(refname25);
-	book(hAuAuYields["pTyields_c92"], refname25 + "_AuAu", refdata25);
+	book(hAuAuYields["pTyields_c92"], 6, 1, 4);
 	
 	//Ratio eta/pi^0 in d+Au 0-88 (fig 19)  ***UNUSED IN HISTO***
 	//string refname26 = mkAxisCode(10, 1, 1);
@@ -197,25 +147,67 @@ namespace Rivet {
 	//book(hRatiodAu["ratioEtaPi0_cMB"], refname26 + "_dAu", refdata26);
 	
 	//Ratio eta/pi^0 in d+Au 0-20 (fig 19)
-	string refname27 = mkAxisCode(10, 1, 2);
-	const Scatter2d& refdata27 = refData(refname27);
-	book(hRatiodAu["ratioEtaPi0_c20"], refname27 + "_dAu", refdata27);
+	book(hRatiodAu["ratioEtaPi0_c20"], 10, 1, 2);
 	
 	//Ratio eta/pi^0 in d+Au 19-40 (fig 19)
-	string refname28 = mkAxisCode(10, 1, 3);
-	const Scatter2d& refdata28 = refData(refname28);
-	book(hRatiodAu["ratioEtaPi0_c40"], refname28 + "_dAu", refdata28);
+	book(hRatiodAu["ratioEtaPi0_c40"], 10, 1, 3);
 	
 	//Ratio eta/pi^0 in d+Au 40-60 (fig 19)
-	string refname29 = mkAxisCode(10, 1, 4);
-	const Scatter2d& refdata29 = refData(refname29);
-	book(hRatiodAu["ratioEtaPi0_c60"], refname29 + "_dAu", refdata29);
+	book(hRatiodAu["ratioEtaPi0_c60"], 10, 1, 4);
 	
 	//Ratio eta/pi^0 in d+Au 60-88 (fig 19)
-	string refname30 = mkAxisCode(10, 1, 5);
-	const Scatter2d& refdata30 = refData(refname30);
-	book(hRatiodAu["ratioEtaPi0_c88"], refname30 + "_dAu", refdata30);
-
+	book(hRatiodAu["ratioEtaPi0_c88"], 10, 1, 5);
+	
+	//-----Book Scatter Plots from division-------
+	
+	string refname1 = mkAxisCode(11, 1, 2);
+	const Scatter2D& refdata1 = refData(refname1);
+	book(hRAuAu["RAuAu_c20"], refname1 + "_RAuAu", refdata1);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname1 + "_pp_GammaGamma", refdata1);
+	book(RatioAuAu["AuAuc/pp_c20"], refname1);
+	
+	string refname2 = mkAxisCode(11, 1, 3);
+	const Scatter2D& refdata2 = refData(refname2);
+	book(hRAuAu["RAuAu_c60"], refname2 + "_RAuAu", refdata2);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname2 + "_pp_GammaGamma", refdata2);
+	book(RatioAuAu["AuAuc/pp_c60"], refname2);
+	
+	string refname3 = mkAxisCode(11, 1, 4);
+	const Scatter2D& refdata3 = refData(refname3);
+	book(hRAuAu["RAuAu_c92"], refname3 + "_RAuAu", refdata3);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname3 + "_pp_GammaGamma", refdata3);
+	book(RatioAuAu["AuAuc/pp_c92"], refname3);
+	
+	string refname4 = mkAxisCode(10, 1, 2);
+	const Scatter2D& refdata4 = refData(refname4);
+	book(hRdAu20["RdAu_c20"], refname4 + "_RdAu", refdata4);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname4 + "_pp_GammaGamma", refdata4);
+	book(RatiodAu20["dAuc/pp_c20"], refname4);
+	
+	string refname5 = mkAxisCode(10, 1, 3);
+	const Scatter2D& refdata5 = refData(refname5);
+	book(hRdAu40["RdAu_c40"], refname5 + "_RdAu", refdata5);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname5 + "_pp_GammaGamma", refdata5);
+	book(RatiodAu40["dAuc/pp_c40"], refname5);
+	
+	string refname6 = mkAxisCode(10, 1, 4);
+	const Scatter2D& refdata6 = refData(refname6);
+	book(hRdAu60["RdAu_c60"], refname6 + "_RdAu", refdata6);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname6 + "_pp_GammaGamma", refdata6);
+	book(RatiodAu60["dAuc/pp_c60"], refname6);
+	
+	string refname7 = mkAxisCode(10, 1, 5);
+	const Scatter2D& refdata7 = refData(refname7);
+	book(hRdAu88["RdAu_c88"], refname7 + "_RdAu", refdata7);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname7 + "_pp_GammaGamma", refdata7);
+	book(RatiodAu88["dAuc/pp_c88"], refname7);
+	
+	string refname8 = mkAxisCode(10, 1, 1);
+	const Scatter2D& refdata8 = refData(refname8);
+	book(hRdAuMB["RdAu_cMB"], refname8 + "_RdAu", refdata8);
+	book(hCrossSec["xSection_pp_GammaGamma"], refname8 + "_pp_GammaGamma", refdata8);
+	book(RatiodAuMB["dAuc/pp_cMB"], refname8);
+	
     }
 
 
@@ -249,6 +241,7 @@ namespace Rivet {
 				
 				break;
 			}
+		}
 		}
 		
 		for (Particle p : neutralParticles)
@@ -1365,6 +1358,7 @@ namespace Rivet {
 		}
 	}
 	
+	
 	for (auto element : hAuAuYields)
 	{
 		string name = element.second->name();
@@ -1526,6 +1520,8 @@ namespace Rivet {
 	}
 	
 	if (!(AuAu200_available && dAu200_available && pp_available)) return;
+	
+	cout << "Here ************" << endl;
 
 	//Scale histograms
 	
@@ -1566,18 +1562,18 @@ namespace Rivet {
 	hRdAuMB["RdAu_cMB"]->scaleW(1. / sow["sow_dAUc40"]->sumW());
 	hRdAuMB["RdAu_cMB"]->scaleW(1. / sow["sow_dAUc60"]->sumW());
 	hRdAuMB["RdAu_cMB"]->scaleW(1. / sow["sow_dAUc88"]->sumW());
-	divide(hRdAu20["RdAu_c20"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu20["dAuc/pp"]);
-	divide(hRdAu40["RdAu_c40"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu40["dAuc/pp"]);
-	divide(hRdAu60["RdAu_c60"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu60["dAuc/pp"]);
-	divide(hRdAu88["RdAu_c88"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu88["dAuc/pp"]);
-	divide(hRdAuMB["RdAu_cMB"], hCrossSec["xSection_pp_GammaGamma"], RatiodAuMB["dAuc/pp"]);
+	divide(hRdAu20["RdAu_c20"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu20["dAuc/pp_c20"]);
+	divide(hRdAu40["RdAu_c40"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu40["dAuc/pp_c40"]);
+	divide(hRdAu60["RdAu_c60"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu60["dAuc/pp_c60"]);
+	divide(hRdAu88["RdAu_c88"], hCrossSec["xSection_pp_GammaGamma"], RatiodAu88["dAuc/pp_c88"]);
+	divide(hRdAuMB["RdAu_cMB"], hCrossSec["xSection_pp_GammaGamma"], RatiodAuMB["dAuc/pp_cMB"]);
 	
 	hRAuAu["RAuAu_c20"]->scaleW(1. / sow["sow_AUAUc20"]->sumW());
 	hRAuAu["RAuAu_c60"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 	hRAuAu["RAuAu_c92"]->scaleW(1. / sow["sow_AUAUc92"]->sumW());
-	divide(hRAuAu["RAuAu_c20"], hCrossSec["xSection_pp_GammaGamma"], RatioAuAu["AuAuc/pp"]);
-	divide(hRAuAu["RAuAu_c60"], hCrossSec["xSection_pp_GammaGamma"], RatioAuAu["AuAuc/pp"]);
-	divide(hRAuAu["RAuAu_c92"], hCrossSec["xSection_pp_GammaGamma"], RatioAuAu["AuAuc/pp"]);
+	divide(hRAuAu["RAuAu_c20"], hCrossSec["xSection_pp_GammaGamma"], RatioAuAu["AuAuc/pp_c20"]);
+	divide(hRAuAu["RAuAu_c60"], hCrossSec["xSection_pp_GammaGamma"], RatioAuAu["AuAuc/pp_c60"]);
+	divide(hRAuAu["RAuAu_c92"], hCrossSec["xSection_pp_GammaGamma"], RatioAuAu["AuAuc/pp_c92"]);
 	
 	hdAuYields["pTyields_c20"]->scaleW(1. / sow["sow_dAUc20"]->sumW());
 	hdAuYields["pTyields_c40"]->scaleW(1. / sow["sow_dAUc40"]->sumW());
@@ -1592,31 +1588,31 @@ namespace Rivet {
 	hAuAuYields["pTyields_cMB"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 	hAuAuYields["pTyields_cMB"]->scaleW(1. / sow["sow_AUAUc92"]->sumW());
 	
-	hRAuAu["RAuAu_c20"]->scaleY(1. / 6.14);
-	hRAuAu["RAuAu_c60"]->scaleY(1. / 4.6);
-	hRAuAu["RAuAu_c92"]->scaleY(1. / 0.3);
+	RatioAuAu["AuAuc/pp_c20"]->scaleY(1. / 6.14);
+	RatioAuAu["AuAuc/pp_c60"]->scaleY(1. / 4.6);
+	RatioAuAu["AuAuc/pp_c92"]->scaleY(1. / 0.3);
 	
-	hRdAu20["RdAu_c20"]->scaleY(1. / 0.36);
-	hRdAu20["RdAu_c40"]->scaleY(1. / 0.25);
-	hRdAu20["RdAu_c60"]->scaleY(1. / 0.17);
-	hRdAu20["RdAu_c88"]->scaleY(1. / 0.078);
-	hRdAu20["RdAu_cMB"]->scaleY(1. / 0.2);
+	RatiodAu20["dAuc/pp_c20"]->scaleY(1. / 0.36);
+	RatiodAu40["dAuc/pp_c40"]->scaleY(1. / 0.25);
+	RatiodAu60["dAuc/pp_c60"]->scaleY(1. / 0.17);
+	RatiodAu88["dAuc/pp_c88"]->scaleY(1. / 0.078);
+	RatiodAuMB["dAuc/pp_cMB"]->scaleY(1. / 0.2);
 
     }
 
-	map<string, Scatter2DPtr> hCrossSec;
-	map<string, Scatter2DPtr> hRatiopp;
-	map<string, Scatter2DPtr> hRdAu20;
-	map<string, Scatter2DPtr> hRdAu40;
-	map<string, Scatter2DPtr> hRdAu60;
-	map<string, Scatter2DPtr> hRdAu88;
-	map<string, Scatter2DPtr> hRdAuMB;
-	map<string, Scatter2DPtr> hRAuAu;
-	map<string, Scatter2DPtr> hRatioAuAu;
+	map<string, Histo1DPtr> hCrossSec;
+	map<string, Histo1DPtr> hRatiopp;
+	map<string, Histo1DPtr> hRdAu20;
+	map<string, Histo1DPtr> hRdAu40;
+	map<string, Histo1DPtr> hRdAu60;
+	map<string, Histo1DPtr> hRdAu88;
+	map<string, Histo1DPtr> hRdAuMB;
+	map<string, Histo1DPtr> hRAuAu;
+	map<string, Histo1DPtr> hRatioAuAu;
 	map<string, Scatter2DPtr> RatioAuAu;
-	map<string, Scatter2DPtr> hdAuYields;
-	map<string, Scatter2DPtr> hAuAuYields;
-	map<string, Scatter2DPtr> hRatiodAu;
+	map<string, Histo1DPtr> hdAuYields;
+	map<string, Histo1DPtr> hAuAuYields;
+	map<string, Histo1DPtr> hRatiodAu;
 	map<string, Scatter2DPtr> RatiodAu20;
 	map<string, Scatter2DPtr> RatiodAu40;
 	map<string, Scatter2DPtr> RatiodAu60;
