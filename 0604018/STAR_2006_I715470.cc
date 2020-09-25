@@ -252,9 +252,44 @@ namespace Rivet {
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
      
       string SysAndEnergy = CollSystem + cmsEnergy;
+
+    
+      double triggerptMin = 999.;
+      double triggerptMax = -999.;
+      double associatedptMin = 999.;
+      double associatedptMax = -999.;
+    
+      bool isVeto = true;
+    
+      for(Correlator& corr : Correlators)
+      {
+        if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+        //if(!corr.CheckCentrality(centr)) continue;
+        
+        //If event is accepted for the correlator, fill event weights
+        sow[corr.GetFullIndex()]->fill();
+        
+        isVeto = false;
+        
+        //Check min and max of the trigger and associated particles in order to speed up the particle loops
+        if(corr.GetTriggerRangeMin() < triggerptMin) triggerptMin = corr.GetTriggerRangeMin();
+        if(corr.GetTriggerRangeMax() > triggerptMax) triggerptMax = corr.GetTriggerRangeMax();
+        
+        if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
+        if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
+      }
+    
+      if(isVeto) vetoEvent;
     }
     void finalize() {
     }
+    map<string, Histo1DPtr> _h;
+    map<string, CounterPtr> sow;
+    map<string, Histo1DPtr> _DeltaPhixE;
+    map<int, Histo1DPtr> _DeltaPhiSub;
+    map<string, int> nTriggers;
+    vector<Correlator> Correlators;
+    
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
 
