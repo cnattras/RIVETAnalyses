@@ -296,10 +296,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 211: // pi+
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -314,10 +314,10 @@ namespace Rivet {
 				}
 				case -211: // pi-
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -341,10 +341,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 221: // eta
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -359,10 +359,10 @@ namespace Rivet {
 				}
 				case 111: // pi^0
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -377,10 +377,10 @@ namespace Rivet {
 				}
 				case 22: // gamma
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -410,10 +410,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 211: // pi+
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -428,10 +428,10 @@ namespace Rivet {
 				}
 				case -211: // pi-
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -455,10 +455,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 221: // eta
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -473,10 +473,10 @@ namespace Rivet {
 				}
 				case 111: // pi^0
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -491,10 +491,10 @@ namespace Rivet {
 				}
 				case 22: // gamma
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -523,10 +523,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 211: // pi+
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -541,10 +541,10 @@ namespace Rivet {
 				}
 				case -211: // pi-
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -568,10 +568,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 221: // eta
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -586,10 +586,10 @@ namespace Rivet {
 				}
 				case 111: // pi^0
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -604,10 +604,10 @@ namespace Rivet {
 				}
 				case 22: // gamma
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -636,10 +636,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 211: // pi+
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -654,10 +654,10 @@ namespace Rivet {
 				}
 				case -211: // pi-
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -681,10 +681,10 @@ namespace Rivet {
 				switch (p.pid()) {
 				case 221: // eta
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -699,10 +699,10 @@ namespace Rivet {
 				}
 				case 111: // pi^0
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
@@ -717,10 +717,10 @@ namespace Rivet {
 				}
 				case 22: // gamma
 				{
-					hAuAuYields["pTyields_c20_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c40_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_c92_AuAu"]->fill(partPt, pt_weight);
-					hAuAuYields["pTyields_cMB_AuAu"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c20"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c40"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_c92"]->fill(partPt, pt_weight);
+					hAuAuYields["pTyields_cMB"]->fill(partPt, pt_weight);
 					
 					hRAuAu["RAuAu_c20"]->fill(partPt);
 					hRAuAu["RAuAu_c60"]->fill(partPt);
