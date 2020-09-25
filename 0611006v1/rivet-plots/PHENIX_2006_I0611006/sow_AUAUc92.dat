@@ -1,0 +1,16 @@
+# BEGIN PLOT
+LegendOnly=//home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/sow_AUAUc92
+DrawOnly=//home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/sow_AUAUc92
+Legend=1
+LogY=1
+# END PLOT
+
+# BEGIN COUNTER //home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/sow_AUAUc92
+LineColor=red
+LineStyle=solid
+Path=//home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/sow_AUAUc92
+Title=Rivet_Output
+# value	 error
+2.249798e+05	1.856901e+04
+# END COUNTER
+

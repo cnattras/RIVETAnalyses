@@ -1,0 +1,22 @@
+# BEGIN PLOT
+LegendOnly=//home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/d04-x01-y01
+DrawOnly=//home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/d04-x01-y01
+Title=$\eta$ invariant yields in Au+Au versus $p_T$
+LogY=1
+XLabel=$p_T$
+YLabel=Yields, $\eta$ $0-92\%$ centrality (MB)
+Legend=1
+# END PLOT
+
+# BEGIN HISTO1D //home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/d04-x01-y01
+LineColor=red
+LineStyle=solid
+Path=//home/lauren/RIVET/0611006/Rivet_Output.yoda/PHENIX_2006_I0611006:beam=AUAU200:cent=GEN/d04-x01-y01
+Title=Rivet_Output
+# xlow	 xhigh	 val	 errminus	 errplus
+4.500000e+00	5.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+5.500000e+00	6.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+6.500000e+00	7.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+7.500000e+00	8.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+
