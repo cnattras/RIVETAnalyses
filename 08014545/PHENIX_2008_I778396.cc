@@ -14,6 +14,12 @@
 #include "../Centralities/RHICCentrality.hh"
 
 #define _USE_MATH_DEFINES
+static const int numTrigPtBins = 4;
+static const float pTTrigBins[] = {2.0,3.0,4.0,5.0,10.0};
+static const int numAssocPtBins = 11;
+static const float pTAssocBins[] = {0.4,1.0,1.5,2.0,2.5,3.0,4.0,5.0,10.0};
+static const int numCentBins = 10;
+static const float CentBins[] = {0.0,5.0,10.0,20.0,30.0,40.0,50.0,60.0,70.0,80.0,90.0,100.0};
 
 using namespace std;
 
