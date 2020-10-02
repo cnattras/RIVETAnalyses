@@ -16,9 +16,9 @@
 #define _USE_MATH_DEFINES
 static const int numTrigPtBins = 4;
 static const float pTTrigBins[] = {2.0,3.0,4.0,5.0,10.0};
-static const int numAssocPtBins = 11;
+static const int numAssocPtBins = 8;
 static const float pTAssocBins[] = {0.4,1.0,1.5,2.0,2.5,3.0,4.0,5.0,10.0};
-static const int numCentBins = 10;
+static const int numCentBins = 11;
 static const float CentBins[] = {0.0,5.0,10.0,20.0,30.0,40.0,50.0,60.0,70.0,80.0,90.0,100.0};
 
 using namespace std;
@@ -30,6 +30,7 @@ namespace Rivet {
     private:
       int _index;
       int _subindex;
+      int _subsubindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
@@ -38,9 +39,10 @@ namespace Rivet {
     public:
    
       /// Constructor
-      Correlator(int index, int subindex) {
+      Correlator(int index, int subindex, int subsubindex) {
         _index = index;
         _subindex = subindex;
+        _subsubindex = subsubindex;
       }
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
@@ -62,9 +64,10 @@ namespace Rivet {
    
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
+      int GetSubSubIndex(){ return _subsubindex; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex())+ to_string(GetSubIndex());
           return fullIndex;
       }
    
@@ -238,13 +241,34 @@ namespace Rivet {
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS");
 
-      	Correlator c1(1,1);
-      	c1.SetCollSystemAndEnergy("pp200GeV");
-     	c1.SetCentrality(0., 100.);
-     	c1.SetTriggerRange(5., 7.);
-     	//c1.SetAssociatedRange(0., 999.);
-     	c1.SetPID(pdgPi0);
+for(int pta = 0; pta<numAssocPtBins; pta++){
+	for(int ptt = 0; ptt<numTrigPtBins; ptt++){
+
+
+
+      	Correlator c2(pta,ptt,-1);
+      	c2.SetCollSystemAndEnergy("pp200GeV");
+     	c2.SetCentrality(0,100);
+     	c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+     	c2.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+     	//c1.SetPID(pdgPi0);
+     	Correlators.push_back(c2);
+
+		for(int cb = 0; cb<numCentBins; cb++){
+
+
+      	Correlator c1(pta,ptt,cb);
+      	c1.SetCollSystemAndEnergy("AuAu200GeV");
+     	c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+     	c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+     	c1.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+     	//c1.SetPID(pdgPi0);
      	Correlators.push_back(c1);
+	
+		}
+	}
+}
+
     }
     void analyze(const Event& event) {
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
