@@ -16,10 +16,15 @@
 #define _USE_MATH_DEFINES
 static const int numTrigPtBins = 4;
 static const float pTTrigBins[] = {2.0,3.0,4.0,5.0,10.0};
-static const int numAssocPtBins = 8;
-static const float pTAssocBins[] = {0.4,1.0,1.5,2.0,2.5,3.0,4.0,5.0,10.0};
-static const int numCentBins = 11;
-static const float CentBins[] = {0.0,5.0,10.0,20.0,30.0,40.0,50.0,60.0,70.0,80.0,90.0,100.0};
+static const int numAssocPtBins = 6;
+static const float pTAssocBins[] = {0.4,1.0,2.0,3.0,4.0,5.0,10.0};
+static const int numCentBins = 5;
+static const float CentBins[] = {0.0,12.0,20.0,40.0,60.0,92.0};
+static const int numDeltaPhiBins = 26;
+static const float DeltaPhiBins[] = {-1.5048,-1.275,-0.98,-0.685,-0.415,-0.22,-0.1,0,0.1,0.22,0.415,0.685,0.98,
+1.275,1.595,1.965,2.305,2.55,2.75,2.945,3.14,3.44,3.535,3.73,3.935,4.32,4.7012};
+static const int numpTAssocBins2 = 4;
+static const float pTAssocBins2[] = {1.0,1.5,2.0,2.5,3.0};
 
 using namespace std;
 
@@ -36,6 +41,7 @@ namespace Rivet {
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
       vector<int> _pid;
+      bool _noCentrality = false;
     public:
    
       /// Constructor
@@ -46,6 +52,7 @@ namespace Rivet {
       }
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
+      void SetNoCentrality(){ _noCentrality = true; }
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
@@ -72,11 +79,12 @@ namespace Rivet {
       }
    
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
-      bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
+     bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
       bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
       bool CheckPID(std::initializer_list<int> pid)
+
       {
          
           bool inList = false;
@@ -240,34 +248,527 @@ namespace Rivet {
         
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS");
+// The following will book the histograms for Figure 36-38
+        int pta;
+        int ptt;
+        int pta2;
+        int cb;
+for(pta = 0; pta<numAssocPtBins; pta++){
+	for(ptt = 0; ptt<numTrigPtBins; ptt++){
 
-for(int pta = 0; pta<numAssocPtBins; pta++){
-	for(int ptt = 0; ptt<numTrigPtBins; ptt++){
-
-
-
-      	Correlator c2(pta,ptt,-1);
-      	c2.SetCollSystemAndEnergy("pp200GeV");
-     	c2.SetCentrality(0,100);
-     	c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-     	c2.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
-     	//c1.SetPID(pdgPi0);
-     	Correlators.push_back(c2);
-
-		for(int cb = 0; cb<numCentBins; cb++){
-
-
-      	Correlator c1(pta,ptt,cb);
-      	c1.SetCollSystemAndEnergy("AuAu200GeV");
-     	c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+      Correlator c1(pta,ptt,-1);
+      c1.SetCollSystemAndEnergy("pp200GeV");
+     	c1.SetNoCentrality();
      	c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
      	c1.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
      	//c1.SetPID(pdgPi0);
-     	Correlators.push_back(c1);
+     	Correlators38.push_back(c1);
+
+      Correlator c2(pta,ptt,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+     	c2.SetCentrality(0,20);
+     	c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+     	c2.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+     	//c1.SetPID(pdgPi0);
+     	Correlators38.push_back(c2);
+
+      Correlator c3(pta,ptt,2);
+      c3.SetCollSystemAndEnergy("AuAu200GeV");
+      c3.SetCentrality(20,40);
+      c3.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c3.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+      //c1.SetPID(pdgPi0);
+      Correlators38.push_back(c3);
+
+      Correlator c4(pta,ptt,3);
+      c4.SetCollSystemAndEnergy("AuAu200GeV");
+      c4.SetCentrality(60,92);
+      c4.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c4.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+      //c1.SetPID(pdgPi0);
+      Correlators38.push_back(c4);
 	
-		}
 	}
 }
+
+// The following will book the histograms for Figure 31
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+  for(cb = 0; cb<numCentBins; cb++){
+        Correlator c1(pta,ptt,cb);
+        c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+      //c1.SetPID(pdgPi0);
+      Correlators31.push_back(c1);
+  }
+}
+
+// The following will book the histograms for Figures 28-30
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+  for(cb = 0; cb<numCentBins; cb++){
+        Correlator c1(pta,ptt,cb);
+        c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+      //c1.SetPID(pdgPi0);
+      Correlators30.push_back(c1);
+  }
+}
+
+// The following will book the histograms for Figure 26 
+for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
+      Correlator c1(pta,ptt,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(3, 4);
+      c1.SetAssociatedRange(pTAssocBins2[pta2],7);
+      //c1.SetPID(pdgPi0);
+      Correlators26.push_back(c1);
+
+      Correlator c2(pta,ptt,-1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetNoCentrality();
+      c2.SetTriggerRange(4, 5);
+      c2.SetAssociatedRange(pTAssocBins2[pta2],7);
+      //c1.SetPID(pdgPi0);
+      Correlators26.push_back(c2);
+}
+
+// The following will book the histograms for Figure 25 
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+      Correlator c1(pta,ptt,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(1,5);
+      //c1.SetPID(pdgPi0);
+      Correlators25.push_back(c1);
+
+      Correlator c2(pta,ptt,-1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetNoCentrality();
+      c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c2.SetAssociatedRange(1,5);
+      //c1.SetPID(pdgPi0);
+      Correlators25.push_back(c2);
+}
+
+// The following will book the histograms for Figure 24 
+for(ptt = 0; ptt<2; ptt++){
+      Correlator c1(1,1,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(0,20);
+      c1.SetTriggerRange(2, 3);
+      c1.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators24.push_back(c1);
+
+      Correlator c2(2,2,1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetCentrality(0,20);
+      c2.SetTriggerRange(3, 4);
+      c2.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators24.push_back(c2);
+
+      Correlator c3(3,3,1);
+      c3.SetCollSystemAndEnergy("AuAu200GeV");
+      c3.SetCentrality(0,20);
+      c3.SetTriggerRange(3, 4);
+      c3.SetAssociatedRange(3,5);
+      //c1.SetPID(pdgPi0);
+      Correlators24.push_back(c3);
+
+      Correlator c4(4,4,1);
+      c4.SetCollSystemAndEnergy("AuAu200GeV");
+      c4.SetCentrality(0,20);
+      c4.SetTriggerRange(5,10);
+      c4.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators24.push_back(c4);
+
+}
+
+// The following will book the histograms for Figure 23 
+for(ptt = 0; ptt<1; ptt++){
+      Correlator c1(1,ptt,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(2, 3);
+      c1.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c1);
+
+      Correlator c2(2,ptt,1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetNoCentrality();
+      c2.SetTriggerRange(3, 4);
+      c2.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c2);
+
+      Correlator c3(3,ptt,1);
+      c3.SetCollSystemAndEnergy("AuAu200GeV");
+      c3.SetNoCentrality();
+      c3.SetTriggerRange(3, 4);
+      c3.SetAssociatedRange(3,5);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c3);
+
+      Correlator c4(4,ptt,1);
+      c4.SetCollSystemAndEnergy("AuAu200GeV");
+      c4.SetNoCentrality();
+      c4.SetTriggerRange(5,10);
+      c4.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c4);
+
+      Correlator c5(5,5,1);
+      c5.SetCollSystemAndEnergy("AuAu200GeV");
+      c5.SetCentrality(0,20);
+      c5.SetTriggerRange(2, 3);
+      c5.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c5);
+
+      Correlator c6(6,6,1);
+      c6.SetCollSystemAndEnergy("AuAu200GeV");
+      c6.SetCentrality(0,20);
+      c6.SetTriggerRange(3, 4);
+      c6.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c6);
+
+      Correlator c7(7,7,1);
+      c7.SetCollSystemAndEnergy("AuAu200GeV");
+      c7.SetCentrality(0,20);
+      c7.SetTriggerRange(3, 4);
+      c7.SetAssociatedRange(3,5);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c7);
+
+      Correlator c8(8,8,1);
+      c8.SetCollSystemAndEnergy("AuAu200GeV");
+      c8.SetCentrality(0,20);
+      c8.SetTriggerRange(5,10);
+      c8.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators23.push_back(c8);
+
+}
+
+// The following will book the histograms for Figure 18 
+
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+      Correlator c1(-1,ptt,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(1,5);
+      //c1.SetPID(pdgPi0);
+      Correlators18.push_back(c1);
+
+      Correlator c2(1,ptt,1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetCentrality(0,20);
+      c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c2.SetAssociatedRange(1,5); //FIXME on all of these... 
+      //c1.SetPID(pdgPi0);
+      Correlators18.push_back(c2);
+}
+
+// The following will book the histograms for Figure 23 
+for(ptt = 0; ptt<1; ptt++){
+      Correlator c1(1,ptt,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(2, 3);
+      c1.SetAssociatedRange(0.4,1);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c1);
+
+      Correlator c2(2,ptt,1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetNoCentrality();
+      c2.SetTriggerRange(2,3);
+      c2.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c2);
+
+      Correlator c3(3,ptt,1);
+      c3.SetCollSystemAndEnergy("AuAu200GeV");
+      c3.SetNoCentrality();
+      c3.SetTriggerRange(3, 4);
+      c3.SetAssociatedRange(3,4);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c3);
+
+      Correlator c4(4,ptt,1);
+      c4.SetCollSystemAndEnergy("AuAu200GeV");
+      c4.SetNoCentrality();
+      c4.SetTriggerRange(4,5);
+      c4.SetAssociatedRange(4,5);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c4);
+
+      Correlator c5(5,ptt,1);
+      c5.SetCollSystemAndEnergy("AuAu200GeV");
+      c5.SetNoCentrality();
+      c5.SetTriggerRange(5,10);
+      c5.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c5);
+
+      Correlator c6(1,ptt,1);
+      c6.SetCollSystemAndEnergy("AuAu200GeV");
+      c6.SetCentrality(0,20);
+      c6.SetTriggerRange(2, 3);
+      c6.SetAssociatedRange(0.4,1);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c6);
+
+      Correlator c7(2,ptt,1);
+      c7.SetCollSystemAndEnergy("AuAu200GeV");
+      c7.SetCentrality(0,20);
+      c7.SetTriggerRange(2,3);
+      c7.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c7);
+
+      Correlator c8(3,ptt,1);
+      c8.SetCollSystemAndEnergy("AuAu200GeV");
+      c8.SetCentrality(0,20);
+      c8.SetTriggerRange(3, 4);
+      c8.SetAssociatedRange(3,4);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c8);
+
+      Correlator c9(4,ptt,1);
+      c9.SetCollSystemAndEnergy("AuAu200GeV");
+      c9.SetCentrality(0,20);
+      c9.SetTriggerRange(4,5);
+      c9.SetAssociatedRange(4,5);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c9);
+
+      Correlator c10(5,ptt,1);
+      c10.SetCollSystemAndEnergy("AuAu200GeV");
+      c10.SetCentrality(0,20);
+      c10.SetTriggerRange(5,10);
+      c10.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators16.push_back(c10);
+
+}
+
+int i;
+// The following will book the histograms for Figure 12
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+  for(i=0;i<3;i++){
+      Correlator c1(-1,ptt,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(1,5); //FIXME 2
+      //c1.SetPID(pdgPi0);
+      Correlators12.push_back(c1);
+
+    for(cb = 0; cb<numCentBins; cb++){
+        Correlator c1(-1,ptt,cb);
+        c1.SetCollSystemAndEnergy("AuAu200GeV");
+        c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+        c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+        c1.SetAssociatedRange(1,5);
+        //c1.SetPID(pdgPi0);
+        Correlators12.push_back(c1);
+    }  
+  }
+}
+
+// The following will book the histograms for Figure 11
+for(i=0;i<2;i++){
+  for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
+      Correlator c1(-1,ptt,i);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(0,20);
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(1,5);
+      //c1.SetPID(pdgPi0);
+      Correlators11.push_back(c1);
+  }
+}
+
+// The following will book the histograms for Figure 10, where i represents FIT number 
+for(i=0;i<3;i++){
+      Correlator c1(1,1,i);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(2,3);
+      c1.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators10.push_back(c1);
+}
+
+// The following will book the histograms for Figure 9 
+for(i=0;i<1;i++){
+      Correlator c1(1,1,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(0,1);
+      c1.SetTriggerRange(2,3);
+      c1.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators10.push_back(c1);
+}
+
+// The following will book the histograms for Figure 8 
+for(i=0;i<1;i++){
+      Correlator c1(1,1,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(2,3);
+      c1.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators8.push_back(c1);
+}
+
+// The following will book the histograms for Figure 7 
+
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+      Correlator c1(1,ptt,-1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(1,5);
+      //c1.SetPID(pdgPi0);
+      Correlators7.push_back(c1);
+
+      Correlator c2(1,ptt,1);
+      c2.SetCollSystemAndEnergy("AuAu200GeV");
+      c2.SetCentrality(0,20);
+      c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c2.SetAssociatedRange(1,5); //FIXME on all of these... 
+      //c1.SetPID(pdgPi0);
+      Correlators7.push_back(c2);
+}
+
+// The following will book the histograms for Figure 6 
+for(i=0;i<1;i++){
+  for(pta = 0; pta<4; pta++){
+   for(ptt = 0; ptt<4; ptt++){
+
+      Correlator c1(pta,ptt,i);
+      c1.SetCollSystemAndEnergy("pp200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(3,4);
+      c1.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c1);
+
+    }
+   } 
+
+      Correlator c5(5,ptt,1);
+      c5.SetCollSystemAndEnergy("AuAu200GeV");
+      c5.SetNoCentrality();
+      c5.SetTriggerRange(5,10);
+      c5.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c5);
+
+      Correlator c6(6,ptt,1);
+      c6.SetCollSystemAndEnergy("AuAu200GeV");
+      c6.SetNoCentrality();
+      c6.SetTriggerRange(4,5);
+      c6.SetAssociatedRange(4,5);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c6);
+
+      Correlator c7(7,ptt,1);
+      c7.SetCollSystemAndEnergy("AuAu200GeV");
+      c7.SetNoCentrality();
+      c7.SetTriggerRange(5,10);
+      c7.SetAssociatedRange(3,5);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c7);
+
+      Correlator c8(8,ptt,1);
+      c8.SetCollSystemAndEnergy("AuAu200GeV");
+      c8.SetNoCentrality();
+      c8.SetTriggerRange(5,10);
+      c8.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c8);
+
+  for(pta = 0; pta<4; pta++){
+   for(ptt = 0; ptt<4; ptt++){
+
+      Correlator c9(pta,ptt,1);
+      c9.SetCollSystemAndEnergy("pp200GeV");
+      c9.SetCentrality(0,20);
+      c9.SetTriggerRange(3,4);
+      c9.SetAssociatedRange(pTAssocBins[pta],pTAssocBins[pta+1]);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c9);
+
+    }
+   } 
+
+      Correlator c11(11,ptt,1);
+      c11.SetCollSystemAndEnergy("AuAu200GeV");
+      c11.SetCentrality(0,20);
+      c11.SetTriggerRange(5,10);
+      c11.SetAssociatedRange(2,3);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c11);
+
+      Correlator c12(12,ptt,1);
+      c12.SetCollSystemAndEnergy("AuAu200GeV");
+      c12.SetCentrality(0,20);
+      c12.SetTriggerRange(4,5);
+      c12.SetAssociatedRange(4,5);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c12);
+
+      Correlator c13(13,ptt,1);
+      c13.SetCollSystemAndEnergy("AuAu200GeV");
+      c13.SetCentrality(0,20);
+      c13.SetTriggerRange(5,10);
+      c13.SetAssociatedRange(3,5);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c13);
+
+      Correlator c14(14,ptt,1);
+      c14.SetCollSystemAndEnergy("AuAu200GeV");
+      c14.SetCentrality(0,20);
+      c14.SetTriggerRange(5,10);
+      c14.SetAssociatedRange(5,10);
+      //c1.SetPID(pdgPi0);
+      Correlators6.push_back(c14);
+}
+
+// The following will book the histograms for Figure 4, where i is the NS,AS,AH 
+for(i=0;i<3;i++){
+  for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
+      Correlator c1(i,ptt,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(0,20);
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(1,5);
+      //c1.SetPID(pdgPi0);
+      Correlators7.push_back(c1);
+  }
+}
+
+
+//for(Correlator& corr : CorrelatorsB)
+  //{
+    //    book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1);
+    //    book(sow[corr.GetIndex()],"sow" + to_string(corr.GetIndex()));
+    //    nTriggers[corr.GetIndex()] = 0;
+   // }
+
 
     }
     void analyze(const Event& event) {
@@ -298,7 +799,7 @@ for(int pta = 0; pta<numAssocPtBins; pta++){
    
       bool isVeto = true;
    
-      for(Correlator& corr : Correlators)
+      for(Correlator& corr : Correlators) // Think about adding for Correlators38 etc. FIXME 
       {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
         //if(!corr.CheckCentrality(centr)) continue;
@@ -328,6 +829,23 @@ for(int pta = 0; pta<numAssocPtBins; pta++){
     map<int, Histo1DPtr> _DeltaPhiSub;
     map<string, int> nTriggers;
     vector<Correlator> Correlators;
+    vector<Correlator> Correlators38;
+    vector<Correlator> Correlators31;
+    vector<Correlator> Correlators30;
+    vector<Correlator> Correlators26;
+    vector<Correlator> Correlators25;
+    vector<Correlator> Correlators24;
+    vector<Correlator> Correlators23;
+    vector<Correlator> Correlators18;
+    vector<Correlator> Correlators16;
+    vector<Correlator> Correlators12;
+    vector<Correlator> Correlators11;
+    vector<Correlator> Correlators10;
+    vector<Correlator> Correlators9;
+    vector<Correlator> Correlators8;
+    vector<Correlator> Correlators7;
+    vector<Correlator> Correlators6;
+    vector<Correlator> Correlators4;
 
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
