@@ -248,11 +248,15 @@ namespace Rivet {
         
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS");
-// The following will book the histograms for Figure 36-38
-        int pta;
+
+      int pta;
         int ptt;
         int pta2;
         int cb;
+        int i;
+
+//*****************************************************************************
+// The following will book the histograms for Figure 36-38
 for(pta = 0; pta<numAssocPtBins; pta++){
 	for(ptt = 0; ptt<numTrigPtBins; ptt++){
 
@@ -290,7 +294,37 @@ for(pta = 0; pta<numAssocPtBins; pta++){
 	
 	}
 }
+for(Correlator& corr : Correlators38)
+  {
+    if(corr.GetSubSubIndex()==-1){
+      string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    } 
+    else if(corr.GetSubSubIndex()==1){
+      string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    } 
+    else if(corr.GetSubSubIndex()==2){
+      string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0; 
+    }
+    else if(corr.GetSubSubIndex()==3){
+      string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0; 
+    }
+        
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 31
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
   for(cb = 0; cb<numCentBins; cb++){
@@ -303,7 +337,16 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       Correlators31.push_back(c1);
   }
 }
+for(Correlator& corr : Correlators31)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figures 28-30
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
   for(cb = 0; cb<numCentBins; cb++){
@@ -316,7 +359,16 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       Correlators30.push_back(c1);
   }
 }
+for(Correlator& corr : Correlators30)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 26 
 for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
       Correlator c1(pta,ptt,-1);
@@ -335,7 +387,16 @@ for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
       //c1.SetPID(pdgPi0);
       Correlators26.push_back(c2);
 }
+for(Correlator& corr : Correlators26)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 25 
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
       Correlator c1(pta,ptt,-1);
@@ -354,7 +415,16 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators25.push_back(c2);
 }
+for(Correlator& corr : Correlators25)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 24 
 for(ptt = 0; ptt<2; ptt++){
       Correlator c1(1,1,1);
@@ -390,7 +460,16 @@ for(ptt = 0; ptt<2; ptt++){
       Correlators24.push_back(c4);
 
 }
+for(Correlator& corr : Correlators24)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 23 
 for(ptt = 0; ptt<1; ptt++){
       Correlator c1(1,ptt,1);
@@ -458,7 +537,16 @@ for(ptt = 0; ptt<1; ptt++){
       Correlators23.push_back(c8);
 
 }
+for(Correlator& corr : Correlators23)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 18 
 
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
@@ -478,7 +566,16 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators18.push_back(c2);
 }
+for(Correlator& corr : Correlators18)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 23 
 for(ptt = 0; ptt<1; ptt++){
       Correlator c1(1,ptt,1);
@@ -562,8 +659,16 @@ for(ptt = 0; ptt<1; ptt++){
       Correlators16.push_back(c10);
 
 }
+for(Correlator& corr : Correlators16)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
-int i;
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 12
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
   for(i=0;i<3;i++){
@@ -586,7 +691,15 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
     }  
   }
 }
-
+for(Correlator& corr : Correlators12)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 11
 for(i=0;i<2;i++){
   for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
@@ -599,7 +712,15 @@ for(i=0;i<2;i++){
       Correlators11.push_back(c1);
   }
 }
-
+for(Correlator& corr : Correlators11)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 10, where i represents FIT number 
 for(i=0;i<3;i++){
       Correlator c1(1,1,i);
@@ -610,7 +731,15 @@ for(i=0;i<3;i++){
       //c1.SetPID(pdgPi0);
       Correlators10.push_back(c1);
 }
-
+for(Correlator& corr : Correlators10)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 9 
 for(i=0;i<1;i++){
       Correlator c1(1,1,-1);
@@ -621,7 +750,15 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators10.push_back(c1);
 }
-
+for(Correlator& corr : Correlators10)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 8 
 for(i=0;i<1;i++){
       Correlator c1(1,1,-1);
@@ -632,7 +769,15 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators8.push_back(c1);
 }
-
+for(Correlator& corr : Correlators8)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 7 
 
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
@@ -652,7 +797,15 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators7.push_back(c2);
 }
-
+for(Correlator& corr : Correlators7)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+ 
+//*****************************************************************************
 // The following will book the histograms for Figure 6 
 for(i=0;i<1;i++){
   for(pta = 0; pta<4; pta++){
@@ -747,7 +900,15 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c14);
 }
+for(Correlator& corr : Correlators6)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
+//*****************************************************************************
 // The following will book the histograms for Figure 4, where i is the NS,AS,AH 
 for(i=0;i<3;i++){
   for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
@@ -760,6 +921,13 @@ for(i=0;i<3;i++){
       Correlators7.push_back(c1);
   }
 }
+for(Correlator& corr : Correlators4)
+  {
+        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
+        book(_h[name], name);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
 
 
 //for(Correlator& corr : CorrelatorsB)
