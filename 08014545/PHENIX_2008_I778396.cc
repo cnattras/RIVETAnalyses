@@ -298,25 +298,25 @@ for(Correlator& corr : Correlators38)
   {
     if(corr.GetSubSubIndex()==-1){
       string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
-        book(_h[name], name);
+        book(_h[name], 58,01,((corr.GetIndex()+1) + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==1){
       string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
-        book(_h[name], name);
+        book(_h[name], 53,01,(corr.GetIndex() +1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==2){
       string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
-        book(_h[name], name);
+        book(_h[name], 55,01,(corr.GetIndex() +1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
     else if(corr.GetSubSubIndex()==3){
       string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
-        book(_h[name], name);
+        book(_h[name], 57,01,(corr.GetIndex() +1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
@@ -339,10 +339,30 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 }
 for(Correlator& corr : Correlators31)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        if(corr.GetSubSubIndex()==0){
+      string name = "49010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 49,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
+    } 
+    else if(corr.GetSubSubIndex()==1){
+      string name = "50010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 50,01,(1+corr.GetSubIndex()));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    } 
+    else if(corr.GetSubSubIndex()==2){
+      string name = "51010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 51,01,(1+corr.GetSubIndex()));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0; 
+    }
+    else if(corr.GetSubSubIndex()==3){
+      string name = "52010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 52,01,(1+corr.GetSubIndex()));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0; 
+    }
   }
 
  
@@ -361,17 +381,36 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 }
 for(Correlator& corr : Correlators30)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        if(corr.GetSubSubIndex()==0){
+      string name = "49010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 49,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
+    } 
+    else if(corr.GetSubSubIndex()==1){
+      string name = "50010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 50,01,(1+corr.GetSubIndex()));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    } 
+    else if(corr.GetSubSubIndex()==2){
+      string name = "51010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 51,01,(1+corr.GetSubIndex()));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0; 
+    }
+    else if(corr.GetSubSubIndex()==3){
+      string name = "52010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 52,01,(1+corr.GetSubIndex()));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0; 
+    }
   }
-
  
 //*****************************************************************************
-// The following will book the histograms for Figure 26 
+// The following will book the histograms for Figure 26, where pta2 FIXME
 for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
-      Correlator c1(pta,ptt,-1);
+      Correlator c1(pta,ptt,pta2);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(3, 4);
@@ -379,7 +418,7 @@ for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
       //c1.SetPID(pdgPi0);
       Correlators26.push_back(c1);
 
-      Correlator c2(pta,ptt,-1);
+      Correlator c2(pta,ptt,pta2);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetNoCentrality();
       c2.SetTriggerRange(4, 5);
@@ -389,8 +428,9 @@ for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
 }
 for(Correlator& corr : Correlators26)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        
+      string name = (44 - corr.GetSubSubIndex()) + "010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], (44 - corr.GetSubSubIndex()),01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -415,10 +455,11 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators25.push_back(c2);
 }
-for(Correlator& corr : Correlators25)
+for(Correlator& corr : Correlators25) //FIXME THIS IS WHERE I AM AT
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        
+      string name = (42 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()-1);
+        book(_h[name], (42 - corr.GetSubSubIndex()),01,(corr.GetSubIndex())-1);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
