@@ -74,7 +74,7 @@ class Correlator {
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
       bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second || _NoPTassociated == true) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
-     // bool CheckPID(std::initializer_list<int> pid)
+      bool CheckPID(std::initializer_list<int> pid)
       {
           
           bool inList = false;
@@ -269,13 +269,13 @@ class Correlator {
 */  
 
       //Booking the histograms
-
-	for(Correlator& corr : Correlators){
-	    string name = "01010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex()); 
-        book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1); 
-        book(sow[corr.GetIndex()],"sow" + to_string(corr.GetIndex())); 
-        nTriggers[corr.GetIndex()] = 0; 
-    }
+    for (Correlator& corr : Correlators){
+    	string name = "010101";
+    	book(_h[name],01,01,01);
+    	book(sow[name], "sow" + name);
+    	nTriggers[name] = 0;
+    	    }
+    
 /*
            	book(_h[], 1,1,((corr.GetIndex()+1) + corr.GetSubIndex())); 
             book(sow[name],"sow" + name); 
