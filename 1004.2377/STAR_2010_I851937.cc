@@ -28,6 +28,7 @@ class Correlator {
     private:
       int _index;
       int _subindex;
+      int _subsubindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
@@ -38,9 +39,10 @@ class Correlator {
     public:
     
       /// Constructor
-      Correlator(int index, int subindex) {
+      Correlator(int index, int subindex, int subsubindex) {
         _index = index;
         _subindex = subindex;
+        _subsubindex = subsubindex;
       }
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
@@ -63,9 +65,10 @@ class Correlator {
     
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
+      int GetSubSubIndex(){ return _subsubindex; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex()) + to_string(GetSubSubIndex());
           return fullIndex;
       }
     
@@ -250,7 +253,7 @@ class Correlator {
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS"); 
      
-     //for loop to get Figure 2 done 
+/*/for loop to get Figure 2 done 
       Correlator c1(1,1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetCentrality(0.0, 12.0);
@@ -258,7 +261,7 @@ class Correlator {
       c1.SetAssociatedRange(1.0, 2.5);
       //c1.SetPID(pdgPi0);
       Correlators.push_back(c1);
-/*
+
 	  Correlator c2(1,1);
       c1.SetCollSystemAndEnergy("dEta200GeV");
       c1.SetCentrality(0.0, 12.0);
@@ -267,42 +270,39 @@ class Correlator {
       //c1.SetPID(pdgPi0);
       Correlators.push_back(c2);
 */  
+      //NOTES: 
 
-      //Booking the histograms
+      int i = 0; //raw, bksb, dEta
+      int ptt = 0; //2.5-3,3-4,...
+      int cb = 0; //Centralities
+      for (i = 0; i < 3; i++){
+      	for (ptt = 0; ptt < numTrigPtBins - 1; ptt++){
+      		for (cb = 0; cb < numCentBins - 1; cb++){
+      			Correlator c1 (i,ptt,cb);
+      			c1.SetCollSystemAndEnergy("AuAu200GeV");
+      			c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
+      			c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+      			c1.SetNoPTassociated();
+      			//c1.SetPID(pdgPi0)
+      			Correlators.push_back(c1);
+      		}
+      	}
+      }
+  	}	
+
+
+    /* FIX ME: LOOP OVER THE YODA FILE
+         //Booking the histograms
+    
     for (Correlator& corr : Correlators){
     	string name = "010101";
     	book(_h[name],01,01,01);
     	book(sow[name], "sow" + name);
     	nTriggers[name] = 0;
     	    }
-    
-/*
-           	book(_h[], 1,1,((corr.GetIndex()+1) + corr.GetSubIndex())); 
-            book(sow[name],"sow" + name); 
-            nTriggers[name] = 0;
-*/
-
-      //NOTES: 
-
-      /*
-      int i=0;//raw,bksb,deltaeta 
-        int ptt=0;//2-3,3-4,...   
-        int cb=0;//Centrality   
-        for(i=0;i<3;i++){     
-        	for(ptt=0;ptt<numTrigPtBins-1;ptt++){         
-        		for (cb=0;cb<numCentBins-1;cb++){           
-        			Correlator c14(8,2,1);           
-        			c1.SetCollSystemAndEnergy("AuAu200GeV");           
-        			c1.SetCentrality(CentBins[cb],CentBins[cb+1]);           
-        			c1.SetTriggerRange(pTTrigBins[ptt],pTTrigBins[ptt+1]);           
-        			c1.SetNopTAssoc();           
-        			//c1.SetPID(pdgPi0);           
-        			Correlators2.push_back(c1);         }     }   } 
-
-      */
-
      }
 
+	*/
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
