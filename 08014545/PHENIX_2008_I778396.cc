@@ -410,7 +410,7 @@ for(Correlator& corr : Correlators30)
 //*****************************************************************************
 // The following will book the histograms for Figure 26, where pta2 FIXME
 for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
-      Correlator c1(pta,ptt,pta2);
+      Correlator c1(0,ptt,pta2);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(3, 4);
@@ -418,7 +418,7 @@ for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
       //c1.SetPID(pdgPi0);
       Correlators26.push_back(c1);
 
-      Correlator c2(pta,ptt,pta2);
+      Correlator c2(1,ptt,pta2);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetNoCentrality();
       c2.SetTriggerRange(4, 5);
@@ -429,8 +429,8 @@ for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
 for(Correlator& corr : Correlators26)
   {
         
-      string name = (44 - corr.GetSubSubIndex()) + "010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], (44 - corr.GetSubSubIndex()),01,(1+corr.GetSubIndex()));
+      string name = (44 - corr.GetIndex()) + "010" + to_string(1+corr.GetSubSubIndex());
+        book(_h[name], (44 - corr.GetIndex()),01,(1+corr.GetSubSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -438,37 +438,45 @@ for(Correlator& corr : Correlators26)
  
 //*****************************************************************************
 // The following will book the histograms for Figure 25 
-for(ptt = 0; ptt<numTrigPtBins; ptt++){
-      Correlator c1(pta,ptt,-1);
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetNoCentrality();
-      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c1.SetAssociatedRange(1,5);
+//for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
+  //    Correlator c1(pta,ptt,0);
+  //    c1.SetCollSystemAndEnergy("AuAu200GeV");
+  //    c1.SetNoCentrality();
+  //    c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+  //    c1.SetAssociatedRange(1,5);
       //c1.SetPID(pdgPi0);
-      Correlators25.push_back(c1);
+  //    Correlators25.push_back(c1);
 
-      Correlator c2(pta,ptt,-1);
-      c2.SetCollSystemAndEnergy("AuAu200GeV");
-      c2.SetNoCentrality();
-      c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c2.SetAssociatedRange(1,5);
+  //    Correlator c2(pta,ptt,1);
+  //    c2.SetCollSystemAndEnergy("AuAu200GeV");
+  //   c2.SetNoCentrality();
+  //    c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+  //    c2.SetAssociatedRange(1,5);
+  //    //c1.SetPID(pdgPi0);
+  //    Correlators25.push_back(c2);
+
+  //   Correlator c3(pta,ptt,2);
+  //    c3.SetCollSystemAndEnergy("AuAu200GeV");
+  //    c3.SetNoCentrality();
+  //    c3.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+  //    c3.SetAssociatedRange(1,5);
       //c1.SetPID(pdgPi0);
-      Correlators25.push_back(c2);
-}
-for(Correlator& corr : Correlators25) //FIXME THIS IS WHERE I AM AT
-  {
-        
-      string name = (42 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()-1);
-        book(_h[name], (42 - corr.GetSubSubIndex()),01,(corr.GetSubIndex())-1);
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
-  }
+  //    Correlators25.push_back(c3);
+//}
+//for(Correlator& corr : Correlators25) //FIXME THIS IS WHERE I AM AT
+//  {
+//      	string name = (42 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+//        book(_h[name], (42 - corr.GetSubSubIndex()),010,(corr.GetSubIndex()+1));
+//        book(sow[name],"sow" + name);
+//        nTriggers[name] = 0;
+      
+//  }
 
  
 //*****************************************************************************
 // The following will book the histograms for Figure 24 
-for(ptt = 0; ptt<2; ptt++){
-      Correlator c1(1,1,1);
+for(i = 0; i<2; i++){
+      Correlator c1(1,1,i);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetCentrality(0,20);
       c1.SetTriggerRange(2, 3);
@@ -476,7 +484,7 @@ for(ptt = 0; ptt<2; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators24.push_back(c1);
 
-      Correlator c2(2,2,1);
+      Correlator c2(2,2,i);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetCentrality(0,20);
       c2.SetTriggerRange(3, 4);
@@ -484,7 +492,7 @@ for(ptt = 0; ptt<2; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators24.push_back(c2);
 
-      Correlator c3(3,3,1);
+      Correlator c3(3,3,i);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetCentrality(0,20);
       c3.SetTriggerRange(3, 4);
@@ -492,7 +500,7 @@ for(ptt = 0; ptt<2; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators24.push_back(c3);
 
-      Correlator c4(4,4,1);
+      Correlator c4(4,4,i);
       c4.SetCollSystemAndEnergy("AuAu200GeV");
       c4.SetCentrality(0,20);
       c4.SetTriggerRange(5,10);
@@ -503,95 +511,22 @@ for(ptt = 0; ptt<2; ptt++){
 }
 for(Correlator& corr : Correlators24)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+      	string name = (39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+        book(_h[name], (39 - corr.GetSubSubIndex()),01,(corr.GetIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
+      
   }
 
  
-//*****************************************************************************
-// The following will book the histograms for Figure 23 
-for(ptt = 0; ptt<1; ptt++){
-      Correlator c1(1,ptt,1);
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetNoCentrality();
-      c1.SetTriggerRange(2, 3);
-      c1.SetAssociatedRange(2,3);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c1);
-
-      Correlator c2(2,ptt,1);
-      c2.SetCollSystemAndEnergy("AuAu200GeV");
-      c2.SetNoCentrality();
-      c2.SetTriggerRange(3, 4);
-      c2.SetAssociatedRange(2,3);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c2);
-
-      Correlator c3(3,ptt,1);
-      c3.SetCollSystemAndEnergy("AuAu200GeV");
-      c3.SetNoCentrality();
-      c3.SetTriggerRange(3, 4);
-      c3.SetAssociatedRange(3,5);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c3);
-
-      Correlator c4(4,ptt,1);
-      c4.SetCollSystemAndEnergy("AuAu200GeV");
-      c4.SetNoCentrality();
-      c4.SetTriggerRange(5,10);
-      c4.SetAssociatedRange(5,10);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c4);
-
-      Correlator c5(5,5,1);
-      c5.SetCollSystemAndEnergy("AuAu200GeV");
-      c5.SetCentrality(0,20);
-      c5.SetTriggerRange(2, 3);
-      c5.SetAssociatedRange(2,3);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c5);
-
-      Correlator c6(6,6,1);
-      c6.SetCollSystemAndEnergy("AuAu200GeV");
-      c6.SetCentrality(0,20);
-      c6.SetTriggerRange(3, 4);
-      c6.SetAssociatedRange(2,3);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c6);
-
-      Correlator c7(7,7,1);
-      c7.SetCollSystemAndEnergy("AuAu200GeV");
-      c7.SetCentrality(0,20);
-      c7.SetTriggerRange(3, 4);
-      c7.SetAssociatedRange(3,5);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c7);
-
-      Correlator c8(8,8,1);
-      c8.SetCollSystemAndEnergy("AuAu200GeV");
-      c8.SetCentrality(0,20);
-      c8.SetTriggerRange(5,10);
-      c8.SetAssociatedRange(5,10);
-      //c1.SetPID(pdgPi0);
-      Correlators23.push_back(c8);
-
-}
-for(Correlator& corr : Correlators23)
-  {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
-  }
+//FIG 23 MISSING FIND FIXME
 
  
 //*****************************************************************************
 // The following will book the histograms for Figure 18 
 
-for(ptt = 0; ptt<numTrigPtBins; ptt++){
-      Correlator c1(-1,ptt,-1);
+for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
+      Correlator c1(-1,ptt,1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -599,7 +534,7 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators18.push_back(c1);
 
-      Correlator c2(1,ptt,1);
+      Correlator c2(1,ptt,0);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetCentrality(0,20);
       c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -609,15 +544,15 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 }
 for(Correlator& corr : Correlators18)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+        book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
 
  
 //*****************************************************************************
-// The following will book the histograms for Figure 23 
+// The following will book the histograms for Figure 17 
 for(ptt = 0; ptt<1; ptt++){
       Correlator c1(1,ptt,1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
@@ -625,7 +560,7 @@ for(ptt = 0; ptt<1; ptt++){
       c1.SetTriggerRange(2, 3);
       c1.SetAssociatedRange(0.4,1);
       //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c1);
+      Correlators17.push_back(c1);
 
       Correlator c2(2,ptt,1);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
@@ -633,7 +568,7 @@ for(ptt = 0; ptt<1; ptt++){
       c2.SetTriggerRange(2,3);
       c2.SetAssociatedRange(2,3);
       //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c2);
+      Correlators17.push_back(c2);
 
       Correlator c3(3,ptt,1);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
@@ -641,7 +576,7 @@ for(ptt = 0; ptt<1; ptt++){
       c3.SetTriggerRange(3, 4);
       c3.SetAssociatedRange(3,4);
       //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c3);
+      Correlators17.push_back(c3);
 
       Correlator c4(4,ptt,1);
       c4.SetCollSystemAndEnergy("AuAu200GeV");
@@ -649,7 +584,7 @@ for(ptt = 0; ptt<1; ptt++){
       c4.SetTriggerRange(4,5);
       c4.SetAssociatedRange(4,5);
       //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c4);
+      Correlators17.push_back(c4);
 
       Correlator c5(5,ptt,1);
       c5.SetCollSystemAndEnergy("AuAu200GeV");
@@ -657,53 +592,13 @@ for(ptt = 0; ptt<1; ptt++){
       c5.SetTriggerRange(5,10);
       c5.SetAssociatedRange(5,10);
       //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c5);
-
-      Correlator c6(1,ptt,1);
-      c6.SetCollSystemAndEnergy("AuAu200GeV");
-      c6.SetCentrality(0,20);
-      c6.SetTriggerRange(2, 3);
-      c6.SetAssociatedRange(0.4,1);
-      //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c6);
-
-      Correlator c7(2,ptt,1);
-      c7.SetCollSystemAndEnergy("AuAu200GeV");
-      c7.SetCentrality(0,20);
-      c7.SetTriggerRange(2,3);
-      c7.SetAssociatedRange(2,3);
-      //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c7);
-
-      Correlator c8(3,ptt,1);
-      c8.SetCollSystemAndEnergy("AuAu200GeV");
-      c8.SetCentrality(0,20);
-      c8.SetTriggerRange(3, 4);
-      c8.SetAssociatedRange(3,4);
-      //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c8);
-
-      Correlator c9(4,ptt,1);
-      c9.SetCollSystemAndEnergy("AuAu200GeV");
-      c9.SetCentrality(0,20);
-      c9.SetTriggerRange(4,5);
-      c9.SetAssociatedRange(4,5);
-      //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c9);
-
-      Correlator c10(5,ptt,1);
-      c10.SetCollSystemAndEnergy("AuAu200GeV");
-      c10.SetCentrality(0,20);
-      c10.SetTriggerRange(5,10);
-      c10.SetAssociatedRange(5,10);
-      //c1.SetPID(pdgPi0);
-      Correlators16.push_back(c10);
+      Correlators17.push_back(c5);
 
 }
-for(Correlator& corr : Correlators16)
+for(Correlator& corr : Correlators17)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        string name = "33010" + to_string(corr.GetIndex());
+        book(_h[name], 33,01,corr.GetIndex());
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -711,9 +606,9 @@ for(Correlator& corr : Correlators16)
  
 //*****************************************************************************
 // The following will book the histograms for Figure 12
-for(ptt = 0; ptt<numTrigPtBins; ptt++){
+for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
   for(i=0;i<3;i++){
-      Correlator c1(-1,ptt,-1);
+      Correlator c1(i,ptt,4);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -721,8 +616,8 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators12.push_back(c1);
 
-    for(cb = 0; cb<numCentBins; cb++){
-        Correlator c1(-1,ptt,cb);
+    for(cb = 0; cb<numCentBins-1; cb++){
+        Correlator c1(i,ptt,cb);
         c1.SetCollSystemAndEnergy("AuAu200GeV");
         c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
         c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -734,16 +629,24 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 }
 for(Correlator& corr : Correlators12)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+  	if(corr.GetIndex()==0){
+        string name = to_string(26 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+        book(_h[name], (26 + corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
+    }
+    else if(corr.GetIndex()==1){
+        string name = to_string(21 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+        book(_h[name], (21 + corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    }
   }
  
 //*****************************************************************************
 // The following will book the histograms for Figure 11
 for(i=0;i<2;i++){
-  for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
+  for(ptt = 0; ptt<numTrigPtBins-2; ptt++){
       Correlator c1(-1,ptt,i);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetCentrality(0,20);
@@ -755,30 +658,38 @@ for(i=0;i<2;i++){
 }
 for(Correlator& corr : Correlators11)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+	if(corr.GetSubSubIndex()==0){
+        string name = (to_string(18) + "0101");
+        book(_h[name], (18),01,01);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
+    }
+    else if(corr.GetSubSubIndex()==1){
+        string name = (to_string(15) + "0101");
+        book(_h[name], (15),01,01);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    }
   }
- 
+ //					FIXME:  - corr.GetSubIndex() is missing for 17,16,14,13 
 //*****************************************************************************
 // The following will book the histograms for Figure 10, where i represents FIT number 
-for(i=0;i<3;i++){
-      Correlator c1(1,1,i);
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetNoCentrality();
-      c1.SetTriggerRange(2,3);
-      c1.SetAssociatedRange(2,3);
-      //c1.SetPID(pdgPi0);
-      Correlators10.push_back(c1);
-}
-for(Correlator& corr : Correlators10)
-  {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
-  }
+//for(i=0;i<3;i++){
+//      Correlator c1(i,1,1);
+//      c1.SetCollSystemAndEnergy("AuAu200GeV");
+//      c1.SetNoCentrality();
+//      c1.SetTriggerRange(2,3);
+//      c1.SetAssociatedRange(2,3);
+//      //c1.SetPID(pdgPi0);
+//      Correlators10.push_back(c1);
+//}
+//for(Correlator& corr : Correlators10)
+//  {
+//        string name = "1401" + corr.GetIndex()+1;
+//        book(_h[name], 14,01,corr.GetIndex()+1);
+//        book(sow[name],"sow" + name);
+//        nTriggers[name] = 0;
+//  }
  
 //*****************************************************************************
 // The following will book the histograms for Figure 9 
@@ -789,12 +700,12 @@ for(i=0;i<1;i++){
       c1.SetTriggerRange(2,3);
       c1.SetAssociatedRange(2,3);
       //c1.SetPID(pdgPi0);
-      Correlators10.push_back(c1);
+      Correlators9.push_back(c1);
 }
-for(Correlator& corr : Correlators10)
+for(Correlator& corr : Correlators9)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        string name = "130101";
+        book(_h[name], 13,01,01);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -812,8 +723,8 @@ for(i=0;i<1;i++){
 }
 for(Correlator& corr : Correlators8)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        string name = "120101";
+        book(_h[name], 12,01,01);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -822,7 +733,7 @@ for(Correlator& corr : Correlators8)
 // The following will book the histograms for Figure 7 
 
 for(ptt = 0; ptt<numTrigPtBins; ptt++){
-      Correlator c1(1,ptt,-1);
+      Correlator c1(1,ptt,1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -830,7 +741,7 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators7.push_back(c1);
 
-      Correlator c2(1,ptt,1);
+      Correlator c2(1,ptt,0);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetCentrality(0,20);
       c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -840,8 +751,8 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 }
 for(Correlator& corr : Correlators7)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        string name = "5" + to_string(9-corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex() + 1);
+        book(_h[name], (9-corr.GetSubSubIndex()),01,(corr.GetSubIndex() + 1));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -849,10 +760,9 @@ for(Correlator& corr : Correlators7)
 //*****************************************************************************
 // The following will book the histograms for Figure 6 
 for(i=0;i<1;i++){
-  for(pta = 0; pta<4; pta++){
-   for(ptt = 0; ptt<4; ptt++){
+   for(pta = 0; pta<4; pta++){
 
-      Correlator c1(pta,ptt,i);
+      Correlator c1(pta,1,0);
       c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(3,4);
@@ -861,9 +771,8 @@ for(i=0;i<1;i++){
       Correlators6.push_back(c1);
 
     }
-   } 
 
-      Correlator c5(5,ptt,1);
+      Correlator c5(5,2,0);
       c5.SetCollSystemAndEnergy("AuAu200GeV");
       c5.SetNoCentrality();
       c5.SetTriggerRange(5,10);
@@ -871,7 +780,7 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c5);
 
-      Correlator c6(6,ptt,1);
+      Correlator c6(6,2,0);
       c6.SetCollSystemAndEnergy("AuAu200GeV");
       c6.SetNoCentrality();
       c6.SetTriggerRange(4,5);
@@ -879,7 +788,7 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c6);
 
-      Correlator c7(7,ptt,1);
+      Correlator c7(7,2,0);
       c7.SetCollSystemAndEnergy("AuAu200GeV");
       c7.SetNoCentrality();
       c7.SetTriggerRange(5,10);
@@ -887,7 +796,7 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c7);
 
-      Correlator c8(8,ptt,1);
+      Correlator c8(8,2,0);
       c8.SetCollSystemAndEnergy("AuAu200GeV");
       c8.SetNoCentrality();
       c8.SetTriggerRange(5,10);
@@ -898,7 +807,7 @@ for(i=0;i<1;i++){
   for(pta = 0; pta<4; pta++){
    for(ptt = 0; ptt<4; ptt++){
 
-      Correlator c9(pta,ptt,1);
+      Correlator c9(pta,1,1);
       c9.SetCollSystemAndEnergy("pp200GeV");
       c9.SetCentrality(0,20);
       c9.SetTriggerRange(3,4);
@@ -909,7 +818,7 @@ for(i=0;i<1;i++){
     }
    } 
 
-      Correlator c11(11,ptt,1);
+      Correlator c11(5,2,1);
       c11.SetCollSystemAndEnergy("AuAu200GeV");
       c11.SetCentrality(0,20);
       c11.SetTriggerRange(5,10);
@@ -917,7 +826,7 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c11);
 
-      Correlator c12(12,ptt,1);
+      Correlator c12(6,2,1);
       c12.SetCollSystemAndEnergy("AuAu200GeV");
       c12.SetCentrality(0,20);
       c12.SetTriggerRange(4,5);
@@ -925,7 +834,7 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c12);
 
-      Correlator c13(13,ptt,1);
+      Correlator c13(7,2,1);
       c13.SetCollSystemAndEnergy("AuAu200GeV");
       c13.SetCentrality(0,20);
       c13.SetTriggerRange(5,10);
@@ -933,7 +842,7 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators6.push_back(c13);
 
-      Correlator c14(14,ptt,1);
+      Correlator c14(8,2,1);
       c14.SetCollSystemAndEnergy("AuAu200GeV");
       c14.SetCentrality(0,20);
       c14.SetTriggerRange(5,10);
@@ -943,10 +852,35 @@ for(i=0;i<1;i++){
 }
 for(Correlator& corr : Correlators6)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
+  	if(corr.GetSubSubIndex()==0){
+  		if(corr.GetSubIndex()==1){
+  			string name = "0501" + to_string(corr.GetIndex()+1);
+  			book(_h[name], 05,01,corr.GetIndex()+1);
+        	book(sow[name],"sow" + name);
+        	nTriggers[name] = 0;
+  		}
+  		else if(corr.GetSubIndex()==2){
+  			string name = "0401" + to_string(corr.GetIndex()-4);
+  			book(_h[name], 04,01,corr.GetIndex()-4);
+        	book(sow[name],"sow" + name);
+        	nTriggers[name] = 0;
+  		}
+  	}
+  	else if(corr.GetSubSubIndex()==1){
+  		if(corr.GetSubIndex()==1){
+  			string name = "0601" + to_string(corr.GetIndex()+1);
+  			book(_h[name], 06,01,corr.GetIndex()+1);
+        	book(sow[name],"sow" + name);
+        	nTriggers[name] = 0;
+  		}
+  		else if(corr.GetSubIndex()==2){
+  			string name = "0701" + to_string(corr.GetIndex()-4);
+  			book(_h[name], 07,01,corr.GetIndex()-4);
+        	book(sow[name],"sow" + name);
+        	nTriggers[name] = 0;
+  		}
+  	}
+
   }
 
 //*****************************************************************************
@@ -964,8 +898,8 @@ for(i=0;i<3;i++){
 }
 for(Correlator& corr : Correlators4)
   {
-        string name = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "2" + to_string(corr.GetSubSubIndex());
-        book(_h[name], name);
+        string name = to_string(corr.GetSubIndex()+1) + "010" + to_string(corr.GetIndex()+1);
+        book(_h[name], corr.GetSubIndex()+1,01,corr.GetIndex()+1);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -1046,6 +980,7 @@ for(Correlator& corr : Correlators4)
     vector<Correlator> Correlators24;
     vector<Correlator> Correlators23;
     vector<Correlator> Correlators18;
+    vector<Correlator> Correlators17;
     vector<Correlator> Correlators16;
     vector<Correlator> Correlators12;
     vector<Correlator> Correlators11;
