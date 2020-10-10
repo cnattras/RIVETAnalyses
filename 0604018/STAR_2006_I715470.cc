@@ -14,6 +14,15 @@
 #include "../Centralities/RHICCentrality.hh"
 
 #define _USE_MATH_DEFINES
+static const int numTrigPtBins = 3;
+static const float pTTrigBins[] = {4.0,6.0,8.0,15.0};
+static const int numAssocPtBins = 3;
+static const float pTAssocBins[] = {3.0,4.0,6.0,10};
+static const int numzTBins = 7;
+static const float zTBins[] = {0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
+static const int numCentBins = 6;
+static const float centBins[] = {0.0,5.0,10,20,30,40,80};
+
 using namespace std;
 namespace Rivet {
 
@@ -28,6 +37,7 @@ namespace Rivet {
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
+      pair<double,double> _zTRange;
       vector<int> _pid;
 
     public:
@@ -54,6 +64,9 @@ namespace Rivet {
       pair<double,double> GetAssociatedRange(){ return _associatedRange; }
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
+      pair<double,double> GetzTRange(){ return _zTRange; }
+      double GetzTRangeMin(){ return _zTRange.first; }
+      double GetzTRangeMax(){ return _zTRange.second; }
       vector<int> GetPID(){ return _pid; }
     
       int GetIndex(){ return _index; }
@@ -69,6 +82,8 @@ namespace Rivet {
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
       bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
+      bool CheckzTRange(double apt){ return (apt>_zTRange.first && apt<_zTRange.second) ? true : false; }
+      bool CheckzTRangeMaxTrigger(double apt, double tpt){ return (apt>_zTRange.first && apt<tpt) ? true : false; }
       bool CheckPID(std::initializer_list<int> pid)
       {
           
@@ -231,6 +246,38 @@ namespace Rivet {
        
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS");
+
+        for(int ntrig=0;ntrig<numTrigPtBins;ntrig++){
+      for(int ncb=0;ncb<numCentBins;ncb++){
+      for(int nassoc=0;nassoc<numAssocPtBins;nassoc++){
+      //Correlators
+      Correlator c1(1,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
+      c1.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
+      c1.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
+      Correlators.push_back(c1);
+        if(cb==0){
+
+      Correlator c2(1,1);
+      c2.SetCollSystemAndEnergy("dAu200GeV");
+      c2.SetCentrality(centbins[ncb], centbins[ncb+1]);
+      c2.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
+      c2.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
+      Correlators.push_back(c2);
+        }
+    }
+
+//Add loop over zT bins
+
+    }
+    }
+//Create histograms from scratch
+//    string name = "mystring";
+//book(_h[name], name, nbins,lowedge,highedge);
+    //I'm going to guess that you want 72 bins
+
+
     }
     void analyze(const Event& event) {
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
@@ -252,9 +299,44 @@ namespace Rivet {
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
      
       string SysAndEnergy = CollSystem + cmsEnergy;
+
+    
+      double triggerptMin = 999.;
+      double triggerptMax = -999.;
+      double associatedptMin = 999.;
+      double associatedptMax = -999.;
+    
+      bool isVeto = true;
+    
+      for(Correlator& corr : Correlators)
+      {
+        if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+        //if(!corr.CheckCentrality(centr)) continue;
+        
+        //If event is accepted for the correlator, fill event weights
+        sow[corr.GetFullIndex()]->fill();
+        
+        isVeto = false;
+        
+        //Check min and max of the trigger and associated particles in order to speed up the particle loops
+        if(corr.GetTriggerRangeMin() < triggerptMin) triggerptMin = corr.GetTriggerRangeMin();
+        if(corr.GetTriggerRangeMax() > triggerptMax) triggerptMax = corr.GetTriggerRangeMax();
+        
+        if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
+        if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
+      }
+    
+      if(isVeto) vetoEvent;
     }
     void finalize() {
     }
+    map<string, Histo1DPtr> _h;
+    map<string, CounterPtr> sow;
+    map<string, Histo1DPtr> _DeltaPhixE;
+    map<int, Histo1DPtr> _DeltaPhiSub;
+    map<string, int> nTriggers;
+    vector<Correlator> Correlators;
+
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
 
