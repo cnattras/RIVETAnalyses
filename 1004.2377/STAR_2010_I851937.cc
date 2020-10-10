@@ -13,8 +13,13 @@
 #include <vector>
 #include "../Centralities/RHICCentrality.hh"
 
-
 #define _USE_MATH_DEFINES
+static const int numTrigPtBins = 4;
+static const float pTTrigBins[] = {2.5,3.0,4.0,6.0,10.0};
+static const int numAssocPtBins = 5;
+static const float pTAssocBins[] = {0.25,0.5,1.0,1.5,2.5,4.0};
+static const int numCentBins = 5;
+static const float CentBins[] = {0.0,12.0,20.0,40.0,60.0,80.0};
 using namespace std;
 namespace Rivet {
 
@@ -28,6 +33,8 @@ class Correlator {
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
       vector<int> _pid;
+      bool _NoPTassociated = false;
+
     public:
     
       /// Constructor
@@ -37,6 +44,7 @@ class Correlator {
       }
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
+      void SetNoPTassociated(){_NoPTassociated = true; }
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
@@ -64,9 +72,9 @@ class Correlator {
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
       bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
-      bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second) ? true : false; }
+      bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second || _NoPTassociated == true) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
-      bool CheckPID(std::initializer_list<int> pid)
+     // bool CheckPID(std::initializer_list<int> pid)
       {
           
           bool inList = false;
@@ -240,12 +248,64 @@ class Correlator {
         declare(pp, "PP");
         
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
-        declare(pfs, "PFS"); }
+        declare(pfs, "PFS"); 
+     
+     //for loop to get Figure 2 done 
+      Correlator c1(1,1);
+      c1.SetCollSystemAndEnergy("AuAu200GeV");
+      c1.SetCentrality(0.0, 12.0);
+      c1.SetTriggerRange(2.5, 3);
+      c1.SetAssociatedRange(1.0, 2.5);
+      //c1.SetPID(pdgPi0);
+      Correlators.push_back(c1);
+/*
+	  Correlator c2(1,1);
+      c1.SetCollSystemAndEnergy("dEta200GeV");
+      c1.SetCentrality(0.0, 12.0);
+      c1.SetTriggerRange(2.5, 3);
+      c1.SetAssociatedRange(1.0, 2.5);
+      //c1.SetPID(pdgPi0);
+      Correlators.push_back(c2);
+*/  
+
+      //Booking the histograms
+
+	for(Correlator& corr : Correlators){
+	    string name = "01010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex()); 
+        book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1); 
+        book(sow[corr.GetIndex()],"sow" + to_string(corr.GetIndex())); 
+        nTriggers[corr.GetIndex()] = 0; 
+    }
+/*
+           	book(_h[], 1,1,((corr.GetIndex()+1) + corr.GetSubIndex())); 
+            book(sow[name],"sow" + name); 
+            nTriggers[name] = 0;
+*/
+
+      //NOTES: 
+
+      /*
+      int i=0;//raw,bksb,deltaeta 
+        int ptt=0;//2-3,3-4,...   
+        int cb=0;//Centrality   
+        for(i=0;i<3;i++){     
+        	for(ptt=0;ptt<numTrigPtBins-1;ptt++){         
+        		for (cb=0;cb<numCentBins-1;cb++){           
+        			Correlator c14(8,2,1);           
+        			c1.SetCollSystemAndEnergy("AuAu200GeV");           
+        			c1.SetCentrality(CentBins[cb],CentBins[cb+1]);           
+        			c1.SetTriggerRange(pTTrigBins[ptt],pTTrigBins[ptt+1]);           
+        			c1.SetNopTAssoc();           
+        			//c1.SetPID(pdgPi0);           
+        			Correlators2.push_back(c1);         }     }   } 
+
+      */
+
+     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
       const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
@@ -256,30 +316,57 @@ class Correlator {
       double nNucleons = 0.;
       string CollSystem = "Empty";
       const ParticlePair& beam = beams();
-      CollSystem = "pp";
-      nNucleons = 1.;
+          CollSystem = "pp";
+          nNucleons = 1.;
       //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
       //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
-                                                                              
+     
       string cmsEnergy = "Empty";
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
+     
       string SysAndEnergy = CollSystem + cmsEnergy;
-	}
+    
+      double triggerptMin = 999.;
+      double triggerptMax = -999.;
+      double associatedptMin = 999.;
+      double associatedptMax = -999.;
+    
+      bool isVeto = true;
+    
+      for(Correlator& corr : Correlators)
+      {
+        if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+        //if(!corr.CheckCentrality(centr)) continue;
+        
+        //If event is accepted for the correlator, fill event weights
+        sow[corr.GetFullIndex()]->fill();
+        
+        isVeto = false;
+        
+        //Check min and max of the trigger and associated particles in order to speed up the particle loops
+        if(corr.GetTriggerRangeMin() < triggerptMin) triggerptMin = corr.GetTriggerRangeMin();
+        if(corr.GetTriggerRangeMax() > triggerptMax) triggerptMax = corr.GetTriggerRangeMax();
+        
+        if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
+        if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
+      }
+    
+      if(isVeto) vetoEvent;
+    }
 
     /// Normalise histograms etc., after the run
     void finalize() {
 	}
+    map<string, Histo1DPtr> _h;
+    map<string, CounterPtr> sow;
+    map<string, Histo1DPtr> _DeltaPhixE;
+    map<int, Histo1DPtr> _DeltaPhiSub;
+    map<string, int> nTriggers;
 
+    vector<Correlator> Correlators;
+    
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
-    //@}
-
-
-    /// @name Histograms
-    //@{
-    map<string, Histo1DPtr> _h;
-    map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
     //@}
 
 
