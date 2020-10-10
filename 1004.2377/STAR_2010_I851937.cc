@@ -253,7 +253,7 @@ class Correlator {
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS"); 
      
-/*/for loop to get Figure 2 done 
+/*/SAVE ME TO BE ON THE SAFE SIDE
       Correlator c1(1,1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetCentrality(0.0, 12.0);
@@ -294,13 +294,13 @@ class Correlator {
     /* FIX ME: LOOP OVER THE YODA FILE
          //Booking the histograms
     
-    for (Correlator& corr : Correlators){
-    	string name = "010101";
-    	book(_h[name],01,01,01);
-    	book(sow[name], "sow" + name);
-    	nTriggers[name] = 0;
-    	    }
-     }
+    	for (Correlator& corr : Correlators){
+    		string name = "010101";
+    		book(_h[name],01,01,01);
+    		book(sow[name], "sow" + name);
+    		nTriggers[name] = 0;
+    	  	  }
+     	}
 
 	*/
 
