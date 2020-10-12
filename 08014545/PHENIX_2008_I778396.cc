@@ -190,6 +190,23 @@ namespace Rivet {
         Vn /= integral;
         return Vn;
     }
+
+    double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+    {
+        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                    
+        if(dPhi < -M_PI/2.)
+        {
+            dPhi += 2.*M_PI;
+        }
+        else if(dPhi > 3.*M_PI/2.)
+        {
+            dPhi -= 2*M_PI;
+        }
+                    
+        return dPhi;   
+      }
    
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
@@ -242,7 +259,7 @@ namespace Rivet {
     }
 
     void init() {
-        const ChargedFinalState cfs(Cuts::abseta < 0.35);
+        const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::abscharge > 0);
         declare(cfs, "CFS");
         
         const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
@@ -250,6 +267,14 @@ namespace Rivet {
         
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS");
+
+        beamOpt = getOption<string>("beam", "NONE");
+
+        if (beamOpt == "PP") collSys = pp0;
+        else if (beamOpt == "AUAU") collSys = AuAu;
+        
+        if (!(collSys == pp0)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+
 
       int pta;
         int ptt;
@@ -1025,18 +1050,13 @@ for(Correlator& corr : Correlators4)
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
       //==================================================
-      double nNucleons = 0.;
-      string CollSystem = "Empty";
-      const ParticlePair& beam = beams();
-          CollSystem = "pp";
-          nNucleons = 1.;
-      //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
-      //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
+      string SysAndEnergy = "";
+      //string cmsEnergy = "200GeV";
+
+      if(collSys == pp0) SysAndEnergy = "pp200GeV";
+      else if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
     
-      string cmsEnergy = "Empty";
-      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
-    
-      string SysAndEnergy = CollSystem + cmsEnergy;
+      //SysAndEnergy = collSys + cmsEnergy;
    
       double triggerptMin = 999.;
       double triggerptMax = -999.;
@@ -1044,7 +1064,11 @@ for(Correlator& corr : Correlators4)
       double associatedptMax = -999.;
    
       bool isVeto = true;
-   
+
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const double c = cent();
+      
+       /*
       for(Correlator& corr : Correlators) // Think about adding for Correlators38 etc. FIXME 
       {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
@@ -1062,8 +1086,43 @@ for(Correlator& corr : Correlators4)
         if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
         if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
       }
-   
+      
       if(isVeto) vetoEvent;
+      */
+
+     for(const Particle& pTrig : cfs.particles())
+      {
+          for(const Particle& pTAssoc : cfs.particles())
+          {
+              for(Correlator& corr : Correlators38)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+                  
+                  
+                  string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+                  _h[name]->fill(DeltaPhi);
+                
+                
+                    nTriggers[name]++;
+  
+                  
+              }
+              
+              
+              
+          }
+          
+          
+          
+      }
+
+
     }
 
     void finalize() {
@@ -1097,6 +1156,9 @@ for(Correlator& corr : Correlators4)
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
 
+    string beamOpt;
+    enum CollisionSystem {pp0, AuAu};
+    CollisionSystem collSys;
   };
 
 
