@@ -1089,6 +1089,36 @@ for(Correlator& corr : Correlators4)
       
       if(isVeto) vetoEvent;
       */
+      //*****************************************************************************
+      // The following will fill the histograms for Figure 36-8 
+      for(Correlator& corr : Correlators38)
+        {
+                  
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  if(corr.GetSubSubIndex()==-1){
+                  string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+                  sow[name]->fill();
+                  } 
+                  else if(corr.GetSubSubIndex()==1){
+                  string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
+                  sow[name]->fill();
+                  } 
+                  else if(corr.GetSubSubIndex()==2){
+                  string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
+                  sow[name]->fill();
+                  }
+                  else if(corr.GetSubSubIndex()==3){
+                  string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
+                  sow[name]->fill();
+                  }
+
+                  //string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+                  
+                  //sow[name]->fill();
+                  
+        }
 
      for(const Particle& pTrig : cfs.particles())
       {
@@ -1103,13 +1133,30 @@ for(Correlator& corr : Correlators4)
                   if(!corr.CheckCentrality(c)) continue;
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
-                  
-                  
-                  string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+
+                  if(corr.GetSubSubIndex()==-1){
+                   string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
+                  } 
+                  else if(corr.GetSubSubIndex()==1){
+                  string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
+                  _h[name]->fill(DeltaPhi);
+                  } 
+                  else if(corr.GetSubSubIndex()==2){
+                  string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
+                  _h[name]->fill(DeltaPhi);
+                  }
+                  else if(corr.GetSubSubIndex()==3){
+                  string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
+                  _h[name]->fill(DeltaPhi);
+                  }
+                  
+                  
+                  //string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+                  //_h[name]->fill(DeltaPhi);
                 
                 
-                    nTriggers[name]++;
+                    //nTriggers[name]++;
   
                   
               }
