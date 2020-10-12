@@ -22,6 +22,7 @@ static const int numzTBins = 7;
 static const float zTBins[] = {0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
 static const int numCentBins = 6;
 static const float centBins[] = {0.0,5.0,10,20,30,40,80};
+static const double pi = 2*acos(0.0);
 
 using namespace std;
 namespace Rivet {
@@ -33,6 +34,7 @@ namespace Rivet {
 
       int _index;
       int _subindex;
+      int _subsubindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
@@ -43,15 +45,17 @@ namespace Rivet {
     public:
     
       /// Constructor
-      Correlator(int index, int subindex) {
+      Correlator(int index, int subindex, int subsubindex) {
         _index = index;
         _subindex = subindex;
+        _subsubindex = subsubindex;
       }
 
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
+      void SetzTRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
     
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
@@ -71,9 +75,10 @@ namespace Rivet {
     
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
+      int GetSubSubIndex(){ return _subsubindex; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex())+ to_string(GetSubSubIndex());
           return fullIndex;
       }
     
@@ -238,45 +243,85 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2006_I715470);
     void init() {
-        const ChargedFinalState cfs(Cuts::abseta < 0.35);
-        declare(cfs, "CFS");
-       
-        const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
-        declare(pp, "PP");
-       
-        const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
-        declare(pfs, "PFS");
+      const ChargedFinalState cfs(Cuts::abseta < 0.35);
+      declare(cfs, "CFS");
 
-        for(int ntrig=0;ntrig<numTrigPtBins;ntrig++){
-      for(int ncb=0;ncb<numCentBins;ncb++){
-      for(int nassoc=0;nassoc<numAssocPtBins;nassoc++){
+      const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
+      declare(pp, "PP");
+
+      const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
+      declare(pfs, "PFS");
+
+int ndPhiBins = 72;
+double lowedge = -pi/2.0;
+double highedge = 3.0*pi/2.0;
+
+
+        for(int ncb=0;ncb<numCentBins;ncb++){
+      for(int ntrig=0;ntrig<numTrigPtBins;ntrig++){
+          for(int nassoc=0;nassoc<numAssocPtBins;nassoc++){
       //Correlators
-      Correlator c1(1,1);
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
-      c1.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
-      c1.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
-      Correlators.push_back(c1);
-        if(cb==0){
+            Correlator c1(ncb,ntrig,nassoc);
+            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
+            c1.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
+            c1.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
+            c1.SetzTRange(0,1);
+            Correlators.push_back(c1);
+            string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
+            book(_h[name], name, ndPhiBins,lowedge,highedge);
+            if(ncb==0){
 
-      Correlator c2(1,1);
-      c2.SetCollSystemAndEnergy("dAu200GeV");
-      c2.SetCentrality(centbins[ncb], centbins[ncb+1]);
-      c2.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
-      c2.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
-      Correlators.push_back(c2);
-        }
-    }
+              Correlator c2(100,ntrig,nassoc);
+              c2.SetCollSystemAndEnergy("dAu200GeV");
+              c2.SetCentrality(0,80);
+              c2.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
+              c2.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
+              c2.SetzTRange(0,1); 
+              Correlators.push_back(c2);
+            string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
+            book(_h[name2], name2, ndPhiBins,lowedge,highedge);
+            }
+          }
 
-//Add loop over zT bins
 
-    }
-    }
+        }//end loop over trigger pT bins
+
+          for(int nzT=0;nzT<numzTBins;nzT++){
+
+      //Correlators
+            Correlator c1(ncb,1000,1000);
+            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
+            c1.SetTriggerRange(8,15);
+            c1.SetzTRange(zTBins[nzT],zTBins[nzT+1]);
+            c1.SetAssociatedRange(3,15);
+            Correlators.push_back(c1);
+            string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
+            book(_h[name], name, ndPhiBins,lowedge,highedge);
+            if(ncb==0){
+
+              Correlator c2(1000,1000,1000);
+              c2.SetCollSystemAndEnergy("dAu200GeV");
+              c2.SetCentrality(0,80);
+              c2.SetTriggerRange(8,15);
+              c2.SetzTRange(zTBins[nzT],zTBins[nzT+1]);
+              c2.SetAssociatedRange(3,15);
+              Correlators.push_back(c2);
+            string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
+            book(_h[name2], name2, ndPhiBins,lowedge,highedge);
+            }
+          }//End of the zT loop
+
+      }//end loop over centrality bins
+
 //Create histograms from scratch
 //    string name = "mystring";
 //book(_h[name], name, nbins,lowedge,highedge);
     //I'm going to guess that you want 72 bins
-
+      //Homework 10/12 Book histograms for the plots you have in your yoda file
+//book(_h[name],table,xindex,yindex);
+      //now name has a specific format related to your yoda file
 
     }
     void analyze(const Event& event) {
