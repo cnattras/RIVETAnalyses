@@ -324,26 +324,26 @@ for(pta = 0; pta<numAssocPtBins; pta++){
 for(Correlator& corr : Correlators38)
   {
     if(corr.GetSubSubIndex()==-1){
-      string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
-        book(_h[name], 58,01,((corr.GetIndex()+1) + corr.GetSubIndex()));
+      string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+        book(_h[name], 58,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==1){
-      string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
-        book(_h[name], 53,01,(corr.GetIndex() +1 + corr.GetSubIndex()));
+      string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+        book(_h[name], 53,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==2){
-      string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
-        book(_h[name], 55,01,(corr.GetIndex() +1 + corr.GetSubIndex()));
+      string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+        book(_h[name], 55,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
     else if(corr.GetSubSubIndex()==3){
-      string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
-        book(_h[name], 57,01,(corr.GetIndex() +1 + corr.GetSubIndex()));
+      string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+        book(_h[name], 57,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
@@ -1090,7 +1090,7 @@ for(Correlator& corr : Correlators4)
       if(isVeto) vetoEvent;
       */
       //*****************************************************************************
-      // The following will fill the histograms for Figure 36-8 
+      // The following will fill the sow for Figure 36-8 
       for(Correlator& corr : Correlators38)
         {
                   
@@ -1098,19 +1098,19 @@ for(Correlator& corr : Correlators4)
                   if(!corr.CheckCentrality(c)) continue;
                   
                   if(corr.GetSubSubIndex()==-1){
-                  string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+                  string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   } 
                   else if(corr.GetSubSubIndex()==1){
-                  string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
+                  string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   } 
                   else if(corr.GetSubSubIndex()==2){
-                  string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
+                  string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   }
                   else if(corr.GetSubSubIndex()==3){
-                  string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
+                  string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   }
 
@@ -1119,11 +1119,37 @@ for(Correlator& corr : Correlators4)
                   //sow[name]->fill();
                   
         }
+      //*****************************************************************************
+      // The following will fill the sow for Figure 31 
+        for(Correlator& corr : Correlators31)
+        {
+
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  if(corr.GetSubSubIndex()==0){
+                  string name = "49010" + to_string(1+corr.GetSubIndex());
+                   sow[name]->fill();
+                   } 
+                 else if(corr.GetSubSubIndex()==1){
+                  string name = "50010" + to_string(1+corr.GetSubIndex());
+                   sow[name]->fill();
+                   } 
+                 else if(corr.GetSubSubIndex()==2){
+                 string name = "51010" + to_string(1+corr.GetSubIndex());
+                  sow[name]->fill();
+                  }
+                  else if(corr.GetSubSubIndex()==3){
+                  string name = "52010" + to_string(1+corr.GetSubIndex());
+                  sow[name]->fill();
+                }
+        }
 
      for(const Particle& pTrig : cfs.particles())
       {
           for(const Particle& pTAssoc : cfs.particles())
           {
+            //*****************************************************************************
+            // The following will fill the histograms for Figure 38 
               for(Correlator& corr : Correlators38)
               {
                   if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
@@ -1135,19 +1161,19 @@ for(Correlator& corr : Correlators4)
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 
                   if(corr.GetSubSubIndex()==-1){
-                   string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
+                   string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
                   } 
                   else if(corr.GetSubSubIndex()==1){
-                  string name = "53010" + to_string(corr.GetIndex() +1 + corr.GetSubIndex());
+                  string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
                   } 
                   else if(corr.GetSubSubIndex()==2){
-                  string name = "55010" + to_string(corr.GetIndex()+1 + corr.GetSubIndex());
+                  string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
                   }
                   else if(corr.GetSubSubIndex()==3){
-                  string name = "57010" + to_string(corr.GetIndex() + 1 + corr.GetSubIndex());
+                  string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
                   }
                   
@@ -1160,7 +1186,37 @@ for(Correlator& corr : Correlators4)
   
                   
               }
-              
+              //*****************************************************************************
+              // The following will fill the histograms for Figure 31
+              for(Correlator& corr : Correlators31)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+
+                  if(corr.GetSubSubIndex()==0){
+                  string name = "49010" + to_string(1+corr.GetSubIndex());
+                  _h[name]->fill(DeltaPhi);
+                   } 
+                 else if(corr.GetSubSubIndex()==1){
+                  string name = "50010" + to_string(1+corr.GetSubIndex());
+                 _h[name]->fill(DeltaPhi);
+                   } 
+                 else if(corr.GetSubSubIndex()==2){
+                 string name = "51010" + to_string(1+corr.GetSubIndex());
+                  _h[name]->fill(DeltaPhi);
+                  }
+                  else if(corr.GetSubSubIndex()==3){
+                  string name = "52010" + to_string(1+corr.GetSubIndex());
+                   _h[name]->fill(DeltaPhi);
+                  }
+  
+                  
+              }
               
               
           }
