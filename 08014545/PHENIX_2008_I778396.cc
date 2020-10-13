@@ -1110,11 +1110,11 @@ for(Correlator& corr : Correlators4)
                   sow[name]->fill();
                   }
                   //FIXME This one causes an error
-                  /*else if(corr.GetSubSubIndex()==3){
+                  else if(corr.GetSubSubIndex()==3){
                   string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   }
-                  */
+                  
 
                   //string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
                   
