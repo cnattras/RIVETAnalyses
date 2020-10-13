@@ -1109,10 +1109,12 @@ for(Correlator& corr : Correlators4)
                   string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   }
-                  else if(corr.GetSubSubIndex()==3){
+                  //FIXME This one causes an error
+                  /*else if(corr.GetSubSubIndex()==3){
                   string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   sow[name]->fill();
                   }
+                  */
 
                   //string name = "58010" + to_string((corr.GetIndex()+1) + corr.GetSubIndex());
                   
@@ -1121,6 +1123,8 @@ for(Correlator& corr : Correlators4)
         }
       //*****************************************************************************
       // The following will fill the sow for Figure 31 
+        //FIXME ... the figure is for pT 
+        /*
         for(Correlator& corr : Correlators31)
         {
 
@@ -1143,6 +1147,7 @@ for(Correlator& corr : Correlators4)
                   sow[name]->fill();
                 }
         }
+          */
 
      for(const Particle& pTrig : cfs.particles())
       {
@@ -1188,7 +1193,8 @@ for(Correlator& corr : Correlators4)
               }
               //*****************************************************************************
               // The following will fill the histograms for Figure 31
-              for(Correlator& corr : Correlators31)
+              //FIXME ... the figure is for pT 
+              /*for(Correlator& corr : Correlators31)
               {
                   if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
                   
@@ -1214,9 +1220,10 @@ for(Correlator& corr : Correlators4)
                   string name = "52010" + to_string(1+corr.GetSubIndex());
                    _h[name]->fill(DeltaPhi);
                   }
-  
+                  
                   
               }
+              */
               
               
           }
