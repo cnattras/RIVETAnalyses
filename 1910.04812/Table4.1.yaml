@@ -1,0 +1,570 @@
+#Data 25, 26, 27
+independent_variables:
+- header: {name: '$p_T$'}
+  values:
+  - {low: 0.3, high: 0.4}
+  - {low: 0.4, high: 0.5}
+  - {low: 0.5, high: 0.6}
+  - {low: 0.6, high: 0.7}
+  - {low: 0.7, high: 0.8}
+  - {low: 0.8, high: 0.9}
+  - {low: 0.9, high: 1}
+  - {low: 1, high: 1.1}
+  - {low: 1.1, high: 1.2}
+  - {low: 1.2, high: 1.3}
+  - {low: 1.3, high: 1.4}
+  - {low: 1.4, high: 1.5}
+  - {low: 1.5, high: 1.6}
+  - {low: 1.6, high: 1.7}
+  - {low: 1.7, high: 1.8}
+  - {low: 1.8, high: 1.9}
+  - {low: 1.9, high: 2.1}
+  - {low: 2.1, high: 2.3}
+  - {low: 2.3, high: 2.5}
+  - {low: 2.5, high: 2.7}
+  - {low: 2.7, high: 2.9}
+  - {low: 2.9, high: 3.3}
+  - {low: 3.3, high: 3.7}
+  - {low: 3.7, high: 4.1}
+  - {low: 4.1, high: 4.5}
+  - {low: 4.5, high: 5}
+  - {low: 5, high: 6}
+  - {low: 6, high: 7}
+  - {low: 7, high: 8}
+  - {low: 8, high: 9.5}
+  - {low: 9.5, high: 11.5}
+  - {low: 11.5, high: 15}
+dependent_variables:
+- header:
+    name: $R_{pPb}$
+  qualifiers:
+  - name: RE
+    value: P Pb --> K0S X
+  - name: SQRT(S)/NUCLEON
+    units: TeV
+    value: 5.02
+  - name: RAPIDITY YCM
+    value: -1.8 TO 0
+  values:
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.008
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 0.6
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.038
+    value: 0.683
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.04
+    value: 0.709
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.023
+    value: 0.739
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.024
+    value: 0.774
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.026
+    value: 0.828
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.026
+    value: 0.847
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.028
+    value: 0.899
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.028
+    value: 0.908
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.029
+    value: 0.946
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.002
+    - label: Systematic uncertainty
+      symerror: 0.03
+    value: 0.97
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.03
+    value: 0.98
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.031
+    value: 0.985
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.032
+    value: 1.018
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.057
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.032
+    value: 1.04
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.052
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.003
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.061
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.072
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.07
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.005
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 1.088
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 1.083
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.005
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 1.091
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.007
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.072
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.009
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.073
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.01
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.077
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.01
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.065
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.017
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 1.083
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.027
+    - label: Systematic uncertainty
+      symerror: 0.036
+    value: 1.168
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.032
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.066
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.049
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 1.086
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.072
+    - label: Systematic uncertainty
+      symerror: 0.033
+    value: 1.056
+- header:
+    name: $R_{pPb}$
+  qualifiers:
+  - name: RE
+    value: P Pb --> Lambda + anti-Lambda X
+  - name: SQRT(S)/NUCLEON
+    units: TeV
+    value: 5.02
+  - name: RAPIDITY YCM
+    value: -1.8 TO 0
+  values:
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.007
+    - label: Systematic uncertainty
+      symerror: 0.073
+    value: 0.699
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.034
+    value: 0.802
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.039
+    value: 0.903
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.041
+    value: 0.965
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.047
+    value: 1.085
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.006
+    - label: Systematic uncertainty
+      symerror: 0.049
+    value: 1.149
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.004
+    - label: Systematic uncertainty
+      symerror: 0.055
+    value: 1.272
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.006
+    - label: Systematic uncertainty
+      symerror: 0.06
+    value: 1.388
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.006
+    - label: Systematic uncertainty
+      symerror: 0.063
+    value: 1.465
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.009
+    - label: Systematic uncertainty
+      symerror: 0.065
+    value: 1.513
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.015
+    - label: Systematic uncertainty
+      symerror: 0.068
+    value: 1.579
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.023
+    - label: Systematic uncertainty
+      symerror: 0.063
+    value: 1.468
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.036
+    - label: Systematic uncertainty
+      symerror: 0.055
+    value: 1.288
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.055
+    - label: Systematic uncertainty
+      symerror: 0.052
+    value: 1.216
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.07
+    - label: Systematic uncertainty
+      symerror: 0.05
+    value: 1.17
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.117
+    - label: Systematic uncertainty
+      symerror: 0.051
+    value: 1.191
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+- header:
+    name: $R_{pPb}$
+  qualifiers:
+  - name: RE
+    value: P Pb --> Xi+ + Xi- X
+  - name: SQRT(S)/NUCLEON
+    units: TeV
+    value: 5.02
+  - name: RAPIDITY YCM
+    value: -1.8 TO 0
+  values:
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.057
+    - label: Systematic uncertainty
+      symerror: 0.077
+    value: 1.128
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.046
+    - label: Systematic uncertainty
+      symerror: 0.07
+    value: 1.028
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.051
+    - label: Systematic uncertainty
+      symerror: 0.08
+    value: 1.171
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.043
+    - label: Systematic uncertainty
+      symerror: 0.097
+    value: 1.426
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.046
+    - label: Systematic uncertainty
+      symerror: 0.102
+    value: 1.501
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.046
+    - label: Systematic uncertainty
+      symerror: 0.11
+    value: 1.617
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.051
+    - label: Systematic uncertainty
+      symerror: 0.11
+    value: 1.615
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.061
+    - label: Systematic uncertainty
+      symerror: 0.108
+    value: 1.587
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.113
+    - label: Systematic uncertainty
+      symerror: 0.116
+    value: 1.706
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 0.151
+    - label: Systematic uncertainty
+      symerror: 0.089
+    value: 1.303
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0
+  - errors:
+    - label: Statistical uncertainty
+      symerror: 1.0e-20
+    value: 0

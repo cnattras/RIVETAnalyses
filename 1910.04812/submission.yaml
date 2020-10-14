@@ -1,0 +1,88 @@
+comment: |
+  The transverse momentum $p_{T}$ distributions of Λ, Ξ−, and Ω− baryons, their antiparticles, and ${K_{0}}^{S}$ mesons are measured in proton-proton (pp) and proton-lead (pPb) collisions at a nucleon-nucleon center-of-mass energy of 5.02 TeV over a broad rapidity range. The data, corresponding to integrated luminosities of 40.2 $nb^{−1}$ and 15.6 $μb^{−1}$ for pp and pPb collisions, respectively, were collected by the CMS experiment.  The nuclear modification factor $R_{pPb}$, which is defined as the ratio of the particle yield in pPb collisions and a scaled pp reference, is measured for each particle.  A strong dependence on particle species is observed in the $p_{T}$ range from 2 to 7 GeV, where $R_{pPb}$ for ${K_{0}}^{S}$ is consistent with unity, while an enhancement ordered by strangeness content and/or particle mass is observed for the three baryons. In pPb collisions, the strange hadron production is asymmetric about the nucleon-nucleon center-of-mass rapidity.  Enhancements, which depend on the particle type, are observed in the direction of the Pb beam.  The results are compared with predictions from EPOS LHC, which includes parametrized radial flow.  The model is in qualitative agreement with the $R_{pPb}$ data, but fails to describe the dependence on particle species in the yield asymmetries measured away from midrapidity in pPb collisions.
+additional_resources:
+  - {location: "http://cms-results.web.cern.ch/cms-results/public-results/publications/HIN-16-013/", description: "web page with all figures and tables"}
+---
+name: "Figure 2.1"
+description: 'Invariant $p_{T}$-differential spectra of ${K_{0}}^{S}$ in p+p and p+Pb at $\sqrt{s}$=5.02 TeV in various |$y_{CM}$| ranges'
+keywords:
+  - {name: reactions, values: [p p --> $K_0^S$ X, p Pb --> $K_0^S$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table2.1.yaml
+---
+name: "Figure 2.2"
+description: 'Invariant $p_{T}$-differential spectra of $\Lambda + \bar{\Lambda}$ in p+p and p+Pb at $\sqrt{s}$=5.02 TeV in various |$y_{CM}$| ranges'
+keywords:
+  - {name: reactions, values: [p p --> $\Lambda$ $\bar\Lambda$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table2.2.yaml
+---
+name: "Figure 2.3"
+description: 'Invariant $p_{T}$-differential spectra of $\Xi- + \bar{\Xi+}$ in p+p and p+Pb at $\sqrt{s}$=5.02 TeV in various |$y_{CM}$| ranges'
+keywords:
+  - {name: reactions, values: [p p --> $\Xi-$ $\bar\Xi+$ X, p Pb --> $\Xi-$ $\bar\Xi+$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table2.3.yaml
+---
+name: "Figure 2.4"
+description: 'Invariant $p_{T}$-differential spectra of $\Omega- + \bar{\Omega+}$ in p+p and p+Pb at $\sqrt{s}$=5.02 TeV in |$y_{CM}$| < 1.8'
+keywords:
+  - {name: reactions, values: [p p --> $\Omega-$ $\bar\Omega+$ X, p Pb --> $\Omega-$ $\bar\Omega+$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table2.4.yaml
+---
+name: "Figure 3"
+description: '$R_{pPb}$ in p+Pb at $\sqrt{s}$=5.02 TeV in |$y_{CM}$| < 1.8'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X, p Pb --> $\Xi-$ $\bar\Xi+$ X, p Pb --> $\Omega-$ $\bar\Omega+$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table3.yaml
+---
+name: "Figure 4.1"
+description: '$R_{pPb}$ in p+Pb at $\sqrt{s}$=5.02 TeV in -1.8 < $y_{CM}$ < 0'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X, p Pb --> $\Xi-$ $\bar\Xi+$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table4.1.yaml
+---
+name: "Figure 4.2"
+description: '$R_{pPb}$ in p+Pb at $\sqrt{s}$=5.02 TeV in 0 < $y_{CM}$ < 1.8'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X, p Pb --> $\Xi-$ $\bar\Xi+$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table4.2.yaml
+---
+name: "Figure 5.1"
+description: 'Invariant $p_{T}$-differential spectra of ${K_{0}}^{S}$ in p+Pb at $\sqrt{s}$=5.02 TeV in various $y_{CM}$ ranges'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table5.1.yaml
+---
+name: "Figure 5.2"
+description: 'Invariant $p_{T}$-differential spectra of $\Lambda + \bar{\Lambda}$ in p+Pb at $\sqrt{s}$=5.02 TeV in various $y_{CM}$ ranges'
+keywords:
+  - {name: reactions, values: [p Pb --> $\Lambda$ $\bar\Lambda$ X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table5.2.yaml
+---
+name: "Figure 6.1"
+description: '$Y_{asym}$ in p+Pb at $\sqrt{s}$=5.02 TeV in 0.3 < $y_{CM}$ < 0.8'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X, p Pb --> h+/- X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table6.1.yaml
+---
+name: "Figure 6.2"
+description: '$Y_{asym}$ in p+Pb at $\sqrt{s}$=5.02 TeV in 0.8 < $y_{CM}$ < 1.3'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X, p Pb --> h+/- X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table6.2.yaml
+---
+name: "Figure 6.3"
+description: '$Y_{asym}$ in p+Pb at $\sqrt{s}$=5.02 TeV in 1.3 < $y_{CM}$ < 1.8'
+keywords:
+  - {name: reactions, values: [p Pb --> $K_0^S$ X, p Pb --> $\Lambda$ $\bar\Lambda$ X, p Pb --> h+/- X]}
+  - {name: cmenergies, values: [5.02]}
+data_file: Table6.3.yaml
