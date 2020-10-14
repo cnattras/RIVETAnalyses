@@ -11,6 +11,6 @@ LineStyle=solid
 Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/sow570106
 Title=Rivet
 # value	 error
--1.799709e+13	1.803869e+13
+2.314132e+05	1.884144e+04
 # END COUNTER
 
