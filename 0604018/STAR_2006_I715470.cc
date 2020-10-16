@@ -315,13 +315,9 @@ double highedge = 3.0*pi/2.0;
 
       }//end loop over centrality bins
 
-//Create histograms from scratch
-//    string name = "mystring";
-//book(_h[name], name, nbins,lowedge,highedge);
-    //I'm going to guess that you want 72 bins
-      //Homework 10/12 Book histograms for the plots you have in your yoda file
-//book(_h[name],table,xindex,yindex);
-      //now name has a specific format related to your yoda file
+//AJ - book histograms which were in the .yoda file
+      //Add counters to keep track of trigger particles - something like this
+      //book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
 
     }
     void analyze(const Event& event) {
@@ -372,6 +368,92 @@ double highedge = 3.0*pi/2.0;
       }
     
       if(isVeto) vetoEvent;
+    // loop over charged final state particles - PI0
+    for(const Particle& pTrig : ppTrigPi0.particles())
+    {//AJ Change this to loop over charged particles
+        //Check if is secondary
+        if(isSecondary(pTrig)) continue;
+          
+        
+        for(Correlator& corr : Correlators)
+        {
+            if(!corr.CheckPID(pdgPi0)) continue;
+            if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
+            nTriggers[corr.GetFullIndex()]++;
+        }
+        // Hadron loop
+        for(const Particle& pAssoc : cfs.particles())
+        {
+                
+            //Check if Trigger and Associated are the same particle
+            if(isSameParticle(pTrig,pAssoc)) continue;
+                
+            //Check if is secondary
+            if(isSecondary(pAssoc)) continue;
+
+            //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+            double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                        
+            //double xE = GetXE(pTrig,pAssoc);
+            
+            for(Correlator& corr : Correlators)
+            {
+                if(!corr.CheckPID(pdgPi0)) continue;
+                
+                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                //AJ add a spot where you fill histograms
+                
+                
+            } //end of correlators loop 
+                
+        } // end of loop over associated particles
+
+    } // particle loop
+
+        // loop over charged final state particles - PHOTONS
+    for(const Particle& pTrig : pfsTrigPhotons.particles())
+    {//AJ Change this to loop over charged particles
+        //Check if is secondary
+        if(isSecondary(pTrig)) continue;
+          
+        
+        for(Correlator& corr : Correlators)
+        {
+            if(!corr.CheckPID(pdgPhoton)) continue;
+            if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
+            nTriggers[corr.GetFullIndex()]++;
+        }
+        
+        // Hadron loop
+        for(const Particle& pAssoc : cfs.particles())
+        {
+                
+            //Check if Trigger and Associated are the same particle
+            if(isSameParticle(pTrig,pAssoc)) continue;
+                
+            //Check if is secondary
+            if(isSecondary(pAssoc)) continue;
+
+            //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+            double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                                 
+            
+            
+            for(Correlator& corr : Correlators)
+            {
+                if(!corr.CheckPID(pdgPhoton)) continue;
+                
+                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                
+                //AJ add a spot where you fill histograms
+                
+                
+            } //end of correlators loop 
+                
+        } // end of loop over associated particles
+
+    } // particle loop
+
     }
     void finalize() {
     }
