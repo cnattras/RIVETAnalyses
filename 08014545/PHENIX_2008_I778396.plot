@@ -1,7 +1,7 @@
-BEGIN PLOT /PHENIX_2008_I778396/d01-x01-y01
-Title=[Insert title for histogram d01-x01-y01 here]
-XLabel=[Insert $x$-axis label for histogram d01-x01-y01 here]
-YLabel=[Insert $y$-axis label for histogram d01-x01-y01 here]
+BEGIN PLOT /PHENIX_2008_I778396/d58-x01-y24
+Title=[Figure 38, 2-3 $\otimes$ 0.4-1 GeV/c]
+XLabel=[$\Delta\phi$ (rad)]
+YLabel=[Per-trigger yield]
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
