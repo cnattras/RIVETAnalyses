@@ -316,6 +316,8 @@ double highedge = 3.0*pi/2.0;
       }//end loop over centrality bins
 
 //AJ - book histograms which were in the .yoda file
+      book(_h["010101"],1,1,1);
+      book(_h["010102"],1,1,2);
       //Add counters to keep track of trigger particles - something like this
       //book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
 
@@ -368,16 +370,17 @@ double highedge = 3.0*pi/2.0;
       }
     
       if(isVeto) vetoEvent;
-    // loop over charged final state particles - PI0
-    for(const Particle& pTrig : ppTrigPi0.particles())
-    {//AJ Change this to loop over charged particles
+    // loop over charged final state particles - PI
+     for(const Particle& pTrig : cfs.particles()){
+      //AJ - check to see if you need to change ppTrigPi0.particles() to cfs
+
         //Check if is secondary
         if(isSecondary(pTrig)) continue;
           
         
         for(Correlator& corr : Correlators)
         {
-            if(!corr.CheckPID(pdgPi0)) continue;
+            //if(!corr.CheckPID(pdgPi0)) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
             nTriggers[corr.GetFullIndex()]++;
         }
@@ -398,11 +401,15 @@ double highedge = 3.0*pi/2.0;
             
             for(Correlator& corr : Correlators)
             {
-                if(!corr.CheckPID(pdgPi0)) continue;
+                //if(!corr.CheckPID(pdgPi0)) continue;
                 
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 //AJ add a spot where you fill histograms
-                
+                //See Nora's code in 08014545 around line 1168
+                  //if(corr.GetSubSubIndex()==-1){
+                   //string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  //_h[name]->fill(DeltaPhi);
+                  //} 
                 
             } //end of correlators loop 
                 
@@ -411,15 +418,17 @@ double highedge = 3.0*pi/2.0;
     } // particle loop
 
         // loop over charged final state particles - PHOTONS
-    for(const Particle& pTrig : pfsTrigPhotons.particles())
-    {//AJ Change this to loop over charged particles
+                 for(const Particle& pTrig : cfs.particles()){
+
+    //for(const Particle& pTrig : pfsTrigPhotons.particles())
+    //{//AJ Change this to loop over charged particles
         //Check if is secondary
         if(isSecondary(pTrig)) continue;
           
         
         for(Correlator& corr : Correlators)
         {
-            if(!corr.CheckPID(pdgPhoton)) continue;
+            //if(!corr.CheckPID(pdgPhoton)) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
             nTriggers[corr.GetFullIndex()]++;
         }
@@ -441,7 +450,7 @@ double highedge = 3.0*pi/2.0;
             
             for(Correlator& corr : Correlators)
             {
-                if(!corr.CheckPID(pdgPhoton)) continue;
+                //if(!corr.CheckPID(pdgPhoton)) continue;
                 
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 
