@@ -1,7 +1,7 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
-Title=[Figure 38, 2-3 $\otimes$ 2-3 GeV/c]
+Title=[Figure 38, p + p, 2-3 $\otimes$ 2-3 GeV/c]
 XLabel=[$\Delta\phi$ (rad)]
 YLabel=[Per-trigger yield]
 DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d58-x01-y09
