@@ -28,7 +28,6 @@ class Correlator {
     private:
       int _index;
       int _subindex;
-      int _subsubindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
@@ -66,7 +65,7 @@ class Correlator {
       int GetSubIndex(){ return _subindex; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex()) + to_string(GetSubSubIndex());
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
           return fullIndex;
       }
     
@@ -242,8 +241,11 @@ class Correlator {
     /// Book histograms and initialise projections before the run
     void init() {
 
-        const ChargedFinalState cfs(Cuts::abseta < 0.35);
+        const ChargedFinalState cfs(Cuts::abseta < 1.0);
         declare(cfs, "CFS");
+
+        const ChargedFinalState cfsEta(Cuts::abseta < 0.7);
+        declare(cfsEta, "CFSETA");
         
         const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
         declare(pp, "PP");
@@ -251,23 +253,9 @@ class Correlator {
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS"); 
      
-/*SAVE ME TO BE ON THE SAFE SIDE
-      Correlator c1(1,1);
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0.0, 12.0);
-      c1.SetTriggerRange(2.5, 3);
-      c1.SetAssociatedRange(1.0, 2.5);
-      //c1.SetPID(pdgPi0);
-      Correlators.push_back(c1);
-
-	  Correlator c2(1,1);
-      c1.SetCollSystemAndEnergy("dEta200GeV");
-      c1.SetCentrality(0.0, 12.0);
-      c1.SetTriggerRange(2.5, 3);
-      c1.SetAssociatedRange(1.0, 2.5);
-      //c1.SetPID(pdgPi0);
-      Correlators.push_back(c2);
-*/  
+        declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+       
+        
       //===========================================================
       //===========================================================
       //Figure 2: Only raw and delta eta histograms 
@@ -276,92 +264,32 @@ class Correlator {
         //and different pT trig. This is going to be tedious.
       //===========================================================
       //===========================================================
-      int i = 0; //raw, dEta
-      int ptt = 0; //2.5-3,3-4,...
-      int cb = 0; //Centralities
-      	for (ptt = 0; ptt < numTrigPtBins - 1; ptt++){
-      		for (cb = 0; cb < numCentBins - 1; cb++){
-      			Correlator c2 (i,ptt,cb);
-      			c2.SetCollSystemAndEnergy("AuAu200GeV");
-      			c2.SetCentrality(CentBins[cb], CentBins[cb+1]);
-      			c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
-      			c2.SetNoPTassociated();
-      			//c2.SetPID(pdgPi0)
-      			CorrelatorsB.push_back(c2);
-      		}
-      	}
+      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
+    {
+        for (int cb = 0; cb < numCentBins - 1; cb++)
+        {
+            Correlator c1 (ptt,cb);
+      		c1.SetCollSystemAndEnergy("AuAu200GeV");
+      		c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
+      		c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+      		c1.SetNoPTassociated();
+      		Correlators.push_back(c1);
+        }
+    }
+
+    for(Correlator corr : Correlators)
+    {
+        //raw |eta| < 1
+        string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+        book(_h[name_raw], corr.(GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+    }
     
+    //YODA FILE EXPLANATION
     //d01,x01,y01 is raw 0-12%
     //d01,x01,y02 is deta 0-12%
     //d01,x01,y03 is raw 20-40% etc. etc.
 
-  //FIX ME: The logic is wrong, maybe split it into multiple correlators.
-      for (Correlator& corr : Correlators){
-        string name = "Raw" + to_string(corr.GetIndex()) + to_string(corr.GetSubIndex()) + to_string(corr.GetSubSubIndex());
-        book(_h[name], corr.GetIndex()+1, corr.GetSubIndex()+1, corr.GetSubSubIndex()+1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-
- 	  for (Correlator& corr : CorrelatorsB){
-        string name = "0-12dEta";
-        //book(_h[name], corr.GetIndex()+1, corr.GetSubIndex()+1, corr.GetSubSubIndex()+2);
-        //book(sow[name],"sow" + to_string(corr.GetIndex()));
-        //nTriggers[name] = 0;
-
-            }
-      /* MARK FOR DELETION
-
-      for (Correlator& corr : Correlators){
-        string name = "02010";
-        book(_h["1" + to_string(corr.GetIndex()) + "4"], corr.GetIndex()+2, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "03010";
-        book(_h["1" + to_string(corr.GetIndex()) + "8"], corr.GetIndex()+3, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "04010";
-        book(_h["1" + to_string(corr.GetIndex()) + "4"], corr.GetIndex()+4, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "05010";
-        book(_h["1" + to_string(corr.GetIndex()) + "6"], corr.GetIndex()+5, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "06010";
-        book(_h["1" + to_string(corr.GetIndex()) + "2"], corr.GetIndex()+6, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "07010";
-        book(_h["1" + to_string(corr.GetIndex()) + "4"], corr.GetIndex()+7, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "08010";
-        book(_h["1" + to_string(corr.GetIndex()) + "8"], corr.GetIndex()+8, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-      for (Correlator& corr : Correlators){
-        string name = "09010";
-        book(_h["1" + to_string(corr.GetIndex()) + "4"], corr.GetIndex()+9, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
-         
-*/
-      
+  
 /*
       //===================================================================
       //===================================================================
