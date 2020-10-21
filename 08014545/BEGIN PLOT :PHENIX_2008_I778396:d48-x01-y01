@@ -1,0 +1,114 @@
+BEGIN PLOT /PHENIX_2008_I778396/d48-x01-y01
+Title=[Figure 30, 60-92 Au + Au, 2-3 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d48-x01-y02
+Title=[Figure 30, 60-92 Au + Au, 3-4 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d48-x01-y03
+Title=[Figure 30, 60-92 Au + Au, 4-5 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d48-x01-y04
+Title=[Figure 30, 60-92 Au + Au, 5-10 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d47-x01-y01
+Title=[Figure 30, 40-60 Au + Au, 2-3 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d47-x01-y02
+Title=[Figure 30, 40-60 Au + Au, 3-4 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d47-x01-y03
+Title=[Figure 30, 40-60 Au + Au, 4-5 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d47-x01-y04
+Title=[Figure 30, 40-60 Au + Au, 5-10 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d46-x01-y01
+Title=[Figure 30, 20-40 Au + Au, 2-3 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d46-x01-y02
+Title=[Figure 30, 20-40 Au + Au, 3-4 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d46-x01-y03
+Title=[Figure 30, 20-40 Au + Au, 4-5 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d46-x01-y04
+Title=[Figure 30, 20-40 Au + Au, 5-10 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+
+
+
+BEGIN PLOT /PHENIX_2008_I778396/d45-x01-y01
+Title=[Figure 28, 20-40 Au + Au, 2-3 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d45-x01-y02
+Title=[Figure 28, 20-40 Au + Au, 3-4 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d45-x01-y03
+Title=[Figure 28, 20-40 Au + Au, 4-5 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT
+
+BEGIN PLOT /PHENIX_2008_I778396/d45-x01-y04
+Title=[Figure 28, 20-40 Au + Au, 5-10 GeV/c]
+XLabel=[$p^b_T$ (GeV/c)]
+YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
+# + any additional plot settings you might like, see make-plots documentation
+END PLOT

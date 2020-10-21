@@ -258,10 +258,7 @@ class Correlator {
         
       //===========================================================
       //===========================================================
-      //Figure 2: Only raw and delta eta histograms 
-      //FIXME You will have to figure out how to use multiple correlators
-        //and then book those seperately for the different centralities
-        //and different pT trig. This is going to be tedious.
+      //                   Figure 2
       //===========================================================
       //===========================================================
       for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
@@ -341,47 +338,58 @@ class Correlator {
     //YODA FILE EXPLANATION
     //d01,x01,y01 is raw 0-12%
     //d01,x01,y02 is deta 0-12%
-    //d01,x01,y03 is raw 20-40% etc. etc.
+    //d01,x01,y03 is raw 20-40% etc.
+    //Only for figure 2 and 3 when the title is not background subtracted.
 
   
-/*
+
       //===================================================================
       //===================================================================
-      //Figure 3
+      //Figure 3 FIX ME: Finish booking histograms. 
       // You might have to make another for loop section for dAU as well.
       //===================================================================
       //===================================================================
-      int j = 0; //raw, bksb, dEta
-      for (j = 0; j < 3; j++){
-      	for (ptt = 0; ptt < numTrigPtBins - 1; ptt++){
-      		for (cb = 0; cb < numCentBins - 1; cb++){
-      			Correlator c3 (i,ptt,cb);
-      			c3.SetCollSystemAndEnergy("BkSub200GeV");
-      			c3.SetCentrality(CentBins[cb], CentBins[cb+1]);
-      			c3.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
-      			c3.SetNoPTassociated();
-      			//c1.SetPID(pdgPi0)
-      			Correlators.push_back(c3);
-      		}
-      	}
+      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
+      {
+        for (int pta = 0; pta < numAssocPtBins - 1; pta++)
+        {
+            Correlator c1 (ptt,pta);
+            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCentrality(pTAssocBins[pta], pTAssocBins[pta+1]);
+            c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+            c1.SetAssociatedRange(1,6);
+            Correlators3.push_back(c1);
+        }
       }
 
-      for (Correlator& corr : Correlators){
-        string name = "10010";
-        book(_h["1" + to_string(corr.GetIndex()) + "16"], corr.GetIndex()+10, 1, 1);
-        book(sow[name],"sow" + to_string(corr.GetIndex()));
-        nTriggers[name] = 0;
-            }
+	  for(Correlator corr : Correlators3)
+      {
+          if(corr.GetIndex() <= 1)
+          {
+              //raw |eta| < 1
+              string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+              book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+            
+              //limited eta acceptance |eta| < 0.7
+              string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+              book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
+            
+              //Background subtracted |eta| < 1
+                string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
+          }
+      }
 
-
-*/
-
-  	}
+  	} //ends the init
 
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      
+      const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
+      const double c = cent();
+
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
       const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
@@ -408,6 +416,30 @@ class Correlator {
       double associatedptMax = -999.;
     
       bool isVeto = true;
+
+      Particles chargedParticles = cfs.particles();
+        
+        for(Particle pTrig : chargedParticles)
+        {
+            for(Particle pAssoc : chargedParticles)
+            {
+                if(pAssoc.pt()/GeV > 2.5 || pAssoc.pt()/GeV < 1.) continue;
+            
+                double DeltaPhi = pTrig.phi() - pAssoc.phi();
+            
+                for(Correlator corr : Correlators)
+                {
+                    if(!corr.CheckCentrality(c)) continue;
+                    if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                    string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+                    _h[name_raw]->fill(DeltaPhi);
+        
+                }
+            
+            }
+        
+        
+        }
     
       for(Correlator& corr : Correlators)
       {
@@ -440,7 +472,7 @@ class Correlator {
     map<string, int> nTriggers;
 
     vector<Correlator> Correlators;
-    vector<Correlator> CorrelatorsB;
+    vector<Correlator> Correlators3;
     
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
