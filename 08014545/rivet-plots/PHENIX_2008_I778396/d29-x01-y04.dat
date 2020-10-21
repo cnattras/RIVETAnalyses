@@ -1,6 +1,9 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
+Title=[Figure 12, Shoulder, 5-10 GeV/c, 60-92 Au + Au]
+XLabel=[$p^b_T$ (GeV/c)$]
+YLabel=[Per-Trigger Yield]
 DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d29-x01-y04
 LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d29-x01-y04
 # END PLOT
