@@ -362,8 +362,25 @@ class Correlator {
         }
       }
 
+	  for(Correlator corr : Correlators)
+      {
+          if(corr.GetIndex() <= 1)
+          {
+              //raw |eta| < 1
+              string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+              book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+            
+              //limited eta acceptance |eta| < 0.7
+              string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+              book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
+            
+              //Background subtracted |eta| < 1
+                string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
+          }
+      }
 
-  	}
+  	} //ends the init
 
 
 
