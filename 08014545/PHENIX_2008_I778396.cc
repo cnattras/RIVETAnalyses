@@ -409,26 +409,26 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 for(Correlator& corr : Correlators30)
   {
         if(corr.GetSubSubIndex()==0){
-      string name = "49010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 49,01,(1+corr.GetSubIndex()));
+      string name = "45010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 45,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==1){
-      string name = "50010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 50,01,(1+corr.GetSubIndex()));
+      string name = "46010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 46,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==2){
-      string name = "51010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 51,01,(1+corr.GetSubIndex()));
+      string name = "47010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 47,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
     else if(corr.GetSubSubIndex()==3){
-      string name = "52010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 52,01,(1+corr.GetSubIndex()));
+      string name = "48010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 48,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
@@ -1236,6 +1236,34 @@ for(Correlator& corr : Correlators4)
     }
 
     void finalize() {
+
+      bool AuAu200_available = false;
+      bool pp_available = false;
+
+      for (auto element : _h)
+      {
+        string name = element.second->name();
+        if (name.find("AuAu") != std::string::npos)
+        {
+          if (element.second->numEntries()>0) AuAu200_available=true;
+          else
+          {
+            AuAu200_available=false;
+            break;
+          }
+
+        }
+         else if (name.find("pp") != std::string::npos)
+        {
+          if (element.second->numEntries()>0) pp_available=true;
+          else
+          {
+            pp_available=false;
+            break;
+          }
+          
+        }
+      }
     }
  	
  	map<string, Histo1DPtr> _h;
