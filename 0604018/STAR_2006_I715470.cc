@@ -318,6 +318,19 @@ double highedge = 3.0*pi/2.0;
 //AJ - book histograms which were in the .yoda file
       book(_h["010101"],1,1,1);
       book(_h["010102"],1,1,2);
+      book(_h["010103"], 1, 1, 3);
+      book(_h["010104"], 1, 1, 4);
+      book(_h["010105"], 1, 1, 5);
+      book(_h["010106"], 1, 1, 6);
+      book(_h["020101"], 2, 1, 1);
+      book(_h["020102"], 2, 1, 2);
+      book(_h["030101"], 3, 1, 1);
+      book(_h["030102"], 3, 1, 2);
+      book(_h["030103"], 3, 1, 3);
+      book(_h["030104"], 3, 1, 4);
+      book(_h["030105"], 3, 1, 5);
+      book(_h["030101"], 3, 1, 1);
+      book(_h["040101"], 3, 1, 1);
       //Add counters to keep track of trigger particles - something like this
       //book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
 

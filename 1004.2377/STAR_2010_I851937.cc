@@ -265,24 +265,78 @@ class Correlator {
       //===========================================================
       //===========================================================
       for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
-    {
+      {
         for (int cb = 0; cb < numCentBins - 1; cb++)
         {
             Correlator c1 (ptt,cb);
-      		c1.SetCollSystemAndEnergy("AuAu200GeV");
-      		c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
-      		c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
-      		c1.SetNoPTassociated();
-      		Correlators.push_back(c1);
+            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
+            c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+            c1.SetNoPTassociated();
+            Correlators.push_back(c1);
         }
-    }
+      }
 
-    for(Correlator corr : Correlators)
-    {
-        //raw |eta| < 1
-        string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-        book(_h[name_raw], corr.(GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
-    }
+      for(Correlator corr : Correlators)
+      {
+          if(corr.GetIndex() <= 1)
+          {
+              //raw |eta| < 1
+              string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+              book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+            
+              //limited eta acceptance |eta| < 0.7
+              string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+              book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
+            
+              //Background subtracted |eta| < 1
+                string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
+          }
+        
+        if(corr.GetIndex() == 2)
+        {
+            if(corr.GetSubIndex() <= 2)
+            {
+                //raw |eta| < 1
+                string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+                book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+                
+                //limited eta acceptance |eta| < 0.7
+                string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+                book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
+            }
+            else
+            {
+                //raw |eta| < 1
+                string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
+                book(_h[name_raw], (corr.GetIndex()*2)+2, 1, 1);
+                //limited eta acceptance |eta| < 0.7
+                string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
+                book(_h[name_eta], (corr.GetIndex()*2)+2, 1, 1);
+            }
+            
+            //Background subtracted |eta| < 1
+            string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
+            
+        }
+        
+        
+        if(corr.GetIndex() == 3)
+        {
+            //raw |eta| < 1
+            string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+            book(_h[name_raw], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+1);
+            //limited eta acceptance |eta| < 0.7
+            string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+            book(_h[name_eta], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+2);
+            //Background subtracted |eta| < 1
+            string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
+        }
+      }
+
     
     //YODA FILE EXPLANATION
     //d01,x01,y01 is raw 0-12%
