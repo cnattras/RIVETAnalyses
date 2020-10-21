@@ -28,7 +28,6 @@ class Correlator {
     private:
       int _index;
       int _subindex;
-      int _subsubindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
@@ -39,10 +38,9 @@ class Correlator {
     public:
     
       /// Constructor
-      Correlator(int index, int subindex, int subsubindex) {
+      Correlator(int index, int subindex) {
         _index = index;
         _subindex = subindex;
-        _subsubindex = subsubindex;
       }
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
@@ -65,10 +63,9 @@ class Correlator {
     
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
-      int GetSubSubIndex(){ return _subsubindex; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex()) + to_string(GetSubSubIndex());
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
           return fullIndex;
       }
     
@@ -244,8 +241,11 @@ class Correlator {
     /// Book histograms and initialise projections before the run
     void init() {
 
-        const ChargedFinalState cfs(Cuts::abseta < 0.35);
+        const ChargedFinalState cfs(Cuts::abseta < 1.0);
         declare(cfs, "CFS");
+
+        const ChargedFinalState cfsEta(Cuts::abseta < 0.7);
+        declare(cfsEta, "CFSETA");
         
         const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
         declare(pp, "PP");
@@ -253,56 +253,132 @@ class Correlator {
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "PFS"); 
      
-/*/SAVE ME TO BE ON THE SAFE SIDE
-      Correlator c1(1,1);
-      c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetCentrality(0.0, 12.0);
-      c1.SetTriggerRange(2.5, 3);
-      c1.SetAssociatedRange(1.0, 2.5);
-      //c1.SetPID(pdgPi0);
-      Correlators.push_back(c1);
+        declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+       
+        
+      //===========================================================
+      //===========================================================
+      //Figure 2: Only raw and delta eta histograms 
+      //FIXME You will have to figure out how to use multiple correlators
+        //and then book those seperately for the different centralities
+        //and different pT trig. This is going to be tedious.
+      //===========================================================
+      //===========================================================
+      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
+      {
+        for (int cb = 0; cb < numCentBins - 1; cb++)
+        {
+            Correlator c1 (ptt,cb);
+            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
+            c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+            c1.SetNoPTassociated();
+            Correlators.push_back(c1);
+        }
+      }
 
-	  Correlator c2(1,1);
-      c1.SetCollSystemAndEnergy("dEta200GeV");
-      c1.SetCentrality(0.0, 12.0);
-      c1.SetTriggerRange(2.5, 3);
-      c1.SetAssociatedRange(1.0, 2.5);
-      //c1.SetPID(pdgPi0);
-      Correlators.push_back(c2);
-*/  
-      //NOTES: 
+      for(Correlator corr : Correlators)
+      {
+          if(corr.GetIndex() <= 1)
+          {
+              //raw |eta| < 1
+              string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+              book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+            
+              //limited eta acceptance |eta| < 0.7
+              string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+              book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
+            
+              //Background subtracted |eta| < 1
+                string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
+          }
+        
+        if(corr.GetIndex() == 2)
+        {
+            if(corr.GetSubIndex() <= 2)
+            {
+                //raw |eta| < 1
+                string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+                book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+                
+                //limited eta acceptance |eta| < 0.7
+                string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+                book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
+            }
+            else
+            {
+                //raw |eta| < 1
+                string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
+                book(_h[name_raw], (corr.GetIndex()*2)+2, 1, 1);
+                //limited eta acceptance |eta| < 0.7
+                string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
+                book(_h[name_eta], (corr.GetIndex()*2)+2, 1, 1);
+            }
+            
+            //Background subtracted |eta| < 1
+            string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
+            
+        }
+        
+        
+        if(corr.GetIndex() == 3)
+        {
+            //raw |eta| < 1
+            string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+            book(_h[name_raw], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+1);
+            //limited eta acceptance |eta| < 0.7
+            string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+            book(_h[name_eta], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+2);
+            //Background subtracted |eta| < 1
+            string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+            book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
+        }
+      }
 
-      int i = 0; //raw, bksb, dEta
-      int ptt = 0; //2.5-3,3-4,...
-      int cb = 0; //Centralities
-      for (i = 0; i < 3; i++){
+    
+    //YODA FILE EXPLANATION
+    //d01,x01,y01 is raw 0-12%
+    //d01,x01,y02 is deta 0-12%
+    //d01,x01,y03 is raw 20-40% etc. etc.
+
+  
+/*
+      //===================================================================
+      //===================================================================
+      //Figure 3
+      // You might have to make another for loop section for dAU as well.
+      //===================================================================
+      //===================================================================
+      int j = 0; //raw, bksb, dEta
+      for (j = 0; j < 3; j++){
       	for (ptt = 0; ptt < numTrigPtBins - 1; ptt++){
       		for (cb = 0; cb < numCentBins - 1; cb++){
-      			Correlator c1 (i,ptt,cb);
-      			c1.SetCollSystemAndEnergy("AuAu200GeV");
-      			c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
-      			c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
-      			c1.SetNoPTassociated();
+      			Correlator c3 (i,ptt,cb);
+      			c3.SetCollSystemAndEnergy("BkSub200GeV");
+      			c3.SetCentrality(CentBins[cb], CentBins[cb+1]);
+      			c3.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+      			c3.SetNoPTassociated();
       			//c1.SetPID(pdgPi0)
-      			Correlators.push_back(c1);
+      			Correlators.push_back(c3);
       		}
       	}
       }
-  	}	
+
+      for (Correlator& corr : Correlators){
+        string name = "10010";
+        book(_h["1" + to_string(corr.GetIndex()) + "16"], corr.GetIndex()+10, 1, 1);
+        book(sow[name],"sow" + to_string(corr.GetIndex()));
+        nTriggers[name] = 0;
+            }
 
 
-    /* FIX ME: LOOP OVER THE YODA FILE
-         //Booking the histograms
-    
-    	for (Correlator& corr : Correlators){
-    		string name = "010101";
-    		book(_h[name],01,01,01);
-    		book(sow[name], "sow" + name);
-    		nTriggers[name] = 0;
-    	  	  }
-     	}
+*/
 
-	*/
+  	}
+
+
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
@@ -364,6 +440,7 @@ class Correlator {
     map<string, int> nTriggers;
 
     vector<Correlator> Correlators;
+    vector<Correlator> CorrelatorsB;
     
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
