@@ -345,7 +345,7 @@ class Correlator {
 
       //===================================================================
       //===================================================================
-      //Figure 3
+      //Figure 3 FIX ME: Finish booking histograms. 
       // You might have to make another for loop section for dAU as well.
       //===================================================================
       //===================================================================
@@ -362,7 +362,7 @@ class Correlator {
         }
       }
 
-	  for(Correlator corr : Correlators)
+	  for(Correlator corr : Correlators3)
       {
           if(corr.GetIndex() <= 1)
           {

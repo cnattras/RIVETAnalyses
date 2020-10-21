@@ -270,6 +270,7 @@ double highedge = 3.0*pi/2.0;
             Correlators.push_back(c1);
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
             book(_h[name], name, ndPhiBins,lowedge,highedge);
+            book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
               Correlator c2(100,ntrig,nassoc);
@@ -281,6 +282,7 @@ double highedge = 3.0*pi/2.0;
               Correlators.push_back(c2);
             string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
+            book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
             }
           }
 
@@ -299,6 +301,7 @@ double highedge = 3.0*pi/2.0;
             Correlators.push_back(c1);
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
             book(_h[name], name, ndPhiBins,lowedge,highedge);
+            book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
               Correlator c2(1000,1000,1000);
@@ -310,6 +313,7 @@ double highedge = 3.0*pi/2.0;
               Correlators.push_back(c2);
             string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
+            book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
             }
           }//End of the zT loop
 
@@ -337,8 +341,8 @@ double highedge = 3.0*pi/2.0;
     }
     void analyze(const Event& event) {
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
-      const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
+      //const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
+      //const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
@@ -346,10 +350,17 @@ double highedge = 3.0*pi/2.0;
       double nNucleons = 0.;
       string CollSystem = "Empty";
       const ParticlePair& beam = beams();
-          CollSystem = "pp";
-          nNucleons = 1.;
-      //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
-      //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
+          CollSystem = "AuAu";
+          nNucleons = 197;
+      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020){ 
+        CollSystem = "dAu";
+          nNucleons = 1;
+    }
+      if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630){
+
+       CollSystem = "dAu";
+          nNucleons = 1;//needs checking
+     }
      
       string cmsEnergy = "Empty";
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
@@ -385,21 +396,21 @@ double highedge = 3.0*pi/2.0;
       if(isVeto) vetoEvent;
     // loop over charged final state particles - PI
      for(const Particle& pTrig : cfs.particles()){
-      //AJ - check to see if you need to change ppTrigPi0.particles() to cfs
 
         //Check if is secondary
         if(isSecondary(pTrig)) continue;
           
         
         for(Correlator& corr : Correlators)
-        {
+        {//This loops over all correlators and asks if the particle is in the trigger range.  If so, add it to the list of triggers.
             //if(!corr.CheckPID(pdgPi0)) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
             nTriggers[corr.GetFullIndex()]++;
+            cout<<"I have a trigger particle!"<<endl;
         }
         // Hadron loop
         for(const Particle& pAssoc : cfs.particles())
-        {
+        {//This loops over all particles and considers them associated particles
                 
             //Check if Trigger and Associated are the same particle
             if(isSameParticle(pTrig,pAssoc)) continue;
@@ -419,9 +430,11 @@ double highedge = 3.0*pi/2.0;
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 //AJ add a spot where you fill histograms
                 //See Nora's code in 08014545 around line 1168
+
+              string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
                   //if(corr.GetSubSubIndex()==-1){
                    //string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
-                  //_h[name]->fill(DeltaPhi);
+                  _h[name]->fill(dPhi);
                   //} 
                 
             } //end of correlators loop 
@@ -430,51 +443,6 @@ double highedge = 3.0*pi/2.0;
 
     } // particle loop
 
-        // loop over charged final state particles - PHOTONS
-                 for(const Particle& pTrig : cfs.particles()){
-
-    //for(const Particle& pTrig : pfsTrigPhotons.particles())
-    //{//AJ Change this to loop over charged particles
-        //Check if is secondary
-        if(isSecondary(pTrig)) continue;
-          
-        
-        for(Correlator& corr : Correlators)
-        {
-            //if(!corr.CheckPID(pdgPhoton)) continue;
-            if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
-            nTriggers[corr.GetFullIndex()]++;
-        }
-        
-        // Hadron loop
-        for(const Particle& pAssoc : cfs.particles())
-        {
-                
-            //Check if Trigger and Associated are the same particle
-            if(isSameParticle(pTrig,pAssoc)) continue;
-                
-            //Check if is secondary
-            if(isSecondary(pAssoc)) continue;
-
-            //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
-            double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
-                                 
-            
-            
-            for(Correlator& corr : Correlators)
-            {
-                //if(!corr.CheckPID(pdgPhoton)) continue;
-                
-                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
-                
-                //AJ add a spot where you fill histograms
-                
-                
-            } //end of correlators loop 
-                
-        } // end of loop over associated particles
-
-    } // particle loop
 
     }
     void finalize() {
