@@ -324,25 +324,25 @@ for(pta = 0; pta<numAssocPtBins; pta++){
 for(Correlator& corr : Correlators38)
   {
     if(corr.GetSubSubIndex()==-1){
-      string name = "pp58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+      string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
         book(_h[name], 58,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==1){
-      string name = "AuAu53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+      string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
         book(_h[name], 53,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==2){
-      string name = "AuAu55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+      string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
         book(_h[name], 55,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
     else if(corr.GetSubSubIndex()==3){
-      string name = "AuAu57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+      string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
         book(_h[name], 57,01,(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
@@ -409,26 +409,26 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 for(Correlator& corr : Correlators30)
   {
         if(corr.GetSubSubIndex()==0){
-      string name = "49010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 49,01,(1+corr.GetSubIndex()));
+      string name = "45010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 45,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==1){
-      string name = "50010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 50,01,(1+corr.GetSubIndex()));
+      string name = "46010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 46,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     } 
     else if(corr.GetSubSubIndex()==2){
-      string name = "51010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 51,01,(1+corr.GetSubIndex()));
+      string name = "47010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 47,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
     else if(corr.GetSubSubIndex()==3){
-      string name = "52010" + to_string(1+corr.GetSubIndex());
-        book(_h[name], 52,01,(1+corr.GetSubIndex()));
+      string name = "48010" + to_string(1+corr.GetSubIndex());
+        book(_h[name], 48,01,(1+corr.GetSubIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0; 
     }
