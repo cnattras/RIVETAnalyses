@@ -382,6 +382,10 @@ class Correlator {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      
+      const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
+      const double c = cent();
+
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
       const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
@@ -408,6 +412,30 @@ class Correlator {
       double associatedptMax = -999.;
     
       bool isVeto = true;
+
+      Particles chargedParticles = cfs.particles();
+        
+        for(Particle pTrig : chargedParticles)
+        {
+            for(Particle pAssoc : chargedParticles)
+            {
+                if(pAssoc.pt()/GeV > 2.5 || pAssoc.pt()/GeV < 1.) continue;
+            
+                double DeltaPhi = pTrig.phi() - pAssoc.phi();
+            
+                for(Correlator corr : Correlators)
+                {
+                    if(!corr.CheckCentrality(c)) continue;
+                    if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                    string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+                    _h[name_raw]->fill(DeltaPhi);
+        
+                }
+            
+            }
+        
+        
+        }
     
       for(Correlator& corr : Correlators)
       {
