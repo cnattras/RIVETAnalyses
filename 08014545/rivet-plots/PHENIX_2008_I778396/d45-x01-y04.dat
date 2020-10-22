@@ -1,7 +1,7 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
-Title=[Figure 28, 20-40 Au + Au, 5-10 GeV/c]
+Title=[Figure 28, 5-10 GeV/c]
 XLabel=[$p^b_T$ (GeV/c)]
 YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
 DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d45-x01-y04
