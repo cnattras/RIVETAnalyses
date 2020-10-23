@@ -1,6 +1,9 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
+Title=[Figure 26, Associated 3-4 GeV/c, Trigger 2.5-7 GeV/c]
+XLabel=[Centrality]
+YLabel=[Truncated Mean $p_T$]
 DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d43-x01-y04
 LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d43-x01-y04
 # END PLOT

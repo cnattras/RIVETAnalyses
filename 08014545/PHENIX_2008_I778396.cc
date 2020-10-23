@@ -1243,8 +1243,9 @@ for(Correlator& corr : Correlators4)
       for (auto element : _h)
       {
         string name = element.second->name();
-        if (name.find("AuAu") != std::string::npos)
+        if (name.find("58" || "53" || "55" || "57") == std::string::npos)
         {
+          cout << "1";
           if (element.second->numEntries()>0) AuAu200_available=true;
           else
           {
