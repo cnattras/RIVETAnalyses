@@ -983,13 +983,13 @@ for(Correlator& corr : Correlators6)
   	if(corr.GetSubSubIndex()==0){
   		if(corr.GetSubIndex()==1){
   			string name = "07010" + to_string(corr.GetIndex()+1);
-  			book(_h[name], 7,01,corr.GetIndex()+1);
+  			book(_h[name], 07,01,corr.GetIndex()+1);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   		else if(corr.GetSubIndex()==2){
   			string name = "06010" + to_string(corr.GetIndex()-4);
-  			book(_h[name], 6,01,corr.GetIndex()-4);
+  			book(_h[name], 06,01,corr.GetIndex()-4);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
@@ -997,13 +997,13 @@ for(Correlator& corr : Correlators6)
   	else if(corr.GetSubSubIndex()==1){
   		if(corr.GetSubIndex()==1){
   			string name = "08010" + to_string(corr.GetIndex()+1);
-  			book(_h[name], 8,01,corr.GetIndex()+1);
+  			book(_h[name], 08,01,corr.GetIndex()+1);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   		else if(corr.GetSubIndex()==2){
   			string name = "09010" + to_string(corr.GetIndex()-4);
-  			book(_h[name], 9,01,corr.GetIndex()-4);
+  			book(_h[name], 09,01,corr.GetIndex()-4);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
