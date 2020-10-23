@@ -982,13 +982,13 @@ for(Correlator& corr : Correlators6)
   {
   	if(corr.GetSubSubIndex()==0){
   		if(corr.GetSubIndex()==1){
-  			string name = "0501" + to_string(corr.GetIndex()+1);
+  			string name = "07010" + to_string(corr.GetIndex()+1);
   			book(_h[name], 05,01,corr.GetIndex()+1);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   		else if(corr.GetSubIndex()==2){
-  			string name = "0401" + to_string(corr.GetIndex()-4);
+  			string name = "06010" + to_string(corr.GetIndex()-4);
   			book(_h[name], 04,01,corr.GetIndex()-4);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
@@ -996,13 +996,13 @@ for(Correlator& corr : Correlators6)
   	}
   	else if(corr.GetSubSubIndex()==1){
   		if(corr.GetSubIndex()==1){
-  			string name = "0601" + to_string(corr.GetIndex()+1);
+  			string name = "08010" + to_string(corr.GetIndex()+1);
   			book(_h[name], 06,01,corr.GetIndex()+1);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   		else if(corr.GetSubIndex()==2){
-  			string name = "0701" + to_string(corr.GetIndex()-4);
+  			string name = "09010" + to_string(corr.GetIndex()-4);
   			book(_h[name], 07,01,corr.GetIndex()-4);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
@@ -1122,32 +1122,37 @@ for(Correlator& corr : Correlators4)
                   
         }
       //*****************************************************************************
-      // The following will fill the sow for Figure 31 
+      // The following will fill the sow for Figure 6
         //FIXME ... the figure is for pT 
-        /*
-        for(Correlator& corr : Correlators31)
+        
+        for(Correlator& corr : Correlators6)
         {
 
                   if(!corr.CheckCentrality(c)) continue;
                   
-                  if(corr.GetSubSubIndex()==0){
-                  string name = "49010" + to_string(1+corr.GetSubIndex());
+                  
+                if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
                    sow[name]->fill();
-                   } 
-                 else if(corr.GetSubSubIndex()==1){
-                  string name = "50010" + to_string(1+corr.GetSubIndex());
-                   sow[name]->fill();
-                   } 
-                 else if(corr.GetSubSubIndex()==2){
-                 string name = "51010" + to_string(1+corr.GetSubIndex());
-                  sow[name]->fill();
                   }
-                  else if(corr.GetSubSubIndex()==3){
-                  string name = "52010" + to_string(1+corr.GetSubIndex());
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  sow[name]->fill();
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                   sow[name]->fill();
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
                   sow[name]->fill();
                 }
+              }
         }
-          */
+          
 
      for(const Particle& pTrig : cfs.particles())
       {
@@ -1192,9 +1197,9 @@ for(Correlator& corr : Correlators4)
                   
               }
               //*****************************************************************************
-              // The following will fill the histograms for Figure 31
+              // The following will fill the histograms for Figure 6
               //FIXME ... the figure is for pT 
-              /*for(Correlator& corr : Correlators31)
+              for(Correlator& corr : Correlators6)
               {
                   if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
                   
@@ -1204,35 +1209,32 @@ for(Correlator& corr : Correlators4)
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 
-                  if(corr.GetSubSubIndex()==0){
-                  string name = "49010" + to_string(1+corr.GetSubIndex());
-                  _h[name]->fill(DeltaPhi);
-                   } 
-                 else if(corr.GetSubSubIndex()==1){
-                  string name = "50010" + to_string(1+corr.GetSubIndex());
-                 _h[name]->fill(DeltaPhi);
-                   } 
-                 else if(corr.GetSubSubIndex()==2){
-                 string name = "51010" + to_string(1+corr.GetSubIndex());
-                  _h[name]->fill(DeltaPhi);
-                  }
-                  else if(corr.GetSubSubIndex()==3){
-                  string name = "52010" + to_string(1+corr.GetSubIndex());
+                if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
                    _h[name]->fill(DeltaPhi);
                   }
-                  
-                  
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  _h[name]->fill(DeltaPhi);
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                   _h[name]->fill(DeltaPhi);
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
+                  _h[name]->fill(DeltaPhi);
+                } 
+               }
               }
-              */
-              
-              
-          }
           
           
           
+        }
       }
-
-
     }
 
     void finalize() {
@@ -1243,9 +1245,8 @@ for(Correlator& corr : Correlators4)
       for (auto element : _h)
       {
         string name = element.second->name();
-        if (name.find("58" || "53" || "55" || "57") == std::string::npos)
+        if (name.find("AuAu") != std::string::npos)
         {
-          cout << "1";
           if (element.second->numEntries()>0) AuAu200_available=true;
           else
           {
