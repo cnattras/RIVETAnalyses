@@ -1021,7 +1021,7 @@ for(i=0;i<3;i++){
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c1.SetNoAssoc();
       //c1.SetPID(pdgPi0);
-      Correlators7.push_back(c1);
+      Correlators4.push_back(c1);
   }
 }
 for(Correlator& corr : Correlators4)
