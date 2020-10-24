@@ -1193,6 +1193,32 @@ for(Correlator& corr : Correlators4)
 
      for(const Particle& pTrig : cfs.particles())
       {
+          
+          //Trigger counting
+          for(Correlator& corr : Correlators38)
+          {
+              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+              if(!corr.CheckCentrality(c)) continue;
+              
+              if(corr.GetSubSubIndex()==-1){
+                  string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+              } 
+              else if(corr.GetSubSubIndex()==1){
+                  string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+              } 
+              else if(corr.GetSubSubIndex()==2){
+                  string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+              }
+              else if(corr.GetSubSubIndex()==3){
+                  string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+              }
+          }
+          
+          
           for(const Particle& pTAssoc : cfs.particles())
           {
             //*****************************************************************************
@@ -1210,22 +1236,18 @@ for(Correlator& corr : Correlators4)
                   if(corr.GetSubSubIndex()==-1){
                    string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
-                  nTriggers[name]++;
                   } 
                   else if(corr.GetSubSubIndex()==1){
                   string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
-                  nTriggers[name]++;
                   } 
                   else if(corr.GetSubSubIndex()==2){
                   string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
-                  nTriggers[name]++;
                   }
                   else if(corr.GetSubSubIndex()==3){
                   string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(DeltaPhi);
-                  nTriggers[name]++;
                   }
                   
                   
