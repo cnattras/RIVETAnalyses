@@ -12,6 +12,7 @@ LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda
 LineColor=red
 LineStyle=solid
 Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d57-x01-y18
+ScaledBy=1.08752066465798541e-04
 Title=Rivet
 # xlow	 xhigh	 val	 errminus	 errplus
 -1.540800e+00	-1.275000e+00	0.000000e+00	0.000000e+00	0.000000e+00

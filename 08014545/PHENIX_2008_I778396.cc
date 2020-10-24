@@ -1245,7 +1245,7 @@ for(Correlator& corr : Correlators4)
           for(const Particle& pTAssoc : cfs.particles())
           {
               //Check if Trigger and Associated are the same particle
-              if(isSameParticle(pTrig,pAssoc)) continue;
+              if(isSameParticle(pTrig,pTAssoc)) continue; //I changed this FIXME
                 
               //Check if is secondary
               //if(isSecondary(pAssoc)) continue;
