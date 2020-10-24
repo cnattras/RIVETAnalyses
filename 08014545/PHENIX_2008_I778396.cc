@@ -188,6 +188,27 @@ namespace Rivet {
         return histo;
                 
     }
+    
+    double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax)
+    {
+        //This will include bins partially covered by the user range
+        
+        YODA::Histo1D hist = *histo;
+        
+        double integral = 0.;
+        
+        if(xmax < xmin) throw RangeError("Error: xmin > xmax");
+        if(xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
+        if(xmax > hist.bin(hist.numBins()-1).xMax()) throw RangeError("xmax is out of range");
+        
+        for(auto &bin : hist.bins())
+        {
+            if((xmin <= bin.xMax()) && (xmax >= bin.xMin())) integral += bin.sumW()/bin.width();
+        }
+        
+        return integral;
+        
+    }
 
     bool isSameParticle(const Particle& p1, const Particle& p2)
       {
@@ -1192,35 +1213,43 @@ for(Correlator& corr : Correlators4)
           
 
      for(const Particle& pTrig : cfs.particles())
-      {
+     {
+         //Check if is secondary
+         //if(isSecondary(pAssoc)) continue;
           
-          //Trigger counting
-          for(Correlator& corr : Correlators38)
-          {
-              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
-              if(!corr.CheckCentrality(c)) continue;
+         //Trigger counting
+         for(Correlator& corr : Correlators38)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
               
-              if(corr.GetSubSubIndex()==-1){
+             if(corr.GetSubSubIndex()==-1){
                   string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   nTriggers[name]++;
-              } 
-              else if(corr.GetSubSubIndex()==1){
+             } 
+             else if(corr.GetSubSubIndex()==1){
                   string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   nTriggers[name]++;
-              } 
-              else if(corr.GetSubSubIndex()==2){
+             } 
+             else if(corr.GetSubSubIndex()==2){
                   string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   nTriggers[name]++;
-              }
-              else if(corr.GetSubSubIndex()==3){
+             }
+             else if(corr.GetSubSubIndex()==3){
                   string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   nTriggers[name]++;
-              }
-          }
+             }
+         }
           
           
           for(const Particle& pTAssoc : cfs.particles())
           {
+              //Check if Trigger and Associated are the same particle
+              if(isSameParticle(pTrig,pAssoc)) continue;
+                
+              //Check if is secondary
+              //if(isSecondary(pAssoc)) continue;
+              
             //*****************************************************************************
             // The following will fill the histograms for Figure 38 
               for(Correlator& corr : Correlators38)
