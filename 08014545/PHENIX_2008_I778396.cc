@@ -834,13 +834,12 @@ for(Correlator& corr : Correlators12)
 // The following will book the histograms for Figure 12, 0-shoulder, 1-head     // OLD FIGURE 12
   /*
 for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
-  for(pta = 0; pta < numpTAssocBins12; pta++){
    for(i=0;i<3;i++){
       Correlator c1(i,ptt,4);
       c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]); 
+      c1.SetNoAssoc();
       //c1.SetPID(pdgPi0);
       Correlators12.push_back(c1);
 
@@ -849,11 +848,10 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
         c1.SetCollSystemAndEnergy("AuAu200GeV");
         c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
         c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-        c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);
+        c1.SetNoAssoc();
         //c1.SetPID(pdgPi0);
         Correlators12.push_back(c1);
     }  
-   }
   }
 }
 for(Correlator& corr : Correlators12)
@@ -1274,7 +1272,7 @@ for(Correlator& corr : Correlators4)
 
      for(const Particle& pTrig : cfs.particles())
      {
-         //Check if is secondary
+         //Check if is secondary    FIXME, omitted for run time 
          //if(isSecondary(pAssoc)) continue;
           
          //Trigger counting Figure 38
@@ -1487,6 +1485,8 @@ for(Correlator& corr : Correlators4)
         }
       }
       
+      //*****************************************************************************
+      // Background subtraction for Figures 36-8
       for(Correlator& corr : Correlators38)
       {
           if(corr.GetSubSubIndex()==-1){
@@ -1512,6 +1512,8 @@ for(Correlator& corr : Correlators4)
           
       }
 
+      //*****************************************************************************
+      // Background subtraction for Figure 12 
       for(Correlator& corr : Correlators12)
       {
           if(corr.GetIndex()==0){
@@ -1526,6 +1528,8 @@ for(Correlator& corr : Correlators4)
               }
       }
 
+      //*****************************************************************************
+      // Background subtraction for Figure 6
       for(Correlator& corr : Correlators6)
       {
               if(corr.GetSubSubIndex()==0){
