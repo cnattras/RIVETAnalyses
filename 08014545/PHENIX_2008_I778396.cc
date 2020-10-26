@@ -25,6 +25,8 @@ static const float DeltaPhiBins[] = {-1.5048,-1.275,-0.98,-0.685,-0.415,-0.22,-0
 1.275,1.595,1.965,2.305,2.55,2.75,2.945,3.14,3.44,3.535,3.73,3.935,4.32,4.7012};
 static const int numpTAssocBins2 = 4;
 static const float pTAssocBins2[] = {1.0,1.5,2.0,2.5,3.0};
+static const int numpTAssocBins12 = 8;
+static const float pTAssocBins12[] = {0.345,0.915,1.415,1.915,2.415,3.055,4.095,5.285,5.88};
 
 using namespace std;
 
@@ -790,14 +792,55 @@ for(Correlator& corr : Correlators16)
   }
  
 //*****************************************************************************
-// The following will book the histograms for Figure 12, 0-shoulder, 1-head 
+// The following will book the histograms for Figure 12 
 for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
-  for(i=0;i<3;i++){
+  for(pta = 0; pta < numpTAssocBins12-1; pta++){
+      Correlator c1(pta,ptt,4);
+      c1.SetCollSystemAndEnergy("pp200GeV");
+      c1.SetNoCentrality();
+      c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+      c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]); 
+      //c1.SetPID(pdgPi0);
+      Correlators12.push_back(c1);
+
+    for(cb = 0; cb<numCentBins-1; cb++){
+        Correlator c1(pta,ptt,cb);
+        c1.SetCollSystemAndEnergy("AuAu200GeV");
+        c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+        c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+        c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);
+        //c1.SetPID(pdgPi0);
+        Correlators12.push_back(c1);
+   }
+  }
+}
+for(Correlator& corr : Correlators12)
+  {
+  	if(corr.GetIndex()==0){
+        string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
+        book(_h[name], name, 36, -M_PI/2, 3*M_PI/2);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    }
+    else if(corr.GetIndex()==1){
+        string name = to_string(21 + corr.GetSubSubIndex()) + to_string(corr.GetSubIndex()+1);
+        book(_h[name], name, 36, -M_PI/2, 3*M_PI/2);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    }
+  }
+ 
+ //*****************************************************************************
+// The following will book the histograms for Figure 12, 0-shoulder, 1-head     // OLD FIGURE 12
+  /*
+for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
+  for(pta = 0; pta < numpTAssocBins12; pta++){
+   for(i=0;i<3;i++){
       Correlator c1(i,ptt,4);
       c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c1.SetNoAssoc(); 
+      c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]); 
       //c1.SetPID(pdgPi0);
       Correlators12.push_back(c1);
 
@@ -806,15 +849,16 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
         c1.SetCollSystemAndEnergy("AuAu200GeV");
         c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
         c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-        c1.SetNoAssoc();
+        c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);
         //c1.SetPID(pdgPi0);
         Correlators12.push_back(c1);
     }  
+   }
   }
 }
 for(Correlator& corr : Correlators12)
   {
-  	if(corr.GetIndex()==0){
+    if(corr.GetIndex()==0){
         string name = to_string(26 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
         book(_h[name], (26 + corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
@@ -827,7 +871,7 @@ for(Correlator& corr : Correlators12)
         nTriggers[name] = 0;
     }
   }
- 
+*/
 //*****************************************************************************
 // The following will book the histograms for Figure 11
 for(i=0;i<2;i++){
@@ -1212,12 +1256,28 @@ for(Correlator& corr : Correlators4)
         }
           
 
+          //*****************************************************************************
+      // The following will fill the sow for Figure 12 
+      for(Correlator& corr : Correlators12)
+        {
+
+             if(corr.GetIndex()==0){
+               string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
+               sow[name]->fill();
+                  }
+            else if(corr.GetIndex()==1){
+              string name = to_string(21 + corr.GetSubSubIndex()) + to_string(corr.GetSubIndex()+1);
+              sow[name]->fill();
+                  }
+
+        }
+
      for(const Particle& pTrig : cfs.particles())
      {
          //Check if is secondary
          //if(isSecondary(pAssoc)) continue;
           
-         //Trigger counting
+         //Trigger counting Figure 38
          for(Correlator& corr : Correlators38)
          {
              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
@@ -1240,6 +1300,23 @@ for(Correlator& corr : Correlators4)
                   nTriggers[name]++;
              }
          }
+
+         //Trigger counting Figure 12
+         for(Correlator& corr : Correlators38)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+
+             if(corr.GetIndex()==0){
+               string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
+               nTriggers[name]++;
+                  }
+             else if(corr.GetIndex()==1){
+               string name = to_string(21 + corr.GetSubSubIndex()) + to_string(corr.GetSubIndex()+1);
+                nTriggers[name]++;
+                  }
+
+        }
           
           
           for(const Particle& pTAssoc : cfs.particles())
@@ -1322,7 +1399,28 @@ for(Correlator& corr : Correlators4)
                 } 
                }
               }
-          
+          //*****************************************************************************
+              // The following will fill the histograms for Figure 12
+          for(Correlator& corr : Correlators12)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+
+                  if(corr.GetIndex()==0){
+                     string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
+                    _h[name]->fill(DeltaPhi);
+                  }
+                  else if(corr.GetIndex()==1){
+                   string name = to_string(21 + corr.GetSubSubIndex()) + to_string(corr.GetSubIndex()+1);
+                    _h[name]->fill(DeltaPhi);
+                  }
+
+              }
           
           
         }
@@ -1385,7 +1483,7 @@ for(Correlator& corr : Correlators4)
       }
       for(Correlator& corr : Correlators12)
       {
-          
+
       }
       
       
