@@ -1319,6 +1319,36 @@ for(Correlator& corr : Correlators4)
         }
           
           
+        //Trigger counting Figure 6
+         for(Correlator& corr : Correlators6)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+
+            if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
+                   nTriggers[name]++;
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  nTriggers[name]++;
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                  nTriggers[name]++;
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
+                  nTriggers[name]++;
+                } 
+               }
+
+        }
+
+
           for(const Particle& pTAssoc : cfs.particles())
           {
               //Check if Trigger and Associated are the same particle
@@ -1481,9 +1511,47 @@ for(Correlator& corr : Correlators4)
           }
           
       }
+
       for(Correlator& corr : Correlators12)
       {
+          if(corr.GetIndex()==0){
+            string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+             }
+          else if(corr.GetIndex()==1){
+            string name = to_string(21 + corr.GetSubSubIndex()) + to_string(corr.GetSubIndex()+1);
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+              }
+      }
 
+      for(Correlator& corr : Correlators6)
+      {
+              if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
+                   _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                   _h[name] = SubtractBackgroundZYAM(_h[name]);
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                  _h[name] = SubtractBackgroundZYAM(_h[name]);
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                   _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                   _h[name] = SubtractBackgroundZYAM(_h[name]);
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
+                  _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                  _h[name] = SubtractBackgroundZYAM(_h[name]);
+                } 
+               }        
       }
       
       
