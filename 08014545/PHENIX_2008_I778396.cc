@@ -790,11 +790,11 @@ for(Correlator& corr : Correlators16)
   }
  
 //*****************************************************************************
-// The following will book the histograms for Figure 12
+// The following will book the histograms for Figure 12, 0-shoulder, 1-head 
 for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
   for(i=0;i<3;i++){
       Correlator c1(i,ptt,4);
-      c1.SetCollSystemAndEnergy("pp00GeV");
+      c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c1.SetNoAssoc(); 
@@ -1381,6 +1381,10 @@ for(Correlator& corr : Correlators4)
               _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
               _h[name] = SubtractBackgroundZYAM(_h[name]);
           }
+          
+      }
+      for(Correlator& corr : Correlators12)
+      {
           
       }
       
