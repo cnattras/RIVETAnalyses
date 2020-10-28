@@ -1,0 +1,26 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=[Figure 12, Head, 3-4 GeV/c, 60-92 Au + Au]
+XLabel=[$p^b_T$ (GeV/c)$]
+YLabel=[Per-Trigger Yield]
+DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d24-x01-y02
+LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d24-x01-y02
+# END PLOT
+
+# BEGIN HISTO1D //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d24-x01-y02
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d24-x01-y02
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+3.450000e-01	9.150000e-01	0.000000e+00	0.000000e+00	0.000000e+00
+9.150000e-01	1.415000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.415000e+00	1.915000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.915000e+00	2.415000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+2.415000e+00	3.055000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+3.055000e+00	4.095000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+4.095000e+00	5.285000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+5.285000e+00	5.880000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+

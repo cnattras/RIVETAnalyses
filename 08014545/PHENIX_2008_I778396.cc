@@ -190,6 +190,7 @@ namespace Rivet {
         return histo;
                 
     }
+
     
     double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax)
     {
@@ -267,6 +268,22 @@ namespace Rivet {
                     
         return dPhi;   
       }
+
+    double GetDeltaEta(Particle pAssoc, Particle pTrig)
+    {
+           double dEta = deltaEta(pTrig, pAssoc);
+
+          if(dEta < -M_PI/2.)
+          {
+            dEta += 2.*M_PI;
+          }
+          else if(dEta > 3.*M_PI/2.)
+          {
+            dEta -= 2*M_PI;
+          }
+                    
+        return dEta;   
+    }
    
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
@@ -673,12 +690,33 @@ for(ptt = 0; ptt<1; ptt++){
       Correlators23.push_back(c8);
 
 }
-for(Correlator& corr : Correlators18)
+for(Correlator& corr : Correlators23)
   {
-        string name = to_string(37-corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
-        book(_h[name], (37 - corr.GetSubSubIndex()),01,(corr.GetIndex()));
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
+        //string name = to_string(37-corr.GetSubSubIndex()) + "01" + to_string(corr.GetIndex()+1);
+        //book(_h[name], (37 - corr.GetSubSubIndex()),1,(corr.GetIndex()));
+        //book(sow[name],"sow" + name);
+        //nTriggers[name] = 0;
+        //string name = to_string(37 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+        //book(_h[name], (37 - corr.GetSubSubIndex()),01,(corr.GetIndex()));
+        //book(sow[name],"sow" + name);
+        //nTriggers[name] = 0;
+        if(corr.GetSubIndex() > 4)
+        {
+          string name = "36010" + to_string(corr.GetIndex());
+          book(_h[name], 36,01,(corr.GetIndex()));
+          book(sow[name],"sow" + name);
+          nTriggers[name] = 0;
+        }
+        else
+          /* FIXME pp, bin definitions acting up
+        {
+          string name = "35010" + to_string(corr.GetIndex());
+          book(_h[name], 37,01,(corr.GetIndex()));
+          book(sow[name],"sow" + name);
+          nTriggers[name] = 0;
+        }
+        */
+
   }
 
  
@@ -801,7 +839,7 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]); 
       //c1.SetPID(pdgPi0);
-      Correlators12.push_back(c1);
+      Correlators12corr.push_back(c1);
 
     for(cb = 0; cb<numCentBins-1; cb++){
         Correlator c1(pta,ptt,cb);
@@ -810,11 +848,11 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
         c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
         c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);
         //c1.SetPID(pdgPi0);
-        Correlators12.push_back(c1);
+        Correlators12corr.push_back(c1);
    }
   }
 }
-for(Correlator& corr : Correlators12)
+for(Correlator& corr : Correlators12corr)
   {
   	if(corr.GetIndex()==0){
         string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
@@ -832,7 +870,7 @@ for(Correlator& corr : Correlators12)
  
  //*****************************************************************************
 // The following will book the histograms for Figure 12, 0-shoulder, 1-head     // OLD FIGURE 12
-  /*
+  
 for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
    for(i=0;i<3;i++){
       Correlator c1(i,ptt,4);
@@ -869,7 +907,7 @@ for(Correlator& corr : Correlators12)
         nTriggers[name] = 0;
     }
   }
-*/
+
 //*****************************************************************************
 // The following will book the histograms for Figure 11
 for(i=0;i<2;i++){
@@ -1256,7 +1294,7 @@ for(Correlator& corr : Correlators4)
 
           //*****************************************************************************
       // The following will fill the sow for Figure 12 
-      for(Correlator& corr : Correlators12)
+      for(Correlator& corr : Correlators12corr)
         {
 
              if(corr.GetIndex()==0){
@@ -1428,8 +1466,8 @@ for(Correlator& corr : Correlators4)
                }
               }
           //*****************************************************************************
-              // The following will fill the histograms for Figure 12
-          for(Correlator& corr : Correlators12)
+              // The following will fill the histograms for Figure 12 correlation function
+          for(Correlator& corr : Correlators12corr)
               {
                   if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
                   
@@ -1449,8 +1487,25 @@ for(Correlator& corr : Correlators4)
                   }
 
               }
+              //*****************************************************************************
+              // The following will fill the histograms for Figure 23
+
+              for(Correlator& corr : Correlators23)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaEta = GetDeltaEta(pTrig, pTAssoc);
+                      // Name is only for AuAu, see above FIXME 
+                   string name = "36010" + to_string(corr.GetIndex());
+                   _h[name]->fill(DeltaEta);
+
+              }
           
-          
+
         }
       }
     }
@@ -1514,7 +1569,7 @@ for(Correlator& corr : Correlators4)
 
       //*****************************************************************************
       // Background subtraction for Figure 12 
-      for(Correlator& corr : Correlators12)
+      for(Correlator& corr : Correlators12corr)
       {
           if(corr.GetIndex()==0){
             string name = to_string(26 + corr.GetSubSubIndex()) + to_string(1+corr.GetIndex()) + to_string(corr.GetSubIndex()+1);
@@ -1559,6 +1614,7 @@ for(Correlator& corr : Correlators4)
       }
       
       
+      
     }
  	
  	map<string, Histo1DPtr> _h;
@@ -1578,6 +1634,7 @@ for(Correlator& corr : Correlators4)
     vector<Correlator> Correlators17;
     vector<Correlator> Correlators16;
     vector<Correlator> Correlators12;
+    vector<Correlator> Correlators12corr;
     vector<Correlator> Correlators11;
     vector<Correlator> Correlators10;
     vector<Correlator> Correlators9;
