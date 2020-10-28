@@ -1,8 +1,8 @@
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d01-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.009, up: 0.009}}, 1: {Stat error: {dn: -0.014, up: 0.014}}, 2: {Stat error: {dn: -0.014, up: 0.014}}, 3: {Stat error: {dn: -0.014, up: 0.014}}, 4: {Stat error: {dn: -0.019, up: 0.019}}, 5: {Stat error: {dn: -0.008, up: 0.008}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+Path: /REF/STAR_2006_I715470/d01-x01-y01
 Title: Figure 3.1
 Type: Scatter2D
 ---
@@ -16,11 +16,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d01-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.005, up: 0.005}}, 1: {Stat error: {dn: -0.006, up: 0.006}}, 2: {Stat error: {dn: -0.005, up: 0.005}}, 3: {Stat error: {dn: -0.005, up: 0.005}}, 4: {Stat error: {dn: -0.007, up: 0.007}}, 5: {Stat error: {dn: -0.003, up: 0.003}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+Path: /REF/STAR_2006_I715470/d01-x01-y02
 Title: Figure 3.1
 Type: Scatter2D
 ---
@@ -34,11 +34,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d01-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.002, up: 0.002}}, 1: {Stat error: {dn: -0.004, up: 0.004}}, 2: {Stat error: {dn: -0.003, up: 0.003}}, 3: {Stat error: {dn: -0.003, up: 0.003}}, 4: {Stat error: {dn: -0.003, up: 0.003}}, 5: {Stat error: {dn: -0.001, up: 0.001}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+Path: /REF/STAR_2006_I715470/d01-x01-y03
 Title: Figure 3.1
 Type: Scatter2D
 ---
@@ -52,11 +52,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d01-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.01, up: 0.01}}, 1: {Stat error: {dn: -0.015, up: 0.015}}, 2: {Stat error: {dn: -0.013, up: 0.013}}, 3: {Stat error: {dn: -0.013, up: 0.013}}, 4: {Stat error: {dn: -0.018, up: 0.018}}, 5: {Stat error: {dn: -0.007, up: 0.007}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+Path: /REF/STAR_2006_I715470/d01-x01-y04
 Title: Figure 3.1
 Type: Scatter2D
 ---
@@ -70,11 +70,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d01-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.005, up: 0.005}}, 1: {Stat error: {dn: -0.007, up: 0.007}}, 2: {Stat error: {dn: -0.005, up: 0.005}}, 3: {Stat error: {dn: -0.005, up: 0.005}}, 4: {Stat error: {dn: -0.006, up: 0.006}}, 5: {Stat error: {dn: -0.002, up: 0.002}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+Path: /REF/STAR_2006_I715470/d01-x01-y05
 Title: Figure 3.1
 Type: Scatter2D
 ---
@@ -88,11 +88,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d01-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.004, up: 0.004}}, 1: {Stat error: {dn: -0.004, up: 0.004}}, 2: {Stat error: {dn: -0.003, up: 0.003}}, 3: {Stat error: {dn: -0.003, up: 0.003}}, 4: {Stat error: {dn: -0.003, up: 0.003}}, 5: {Stat error: {dn: -0.001, up: 0.001}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+Path: /REF/STAR_2006_I715470/d01-x01-y06
 Title: Figure 3.1
 Type: Scatter2D
 ---
@@ -106,11 +106,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d02-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.02, up: 0.02}}, 1: {stat: {dn: -0.01, up: 0.01}}, 2: {stat: {dn: -0.006, up: 0.006}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+Path: /REF/STAR_2006_I715470/d02-x01-y01
 Title: Figure 3.2
 Type: Scatter2D
 ---
@@ -121,11 +121,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d02-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {stat: {dn: -0.023, up: 0.023}}, 1: {stat: {dn: -0.015, up: 0.015}}, 2: {stat: {dn: -0.011, up: 0.011}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+Path: /REF/STAR_2006_I715470/d02-x01-y02
 Title: Figure 3.2
 Type: Scatter2D
 ---
@@ -136,11 +136,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d03-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.127, up: 0.127}}, 1: {Stat error: {dn: -0.099, up: 0.099}}, 2: {Stat error: {dn: -0.065, up: 0.065}}, 3: {Stat error: {dn: -0.043, up: 0.043}}, 4: {Stat error: {dn: -0.037, up: 0.037}}, 5: {Stat error: {dn: -0.038, up: 0.038}}, 6: {Stat error: {dn: -0.01, up: 0.01}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+Path: /REF/STAR_2006_I715470/d03-x01-y01
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -155,11 +155,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d03-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.08, up: 0.08}}, 1: {Stat error: {dn: -0.042, up: 0.042}}, 2: {Stat error: {dn: -0.026, up: 0.026}}, 3: {Stat error: {dn: -0.018, up: 0.018}}, 4: {Stat error: {dn: -0.014, up: 0.014}}, 5: {Stat error: {dn: -0.011, up: 0.011}}, 6: {Stat error: {dn: -0.006, up: 0.006}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+Path: /REF/STAR_2006_I715470/d03-x01-y02
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -174,11 +174,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d03-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.067, up: 0.067}}, 1: {Stat error: {dn: -0.028, up: 0.028}}, 2: {Stat error: {dn: -0.015, up: 0.015}}, 3: {Stat error: {dn: -0.01, up: 0.01}}, 4: {Stat error: {dn: -0.008, up: 0.008}}, 5: {Stat error: {dn: -0.006, up: 0.006}}, 6: {Stat error: {dn: -0.053, up: 0.053}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+Path: /REF/STAR_2006_I715470/d03-x01-y03
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -193,11 +193,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d03-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.17, up: 0.17}}, 1: {Stat error: {dn: -0.12, up: 0.12}}, 2: {Stat error: {dn: -0.09, up: 0.09}}, 3: {Stat error: {dn: -0.075, up: 0.075}}, 4: {Stat error: {dn: -0.077, up: 0.077}}, 5: {Stat error: {dn: -0.048, up: 0.048}}, 6: {Stat error: {dn: -0.011, up: 0.011}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+Path: /REF/STAR_2006_I715470/d03-x01-y04
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -212,11 +212,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d03-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.083, up: 0.083}}, 1: {Stat error: {dn: -0.04, up: 0.04}}, 2: {Stat error: {dn: -0.026, up: 0.026}}, 3: {Stat error: {dn: -0.018, up: 0.018}}, 4: {Stat error: {dn: -0.017, up: 0.017}}, 5: {Stat error: {dn: -0.013, up: 0.013}}, 6: {Stat error: {dn: -0.004, up: 0.004}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+Path: /REF/STAR_2006_I715470/d03-x01-y05
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -231,11 +231,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2006_I715470/d04-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {Stat error: {dn: -0.065, up: 0.065}}, 1: {Stat error: {dn: -0.026, up: 0.026}}, 2: {Stat error: {dn: -0.013, up: 0.013}}, 3: {Stat error: {dn: -0.009, up: 0.009}}, 4: {Stat error: {dn: -0.007, up: 0.007}}, 5: {Stat error: {dn: -0.005, up: 0.005}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+Path: /REF/STAR_2006_I715470/d04-x01-y01
 Title: Figure 4.2
 Type: Scatter2D
 ---

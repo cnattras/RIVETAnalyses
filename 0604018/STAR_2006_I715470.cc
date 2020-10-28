@@ -398,7 +398,7 @@ double highedge = 3.0*pi/2.0;
      for(const Particle& pTrig : cfs.particles()){
 
         //Check if is secondary
-        if(isSecondary(pTrig)) continue;
+        //if(isSecondary(pTrig)) continue;
           
         
         for(Correlator& corr : Correlators)
@@ -416,7 +416,7 @@ double highedge = 3.0*pi/2.0;
             if(isSameParticle(pTrig,pAssoc)) continue;
                 
             //Check if is secondary
-            if(isSecondary(pAssoc)) continue;
+            //if(isSecondary(pAssoc)) continue;
 
             //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
             double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range

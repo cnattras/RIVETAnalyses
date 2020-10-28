@@ -353,32 +353,34 @@ class Correlator {
       {
         for (int pta = 0; pta < numAssocPtBins - 1; pta++)
         {
-            Correlator c1 (ptt,pta);
-            c1.SetCollSystemAndEnergy("AuAu200GeV");
-            c1.SetCentrality(pTAssocBins[pta], pTAssocBins[pta+1]);
-            c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
-            c1.SetAssociatedRange(1,6);
-            Correlators3.push_back(c1);
+            Correlator c2 (ptt,pta);
+            c2.SetCollSystemAndEnergy("AuAu200GeV");
+            c2.SetCentrality(pTAssocBins[pta], pTAssocBins[pta+1]);
+            c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+            c2.SetAssociatedRange(1,6);
+            Correlators3.push_back(c2);
         }
       }
 
 	  for(Correlator corr : Correlators3)
       {
-          if(corr.GetIndex() <= 1)
-          {
-              //raw |eta| < 1
-              string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-              book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
-            
-              //limited eta acceptance |eta| < 0.7
-              string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
-              book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
-            
-              //Background subtracted |eta| < 1
-                string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
-            book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
-          }
-      }
+         /// Yoda d10-x01-y01 to d10-x01-y16: all Bksub for Fig 3. 1st 4 are pTassoc .5-1
+      	 // 2nd 4 are pTassoc 1-1.5, 3rd 4 are pTassoc 1.5-2.5, last 4 are 2.5-4 pTassoc. However
+      	 // 1,2,3,4 of each set are different pTTrig.
+		 string name_sub = "sub_d10x01y" + to_string(corr.GetSubIndex()+1);
+      	 book(_h[name_sub], 10, 1, corr.GetSubIndex()+1);
+
+        //Yoda d11-x01-y01 to d11-x01-y16: all AuAu Raw for Fig 3. Same logic as above
+      	string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetSubIndex()+1);
+      	book(_h[name_AuAuRaw], 11, 1, corr.GetSubIndex()+1);
+
+		// Yoda d12-x01-y01 to d12-x01-y16: all dAu for Fig 3. Same logic as above
+      	string name_dAu = "dAu_d12x1y" + to_string(corr.GetSubIndex()+1);
+      	book(_h[name_dAu], 12, 1, corr.GetSubIndex()+1);
+
+        }//end if
+
+      }//end for
 
   	} //ends the init
 
