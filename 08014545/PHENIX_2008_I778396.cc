@@ -1481,7 +1481,7 @@ for(Correlator& corr : Correlators4)
                   
                   if(!corr.CheckCentrality(c)) continue;
                   
-                  double DeltaEta = abs(pTrig.eta() - pTAssoc.eta());
+                  double DeltaEta = pTrig.eta() - pTAssoc.eta();
                       // Name is only for AuAu, see above FIXME 
                    string name = "36010" + to_string(corr.GetIndex());
                    _h[name]->fill(DeltaEta);
