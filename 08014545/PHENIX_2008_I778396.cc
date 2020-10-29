@@ -1487,6 +1487,30 @@ for(Correlator& corr : Correlators4)
                    _h[name]->fill(DeltaEta);
 
               }
+              
+              for(Correlator& corr : Correlators24)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaEta = pTrig.eta() - pTAssoc.eta();
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+                      // Name is only for AuAu, see above FIXME 
+                  /*if(corr.GetSubSubIndex()==1){
+                  	string name = "38010" + to_string(corr.GetIndex());
+                   	_h[name]->fill(DeltaEta);
+                  }
+                  
+                  else if(corr.GetSubSubIndex()==0){
+                  	string name = "39010" + to_string(corr.GetIndex());
+                   	_h[name]->fill(DeltaEta);
+                  }*/
+
+
+              }
           
 
         }
