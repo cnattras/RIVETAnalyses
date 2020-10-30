@@ -1499,6 +1499,15 @@ for(Correlator& corr : Correlators4)
                   double DeltaEta = pTrig.eta() - pTAssoc.eta();
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
                       // Name is only for AuAu, see above FIXME 
+
+                  	string name = (39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+                   	if(corr.GetSubSubIndex()==1) {
+                   		_h[name]->fill(DeltaEta);
+                  	}
+                  else if(corr.GetSubSubIndex()==0) {
+                   	_h[name]->fill(DeltaPhi);
+                  }
+                  
                   /*if(corr.GetSubSubIndex()==1){
                   	string name = "38010" + to_string(corr.GetIndex());
                    	_h[name]->fill(DeltaEta);

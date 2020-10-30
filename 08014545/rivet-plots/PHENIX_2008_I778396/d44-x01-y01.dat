@@ -4,9 +4,27 @@ LogY=1
 Title=[Figure 26, Associated 4-5 GeV/c, Trigger 1-7 GeV/c]
 XLabel=[Centrality]
 YLabel=[Truncated Mean $p_T$]
-DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d44-x01-y01
-LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d44-x01-y01
+DrawOnly=/PHENIX_2008_I778396/d44-x01-y01 //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d44-x01-y01
+LegendOnly=/PHENIX_2008_I778396/d44-x01-y01 //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d44-x01-y01
+RatioPlot=1
+RatioPlotReference=/PHENIX_2008_I778396/d44-x01-y01
 # END PLOT
+
+# BEGIN HISTO1D /PHENIX_2008_I778396/d44-x01-y01
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2008_I778396/d44-x01-y01
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	2.000000e+01	4.480000e-01	6.325346e-02	6.325346e-02
+2.000000e+01	4.000000e+01	6.020000e-01	6.192132e-02	6.192132e-02
+4.000000e+01	6.000000e+01	6.370000e-01	4.705582e-02	4.705582e-02
+6.000000e+01	7.000000e+01	7.940000e-01	4.909175e-02	4.909175e-02
+7.000000e+01	9.200000e+01	8.380000e-01	3.206244e-02	3.206244e-02
+# END HISTO1D
+
 
 # BEGIN HISTO1D //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d44-x01-y01
 LineColor=red
