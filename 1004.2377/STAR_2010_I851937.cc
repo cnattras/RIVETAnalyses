@@ -351,7 +351,7 @@ class Correlator {
       //===================================================================
       for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
       {
-        for (int pta = 0; pta < numAssocPtBins - 1; pta++)
+        for (int pta = 1; pta < numAssocPtBins; pta++)
         {
             Correlator c2 (ptt,pta);
             c2.SetCollSystemAndEnergy("AuAu200GeV");
@@ -364,23 +364,57 @@ class Correlator {
 
 	  for(Correlator corr : Correlators3)
       {
-         /// Yoda d10-x01-y01 to d10-x01-y16: all Bksub for Fig 3. 1st 4 are pTassoc .5-1
+		 /// Yoda d10-x01-y01 to d10-x01-y16: all Bksub for Fig 3. 1st 4 are pTassoc .5-1
       	 // 2nd 4 are pTassoc 1-1.5, 3rd 4 are pTassoc 1.5-2.5, last 4 are 2.5-4 pTassoc. However
       	 // 1,2,3,4 of each set are different pTTrig.
-		 string name_sub = "sub_d10x01y" + to_string(corr.GetSubIndex()+1);
-      	 book(_h[name_sub], 10, 1, corr.GetSubIndex()+1);
+		 string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+      	 book(_h[name_sub], 10, 1, corr.GetIndex() + ((corr.GetSubIndex() - 1) * 4) + 1);
+
+      	 string name2_sub = "sub_d10x01y16";
+      	 book(_h[name2_sub],10,1,16);
 
         //Yoda d11-x01-y01 to d11-x01-y16: all AuAu Raw for Fig 3. Same logic as above
-      	string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetSubIndex()+1);
-      	book(_h[name_AuAuRaw], 11, 1, corr.GetSubIndex()+1);
+      	 string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+     	 book(_h[name_AuAuRaw], 11, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+
+     	 string name2_AuAuRaw = "AuAuRaw_d11x01y16";
+      	 book(_h[name2_AuAuRaw],11,1,16);
 
 		// Yoda d12-x01-y01 to d12-x01-y16: all dAu for Fig 3. Same logic as above
-      	string name_dAu = "dAu_d12x1y" + to_string(corr.GetSubIndex()+1);
-      	book(_h[name_dAu], 12, 1, corr.GetSubIndex()+1);
+       	 string name_dAu = "dAu_d12x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+      	 book(_h[name_dAu], 12, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
 
-        }//end if
+      	 string name2_dAu = "dAu_d12x01y16";
+      	 book(_h[name2_dAu],12,1,16);
 
-      }//end for
+      	// Yoda d13-x01-y01 to d13-x01-y16: same logic
+      	 string name_dEta = "dEta_d13x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+      	 book(_h[name_dEta], 13, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+		 
+		 string name2_dEta = "dEta_d13x01y16";
+      	 book(_h[name2_dEta],13,1,16);
+
+
+      }
+
+     ////////////////////////////////////////////////////////////////////////////////////////////////////
+     ////////////////////////////////////////////////////////////////////////////////////////////////////
+     //Figure 6//
+     ////////////////////////////////////////////////////////////////////////////////////////////////////
+     ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+     //
+     //
+     //Figure 7//
+     //
+     //
+
+     //
+     //
+     //Figure 8//
+     //
+     //
 
   	} //ends the init
 
