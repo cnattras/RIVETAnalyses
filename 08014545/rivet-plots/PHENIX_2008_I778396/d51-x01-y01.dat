@@ -4,9 +4,30 @@ LogY=1
 Title=[Figure 31, 40-60 Au + Au, 2-3 GeV/c]
 XLabel=[$p^b_T$ (GeV/c)]
 YLabel=[$J_{AA}$ ($p^a_T$, $p^b_T$)]
-DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d51-x01-y01
-LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d51-x01-y01
+DrawOnly=/PHENIX_2008_I778396/d51-x01-y01 //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d51-x01-y01
+LegendOnly=/PHENIX_2008_I778396/d51-x01-y01 //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d51-x01-y01
+RatioPlot=1
+RatioPlotReference=/PHENIX_2008_I778396/d51-x01-y01
 # END PLOT
+
+# BEGIN HISTO1D /PHENIX_2008_I778396/d51-x01-y01
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2008_I778396/d51-x01-y01
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+3.150000e-01	9.150000e-01	1.410000e+00	3.453570e-01	3.453570e-01
+9.150000e-01	1.415000e+00	1.460000e+00	3.586037e-01	3.586037e-01
+1.415000e+00	1.915000e+00	1.410000e+00	2.848403e-01	2.848403e-01
+1.915000e+00	2.415000e+00	1.200000e+00	1.811548e-01	1.811548e-01
+2.415000e+00	3.055000e+00	9.460000e-01	1.654929e-01	1.654929e-01
+3.055000e+00	4.095000e+00	7.220000e-01	1.053081e-01	1.053081e-01
+4.095000e+00	5.465000e+00	6.000000e-01	1.017012e-01	1.017012e-01
+5.465000e+00	6.435000e+00	5.110000e-01	1.202401e-01	1.202401e-01
+# END HISTO1D
+
 
 # BEGIN HISTO1D //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d51-x01-y01
 LineColor=red

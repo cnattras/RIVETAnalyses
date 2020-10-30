@@ -25,6 +25,11 @@ static const float DeltaPhiBins[] = {-1.5048,-1.275,-0.98,-0.685,-0.415,-0.22,-0
 1.275,1.595,1.965,2.305,2.55,2.75,2.945,3.14,3.44,3.535,3.73,3.935,4.32,4.7012};
 static const int numpTAssocBins2 = 4;
 static const float pTAssocBins2[] = {1.0,1.5,2.0,2.5,3.0};
+//For figure 12
+static const int numCentBins12 = 4;
+static const float CentBins12[] = {0.0,20.0,40.0,60.0,92.0};
+static const int numpTAssocBins12 = 8;
+static const float pTAssocBins12[] = {0.345,0.915,1.415,1.915,2.415,3.055,4.095,5.285,5.88};
 
 using namespace std;
 
@@ -83,7 +88,7 @@ namespace Rivet {
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
      bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
-      bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second || _noAssoc == true) ? true : false; }
+      bool CheckAssociatedRange(double apt){ return ((apt>_associatedRange.first && apt<_associatedRange.second) || _noAssoc == true) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
       bool CheckPID(std::initializer_list<int> pid)
 
@@ -151,6 +156,69 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I778396);
+    
+    Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+    {
+        
+        YODA::Histo1D hist = *histo;
+        
+        double minValue = sqrt(-2);
+        double binWidth = 0.;
+        int minValueEntries = 0.;
+        
+        for(auto &bin : hist.bins())
+        {
+            if(std::isnan(minValue))
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+            if(bin.sumW()/bin.width() < minValue/binWidth)
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+        }
+                
+        histo->reset();
+        
+        for(unsigned int i = 0; i < hist.numBins(); i++)
+        {
+            double effEntries = (hist.bin(i).numEntries()*minValueEntries)/(hist.bin(i).numEntries()+minValueEntries);
+            if(minValue > 0.) histo->fillBin(i, (hist.bin(i).sumW()-((minValue*hist.bin(i).width())/binWidth))/effEntries, effEntries);
+        }
+        
+        return histo;
+                
+    }
+
+    
+    double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax, double &fraction)
+    {
+        //This will include bins partially covered by the user range
+        
+        YODA::Histo1D hist = *histo;
+        
+        double integral = 0.;
+        
+        if(xmax < xmin) throw RangeError("Error: xmin > xmax");
+        if(xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
+        if(xmax > hist.bin(hist.numBins()-1).xMax()) throw RangeError("xmax is out of range");
+        
+        for(auto &bin : hist.bins())
+        {
+            if((xmin <= bin.xMax()) && (xmax >= bin.xMin()))
+            {
+                integral += bin.sumW()/bin.width();
+                fraction += bin.numEntries()/bin.width();
+            }
+        }
+        
+        return integral;
+        
+    }
 
     bool isSameParticle(const Particle& p1, const Particle& p2)
       {
@@ -207,7 +275,23 @@ namespace Rivet {
                     
         return dPhi;   
       }
-   
+/*
+    double GetDeltaEta(Particle pAssoc, Particle pTrig)
+    {
+           double dEta = deltaEta(pTrig, pAssoc);
+
+          if(dEta < -M_PI/2.)
+          {
+            dEta += 2.*M_PI;
+          }
+          else if(dEta > 3.*M_PI/2.)
+          {
+            dEta -= 2*M_PI;
+          }
+                    
+        return dEta;   
+    }
+   */
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
         int minBin = -1;
@@ -613,12 +697,33 @@ for(ptt = 0; ptt<1; ptt++){
       Correlators23.push_back(c8);
 
 }
-for(Correlator& corr : Correlators18)
+for(Correlator& corr : Correlators23)
   {
-        string name = to_string(37-corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
-        book(_h[name], (37 - corr.GetSubSubIndex()),01,(corr.GetIndex()));
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
+        //string name = to_string(37-corr.GetSubSubIndex()) + "01" + to_string(corr.GetIndex()+1);
+        //book(_h[name], (37 - corr.GetSubSubIndex()),1,(corr.GetIndex()));
+        //book(sow[name],"sow" + name);
+        //nTriggers[name] = 0;
+        //string name = to_string(37 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+        //book(_h[name], (37 - corr.GetSubSubIndex()),01,(corr.GetIndex()));
+        //book(sow[name],"sow" + name);
+        //nTriggers[name] = 0;
+        if(corr.GetSubIndex() > 4)
+        {
+          string name = "36010" + to_string(corr.GetIndex());
+          book(_h[name], 36,01,(corr.GetIndex()));
+          book(sow[name],"sow" + name);
+          nTriggers[name] = 0;
+        }
+        //else
+          /* FIXME pp, bin definitions acting up
+        {
+          string name = "35010" + to_string(corr.GetIndex());
+          book(_h[name], 37,01,(corr.GetIndex()));
+          book(sow[name],"sow" + name);
+          nTriggers[name] = 0;
+        }
+        */
+
   }
 
  
@@ -732,44 +837,59 @@ for(Correlator& corr : Correlators16)
   }
  
 //*****************************************************************************
-// The following will book the histograms for Figure 12
-for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
-  for(i=0;i<3;i++){
-      Correlator c1(i,ptt,4);
-      c1.SetCollSystemAndEnergy("pp00GeV");
+// The following will book the histograms for Figure 12 
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+  for(pta = 0; pta < numpTAssocBins12; pta++){
+      Correlator c1(pta,ptt,4);
+      c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c1.SetNoAssoc(); 
+      c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]); 
       //c1.SetPID(pdgPi0);
       Correlators12.push_back(c1);
 
-    for(cb = 0; cb<numCentBins-1; cb++){
-        Correlator c1(i,ptt,cb);
+    for(cb = 0; cb<numCentBins12; cb++){
+        Correlator c1(pta,ptt,cb);
         c1.SetCollSystemAndEnergy("AuAu200GeV");
-        c1.SetCentrality(CentBins[cb],CentBins[cb+1]);
+        c1.SetCentrality(CentBins12[cb],CentBins12[cb+1]);
         c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-        c1.SetNoAssoc();
+        c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);
         //c1.SetPID(pdgPi0);
         Correlators12.push_back(c1);
-    }  
+   }
   }
 }
 for(Correlator& corr : Correlators12)
   {
-  	if(corr.GetIndex()==0){
-        string name = to_string(26 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
-        book(_h[name], (26 + corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
+  	if(corr.GetSubSubIndex() < 4){
+        string name = "Fig12CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        book(_h[name], name, 36, -M_PI/2, 3*M_PI/2);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     }
-    else if(corr.GetIndex()==1){
-        string name = to_string(21 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
-        book(_h[name], (21 + corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
+    else if(corr.GetSubSubIndex()==4){
+        string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        book(_h[name], name, 36, -M_PI/2, 3*M_PI/2);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     }
   }
- 
+  
+  for(ptt = 0; ptt<numTrigPtBins; ptt++){
+      //AuAu
+      for(cb = 0; cb<numCentBins12; cb++){
+          string name = "Figure12_AuAu_" + to_string(21+cb) + "_1_" + to_string(ptt+1);
+          book(_h[name],21+cb, 1, ptt+1);
+          string nameSR = "Figure12_AuAu_" + to_string(26+cb) + "_1_" + to_string(ptt+1);
+          book(_h[nameSR],26+cb, 1, ptt+1);
+      }
+      //pp
+      string name = "Figure12_pp_25_1_" + to_string(ptt+1);
+      book(_h[name],25, 1, ptt+1);
+      string nameSR = "Figure12_pp_" + to_string(26+cb) + "_1_" + to_string(ptt+1);
+      book(_h[nameSR],26+cb, 1, ptt+1);
+  }
+
 //*****************************************************************************
 // The following will book the histograms for Figure 11
 for(i=0;i<2;i++){
@@ -982,28 +1102,28 @@ for(Correlator& corr : Correlators6)
   {
   	if(corr.GetSubSubIndex()==0){
   		if(corr.GetSubIndex()==1){
-  			string name = "0501" + to_string(corr.GetIndex()+1);
-  			book(_h[name], 05,01,corr.GetIndex()+1);
+  			string name = "07010" + to_string(corr.GetIndex()+1);
+  			book(_h[name], 7,01,corr.GetIndex()+1);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   		else if(corr.GetSubIndex()==2){
-  			string name = "0401" + to_string(corr.GetIndex()-4);
-  			book(_h[name], 04,01,corr.GetIndex()-4);
+  			string name = "06010" + to_string(corr.GetIndex()-4);
+  			book(_h[name], 6,01,corr.GetIndex()-4);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   	}
   	else if(corr.GetSubSubIndex()==1){
   		if(corr.GetSubIndex()==1){
-  			string name = "0601" + to_string(corr.GetIndex()+1);
-  			book(_h[name], 06,01,corr.GetIndex()+1);
+  			string name = "08010" + to_string(corr.GetIndex()+1);
+  			book(_h[name], 8,01,corr.GetIndex()+1);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
   		else if(corr.GetSubIndex()==2){
-  			string name = "0701" + to_string(corr.GetIndex()-4);
-  			book(_h[name], 07,01,corr.GetIndex()-4);
+  			string name = "09010" + to_string(corr.GetIndex()-4);
+  			book(_h[name], 9,01,corr.GetIndex()-4);
         	book(sow[name],"sow" + name);
         	nTriggers[name] = 0;
   		}
@@ -1021,7 +1141,7 @@ for(i=0;i<3;i++){
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c1.SetNoAssoc();
       //c1.SetPID(pdgPi0);
-      Correlators7.push_back(c1);
+      Correlators4.push_back(c1);
   }
 }
 for(Correlator& corr : Correlators4)
@@ -1122,37 +1242,140 @@ for(Correlator& corr : Correlators4)
                   
         }
       //*****************************************************************************
-      // The following will fill the sow for Figure 31 
+      // The following will fill the sow for Figure 6
         //FIXME ... the figure is for pT 
-        /*
-        for(Correlator& corr : Correlators31)
+        
+        for(Correlator& corr : Correlators6)
         {
 
                   if(!corr.CheckCentrality(c)) continue;
                   
-                  if(corr.GetSubSubIndex()==0){
-                  string name = "49010" + to_string(1+corr.GetSubIndex());
+                  
+                if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
                    sow[name]->fill();
-                   } 
-                 else if(corr.GetSubSubIndex()==1){
-                  string name = "50010" + to_string(1+corr.GetSubIndex());
-                   sow[name]->fill();
-                   } 
-                 else if(corr.GetSubSubIndex()==2){
-                 string name = "51010" + to_string(1+corr.GetSubIndex());
-                  sow[name]->fill();
                   }
-                  else if(corr.GetSubSubIndex()==3){
-                  string name = "52010" + to_string(1+corr.GetSubIndex());
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  sow[name]->fill();
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                   sow[name]->fill();
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
                   sow[name]->fill();
                 }
+              }
         }
-          */
+          
+
+          //*****************************************************************************
+      // The following will fill the sow for Figure 12 
+      for(Correlator& corr : Correlators12)
+      {
+          if(!corr.CheckCentrality(c)) continue;
+
+          if(corr.GetSubSubIndex() < 4){
+              string name = "Fig12CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+              sow[name]->fill();
+          }
+          else if(corr.GetSubSubIndex() == 4){
+              string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+              sow[name]->fill();
+          }
+
+      }
 
      for(const Particle& pTrig : cfs.particles())
-      {
+     {
+         //Check if is secondary    FIXME, omitted for run time 
+         //if(isSecondary(pAssoc)) continue;
+          
+         //Trigger counting Figure 38
+         for(Correlator& corr : Correlators38)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+              
+             if(corr.GetSubSubIndex()==-1){
+                  string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+             } 
+             else if(corr.GetSubSubIndex()==1){
+                  string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+             } 
+             else if(corr.GetSubSubIndex()==2){
+                  string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+             }
+             else if(corr.GetSubSubIndex()==3){
+                  string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+                  nTriggers[name]++;
+             }
+         }
+
+         //Trigger counting Figure 12
+         for(Correlator& corr : Correlators12)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+
+             if(corr.GetSubSubIndex() < 4){
+               string name = "Fig12CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+               nTriggers[name]++;
+                  }
+             else if(corr.GetSubSubIndex() == 4){
+               string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                nTriggers[name]++;
+                  }
+
+          }
+          
+          
+        //Trigger counting Figure 6
+         for(Correlator& corr : Correlators6)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+
+            if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
+                   nTriggers[name]++;
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  nTriggers[name]++;
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                  nTriggers[name]++;
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
+                  nTriggers[name]++;
+                } 
+               }
+
+        }
+
+
           for(const Particle& pTAssoc : cfs.particles())
           {
+              //Check if Trigger and Associated are the same particle
+              if(isSameParticle(pTrig,pTAssoc)) continue; //I changed this FIXME
+                
+              //Check if is secondary
+              //if(isSecondary(pAssoc)) continue;
+              
             //*****************************************************************************
             // The following will fill the histograms for Figure 38 
               for(Correlator& corr : Correlators38)
@@ -1192,9 +1415,9 @@ for(Correlator& corr : Correlators4)
                   
               }
               //*****************************************************************************
-              // The following will fill the histograms for Figure 31
+              // The following will fill the histograms for Figure 6
               //FIXME ... the figure is for pT 
-              /*for(Correlator& corr : Correlators31)
+              for(Correlator& corr : Correlators6)
               {
                   if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
                   
@@ -1204,35 +1427,103 @@ for(Correlator& corr : Correlators4)
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 
-                  if(corr.GetSubSubIndex()==0){
-                  string name = "49010" + to_string(1+corr.GetSubIndex());
-                  _h[name]->fill(DeltaPhi);
-                   } 
-                 else if(corr.GetSubSubIndex()==1){
-                  string name = "50010" + to_string(1+corr.GetSubIndex());
-                 _h[name]->fill(DeltaPhi);
-                   } 
-                 else if(corr.GetSubSubIndex()==2){
-                 string name = "51010" + to_string(1+corr.GetSubIndex());
-                  _h[name]->fill(DeltaPhi);
-                  }
-                  else if(corr.GetSubSubIndex()==3){
-                  string name = "52010" + to_string(1+corr.GetSubIndex());
+                if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
                    _h[name]->fill(DeltaPhi);
                   }
-                  
-                  
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  _h[name]->fill(DeltaPhi);
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                   _h[name]->fill(DeltaPhi);
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
+                  _h[name]->fill(DeltaPhi);
+                } 
+               }
               }
-              */
-              
-              
+          //*****************************************************************************
+              // The following will fill the histograms for Figure 12
+          for(Correlator& corr : Correlators12)
+          {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+
+                  if(corr.GetSubSubIndex() < 4){
+                     string name = "Fig12CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                    _h[name]->fill(DeltaPhi);
+                  }
+                  else if(corr.GetSubSubIndex() == 4){
+                   string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                    _h[name]->fill(DeltaPhi);
+                  }
+
           }
+              //*****************************************************************************
+              // The following will fill the histograms for Figure 23
+
+              for(Correlator& corr : Correlators23)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaEta = pTrig.eta() - pTAssoc.eta();
+                      // Name is only for AuAu, see above FIXME 
+                   string name = "36010" + to_string(corr.GetIndex());
+                   _h[name]->fill(DeltaEta);
+
+              }
+              
+              for(Correlator& corr : Correlators24)
+              {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaEta = pTrig.eta() - pTAssoc.eta();
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+                      // Name is only for AuAu, see above FIXME 
+
+                  	string name = (39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+                   	if(corr.GetSubSubIndex()==1) {
+                   		_h[name]->fill(DeltaEta);
+                  	}
+                  else if(corr.GetSubSubIndex()==0) {
+                   	_h[name]->fill(DeltaPhi);
+                  }
+                  
+                  /*if(corr.GetSubSubIndex()==1){
+                  	string name = "38010" + to_string(corr.GetIndex());
+                   	_h[name]->fill(DeltaEta);
+                  }
+                  
+                  else if(corr.GetSubSubIndex()==0){
+                  	string name = "39010" + to_string(corr.GetIndex());
+                   	_h[name]->fill(DeltaEta);
+                  }*/
+
+
+              }
           
-          
-          
+
+        }
       }
-
-
     }
 
     void finalize() {
@@ -1264,6 +1555,103 @@ for(Correlator& corr : Correlators4)
           
         }
       }
+      
+      //*****************************************************************************
+      // Background subtraction for Figures 36-8
+      for(Correlator& corr : Correlators38)
+      {
+          if(corr.GetSubSubIndex()==-1){
+              string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+              _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+              _h[name] = SubtractBackgroundZYAM(_h[name]);
+          } 
+          else if(corr.GetSubSubIndex()==1){
+              string name = "53010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+              _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+              _h[name] = SubtractBackgroundZYAM(_h[name]);
+          }
+          else if(corr.GetSubSubIndex()==2){
+              string name = "55010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+              _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+              _h[name] = SubtractBackgroundZYAM(_h[name]);
+          }
+          else if(corr.GetSubSubIndex()==3){
+              string name = "57010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
+              _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+              _h[name] = SubtractBackgroundZYAM(_h[name]);
+          }
+          
+      }
+
+      //*****************************************************************************
+      // Background subtraction for Figure 12 
+      for(Correlator& corr : Correlators12)
+      {
+          if(corr.GetSubSubIndex() < 4){
+            string name = "Fig12CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig12 = "Figure12_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+            string nameFig12SH = "Figure12_AuAu_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+          }
+          else if(corr.GetSubSubIndex() == 4){
+            string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig12 = "Figure12_pp_25_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+            string nameFig12SH = "Figure12_pp_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+          }
+              
+          
+      }
+
+      //*****************************************************************************
+      // Background subtraction for Figure 6
+      for(Correlator& corr : Correlators6)
+      {
+              if(corr.GetSubSubIndex()==0){
+                  if(corr.GetSubIndex()==1){
+                   string name = "07010" + to_string(corr.GetIndex()+1);
+                   _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                   _h[name] = SubtractBackgroundZYAM(_h[name]);
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "06010" + to_string(corr.GetIndex()-4);
+                  _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                  _h[name] = SubtractBackgroundZYAM(_h[name]);
+                 }
+                }
+                else if(corr.GetSubSubIndex()==1){
+                 if(corr.GetSubIndex()==1){
+                   string name = "08010" + to_string(corr.GetIndex()+1);
+                   _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                   _h[name] = SubtractBackgroundZYAM(_h[name]);
+                  }
+                 else if(corr.GetSubIndex()==2){
+                  string name = "09010" + to_string(corr.GetIndex()-4);
+                  _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+                  _h[name] = SubtractBackgroundZYAM(_h[name]);
+                } 
+               }        
+      }
+      
+      
+      
     }
  	
  	map<string, Histo1DPtr> _h;
@@ -1283,6 +1671,7 @@ for(Correlator& corr : Correlators4)
     vector<Correlator> Correlators17;
     vector<Correlator> Correlators16;
     vector<Correlator> Correlators12;
+    vector<Correlator> Correlators12corr;
     vector<Correlator> Correlators11;
     vector<Correlator> Correlators10;
     vector<Correlator> Correlators9;
@@ -1301,6 +1690,5 @@ for(Correlator& corr : Correlators4)
 
 
   DECLARE_RIVET_PLUGIN(PHENIX_2008_I778396);
-
+  
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   

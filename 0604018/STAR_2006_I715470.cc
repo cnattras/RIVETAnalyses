@@ -189,6 +189,23 @@ namespace Rivet {
         Vn /= integral;
         return Vn;
     }
+    
+    double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+    {
+        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                    
+        if(dPhi < -M_PI/2.)
+        {
+            dPhi += 2.*M_PI;
+        }
+        else if(dPhi > 3.*M_PI/2.)
+        {
+            dPhi -= 2*M_PI;
+        }
+                    
+        return dPhi;   
+    }
    
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
@@ -398,7 +415,7 @@ double highedge = 3.0*pi/2.0;
      for(const Particle& pTrig : cfs.particles()){
 
         //Check if is secondary
-        if(isSecondary(pTrig)) continue;
+        //if(isSecondary(pTrig)) continue;
           
         
         for(Correlator& corr : Correlators)
@@ -416,10 +433,11 @@ double highedge = 3.0*pi/2.0;
             if(isSameParticle(pTrig,pAssoc)) continue;
                 
             //Check if is secondary
-            if(isSecondary(pAssoc)) continue;
+            //if(isSecondary(pAssoc)) continue;
 
             //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
-            double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+            //double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+            double dPhi = GetDeltaPhi(pTrig, pAssoc);
                         
             //double xE = GetXE(pTrig,pAssoc);
             
