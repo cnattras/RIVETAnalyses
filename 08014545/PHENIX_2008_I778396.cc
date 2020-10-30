@@ -730,27 +730,58 @@ for(Correlator& corr : Correlators23)
 //*****************************************************************************
 // The following will book the histograms for Figure 18 
 
-for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
-      Correlator c1(-1,ptt,1);
+for(ptt = 0; ptt<numTrigPtBins - 1; ptt++){
+   for(pta = 0; pta < numpTAssocBins12; pta++){
+      Correlator c1(pta,ptt,1);
       c1.SetCollSystemAndEnergy("pp200GeV");
       c1.SetNoCentrality();
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c1.SetNoAssoc();
+      c1.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);
       //c1.SetPID(pdgPi0);
       Correlators18.push_back(c1);
 
-      Correlator c2(1,ptt,0);
+      Correlator c2(pta,ptt,0);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetCentrality(0,20);
       c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-      c2.SetNoAssoc();  
+      c2.SetAssociatedRange(pTAssocBins12[pta],pTAssocBins12[pta+1]);  
       //c1.SetPID(pdgPi0);
       Correlators18.push_back(c2);
+  }
 }
+
+/*for(Correlator& corr : Correlators18)
+  {
+  	if(corr.GetSubSubIndex() == 0){
+        //string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        string name = "Fig18CorrFunc_AuAu_35_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        book(_h[name], name, 35, -M_PI/2, 3*M_PI/2);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    }
+    else if(corr.GetSubSubIndex() == 1){
+    	//string name = "Fig18CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        string name = "Fig18CorrFunc_pp_34_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        book(_h[name], name, 34, -M_PI/2, 3*M_PI/2);
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+    }
+  }*/
+
+ for(ptt = 0; ptt<numTrigPtBins; ptt++){
+      //AuAu
+      string name = "Figure18_AuAu_35_1_" + to_string(ptt+1);
+      book(_h[name],35, 1, ptt+1);
+      //pp
+      string nameNS = "Figure18_pp_34_1_" + to_string(ptt+1);
+      book(_h[nameNS],34, 1, ptt+1);
+  }
 for(Correlator& corr : Correlators18)
   {
         string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
-        book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
+        book(_h[name], name, 34, -M_PI/2, 3*M_PI/2);
+        //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
   }
@@ -1274,7 +1305,7 @@ for(Correlator& corr : Correlators4)
         }
           
 
-          //*****************************************************************************
+      //*****************************************************************************
       // The following will fill the sow for Figure 12 
       for(Correlator& corr : Correlators12)
       {
@@ -1290,6 +1321,28 @@ for(Correlator& corr : Correlators4)
           }
 
       }
+
+      //*****************************************************************************
+      // The following will fill the sow for Figure 18 
+      
+      for(Correlator& corr : Correlators18)
+      {
+
+          if(!corr.CheckCentrality(c)) continue;
+			string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+			sow[name]->fill();
+          /*if(corr.GetSubSubIndex() == 0){
+              //string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+              string name = "Fig18CorrFunc_AuAu_35_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+              sow[name]->fill();
+          }
+          else if(corr.GetSubSubIndex() == 1){
+              //string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+              string name = "Fig18CorrFunc_pp_34_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+              sow[name]->fill();
+          } */
+
+      } //FIXME
 
      for(const Particle& pTrig : cfs.particles())
      {
@@ -1336,6 +1389,26 @@ for(Correlator& corr : Correlators4)
                   }
 
           }
+
+          //Trigger counting Figure 18
+          
+         for(Correlator& corr : Correlators18)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+
+             string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+             nTriggers[name]++;
+             /*if(corr.GetSubSubIndex() == 0){
+               string name = "Fig18CorrFunc_AuAu_35_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+               nTriggers[name]++;
+                  }
+             else if(corr.GetSubSubIndex() == 1){
+               string name = "Fig18CorrFunc_pp_34_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                nTriggers[name]++;
+                  }*/
+
+          } //FIXME 
           
           
         //Trigger counting Figure 6
@@ -1470,6 +1543,36 @@ for(Correlator& corr : Correlators4)
                   }
 
           }
+
+          //*****************************************************************************
+              // The following will fill the histograms for Figure 18
+          
+          for(Correlator& corr : Correlators18)
+          {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+					
+				string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+				_h[name]->fill(DeltaPhi);
+                  /*if(corr.GetSubSubIndex() == 0){
+                     string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                     //string name = "Fig18CorrFunc_AuAu_35_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                    _h[name]->fill(DeltaPhi);
+                  }
+                  else if(corr.GetSubSubIndex() == 1){
+                   string name = "Fig18CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                   //string name = "Fig18CorrFunc_pp_34_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+                    _h[name]->fill(DeltaPhi);
+                  }*/
+
+
+          }  //FIXME 
+
               //*****************************************************************************
               // The following will fill the histograms for Figure 23
 
@@ -1619,6 +1722,70 @@ for(Correlator& corr : Correlators4)
               
           
       }
+
+
+      //*****************************************************************************
+      // Background subtraction for Figure 18 
+      //FIXME 
+      for(Correlator& corr : Correlators18)
+      {
+      		if(corr.GetSubSubIndex() == 0){
+            string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig12 = "Figure18_AuAu_35_1_" + to_string(corr.GetSubIndex()+1);
+            //string nameFig12 = "Figure18_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+          }
+          else if(corr.GetSubSubIndex() == 1){
+            string name = to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig12 = "Figure18_pp_34_1_" + to_string(corr.GetSubIndex()+1);
+            //string nameFig12 = "Figure18_pp_25_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+
+          }
+
+          /*if(corr.GetSubSubIndex() == 0){
+            string name = "Fig18CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig12 = "Figure18_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+            string nameFig18SH = "Figure18_AuAu_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+          }
+          else if(corr.GetSubSubIndex() == 1){
+            string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig12 = "Figure12_pp_25_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            
+            string nameFig12SH = "Figure12_pp_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+          }*/
+              
+          
+      } //FIXME 
 
       //*****************************************************************************
       // Background subtraction for Figure 6
