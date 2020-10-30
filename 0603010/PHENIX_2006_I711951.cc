@@ -28,7 +28,16 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2006_I711951);
 
+    bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
+    {
+      if(pT > hist.xMin() && pT < hist.xMax())
+      {
+        deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+        return true;
+      }
+      else return false;
 
+    }
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -48,155 +57,175 @@ namespace Rivet {
 
 
       //****Counters****
-      //book(sow["sow_pp"],"sow_pp");
-      //book(sow["sow_dAU20"],"sow_dAU20");
-      //book(sow["sow_dAU40"],"sow_dAU40");
-      //book(sow["sow_dAU60"],"sow_dAU60");
-      //book(sow["sow_dAU88"],"sow_dAU88");
-      book(sow,"sow");
-
-      //****Book Histos****
-      //book(hPionPlusPt,4,1,1);
+      book(sow["sow_pp"],"sow_pp");
+      book(sow["sow_dAU20"],"sow_dAU20");
+      book(sow["sow_dAU40"],"sow_dAU40");
+      book(sow["sow_dAU60"],"sow_dAU60");
+      book(sow["sow_dAU88"],"sow_dAU88");
       //book(sow,"sow");
 
+      //****Book Histos****
 
       //for (i=0, i<4, i++){
 
       //Invariant Yield in pp (piplus)
-      book(hPP_PiPlusPt["PiplusPP"], 1,1,1);
+      book(hPP_Yields["PiplusPP"], 1,1,1);
 
       //Invariant Yield in pp (piminus)
-      book(hPP_PiMinusPt["PiminusPP"], 1,1,2);
+      book(hPP_Yields["PiminusPP"], 1,1,2);
 
       //Invariant Yield in pp (kplus)
-      book(hPP_KPlusPt["KplusPP"], 5,1,1);
+      book(hPP_Yields["KplusPP"], 5,1,1);
 
       //Invariant Yield in pp (kminus)
-      book(hPP_KMinusPt["KminusPP"], 5,1,2);
+      book(hPP_Yields["KminusPP"], 5,1,2);
 
       //Invariant Yield in pp (p)
-      book(hPP_PPt["PPP"], 9,1,1);
+      book(hPP_Yields["PPP"], 9,1,1);
 
       //Invariant Yield in pp (p_bar)
-      book(hPP_P_BarPt["P_barPP"], 9,1,2);
+      book(hPP_Yields["P_barPP"], 9,1,2);
 
       //Invariant Yield in dAU 0-20% (piplus)
-      book(hdAu_PiPlusPt["PiplusC20"], 3,1,1);
+      book(hdAu_Yields["PiplusC20"], 3,1,1);
 
       //Invariant Yield in dAU 0-20% (piminus)
-      book(hdAu_PiMinusPt["PiminusC20"], 3,1,2);
+      book(hdAu_Yields["PiminusC20"], 3,1,2);
 
       //Invariant Yield in dAU 0-20% (kplus)
-      book(hdAu_KPlusPt["KplusC20"], 7,1,1);
+      book(hdAu_Yields["KplusC20"], 7,1,1);
 
       //Invariant Yield in dAU 0-20% (kminus)
-      book(hdAu_KMinusPt["KminusC20"], 7,1,2);
+      book(hdAu_Yields["KminusC20"], 7,1,2);
 
       //Invariant Yield in dAU 0-20% (p)
-      book(hdAu_PPt["PC20"], 10,1,1);
+      book(hdAu_Yields["PC20"], 10,1,1);
 
       //Invariant Yield in dAU 0-20% (p_bar)
-      book(hdAu_P_BarPt["P_barC20"], 10,1,2);
+      book(hdAu_Yields["P_barC20"], 10,1,2);
 
       //Invariant Yield in dAU 20-40% (piplus)
-      book(hdAu_PiPlusPt["PiplusC40"], 3,1,3);
+      book(hdAu_Yields["PiplusC40"], 3,1,3);
 
       //Invariant Yield in dAU 20-40% (piminus)
-      book(hdAu_PiMinusPt["PiminusC40"], 3,1,4);
+      book(hdAu_Yields["PiminusC40"], 3,1,4);
 
       //Invariant Yield in dAU 20-40% (kplus)
-      book(hdAu_KPlusPt["KplusC40"], 8,1,1);
+      book(hdAu_Yields["KplusC40"], 8,1,1);
 
       //Invariant Yield in dAU 20-40% (kminus)
-      book(hdAu_KMinusPt["KminusC40"], 8,1,2);
+      book(hdAu_Yields["KminusC40"], 8,1,2);
 
       //Invariant Yield in dAU 20-40% (p)
-      book(hdAu_PPt["PC40"], 10,1,3);
+      book(hdAu_Yields["PC40"], 10,1,3);
 
       //Invariant Yield in dAU 20-40% (p_bar)
-      book(hdAu_P_BarPt["P_barC40"], 10,1,4);
+      book(hdAu_Yields["P_barC40"], 10,1,4);
 
       //Invariant Yield in dAU 40-60% (piplus)
-      book(hdAu_PiPlusPt["PiplusC60"], 4,1,1);
+      book(hdAu_Yields["PiplusC60"], 4,1,1);
 
       //Invariant Yield in dAU 40-60% (piminus)
-      book(hdAu_PiMinusPt["PiminusC60"], 3,1,5);
+      book(hdAu_Yields["PiminusC60"], 3,1,5);
 
       //Invariant Yield in dAU 40-60% (kplus)
-      book(hdAu_KPlusPt["KplusC60"], 7,1,3);
+      book(hdAu_Yields["KplusC60"], 7,1,3);
 
       //Invariant Yield in dAU 40-60% (kminus)
-      book(hdAu_KMinusPt["KminusC60"], 7,1,4);
+      book(hdAu_Yields["KminusC60"], 7,1,4);
 
       //Invariant Yield in dAU 40-60% (p)
-      book(hdAu_PPt["PC60"], 10,1,5);
+      book(hdAu_Yields["PC60"], 10,1,5);
 
       //Invariant Yield in dAU 40-60% (p_bar)
-      book(hdAu_P_BarPt["P_barC60"], 10,1,6);
+      book(hdAu_Yields["P_barC60"], 10,1,6);
 
       //Invariant Yield in dAU 60-88.5% (piplus)
-      book(hdAu_PiPlusPt["PiplusC88"], 3,1,6);
+      book(hdAu_Yields["PiplusC88"], 3,1,6);
 
       //Invariant Yield in dAU 60-88.5% (piminus)
-      book(hdAu_PiMinusPt["PiminusC88"], 3,1,7);
+      book(hdAu_Yields["PiminusC88"], 3,1,7);
 
       //Invariant Yield in dAU 60-88.5% (kplus)
-      book(hdAu_KPlusPt["KplusC88"], 7,1,5);
+      book(hdAu_Yields["KplusC88"], 7,1,5);
 
       //Invariant Yield in dAU 60-88.5% (kminus)
-      book(hdAu_KMinusPt["KminusC88"], 7,1,6);
+      book(hdAu_Yields["KminusC88"], 7,1,6);
 
       //Invariant Yield in dAU 60-88.5% (p)
-      book(hdAu_PPt["PC88"], 10,1,7);
+      book(hdAu_Yields["PC88"], 10,1,7);
 
       //Invariant Yield in dAU 60-88.5% (p_bar)
-      book(hdAu_P_BarPt["P_barC88"], 10,1,8);
+      book(hdAu_Yields["P_barC88"], 10,1,8);
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      sow->fill();
+      //sow->fill();
       Particles chargedP = applyProjection<FinalState>(event,"fs").particles();
 
       if (collSys == pp) {
-        //sow["sow_pp"]->fill();
+        sow["sow_pp"]->fill();
         for (const Particle& p :chargedP) {
           double partPt = p.pT() / GeV;
           double pt_weight = 1. / (partPt*2.*M_PI);
+          double deltaPt = 0.;
 
           if (p.pid() == 211) {
-            hPP_PiPlusPt["PiplusPP"]->fill(partPt, pt_weight);
+            if (getDeltaPt(*hPP_Yields["PiplusPP"], partPt, deltaPt))
+            {
+              pt_weight /= deltaPt;
+              hPP_Yields["PiplusPP"]->fill(partPt, pt_weight);
+            }
           }
           if (p.pid() == -211) {
-            hPP_PiMinusPt["PiminusPP"]->fill(partPt, pt_weight);
+            if (getDeltaPt(*hPP_Yields["PiminusPP"], partPt, deltaPt))
+            {
+              pt_weight /= deltaPt;
+              hPP_Yields["PiminusPP"]->fill(partPt, pt_weight);
+            }
           }
           if (p.pid() == 321) {
-            hPP_KPlusPt["KplusPP"]->fill(partPt, pt_weight);
+            if (getDeltaPt(*hPP_Yields["KplusPP"], partPt, deltaPt))
+            {
+              pt_weight /= deltaPt;
+              hPP_Yields["KplusPP"]->fill(partPt, pt_weight);
+            }
           }
           if (p.pid() == -321) {
-            hPP_KMinusPt["KminusPP"]->fill(partPt, pt_weight);
+            if (getDeltaPt(*hPP_Yields["KminusPP"], partPt, deltaPt))
+            {
+              pt_weight /= deltaPt;
+              hPP_Yields["KminusPP"]->fill(partPt, pt_weight);
+            }
           }
           if (p.pid() == 2212) {
-            if (!(p.hasAncestor(3122) ||                          //Lambda
+            if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
                   p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
                   p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
                   p.hasAncestor(3334) )) {                        //Omega-
-                    hPP_PPt["PPP"]->fill(partPt, pt_weight);
+                    if (getDeltaPt(*hPP_Yields["PPP"], partPt, deltaPt))
+                    {
+                      pt_weight /= deltaPt;
+                      hPP_Yields["PPP"]->fill(partPt, pt_weight);
+                    }
                   }
           }
           if (p.pid() == -2212) {
-            if (!(p.hasAncestor(3122) ||                          //Lambda
+            if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
                   p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
                   p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
                   p.hasAncestor(3334) )) {                        //Omega-
-                    hPP_P_BarPt["P_barPP"]->fill(partPt, pt_weight);
+                    if (getDeltaPt(*hPP_Yields["P_barPP"], partPt, deltaPt))
+                    {
+                      pt_weight /= deltaPt;
+                      hPP_Yields["P_barPP"]->fill(partPt, pt_weight);
+                    }
                   }
           }
         }
-
-
       }
 
       if (collSys == dAu200) {
@@ -207,37 +236,62 @@ namespace Rivet {
         if (cent < 0. || cent > 88.5) vetoEvent;
 
         if (cent > 0. && cent < 20.) {
-          //sow["sow_dAU20"]->fill();
+          sow["sow_dAU20"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
+            double deltaPt = 0.;
 
             if (p.pid() == 211) {
-              hdAu_PiPlusPt["PiplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiplusC20"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiplusC20"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -211) {
-              hdAu_PiMinusPt["PiminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiminusC20"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiminusC20"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 321) {
-              hdAu_KPlusPt["KplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KplusC20"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KplusC20"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -321) {
-              hdAu_KMinusPt["KminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KminusC20"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KminusC20"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) ||                          //Lambda
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
                     p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
                     p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
                     p.hasAncestor(3334) )) {                        //Omega-
-                      hdAu_PPt["PC20"]->fill(partPt, pt_weight);
+                      if (getDeltaPt(*hdAu_Yields["PC20"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["PC20"]->fill(partPt, pt_weight);
+                      }
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) ||                          //Lambda
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
                     p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
                     p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
                     p.hasAncestor(3334) )) {                        //Omega-
-                      hdAu_P_BarPt["P_barC20"]->fill(partPt, pt_weight);
+                      if (getDeltaPt(*hdAu_Yields["P_barC20"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["P_barC20"]->fill(partPt, pt_weight);
+                      }
                     }
             }
           }
@@ -245,28 +299,63 @@ namespace Rivet {
         }
 
         if (cent > 20. && cent < 40.) {
-          //sow["sow_dAU40"]->fill();
+          sow["sow_dAU40"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
+            double deltaPt = 0.;
 
             if (p.pid() == 211) {
-              hdAu_PiPlusPt["PiplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiplusC40"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiplusC40"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -211) {
-              hdAu_PiMinusPt["PiminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiminusC40"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiminusC40"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 321) {
-              hdAu_KPlusPt["KplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KplusC40"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KplusC40"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -321) {
-              hdAu_KMinusPt["KminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KminusC40"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KminusC40"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 2212) {
-              hdAu_PPt["PC20"]->fill(partPt, pt_weight);
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
+                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
+                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
+                    p.hasAncestor(3334) )) {                        //Omega-
+                      if (getDeltaPt(*hdAu_Yields["PC40"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["PC40"]->fill(partPt, pt_weight);
+                      }
+              }
             }
             if (p.pid() == -2212) {
-              hdAu_P_BarPt["P_barC20"]->fill(partPt, pt_weight);
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
+                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
+                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
+                    p.hasAncestor(3334) )) {                        //Omega-
+                      if (getDeltaPt(*hdAu_Yields["P_barC40"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["P_barC40"]->fill(partPt, pt_weight);
+                      }
+              }
             }
           }
 
@@ -274,179 +363,288 @@ namespace Rivet {
         }
 
         if (cent > 40. && cent < 60.) {
-          //sow["sow_dAU60"]->fill();
+          sow["sow_dAU60"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
+            double deltaPt = 0.;
 
             if (p.pid() == 211) {
-              hdAu_PiPlusPt["PiplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiplusC60"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiplusC60"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -211) {
-              hdAu_PiMinusPt["PiminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiminusC60"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiminusC60"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 321) {
-              hdAu_KPlusPt["KplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KplusC60"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KplusC60"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -321) {
-              hdAu_KMinusPt["KminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KminusC60"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KminusC60"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 2212) {
-              hdAu_PPt["PC20"]->fill(partPt, pt_weight);
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
+                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
+                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
+                    p.hasAncestor(3334) )) {                        //Omega-
+                      if (getDeltaPt(*hdAu_Yields["PC60"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["PC60"]->fill(partPt, pt_weight);
+                      }
+              }
             }
             if (p.pid() == -2212) {
-              hdAu_P_BarPt["P_barC20"]->fill(partPt, pt_weight);
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
+                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
+                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
+                    p.hasAncestor(3334) )) {                        //Omega-
+                      if (getDeltaPt(*hdAu_Yields["P_barC60"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["P_barC60"]->fill(partPt, pt_weight);
+                      }
+              }
             }
           }
 
         }
 
         if (cent > 60. && cent < 88.5) {
-          //sow["sow_dAU88"]->fill();
+          sow["sow_dAU88"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
+            double deltaPt = 0.;
 
             if (p.pid() == 211) {
-              hdAu_PiPlusPt["PiplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiplusC88"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiplusC88"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -211) {
-              hdAu_PiMinusPt["PiminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["PiminusC88"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["PiminusC88"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 321) {
-              hdAu_KPlusPt["KplusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KplusC88"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KplusC88"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == -321) {
-              hdAu_KMinusPt["KminusC20"]->fill(partPt, pt_weight);
+              if (getDeltaPt(*hdAu_Yields["KminusC88"], partPt, deltaPt))
+              {
+                pt_weight /= deltaPt;
+                hdAu_Yields["KminusC88"]->fill(partPt, pt_weight);
+              }
             }
             if (p.pid() == 2212) {
-              hdAu_PPt["PC20"]->fill(partPt, pt_weight);
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
+                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
+                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
+                    p.hasAncestor(3334) )) {                        //Omega-
+                      if (getDeltaPt(*hdAu_Yields["PC88"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["PC88"]->fill(partPt, pt_weight);
+                      }
+              }
             }
             if (p.pid() == -2212) {
-              hdAu_P_BarPt["P_barC20"]->fill(partPt, pt_weight);
+              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
+                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
+                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
+                    p.hasAncestor(3334) )) {                        //Omega-
+                      if (getDeltaPt(*hdAu_Yields["P_barC88"], partPt, deltaPt))
+                      {
+                        pt_weight /= deltaPt;
+                        hdAu_Yields["P_barC88"]->fill(partPt, pt_weight);
+                      }
+              }
             }
           }
 
         }
 
-
-
-
-        /**
-        for(const Particle& p : chargedP)
-        {
-        if(p.pid() == 211)
-        {
-            double partPt = p.pT()/GeV;
-                        double pt_weight = 1./(partPt*2.*M_PI);
-            hPionPlusPt->fill(partPt, pt_weight);
-        }
-
-        }
-        **/
       }
     }
 
-
     /// Normalise histograms etc., after the run
     void finalize() {
+//
+      bool dAu200_available = false;
+      bool pp_available = false;
+
+      for (auto element : hdAu_Yields)
+      {
+        string name = element.second->name();
+        if (name.find("pp") != std::string::npos)
+        {
+          if (element.second->numEntries() > 0) pp_available = true;
+          else
+          {
+            pp_available = false;
+            break;
+          }
+        }
+        else if (name.find("C") != std::string::npos)
+        {
+          if (element.second->numEntries() > 0) dAu200_available = true;
+          else
+          {
+            dAu200_available = false;
+            break;
+          }
+        }
+      }
+
+      for (auto element : hPP_Yields)
+      {
+        string name = element.second->name();
+        if (name.find("pp") != std::string::npos)
+        {
+          if (element.second->numEntries() > 0) pp_available = true;
+          else
+          {
+            pp_available = false;
+            break;
+          }
+        }
+        else if (name.find("C") != std::string::npos)
+        {
+          if (element.second->numEntries() > 0) dAu200_available = true;
+          else
+          {
+            dAu200_available = false;
+            break;
+          }
+        }
+      }
+
+      //if (!(dAu200_available && pp_available)) return;
+//
 
       //****Scale Histos****
-/**
-      hdAu_PiPlusPt["PiplusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hdAu_PiMinusPt["PiminusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hdAu_KPlusPt["KplusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hdAu_KMinusPt["KminusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hdAu_PPt["PC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hdAu_P_BarPt["P_barC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
 
-      hdAu_PiPlusPt["PiplusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hdAu_PiMinusPt["PiminusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hdAu_KPlusPt["KplusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hdAu_KMinusPt["KminusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hdAu_PPt["PC40"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hdAu_P_BarPt["P_barC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
+      hdAu_Yields["PiplusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hdAu_Yields["PiminusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hdAu_Yields["KplusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hdAu_Yields["KminusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hdAu_Yields["PC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hdAu_Yields["P_barC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
 
-      hdAu_PiPlusPt["PiplusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hdAu_PiMinusPt["PiminusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hdAu_KPlusPt["KplusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hdAu_KMinusPt["KminusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hdAu_PPt["PC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hdAu_P_BarPt["P_barC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hdAu_Yields["PiplusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
+      hdAu_Yields["PiminusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
+      hdAu_Yields["KplusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
+      hdAu_Yields["KminusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
+      hdAu_Yields["PC40"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hdAu_Yields["P_barC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
 
-      hdAu_PiPlusPt["PiplusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hdAu_PiMinusPt["PiminusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hdAu_KPlusPt["KplusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hdAu_KMinusPt["KminusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hdAu_PPt["PC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hdAu_P_BarPt["P_barC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hdAu_Yields["PiplusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hdAu_Yields["PiminusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hdAu_Yields["KplusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hdAu_Yields["KminusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hdAu_Yields["PC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hdAu_Yields["P_barC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
 
-      hPP_PiPlusPt["PiplusPP"]->scaleW(1./sow["sow_PP"]->sumW());
-      hPP_PiMinusPt["PiminusPP"]->scaleW(1./sow["sow_PP"]->sumW());
-      hPP_KPlusPt["KplusPP"]->scaleW(1./sow["sow_PP"]->sumW());
-      hPP_KMinusPt["KminusPP"]->scaleW(1./sow["sow_PP"]->sumW());
-      hPP_PPt["PPP"]->scaleW(1./sow["sow_PP"]->sumW());
-      hPP_P_BarPt["P_barPP"]->scaleW(1./sow["sow_PP"]->sumW());
+      hdAu_Yields["PiplusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hdAu_Yields["PiminusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hdAu_Yields["KplusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hdAu_Yields["KminusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hdAu_Yields["PC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hdAu_Yields["P_barC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
 
-**/
+      hPP_Yields["PiplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["KplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["KminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["PPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["P_barPP"]->scaleW(1./sow["sow_pp"]->sumW());
 
+
+/*
       const double s = 1./sow->sumW();
-      hdAu_PiPlusPt["PiplusC20"]->scaleW(s);
-      hdAu_PiMinusPt["PiminusC20"]->scaleW(s);
-      hdAu_KPlusPt["KplusC20"]->scaleW(s);
-      hdAu_KMinusPt["KminusC20"]->scaleW(s);
-      hdAu_PPt["PC20"]->scaleW(s);
-      hdAu_P_BarPt["P_barC20"]->scaleW(s);
+      hdAu_Yields["PiplusC20"]->scaleW(s);
+      hdAu_Yields["PiminusC20"]->scaleW(s);
+      hdAu_Yields["KplusC20"]->scaleW(s);
+      hdAu_Yields["KminusC20"]->scaleW(s);
+      hdAu_Yields["PC20"]->scaleW(s);
+      hdAu_Yields["P_barC20"]->scaleW(s);
 
-      hdAu_PiPlusPt["PiplusC40"]->scaleW(s);
-      hdAu_PiMinusPt["PiminusC40"]->scaleW(s);
-      hdAu_KPlusPt["KplusC40"]->scaleW(s);
-      hdAu_KMinusPt["KminusC40"]->scaleW(s);
-      hdAu_PPt["PC40"]->scaleW(s);
-      hdAu_P_BarPt["P_barC40"]->scaleW(s);
+      hdAu_Yields["PiplusC40"]->scaleW(s);
+      hdAu_Yields["PiminusC40"]->scaleW(s);
+      hdAu_Yields["KplusC40"]->scaleW(s);
+      hdAu_Yields["KminusC40"]->scaleW(s);
+      hdAu_Yields["PC40"]->scaleW(s);
+      hdAu_Yields["P_barC40"]->scaleW(s);
 
-      hdAu_PiPlusPt["PiplusC60"]->scaleW(s);
-      hdAu_PiMinusPt["PiminusC60"]->scaleW(s);
-      hdAu_KPlusPt["KplusC60"]->scaleW(s);
-      hdAu_KMinusPt["KminusC60"]->scaleW(s);
-      hdAu_PPt["PC60"]->scaleW(s);
-      hdAu_P_BarPt["P_barC60"]->scaleW(s);
+      hdAu_Yields["PiplusC60"]->scaleW(s);
+      hdAu_Yields["PiminusC60"]->scaleW(s);
+      hdAu_Yields["KplusC60"]->scaleW(s);
+      hdAu_Yields["KminusC60"]->scaleW(s);
+      hdAu_Yields["PC60"]->scaleW(s);
+      hdAu_Yields["P_barC60"]->scaleW(s);
 
-      hdAu_PiPlusPt["PiplusC88"]->scaleW(s);
-      hdAu_PiMinusPt["PiminusC88"]->scaleW(s);
-      hdAu_KPlusPt["KplusC88"]->scaleW(s);
-      hdAu_KMinusPt["KminusC88"]->scaleW(s);
-      hdAu_PPt["PC88"]->scaleW(s);
-      hdAu_P_BarPt["P_barC88"]->scaleW(s);
+      hdAu_Yields["PiplusC88"]->scaleW(s);
+      hdAu_Yields["PiminusC88"]->scaleW(s);
+      hdAu_Yields["KplusC88"]->scaleW(s);
+      hdAu_Yields["KminusC88"]->scaleW(s);
+      hdAu_Yields["PC88"]->scaleW(s);
+      hdAu_Yields["P_barC88"]->scaleW(s);
 
-      hPP_PiPlusPt["PiplusPP"]->scaleW(s);
-      hPP_PiMinusPt["PiminusPP"]->scaleW(s);
-      hPP_KPlusPt["KplusPP"]->scaleW(s);
-      hPP_KMinusPt["KminusPP"]->scaleW(s);
-      hPP_PPt["PPP"]->scaleW(s);
-      hPP_P_BarPt["P_barPP"]->scaleW(s);
+      hPP_Yields["PiplusPP"]->scaleW(s);
+      hPP_Yields["PiminusPP"]->scaleW(s);
+      hPP_Yields["KplusPP"]->scaleW(s);
+      hPP_Yields["KminusPP"]->scaleW(s);
+      hPP_Yields["PPP"]->scaleW(s);
+      hPP_Yields["P_barPP"]->scaleW(s);
 
-      //hPionPlusPt->scaleW(1./sow->sumW());
-      //hPionMinusPt->scaleW(1./sow->sumW());
+*/
     }
 
     ///@}
 
-    map<string, Histo1DPtr> hdAu_PiPlusPt;
-    map<string, Histo1DPtr> hdAu_PiMinusPt;
-    map<string, Histo1DPtr> hdAu_KPlusPt;
-    map<string, Histo1DPtr> hdAu_KMinusPt;
-    map<string, Histo1DPtr> hdAu_PPt;
-    map<string, Histo1DPtr> hdAu_P_BarPt;
+    map<string, Histo1DPtr> hdAu_Yields;
+    map<string, Histo1DPtr> hPP_Yields;
 
-    map<string, Histo1DPtr> hPP_PiPlusPt;
-    map<string, Histo1DPtr> hPP_PiMinusPt;
-    map<string, Histo1DPtr> hPP_KPlusPt;
-    map<string, Histo1DPtr> hPP_KMinusPt;
-    map<string, Histo1DPtr> hPP_PPt;
-    map<string, Histo1DPtr> hPP_P_BarPt;
+/*  map<string, Histo1DPtr> hdAu_Yields;
+    map<string, Histo1DPtr> hdAu_Yields;
+    map<string, Histo1DPtr> hdAu_Yields;
+    map<string, Histo1DPtr> hdAu_Yields;
+    map<string, Histo1DPtr> hdAu_Yields;
+    map<string, Histo1DPtr> hdAu_Yields;
 
-    //map<string, CounterPtr> sow;
+    map<string, Histo1DPtr> hPP_Yields;
+    map<string, Histo1DPtr> hPP_Yields;
+    map<string, Histo1DPtr> hPP_Yields;
+    map<string, Histo1DPtr> hPP_Yields;
+    map<string, Histo1DPtr> hPP_Yields;
+    map<string, Histo1DPtr> hPP_Yields;
+*/
+
+    map<string, CounterPtr> sow;
     string beamOpt;
     enum CollisionSystem { pp, dAu200 };
     CollisionSystem collSys;
@@ -455,7 +653,7 @@ namespace Rivet {
     ///@{
     //Histo1DPtr hPionPlusPt;
     //Histo1DPtr hPionMinusPt;
-    CounterPtr sow;
+    //CounterPtr sow;
     ///@}
 
 
