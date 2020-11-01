@@ -768,6 +768,16 @@ for(ptt = 0; ptt<numTrigPtBins - 1; ptt++){
     }
   }*/
 
+for(Correlator& corr : Correlators18)
+  {
+        string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+        book(_h[name], name, 34, -M_PI/2, 3*M_PI/2);
+        //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+        //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
+        book(sow[name],"sow" + name);
+        nTriggers[name] = 0;
+  }
+
  for(ptt = 0; ptt<numTrigPtBins; ptt++){
       //AuAu
       string name = "Figure18_AuAu_35_1_" + to_string(ptt+1);
@@ -776,15 +786,7 @@ for(ptt = 0; ptt<numTrigPtBins - 1; ptt++){
       string nameNS = "Figure18_pp_34_1_" + to_string(ptt+1);
       book(_h[nameNS],34, 1, ptt+1);
   }
-for(Correlator& corr : Correlators18)
-  {
-        string name = "Fig_18_" + to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
-        book(_h[name], name, 34, -M_PI/2, 3*M_PI/2);
-        //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
-        //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
-  }
+
 
  
 //*****************************************************************************
@@ -1329,7 +1331,7 @@ for(Correlator& corr : Correlators4)
       {
 
           if(!corr.CheckCentrality(c)) continue;
-			string name = "Fig_18_" + to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+			string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
 			sow[name]->fill();
           /*if(corr.GetSubSubIndex() == 0){
               //string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1397,7 +1399,7 @@ for(Correlator& corr : Correlators4)
              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
              if(!corr.CheckCentrality(c)) continue;
 
-             string name = "Fig_18_" + to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+             string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
              nTriggers[name]++;
              /*if(corr.GetSubSubIndex() == 0){
                string name = "Fig18CorrFunc_AuAu_35_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1557,7 +1559,7 @@ for(Correlator& corr : Correlators4)
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 					
-				string name = "Fig_18_" + to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+				string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
 				_h[name]->fill(DeltaPhi);
                   /*if(corr.GetSubSubIndex() == 0){
                      string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1730,27 +1732,27 @@ for(Correlator& corr : Correlators4)
       for(Correlator& corr : Correlators18)
       {
       		if(corr.GetSubSubIndex() == 0){
-            string name = "Fig_18_" + to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+            string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
-            string nameFig12 = "Figure18_AuAu_35_1_" + to_string(corr.GetSubIndex()+1);
+            string nameFig18 = "Figure18_AuAu_35_1_" + to_string(corr.GetSubIndex()+1);
             //string nameFig12 = "Figure18_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
-            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
             
           }
           else if(corr.GetSubSubIndex() == 1){
-            string name = "Fig_18_" + to_string(35 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
+            string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
-            string nameFig12 = "Figure18_pp_34_1_" + to_string(corr.GetSubIndex()+1);
+            string nameFig18 = "Figure18_pp_34_1_" + to_string(corr.GetSubIndex()+1);
             //string nameFig12 = "Figure18_pp_25_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
-            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
 
           }
 
