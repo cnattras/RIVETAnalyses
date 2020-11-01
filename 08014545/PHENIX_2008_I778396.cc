@@ -730,7 +730,7 @@ for(Correlator& corr : Correlators23)
 //*****************************************************************************
 // The following will book the histograms for Figure 18 
 
-for(ptt = 0; ptt<numTrigPtBins - 1; ptt++){
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
    for(pta = 0; pta < numpTAssocBins12; pta++){
       Correlator c1(pta,ptt,1);
       c1.SetCollSystemAndEnergy("pp200GeV");
