@@ -440,6 +440,47 @@ class Correlator {
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+      for (int ptt = 1; ptt < numTrigPtBins - 1; ptt++)
+      {
+        for (int cb = 0; cb < numCentBins - 1; cb++)
+        {
+            Correlator c8 (ptt,cb);
+            c8.SetCollSystemAndEnergy("AuAu200GeV");
+            c8.SetCentrality(CentBins[cb], CentBins[cb+1]);
+            c8.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+            c8.SetNoPTassociated();
+            Correlators8.push_back(c8);
+        }
+      }
+
+      for (Correlator corr : Correlators8)
+      {
+      	string name_AuAu = "AuAu_d24x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_AuAu], 24, 1, 1);
+      	book(_h[name_AuAu], 24, 1, 2);
+
+      	string name_AuAu2 = "AuAu2_d25x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_AuAu2], 25, 1, 1);
+
+      	string name_AuAu3 = "AuAu3_d26x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_AuAu3], 26, 1, 1);
+      	book(_h[name_AuAu3], 26, 1, 2);
+
+		string name_AuAu4 = "AuAu4_d27x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_AuAu4], 27,1, 1);
+
+      	string name_AuAu5 = "AuAu5_d28x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_AuAu5], 28,1, 1);
+      	book(_h[name_AuAu5], 28,1, 2);
+
+      	string name_AuAu6 = "AuAu5_d29x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_AuAu6], 29,1, 1);
+
+      	string name_dAuAu = "dAuAu_d30x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      	book(_h[name_dAuAu], 30,1, 1);
+
+      }
+
   	} //ends the init
 
 
@@ -534,6 +575,7 @@ class Correlator {
     vector<Correlator> Correlators;
     vector<Correlator> Correlators3;
     vector<Correlator> Correlators7;
+    vector<Correlator> Correlators8;
     
     std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
     std::initializer_list<int> pdgPhoton = {22};  // Pion 0
