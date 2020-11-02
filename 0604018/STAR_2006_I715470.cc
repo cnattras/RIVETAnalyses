@@ -448,8 +448,10 @@ double highedge = 3.0*pi/2.0;
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 //AJ add a spot where you fill histograms
                 //See Nora's code in 08014545 around line 1168
+                
+                string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
+                
 
-              string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
                   //if(corr.GetSubSubIndex()==-1){
                    //string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(dPhi);
@@ -464,6 +466,47 @@ double highedge = 3.0*pi/2.0;
 
     }
     void finalize() {
+        
+        bool AuAu200_available = false;
+        bool dAu_available = false;
+
+        for (auto element : _h)
+        {
+            string name = element.second->name();
+            if (name.find("AuAu") != std::string::npos)
+            {
+            if (element.second->numEntries()>0) AuAu200_available=true;
+            else
+            {
+                AuAu200_available=false;
+                break;
+            }
+
+        }
+        else if (name.find("dAu") != std::string::npos)
+        {
+          if (element.second->numEntries()>0) dAu_available=true;
+          else
+          {
+            dAu_available=false;
+            break;
+          }
+          
+        }
+      }
+      
+      //if((!AuAu200_available) || (!dAu_available)) return;
+        
+        
+        
+        for(Correlator& corr : Correlators)
+        {
+            
+            string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
+            if(nTriggers[corr.GetFullIndex()] > 0) _h[name]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
+        }
+        
+        
     }
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> sow;
