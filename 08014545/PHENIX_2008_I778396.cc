@@ -770,7 +770,8 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 
 for(Correlator& corr : Correlators18)
   {
-        string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+        string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+        cerr << name << endl;
         book(_h[name], name, 34, -M_PI/2, 3*M_PI/2);
         //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
         //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
@@ -851,7 +852,7 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c1.SetNoAssoc();
       //c1.SetPID(pdgPi0);
-      Correlators18.push_back(c1);
+      Correlators16.push_back(c1);
 
       Correlator c2(1,ptt,0);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
@@ -1331,7 +1332,8 @@ for(Correlator& corr : Correlators4)
       {
 
           if(!corr.CheckCentrality(c)) continue;
-			string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+          string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+			//string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
 			sow[name]->fill();
           /*if(corr.GetSubSubIndex() == 0){
               //string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1399,7 +1401,7 @@ for(Correlator& corr : Correlators4)
              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
              if(!corr.CheckCentrality(c)) continue;
 
-             string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+             string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
              nTriggers[name]++;
              /*if(corr.GetSubSubIndex() == 0){
                string name = "Fig18CorrFunc_AuAu_35_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1559,7 +1561,7 @@ for(Correlator& corr : Correlators4)
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 					
-				string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+				string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
 				_h[name]->fill(DeltaPhi);
                   /*if(corr.GetSubSubIndex() == 0){
                      string name = "Fig18CorrFunc_AuAu_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1732,7 +1734,7 @@ for(Correlator& corr : Correlators4)
       for(Correlator& corr : Correlators18)
       {
       		if(corr.GetSubSubIndex() == 0){
-            string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
             _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
@@ -1744,7 +1746,7 @@ for(Correlator& corr : Correlators4)
             
           }
           else if(corr.GetSubSubIndex() == 1){
-            string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
             _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
