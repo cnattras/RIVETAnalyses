@@ -771,7 +771,6 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
 for(Correlator& corr : Correlators18)
   {
         string name = "Fig18CorrFunc_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
-        cerr << name << endl;
         book(_h[name], name, 34, -M_PI/2, 3*M_PI/2);
         //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
         //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
@@ -1741,7 +1740,7 @@ for(Correlator& corr : Correlators4)
             string nameFig18 = "Figure18_AuAu_35_1_" + to_string(corr.GetSubIndex()+1);
             //string nameFig12 = "Figure18_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
-            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            double yield = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
             _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
             
           }
@@ -1753,7 +1752,7 @@ for(Correlator& corr : Correlators4)
             string nameFig18 = "Figure18_pp_34_1_" + to_string(corr.GetSubIndex()+1);
             //string nameFig12 = "Figure18_pp_25_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
-            double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            double yield = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
             _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
 
           }
