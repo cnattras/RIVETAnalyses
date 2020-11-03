@@ -1704,7 +1704,10 @@ for(Correlator& corr : Correlators4)
             _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
             
             string nameFig12SH = "Figure12_AuAu_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
-            yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            yield = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
+            double fraction2 = 0.;
+            yield += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
+            fraction += fraction2;
             _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
             
           }
@@ -1719,7 +1722,10 @@ for(Correlator& corr : Correlators4)
             _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
             
             string nameFig12SH = "Figure12_pp_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
-            yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            yield = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
+            double fraction2 = 0.;
+            yield += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
+            fraction += fraction2;
             _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
           }
               
