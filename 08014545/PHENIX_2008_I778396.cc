@@ -182,13 +182,14 @@ namespace Rivet {
             }
         }
                 
-        histo->reset();
+        hist.reset();
         
-        for(unsigned int i = 0; i < hist.numBins(); i++)
+        for(auto &bin : hist.bins())
         {
-            double effEntries = (hist.bin(i).numEntries()*minValueEntries)/(hist.bin(i).numEntries()+minValueEntries);
-            if(minValue > 0.) histo->fillBin(i, (hist.bin(i).sumW()-((minValue*hist.bin(i).width())/binWidth))/effEntries, effEntries);
+            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
         }
+        
+        *histo = YODA::subtract(*histo, hist);
         
         return histo;
                 
@@ -209,10 +210,23 @@ namespace Rivet {
         
         for(auto &bin : hist.bins())
         {
-            if((xmin <= bin.xMax()) && (xmax >= bin.xMin()))
+            if((bin.xMin() > xmin) && (bin.xMax() < xmax))
             {
                 integral += bin.sumW()/bin.width();
                 fraction += bin.numEntries()/bin.width();
+            }
+            else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
+            {
+                double perc = (bin.xMax() - xmin)/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
+                
+            }
+            else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
+            {
+                double perc = (xmax - bin.xMin())/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
             }
         }
         
