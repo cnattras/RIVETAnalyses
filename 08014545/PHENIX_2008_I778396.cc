@@ -30,6 +30,9 @@ static const int numCentBins12 = 4;
 static const float CentBins12[] = {0.0,20.0,40.0,60.0,92.0};
 static const int numpTAssocBins12 = 8;
 static const float pTAssocBins12[] = {0.345,0.915,1.415,1.915,2.415,3.055,4.095,5.285,5.88};
+//For figure 25 
+static const int numCentBins25 = 9;
+static const float CentBins25[] = {0.0,5.0,10.0,20.0,30.0,40.04,50.0,60.0,70.0,92.0};
 
 using namespace std;
 
@@ -233,6 +236,48 @@ namespace Rivet {
         return integral;
         
     }
+
+    /*
+    double getTruncatedMean(Histo1DPtr histo, double xmin, double xmax, double &fraction)
+    {
+        //This will include bins partially covered by the user range
+        
+        YODA::Histo1D hist = *histo;
+        
+        double integral = 0.;
+        
+        if(xmax < xmin) throw RangeError("Error: xmin > xmax");
+        if(xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
+        if(xmax > hist.bin(hist.numBins()-1).xMax()) throw RangeError("xmax is out of range");
+        
+        for(auto &bin : hist.bins())
+        {
+            if((bin.xMin() > xmin) && (bin.xMax() < xmax))
+            {
+                integral += bin.sumW()/bin.width();
+                fraction += bin.numEntries()/bin.width();
+            }
+            else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
+            {
+                double perc = (bin.xMax() - xmin)/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
+                
+            }
+            else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
+            {
+                double perc = (xmax - bin.xMin())/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
+            }
+        }
+        
+        return integral;
+        
+    }
+    */
+
+
 
     bool isSameParticle(const Particle& p1, const Particle& p2)
       {
@@ -563,16 +608,17 @@ for(Correlator& corr : Correlators26)
  
 //*****************************************************************************
 // The following will book the histograms for Figure 25 
-for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
-      Correlator c1(pta,ptt,0);
+for(ptt = 0; ptt<numTrigPtBins; ptt++){
+	for(cb = 0; cb < numCentBins25; cb++){
+      Correlator c1(cb,ptt,0);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetNoCentrality();
+      c1.SetCentrality(CentBins25[cb],CentBins25[cb + 1]);
       c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c1.SetAssociatedRange(1,5);
       //c1.SetPID(pdgPi0);
       Correlators25.push_back(c1);
-
-      Correlator c2(pta,ptt,1);
+      /*
+      Correlator c2(cb,ptt,1);
       c2.SetCollSystemAndEnergy("AuAu200GeV");
       c2.SetNoCentrality();
       c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
@@ -580,13 +626,15 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
       //c1.SetPID(pdgPi0);
       Correlators25.push_back(c2);
 
-      Correlator c3(pta,ptt,2);
+      Correlator c3(cb,ptt,2);
       c3.SetCollSystemAndEnergy("AuAu200GeV");
       c3.SetNoCentrality();
       c3.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
       c3.SetAssociatedRange(1,5);
       //c1.SetPID(pdgPi0);
       Correlators25.push_back(c3);
+      */
+  }
 }
 
 /*for(Correlator& corr : Correlators25) 
@@ -600,18 +648,27 @@ for(ptt = 0; ptt<numTrigPtBins-1; ptt++){
 
   for(Correlator& corr : Correlators25)
   {
-        string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+        //string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+        string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
         book(_h[name], name, 42 - corr.GetSubSubIndex(), -M_PI/2, 3*M_PI/2);
         //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
         //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
+        cerr << name << endl;
   }
 
- for(ptt = 0; ptt<numTrigPtBins - 1; ptt++){
-      //AuAu
-      string name = "Figure25_AuAu_35_1_" + to_string(ptt+1);
-      book(_h[name],35, 1, ptt+1);
+ for(ptt = 0; ptt<numTrigPtBins; ptt++){
+      // Head 
+      string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1);
+      book(_h[name1],40, 1, ptt+1);
+      // Shoulder 
+      string name2 = "Figure25_AuAu_41_1_" + to_string(ptt+1);
+      book(_h[name2],41, 1, ptt+1);
+      // Near side 
+      string name3 = "Figure25_AuAu_42_1_" + to_string(ptt+1);
+      book(_h[name3],42, 1, ptt+1);
+
   }
 
  
@@ -1381,12 +1438,13 @@ for(Correlator& corr : Correlators4)
 
       //*****************************************************************************
       // The following will fill the sow for Figure 25 
+      
       for(Correlator& corr : Correlators25)
       {
           if(!corr.CheckCentrality(c)) continue;
 
 
-              string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+              string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
               sow[name]->fill();
 
       }
@@ -1465,7 +1523,7 @@ for(Correlator& corr : Correlators4)
              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
              if(!corr.CheckCentrality(c)) continue;
 
-             string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+             string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
              nTriggers[name]++;
 
           } //FIXME 
@@ -1648,12 +1706,12 @@ for(Correlator& corr : Correlators4)
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 					
-				string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+				string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
 				_h[name]->fill(DeltaPhi);
 
 
           }  //FIXME 
-
+			
 
               //*****************************************************************************
               // The following will fill the histograms for Figure 23
@@ -1876,21 +1934,30 @@ for(Correlator& corr : Correlators4)
       } //FIXME 
 	  //*****************************************************************************
       // Background subtraction for Figure 25 
-      /*
+      
       for(Correlator& corr : Correlators25)
       {
+			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+			//string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1); // + 41, 42 
 
-            string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex());
+            string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
             _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
-            string nameFig18 = "Figure25_AuAu_"+ to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
-            //string nameFig12 = "Figure18_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
+            string name1 = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
-            double yield = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
-            _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            double yield1 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Head 
+            _h[name1]->bin(corr.GetIndex()).fillBin(yield1/fraction, fraction);
+
+            string name2 = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
+            double yield2 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Shoulder 
+            _h[name2]->bin(corr.GetIndex()).fillBin(yield2/fraction, fraction);
+
+            string name3 = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
+            double yield3 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
+            _h[name3]->bin(corr.GetIndex()).fillBin(yield3/fraction, fraction);
             
-       } */
+       } 
 
       //*****************************************************************************
       // Background subtraction for Figure 6
