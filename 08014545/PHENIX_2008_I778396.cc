@@ -288,6 +288,7 @@ namespace Rivet {
    
         return true;
       }
+
    
       bool isSecondary(Particle p)
       {
@@ -655,7 +656,7 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
         //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
-        cerr << name << endl;
+        //cerr << name << endl;
   }
 
  for(ptt = 0; ptt<numTrigPtBins; ptt++){
@@ -1763,6 +1764,36 @@ for(Correlator& corr : Correlators4)
 
 
               }
+
+               for(Correlator& corr : Correlators25)
+     		 {
+			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+			//string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1); // + 41, 42 
+
+            string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            //cerr << pTAssoc << endl;
+            
+            string name1 = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
+            double fraction = 0.;
+            double yield1 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Head 
+            _h[name1]->bin(corr.GetIndex()).fillBin(yield1/fraction, fraction);
+
+            string name2 = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
+            double yield2 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Shoulder 
+            _h[name2]->bin(corr.GetIndex()).fillBin(yield2/fraction, fraction);
+
+            string name3 = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
+            double yield3 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
+            _h[name3]->bin(corr.GetIndex()).fillBin(yield3/fraction, fraction);
+
+            
+            
+      		 } 
+
+
+
           
 
         }
@@ -1899,6 +1930,7 @@ for(Correlator& corr : Correlators4)
             _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
 
           }
+          
 
           /*if(corr.GetSubSubIndex() == 0){
             string name = "Fig18CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
@@ -1934,7 +1966,7 @@ for(Correlator& corr : Correlators4)
       } //FIXME 
 	  //*****************************************************************************
       // Background subtraction for Figure 25 
-      
+      /*
       for(Correlator& corr : Correlators25)
       {
 			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
@@ -1956,8 +1988,11 @@ for(Correlator& corr : Correlators4)
             string name3 = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
             double yield3 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
             _h[name3]->bin(corr.GetIndex()).fillBin(yield3/fraction, fraction);
+
+
             
        } 
+       */
 
       //*****************************************************************************
       // Background subtraction for Figure 6
