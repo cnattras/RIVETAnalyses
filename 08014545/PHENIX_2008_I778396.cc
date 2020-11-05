@@ -650,15 +650,28 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
   for(Correlator& corr : Correlators25)
   {
         //string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-        string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+        //string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
         //book(_p[name], name, 10, 0.,100.);
-        book(_p[name], name, 1, CentBins25[corr.GetIndex()], CentBins25[corr.GetIndex()+1]);
+        //book(_p[name], name, 1, CentBins25[corr.GetIndex()], CentBins25[corr.GetIndex()+1]);
         //book(_h[name], name, 42 - corr.GetSubSubIndex(), -M_PI/2, 3*M_PI/2);
         //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
         //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
-        //cerr << name << endl;
+        //book(_p[name], name, 10, 0.,100.);
+        string name1 = "Fig25CorrFunc_40_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+        book(_p[name1], name1, 1, CentBins25[corr.GetIndex()], CentBins25[corr.GetIndex()+1]);
+        book(sow[name1],"sow" + name1);
+        nTriggers[name1] = 0;
+        
+        string name2 = "Fig25CorrFunc_41_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+        book(_p[name2], name2, 1, CentBins25[corr.GetIndex()], CentBins25[corr.GetIndex()+1]);
+        book(sow[name2],"sow" + name2);
+        nTriggers[name2] = 0;
+
+        string name3 = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+        book(_p[name3], name3, 1, CentBins25[corr.GetIndex()], CentBins25[corr.GetIndex()+1]);
+        book(sow[name3],"sow" + name3);
+        nTriggers[name3] = 0;
+
   }
 
  for(ptt = 0; ptt<numTrigPtBins; ptt++){
@@ -1447,9 +1460,14 @@ for(Correlator& corr : Correlators4)
           if(!corr.CheckCentrality(c)) continue;
 
 
-              string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-              sow[name]->fill();
+              string name1 = "Fig25CorrFunc_40_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+              sow[name1]->fill();
+				
+              string name2 = "Fig25CorrFunc_41_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+              sow[name2]->fill();
 
+              string name3 = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+              sow[name3]->fill();
       }
 
 
@@ -1526,8 +1544,14 @@ for(Correlator& corr : Correlators4)
              if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
              if(!corr.CheckCentrality(c)) continue;
 
-             string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-             nTriggers[name]++;
+             string name1 = "Fig25CorrFunc_40_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+             nTriggers[name1]++;
+
+             string name2 = "Fig25CorrFunc_41_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+             nTriggers[name2]++;
+
+             string name3 = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+             nTriggers[name3]++;
 
           } //FIXME 
           
@@ -1651,6 +1675,8 @@ for(Correlator& corr : Correlators4)
                   if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
                   
                   if(!corr.CheckCentrality(c)) continue;
+
+
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 
@@ -1708,11 +1734,24 @@ for(Correlator& corr : Correlators4)
                   if(!corr.CheckCentrality(c)) continue;
                   
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
-					
-				string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-				
-				_p[name]->fill(0.5 + corr.GetIndex(), pTAssoc.pT()/GeV);
-				//_h[name]->fill(DeltaPhi);
+
+                  if(DeltaPhi < (M_PI + M_PI/6) && DeltaPhi > (M_PI - M_PI/6)){
+                  	string name1 = "Fig25CorrFunc_40_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+					_p[name1]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+					//_h[name]->fill(DeltaPhi);
+                  }
+
+                  if((DeltaPhi < M_PI-M_PI/6. && DeltaPhi > M_PI/2.) || (DeltaPhi < 3.*M_PI/2. && DeltaPhi > M_PI+M_PI/6.)){
+                  	string name2 = "Fig25CorrFunc_41_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+					_p[name2]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+					//_h[name]->fill(DeltaPhi);
+                  }
+
+                  if(DeltaPhi < M_PI/3 && DeltaPhi > -M_PI/3){
+                  	string name3 = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+					_p[name3]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+					//_h[name]->fill(DeltaPhi);
+                  }
 
 
           }  //FIXME 
@@ -1973,22 +2012,80 @@ for(Correlator& corr : Correlators4)
       double minpTAssoc = 10000000;
       for(Correlator& corr : Correlators25)
       {
-			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-			//string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1); // + 41, 42 
       		
-      		
-            string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-            _p[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            string name1 = "Fig25CorrFunc_40_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+            _p[name1]->scaleW(sow[name1]->numEntries()/(nTriggers[name1]*sow[name1]->sumW()));
             //_p[name] = SubtractBackgroundZYAM(_p[name]);
-
-            if(_p[name]->bin(0).numEntries() > 0){
-            	_p[name]->bin(corr.GetIndex()).mean();
-            	if(_p[name]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            
+            if(_p[name1]->bin(0).numEntries() > 0){
+            	_p[name1]->bin(corr.GetIndex()).mean();
+            	if(_p[name1]->bin(corr.GetIndex()).mean() < minpTAssoc)
             	{
-            		minpTAssoc = _p[name]->bin(corr.GetIndex()).mean();
+            		minpTAssoc = _p[name1]->bin(corr.GetIndex()).mean();
             	}
-            }
-            string namehead = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
+
+            	string namehead = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
+            	int i = corr.GetIndex();
+            	_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+
+
+            	/*for(int i=0; i < 2; i++){
+
+            		string namehead = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
+            		//_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+            		_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+
+            	}*/
+            	
+            } 
+            
+            string name2 = "Fig25CorrFunc_41_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+            _p[name2]->scaleW(sow[name2]->numEntries()/(nTriggers[name2]*sow[name2]->sumW()));
+            //_p[name] = SubtractBackgroundZYAM(_p[name]);
+            
+            if(_p[name2]->bin(0).numEntries() > 0){
+            	_p[name2]->bin(corr.GetIndex()).mean();
+            	if(_p[name2]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	{
+            		minpTAssoc = _p[name2]->bin(corr.GetIndex()).mean();
+            	}
+
+            	string nameshoulder = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
+            	int j = corr.GetIndex();
+            	_h[nameshoulder]->bin(j).fillBin((_p[name2]->bin(j).mean()-minpTAssoc)/_p[name2]->bin(j).numEntries(), _p[name2]->bin(j).numEntries());
+            	/*for(int i=0; i < 10; i++){
+
+            		string nameshoulder = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
+            		_h[nameshoulder]->bin(0).fillBin((_p[name2]->bin(0).mean()-minpTAssoc)/_p[name2]->bin(0).numEntries(), _p[name2]->bin(0).numEntries());
+
+            	}*/
+            	
+            } 
+
+            string name3 = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+            _p[name3]->scaleW(sow[name3]->numEntries()/(nTriggers[name3]*sow[name3]->sumW()));
+            //_p[name] = SubtractBackgroundZYAM(_p[name]);
+            
+            if(_p[name3]->bin(0).numEntries() > 0){
+            	_p[name3]->bin(corr.GetIndex()).mean();
+            	if(_p[name3]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	{
+            		minpTAssoc = _p[name3]->bin(corr.GetIndex()).mean();
+            	}
+            	string namenearside = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
+            	int k = corr.GetIndex();
+            	_h[namenearside]->bin(k).fillBin((_p[name3]->bin(k).mean()-minpTAssoc)/_p[name3]->bin(k).numEntries(), _p[name3]->bin(k).numEntries());
+            	/*
+            	for(int i=0; i < 10; i++){
+
+            		string namenearside = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
+            		_h[namenearside]->bin(0).fillBin((_p[name3]->bin(0).mean()-minpTAssoc)/_p[name3]->bin(0).numEntries(), _p[name3]->bin(0).numEntries());
+
+            	}*/
+            	
+            } 
+             // Here 
+
             //_h[namehead]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
             //_h[namehead]->bin();
 
