@@ -31,8 +31,8 @@ static const float CentBins12[] = {0.0,20.0,40.0,60.0,92.0};
 static const int numpTAssocBins12 = 8;
 static const float pTAssocBins12[] = {0.345,0.915,1.415,1.915,2.415,3.055,4.095,5.285,5.88};
 //For figure 25 
-static const int numCentBins25 = 9;
-static const float CentBins25[] = {0.0,5.0,10.0,20.0,30.0,40.04,50.0,60.0,70.0,92.0};
+static const int numCentBins25 = 10;
+static const float CentBins25[] = {0.0,5.0,10.0,20.0,30.0,40.04,50.0,60.0,70.0,92.0,100};
 
 using namespace std;
 
@@ -651,7 +651,9 @@ for(ptt = 0; ptt<numTrigPtBins; ptt++){
   {
         //string name = "Fig25CorrFunc_" + to_string(42 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
         string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-        book(_h[name], name, 42 - corr.GetSubSubIndex(), -M_PI/2, 3*M_PI/2);
+        //book(_p[name], name, 10, 0.,100.);
+        book(_p[name], name, 1, CentBins25[corr.GetIndex()], CentBins25[corr.GetIndex()+1]);
+        //book(_h[name], name, 42 - corr.GetSubSubIndex(), -M_PI/2, 3*M_PI/2);
         //string name = "Fig12CorrFunc_pp_" + to_string(35 - corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
         //book(_h[name], (35 - corr.GetSubSubIndex()),01,(1 + corr.GetSubIndex()+1));
         book(sow[name],"sow" + name);
@@ -1708,7 +1710,9 @@ for(Correlator& corr : Correlators4)
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
 					
 				string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-				_h[name]->fill(DeltaPhi);
+				
+				_p[name]->fill(0.5 + corr.GetIndex(), pTAssoc.pT()/GeV);
+				//_h[name]->fill(DeltaPhi);
 
 
           }  //FIXME 
@@ -1770,11 +1774,11 @@ for(Correlator& corr : Correlators4)
 			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
 			//string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1); // + 41, 42 
 
-            string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
-            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            /*string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
+            _p[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _p[name] = SubtractBackgroundZYAM(_p[name]);*/
             //cerr << pTAssoc << endl;
-            
+            /*
             string name1 = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield1 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Head 
@@ -1787,7 +1791,7 @@ for(Correlator& corr : Correlators4)
             string name3 = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
             double yield3 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
             _h[name3]->bin(corr.GetIndex()).fillBin(yield3/fraction, fraction);
-
+			*/
             
             
       		 } 
@@ -1966,21 +1970,51 @@ for(Correlator& corr : Correlators4)
       } //FIXME 
 	  //*****************************************************************************
       // Background subtraction for Figure 25 
-      /*
+      double minpTAssoc = 10000000;
       for(Correlator& corr : Correlators25)
       {
 			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
 			//string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1); // + 41, 42 
-
+      		
+      		
             string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
-            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
-            _h[name] = SubtractBackgroundZYAM(_h[name]);
-            
-            string name1 = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
-            double fraction = 0.;
-            double yield1 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Head 
-            _h[name1]->bin(corr.GetIndex()).fillBin(yield1/fraction, fraction);
+            _p[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            //_p[name] = SubtractBackgroundZYAM(_p[name]);
 
+            if(_p[name]->bin(0).numEntries() > 0){
+            	_p[name]->bin(corr.GetIndex()).mean();
+            	if(_p[name]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	{
+            		minpTAssoc = _p[name]->bin(corr.GetIndex()).mean();
+            	}
+            }
+            string namehead = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
+            //_h[namehead]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            //_h[namehead]->bin();
+
+            /*string nameshoulder = "Figure25_AuAu_41_1_" + to_string(ptt+1);
+
+            string namenearside = "Figure25_AuAu_42_1_" + to_string(ptt+1);*/
+
+
+            
+            /*for(int cb = 0; cb < 4; cb++)
+            {
+            	_p[name]->bin(cb).mean();
+            }*/
+            //_h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            //_h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+
+            /*string name1 = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
+            for(int cb = 0; cb < numCentBins25; cb++)
+            {
+            	_p[name1]->bin(cb).mean();
+            }*/
+            /*double fraction = 0.;
+            double yield1 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Head 
+            _h[name1]->bin(corr.GetIndex()).fillBin(yield1/fraction, fraction);*/
+            /*
             string name2 = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
             double yield2 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Shoulder 
             _h[name2]->bin(corr.GetIndex()).fillBin(yield2/fraction, fraction);
@@ -1988,11 +2022,11 @@ for(Correlator& corr : Correlators4)
             string name3 = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
             double yield3 = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
             _h[name3]->bin(corr.GetIndex()).fillBin(yield3/fraction, fraction);
-
+			*/
 
             
        } 
-       */
+       
 
       //*****************************************************************************
       // Background subtraction for Figure 6
@@ -2029,6 +2063,7 @@ for(Correlator& corr : Correlators4)
     }
  	
  	map<string, Histo1DPtr> _h;
+ 	map<string, Profile1DPtr> _p;
     map<string, CounterPtr> sow;
     map<string, Histo1DPtr> _DeltaPhixE;
     map<int, Histo1DPtr> _DeltaPhiSub;
