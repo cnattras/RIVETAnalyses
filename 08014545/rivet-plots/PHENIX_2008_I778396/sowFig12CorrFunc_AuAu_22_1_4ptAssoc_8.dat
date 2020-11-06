@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/sowFig12CorrFunc_AuAu_22_1_4ptAssoc_8
+LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/sowFig12CorrFunc_AuAu_22_1_4ptAssoc_8
+# END PLOT
+
+# BEGIN COUNTER //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/sowFig12CorrFunc_AuAu_22_1_4ptAssoc_8
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/sowFig12CorrFunc_AuAu_22_1_4ptAssoc_8
+Title=Rivet
+# value	 error
+1.542037e+05	1.432149e+04
+# END COUNTER
+

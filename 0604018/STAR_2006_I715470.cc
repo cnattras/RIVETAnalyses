@@ -189,6 +189,23 @@ namespace Rivet {
         Vn /= integral;
         return Vn;
     }
+    
+    double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+    {
+        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                    
+        if(dPhi < -M_PI/2.)
+        {
+            dPhi += 2.*M_PI;
+        }
+        else if(dPhi > 3.*M_PI/2.)
+        {
+            dPhi -= 2*M_PI;
+        }
+                    
+        return dPhi;   
+    }
    
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
@@ -239,6 +256,82 @@ namespace Rivet {
         }
        
     }
+        Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+    {
+        
+        YODA::Histo1D hist = *histo;
+        
+        double minValue = sqrt(-2);
+        double binWidth = 0.;
+        int minValueEntries = 0.;
+        
+        for(auto &bin : hist.bins())
+        {
+            if(std::isnan(minValue))
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+            if(bin.sumW()/bin.width() < minValue/binWidth)
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+        }
+                
+        hist.reset();
+        
+        for(auto &bin : hist.bins())
+        {
+            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+        }
+        
+        *histo = YODA::subtract(*histo, hist);
+        
+        return histo;
+                
+    }
+
+    
+    double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax, double &fraction)
+    {
+        //This will include bins partially covered by the user range
+        
+        YODA::Histo1D hist = *histo;
+        
+        double integral = 0.;
+        
+        if(xmax < xmin) throw RangeError("Error: xmin > xmax");
+        if(xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
+        if(xmax > hist.bin(hist.numBins()-1).xMax()) throw RangeError("xmax is out of range");
+        
+        for(auto &bin : hist.bins())
+        {
+            if((bin.xMin() > xmin) && (bin.xMax() < xmax))
+            {
+                integral += bin.sumW()/bin.width();
+                fraction += bin.numEntries()/bin.width();
+            }
+            else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
+            {
+                double perc = (bin.xMax() - xmin)/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
+                
+            }
+            else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
+            {
+                double perc = (xmax - bin.xMin())/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
+            }
+        }
+        
+        return integral;
+        
+    }
    
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2006_I715470);
@@ -269,7 +362,9 @@ double highedge = 3.0*pi/2.0;
             c1.SetzTRange(0,1);
             Correlators.push_back(c1);
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
+            string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
             book(_h[name], name, ndPhiBins,lowedge,highedge);
+            book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
@@ -281,7 +376,9 @@ double highedge = 3.0*pi/2.0;
               c2.SetzTRange(0,1); 
               Correlators.push_back(c2);
             string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
+            string name4 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex()+"BkgdSubtracted";
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
+            book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
             }
           }
@@ -300,7 +397,9 @@ double highedge = 3.0*pi/2.0;
             c1.SetAssociatedRange(3,15);
             Correlators.push_back(c1);
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
+            string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
             book(_h[name], name, ndPhiBins,lowedge,highedge);
+            book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
@@ -312,7 +411,9 @@ double highedge = 3.0*pi/2.0;
               c2.SetAssociatedRange(3,15);
               Correlators.push_back(c2);
             string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
+            string name4 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex()+"BkgdSubtracted";
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
+            book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
             }
           }//End of the zT loop
@@ -419,7 +520,8 @@ double highedge = 3.0*pi/2.0;
             //if(isSecondary(pAssoc)) continue;
 
             //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
-            double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+            //double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+            double dPhi = GetDeltaPhi(pTrig, pAssoc);
                         
             //double xE = GetXE(pTrig,pAssoc);
             
@@ -430,8 +532,10 @@ double highedge = 3.0*pi/2.0;
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 //AJ add a spot where you fill histograms
                 //See Nora's code in 08014545 around line 1168
+                
+                string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
+                
 
-              string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
                   //if(corr.GetSubSubIndex()==-1){
                    //string name = "58010" + to_string(((corr.GetIndex())*(4)) + 1 + corr.GetSubIndex());
                   _h[name]->fill(dPhi);
@@ -446,6 +550,54 @@ double highedge = 3.0*pi/2.0;
 
     }
     void finalize() {
+        
+        bool AuAu200_available = false;
+        bool dAu_available = false;
+
+        for (auto element : _h)
+        {
+            string name = element.second->name();
+            if (name.find("AuAu") != std::string::npos)
+            {
+            if (element.second->numEntries()>0) AuAu200_available=true;
+            else
+            {
+                AuAu200_available=false;
+                break;
+            }
+
+        }
+        else if (name.find("dAu") != std::string::npos)
+        {
+          if (element.second->numEntries()>0) dAu_available=true;
+          else
+          {
+            dAu_available=false;
+            break;
+          }
+          
+        }
+      }
+      
+      //if((!AuAu200_available) || (!dAu_available)) return;
+        
+        
+        
+        for(Correlator& corr : Correlators)
+        {
+            
+            string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
+            if(nTriggers[corr.GetFullIndex()] > 0) _h[name]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
+            string name2 = corr.GetCollSystemAndEnergy()+corr.GetFullIndex()+"BkgdSubtracted";
+                  _h[name2] = SubtractBackgroundZYAM(_h[name]);
+                  //You will need something like this
+
+  //            double fraction = 0.;
+    //        double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+      //      _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+        }
+        
+        
     }
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> sow;

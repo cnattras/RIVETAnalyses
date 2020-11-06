@@ -1,0 +1,34 @@
+Name: CMS_2020_I064906
+Year: 2020
+Summary: <Strange hadron production in pp and pPb collisions at $\sqrt{s_{NN}}$ = 5.02 TeV>
+Experiment: CMS
+Collider: LHC
+InspireID: 064906
+Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Authors:
+ - Antonio Silva <antonio.silva@cern.ch>, Lauren Kasper <lauren.n.kasper@vanderbilt.edu>, Christine Nattrass <cnattras@utk.edu>
+References:
+ - 'Phys. Rev. C 101, 064906 (2020)'
+ - 'DOI:10.1103/PhysRevC.101.064906'
+ - 'arXiv:1910.04812v2'
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=PP,pPB
+Description:
+  'The transverse momentum $p_{T}$ distributions of Λ, Ξ−, and Ω− baryons, their antiparticles, and ${K_{0}}^{S}$ mesons are measured in proton-proton (pp) and proton-lead (pPb) collisions at a nucleon-nucleon center-of-mass energy of 5.02 TeV over a broad rapidity range. The data, corresponding to integrated luminosities of 40.2 $nb^{−1}$ and 15.6 $μb^{−1}$ for pp and pPb collisions, respectively, were collected by the CMS experiment.  The nuclear modification factor $R_{pPb}$, which is defined as the ratio of the particle yield in pPb collisions and a scaled pp reference, is measured for each particle.  A strong dependence on particle species is observed in the $p_{T}$ range from 2 to 7 GeV, where $R_{pPb}$ for ${K_{0}}^{S}$ is consistent with unity, while an enhancement ordered by strangeness content and/or particle mass is observed for the three baryons. In pPb collisions, the strange hadron production is asymmetric about the nucleon-nucleon center-of-mass rapidity.  Enhancements, which depend on the particle type, are observed in the direction of the Pb beam.  The results are compared with predictions from EPOS LHC, which includes parametrized radial flow.  The model is in qualitative agreement with the $R_{pPb}$ data, but fails to describe the dependence on particle species in the yield asymmetries measured away from midrapidity in pPb collisions.'
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: ''
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
