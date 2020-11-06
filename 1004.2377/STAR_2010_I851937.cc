@@ -403,6 +403,71 @@ class Correlator {
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+ for (int ptt = 0; ptt < numTrigPtBins; ptt++)
+      {
+
+            Correlator c6 (ptt,0);
+            c6.SetCollSystemAndEnergy("AuAu200GeV");
+            c6.SetCentrality(0,20);
+            c6.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+            c6.SetNoPTassociated();
+            Correlators6.push_back(c6);
+
+            Correlator c61 (ptt,1);
+            c61.SetCollSystemAndEnergy("AuAu200GeV"); //I did not see a flag for dAu, but this is the dAu correlator 
+            c61.SetCentrality(0,20);
+            c61.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
+            c61.SetNoPTassociated();
+            Correlators6.push_back(c61);
+
+      }
+
+
+      for(Correlator corr : Correlators6){
+            if(corr.GetSubIndex()==0){ // AuAu 
+                  if(corr.GetIndex() < 3){
+                        string name_AuAu1 = "AuAu_d14x1y" + to_string((corr.GetIndex() + 1)*2);
+                        book(_h[name_AuAu1], 14 , 1 , ((corr.GetIndex() + 1)*2));
+                        string name_AuAu2 = "AuAu_d16x1y" + to_string((corr.GetIndex() + 1)*2);
+                        book(_h[name_AuAu2], 16 , 1 , ((corr.GetIndex() + 1)*2));   
+                  }
+                  else{
+                        string name_AuAu3 = "AuAu_d18x1y2";
+                        book(_h[name_AuAu3], 18 , 1 , 2);
+                        string name_AuAu4 = "AuAu_d20x1y2";
+                        book(_h[name_AuAu4], 20 , 1 , 2);   
+                  }
+            }
+            else if(corr.GetSubIndex()==1){ // dAu 
+                  if(corr.GetIndex() < 3){
+                        string name_AuAu5 = "AuAu_d14x1y" + to_string((corr.GetIndex() * 2) + 1);
+                        book(_h[name_AuAu5], 14 , 1 , (corr.GetIndex() * 2) + 1);
+                        string name_AuAu6 = "AuAu_d16x1y" + to_string((corr.GetIndex() * 2) + 1);
+                        book(_h[name_AuAu6], 16 , 1 , (corr.GetIndex() * 2) + 1);   
+                  }
+                  else{
+                        string name_AuAu7 = "AuAu_d18x1y1";
+                        book(_h[name_AuAu7], 18 , 1 , 1);
+                        string name_AuAu8 = "AuAu_d20x1y1";
+                        book(_h[name_AuAu8], 20 , 1 , 1);   
+                  }
+
+            }
+            if(corr.GetSubIndex()==1){ // dAu
+                  if(corr.GetIndex() < 3){
+                        string name_AuAu9 = "AuAu_d15x1y" + to_string(corr.GetIndex()+ 1);
+                        book(_h[name_AuAu9], 15 , 1 , corr.GetIndex()+ 1);
+                        string name_AuAu10 = "AuAu_d17x1y" + to_string(corr.GetIndex()+ 1);
+                        book(_h[name_AuAu10], 17 , 1 , corr.GetIndex()+ 1);   
+                  }
+                  else{
+                        string name_AuAu11 = "AuAu_d19x1y1";
+                        book(_h[name_AuAu11], 19 , 1 , 1);
+                        string name_AuAu12 = "AuAu_d21x1y1";
+                        book(_h[name_AuAu12], 21 , 1 , 1);   
+                  }
+            }
+      }
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -574,6 +639,7 @@ class Correlator {
 
     vector<Correlator> Correlators;
     vector<Correlator> Correlators3;
+    vector<Correlator> Correlators6;
     vector<Correlator> Correlators7;
     vector<Correlator> Correlators8;
     
