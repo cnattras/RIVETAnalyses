@@ -18,7 +18,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=dAU,AUAU
+ - beam=DAU,AUAU
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX

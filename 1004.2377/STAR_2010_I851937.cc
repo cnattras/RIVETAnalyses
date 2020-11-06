@@ -234,6 +234,61 @@ class Correlator {
         }
         
     }
+    
+    double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+    {
+        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+                    
+        if(dPhi < -M_PI/2.)
+        {
+            dPhi += 2.*M_PI;
+        }
+        else if(dPhi > 3.*M_PI/2.)
+        {
+            dPhi -= 2*M_PI;
+        }
+                    
+        return dPhi;   
+      }
+      
+      Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+      {
+        
+        YODA::Histo1D hist = *histo;
+        
+        double minValue = sqrt(-2);
+        double binWidth = 0.;
+        int minValueEntries = 0.;
+        
+        for(auto &bin : hist.bins())
+        {
+            if(std::isnan(minValue))
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+            if(bin.sumW()/bin.width() < minValue/binWidth)
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+        }
+                
+        hist.reset();
+        
+        for(auto &bin : hist.bins())
+        {
+            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+        }
+        
+        *histo = YODA::subtract(*histo, hist);
+        
+        return histo;
+                
+      }
 
     /// @name Analysis methods
     //@{
@@ -246,13 +301,13 @@ class Correlator {
 
         const ChargedFinalState cfsEta(Cuts::abseta < 0.7);
         declare(cfsEta, "CFSETA");
-        
-        const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
-        declare(pp, "PP");
-        
-        const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
-        declare(pfs, "PFS"); 
      
+        beamOpt = getOption<string>("beam", "NONE");
+
+        if (beamOpt == "DAU") collSys = dAu;
+        else if (beamOpt == "AUAU") collSys = AuAu;
+        
+        
         declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
        
         
@@ -281,6 +336,8 @@ class Correlator {
               //raw |eta| < 1
               string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
               book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
+              nTriggers[name_raw]=0;
+              book(sow[name_raw], "sow" + name_raw);
             
               //limited eta acceptance |eta| < 0.7
               string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
@@ -288,7 +345,7 @@ class Correlator {
             
               //Background subtracted |eta| < 1
                 string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
-            book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
+                book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
           }
         
         if(corr.GetIndex() == 2)
@@ -557,22 +614,18 @@ class Correlator {
       const double c = cent();
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
-      const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
+
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
       //==================================================
-      double nNucleons = 0.;
-      string CollSystem = "Empty";
-      const ParticlePair& beam = beams();
-          CollSystem = "pp";
-          nNucleons = 1.;
-      //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
-      //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
-     
-      string cmsEnergy = "Empty";
-      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
+    
+      string SysAndEnergy = "";
+
+      if(collSys == dAu) SysAndEnergy = "dAu200GeV";
+      else if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
+      
+      
      
       string SysAndEnergy = CollSystem + cmsEnergy;
     
@@ -582,23 +635,55 @@ class Correlator {
       double associatedptMax = -999.;
     
       bool isVeto = true;
+      
+      for(Correlator corr : Correlators)
+      {
+          if(!corr.CheckCentrality(c)) continue;
+          if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+          string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+          sow[name_raw]->fill();
+      }
+      
+      
 
       Particles chargedParticles = cfs.particles();
         
         for(Particle pTrig : chargedParticles)
         {
+            for(Correlator corr : Correlators)
+            {
+                if(!corr.CheckCentrality(c)) continue;
+                if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+                
+                string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+                nTriggers[name_raw]++;
+                
+            }
+            
             for(Particle pAssoc : chargedParticles)
             {
-                if(pAssoc.pt()/GeV > 2.5 || pAssoc.pt()/GeV < 1.) continue;
-            
-                double DeltaPhi = pTrig.phi() - pAssoc.phi();
+                if(isSameParticle(pTrig, pAssoc)) continue;
+                
+                double DeltaPhi = GetDeltaPhi(pAssoc, pTrig);
             
                 for(Correlator corr : Correlators)
                 {
                     if(!corr.CheckCentrality(c)) continue;
                     if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
-                    string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-                    _h[name_raw]->fill(DeltaPhi);
+                    if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+                    
+                    if(corr.GetIndex() <= 1)
+                    {
+                        string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+                        _h[name_raw]->fill(DeltaPhi);
+                    }
+                    else if(corr.GetIndex() == 2)
+                    {
+                        
+                        
+                    }
+                    
         
                 }
             
@@ -630,7 +715,52 @@ class Correlator {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+        
+      bool AuAu200_available = false;
+      bool dAu_available = false;
+
+      for (auto element : _h)
+      {
+        string name = element.second->name();
+        if (name.find("AuAu") != std::string::npos)
+        {
+          if (element.second->numEntries()>0) AuAu200_available=true;
+          else
+          {
+            AuAu200_available=false;
+            break;
+          }
+
+        }
+         else if (name.find("dAu") != std::string::npos)
+        {
+          if (element.second->numEntries()>0) dAu_available=true;
+          else
+          {
+            dAu_available=false;
+            break;
+          }
+          
+        }
+      }
+      
+      //if((!AuAu200_available) || (!dAu_available)) return;
+      
+      for(Correlator corr : Correlators)
+      {
+          string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+          _h[name_raw]->scaleW(sow[name_raw]->numEntries()/(nTriggers[name_raw]*sow[name_raw]->sumW()));
+          
+          string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+          _f[name_sub] = SubtractBackgroundZYAM(_h[name_raw]);
+      }
+      
+      
+        
+        
 	}
+	
+	
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> sow;
     map<string, Histo1DPtr> _DeltaPhixE;
@@ -643,8 +773,10 @@ class Correlator {
     vector<Correlator> Correlators7;
     vector<Correlator> Correlators8;
     
-    std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
-    std::initializer_list<int> pdgPhoton = {22};  // Pion 0
+    string beamOpt;
+    enum CollisionSystem {dAu, AuAu};
+    CollisionSystem collSys;
+    
     //@}
 
 
