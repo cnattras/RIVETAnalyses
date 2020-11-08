@@ -35,7 +35,7 @@ LineStyle=solid
 Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/d28-x01-y03
 Title=Rivet
 # xlow	 xhigh	 val	 errminus	 errplus
-3.450000e-01	9.150000e-01	8.435800e+01	8.398937e+00	8.398937e+00
+3.450000e-01	9.150000e-01	1.406423e+02	5.133564e+00	5.133564e+00
 9.150000e-01	1.415000e+00	nan	nan	nan
 1.415000e+00	1.915000e+00	nan	nan	nan
 1.915000e+00	2.415000e+00	nan	nan	nan

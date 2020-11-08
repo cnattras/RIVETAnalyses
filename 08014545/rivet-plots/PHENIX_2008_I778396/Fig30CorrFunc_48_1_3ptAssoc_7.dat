@@ -1,0 +1,67 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=[Figure 30 Correlation Functon, AuAu, 60-92 ,4-5 $\otimes$ 4.095-5.285 GeV/c]
+XLabel=[$\Delta\phi$]
+YLabel=[Jet-Induced Hadron Pair Yield]
+DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig30CorrFunc_48_1_3ptAssoc_7
+LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig30CorrFunc_48_1_3ptAssoc_7
+# END PLOT
+
+# BEGIN HISTO1D //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig30CorrFunc_48_1_3ptAssoc_7
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig30CorrFunc_48_1_3ptAssoc_7
+ScaledBy=inf
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+-1.570796e+00	-1.439897e+00	nan	nan	nan
+-1.439897e+00	-1.308997e+00	nan	nan	nan
+-1.308997e+00	-1.178097e+00	nan	nan	nan
+-1.178097e+00	-1.047198e+00	nan	nan	nan
+-1.047198e+00	-9.162979e-01	nan	nan	nan
+-9.162979e-01	-7.853982e-01	nan	nan	nan
+-7.853982e-01	-6.544985e-01	nan	nan	nan
+-6.544985e-01	-5.235988e-01	nan	nan	nan
+-5.235988e-01	-3.926991e-01	nan	nan	nan
+-3.926991e-01	-2.617994e-01	nan	nan	nan
+-2.617994e-01	-1.308997e-01	nan	nan	nan
+-1.308997e-01	0.000000e+00	nan	nan	nan
+0.000000e+00	1.308997e-01	nan	nan	nan
+1.308997e-01	2.617994e-01	nan	nan	nan
+2.617994e-01	3.926991e-01	nan	nan	nan
+3.926991e-01	5.235988e-01	nan	nan	nan
+5.235988e-01	6.544985e-01	nan	nan	nan
+6.544985e-01	7.853982e-01	nan	nan	nan
+7.853982e-01	9.162979e-01	nan	nan	nan
+9.162979e-01	1.047198e+00	nan	nan	nan
+1.047198e+00	1.178097e+00	nan	nan	nan
+1.178097e+00	1.308997e+00	nan	nan	nan
+1.308997e+00	1.439897e+00	nan	nan	nan
+1.439897e+00	1.570796e+00	nan	nan	nan
+1.570796e+00	1.701696e+00	nan	nan	nan
+1.701696e+00	1.832596e+00	nan	nan	nan
+1.832596e+00	1.963495e+00	nan	nan	nan
+1.963495e+00	2.094395e+00	nan	nan	nan
+2.094395e+00	2.225295e+00	nan	nan	nan
+2.225295e+00	2.356194e+00	nan	nan	nan
+2.356194e+00	2.487094e+00	nan	nan	nan
+2.487094e+00	2.617994e+00	nan	nan	nan
+2.617994e+00	2.748894e+00	nan	nan	nan
+2.748894e+00	2.879793e+00	nan	nan	nan
+2.879793e+00	3.010693e+00	nan	nan	nan
+3.010693e+00	3.141593e+00	nan	nan	nan
+3.141593e+00	3.272492e+00	nan	nan	nan
+3.272492e+00	3.403392e+00	nan	nan	nan
+3.403392e+00	3.534292e+00	nan	nan	nan
+3.534292e+00	3.665191e+00	nan	nan	nan
+3.665191e+00	3.796091e+00	nan	nan	nan
+3.796091e+00	3.926991e+00	nan	nan	nan
+3.926991e+00	4.057891e+00	nan	nan	nan
+4.057891e+00	4.188790e+00	nan	nan	nan
+4.188790e+00	4.319690e+00	nan	nan	nan
+4.319690e+00	4.450590e+00	nan	nan	nan
+4.450590e+00	4.581489e+00	nan	nan	nan
+4.581489e+00	4.712389e+00	nan	nan	nan
+# END HISTO1D
+
