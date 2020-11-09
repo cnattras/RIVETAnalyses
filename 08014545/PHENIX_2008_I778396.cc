@@ -719,7 +719,7 @@ for(Correlator& corr : Correlators30)
 //*****************************************************************************
 // The following will book the histograms for Figure 26, where pta2 
 for(pta2 = 0; pta2<numpTAssocBins2; pta2++){
-	for(cb = 0; cb < numCentBins26; cb++){
+	for(cb = 0; cb < numCentBins26; cb++){ 
       Correlator c1(cb,0,pta2);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
       c1.SetNoCentrality();
@@ -1246,22 +1246,33 @@ for(Correlator& corr : Correlators9)
  
 //*****************************************************************************
 // The following will book the histograms for Figure 8 
-for(i=0;i<1;i++){
-      Correlator c1(1,1,-1);
+for(cb = 0; cb < numCentBins26; cb++){
+      Correlator c1(cb,1,-1);
       c1.SetCollSystemAndEnergy("AuAu200GeV");
-      c1.SetNoCentrality();
+      c1.SetCentrality(CentBins26[cb],CentBins26[cb + 1]);
       c1.SetTriggerRange(2,3);
       c1.SetAssociatedRange(2,3);
       //c1.SetPID(pdgPi0);
       Correlators8.push_back(c1);
 }
+
 for(Correlator& corr : Correlators8)
   {
-        string name = "120101";
-        book(_h[name], 12,01,01);
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
+        string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+        book(_h[namehead], namehead, 12, -M_PI/2, 3*M_PI/2);
+        book(sow[namehead],"sow" + namehead);
+        nTriggers[namehead] = 0;
+
+        string nameshoulder = "Fig8CorrFunc_S_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+        book(_h[nameshoulder], nameshoulder, 12, -M_PI/2, 3*M_PI/2);
+        book(sow[nameshoulder],"sow" + nameshoulder);
+        nTriggers[nameshoulder] = 0;
   }
+
+  string name = "120101";
+  book(_h[name], name, 12, 1 , 1);
+  book(sow[name],"sow" + name);
+  nTriggers[name] = 0;
  
 //*****************************************************************************
 // The following will book the histograms for Figure 7 
@@ -1619,6 +1630,25 @@ for(Correlator& corr : Correlators4)
               sow[name3]->fill();
       }
 
+
+      //*****************************************************************************
+      // The following will fill the sow for Figure 8 
+
+      for(Correlator& corr : Correlators8)
+      {
+          if(!corr.CheckCentrality(c)) continue;
+
+
+        string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+        sow[namehead]->fill();
+
+        string nameshoulder = "Fig8CorrFunc_S_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+        sow[nameshoulder]->fill();
+
+      }
+
+
+
       //*****************************************************************************
       // The following will fill the sow for Figure 26 
       
@@ -1739,6 +1769,25 @@ for(Correlator& corr : Correlators4)
              nTriggers[name3]++;
 
           } //FIXME 
+
+
+
+          //Trigger counting Figure 8 
+          
+         for(Correlator& corr : Correlators8)
+         {
+             if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+             if(!corr.CheckCentrality(c)) continue;
+
+        string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+        nTriggers[namehead]++;
+
+        string nameshoulder = "Fig8CorrFunc_S_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+        nTriggers[nameshoulder]++;
+
+          } 
+
+
 
 
           //Trigger counting Figure 26
@@ -2011,6 +2060,38 @@ for(Correlator& corr : Correlators4)
           }  
 
 
+
+          //*****************************************************************************
+              // The following will fill the histograms for Figure 8 
+          
+          for(Correlator& corr : Correlators8)
+          {
+                  if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckAssociatedRange(pTAssoc.pt()/GeV)) continue;
+                  
+                  if(!corr.CheckCentrality(c)) continue;
+                  
+                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
+
+                    string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+                    _h[namehead]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+                  
+                    string nameshoulder = "Fig8CorrFunc_S_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+                    _h[nameshoulder]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+                  /*if(DeltaPhi < (M_PI + M_PI/6) && DeltaPhi > (M_PI - M_PI/6)){
+                    string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+                    _h[namehead]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+                  }
+
+                  if((DeltaPhi < M_PI-M_PI/6. && DeltaPhi > M_PI/2.) || (DeltaPhi < 3.*M_PI/2. && DeltaPhi > M_PI+M_PI/6.)){
+                    string nameshoulder = "Fig8CorrFunc_S_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+                    _h[nameshoulder]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
+                  }*/
+
+
+
+          } 
 
 
           
@@ -2546,6 +2627,77 @@ for(Correlator& corr : Correlators4)
 
       
   }
+
+
+  //*****************************************************************************
+      // Background subtraction for Figure 8 
+      //FIXME 
+      for(Correlator& corr : Correlators8) 
+      {
+
+
+          string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+          _h[namehead]->scaleW(sow[namehead]->numEntries()/(nTriggers[namehead]*sow[namehead]->sumW()));
+          _h[namehead] = SubtractBackgroundZYAM(_h[namehead]);
+          double fractionhead = 0.;
+          double yieldhead = getYieldRangeUser(_h[namehead], (-M_PI/3.), (M_PI/3.), fractionhead); // Head 
+          
+          string nameshoulder = "Fig8CorrFunc_S_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
+          _h[nameshoulder]->scaleW(sow[nameshoulder]->numEntries()/(nTriggers[nameshoulder]*sow[nameshoulder]->sumW()));
+          _h[nameshoulder] = SubtractBackgroundZYAM(_h[nameshoulder]);
+          double fractionshoulder = 0.;
+          double yieldshoulder = getYieldRangeUser(_h[nameshoulder], M_PI/2., M_PI-(M_PI/6.), fractionshoulder);
+          double fractionshoulder2 = 0.;
+          yieldshoulder += getYieldRangeUser(_h[nameshoulder], M_PI+(M_PI/6.), 3.*M_PI/2., fractionshoulder2);
+          fractionshoulder += fractionshoulder2;
+
+          string nameFig8 = "120101";
+
+            _h[nameFig8]->bin(corr.GetIndex()).fillBin((yieldhead/fractionhead)/(yieldshoulder/fractionshoulder), fractionhead/fractionshoulder);
+
+          }
+
+
+          //*****************************************************************************
+      // Background subtraction for Figure 7 
+      for(Correlator& corr : Correlators12)
+      {
+          if(corr.GetSubSubIndex() < 4){
+            string name = "Fig12CorrFunc_AuAu_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig8 = "90101";
+            double fraction = 0.;
+            double yieldhead = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            double yieldshoulder = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
+            double fraction2 = 0.;
+            yieldshoulder += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
+            fraction += fraction2;
+            _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
+            
+          }
+          else if(corr.GetSubSubIndex() == 4){
+            string name = "Fig12CorrFunc_pp_" + to_string(21 + corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1) + "ptAssoc_" + to_string(1+corr.GetIndex());
+            _h[name]->scaleW(sow[name]->numEntries()/(nTriggers[name]*sow[name]->sumW()));
+            _h[name] = SubtractBackgroundZYAM(_h[name]);
+            
+            string nameFig8 = "80101";
+            double fraction = 0.;
+            double yieldhead = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+            double yieldshoulder = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
+            double fraction2 = 0.;
+            yieldshoulder += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
+            fraction += fraction2;
+            _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
+
+          }
+              
+          
+      }
+
+
+
       
       
       
