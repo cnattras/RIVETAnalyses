@@ -402,8 +402,8 @@ class Correlator {
 
       //===================================================================
       //===================================================================
-      //Figure 3 FIX ME: Finish booking histograms. 
-      // You might have to make another for loop section for dAU as well.
+      //Figure 3 FIX ME: make sure it is dAu and not AuAu 
+      // 
       //===================================================================
       //===================================================================
       for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
@@ -424,7 +424,7 @@ class Correlator {
 		 /// Yoda d10-x01-y01 to d10-x01-y16: all Bksub for Fig 3. 1st 4 are pTassoc .5-1
       	 // 2nd 4 are pTassoc 1-1.5, 3rd 4 are pTassoc 1.5-2.5, last 4 are 2.5-4 pTassoc. However
       	 // 1,2,3,4 of each set are different pTTrig.
-		 string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+		     string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
       	 book(_h[name_sub], 10, 1, corr.GetIndex() + ((corr.GetSubIndex() - 1) * 4) + 1);
 
       	 string name2_sub = "sub_d10x01y16";
@@ -432,9 +432,9 @@ class Correlator {
 
         //Yoda d11-x01-y01 to d11-x01-y16: all AuAu Raw for Fig 3. Same logic as above
       	 string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
-     	 book(_h[name_AuAuRaw], 11, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+     	   book(_h[name_AuAuRaw], 11, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
 
-     	 string name2_AuAuRaw = "AuAuRaw_d11x01y16";
+     	   string name2_AuAuRaw = "AuAuRaw_d11x01y16";
       	 book(_h[name2_AuAuRaw],11,1,16);
 
 		// Yoda d12-x01-y01 to d12-x01-y16: all dAu for Fig 3. Same logic as above
@@ -456,7 +456,7 @@ class Correlator {
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
-     //                                 Figure 6                                                       //
+     //                                 Figure 6: check dAu not AuAu                                                   //
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -528,7 +528,7 @@ class Correlator {
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
-     //                                  Figure 7                                                      //
+     //                                  Figure 7   : Check dAU not AUAU                                                   //
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -558,7 +558,7 @@ class Correlator {
       }
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
-     //                                  Figure 8                                                     //
+     //                                  Figure 8    : Check dAU not AUAU                                                 //
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -588,7 +588,7 @@ class Correlator {
       	book(_h[name_AuAu3], 26, 1, 1);
       	book(_h[name_AuAu3], 26, 1, 2);
 
-		string name_AuAu4 = "AuAu4_d27x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+		    string name_AuAu4 = "AuAu4_d27x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
       	book(_h[name_AuAu4], 27,1, 1);
 
       	string name_AuAu5 = "AuAu5_d28x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
@@ -625,9 +625,8 @@ class Correlator {
       if(collSys == dAu) SysAndEnergy = "dAu200GeV";
       else if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
       
-      
      
-      string SysAndEnergy = CollSystem + cmsEnergy;
+      SysAndEnergy = CollSystem + cmsEnergy;
     
       double triggerptMin = 999.;
       double triggerptMax = -999.;
@@ -636,6 +635,7 @@ class Correlator {
     
       bool isVeto = true;
       
+      //Fill Histograms for figure 2
       for(Correlator corr : Correlators)
       {
           if(!corr.CheckCentrality(c)) continue;
@@ -644,7 +644,80 @@ class Correlator {
           sow[name_raw]->fill();
       }
       
-      
+
+      //Fill Histograms for figure 3
+      for (Correlator corr : Correlators3)
+      {
+        string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_sub]->fill();
+
+        string name2_sub = "sub_d10x01y16"
+        sow[name2_sub]->fill();
+
+        string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_AuAuRaw]->fill();
+
+        string name2_AuAuRaw = "AuAuRaw_d11x01y16";
+        sow[name2_AuAuRaw]->fill();
+    
+        string name_dAu = "dAu_d12x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_dAu]->fill();
+
+        string name2_dAu = "dAu_d12x01y16";
+        sow[name2_dAu]->fill();
+
+        string name_dEta = "dEta_d13x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_dEta]->fill();
+
+        string name2_dEta = "dEta_d13x01y16";
+        sow[name2_dEta]->fill();
+         
+      }
+
+      //Fill Histograms for Figure 6
+      for (Correlator corr : Correlators6)
+      {
+
+      }
+
+      //Fill Histograms for Figure 7
+      for (Correlator corr : Correlators7)
+      {
+        string name_dPhi = "dPhi_d22x1y1";
+        sow[name_dPhi]->fill();
+
+        string name_dPhi2 = "dPhi2_d22x1y2";
+        sow[name_dPhi2]->fill();
+
+        string name_dPhi3 = "dPhi3_d22x1y1";
+        sow[name_dPhi3]->fill();
+
+      }
+
+      //Fill Histograms for Figure 8
+      for (Correlator corr : Correlators8)
+      {
+        string name_AuAu = "AuAu_d24x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu]->fill();
+
+        string name_AuAu2 = "AuAu2_d25x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu2]->fill();
+
+        string name_AuAu3 = "AuAu3_d26x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu3]->fill();
+
+        string name_AuAu4 = "AuAu4_d27x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu4]->fill();
+
+        string name_AuAu5 = "AuAu5_d28x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu5]->fill();
+
+        string name_AuAu6 = "AuAu5_d29x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu6]->fill();
+
+        string name_dAuAu = "dAuAu_d30x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_dAuAu]->fill();
+      }
 
       Particles chargedParticles = cfs.particles();
         
@@ -746,7 +819,7 @@ class Correlator {
       
       //if((!AuAu200_available) || (!dAu_available)) return;
       
-      for(Correlator corr : Correlators)
+      for(Correlator corr : Correlators) //Finish with rest of logic
       {
           string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
           _h[name_raw]->scaleW(sow[name_raw]->numEntries()/(nTriggers[name_raw]*sow[name_raw]->sumW()));
@@ -754,7 +827,6 @@ class Correlator {
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
           _f[name_sub] = SubtractBackgroundZYAM(_h[name_raw]);
       }
-      
       
         
         
