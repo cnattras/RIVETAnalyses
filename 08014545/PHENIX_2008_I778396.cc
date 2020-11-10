@@ -875,7 +875,7 @@ for(i = 0; i<2; i++){
 }
 for(Correlator& corr : Correlators24)
   {
-      	string name = (39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+      	string name = to_string(39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
         book(_h[name], (39 - corr.GetSubSubIndex()),01,(corr.GetIndex()));
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
@@ -1270,7 +1270,7 @@ for(Correlator& corr : Correlators8)
   }
 
   string name = "120101";
-  book(_h[name], name, 12, 1 , 1);
+  book(_h[name], 12, 1 , 1);
   book(sow[name],"sow" + name);
   nTriggers[name] = 0;
  
@@ -2127,7 +2127,7 @@ for(Correlator& corr : Correlators4)
                   double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
                       // Name is only for AuAu, see above FIXME 
 
-                  	string name = (39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
+                  	string name = to_string(39 - corr.GetSubSubIndex()) + "010" + to_string(corr.GetIndex());
                    	if(corr.GetSubSubIndex()==1) {
                    		_h[name]->fill(DeltaEta);
                   	}
@@ -2590,7 +2590,7 @@ for(Correlator& corr : Correlators4)
             	double fraction = 0.;
             	double yieldauau = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction); 
             
-            string namepp = "Fig31CorrFunc_53_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex()); // FIXME This needs to be 53 
+            string namepp = "Fig31CorrFunc_53_" + to_string(1) + "_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex()); // FIXME This needs to be 53 
             _h[namepp]->scaleW(sow[namepp]->numEntries()/(nTriggers[namepp]*sow[namepp]->sumW()));
             _h[namepp] = SubtractBackgroundZYAM(_h[namepp]);
             double yieldpp = getYieldRangeUser(_h[namepp], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
@@ -2616,7 +2616,7 @@ for(Correlator& corr : Correlators4)
             	double fraction = 0.;
             	double yieldauau = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); 
             
-            string namepp = "Fig30CorrFunc_49_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex()); // FIXME This needs to be 53 
+            string namepp = "Fig30CorrFunc_" + to_string(49) + "_1_" + to_string(corr.GetSubIndex()+1)  + "ptAssoc_" + to_string(1+corr.GetIndex()); // FIXME This needs to be 53 
             _h[namepp]->scaleW(sow[namepp]->numEntries()/(nTriggers[namepp]*sow[namepp]->sumW()));
             _h[namepp] = SubtractBackgroundZYAM(_h[namepp]);
             double yieldpp = getYieldRangeUser(_h[namepp], (-M_PI/3.), (M_PI/3.), fraction);
