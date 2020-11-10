@@ -35,9 +35,9 @@ namespace Rivet {
       // all final-state particles within the given eta acceptance
       //Particles: K0S, Lambda, Xi-, Anti-Xi+, Omega-, Anti-Omega+, anti-Lambda(?)
     	std::initializer_list<int> pdgIds = {310, 3122, 3312,-3312, 3334, -3334};
-    	const PrimaryParticles fs(pdgIds, Cuts::abscharge > 0 && Cuts::absrap < 1.8 && Cuts::abseta < 2.5);
+    	const PrimaryParticles fs(pdgIds, Cuts::abscharge > 0 && Cuts::absrap < 1.8);
     	declare(fs, "fs");
-    	const PrimaryParticles ns(pdgIds, Cuts::abscharge == 0 && Cuts::absrap < 1.8 && Cuts::abseta < 5.2 && Cuts::abseta > 3);
+    	const PrimaryParticles ns(pdgIds, Cuts::abscharge == 0 && Cuts::absrap < 1.8);
     	declare(ns, "ns");
     	
     	beamOpt = getOption<string>("beam", "NONE");
@@ -573,33 +573,31 @@ namespace Rivet {
 	hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTK0S["pT_K0S_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
 		
-	hInvariantPTK0S["pT_K0S_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTK0S["pT_K0S_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTK0S["pT_K0S_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
 				
 	hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTLambda["pT_Lambda_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());	
 		
-	hInvariantPTLambda["pT_Lambda_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTLambda["pT_Lambda_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTLambda["pT_Lambda_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
 
 	hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTXi["pT_Xi_pp_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
 					
-	hInvariantPTXi["pT_Xi_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTXi["pT_Xi_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTXi["pT_Xi_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
 
 	hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
 	hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());	
 		
-	hInvariantPTOmega["pT_Omega_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTOmega["pT_Omega_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
-	hInvariantPTOmega["pT_Omega_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
+	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
 				
 		
 	hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
@@ -621,9 +619,9 @@ namespace Rivet {
 	//hYasymMidyCM["Yasym_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	//hYasymHighyCM["Yasym_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	hInvariantPTK0S["pT_K0S_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
 	hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
@@ -644,9 +642,9 @@ namespace Rivet {
 	//hYasymMidyCM["Yasym_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	//hYasymHighyCM["Yasym_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
 	hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
@@ -660,22 +658,22 @@ namespace Rivet {
 	//hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	//hYasymHighyCM["Yasym_h+/-_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	hInvariantPTXi["pT_Xi_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
 	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 
 	hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	h["negative_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	h["positive_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	h["negative_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	h["positive_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	h["negative_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	h["positive_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	hInvariantPTOmega["pT_Omega_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
 	//Figure 2 Y scalings
 	//hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->scaleY(10.0);
@@ -749,9 +747,9 @@ namespace Rivet {
     	map<string, Histo1DPtr> hRpPBHighyCM;
     	map<string, Histo1DPtr> hInvariantPTK0SpPB;
     	map<string, Histo1DPtr> hInvariantPTLambdapPB;
-    	map<string, Histo1DPtr> hYasymLowyCM;
-    	map<string, Histo1DPtr> hYasymMidyCM;
-    	map<string, Histo1DPtr> hYasymHighyCM;
+    	//map<string, Histo1DPtr> hYasymLowyCM;
+    	//map<string, Histo1DPtr> hYasymMidyCM;
+    	//map<string, Histo1DPtr> hYasymHighyCM;
     	map<string, Histo1DPtr> h;
     	
 	map<string, Scatter2DPtr> RpPBFullyCM;
