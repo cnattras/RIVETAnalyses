@@ -329,25 +329,17 @@ namespace Rivet {
 			}
 			case 3334: // Omega-
 			{
-				hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
 				hInvariantPTOmega["pT_Omega_pp_full"]->fill(partPt, pt_weight);
-				hInvariantPTOmega["pT_Omega_pp_low"]->fill(partPt, pt_weight);
-				hInvariantPTOmega["pT_Omega_pp_high"]->fill(partPt, pt_weight);
 				
 				break;
 			}
 			case -3334: // Omega+
 			{
-				hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
 				hInvariantPTOmega["pT_Omega_pp_full"]->fill(partPt, pt_weight);
-				hInvariantPTOmega["pT_Omega_pp_low"]->fill(partPt, pt_weight);
-				hInvariantPTOmega["pT_Omega_pp_high"]->fill(partPt, pt_weight);
 				
 				break;
 			}
