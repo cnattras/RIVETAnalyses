@@ -256,7 +256,8 @@ namespace Rivet {
         }
        
     }
-        Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+    
+    Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
     {
         
         YODA::Histo1D hist = *histo;
@@ -339,11 +340,12 @@ namespace Rivet {
       const ChargedFinalState cfs(Cuts::abseta < 0.35);
       declare(cfs, "CFS");
 
-      const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
-      declare(pp, "PP");
+      beamOpt = getOption<string>("beam", "NONE");
 
-      const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
-      declare(pfs, "PFS");
+      if (beamOpt == "AUAU") collSys = AuAu;
+      else if (beamOpt == "DAU") collSys = dAu;
+      
+      declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
 int ndPhiBins = 72;
 double lowedge = -pi/2.0;
@@ -362,9 +364,9 @@ double highedge = 3.0*pi/2.0;
             c1.SetzTRange(0,1);
             Correlators.push_back(c1);
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
-            string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
+            //string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
             book(_h[name], name, ndPhiBins,lowedge,highedge);
-            book(_h[name3], name3, ndPhiBins,lowedge,highedge);
+            //book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
@@ -376,9 +378,9 @@ double highedge = 3.0*pi/2.0;
               c2.SetzTRange(0,1); 
               Correlators.push_back(c2);
             string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
-            string name4 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex()+"BkgdSubtracted";
+            //string name4 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex()+"BkgdSubtracted";
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
-            book(_h[name4], name4, ndPhiBins,lowedge,highedge);
+            //book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
             }
           }
@@ -397,9 +399,9 @@ double highedge = 3.0*pi/2.0;
             c1.SetAssociatedRange(3,15);
             Correlators.push_back(c1);
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
-            string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
+            //string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
             book(_h[name], name, ndPhiBins,lowedge,highedge);
-            book(_h[name3], name3, ndPhiBins,lowedge,highedge);
+            //book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
@@ -411,9 +413,9 @@ double highedge = 3.0*pi/2.0;
               c2.SetAssociatedRange(3,15);
               Correlators.push_back(c2);
             string name2 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex();
-            string name4 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex()+"BkgdSubtracted";
+            //string name4 = c2.GetCollSystemAndEnergy()+c2.GetFullIndex()+"BkgdSubtracted";
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
-            book(_h[name4], name4, ndPhiBins,lowedge,highedge);
+            //book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
             }
           }//End of the zT loop
@@ -441,33 +443,20 @@ double highedge = 3.0*pi/2.0;
 
     }
     void analyze(const Event& event) {
+        
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      //const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
-      //const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
+      
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
       //==================================================
-      double nNucleons = 0.;
-      string CollSystem = "Empty";
-      const ParticlePair& beam = beams();
-          CollSystem = "AuAu";
-          nNucleons = 197;
-      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020){ 
-        CollSystem = "dAu";
-          nNucleons = 1;
-    }
-      if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630){
+      string SysAndEnergy = "";
 
-       CollSystem = "dAu";
-          nNucleons = 1;//needs checking
-     }
-     
-      string cmsEnergy = "Empty";
-      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
-     
-      string SysAndEnergy = CollSystem + cmsEnergy;
+      if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
+      else if(collSys == dAu) SysAndEnergy = "dAu200GeV";
 
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const double c = cent();
     
       double triggerptMin = 999.;
       double triggerptMax = -999.;
@@ -479,7 +468,7 @@ double highedge = 3.0*pi/2.0;
       for(Correlator& corr : Correlators)
       {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
-        //if(!corr.CheckCentrality(centr)) continue;
+        if(!corr.CheckCentrality(c)) continue;
         
         //If event is accepted for the correlator, fill event weights
         sow[corr.GetFullIndex()]->fill();
@@ -504,9 +493,10 @@ double highedge = 3.0*pi/2.0;
         
         for(Correlator& corr : Correlators)
         {//This loops over all correlators and asks if the particle is in the trigger range.  If so, add it to the list of triggers.
-            //if(!corr.CheckPID(pdgPi0)) continue;
+            if(!corr.CheckCentrality(c)) continue;//May need to check that the centrality for d+Au matches the centrality in the correlator
+            if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
-            nTriggers[corr.GetFullIndex()]++;
+            nTriggers[corr.GetFullIndex()]++;//Antonio is this OK? Nora uses strings.
             cout<<"I have a trigger particle!"<<endl;
         }
         // Hadron loop
@@ -527,9 +517,9 @@ double highedge = 3.0*pi/2.0;
             
             for(Correlator& corr : Correlators)
             {
-                //if(!corr.CheckPID(pdgPi0)) continue;
-                
-                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                if(!corr.CheckCentrality(c)) continue;
+                if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+                if(!corr.CheckAssociatedRange(pTrig.pT()/GeV)) continue;
                 //AJ add a spot where you fill histograms
                 //See Nora's code in 08014545 around line 1168
                 
@@ -587,12 +577,16 @@ double highedge = 3.0*pi/2.0;
         {
             
             string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
+            //AJ add some cross checks to make sure you do not divide by zero here.
             if(nTriggers[corr.GetFullIndex()] > 0) _h[name]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
-            string name2 = corr.GetCollSystemAndEnergy()+corr.GetFullIndex()+"BkgdSubtracted";
-                  _h[name2] = SubtractBackgroundZYAM(_h[name]);
+            //string name2 = corr.GetCollSystemAndEnergy()+corr.GetFullIndex()+"BkgdSubtracted";
+                  _h[name] = SubtractBackgroundZYAM(_h[name]);
                   //You will need something like this
 
   //            double fraction = 0.;
+                  //AJ work on this
+                  //1.  Just calculate the yield but adjust the range so that it matched the paper.
+                  //2.  Try to fill the histogram as below, except you'll need to figure out what the name is.
     //        double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
       //      _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
         }
@@ -605,9 +599,10 @@ double highedge = 3.0*pi/2.0;
     map<int, Histo1DPtr> _DeltaPhiSub;
     map<string, int> nTriggers;
     vector<Correlator> Correlators;
-
-    std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
-    std::initializer_list<int> pdgPhoton = {22};  // Pion 0
+    
+    string beamOpt;
+    enum CollisionSystem {AuAu, dAu};
+    CollisionSystem collSys;
 
 
   };

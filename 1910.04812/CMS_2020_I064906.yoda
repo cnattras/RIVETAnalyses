@@ -1,7 +1,7 @@
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d01-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00036, up: 0.00036}}, 1: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 2: {Statistical uncertainty: {dn: -7.9e-05, up: 7.9e-05}}, 3: {Statistical uncertainty: {dn: -4.8e-05, up: 4.8e-05}}, 4: {Statistical uncertainty: {dn: -3.4e-05, up: 3.4e-05}}, 5: {Statistical uncertainty: {dn: -2.4e-05, up: 2.4e-05}}, 6: {Statistical uncertainty: {dn: -1.8e-05, up: 1.8e-05}}, 7: {Statistical uncertainty: {dn: -1.4e-05, up: 1.4e-05}}, 8: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 9: {Statistical uncertainty: {dn: -8.5e-06, up: 8.5e-06}}, 10: {Statistical uncertainty: {dn: -6.8e-06, up: 6.8e-06}}, 11: {Statistical uncertainty: {dn: -5.6e-06, up: 5.6e-06}}, 12: {Statistical uncertainty: {dn: -4.7e-06, up: 4.7e-06}}, 13: {Statistical uncertainty: {dn: -3.8e-06, up: 3.8e-06}}, 14: {Statistical uncertainty: {dn: -3.2e-06, up: 3.2e-06}}, 15: {Statistical uncertainty: {dn: -2.8e-06, up: 2.8e-06}}, 16: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 17: {Statistical uncertainty: {dn: -1.2e-06, up: 1.2e-06}}, 18: {Statistical uncertainty: {dn: -9.2e-07, up: 9.2e-07}}, 19: {Statistical uncertainty: {dn: -7.0e-07, up: 7.0e-07}}, 20: {Statistical uncertainty: {dn: -5.8e-07, up: 5.8e-07}}, 21: {Statistical uncertainty: {dn: -3.0e-07, up: 3.0e-07}}, 22: {Statistical uncertainty: {dn: -2.0e-07, up: 2.0e-07}}, 23: {Statistical uncertainty: {dn: -1.5e-07, up: 1.5e-07}}, 24: {Statistical uncertainty: {dn: -1.1e-07, up: 1.1e-07}}, 25: {Statistical uncertainty: {dn: -7.0e-08, up: 7.0e-08}}, 26: {Statistical uncertainty: {dn: -3.1e-08, up: 3.1e-08}}, 27: {Statistical uncertainty: {dn: -1.8e-08, up: 1.8e-08}}, 28: {Statistical uncertainty: {dn: -1.1e-08, up: 1.1e-08}}, 29: {Statistical uncertainty: {dn: -5.7e-09, up: 5.7e-09}}, 30: {Statistical uncertainty: {dn: -3.1e-09, up: 3.1e-09}}, 31: {Statistical uncertainty: {dn: -1.1e-09, up: 1.1e-09}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+Path: /REF/CMS_2020_I064906/d01-x01-y01
 Title: Figure 2.1
 Type: Scatter2D
 ---
@@ -43,10 +43,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d01-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00043, up: 0.00043}}, 1: {Statistical uncertainty: {dn: -0.00022, up: 0.00022}}, 2: {Statistical uncertainty: {dn: -9.8e-05, up: 9.8e-05}}, 3: {Statistical uncertainty: {dn: -5.2e-05, up: 5.2e-05}}, 4: {Statistical uncertainty: {dn: -3.2e-05, up: 3.2e-05}}, 5: {Statistical uncertainty: {dn: -2.3e-05, up: 2.3e-05}}, 6: {Statistical uncertainty: {dn: -1.6e-05, up: 1.6e-05}}, 7: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 8: {Statistical uncertainty: {dn: -9.5e-06, up: 9.5e-06}}, 9: {Statistical uncertainty: {dn: -7.5e-06, up: 7.5e-06}}, 10: {Statistical uncertainty: {dn: -6.0e-06, up: 6.0e-06}}, 11: {Statistical uncertainty: {dn: -4.8e-06, up: 4.8e-06}}, 12: {Statistical uncertainty: {dn: -4.0e-06, up: 4.0e-06}}, 13: {Statistical uncertainty: {dn: -3.3e-06, up: 3.3e-06}}, 14: {Statistical uncertainty: {dn: -2.7e-06, up: 2.7e-06}}, 15: {Statistical uncertainty: {dn: -2.3e-06, up: 2.3e-06}}, 16: {Statistical uncertainty: {dn: -2.0e-06, up: 2.0e-06}}, 17: {Statistical uncertainty: {dn: -1.1e-06, up: 1.1e-06}}, 18: {Statistical uncertainty: {dn: -8.5e-07, up: 8.5e-07}}, 19: {Statistical uncertainty: {dn: -6.6e-07, up: 6.6e-07}}, 20: {Statistical uncertainty: {dn: -5.1e-07, up: 5.1e-07}}, 21: {Statistical uncertainty: {dn: -4.1e-07, up: 4.1e-07}}, 22: {Statistical uncertainty: {dn: -2.1e-07, up: 2.1e-07}}, 23: {Statistical uncertainty: {dn: -1.4e-07, up: 1.4e-07}}, 24: {Statistical uncertainty: {dn: -1.0e-07, up: 1.0e-07}}, 25: {Statistical uncertainty: {dn: -7.5e-08, up: 7.5e-08}}, 26: {Statistical uncertainty: {dn: -4.9e-08, up: 4.9e-08}}, 27: {Statistical uncertainty: {dn: -2.2e-08, up: 2.2e-08}}, 28: {Statistical uncertainty: {dn: -1.3e-08, up: 1.3e-08}}, 29: {Statistical uncertainty: {dn: -7.8e-09, up: 7.8e-09}}, 30: {Statistical uncertainty: {dn: -4.1e-09, up: 4.1e-09}}, 31: {Statistical uncertainty: {dn: -2.1e-09, up: 2.1e-09}}, 32: {Statistical uncertainty: {dn: -7.7e-10, up: 7.7e-10}}, 33: {Statistical uncertainty: {dn: -3.0e-10, up: 3.0e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+Path: /REF/CMS_2020_I064906/d01-x01-y02
 Title: Figure 2.1
 Type: Scatter2D
 ---
@@ -88,10 +88,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d01-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00031, up: 0.00031}}, 1: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 2: {Statistical uncertainty: {dn: -7.7e-05, up: 7.7e-05}}, 3: {Statistical uncertainty: {dn: -4.7e-05, up: 4.7e-05}}, 4: {Statistical uncertainty: {dn: -3.4e-05, up: 3.4e-05}}, 5: {Statistical uncertainty: {dn: -2.4e-05, up: 2.4e-05}}, 6: {Statistical uncertainty: {dn: -1.7e-05, up: 1.7e-05}}, 7: {Statistical uncertainty: {dn: -1.4e-05, up: 1.4e-05}}, 8: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 9: {Statistical uncertainty: {dn: -8.4e-06, up: 8.4e-06}}, 10: {Statistical uncertainty: {dn: -6.9e-06, up: 6.9e-06}}, 11: {Statistical uncertainty: {dn: -5.6e-06, up: 5.6e-06}}, 12: {Statistical uncertainty: {dn: -4.5e-06, up: 4.5e-06}}, 13: {Statistical uncertainty: {dn: -3.9e-06, up: 3.9e-06}}, 14: {Statistical uncertainty: {dn: -3.3e-06, up: 3.3e-06}}, 15: {Statistical uncertainty: {dn: -2.8e-06, up: 2.8e-06}}, 16: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 17: {Statistical uncertainty: {dn: -1.2e-06, up: 1.2e-06}}, 18: {Statistical uncertainty: {dn: -9.5e-07, up: 9.5e-07}}, 19: {Statistical uncertainty: {dn: -7.4e-07, up: 7.4e-07}}, 20: {Statistical uncertainty: {dn: -5.8e-07, up: 5.8e-07}}, 21: {Statistical uncertainty: {dn: -3.0e-07, up: 3.0e-07}}, 22: {Statistical uncertainty: {dn: -2.0e-07, up: 2.0e-07}}, 23: {Statistical uncertainty: {dn: -1.5e-07, up: 1.5e-07}}, 24: {Statistical uncertainty: {dn: -1.1e-07, up: 1.1e-07}}, 25: {Statistical uncertainty: {dn: -7.1e-08, up: 7.1e-08}}, 26: {Statistical uncertainty: {dn: -3.2e-08, up: 3.2e-08}}, 27: {Statistical uncertainty: {dn: -1.9e-08, up: 1.9e-08}}, 28: {Statistical uncertainty: {dn: -1.1e-08, up: 1.1e-08}}, 29: {Statistical uncertainty: {dn: -6.0e-09, up: 6.0e-09}}, 30: {Statistical uncertainty: {dn: -3.0e-09, up: 3.0e-09}}, 31: {Statistical uncertainty: {dn: -1.1e-09, up: 1.1e-09}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+Path: /REF/CMS_2020_I064906/d01-x01-y03
 Title: Figure 2.1
 Type: Scatter2D
 ---
@@ -133,10 +133,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d01-x01-y04
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0057, up: 0.0057}}, 1: {Statistical uncertainty: {dn: -0.0022, up: 0.0022}}, 2: {Statistical uncertainty: {dn: -0.00098, up: 0.00098}}, 3: {Statistical uncertainty: {dn: -0.00058, up: 0.00058}}, 4: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}}, 5: {Statistical uncertainty: {dn: -0.00028, up: 0.00028}}, 6: {Statistical uncertainty: {dn: -0.0002, up: 0.0002}}, 7: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 8: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 9: {Statistical uncertainty: {dn: -9.6e-05, up: 9.6e-05}}, 10: {Statistical uncertainty: {dn: -7.7e-05, up: 7.7e-05}}, 11: {Statistical uncertainty: {dn: -6.3e-05, up: 6.3e-05}}, 12: {Statistical uncertainty: {dn: -5.2e-05, up: 5.2e-05}}, 13: {Statistical uncertainty: {dn: -4.3e-05, up: 4.3e-05}}, 14: {Statistical uncertainty: {dn: -3.7e-05, up: 3.7e-05}}, 15: {Statistical uncertainty: {dn: -3.1e-05, up: 3.1e-05}}, 16: {Statistical uncertainty: {dn: -1.8e-05, up: 1.8e-05}}, 17: {Statistical uncertainty: {dn: -1.3e-05, up: 1.3e-05}}, 18: {Statistical uncertainty: {dn: -1.0e-05, up: 1.0e-05}}, 19: {Statistical uncertainty: {dn: -8.0e-06, up: 8.0e-06}}, 20: {Statistical uncertainty: {dn: -6.4e-06, up: 6.4e-06}}, 21: {Statistical uncertainty: {dn: -3.3e-06, up: 3.3e-06}}, 22: {Statistical uncertainty: {dn: -2.2e-06, up: 2.2e-06}}, 23: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 24: {Statistical uncertainty: {dn: -1.2e-06, up: 1.2e-06}}, 25: {Statistical uncertainty: {dn: -7.6e-07, up: 7.6e-07}}, 26: {Statistical uncertainty: {dn: -3.2e-07, up: 3.2e-07}}, 27: {Statistical uncertainty: {dn: -2.0e-07, up: 2.0e-07}}, 28: {Statistical uncertainty: {dn: -1.3e-07, up: 1.3e-07}}, 29: {Statistical uncertainty: {dn: -6.2e-08, up: 6.2e-08}}, 30: {Statistical uncertainty: {dn: -3.1e-08, up: 3.1e-08}}, 31: {Statistical uncertainty: {dn: -1.2e-08, up: 1.2e-08}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+Path: /REF/CMS_2020_I064906/d01-x01-y04
 Title: Figure 2.1
 Type: Scatter2D
 ---
@@ -178,10 +178,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d01-x01-y05
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0083, up: 0.0083}}, 1: {Statistical uncertainty: {dn: -0.0032, up: 0.0032}}, 2: {Statistical uncertainty: {dn: -0.0014, up: 0.0014}}, 3: {Statistical uncertainty: {dn: -0.00066, up: 0.00066}}, 4: {Statistical uncertainty: {dn: -0.00041, up: 0.00041}}, 5: {Statistical uncertainty: {dn: -0.00028, up: 0.00028}}, 6: {Statistical uncertainty: {dn: -0.00019, up: 0.00019}}, 7: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 8: {Statistical uncertainty: {dn: -0.00011, up: 0.00011}}, 9: {Statistical uncertainty: {dn: -8.5e-05, up: 8.5e-05}}, 10: {Statistical uncertainty: {dn: -6.8e-05, up: 6.8e-05}}, 11: {Statistical uncertainty: {dn: -5.4e-05, up: 5.4e-05}}, 12: {Statistical uncertainty: {dn: -4.5e-05, up: 4.5e-05}}, 13: {Statistical uncertainty: {dn: -3.7e-05, up: 3.7e-05}}, 14: {Statistical uncertainty: {dn: -3.1e-05, up: 3.1e-05}}, 15: {Statistical uncertainty: {dn: -2.6e-05, up: 2.6e-05}}, 16: {Statistical uncertainty: {dn: -2.2e-05, up: 2.2e-05}}, 17: {Statistical uncertainty: {dn: -1.3e-05, up: 1.3e-05}}, 18: {Statistical uncertainty: {dn: -9.6e-06, up: 9.6e-06}}, 19: {Statistical uncertainty: {dn: -7.4e-06, up: 7.4e-06}}, 20: {Statistical uncertainty: {dn: -5.8e-06, up: 5.8e-06}}, 21: {Statistical uncertainty: {dn: -4.7e-06, up: 4.7e-06}}, 22: {Statistical uncertainty: {dn: -2.4e-06, up: 2.4e-06}}, 23: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 24: {Statistical uncertainty: {dn: -1.2e-06, up: 1.2e-06}}, 25: {Statistical uncertainty: {dn: -8.6e-07, up: 8.6e-07}}, 26: {Statistical uncertainty: {dn: -5.6e-07, up: 5.6e-07}}, 27: {Statistical uncertainty: {dn: -2.4e-07, up: 2.4e-07}}, 28: {Statistical uncertainty: {dn: -1.5e-07, up: 1.5e-07}}, 29: {Statistical uncertainty: {dn: -9.3e-08, up: 9.3e-08}}, 30: {Statistical uncertainty: {dn: -4.7e-08, up: 4.7e-08}}, 31: {Statistical uncertainty: {dn: -2.4e-08, up: 2.4e-08}}, 32: {Statistical uncertainty: {dn: -9.1e-09, up: 9.1e-09}}, 33: {Statistical uncertainty: {dn: -3.3e-09, up: 3.3e-09}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+Path: /REF/CMS_2020_I064906/d01-x01-y05
 Title: Figure 2.1
 Type: Scatter2D
 ---
@@ -223,10 +223,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d01-x01-y06
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.004, up: 0.004}}, 1: {Statistical uncertainty: {dn: -0.0017, up: 0.0017}}, 2: {Statistical uncertainty: {dn: -0.00086, up: 0.00086}}, 3: {Statistical uncertainty: {dn: -0.00055, up: 0.00055}}, 4: {Statistical uncertainty: {dn: -0.00037, up: 0.00037}}, 5: {Statistical uncertainty: {dn: -0.00026, up: 0.00026}}, 6: {Statistical uncertainty: {dn: -0.00019, up: 0.00019}}, 7: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 8: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 9: {Statistical uncertainty: {dn: -9.5e-05, up: 9.5e-05}}, 10: {Statistical uncertainty: {dn: -7.7e-05, up: 7.7e-05}}, 11: {Statistical uncertainty: {dn: -6.3e-05, up: 6.3e-05}}, 12: {Statistical uncertainty: {dn: -5.3e-05, up: 5.3e-05}}, 13: {Statistical uncertainty: {dn: -4.4e-05, up: 4.4e-05}}, 14: {Statistical uncertainty: {dn: -3.8e-05, up: 3.8e-05}}, 15: {Statistical uncertainty: {dn: -3.2e-05, up: 3.2e-05}}, 16: {Statistical uncertainty: {dn: -1.8e-05, up: 1.8e-05}}, 17: {Statistical uncertainty: {dn: -1.4e-05, up: 1.4e-05}}, 18: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 19: {Statistical uncertainty: {dn: -8.6e-06, up: 8.6e-06}}, 20: {Statistical uncertainty: {dn: -6.7e-06, up: 6.7e-06}}, 21: {Statistical uncertainty: {dn: -3.6e-06, up: 3.6e-06}}, 22: {Statistical uncertainty: {dn: -2.4e-06, up: 2.4e-06}}, 23: {Statistical uncertainty: {dn: -1.7e-06, up: 1.7e-06}}, 24: {Statistical uncertainty: {dn: -1.3e-06, up: 1.3e-06}}, 25: {Statistical uncertainty: {dn: -8.4e-07, up: 8.4e-07}}, 26: {Statistical uncertainty: {dn: -3.6e-07, up: 3.6e-07}}, 27: {Statistical uncertainty: {dn: -2.2e-07, up: 2.2e-07}}, 28: {Statistical uncertainty: {dn: -1.3e-07, up: 1.3e-07}}, 29: {Statistical uncertainty: {dn: -7.2e-08, up: 7.2e-08}}, 30: {Statistical uncertainty: {dn: -3.6e-08, up: 3.6e-08}}, 31: {Statistical uncertainty: {dn: -1.4e-08, up: 1.4e-08}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+Path: /REF/CMS_2020_I064906/d01-x01-y06
 Title: Figure 2.1
 Type: Scatter2D
 ---
@@ -268,10 +268,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d02-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -4.3e-05, up: 4.3e-05}}, 1: {Statistical uncertainty: {dn: -2.0e-05, up: 2.0e-05}}, 2: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 3: {Statistical uncertainty: {dn: -8.1e-06, up: 8.1e-06}}, 4: {Statistical uncertainty: {dn: -5.5e-06, up: 5.5e-06}}, 5: {Statistical uncertainty: {dn: -4.1e-06, up: 4.1e-06}}, 6: {Statistical uncertainty: {dn: -1.8e-06, up: 1.8e-06}}, 7: {Statistical uncertainty: {dn: -1.0e-06, up: 1.0e-06}}, 8: {Statistical uncertainty: {dn: -4.5e-07, up: 4.5e-07}}, 9: {Statistical uncertainty: {dn: -1.7e-07, up: 1.7e-07}}, 10: {Statistical uncertainty: {dn: -7.5e-08, up: 7.5e-08}}, 11: {Statistical uncertainty: {dn: -3.4e-08, up: 3.4e-08}}, 12: {Statistical uncertainty: {dn: -1.9e-08, up: 1.9e-08}}, 13: {Statistical uncertainty: {dn: -1.1e-08, up: 1.1e-08}}, 14: {Statistical uncertainty: {dn: -5.5e-09, up: 5.5e-09}}, 15: {Statistical uncertainty: {dn: -2.6e-09, up: 2.6e-09}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+Path: /REF/CMS_2020_I064906/d02-x01-y01
 Title: Figure 2.2
 Type: Scatter2D
 ---
@@ -280,9 +280,9 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	1.020000e-02	2.000000e-05	2.000000e-05
 1.200000e+00	1.000000e-01	1.000000e-01	6.660000e-03	1.200000e-05	1.200000e-05
 1.400000e+00	1.000000e-01	1.000000e-01	4.410000e-03	8.100000e-06	8.100000e-06
-1.600000e+00	-3.000000e-01	-3.000000e-01	9.880000e-04	1.800000e-06	1.800000e-06
 1.600000e+00	1.000000e-01	1.000000e-01	2.770000e-03	5.500000e-06	5.500000e-06
 1.800000e+00	1.000000e-01	1.000000e-01	1.890000e-03	4.100000e-06	4.100000e-06
+2.100000e+00	2.000000e-01	2.000000e-01	9.880000e-04	1.800000e-06	1.800000e-06
 2.500000e+00	2.000000e-01	2.000000e-01	4.360000e-04	1.000000e-06	1.000000e-06
 3.000000e+00	3.000000e-01	3.000000e-01	1.750000e-04	4.500000e-07	4.500000e-07
 3.700000e+00	4.000000e-01	4.000000e-01	4.880000e-05	1.700000e-07	1.700000e-07
@@ -296,10 +296,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d02-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -3.1e-05, up: 3.1e-05}}, 1: {Statistical uncertainty: {dn: -1.5e-05, up: 1.5e-05}}, 2: {Statistical uncertainty: {dn: -8.6e-06, up: 8.6e-06}}, 3: {Statistical uncertainty: {dn: -5.7e-06, up: 5.7e-06}}, 4: {Statistical uncertainty: {dn: -4.0e-06, up: 4.0e-06}}, 5: {Statistical uncertainty: {dn: -2.9e-06, up: 2.9e-06}}, 6: {Statistical uncertainty: {dn: -1.3e-06, up: 1.3e-06}}, 7: {Statistical uncertainty: {dn: -7.2e-07, up: 7.2e-07}}, 8: {Statistical uncertainty: {dn: -3.1e-07, up: 3.1e-07}}, 9: {Statistical uncertainty: {dn: -1.3e-07, up: 1.3e-07}}, 10: {Statistical uncertainty: {dn: -5.4e-08, up: 5.4e-08}}, 11: {Statistical uncertainty: {dn: -2.5e-08, up: 2.5e-08}}, 12: {Statistical uncertainty: {dn: -1.3e-08, up: 1.3e-08}}, 13: {Statistical uncertainty: {dn: -8.5e-09, up: 8.5e-09}}, 14: {Statistical uncertainty: {dn: -4.0e-09, up: 4.0e-09}}, 15: {Statistical uncertainty: {dn: -1.9e-09, up: 1.9e-09}}, 16: {Statistical uncertainty: {dn: -7.7e-10, up: 7.7e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+Path: /REF/CMS_2020_I064906/d02-x01-y02
 Title: Figure 2.2
 Type: Scatter2D
 ---
@@ -308,9 +308,9 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	1.040000e-02	1.500000e-05	1.500000e-05
 1.200000e+00	1.000000e-01	1.000000e-01	6.760000e-03	8.600000e-06	8.600000e-06
 1.400000e+00	1.000000e-01	1.000000e-01	4.330000e-03	5.700000e-06	5.700000e-06
-1.600000e+00	-3.000000e-01	-3.000000e-01	9.830000e-04	1.300000e-06	1.300000e-06
 1.600000e+00	1.000000e-01	1.000000e-01	2.790000e-03	4.000000e-06	4.000000e-06
 1.800000e+00	1.000000e-01	1.000000e-01	1.880000e-03	2.900000e-06	2.900000e-06
+2.100000e+00	2.000000e-01	2.000000e-01	9.830000e-04	1.300000e-06	1.300000e-06
 2.500000e+00	2.000000e-01	2.000000e-01	4.390000e-04	7.200000e-07	7.200000e-07
 3.000000e+00	3.000000e-01	3.000000e-01	1.720000e-04	3.100000e-07	3.100000e-07
 3.700000e+00	4.000000e-01	4.000000e-01	5.030000e-05	1.300000e-07	1.300000e-07
@@ -324,10 +324,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d02-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -4.4e-05, up: 4.4e-05}}, 1: {Statistical uncertainty: {dn: -2.0e-05, up: 2.0e-05}}, 2: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 3: {Statistical uncertainty: {dn: -7.8e-06, up: 7.8e-06}}, 4: {Statistical uncertainty: {dn: -5.5e-06, up: 5.5e-06}}, 5: {Statistical uncertainty: {dn: -4.0e-06, up: 4.0e-06}}, 6: {Statistical uncertainty: {dn: -1.8e-06, up: 1.8e-06}}, 7: {Statistical uncertainty: {dn: -1.0e-06, up: 1.0e-06}}, 8: {Statistical uncertainty: {dn: -4.3e-07, up: 4.3e-07}}, 9: {Statistical uncertainty: {dn: -1.8e-07, up: 1.8e-07}}, 10: {Statistical uncertainty: {dn: -7.8e-08, up: 7.8e-08}}, 11: {Statistical uncertainty: {dn: -3.7e-08, up: 3.7e-08}}, 12: {Statistical uncertainty: {dn: -1.8e-08, up: 1.8e-08}}, 13: {Statistical uncertainty: {dn: -1.2e-08, up: 1.2e-08}}, 14: {Statistical uncertainty: {dn: -5.6e-09, up: 5.6e-09}}, 15: {Statistical uncertainty: {dn: -2.6e-09, up: 2.6e-09}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y03
+Path: /REF/CMS_2020_I064906/d02-x01-y03
 Title: Figure 2.2
 Type: Scatter2D
 ---
@@ -336,9 +336,9 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	1.020000e-02	2.000000e-05	2.000000e-05
 1.200000e+00	1.000000e-01	1.000000e-01	6.770000e-03	1.200000e-05	1.200000e-05
 1.400000e+00	1.000000e-01	1.000000e-01	4.270000e-03	7.800000e-06	7.800000e-06
-1.600000e+00	-3.000000e-01	-3.000000e-01	9.770000e-04	1.800000e-06	1.800000e-06
 1.600000e+00	1.000000e-01	1.000000e-01	2.790000e-03	5.500000e-06	5.500000e-06
 1.800000e+00	1.000000e-01	1.000000e-01	1.840000e-03	4.000000e-06	4.000000e-06
+2.100000e+00	2.000000e-01	2.000000e-01	9.770000e-04	1.800000e-06	1.800000e-06
 2.500000e+00	2.000000e-01	2.000000e-01	4.420000e-04	1.000000e-06	1.000000e-06
 3.000000e+00	3.000000e-01	3.000000e-01	1.700000e-04	4.300000e-07	4.300000e-07
 3.700000e+00	4.000000e-01	4.000000e-01	5.170000e-05	1.800000e-07	1.800000e-07
@@ -352,10 +352,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d02-x01-y04
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00067, up: 0.00067}}, 1: {Statistical uncertainty: {dn: -0.00026, up: 0.00026}}, 2: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 3: {Statistical uncertainty: {dn: -9.8e-05, up: 9.8e-05}}, 4: {Statistical uncertainty: {dn: -7.1e-05, up: 7.1e-05}}, 5: {Statistical uncertainty: {dn: -6.8e-05, up: 6.8e-05}}, 6: {Statistical uncertainty: {dn: -2.5e-05, up: 2.5e-05}}, 7: {Statistical uncertainty: {dn: -1.4e-05, up: 1.4e-05}}, 8: {Statistical uncertainty: {dn: -6.0e-06, up: 6.0e-06}}, 9: {Statistical uncertainty: {dn: -2.3e-06, up: 2.3e-06}}, 10: {Statistical uncertainty: {dn: -1.0e-06, up: 1.0e-06}}, 11: {Statistical uncertainty: {dn: -4.4e-07, up: 4.4e-07}}, 12: {Statistical uncertainty: {dn: -2.3e-07, up: 2.3e-07}}, 13: {Statistical uncertainty: {dn: -1.3e-07, up: 1.3e-07}}, 14: {Statistical uncertainty: {dn: -6.0e-08, up: 6.0e-08}}, 15: {Statistical uncertainty: {dn: -2.9e-08, up: 2.9e-08}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y04
+Path: /REF/CMS_2020_I064906/d02-x01-y04
 Title: Figure 2.2
 Type: Scatter2D
 ---
@@ -364,9 +364,9 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	5.660000e-02	2.600000e-04	2.600000e-04
 1.200000e+00	1.000000e-01	1.000000e-01	4.150000e-02	1.500000e-04	1.500000e-04
 1.400000e+00	1.000000e-01	1.000000e-01	2.940000e-02	9.800000e-05	9.800000e-05
-1.600000e+00	-3.000000e-01	-3.000000e-01	8.670000e-03	2.500000e-05	2.500000e-05
 1.600000e+00	1.000000e-01	1.000000e-01	2.070000e-02	7.100000e-05	7.100000e-05
 1.800000e+00	1.000000e-01	1.000000e-01	1.500000e-02	6.800000e-05	6.800000e-05
+2.100000e+00	2.000000e-01	2.000000e-01	8.670000e-03	2.500000e-05	2.500000e-05
 2.500000e+00	2.000000e-01	2.000000e-01	4.210000e-03	1.400000e-05	1.400000e-05
 3.000000e+00	3.000000e-01	3.000000e-01	1.740000e-03	6.000000e-06	6.000000e-06
 3.700000e+00	4.000000e-01	4.000000e-01	5.220000e-04	2.300000e-06	2.300000e-06
@@ -380,10 +380,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d02-x01-y05
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00056, up: 0.00056}}, 1: {Statistical uncertainty: {dn: -0.00017, up: 0.00017}}, 2: {Statistical uncertainty: {dn: -0.00011, up: 0.00011}}, 3: {Statistical uncertainty: {dn: -6.9e-05, up: 6.9e-05}}, 4: {Statistical uncertainty: {dn: -4.8e-05, up: 4.8e-05}}, 5: {Statistical uncertainty: {dn: -3.6e-05, up: 3.6e-05}}, 6: {Statistical uncertainty: {dn: -1.6e-05, up: 1.6e-05}}, 7: {Statistical uncertainty: {dn: -9.3e-06, up: 9.3e-06}}, 8: {Statistical uncertainty: {dn: -4.1e-06, up: 4.1e-06}}, 9: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 10: {Statistical uncertainty: {dn: -7.0e-07, up: 7.0e-07}}, 11: {Statistical uncertainty: {dn: -3.2e-07, up: 3.2e-07}}, 12: {Statistical uncertainty: {dn: -1.7e-07, up: 1.7e-07}}, 13: {Statistical uncertainty: {dn: -9.2e-08, up: 9.2e-08}}, 14: {Statistical uncertainty: {dn: -4.5e-08, up: 4.5e-08}}, 15: {Statistical uncertainty: {dn: -2.1e-08, up: 2.1e-08}}, 16: {Statistical uncertainty: {dn: -7.3e-09, up: 7.3e-09}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y05
+Path: /REF/CMS_2020_I064906/d02-x01-y05
 Title: Figure 2.2
 Type: Scatter2D
 ---
@@ -392,9 +392,9 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	5.250000e-02	1.700000e-04	1.700000e-04
 1.200000e+00	1.000000e-01	1.000000e-01	3.850000e-02	1.100000e-04	1.100000e-04
 1.400000e+00	1.000000e-01	1.000000e-01	2.700000e-02	6.900000e-05	6.900000e-05
-1.600000e+00	-3.000000e-01	-3.000000e-01	7.800000e-03	1.600000e-05	1.600000e-05
 1.600000e+00	1.000000e-01	1.000000e-01	1.890000e-02	4.800000e-05	4.800000e-05
 1.800000e+00	1.000000e-01	1.000000e-01	1.360000e-02	3.600000e-05	3.600000e-05
+2.100000e+00	2.000000e-01	2.000000e-01	7.800000e-03	1.600000e-05	1.600000e-05
 2.500000e+00	2.000000e-01	2.000000e-01	3.800000e-03	9.300000e-06	9.300000e-06
 3.000000e+00	3.000000e-01	3.000000e-01	1.570000e-03	4.100000e-06	4.100000e-06
 3.700000e+00	4.000000e-01	4.000000e-01	4.780000e-04	1.600000e-06	1.600000e-06
@@ -408,10 +408,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d02-x01-y06
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00056, up: 0.00056}}, 1: {Statistical uncertainty: {dn: -0.00023, up: 0.00023}}, 2: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 3: {Statistical uncertainty: {dn: -8.9e-05, up: 8.9e-05}}, 4: {Statistical uncertainty: {dn: -6.2e-05, up: 6.2e-05}}, 5: {Statistical uncertainty: {dn: -4.5e-05, up: 4.5e-05}}, 6: {Statistical uncertainty: {dn: -2.1e-05, up: 2.1e-05}}, 7: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 8: {Statistical uncertainty: {dn: -5.4e-06, up: 5.4e-06}}, 9: {Statistical uncertainty: {dn: -2.2e-06, up: 2.2e-06}}, 10: {Statistical uncertainty: {dn: -9.7e-07, up: 9.7e-07}}, 11: {Statistical uncertainty: {dn: -4.6e-07, up: 4.6e-07}}, 12: {Statistical uncertainty: {dn: -2.4e-07, up: 2.4e-07}}, 13: {Statistical uncertainty: {dn: -1.4e-07, up: 1.4e-07}}, 14: {Statistical uncertainty: {dn: -6.8e-08, up: 6.8e-08}}, 15: {Statistical uncertainty: {dn: -3.0e-08, up: 3.0e-08}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y06
+Path: /REF/CMS_2020_I064906/d02-x01-y06
 Title: Figure 2.2
 Type: Scatter2D
 ---
@@ -420,9 +420,9 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	4.670000e-02	2.300000e-04	2.300000e-04
 1.200000e+00	1.000000e-01	1.000000e-01	3.460000e-02	1.400000e-04	1.400000e-04
 1.400000e+00	1.000000e-01	1.000000e-01	2.420000e-02	8.900000e-05	8.900000e-05
-1.600000e+00	-3.000000e-01	-3.000000e-01	7.020000e-03	2.100000e-05	2.100000e-05
 1.600000e+00	1.000000e-01	1.000000e-01	1.680000e-02	6.200000e-05	6.200000e-05
 1.800000e+00	1.000000e-01	1.000000e-01	1.200000e-02	4.500000e-05	4.500000e-05
+2.100000e+00	2.000000e-01	2.000000e-01	7.020000e-03	2.100000e-05	2.100000e-05
 2.500000e+00	2.000000e-01	2.000000e-01	3.430000e-03	1.200000e-05	1.200000e-05
 3.000000e+00	3.000000e-01	3.000000e-01	1.390000e-03	5.400000e-06	5.400000e-06
 3.700000e+00	4.000000e-01	4.000000e-01	4.290000e-04	2.200000e-06	2.200000e-06
@@ -436,10 +436,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d03-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -1.3e-05, up: 1.3e-05}}, 1: {Statistical uncertainty: {dn: -7.7e-06, up: 7.7e-06}}, 2: {Statistical uncertainty: {dn: -5.7e-06, up: 5.7e-06}}, 3: {Statistical uncertainty: {dn: -2.4e-06, up: 2.4e-06}}, 4: {Statistical uncertainty: {dn: -1.3e-06, up: 1.3e-06}}, 5: {Statistical uncertainty: {dn: -5.6e-07, up: 5.6e-07}}, 6: {Statistical uncertainty: {dn: -1.9e-07, up: 1.9e-07}}, 7: {Statistical uncertainty: {dn: -7.6e-08, up: 7.6e-08}}, 8: {Statistical uncertainty: {dn: -3.2e-08, up: 3.2e-08}}, 9: {Statistical uncertainty: {dn: -1.7e-08, up: 1.7e-08}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+Path: /REF/CMS_2020_I064906/d03-x01-y01
 Title: Figure 2.3
 Type: Scatter2D
 ---
@@ -458,10 +458,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d03-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -8.5e-06, up: 8.5e-06}}, 1: {Statistical uncertainty: {dn: -5.7e-06, up: 5.7e-06}}, 2: {Statistical uncertainty: {dn: -4.0e-06, up: 4.0e-06}}, 3: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 4: {Statistical uncertainty: {dn: -8.4e-07, up: 8.4e-07}}, 5: {Statistical uncertainty: {dn: -3.5e-07, up: 3.5e-07}}, 6: {Statistical uncertainty: {dn: -1.4e-07, up: 1.4e-07}}, 7: {Statistical uncertainty: {dn: -5.2e-08, up: 5.2e-08}}, 8: {Statistical uncertainty: {dn: -2.4e-08, up: 2.4e-08}}, 9: {Statistical uncertainty: {dn: -1.2e-08, up: 1.2e-08}}, 10: {Statistical uncertainty: {dn: -7.1e-09, up: 7.1e-09}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+Path: /REF/CMS_2020_I064906/d03-x01-y02
 Title: Figure 2.3
 Type: Scatter2D
 ---
@@ -480,10 +480,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d03-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 1: {Statistical uncertainty: {dn: -7.7e-06, up: 7.7e-06}}, 2: {Statistical uncertainty: {dn: -5.6e-06, up: 5.6e-06}}, 3: {Statistical uncertainty: {dn: -2.4e-06, up: 2.4e-06}}, 4: {Statistical uncertainty: {dn: -1.2e-06, up: 1.2e-06}}, 5: {Statistical uncertainty: {dn: -5.0e-07, up: 5.0e-07}}, 6: {Statistical uncertainty: {dn: -2.0e-07, up: 2.0e-07}}, 7: {Statistical uncertainty: {dn: -7.7e-08, up: 7.7e-08}}, 8: {Statistical uncertainty: {dn: -3.3e-08, up: 3.3e-08}}, 9: {Statistical uncertainty: {dn: -1.8e-08, up: 1.8e-08}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+Path: /REF/CMS_2020_I064906/d03-x01-y03
 Title: Figure 2.3
 Type: Scatter2D
 ---
@@ -502,10 +502,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d03-x01-y04
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00018, up: 0.00018}}, 1: {Statistical uncertainty: {dn: -0.0001, up: 0.0001}}, 2: {Statistical uncertainty: {dn: -7.8e-05, up: 7.8e-05}}, 3: {Statistical uncertainty: {dn: -3.5e-05, up: 3.5e-05}}, 4: {Statistical uncertainty: {dn: -1.9e-05, up: 1.9e-05}}, 5: {Statistical uncertainty: {dn: -7.5e-06, up: 7.5e-06}}, 6: {Statistical uncertainty: {dn: -2.8e-06, up: 2.8e-06}}, 7: {Statistical uncertainty: {dn: -7.2e-07, up: 7.2e-07}}, 8: {Statistical uncertainty: {dn: -4.2e-07, up: 4.2e-07}}, 9: {Statistical uncertainty: {dn: -1.9e-07, up: 1.9e-07}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+Path: /REF/CMS_2020_I064906/d03-x01-y04
 Title: Figure 2.3
 Type: Scatter2D
 ---
@@ -524,10 +524,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d03-x01-y05
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 1: {Statistical uncertainty: {dn: -7.3e-05, up: 7.3e-05}}, 2: {Statistical uncertainty: {dn: -5.2e-05, up: 5.2e-05}}, 3: {Statistical uncertainty: {dn: -2.2e-05, up: 2.2e-05}}, 4: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 5: {Statistical uncertainty: {dn: -4.7e-06, up: 4.7e-06}}, 6: {Statistical uncertainty: {dn: -1.8e-06, up: 1.8e-06}}, 7: {Statistical uncertainty: {dn: -6.8e-07, up: 6.8e-07}}, 8: {Statistical uncertainty: {dn: -2.9e-07, up: 2.9e-07}}, 9: {Statistical uncertainty: {dn: -1.4e-07, up: 1.4e-07}}, 10: {Statistical uncertainty: {dn: -7.4e-08, up: 7.4e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+Path: /REF/CMS_2020_I064906/d03-x01-y05
 Title: Figure 2.3
 Type: Scatter2D
 ---
@@ -546,10 +546,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d03-x01-y06
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 1: {Statistical uncertainty: {dn: -0.0001, up: 0.0001}}, 2: {Statistical uncertainty: {dn: -6.3e-05, up: 6.3e-05}}, 3: {Statistical uncertainty: {dn: -2.5e-05, up: 2.5e-05}}, 4: {Statistical uncertainty: {dn: -1.3e-05, up: 1.3e-05}}, 5: {Statistical uncertainty: {dn: -5.6e-06, up: 5.6e-06}}, 6: {Statistical uncertainty: {dn: -2.2e-06, up: 2.2e-06}}, 7: {Statistical uncertainty: {dn: -9.4e-07, up: 9.4e-07}}, 8: {Statistical uncertainty: {dn: -3.9e-07, up: 3.9e-07}}, 9: {Statistical uncertainty: {dn: -2.0e-07, up: 2.0e-07}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y06
+Path: /REF/CMS_2020_I064906/d03-x01-y06
 Title: Figure 2.3
 Type: Scatter2D
 ---
@@ -568,10 +568,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d04-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -3.9e-07, up: 3.9e-07}}, 1: {Statistical uncertainty: {dn: -6.3e-07, up: 6.3e-07}}, 2: {Statistical uncertainty: {dn: -3.7e-07, up: 3.7e-07}}, 3: {Statistical uncertainty: {dn: -1.5e-07, up: 1.5e-07}}, 4: {Statistical uncertainty: {dn: -5.7e-08, up: 5.7e-08}}, 5: {Statistical uncertainty: {dn: -2.1e-08, up: 2.1e-08}}, 6: {Statistical uncertainty: {dn: -8.9e-09, up: 8.9e-09}}, 7: {Statistical uncertainty: {dn: -2.0e-09, up: 2.0e-09}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+Path: /REF/CMS_2020_I064906/d04-x01-y01
 Title: Figure 2.4
 Type: Scatter2D
 ---
@@ -587,10 +587,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d04-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -1.8e-05, up: 1.8e-05}}, 1: {Statistical uncertainty: {dn: -9.1e-06, up: 9.1e-06}}, 2: {Statistical uncertainty: {dn: -5.0e-06, up: 5.0e-06}}, 3: {Statistical uncertainty: {dn: -2.2e-06, up: 2.2e-06}}, 4: {Statistical uncertainty: {dn: -8.0e-07, up: 8.0e-07}}, 5: {Statistical uncertainty: {dn: -3.2e-07, up: 3.2e-07}}, 6: {Statistical uncertainty: {dn: -1.2e-07, up: 1.2e-07}}, 7: {Statistical uncertainty: {dn: -2.9e-08, up: 2.9e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y02
+Path: /REF/CMS_2020_I064906/d04-x01-y02
 Title: Figure 2.4
 Type: Scatter2D
 ---
@@ -606,10 +606,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d05-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 1: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 2: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 3: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.037, up: 0.037}}, 4: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 5: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 6: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 7: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 8: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 9: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 10: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 11: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 12: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 13: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 14: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 15: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 16: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 17: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 18: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 19: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 20: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 21: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 22: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 23: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 24: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 25: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 26: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 27: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 28: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 29: {Statistical uncertainty: {dn: -0.019, up: 0.019}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 30: {Statistical uncertainty: {dn: -0.023, up: 0.023}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 31: {Statistical uncertainty: {dn: -0.036, up: 0.036}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 32: {Statistical uncertainty: {dn: -0.054, up: 0.054}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 33: {Statistical uncertainty: {dn: -0.115, up: 0.115}, Systematic uncertainty: {dn: -0.032, up: 0.032}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+Path: /REF/CMS_2020_I064906/d05-x01-y01
 Title: Figure 3
 Type: Scatter2D
 ---
@@ -651,10 +651,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d05-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.068, up: 0.068}}, 1: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 2: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 3: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 4: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.042, up: 0.042}}, 5: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.045, up: 0.045}}, 6: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 7: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.054, up: 0.054}}, 8: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.057, up: 0.057}}, 9: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.059, up: 0.059}}, 10: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.06, up: 0.06}}, 11: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.059, up: 0.059}}, 12: {Statistical uncertainty: {dn: -0.027, up: 0.027}, Systematic uncertainty: {dn: -0.668, up: 0.668}}, 13: {Statistical uncertainty: {dn: -0.039, up: 0.039}, Systematic uncertainty: {dn: -0.048, up: 0.048}}, 14: {Statistical uncertainty: {dn: -0.053, up: 0.053}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 15: {Statistical uncertainty: {dn: -0.081, up: 0.081}, Systematic uncertainty: {dn: -0.046, up: 0.046}}, 16: {Statistical uncertainty: {dn: -0.113, up: 0.113}, Systematic uncertainty: {dn: -0.036, up: 0.036}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y02
+Path: /REF/CMS_2020_I064906/d05-x01-y02
 Title: Figure 3
 Type: Scatter2D
 ---
@@ -696,10 +696,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d05-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.036, up: 0.036}, Systematic uncertainty: {dn: -0.067, up: 0.067}}, 1: {Statistical uncertainty: {dn: -0.033, up: 0.033}, Systematic uncertainty: {dn: -0.069, up: 0.069}}, 2: {Statistical uncertainty: {dn: -0.033, up: 0.033}, Systematic uncertainty: {dn: -0.074, up: 0.074}}, 3: {Statistical uncertainty: {dn: -0.025, up: 0.025}, Systematic uncertainty: {dn: -0.079, up: 0.079}}, 4: {Statistical uncertainty: {dn: -0.028, up: 0.028}, Systematic uncertainty: {dn: -0.088, up: 0.088}}, 5: {Statistical uncertainty: {dn: -0.029, up: 0.029}, Systematic uncertainty: {dn: -0.097, up: 0.097}}, 6: {Statistical uncertainty: {dn: -0.034, up: 0.034}, Systematic uncertainty: {dn: -0.1, up: 0.1}}, 7: {Statistical uncertainty: {dn: -0.048, up: 0.048}, Systematic uncertainty: {dn: -0.101, up: 0.101}}, 8: {Statistical uncertainty: {dn: -0.077, up: 0.077}, Systematic uncertainty: {dn: -0.102, up: 0.102}}, 9: {Statistical uncertainty: {dn: -0.106, up: 0.106}, Systematic uncertainty: {dn: -0.084, up: 0.084}}, 10: {Statistical uncertainty: {dn: -0.152, up: 0.152}, Systematic uncertainty: {dn: -0.068, up: 0.068}}, 11: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 12: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 13: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y03
+Path: /REF/CMS_2020_I064906/d05-x01-y03
 Title: Figure 3
 Type: Scatter2D
 ---
@@ -741,10 +741,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d05-x01-y04
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.069, up: 0.069}, Systematic uncertainty: {dn: -0.127, up: 0.127}}, 1: {Statistical uncertainty: {dn: -0.074, up: 0.074}, Systematic uncertainty: {dn: -0.129, up: 0.129}}, 2: {Statistical uncertainty: {dn: -0.087, up: 0.087}, Systematic uncertainty: {dn: -0.15, up: 0.15}}, 3: {Statistical uncertainty: {dn: -0.094, up: 0.094}, Systematic uncertainty: {dn: -0.178, up: 0.178}}, 4: {Statistical uncertainty: {dn: -0.114, up: 0.114}, Systematic uncertainty: {dn: -0.207, up: 0.207}}, 5: {Statistical uncertainty: {dn: -0.155, up: 0.155}, Systematic uncertainty: {dn: -0.213, up: 0.213}}, 6: {Statistical uncertainty: {dn: -0.228, up: 0.228}, Systematic uncertainty: {dn: -0.202, up: 0.202}}, 7: {Statistical uncertainty: {dn: -0.311, up: 0.311}, Systematic uncertainty: {dn: -0.181, up: 0.181}}, 8: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 9: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 11: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 12: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 13: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 32: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 33: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y04
+Path: /REF/CMS_2020_I064906/d05-x01-y04
 Title: Figure 3
 Type: Scatter2D
 ---
@@ -786,10 +786,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d06-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 1: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.038, up: 0.038}}, 2: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 3: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 4: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 5: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 6: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 7: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 8: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 9: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 10: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 11: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 12: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 13: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 14: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 15: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 16: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 17: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 18: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 19: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 20: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 21: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 22: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 23: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 24: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 25: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 26: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 27: {Statistical uncertainty: {dn: -0.017, up: 0.017}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 28: {Statistical uncertainty: {dn: -0.027, up: 0.027}, Systematic uncertainty: {dn: -0.036, up: 0.036}}, 29: {Statistical uncertainty: {dn: -0.032, up: 0.032}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 30: {Statistical uncertainty: {dn: -0.049, up: 0.049}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 31: {Statistical uncertainty: {dn: -0.072, up: 0.072}, Systematic uncertainty: {dn: -0.033, up: 0.033}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+Path: /REF/CMS_2020_I064906/d06-x01-y01
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -829,10 +829,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d06-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.073, up: 0.073}}, 1: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 2: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 3: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 4: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.047, up: 0.047}}, 5: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 6: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.055, up: 0.055}}, 7: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.06, up: 0.06}}, 8: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.063, up: 0.063}}, 9: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.065, up: 0.065}}, 10: {Statistical uncertainty: {dn: -0.015, up: 0.015}, Systematic uncertainty: {dn: -0.068, up: 0.068}}, 11: {Statistical uncertainty: {dn: -0.023, up: 0.023}, Systematic uncertainty: {dn: -0.063, up: 0.063}}, 12: {Statistical uncertainty: {dn: -0.036, up: 0.036}, Systematic uncertainty: {dn: -0.055, up: 0.055}}, 13: {Statistical uncertainty: {dn: -0.055, up: 0.055}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 14: {Statistical uncertainty: {dn: -0.07, up: 0.07}, Systematic uncertainty: {dn: -0.05, up: 0.05}}, 15: {Statistical uncertainty: {dn: -0.117, up: 0.117}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y02
+Path: /REF/CMS_2020_I064906/d06-x01-y02
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -872,10 +872,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d06-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.057, up: 0.057}, Systematic uncertainty: {dn: -0.077, up: 0.077}}, 1: {Statistical uncertainty: {dn: -0.046, up: 0.046}, Systematic uncertainty: {dn: -0.07, up: 0.07}}, 2: {Statistical uncertainty: {dn: -0.051, up: 0.051}, Systematic uncertainty: {dn: -0.08, up: 0.08}}, 3: {Statistical uncertainty: {dn: -0.043, up: 0.043}, Systematic uncertainty: {dn: -0.097, up: 0.097}}, 4: {Statistical uncertainty: {dn: -0.046, up: 0.046}, Systematic uncertainty: {dn: -0.102, up: 0.102}}, 5: {Statistical uncertainty: {dn: -0.046, up: 0.046}, Systematic uncertainty: {dn: -0.11, up: 0.11}}, 6: {Statistical uncertainty: {dn: -0.051, up: 0.051}, Systematic uncertainty: {dn: -0.11, up: 0.11}}, 7: {Statistical uncertainty: {dn: -0.061, up: 0.061}, Systematic uncertainty: {dn: -0.108, up: 0.108}}, 8: {Statistical uncertainty: {dn: -0.113, up: 0.113}, Systematic uncertainty: {dn: -0.116, up: 0.116}}, 9: {Statistical uncertainty: {dn: -0.151, up: 0.151}, Systematic uncertainty: {dn: -0.089, up: 0.089}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 11: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 12: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 13: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y03
+Path: /REF/CMS_2020_I064906/d06-x01-y03
 Title: Figure 4.1
 Type: Scatter2D
 ---
@@ -915,10 +915,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d07-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 1: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 2: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 3: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.02, up: 0.02}}, 4: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 5: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 6: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 7: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 8: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 9: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 10: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 11: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 12: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 13: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 14: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 15: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 16: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 17: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 18: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 19: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 20: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 21: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 22: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 23: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 24: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 25: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 26: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 27: {Statistical uncertainty: {dn: -0.018, up: 0.018}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 28: {Statistical uncertainty: {dn: -0.026, up: 0.026}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 29: {Statistical uncertainty: {dn: -0.033, up: 0.033}, Systematic uncertainty: {dn: -0.029, up: 0.029}}, 30: {Statistical uncertainty: {dn: -0.052, up: 0.052}, Systematic uncertainty: {dn: -0.031, up: 0.031}}, 31: {Statistical uncertainty: {dn: -0.084, up: 0.084}, Systematic uncertainty: {dn: -0.034, up: 0.034}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y01
+Path: /REF/CMS_2020_I064906/d07-x01-y01
 Title: Figure 4.2
 Type: Scatter2D
 ---
@@ -958,10 +958,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d07-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.058, up: 0.058}}, 1: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.028, up: 0.028}}, 2: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.032, up: 0.032}}, 3: {Statistical uncertainty: {dn: -0.003, up: 0.003}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 4: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.038, up: 0.038}}, 5: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 6: {Statistical uncertainty: {dn: -0.004, up: 0.004}, Systematic uncertainty: {dn: -0.045, up: 0.045}}, 7: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 8: {Statistical uncertainty: {dn: -0.005, up: 0.005}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 9: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 10: {Statistical uncertainty: {dn: -0.013, up: 0.013}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 11: {Statistical uncertainty: {dn: -0.023, up: 0.023}, Systematic uncertainty: {dn: -0.055, up: 0.055}}, 12: {Statistical uncertainty: {dn: -0.038, up: 0.038}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 13: {Statistical uncertainty: {dn: -0.056, up: 0.056}, Systematic uncertainty: {dn: -0.046, up: 0.046}}, 14: {Statistical uncertainty: {dn: -0.075, up: 0.075}, Systematic uncertainty: {dn: -0.045, up: 0.045}}, 15: {Statistical uncertainty: {dn: -0.112, up: 0.112}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y02
+Path: /REF/CMS_2020_I064906/d07-x01-y02
 Title: Figure 4.2
 Type: Scatter2D
 ---
@@ -1001,10 +1001,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d07-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.05, up: 0.05}, Systematic uncertainty: {dn: -0.06, up: 0.06}}, 1: {Statistical uncertainty: {dn: -0.044, up: 0.044}, Systematic uncertainty: {dn: -0.067, up: 0.067}}, 2: {Statistical uncertainty: {dn: -0.044, up: 0.044}, Systematic uncertainty: {dn: -0.073, up: 0.073}}, 3: {Statistical uncertainty: {dn: -0.029, up: 0.029}, Systematic uncertainty: {dn: -0.069, up: 0.069}}, 4: {Statistical uncertainty: {dn: -0.034, up: 0.034}, Systematic uncertainty: {dn: -0.078, up: 0.078}}, 5: {Statistical uncertainty: {dn: -0.034, up: 0.034}, Systematic uncertainty: {dn: -0.084, up: 0.084}}, 6: {Statistical uncertainty: {dn: -0.042, up: 0.042}, Systematic uncertainty: {dn: -0.087, up: 0.087}}, 7: {Statistical uncertainty: {dn: -0.066, up: 0.066}, Systematic uncertainty: {dn: -0.095, up: 0.095}}, 8: {Statistical uncertainty: {dn: -0.101, up: 0.101}, Systematic uncertainty: {dn: -0.086, up: 0.086}}, 9: {Statistical uncertainty: {dn: -0.134, up: 0.134}, Systematic uncertainty: {dn: -0.073, up: 0.073}}, 10: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 11: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 12: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 13: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 30: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 31: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y03
+Path: /REF/CMS_2020_I064906/d07-x01-y03
 Title: Figure 4.2
 Type: Scatter2D
 ---
@@ -1044,10 +1044,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d08-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0033, up: 0.0033}}, 1: {Statistical uncertainty: {dn: -0.0017, up: 0.0017}}, 2: {Statistical uncertainty: {dn: -0.0011, up: 0.0011}}, 3: {Statistical uncertainty: {dn: -0.00069, up: 0.00069}}, 4: {Statistical uncertainty: {dn: -0.00054, up: 0.00054}}, 5: {Statistical uncertainty: {dn: -0.00039, up: 0.00039}}, 6: {Statistical uncertainty: {dn: -0.00031, up: 0.00031}}, 7: {Statistical uncertainty: {dn: -0.00024, up: 0.00024}}, 8: {Statistical uncertainty: {dn: -0.00019, up: 0.00019}}, 9: {Statistical uncertainty: {dn: -0.00016, up: 0.00016}}, 10: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 11: {Statistical uncertainty: {dn: -0.00011, up: 0.00011}}, 12: {Statistical uncertainty: {dn: -8.9e-05, up: 8.9e-05}}, 13: {Statistical uncertainty: {dn: -7.6e-05, up: 7.6e-05}}, 14: {Statistical uncertainty: {dn: -6.5e-05, up: 6.5e-05}}, 15: {Statistical uncertainty: {dn: -3.8e-05, up: 3.8e-05}}, 16: {Statistical uncertainty: {dn: -2.8e-05, up: 2.8e-05}}, 17: {Statistical uncertainty: {dn: -2.2e-05, up: 2.2e-05}}, 18: {Statistical uncertainty: {dn: -1.7e-05, up: 1.7e-05}}, 19: {Statistical uncertainty: {dn: -1.4e-05, up: 1.4e-05}}, 20: {Statistical uncertainty: {dn: -7.0e-06, up: 7.0e-06}}, 21: {Statistical uncertainty: {dn: -4.8e-06, up: 4.8e-06}}, 22: {Statistical uncertainty: {dn: -3.7e-06, up: 3.7e-06}}, 23: {Statistical uncertainty: {dn: -2.5e-06, up: 2.5e-06}}, 24: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 25: {Statistical uncertainty: {dn: -6.7e-07, up: 6.7e-07}}, 26: {Statistical uncertainty: {dn: -4.1e-07, up: 4.1e-07}}, 27: {Statistical uncertainty: {dn: -2.6e-07, up: 2.6e-07}}, 28: {Statistical uncertainty: {dn: -1.3e-07, up: 1.3e-07}}, 29: {Statistical uncertainty: {dn: -6.6e-08, up: 6.6e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y01
+Path: /REF/CMS_2020_I064906/d08-x01-y01
 Title: Figure 5.1
 Type: Scatter2D
 ---
@@ -1085,10 +1085,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d08-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0038, up: 0.0038}}, 1: {Statistical uncertainty: {dn: -0.0019, up: 0.0019}}, 2: {Statistical uncertainty: {dn: -0.0011, up: 0.0011}}, 3: {Statistical uncertainty: {dn: -0.00077, up: 0.00077}}, 4: {Statistical uncertainty: {dn: -0.00054, up: 0.00054}}, 5: {Statistical uncertainty: {dn: -0.00038, up: 0.00038}}, 6: {Statistical uncertainty: {dn: -0.00029, up: 0.00029}}, 7: {Statistical uncertainty: {dn: -0.00023, up: 0.00023}}, 8: {Statistical uncertainty: {dn: -0.00018, up: 0.00018}}, 9: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 10: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 11: {Statistical uncertainty: {dn: -9.6e-05, up: 9.6e-05}}, 12: {Statistical uncertainty: {dn: -8.1e-05, up: 8.1e-05}}, 13: {Statistical uncertainty: {dn: -6.9e-05, up: 6.9e-05}}, 14: {Statistical uncertainty: {dn: -5.8e-05, up: 5.8e-05}}, 15: {Statistical uncertainty: {dn: -3.3e-05, up: 3.3e-05}}, 16: {Statistical uncertainty: {dn: -2.5e-05, up: 2.5e-05}}, 17: {Statistical uncertainty: {dn: -1.9e-05, up: 1.9e-05}}, 18: {Statistical uncertainty: {dn: -1.5e-05, up: 1.5e-05}}, 19: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 20: {Statistical uncertainty: {dn: -6.0e-06, up: 6.0e-06}}, 21: {Statistical uncertainty: {dn: -4.0e-06, up: 4.0e-06}}, 22: {Statistical uncertainty: {dn: -3.0e-06, up: 3.0e-06}}, 23: {Statistical uncertainty: {dn: -2.0e-06, up: 2.0e-06}}, 24: {Statistical uncertainty: {dn: -1.3e-06, up: 1.3e-06}}, 25: {Statistical uncertainty: {dn: -5.9e-07, up: 5.9e-07}}, 26: {Statistical uncertainty: {dn: -3.5e-07, up: 3.5e-07}}, 27: {Statistical uncertainty: {dn: -2.2e-07, up: 2.2e-07}}, 28: {Statistical uncertainty: {dn: -1.1e-07, up: 1.1e-07}}, 29: {Statistical uncertainty: {dn: -5.6e-08, up: 5.6e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y02
+Path: /REF/CMS_2020_I064906/d08-x01-y02
 Title: Figure 5.1
 Type: Scatter2D
 ---
@@ -1126,10 +1126,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d08-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0045, up: 0.0045}}, 1: {Statistical uncertainty: {dn: -0.002, up: 0.002}}, 2: {Statistical uncertainty: {dn: -0.0012, up: 0.0012}}, 3: {Statistical uncertainty: {dn: -0.00078, up: 0.00078}}, 4: {Statistical uncertainty: {dn: -0.00054, up: 0.00054}}, 5: {Statistical uncertainty: {dn: -0.00038, up: 0.00038}}, 6: {Statistical uncertainty: {dn: -0.0003, up: 0.0003}}, 7: {Statistical uncertainty: {dn: -0.00023, up: 0.00023}}, 8: {Statistical uncertainty: {dn: -0.00018, up: 0.00018}}, 9: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 10: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 11: {Statistical uncertainty: {dn: -9.8e-05, up: 9.8e-05}}, 12: {Statistical uncertainty: {dn: -8.1e-05, up: 8.1e-05}}, 13: {Statistical uncertainty: {dn: -6.8e-05, up: 6.8e-05}}, 14: {Statistical uncertainty: {dn: -5.8e-05, up: 5.8e-05}}, 15: {Statistical uncertainty: {dn: -3.3e-05, up: 3.3e-05}}, 16: {Statistical uncertainty: {dn: -2.5e-05, up: 2.5e-05}}, 17: {Statistical uncertainty: {dn: -1.9e-05, up: 1.9e-05}}, 18: {Statistical uncertainty: {dn: -1.5e-05, up: 1.5e-05}}, 19: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 20: {Statistical uncertainty: {dn: -5.9e-06, up: 5.9e-06}}, 21: {Statistical uncertainty: {dn: -4.1e-06, up: 4.1e-06}}, 22: {Statistical uncertainty: {dn: -2.9e-06, up: 2.9e-06}}, 23: {Statistical uncertainty: {dn: -2.2e-06, up: 2.2e-06}}, 24: {Statistical uncertainty: {dn: -1.4e-06, up: 1.4e-06}}, 25: {Statistical uncertainty: {dn: -5.9e-07, up: 5.9e-07}}, 26: {Statistical uncertainty: {dn: -3.7e-07, up: 3.7e-07}}, 27: {Statistical uncertainty: {dn: -2.4e-07, up: 2.4e-07}}, 28: {Statistical uncertainty: {dn: -1.1e-07, up: 1.1e-07}}, 29: {Statistical uncertainty: {dn: -5.5e-08, up: 5.5e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y03
+Path: /REF/CMS_2020_I064906/d08-x01-y03
 Title: Figure 5.1
 Type: Scatter2D
 ---
@@ -1167,10 +1167,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d08-x01-y04
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0036, up: 0.0036}}, 1: {Statistical uncertainty: {dn: -0.0016, up: 0.0016}}, 2: {Statistical uncertainty: {dn: -0.001, up: 0.001}}, 3: {Statistical uncertainty: {dn: -0.00069, up: 0.00069}}, 4: {Statistical uncertainty: {dn: -0.00049, up: 0.00049}}, 5: {Statistical uncertainty: {dn: -0.00037, up: 0.00037}}, 6: {Statistical uncertainty: {dn: -0.00028, up: 0.00028}}, 7: {Statistical uncertainty: {dn: -0.00023, up: 0.00023}}, 8: {Statistical uncertainty: {dn: -0.00018, up: 0.00018}}, 9: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 10: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 11: {Statistical uncertainty: {dn: -9.8e-05, up: 9.8e-05}}, 12: {Statistical uncertainty: {dn: -8.2e-05, up: 8.2e-05}}, 13: {Statistical uncertainty: {dn: -7.1e-05, up: 7.1e-05}}, 14: {Statistical uncertainty: {dn: -5.9e-05, up: 5.9e-05}}, 15: {Statistical uncertainty: {dn: -3.4e-05, up: 3.4e-05}}, 16: {Statistical uncertainty: {dn: -2.6e-05, up: 2.6e-05}}, 17: {Statistical uncertainty: {dn: -2.0e-05, up: 2.0e-05}}, 18: {Statistical uncertainty: {dn: -1.6e-05, up: 1.6e-05}}, 19: {Statistical uncertainty: {dn: -1.3e-05, up: 1.3e-05}}, 20: {Statistical uncertainty: {dn: -6.6e-06, up: 6.6e-06}}, 21: {Statistical uncertainty: {dn: -4.5e-06, up: 4.5e-06}}, 22: {Statistical uncertainty: {dn: -3.3e-06, up: 3.3e-06}}, 23: {Statistical uncertainty: {dn: -2.3e-06, up: 2.3e-06}}, 24: {Statistical uncertainty: {dn: -1.7e-06, up: 1.7e-06}}, 25: {Statistical uncertainty: {dn: -7.0e-07, up: 7.0e-07}}, 26: {Statistical uncertainty: {dn: -4.0e-07, up: 4.0e-07}}, 27: {Statistical uncertainty: {dn: -2.5e-07, up: 2.5e-07}}, 28: {Statistical uncertainty: {dn: -1.2e-07, up: 1.2e-07}}, 29: {Statistical uncertainty: {dn: -6.4e-08, up: 6.4e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y04
+Path: /REF/CMS_2020_I064906/d08-x01-y04
 Title: Figure 5.1
 Type: Scatter2D
 ---
@@ -1208,10 +1208,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d08-x01-y05
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0029, up: 0.0029}}, 1: {Statistical uncertainty: {dn: -0.0015, up: 0.0015}}, 2: {Statistical uncertainty: {dn: -0.00096, up: 0.00096}}, 3: {Statistical uncertainty: {dn: -0.00065, up: 0.00065}}, 4: {Statistical uncertainty: {dn: -0.00045, up: 0.00045}}, 5: {Statistical uncertainty: {dn: -0.00034, up: 0.00034}}, 6: {Statistical uncertainty: {dn: -0.00026, up: 0.00026}}, 7: {Statistical uncertainty: {dn: -0.00022, up: 0.00022}}, 8: {Statistical uncertainty: {dn: -0.00017, up: 0.00017}}, 9: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 10: {Statistical uncertainty: {dn: -0.00012, up: 0.00012}}, 11: {Statistical uncertainty: {dn: -0.0001, up: 0.0001}}, 12: {Statistical uncertainty: {dn: -8.4e-05, up: 8.4e-05}}, 13: {Statistical uncertainty: {dn: -7.4e-05, up: 7.4e-05}}, 14: {Statistical uncertainty: {dn: -6.0e-05, up: 6.0e-05}}, 15: {Statistical uncertainty: {dn: -3.8e-05, up: 3.8e-05}}, 16: {Statistical uncertainty: {dn: -2.7e-05, up: 2.7e-05}}, 17: {Statistical uncertainty: {dn: -2.1e-05, up: 2.1e-05}}, 18: {Statistical uncertainty: {dn: -1.7e-05, up: 1.7e-05}}, 19: {Statistical uncertainty: {dn: -1.4e-05, up: 1.4e-05}}, 20: {Statistical uncertainty: {dn: -7.5e-06, up: 7.5e-06}}, 21: {Statistical uncertainty: {dn: -5.1e-06, up: 5.1e-06}}, 22: {Statistical uncertainty: {dn: -3.6e-06, up: 3.6e-06}}, 23: {Statistical uncertainty: {dn: -2.7e-06, up: 2.7e-06}}, 24: {Statistical uncertainty: {dn: -1.8e-06, up: 1.8e-06}}, 25: {Statistical uncertainty: {dn: -8.7e-07, up: 8.7e-07}}, 26: {Statistical uncertainty: {dn: -5.0e-07, up: 5.0e-07}}, 27: {Statistical uncertainty: {dn: -3.3e-07, up: 3.3e-07}}, 28: {Statistical uncertainty: {dn: -1.7e-07, up: 1.7e-07}}, 29: {Statistical uncertainty: {dn: -8.5e-08, up: 8.5e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y05
+Path: /REF/CMS_2020_I064906/d08-x01-y05
 Title: Figure 5.1
 Type: Scatter2D
 ---
@@ -1249,10 +1249,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d08-x01-y06
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.011, up: 0.011}}, 1: {Statistical uncertainty: {dn: -0.0041, up: 0.0041}}, 2: {Statistical uncertainty: {dn: -0.0023, up: 0.0023}}, 3: {Statistical uncertainty: {dn: -0.0013, up: 0.0013}}, 4: {Statistical uncertainty: {dn: -0.00087, up: 0.00087}}, 5: {Statistical uncertainty: {dn: -0.00055, up: 0.00055}}, 6: {Statistical uncertainty: {dn: -0.00041, up: 0.00041}}, 7: {Statistical uncertainty: {dn: -0.0003, up: 0.0003}}, 8: {Statistical uncertainty: {dn: -0.00024, up: 0.00024}}, 9: {Statistical uncertainty: {dn: -0.00019, up: 0.00019}}, 10: {Statistical uncertainty: {dn: -0.00015, up: 0.00015}}, 11: {Statistical uncertainty: {dn: -0.00013, up: 0.00013}}, 12: {Statistical uncertainty: {dn: -0.0001, up: 0.0001}}, 13: {Statistical uncertainty: {dn: -9.6e-05, up: 9.6e-05}}, 14: {Statistical uncertainty: {dn: -7.9e-05, up: 7.9e-05}}, 15: {Statistical uncertainty: {dn: -4.4e-05, up: 4.4e-05}}, 16: {Statistical uncertainty: {dn: -3.2e-05, up: 3.2e-05}}, 17: {Statistical uncertainty: {dn: -2.4e-05, up: 2.4e-05}}, 18: {Statistical uncertainty: {dn: -2.1e-05, up: 2.1e-05}}, 19: {Statistical uncertainty: {dn: -1.6e-05, up: 1.6e-05}}, 20: {Statistical uncertainty: {dn: -7.9e-06, up: 7.9e-06}}, 21: {Statistical uncertainty: {dn: -5.4e-06, up: 5.4e-06}}, 22: {Statistical uncertainty: {dn: -4.5e-06, up: 4.5e-06}}, 23: {Statistical uncertainty: {dn: -2.5e-06, up: 2.5e-06}}, 24: {Statistical uncertainty: {dn: -1.6e-06, up: 1.6e-06}}, 25: {Statistical uncertainty: {dn: -8.9e-07, up: 8.9e-07}}, 26: {Statistical uncertainty: {dn: -5.2e-07, up: 5.2e-07}}, 27: {Statistical uncertainty: {dn: -2.6e-07, up: 2.6e-07}}, 28: {Statistical uncertainty: {dn: -1.3e-07, up: 1.3e-07}}, 29: {Statistical uncertainty: {dn: -7.2e-08, up: 7.2e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y06
+Path: /REF/CMS_2020_I064906/d08-x01-y06
 Title: Figure 5.1
 Type: Scatter2D
 ---
@@ -1290,10 +1290,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d09-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0011, up: 0.0011}}, 1: {Statistical uncertainty: {dn: -0.00051, up: 0.00051}}, 2: {Statistical uncertainty: {dn: -0.00029, up: 0.00029}}, 3: {Statistical uncertainty: {dn: -0.00019, up: 0.00019}}, 4: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 5: {Statistical uncertainty: {dn: -0.00011, up: 0.00011}}, 6: {Statistical uncertainty: {dn: -4.5e-05, up: 4.5e-05}}, 7: {Statistical uncertainty: {dn: -2.6e-05, up: 2.6e-05}}, 8: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 9: {Statistical uncertainty: {dn: -4.8e-06, up: 4.8e-06}}, 10: {Statistical uncertainty: {dn: -2.0e-06, up: 2.0e-06}}, 11: {Statistical uncertainty: {dn: -9.1e-07, up: 9.1e-07}}, 12: {Statistical uncertainty: {dn: -4.8e-07, up: 4.8e-07}}, 13: {Statistical uncertainty: {dn: -2.6e-07, up: 2.6e-07}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y01
+Path: /REF/CMS_2020_I064906/d09-x01-y01
 Title: Figure 5.2
 Type: Scatter2D
 ---
@@ -1316,10 +1316,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d09-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0013, up: 0.0013}}, 1: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}}, 2: {Statistical uncertainty: {dn: -0.00028, up: 0.00028}}, 3: {Statistical uncertainty: {dn: -0.00018, up: 0.00018}}, 4: {Statistical uncertainty: {dn: -0.00013, up: 0.00013}}, 5: {Statistical uncertainty: {dn: -0.0001, up: 0.0001}}, 6: {Statistical uncertainty: {dn: -4.6e-05, up: 4.6e-05}}, 7: {Statistical uncertainty: {dn: -2.6e-05, up: 2.6e-05}}, 8: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 9: {Statistical uncertainty: {dn: -4.3e-06, up: 4.3e-06}}, 10: {Statistical uncertainty: {dn: -1.9e-06, up: 1.9e-06}}, 11: {Statistical uncertainty: {dn: -7.9e-07, up: 7.9e-07}}, 12: {Statistical uncertainty: {dn: -4.3e-07, up: 4.3e-07}}, 13: {Statistical uncertainty: {dn: -2.3e-07, up: 2.3e-07}}, 14: {Statistical uncertainty: {dn: -1.0e-07, up: 1.0e-07}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y02
+Path: /REF/CMS_2020_I064906/d09-x01-y02
 Title: Figure 5.2
 Type: Scatter2D
 ---
@@ -1342,10 +1342,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d09-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0016, up: 0.0016}}, 1: {Statistical uncertainty: {dn: -0.00047, up: 0.00047}}, 2: {Statistical uncertainty: {dn: -0.00027, up: 0.00027}}, 3: {Statistical uncertainty: {dn: -0.00019, up: 0.00019}}, 4: {Statistical uncertainty: {dn: -0.00013, up: 0.00013}}, 5: {Statistical uncertainty: {dn: -0.0001, up: 0.0001}}, 6: {Statistical uncertainty: {dn: -4.8e-05, up: 4.8e-05}}, 7: {Statistical uncertainty: {dn: -2.8e-05, up: 2.8e-05}}, 8: {Statistical uncertainty: {dn: -1.2e-05, up: 1.2e-05}}, 9: {Statistical uncertainty: {dn: -4.5e-06, up: 4.5e-06}}, 10: {Statistical uncertainty: {dn: -1.9e-06, up: 1.9e-06}}, 11: {Statistical uncertainty: {dn: -8.5e-07, up: 8.5e-07}}, 12: {Statistical uncertainty: {dn: -4.1e-07, up: 4.1e-07}}, 13: {Statistical uncertainty: {dn: -2.3e-07, up: 2.3e-07}}, 14: {Statistical uncertainty: {dn: -1.1e-07, up: 1.1e-07}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y03
+Path: /REF/CMS_2020_I064906/d09-x01-y03
 Title: Figure 5.2
 Type: Scatter2D
 ---
@@ -1368,10 +1368,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d09-x01-y04
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.001, up: 0.001}}, 1: {Statistical uncertainty: {dn: -0.00049, up: 0.00049}}, 2: {Statistical uncertainty: {dn: -0.00027, up: 0.00027}}, 3: {Statistical uncertainty: {dn: -0.00018, up: 0.00018}}, 4: {Statistical uncertainty: {dn: -0.00013, up: 0.00013}}, 5: {Statistical uncertainty: {dn: -9.4e-05, up: 9.4e-05}}, 6: {Statistical uncertainty: {dn: -4.3e-05, up: 4.3e-05}}, 7: {Statistical uncertainty: {dn: -2.5e-05, up: 2.5e-05}}, 8: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 9: {Statistical uncertainty: {dn: -4.5e-06, up: 4.5e-06}}, 10: {Statistical uncertainty: {dn: -2.0e-06, up: 2.0e-06}}, 11: {Statistical uncertainty: {dn: -9.0e-07, up: 9.0e-07}}, 12: {Statistical uncertainty: {dn: -4.8e-07, up: 4.8e-07}}, 13: {Statistical uncertainty: {dn: -2.5e-07, up: 2.5e-07}}, 14: {Statistical uncertainty: {dn: -1.2e-07, up: 1.2e-07}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y04
+Path: /REF/CMS_2020_I064906/d09-x01-y04
 Title: Figure 5.2
 Type: Scatter2D
 ---
@@ -1394,10 +1394,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d09-x01-y05
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.00092, up: 0.00092}}, 1: {Statistical uncertainty: {dn: -0.00042, up: 0.00042}}, 2: {Statistical uncertainty: {dn: -0.00027, up: 0.00027}}, 3: {Statistical uncertainty: {dn: -0.00016, up: 0.00016}}, 4: {Statistical uncertainty: {dn: -0.00011, up: 0.00011}}, 5: {Statistical uncertainty: {dn: -8.4e-05, up: 8.4e-05}}, 6: {Statistical uncertainty: {dn: -3.7e-05, up: 3.7e-05}}, 7: {Statistical uncertainty: {dn: -2.4e-05, up: 2.4e-05}}, 8: {Statistical uncertainty: {dn: -1.1e-05, up: 1.1e-05}}, 9: {Statistical uncertainty: {dn: -4.6e-06, up: 4.6e-06}}, 10: {Statistical uncertainty: {dn: -2.1e-06, up: 2.1e-06}}, 11: {Statistical uncertainty: {dn: -9.8e-07, up: 9.8e-07}}, 12: {Statistical uncertainty: {dn: -5.3e-07, up: 5.3e-07}}, 13: {Statistical uncertainty: {dn: -3.4e-07, up: 3.4e-07}}, 14: {Statistical uncertainty: {dn: -1.6e-07, up: 1.6e-07}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y05
+Path: /REF/CMS_2020_I064906/d09-x01-y05
 Title: Figure 5.2
 Type: Scatter2D
 ---
@@ -1420,10 +1420,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d09-x01-y06
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0041, up: 0.0041}}, 1: {Statistical uncertainty: {dn: -0.0014, up: 0.0014}}, 2: {Statistical uncertainty: {dn: -0.00047, up: 0.00047}}, 3: {Statistical uncertainty: {dn: -0.00022, up: 0.00022}}, 4: {Statistical uncertainty: {dn: -0.00014, up: 0.00014}}, 5: {Statistical uncertainty: {dn: -8.7e-05, up: 8.7e-05}}, 6: {Statistical uncertainty: {dn: -3.6e-05, up: 3.6e-05}}, 7: {Statistical uncertainty: {dn: -2.1e-05, up: 2.1e-05}}, 8: {Statistical uncertainty: {dn: -9.5e-06, up: 9.5e-06}}, 9: {Statistical uncertainty: {dn: -4.3e-06, up: 4.3e-06}}, 10: {Statistical uncertainty: {dn: -1.7e-06, up: 1.7e-06}}, 11: {Statistical uncertainty: {dn: -9.2e-07, up: 9.2e-07}}, 12: {Statistical uncertainty: {dn: -4.2e-07, up: 4.2e-07}}, 13: {Statistical uncertainty: {dn: -2.4e-07, up: 2.4e-07}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y06
+Path: /REF/CMS_2020_I064906/d09-x01-y06
 Title: Figure 5.2
 Type: Scatter2D
 ---
@@ -1446,10 +1446,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d10-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.018, up: 0.018}, Systematic uncertainty: {dn: -0.046, up: 0.046}}, 1: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.046, up: 0.046}}, 2: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 3: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 4: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 5: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 6: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 7: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 8: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 9: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 10: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 11: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 12: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 13: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 14: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 15: {Statistical uncertainty: {dn: -0.006, up: 0.006}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 16: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 17: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 18: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 19: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 20: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 21: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 22: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 23: {Statistical uncertainty: {dn: -0.02, up: 0.02}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 24: {Statistical uncertainty: {dn: -0.022, up: 0.022}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 25: {Statistical uncertainty: {dn: -0.022, up: 0.022}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 26: {Statistical uncertainty: {dn: -0.037, up: 0.037}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 27: {Statistical uncertainty: {dn: -0.059, up: 0.059}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 28: {Statistical uncertainty: {dn: -0.078, up: 0.078}, Systematic uncertainty: {dn: -0.027, up: 0.027}}, 29: {Statistical uncertainty: {dn: -0.109, up: 0.109}, Systematic uncertainty: {dn: -0.026, up: 0.026}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y01
+Path: /REF/CMS_2020_I064906/d10-x01-y01
 Title: Figure 6.1
 Type: Scatter2D
 ---
@@ -1487,10 +1487,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d10-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.029, up: 0.029}, Systematic uncertainty: {dn: -0.083, up: 0.083}}, 1: {Statistical uncertainty: {dn: -0.013, up: 0.013}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 2: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 3: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 4: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 5: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 6: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 7: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 8: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 9: {Statistical uncertainty: {dn: -0.014, up: 0.014}, Systematic uncertainty: {dn: -0.036, up: 0.036}}, 10: {Statistical uncertainty: {dn: -0.022, up: 0.022}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 11: {Statistical uncertainty: {dn: -0.037, up: 0.037}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 12: {Statistical uncertainty: {dn: -0.057, up: 0.057}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 13: {Statistical uncertainty: {dn: -0.106, up: 0.106}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 14: {Statistical uncertainty: {dn: -0.165, up: 0.165}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y02
+Path: /REF/CMS_2020_I064906/d10-x01-y02
 Title: Figure 6.1
 Type: Scatter2D
 ---
@@ -1528,10 +1528,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d10-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0003, up: 0.0003}, Systematic uncertainty: {dn: -0.02, up: 0.02}}, 1: {Statistical uncertainty: {dn: -0.0003, up: 0.0003}, Systematic uncertainty: {dn: -0.02, up: 0.02}}, 2: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 3: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 4: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 5: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 6: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 7: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 8: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 9: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 10: {Statistical uncertainty: {dn: -0.0008, up: 0.0008}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 11: {Statistical uncertainty: {dn: -0.0009, up: 0.0009}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 12: {Statistical uncertainty: {dn: -0.0011, up: 0.0011}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 13: {Statistical uncertainty: {dn: -0.0013, up: 0.0013}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 14: {Statistical uncertainty: {dn: -0.0009, up: 0.0009}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 15: {Statistical uncertainty: {dn: -0.0016, up: 0.0016}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 16: {Statistical uncertainty: {dn: -0.0026, up: 0.0026}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 17: {Statistical uncertainty: {dn: -0.0038, up: 0.0038}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 18: {Statistical uncertainty: {dn: -0.0055, up: 0.0055}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 19: {Statistical uncertainty: {dn: -0.0076, up: 0.0076}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 20: {Statistical uncertainty: {dn: -0.0072, up: 0.0072}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 21: {Statistical uncertainty: {dn: -0.0137, up: 0.0137}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 22: {Statistical uncertainty: {dn: -0.0218, up: 0.0218}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 23: {Statistical uncertainty: {dn: -0.0025, up: 0.0025}, Systematic uncertainty: {dn: -0.03, up: 0.03}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y03
+Path: /REF/CMS_2020_I064906/d10-x01-y03
 Title: Figure 6.1
 Type: Scatter2D
 ---
@@ -1569,10 +1569,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d11-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d11-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.059, up: 0.059}}, 1: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.061, up: 0.061}}, 2: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 3: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 4: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 5: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 6: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 7: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 8: {Statistical uncertainty: {dn: -0.007, up: 0.007}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 9: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 10: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 11: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 12: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 13: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.042, up: 0.042}}, 14: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 15: {Statistical uncertainty: {dn: -0.008, up: 0.008}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 16: {Statistical uncertainty: {dn: -0.009, up: 0.009}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 17: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 18: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 19: {Statistical uncertainty: {dn: -0.015, up: 0.015}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 20: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 21: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 22: {Statistical uncertainty: {dn: -0.021, up: 0.021}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 23: {Statistical uncertainty: {dn: -0.024, up: 0.024}, Systematic uncertainty: {dn: -0.036, up: 0.036}}, 24: {Statistical uncertainty: {dn: -0.029, up: 0.029}, Systematic uncertainty: {dn: -0.037, up: 0.037}}, 25: {Statistical uncertainty: {dn: -0.026, up: 0.026}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 26: {Statistical uncertainty: {dn: -0.047, up: 0.047}, Systematic uncertainty: {dn: -0.036, up: 0.036}}, 27: {Statistical uncertainty: {dn: -0.078, up: 0.078}, Systematic uncertainty: {dn: -0.039, up: 0.039}}, 28: {Statistical uncertainty: {dn: -0.088, up: 0.088}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 29: {Statistical uncertainty: {dn: -0.155, up: 0.155}, Systematic uncertainty: {dn: -0.039, up: 0.039}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d11-x01-y01
+Path: /REF/CMS_2020_I064906/d11-x01-y01
 Title: Figure 6.2
 Type: Scatter2D
 ---
@@ -1610,10 +1610,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d11-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d11-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.026, up: 0.026}, Systematic uncertainty: {dn: -0.096, up: 0.096}}, 1: {Statistical uncertainty: {dn: -0.014, up: 0.014}, Systematic uncertainty: {dn: -0.047, up: 0.047}}, 2: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.047, up: 0.047}}, 3: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 4: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 5: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 6: {Statistical uncertainty: {dn: -0.01, up: 0.01}, Systematic uncertainty: {dn: -0.053, up: 0.053}}, 7: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 8: {Statistical uncertainty: {dn: -0.013, up: 0.013}, Systematic uncertainty: {dn: -0.053, up: 0.053}}, 9: {Statistical uncertainty: {dn: -0.018, up: 0.018}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 10: {Statistical uncertainty: {dn: -0.03, up: 0.03}, Systematic uncertainty: {dn: -0.053, up: 0.053}}, 11: {Statistical uncertainty: {dn: -0.049, up: 0.049}, Systematic uncertainty: {dn: -0.048, up: 0.048}}, 12: {Statistical uncertainty: {dn: -0.095, up: 0.095}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 13: {Statistical uncertainty: {dn: -0.107, up: 0.107}, Systematic uncertainty: {dn: -0.04, up: 0.04}}, 14: {Statistical uncertainty: {dn: -0.16, up: 0.16}, Systematic uncertainty: {dn: -0.038, up: 0.038}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d11-x01-y02
+Path: /REF/CMS_2020_I064906/d11-x01-y02
 Title: Figure 6.2
 Type: Scatter2D
 ---
@@ -1651,10 +1651,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d11-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d11-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0003, up: 0.0003}, Systematic uncertainty: {dn: -0.021, up: 0.021}}, 1: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 2: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 3: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 4: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 5: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.022, up: 0.022}}, 6: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 7: {Statistical uncertainty: {dn: -0.0007, up: 0.0007}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 8: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 9: {Statistical uncertainty: {dn: -0.0007, up: 0.0007}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 10: {Statistical uncertainty: {dn: -0.0008, up: 0.0008}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 11: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 12: {Statistical uncertainty: {dn: -0.0012, up: 0.0012}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 13: {Statistical uncertainty: {dn: -0.0014, up: 0.0014}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 14: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 15: {Statistical uncertainty: {dn: -0.0018, up: 0.0018}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 16: {Statistical uncertainty: {dn: -0.0028, up: 0.0028}, Systematic uncertainty: {dn: -0.034, up: 0.034}}, 17: {Statistical uncertainty: {dn: -0.0042, up: 0.0042}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 18: {Statistical uncertainty: {dn: -0.0061, up: 0.0061}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 19: {Statistical uncertainty: {dn: -0.0083, up: 0.0083}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 20: {Statistical uncertainty: {dn: -0.0078, up: 0.0078}, Systematic uncertainty: {dn: -0.033, up: 0.033}}, 21: {Statistical uncertainty: {dn: -0.0153, up: 0.0153}, Systematic uncertainty: {dn: -0.035, up: 0.035}}, 22: {Statistical uncertainty: {dn: -0.0226, up: 0.0226}, Systematic uncertainty: {dn: -0.038, up: 0.038}}, 23: {Statistical uncertainty: {dn: -0.0027, up: 0.0027}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d11-x01-y03
+Path: /REF/CMS_2020_I064906/d11-x01-y03
 Title: Figure 6.2
 Type: Scatter2D
 ---
@@ -1692,10 +1692,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d12-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d12-x01-y01
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.045, up: 0.045}, Systematic uncertainty: {dn: -0.078, up: 0.078}}, 1: {Statistical uncertainty: {dn: -0.025, up: 0.025}, Systematic uncertainty: {dn: -0.084, up: 0.084}}, 2: {Statistical uncertainty: {dn: -0.02, up: 0.02}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 3: {Statistical uncertainty: {dn: -0.015, up: 0.015}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 4: {Statistical uncertainty: {dn: -0.014, up: 0.014}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 5: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 6: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 7: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 8: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 9: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.052, up: 0.052}}, 10: {Statistical uncertainty: {dn: -0.011, up: 0.011}, Systematic uncertainty: {dn: -0.05, up: 0.05}}, 11: {Statistical uncertainty: {dn: -0.013, up: 0.013}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 12: {Statistical uncertainty: {dn: -0.014, up: 0.014}, Systematic uncertainty: {dn: -0.053, up: 0.053}}, 13: {Statistical uncertainty: {dn: -0.015, up: 0.015}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 14: {Statistical uncertainty: {dn: -0.015, up: 0.015}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 15: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 16: {Statistical uncertainty: {dn: -0.013, up: 0.013}, Systematic uncertainty: {dn: -0.05, up: 0.05}}, 17: {Statistical uncertainty: {dn: -0.014, up: 0.014}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 18: {Statistical uncertainty: {dn: -0.017, up: 0.017}, Systematic uncertainty: {dn: -0.048, up: 0.048}}, 19: {Statistical uncertainty: {dn: -0.019, up: 0.019}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 20: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 21: {Statistical uncertainty: {dn: -0.021, up: 0.021}, Systematic uncertainty: {dn: -0.048, up: 0.048}}, 22: {Statistical uncertainty: {dn: -0.028, up: 0.028}, Systematic uncertainty: {dn: -0.047, up: 0.047}}, 23: {Statistical uncertainty: {dn: -0.03, up: 0.03}, Systematic uncertainty: {dn: -0.046, up: 0.046}}, 24: {Statistical uncertainty: {dn: -0.033, up: 0.033}, Systematic uncertainty: {dn: -0.045, up: 0.045}}, 25: {Statistical uncertainty: {dn: -0.041, up: 0.041}, Systematic uncertainty: {dn: -0.045, up: 0.045}}, 26: {Statistical uncertainty: {dn: -0.054, up: 0.054}, Systematic uncertainty: {dn: -0.041, up: 0.041}}, 27: {Statistical uncertainty: {dn: -0.075, up: 0.075}, Systematic uncertainty: {dn: -0.042, up: 0.042}}, 28: {Statistical uncertainty: {dn: -0.124, up: 0.124}, Systematic uncertainty: {dn: -0.051, up: 0.051}}, 29: {Statistical uncertainty: {dn: -0.128, up: 0.128}, Systematic uncertainty: {dn: -0.038, up: 0.038}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d12-x01-y01
+Path: /REF/CMS_2020_I064906/d12-x01-y01
 Title: Figure 6.3
 Type: Scatter2D
 ---
@@ -1733,10 +1733,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d12-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d12-x01-y02
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.102, up: 0.102}, Systematic uncertainty: {dn: -0.126, up: 0.126}}, 1: {Statistical uncertainty: {dn: -0.047, up: 0.047}, Systematic uncertainty: {dn: -0.066, up: 0.066}}, 2: {Statistical uncertainty: {dn: -0.024, up: 0.024}, Systematic uncertainty: {dn: -0.065, up: 0.065}}, 3: {Statistical uncertainty: {dn: -0.017, up: 0.017}, Systematic uncertainty: {dn: -0.064, up: 0.064}}, 4: {Statistical uncertainty: {dn: -0.018, up: 0.018}, Systematic uncertainty: {dn: -0.067, up: 0.067}}, 5: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.07, up: 0.07}}, 6: {Statistical uncertainty: {dn: -0.012, up: 0.012}, Systematic uncertainty: {dn: -0.07, up: 0.07}}, 7: {Statistical uncertainty: {dn: -0.015, up: 0.015}, Systematic uncertainty: {dn: -0.069, up: 0.069}}, 8: {Statistical uncertainty: {dn: -0.016, up: 0.016}, Systematic uncertainty: {dn: -0.07, up: 0.07}}, 9: {Statistical uncertainty: {dn: -0.023, up: 0.023}, Systematic uncertainty: {dn: -0.069, up: 0.069}}, 10: {Statistical uncertainty: {dn: -0.039, up: 0.039}, Systematic uncertainty: {dn: -0.07, up: 0.07}}, 11: {Statistical uncertainty: {dn: -0.066, up: 0.066}, Systematic uncertainty: {dn: -0.066, up: 0.066}}, 12: {Statistical uncertainty: {dn: -0.106, up: 0.106}, Systematic uncertainty: {dn: -0.063, up: 0.063}}, 13: {Statistical uncertainty: {dn: -0.156, up: 0.156}, Systematic uncertainty: {dn: -0.056, up: 0.056}}, 14: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 15: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 16: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 17: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 18: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 19: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 20: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 21: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 22: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 23: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d12-x01-y02
+Path: /REF/CMS_2020_I064906/d12-x01-y02
 Title: Figure 6.3
 Type: Scatter2D
 ---
@@ -1774,10 +1774,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d12-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/CMS_2020_I064906/d12-x01-y03
 ErrorBreakdown: {0: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}, Systematic uncertainty: {dn: -0.023, up: 0.023}}, 1: {Statistical uncertainty: {dn: -0.0004, up: 0.0004}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 2: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 3: {Statistical uncertainty: {dn: -0.0005, up: 0.0005}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 4: {Statistical uncertainty: {dn: -0.0006, up: 0.0006}, Systematic uncertainty: {dn: -0.024, up: 0.024}}, 5: {Statistical uncertainty: {dn: -0.0007, up: 0.0007}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 6: {Statistical uncertainty: {dn: -0.0007, up: 0.0007}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 7: {Statistical uncertainty: {dn: -0.0008, up: 0.0008}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 8: {Statistical uncertainty: {dn: -0.0007, up: 0.0007}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 9: {Statistical uncertainty: {dn: -0.0008, up: 0.0008}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 10: {Statistical uncertainty: {dn: -0.001, up: 0.001}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 11: {Statistical uncertainty: {dn: -0.0012, up: 0.0012}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 12: {Statistical uncertainty: {dn: -0.0014, up: 0.0014}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 13: {Statistical uncertainty: {dn: -0.0017, up: 0.0017}, Systematic uncertainty: {dn: -0.026, up: 0.026}}, 14: {Statistical uncertainty: {dn: -0.0012, up: 0.0012}, Systematic uncertainty: {dn: -0.025, up: 0.025}}, 15: {Statistical uncertainty: {dn: -0.002, up: 0.002}, Systematic uncertainty: {dn: -0.049, up: 0.049}}, 16: {Statistical uncertainty: {dn: -0.0032, up: 0.0032}, Systematic uncertainty: {dn: -0.048, up: 0.048}}, 17: {Statistical uncertainty: {dn: -0.0048, up: 0.0048}, Systematic uncertainty: {dn: -0.047, up: 0.047}}, 18: {Statistical uncertainty: {dn: -0.0068, up: 0.0068}, Systematic uncertainty: {dn: -0.046, up: 0.046}}, 19: {Statistical uncertainty: {dn: -0.0091, up: 0.0091}, Systematic uncertainty: {dn: -0.045, up: 0.045}}, 20: {Statistical uncertainty: {dn: -0.0085, up: 0.0085}, Systematic uncertainty: {dn: -0.044, up: 0.044}}, 21: {Statistical uncertainty: {dn: -0.0159, up: 0.0159}, Systematic uncertainty: {dn: -0.044, up: 0.044}}, 22: {Statistical uncertainty: {dn: -0.0249, up: 0.0249}, Systematic uncertainty: {dn: -0.048, up: 0.048}}, 23: {Statistical uncertainty: {dn: -0.0031, up: 0.0031}, Systematic uncertainty: {dn: -0.054, up: 0.054}}, 24: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 25: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 26: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 27: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 28: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}, 29: {Statistical uncertainty: {dn: -1.0e-20, up: 1.0e-20}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d12-x01-y03
+Path: /REF/CMS_2020_I064906/d12-x01-y03
 Title: Figure 6.3
 Type: Scatter2D
 ---

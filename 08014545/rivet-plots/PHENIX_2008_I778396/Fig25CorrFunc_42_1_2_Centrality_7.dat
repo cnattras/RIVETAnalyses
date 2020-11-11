@@ -1,0 +1,19 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=[Figure 25 Correlation Functon, Near Side, AuAu, 50-60 ,3-4 GeV/c]
+XLabel=[$\Delta\phi$]
+YLabel=[Jet-Induced Hadron Pair Yield]
+DrawOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig25CorrFunc_42_1_2_Centrality_7
+LegendOnly=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig25CorrFunc_42_1_2_Centrality_7
+# END PLOT
+
+# BEGIN HISTO1D //lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig25CorrFunc_42_1_2_Centrality_7
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nbauer1/RIVETAnalyses/08014545/Rivet.yoda/PHENIX_2008_I778396:beam=AUAU:cent=GEN/Fig25CorrFunc_42_1_2_Centrality_7
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e+01	6.000000e+01	nan	nan	nan
+# END HISTO1D
+
