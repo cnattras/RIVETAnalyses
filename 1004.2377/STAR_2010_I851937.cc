@@ -585,7 +585,6 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
 
       //Fill Histograms for figure 3
-
       for (Correlator corr : Correlators3)
       {
         //if(!corr.CheckAssociatedRange(a)) continue;
@@ -615,6 +614,26 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         string name2_dEta = "dEta_d13x01y16";
         sow[name2_dEta]->fill();
       }
+
+      //Fill Histograms for figure 6
+
+      //Fill Histograms for figure 7
+      for (Correlator corr : Correlators7)
+      {
+        if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+
+        string name_dPhi = "dPhi_d22x1y1";
+        sow[name_dPhi]->fill();
+
+        string name_dPhi2 = "dPhi2_d22x1y2";
+        sow[name_dPhi2]->fill();
+
+        string name_dPhi3 = "dPhi3_d22x1y1";
+        sow[name_dPhi3]->fill();
+      }
+
+      //Fill Histograms for figure 8
+
 
 Particles chargedParticles = cfs.particles();
         
