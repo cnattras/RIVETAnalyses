@@ -633,7 +633,31 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
 
       //Fill Histograms for figure 8
+      for (Correlator corr : Correlators8)
+      {
+        if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
 
+        string name_AuAu = "AuAu_d24x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu]->fill();
+
+        string name_AuAu2 = "AuAu2_d25x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu2]->fill();
+
+        string name_AuAu3 = "AuAu3_d26x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu3]->fill();
+
+        string name_AuAu4 = "AuAu4_d27x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu4]->fill();
+
+        string name_AuAu5 = "AuAu5_d28x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu5]->fill();
+
+        string name_AuAu6 = "AuAu5_d29x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_AuAu6]->fill();
+
+        string name_dAuAu = "dAuAu_d30x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+        sow[name_dAuAu]->fill();
+      }
 
 Particles chargedParticles = cfs.particles();
         
