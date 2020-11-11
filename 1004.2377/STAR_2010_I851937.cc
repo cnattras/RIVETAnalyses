@@ -405,13 +405,13 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       // You might have to make another for loop section for dAU as well.
       //===================================================================
       //===================================================================
-      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
+      for (int ptt = 0; ptt < numTrigPtBins; ptt++)
       {
         for (int pta = 1; pta < numAssocPtBins; pta++)
         {
             Correlator c2 (ptt,pta);
             c2.SetCollSystemAndEnergy("AuAu200GeV");
-            c2.SetCentrality(pTAssocBins[pta], pTAssocBins[pta+1]);
+            c2.SetCentrality(pTAssocBins[pta], pTAssocBins[pta + 1]);
             c2.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
             c2.SetAssociatedRange(1,6);
             Correlators3.push_back(c2);
@@ -420,37 +420,26 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
     for(Correlator corr : Correlators3)
       {
-     /// Yoda d10-x01-y01 to d10-x01-y16: all Bksub for Fig 3. 1st 4 are pTassoc .5-1
+     	/// Yoda d10-x01-y01 to d10-x01-y16: all Bksub for Fig 3. 1st 4 are pTassoc .5-1
          // 2nd 4 are pTassoc 1-1.5, 3rd 4 are pTassoc 1.5-2.5, last 4 are 2.5-4 pTassoc. However
          // 1,2,3,4 of each set are different pTTrig.
-     string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
-         book(_h[name_sub], 10, 1, corr.GetIndex() + ((corr.GetSubIndex() - 1) * 4) + 1);
+     	string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        book(_h[name_sub], 10, 1, corr.GetIndex() + ((corr.GetSubIndex() - 1) * 4) + 1);
 
-         string name2_sub = "sub_d10x01y16";
-         book(_h[name2_sub],10,1,16);
+        //cout << "name_sub: " << name_sub << endl; //Debugging
 
         //Yoda d11-x01-y01 to d11-x01-y16: all AuAu Raw for Fig 3. Same logic as above
-         string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
-       book(_h[name_AuAuRaw], 11, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+      	book(_h[name_AuAuRaw], 11, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
 
-       string name2_AuAuRaw = "AuAuRaw_d11x01y16";
-         book(_h[name2_AuAuRaw],11,1,16);
-
-    // Yoda d12-x01-y01 to d12-x01-y16: all dAu for Fig 3. Same logic as above
+    	// Yoda d12-x01-y01 to d12-x01-y16: all dAu for Fig 3. Same logic as above
          string name_dAu = "dAu_d12x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
          book(_h[name_dAu], 12, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
-
-         string name2_dAu = "dAu_d12x01y16";
-         book(_h[name2_dAu],12,1,16);
 
         // Yoda d13-x01-y01 to d13-x01-y16: same logic
          string name_dEta = "dEta_d13x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
          book(_h[name_dEta], 13, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
-     
-     string name2_dEta = "dEta_d13x01y16";
-         book(_h[name2_dEta],13,1,16);
-
-
+ 
       }
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -481,14 +470,22 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
   for(Correlator corr : Correlators7)
       {
-        string name_dPhi = "dPhi_d22x1y1";
-        book(_h[name_dPhi], 22 , 1 , 1);
+        if (corr.GetIndex() == 1)
+        {
+        	string name_dPhi = "dPhi_d22x1y1";
+        	book(_h[name_dPhi], 22 , 1 , 1);
+        }
+        else if (corr.GetIndex() == 2)
+        {
+       		string name_dPhi2 = "dPhi2_d22x1y2";
+        	book(_h[name_dPhi2], 22 , 1 , 2);
+        }
 
-        string name_dPhi2 = "dPhi2_d22x1y2";
-        book(_h[name_dPhi2], 22 , 1 , 2);
-
-        string name_dPhi3 = "dPhi3_d22x1y1";
-        book(_h[name_dPhi3], 23 , 1 , 1);
+        else if (corr.GetIndex() == 3)
+        {
+        	string name_dPhi3 = "dPhi3_d22x1y1";
+        	book(_h[name_dPhi3], 23 , 1 , 1);
+        }
       }
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -592,27 +589,16 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
         string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1); 
         sow[name_sub]->fill();
-        
-        string name2_sub = "sub_d10x01y16";
-        sow[name2_sub]->fill();
 
         string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
         sow[name_AuAuRaw]->fill();
 
-        string name2_AuAuRaw = "AuAuRaw_d11x01y16";
-        sow[name2_AuAuRaw]->fill();
-
         string name_dAu = "dAu_d12x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
         sow[name_dAu]->fill();
-
-        string name2_dAu = "dAu_d12x01y16";
-        sow[name2_dAu]->fill();
 
         string name_dEta = "dEta_d13x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
         sow[name_dEta]->fill();
 
-        string name2_dEta = "dEta_d13x01y16";
-        sow[name2_dEta]->fill();
       }
 
       //Fill Histograms for figure 6
