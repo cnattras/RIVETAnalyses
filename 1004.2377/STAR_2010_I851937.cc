@@ -569,7 +569,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     
       bool isVeto = true;
 
-      //Fill Histograms for figure 2
+      //INCOMPLETE: Fill Histograms for figure 2
       for(Correlator corr : Correlators)
       {
           if(!corr.CheckCentrality(c)) continue;
@@ -582,6 +582,38 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
           sow[name_sub]->fill();
+      }
+
+      //Fill Histograms for figure 3
+
+      for (Correlator corr : Correlators3)
+      {
+        //if(!corr.CheckAssociatedRange(a)) continue;
+        if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+
+        string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1); 
+        sow[name_sub]->fill();
+        
+        string name2_sub = "sub_d10x01y16";
+        sow[name2_sub]->fill();
+
+        string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_AuAuRaw]->fill();
+
+        string name2_AuAuRaw = "AuAuRaw_d11x01y16";
+        sow[name2_AuAuRaw]->fill();
+
+        string name_dAu = "dAu_d12x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_dAu]->fill();
+
+        string name2_dAu = "dAu_d12x01y16";
+        sow[name2_dAu]->fill();
+
+        string name_dEta = "dEta_d13x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+        sow[name_dEta]->fill();
+
+        string name2_dEta = "dEta_d13x01y16";
+        sow[name2_dEta]->fill();
       }
 
 Particles chargedParticles = cfs.particles();
