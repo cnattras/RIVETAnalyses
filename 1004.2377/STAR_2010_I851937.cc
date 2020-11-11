@@ -576,6 +576,12 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
           if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
           string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
           sow[name_raw]->fill();
+
+          string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+          sow[name_eta]->fill();
+
+          string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
+          sow[name_sub]->fill();
       }
 
 Particles chargedParticles = cfs.particles();
