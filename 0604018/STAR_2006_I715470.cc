@@ -493,10 +493,10 @@ double highedge = 3.0*pi/2.0;
         
         for(Correlator& corr : Correlators)
         {//This loops over all correlators and asks if the particle is in the trigger range.  If so, add it to the list of triggers.
-            if(!corr.CheckCentrality(c)) continue;
+            if(!corr.CheckCentrality(c)) continue;//May need to check that the centrality for d+Au matches the centrality in the correlator
             if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
-            nTriggers[corr.GetFullIndex()]++;
+            nTriggers[corr.GetFullIndex()]++;//Antonio is this OK? Nora uses strings.
             cout<<"I have a trigger particle!"<<endl;
         }
         // Hadron loop
@@ -519,7 +519,7 @@ double highedge = 3.0*pi/2.0;
             {
                 if(!corr.CheckCentrality(c)) continue;
                 if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
-                if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                if(!corr.CheckAssociatedRange(pTrig.pT()/GeV)) continue;
                 //AJ add a spot where you fill histograms
                 //See Nora's code in 08014545 around line 1168
                 
@@ -577,12 +577,16 @@ double highedge = 3.0*pi/2.0;
         {
             
             string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
+            //AJ add some cross checks to make sure you do not divide by zero here.
             if(nTriggers[corr.GetFullIndex()] > 0) _h[name]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
             //string name2 = corr.GetCollSystemAndEnergy()+corr.GetFullIndex()+"BkgdSubtracted";
                   _h[name] = SubtractBackgroundZYAM(_h[name]);
                   //You will need something like this
 
   //            double fraction = 0.;
+                  //AJ work on this
+                  //1.  Just calculate the yield but adjust the range so that it matched the paper.
+                  //2.  Try to fill the histogram as below, except you'll need to figure out what the name is.
     //        double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
       //      _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
         }
