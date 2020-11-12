@@ -585,6 +585,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
           if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
           
           if(corr.GetIndex() <=1)
+          {
           string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
           sow[name_raw]->fill();
 
@@ -593,6 +594,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
           sow[name_sub]->fill();
+      	  }
       }
 
       //Fill Histograms for figure 3: add in the logic that is in the figure
