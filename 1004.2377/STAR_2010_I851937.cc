@@ -480,9 +480,22 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 			Correlators6.push_back(c6);
 		}
       }
-
-
-
+      
+     /* for (Correlator corr : Correlators6) 
+	  {
+      	if (corr.GetSubIndex() == 1)
+      	{
+      		string name_dAu = "dAu_d14x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
+      		book(_h[name_dAu], 14, 1, to_string(corr.GetIndex() + corr.GetSubIndex()));
+  	  	}
+  	  	else
+  	  	{
+  	  		string name_AuAu = "AuAu_d14x1y" + to_string(corr.GetIndex());
+  	  		book(_h[name_AuAu], 14, 1, to_string(corr.GetIndex()));
+  	  	}
+  	  }
+  	  */
+  	  
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      //                                  Figure 7    : add in book(sow)                                                  //
