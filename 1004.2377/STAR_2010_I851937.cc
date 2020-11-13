@@ -468,6 +468,19 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
      //                                 Figure 6                                                       //
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
+      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
+      {
+      	for (int cb = 0; cb < 1; cb++)
+		{
+			Correlator c6 (ptt,cb);
+			c6.SetCollSystemAndEnergy("dAu200GeV");
+			c6.SetCentrality(CentBins[cb], CentBins[cb+1]);
+			c6.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+			c6.SetNoPTassociated();
+			Correlators6.push_back(c6);
+		}
+      }
+
 
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -476,7 +489,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  for (int ptt = 1; ptt < numTrigPtBins; ptt++)
+  	for (int ptt = 1; ptt < numTrigPtBins; ptt++)
       {
         for (int cb = 0; cb < 1; cb++)
         {
@@ -516,7 +529,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
-     //                                  Figure 8 : FIX ME ANTONIO                                                    //
+     //                                  Figure 8 : FIX ME ANTONIO PLEASE                                                  //
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -593,7 +606,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     
       bool isVeto = true;
 
-      //INCOMPLETE: Fill Histograms for figure 2: add in the logic that is in the figure
+      //INCOMPLETE: Fill Histograms for figure 2
       for(Correlator corr : Correlators)
       {
           if(!corr.CheckCentrality(c)) continue;
@@ -647,10 +660,10 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       	  }
       }
 
-      //Fill Histograms for figure 3: add in the logic that is in the figure
+      //Fill Histograms for figure 3
       for (Correlator corr : Correlators3)
       {
-        //if(!corr.CheckAssociatedRange(a)) continue;
+        
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
 
         string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1); 
@@ -669,7 +682,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       //Fill Histograms for figure 6
 
-      //Fill Histograms for figure 7: add in the logic that is in the figure
+      //Fill Histograms for figure 7
       for (Correlator corr : Correlators7)
       {
         if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
@@ -829,7 +842,7 @@ Particles chargedParticles = cfs.particles();
 
     vector<Correlator> Correlators;
     vector<Correlator> Correlators3;
-    //vector<Correlator> Correlators6;
+    vector<Correlator> Correlators6;
     vector<Correlator> Correlators7;
     vector<Correlator> Correlators8;
     
