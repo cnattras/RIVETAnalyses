@@ -633,6 +633,18 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       	  	string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
       	  	sow[name_sub]->fill();
       	  }
+
+      	  if (corr.GetIndex() == 3)
+      	  {
+      	  	string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+      	  	sow[name_raw]->fill();
+
+      	  	string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
+      	  	sow[name_eta]->fill();
+
+      	  	string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+      	  	sow[name_sub]->fill();
+      	  }
       }
 
       //Fill Histograms for figure 3: add in the logic that is in the figure
@@ -672,7 +684,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         sow[name_dPhi3]->fill();
       }
 
-      //Fill Histograms for figure 8
+      //Fill Histograms for figure 8; FIX ME TO THE FIG 8 LOGIC
       for (Correlator corr : Correlators8)
       {
         if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
