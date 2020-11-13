@@ -393,9 +393,13 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
             //raw |eta| < 1
             string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
             book(_h[name_raw], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+1);
+            nTriggers[name_raw]=0;
+            book(sow[name_raw], "sow" + name_raw);
             //limited eta acceptance |eta| < 0.7
             string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
             book(_h[name_eta], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+2);
+            nTriggers[name_eta]=0;
+            book(sow[name_eta], "sow" + name_eta);
             //Background subtracted |eta| < 1
             string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
             book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
@@ -413,8 +417,8 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       //===================================================================
       //===================================================================
-      //Figure 3 FIX ME: Finish booking histograms. 
-      // Add in book(sow) and nTriggers
+      //Figure 3 FIX ME:
+      // 
       //===================================================================
       //===================================================================
       for (int ptt = 0; ptt < numTrigPtBins; ptt++)
@@ -437,20 +441,25 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
          // 1,2,3,4 of each set are different pTTrig.
      	string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
         book(_h[name_sub], 10, 1, corr.GetIndex() + ((corr.GetSubIndex() - 1) * 4) + 1);
-
         //cout << "name_sub: " << name_sub << endl; //Debugging
 
         //Yoda d11-x01-y01 to d11-x01-y16: all AuAu Raw for Fig 3. Same logic as above
         string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
       	book(_h[name_AuAuRaw], 11, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+      	nTriggers[name_AuAuRaw]=0;
+        book(sow[name_AuAuRaw], "sow" + name_AuAuRaw);
 
     	// Yoda d12-x01-y01 to d12-x01-y16: all dAu for Fig 3. Same logic as above
          string name_dAu = "dAu_d12x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
          book(_h[name_dAu], 12, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+         nTriggers[name_dAu]=0;
+         book(sow[name_dAu], "sow" + name_dAu);
 
         // Yoda d13-x01-y01 to d13-x01-y16: same logic
          string name_dEta = "dEta_d13x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
          book(_h[name_dEta], 13, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
+         nTriggers[name_dEta]=0;
+         book(sow[name_dEta], "sow" + name_dEta);
  
       }
 
@@ -486,22 +495,28 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         {
         	string name_dPhi = "dPhi_d22x1y1";
         	book(_h[name_dPhi], 22 , 1 , 1);
+        	nTriggers[name_dPhi]=0;
+        	book(sow[name_dPhi], "sow" + name_dPhi);
         }
         else if (corr.GetIndex() == 2)
         {
        		string name_dPhi2 = "dPhi2_d22x1y2";
         	book(_h[name_dPhi2], 22 , 1 , 2);
+        	nTriggers[name_dPhi2]=0;
+        	book(sow[name_dPhi2], "sow" + name_dPhi2);
         }
 
         else if (corr.GetIndex() == 3)
         {
         	string name_dPhi3 = "dPhi3_d22x1y1";
         	book(_h[name_dPhi3], 23 , 1 , 1);
+        	nTriggers[name_dPhi3]=0;
+       		book(sow[name_dPhi3], "sow" + name_dPhi3);
         }
       }
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
-     //                                  Figure 8 : FIX ME                                                     //
+     //                                  Figure 8 : FIX ME ANTONIO                                                    //
      ///////////////////////////////////////////////////////////////////////////////////////////////////
      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
