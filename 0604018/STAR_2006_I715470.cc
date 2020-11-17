@@ -312,21 +312,21 @@ namespace Rivet {
         {
             if((bin.xMin() > xmin) && (bin.xMax() < xmax))
             {
-                integral += bin.sumW()/bin.width();
-                fraction += bin.numEntries()/bin.width();
+                integral += bin.sumW();
+                fraction += bin.numEntries();
             }
             else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
             {
-                double perc = (bin.xMax() - xmin)/bin.width();
-                integral += perc*(bin.sumW()/bin.width());
-                fraction += perc*(bin.numEntries()/bin.width());
+                double perc = bin.xMax() - xmin;
+                integral += perc*bin.sumW();
+                fraction += perc*bin.numEntries();
                 
             }
             else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
             {
-                double perc = (xmax - bin.xMin())/bin.width();
-                integral += perc*(bin.sumW()/bin.width());
-                fraction += perc*(bin.numEntries()/bin.width());
+                double perc = xmax - bin.xMin();
+                integral += perc*bin.sumW();
+                fraction += perc*bin.numEntries();
             }
         }
         
