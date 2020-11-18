@@ -366,6 +366,7 @@ double highedge = 3.0*pi/2.0;
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
             //string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
             book(_h[name], name, ndPhiBins,lowedge,highedge);
+            cout<<"making "<<name<<endl;
             //book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
@@ -382,6 +383,7 @@ double highedge = 3.0*pi/2.0;
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
             //book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
+            cout<<"making* "<<name2<<endl;
             }
           }
 
@@ -403,6 +405,7 @@ double highedge = 3.0*pi/2.0;
             book(_h[name], name, ndPhiBins,lowedge,highedge);
             //book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
+            cout<<"making* "<<name<<endl;
             if(ncb==0){
 
               Correlator c2(1000,1000,1000);
@@ -417,48 +420,30 @@ double highedge = 3.0*pi/2.0;
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
             //book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
+            cout<<"making* "<<name2<<endl;
             }
           }//End of the zT loop
 
       }//end loop over centrality bins
 
-//AJ - book histograms which were in the .yoda file
-      //book(_h["010101"],1,1,1);
-      //book(_h["010102"],1,1,2);
-      //book(_h["010103"], 1, 1, 3);
-      //book(_h["010104"], 1, 1, 4);
-      //book(_h["010105"], 1, 1, 5);
-      //book(_h["010106"], 1, 1, 6);
-      //book(_h["020101"], 2, 1, 1);
-      //book(_h["020102"], 2, 1, 2);
-      //book(_h["030101"], 3, 1, 1);
-      //book(_h["030102"], 3, 1, 2);
-      //book(_h["030103"], 3, 1, 3);
-      //book(_h["030104"], 3, 1, 4);
-      //book(_h["030105"], 3, 1, 5);
-      //book(_h["030101"], 3, 1, 1);
-      //book(_h["040101"], 3, 1, 1);
-
-        //Table 1 Fig. 3.1 - Near-side yield per trigger
-        book(_h["010101"], 1, 1, 1);//pTassoc = 3-4
-        book(_h["010102"], 1, 1, 2);//pTassoc = 4-6
-        book(_h["010103"], 1, 1, 3);//pTassoc > 6
-  //Table 2 Fig. 3.2 - Away-side yield per trigger
-        book(_h["020101"], 2, 1, 1);//pTassoc = 3-4
-        book(_h["020102"], 2, 1, 2);//pTassoc = 4-6
-        book(_h["020103"], 2, 1, 3);//pTassoc > 6
-        //Table 3 - d+Au D(z) vs z_T - Near side
-        book(_h["030101"], 3, 1, 1);//Fig. 4.0
-        //Au+Au D(z) vs z_T - Near side
-        book(_h["040101"], 4, 1, 1);//0-5%
-        book(_h["040102"], 4, 1, 2);//20-40%
-        //d+Au, Au+Au D(z) vs z_T - Near side
-        book(_h["050101"], 5, 1, 1);//d+Au
-        book(_h["050102"], 5, 1, 2);//0-5%
-        book(_h["050103"], 5, 1, 3);//20-40%
-      //Add counters to keep track of trigger particles - something like this
-      //book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
-
+        //Table 1 Fig. 3.1 - yield per trigger vs centrality
+        book(_h["010101"], 1, 1, 1);//pTassoc = 3-4 NS
+        book(_h["010102"], 1, 1, 2);//pTassoc = 4-6 NS
+        book(_h["010103"], 1, 1, 3);//pTassoc > 6 NS
+        book(_h["010104"], 1, 1, 4);//pTassoc = 3-4 AS
+        book(_h["010105"], 1, 1, 5);//pTassoc = 4-6 AS 
+        book(_h["010106"], 1, 1, 6);//pTassoc > 6 AS
+        //Table 2 Fig. 3.2 - yield per trigger vs pTassoc
+        book(_h["020101"], 2, 1, 1);//Near side
+        book(_h["020102"], 2, 1, 2);//Near side
+        //Table 3 - D(z) vs z_T
+        book(_h["030101"], 3, 1, 1);//d+Au NS
+        book(_h["030102"], 3, 1, 2);//Au+Au 20-40% NS *can't fill yet
+        book(_h["030103"], 3, 1, 3);//Au+Au 0-5% NS
+        book(_h["030104"], 3, 1, 4);//d+Au AS
+        book(_h["030105"], 3, 1, 5);//Au+Au 20-40% AS *can't fill yet
+        //Au+Au D(z) vs z_T - Away side
+        book(_h["040101"], 4, 1, 1);//0-5% AS
     }
     void analyze(const Event& event) {
         
@@ -612,7 +597,20 @@ double highedge = 3.0*pi/2.0;
             double fractionnearside = 0;
             double yieldnearside = getYieldRangeUser(_h[name], M_PI - (M_PI / 6.), M_PI + (M_PI / 6.), fractionnearside);
             //  _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
-
+            cout<<name<<endl;
+            //Histogram 1: all correlators with pTassoc = 3-4 GeV, trigger 8-15
+            if(corr.CheckConditions("AuAu200GeV",2.5,10,3.5)){
+              cout<<" name "<<name<<" "<<corr.GetFullIndex()<<"  "<<corr.GetCollSystemAndEnergy()<<" "<<corr.GetCentrality()<<endl;
+            }
+if(corr.CheckConditions("AuAu200GeV",2.5)){//Central Au+Au
+//cout<<"I am AuAu200GeV 0-5%"<<endl;
+}
+if(corr.CheckConditions("AuAu200GeV",35)){//Central Au+Au
+//cout<<"I am AuAu200GeV 20-40%"<<endl;
+}
+if(corr.CheckConditions("dAu200GeV",2.5)){//Central Au+Au
+//cout<<"I am dAu200GeV"<<endl;
+}
         }
         
         
