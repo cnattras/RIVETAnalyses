@@ -312,21 +312,21 @@ namespace Rivet {
         {
             if((bin.xMin() > xmin) && (bin.xMax() < xmax))
             {
-                integral += bin.sumW();
-                fraction += bin.numEntries();
+                integral += bin.sumW()/bin.width();
+                fraction += bin.numEntries()/bin.width();
             }
             else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
             {
-                double perc = bin.xMax() - xmin;
-                integral += perc*bin.sumW();
-                fraction += perc*bin.numEntries();
+                double perc = (bin.xMax() - xmin)/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
                 
             }
             else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
             {
-                double perc = xmax - bin.xMin();
-                integral += perc*bin.sumW();
-                fraction += perc*bin.numEntries();
+                double perc = (xmax - bin.xMin())/bin.width();
+                integral += perc*(bin.sumW()/bin.width());
+                fraction += perc*(bin.numEntries()/bin.width());
             }
         }
         
@@ -446,13 +446,12 @@ double highedge = 3.0*pi/2.0;
   //Table 2 Fig. 3.2 - Away-side yield per trigger
         book(_h["020101"], 2, 1, 1);//pTassoc = 3-4
         book(_h["020102"], 2, 1, 2);//pTassoc = 4-6
-        //book(_h["020103"], 2, 1, 3);//pTassoc > 6
+        book(_h["020103"], 2, 1, 3);//pTassoc > 6
         //Table 3 - d+Au D(z) vs z_T - Near side
         book(_h["030101"], 3, 1, 1);//Fig. 4.0
-        //book(_h["030101"], 3, 1, 1);
         //Au+Au D(z) vs z_T - Near side
         book(_h["040101"], 4, 1, 1);//0-5%
-        //book(_h["040102"], 4, 1, 2);//20-40%
+        book(_h["040102"], 4, 1, 2);//20-40%
         //d+Au, Au+Au D(z) vs z_T - Near side
         book(_h["050101"], 5, 1, 1);//d+Au
         book(_h["050102"], 5, 1, 2);//0-5%
