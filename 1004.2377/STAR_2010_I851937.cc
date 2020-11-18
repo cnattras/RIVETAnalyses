@@ -22,6 +22,8 @@ static const int numCentBins = 5;
 static const float CentBins[] = {0.0,12.0,20.0,40.0,60.0,80.0};
 static const int numAssocPtBins6 = 13;
 static const float pTAssocBins6[] = {0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.4,2.8,3.2,3.6,4.0};
+static const int numAssocPtBins6b = 7;
+static const float pTAssocPtBins6b[] = {0.4,0.8,1.2,1.6,2.0,2.8,3.6,4.0};
 using namespace std;
 namespace Rivet {
 
@@ -37,6 +39,7 @@ class Correlator {
       pair<double,double> _associatedRange;
       vector<int> _pid;
       bool _NoPTassociated = false;
+      bool _noCentrality = false;
 
     public:
     
@@ -49,6 +52,7 @@ class Correlator {
       }
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
+      void SetNoCentrality(){_noCentrality = true; }
       void SetNoPTassociated(){_NoPTassociated = true; }
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
@@ -76,9 +80,9 @@ class Correlator {
       }
     
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
-      bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
+      bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
-      bool CheckAssociatedRange(double apt){ return (apt>_associatedRange.first && apt<_associatedRange.second || _NoPTassociated == true) ? true : false; }
+      bool CheckAssociatedRange(double apt){ return ((apt>_associatedRange.first && apt<_associatedRange.second) || _NoPTassociated == true) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
       bool CheckPID(std::initializer_list<int> pid)
       {
@@ -486,12 +490,13 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 			if (cb == 0)
 			{
 			c6.SetCollSystemAndEnergy("dAu200GeV");
+			c6.SetNoCentrality();
 			}
 			else 
 			{
 			c6.SetCollSystemAndEnergy("AuAu200GeV");
+			c6.SetCentrality(0.0,12.0);
 			}
-			c6.SetCentrality(CentBins[cb], CentBins[cb+1]);
 			c6.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
 			c6.SetAssociatedRange(pTAssocBins6[pta], pTAssocBins6[pta+1]);
 			Correlators6.push_back(c6);
@@ -499,13 +504,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
       }
 
-      //for ///blah blah blah DEFINE STUFF FOR AT THE TOP. NUMASSOCPTBINS AND ARRAY. THIS IS FOR THE 6-10 PTA
-      	for (int cb = 0; cb < 2; cb++)
-      	{      	//Correlator c6b (pta, cb);
-
-      	}
-
-      for (Correlator corr : Correlators6) 
+		for (Correlator corr : Correlators6) 
 	  {
       		if (corr.GetSubSubIndex() == 0)
       		{
@@ -523,7 +522,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
   	  			{
 
   	  			//6b Near Side
-  	  			string name_ratioB = mkAxisCode(17,1,corr.GetIndex() + 1);
+  	  			string name_ratioB = mkAxisCode(15,1,corr.GetIndex() + 1);
   	  			book(_s[name_ratioB],name_ratioB);
 
   	  			//6d Away Side
@@ -534,9 +533,63 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
   	  			}
   	  		}
 
-
-  	  	
+  	  	string name_corrFunc = "CorrFunc_" + to_string(corr.GetIndex()) + "_" + to_string(corr.GetSubIndex()) + "_" + to_string(corr.GetSubSubIndex());
+  	  	book(_h[name_corrFunc], name_corrFunc, 72, - M_PI/2,3*(M_PI/2));
+  	  	book(sow[name_corrFunc], "sow" + name_corrFunc);
+  	  	nTriggers[name_corrFunc] = 0;
   	  }
+
+		for (int cb = 0; cb < 2; cb++)
+      	{
+      		for (int pta = 0; pta < numAssocPtBins6b; pta++)
+      		{
+      			Correlator c6b (0,cb,pta);
+      			if (cb == 0)
+      			{
+      				c6b.SetCollSystemAndEnergy("dAu200GeV");
+      				c6b.SetNoCentrality();
+      			}
+      			else
+      			{
+      				c6b.SetCollSystemAndEnergy("AuAu200GeV");
+      				c6b.SetCentrality(0.0, 12.0);
+      			}
+      			c6b.SetTriggerRange(6.0,10.0);
+				c6b.SetAssociatedRange(pTAssocBins6[pta], pTAssocBins6[pta+1]);
+				Correlators6b.push_back(c6b);
+      		}
+      	}
+    
+      	
+  	  for (Correlator corr : Correlators6b)
+  	  {
+  	  	if (corr.GetSubSubIndex() == 0)
+  	  	{
+  	  		// 6a ptt 6-10
+  	  		string name_rawA = "rawA_d18x1y" + to_string(corr.GetSubIndex()+1);
+  	  		book(_h[name_rawA], 18,1, corr.GetSubIndex()+1);
+
+  	  		//6c ptt 6-10
+  	  		string name_rawC = "rawA_d20x1y" + to_string(corr.GetSubIndex()+1);
+  	  		book(_h[name_rawC], 20,1, corr.GetSubIndex()+1);
+
+  	  		if (corr.GetSubIndex() == 0)
+  	  		{
+  	  			// 6b ptt 6-10
+  	  			string name_ratioB = mkAxisCode(19,1,1);
+  	  			book(_s[name_ratioB], name_ratioB);
+
+  	  			// 6d ptt 6-10
+  	  			string name_ratioD = mkAxisCode(21,1,1);
+  	  			book(_s[name_ratioD], name_ratioD);
+  	  		}
+  	  	}
+  	  	string name_corrFunc6b = "CorrFunc6b_" + to_string(corr.GetIndex()) + "_" + to_string(corr.GetSubIndex()) + "_" + to_string(corr.GetSubSubIndex());
+  	  	book(_h[name_corrFunc6b], name_corrFunc6b, 72, - M_PI/2,3*(M_PI/2));
+  	  	book(sow[name_corrFunc6b], "sow" + name_corrFunc6b);
+  	  	nTriggers[name_corrFunc6b] = 0;
+  	  }
+
   	  
   	  
      ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -737,6 +790,22 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
 
       //Fill Histograms for figure 6
+      for (Correlator corr : Correlators6)
+      {
+      	if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+
+      	string name_corrFunc = "CorrFunc_" + to_string(corr.GetIndex()) + "_" + to_string(corr.GetSubIndex()) + "_" + to_string(corr.GetSubSubIndex());
+      	sow[name_corrFunc]->fill();
+ 
+      }
+
+      for (Correlator corr : Correlators6b)
+      {
+      	if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+
+      	string name_corrFunc6b = "CorrFunc_" + to_string(corr.GetIndex()) + "_" + to_string(corr.GetSubIndex()) + "_" + to_string(corr.GetSubSubIndex());
+      	sow[name_corrFunc6b]->fill();
+      }
 
       //Fill Histograms for figure 7
       for (Correlator corr : Correlators7)
@@ -900,6 +969,7 @@ Particles chargedParticles = cfs.particles();
     vector<Correlator> Correlators;
     vector<Correlator> Correlators3;
     vector<Correlator> Correlators6;
+    vector<Correlator> Correlators6b;
     vector<Correlator> Correlators7;
     vector<Correlator> Correlators8;
     
