@@ -34,7 +34,6 @@ namespace Rivet {
 
       int _index;
       int _subindex;
-      int _subsubindex;
       string _collSystemAndEnergy;
       pair<double,double> _centrality;
       pair<double,double> _triggerRange;
@@ -45,10 +44,9 @@ namespace Rivet {
     public:
     
       /// Constructor
-      Correlator(int index, int subindex, int subsubindex) {
+      Correlator(int index, int subindex) {
         _index = index;
         _subindex = subindex;
-        _subsubindex = subsubindex;
       }
 
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
@@ -75,10 +73,9 @@ namespace Rivet {
     
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
-      int GetSubSubIndex(){ return _subsubindex; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex())+ to_string(GetSubSubIndex());
+          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
           return fullIndex;
       }
     
@@ -353,13 +350,12 @@ double highedge = 3.0*pi/2.0;
 
 
         for(int ncb=0;ncb<numCentBins;ncb++){
-      for(int ntrig=0;ntrig<numTrigPtBins;ntrig++){
           for(int nassoc=0;nassoc<numAssocPtBins;nassoc++){
       //Correlators
-            Correlator c1(ncb,ntrig,nassoc);
+            Correlator c1(ncb,nassoc);
             c1.SetCollSystemAndEnergy("AuAu200GeV");
             c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
-            c1.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
+            c1.SetTriggerRange(8., 15.);
             c1.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
             c1.SetzTRange(0,1);
             Correlators.push_back(c1);
@@ -371,10 +367,10 @@ double highedge = 3.0*pi/2.0;
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
 
-              Correlator c2(100,ntrig,nassoc);
+              Correlator c2(100,nassoc);
               c2.SetCollSystemAndEnergy("dAu200GeV");
               c2.SetCentrality(0,80);
-              c2.SetTriggerRange(pTTrigBins[ntrig], pTTrigBins[ntrig+1]);
+              c2.SetTriggerRange(8., 15.);
               c2.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
               c2.SetzTRange(0,1); 
               Correlators.push_back(c2);
@@ -388,12 +384,11 @@ double highedge = 3.0*pi/2.0;
           }
 
 
-        }//end loop over trigger pT bins
 
           for(int nzT=0;nzT<numzTBins;nzT++){
 
       //Correlators
-            Correlator c1(ncb,1000,1000);
+            Correlator c1(ncb,1000);
             c1.SetCollSystemAndEnergy("AuAu200GeV");
             c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
             c1.SetTriggerRange(8,15);
@@ -408,7 +403,7 @@ double highedge = 3.0*pi/2.0;
             cout<<"making* "<<name<<endl;
             if(ncb==0){
 
-              Correlator c2(1000,1000,1000);
+              Correlator c2(1000,1000);
               c2.SetCollSystemAndEnergy("dAu200GeV");
               c2.SetCentrality(0,80);
               c2.SetTriggerRange(8,15);
