@@ -347,7 +347,7 @@ namespace Rivet {
       
       declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
-int ndPhiBins = 72;
+int ndPhiBins = 72*4;
 double lowedge = -pi/2.0;
 double highedge = 3.0*pi/2.0;
 
@@ -423,21 +423,40 @@ double highedge = 3.0*pi/2.0;
       }//end loop over centrality bins
 
 //AJ - book histograms which were in the .yoda file
-      book(_h["010101"],1,1,1);
-      book(_h["010102"],1,1,2);
-      book(_h["010103"], 1, 1, 3);
-      book(_h["010104"], 1, 1, 4);
-      book(_h["010105"], 1, 1, 5);
-      book(_h["010106"], 1, 1, 6);
-      book(_h["020101"], 2, 1, 1);
-      book(_h["020102"], 2, 1, 2);
-      book(_h["030101"], 3, 1, 1);
-      book(_h["030102"], 3, 1, 2);
-      book(_h["030103"], 3, 1, 3);
-      book(_h["030104"], 3, 1, 4);
-      book(_h["030105"], 3, 1, 5);
-      book(_h["030101"], 3, 1, 1);
-      book(_h["040101"], 3, 1, 1);
+      //book(_h["010101"],1,1,1);
+      //book(_h["010102"],1,1,2);
+      //book(_h["010103"], 1, 1, 3);
+      //book(_h["010104"], 1, 1, 4);
+      //book(_h["010105"], 1, 1, 5);
+      //book(_h["010106"], 1, 1, 6);
+      //book(_h["020101"], 2, 1, 1);
+      //book(_h["020102"], 2, 1, 2);
+      //book(_h["030101"], 3, 1, 1);
+      //book(_h["030102"], 3, 1, 2);
+      //book(_h["030103"], 3, 1, 3);
+      //book(_h["030104"], 3, 1, 4);
+      //book(_h["030105"], 3, 1, 5);
+      //book(_h["030101"], 3, 1, 1);
+      //book(_h["040101"], 3, 1, 1);
+
+        //Table 1 Fig. 3.1 - Near-side yield per trigger
+        book(_h["010101"], 1, 1, 1);//pTassoc = 3-4
+        book(_h["010102"], 1, 1, 2);//pTassoc = 4-6
+        book(_h["010103"], 1, 1, 3);//pTassoc > 6
+  //Table 2 Fig. 3.2 - Away-side yield per trigger
+        book(_h["020101"], 2, 1, 1);//pTassoc = 3-4
+        book(_h["020102"], 2, 1, 2);//pTassoc = 4-6
+        //book(_h["020103"], 2, 1, 3);//pTassoc > 6
+        //Table 3 - d+Au D(z) vs z_T - Near side
+        book(_h["030101"], 3, 1, 1);//Fig. 4.0
+        //book(_h["030101"], 3, 1, 1);
+        //Au+Au D(z) vs z_T - Near side
+        book(_h["040101"], 4, 1, 1);//0-5%
+        //book(_h["040102"], 4, 1, 2);//20-40%
+        //d+Au, Au+Au D(z) vs z_T - Near side
+        book(_h["050101"], 5, 1, 1);//d+Au
+        book(_h["050102"], 5, 1, 2);//0-5%
+        book(_h["050103"], 5, 1, 3);//20-40%
       //Add counters to keep track of trigger particles - something like this
       //book(sow[corr.GetFullIndex()],"sow" + corr.GetFullIndex());
 
@@ -520,8 +539,8 @@ double highedge = 3.0*pi/2.0;
                 if(!corr.CheckCentrality(c)) continue;
                 if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
                 if(!corr.CheckAssociatedRange(pTrig.pT()/GeV)) continue;
-                //AJ add a spot where you fill histograms
-                //See Nora's code in 08014545 around line 1168
+                
+                
                 
                 string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
                 
@@ -578,6 +597,7 @@ double highedge = 3.0*pi/2.0;
             
             string name = corr.GetCollSystemAndEnergy()+corr.GetFullIndex();
             //AJ add some cross checks to make sure you do not divide by zero here.
+
             if(nTriggers[corr.GetFullIndex()] > 0) _h[name]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
             //string name2 = corr.GetCollSystemAndEnergy()+corr.GetFullIndex()+"BkgdSubtracted";
                   _h[name] = SubtractBackgroundZYAM(_h[name]);
@@ -587,16 +607,19 @@ double highedge = 3.0*pi/2.0;
                   //AJ work on this
                   //1.  Just calculate the yield but adjust the range so that it matched the paper.
                   //2.  Try to fill the histogram as below, except you'll need to figure out what the name is.
-    //        double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
+                  double fractionawayside = 0;
+            double yieldawayside = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fractionawayside);
       //      _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            double fractionnearside = 0;
+            double yieldnearside = getYieldRangeUser(_h[name], M_PI - (M_PI / 6.), M_PI + (M_PI / 6.), fractionnearside);
+            //  _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
+
         }
         
         
     }
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> sow;
-    map<string, Histo1DPtr> _DeltaPhixE;
-    map<int, Histo1DPtr> _DeltaPhiSub;
     map<string, int> nTriggers;
     vector<Correlator> Correlators;
     
