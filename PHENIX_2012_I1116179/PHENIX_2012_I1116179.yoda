@@ -1,0 +1,518 @@
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y01
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -1.34033e-05, up: 1.34033e-05}, $p_T$-uncorrelated-error: {dn: -1.60975e-06, up: 1.60975e-06}}, 1: {$p_T$-correlated-error: {dn: -6.49107e-06, up: 6.49107e-06}, $p_T$-uncorrelated-error: {dn: -9.80658e-07, up: 9.80658e-07}}, 2: {$p_T$-correlated-error: {dn: -3.04366e-06, up: 3.04366e-06}, $p_T$-uncorrelated-error: {dn: -6.23192e-07, up: 6.23192e-07}}, 3: {$p_T$-correlated-error: {dn: -1.58296e-06, up: 1.58296e-06}, $p_T$-uncorrelated-error: {dn: -4.16639e-07, up: 4.16639e-07}}, 4: {$p_T$-correlated-error: {dn: -9.37348e-07, up: 9.37348e-07}, $p_T$-uncorrelated-error: {dn: -2.95356e-07, up: 2.95356e-07}}, 5: {$p_T$-correlated-error: {dn: -5.44603e-07, up: 5.44603e-07}, $p_T$-uncorrelated-error: {dn: -2.09733e-07, up: 2.09733e-07}}, 6: {$p_T$-correlated-error: {dn: -3.29777e-07, up: 3.29777e-07}, $p_T$-uncorrelated-error: {dn: -1.49424e-07, up: 1.49424e-07}}, 7: {$p_T$-correlated-error: {dn: -2.18454e-07, up: 2.18454e-07}, $p_T$-uncorrelated-error: {dn: -1.14391e-07, up: 1.14391e-07}}, 8: {$p_T$-correlated-error: {dn: -1.40698e-07, up: 1.40698e-07}, $p_T$-uncorrelated-error: {dn: -8.43162e-08, up: 8.43162e-08}}, 9: {$p_T$-correlated-error: {dn: -1.00004e-07, up: 1.00004e-07}, $p_T$-uncorrelated-error: {dn: -6.77061e-08, up: 6.77061e-08}}, 10: {$p_T$-correlated-error: {dn: -6.20874e-08, up: 6.20874e-08}, $p_T$-uncorrelated-error: {dn: -4.79592e-08, up: 4.79592e-08}}, 11: {$p_T$-correlated-error: {dn: -4.63225e-08, up: 4.63225e-08}, $p_T$-uncorrelated-error: {dn: -3.9572e-08, up: 3.9572e-08}}, 12: {$p_T$-correlated-error: {dn: -2.02793e-08, up: 2.02793e-08}, $p_T$-uncorrelated-error: {dn: -1.49383e-08, up: 1.49383e-08}}, 13: {$p_T$-correlated-error: {dn: -6.14284e-09, up: 6.14284e-09}, $p_T$-uncorrelated-error: {dn: -7.66556e-09, up: 7.66556e-09}}, 14: {$p_T$-correlated-error: {dn: -1.95479e-09, up: 1.95479e-09}, $p_T$-uncorrelated-error: {dn: -3.24545e-09, up: 3.24545e-09}}, 15: {$p_T$-correlated-error: {dn: -1.17735e-09, up: 1.17735e-09}, $p_T$-uncorrelated-error: {dn: -2.96705e-09, up: 2.96705e-09}}, 16: {$p_T$-correlated-error: {dn: -2.2868e-10, up: 2.2868e-10}, $p_T$-uncorrelated-error: {dn: -1.00846e-09, up: 1.00846e-09}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y01
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	1.169540e-04	1.349962e-05	1.349962e-05
+2.000000e+00	5.000000e-01	5.000000e-01	5.834750e-05	6.564730e-06	6.564730e-06
+3.000000e+00	5.000000e-01	5.000000e-01	2.885620e-05	3.106805e-06	3.106805e-06
+4.000000e+00	5.000000e-01	5.000000e-01	1.613360e-05	1.636872e-06	1.636872e-06
+5.000000e+00	5.000000e-01	5.000000e-01	1.010120e-05	9.827800e-07	9.827800e-07
+6.000000e+00	5.000000e-01	5.000000e-01	6.166220e-06	5.835926e-07	5.835926e-07
+7.000000e+00	5.000000e-01	5.000000e-01	3.808800e-06	3.620503e-07	3.620503e-07
+8.000000e+00	5.000000e-01	5.000000e-01	2.571910e-06	2.465917e-07	2.465917e-07
+9.000000e+00	5.000000e-01	5.000000e-01	1.693320e-06	1.640279e-07	1.640279e-07
+1.000000e+01	5.000000e-01	5.000000e-01	1.218610e-06	1.207680e-07	1.207680e-07
+1.100000e+01	5.000000e-01	5.000000e-01	7.475920e-07	7.845336e-08	7.845336e-08
+1.200000e+01	5.000000e-01	5.000000e-01	5.577750e-07	6.092386e-08	6.092386e-08
+1.300000e+01	5.000000e-01	5.000000e-01	2.498810e-07	2.518735e-08	2.518735e-08
+1.400000e+01	5.000000e-01	5.000000e-01	7.606350e-08	9.823202e-09	9.823202e-09
+1.500000e+01	5.000000e-01	5.000000e-01	2.256370e-08	3.788687e-09	3.788687e-09
+1.600000e+01	5.000000e-01	5.000000e-01	1.321840e-08	3.192106e-09	3.192106e-09
+1.700000e+01	5.000000e-01	5.000000e-01	1.405080e-09	1.034063e-09	1.034063e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y02
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -9.78811e-06, up: 9.78811e-06}, $p_T$-uncorrelated-error: {dn: -1.48594e-06, up: 1.48594e-06}}, 1: {$p_T$-correlated-error: {dn: -4.65519e-06, up: 4.65519e-06}, $p_T$-uncorrelated-error: {dn: -8.82305e-07, up: 8.82305e-07}}, 2: {$p_T$-correlated-error: {dn: -2.35914e-06, up: 2.35914e-06}, $p_T$-uncorrelated-error: {dn: -5.54484e-07, up: 5.54484e-07}}, 3: {$p_T$-correlated-error: {dn: -1.24133e-06, up: 1.24133e-06}, $p_T$-uncorrelated-error: {dn: -3.61419e-07, up: 3.61419e-07}}, 4: {$p_T$-correlated-error: {dn: -7.10095e-07, up: 7.10095e-07}, $p_T$-uncorrelated-error: {dn: -2.47076e-07, up: 2.47076e-07}}, 5: {$p_T$-correlated-error: {dn: -4.3033e-07, up: 4.3033e-07}, $p_T$-uncorrelated-error: {dn: -1.75644e-07, up: 1.75644e-07}}, 6: {$p_T$-correlated-error: {dn: -2.67933e-07, up: 2.67933e-07}, $p_T$-uncorrelated-error: {dn: -1.27089e-07, up: 1.27089e-07}}, 7: {$p_T$-correlated-error: {dn: -1.6685e-07, up: 1.6685e-07}, $p_T$-uncorrelated-error: {dn: -9.15946e-08, up: 9.15946e-08}}, 8: {$p_T$-correlated-error: {dn: -1.13217e-07, up: 1.13217e-07}, $p_T$-uncorrelated-error: {dn: -6.97623e-08, up: 6.97623e-08}}, 9: {$p_T$-correlated-error: {dn: -6.98159e-08, up: 6.98159e-08}, $p_T$-uncorrelated-error: {dn: -4.99626e-08, up: 4.99626e-08}}, 10: {$p_T$-correlated-error: {dn: -5.85468e-08, up: 5.85468e-08}, $p_T$-uncorrelated-error: {dn: -4.39702e-08, up: 4.39702e-08}}, 11: {$p_T$-correlated-error: {dn: -3.85014e-08, up: 3.85014e-08}, $p_T$-uncorrelated-error: {dn: -3.43591e-08, up: 3.43591e-08}}, 12: {$p_T$-correlated-error: {dn: -1.48453e-08, up: 1.48453e-08}, $p_T$-uncorrelated-error: {dn: -1.19268e-08, up: 1.19268e-08}}, 13: {$p_T$-correlated-error: {dn: -6.13045e-09, up: 6.13045e-09}, $p_T$-uncorrelated-error: {dn: -6.59493e-09, up: 6.59493e-09}}, 14: {$p_T$-correlated-error: {dn: -1.9797e-09, up: 1.9797e-09}, $p_T$-uncorrelated-error: {dn: -2.83537e-09, up: 2.83537e-09}}, 15: {$p_T$-correlated-error: {dn: -7.06729e-10, up: 7.06729e-10}, $p_T$-uncorrelated-error: {dn: -2.19236e-09, up: 2.19236e-09}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y02
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	7.668580e-05	9.900258e-06	9.900258e-06
+2.000000e+00	5.000000e-01	5.000000e-01	3.887050e-05	4.738065e-06	4.738065e-06
+3.000000e+00	5.000000e-01	5.000000e-01	2.089840e-05	2.423426e-06	2.423426e-06
+4.000000e+00	5.000000e-01	5.000000e-01	1.172780e-05	1.292874e-06	1.292874e-06
+5.000000e+00	5.000000e-01	5.000000e-01	7.096310e-06	7.518520e-07	7.518520e-07
+6.000000e+00	5.000000e-01	5.000000e-01	4.523540e-06	4.647954e-07	4.647954e-07
+7.000000e+00	5.000000e-01	5.000000e-01	2.872520e-06	2.965463e-07	2.965463e-07
+8.000000e+00	5.000000e-01	5.000000e-01	1.828900e-06	1.903378e-07	1.903378e-07
+9.000000e+00	5.000000e-01	5.000000e-01	1.273620e-06	1.329845e-07	1.329845e-07
+1.000000e+01	5.000000e-01	5.000000e-01	7.764410e-07	8.585174e-08	8.585174e-08
+1.100000e+01	5.000000e-01	5.000000e-01	6.640470e-07	7.321958e-08	7.321958e-08
+1.200000e+01	5.000000e-01	5.000000e-01	4.325460e-07	5.160335e-08	5.160335e-08
+1.300000e+01	5.000000e-01	5.000000e-01	1.726820e-07	1.904289e-08	1.904289e-08
+1.400000e+01	5.000000e-01	5.000000e-01	7.128150e-08	9.004195e-09	9.004195e-09
+1.500000e+01	5.000000e-01	5.000000e-01	2.043220e-08	3.458111e-09	3.458111e-09
+1.600000e+01	5.000000e-01	5.000000e-01	7.565490e-09	2.303456e-09	2.303456e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y03
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -9.49766e-06, up: 9.49766e-06}, $p_T$-uncorrelated-error: {dn: -1.39305e-06, up: 1.39305e-06}}, 1: {$p_T$-correlated-error: {dn: -4.4554e-06, up: 4.4554e-06}, $p_T$-uncorrelated-error: {dn: -8.1875e-07, up: 8.1875e-07}}, 2: {$p_T$-correlated-error: {dn: -2.2243e-06, up: 2.2243e-06}, $p_T$-uncorrelated-error: {dn: -5.15954e-07, up: 5.15954e-07}}, 3: {$p_T$-correlated-error: {dn: -1.16367e-06, up: 1.16367e-06}, $p_T$-uncorrelated-error: {dn: -3.36085e-07, up: 3.36085e-07}}, 4: {$p_T$-correlated-error: {dn: -6.42743e-07, up: 6.42743e-07}, $p_T$-uncorrelated-error: {dn: -2.25907e-07, up: 2.25907e-07}}, 5: {$p_T$-correlated-error: {dn: -3.91199e-07, up: 3.91199e-07}, $p_T$-uncorrelated-error: {dn: -1.62582e-07, up: 1.62582e-07}}, 6: {$p_T$-correlated-error: {dn: -2.46295e-07, up: 2.46295e-07}, $p_T$-uncorrelated-error: {dn: -1.19735e-07, up: 1.19735e-07}}, 7: {$p_T$-correlated-error: {dn: -1.51147e-07, up: 1.51147e-07}, $p_T$-uncorrelated-error: {dn: -8.55338e-08, up: 8.55338e-08}}, 8: {$p_T$-correlated-error: {dn: -9.86335e-08, up: 9.86335e-08}, $p_T$-uncorrelated-error: {dn: -6.40454e-08, up: 6.40454e-08}}, 9: {$p_T$-correlated-error: {dn: -6.23233e-08, up: 6.23233e-08}, $p_T$-uncorrelated-error: {dn: -4.75651e-08, up: 4.75651e-08}}, 10: {$p_T$-correlated-error: {dn: -5.03585e-08, up: 5.03585e-08}, $p_T$-uncorrelated-error: {dn: -3.97804e-08, up: 3.97804e-08}}, 11: {$p_T$-correlated-error: {dn: -3.74842e-08, up: 3.74842e-08}, $p_T$-uncorrelated-error: {dn: -3.30788e-08, up: 3.30788e-08}}, 12: {$p_T$-correlated-error: {dn: -1.26538e-08, up: 1.26538e-08}, $p_T$-uncorrelated-error: {dn: -1.10376e-08, up: 1.10376e-08}}, 13: {$p_T$-correlated-error: {dn: -4.3288e-09, up: 4.3288e-09}, $p_T$-uncorrelated-error: {dn: -5.46094e-09, up: 5.46094e-09}}, 14: {$p_T$-correlated-error: {dn: -1.53246e-09, up: 1.53246e-09}, $p_T$-uncorrelated-error: {dn: -2.96093e-09, up: 2.96093e-09}}, 15: {$p_T$-correlated-error: {dn: -6.911e-10, up: 6.911e-10}, $p_T$-uncorrelated-error: {dn: -2.00331e-09, up: 2.00331e-09}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y03
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	6.285280e-05	9.599278e-06	9.599278e-06
+2.000000e+00	5.000000e-01	5.000000e-01	3.335250e-05	4.530004e-06	4.530004e-06
+3.000000e+00	5.000000e-01	5.000000e-01	1.618300e-05	2.283357e-06	2.283357e-06
+4.000000e+00	5.000000e-01	5.000000e-01	9.534800e-06	1.211231e-06	1.211231e-06
+5.000000e+00	5.000000e-01	5.000000e-01	5.478670e-06	6.812874e-07	6.812874e-07
+6.000000e+00	5.000000e-01	5.000000e-01	3.735720e-06	4.236385e-07	4.236385e-07
+7.000000e+00	5.000000e-01	5.000000e-01	2.456650e-06	2.738571e-07	2.738571e-07
+8.000000e+00	5.000000e-01	5.000000e-01	1.528440e-06	1.736705e-07	1.736705e-07
+9.000000e+00	5.000000e-01	5.000000e-01	1.037020e-06	1.176026e-07	1.176026e-07
+1.000000e+01	5.000000e-01	5.000000e-01	7.143380e-07	7.840046e-08	7.840046e-08
+1.100000e+01	5.000000e-01	5.000000e-01	5.194010e-07	6.417522e-08	6.417522e-08
+1.200000e+01	5.000000e-01	5.000000e-01	4.015090e-07	4.999272e-08	4.999272e-08
+1.300000e+01	5.000000e-01	5.000000e-01	1.368730e-07	1.679129e-08	1.679129e-08
+1.400000e+01	5.000000e-01	5.000000e-01	4.421170e-08	6.968527e-09	6.968527e-09
+1.500000e+01	5.000000e-01	5.000000e-01	1.754840e-08	3.333998e-09	3.333998e-09
+1.600000e+01	5.000000e-01	5.000000e-01	7.454400e-09	2.119167e-09	2.119167e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y04
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -6.96911e-06, up: 6.96911e-06}, $p_T$-uncorrelated-error: {dn: -1.22006e-06, up: 1.22006e-06}}, 1: {$p_T$-correlated-error: {dn: -3.44847e-06, up: 3.44847e-06}, $p_T$-uncorrelated-error: {dn: -7.26442e-07, up: 7.26442e-07}}, 2: {$p_T$-correlated-error: {dn: -1.79457e-06, up: 1.79457e-06}, $p_T$-uncorrelated-error: {dn: -4.53074e-07, up: 4.53074e-07}}, 3: {$p_T$-correlated-error: {dn: -9.59495e-07, up: 9.59495e-07}, $p_T$-uncorrelated-error: {dn: -2.92545e-07, up: 2.92545e-07}}, 4: {$p_T$-correlated-error: {dn: -4.8499e-07, up: 4.8499e-07}, $p_T$-uncorrelated-error: {dn: -1.80917e-07, up: 1.80917e-07}}, 5: {$p_T$-correlated-error: {dn: -3.26481e-07, up: 3.26481e-07}, $p_T$-uncorrelated-error: {dn: -1.38625e-07, up: 1.38625e-07}}, 6: {$p_T$-correlated-error: {dn: -1.84079e-07, up: 1.84079e-07}, $p_T$-uncorrelated-error: {dn: -9.15359e-08, up: 9.15359e-08}}, 7: {$p_T$-correlated-error: {dn: -1.24759e-07, up: 1.24759e-07}, $p_T$-uncorrelated-error: {dn: -7.07613e-08, up: 7.07613e-08}}, 8: {$p_T$-correlated-error: {dn: -8.15658e-08, up: 8.15658e-08}, $p_T$-uncorrelated-error: {dn: -5.30156e-08, up: 5.30156e-08}}, 9: {$p_T$-correlated-error: {dn: -6.36648e-08, up: 6.36648e-08}, $p_T$-uncorrelated-error: {dn: -4.51108e-08, up: 4.51108e-08}}, 10: {$p_T$-correlated-error: {dn: -4.19296e-08, up: 4.19296e-08}, $p_T$-uncorrelated-error: {dn: -3.19705e-08, up: 3.19705e-08}}, 11: {$p_T$-correlated-error: {dn: -2.69507e-08, up: 2.69507e-08}, $p_T$-uncorrelated-error: {dn: -2.47409e-08, up: 2.47409e-08}}, 12: {$p_T$-correlated-error: {dn: -1.09099e-08, up: 1.09099e-08}, $p_T$-uncorrelated-error: {dn: -9.53894e-09, up: 9.53894e-09}}, 13: {$p_T$-correlated-error: {dn: -4.52241e-09, up: 4.52241e-09}, $p_T$-uncorrelated-error: {dn: -5.50433e-09, up: 5.50433e-09}}, 14: {$p_T$-correlated-error: {dn: -1.64319e-09, up: 1.64319e-09}, $p_T$-uncorrelated-error: {dn: -2.84193e-09, up: 2.84193e-09}}, 15: {$p_T$-correlated-error: {dn: -5.14353e-10, up: 5.14353e-10}, $p_T$-uncorrelated-error: {dn: -1.80625e-09, up: 1.80625e-09}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y04
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	4.453730e-05	7.075100e-06	7.075100e-06
+2.000000e+00	5.000000e-01	5.000000e-01	2.324390e-05	3.524154e-06	3.524154e-06
+3.000000e+00	5.000000e-01	5.000000e-01	1.288300e-05	1.850880e-06	1.850880e-06
+4.000000e+00	5.000000e-01	5.000000e-01	7.373650e-06	1.003102e-06	1.003102e-06
+5.000000e+00	5.000000e-01	5.000000e-01	3.989870e-06	5.176353e-07	5.176353e-07
+6.000000e+00	5.000000e-01	5.000000e-01	2.902500e-06	3.546924e-07	3.546924e-07
+7.000000e+00	5.000000e-01	5.000000e-01	1.699870e-06	2.055819e-07	2.055819e-07
+8.000000e+00	5.000000e-01	5.000000e-01	1.188280e-06	1.434293e-07	1.434293e-07
+9.000000e+00	5.000000e-01	5.000000e-01	7.860360e-07	9.728121e-08	9.728121e-08
+1.000000e+01	5.000000e-01	5.000000e-01	6.476220e-07	7.802686e-08	7.802686e-08
+1.100000e+01	5.000000e-01	5.000000e-01	4.140530e-07	5.272764e-08	5.272764e-08
+1.200000e+01	5.000000e-01	5.000000e-01	2.533390e-07	3.658487e-08	3.658487e-08
+1.300000e+01	5.000000e-01	5.000000e-01	1.157750e-07	1.449197e-08	1.449197e-08
+1.400000e+01	5.000000e-01	5.000000e-01	4.837900e-08	7.123892e-09	7.123892e-09
+1.500000e+01	5.000000e-01	5.000000e-01	1.609570e-08	3.282779e-09	3.282779e-09
+1.600000e+01	5.000000e-01	5.000000e-01	5.184220e-09	1.878057e-09	1.878057e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y05
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -6.07928e-06, up: 6.07928e-06}, $p_T$-uncorrelated-error: {dn: -8.53671e-07, up: 8.53671e-07}}, 1: {$p_T$-correlated-error: {dn: -2.82796e-06, up: 2.82796e-06}, $p_T$-uncorrelated-error: {dn: -4.97669e-07, up: 4.97669e-07}}, 2: {$p_T$-correlated-error: {dn: -1.415e-06, up: 1.415e-06}, $p_T$-uncorrelated-error: {dn: -3.05573e-07, up: 3.05573e-07}}, 3: {$p_T$-correlated-error: {dn: -7.60167e-07, up: 7.60167e-07}, $p_T$-uncorrelated-error: {dn: -1.96963e-07, up: 1.96963e-07}}, 4: {$p_T$-correlated-error: {dn: -4.48527e-07, up: 4.48527e-07}, $p_T$-uncorrelated-error: {dn: -1.35377e-07, up: 1.35377e-07}}, 5: {$p_T$-correlated-error: {dn: -2.53446e-07, up: 2.53446e-07}, $p_T$-uncorrelated-error: {dn: -9.16576e-08, up: 9.16576e-08}}, 6: {$p_T$-correlated-error: {dn: -1.62912e-07, up: 1.62912e-07}, $p_T$-uncorrelated-error: {dn: -6.77395e-08, up: 6.77395e-08}}, 7: {$p_T$-correlated-error: {dn: -9.30628e-08, up: 9.30628e-08}, $p_T$-uncorrelated-error: {dn: -4.54546e-08, up: 4.54546e-08}}, 8: {$p_T$-correlated-error: {dn: -6.38647e-08, up: 6.38647e-08}, $p_T$-uncorrelated-error: {dn: -3.62092e-08, up: 3.62092e-08}}, 9: {$p_T$-correlated-error: {dn: -3.83038e-08, up: 3.83038e-08}, $p_T$-uncorrelated-error: {dn: -2.40442e-08, up: 2.40442e-08}}, 10: {$p_T$-correlated-error: {dn: -2.92942e-08, up: 2.92942e-08}, $p_T$-uncorrelated-error: {dn: -2.13504e-08, up: 2.13504e-08}}, 11: {$p_T$-correlated-error: {dn: -2.04244e-08, up: 2.04244e-08}, $p_T$-uncorrelated-error: {dn: -1.57911e-08, up: 1.57911e-08}}, 12: {$p_T$-correlated-error: {dn: -9.06303e-09, up: 9.06303e-09}, $p_T$-uncorrelated-error: {dn: -6.35004e-09, up: 6.35004e-09}}, 13: {$p_T$-correlated-error: {dn: -2.45799e-09, up: 2.45799e-09}, $p_T$-uncorrelated-error: {dn: -2.71582e-09, up: 2.71582e-09}}, 14: {$p_T$-correlated-error: {dn: -9.84859e-10, up: 9.84859e-10}, $p_T$-uncorrelated-error: {dn: -1.62042e-09, up: 1.62042e-09}}, 15: {$p_T$-correlated-error: {dn: -4.19356e-10, up: 4.19356e-10}, $p_T$-uncorrelated-error: {dn: -1.11433e-09, up: 1.11433e-09}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y05
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	3.463940e-05	6.138925e-06	6.138925e-06
+2.000000e+00	5.000000e-01	5.000000e-01	1.697320e-05	2.871416e-06	2.871416e-06
+3.000000e+00	5.000000e-01	5.000000e-01	9.000840e-06	1.447619e-06	1.447619e-06
+4.000000e+00	5.000000e-01	5.000000e-01	5.065190e-06	7.852696e-07	7.852696e-07
+5.000000e+00	5.000000e-01	5.000000e-01	3.324980e-06	4.685119e-07	4.685119e-07
+6.000000e+00	5.000000e-01	5.000000e-01	2.023990e-06	2.695107e-07	2.695107e-07
+7.000000e+00	5.000000e-01	5.000000e-01	1.433370e-06	1.764340e-07	1.764340e-07
+8.000000e+00	5.000000e-01	5.000000e-01	7.937050e-07	1.035703e-07	1.035703e-07
+9.000000e+00	5.000000e-01	5.000000e-01	5.484960e-07	7.341530e-08	7.341530e-08
+1.000000e+01	5.000000e-01	5.000000e-01	3.441390e-07	4.522504e-08	4.522504e-08
+1.100000e+01	5.000000e-01	5.000000e-01	2.625370e-07	3.624900e-08	3.624900e-08
+1.200000e+01	5.000000e-01	5.000000e-01	1.889530e-07	2.581695e-08	2.581695e-08
+1.300000e+01	5.000000e-01	5.000000e-01	9.211470e-08	1.106623e-08	1.106623e-08
+1.400000e+01	5.000000e-01	5.000000e-01	2.407710e-08	3.662976e-09	3.662976e-09
+1.500000e+01	5.000000e-01	5.000000e-01	9.589960e-09	1.896235e-09	1.896235e-09
+1.600000e+01	5.000000e-01	5.000000e-01	4.066450e-09	1.190626e-09	1.190626e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y06
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -4.16323e-06, up: 4.16323e-06}, $p_T$-uncorrelated-error: {dn: -6.82959e-07, up: 6.82959e-07}}, 1: {$p_T$-correlated-error: {dn: -1.94061e-06, up: 1.94061e-06}, $p_T$-uncorrelated-error: {dn: -3.92972e-07, up: 3.92972e-07}}, 2: {$p_T$-correlated-error: {dn: -9.34297e-07, up: 9.34297e-07}, $p_T$-uncorrelated-error: {dn: -2.32228e-07, up: 2.32228e-07}}, 3: {$p_T$-correlated-error: {dn: -5.48261e-07, up: 5.48261e-07}, $p_T$-uncorrelated-error: {dn: -1.55433e-07, up: 1.55433e-07}}, 4: {$p_T$-correlated-error: {dn: -2.8673e-07, up: 2.8673e-07}, $p_T$-uncorrelated-error: {dn: -9.82211e-08, up: 9.82211e-08}}, 5: {$p_T$-correlated-error: {dn: -1.64963e-07, up: 1.64963e-07}, $p_T$-uncorrelated-error: {dn: -6.60515e-08, up: 6.60515e-08}}, 6: {$p_T$-correlated-error: {dn: -9.82336e-08, up: 9.82336e-08}, $p_T$-uncorrelated-error: {dn: -4.54547e-08, up: 4.54547e-08}}, 7: {$p_T$-correlated-error: {dn: -6.88873e-08, up: 6.88873e-08}, $p_T$-uncorrelated-error: {dn: -3.66729e-08, up: 3.66729e-08}}, 8: {$p_T$-correlated-error: {dn: -4.11188e-08, up: 4.11188e-08}, $p_T$-uncorrelated-error: {dn: -2.5189e-08, up: 2.5189e-08}}, 9: {$p_T$-correlated-error: {dn: -2.72173e-08, up: 2.72173e-08}, $p_T$-uncorrelated-error: {dn: -1.87424e-08, up: 1.87424e-08}}, 10: {$p_T$-correlated-error: {dn: -2.16718e-08, up: 2.16718e-08}, $p_T$-uncorrelated-error: {dn: -1.58522e-08, up: 1.58522e-08}}, 11: {$p_T$-correlated-error: {dn: -1.60122e-08, up: 1.60122e-08}, $p_T$-uncorrelated-error: {dn: -1.32118e-08, up: 1.32118e-08}}, 12: {$p_T$-correlated-error: {dn: -6.22987e-09, up: 6.22987e-09}, $p_T$-uncorrelated-error: {dn: -5.07133e-09, up: 5.07133e-09}}, 13: {$p_T$-correlated-error: {dn: -1.75424e-09, up: 1.75424e-09}, $p_T$-uncorrelated-error: {dn: -2.49448e-09, up: 2.49448e-09}}, 14: {$p_T$-correlated-error: {dn: -4.85289e-10, up: 4.85289e-10}, $p_T$-uncorrelated-error: {dn: -9.26231e-10, up: 9.26231e-10}}, 15: {$p_T$-correlated-error: {dn: -3.65587e-10, up: 3.65587e-10}, $p_T$-uncorrelated-error: {dn: -9.63855e-10, up: 9.63855e-10}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y06
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	2.120370e-05	4.218876e-06	4.218876e-06
+2.000000e+00	5.000000e-01	5.000000e-01	1.030900e-05	1.979999e-06	1.979999e-06
+3.000000e+00	5.000000e-01	5.000000e-01	5.383490e-06	9.627257e-07	9.627257e-07
+4.000000e+00	5.000000e-01	5.000000e-01	3.480930e-06	5.698680e-07	5.698680e-07
+5.000000e+00	5.000000e-01	5.000000e-01	1.958740e-06	3.030866e-07	3.030866e-07
+6.000000e+00	5.000000e-01	5.000000e-01	1.191830e-06	1.776952e-07	1.776952e-07
+7.000000e+00	5.000000e-01	5.000000e-01	7.378100e-07	1.082403e-07	1.082403e-07
+8.000000e+00	5.000000e-01	5.000000e-01	5.214980e-07	7.804077e-08	7.804077e-08
+9.000000e+00	5.000000e-01	5.000000e-01	3.048290e-07	4.822076e-08	4.822076e-08
+1.000000e+01	5.000000e-01	5.000000e-01	2.054690e-07	3.304632e-08	3.304632e-08
+1.100000e+01	5.000000e-01	5.000000e-01	1.865890e-07	2.685068e-08	2.685068e-08
+1.200000e+01	5.000000e-01	5.000000e-01	1.374740e-07	2.075915e-08	2.075915e-08
+1.300000e+01	5.000000e-01	5.000000e-01	5.854280e-08	8.033036e-09	8.033036e-09
+1.400000e+01	5.000000e-01	5.000000e-01	1.706080e-08	3.049555e-09	3.049555e-09
+1.500000e+01	5.000000e-01	5.000000e-01	2.713860e-09	1.045662e-09	1.045662e-09
+1.600000e+01	5.000000e-01	5.000000e-01	3.360700e-09	1.030859e-09	1.030859e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y07
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -2.58363e-06, up: 2.58363e-06}, $p_T$-uncorrelated-error: {dn: -5.13252e-07, up: 5.13252e-07}}, 1: {$p_T$-correlated-error: {dn: -1.03381e-06, up: 1.03381e-06}, $p_T$-uncorrelated-error: {dn: -2.62342e-07, up: 2.62342e-07}}, 2: {$p_T$-correlated-error: {dn: -5.63155e-07, up: 5.63155e-07}, $p_T$-uncorrelated-error: {dn: -1.62094e-07, up: 1.62094e-07}}, 3: {$p_T$-correlated-error: {dn: -3.32143e-07, up: 3.32143e-07}, $p_T$-uncorrelated-error: {dn: -1.08675e-07, up: 1.08675e-07}}, 4: {$p_T$-correlated-error: {dn: -1.61107e-07, up: 1.61107e-07}, $p_T$-uncorrelated-error: {dn: -6.19445e-08, up: 6.19445e-08}}, 5: {$p_T$-correlated-error: {dn: -1.09481e-07, up: 1.09481e-07}, $p_T$-uncorrelated-error: {dn: -4.81838e-08, up: 4.81838e-08}}, 6: {$p_T$-correlated-error: {dn: -6.04011e-08, up: 6.04011e-08}, $p_T$-uncorrelated-error: {dn: -3.07966e-08, up: 3.07966e-08}}, 7: {$p_T$-correlated-error: {dn: -4.34567e-08, up: 4.34567e-08}, $p_T$-uncorrelated-error: {dn: -2.47586e-08, up: 2.47586e-08}}, 8: {$p_T$-correlated-error: {dn: -2.73726e-08, up: 2.73726e-08}, $p_T$-uncorrelated-error: {dn: -1.76078e-08, up: 1.76078e-08}}, 9: {$p_T$-correlated-error: {dn: -1.80047e-08, up: 1.80047e-08}, $p_T$-uncorrelated-error: {dn: -1.30854e-08, up: 1.30854e-08}}, 10: {$p_T$-correlated-error: {dn: -1.34865e-08, up: 1.34865e-08}, $p_T$-uncorrelated-error: {dn: -1.07832e-08, up: 1.07832e-08}}, 11: {$p_T$-correlated-error: {dn: -9.88662e-09, up: 9.88662e-09}, $p_T$-uncorrelated-error: {dn: -8.95641e-09, up: 8.95641e-09}}, 12: {$p_T$-correlated-error: {dn: -3.43701e-09, up: 3.43701e-09}, $p_T$-uncorrelated-error: {dn: -3.1114e-09, up: 3.1114e-09}}, 13: {$p_T$-correlated-error: {dn: -1.49375e-09, up: 1.49375e-09}, $p_T$-uncorrelated-error: {dn: -2.19254e-09, up: 2.19254e-09}}, 14: {$p_T$-correlated-error: {dn: -5.95905e-10, up: 5.95905e-10}, $p_T$-uncorrelated-error: {dn: -1.04094e-09, up: 1.04094e-09}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y07
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	1.216460e-05	2.634117e-06	2.634117e-06
+2.000000e+00	5.000000e-01	5.000000e-01	5.151930e-06	1.066577e-06	1.066577e-06
+3.000000e+00	5.000000e-01	5.000000e-01	2.914770e-06	5.860188e-07	5.860188e-07
+4.000000e+00	5.000000e-01	5.000000e-01	1.852430e-06	3.494699e-07	3.494699e-07
+5.000000e+00	5.000000e-01	5.000000e-01	9.873780e-07	1.726053e-07	1.726053e-07
+6.000000e+00	5.000000e-01	5.000000e-01	6.616130e-07	1.196151e-07	1.196151e-07
+7.000000e+00	5.000000e-01	5.000000e-01	3.711090e-07	6.779914e-08	6.779914e-08
+8.000000e+00	5.000000e-01	5.000000e-01	3.040360e-07	5.001473e-08	5.001473e-08
+9.000000e+00	5.000000e-01	5.000000e-01	2.016950e-07	3.254679e-08	3.254679e-08
+1.000000e+01	5.000000e-01	5.000000e-01	1.345640e-07	2.225751e-08	2.225751e-08
+1.100000e+01	5.000000e-01	5.000000e-01	1.024160e-07	1.726740e-08	1.726740e-08
+1.200000e+01	5.000000e-01	5.000000e-01	7.339050e-08	1.334026e-08	1.334026e-08
+1.300000e+01	5.000000e-01	5.000000e-01	2.933530e-08	4.636146e-09	4.636146e-09
+1.400000e+01	5.000000e-01	5.000000e-01	1.413890e-08	2.653021e-09	2.653021e-09
+1.500000e+01	5.000000e-01	5.000000e-01	4.833880e-09	1.199441e-09	1.199441e-09
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y08
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -8.982e-07, up: 8.982e-07}, $p_T$-uncorrelated-error: {dn: -2.38787e-07, up: 2.38787e-07}}, 1: {$p_T$-correlated-error: {dn: -4.03866e-07, up: 4.03866e-07}, $p_T$-uncorrelated-error: {dn: -1.24723e-07, up: 1.24723e-07}}, 2: {$p_T$-correlated-error: {dn: -2.33108e-07, up: 2.33108e-07}, $p_T$-uncorrelated-error: {dn: -7.99737e-08, up: 7.99737e-08}}, 3: {$p_T$-correlated-error: {dn: -1.33572e-07, up: 1.33572e-07}, $p_T$-uncorrelated-error: {dn: -5.10421e-08, up: 5.10421e-08}}, 4: {$p_T$-correlated-error: {dn: -9.79837e-08, up: 9.79837e-08}, $p_T$-uncorrelated-error: {dn: -4.12218e-08, up: 4.12218e-08}}, 5: {$p_T$-correlated-error: {dn: -5.67833e-08, up: 5.67833e-08}, $p_T$-uncorrelated-error: {dn: -2.7141e-08, up: 2.7141e-08}}, 6: {$p_T$-correlated-error: {dn: -3.14917e-08, up: 3.14917e-08}, $p_T$-uncorrelated-error: {dn: -1.76744e-08, up: 1.76744e-08}}, 7: {$p_T$-correlated-error: {dn: -2.4501e-08, up: 2.4501e-08}, $p_T$-uncorrelated-error: {dn: -1.56215e-08, up: 1.56215e-08}}, 8: {$p_T$-correlated-error: {dn: -1.71595e-08, up: 1.71595e-08}, $p_T$-uncorrelated-error: {dn: -1.25248e-08, up: 1.25248e-08}}, 9: {$p_T$-correlated-error: {dn: -1.14876e-08, up: 1.14876e-08}, $p_T$-uncorrelated-error: {dn: -9.66547e-09, up: 9.66547e-09}}, 10: {$p_T$-correlated-error: {dn: -6.96739e-09, up: 6.96739e-09}, $p_T$-uncorrelated-error: {dn: -7.05211e-09, up: 7.05211e-09}}, 11: {$p_T$-correlated-error: {dn: -4.71519e-09, up: 4.71519e-09}, $p_T$-uncorrelated-error: {dn: -5.35387e-09, up: 5.35387e-09}}, 12: {$p_T$-correlated-error: {dn: -1.94994e-09, up: 1.94994e-09}, $p_T$-uncorrelated-error: {dn: -2.69105e-09, up: 2.69105e-09}}, 13: {$p_T$-correlated-error: {dn: -6.14329e-10, up: 6.14329e-10}, $p_T$-uncorrelated-error: {dn: -1.18698e-09, up: 1.18698e-09}}, 14: {$p_T$-correlated-error: {dn: -2.15139e-10, up: 2.15139e-10}, $p_T$-uncorrelated-error: {dn: -6.73752e-10, up: 6.73752e-10}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y08
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	3.899830e-06	9.293990e-07	9.293990e-07
+2.000000e+00	5.000000e-01	5.000000e-01	1.762400e-06	4.226861e-07	4.226861e-07
+3.000000e+00	5.000000e-01	5.000000e-01	1.048540e-06	2.464450e-07	2.464450e-07
+4.000000e+00	5.000000e-01	5.000000e-01	6.512040e-07	1.429922e-07	1.429922e-07
+5.000000e+00	5.000000e-01	5.000000e-01	4.930950e-07	1.063017e-07	1.063017e-07
+6.000000e+00	5.000000e-01	5.000000e-01	3.149020e-07	6.293629e-08	6.293629e-08
+7.000000e+00	5.000000e-01	5.000000e-01	1.731940e-07	3.611249e-08	3.611249e-08
+8.000000e+00	5.000000e-01	5.000000e-01	1.358200e-07	2.905736e-08	2.905736e-08
+9.000000e+00	5.000000e-01	5.000000e-01	9.514950e-08	2.124427e-08	2.124427e-08
+1.000000e+01	5.000000e-01	5.000000e-01	5.749140e-08	1.501287e-08	1.501287e-08
+1.100000e+01	5.000000e-01	5.000000e-01	3.016710e-08	9.913465e-09	9.913465e-09
+1.200000e+01	5.000000e-01	5.000000e-01	3.043900e-08	7.134209e-09	7.134209e-09
+1.300000e+01	5.000000e-01	5.000000e-01	1.502930e-08	3.323254e-09	3.323254e-09
+1.400000e+01	5.000000e-01	5.000000e-01	4.499460e-09	1.336533e-09	1.336533e-09
+1.500000e+01	5.000000e-01	5.000000e-01	1.519490e-09	7.072670e-10	7.072670e-10
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y09
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -1.135e-07, up: 1.135e-07}, $p_T$-uncorrelated-error: {dn: -3.49445e-08, up: 3.49445e-08}}, 1: {$p_T$-correlated-error: {dn: -1.0612e-07, up: 1.0612e-07}, $p_T$-uncorrelated-error: {dn: -3.48975e-08, up: 3.48975e-08}}, 2: {$p_T$-correlated-error: {dn: -6.32866e-08, up: 6.32866e-08}, $p_T$-uncorrelated-error: {dn: -2.29255e-08, up: 2.29255e-08}}, 3: {$p_T$-correlated-error: {dn: -3.90637e-08, up: 3.90637e-08}, $p_T$-uncorrelated-error: {dn: -1.58339e-08, up: 1.58339e-08}}, 4: {$p_T$-correlated-error: {dn: -2.35367e-08, up: 2.35367e-08}, $p_T$-uncorrelated-error: {dn: -1.11953e-08, up: 1.11953e-08}}, 5: {$p_T$-correlated-error: {dn: -1.68618e-08, up: 1.68618e-08}, $p_T$-uncorrelated-error: {dn: -9.2992e-09, up: 9.2992e-09}}, 6: {$p_T$-correlated-error: {dn: -9.32671e-09, up: 9.32671e-09}, $p_T$-uncorrelated-error: {dn: -6.10301e-09, up: 6.10301e-09}}, 7: {$p_T$-correlated-error: {dn: -5.86636e-09, up: 5.86636e-09}, $p_T$-uncorrelated-error: {dn: -4.28895e-09, up: 4.28895e-09}}, 8: {$p_T$-correlated-error: {dn: -3.92924e-09, up: 3.92924e-09}, $p_T$-uncorrelated-error: {dn: -3.55333e-09, up: 3.55333e-09}}, 9: {$p_T$-correlated-error: {dn: -3.0365e-09, up: 3.0365e-09}, $p_T$-uncorrelated-error: {dn: -2.83409e-09, up: 2.83409e-09}}, 10: {$p_T$-correlated-error: {dn: -1.60848e-09, up: 1.60848e-09}, $p_T$-uncorrelated-error: {dn: -2.11595e-09, up: 2.11595e-09}}, 11: {$p_T$-correlated-error: {dn: -1.38181e-09, up: 1.38181e-09}, $p_T$-uncorrelated-error: {dn: -1.83994e-09, up: 1.83994e-09}}, 12: {$p_T$-correlated-error: {dn: -4.75681e-10, up: 4.75681e-10}, $p_T$-uncorrelated-error: {dn: -7.56859e-10, up: 7.56859e-10}}, 13: {$p_T$-correlated-error: {dn: -1.20631e-10, up: 1.20631e-10}, $p_T$-uncorrelated-error: {dn: -3.71647e-10, up: 3.71647e-10}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y09
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	4.469630e-07	1.187576e-07	1.187576e-07
+2.000000e+00	5.000000e-01	5.000000e-01	4.234200e-07	1.117107e-07	1.117107e-07
+3.000000e+00	5.000000e-01	5.000000e-01	2.718550e-07	6.731101e-08	6.731101e-08
+4.000000e+00	5.000000e-01	5.000000e-01	1.788940e-07	4.215074e-08	4.215074e-08
+5.000000e+00	5.000000e-01	5.000000e-01	1.073920e-07	2.606360e-08	2.606360e-08
+6.000000e+00	5.000000e-01	5.000000e-01	8.918670e-08	1.925605e-08	1.925605e-08
+7.000000e+00	5.000000e-01	5.000000e-01	4.387580e-08	1.114604e-08	1.114604e-08
+8.000000e+00	5.000000e-01	5.000000e-01	3.031310e-08	7.266999e-09	7.266999e-09
+9.000000e+00	5.000000e-01	5.000000e-01	1.755720e-08	5.297649e-09	5.297649e-09
+1.000000e+01	5.000000e-01	5.000000e-01	1.190830e-08	4.153601e-09	4.153601e-09
+1.100000e+01	5.000000e-01	5.000000e-01	7.921410e-09	2.657904e-09	2.657904e-09
+1.200000e+01	5.000000e-01	5.000000e-01	7.459560e-09	2.301038e-09	2.301038e-09
+1.300000e+01	5.000000e-01	5.000000e-01	3.644800e-09	8.939284e-10	8.939284e-10
+1.400000e+01	5.000000e-01	5.000000e-01	4.168540e-10	3.907343e-10	3.907343e-10
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d01-x01-y10
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -2.96213e-06, up: 2.96213e-06}, $p_T$-uncorrelated-error: {dn: -2.19677e-07, up: 2.19677e-07}}, 1: {$p_T$-correlated-error: {dn: -1.41102e-06, up: 1.41102e-06}, $p_T$-uncorrelated-error: {dn: -1.3158e-07, up: 1.3158e-07}}, 2: {$p_T$-correlated-error: {dn: -6.97981e-07, up: 6.97981e-07}, $p_T$-uncorrelated-error: {dn: -8.42344e-08, up: 8.42344e-08}}, 3: {$p_T$-correlated-error: {dn: -3.88451e-07, up: 3.88451e-07}, $p_T$-uncorrelated-error: {dn: -5.69567e-08, up: 5.69567e-08}}, 4: {$p_T$-correlated-error: {dn: -2.2556e-07, up: 2.2556e-07}, $p_T$-uncorrelated-error: {dn: -3.98972e-08, up: 3.98972e-08}}, 5: {$p_T$-correlated-error: {dn: -1.37362e-07, up: 1.37362e-07}, $p_T$-uncorrelated-error: {dn: -2.90466e-08, up: 2.90466e-08}}, 6: {$p_T$-correlated-error: {dn: -8.44308e-08, up: 8.44308e-08}, $p_T$-uncorrelated-error: {dn: -2.11727e-08, up: 2.11727e-08}}, 7: {$p_T$-correlated-error: {dn: -5.47688e-08, up: 5.47688e-08}, $p_T$-uncorrelated-error: {dn: -1.58539e-08, up: 1.58539e-08}}, 8: {$p_T$-correlated-error: {dn: -3.58027e-08, up: 3.58027e-08}, $p_T$-uncorrelated-error: {dn: -1.20151e-08, up: 1.20151e-08}}, 9: {$p_T$-correlated-error: {dn: -2.39246e-08, up: 2.39246e-08}, $p_T$-uncorrelated-error: {dn: -9.32689e-09, up: 9.32689e-09}}, 10: {$p_T$-correlated-error: {dn: -1.69442e-08, up: 1.69442e-08}, $p_T$-uncorrelated-error: {dn: -7.50916e-09, up: 7.50916e-09}}, 11: {$p_T$-correlated-error: {dn: -1.1835e-08, up: 1.1835e-08}, $p_T$-uncorrelated-error: {dn: -5.94224e-09, up: 5.94224e-09}}, 12: {$p_T$-correlated-error: {dn: -5.10856e-09, up: 5.10856e-09}, $p_T$-uncorrelated-error: {dn: -1.93299e-09, up: 1.93299e-09}}, 13: {$p_T$-correlated-error: {dn: -1.6495e-09, up: 1.6495e-09}, $p_T$-uncorrelated-error: {dn: -9.75672e-10, up: 9.75672e-10}}, 14: {$p_T$-correlated-error: {dn: -5.57649e-10, up: 5.57649e-10}, $p_T$-uncorrelated-error: {dn: -4.87442e-10, up: 4.87442e-10}}, 15: {$p_T$-correlated-error: {dn: -2.58077e-10, up: 2.58077e-10}, $p_T$-uncorrelated-error: {dn: -3.11581e-10, up: 3.11581e-10}}, 16: {$p_T$-correlated-error: {dn: -1.33886e-10, up: 1.33886e-10}, $p_T$-uncorrelated-error: {dn: -1.76465e-10, up: 1.76465e-10}}, 17: {$p_T$-correlated-error: {dn: -1.33955e-10, up: 1.33955e-10}, $p_T$-uncorrelated-error: {dn: -1.44796e-10, up: 1.44796e-10}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d01-x01-y10
+Title: Figure 2
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+1.000000e+00	5.000000e-01	5.000000e-01	2.378350e-05	2.970265e-06	2.970265e-06
+2.000000e+00	5.000000e-01	5.000000e-01	1.207800e-05	1.417142e-06	1.417142e-06
+3.000000e+00	5.000000e-01	5.000000e-01	6.254180e-06	7.030455e-07	7.030455e-07
+4.000000e+00	5.000000e-01	5.000000e-01	3.670970e-06	3.926044e-07	3.926044e-07
+5.000000e+00	5.000000e-01	5.000000e-01	2.229120e-06	2.290613e-07	2.290613e-07
+6.000000e+00	5.000000e-01	5.000000e-01	1.423380e-06	1.403995e-07	1.403995e-07
+7.000000e+00	5.000000e-01	5.000000e-01	8.973820e-07	8.704506e-08	8.704506e-08
+8.000000e+00	5.000000e-01	5.000000e-01	5.924540e-07	5.701726e-08	5.701726e-08
+9.000000e+00	5.000000e-01	5.000000e-01	3.976680e-07	3.776501e-08	3.776501e-08
+1.000000e+01	5.000000e-01	5.000000e-01	2.724780e-07	2.567834e-08	2.567834e-08
+1.100000e+01	5.000000e-01	5.000000e-01	1.994360e-07	1.853357e-08	1.853357e-08
+1.200000e+01	5.000000e-01	5.000000e-01	1.410810e-07	1.324301e-08	1.324301e-08
+1.300000e+01	5.000000e-01	5.000000e-01	5.921930e-08	5.462036e-09	5.462036e-09
+1.400000e+01	5.000000e-01	5.000000e-01	1.983510e-08	1.916451e-09	1.916451e-09
+1.500000e+01	5.000000e-01	5.000000e-01	6.724730e-09	7.406565e-10	7.406565e-10
+1.600000e+01	5.000000e-01	5.000000e-01	2.869820e-09	4.045818e-10	4.045818e-10
+1.700000e+01	5.000000e-01	5.000000e-01	1.101980e-09	2.215070e-10	2.215070e-10
+1.800000e+01	5.000000e-01	5.000000e-01	3.997860e-10	1.972557e-10	1.972557e-10
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y01
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.431437, up: 0.431437}, $p_T$-uncorrelated-error: {dn: -0.0342416, up: 0.0342416}}, 1: {$p_T$-correlated-error: {dn: -0.387664, up: 0.387664}, $p_T$-uncorrelated-error: {dn: -0.0421188, up: 0.0421188}}, 2: {$p_T$-correlated-error: {dn: -0.348666, up: 0.348666}, $p_T$-uncorrelated-error: {dn: -0.05351, up: 0.05351}}, 3: {$p_T$-correlated-error: {dn: -0.299068, up: 0.299068}, $p_T$-uncorrelated-error: {dn: -0.0527299, up: 0.0527299}}, 4: {$p_T$-correlated-error: {dn: -0.271478, up: 0.271478}, $p_T$-uncorrelated-error: {dn: -0.0659113, up: 0.0659113}}, 5: {$p_T$-correlated-error: {dn: -0.24713, up: 0.24713}, $p_T$-uncorrelated-error: {dn: -0.0709957, up: 0.0709957}}, 6: {$p_T$-correlated-error: {dn: -0.215777, up: 0.215777}, $p_T$-uncorrelated-error: {dn: -0.0689491, up: 0.0689491}}, 7: {$p_T$-correlated-error: {dn: -0.205907, up: 0.205907}, $p_T$-uncorrelated-error: {dn: -0.0748271, up: 0.0748271}}, 8: {$p_T$-correlated-error: {dn: -0.190404, up: 0.190404}, $p_T$-uncorrelated-error: {dn: -0.079945, up: 0.079945}}, 9: {$p_T$-correlated-error: {dn: -0.214055, up: 0.214055}, $p_T$-uncorrelated-error: {dn: -0.108621, up: 0.108621}}, 10: {$p_T$-correlated-error: {dn: -0.189373, up: 0.189373}, $p_T$-uncorrelated-error: {dn: -0.0740158, up: 0.0740158}}, 11: {$p_T$-correlated-error: {dn: -0.180889, up: 0.180889}, $p_T$-uncorrelated-error: {dn: -0.120335, up: 0.120335}}, 12: {$p_T$-correlated-error: {dn: -0.152266, up: 0.152266}, $p_T$-uncorrelated-error: {dn: -0.143698, up: 0.143698}}, 13: {$p_T$-correlated-error: {dn: -0.282796, up: 0.282796}, $p_T$-uncorrelated-error: {dn: -0.427689, up: 0.427689}}, 14: {$p_T$-correlated-error: {dn: -0.0730998, up: 0.0730998}, $p_T$-uncorrelated-error: {dn: -0.238113, up: 0.238113}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y01
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	9.978610e-01	4.327937e-01	4.327937e-01
+5.750000e+00	2.500000e-01	2.500000e-01	1.037550e+00	3.899453e-01	3.899453e-01
+6.250000e+00	2.500000e-01	2.500000e-01	1.144280e+00	3.527482e-01	3.527482e-01
+6.750000e+00	2.500000e-01	2.500000e-01	1.052310e+00	3.036809e-01	3.036809e-01
+7.250000e+00	2.500000e-01	2.500000e-01	1.104040e+00	2.793646e-01	2.793646e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.091380e+00	2.571257e-01	2.571257e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.963240e-01	2.265253e-01	2.265253e-01
+8.750000e+00	2.500000e-01	2.500000e-01	9.946120e-01	2.190817e-01	2.190817e-01
+9.250000e+00	2.500000e-01	2.500000e-01	9.181140e-01	2.065064e-01	2.065064e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.077870e+00	2.400376e-01	2.400376e-01
+1.100000e+01	1.000000e+00	1.000000e+00	1.004150e+00	2.033236e-01	2.033236e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.009620e+00	2.172587e-01	2.172587e-01
+1.500000e+01	1.000000e+00	1.000000e+00	8.391540e-01	2.093658e-01	2.093658e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.541700e+00	5.127294e-01	5.127294e-01
+1.900000e+01	1.000000e+00	1.000000e+00	3.201790e-01	2.490811e-01	2.490811e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y02
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.395469, up: 0.395469}, $p_T$-uncorrelated-error: {dn: -0.0342598, up: 0.0342598}}, 1: {$p_T$-correlated-error: {dn: -0.357131, up: 0.357131}, $p_T$-uncorrelated-error: {dn: -0.0417642, up: 0.0417642}}, 2: {$p_T$-correlated-error: {dn: -0.311009, up: 0.311009}, $p_T$-uncorrelated-error: {dn: -0.0510983, up: 0.0510983}}, 3: {$p_T$-correlated-error: {dn: -0.278621, up: 0.278621}, $p_T$-uncorrelated-error: {dn: -0.0520431, up: 0.0520431}}, 4: {$p_T$-correlated-error: {dn: -0.260579, up: 0.260579}, $p_T$-uncorrelated-error: {dn: -0.0662195, up: 0.0662195}}, 5: {$p_T$-correlated-error: {dn: -0.223848, up: 0.223848}, $p_T$-uncorrelated-error: {dn: -0.0674899, up: 0.0674899}}, 6: {$p_T$-correlated-error: {dn: -0.206695, up: 0.206695}, $p_T$-uncorrelated-error: {dn: -0.0688177, up: 0.0688177}}, 7: {$p_T$-correlated-error: {dn: -0.16792, up: 0.16792}, $p_T$-uncorrelated-error: {dn: -0.0654378, up: 0.0654378}}, 8: {$p_T$-correlated-error: {dn: -0.215298, up: 0.215298}, $p_T$-uncorrelated-error: {dn: -0.0910643, up: 0.0910643}}, 9: {$p_T$-correlated-error: {dn: -0.211897, up: 0.211897}, $p_T$-uncorrelated-error: {dn: -0.112629, up: 0.112629}}, 10: {$p_T$-correlated-error: {dn: -0.166778, up: 0.166778}, $p_T$-uncorrelated-error: {dn: -0.0712051, up: 0.0712051}}, 11: {$p_T$-correlated-error: {dn: -0.216521, up: 0.216521}, $p_T$-uncorrelated-error: {dn: -0.133892, up: 0.133892}}, 12: {$p_T$-correlated-error: {dn: -0.178661, up: 0.178661}, $p_T$-uncorrelated-error: {dn: -0.159932, up: 0.159932}}, 13: {$p_T$-correlated-error: {dn: -0.206367, up: 0.206367}, $p_T$-uncorrelated-error: {dn: -0.369732, up: 0.369732}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y02
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	9.107400e-01	3.969502e-01	3.969502e-01
+5.750000e+00	2.500000e-01	2.500000e-01	9.504790e-01	3.595647e-01	3.595647e-01
+6.250000e+00	2.500000e-01	2.500000e-01	1.013070e+00	3.151787e-01	3.151787e-01
+6.750000e+00	2.500000e-01	2.500000e-01	9.728660e-01	2.834398e-01	2.834398e-01
+7.250000e+00	2.500000e-01	2.500000e-01	1.049330e+00	2.688614e-01	2.688614e-01
+7.750000e+00	2.500000e-01	2.500000e-01	9.780500e-01	2.338008e-01	2.338008e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.443930e-01	2.178502e-01	2.178502e-01
+8.750000e+00	2.500000e-01	2.500000e-01	7.986350e-01	1.802200e-01	1.802200e-01
+9.250000e+00	2.500000e-01	2.500000e-01	1.027730e+00	2.337647e-01	2.337647e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.053390e+00	2.399701e-01	2.399701e-01
+1.100000e+01	1.000000e+00	1.000000e+00	8.745100e-01	1.813424e-01	1.813424e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.192360e+00	2.545750e-01	2.545750e-01
+1.500000e+01	1.000000e+00	1.000000e+00	9.576270e-01	2.397874e-01	2.397874e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.112010e+00	4.234254e-01	4.234254e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y03
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.391257, up: 0.391257}, $p_T$-uncorrelated-error: {dn: -0.0368551, up: 0.0368551}}, 1: {$p_T$-correlated-error: {dn: -0.369797, up: 0.369797}, $p_T$-uncorrelated-error: {dn: -0.0458129, up: 0.0458129}}, 2: {$p_T$-correlated-error: {dn: -0.307839, up: 0.307839}, $p_T$-uncorrelated-error: {dn: -0.0541486, up: 0.0541486}}, 3: {$p_T$-correlated-error: {dn: -0.292657, up: 0.292657}, $p_T$-uncorrelated-error: {dn: -0.0575699, up: 0.0575699}}, 4: {$p_T$-correlated-error: {dn: -0.283245, up: 0.283245}, $p_T$-uncorrelated-error: {dn: -0.0748474, up: 0.0748474}}, 5: {$p_T$-correlated-error: {dn: -0.238453, up: 0.238453}, $p_T$-uncorrelated-error: {dn: -0.0754142, up: 0.0754142}}, 6: {$p_T$-correlated-error: {dn: -0.21411, up: 0.21411}, $p_T$-uncorrelated-error: {dn: -0.0756569, up: 0.0756569}}, 7: {$p_T$-correlated-error: {dn: -0.193195, up: 0.193195}, $p_T$-uncorrelated-error: {dn: -0.0773278, up: 0.0773278}}, 8: {$p_T$-correlated-error: {dn: -0.215617, up: 0.215617}, $p_T$-uncorrelated-error: {dn: -0.0976382, up: 0.0976382}}, 9: {$p_T$-correlated-error: {dn: -0.24971, up: 0.24971}, $p_T$-uncorrelated-error: {dn: -0.134163, up: 0.134163}}, 10: {$p_T$-correlated-error: {dn: -0.168827, up: 0.168827}, $p_T$-uncorrelated-error: {dn: -0.0796951, up: 0.0796951}}, 11: {$p_T$-correlated-error: {dn: -0.174364, up: 0.174364}, $p_T$-uncorrelated-error: {dn: -0.129197, up: 0.129197}}, 12: {$p_T$-correlated-error: {dn: -0.187978, up: 0.187978}, $p_T$-uncorrelated-error: {dn: -0.199189, up: 0.199189}}, 13: {$p_T$-correlated-error: {dn: -0.255165, up: 0.255165}, $p_T$-uncorrelated-error: {dn: -0.433001, up: 0.433001}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y03
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	8.867000e-01	3.929890e-01	3.929890e-01
+5.750000e+00	2.500000e-01	2.500000e-01	9.715670e-01	3.726240e-01	3.726240e-01
+6.250000e+00	2.500000e-01	2.500000e-01	9.833720e-01	3.125651e-01	3.125651e-01
+6.750000e+00	2.500000e-01	2.500000e-01	1.010150e+00	2.982657e-01	2.982657e-01
+7.250000e+00	2.500000e-01	2.500000e-01	1.128300e+00	2.929673e-01	2.929673e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.027670e+00	2.500943e-01	2.500943e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.667930e-01	2.270838e-01	2.270838e-01
+8.750000e+00	2.500000e-01	2.500000e-01	9.238010e-01	2.080959e-01	2.080959e-01
+9.250000e+00	2.500000e-01	2.500000e-01	1.010690e+00	2.366937e-01	2.366937e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.229380e+00	2.834692e-01	2.834692e-01
+1.100000e+01	1.000000e+00	1.000000e+00	8.715090e-01	1.866919e-01	1.866919e-01
+1.300000e+01	1.000000e+00	1.000000e+00	9.298260e-01	2.170131e-01	2.170131e-01
+1.500000e+01	1.000000e+00	1.000000e+00	1.034080e+00	2.738832e-01	2.738832e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.377580e+00	5.025923e-01	5.025923e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y04
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.393673, up: 0.393673}, $p_T$-uncorrelated-error: {dn: -0.0393247, up: 0.0393247}}, 1: {$p_T$-correlated-error: {dn: -0.363507, up: 0.363507}, $p_T$-uncorrelated-error: {dn: -0.0479393, up: 0.0479393}}, 2: {$p_T$-correlated-error: {dn: -0.284435, up: 0.284435}, $p_T$-uncorrelated-error: {dn: -0.0526154, up: 0.0526154}}, 3: {$p_T$-correlated-error: {dn: -0.289881, up: 0.289881}, $p_T$-uncorrelated-error: {dn: -0.0597286, up: 0.0597286}}, 4: {$p_T$-correlated-error: {dn: -0.250656, up: 0.250656}, $p_T$-uncorrelated-error: {dn: -0.0691565, up: 0.0691565}}, 5: {$p_T$-correlated-error: {dn: -0.236688, up: 0.236688}, $p_T$-uncorrelated-error: {dn: -0.076801, up: 0.076801}}, 6: {$p_T$-correlated-error: {dn: -0.208415, up: 0.208415}, $p_T$-uncorrelated-error: {dn: -0.0766053, up: 0.0766053}}, 7: {$p_T$-correlated-error: {dn: -0.226212, up: 0.226212}, $p_T$-uncorrelated-error: {dn: -0.0910937, up: 0.0910937}}, 8: {$p_T$-correlated-error: {dn: -0.218988, up: 0.218988}, $p_T$-uncorrelated-error: {dn: -0.098751, up: 0.098751}}, 9: {$p_T$-correlated-error: {dn: -0.205052, up: 0.205052}, $p_T$-uncorrelated-error: {dn: -0.118548, up: 0.118548}}, 10: {$p_T$-correlated-error: {dn: -0.181051, up: 0.181051}, $p_T$-uncorrelated-error: {dn: -0.0865293, up: 0.0865293}}, 11: {$p_T$-correlated-error: {dn: -0.237914, up: 0.237914}, $p_T$-uncorrelated-error: {dn: -0.167425, up: 0.167425}}, 12: {$p_T$-correlated-error: {dn: -0.226654, up: 0.226654}, $p_T$-uncorrelated-error: {dn: -0.238873, up: 0.238873}}, 13: {$p_T$-correlated-error: {dn: -0.228033, up: 0.228033}, $p_T$-uncorrelated-error: {dn: -0.465174, up: 0.465174}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y04
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	8.910020e-01	3.956322e-01	3.956322e-01
+5.750000e+00	2.500000e-01	2.500000e-01	9.483940e-01	3.666545e-01	3.666545e-01
+6.250000e+00	2.500000e-01	2.500000e-01	9.039530e-01	2.892605e-01	2.892605e-01
+6.750000e+00	2.500000e-01	2.500000e-01	9.906640e-01	2.959704e-01	2.959704e-01
+7.250000e+00	2.500000e-01	2.500000e-01	9.854720e-01	2.600213e-01	2.600213e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.008480e+00	2.488365e-01	2.488365e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.249850e-01	2.220477e-01	2.220477e-01
+8.750000e+00	2.500000e-01	2.500000e-01	1.057160e+00	2.438646e-01	2.438646e-01
+9.250000e+00	2.500000e-01	2.500000e-01	1.016990e+00	2.402239e-01	2.402239e-01
+9.750000e+00	2.500000e-01	2.500000e-01	9.791240e-01	2.368543e-01	2.368543e-01
+1.100000e+01	1.000000e+00	1.000000e+00	9.304920e-01	2.006659e-01	2.006659e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.284300e+00	2.909196e-01	2.909196e-01
+1.500000e+01	1.000000e+00	1.000000e+00	1.197210e+00	3.292907e-01	3.292907e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.209300e+00	5.180597e-01	5.180597e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y05
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.397258, up: 0.397258}, $p_T$-uncorrelated-error: {dn: -0.0382977, up: 0.0382977}}, 1: {$p_T$-correlated-error: {dn: -0.362559, up: 0.362559}, $p_T$-uncorrelated-error: {dn: -0.0463572, up: 0.0463572}}, 2: {$p_T$-correlated-error: {dn: -0.343585, up: 0.343585}, $p_T$-uncorrelated-error: {dn: -0.0586979, up: 0.0586979}}, 3: {$p_T$-correlated-error: {dn: -0.293121, up: 0.293121}, $p_T$-uncorrelated-error: {dn: -0.0574447, up: 0.0574447}}, 4: {$p_T$-correlated-error: {dn: -0.303965, up: 0.303965}, $p_T$-uncorrelated-error: {dn: -0.0772774, up: 0.0772774}}, 5: {$p_T$-correlated-error: {dn: -0.230805, up: 0.230805}, $p_T$-uncorrelated-error: {dn: -0.071407, up: 0.071407}}, 6: {$p_T$-correlated-error: {dn: -0.212872, up: 0.212872}, $p_T$-uncorrelated-error: {dn: -0.0751103, up: 0.0751103}}, 7: {$p_T$-correlated-error: {dn: -0.176328, up: 0.176328}, $p_T$-uncorrelated-error: {dn: -0.0691203, up: 0.0691203}}, 8: {$p_T$-correlated-error: {dn: -0.202509, up: 0.202509}, $p_T$-uncorrelated-error: {dn: -0.0922633, up: 0.0922633}}, 9: {$p_T$-correlated-error: {dn: -0.218862, up: 0.218862}, $p_T$-uncorrelated-error: {dn: -0.114509, up: 0.114509}}, 10: {$p_T$-correlated-error: {dn: -0.207444, up: 0.207444}, $p_T$-uncorrelated-error: {dn: -0.0857865, up: 0.0857865}}, 11: {$p_T$-correlated-error: {dn: -0.172827, up: 0.172827}, $p_T$-uncorrelated-error: {dn: -0.117967, up: 0.117967}}, 12: {$p_T$-correlated-error: {dn: -0.192782, up: 0.192782}, $p_T$-uncorrelated-error: {dn: -0.196024, up: 0.196024}}, 13: {$p_T$-correlated-error: {dn: -0.257723, up: 0.257723}, $p_T$-uncorrelated-error: {dn: -0.43102, up: 0.43102}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y05
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	8.871320e-01	3.990998e-01	3.990998e-01
+5.750000e+00	2.500000e-01	2.500000e-01	9.284220e-01	3.655106e-01	3.655106e-01
+6.250000e+00	2.500000e-01	2.500000e-01	1.073540e+00	3.485629e-01	3.485629e-01
+6.750000e+00	2.500000e-01	2.500000e-01	9.844780e-01	2.986969e-01	2.986969e-01
+7.250000e+00	2.500000e-01	2.500000e-01	1.184210e+00	3.136344e-01	3.136344e-01
+7.750000e+00	2.500000e-01	2.500000e-01	9.599610e-01	2.415986e-01	2.415986e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.198320e-01	2.257345e-01	2.257345e-01
+8.750000e+00	2.500000e-01	2.500000e-01	8.005640e-01	1.893916e-01	1.893916e-01
+9.250000e+00	2.500000e-01	2.500000e-01	9.189580e-01	2.225363e-01	2.225363e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.040720e+00	2.470079e-01	2.470079e-01
+1.100000e+01	1.000000e+00	1.000000e+00	1.055040e+00	2.244824e-01	2.244824e-01
+1.300000e+01	1.000000e+00	1.000000e+00	9.108730e-01	2.092496e-01	2.092496e-01
+1.500000e+01	1.000000e+00	1.000000e+00	1.016530e+00	2.749369e-01	2.749369e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.351790e+00	5.021946e-01	5.021946e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y06
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.409487, up: 0.409487}, $p_T$-uncorrelated-error: {dn: -0.0457624, up: 0.0457624}}, 1: {$p_T$-correlated-error: {dn: -0.426893, up: 0.426893}, $p_T$-uncorrelated-error: {dn: -0.0591822, up: 0.0591822}}, 2: {$p_T$-correlated-error: {dn: -0.349606, up: 0.349606}, $p_T$-uncorrelated-error: {dn: -0.0667028, up: 0.0667028}}, 3: {$p_T$-correlated-error: {dn: -0.29924, up: 0.29924}, $p_T$-uncorrelated-error: {dn: -0.0655843, up: 0.0655843}}, 4: {$p_T$-correlated-error: {dn: -0.275626, up: 0.275626}, $p_T$-uncorrelated-error: {dn: -0.0790874, up: 0.0790874}}, 5: {$p_T$-correlated-error: {dn: -0.266027, up: 0.266027}, $p_T$-uncorrelated-error: {dn: -0.091009, up: 0.091009}}, 6: {$p_T$-correlated-error: {dn: -0.209724, up: 0.209724}, $p_T$-uncorrelated-error: {dn: -0.0831051, up: 0.0831051}}, 7: {$p_T$-correlated-error: {dn: -0.188317, up: 0.188317}, $p_T$-uncorrelated-error: {dn: -0.0848414, up: 0.0848414}}, 8: {$p_T$-correlated-error: {dn: -0.247373, up: 0.247373}, $p_T$-uncorrelated-error: {dn: -0.11481, up: 0.11481}}, 9: {$p_T$-correlated-error: {dn: -0.276502, up: 0.276502}, $p_T$-uncorrelated-error: {dn: -0.154298, up: 0.154298}}, 10: {$p_T$-correlated-error: {dn: -0.228929, up: 0.228929}, $p_T$-uncorrelated-error: {dn: -0.110342, up: 0.110342}}, 11: {$p_T$-correlated-error: {dn: -0.208701, up: 0.208701}, $p_T$-uncorrelated-error: {dn: -0.175031, up: 0.175031}}, 12: {$p_T$-correlated-error: {dn: -0.117204, up: 0.117204}, $p_T$-uncorrelated-error: {dn: -0.173047, up: 0.173047}}, 13: {$p_T$-correlated-error: {dn: -0.36815, up: 0.36815}, $p_T$-uncorrelated-error: {dn: -0.626772, up: 0.626772}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y06
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	9.023610e-01	4.120362e-01	4.120362e-01
+5.750000e+00	2.500000e-01	2.500000e-01	1.085070e+00	4.309758e-01	4.309758e-01
+6.250000e+00	2.500000e-01	2.500000e-01	1.075520e+00	3.559124e-01	3.559124e-01
+6.750000e+00	2.500000e-01	2.500000e-01	9.858790e-01	3.063427e-01	3.063427e-01
+7.250000e+00	2.500000e-01	2.500000e-01	1.036640e+00	2.867482e-01	2.867482e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.072650e+00	2.811637e-01	2.811637e-01
+8.250000e+00	2.500000e-01	2.500000e-01	8.693660e-01	2.255895e-01	2.255895e-01
+8.750000e+00	2.500000e-01	2.500000e-01	8.128710e-01	2.065463e-01	2.065463e-01
+9.250000e+00	2.500000e-01	2.500000e-01	1.110710e+00	2.727173e-01	2.727173e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.287690e+00	3.166405e-01	3.166405e-01
+1.100000e+01	1.000000e+00	1.000000e+00	1.140320e+00	2.541335e-01	2.541335e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.097650e+00	2.723820e-01	2.723820e-01
+1.500000e+01	1.000000e+00	1.000000e+00	4.892190e-01	2.090025e-01	2.090025e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.899920e+00	7.268958e-01	7.268958e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y07
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.412112, up: 0.412112}, $p_T$-uncorrelated-error: {dn: -0.0550539, up: 0.0550539}}, 1: {$p_T$-correlated-error: {dn: -0.424805, up: 0.424805}, $p_T$-uncorrelated-error: {dn: -0.0701637, up: 0.0701637}}, 2: {$p_T$-correlated-error: {dn: -0.329814, up: 0.329814}, $p_T$-uncorrelated-error: {dn: -0.0718948, up: 0.0718948}}, 3: {$p_T$-correlated-error: {dn: -0.316767, up: 0.316767}, $p_T$-uncorrelated-error: {dn: -0.0815912, up: 0.0815912}}, 4: {$p_T$-correlated-error: {dn: -0.268544, up: 0.268544}, $p_T$-uncorrelated-error: {dn: -0.0899339, up: 0.0899339}}, 5: {$p_T$-correlated-error: {dn: -0.290159, up: 0.290159}, $p_T$-uncorrelated-error: {dn: -0.1077, up: 0.1077}}, 6: {$p_T$-correlated-error: {dn: -0.254026, up: 0.254026}, $p_T$-uncorrelated-error: {dn: -0.104737, up: 0.104737}}, 7: {$p_T$-correlated-error: {dn: -0.226082, up: 0.226082}, $p_T$-uncorrelated-error: {dn: -0.10668, up: 0.10668}}, 8: {$p_T$-correlated-error: {dn: -0.257531, up: 0.257531}, $p_T$-uncorrelated-error: {dn: -0.134373, up: 0.134373}}, 9: {$p_T$-correlated-error: {dn: -0.28278, up: 0.28278}, $p_T$-uncorrelated-error: {dn: -0.177695, up: 0.177695}}, 10: {$p_T$-correlated-error: {dn: -0.215752, up: 0.215752}, $p_T$-uncorrelated-error: {dn: -0.119532, up: 0.119532}}, 11: {$p_T$-correlated-error: {dn: -0.318576, up: 0.318576}, $p_T$-uncorrelated-error: {dn: -0.278593, up: 0.278593}}, 12: {$p_T$-correlated-error: {dn: -0.320866, up: 0.320866}, $p_T$-uncorrelated-error: {dn: -0.373408, up: 0.373408}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y07
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	8.926540e-01	4.157731e-01	4.157731e-01
+5.750000e+00	2.500000e-01	2.500000e-01	1.055030e+00	4.305604e-01	4.305604e-01
+6.250000e+00	2.500000e-01	2.500000e-01	9.905760e-01	3.375591e-01	3.375591e-01
+6.750000e+00	2.500000e-01	2.500000e-01	9.999440e-01	3.271062e-01	3.271062e-01
+7.250000e+00	2.500000e-01	2.500000e-01	9.526790e-01	2.832031e-01	2.832031e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.142600e+00	3.095021e-01	3.095021e-01
+8.250000e+00	2.500000e-01	2.500000e-01	1.051000e+00	2.747709e-01	2.747709e-01
+8.750000e+00	2.500000e-01	2.500000e-01	9.726680e-01	2.499874e-01	2.499874e-01
+9.250000e+00	2.500000e-01	2.500000e-01	1.113900e+00	2.904795e-01	2.904795e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.256010e+00	3.339761e-01	3.339761e-01
+1.100000e+01	1.000000e+00	1.000000e+00	1.044010e+00	2.466512e-01	2.466512e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.662040e+00	4.232077e-01	4.232077e-01
+1.500000e+01	1.000000e+00	1.000000e+00	1.592110e+00	4.923297e-01	4.923297e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y08
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.300551, up: 0.300551}, $p_T$-uncorrelated-error: {dn: -0.0511687, up: 0.0511687}}, 1: {$p_T$-correlated-error: {dn: -0.30339, up: 0.30339}, $p_T$-uncorrelated-error: {dn: -0.0617387, up: 0.0617387}}, 2: {$p_T$-correlated-error: {dn: -0.343155, up: 0.343155}, $p_T$-uncorrelated-error: {dn: -0.0889908, up: 0.0889908}}, 3: {$p_T$-correlated-error: {dn: -0.304846, up: 0.304846}, $p_T$-uncorrelated-error: {dn: -0.0879614, up: 0.0879614}}, 4: {$p_T$-correlated-error: {dn: -0.25718, up: 0.25718}, $p_T$-uncorrelated-error: {dn: -0.0977934, up: 0.0977934}}, 5: {$p_T$-correlated-error: {dn: -0.278602, up: 0.278602}, $p_T$-uncorrelated-error: {dn: -0.125252, up: 0.125252}}, 6: {$p_T$-correlated-error: {dn: -0.263324, up: 0.263324}, $p_T$-uncorrelated-error: {dn: -0.137021, up: 0.137021}}, 7: {$p_T$-correlated-error: {dn: -0.226008, up: 0.226008}, $p_T$-uncorrelated-error: {dn: -0.143918, up: 0.143918}}, 8: {$p_T$-correlated-error: {dn: -0.19353, up: 0.19353}, $p_T$-uncorrelated-error: {dn: -0.155987, up: 0.155987}}, 9: {$p_T$-correlated-error: {dn: -0.244279, up: 0.244279}, $p_T$-uncorrelated-error: {dn: -0.195086, up: 0.195086}}, 10: {$p_T$-correlated-error: {dn: -0.225779, up: 0.225779}, $p_T$-uncorrelated-error: {dn: -0.194273, up: 0.194273}}, 11: {$p_T$-correlated-error: {dn: -0.219348, up: 0.219348}, $p_T$-uncorrelated-error: {dn: -0.283065, up: 0.283065}}, 12: {$p_T$-correlated-error: {dn: -0.210453, up: 0.210453}, $p_T$-uncorrelated-error: {dn: -0.447144, up: 0.447144}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y08
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	6.332850e-01	3.048756e-01	3.048756e-01
+5.750000e+00	2.500000e-01	2.500000e-01	7.314350e-01	3.096081e-01	3.096081e-01
+6.250000e+00	2.500000e-01	2.500000e-01	9.755990e-01	3.545063e-01	3.545063e-01
+6.750000e+00	2.500000e-01	2.500000e-01	9.386060e-01	3.172827e-01	3.172827e-01
+7.250000e+00	2.500000e-01	2.500000e-01	8.768250e-01	2.751456e-01	2.751456e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.006620e+00	3.054622e-01	3.054622e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.778030e-01	2.968405e-01	2.968405e-01
+8.750000e+00	2.500000e-01	2.500000e-01	8.195500e-01	2.679403e-01	2.679403e-01
+9.250000e+00	2.500000e-01	2.500000e-01	6.470650e-01	2.485675e-01	2.485675e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.027350e+00	3.126192e-01	3.126192e-01
+1.100000e+01	1.000000e+00	1.000000e+00	1.054850e+00	2.978559e-01	2.978559e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.043090e+00	3.581052e-01	3.581052e-01
+1.500000e+01	1.000000e+00	1.000000e+00	9.869890e-01	4.941945e-01	4.941945e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y09
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.33127, up: 0.33127}, $p_T$-uncorrelated-error: {dn: -0.0610929, up: 0.0610929}}, 1: {$p_T$-correlated-error: {dn: -0.356295, up: 0.356295}, $p_T$-uncorrelated-error: {dn: -0.0793648, up: 0.0793648}}, 2: {$p_T$-correlated-error: {dn: -0.325088, up: 0.325088}, $p_T$-uncorrelated-error: {dn: -0.0987284, up: 0.0987284}}, 3: {$p_T$-correlated-error: {dn: -0.368734, up: 0.368734}, $p_T$-uncorrelated-error: {dn: -0.123653, up: 0.123653}}, 4: {$p_T$-correlated-error: {dn: -0.292767, up: 0.292767}, $p_T$-uncorrelated-error: {dn: -0.136616, up: 0.136616}}, 5: {$p_T$-correlated-error: {dn: -0.26984, up: 0.26984}, $p_T$-uncorrelated-error: {dn: -0.141052, up: 0.141052}}, 6: {$p_T$-correlated-error: {dn: -0.227818, up: 0.227818}, $p_T$-uncorrelated-error: {dn: -0.15789, up: 0.15789}}, 7: {$p_T$-correlated-error: {dn: -0.227119, up: 0.227119}, $p_T$-uncorrelated-error: {dn: -0.173778, up: 0.173778}}, 8: {$p_T$-correlated-error: {dn: -0.198788, up: 0.198788}, $p_T$-uncorrelated-error: {dn: -0.195517, up: 0.195517}}, 9: {$p_T$-correlated-error: {dn: -0.273862, up: 0.273862}, $p_T$-uncorrelated-error: {dn: -0.272025, up: 0.272025}}, 10: {$p_T$-correlated-error: {dn: -0.230847, up: 0.230847}, $p_T$-uncorrelated-error: {dn: -0.228241, up: 0.228241}}, 11: {$p_T$-correlated-error: {dn: -0.134419, up: 0.134419}, $p_T$-uncorrelated-error: {dn: -0.363378, up: 0.363378}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y09
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	6.907380e-01	3.368563e-01	3.368563e-01
+5.750000e+00	2.500000e-01	2.500000e-01	8.453120e-01	3.650273e-01	3.650273e-01
+6.250000e+00	2.500000e-01	2.500000e-01	8.938730e-01	3.397492e-01	3.397492e-01
+6.750000e+00	2.500000e-01	2.500000e-01	1.118330e+00	3.889149e-01	3.889149e-01
+7.250000e+00	2.500000e-01	2.500000e-01	9.344750e-01	3.230734e-01	3.230734e-01
+7.750000e+00	2.500000e-01	2.500000e-01	9.451410e-01	3.044820e-01	3.044820e-01
+8.250000e+00	2.500000e-01	2.500000e-01	7.590340e-01	2.771828e-01	2.771828e-01
+8.750000e+00	2.500000e-01	2.500000e-01	7.141400e-01	2.859752e-01	2.859752e-01
+9.250000e+00	2.500000e-01	2.500000e-01	7.147910e-01	2.788253e-01	2.788253e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.059170e+00	3.860026e-01	3.860026e-01
+1.100000e+01	1.000000e+00	1.000000e+00	1.076180e+00	3.246295e-01	3.246295e-01
+1.300000e+01	1.000000e+00	1.000000e+00	4.065460e-01	3.874429e-01	3.874429e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2012_I1116179/d02-x01-y10
+ErrorBreakdown: {0: {$p_T$-correlated-error: {dn: -0.387809, up: 0.387809}, $p_T$-uncorrelated-error: {dn: -0.0267017, up: 0.0267017}}, 1: {$p_T$-correlated-error: {dn: -0.366575, up: 0.366575}, $p_T$-uncorrelated-error: {dn: -0.0341019, up: 0.0341019}}, 2: {$p_T$-correlated-error: {dn: -0.320754, up: 0.320754}, $p_T$-uncorrelated-error: {dn: -0.0424178, up: 0.0424178}}, 3: {$p_T$-correlated-error: {dn: -0.287959, up: 0.287959}, $p_T$-uncorrelated-error: {dn: -0.042239, up: 0.042239}}, 4: {$p_T$-correlated-error: {dn: -0.267281, up: 0.267281}, $p_T$-uncorrelated-error: {dn: -0.0546204, up: 0.0546204}}, 5: {$p_T$-correlated-error: {dn: -0.238298, up: 0.238298}, $p_T$-uncorrelated-error: {dn: -0.0566172, up: 0.0566172}}, 6: {$p_T$-correlated-error: {dn: -0.212085, up: 0.212085}, $p_T$-uncorrelated-error: {dn: -0.0548929, up: 0.0548929}}, 7: {$p_T$-correlated-error: {dn: -0.192421, up: 0.192421}, $p_T$-uncorrelated-error: {dn: -0.0562416, up: 0.0562416}}, 8: {$p_T$-correlated-error: {dn: -0.210698, up: 0.210698}, $p_T$-uncorrelated-error: {dn: -0.0707406, up: 0.0707406}}, 9: {$p_T$-correlated-error: {dn: -0.224148, up: 0.224148}, $p_T$-uncorrelated-error: {dn: -0.0935637, up: 0.0935637}}, 10: {$p_T$-correlated-error: {dn: -0.187689, up: 0.187689}, $p_T$-uncorrelated-error: {dn: -0.0531867, up: 0.0531867}}, 11: {$p_T$-correlated-error: {dn: -0.196132, up: 0.196132}, $p_T$-uncorrelated-error: {dn: -0.0875123, up: 0.0875123}}, 12: {$p_T$-correlated-error: {dn: -0.185741, up: 0.185741}, $p_T$-uncorrelated-error: {dn: -0.121807, up: 0.121807}}, 13: {$p_T$-correlated-error: {dn: -0.254312, up: 0.254312}, $p_T$-uncorrelated-error: {dn: -0.270931, up: 0.270931}}, 14: {$p_T$-correlated-error: {dn: -0.208582, up: 0.208582}, $p_T$-uncorrelated-error: {dn: -0.261689, up: 0.261689}}, 15: {$p_T$-correlated-error: {dn: -0.27748, up: 0.27748}, $p_T$-uncorrelated-error: {dn: -0.315998, up: 0.315998}}}
+IsRef: 1
+Path: /REF/PHENIX_2012_I1116179/d02-x01-y10
+Title: Figure 3-4
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+5.250000e+00	2.500000e-01	2.500000e-01	8.937830e-01	3.887272e-01	3.887272e-01
+5.750000e+00	2.500000e-01	2.500000e-01	9.756330e-01	3.681578e-01	3.681578e-01
+6.250000e+00	2.500000e-01	2.500000e-01	1.043570e+00	3.235466e-01	3.235466e-01
+6.750000e+00	2.500000e-01	2.500000e-01	1.003860e+00	2.910404e-01	2.910404e-01
+7.250000e+00	2.500000e-01	2.500000e-01	1.074990e+00	2.728049e-01	2.728049e-01
+7.750000e+00	2.500000e-01	2.500000e-01	1.038980e+00	2.449315e-01	2.449315e-01
+8.250000e+00	2.500000e-01	2.500000e-01	9.669680e-01	2.190737e-01	2.190737e-01
+8.750000e+00	2.500000e-01	2.500000e-01	9.190740e-01	2.004718e-01	2.004718e-01
+9.250000e+00	2.500000e-01	2.500000e-01	1.012200e+00	2.222563e-01	2.222563e-01
+9.750000e+00	2.500000e-01	2.500000e-01	1.126690e+00	2.428919e-01	2.428919e-01
+1.100000e+01	1.000000e+00	1.000000e+00	9.834690e-01	1.950794e-01	1.950794e-01
+1.300000e+01	1.000000e+00	1.000000e+00	1.088040e+00	2.147700e-01	2.147700e-01
+1.500000e+01	1.000000e+00	1.000000e+00	1.033560e+00	2.221186e-01	2.221186e-01
+1.700000e+01	1.000000e+00	1.000000e+00	1.383260e+00	3.715888e-01	3.715888e-01
+1.900000e+01	1.000000e+00	1.000000e+00	1.037760e+00	3.346455e-01	3.346455e-01
+2.100000e+01	1.000000e+00	1.000000e+00	7.384570e-01	4.205352e-01	4.205352e-01
+END YODA_SCATTER2D_V2
+
+
