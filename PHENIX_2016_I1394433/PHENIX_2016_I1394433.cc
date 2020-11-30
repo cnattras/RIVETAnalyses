@@ -25,14 +25,17 @@ namespace Rivet {
     void init() {
 
       declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
-      // Initialise and register projections
+    
+
+    // Initialise and register projections
 
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-/*      const FinalState fs(Cuts::abseta < 4.9);
-
-      // The final-state particles declared above are clustered using FastJet with
+      const FinalState fs(Cuts::abseta < 4.9);
+      book(_h["hist_1"],7,1,2);
+  
+/*      // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
       FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
