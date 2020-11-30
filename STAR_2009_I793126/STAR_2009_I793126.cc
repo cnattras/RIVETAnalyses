@@ -85,103 +85,103 @@ namespace Rivet {
       //Figure 4a pp
        book(_h["Figure_4a_pp"], 8, 1, 1);
       //Figure 4b AuAu200
-       book(_h["AAAA"], 9, 1, 1);
-       book(_h["AAAA"], 9, 1, 2);
+       book(_h["Figure_4b_AuAu200_1"], 9, 1, 1);
+       book(_h["Figure_4b_AuAu200_2"], 9, 1, 2);
       //Figure 4b AuAu62
-       book(_h["AAAA"], 10, 1, 1);
-       book(_h["AAAA"], 10, 1, 2);
+       book(_h["Figure_4b_AuAu62_1"], 10, 1, 1);
+       book(_h["Figure_4b_AuAu62_2"], 10, 1, 2);
       //Figure 4b pp
-       book(_h["AAAA"], 11, 1, 1);
+       book(_h["Figure_4b_pp"], 11, 1, 1);
       //Figure 4b AuAu200
       //Figure 4b AuAu62
       //Figure 10
-       book(_h["AAAA"], 12, 1, 1);
-       book(_h["AAAA"], 12, 1, 2);
-       book(_h["AAAA"], 12, 1, 3);
-       book(_h["AAAA"], 12, 1, 4);
-       book(_h["AAAA"], 12, 1, 5);
-       book(_h["AAAA"], 12, 1, 6);
+       book(_h["Figure_10_1"], 12, 1, 1);
+       book(_h["Figure_10_2"], 12, 1, 2);
+       book(_h["Figure_10_3"], 12, 1, 3);
+       book(_h["Figure_10_4"], 12, 1, 4);
+       book(_h["Figure_10_5"], 12, 1, 5);
+       book(_h["Figure_10_6"], 12, 1, 6);
       //Figure 11a
-       book(_h["AAAA"], 13, 1, 1);
-       book(_h["AAAA"], 13, 1, 2);
+       book(_h["Figure_11a_1"], 13, 1, 1);
+       book(_h["Figure_11a_2"], 13, 1, 2);
       //Figure 11b
-     //book(_h["AAAA"], 14, 1, 1);
-     //book(_h["AAAA"], 14, 1, 2);
+       book(_h["Figure_11b_1"], 14, 1, 1);
+       book(_h["Figure_11b_2"], 14, 1, 2);
       //Figure 12 dAu
-      //book(_h["AAAA"], 15, 1, 1);
+       //book(_h["Figure_12_dAu"], 15, 1, 1);
       //Figure 12 pp
-      //book(_h["AAAA"], 16, 1, 1);
+       //book(_h["Figure_12_pp"], 16, 1, 1);
       //Figure 13a
-      //book(_h["AAAA"], 17, 1, 1);
-     //book(_h["AAAA"], 17, 1, 2);
-     //book(_h["AAAA"], 17, 1, 3);
+       //book(_h["Figure_13a_1"], 17, 1, 1);
+       //book(_h["Figure_13a_2"], 17, 1, 2);
+       //book(_h["Figure_13a_3"], 17, 1, 3);
       //Figure 13b
-     //book(_h["AAAA"], 18, 1, 1);
-     //book(_h["AAAA"], 18, 1, 2);
-     //book(_h["AAAA"], 18, 1, 3);
+       //book(_h["Figure_13b_1"], 18, 1, 1);
+       //book(_h["Figure_13b_2"], 18, 1, 2);
+       //book(_h["Figure_13b_3"], 18, 1, 3);
       //Figure 14a pion and kaon
-     //book(_h["AAAA"], 19, 1, 1);
-     //book(_h["AAAA"], 19, 1, 2);
+     //book(_h["Figure_14a_pion_and_kaon_1"], 19, 1, 1);
+     //book(_h["Figure_14a_pion_and_kaon_2"], 19, 1, 2);
       //Figure 14a proton
-     //book(_h["AAAA"], 20, 1, 1);
+     //book(_h["Figure_14a_proton"], 20, 1, 1);
       //Figure 14b pion and kaon
-     //book(_h["AAAA"], 21, 1, 1);
-     //book(_h["AAAA"], 21, 1, 2);
+     //book(_h["Figure_14b_pion_and_kaon_1"], 21, 1, 1);
+     //book(_h["Figure_14b_pion_and_kaon_2"], 21, 1, 2);
       //Figure 14b proton
-     //book(_h["AAAA"], 22, 1, 1);
+    //book(_h["Figure_14b_proton"], 22, 1, 1);
       //Figure 15a
-     //book(_h["AAAA"], 23, 1, 1);
-     //book(_h["AAAA"], 23, 1, 2);
-     //book(_h["AAAA"], 23, 1, 3);
-     //book(_h["AAAA"], 23, 1, 4);
+     book(_h["Figure_15a_1"], 23, 1, 1);
+     book(_h["Figure_15a_2"], 23, 1, 2);
+     book(_h["Figure_15a_3"], 23, 1, 3);
+     book(_h["Figure_15a_4"], 23, 1, 4);
       //Figure 15a Bkgd
-     //book(_h["AAAA"], 24, 1, 1);
+     book(_h["Figure_15a_Bkgd"], 24, 1, 1);
       //Figure 15b
-     //book(_h["AAAA"], 25, 1, 1);
-     //book(_h["AAAA"], 25, 1, 2);
-     //book(_h["AAAA"], 25, 1, 3);
-     //book(_h["AAAA"], 25, 1, 4);
+     book(_h["Figure_15b_1"], 25, 1, 1);
+     book(_h["Figure_15b_2"], 25, 1, 2);
+     book(_h["Figure_15b_3"], 25, 1, 3);
+     book(_h["Figure_15b_4"], 25, 1, 4);
       //Figure 15b Bkgd
-     //book(_h["AAAA"], 26, 1, 1);
+     book(_h["Figure_15b_Bkgd"], 26, 1, 1);
       //Figure 15c
-     //book(_h["AAAA"], 27, 1, 1);
-     //book(_h["AAAA"], 27, 1, 2);
-     //book(_h["AAAA"], 27, 1, 3);
-     //book(_h["AAAA"], 27, 1, 4);
+     book(_h["Figure_15c_1"], 27, 1, 1);
+     book(_h["Figure_15c_2"], 27, 1, 2);
+     book(_h["Figure_15c_3"], 27, 1, 3);
+     book(_h["Figure_15c_4"], 27, 1, 4);
       //Figure 15c Bkgd
-     //book(_h["AAAA"], 28, 1, 1);
+     book(_h["Figure_15c_Bkgd"], 28, 1, 1);
       //Figure 15d
-     //book(_h["AAAA"], 29, 1, 1);
-     //book(_h["AAAA"], 29, 1, 2);
-     //book(_h["AAAA"], 29, 1, 3);
-     //book(_h["AAAA"], 29, 1, 4);
+     book(_h["Figure_15d_1"], 29, 1, 1);
+     book(_h["Figure_15d_2"], 29, 1, 2);
+     book(_h["Figure_15d_3"], 29, 1, 3);
+     book(_h["Figure_15d_4"], 29, 1, 4);
       //Figure 15d Bkgd
-     //book(_h["AAAA"], 30, 1, 1);
+     book(_h["Figure_15d_Bkgd"], 30, 1, 1);
       //Figure 16 all and weak-decay bkgd
-     //book(_h["AAAA"], 31, 1, 1);
-     //book(_h["AAAA"], 31, 1, 2);
+     //book(_h["Figure_16_allandweakdecay_bkgd_1"], 31, 1, 1);
+     //book(_h["Figure_16_allandweakdecay_bkgd_2"], 31, 1, 2);
       //Figure 16 muon contamination
-     //book(_h["AAAA"], 32, 1, 1);
+     //book(_h["Figure_16_muon_contamination"], 32, 1, 1);
       //Figure 17 AuAu dE/dx
-     //book(_h["AAAA"], 33, 1, 1);
+     //book(_h["Figure17_AuAu_dEdx"], 33, 1, 1);
       //Figure 17 AuAu Blast-wave fit
-     //book(_h["AAAA"], 34, 1, 1);
+     //book(_h["Figure_17_AuAu_Blastwave_fit"], 34, 1, 1);
       //Figure 17 AuAu p_T-Gaussian fit
-     //book(_h["AAAA"], 35, 1, 1);
+     //book(_h["Figure_17_AuAu_pT_Gaussian_fit"], 35, 1, 1);
       //Figure 17 AuAu p_T-exponential fit
-     //book(_h["AAAA"], 36, 1, 1);
+     //book(_h["Figure_17_AuAu_pT_exponential_fit"], 36, 1, 1);
       //Figure 17 AuAu TOF data
-     //book(_h["AAAA"], 37, 1, 1);
+     //book(_h["Figure_17_AuAu_TOF_data"], 37, 1, 1);
       //Figure 17 dAu dE/dx
-     //book(_h["AAAA"], 38, 1, 1);
+     //book(_h["Figure_17_dAu_dEdx"], 38, 1, 1);
       //Figure 17 dAu Blast-wave fit
-     //book(_h["AAAA"], 39, 1, 1);
+     //book(_h["Figure_17_dAu_pT_Blastwave_fit"], 39, 1, 1);
       //Figure 17 dAu p_T-Gaussian fit
-     //book(_h["AAAA"], 40, 1, 1);
+     //book(_h["Figure_17_dAu_pT_Gaussian_fit"], 40, 1, 1);
       //Figure 17 dAu p_T-exponential fit
-     //book(_h["AAAA"], 41, 1, 1);
+     //book(_h["Figure_17_dAu_pT_exponential_fit"], 41, 1, 1);
       //Figure 17 dAu TOF data
-     //book(_h["AAAA"], 42, 1, 1);
+     //book(_h["Figure_17_dAu_TOF_data"], 42, 1, 1);
       //Figure 18 kaon
      //book(_h["AAAA"], 43, 1, 1);
      //book(_h["AAAA"], 43, 1, 2);
@@ -399,15 +399,15 @@ namespace Rivet {
       //Figure 41 Tch AGS 4.8 GeV
      //book(_h["AAAA"], 105, 1, 1);
       //Figure 41 Tch SPS
-     //book(_h["AAAA"], 106, 1, 1);
+     //book(_h["Figure_41_Tch_SPS"], 106, 1, 1);
       //Figure 41 Tch STAR Au+Au
-     //book(_h["AAAA"], 107, 1, 1);
+     //book(_h["Figure_41_Tch_STAR_Au+Au"], 107, 1, 1);
       //Figure 41 Tch STAR pp 200 GeV
-     //book(_h["AAAA"], 108, 1, 1);
+     //book(_h["Figure_41_Tch_STAR_pp_200_GeV"], 108, 1, 1);
       //Figure 42 Optical Glauber
-     //book(_h["AAAA"], 109, 1, 1);
+     book(_h["Figure_42_Optical_Glauber"], 109, 1, 1);
       //Figure 42 MC Glauber
-     //book(_h["AAAA"], 110, 1, 1);
+     book(_h["Figure_42_MC_Glauber"], 110, 1, 1);
 
     }
 
