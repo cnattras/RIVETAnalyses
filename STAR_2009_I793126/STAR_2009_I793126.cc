@@ -447,8 +447,8 @@ namespace Rivet {
       //Sorting events by energy
       //Fig 18 dAu spectra @ 200 Gev
       //Sorting particles by type
-      if (beam == "DAU")
-      {
+      //if (beam == "DAU")
+      //{
         _c["sow_dAu"]->fill();
 
         for (const Particle& p : fsParticles) {
@@ -489,11 +489,11 @@ namespace Rivet {
             if (c > 40.0) _h2D["Figure_18_proton_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
           }
         }
-      }
+      //}
 
       //Figure 19 AuAu @ 62.4 GeV
-      if (beam == "AUAU")
-      {
+      //if (beam == "AUAU")
+      //{
         _c["sow_AuAu"]->fill();
 
         //if (beamEnergy == 62.4)
@@ -590,7 +590,7 @@ namespace Rivet {
             if (c > 58.0 && c < 85.0) _h2D["Figure_20_16"]->fill(p.pT()/GeV, 1.0); // 58-85% centrality
           }
         }
-      }
+      //}
 
     }
 
