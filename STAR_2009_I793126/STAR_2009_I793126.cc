@@ -60,7 +60,7 @@ namespace Rivet {
       //book(_c["sow_AuAu_40_100"], sow_AuAu_40_100);
 
       //Booking histograms for figures in paper
-      //Figure 1 AuAu200
+      /*//Figure 1 AuAu200
       book(_h["Figure_1_AuAu200"], 1, 1, 1);
       //Figure 1 AuAu62
       book(_h["Figure_1_AuAu62"], 2, 1, 1);
@@ -178,7 +178,7 @@ namespace Rivet {
       //Figure 17 dAu p_T-exponential fit
       book(_h["Figure_17_dAu_pT_exponential_fit"], 41, 1, 1);
       //Figure 17 dAu TOF data
-      book(_h2D["Figure_17_dAu_TOF_data"], 42, 1, 1);
+      book(_h2D["Figure_17_dAu_TOF_data"], 42, 1, 1);*/
       //Figure 18 kaon
       book(_h2D["Figure_18_kaon_1"], 43, 1, 1);
       book(_h2D["Figure_18_kaon_2"], 43, 1, 2);
@@ -280,7 +280,7 @@ namespace Rivet {
       book(_h2D["Figure_20_14"], 49, 1, 14);
       book(_h2D["Figure_20_15"], 49, 1, 15);
       book(_h2D["Figure_20_16"], 49, 1, 16);
-      //Figure 24 Au+Au 62.4 GeV
+      /*//Figure 24 Au+Au 62.4 GeV
       book(_h["Figure_24_AuAu_62_point4_GeV_1"], 50, 1, 1);
       book(_h["Figure_24_AuAu_62_point4_GeV_2"], 50, 1, 2);
       //Figure 24 Au+Au 130 GeV
@@ -404,7 +404,7 @@ namespace Rivet {
       //Figure 42 Optical Glauber
       book(_h["Figure_42_Optical_Glauber"], 109, 1, 1);
       //Figure 42 MC Glauber
-      book(_h["Figure_42_MC_Glauber"], 110, 1, 1);
+      book(_h["Figure_42_MC_Glauber"], 110, 1, 1);*/
 
     }
 
@@ -424,7 +424,7 @@ namespace Rivet {
       // Select jets ghost-associated to B-hadrons with a certain fiducial selection
       /*Jets bjets = filter_select(jets, [](const Jet& jet) {
         return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-	});*/
+	    });*/
 
       // Veto event if there are no b-jets
       //if (bjets.empty())  vetoEvent;
@@ -441,44 +441,146 @@ namespace Rivet {
       Particles fsParticles = applyProjection<FinalState>(event, "fs").particles();
 
       //Sorting events by energy
-      //Fig 18 is spectra @ 200 Gev, Fig 19 is @ 62.4 GeV
+      //Fig 18 dAu spectra @ 200 Gev
       //Sorting particles by type
-      for (const Particle& p : fsParticles) {
-        if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
-          if (c < 20.0) _h2D["Figure_18_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
-          if (c > 20.0 && c < 40.0) _h2D["Figure_18_kaon_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-          _h2D["Figure_18_kaon_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
-          if (c > 40.0) _h2D["Figure_18_kaon_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+      if (beam == "DAU")
+      {
+        for (const Particle& p : fsParticles) {
+          if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
+            if (c < 20.0) _h2D["Figure_18_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
+            if (c > 20.0 && c < 40.0) _h2D["Figure_18_kaon_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
+            _h2D["Figure_18_kaon_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
+            if (c > 40.0) _h2D["Figure_18_kaon_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+          }
+          if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
+            if (c < 20.0) _h2D["Figure_18_kaon_5"]->fill(p.pT()/GeV, 1.0);
+            if (c > 20.0 && c < 40.0) _h2D["Figure_18_kaon_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
+            _h2D["Figure_18_kaon_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
+            if (c > 40.0) _h2D["Figure_18_kaon_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+          }
+          if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
+            if (c < 20.0) _h2D["Figure_18_pion_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
+            if (c > 20.0 && c < 40.0) _h2D["Figure_18_pion_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
+            _h2D["Figure_18_pion_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
+            if (c > 40.0) _h2D["Figure_18_pion_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+          }
+          if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
+            if (c < 20.0) _h2D["Figure_18_pion_5"]->fill(p.pT()/GeV, 1.0);
+            if (c > 20.0 && c < 40.0) _h2D["Figure_18_pion_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
+            _h2D["Figure_18_pion_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
+            if (c > 40.0) _h2D["Figure_18_pion_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+          }
+          if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
+            if (c < 20.0) _h2D["Figure_18_proton_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
+            if (c > 20.0 && c < 40.0) _h2D["Figure_18_proton_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
+            _h2D["Figure_18_proton_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
+            if (c > 40.0) _h2D["Figure_18_proton_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+          }
+          if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
+            if (c < 20.0) _h2D["Figure_18_proton_5"]->fill(p.pT()/GeV, 1.0);
+            if (c > 20.0 && c < 40.0) _h2D["Figure_18_proton_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
+            _h2D["Figure_18_proton_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
+            if (c > 40.0) _h2D["Figure_18_proton_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+          }
         }
-        if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
-          if (c < 20.0) _h2D["Figure_18_kaon_5"]->fill(p.pT()/GeV, 1.0);
-          if (c > 20.0 && c < 40.0) _h2D["Figure_18_kaon_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-          _h2D["Figure_18_kaon_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
-          if (c > 40.0) _h2D["Figure_18_kaon_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+      }
+
+      //Figure 19 AuAu @ 62.4 GeV
+      if (beam == "AUAU")
+      {
+        //if (beamEnergy == 62.4)
+        for (const Particle& p : fsParticles) {
+          if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
+            if (c < 5.0) _h2D["Figure_19_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h2D["Figure_19_kaon_2"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h2D["Figure_19_kaon_3"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h2D["Figure_19_kaon_4"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h2D["Figure_19_kaon_5"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h2D["Figure_19_kaon_6"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h2D["Figure_19_kaon_7"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h2D["Figure_19_kaon_8"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h2D["Figure_19_kaon_9"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+          }
+          if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
+            if (c < 5.0) _h2D["Figure_19_kaon_10"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h2D["Figure_19_kaon_11"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h2D["Figure_19_kaon_12"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h2D["Figure_19_kaon_13"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h2D["Figure_19_kaon_14"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h2D["Figure_19_kaon_15"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h2D["Figure_19_kaon_16"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h2D["Figure_19_kaon_17"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h2D["Figure_19_kaon_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+          }
+          if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
+            if (c < 5.0) _h2D["Figure_19_pion_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h2D["Figure_19_pion_2"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h2D["Figure_19_pion_3"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h2D["Figure_19_pion_4"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h2D["Figure_19_pion_5"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h2D["Figure_19_pion_6"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h2D["Figure_19_pion_7"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h2D["Figure_19_pion_8"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h2D["Figure_19_pion_9"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+          }
+          if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
+            if (c < 5.0) _h2D["Figure_19_pion_10"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h2D["Figure_19_pion_11"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h2D["Figure_19_pion_12"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h2D["Figure_19_pion_13"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h2D["Figure_19_pion_14"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h2D["Figure_19_pion_15"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h2D["Figure_19_pion_16"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h2D["Figure_19_pion_17"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h2D["Figure_19_pion_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+          }
+          if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
+            if (c < 5.0) _h2D["Figure_19_proton_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h2D["Figure_19_proton_2"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h2D["Figure_19_proton_3"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h2D["Figure_19_proton_4"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h2D["Figure_19_proton_5"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h2D["Figure_19_proton_6"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h2D["Figure_19_proton_7"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h2D["Figure_19_proton_8"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h2D["Figure_19_proton_9"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+          }
+          if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
+            if (c < 5.0) _h2D["Figure_19_proton_10"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h2D["Figure_19_proton_11"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h2D["Figure_19_proton_12"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h2D["Figure_19_proton_13"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h2D["Figure_19_proton_14"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h2D["Figure_19_proton_15"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h2D["Figure_19_proton_16"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h2D["Figure_19_proton_17"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h2D["Figure_19_proton_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+          }
         }
-        if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
-          if (c < 20.0) _h2D["Figure_18_pion_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
-          if (c > 20.0 && c < 40.0) _h2D["Figure_18_pion_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-          _h2D["Figure_18_pion_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
-          if (c > 40.0) _h2D["Figure_18_pion_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
-        }
-        if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
-          if (c < 20.0) _h2D["Figure_18_pion_5"]->fill(p.pT()/GeV, 1.0);
-          if (c > 20.0 && c < 40.0) _h2D["Figure_18_pion_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-          _h2D["Figure_18_pion_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
-          if (c > 40.0) _h2D["Figure_18_pion_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
-        }
-        if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
-          if (c < 20.0) _h2D["Figure_18_proton_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
-          if (c > 20.0 && c < 40.0) _h2D["Figure_18_proton_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-          _h2D["Figure_18_proton_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
-          if (c > 40.0) _h2D["Figure_18_proton_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
-        }
-        if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
-          if (c < 20.0) _h2D["Figure_18_proton_5"]->fill(p.pT()/GeV, 1.0);
-          if (c > 20.0 && c < 40.0) _h2D["Figure_18_proton_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-          _h2D["Figure_18_proton_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
-          if (c > 40.0) _h2D["Figure_18_proton_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+
+        //Figure 20 AuAu @ 130 GeV
+        //if (beamEnergy == 130 GeV)
+        for (const Particle& p : fsParticles) {
+          if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
+            if (c < 6.0) _h2D["Figure_20_1"]->fill(p.pT()/GeV, 1.0); // 0-6% centrality
+            if (c > 6.0 && c < 11.0) _h2D["Figure_20_2"]->fill(p.pT()/GeV, 1.0); // 6-11% centrality
+            if (c > 11.0 && c < 18.0) _h2D["Figure_20_3"]->fill(p.pT()/GeV, 1.0); // 11-18% centrality
+            if (c > 18.0 && c < 26.0) _h2D["Figure_20_4"]->fill(p.pT()/GeV, 1.0); // 18-26% centrality
+            if (c > 26.0 && c < 34.0) _h2D["Figure_20_5"]->fill(p.pT()/GeV, 1.0); // 26-34% centrality
+            if (c > 34.0 && c < 45.0) _h2D["Figure_20_6"]->fill(p.pT()/GeV, 1.0); // 34-45% centrality
+            if (c > 45.0 && c < 58.0) _h2D["Figure_20_7"]->fill(p.pT()/GeV, 1.0); // 45-58% centrality
+            if (c > 58.0 && c < 85.0) _h2D["Figure_20_8"]->fill(p.pT()/GeV, 1.0); // 58-85% centrality
+          }
+          if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
+            if (c < 6.0) _h2D["Figure_20_9"]->fill(p.pT()/GeV, 1.0); // 0-6% centrality
+            if (c > 6.0 && c < 11.0) _h2D["Figure_20_10"]->fill(p.pT()/GeV, 1.0); // 6-11% centrality
+            if (c > 11.0 && c < 18.0) _h2D["Figure_20_11"]->fill(p.pT()/GeV, 1.0); // 11-18% centrality
+            if (c > 18.0 && c < 26.0) _h2D["Figure_20_12"]->fill(p.pT()/GeV, 1.0); // 18-26% centrality
+            if (c > 26.0 && c < 34.0) _h2D["Figure_20_13"]->fill(p.pT()/GeV, 1.0); // 26-34% centrality
+            if (c > 34.0 && c < 45.0) _h2D["Figure_20_14"]->fill(p.pT()/GeV, 1.0); // 34-45% centrality
+            if (c > 45.0 && c < 58.0) _h2D["Figure_20_15"]->fill(p.pT()/GeV, 1.0); // 45-58% centrality
+            if (c > 58.0 && c < 85.0) _h2D["Figure_20_16"]->fill(p.pT()/GeV, 1.0); // 58-85% centrality
+          }
         }
       }
 
