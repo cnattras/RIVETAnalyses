@@ -37,27 +37,31 @@ namespace Rivet {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
+      //FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      //declare(jetfs, "jets");
 
       // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
+      //PromptFinalState photons(Cuts::abspid == PID::PHOTON);
+      //PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
 
       // Dress the prompt bare leptons with prompt photons within dR < 0.1,
       // and apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
+      //Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
+      //DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
+      //declare(dressed_leps, "leptons");
 
       // Missing momentum
-      declare(MissingMomentum(fs), "MET");
+      //declare(MissingMomentum(fs), "MET");
 
-      //Book counters
-      //book(_c["sow_AuAu_00_20"], sow_AuAu_00_20);
-      //book(_c["sow_AuAu_20_40"], sow_AuAu_20_40);
-      //book(_c["sow_AuAu_MinBias"], sow_AuAu_MinBias);
-      //book(_c["sow_AuAu_40_100"], sow_AuAu_40_100);
+      beamOpt = getOption<string>("beam", "NONE");
+
+      string refname = mkAxisCode(1, 1, 1);
+      const Scatter2D& refdata = refData(refname);
+      book(_h["dAu"], refname + "_dAu", refdata);
+      book(_h["AuAu"], refname + "_AuAu", refdata);
+
+      book(_c["dAu"], "sow_dAu");
+      book(_c["AuAu"], "sow_AuAu");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -445,6 +449,8 @@ namespace Rivet {
       //Sorting particles by type
       if (beam == "DAU")
       {
+        _c["sow_dAu"]->fill();
+
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
             if (c < 20.0) _h2D["Figure_18_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
@@ -488,6 +494,8 @@ namespace Rivet {
       //Figure 19 AuAu @ 62.4 GeV
       if (beam == "AUAU")
       {
+        _c["sow_AuAu"]->fill();
+
         //if (beamEnergy == 62.4)
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -608,9 +616,10 @@ namespace Rivet {
     /// @name Histograms
     //@{
     map<string, Histo1DPtr> _h;
-    map<string, Histo2DPtr> _h2D;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    map<string, Histo2DPtr> _h2D;
+    string beamOpt = "";
     //@}
 
 
