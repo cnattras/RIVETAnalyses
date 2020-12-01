@@ -7,6 +7,8 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
 
+map<string, Histo2DPtr> _h2D;
+
 namespace Rivet {
 
 
@@ -108,27 +110,27 @@ namespace Rivet {
        book(_h["Figure_11b_1"], 14, 1, 1);
        book(_h["Figure_11b_2"], 14, 1, 2);
       //Figure 12 dAu
-       //book(_h["Figure_12_dAu"], 15, 1, 1);
+       //book(_h2D["Figure_12_dAu"], 15, 1, 1);
       //Figure 12 pp
-       //book(_h["Figure_12_pp"], 16, 1, 1);
+       //book(_h2D["Figure_12_pp"], 16, 1, 1);
       //Figure 13a
-       //book(_h["Figure_13a_1"], 17, 1, 1);
-       //book(_h["Figure_13a_2"], 17, 1, 2);
-       //book(_h["Figure_13a_3"], 17, 1, 3);
+       //book(_h2D["Figure_13a_1"], 17, 1, 1);
+       //book(_h2D["Figure_13a_2"], 17, 1, 2);
+       //book(_h2D["Figure_13a_3"], 17, 1, 3);
       //Figure 13b
-       //book(_h["Figure_13b_1"], 18, 1, 1);
-       //book(_h["Figure_13b_2"], 18, 1, 2);
-       //book(_h["Figure_13b_3"], 18, 1, 3);
+       //book(_h2D["Figure_13b_1"], 18, 1, 1);
+       //book(_h2D["Figure_13b_2"], 18, 1, 2);
+       //book(_h2D["Figure_13b_3"], 18, 1, 3);
       //Figure 14a pion and kaon
-     //book(_h["Figure_14a_pion_and_kaon_1"], 19, 1, 1);
-     //book(_h["Figure_14a_pion_and_kaon_2"], 19, 1, 2);
+     //book(_h2D["Figure_14a_pion_and_kaon_1"], 19, 1, 1);
+     //book(_h2D["Figure_14a_pion_and_kaon_2"], 19, 1, 2);
       //Figure 14a proton
-     //book(_h["Figure_14a_proton"], 20, 1, 1);
+     //book(_h2D["Figure_14a_proton"], 20, 1, 1);
       //Figure 14b pion and kaon
-     //book(_h["Figure_14b_pion_and_kaon_1"], 21, 1, 1);
-     //book(_h["Figure_14b_pion_and_kaon_2"], 21, 1, 2);
+     //book(_h2D["Figure_14b_pion_and_kaon_1"], 21, 1, 1);
+     //book(_h2D["Figure_14b_pion_and_kaon_2"], 21, 1, 2);
       //Figure 14b proton
-    //book(_h["Figure_14b_proton"], 22, 1, 1);
+    //book(_h2D["Figure_14b_proton"], 22, 1, 1);
       //Figure 15a
      book(_h["Figure_15a_1"], 23, 1, 1);
      book(_h["Figure_15a_2"], 23, 1, 2);
@@ -158,131 +160,131 @@ namespace Rivet {
       //Figure 15d Bkgd
      book(_h["Figure_15d_Bkgd"], 30, 1, 1);
       //Figure 16 all and weak-decay bkgd
-     //book(_h["Figure_16_allandweakdecay_bkgd_1"], 31, 1, 1);
-     //book(_h["Figure_16_allandweakdecay_bkgd_2"], 31, 1, 2);
+     //book(_h2D["Figure_16_allandweakdecay_bkgd_1"], 31, 1, 1);
+     //book(_h2D["Figure_16_allandweakdecay_bkgd_2"], 31, 1, 2);
       //Figure 16 muon contamination
-     //book(_h["Figure_16_muon_contamination"], 32, 1, 1);
+     //book(_h2D["Figure_16_muon_contamination"], 32, 1, 1);
       //Figure 17 AuAu dE/dx
-     //book(_h["Figure17_AuAu_dEdx"], 33, 1, 1);
+     //book(_h2D["Figure17_AuAu_dEdx"], 33, 1, 1);
       //Figure 17 AuAu Blast-wave fit
-     //book(_h["Figure_17_AuAu_Blastwave_fit"], 34, 1, 1);
+     //book(_h2D["Figure_17_AuAu_Blastwave_fit"], 34, 1, 1);
       //Figure 17 AuAu p_T-Gaussian fit
      //book(_h["Figure_17_AuAu_pT_Gaussian_fit"], 35, 1, 1);
       //Figure 17 AuAu p_T-exponential fit
      //book(_h["Figure_17_AuAu_pT_exponential_fit"], 36, 1, 1);
       //Figure 17 AuAu TOF data
-     //book(_h["Figure_17_AuAu_TOF_data"], 37, 1, 1);
+     //book(_h2D["Figure_17_AuAu_TOF_data"], 37, 1, 1);
       //Figure 17 dAu dE/dx
-     //book(_h["Figure_17_dAu_dEdx"], 38, 1, 1);
+     //book(_h2D["Figure_17_dAu_dEdx"], 38, 1, 1);
       //Figure 17 dAu Blast-wave fit
-     //book(_h["Figure_17_dAu_pT_Blastwave_fit"], 39, 1, 1);
+     //book(_h2D["Figure_17_dAu_pT_Blastwave_fit"], 39, 1, 1);
       //Figure 17 dAu p_T-Gaussian fit
      //book(_h["Figure_17_dAu_pT_Gaussian_fit"], 40, 1, 1);
       //Figure 17 dAu p_T-exponential fit
      //book(_h["Figure_17_dAu_pT_exponential_fit"], 41, 1, 1);
       //Figure 17 dAu TOF data
-     //book(_h["Figure_17_dAu_TOF_data"], 42, 1, 1);
+     //book(_h2D["Figure_17_dAu_TOF_data"], 42, 1, 1);
       //Figure 18 kaon
-     //book(_h["AAAA"], 43, 1, 1);
-     //book(_h["AAAA"], 43, 1, 2);
-     //book(_h["AAAA"], 43, 1, 3);
-     //book(_h["AAAA"], 43, 1, 4);
-     //book(_h["AAAA"], 43, 1, 5);
-     //book(_h["AAAA"], 43, 1, 6);
-     //book(_h["AAAA"], 43, 1, 7);
-     //book(_h["AAAA"], 43, 1, 8);
+     //book(_h2D["AAAA"], 43, 1, 1);
+     //book(_h2D["AAAA"], 43, 1, 2);
+     //book(_h2D["AAAA"], 43, 1, 3);
+     //book(_h2D["AAAA"], 43, 1, 4);
+     //book(_h2D["AAAA"], 43, 1, 5);
+     //book(_h2D["AAAA"], 43, 1, 6);
+     //book(_h2D["AAAA"], 43, 1, 7);
+     //book(_h2D["AAAA"], 43, 1, 8);
       //Figure 18 pion
-     //book(_h["AAAA"], 44, 1, 1);
-     //book(_h["AAAA"], 44, 1, 2);
-     //book(_h["AAAA"], 44, 1, 3);
-     //book(_h["AAAA"], 44, 1, 4);
-     //book(_h["AAAA"], 44, 1, 5);
-     //book(_h["AAAA"], 44, 1, 6);
-     //book(_h["AAAA"], 44, 1, 7);
-     //book(_h["AAAA"], 44, 1, 8);
+     //book(_h2D["AAAA"], 44, 1, 1);
+     //book(_h2D["AAAA"], 44, 1, 2);
+     //book(_h2D["AAAA"], 44, 1, 3);
+     //book(_h2D["AAAA"], 44, 1, 4);
+     //book(_h2D["AAAA"], 44, 1, 5);
+     //book(_h2D["AAAA"], 44, 1, 6);
+     //book(_h2D["AAAA"], 44, 1, 7);
+     //book(_h2D["AAAA"], 44, 1, 8);
       //Figure 18 proton
-     //book(_h["AAAA"], 45, 1, 1);
-     //book(_h["AAAA"], 45, 1, 2);
-     //book(_h["AAAA"], 45, 1, 3);
-     //book(_h["AAAA"], 45, 1, 4);
-     //book(_h["AAAA"], 45, 1, 5);
-     //book(_h["AAAA"], 45, 1, 6);
-     //book(_h["AAAA"], 45, 1, 7);
-     //book(_h["AAAA"], 45, 1, 8);
+     //book(_h2D["AAAA"], 45, 1, 1);
+     //book(_h2D["AAAA"], 45, 1, 2);
+     //book(_h2D["AAAA"], 45, 1, 3);
+     //book(_h2D["AAAA"], 45, 1, 4);
+     //book(_h2D["AAAA"], 45, 1, 5);
+     //book(_h2D["AAAA"], 45, 1, 6);
+     //book(_h2D["AAAA"], 45, 1, 7);
+     //book(_h2D["AAAA"], 45, 1, 8);
       //Figure 19 kaon
-     //book(_h["AAAA"], 46, 1, 1);
-     //book(_h["AAAA"], 46, 1, 2);
-     //book(_h["AAAA"], 46, 1, 3);
-     //book(_h["AAAA"], 46, 1, 4);
-     //book(_h["AAAA"], 46, 1, 5);
-     //book(_h["AAAA"], 46, 1, 6);
-     //book(_h["AAAA"], 46, 1, 7);
-     //book(_h["AAAA"], 46, 1, 8);
-     //book(_h["AAAA"], 46, 1, 9);
-     //book(_h["AAAA"], 46, 1, 10);
-     //book(_h["AAAA"], 46, 1, 11);
-     //book(_h["AAAA"], 46, 1, 12);
-     //book(_h["AAAA"], 46, 1, 13);
-     //book(_h["AAAA"], 46, 1, 14);
-     //book(_h["AAAA"], 46, 1, 15);
-     //book(_h["AAAA"], 46, 1, 16);
-     //book(_h["AAAA"], 46, 1, 17);
-     //book(_h["AAAA"], 46, 1, 18);
+     //book(_h2D["AAAA"], 46, 1, 1);
+     //book(_h2D["AAAA"], 46, 1, 2);
+     //book(_h2D["AAAA"], 46, 1, 3);
+     //book(_h2D["AAAA"], 46, 1, 4);
+     //book(_h2D["AAAA"], 46, 1, 5);
+     //book(_h2D["AAAA"], 46, 1, 6);
+     //book(_h2D["AAAA"], 46, 1, 7);
+     //book(_h2D["AAAA"], 46, 1, 8);
+     //book(_h2D["AAAA"], 46, 1, 9);
+     //book(_h2D["AAAA"], 46, 1, 10);
+     //book(_h2D["AAAA"], 46, 1, 11);
+     //book(_h2D["AAAA"], 46, 1, 12);
+     //book(_h2D["AAAA"], 46, 1, 13);
+     //book(_h2D["AAAA"], 46, 1, 14);
+     //book(_h2D["AAAA"], 46, 1, 15);
+     //book(_h2D["AAAA"], 46, 1, 16);
+     //book(_h2D["AAAA"], 46, 1, 17);
+     //book(_h2D["AAAA"], 46, 1, 18);
       //Figure 19 pion
-     //book(_h["AAAA"], 47, 1, 1);
-     //book(_h["AAAA"], 47, 1, 2);
-     //book(_h["AAAA"], 47, 1, 3);
-     //book(_h["AAAA"], 47, 1, 4);
-     //book(_h["AAAA"], 47, 1, 5);
-     //book(_h["AAAA"], 47, 1, 6);
-     //book(_h["AAAA"], 47, 1, 7);
-     //book(_h["AAAA"], 47, 1, 8);
-     //book(_h["AAAA"], 47, 1, 9);
-     //book(_h["AAAA"], 47, 1, 10);
-     //book(_h["AAAA"], 47, 1, 11);
-     //book(_h["AAAA"], 47, 1, 12);
-     //book(_h["AAAA"], 47, 1, 13);
-     //book(_h["AAAA"], 47, 1, 14);
-     //book(_h["AAAA"], 47, 1, 15);
-     //book(_h["AAAA"], 47, 1, 16);
-     //book(_h["AAAA"], 47, 1, 17);
-     //book(_h["AAAA"], 47, 1, 18);
+     //book(_h2D["AAAA"], 47, 1, 1);
+     //book(_h2D["AAAA"], 47, 1, 2);
+     //book(_h2D["AAAA"], 47, 1, 3);
+     //book(_h2D["AAAA"], 47, 1, 4);
+     //book(_h2D["AAAA"], 47, 1, 5);
+     //book(_h2D["AAAA"], 47, 1, 6);
+     //book(_h2D["AAAA"], 47, 1, 7);
+     //book(_h2D["AAAA"], 47, 1, 8);
+     //book(_h2D["AAAA"], 47, 1, 9);
+     //book(_h2D["AAAA"], 47, 1, 10);
+     //book(_h2D["AAAA"], 47, 1, 11);
+     //book(_h2D["AAAA"], 47, 1, 12);
+     //book(_h2D["AAAA"], 47, 1, 13);
+     //book(_h2D["AAAA"], 47, 1, 14);
+     //book(_h2D["AAAA"], 47, 1, 15);
+     //book(_h2D["AAAA"], 47, 1, 16);
+     //book(_h2D["AAAA"], 47, 1, 17);
+     //book(_h2D["AAAA"], 47, 1, 18);
       //Figure 19 proton
-     //book(_h["AAAA"], 48, 1, 1);
-     //book(_h["AAAA"], 48, 1, 2);
-     //book(_h["AAAA"], 48, 1, 3);
-     //book(_h["AAAA"], 48, 1, 4);
-     //book(_h["AAAA"], 48, 1, 5);
-     //book(_h["AAAA"], 48, 1, 6);
-     //book(_h["AAAA"], 48, 1, 7);
-     //book(_h["AAAA"], 48, 1, 8);
-     //book(_h["AAAA"], 48, 1, 9);
-     //book(_h["AAAA"], 48, 1, 10);
-     //book(_h["AAAA"], 48, 1, 11);
-     //book(_h["AAAA"], 48, 1, 12);
-     //book(_h["AAAA"], 48, 1, 13);
-     //book(_h["AAAA"], 48, 1, 14);
-     //book(_h["AAAA"], 48, 1, 15);
-     //book(_h["AAAA"], 48, 1, 16);
-     //book(_h["AAAA"], 48, 1, 17);
-     //book(_h["AAAA"], 48, 1, 18);
+     //book(_h2D["AAAA"], 48, 1, 1);
+     //book(_h2D["AAAA"], 48, 1, 2);
+     //book(_h2D["AAAA"], 48, 1, 3);
+     //book(_h2D["AAAA"], 48, 1, 4);
+     //book(_h2D["AAAA"], 48, 1, 5);
+     //book(_h2D["AAAA"], 48, 1, 6);
+     //book(_h2D["AAAA"], 48, 1, 7);
+     //book(_h2D["AAAA"], 48, 1, 8);
+     //book(_h2D["AAAA"], 48, 1, 9);
+     //book(_h2D["AAAA"], 48, 1, 10);
+     //book(_h2D["AAAA"], 48, 1, 11);
+     //book(_h2D["AAAA"], 48, 1, 12);
+     //book(_h2D["AAAA"], 48, 1, 13);
+     //book(_h2D["AAAA"], 48, 1, 14);
+     //book(_h2D["AAAA"], 48, 1, 15);
+     //book(_h2D["AAAA"], 48, 1, 16);
+     //book(_h2D["AAAA"], 48, 1, 17);
+     //book(_h2D["AAAA"], 48, 1, 18);
       //Figure 20
-     //book(_h["AAAA"], 49, 1, 1);
-     //book(_h["AAAA"], 49, 1, 2);
-     //book(_h["AAAA"], 49, 1, 3);
-     //book(_h["AAAA"], 49, 1, 4);
-     //book(_h["AAAA"], 49, 1, 5);
-     //book(_h["AAAA"], 49, 1, 6);
-     //book(_h["AAAA"], 49, 1, 7);
-     //book(_h["AAAA"], 49, 1, 8);
-     //book(_h["AAAA"], 49, 1, 9);
-     //book(_h["AAAA"], 49, 1, 10);
-     //book(_h["AAAA"], 49, 1, 11);
-     //book(_h["AAAA"], 49, 1, 12);
-     //book(_h["AAAA"], 49, 1, 13);
-     //book(_h["AAAA"], 49, 1, 14);
-     //book(_h["AAAA"], 49, 1, 15);
-     //book(_h["AAAA"], 49, 1, 16);
+     //book(_h2D["AAAA"], 49, 1, 1);
+     //book(_h2D["AAAA"], 49, 1, 2);
+     //book(_h2D["AAAA"], 49, 1, 3);
+     //book(_h2D["AAAA"], 49, 1, 4);
+     //book(_h2D["AAAA"], 49, 1, 5);
+     //book(_h2D["AAAA"], 49, 1, 6);
+     //book(_h2D["AAAA"], 49, 1, 7);
+     //book(_h2D["AAAA"], 49, 1, 8);
+     //book(_h2D["AAAA"], 49, 1, 9);
+     //book(_h2D["AAAA"], 49, 1, 10);
+     //book(_h2D["AAAA"], 49, 1, 11);
+     //book(_h2D["AAAA"], 49, 1, 12);
+     //book(_h2D["AAAA"], 49, 1, 13);
+     //book(_h2D["AAAA"], 49, 1, 14);
+     //book(_h2D["AAAA"], 49, 1, 15);
+     //book(_h2D["AAAA"], 49, 1, 16);
       //Figure 24 Au+Au 62.4 GeV
      //book(_h["AAAA"], 50, 1, 1);
      //book(_h["AAAA"], 50, 1, 2);
