@@ -458,6 +458,7 @@ namespace Rivet {
     /// @name Histograms
     //@{
     map<string, Histo1DPtr> _h;
+    map<string, Histo2DPtr> _h2D;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     //@}
