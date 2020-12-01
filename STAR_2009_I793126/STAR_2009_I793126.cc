@@ -31,7 +31,8 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
+      declare(fs, "fs");
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
@@ -54,7 +55,7 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
+      //book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
       //book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
       //book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
@@ -436,7 +437,32 @@ namespace Rivet {
       if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
 
       // Fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
+      //_h["XXXX"]->fill(bjets[0].pT()/GeV);
+
+      Particles fsParticles = applyProjection<FinalState>(event, "fs").particles();
+      //Sorting events by energy
+      //Fig 18 is spectra @ 200 Gev, Fig 19 is @ 62.4 GeV
+      //Sorting particles by type
+      for (const Particle& p : fsParticles) {
+        if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
+          _h2D["Figure_18_kaon_1"]->fill(p.pT()/GeV, 1.0);
+        }
+        if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
+          _h2D["Figure_18_kaon_5"]->fill(p.pT()/GeV, 1.0);
+        }
+        if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
+          _h2D["Figure_18_pion_1"]->fill(p.pT()/GeV, 1.0);
+        }
+        if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
+          _h2D["Figure_18_pion_5"]->fill(p.pT()/GeV, 1.0);
+        }
+        if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
+          _h2D["Figure_18_proton_1"]->fill(p.pT()/GeV, 1.0);
+        }
+        if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
+          _h2D["Figure_18_proton_5"]->fill(p.pT()/GeV, 1.0);
+        }
+      }
 
     }
 
@@ -444,9 +470,15 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      normalize(_h["XXXX"]); // normalize to unity
-      normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
+      //normalize(_h["XXXX"]); // normalize to unity
+      //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
+      //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
+      normalize(_h2D["Figure_18_kaon_1"]);
+      normalize(_h2D["Figure_18_kaon_5"]);
+      normalize(_h2D["Figure_18_pion_1"]);
+      normalize(_h2D["Figure_18_pion_5"]);
+      normalize(_h2D["Figure_18_proton_1"]);
+      normalize(_h2D["Figure_18_proton_5"]);
 
     }
 
