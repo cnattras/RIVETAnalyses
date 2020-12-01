@@ -54,7 +54,7 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      //book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
+      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
       //book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
       //book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
