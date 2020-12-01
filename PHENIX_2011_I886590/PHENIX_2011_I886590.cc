@@ -63,21 +63,26 @@ namespace Rivet {
       book(_h["xsec_kminus_200"], 2, 1, 2);
       book(_h["xsec_p_noFD_200_1"], 3, 1, 1);
       book(_h["xsec_p_noFD_200_2"], 9, 1, 1);
-      //book(_h["xsec_pbar_noFD_200"], 3, 1, 2);
-      //book(_h["xsec_p_withFD_200"], 4, 1, 1);
-      //book(_h["xsec_pbar_withFD_200"], 4, 1, 2);
+      book(_h["xsec_pbar_noFD_200_1"], 3, 1, 2);
+      book(_h["xsec_pbar_noFD_200_2"], 9, 1, 2);
+      book(_h["xsec_p_withFD_200_1"], 4, 1, 1);
+      book(_h["xsec_p_withFD_200_2"], 10, 1, 1);
+      book(_h["xsec_pbar_withFD_200_1"], 4, 1, 2);
+      book(_h["xsec_pbar_withFD_200_2"], 10, 1, 2);
 
       // Histos from HEPdata at 62.4GeV
       book(_h["xsec_piplus_624"], 5, 1, 1);
       book(_h["xsec_piminus_624"], 5, 1, 2);
       book(_h["xsec_kplus_624"], 6, 1, 1);
       book(_h["xsec_kminus_624"], 6, 1, 2);
-      //book(_h["xsec_p_noFD_624"], 7, 1, 1);
-      //book(_h["xsec_pbar_noFD_624"], 7, 1, 2);
-      //book(_h["xsec_p_withFD_624"], 8, 1, 1);
-      //book(_h["xsec_pbar_withFD_624"], 8, 1, 2);
-      //book(_p["BBBB"], 2, 1, 1);
-      //book(_c["CCCC"], 3, 1, 1);
+      book(_h["xsec_p_noFD_624_1"], 7, 1, 1);
+      //book(_h["xsec_p_noFD_624_2"], 11, 1, 1);
+      book(_h["xsec_pbar_noFD_624_1"], 7, 1, 2);
+      //book(_h["xsec_pbar_noFD_624_2"], 11, 1, 2);
+      book(_h["xsec_p_withFD_624_1"], 8, 1, 1);
+      //book(_h["xsec_p_withFD_624_2"], 12, 1, 1);
+      book(_h["xsec_pbar_withFD_624_1"], 8, 1, 2);
+      //book(_h["xsec_pbar_withFD_624_2"], 12, 1, 2);
 
     }
 
