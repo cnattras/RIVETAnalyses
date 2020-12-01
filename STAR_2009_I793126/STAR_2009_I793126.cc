@@ -53,7 +53,7 @@ namespace Rivet {
       // Missing momentum
       //declare(MissingMomentum(fs), "MET");
 
-      beamOpt = getOption<string>("beam", "NONE");
+      /*beamOpt = getOption<string>("beam", "NONE");
 
       string refname = mkAxisCode(1, 1, 1);
       const Scatter2D& refdata = refData(refname);
@@ -61,7 +61,7 @@ namespace Rivet {
       book(_h["AuAu"], refname + "_AuAu", refdata);
 
       book(_c["dAu"], "sow_dAu");
-      book(_c["AuAu"], "sow_AuAu");
+      book(_c["AuAu"], "sow_AuAu");*/
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -449,7 +449,7 @@ namespace Rivet {
       //Sorting particles by type
       //if (beam == "DAU")
       //{
-        _c["sow_dAu"]->fill();
+        //_c["sow_dAu"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -494,7 +494,7 @@ namespace Rivet {
       //Figure 19 AuAu @ 62.4 GeV
       //if (beam == "AUAU")
       //{
-        _c["sow_AuAu"]->fill();
+        //_c["sow_AuAu"]->fill();
 
         //if (beamEnergy == 62.4)
         for (const Particle& p : fsParticles) {
@@ -619,7 +619,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Histo2DPtr> _h2D;
-    string beamOpt = "";
+    //string beamOpt = "";
     //@}
 
 
