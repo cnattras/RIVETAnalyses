@@ -5,7 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "../Centralities/RHICCentrality.hh"
+#include "RHICCentrality.hh"
 
 
 namespace Rivet {
@@ -50,49 +50,49 @@ namespace Rivet {
         const Scatter2D& refdata0 = refData(refname0);
         book(_h["PIminus_0_10"], refname0 + "_PIminus_0_10", refdata0);
         book(_h["PIplus_0_10"],  refname0 + "_PIplus_0_10",  refdata0);
-        book(_s["PIminusOverPIplus_0_10"], refname0);
+        book(_s["PIminusOverPIplus_0_10"], refname0, true);
 
         string refname1 = mkAxisCode(3, 1, 2);
         const Scatter2D& refdata1 = refData(refname1);
         book(_h["PIminus_10_20"], refname1 + "_PIminus_10_20", refdata1);
         book(_h["PIplus_10_20"],  refname1 + "_PIplus_10_20",  refdata1);
-        book(_s["PIminusOverPIplus_10_20"], refname1);
+        book(_s["PIminusOverPIplus_10_20"], refname1, true);
 
         string refname2 = mkAxisCode(3, 1, 3);
         const Scatter2D& refdata2 = refData(refname2);
         book(_h["PIminus_20_40"], refname2 + "_PIminus_20_40", refdata2);
         book(_h["PIplus_20_40"],  refname2 + "_PIplus_20_40",  refdata2);
-        book(_s["PIminusOverPIplus_20_40"], refname2);
+        book(_s["PIminusOverPIplus_20_40"], refname2, true);
 
         string refname4 = mkAxisCode(3, 1, 4);
         const Scatter2D& refdata4 = refData(refname4);
         book(_h["PIminus_40_60"], refname4 + "_PIminus_40_60", refdata4);
         book(_h["PIplus_40_60"],  refname4 + "_PIplus_40_60",  refdata4);
-        book(_s["PIminusOverPIplus_40_60"], refname4);
+        book(_s["PIminusOverPIplus_40_60"], refname4, true);
 
         string refname5 = mkAxisCode(4, 1, 1);
         const Scatter2D& refdata5 = refData(refname5);
         book(_h["PBAR_0_10"], refname5 + "_PBAR_0_10", refdata5);
         book(_h["P_0_10"],  refname5 + "_P_0_10",  refdata5);
-        book(_s["PBAROverP_0_10"], refname5);
+        book(_s["PBAROverP_0_10"], refname5, true);
 
         string refname6 = mkAxisCode(4, 1, 2);
         const Scatter2D& refdata6 = refData(refname6);
         book(_h["PBAR_10_20"], refname6 + "_PBAR_10_20", refdata6);
         book(_h["P_10_20"],  refname6 + "_P_10_20",  refdata6);
-        book(_s["PBAROverP_10_20"], refname6);
+        book(_s["PBAROverP_10_20"], refname6, true);
 
         string refname7 = mkAxisCode(4, 1, 3);
         const Scatter2D& refdata7 = refData(refname7);
         book(_h["PBAR_20_40"], refname7 + "_PBAR_20_40", refdata7);
         book(_h["P_20_40"],  refname7 + "_P_20_40",  refdata7);
-        book(_s["PBAROverP_20_40"], refname7);
+        book(_s["PBAROverP_20_40"], refname7, true);
 
         string refname8 = mkAxisCode(4, 1, 4);
         const Scatter2D& refdata8 = refData(refname8);
         book(_h["PBAR_40_60"], refname8 + "_PBAR_40_60", refdata8);
         book(_h["P_40_60"],  refname8 + "_P_40_60",  refdata8);
-        book(_s["PBAROverP_40_60"], refname8);
+        book(_s["PBAROverP_40_60"], refname8, true);
 
         book(_h["RAA_PIONS_0_10cent"],    5,1,1);
         book(_h["RAA_PIONS_10_20cent"],   5,1,2);
