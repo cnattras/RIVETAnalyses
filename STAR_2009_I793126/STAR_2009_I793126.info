@@ -1,16 +1,16 @@
 Name: STAR_2009_I793126
 Year: 2009
-Summary: <A one-line informative STAR_2009_I793126 headline>
+Summary: Systematic Measurements of Identified Particle Spectra in pp, d+Au and Au+Au Collisions from STAR
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: RHIC
 InspireID: 793126
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Charles Hughes chughe26@vols.utk.edu
+ - William Witt wwitt4@vols.utk.edu
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'Phys.Rev.C 79 (2009) 034909'
+ - 'arXiv:0808.2041'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
