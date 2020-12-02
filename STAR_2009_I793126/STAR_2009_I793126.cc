@@ -605,7 +605,7 @@ namespace Rivet {
       //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
-      normalize(_h["Figure_18_kaon_1"]);
+      /*normalize(_h["Figure_18_kaon_1"]);
       normalize(_h["Figure_18_kaon_2"]);
       normalize(_h["Figure_18_kaon_3"]);
       normalize(_h["Figure_18_kaon_4"]);
@@ -700,7 +700,7 @@ namespace Rivet {
       normalize(_h["Figure_20_13"]);
       normalize(_h["Figure_20_14"]);
       normalize(_h["Figure_20_15"]);
-      normalize(_h["Figure_20_16"]);
+      normalize(_h["Figure_20_16"]);*/
 
       scale(_h["Figure_18_kaon_1"], 4.0);
       scale(_h["Figure_18_kaon_2"], 2.0);
