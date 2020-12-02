@@ -17,6 +17,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
+ - beam=DAU200,AUAU62.AUAU130
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
@@ -28,8 +29,7 @@ ValidationInfo:
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
-BibKey: 
+BibKey:
 BibTeX: ''
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
-
