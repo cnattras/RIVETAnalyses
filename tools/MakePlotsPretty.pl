@@ -11,6 +11,6 @@ print "Title=$Title\n";
 print "XLabel=$Xaxis\n";
 print "YLabel=$Yaxis\n";
 print "Options=$Options\n";
-print "END PLOT"
+print "END PLOT\n";
 
 }
