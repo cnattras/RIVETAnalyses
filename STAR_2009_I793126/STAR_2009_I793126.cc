@@ -53,7 +53,7 @@ namespace Rivet {
       // Missing momentum
       //declare(MissingMomentum(fs), "MET");
 
-      /*beamOpt = getOption<string>("beam", "NONE");
+      beamOpt = getOption<string>("beam", "NONE");
 
       string refname = mkAxisCode(1, 1, 1);
       const Scatter2D& refdata = refData(refname);
@@ -61,7 +61,7 @@ namespace Rivet {
       book(_h["AuAu"], refname + "_AuAu", refdata);
 
       book(_c["dAu"], "sow_dAu");
-      book(_c["AuAu"], "sow_AuAu");*/
+      book(_c["AuAu"], "sow_AuAu");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -447,10 +447,9 @@ namespace Rivet {
       //Sorting events by energy
       //Fig 18 dAu spectra @ 200 Gev
       //Sorting particles by type
-      //if (beam == "DAU")
-      //{
-        //_c["sow_dAu"]->fill();
-        //
+      if (beam == "DAU200")
+      {
+        _c["sow_dAu"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -490,15 +489,13 @@ namespace Rivet {
             if (c > 40.0) _h["Figure_18_proton_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
           }
         }
-      //}
-      //
+      }
 
       //Figure 19 AuAu @ 62.4 GeV
-      //if (beam == "AUAU")
-      //{
-        //_c["sow_AuAu"]->fill();
+      if (beam == "AUAU62")
+      {
+        _c["sow_AuAu"]->fill();
 
-        //if (beamEnergy == 62.4)
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
             if (c < 5.0) _h["Figure_19_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
@@ -567,9 +564,13 @@ namespace Rivet {
             if (c > 70.0 && c < 80.0) _h["Figure_19_proton_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
           }
         }
+      }
 
-        //Figure 20 AuAu @ 130 GeV
-        //if (beamEnergy == 130 GeV)
+      //Figure 20 AuAu @ 130 GeV
+      if (beam == "AUAU130")
+      {
+        _c["sow_AuAu"]->fill();
+
         for (const Particle& p : fsParticles) {
           if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
             if (c < 6.0) _h["Figure_20_1"]->fill(p.pT()/GeV, 1.0); // 0-6% centrality
@@ -592,7 +593,7 @@ namespace Rivet {
             if (c > 58.0 && c < 85.0) _h["Figure_20_16"]->fill(p.pT()/GeV, 1.0); // 58-85% centrality
           }
         }
-      //}
+      }
 
     }
 
@@ -621,7 +622,8 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Histo2DPtr> _h2D;
-    //string beamOpt = "";
+    string beamOpt = "";
+    string beam = "";
     //@}
 
 
