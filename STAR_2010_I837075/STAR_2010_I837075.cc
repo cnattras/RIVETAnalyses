@@ -89,22 +89,52 @@ namespace Rivet {
         for (int i{0};i<4;++i) {
             book( _c4[i], "c"+cent[i]);
 
+            // FIG 1.
             book( _h4["PIminus"][i], 1, 1, i_minus[i] );
             book( _h4["PIplus" ][i], 1, 1, i_plus [i] );
             book( _h4["PBAR"   ][i], 2, 1, i_minus[i] );
             book( _h4["P"      ][i], 2, 1, i_plus [i] );
 
+            // FIG 2. -- ratios of the above plots
             string refname = mkAxisCode(3,1,i+1);
             book( _s4["PIminusOverPIplus"][i], refname, true);
-
             refname = mkAxisCode(4,1,i+1);
             book( _s4["PBARoverP"][i], refname, true);
-            book (_h4["RAA_PI"]     [i], 5, 1, i+1);
-            /* book(_h["RAA_PIONS_pT_5to8"],    6,1,2); */
-            book (_h4["RAA_P"]      [i], 7, 1, i+1);
-            book (_h4["ratio_PItoP"][i], 8,1,i+1);
-            /* book(_h["RATIO_PIONStoPROTONS_pT_3to4"],   9,1,1); */
+
+            // FIG 3a. -- RAA pions 3-6 GeV (in paper at 3-8 GeV/c but in data at 3-6)
+            string refnameRaa_pion = mkAxisCode(5,1,i+1);
+            const Scatter2D& refdataRaa_pion =refData(refnameRaa_pion);
+            book(_h4["pion_pT_CuCu"][i], refnameRaa_pion + "_CuCu" + cent[i], refdataRaa_pion);
+            book(_h4["pion_pT_pp"][i],   refnameRaa_pion + "_pp"   + cent[i], refdataRaa_pion);
+            book(_s4["Raa_pion_pT"][i],  refnameRaa_pion);
+
+            // FIG 3b. -- RAA pions 5-8 GeV -- only one bin!
+            /* string refnameRaa_pionB = mkAxisCode(5,1,i+1); */
+            /* const Scatter2D& refdataRaa_pionB =refData(refnameRaa_pionB); */
+            /* book(_h4["pion_Cent_CuCu"][i], refnameRaa_pionB + "_CuCu" + cent[i], refdataRaa_pionB); */
+            /* book(_h4["pion_Cent_pp"][i],   refnameRaa_pionB + "_pp"   + cent[i], refdataRaa_pionB); */
+            /* book(_s4["Raa_pion_Cent"][i],  refnameRaa_pionB); */
+
+            // FIG 4a. -- RAA protons 3-6 GeV
+            string refnameRaa_proton = mkAxisCode(7,1,i+1);
+            const Scatter2D& refdataRaa_proton =refData(refnameRaa_proton);
+            book(_h4["proton_pT_CuCu"][i], refnameRaa_proton + "_CuCu" + cent[i], refdataRaa_proton);
+            book(_h4["proton_pT_pp"][i],   refnameRaa_proton + "_pp"   + cent[i], refdataRaa_proton);
+            book(_s4["Raa_proton"][i],     refnameRaa_proton);
+
+            // Fig 4b -- don't have the data for this!
+
+            // Fig 5. -- p+p over pi+pi in 3-6 GeV range
+            vector<double> bins { 3.,3.25,3.5,3.75,4.,4.5,5.,5.5,6. };
+            book (_s4["ratio_PtoPI"][i], 8,1,i+1, true);
+            book (_h4["PI_3_to_6"][i], "PI_3_to_6"+cent[i], bins );
         }
+        // Get FIG 3b.
+        string refnameRaa_PIcent = mkAxisCode(6,1,2);
+        const Scatter2D& refdataRaa_PIcent =refData(refnameRaa_PIcent);
+        book(_h["pion_Cent_CuCu"], refnameRaa_PIcent + "_CuCu", refdataRaa_PIcent);
+        book(_h["pion_Cent_pp"],   refnameRaa_PIcent + "_pp"  , refdataRaa_PIcent);
+        book(_s["Raa_pion_Cent"],  refnameRaa_PIcent);
     }
 
 
@@ -129,17 +159,30 @@ namespace Rivet {
         else if (cent < 40.)  k = 2;
         else if (cent < 60.)  k = 3;
         else vetoEvent;
-        /* _c4[c]->fill(); */
+        /* _c4[k]->fill(); */
 
         const Particles& piplus  = apply<ALICE::PrimaryParticles>(event,"piplusFS").particles();
         const Particles& piminus = apply<ALICE::PrimaryParticles>(event,"piminusFS").particles();
         const Particles& proton  = apply<ALICE::PrimaryParticles>(event,"protonFS").particles();
         const Particles& pbar    = apply<ALICE::PrimaryParticles>(event,"pbarFS").particles();
 
+        // FIG. 1 data pion and proton spectra
         for (auto& p : piminus) _h4["PIminus"][k]->fill(p.pT()/GeV);
         for (auto& p : piplus ) _h4["PIminus"][k]->fill(p.pT()/GeV);
         for (auto& p : proton ) _h4["P"      ][k]->fill(p.pT()/GeV);
         for (auto& p : pbar   ) _h4["PBAR"   ][k]->fill(p.pT()/GeV);
+       
+        // FIG. 2 is a ratio fo FIG. 1, so it is processed in the final
+     
+        // FIG. 3 is RAA of pions -- so need both Cu+Cu and pp events
+        
+        // FIG. 4 is RAA of protons -- so need both Cu+Cu and pp events
+        
+        // Fig. 5 is ratio of protons to pions
+
+        
+
+
 
         /* // ok, fill all the histograms with appropriate spectra */
         /* if (cent < 10.) { */
@@ -217,7 +260,7 @@ namespace Rivet {
     /// @name Histograms
     //@{
     map<string, Histo1DPtr> _h;
-    map<string, CounterPtr>   _c;
+    map<string, CounterPtr> _c;
 
     // There are a set of four indentical measurements for four centralities
     map<string, array<Histo1DPtr,4>> _h4; // like _h but for four centralities
@@ -234,85 +277,4 @@ namespace Rivet {
   DECLARE_RIVET_PLUGIN(STAR_2010_I837075);
 
 }
-        // book all the histograms
-        /* book(_h["PIminus_0_10cent"],1,1,1); */
-        /* book(_h["PIplus_0_10cent"], 1,1,2); */
-        /* book(_h["PIminus_10_20cent"],1,1,3); */
-        /* book(_h["PIplus_10_20cent"], 1,1,4); */
-        /* book(_h["PIminus_20_40cent"],1,1,5); */
-        /* book(_h["PIplus_20_40cent"], 1,1,6); */
-        /* book(_h["PIminus_40_60cent"],1,1,7); */
-        /* book(_h["PIplus_40_60cent"], 1,1,8); */
-
-        /* book(_h["PBAR_0_10cent"], 2,1,1); */
-        /* book(_h["P_0_10cent"],    2,1,2); */
-        /* book(_h["PBAR_10_20cent"],2,1,3); */
-        /* book(_h["P_10_20cent"],   2,1,4); */
-        /* book(_h["PBAR_20_40cent"],2,1,5); */
-        /* book(_h["P_20_40cent"],   2,1,6); */
-        /* book(_h["PBAR_40_60cent"],2,1,7); */
-        /* book(_h["P_40_60cent"],   2,1,8); */
-
-        /* string refname0 = mkAxisCode(3, 1, 1); */
-        /* const Scatter2D& refdata0 = refData(refname0); */
-        /* book(_h["PIminus_0_10"], refname0 + "_PIminus_0_10", refdata0); */
-        /* book(_h["PIplus_0_10"],  refname0 + "_PIplus_0_10",  refdata0); */
-        /* book(_s["PIminusOverPIplus_0_10"], refname0, true); */
-
-        /* string refname1 = mkAxisCode(3, 1, 2); */
-        /* const Scatter2D& refdata1 = refData(refname1); */
-        /* book(_h["PIminus_10_20"], refname1 + "_PIminus_10_20", refdata1); */
-        /* book(_h["PIplus_10_20"],  refname1 + "_PIplus_10_20",  refdata1); */
-        /* book(_s["PIminusOverPIplus_10_20"], refname1, true); */
-
-        /* string refname2 = mkAxisCode(3, 1, 3); */
-        /* const Scatter2D& refdata2 = refData(refname2); */
-        /* book(_h["PIminus_20_40"], refname2 + "_PIminus_20_40", refdata2); */
-        /* book(_h["PIplus_20_40"],  refname2 + "_PIplus_20_40",  refdata2); */
-        /* book(_s["PIminusOverPIplus_20_40"], refname2, true); */
-
-        /* string refname4 = mkAxisCode(3, 1, 4); */
-        /* const Scatter2D& refdata4 = refData(refname4); */
-        /* book(_h["PIminus_40_60"], refname4 + "_PIminus_40_60", refdata4); */
-        /* book(_h["PIplus_40_60"],  refname4 + "_PIplus_40_60",  refdata4); */
-        /* book(_s["PIminusOverPIplus_40_60"], refname4, true); */
-
-        /* string refname5 = mkAxisCode(4, 1, 1); */
-        /* const Scatter2D& refdata5 = refData(refname5); */
-        /* book(_h["PBAR_0_10"], refname5 + "_PBAR_0_10", refdata5); */
-        /* book(_h["P_0_10"],  refname5 + "_P_0_10",  refdata5); */
-        /* book(_s["PBAROverP_0_10"], refname5, true); */
-
-        /* string refname6 = mkAxisCode(4, 1, 2); */
-        /* const Scatter2D& refdata6 = refData(refname6); */
-        /* book(_h["PBAR_10_20"], refname6 + "_PBAR_10_20", refdata6); */
-        /* book(_h["P_10_20"],  refname6 + "_P_10_20",  refdata6); */
-        /* book(_s["PBAROverP_10_20"], refname6, true); */
-
-        /* string refname7 = mkAxisCode(4, 1, 3); */
-        /* const Scatter2D& refdata7 = refData(refname7); */
-        /* book(_h["PBAR_20_40"], refname7 + "_PBAR_20_40", refdata7); */
-        /* book(_h["P_20_40"],  refname7 + "_P_20_40",  refdata7); */
-        /* book(_s["PBAROverP_20_40"], refname7, true); */
-
-        /* string refname8 = mkAxisCode(4, 1, 4); */
-        /* const Scatter2D& refdata8 = refData(refname8); */
-        /* book(_h["PBAR_40_60"], refname8 + "_PBAR_40_60", refdata8); */
-        /* book(_h["P_40_60"],  refname8 + "_P_40_60",  refdata8); */
-        /* book(_s["PBAROverP_40_60"], refname8, true); */
-
-        /* book(_h["RAA_PIONS_0_10cent"],    5,1,1); */
-        /* book(_h["RAA_PIONS_10_20cent"],   5,1,2); */
-        /* book(_h["RAA_PIONS_20_40cent"],   5,1,3); */
-        /* book(_h["RAA_PIONS_40_60cent"],   5,1,4); */
-
-        /* book(_h["RAA_PROTONS_0_10cent"],    7,1,1); */
-        /* book(_h["RAA_PROTONS_10_20cent"],   7,1,2); */
-        /* book(_h["RAA_PROTONS_20_40cent"],   7,1,3); */
-        /* book(_h["RAA_PROTONS_40_60cent"],   7,1,4); */
-
-        /* book(_h["RATIO_PIONStoPROTONS_0_10cent"],    8,1,1); */
-        /* book(_h["RATIO_PIONStoPROTONS_10_20cent"],   8,1,2); */
-        /* book(_h["RATIO_PIONStoPROTONS_20_40cent"],   8,1,3); */
-        /* book(_h["RATIO_PIONStoPROTONS_40_60cent"],   8,1,4); */
 
