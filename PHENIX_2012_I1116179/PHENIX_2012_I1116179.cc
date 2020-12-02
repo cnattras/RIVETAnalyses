@@ -26,18 +26,54 @@ namespace Rivet {
 
 	  declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-	  book(_h["AAAA"], 1, 1, 1);
+
+	  //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV);
+	  //declare(fs, "fs");
+
+	  const PromptFinalState pfs(Cuts::abseta < 0.5 && Cuts::pT > 4.0 && Cuts::pT < 22.0);
+	  declare(pfs, "pfs");
+
+//	  const UnstableParticles up(Cuts::abseta < 0.5 && Cuts::abspid == 421);
+//	  declare(up, "up");
+
+	  book(_h["dir_photon_AuAu0005"], 1, 1, 1);
+	  book(_c["sow_AuAu0005"], "sow_AuAu0005");
+//	  book(_c["sow_AuAu3050"], sow_AuAu3050);
+//	  book(_c["sow_pp"], "sow_pp");
+
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const double c = cent();
+
+      if(c < 5.) 
+      {
+        _c["sow_AuAu0005"]->fill();
+      }
+
+      Particles pfsParticles = applyProjection<FinalState>(event,"pfs").particles();
+
+      for(const Particle& p : pfsParticles) 
+      {
+        if(c < 5. && p.pid() == 22) _h["dir_photon_AuAu0005"]->fill(p.pT()/GeV);
+        
+      }
+
+
+
+
+
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      _h["dir_photon_AuAu0005"]->scaleW(1./_c["sow_AuAu0005"]->sumW());
+
 
     }
 
