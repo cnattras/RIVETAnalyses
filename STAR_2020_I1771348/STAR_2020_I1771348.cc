@@ -22,8 +22,29 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+	const FinalState fs(Cuts::abseta < 4.9);
+      //fig2
+      book(_h["Fig2_Toward"], 1, 1, 1);
+      book(_h["Fig2_Away"], 1, 1, 2);
+      book(_h["Fig2_Transverse"], 1, 1, 3);
+      //fig3
+      //book(_h["BBBB"], 3, 1, 1);
+      book(_h["Fig3_Transverse_pt02"], 2, 1, 1);
+      book(_h["Fig3_Transverse_pt05"], 2, 1, 2);
+      //book(_h["Fig3_Transverse"],2,1,3);
 
-	declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+      book(_h["Fig4_Toward"], 3, 1, 1);
+      book(_h["Fig4_Away"], 3, 1, 2);
+      book(_h["Fig4_Transverse"], 3, 1, 3);
+
+      book(_h["Fig5_Transverse_pt02"], 4, 1, 1);
+      book(_h["Fig5_Transverse_pt05"], 4, 1, 2);
+      //book(_h["Fig5_Transverse"], 4, 1, 3);
+
+      book(_h["Fig6_Transverse_pt02"], 5, 1, 1);
+      book(_h["Fig6_Transverse_pt05"], 5, 1, 2);
+      //book(_h["Fig6_Transverse"], 5, 1, 3);
+
     }
 
 

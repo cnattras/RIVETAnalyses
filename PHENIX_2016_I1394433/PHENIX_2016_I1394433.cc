@@ -25,14 +25,45 @@ namespace Rivet {
     void init() {
 
       declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
-      // Initialise and register projections
+    
+
+    // Initialise and register projections
 
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-/*      const FinalState fs(Cuts::abseta < 4.9);
+      const FinalState fs(Cuts::abseta < 4.9);
+      book(_h["hist_E_200"],7,1,3);
+      book(_h["hist_Ch_200"],8,1,3);
+      book(_h["hist_E_130"],9,1,3);
+      book(_h["hist_Ch_130"],10,1,3);
+      book(_h["hist_E_62.4"],11,1,3);
+      book(_h["hist_Ch_62.4"],12,1,3);
+      book(_h["hist_E_39"],13,1,3);
+      book(_h["hist_Ch_39"],14,1,3);
+      book(_h["hist_E_27"],15,1,3);
+      book(_h["hist_Ch_27"],16,1,3);
+      book(_h["hist_E_19.6"],17,1,3);
+      book(_h["hist_Ch_19.6"],18,1,3);
+      book(_h["hist_E_14.5"],19,1,3);
+      book(_h["hist_Ch_14.5"],20,1,3);
+      book(_h["hist_E_7.7"],21,1,3);
+      book(_h["hist_Ch_7.7"],22,1,3);
+      
+      book(_h["hist_E_200_Cu"],23,1,3);
+      book(_h["hist_Ch_200_Cu"],24,1,3);
+      book(_h["hist_E_62.4_Cu"],25,1,3);
+      book(_h["hist_Ch_62.4_Cu"],26,1,3);
+      book(_h["hist_E_200_Cu_Au"],27,1,3);
+      book(_h["hist_Ch_200_Cu_Au"],28,1,3);
+//      book(_h["hist_E_193_UU"],29,1,3);
+//      book(_h["hist_Ch_193_UU"],30,1,3);
+//      book(_h["hist_E_200_dAu"],31,1,3);
+//      book(_h["hist_Ch_200_dAu"],32,1,3);
+//      book(_h["hist_E_200_He_A"],33,1,3);
+//      book(_h["hist_Ch_200_He_A"],34,1,3);
 
-      // The final-state particles declared above are clustered using FastJet with
+/*      // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
       FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);

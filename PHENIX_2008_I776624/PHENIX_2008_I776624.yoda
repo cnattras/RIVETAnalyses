@@ -2,7 +2,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d01-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -1.333e-06, up: 1.333e-06}, sys: {dn: -8.191e-07, up: 8.191e-07}}, 1: {stat: {dn: -7.106e-07, up: 7.106e-07}, sys: {dn: -6.422e-07, up: 6.422e-07}}, 2: {stat: {dn: -4.707e-07, up: 4.707e-07}, sys: {dn: -3.741e-07, up: 3.741e-07}}, 3: {stat: {dn: -3.129e-07, up: 3.129e-07}, sys: {dn: -1.855e-07, up: 1.855e-07}}, 4: {stat: {dn: -1.334e-07, up: 1.334e-07}, sys: {dn: -9.302e-08, up: 9.302e-08}}, 5: {stat: {dn: -6.493e-08, up: 6.493e-08}, sys: {dn: -2.732e-08, up: 2.732e-08}}, 6: {stat: {dn: -3.279e-08, up: 3.239e-08}, sys: {dn: -7.479e-09, up: 7.479e-09}}, 7: {stat: {dn: -1.132e-08, up: 1.247e-08}, sys: {dn: -1.757e-09, up: 1.757e-09}}, 8: {stat: {dn: -1.48e-09, up: 3.066e-09}, sys: {dn: -2.056e-10, up: 2.056e-10}}, 9: {stat: {dn: -5.979e-10, up: 8.253e-10}, sys: {dn: -8.005e-11, up: 8.005e-11}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d01-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t1
+Title: YAA_pT_mid_020
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -23,7 +23,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d02-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -7.592e-07, up: 7.592e-07}, sys: {dn: -5.031e-07, up: 5.031e-07}}, 1: {stat: {dn: -3.937e-07, up: 3.937e-07}, sys: {dn: -3.632e-07, up: 3.632e-07}}, 2: {stat: {dn: -2.628e-07, up: 2.628e-07}, sys: {dn: -2.073e-07, up: 2.073e-07}}, 3: {stat: {dn: -1.97e-07, up: 1.97e-07}, sys: {dn: -1.311e-07, up: 1.311e-07}}, 4: {stat: {dn: -8.191e-08, up: 8.191e-08}, sys: {dn: -5.877e-08, up: 5.877e-08}}, 5: {stat: {dn: -4.349e-08, up: 4.294e-08}, sys: {dn: -1.685e-08, up: 1.685e-08}}, 6: {stat: {dn: -1.736e-08, up: 1.736e-08}, sys: {dn: -3.974e-09, up: 3.974e-09}}, 7: {stat: {dn: -6.834e-09, up: 7.969e-09}, sys: {dn: -9.457e-10, up: 9.457e-10}}, 8: {stat: {dn: -8.649e-10, up: 1.782e-09}, sys: {dn: -1.217e-10, up: 1.217e-10}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d02-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t2
+Title: YAA_pT_mid_2040
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -43,7 +43,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d03-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -4.563e-07, up: 4.563e-07}, sys: {dn: -2.3e-07, up: 2.3e-07}}, 1: {stat: {dn: -2.268e-07, up: 2.268e-07}, sys: {dn: -1.481e-07, up: 1.481e-07}}, 2: {stat: {dn: -1.571e-07, up: 1.571e-07}, sys: {dn: -9.192e-08, up: 9.192e-08}}, 3: {stat: {dn: -1.082e-07, up: 1.054e-07}, sys: {dn: -4.276e-08, up: 4.276e-08}}, 4: {stat: {dn: -4.764e-08, up: 4.764e-08}, sys: {dn: -2.563e-08, up: 2.563e-08}}, 5: {stat: {dn: -2.1e-08, up: 2.32e-08}, sys: {dn: -3.356e-09, up: 3.356e-09}}, 6: {stat: {dn: -1.249e-08, up: 1.327e-08}, sys: {dn: -2.261e-09, up: 2.261e-09}}, 7: {stat: {dn: -1.356e-09, up: 3.613e-09}, sys: {dn: -1.569e-10, up: 1.569e-10}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d03-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t3
+Title: YAA_pT_mid_4060
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -62,7 +62,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d04-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -2.182e-07, up: 2.182e-07}, sys: {dn: -8.683e-08, up: 8.683e-08}}, 1: {stat: {dn: -9.229e-08, up: 9.229e-08}, sys: {dn: -2.851e-08, up: 2.851e-08}}, 2: {stat: {dn: -5.249e-08, up: 5.249e-08}, sys: {dn: -1.593e-08, up: 1.593e-08}}, 3: {stat: {dn: -3.554e-08, up: 3.554e-08}, sys: {dn: -9.912e-09, up: 9.912e-09}}, 4: {stat: {dn: -1.183e-08, up: 1.217e-08}, sys: {dn: -2.556e-09, up: 2.556e-09}}, 5: {stat: {dn: -5.395e-09, up: 6.977e-09}, sys: {dn: -7.392e-10, up: 7.392e-10}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d04-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t4
+Title: YAA_pT_mid_6094
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -79,7 +79,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d05-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -8.006e-07, up: 8.006e-07}, sys: {dn: -4.48e-07, up: 4.48e-07}}, 1: {stat: {dn: -3.73e-07, up: 3.73e-07}, sys: {dn: -3.341e-07, up: 3.341e-07}}, 2: {stat: {dn: -2.52e-07, up: 2.52e-07}, sys: {dn: -1.879e-07, up: 1.879e-07}}, 3: {stat: {dn: -1.731e-07, up: 1.731e-07}, sys: {dn: -1.5e-07, up: 1.5e-07}}, 4: {stat: {dn: -1.172e-07, up: 1.172e-07}, sys: {dn: -8.408e-08, up: 8.408e-08}}, 5: {stat: {dn: -7.083e-08, up: 7.083e-08}, sys: {dn: -3.823e-08, up: 3.823e-08}}, 6: {stat: {dn: -2.124e-08, up: 2.124e-08}, sys: {dn: -1.33e-08, up: 1.33e-08}}, 7: {stat: {dn: -1.038e-08, up: 1.038e-08}, sys: {dn: -3.307e-09, up: 3.307e-09}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d05-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t5
+Title: YAA_pT_fwd_cent_1
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -98,7 +98,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d06-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -3.705e-07, up: 3.705e-07}, sys: {dn: -2.055e-07, up: 2.055e-07}}, 1: {stat: {dn: -1.74e-07, up: 1.74e-07}, sys: {dn: -1.42e-07, up: 1.42e-07}}, 2: {stat: {dn: -1.227e-07, up: 1.227e-07}, sys: {dn: -1.094e-07, up: 1.094e-07}}, 3: {stat: {dn: -8.486e-08, up: 8.486e-08}, sys: {dn: -7.264e-08, up: 7.264e-08}}, 4: {stat: {dn: -5.736e-08, up: 5.736e-08}, sys: {dn: -4.224e-08, up: 4.224e-08}}, 5: {stat: {dn: -3.906e-08, up: 3.906e-08}, sys: {dn: -2.171e-08, up: 2.171e-08}}, 6: {stat: {dn: -1.088e-08, up: 1.088e-08}, sys: {dn: -6.791e-09, up: 6.791e-09}}, 7: {stat: {dn: -4.362e-09, up: 4.362e-09}, sys: {dn: -1.179e-09, up: 1.179e-09}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d06-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t6
+Title: YAA_pT_fwd_cent_2
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -117,7 +117,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d07-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -1.981e-07, up: 1.981e-07}, sys: {dn: -1.03e-07, up: 1.03e-07}}, 1: {stat: {dn: -8.5e-08, up: 8.5e-08}, sys: {dn: -7.096e-08, up: 7.096e-08}}, 2: {stat: {dn: -6.481e-08, up: 6.481e-08}, sys: {dn: -4.559e-08, up: 4.559e-08}}, 3: {stat: {dn: -4.362e-08, up: 4.362e-08}, sys: {dn: -2.968e-08, up: 2.968e-08}}, 4: {stat: {dn: -2.543e-08, up: 2.543e-08}, sys: {dn: -1.534e-08, up: 1.534e-08}}, 5: {stat: {dn: -1.873e-08, up: 1.873e-08}, sys: {dn: -8.199e-09, up: 8.199e-09}}, 6: {stat: {dn: -5.592e-09, up: 5.592e-09}, sys: {dn: -3.187e-09, up: 3.187e-09}}, 7: {stat: {dn: -2.129e-09, up: 2.129e-09}, sys: {dn: -6.82e-10, up: 6.82e-10}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d07-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t7
+Title: YAA_pT_fwd_cent_3
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -136,7 +136,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d08-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -5.775e-08, up: 5.775e-08}, sys: {dn: -3.112e-08, up: 3.112e-08}}, 1: {stat: {dn: -2.994e-08, up: 2.994e-08}, sys: {dn: -1.991e-08, up: 1.991e-08}}, 2: {stat: {dn: -1.917e-08, up: 1.917e-08}, sys: {dn: -1.071e-08, up: 1.071e-08}}, 3: {stat: {dn: -1.311e-08, up: 1.311e-08}, sys: {dn: -7.433e-09, up: 7.433e-09}}, 4: {stat: {dn: -9.681e-09, up: 9.681e-09}, sys: {dn: -4.62e-09, up: 4.62e-09}}, 5: {stat: {dn: -4.377e-09, up: 4.377e-09}, sys: {dn: -1.556e-09, up: 1.556e-09}}, 6: {stat: {dn: -1.754e-09, up: 1.754e-09}, sys: {dn: -5.841e-10, up: 5.841e-10}}, 7: {stat: {dn: -1.038e-09, up: 1.038e-09}, sys: {dn: -2.989e-10, up: 2.989e-10}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d08-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t8
+Title: YAA_pT_fwd_cent_4
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -155,7 +155,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d09-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.2826, up: 0.2825}, sys: {dn: -0.1377, up: 0.1377}}, 1: {stat: {dn: -0.2706, up: 0.2705}, sys: {dn: -0.1318, up: 0.1318}}, 2: {stat: {dn: -0.3807, up: 0.3811}, sys: {dn: -0.1628, up: 0.1628}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d09-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t9
+Title: ptsq_npart_mid
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -169,7 +169,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d10-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.1604, up: 0.1604}, sys: {dn: -0.2482, up: 0.2482}}, 1: {stat: {dn: -0.1505, up: 0.1505}, sys: {dn: -0.2218, up: 0.2218}}, 2: {stat: {dn: -0.1765, up: 0.1765}, sys: {dn: -0.2766, up: 0.2766}}, 3: {stat: {dn: -0.2576, up: 0.2576}, sys: {dn: -0.2618, up: 0.2618}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d10-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t10
+Title: ptsq_npart_fwd
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -184,7 +184,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d11-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.057, up: 0.057}, sys: {dn: -0.082, up: 0.082}}, 1: {stat: {dn: -0.048, up: 0.048}, sys: {dn: -0.0686, up: 0.0686}}, 2: {stat: {dn: -0.0653, up: 0.0653}, sys: {dn: -0.067, up: 0.067}}, 3: {stat: {dn: -0.1351, up: 0.1351}, sys: {dn: -0.0797, up: 0.0797}}, 4: {stat: {dn: -0.3611, up: 0.3589}, sys: {dn: -0.1094, up: 0.1094}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d11-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t11
+Title: RAA_pT_020_mid
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -200,7 +200,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d12-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.0386, up: 0.0386}, sys: {dn: -0.0454, up: 0.0454}}, 1: {stat: {dn: -0.0341, up: 0.0341}, sys: {dn: -0.0453, up: 0.0453}}, 2: {stat: {dn: -0.0638, up: 0.0638}, sys: {dn: -0.0594, up: 0.0594}}, 3: {stat: {dn: -0.0769, up: 0.0769}, sys: {dn: -0.0519, up: 0.0519}}, 4: {stat: {dn: -0.1666, up: 0.1666}, sys: {dn: -0.0542, up: 0.0542}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d12-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t12
+Title: RAA_pT_020_fwd
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -216,7 +216,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d13-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.1211, up: 0.1211}, sys: {dn: -0.0671, up: 0.0671}}, 1: {stat: {dn: -0.0509, up: 0.0509}, sys: {dn: -0.063, up: 0.063}}, 2: {stat: {dn: -0.055, up: 0.055}, sys: {dn: -0.0648, up: 0.0648}}, 3: {stat: {dn: -0.0837, up: 0.0837}, sys: {dn: -0.0792, up: 0.0792}}, 4: {stat: {dn: -0.0267, up: 0.0267}, sys: {dn: -0.0716, up: 0.0716}}, 5: {stat: {dn: -0.0701, up: 0.0701}, sys: {dn: -0.0633, up: 0.0633}}, 6: {stat: {dn: -0.0423, up: 0.0423}, sys: {dn: -0.075, up: 0.075}}, 7: {stat: {dn: -0.0746, up: 0.0746}, sys: {dn: -0.0718, up: 0.0718}}, 8: {stat: {dn: -0.1037, up: 0.1037}, sys: {dn: -0.0601, up: 0.0601}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d13-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t13
+Title: RAA_y_020
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -236,7 +236,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d14-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.0355, up: 0.0355}, sys: {dn: -0.0667, up: 0.0667}}, 1: {stat: {dn: -0.0401, up: 0.0401}, sys: {dn: -0.0792, up: 0.0792}}, 2: {stat: {dn: -0.0498, up: 0.0498}, sys: {dn: -0.101, up: 0.101}}, 3: {stat: {dn: -0.0638, up: 0.0638}, sys: {dn: -0.1143, up: 0.1143}}, 4: {stat: {dn: -0.0812, up: 0.0812}, sys: {dn: -0.1202, up: 0.1202}}, 5: {stat: {dn: -0.1007, up: 0.1007}, sys: {dn: -0.1238, up: 0.1238}}, 6: {stat: {dn: -0.0849, up: 0.0849}, sys: {dn: -0.1048, up: 0.1048}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d14-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t14
+Title: RAA_npart_mid
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -254,7 +254,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2008_I776624/d15-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.0305, up: 0.0305}, sys: {dn: -0.0637, up: 0.0637}}, 1: {stat: {dn: -0.0333, up: 0.0333}, sys: {dn: -0.0621, up: 0.0621}}, 2: {stat: {dn: -0.037, up: 0.037}, sys: {dn: -0.0701, up: 0.0701}}, 3: {stat: {dn: -0.0428, up: 0.0428}, sys: {dn: -0.0856, up: 0.0856}}, 4: {stat: {dn: -0.0463, up: 0.0463}, sys: {dn: -0.0841, up: 0.0841}}, 5: {stat: {dn: -0.0608, up: 0.0608}, sys: {dn: -0.1076, up: 0.1076}}, 6: {stat: {dn: -0.079, up: 0.079}, sys: {dn: -0.1002, up: 0.1002}}, 7: {stat: {dn: -0.0707, up: 0.0707}, sys: {dn: -0.1053, up: 0.1053}}}
 IsRef: 1
 Path: /REF/PHENIX_2008_I776624/d15-x01-y01
-Title: doi:10.17182/hepdata.57327.v1/t15
+Title: RAA_npart_fwd
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
