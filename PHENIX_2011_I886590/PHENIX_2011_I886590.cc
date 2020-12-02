@@ -112,8 +112,8 @@ cout << "Made it into initialize" << endl;
 
 		if(p.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(p.pT()/GeV, 1.0);
 		if(p.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(p.pT()/GeV, 1.0);
-		//if(p.pid() == -2212) _h["xsec_pbar_200_1"]->fill(p.pT()/GeV, 1.0);
-		//if(p.pid() == -2212) _h["xsec_pbar_200_2"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(p.pT()/GeV, 1.0);
 
 		if(p.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(p.pT()/GeV, 1.0);
 		if(p.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(p.pT()/GeV, 1.0);
@@ -130,7 +130,7 @@ cout << "Made it into initialize" << endl;
                 if(p.pid() == -321) _h["xsec_kminus_624"]->fill(p.pT()/GeV, 1.0);
 
                 if(p.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(p.pT()/GeV, 1.0);
-                //if(p.pid() == -2212) _h["xsec_pbar_624_1"]->fill(p.pT()/GeV, 1.0);
+                if(p.pid() == -2212) _h["xsec_pbar_noFD_624_1"]->fill(p.pT()/GeV, 1.0);
 
                 if(p.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(p.pT()/GeV, 1.0);
                 if(p.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(p.pT()/GeV, 1.0);
