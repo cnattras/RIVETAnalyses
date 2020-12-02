@@ -12,12 +12,12 @@ References:
  - 'Phys.Rev.C 79 (2009) 034909'
  - 'arXiv:0808.2041'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
+#Beams: [d, Au,], [Au, Au]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=DAU200,AUAU62.AUAU130
+ - beam=DAU200,AUAU62,AUAU130
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX

@@ -54,14 +54,17 @@ namespace Rivet {
       //declare(MissingMomentum(fs), "MET");
 
       beamOpt = getOption<string>("beam", "NONE");
+      if (beamOpt == "DAU200") collSys = dAu200;
+      if (beamOpt == "AUAU62") collSys = AuAu62;
+      if (beamOpt == "AUAU130") collSys = AuAu130;
 
-      string refname = mkAxisCode(1, 1, 1);
-      const Scatter2D& refdata = refData(refname);
-      book(_h["dAu"], refname + "_dAu", refdata);
-      book(_h["AuAu"], refname + "_AuAu", refdata);
+      //string refname = mkAxisCode(1, 1, 1);
+      //const Scatter2D& refdata = refData(refname);
+      //book(_h["dAu"], refname + "_dAu", refdata);
+      //book(_h["AuAu"], refname + "_AuAu", refdata);
 
-      book(_c["dAu"], "sow_dAu");
-      book(_c["AuAu"], "sow_AuAu");
+      //book(_c["dAu"], "sow_dAu");
+      //book(_c["AuAu"], "sow_AuAu");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -447,9 +450,9 @@ namespace Rivet {
       //Sorting events by energy
       //Fig 18 dAu spectra @ 200 Gev
       //Sorting particles by type
-      if (beam == "DAU200")
+      if (collSys == dAu200)
       {
-        _c["sow_dAu"]->fill();
+      //_c["sow_dAu"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -492,9 +495,9 @@ namespace Rivet {
       }
 
       //Figure 19 AuAu @ 62.4 GeV
-      if (beam == "AUAU62")
+      if (collSys == AuAu62)
       {
-        _c["sow_AuAu"]->fill();
+        //_c["sow_AuAu"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -567,9 +570,9 @@ namespace Rivet {
       }
 
       //Figure 20 AuAu @ 130 GeV
-      if (beam == "AUAU130")
+      if (collSys == AuAu130)
       {
-        _c["sow_AuAu"]->fill();
+        //_c["sow_AuAu"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
@@ -702,7 +705,7 @@ namespace Rivet {
       normalize(_h["Figure_20_15"]);
       normalize(_h["Figure_20_16"]);*/
 
-      scale(_h["Figure_18_kaon_1"], 4.0);
+      /*scale(_h["Figure_18_kaon_1"], 4.0);
       scale(_h["Figure_18_kaon_2"], 2.0);
       scale(_h["Figure_18_kaon_3"], 1.0);
       scale(_h["Figure_18_kaon_4"], 0.5);
@@ -725,7 +728,7 @@ namespace Rivet {
       scale(_h["Figure_18_proton_5"], 4.0);
       scale(_h["Figure_18_proton_6"], 2.0);
       scale(_h["Figure_18_proton_7"], 1.0);
-      scale(_h["Figure_18_proton_8"], 0.5);
+      scale(_h["Figure_18_proton_8"], 0.5);*/
 
     }
 
@@ -739,7 +742,9 @@ namespace Rivet {
     map<string, CounterPtr> _c;
     map<string, Histo2DPtr> _h2D;
     string beamOpt = "";
-    string beam = "";
+    //string beam = "";
+    enum CollisionSystem {dAu200, AuAu62, AuAu130};
+    CollisionSystem collSys;
     //@}
 
 
