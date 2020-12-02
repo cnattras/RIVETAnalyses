@@ -622,7 +622,8 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Histo2DPtr> _h2D;
-    //string beamOpt = "";
+    string beamOpt = "";
+    string beam = "";
     //@}
 
 
