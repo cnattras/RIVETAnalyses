@@ -24,11 +24,12 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-
+cout << "Made it into initialize" << endl;
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      const FinalState fs(Cuts::abseta < 4.9 && Cuts::pT > 0.15*GeV);
+      declare(fs, "fs");
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
@@ -59,12 +60,15 @@ namespace Rivet {
       // Histos from HEPdata at 200GeV
       book(_h["xsec_piplus_200"], 1, 1, 1);
       book(_h["xsec_piminus_200"], 1, 1, 2);
+
       book(_h["xsec_kplus_200"], 2, 1, 1);
       book(_h["xsec_kminus_200"], 2, 1, 2);
+
       book(_h["xsec_p_noFD_200_1"], 3, 1, 1);
       book(_h["xsec_p_noFD_200_2"], 9, 1, 1);
       book(_h["xsec_pbar_noFD_200_1"], 3, 1, 2);
       book(_h["xsec_pbar_noFD_200_2"], 9, 1, 2);
+
       book(_h["xsec_p_withFD_200_1"], 4, 1, 1);
       book(_h["xsec_p_withFD_200_2"], 10, 1, 1);
       book(_h["xsec_pbar_withFD_200_1"], 4, 1, 2);
@@ -73,22 +77,67 @@ namespace Rivet {
       // Histos from HEPdata at 62.4GeV
       book(_h["xsec_piplus_624"], 5, 1, 1);
       book(_h["xsec_piminus_624"], 5, 1, 2);
+
       book(_h["xsec_kplus_624"], 6, 1, 1);
       book(_h["xsec_kminus_624"], 6, 1, 2);
+
       book(_h["xsec_p_noFD_624_1"], 7, 1, 1);
-      //book(_h["xsec_p_noFD_624_2"], 11, 1, 1);
       book(_h["xsec_pbar_noFD_624_1"], 7, 1, 2);
-      //book(_h["xsec_pbar_noFD_624_2"], 11, 1, 2);
+
       book(_h["xsec_p_withFD_624_1"], 8, 1, 1);
-      //book(_h["xsec_p_withFD_624_2"], 12, 1, 1);
       book(_h["xsec_pbar_withFD_624_1"], 8, 1, 2);
-      //book(_h["xsec_pbar_withFD_624_2"], 12, 1, 2);
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      cout << "Made it to analyze" << endl;
+
+      Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+      for( const Particle& p : fsParticles)
+      {
+
+		cout << "Made it into particle loop" << endl;
+		
+		// Histos 200GeV
+      		if(p.pid() == 211) _h["xsec_piplus_200"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == -211) _h["xsec_piminus_200"]->fill(p.pT()/GeV, 1.0);
+
+		if(p.pid() == 321) _h["xsec_kplus_200"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == -321) _h["xsec_kminus_200"]->fill(p.pT()/GeV, 1.0);
+
+                cout << "Made it past pions and kaons" << endl;
+
+		if(p.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(p.pT()/GeV, 1.0);
+		//if(p.pid() == -2212) _h["xsec_pbar_200_1"]->fill(p.pT()/GeV, 1.0);
+		//if(p.pid() == -2212) _h["xsec_pbar_200_2"]->fill(p.pT()/GeV, 1.0);
+
+		if(p.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(p.pT()/GeV, 1.0);
+		if(p.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(p.pT()/GeV, 1.0);
+
+                cout << "Made it past first four histos" << endl;
+
+		// Histos 62.4GeV
+                if(p.pid() == 211) _h["xsec_piplus_624"]->fill(p.pT()/GeV, 1.0);
+                if(p.pid() == -211) _h["xsec_piminus_624"]->fill(p.pT()/GeV, 1.0);
+
+                if(p.pid() == 321) _h["xsec_kplus_624"]->fill(p.pT()/GeV, 1.0);
+                if(p.pid() == -321) _h["xsec_kminus_624"]->fill(p.pT()/GeV, 1.0);
+
+                if(p.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(p.pT()/GeV, 1.0);
+                //if(p.pid() == -2212) _h["xsec_pbar_624_1"]->fill(p.pT()/GeV, 1.0);
+
+                if(p.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(p.pT()/GeV, 1.0);
+                if(p.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(p.pT()/GeV, 1.0);
+
+                cout << "Made it past all histos" << endl;
+
+      }
 
       // Retrieve dressed leptons, sorted by pT
       //vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
@@ -119,6 +168,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
+                cout << "Made it into finalize" << endl;
+
       //normalize(_h["XXXX"]); // normalize to unity
       //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
@@ -127,7 +178,6 @@ namespace Rivet {
 
     //@}
 
-
     /// @name Histograms
     //@{
     map<string, Histo1DPtr> _h;
@@ -135,7 +185,6 @@ namespace Rivet {
     map<string, CounterPtr> _c;
     map<string, Scatter2DPtr> _s;
     //@}
-
 
   };
 
