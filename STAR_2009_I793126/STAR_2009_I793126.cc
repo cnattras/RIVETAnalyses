@@ -34,37 +34,15 @@ namespace Rivet {
       const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(fs, "fs");
 
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      //FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      //declare(jetfs, "jets");
-
-      // FinalState of prompt photons and bare muons and electrons in the event
-      //PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      //PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      //Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      //DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      //declare(dressed_leps, "leptons");
-
-      // Missing momentum
-      //declare(MissingMomentum(fs), "MET");
-
       beamOpt = getOption<string>("beam", "NONE");
       if (beamOpt == "DAU200") collSys = dAu200;
       if (beamOpt == "AUAU62") collSys = AuAu62;
       if (beamOpt == "AUAU130") collSys = AuAu130;
 
-      //string refname = mkAxisCode(1, 1, 1);
-      //const Scatter2D& refdata = refData(refname);
-      //book(_h["dAu"], refname + "_dAu", refdata);
-      //book(_h["AuAu"], refname + "_AuAu", refdata);
-
-      //book(_c["dAu"], "sow_dAu");
-      //book(_c["AuAu"], "sow_AuAu");
+      //Event counters
+      book(_c["dAu200"], "sow_dAu200");
+      book(_c["AuAu62"], "sow_AuAu62");
+      book(_c["AuAu130"], "sow_AuAu130");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -429,7 +407,7 @@ namespace Rivet {
       //Sorting particles by type
       if (collSys == dAu200)
       {
-      //_c["sow_dAu"]->fill();
+      _c["sow_dAu200"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -474,7 +452,7 @@ namespace Rivet {
       //Figure 19 AuAu @ 62.4 GeV
       if (collSys == AuAu62)
       {
-        //_c["sow_AuAu"]->fill();
+        _c["sow_AuAu62"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -549,7 +527,7 @@ namespace Rivet {
       //Figure 20 AuAu @ 130 GeV
       if (collSys == AuAu130)
       {
-        //_c["sow_AuAu"]->fill();
+        _c["sow_AuAu130"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
@@ -589,7 +567,32 @@ namespace Rivet {
 
       if (collSys == dAu200)
       {
-        normalize(_h["Figure_18_kaon_1"]);
+        _h["Figure_18_kaon_1"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_2"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_3"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_4"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_5"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_6"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_7"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_kaon_8"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_1"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_2"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_3"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_4"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_5"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_6"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_7"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_pion_8"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_1"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_2"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_3"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_4"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_5"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_6"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_7"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_8"]->scaleW(1.0/_c["dAu200"]->sumW());
+
+        /*normalize(_h["Figure_18_kaon_1"]);
         normalize(_h["Figure_18_kaon_2"]);
         normalize(_h["Figure_18_kaon_3"]);
         normalize(_h["Figure_18_kaon_4"]);
@@ -612,7 +615,7 @@ namespace Rivet {
         normalize(_h["Figure_18_proton_5"]);
         normalize(_h["Figure_18_proton_6"]);
         normalize(_h["Figure_18_proton_7"]);
-        normalize(_h["Figure_18_proton_8"]);
+        normalize(_h["Figure_18_proton_8"]);*/
 
         /*scale(_h["Figure_18_kaon_1"], 4.0);
         scale(_h["Figure_18_kaon_2"], 2.0);
@@ -642,7 +645,7 @@ namespace Rivet {
 
       if (collSys == AuAu62)
       {
-        normalize(_h["Figure_19_kaon_1"]);
+        /*normalize(_h["Figure_19_kaon_1"]);
         normalize(_h["Figure_19_kaon_2"]);
         normalize(_h["Figure_19_kaon_3"]);
         normalize(_h["Figure_19_kaon_4"]);
@@ -695,12 +698,12 @@ namespace Rivet {
         normalize(_h["Figure_19_proton_15"]);
         normalize(_h["Figure_19_proton_16"]);
         normalize(_h["Figure_19_proton_17"]);
-        normalize(_h["Figure_19_proton_18"]);
+        normalize(_h["Figure_19_proton_18"]);*/
       }
 
       if (collSys == AuAu130)
       {
-        normalize(_h["Figure_20_1"]);
+        /*normalize(_h["Figure_20_1"]);
         normalize(_h["Figure_20_2"]);
         normalize(_h["Figure_20_3"]);
         normalize(_h["Figure_20_4"]);
@@ -715,7 +718,7 @@ namespace Rivet {
         normalize(_h["Figure_20_13"]);
         normalize(_h["Figure_20_14"]);
         normalize(_h["Figure_20_15"]);
-        normalize(_h["Figure_20_16"]);
+        normalize(_h["Figure_20_16"]);*/
       }
 
     }
