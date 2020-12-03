@@ -202,6 +202,7 @@ namespace Rivet {
         for(int icen = 0; icen<NCEN; icen++){ 
           for(int ihar = 0; ihar<NHAR; ihar++){
             if(icen==5 && ihar==2) continue; // No $v_4$ measurment in 50-60%
+            if(_p_epcor_cen[name_epcor[ihar]]-> bin(icen).sumWY() == 0) continue;
             double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).mean();
             double chi_sub = chi(sqrt(epcor));
             double res = resEventPlane(sqrt(2.0)*chi_sub);
@@ -213,6 +214,7 @@ namespace Rivet {
           for(int ihar = 0; ihar<NHAR; ihar++){
             for(int icen = 0; icen<NCEN; icen++){ 
               if(icen==5 && ihar==2) continue; // No $v_4$ measurment in 50-60%
+              if(_p_epcor_cen[name_epcor[ihar]]-> bin(icen).sumWY() == 0) continue;
               double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).mean();
               double chi_sub = chi(sqrt(epcor));
               double res = resEventPlane(sqrt(2.0)*chi_sub);
