@@ -567,30 +567,30 @@ namespace Rivet {
 
       if (collSys == dAu200)
       {
-        _h["Figure_18_kaon_1"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_kaon_2"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_kaon_3"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-	_h["Figure_18_kaon_4"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-	_h["Figure_18_kaon_5"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-	_h["Figure_18_kaon_6"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_kaon_7"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-	_h["Figure_18_kaon_8"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_1"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_2"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_3"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_4"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_5"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_6"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_7"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_pion_8"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_1"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_2"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_3"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_4"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_5"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_6"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_7"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
-        _h["Figure_18_proton_8"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_kaon_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_kaon_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_kaon_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_kaon_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
 
         /*normalize(_h["Figure_18_kaon_1"]);
         normalize(_h["Figure_18_kaon_2"]);
@@ -645,6 +645,61 @@ namespace Rivet {
 
       if (collSys == AuAu62)
       {
+        _h["Figure_19_kaon_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+
         /*normalize(_h["Figure_19_kaon_1"]);
         normalize(_h["Figure_19_kaon_2"]);
         normalize(_h["Figure_19_kaon_3"]);
@@ -703,6 +758,22 @@ namespace Rivet {
 
       if (collSys == AuAu130)
       {
+        _h["Figure_20_1"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_2"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_3"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_4"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_5"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_6"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_7"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_8"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_9"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_10"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_12"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_13"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_14"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_15"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_16"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        
         /*normalize(_h["Figure_20_1"]);
         normalize(_h["Figure_20_2"]);
         normalize(_h["Figure_20_3"]);
