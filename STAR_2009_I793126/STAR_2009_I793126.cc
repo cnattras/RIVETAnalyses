@@ -407,7 +407,7 @@ namespace Rivet {
       //Sorting particles by type
       if (collSys == dAu200)
       {
-      _c["sow_dAu200"]->fill();
+	_c["sow_dAu200"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
@@ -567,30 +567,30 @@ namespace Rivet {
 
       if (collSys == dAu200)
       {
-        /*_h["Figure_18_kaon_1"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_2"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_3"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_4"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_5"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_6"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_7"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_kaon_8"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_1"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_2"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_3"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_4"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_5"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_6"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_7"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_pion_8"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_1"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_2"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_3"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_4"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_5"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_6"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_7"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_8"]->scaleW(1.0/_c["dAu200"]->sumW());*/
+        _h["Figure_18_kaon_1"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_kaon_2"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_kaon_3"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+	_h["Figure_18_kaon_4"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+	_h["Figure_18_kaon_5"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+	_h["Figure_18_kaon_6"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_kaon_7"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+	_h["Figure_18_kaon_8"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_1"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_2"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_3"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_4"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_5"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_6"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_7"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_8"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_1"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_2"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_3"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_4"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_5"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_6"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_7"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_8"]->scaleW(1.0/(_c["sow_dAu200"]->sumW()));
 
         /*normalize(_h["Figure_18_kaon_1"]);
         normalize(_h["Figure_18_kaon_2"]);
