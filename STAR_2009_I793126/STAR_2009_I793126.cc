@@ -40,9 +40,9 @@ namespace Rivet {
       if (beamOpt == "AUAU130") collSys = AuAu130;
 
       //Event counters
-      book(_c["dAu200"], "sow_dAu200");
-      book(_c["AuAu62"], "sow_AuAu62");
-      book(_c["AuAu130"], "sow_AuAu130");
+      book(_c["sow_dAu200"], "sow_dAu200");
+      book(_c["sow_AuAu62"], "sow_AuAu62");
+      book(_c["sow_AuAu130"], "sow_AuAu130");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -567,7 +567,7 @@ namespace Rivet {
 
       if (collSys == dAu200)
       {
-        _h["Figure_18_kaon_1"]->scaleW(1.0/_c["dAu200"]->sumW());
+        /*_h["Figure_18_kaon_1"]->scaleW(1.0/_c["dAu200"]->sumW());
         _h["Figure_18_kaon_2"]->scaleW(1.0/_c["dAu200"]->sumW());
         _h["Figure_18_kaon_3"]->scaleW(1.0/_c["dAu200"]->sumW());
         _h["Figure_18_kaon_4"]->scaleW(1.0/_c["dAu200"]->sumW());
@@ -590,7 +590,7 @@ namespace Rivet {
         _h["Figure_18_proton_5"]->scaleW(1.0/_c["dAu200"]->sumW());
         _h["Figure_18_proton_6"]->scaleW(1.0/_c["dAu200"]->sumW());
         _h["Figure_18_proton_7"]->scaleW(1.0/_c["dAu200"]->sumW());
-        _h["Figure_18_proton_8"]->scaleW(1.0/_c["dAu200"]->sumW());
+        _h["Figure_18_proton_8"]->scaleW(1.0/_c["dAu200"]->sumW());*/
 
         /*normalize(_h["Figure_18_kaon_1"]);
         normalize(_h["Figure_18_kaon_2"]);
