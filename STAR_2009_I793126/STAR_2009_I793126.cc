@@ -31,7 +31,8 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
+      //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
+      const FinalState fs(Cuts::absrap < 0.5 && Cuts::pT > 0.2*GeV && Cuts::abscharge > 0);
       declare(fs, "fs");
 
       beamOpt = getOption<string>("beam", "NONE");
