@@ -79,13 +79,8 @@ namespace Rivet {
       */
         
      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.35 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
-        
-
     }
 
-
-   //event-by-event
-     
 
     void analyze(const Event& event)
     {
@@ -93,60 +88,70 @@ namespace Rivet {
         double NN = 0.;
         string thisbeam = "Empty";
         
+        //track beams
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+        {
+          thisbeam = "AuAu";
+          NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) thisbeam += "200GeV";
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) thisbeam += "62GeV";
+          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) thisbeam += "39GeV";
+        }
+        
+        int nch200counter = 0; int nch62counter = 0;
+        int nch39counter = 0; double sumET200 = 0.;
+        double sumET62 = 0.; double sumET39 = 0.;
+        
+        //get charged particles
         Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+        
+        //get centrality info
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
         const double c = cent();
-
-
-        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-            {
-                thisbeam = "AuAu";
-                NN = 197.;
-                if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) thisbeam += "200GeV";
-                if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) thisbeam += "62GeV";
-                if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) thisbeam += "39GeV";
-            }
+        if (c > 60) vetoEvent;
         
-        std::vector < std::pair <int, double> > thisNch;
-        int counter = 0;
+        //loop over particles to get total charged particles & Et
         for(const Particle& p : chargedParticles)
         {
             const int id = abs(p.pid());
-            if(id==11 || id==13) continue;
-            counter ++;
-            thisNch.push_back (std::make_pair (counter, p.Et()/GeV));
-        }
-        
-        double sumET200 = 0.;
-        double sumET62 = 0.;
-        double sumET39 = 0.;
+            if(id==11 || id==13) continue; //exclude electron & muon
             
-        if (c > 60) vetoEvent;
-        for (unsigned int nchsize = 0; nchsize < thisNch.size(); nchsize ++)
-        {
             if(thisbeam == "AuAu200GeV")
             {
-                _hist_Ch_200->fill(c,(thisNch[nchsize].first)/0.7);
-                sumET200 += thisNch[nchsize].second;
+                nch200counter ++;
+                sumET200 += p.Et()/GeV;
             }
-           else if(thisbeam == "AuAu62GeV")
+            else if(thisbeam == "AuAu62GeV")
             {
-                _hist_Ch_62->fill(c,(thisNch[nchsize].first)/0.7);
-                sumET62 += thisNch[nchsize].second;
+                nch62counter ++;
+                sumET62 += p.Et()/GeV;
             }
             else if(thisbeam == "AuAu39GeV")
             {
-                _hist_Ch_39->fill(c,(thisNch[nchsize].first)/0.7);
-                sumET39 += thisNch[nchsize].second;
+                nch39counter ++;
+                sumET39 += p.Et()/GeV;
             }
         }
-
-        if(thisbeam == "AuAu200GeV") _hist_E_200->fill(c,sumET200/0.7);
-        if(thisbeam == "AuAu62GeV")_hist_E_62->fill(c,sumET62/0.7);
-        if(thisbeam == "AuAu39GeV")_hist_E_39->fill(c,sumET39/0.7);
-
-
-      
+        
+        
+        //fill hists
+        if(thisbeam == "AuAu200GeV")
+        {
+            _hist_Ch_200->fill(c,nch200counter/0.7);
+            _hist_E_200->fill(c,sumET200/0.7);
+        }
+        else if(thisbeam == "AuAu62GeV")
+        {
+            _hist_Ch_62->fill(c,nch62counter/0.7);
+            _hist_E_62->fill(c,sumET62/0.7);
+        }
+        else if(thisbeam == "AuAu39GeV")
+        {
+            _hist_Ch_39->fill(c,nch39counter/0.7);
+            _hist_E_39->fill(c,sumET39/0.7);
+        }
+        
+ 
     }
 
     void finalize()

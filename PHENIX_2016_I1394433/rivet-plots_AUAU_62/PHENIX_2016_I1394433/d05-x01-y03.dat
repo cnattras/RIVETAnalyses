@@ -4,8 +4,8 @@ LogY=1
 Title=Transverse energy results for 62.4 GeV Au+Au collisions
 XLabel=centrality
 YLabel=$dE_{T}/d_{\eta}$
-DrawOnly=/PHENIX_2016_I1394433/d05-x01-y03 //Users/ejiro/RIVETAnalyses/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
-LegendOnly=/PHENIX_2016_I1394433/d05-x01-y03 //Users/ejiro/RIVETAnalyses/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
+DrawOnly=/PHENIX_2016_I1394433/d05-x01-y03 //Users/ejiro/RIVETAnalyses_0/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
+LegendOnly=/PHENIX_2016_I1394433/d05-x01-y03 //Users/ejiro/RIVETAnalyses_0/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
 RatioPlot=1
 RatioPlotReference=/PHENIX_2016_I1394433/d05-x01-y03
 # END PLOT
@@ -33,10 +33,10 @@ Title=Data
 # END HISTO1D
 
 
-# BEGIN HISTO1D //Users/ejiro/RIVETAnalyses/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
+# BEGIN HISTO1D //Users/ejiro/RIVETAnalyses_0/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
 LineColor=red
 LineStyle=solid
-Path=//Users/ejiro/RIVETAnalyses/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
+Path=//Users/ejiro/RIVETAnalyses_0/PHENIX_2016_I1394433/Rivet_AUAU_62.yoda/PHENIX_2016_I1394433:cent=GEN/d05-x01-y03
 Title=Rivet_AUAU_62
 # xlow	 xhigh	 val	 errminus	 errplus
 0.000000e+00	5.000000e+00	3.021630e+02	9.759394e+00	9.759394e+00
