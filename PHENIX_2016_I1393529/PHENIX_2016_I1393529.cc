@@ -26,7 +26,7 @@ namespace Rivet {
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-      const FinalState fs(Cuts::abseta < 0.35 && Cuts::pT > 1.5*Gev && Cuts::pT < 5.0*Gev);
+      const FinalState fs(Cuts::abseta < 0.35 && Cuts::pT > 0.0*GeV && Cuts::pT < 20.0*GeV);
       declare(fs, "fs");
 
       book(_h["InvYield_charm"], 1, 1, 1);
@@ -45,8 +45,8 @@ namespace Rivet {
 
       for(const Particle& p : fsParticles) 
       {
-         if(p.fromCharm) _h["InvYield_charm"]->fill(p.pT()/GeV);
-         if(p.fromBottom) _h["InvYield_bottom"]->fill(p.pT()/GeV);
+         if(p.fromCharm()) _h["InvYield_charm"]->fill(p.pT()/GeV);
+         if(p.fromBottom()) _h["InvYield_bottom"]->fill(p.pT()/GeV);
       }
 
 
