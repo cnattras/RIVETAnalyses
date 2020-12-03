@@ -193,8 +193,8 @@ namespace Rivet {
 		
 		
 		double scale = 1./(2*M_PI);
-		//_h["Jpsi"]->scaleW(scale/_c["eventW"]->sumW());
-		_h["Jpsi"]->scaleW(scale);
+		_h["Jpsi"]->scaleW(scale/_c["eventW"]->sumW());
+		//_h["Jpsi"]->scaleW(scale);
 		
 		
     }
