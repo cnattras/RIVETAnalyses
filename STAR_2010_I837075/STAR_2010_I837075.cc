@@ -21,6 +21,9 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+        w2 = 0;
+        w_all = 0;
+
         declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
         // ----------------------------------------------------------
@@ -57,9 +60,14 @@ namespace Rivet {
 
 		book ( _c["pp"],"Nev_pp" );
 		book ( _c["CuCu"],"Nev_CuCu" );
+		 _c_dummy["pp"] = 0.;
+		 _c_dummy["CuCu"] = 0.;
 
         for (int i{0};i<4;++i) {
+            event_ctr[i] = 0.;
+
             book( _c4[i], "c"+cent[i]);
+            _c4_dummy[i] = 0.;
 
             // FIG 1a : pi+ and pi- spectra
             book( _h4["PIminus"][i], 1, 1, i_minus[i] );
@@ -123,6 +131,12 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+        /* cout << " event: " << w_all++ << endl; */
+        if (debug > 2) {
+            cout << " weights: ";
+            for (auto& w : event.weights()) cout << " " << w;
+            cout << endl;
+        }
 
 		int pid_p  = 2212;
 		int NN_Cu  = 63;
@@ -178,8 +192,10 @@ namespace Rivet {
         const Particles& pbar    = apply<ALICE::PrimaryParticles>(event,"pbarFS").particles();
 
 		if (isCu) {
-			_c["CuCu"]->fill();
-			_c4[k]->fill();
+			_c_dummy["CuCu"] += 1.;
+            _c4_dummy[k] += 1.;
+            /* if (debug > 0 && k==2) */ 
+                /* cout << " counter: _c4["<<k<<"]->sumW() : " << _c4[k]->sumW() << "  event: " << w2++ << endl; */
 
 			// fill in the spectra
 			for (auto& p : piminus) _h4["PIminus"][k]->fill(p.pT()/GeV);
@@ -222,7 +238,7 @@ namespace Rivet {
 				if (pT < 4. ) _h["P_Cent_34"]->fill(cent);
 			}
 		} else { // is pp collision
-			_c["pp"]->fill();
+			_c_dummy["pp"] += 1.;
 			// fill in values for the RAA
 			for (auto& p : piminus) {
 				const double pT {p.pT()/GeV};
@@ -256,8 +272,8 @@ namespace Rivet {
     void finalize() {
         if (debug > 1) cout << " ZEBRA 2" << endl;
 
-        bool has_CuCu { _c["CuCu"]->sumW() != 0 };
-        bool has_pp   { _c["pp"]  ->sumW() != 0 };
+        bool has_CuCu { _c_dummy["CuCu"] != 0 }; //_c["CuCu"]->sumW() != 0 };
+        bool has_pp   { _c_dummy["pp"] != 0 }; //_c["pp"]  ->sumW() != 0 };
 
         if (debug > 0) {
             cout << " has_CuCu: " << has_CuCu << endl;
@@ -265,10 +281,15 @@ namespace Rivet {
             
             cout << " has: " << _c["pp"]->sumW() << " pp events. " << endl;
             array<string, 4> i_str{"0_10","10_20","20_40","40_60"};
-            for (int i{0};i<4;++i) {
-                cout << " has: " << _c4[i]->sumW() 
-                     << " Cu+Cu "<<i_str[i]<<" events." << endl;
+            if (debug > 2) {
+                for (int i{0};i<4;++i) {
+                    cout << " has: " << _c4[i]->sumW() 
+                         << " Cu+Cu "<<i_str[i]<<" events." << endl;
+                }
             }
+            /* if (i==2) { */
+                /* cout << " w2 weighting: " << weight << endl; */
+            /* } */
         }
 
         if (has_pp) {
@@ -278,17 +299,19 @@ namespace Rivet {
         if (has_CuCu) {
             array<string, 4> i_str{"0_10","10_20","20_40","40_60"};
             for (int i{0}; i<4; ++i) {
-                if (_c4[i]->sumW() == 0) {
+                //FIXME
+                /* if (_c4[i]->sumW() == 0) { */
+                if (_c4_dummy[i] == 0.) {
                     cout << " No events for centrality class " << i_str[0] << endl;
                     continue;
                 }
                 // FIG 1a : pi+ and pi- spectra
-                _h4["PIminus"][i]->scaleW(1./_c4[i]->sumW());		
-                _h4["PIplus" ][i]->scaleW(1./_c4[i]->sumW());		
+                _h4["PIminus"][i]->scaleW(1./_c4_dummy[i]);		
+                _h4["PIplus" ][i]->scaleW(1./_c4_dummy[i]);		
 
                 // FIG 1b : p and pbar spectra
-                _h4["P"      ][i]->scaleW(1./_c4[i]->sumW());		
-                _h4["PBAR"   ][i]->scaleW(1./_c4[i]->sumW());		
+                _h4["P"      ][i]->scaleW(1./_c4_dummy[i]);		
+                _h4["PBAR"   ][i]->scaleW(1./_c4_dummy[i]);		
 
                 // FIG 2a : ratio pi- to pi+
                 divide (_h4["PIminus"][i], _h4["PIplus"][i], _s4["PIminusOverPIplus"][i]);
@@ -298,7 +321,7 @@ namespace Rivet {
 
                 // FIG 3a : Pion Raa(pT)
                 if (has_pp) {
-                    _h4["pion_pT_CuCu"][i]->scaleW(1./_c4[i]   ->sumW());
+                    _h4["pion_pT_CuCu"][i]->scaleW(1./_c4_dummy[i]);
                     divide(_h4["pion_pT_CuCu"][i], _h["pion_pT_pp"], _s4["Raa_pion_pT"][i]);
                     _s4["Raa_pion_pT"][i]->scaleY(1./Npart[i]);
                 }
@@ -319,7 +342,7 @@ namespace Rivet {
                 // FIG 4b -- no data for this figure
 
                 // FIG 5a : p+p over pi+pi in 3-6 GeV range
-                _h4["PI_3_to_6"][i]->scaleW(1./_c4[i]->sumW());
+                _h4["PI_3_to_6"][i]->scaleW(1./_c4_dummy[i]);
                 *_s4["ratio_PtoPI"][i] = YODA::divide( PandPBAR, *_h4["PI_3_to_6"][i]);
 
                 // FIG 5b (outside of centrality loop)
@@ -342,17 +365,23 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> _c; // Counters: number of p+p event, Cu+Cu events
+    map<string, double> _c_dummy; // Counters: number of p+p event, Cu+Cu events
 
 	array<double, 4> Npart{ 99., 74.6, 45.9, 21.5 };
 
     // There are a set of four indentical measurements for four centralities
     map<string, array<Histo1DPtr,4>> _h4; // Histograms at 4 bins of Cu+Cu centralities
     array<CounterPtr,4>              _c4; // Counts of 4 bins of Cu+Cu centralities
+    array<double,4>              _c4_dummy; // Counts of 4 bins of Cu+Cu centralities
+    array<double,4> event_ctr;
 
     map<string, array<Scatter2DPtr,4>> _s4; // Scatterplots of divisions at 4 bins of Cu+Cu centralities
     map<string, Scatter2DPtr> _s;           // Ratio plots for non-ratio events
 
     int debug { 1 };
+
+    int w2;
+    int w_all;
 
   };
 
