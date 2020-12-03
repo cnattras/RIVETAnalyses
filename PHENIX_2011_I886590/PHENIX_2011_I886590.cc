@@ -33,6 +33,10 @@ namespace Rivet {
       const FinalState fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
       declare(fsP, "fsP");
 
+      beamOpt = getOption<string>("beam", "NONE");
+      if (beamOpt == "pp200") collsys = pp200;
+      if (beamOpt == "pp62") collsys = pp62;
+
       // Book histograms
       // Histos from HEPdata at 200GeV
       book(_h["xsec_piplus_200"], 1, 1, 1);
@@ -64,6 +68,11 @@ namespace Rivet {
       book(_h["xsec_p_withFD_624_1"], 8, 1, 1);
       book(_h["xsec_pbar_withFD_624_1"], 8, 1, 2);
 
+      //book(_Nevt_after_cuts,"Nevt_after_cuts");
+      //book(sow, "sow");
+      book(_c["sow_pp200"], "sow_pp200");
+      book(_c["sow_pp62"], "sow_pp62");
+
     }
 
 
@@ -74,31 +83,49 @@ namespace Rivet {
       Particles fsKParticles = applyProjection<FinalState>(event,"fsK").particles();
       Particles fsPParticles = applyProjection<FinalState>(event,"fsP").particles();
 
+      //_Nevt_after_cuts->fill();
+      //sow->fill();
+     
       // Pions
       for( const Particle& pPI : fsPIParticles)
       {
 		
+		const double pPIWeight = 1.0 / pPI.pt() / 2. / M_PI;
 		// Fill histos 200GeV
-      		if(pPI.pid() == 211) _h["xsec_piplus_200"]->fill(pPI.pT()/GeV, 1.0);
-		if(pPI.pid() == -211) _h["xsec_piminus_200"]->fill(pPI.pT()/GeV, 1.0);
+		if (collsys == pp200)
+		{
+			_c["sow_pp200"]->fill();
+      			if(pPI.pid() == 211) _h["xsec_piplus_200"]->fill(pPI.pT()/GeV, pPIWeight);
+			if(pPI.pid() == -211) _h["xsec_piminus_200"]->fill(pPI.pT()/GeV, 1.0);
+		}
 
 		// Fill histos 62.4GeV
-                if(pPI.pid() == 211) _h["xsec_piplus_624"]->fill(pPI.pT()/GeV, 1.0);
-                if(pPI.pid() == -211) _h["xsec_piminus_624"]->fill(pPI.pT()/GeV, 1.0);
+		if (collsys == pp62)
+                {
+			_c["sow_pp62"]->fill();
+                	if(pPI.pid() == 211) _h["xsec_piplus_624"]->fill(pPI.pT()/GeV, 1.0);
+                	if(pPI.pid() == -211) _h["xsec_piminus_624"]->fill(pPI.pT()/GeV, 1.0);
+		}
 
       }
 
       // Kaons
       for( const Particle& pK : fsKParticles)
       {
-		
+	
 		// Fill histos 200GeV
-                if(pK.pid() == 321) _h["xsec_kplus_200"]->fill(pK.pT()/GeV, 1.0);
-                if(pK.pid() == -321) _h["xsec_kminus_200"]->fill(pK.pT()/GeV, 1.0);
+		if (collsys == pp200)
+		{
+                	if(pK.pid() == 321) _h["xsec_kplus_200"]->fill(pK.pT()/GeV, 1.0);
+                	if(pK.pid() == -321) _h["xsec_kminus_200"]->fill(pK.pT()/GeV, 1.0);
+		}
 
 		// Fill histos 62.4GeV
-                if(pK.pid() == 321) _h["xsec_kplus_624"]->fill(pK.pT()/GeV, 1.0);
-                if(pK.pid() == -321) _h["xsec_kminus_624"]->fill(pK.pT()/GeV, 1.0);
+		if (collsys == pp62)
+		{
+                	if(pK.pid() == 321) _h["xsec_kplus_624"]->fill(pK.pT()/GeV, 1.0);
+                	if(pK.pid() == -321) _h["xsec_kminus_624"]->fill(pK.pT()/GeV, 1.0);
+		}
 
       }
 
@@ -107,22 +134,28 @@ namespace Rivet {
       {
 
 		// Fill histos 200GeV
-                if(pP.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+		if (collsys == pp200)
+		{
+                	if(pP.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
 
-                if(pP.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+		}
 
 		// Fill histos 62.4GeV
-                if(pP.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == -2212) _h["xsec_pbar_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+		if (collsys == pp62)
+		{
+                	if(pP.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == -2212) _h["xsec_pbar_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
 
-                if(pP.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
-                if(pP.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                	if(pP.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+		}
 
       }
 
@@ -133,9 +166,17 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      normalize(_h["xsec_piplus_200"]); // normalize to unity
-      //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
+      //normalize(_h["xsec_piplus_200"]); // normalize to unity
+      //scale(_h["xsec_piplus_200"], 1.0/ *_Nevt_after_cuts);
+      //const double s = 1./sow->sumW();
+      //scale(_h["xsec_piplus_200"], s);
+      //normalize(_h["xsec_piplus_200"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
+      //scale(_h["xsec_piplus_200"], crossSection()/picobarn/sow->sumW()); // norm to generated cross-section in pb (after cuts)
+
+      if (collsys == pp200)
+      {
+		_h["xsec_piplus_200"]->scaleW(1.0/_c["sow_pp200"]->sumW());
+      }
 
     }
 
@@ -147,6 +188,11 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Scatter2DPtr> _s;
+    string beamOpt = "";
+    enum CollisionSystem {pp200, pp62};
+    CollisionSystem collsys;
+    //CounterPtr _Nevt_after_cuts;
+    //CounterPtr sow;
     //@}
 
   };
