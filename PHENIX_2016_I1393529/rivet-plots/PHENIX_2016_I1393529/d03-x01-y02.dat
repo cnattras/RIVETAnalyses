@@ -1,0 +1,40 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=/PHENIX_2016_I1393529/d03-x01-y02 //gpfs/mnt/gpfs02/phenix/fvtx/subsys/fvtx/ajeeta/RIVET/RIVETAnalyses/PHENIX_2016_I1393529/Rivet.yoda/PHENIX_2016_I1393529:cent=GEN/d03-x01-y02
+LegendOnly=/PHENIX_2016_I1393529/d03-x01-y02 //gpfs/mnt/gpfs02/phenix/fvtx/subsys/fvtx/ajeeta/RIVET/RIVETAnalyses/PHENIX_2016_I1393529/Rivet.yoda/PHENIX_2016_I1393529:cent=GEN/d03-x01-y02
+RatioPlot=1
+RatioPlotReference=/PHENIX_2016_I1393529/d03-x01-y02
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2016_I1393529/d03-x01-y02
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2016_I1393529/d03-x01-y02
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+3.000000e+00	3.000000e+00	1.150000e+00	3.440000e-01	4.570000e-01
+4.000000e+00	4.000000e+00	7.210000e-01	2.050000e-01	2.800000e-01
+5.000000e+00	5.000000e+00	3.860000e-01	1.390000e-01	2.210000e-01
+6.000000e+00	6.000000e+00	2.280000e-01	9.820000e-02	1.400000e-01
+7.000000e+00	7.000000e+00	3.730000e-01	1.820000e-01	2.760000e-01
+8.000000e+00	8.000000e+00	4.550000e-01	2.530000e-01	4.380000e-01
+# END HISTO1D
+
+
+# BEGIN HISTO1D //gpfs/mnt/gpfs02/phenix/fvtx/subsys/fvtx/ajeeta/RIVET/RIVETAnalyses/PHENIX_2016_I1393529/Rivet.yoda/PHENIX_2016_I1393529:cent=GEN/d03-x01-y02
+LineColor=red
+LineStyle=solid
+Path=//gpfs/mnt/gpfs02/phenix/fvtx/subsys/fvtx/ajeeta/RIVET/RIVETAnalyses/PHENIX_2016_I1393529/Rivet.yoda/PHENIX_2016_I1393529:cent=GEN/d03-x01-y02
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+3.000000e+00	3.000000e+00	-nan	-nan	-nan
+4.000000e+00	4.000000e+00	-nan	-nan	-nan
+5.000000e+00	5.000000e+00	-nan	-nan	-nan
+6.000000e+00	6.000000e+00	-nan	-nan	-nan
+7.000000e+00	7.000000e+00	-nan	-nan	-nan
+8.000000e+00	8.000000e+00	-nan	-nan	-nan
+# END HISTO1D
+
