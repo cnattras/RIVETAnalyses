@@ -1,8 +1,8 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
-DrawOnly=/STAR_2010_I840766/d02-x01-y02 //home/truhlar/Desktop/HEPData_workshop/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
-LegendOnly=/STAR_2010_I840766/d02-x01-y02 //home/truhlar/Desktop/HEPData_workshop/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
+DrawOnly=/STAR_2010_I840766/d02-x01-y02 //direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
+LegendOnly=/STAR_2010_I840766/d02-x01-y02 //direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
 RatioPlot=1
 RatioPlotReference=/STAR_2010_I840766/d02-x01-y02
 # END PLOT
@@ -31,11 +31,11 @@ Title=Data
 # END HISTO1D
 
 
-# BEGIN HISTO1D //home/truhlar/Desktop/HEPData_workshop/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
+# BEGIN HISTO1D //direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
 LineColor=red
 LineStyle=solid
-Path=//home/truhlar/Desktop/HEPData_workshop/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
-Title=Rivet
+Path=//direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/d02-x01-y02
+Title=Rivet_pp
 # xlow	 xhigh	 val	 errminus	 errplus
 1.000000e+00	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
 1.500000e+00	2.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
