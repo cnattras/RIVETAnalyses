@@ -24,39 +24,16 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-cout << "Made it into initialize" << endl;
-      // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9 && Cuts::pT > 0.15*GeV);
-      declare(fs, "fs");
+      const FinalState fsPI(Cuts::abseta < 0.35 && Cuts::pT > 0.3*GeV && Cuts::pT < 3*GeV);
+      declare(fsPI, "fsPI");
 
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      //FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      //declare(jetfs, "jets");
+      const FinalState fsK(Cuts::abseta < 0.35 && Cuts::pT > 0.4*GeV && Cuts::pT < 2*GeV);
+      declare(fsK, "fsK");
 
-      // FinalState of prompt photons and bare muons and electrons in the event
-      //PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      //PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      //Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      //DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      //declare(dressed_leps, "leptons");
-
-      // Missing momentum
-      //declare(MissingMomentum(fs), "MET");
+      const FinalState fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
+      declare(fsP, "fsP");
 
       // Book histograms
-      // specify custom binning
-      //book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      //book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      //book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      
       // Histos from HEPdata at 200GeV
       book(_h["xsec_piplus_200"], 1, 1, 1);
       book(_h["xsec_piminus_200"], 1, 1, 2);
@@ -93,74 +70,62 @@ cout << "Made it into initialize" << endl;
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      cout << "Made it to analyze" << endl;
+      Particles fsPIParticles = applyProjection<FinalState>(event,"fsPI").particles();
+      Particles fsKParticles = applyProjection<FinalState>(event,"fsK").particles();
+      Particles fsPParticles = applyProjection<FinalState>(event,"fsP").particles();
 
-      Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
-      for( const Particle& p : fsParticles)
+      // Pions
+      for( const Particle& pPI : fsPIParticles)
       {
-
-		cout << "Made it into particle loop" << endl;
 		
-		// Histos 200GeV
-      		if(p.pid() == 211) _h["xsec_piplus_200"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == -211) _h["xsec_piminus_200"]->fill(p.pT()/GeV, 1.0);
+		// Fill histos 200GeV
+      		if(pPI.pid() == 211) _h["xsec_piplus_200"]->fill(pPI.pT()/GeV, 1.0);
+		if(pPI.pid() == -211) _h["xsec_piminus_200"]->fill(pPI.pT()/GeV, 1.0);
 
-		if(p.pid() == 321) _h["xsec_kplus_200"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == -321) _h["xsec_kminus_200"]->fill(p.pT()/GeV, 1.0);
-
-                cout << "Made it past pions and kaons" << endl;
-
-		if(p.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(p.pT()/GeV, 1.0);
-
-		if(p.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(p.pT()/GeV, 1.0);
-		if(p.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(p.pT()/GeV, 1.0);
-
-                cout << "Made it past first four histos" << endl;
-
-		// Histos 62.4GeV
-                if(p.pid() == 211) _h["xsec_piplus_624"]->fill(p.pT()/GeV, 1.0);
-                if(p.pid() == -211) _h["xsec_piminus_624"]->fill(p.pT()/GeV, 1.0);
-
-                if(p.pid() == 321) _h["xsec_kplus_624"]->fill(p.pT()/GeV, 1.0);
-                if(p.pid() == -321) _h["xsec_kminus_624"]->fill(p.pT()/GeV, 1.0);
-
-                if(p.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(p.pT()/GeV, 1.0);
-                if(p.pid() == -2212) _h["xsec_pbar_noFD_624_1"]->fill(p.pT()/GeV, 1.0);
-
-                if(p.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(p.pT()/GeV, 1.0);
-                if(p.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(p.pT()/GeV, 1.0);
-
-                cout << "Made it past all histos" << endl;
+		// Fill histos 62.4GeV
+                if(pPI.pid() == 211) _h["xsec_piplus_624"]->fill(pPI.pT()/GeV, 1.0);
+                if(pPI.pid() == -211) _h["xsec_piminus_624"]->fill(pPI.pT()/GeV, 1.0);
 
       }
 
-      // Retrieve dressed leptons, sorted by pT
-      //vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
+      // Kaons
+      for( const Particle& pK : fsKParticles)
+      {
+		
+		// Fill histos 200GeV
+                if(pK.pid() == 321) _h["xsec_kplus_200"]->fill(pK.pT()/GeV, 1.0);
+                if(pK.pid() == -321) _h["xsec_kminus_200"]->fill(pK.pT()/GeV, 1.0);
 
-      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+		// Fill histos 62.4GeV
+                if(pK.pid() == 321) _h["xsec_kplus_624"]->fill(pK.pT()/GeV, 1.0);
+                if(pK.pid() == -321) _h["xsec_kminus_624"]->fill(pK.pT()/GeV, 1.0);
 
-      // Remove all jets within dR < 0.2 of a dressed lepton
-      //idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
+      }
 
-      // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      //Jets bjets = filter_select(jets, [](const Jet& jet) {
-        //return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-      //});
+      // Protons and antiprotons
+      for( const Particle& pP : fsPParticles)
+      {
 
-      // Veto event if there are no b-jets
-      //if (bjets.empty())  vetoEvent;
+		// Fill histos 200GeV
+                if(pP.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
 
-      // Apply a missing-momentum cut
-      //if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
+                if(pP.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
 
-      // Fill histogram with leading b-jet pT
-      //_h["XXXX"]->fill(bjets[0].pT()/GeV);
+		// Fill histos 62.4GeV
+                if(pP.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == -2212) _h["xsec_pbar_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+
+                if(pP.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                if(pP.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+
+      }
+
 
     }
 
@@ -168,9 +133,7 @@ cout << "Made it into initialize" << endl;
     /// Normalise histograms etc., after the run
     void finalize() {
 
-                cout << "Made it into finalize" << endl;
-
-      //normalize(_h["XXXX"]); // normalize to unity
+      normalize(_h["xsec_piplus_200"]); // normalize to unity
       //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
