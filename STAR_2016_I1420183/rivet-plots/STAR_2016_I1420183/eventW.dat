@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+LegendOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+# END PLOT
+
+# BEGIN COUNTER //gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+LineColor=red
+LineStyle=solid
+Path=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+Title=Rivet_dAu
+# value	 error
+4.364004e+36	4.364004e+36
+# END COUNTER
+

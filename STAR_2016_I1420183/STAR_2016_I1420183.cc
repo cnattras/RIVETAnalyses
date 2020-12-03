@@ -5,7 +5,8 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "../Centralities/RHICCentrality.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
+#include "RHICCentrality.hh"
 
 namespace Rivet {
 
@@ -24,72 +25,130 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
+		//declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+
+		// const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV);
+		// declare(fs, "fs");
+
+		// const PromptFinalState pfs(Cuts::abseta < 0.5);
+		// declare(pfs, "pfs");
+
+		// const UnstableParticles up(Cuts::abseta < 0.5 && Cuts::abspid == 421);
+		// declare(up, "up");
+
+		// book(_h["AAAA"], 1, 1, 1);
+		// book(_c["sow_AuAu0010"], "sow_AuAu0010");
+		// book(_c["sow_AuAu3050"], "sow_AuAu3050");
+		// book(_c["sow_pp"], "sow_pp");
+		
+		// book(_p["XXXX"], 5, 1 ,1);
+		// book(_p["YYYY"], "YYYY", 2, 0.0, 4.0);
+
+		// book(_c["CCCC"], "CCCC");
+
+		
+		// string refname = mkAxisCode(5, 1, 1);
+		// const Scatter2D& refdata = refData(refname);
+		// book(_h["Kaon"], refname + "_Kaon", refdata);
+		// book(_h["Pion"], refname + "_Pion", refdata);
+		// book(_s["KaonOverPion"], refname);
+
 		declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
-      // Initialise and register projections
+		const FinalState fs(Cuts::abseta < 1.0 && Cuts::pT > 0.15*GeV);
+		declare(fs, "fs");
 
-      // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+		const PromptFinalState pfs(Cuts::absrap < 1.0);
+		declare(pfs, "pfs");
 
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
+		const UnstableParticles up(Cuts::absrap < 1.0);
+		declare(up, "up");
+		
+		book(_h["particles"], 6, 1, 1);
+		book(_h["Jpsi"], 5, 1, 1);
+		book(_c["eventW"], "eventW");
+		
+		beamOpt = getOption<string>("beam", "NONE");
 
-      // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
+		string refname = mkAxisCode(1, 1, 1);
+		const Scatter2D& refdata = refData(refname);
+		book(_h["dAu"], refname + "_dAu", refdata);
+		book(_h["pp"], refname + "_pp", refdata);
+		book(_s["Raa"], refname);
 
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
+		book(_c["dAu"], "sow_dAu");
+		book(_c["pp"], "sow_pp");
+		
+		book(_c["sow_dAu0010"], "sow_dAu0010");
 
-      // Missing momentum
-      declare(MissingMomentum(fs), "MET");
-
-      // Book histograms
-      // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+		
+		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+		const double c = cent();
 
-      // Retrieve dressed leptons, sorted by pT
-      vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
+		// if(c < 10.)
+		// {
+		// _c["sow_AuAu0010"]->fill();
+		// }
+		// else if(c >= 30. && c < 50.)
+		// {
+		// _c["sow_AuAu3050"]->fill();
+		// }
+		// if(c > 50.) vetoEvent;
 
-      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+		// Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
 
-      // Remove all jets within dR < 0.2 of a dressed lepton
-      idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
+		// for(const Particle& p : fsParticles) 
+		// {
+			// if(c < 10. && p.pid() == 321) _h["AAAA"]->fill(p.pT()/GeV);
+		// }
+		
+		_c["eventW"]->fill();
+		
+		Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+		Particles pfsParticles = applyProjection<PromptFinalState>(event,"pfs").particles();
+		
+		for(const Particle& fs : fsParticles) 
+		{
+			_h["particles"]->fill(fs.pT()/GeV);
+		}
 
-      // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, [](const Jet& jet) {
-        return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-      });
+		Particles upParticles = applyProjection<UnstableParticles>(event,"up").particles();
 
-      // Veto event if there are no b-jets
-      if (bjets.empty())  vetoEvent;
+		for(const Particle& p : upParticles) 
+		{
+			if(p.pid() == 421) _h["Jpsi"]->fill(p.pT()/GeV);
+		}
+		
+		if(beamOpt=="pp")
+		{
+			_c["sow_pp"]->fill();
+			for(const Particle& p : upParticles) 
+			{
+				if(p.pid() == 421) _h["pp"]->fill(p.pT()/GeV);
+			}
+			return;
+		}
+		else if(beamOpt=="dAu")
+		{
+			//const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+			//const double c = cent();
 
-      // Apply a missing-momentum cut
-      if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
+			//if(c > 10) vetoEvent;
+			_c["sow_dAu0010"]->fill();
+			
+			for(const Particle& p : upParticles) 
+			{
+				if(p.pid() == 421) _h["dAu"]->fill(p.pT()/GeV);
+			}
+		}
 
-      // Fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
+
 
     }
 
@@ -97,10 +156,47 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      normalize(_h["XXXX"]); // normalize to unity
-      normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
-
+		// double scale = 1./(2*M_PI);
+		// _h["AAAA"]->scaleW(scale/_c["CCCC"]->sumW());
+		// _h["Kaon"]->scaleW(1./_c["CCCC"]->sumW());
+		// _h["Pion"]->scaleW(1./_c["CCCC"]->sumW());
+		// divide(_h["Kaon"], _h["Pion"], _s["KaonOverPion"]);
+		
+		
+		bool pp_available = false;
+		bool dAu_available = false;
+					
+		for (auto element : _c)
+		{
+		string name = element.second->name();
+			if (name.find("dAu") != std::string::npos)
+			{
+				  if (element.second->sumW()>0) dAu_available=true;
+				  else
+				  {
+						dAu_available=false;
+						break;
+				  }
+			}
+			else if (name.find("pp") != std::string::npos)
+			{
+				  if (element.second->sumW()>0) pp_available=true;
+				  else
+				  {
+						pp_available=false;
+						break;
+				  }
+			}
+		}
+		if((!pp_available) || (!dAu_available)) return;	
+		
+		
+		
+		double scale = 1./(2*M_PI);
+		//_h["Jpsi"]->scaleW(scale/_c["eventW"]->sumW());
+		_h["Jpsi"]->scaleW(scale);
+		
+		
     }
 
     //@}
@@ -111,8 +207,9 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+	map<string, Scatter2DPtr> _s;
+	string beamOpt = "";
     //@}
-
 
   };
 
