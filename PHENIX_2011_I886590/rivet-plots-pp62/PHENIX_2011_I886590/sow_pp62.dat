@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//lustre/haven/proj/UTK0019/aschmier/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp62.yoda/PHENIX_2011_I886590:beam=pp62/sow_pp62
+LegendOnly=//lustre/haven/proj/UTK0019/aschmier/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp62.yoda/PHENIX_2011_I886590:beam=pp62/sow_pp62
+# END PLOT
+
+# BEGIN COUNTER //lustre/haven/proj/UTK0019/aschmier/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp62.yoda/PHENIX_2011_I886590:beam=pp62/sow_pp62
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/aschmier/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp62.yoda/PHENIX_2011_I886590:beam=pp62/sow_pp62
+Title=Rivet_pp62
+# value	 error
+7.890000e+03	8.882567e+01
+# END COUNTER
+
