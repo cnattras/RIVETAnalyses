@@ -25,81 +25,125 @@ namespace Rivet {
     void init() {
 
 	  declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-      // Initialise and register projections
 
-      // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
 
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
+	  //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV);
+	  //declare(fs, "fs");
 
-      // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
+	  const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pT > 4.0 && Cuts::pT < 22.0);
+	  declare(pfs, "pfs");
 
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
+//	  const UnstableParticles up(Cuts::abseta < 0.5 && Cuts::abspid == 421);
+//	  declare(up, "up");
 
-      // Missing momentum
-      declare(MissingMomentum(fs), "MET");
-
-      // Book histograms
-      // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
+	  book(_h["dir_photon_AuAu0005"], 1, 1, 1);
+    book(_h["dir_photon_AuAu0510"], 1, 1, 2);
+    book(_h["dir_photon_AuAu1015"], 1, 1, 3);
+    book(_h["dir_photon_AuAu1520"], 1, 1, 4);
+    book(_h["dir_photon_AuAu2030"], 1, 1, 5);
+    book(_h["dir_photon_AuAu3040"], 1, 1, 6);
+    book(_h["dir_photon_AuAu4050"], 1, 1, 7);
+    book(_h["dir_photon_AuAu5060"], 1, 1, 8);
+    book(_h["dir_photon_AuAu6092"], 1, 1, 9);
+    book(_h["dir_photon_AuAu0092"], 1, 1, 10);
+    
+	  book(_c["sow_AuAu0005"], "sow_AuAu0005");
+	  book(_c["sow_AuAu0510"], "sow_AuAu0510");
+	  book(_c["sow_AuAu1015"], "sow_AuAu1015");
+	  book(_c["sow_AuAu1520"], "sow_AuAu1520");
+	  book(_c["sow_AuAu2030"], "sow_AuAu2030");
+	  book(_c["sow_AuAu3040"], "sow_AuAu3040");
+	  book(_c["sow_AuAu4050"], "sow_AuAu4050");
+	  book(_c["sow_AuAu5060"], "sow_AuAu5060");
+	  book(_c["sow_AuAu6092"], "sow_AuAu6092");
+	  book(_c["sow_AuAu0092"], "sow_AuAu0092");
+//	  book(_c["sow_pp"], "sow_pp");
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const double c = cent();
 
-      // Retrieve dressed leptons, sorted by pT
-      vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
+      if(c > 0. && c < 5.) 
+      {
+        _c["sow_AuAu0005"]->fill();
+      }
+      else if(c < 10.) 
+      {
+        _c["sow_AuAu0510"]->fill();
+      }
+      else if(c < 15.) 
+      {
+        _c["sow_AuAu1015"]->fill();
+      }
+      else if(c < 20.) 
+      {
+        _c["sow_AuAu1520"]->fill();
+      }
+      else if(c < 30.) 
+      {
+        _c["sow_AuAu2030"]->fill();
+      }
+      else if(c < 40.) 
+      {
+        _c["sow_AuAu3040"]->fill();
+      }
+      else if(c < 50.) 
+      {
+        _c["sow_AuAu4050"]->fill();
+      }
+      else if(c < 60.) 
+      {
+        _c["sow_AuAu5060"]->fill();
+      }
+      else if(c < 92.) 
+      {
+        _c["sow_AuAu6092"]->fill();
+      }
+      
+      if(c > 0. && c < 92.)
+        _c["sow_AuAu0092"]->fill();
 
-      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+      Particles pfsParticles = applyProjection<FinalState>(event,"pfs").particles();
 
-      // Remove all jets within dR < 0.2 of a dressed lepton
-      idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
+      for(const Particle& p : pfsParticles) 
+      {
+        if(c > 0. && c < 5. && p.pid() == 22) _h["dir_photon_AuAu0005"]->fill(p.pT()/GeV);
+        else if (c < 10. && p.pid() == 22) _h["dir_photon_AuAu0510"]->fill(p.pT()/GeV);
+        else if (c < 15. && p.pid() == 22) _h["dir_photon_AuAu1015"]->fill(p.pT()/GeV);
+        else if (c < 20. && p.pid() == 22) _h["dir_photon_AuAu1520"]->fill(p.pT()/GeV);
+        else if (c < 30. && p.pid() == 22) _h["dir_photon_AuAu2030"]->fill(p.pT()/GeV);
+        else if (c < 40. && p.pid() == 22) _h["dir_photon_AuAu3040"]->fill(p.pT()/GeV);
+        else if (c < 50. && p.pid() == 22) _h["dir_photon_AuAu4050"]->fill(p.pT()/GeV);
+        else if (c < 60. && p.pid() == 22) _h["dir_photon_AuAu5060"]->fill(p.pT()/GeV);
+        else if (c < 92. && p.pid() == 22) _h["dir_photon_AuAu6092"]->fill(p.pT()/GeV);
+        
+        if(c > 0. && c < 92. && p.pid() == 22 ) 
+          _h["dir_photon_AuAu0092"]->fill(p.pT()/GeV);
 
-      // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, [](const Jet& jet) {
-        return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-      });
-
-      // Veto event if there are no b-jets
-      if (bjets.empty())  vetoEvent;
-
-      // Apply a missing-momentum cut
-      if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
-
-      // Fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
+      }
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      /*
+      _h["dir_photon_AuAu0005"]->scaleW(1./_c["sow_AuAu0005"]->sumW());
+      _h["dir_photon_AuAu0510"]->scaleW(1./_c["sow_AuAu0510"]->sumW());
+      _h["dir_photon_AuAu1015"]->scaleW(1./_c["sow_AuAu1015"]->sumW());
+      _h["dir_photon_AuAu1520"]->scaleW(1./_c["sow_AuAu1520"]->sumW());
+      _h["dir_photon_AuAu2030"]->scaleW(1./_c["sow_AuAu2030"]->sumW());
+      _h["dir_photon_AuAu3040"]->scaleW(1./_c["sow_AuAu3040"]->sumW());
+      _h["dir_photon_AuAu4050"]->scaleW(1./_c["sow_AuAu4050"]->sumW());
+      _h["dir_photon_AuAu5060"]->scaleW(1./_c["sow_AuAu5060"]->sumW());
+      _h["dir_photon_AuAu6092"]->scaleW(1./_c["sow_AuAu6092"]->sumW());
+      _h["dir_photon_AuAu0092"]->scaleW(1./_c["sow_AuAu0092"]->sumW());
 
-      normalize(_h["XXXX"]); // normalize to unity
-      normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
-
+      */
     }
 
     //@}
@@ -110,6 +154,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+	map<string, Scatter2DPtr> _s;
     //@}
 
 
