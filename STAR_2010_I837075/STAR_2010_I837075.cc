@@ -259,9 +259,16 @@ namespace Rivet {
         bool has_CuCu { _c["CuCu"]->sumW() != 0 };
         bool has_pp   { _c["pp"]  ->sumW() != 0 };
 
-        if (debug > 1) {
+        if (debug > 0) {
             cout << " has_CuCu: " << has_CuCu << endl;
             cout << " has_pp:   " << has_pp   << endl;
+            
+            cout << " has: " << _c["pp"]->sumW() << " pp events. " << endl;
+            array<string, 4> i_str{"0_10","10_20","20_40","40_60"};
+            for (int i{0};i<4;++i) {
+                cout << " has: " << _c4[i]->sumW() 
+                     << " Cu+Cu "<<i_str[i]<<" events." << endl;
+            }
         }
 
         if (has_pp) {
