@@ -58,7 +58,7 @@ namespace Rivet {
 		const FinalState fs(Cuts::abseta < 1.0 && Cuts::pT > 0.15*GeV);
 		declare(fs, "fs");
 
-		const PromptFinalState pfs(Cuts::absrap < 1.0);
+		const PromptFinalState pfs(Cuts::abseta < 1.0);
 		declare(pfs, "pfs");
 
 		const UnstableParticles up(Cuts::absrap < 1.0);
@@ -108,6 +108,8 @@ namespace Rivet {
 			// if(c < 10. && p.pid() == 321) _h["AAAA"]->fill(p.pT()/GeV);
 		// }
 		
+		for (auto& w : event.weights()) cout << " " << w;
+		
 		_c["eventW"]->fill();
 		
 		Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
@@ -122,7 +124,7 @@ namespace Rivet {
 
 		for(const Particle& p : upParticles) 
 		{
-			if(p.pid() == 421) _h["Jpsi"]->fill(p.pT()/GeV);
+			if(p.pid() == 421) _h["Jpsi"]->fill(p.pT()/GeV, 1.0/(2.0*M_PI*p.pT()/GeV));
 		}
 		
 		if(beamOpt=="pp")
@@ -193,7 +195,8 @@ namespace Rivet {
 		
 		
 		double scale = 1./(2*M_PI);
-		_h["Jpsi"]->scaleW(scale/_c["eventW"]->sumW());
+		_h["Jpsi"]->scaleW(1.0/_c["eventW"]->sumW());
+		//_h["Jpsi"]->scaleW(scale/_c["eventW"]->sumW());
 		//_h["Jpsi"]->scaleW(scale);
 		
 		

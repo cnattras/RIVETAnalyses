@@ -141,6 +141,9 @@ namespace Rivet {
 		bool isCu;
 		const ParticlePair& beam = beams();
 		double NN = 0;
+
+        // move to init -- init uses data from the first event and fill a global flag
+        // assumes all events are the same in analyze
 		string beamName = "Empty";
 		if (beam.first.pid() == pid_Cu && beam.second.pid() == pid_Cu)
 		{
@@ -270,11 +273,13 @@ namespace Rivet {
 
     /* /// Normalise histograms etc., after the run */
     void finalize() {
+        cout << " a0 " << endl;
         if (debug > 1) cout << " ZEBRA 2" << endl;
 
         bool has_CuCu { _c["CuCu"]->sumW() != 0 };
         bool has_pp   { _c["pp"]  ->sumW() != 0 };
-
+         
+        cout << " a1 " << has_CuCu << " " << has_pp << endl;
         if (debug > 0) {
             cout << " has_CuCu: " << has_CuCu << endl;
             cout << " has_pp:   " << has_pp   << endl;
@@ -302,7 +307,7 @@ namespace Rivet {
             //    is all that is required.
         }
 
-        if (has_CuCu) {
+        if (has_CuCu && has_pp) {
             /* array<string, 4> i_str{"0_10","10_20","20_40","40_60"}; */
             bool first_loop = true;
             for (int i{0}; i<4; ++i) {
