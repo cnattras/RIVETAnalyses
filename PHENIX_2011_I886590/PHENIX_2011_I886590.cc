@@ -18,6 +18,19 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2011_I886590);
 
+    // Function to get bin centers for scaling
+    bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
+    {
+    	//cout << "pT: " << pT << endl;
+        if(pT > hist.xMin() && pT < hist.xMax())
+        {
+        	deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+                //cout << "DeltapT: " << deltaPt << endl;
+                return true;
+        }
+        else return false;
+    }
+
 
     /// @name Analysis methods
     //@{
@@ -28,19 +41,14 @@ namespace Rivet {
       //cout << "Made it into init\n";
 
       // Initialise and register projections
-      const FinalState fsPI(Cuts::abseta < 0.35 && Cuts::pT > 0.3*GeV && Cuts::pT < 3*GeV);
+      const ALICE::PrimaryParticles fsPI(Cuts::abseta < 0.35 && Cuts::pT > 0.3*GeV && Cuts::pT < 3*GeV);
       declare(fsPI, "fsPI");
 
-      const FinalState fsK(Cuts::abseta < 0.35 && Cuts::pT > 0.4*GeV && Cuts::pT < 2*GeV);
+      const ALICE::PrimaryParticles fsK(Cuts::abseta < 0.35 && Cuts::pT > 0.4*GeV && Cuts::pT < 2*GeV);
       declare(fsK, "fsK");
 
-      const FinalState fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
+      const ALICE::PrimaryParticles fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
       declare(fsP, "fsP");
-
-      //const PrimaryParticles pp(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
-      //declare(pp, "pp");
-
-      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.35 && Cuts::pT > 0.3*GeV && Cuts::pT < 3*GeV),"CFS");
 
       beamOpt = getOption<string>("beam", "NONE");
       if (beamOpt == "pp200") collsys = pp200;
@@ -77,19 +85,7 @@ namespace Rivet {
       book(_h["xsec_p_withFD_62_1"], 8, 1, 1);
       book(_h["xsec_pbar_withFD_62_1"], 8, 1, 2);
 
-      // Ratio plots
-      //string refname = mkAxisCode(1,1,1);
-      //const Scatter2D& refdata = refData(refname);
-      //book(_h["xsec_piplus_200"], refname + "_piplus_200_temp",refdata);
-      //book(_h["xsec_piplus_62"], refname + "_piplus_62_temp",refdata);
-      //book(_s["piplus_ratio"],refname);
-      //
-      //book(_s["piplus_ratio"],"piplus_ratio",10,0.3,3);
-      //book(_h["piplus_200_temp"],"piplus_200_temp",10,0.3,3);
-      //book(_h["piplus_62_temp"],"piplus_62_temp",10,0.3,3);
-
-      //book(_Nevt_after_cuts,"Nevt_after_cuts");
-      //book(sow, "sow");
+      // Counter histos for event weights
       book(_c["sow_pp200"], "sow_pp200");
       book(_c["sow_pp62"], "sow_pp62");
 
@@ -103,25 +99,28 @@ namespace Rivet {
 
       //cout << "Made it into analyze\n";
 
-      Particles fsPIParticles = applyProjection<FinalState>(event,"fsPI").particles();
-      Particles fsKParticles = applyProjection<FinalState>(event,"fsK").particles();
-      Particles fsPParticles = applyProjection<FinalState>(event,"fsP").particles();
-      //Particles ppParticles = applyProjection<PrimaryParticles>(event,"pp").particles();
-
-      //_Nevt_after_cuts->fill();
-      //sow->fill();
+      Particles fsPIParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsPI").particles();
+      Particles fsKParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsK").particles();
+      Particles fsPParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsP").particles();
      
       // Pions
-      for( const Particle& pp : apply<ALICE::PrimaryParticles>(event,"CFS").particles())
+      for( const Particle& pPI : fsPIParticles)
       {
 		
-		const double ppWeight = 2.0 / pp.pt() / 2. / M_PI;
+		//const double pPIWeight = 1.0 / pPI.pt() / 2. / M_PI;
+		double partPt = pPI.pT()/GeV;
+		double pt_weight = 1./(2.*M_PI*0.7);
+		double deltaPt = 0;
 		// Fill histos 200GeV
 		if (collsys == pp200)
 		{
+			if(getDeltaPt(*_h["xsec_piplus_200"],partPt,deltaPt))
+			{
+			pt_weight /= deltaPt;
 			_c["sow_pp200"]->fill();
-      			if(pp.pid() == 211) _h["xsec_piplus_200"]->fill(pp.pT()/GeV, ppWeight);
-			if(pp.pid() == -211) _h["xsec_piminus_200"]->fill(pp.pT()/GeV, 1.0);
+      			if(pPI.pid() == 211) _h["xsec_piplus_200"]->fill(pPI.pT()/GeV, pt_weight);
+			if(pPI.pid() == -211) _h["xsec_piminus_200"]->fill(pPI.pT()/GeV, 1.0);
+			}
 			//if(pPI.pid() == 211) _h["piplus_200_temp"]->fill(pPI.pT()/GeV);
 		}
 
@@ -129,8 +128,8 @@ namespace Rivet {
 		if (collsys == pp62)
                 {
 			_c["sow_pp62"]->fill();
-                	if(pp.pid() == 211) _h["xsec_piplus_62"]->fill(pp.pT()/GeV, ppWeight);
-                	if(pp.pid() == -211) _h["xsec_piminus_62"]->fill(pp.pT()/GeV, 1.0);
+                	if(pPI.pid() == 211) _h["xsec_piplus_62"]->fill(pPI.pT()/GeV, pt_weight);
+                	if(pPI.pid() == -211) _h["xsec_piminus_62"]->fill(pPI.pT()/GeV, 1.0);
 			//if(pPI.pid() == 211) _h["piplus_62_temp"]->fill(pPI.pT()/GeV);
 		}
 
@@ -215,13 +214,13 @@ namespace Rivet {
       // Method 6
       if (collsys == pp200)
       {
-		_h["xsec_piplus_200"]->scaleW(23.0/_c["sow_pp200"]->sumW());
+		_h["xsec_piplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
 		//_h["piplus_200_temp"]->scaleW(1.0/_c["sow_pp200"]->sumW());
       }
 
       if (collsys == pp62)
       {
-		_h["xsec_piplus_62"]->scaleW(13.7/_c["sow_pp62"]->sumW());
+		_h["xsec_piplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
 		//_h["piplus_62_temp"]->scaleW(1.0/_c["sow_pp62"]->sumW());
       }
 
