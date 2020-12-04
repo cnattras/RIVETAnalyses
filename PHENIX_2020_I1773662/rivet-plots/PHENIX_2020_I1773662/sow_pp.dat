@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//gpfs/mnt/gpfs02/phenix/hhj/hhj1/stacy4/RIVETAnalyses/PHENIX_2020_I1773662/Rivet.yoda/PHENIX_2020_I1773662:beam=dAU200:cent=GEN/sow_pp
+LegendOnly=//gpfs/mnt/gpfs02/phenix/hhj/hhj1/stacy4/RIVETAnalyses/PHENIX_2020_I1773662/Rivet.yoda/PHENIX_2020_I1773662:beam=dAU200:cent=GEN/sow_pp
+# END PLOT
+
+# BEGIN COUNTER //gpfs/mnt/gpfs02/phenix/hhj/hhj1/stacy4/RIVETAnalyses/PHENIX_2020_I1773662/Rivet.yoda/PHENIX_2020_I1773662:beam=dAU200:cent=GEN/sow_pp
+LineColor=red
+LineStyle=solid
+Path=//gpfs/mnt/gpfs02/phenix/hhj/hhj1/stacy4/RIVETAnalyses/PHENIX_2020_I1773662/Rivet.yoda/PHENIX_2020_I1773662:beam=dAU200:cent=GEN/sow_pp
+Title=Rivet
+# value	 error
+0.000000e+00	0.000000e+00
+# END COUNTER
+
