@@ -1,0 +1,271 @@
+BEGIN YODA_HISTO1D_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/d06-x01-y01
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/d06-x01-y01
+Title: 
+Type: Histo1D
+---
+# Mean: 4.582428e-01
+# Area: 6.746750e+39
+# ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	6.746750e+39	2.944285e+76	3.091650e+39	2.071689e+39	4.281000e+03
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	3.503114e+07	1.227181e+15	1.669851e+08	7.959778e+08	1.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+0.000000e+00	1.000000e+00	6.353990e+39	2.772884e+76	2.564187e+39	1.312598e+39	4.061000e+03
+1.000000e+00	2.000000e+00	3.491203e+38	1.523563e+75	4.324514e+38	5.515049e+38	2.030000e+02
+3.000000e+00	3.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_HISTO1D_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/d05-x01-y01
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/d05-x01-y01
+Title: 
+Type: Histo1D
+---
+# Mean: 2.715218e+00
+# Area: 4.364004e+36
+# ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+0.000000e+00	2.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+2.000000e+00	4.000000e+00	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_COUNTER_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+4.364004e+36	1.904453e+73	1.000000e+01
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_HISTO1D_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_dAu
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_dAu
+Title: 
+Type: Histo1D
+---
+# Mean: 2.715218e+00
+# Area: 4.364004e+36
+# ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+5.000000e-01	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.500000e+00	2.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_HISTO1D_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_pp
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_pp
+Title: 
+Type: Histo1D
+---
+# Mean: # ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+5.000000e-01	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.500000e+00	2.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01
+Title: 
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_COUNTER_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_COUNTER_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/sow_pp
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/sow_pp
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_COUNTER_V2 /STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu0010
+Path: /STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu0010
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+4.364004e+36	1.904453e+73	1.000000e+01
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_COUNTER_V2 /_EVTCOUNT
+Path: /_EVTCOUNT
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+4.364004e+36	1.904453e+73	1.000000e+01
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_SCATTER1D_V2 /_XSEC
+Path: /_XSEC
+Title: 
+Type: Scatter1D
+---
+# xval	 xerr-	 xerr+	
+1.897393e+45	9.099578e+44	9.099578e+44
+END YODA_SCATTER1D_V2
+
+
+BEGIN YODA_HISTO1D_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d06-x01-y01
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d06-x01-y01
+Title: 
+Type: Histo1D
+---
+# Mean: 4.582428e-01
+# Area: 6.746750e+39
+# ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	6.746750e+39	2.944285e+76	3.091650e+39	2.071689e+39	4.281000e+03
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	3.503114e+07	1.227181e+15	1.669851e+08	7.959778e+08	1.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+0.000000e+00	1.000000e+00	6.353990e+39	2.772884e+76	2.564187e+39	1.312598e+39	4.061000e+03
+1.000000e+00	2.000000e+00	3.491203e+38	1.523563e+75	4.324514e+38	5.515049e+38	2.030000e+02
+3.000000e+00	3.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_HISTO1D_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d05-x01-y01
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d05-x01-y01
+Title: 
+Type: Histo1D
+---
+# Mean: 2.715218e+00
+# Area: 4.364004e+36
+# ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+0.000000e+00	2.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+2.000000e+00	4.000000e+00	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_COUNTER_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/eventW
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+4.364004e+36	1.904453e+73	1.000000e+01
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_HISTO1D_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_dAu
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_dAu
+Title: 
+Type: Histo1D
+---
+# Mean: 2.715218e+00
+# Area: 4.364004e+36
+# ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	4.364004e+36	1.904453e+73	1.184922e+37	3.217323e+37	1.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+5.000000e-01	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.500000e+00	2.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_HISTO1D_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_pp
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01_pp
+Title: 
+Type: Histo1D
+---
+# Mean: # ID	 ID	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+Total   	Total   	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Underflow	Underflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+Overflow	Overflow	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# xlow	 xhigh	 sumw	 sumw2	 sumwx	 sumwx2	 numEntries
+5.000000e-01	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.500000e+00	2.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_HISTO1D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/d01-x01-y01
+Title: 
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_COUNTER_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_COUNTER_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_pp
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_pp
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+0.000000e+00	0.000000e+00	0.000000e+00
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_COUNTER_V2 /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu0010
+Path: /RAW/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu0010
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+4.364004e+36	1.904453e+73	1.000000e+01
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_COUNTER_V2 /RAW/_EVTCOUNT
+Path: /RAW/_EVTCOUNT
+Title: 
+Type: Counter
+---
+# sumW	 sumW2	 numEntries
+4.364004e+36	1.904453e+73	1.000000e+01
+END YODA_COUNTER_V2
+
+
+BEGIN YODA_SCATTER1D_V2 /RAW/_XSEC
+Path: /RAW/_XSEC
+Title: 
+Type: Scatter1D
+---
+# xval	 xerr-	 xerr+	
+1.897393e+45	9.099578e+44	9.099578e+44
+END YODA_SCATTER1D_V2
+

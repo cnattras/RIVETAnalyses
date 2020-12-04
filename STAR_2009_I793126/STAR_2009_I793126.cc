@@ -31,40 +31,19 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
+      //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
+      const FinalState fs(Cuts::absrap < 0.5 && Cuts::pT > 0.2*GeV && Cuts::abscharge > 0);
       declare(fs, "fs");
-
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      //FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      //declare(jetfs, "jets");
-
-      // FinalState of prompt photons and bare muons and electrons in the event
-      //PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      //PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      //Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      //DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      //declare(dressed_leps, "leptons");
-
-      // Missing momentum
-      //declare(MissingMomentum(fs), "MET");
 
       beamOpt = getOption<string>("beam", "NONE");
       if (beamOpt == "DAU200") collSys = dAu200;
       if (beamOpt == "AUAU62") collSys = AuAu62;
       if (beamOpt == "AUAU130") collSys = AuAu130;
 
-      //string refname = mkAxisCode(1, 1, 1);
-      //const Scatter2D& refdata = refData(refname);
-      //book(_h["dAu"], refname + "_dAu", refdata);
-      //book(_h["AuAu"], refname + "_AuAu", refdata);
-
-      //book(_c["dAu"], "sow_dAu");
-      //book(_c["AuAu"], "sow_AuAu");
+      //Event counters
+      book(_c["sow_dAu200"], "sow_dAu200");
+      book(_c["sow_AuAu62"], "sow_AuAu62");
+      book(_c["sow_AuAu130"], "sow_AuAu130");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -419,29 +398,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      // Retrieve dressed leptons, sorted by pT
-      //vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
-
-      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
-
-      // Remove all jets within dR < 0.2 of a dressed lepton
-      //idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
-
-      // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      /*Jets bjets = filter_select(jets, [](const Jet& jet) {
-        return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-	    });*/
-
-      // Veto event if there are no b-jets
-      //if (bjets.empty())  vetoEvent;
-
-      // Apply a missing-momentum cut
-      //if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
-
-      // Fill histogram with leading b-jet pT
-      //_h["XXXX"]->fill(bjets[0].pT()/GeV);
-
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
 
@@ -452,44 +408,44 @@ namespace Rivet {
       //Sorting particles by type
       if (collSys == dAu200)
       {
-      //_c["sow_dAu"]->fill();
+	_c["sow_dAu200"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
-            if (c < 20.0) _h["Figure_18_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
-            if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-            _h["Figure_18_kaon_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
-            if (c > 40.0) _h["Figure_18_kaon_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+            if (c < 20.0) _h["Figure_18_kaon_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-20% centrality
+            if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
+            _h["Figure_18_kaon_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
+            if (c > 40.0) _h["Figure_18_kaon_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
           if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
-            if (c < 20.0) _h["Figure_18_kaon_5"]->fill(p.pT()/GeV, 1.0);
-            if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-            _h["Figure_18_kaon_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
-            if (c > 40.0) _h["Figure_18_kaon_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+            if (c < 20.0) _h["Figure_18_kaon_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV));
+            if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
+            _h["Figure_18_kaon_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
+            if (c > 40.0) _h["Figure_18_kaon_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
           if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
-            if (c < 20.0) _h["Figure_18_pion_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
-            if (c > 20.0 && c < 40.0) _h["Figure_18_pion_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-            _h["Figure_18_pion_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
-            if (c > 40.0) _h["Figure_18_pion_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+            if (c < 20.0) _h["Figure_18_pion_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-20% centrality
+            if (c > 20.0 && c < 40.0) _h["Figure_18_pion_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
+            _h["Figure_18_pion_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
+            if (c > 40.0) _h["Figure_18_pion_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
           if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
-            if (c < 20.0) _h["Figure_18_pion_5"]->fill(p.pT()/GeV, 1.0);
-            if (c > 20.0 && c < 40.0) _h["Figure_18_pion_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-            _h["Figure_18_pion_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
-            if (c > 40.0) _h["Figure_18_pion_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+            if (c < 20.0) _h["Figure_18_pion_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV));
+            if (c > 20.0 && c < 40.0) _h["Figure_18_pion_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
+            _h["Figure_18_pion_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
+            if (c > 40.0) _h["Figure_18_pion_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
           if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
-            if (c < 20.0) _h["Figure_18_proton_1"]->fill(p.pT()/GeV, 1.0); // 0-20% centrality
-            if (c > 20.0 && c < 40.0) _h["Figure_18_proton_2"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-            _h["Figure_18_proton_3"]->fill(p.pT()/GeV, 1.0); // Min Bias
-            if (c > 40.0) _h["Figure_18_proton_4"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+            if (c < 20.0) _h["Figure_18_proton_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-20% centrality
+            if (c > 20.0 && c < 40.0) _h["Figure_18_proton_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
+            _h["Figure_18_proton_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
+            if (c > 40.0) _h["Figure_18_proton_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
           if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
-            if (c < 20.0) _h["Figure_18_proton_5"]->fill(p.pT()/GeV, 1.0);
-            if (c > 20.0 && c < 40.0) _h["Figure_18_proton_6"]->fill(p.pT()/GeV, 1.0); // 20-40% centrality
-            _h["Figure_18_proton_7"]->fill(p.pT()/GeV, 1.0); // Min Bias
-            if (c > 40.0) _h["Figure_18_proton_8"]->fill(p.pT()/GeV, 1.0); // 40-100% centrality
+            if (c < 20.0) _h["Figure_18_proton_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV));
+            if (c > 20.0 && c < 40.0) _h["Figure_18_proton_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
+            _h["Figure_18_proton_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
+            if (c > 40.0) _h["Figure_18_proton_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
         }
       }
@@ -497,74 +453,74 @@ namespace Rivet {
       //Figure 19 AuAu @ 62.4 GeV
       if (collSys == AuAu62)
       {
-        //_c["sow_AuAu"]->fill();
+        _c["sow_AuAu62"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
-            if (c < 5.0) _h["Figure_19_kaon_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
-            if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_2"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
-            if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_3"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
-            if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_4"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
-            if (c > 30.0 && c < 40.0) _h["Figure_19_kaon_5"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
-            if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_6"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
-            if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_7"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
-            if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_8"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
-            if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_9"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+            if (c < 5.0) _h["Figure_19_kaon_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h["Figure_19_kaon_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_9"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
           if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
-            if (c < 5.0) _h["Figure_19_kaon_10"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
-            if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_11"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
-            if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_12"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
-            if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_13"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
-            if (c > 30.0 && c < 40.0) _h["Figure_19_kaon_14"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
-            if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_15"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
-            if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_16"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
-            if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_17"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
-            if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+            if (c < 5.0) _h["Figure_19_kaon_10"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_11"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_12"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_13"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h["Figure_19_kaon_14"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_15"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_16"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_17"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_18"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
           if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
-            if (c < 5.0) _h["Figure_19_pion_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
-            if (c > 5.0 && c < 10.0) _h["Figure_19_pion_2"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
-            if (c > 10.0 && c < 20.0) _h["Figure_19_pion_3"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
-            if (c > 20.0 && c < 30.0) _h["Figure_19_pion_4"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
-            if (c > 30.0 && c < 40.0) _h["Figure_19_pion_5"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
-            if (c > 40.0 && c < 50.0) _h["Figure_19_pion_6"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
-            if (c > 50.0 && c < 60.0) _h["Figure_19_pion_7"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
-            if (c > 60.0 && c < 70.0) _h["Figure_19_pion_8"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
-            if (c > 70.0 && c < 80.0) _h["Figure_19_pion_9"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+            if (c < 5.0) _h["Figure_19_pion_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h["Figure_19_pion_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h["Figure_19_pion_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h["Figure_19_pion_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h["Figure_19_pion_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h["Figure_19_pion_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h["Figure_19_pion_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h["Figure_19_pion_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h["Figure_19_pion_9"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
           if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
-            if (c < 5.0) _h["Figure_19_pion_10"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
-            if (c > 5.0 && c < 10.0) _h["Figure_19_pion_11"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
-            if (c > 10.0 && c < 20.0) _h["Figure_19_pion_12"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
-            if (c > 20.0 && c < 30.0) _h["Figure_19_pion_13"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
-            if (c > 30.0 && c < 40.0) _h["Figure_19_pion_14"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
-            if (c > 40.0 && c < 50.0) _h["Figure_19_pion_15"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
-            if (c > 50.0 && c < 60.0) _h["Figure_19_pion_16"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
-            if (c > 60.0 && c < 70.0) _h["Figure_19_pion_17"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
-            if (c > 70.0 && c < 80.0) _h["Figure_19_pion_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+            if (c < 5.0) _h["Figure_19_pion_10"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h["Figure_19_pion_11"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h["Figure_19_pion_12"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h["Figure_19_pion_13"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h["Figure_19_pion_14"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h["Figure_19_pion_15"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h["Figure_19_pion_16"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h["Figure_19_pion_17"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h["Figure_19_pion_18"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
           if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
-            if (c < 5.0) _h["Figure_19_proton_1"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
-            if (c > 5.0 && c < 10.0) _h["Figure_19_proton_2"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
-            if (c > 10.0 && c < 20.0) _h["Figure_19_proton_3"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
-            if (c > 20.0 && c < 30.0) _h["Figure_19_proton_4"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
-            if (c > 30.0 && c < 40.0) _h["Figure_19_proton_5"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
-            if (c > 40.0 && c < 50.0) _h["Figure_19_proton_6"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
-            if (c > 50.0 && c < 60.0) _h["Figure_19_proton_7"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
-            if (c > 60.0 && c < 70.0) _h["Figure_19_proton_8"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
-            if (c > 70.0 && c < 80.0) _h["Figure_19_proton_9"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+            if (c < 5.0) _h["Figure_19_proton_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h["Figure_19_proton_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h["Figure_19_proton_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h["Figure_19_proton_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h["Figure_19_proton_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h["Figure_19_proton_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h["Figure_19_proton_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h["Figure_19_proton_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h["Figure_19_proton_9"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
           if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
-            if (c < 5.0) _h["Figure_19_proton_10"]->fill(p.pT()/GeV, 1.0); // 0-5% centrality
-            if (c > 5.0 && c < 10.0) _h["Figure_19_proton_11"]->fill(p.pT()/GeV, 1.0); // 5-10% centrality
-            if (c > 10.0 && c < 20.0) _h["Figure_19_proton_12"]->fill(p.pT()/GeV, 1.0); // 10-20% centrality
-            if (c > 20.0 && c < 30.0) _h["Figure_19_proton_13"]->fill(p.pT()/GeV, 1.0); // 20-30% centrality
-            if (c > 30.0 && c < 40.0) _h["Figure_19_proton_14"]->fill(p.pT()/GeV, 1.0); // 30-40% centrality
-            if (c > 40.0 && c < 50.0) _h["Figure_19_proton_15"]->fill(p.pT()/GeV, 1.0); // 40-50% centrality
-            if (c > 50.0 && c < 60.0) _h["Figure_19_proton_16"]->fill(p.pT()/GeV, 1.0); // 50-60% centrality
-            if (c > 60.0 && c < 70.0) _h["Figure_19_proton_17"]->fill(p.pT()/GeV, 1.0); // 60-70% centrality
-            if (c > 70.0 && c < 80.0) _h["Figure_19_proton_18"]->fill(p.pT()/GeV, 1.0); // 70-80% centrality
+            if (c < 5.0) _h["Figure_19_proton_10"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
+            if (c > 5.0 && c < 10.0) _h["Figure_19_proton_11"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
+            if (c > 10.0 && c < 20.0) _h["Figure_19_proton_12"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
+            if (c > 20.0 && c < 30.0) _h["Figure_19_proton_13"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-30% centrality
+            if (c > 30.0 && c < 40.0) _h["Figure_19_proton_14"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 30-40% centrality
+            if (c > 40.0 && c < 50.0) _h["Figure_19_proton_15"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-50% centrality
+            if (c > 50.0 && c < 60.0) _h["Figure_19_proton_16"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 50-60% centrality
+            if (c > 60.0 && c < 70.0) _h["Figure_19_proton_17"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
+            if (c > 70.0 && c < 80.0) _h["Figure_19_proton_18"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
         }
       }
@@ -572,28 +528,28 @@ namespace Rivet {
       //Figure 20 AuAu @ 130 GeV
       if (collSys == AuAu130)
       {
-        //_c["sow_AuAu"]->fill();
+        _c["sow_AuAu130"]->fill();
 
         for (const Particle& p : fsParticles) {
           if (p.pid() == 211) { //pion+ (PIPLUS Pdgid = 211)
-            if (c < 6.0) _h["Figure_20_1"]->fill(p.pT()/GeV, 1.0); // 0-6% centrality
-            if (c > 6.0 && c < 11.0) _h["Figure_20_2"]->fill(p.pT()/GeV, 1.0); // 6-11% centrality
-            if (c > 11.0 && c < 18.0) _h["Figure_20_3"]->fill(p.pT()/GeV, 1.0); // 11-18% centrality
-            if (c > 18.0 && c < 26.0) _h["Figure_20_4"]->fill(p.pT()/GeV, 1.0); // 18-26% centrality
-            if (c > 26.0 && c < 34.0) _h["Figure_20_5"]->fill(p.pT()/GeV, 1.0); // 26-34% centrality
-            if (c > 34.0 && c < 45.0) _h["Figure_20_6"]->fill(p.pT()/GeV, 1.0); // 34-45% centrality
-            if (c > 45.0 && c < 58.0) _h["Figure_20_7"]->fill(p.pT()/GeV, 1.0); // 45-58% centrality
-            if (c > 58.0 && c < 85.0) _h["Figure_20_8"]->fill(p.pT()/GeV, 1.0); // 58-85% centrality
+            if (c < 6.0) _h["Figure_20_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-6% centrality
+            if (c > 6.0 && c < 11.0) _h["Figure_20_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 6-11% centrality
+            if (c > 11.0 && c < 18.0) _h["Figure_20_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 11-18% centrality
+            if (c > 18.0 && c < 26.0) _h["Figure_20_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 18-26% centrality
+            if (c > 26.0 && c < 34.0) _h["Figure_20_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 26-34% centrality
+            if (c > 34.0 && c < 45.0) _h["Figure_20_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 34-45% centrality
+            if (c > 45.0 && c < 58.0) _h["Figure_20_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 45-58% centrality
+            if (c > 58.0 && c < 85.0) _h["Figure_20_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 58-85% centrality
           }
           if (p.pid() == -211) { //pion- (PIMINUS Pdgis = -211)
-            if (c < 6.0) _h["Figure_20_9"]->fill(p.pT()/GeV, 1.0); // 0-6% centrality
-            if (c > 6.0 && c < 11.0) _h["Figure_20_10"]->fill(p.pT()/GeV, 1.0); // 6-11% centrality
-            if (c > 11.0 && c < 18.0) _h["Figure_20_11"]->fill(p.pT()/GeV, 1.0); // 11-18% centrality
-            if (c > 18.0 && c < 26.0) _h["Figure_20_12"]->fill(p.pT()/GeV, 1.0); // 18-26% centrality
-            if (c > 26.0 && c < 34.0) _h["Figure_20_13"]->fill(p.pT()/GeV, 1.0); // 26-34% centrality
-            if (c > 34.0 && c < 45.0) _h["Figure_20_14"]->fill(p.pT()/GeV, 1.0); // 34-45% centrality
-            if (c > 45.0 && c < 58.0) _h["Figure_20_15"]->fill(p.pT()/GeV, 1.0); // 45-58% centrality
-            if (c > 58.0 && c < 85.0) _h["Figure_20_16"]->fill(p.pT()/GeV, 1.0); // 58-85% centrality
+            if (c < 6.0) _h["Figure_20_9"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-6% centrality
+            if (c > 6.0 && c < 11.0) _h["Figure_20_10"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 6-11% centrality
+            if (c > 11.0 && c < 18.0) _h["Figure_20_11"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 11-18% centrality
+            if (c > 18.0 && c < 26.0) _h["Figure_20_12"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 18-26% centrality
+            if (c > 26.0 && c < 34.0) _h["Figure_20_13"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 26-34% centrality
+            if (c > 34.0 && c < 45.0) _h["Figure_20_14"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 34-45% centrality
+            if (c > 45.0 && c < 58.0) _h["Figure_20_15"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 45-58% centrality
+            if (c > 58.0 && c < 85.0) _h["Figure_20_16"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 58-85% centrality
           }
         }
       }
@@ -608,127 +564,234 @@ namespace Rivet {
       //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
-      /*normalize(_h["Figure_18_kaon_1"]);
-      normalize(_h["Figure_18_kaon_2"]);
-      normalize(_h["Figure_18_kaon_3"]);
-      normalize(_h["Figure_18_kaon_4"]);
-      normalize(_h["Figure_18_kaon_5"]);
-      normalize(_h["Figure_18_kaon_6"]);
-      normalize(_h["Figure_18_kaon_7"]);
-      normalize(_h["Figure_18_kaon_8"]);
-      normalize(_h["Figure_18_pion_1"]);
-      normalize(_h["Figure_18_pion_2"]);
-      normalize(_h["Figure_18_pion_3"]);
-      normalize(_h["Figure_18_pion_4"]);
-      normalize(_h["Figure_18_pion_5"]);
-      normalize(_h["Figure_18_pion_6"]);
-      normalize(_h["Figure_18_pion_7"]);
-      normalize(_h["Figure_18_pion_8"]);
-      normalize(_h["Figure_18_proton_1"]);
-      normalize(_h["Figure_18_proton_2"]);
-      normalize(_h["Figure_18_proton_3"]);
-      normalize(_h["Figure_18_proton_4"]);
-      normalize(_h["Figure_18_proton_5"]);
-      normalize(_h["Figure_18_proton_6"]);
-      normalize(_h["Figure_18_proton_7"]);
-      normalize(_h["Figure_18_proton_8"]);
+      //_h["AAAA"]->scaleW(1./_c["CCCC"]->sumW());
 
-      normalize(_h["Figure_19_kaon_1"]);
-      normalize(_h["Figure_19_kaon_2"]);
-      normalize(_h["Figure_19_kaon_3"]);
-      normalize(_h["Figure_19_kaon_4"]);
-      normalize(_h["Figure_19_kaon_5"]);
-      normalize(_h["Figure_19_kaon_6"]);
-      normalize(_h["Figure_19_kaon_7"]);
-      normalize(_h["Figure_19_kaon_8"]);
-      normalize(_h["Figure_19_kaon_9"]);
-      normalize(_h["Figure_19_kaon_10"]);
-      normalize(_h["Figure_19_kaon_11"]);
-      normalize(_h["Figure_19_kaon_12"]);
-      normalize(_h["Figure_19_kaon_13"]);
-      normalize(_h["Figure_19_kaon_14"]);
-      normalize(_h["Figure_19_kaon_15"]);
-      normalize(_h["Figure_19_kaon_16"]);
-      normalize(_h["Figure_19_kaon_17"]);
-      normalize(_h["Figure_19_kaon_18"]);
-      normalize(_h["Figure_19_pion_1"]);
-      normalize(_h["Figure_19_pion_2"]);
-      normalize(_h["Figure_19_pion_3"]);
-      normalize(_h["Figure_19_pion_4"]);
-      normalize(_h["Figure_19_pion_5"]);
-      normalize(_h["Figure_19_pion_6"]);
-      normalize(_h["Figure_19_pion_7"]);
-      normalize(_h["Figure_19_pion_8"]);
-      normalize(_h["Figure_19_pion_9"]);
-      normalize(_h["Figure_19_pion_10"]);
-      normalize(_h["Figure_19_pion_11"]);
-      normalize(_h["Figure_19_pion_12"]);
-      normalize(_h["Figure_19_pion_13"]);
-      normalize(_h["Figure_19_pion_14"]);
-      normalize(_h["Figure_19_pion_15"]);
-      normalize(_h["Figure_19_pion_16"]);
-      normalize(_h["Figure_19_pion_17"]);
-      normalize(_h["Figure_19_pion_18"]);
-      normalize(_h["Figure_19_proton_1"]);
-      normalize(_h["Figure_19_proton_2"]);
-      normalize(_h["Figure_19_proton_3"]);
-      normalize(_h["Figure_19_proton_4"]);
-      normalize(_h["Figure_19_proton_5"]);
-      normalize(_h["Figure_19_proton_6"]);
-      normalize(_h["Figure_19_proton_7"]);
-      normalize(_h["Figure_19_proton_8"]);
-      normalize(_h["Figure_19_proton_9"]);
-      normalize(_h["Figure_19_proton_10"]);
-      normalize(_h["Figure_19_proton_11"]);
-      normalize(_h["Figure_19_proton_12"]);
-      normalize(_h["Figure_19_proton_13"]);
-      normalize(_h["Figure_19_proton_14"]);
-      normalize(_h["Figure_19_proton_15"]);
-      normalize(_h["Figure_19_proton_16"]);
-      normalize(_h["Figure_19_proton_17"]);
-      normalize(_h["Figure_19_proton_18"]);
+      if (collSys == dAu200)
+      {
+        _h["Figure_18_kaon_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_kaon_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_kaon_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_kaon_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+	      _h["Figure_18_kaon_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_pion_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_18_proton_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
 
-      normalize(_h["Figure_20_1"]);
-      normalize(_h["Figure_20_2"]);
-      normalize(_h["Figure_20_3"]);
-      normalize(_h["Figure_20_4"]);
-      normalize(_h["Figure_20_5"]);
-      normalize(_h["Figure_20_6"]);
-      normalize(_h["Figure_20_7"]);
-      normalize(_h["Figure_20_8"]);
-      normalize(_h["Figure_20_9"]);
-      normalize(_h["Figure_20_10"]);
-      normalize(_h["Figure_20_11"]);
-      normalize(_h["Figure_20_12"]);
-      normalize(_h["Figure_20_13"]);
-      normalize(_h["Figure_20_14"]);
-      normalize(_h["Figure_20_15"]);
-      normalize(_h["Figure_20_16"]);*/
+        /*normalize(_h["Figure_18_kaon_1"]);
+        normalize(_h["Figure_18_kaon_2"]);
+        normalize(_h["Figure_18_kaon_3"]);
+        normalize(_h["Figure_18_kaon_4"]);
+        normalize(_h["Figure_18_kaon_5"]);
+        normalize(_h["Figure_18_kaon_6"]);
+        normalize(_h["Figure_18_kaon_7"]);
+        normalize(_h["Figure_18_kaon_8"]);
+        normalize(_h["Figure_18_pion_1"]);
+        normalize(_h["Figure_18_pion_2"]);
+        normalize(_h["Figure_18_pion_3"]);
+        normalize(_h["Figure_18_pion_4"]);
+        normalize(_h["Figure_18_pion_5"]);
+        normalize(_h["Figure_18_pion_6"]);
+        normalize(_h["Figure_18_pion_7"]);
+        normalize(_h["Figure_18_pion_8"]);
+        normalize(_h["Figure_18_proton_1"]);
+        normalize(_h["Figure_18_proton_2"]);
+        normalize(_h["Figure_18_proton_3"]);
+        normalize(_h["Figure_18_proton_4"]);
+        normalize(_h["Figure_18_proton_5"]);
+        normalize(_h["Figure_18_proton_6"]);
+        normalize(_h["Figure_18_proton_7"]);
+        normalize(_h["Figure_18_proton_8"]);*/
 
-      /*scale(_h["Figure_18_kaon_1"], 4.0);
-      scale(_h["Figure_18_kaon_2"], 2.0);
-      scale(_h["Figure_18_kaon_3"], 1.0);
-      scale(_h["Figure_18_kaon_4"], 0.5);
-      scale(_h["Figure_18_kaon_5"], 4.0);
-      scale(_h["Figure_18_kaon_6"], 2.0);
-      scale(_h["Figure_18_kaon_7"], 1.0);
-      scale(_h["Figure_18_kaon_8"], 0.5);
-      scale(_h["Figure_18_pion_1"], 4.0);
-      scale(_h["Figure_18_pion_2"], 2.0);
-      scale(_h["Figure_18_pion_3"], 1.0);
-      scale(_h["Figure_18_pion_4"], 0.5);
-      scale(_h["Figure_18_pion_5"], 4.0);
-      scale(_h["Figure_18_pion_6"], 2.0);
-      scale(_h["Figure_18_pion_7"], 1.0);
-      scale(_h["Figure_18_pion_8"], 0.5);
-      scale(_h["Figure_18_proton_1"], 4.0);
-      scale(_h["Figure_18_proton_2"], 2.0);
-      scale(_h["Figure_18_proton_3"], 1.0);
-      scale(_h["Figure_18_proton_4"], 0.5);
-      scale(_h["Figure_18_proton_5"], 4.0);
-      scale(_h["Figure_18_proton_6"], 2.0);
-      scale(_h["Figure_18_proton_7"], 1.0);
-      scale(_h["Figure_18_proton_8"], 0.5);*/
+        /*scale(_h["Figure_18_kaon_1"], 4.0);
+        scale(_h["Figure_18_kaon_2"], 2.0);
+        scale(_h["Figure_18_kaon_3"], 1.0);
+        scale(_h["Figure_18_kaon_4"], 0.5);
+        scale(_h["Figure_18_kaon_5"], 4.0);
+        scale(_h["Figure_18_kaon_6"], 2.0);
+        scale(_h["Figure_18_kaon_7"], 1.0);
+        scale(_h["Figure_18_kaon_8"], 0.5);
+        scale(_h["Figure_18_pion_1"], 4.0);
+        scale(_h["Figure_18_pion_2"], 2.0);
+        scale(_h["Figure_18_pion_3"], 1.0);
+        scale(_h["Figure_18_pion_4"], 0.5);
+        scale(_h["Figure_18_pion_5"], 4.0);
+        scale(_h["Figure_18_pion_6"], 2.0);
+        scale(_h["Figure_18_pion_7"], 1.0);
+        scale(_h["Figure_18_pion_8"], 0.5);
+        scale(_h["Figure_18_proton_1"], 4.0);
+        scale(_h["Figure_18_proton_2"], 2.0);
+        scale(_h["Figure_18_proton_3"], 1.0);
+        scale(_h["Figure_18_proton_4"], 0.5);
+        scale(_h["Figure_18_proton_5"], 4.0);
+        scale(_h["Figure_18_proton_6"], 2.0);
+        scale(_h["Figure_18_proton_7"], 1.0);
+        scale(_h["Figure_18_proton_8"], 0.5);*/
+      }
+
+      if (collSys == AuAu62)
+      {
+        _h["Figure_19_kaon_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_kaon_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_kaon_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_pion_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+	      _h["Figure_19_pion_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+        _h["Figure_19_proton_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
+
+        /*normalize(_h["Figure_19_kaon_1"]);
+        normalize(_h["Figure_19_kaon_2"]);
+        normalize(_h["Figure_19_kaon_3"]);
+        normalize(_h["Figure_19_kaon_4"]);
+        normalize(_h["Figure_19_kaon_5"]);
+        normalize(_h["Figure_19_kaon_6"]);
+        normalize(_h["Figure_19_kaon_7"]);
+        normalize(_h["Figure_19_kaon_8"]);
+        normalize(_h["Figure_19_kaon_9"]);
+        normalize(_h["Figure_19_kaon_10"]);
+        normalize(_h["Figure_19_kaon_11"]);
+        normalize(_h["Figure_19_kaon_12"]);
+        normalize(_h["Figure_19_kaon_13"]);
+        normalize(_h["Figure_19_kaon_14"]);
+        normalize(_h["Figure_19_kaon_15"]);
+        normalize(_h["Figure_19_kaon_16"]);
+        normalize(_h["Figure_19_kaon_17"]);
+        normalize(_h["Figure_19_kaon_18"]);
+        normalize(_h["Figure_19_pion_1"]);
+        normalize(_h["Figure_19_pion_2"]);
+        normalize(_h["Figure_19_pion_3"]);
+        normalize(_h["Figure_19_pion_4"]);
+        normalize(_h["Figure_19_pion_5"]);
+        normalize(_h["Figure_19_pion_6"]);
+        normalize(_h["Figure_19_pion_7"]);
+        normalize(_h["Figure_19_pion_8"]);
+        normalize(_h["Figure_19_pion_9"]);
+        normalize(_h["Figure_19_pion_10"]);
+        normalize(_h["Figure_19_pion_11"]);
+        normalize(_h["Figure_19_pion_12"]);
+        normalize(_h["Figure_19_pion_13"]);
+        normalize(_h["Figure_19_pion_14"]);
+        normalize(_h["Figure_19_pion_15"]);
+        normalize(_h["Figure_19_pion_16"]);
+        normalize(_h["Figure_19_pion_17"]);
+        normalize(_h["Figure_19_pion_18"]);
+        normalize(_h["Figure_19_proton_1"]);
+        normalize(_h["Figure_19_proton_2"]);
+        normalize(_h["Figure_19_proton_3"]);
+        normalize(_h["Figure_19_proton_4"]);
+        normalize(_h["Figure_19_proton_5"]);
+        normalize(_h["Figure_19_proton_6"]);
+        normalize(_h["Figure_19_proton_7"]);
+        normalize(_h["Figure_19_proton_8"]);
+        normalize(_h["Figure_19_proton_9"]);
+        normalize(_h["Figure_19_proton_10"]);
+        normalize(_h["Figure_19_proton_11"]);
+        normalize(_h["Figure_19_proton_12"]);
+        normalize(_h["Figure_19_proton_13"]);
+        normalize(_h["Figure_19_proton_14"]);
+        normalize(_h["Figure_19_proton_15"]);
+        normalize(_h["Figure_19_proton_16"]);
+        normalize(_h["Figure_19_proton_17"]);
+        normalize(_h["Figure_19_proton_18"]);*/
+      }
+
+      if (collSys == AuAu130)
+      {
+        _h["Figure_20_1"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_2"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_3"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_4"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_5"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_6"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_7"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+	      _h["Figure_20_8"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_9"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_10"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_12"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_13"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_14"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_15"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_16"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        
+        /*normalize(_h["Figure_20_1"]);
+        normalize(_h["Figure_20_2"]);
+        normalize(_h["Figure_20_3"]);
+        normalize(_h["Figure_20_4"]);
+        normalize(_h["Figure_20_5"]);
+        normalize(_h["Figure_20_6"]);
+        normalize(_h["Figure_20_7"]);
+        normalize(_h["Figure_20_8"]);
+        normalize(_h["Figure_20_9"]);
+        normalize(_h["Figure_20_10"]);
+        normalize(_h["Figure_20_11"]);
+        normalize(_h["Figure_20_12"]);
+        normalize(_h["Figure_20_13"]);
+        normalize(_h["Figure_20_14"]);
+        normalize(_h["Figure_20_15"]);
+        normalize(_h["Figure_20_16"]);*/
+      }
 
     }
 

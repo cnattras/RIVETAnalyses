@@ -8,9 +8,14 @@ rivet --pwd -p ../Centralities/Calibration/calibration_AuAu_200GeV_STAR.yoda -a 
 
 rivet-mkhtml --pwd Rivet_AUAU130.yoda
 cp -r rivet-plots/ rivet-plots-AUAU130/
+rm -rf rivet-plots-AUAU130/rivet-plots/
 
 rivet-mkhtml --pwd Rivet_AUAU62.yoda
 cp -r rivet-plots/ rivet-plots-AUAU62/
+rm -rf rivet-plots-AUAU62/rivet-plots/
 
 rivet-mkhtml --pwd Rivet_DAU200.yoda
 cp -r rivet-plots/ rivet-plots-DAU200/
+rm -rf rivet-plots-DAU200/rivet-plots/
+
+rm -rf rivet-plots/
