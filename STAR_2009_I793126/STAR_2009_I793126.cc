@@ -423,13 +423,13 @@ namespace Rivet {
             _h["Figure_18_kaon_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
             if (c > 40.0) _h["Figure_18_kaon_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
-          if (p.pid() == 211 && absValue(p.parents()[0]) != 3122 && absValue(p.parents()[0]) != 310 && absValue(p.parents()[0]) != 13) { //pion+ (PIPLUS Pdgid = 211)
+          if (p.pid() == 211 && p.parents()[0] != 3122 && p.parents()[0] != 310 && p.parents()[0] != 13 && p.parents()[0] != -3122 && p.parents()[0] != -310 && p.parents()[0] != -13) { //pion+ (PIPLUS Pdgid = 211)
             if (c < 20.0) _h["Figure_18_pion_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-20% centrality
             if (c > 20.0 && c < 40.0) _h["Figure_18_pion_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
             _h["Figure_18_pion_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
             if (c > 40.0) _h["Figure_18_pion_4"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 40-100% centrality
           }
-          if (p.pid() == -211 && absValue(p.parents()[0]) != 3122 && absValue(p.parents()[0]) != 310 && absValue(p.parents()[0]) != 13) { //pion- (PIMINUS Pdgis = -211)
+          if (p.pid() == -211 && p.parents()[0] != 3122 && p.parents()[0] != 310 && p.parents()[0] != 13 && p.parents()[0] != -3122 && p.parents()[0] != -310 && p.parents()[0] != -13) { //pion- (PIMINUS Pdgis = -211)
             if (c < 20.0) _h["Figure_18_pion_5"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV));
             if (c > 20.0 && c < 40.0) _h["Figure_18_pion_6"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 20-40% centrality
             _h["Figure_18_pion_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // Min Bias
@@ -478,7 +478,7 @@ namespace Rivet {
             if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_17"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
             if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_18"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
-          if (p.pid() == 211 && absValue(p.parents()[0]) != 3122 && absValue(p.parents()[0]) != 310 && absValue(p.parents()[0]) != 13) { //pion+ (PIPLUS Pdgid = 211)
+          if (p.pid() == 211 && p.parents()[0] != 3122 && p.parents()[0] != 310 && p.parents()[0] != 13 && p.parents()[0] != -3122 && p.parents()[0] != -310 && p.parents()[0] != -13) { //pion+ (PIPLUS Pdgid = 211)
             if (c < 5.0) _h["Figure_19_pion_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
             if (c > 5.0 && c < 10.0) _h["Figure_19_pion_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
             if (c > 10.0 && c < 20.0) _h["Figure_19_pion_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
@@ -489,7 +489,7 @@ namespace Rivet {
             if (c > 60.0 && c < 70.0) _h["Figure_19_pion_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 60-70% centrality
             if (c > 70.0 && c < 80.0) _h["Figure_19_pion_9"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 70-80% centrality
           }
-          if (p.pid() == -211 && absValue(p.parents()[0]) != 3122 && absValue(p.parents()[0]) != 310 && absValue(p.parents()[0]) != 13) { //pion- (PIMINUS Pdgis = -211)
+          if (p.pid() == -211 && p.parents()[0] != 3122 && p.parents()[0] != 310 && p.parents()[0] != 13 && p.parents()[0] != -3122 && p.parents()[0] != -310 && p.parents()[0] != -13) { //pion- (PIMINUS Pdgis = -211)
             if (c < 5.0) _h["Figure_19_pion_10"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-5% centrality
             if (c > 5.0 && c < 10.0) _h["Figure_19_pion_11"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 5-10% centrality
             if (c > 10.0 && c < 20.0) _h["Figure_19_pion_12"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 10-20% centrality
@@ -531,7 +531,7 @@ namespace Rivet {
         _c["sow_AuAu130"]->fill();
 
         for (const Particle& p : fsParticles) {
-          if (p.pid() == 211 && absValue(p.parents()[0]) != 3122 && absValue(p.parents()[0]) != 310 && absValue(p.parents()[0]) != 13) { //pion+ (PIPLUS Pdgid = 211)
+          if (p.pid() == 211 && p.parents()[0] != 3122 && p.parents()[0] != 310 && p.parents()[0] != 13 && p.parents()[0] != -3122 && p.parents()[0] != -310 && p.parents()[0] != -13) { //pion+ (PIPLUS Pdgid = 211)
             if (c < 6.0) _h["Figure_20_1"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-6% centrality
             if (c > 6.0 && c < 11.0) _h["Figure_20_2"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 6-11% centrality
             if (c > 11.0 && c < 18.0) _h["Figure_20_3"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 11-18% centrality
@@ -541,7 +541,7 @@ namespace Rivet {
             if (c > 45.0 && c < 58.0) _h["Figure_20_7"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 45-58% centrality
             if (c > 58.0 && c < 85.0) _h["Figure_20_8"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 58-85% centrality
           }
-          if (p.pid() == -211 && absValue(p.parents()[0]) != 3122 && absValue(p.parents()[0]) != 310 && absValue(p.parents()[0]) != 13) { //pion- (PIMINUS Pdgis = -211)
+          if (p.pid() == -211 && p.parents()[0] != 3122 && p.parents()[0] != 310 && p.parents()[0] != 13 && p.parents()[0] != -3122 && p.parents()[0] != -310 && p.parents()[0] != -13) { //pion- (PIMINUS Pdgis = -211)
             if (c < 6.0) _h["Figure_20_9"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 0-6% centrality
             if (c > 6.0 && c < 11.0) _h["Figure_20_10"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 6-11% centrality
             if (c > 11.0 && c < 18.0) _h["Figure_20_11"]->fill(p.pT()/GeV, 1.0/(2.0*3.14*p.pT()/GeV)); // 11-18% centrality
