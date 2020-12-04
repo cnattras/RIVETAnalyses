@@ -33,4 +33,4 @@ ToDo:
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=AuAu,pp
+ - beam=dAu,pp

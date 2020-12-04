@@ -1,0 +1,12 @@
+Name,Title,Xaxis,Yaxis,Options
+d01-x01-y02,Cross section for $\pi^0$ production in pp at $\sqrt{s_{NN}}$ = 200 GeV,$p_T$ (GeV/$c$),Cross section (mb GeV$^{-2}c^3$),LogY=<0>
+d02-x01-y02,Cross section for $\pi^0$ production in dAu at $\sqrt{s_{NN}}$ = 200 GeV,$p_T$ (GeV/$c$),Cross section (mb GeV$^{-2}c^3$),LogY=<0>
+d03-x01-y02,$\eta / \pi^0$ ratio in pp collisions at $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$\eta / \pi^0$ ratio,LogY=<0>
+d04-x01-y02,$\eta / \pi^0$ ratio in dAu collisions at $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$\eta / \pi^0$ ratio,LogY=<0>
+d05-x01-y02,Nuclear modification factor $R_{dA}$ for $\pi^0$ $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$R_{dA}$,LogY=<0>
+d06-x01-y02,Nuclear modification factor $R_{dA}$ for $\eta$ $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$R_{dA}$,LogY=<0>
+d07-x01-y02,Nuclear modification factor $R_{CP}$ for $\pi^0$ $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$R_{CP}$,LogY=<0>
+d08-x01-y02,Direct photon double ratio $R_{\gamma}$ in pp at $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$R_{\gamma}$,LogY=<0>
+d09-x01-y02,Direct photon double ratio $R_{\gamma}$ in dAu at $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),$R_{\gamma}$,LogY=<0>
+d10-x01-y02,Cross section for direct photon production in pp at $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),Cross section (mb GeV$^{-2}c^3$),LogY=<0>
+d11-x01-y02,Cross section for direct photon production in dAu at $\sqrt{s}$ = 200 GeV,$p_T$ (GeV/$c$),Cross section (mb GeV$^{-2}c^3$),LogY=<0>
