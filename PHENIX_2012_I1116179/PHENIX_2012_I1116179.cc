@@ -25,7 +25,7 @@ namespace Rivet {
     void init() {
 
 	  declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-
+    beamOpt = getOption<string>("beam", "NONE");
 
 	  //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV);
 	  //declare(fs, "fs");
@@ -46,6 +46,8 @@ namespace Rivet {
     book(_h["dir_photon_AuAu5060"], 1, 1, 8);
     book(_h["dir_photon_AuAu6092"], 1, 1, 9);
     book(_h["dir_photon_AuAu0092"], 1, 1, 10);
+
+    //book(_h["dir_photon_pp"], 1, 1, 10);
     
 	  book(_c["sow_AuAu0005"], "sow_AuAu0005");
 	  book(_c["sow_AuAu0510"], "sow_AuAu0510");
@@ -57,7 +59,7 @@ namespace Rivet {
 	  book(_c["sow_AuAu5060"], "sow_AuAu5060");
 	  book(_c["sow_AuAu6092"], "sow_AuAu6092");
 	  book(_c["sow_AuAu0092"], "sow_AuAu0092");
-//	  book(_c["sow_pp"], "sow_pp");
+	  //book(_c["sow_pp"], "sow_pp");
 
     }
 
@@ -66,6 +68,15 @@ namespace Rivet {
     void analyze(const Event& event) {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
+
+      Particles pfsParticles = applyProjection<FinalState>(event,"pfs").particles();
+
+
+	  //cout << "c=" << c << endl;
+    //for (auto& w : event.weights()) cout << " " << w << endl;
+
+ //   if(beam=="AUAU")
+    {
 
       if(c > 0. && c < 5.) 
       {
@@ -107,11 +118,11 @@ namespace Rivet {
       if(c > 0. && c < 92.)
         _c["sow_AuAu0092"]->fill();
 
-      Particles pfsParticles = applyProjection<FinalState>(event,"pfs").particles();
+      
 
       for(const Particle& p : pfsParticles) 
       {
-        if(c > 0. && c < 5. && p.pid() == 22) _h["dir_photon_AuAu0005"]->fill(p.pT()/GeV);
+        if(c >= 0. && c < 5. && p.pid() == 22) _h["dir_photon_AuAu0005"]->fill(p.pT()/GeV);
         else if (c < 10. && p.pid() == 22) _h["dir_photon_AuAu0510"]->fill(p.pT()/GeV);
         else if (c < 15. && p.pid() == 22) _h["dir_photon_AuAu1015"]->fill(p.pT()/GeV);
         else if (c < 20. && p.pid() == 22) _h["dir_photon_AuAu1520"]->fill(p.pT()/GeV);
@@ -127,11 +138,24 @@ namespace Rivet {
       }
 
     }
+/*
+    else if(beam="PP")
+    {
+      _c["sow_pp"]->fill();
+      for(const Particle& p : pfsParticles) 
+      {
+        if(p.pid() == 22) _h["dir_photon_pp"]->fill(p.pT()/GeV);
+      }
+
+    }
+      
+*/
+    }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      /*
+      
       _h["dir_photon_AuAu0005"]->scaleW(1./_c["sow_AuAu0005"]->sumW());
       _h["dir_photon_AuAu0510"]->scaleW(1./_c["sow_AuAu0510"]->sumW());
       _h["dir_photon_AuAu1015"]->scaleW(1./_c["sow_AuAu1015"]->sumW());
@@ -143,7 +167,7 @@ namespace Rivet {
       _h["dir_photon_AuAu6092"]->scaleW(1./_c["sow_AuAu6092"]->sumW());
       _h["dir_photon_AuAu0092"]->scaleW(1./_c["sow_AuAu0092"]->sumW());
 
-      */
+      
     }
 
     //@}
@@ -155,6 +179,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
 	map<string, Scatter2DPtr> _s;
+  string beamOpt = "";
     //@}
 
 
