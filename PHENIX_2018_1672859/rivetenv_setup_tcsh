@@ -1,0 +1,2 @@
+set path = ($path /cvmfs/sft.cern.ch/lcg/external/texlive/2020/bin/x86_64-linux/ /cvmfs/sphenix.sdcc.bnl.gov/x8664_sl7/opt/sphenix/core/bin)
+source /cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/opt/sphenix/core/rivet/rivetenv.csh

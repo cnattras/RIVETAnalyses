@@ -1,0 +1,4 @@
+source /cvmfs/sphenix.sdcc.bnl.gov/gcc-8.3/opt/sphenix/core/rivet/rivetenv.sh
+export PATH="/cvmfs/sphenix.sdcc.bnl.gov/x8664_sl7/opt/sphenix/core/bin:$PATH"
+export PATH=/cvmfs/sft.cern.ch/lcg/external/texlive/2020/bin/x86_64-linux/:$PATH
+
