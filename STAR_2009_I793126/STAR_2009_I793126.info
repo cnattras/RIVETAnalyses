@@ -1,26 +1,26 @@
 Name: STAR_2009_I793126
 Year: 2009
-Summary: <A one-line informative STAR_2009_I793126 headline>
+Summary: Systematic Measurements of Identified Particle Spectra in pp, d+Au and Au+Au Collisions from STAR
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: RHIC
 InspireID: 793126
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Charles Hughes chughe26@vols.utk.edu
+ - William Witt wwitt4@vols.utk.edu
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'Phys.Rev.C 79 (2009) 034909'
+ - 'arXiv:0808.2041'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
-#Energies: [[6500,6500]]
+#Beams: [d, Au,], [Au, Au]
+#Energies: [200000, 62400, 130000]
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
+ - beam=DAU200,AUAU62,AUAU130
 Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+  'This rivet analysis plots spectra of charges pions, kaons, protons and antiprotons 
+  for three collision systems: dAu at 200 GeV, AuAu at 62.4 GeV, and AuAu at 130 GeV.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -28,8 +28,7 @@ ValidationInfo:
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
-BibKey: 
+BibKey:
 BibTeX: ''
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
-

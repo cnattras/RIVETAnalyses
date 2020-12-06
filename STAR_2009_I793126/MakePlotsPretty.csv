@@ -1,0 +1,95 @@
+Name,Title,Xaxis,Yaxis,Options
+d43-x01-y01,d+Au $\sqrt{s} = 200 GeV$ $K^{-}$ Min-Bias,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y02,d+Au $\sqrt{s} = 200 GeV$ $K^{-}$ 40 - 100 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y03,d+Au $\sqrt{s} = 200 GeV$ $K^{-}$ 20 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y04,d+Au $\sqrt{s} = 200 GeV$ $K^{-}$ 0-20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y05,d+Au $\sqrt{s} = 200 GeV$ $K^{+}$ Min-Bias,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y06,d+Au $\sqrt{s} = 200 GeV$ $K^{+}$ 40 - 100 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y07,d+Au $\sqrt{s} = 200 GeV$ $K^{+}$ 20 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d43-x01-y08,d+Au $\sqrt{s} = 200 GeV$ $K^{+}$ 0-20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y01,d+Au $\sqrt{s} = 200 GeV$ $\pi^{-}$ Min-Bias,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y02,d+Au $\sqrt{s} = 200 GeV$ $\pi^{-}$ 40 - 100 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y03,d+Au $\sqrt{s} = 200 GeV$ $\pi^{-}$ 20 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y04,d+Au $\sqrt{s} = 200 GeV$ $\pi^{-}$ 0-20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y05,d+Au $\sqrt{s} = 200 GeV$ $\pi^{+}$ Min-Bias,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y06,d+Au $\sqrt{s} = 200 GeV$ $\pi^{+}$ 40 - 100 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y07,d+Au $\sqrt{s} = 200 GeV$ $\pi^{+}$ 20 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d44-x01-y08,d+Au $\sqrt{s} = 200 GeV$ $\pi^{+}$ 0-20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y01,d+Au $\sqrt{s} = 200 GeV$ p Min-Bias,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y02,d+Au $\sqrt{s} = 200 GeV$ p 40 - 100 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y03,d+Au $\sqrt{s} = 200 GeV$ p 20 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y04,d+Au $\sqrt{s} = 200 GeV$ p 0-20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y05,d+Au $\sqrt{s} = 200 GeV$ $\overline{p}$ Min-Bias,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y06,d+Au $\sqrt{s} = 200 GeV$ $\overline{p}$ 40 - 100 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y07,d+Au $\sqrt{s} = 200 GeV$ $\overline{p}$ 20 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d45-x01-y08,d+Au $\sqrt{s} = 200 GeV$ $\overline{p}$ 0-20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y01,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 70 - 80 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y02,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 60 - 70 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y03,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 50 - 60 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y04,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 40 - 50 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y05,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 30 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y06,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 20 - 30 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y07,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 10 - 20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y08,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 5 - 10 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y09,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{-}$ 0 - 5 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y10,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 70 - 80 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y11,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 60 - 70 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y12,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 50 - 60 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y13,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 40 - 50 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y14,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 30 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y15,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 20 - 30 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y16,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 10 - 20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y17,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 5 - 10 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d46-x01-y18,Au+Au $\sqrt{s} = 62.4 GeV$ $K^{+}$ 0 - 5 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y01,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 70 - 80 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y02,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 60 - 70 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y03,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 50 - 60 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y04,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 40 - 50 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y05,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 30 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y06,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 20 - 30 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y07,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 10 - 20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y08,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{-}$ 5 - 10 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y09,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 0 - 5 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y10,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 70 - 80 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y11,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 60 - 70 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y12,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 50 - 60 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y13,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 40 - 50 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y14,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 30 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y15,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 20 - 30 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y16,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 10 - 20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y17,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 5 - 10 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d47-x01-y18,Au+Au $\sqrt{s} = 62.4 GeV$ $\pi^{+}$ 0 - 5 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y01,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 70 - 80 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y02,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 60 - 70 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y03,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 50 - 60 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y04,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 40 - 50 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y05,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 30 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y06,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 20 - 30 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y07,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 10 - 20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y08,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 5 - 10 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y09,Au+Au $\sqrt{s} = 62.4 GeV$ $\overline{p}$ 0 - 5 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y10,Au+Au $\sqrt{s} = 62.4 GeV$ p 70 - 80 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y11,Au+Au $\sqrt{s} = 62.4 GeV$ p 60 - 70 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y12,Au+Au $\sqrt{s} = 62.4 GeV$ p 50 - 60 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y13,Au+Au $\sqrt{s} = 62.4 GeV$ p 40 - 50 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y14,Au+Au $\sqrt{s} = 62.4 GeV$ p 30 - 40 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y15,Au+Au $\sqrt{s} = 62.4 GeV$ p 20 - 30 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y16,Au+Au $\sqrt{s} = 62.4 GeV$ p 10 - 20 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y17,Au+Au $\sqrt{s} = 62.4 GeV$ p 5 - 10 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d48-x01-y18,Au+Au $\sqrt{s} = 62.4 GeV$ p 0 - 5 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y01,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 58 - 85 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y02,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 45 - 58 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y03,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 34 - 45 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y04,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 26 - 34 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y05,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 18 - 26 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y06,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 11 - 18 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y07,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 6 - 11 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y08,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{-}$ 0 - 6 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y09,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 58 - 85 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y10,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 45 - 58 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y11,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 34 - 45 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y12,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 26 - 34 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y13,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 18 - 26 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y14,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 11 - 18 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y15,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 6 - 11 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>
+d49-x01-y16,Au+Au $\sqrt{s} = 130 GeV$ $\pi^{+}$ 0 - 6 $\%$,$p_{T} (GeV/c)$,$\dfrac{1}{2\pi}\dfrac{d^{2}N}{p_{T}dp{T}dy}$,LogY=<1>

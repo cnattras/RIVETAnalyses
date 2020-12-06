@@ -1,0 +1,20 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=[Insert title for histogram d01-x01-y01 here]
+XLabel=$p_{\rm T}$ (GeV/c)
+YLabel=$\frac{1}{N_{\rm ev}2\pi p_{\rm T}}\frac{{\rm d}^2N}{{\rm d}p_{\rm T}{\rm d}y}$ (GeV/c)$^{-2}$
+DrawOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/d01-x01-y01_dAu
+LegendOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/d01-x01-y01_dAu
+# END PLOT
+
+# BEGIN HISTO1D //gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/d01-x01-y01_dAu
+LineColor=red
+LineStyle=solid
+Path=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/d01-x01-y01_dAu
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.500000e+00	2.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+

@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/sow_AuAu
+LegendOnly=//direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/sow_AuAu
+# END PLOT
+
+# BEGIN COUNTER //direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/sow_AuAu
+LineColor=red
+LineStyle=solid
+Path=//direct/star+u/truhlar/Rivet/RIVETAnalyses/STAR_2010_I840766/Rivet_pp.yoda/STAR_2010_I840766:beam=pp:cent=GEN/sow_AuAu
+Title=Rivet_pp
+# value	 error
+0.000000e+00	0.000000e+00
+# END COUNTER
+
