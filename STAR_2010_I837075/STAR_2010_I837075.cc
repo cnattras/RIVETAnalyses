@@ -8,10 +8,7 @@
 #include "Rivet/Projections/AliceCommon.hh"
 #include "RHICCentrality.hh"
 
-
 namespace Rivet {
-
-
   /// @brief Add a short analysis description here
   class STAR_2010_I837075 : public Analysis {
   public:
@@ -22,20 +19,31 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
         i_event = 0;
-        /* w2 = 0; */
-        /* w_all = 0; */
 
-        declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+		int pid_p  = 2212;
+		int pid_Cu = 1000290630;
+
+		const ParticlePair& beam = beams();
+		if (beam.first.pid() == pid_Cu && beam.second.pid() == pid_Cu)
+		{
+            cout << " getting centrality " << endl;
+			isCu = true;
+            declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+		} else if (beam.first.pid() == pid_p && beam.second.pid() == pid_p) {
+			isCu = false;
+		} else {
+            cout << " Error: don't run on these beams! (beam id's should both be either " << pid_Cu << " or " << pid_p << endl;
+        }
 
         // ----------------------------------------------------------
         // Cuts used to see if there is a trigger hit in the BBC
         // Refer to example/precedent from: 
         //   https://rivet.hepforge.org/analyses/ALICE_2010_I880049
         // ----------------------------------------------------------
-        declare(ChargedFinalState((Cuts::eta >= 3.3 && Cuts::eta < 5.0) &&
-                    Cuts::pT > 0.1*GeV), "BBC_East");
-        declare(ChargedFinalState((Cuts::eta > -5.0 && Cuts::eta < -3.3) &&
-                    Cuts::pT > 0.1*GeV), "BBC_West");
+        /* declare(ChargedFinalState((Cuts::eta >= 3.3 && Cuts::eta < 5.0) && */
+        /*             Cuts::pT > 0.1*GeV), "BBC_East"); */
+        /* declare(ChargedFinalState((Cuts::eta > -5.0 && Cuts::eta < -3.3) && */
+        /*             Cuts::pT > 0.1*GeV), "BBC_West"); */
         // note: this cut probably isn't very restrictive in Cu+Cu, but more
         //       often in pp
 
@@ -44,10 +52,10 @@ namespace Rivet {
         // Refer to example/precedent from: 
         //   https://rivet.hepforge.org/analyses/STAR_2006_S6500200.html
         // ----------------------------------------------------------
-        const double min_pi_pT = 3*GeV;
-        const double max_pi_pT = 10.*GeV;
-        const double min_p_pT  = 3.*GeV;
-        const double max_p_pT  = 6.*GeV;
+        const double min_pi_pT =  3. * GeV;
+        const double max_pi_pT = 10. * GeV;
+        const double min_p_pT  =  3. * GeV;
+        const double max_p_pT  =  6. * GeV;
 
         declare( ALICE::PrimaryParticles( Cuts::abseta < 0.5 && Cuts::pT > min_pi_pT  && Cuts::pT < max_pi_pT  && Cuts::pid == PID::PIPLUS),  "piplusFS");
         declare( ALICE::PrimaryParticles( Cuts::abseta < 0.5 && Cuts::pT > min_pi_pT  && Cuts::pT < max_pi_pT  && Cuts::pid == PID::PIMINUS), "piminusFS");
@@ -97,7 +105,6 @@ namespace Rivet {
 
             // FIG 3b : Pion RAA (cent)
             if (i==0) {
-                /* book(_h["Raa_pion_cent"], mkAxisCode(6,1,2)); // (f) */
                 book(_h["pion_cent_CuCu_58"], 6,1,2); // [A]
                 book(_c["_pion_cent_pp_58"],   "_c_pionCent");    // [A]
             }
@@ -134,49 +141,22 @@ namespace Rivet {
             for (auto e : event.weights()) cout <<" "<<e << "  sumW: " << _c["CuCu"]->sumW() <<  endl;
         }
 
-		int pid_p  = 2212;
-		int NN_Cu  = 63;
-		int pid_Cu = 1000290630;
-
-		bool isCu;
-		const ParticlePair& beam = beams();
-		double NN = 0;
-
         // move to init -- init uses data from the first event and fill a global flag
         // assumes all events are the same in analyze
-		string beamName = "Empty";
-		if (beam.first.pid() == pid_Cu && beam.second.pid() == pid_Cu)
-		{
-			isCu = true;
-			beamName = "CuCu";
-			NN = NN_Cu;
-			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) beamName += "200GeV";
-			else vetoEvent;
-		} else if (beam.first.pid() == pid_p && beam.second.pid() == pid_p)
-		{
-			isCu = false;
-			beamName = "pp";
-			NN = 1.;
-			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) beamName += "200GeV";
-			else vetoEvent;
-		} else {
-			vetoEvent;
-		}
 
-        const ChargedFinalState& bbc_east = applyProjection<ChargedFinalState>(event,"BBC_East");
-        const ChargedFinalState& bbc_west = applyProjection<ChargedFinalState>(event,"BBC_West");
-        if (!(bbc_east.size() || bbc_west.size())){
-            vetoEvent;
-        }
+        /* const ChargedFinalState& bbc_east = applyProjection<ChargedFinalState>(event,"BBC_East"); */
+        /* const ChargedFinalState& bbc_west = applyProjection<ChargedFinalState>(event,"BBC_West"); */
+        /* if (!bbc_east.size() && !bbc_west.size()){ */
+        /*     cout << " n_events vetoed " << temp_nVetoEvent++ << endl; */
+        /*     cout << " sizes: " << bbc_east.size() << " " << bbc_west.size() << endl; */
+        /* } */
 
         // get final state particles:
         int k {0}; 
-        double cent{-1};
+        double cent{-2.};
         if (isCu) {
-            // FIXME -- remove test_factor. 
-            // It is used for testing because centraliy definition in Au+Au
-            double const test_factor {0.2};
-            cent = apply<CentralityProjection>(event,"CMULT")() * test_factor;
+            cent = apply<CentralityProjection>(event,"CMULT")();
+            /* cout << cent << endl; */
             if      (cent < 10.)  k = 0;
             else if (cent < 20.)  k = 1;
             else if (cent < 40.)  k = 2;
@@ -185,10 +165,10 @@ namespace Rivet {
         }
 
         // All event vetos are passed. Get the particles
-        const Particles& piplus  = apply<ALICE::PrimaryParticles>(event,"piplusFS").particles();
+        const Particles& piplus  = apply<ALICE::PrimaryParticles>(event,"piplusFS") .particles();
         const Particles& piminus = apply<ALICE::PrimaryParticles>(event,"piminusFS").particles();
-        const Particles& proton  = apply<ALICE::PrimaryParticles>(event,"protonFS").particles();
-        const Particles& pbar    = apply<ALICE::PrimaryParticles>(event,"pbarFS").particles();
+        const Particles& proton  = apply<ALICE::PrimaryParticles>(event,"protonFS") .particles();
+        const Particles& pbar    = apply<ALICE::PrimaryParticles>(event,"pbarFS")   .particles();
 
 		if (isCu) {
             // ------------------
@@ -196,11 +176,6 @@ namespace Rivet {
             // ------------------
             _c["CuCu"]->fill();
             _c4[k]->fill();
-			/* _c_dummy["CuCu"] += 1.; */
-            /* _c4_dummy[k] += 1.; */
-            /* if (debug > 0 && k==2) */ 
-
-			// fill in the spectra
 
 			// fill in values for the RAA
 			for (auto& p : piminus) {
@@ -273,49 +248,33 @@ namespace Rivet {
 
     /* /// Normalise histograms etc., after the run */
     void finalize() {
-        cout << " a0 " << endl;
-        if (debug > 1) cout << " ZEBRA 2" << endl;
 
-        bool has_CuCu { _c["CuCu"]->sumW() != 0 };
-        bool has_pp   { _c["pp"]  ->sumW() != 0 };
-         
-        cout << " a1 " << has_CuCu << " " << has_pp << endl;
-        if (debug > 0) {
-            cout << " has_CuCu: " << has_CuCu << endl;
-            cout << " has_pp:   " << has_pp   << endl;
-            
-            cout << " has: " << _c["pp"]->sumW() << " pp events. " << endl;
-            cout << " has: " << _c["CuCu"]->sumW() << " CuCu events. " << endl;
-            array<string, 4> i_str{"0_10","10_20","20_40","40_60"};
-            if (debug > 2) {
-                for (int i{0};i<4;++i) {
-                    cout << " has: " << _c4[i]->sumW() 
-                         << " Cu+Cu "<<i_str[i]<<" events." << endl;
-                }
+        bool has_CuCu { _c["CuCu"]->numEntries() != 0 };
+        bool has_pp   { _c["pp"]  ->numEntries() != 0 };
+        
+        // print out some run statistics 
+        cout << " has_CuCu: " << has_CuCu << endl;
+        cout << " has_pp:   " << has_pp   << endl;
+        
+        cout << " has: " << _c["pp"]  ->numEntries() << "  pp events. " << endl;
+        cout << " has: " << _c["CuCu"]->numEntries() << "  CuCu events. " << endl;
+
+        if (has_CuCu) {
+            cout << " distribution of Cu+Cu centralities: " << endl;
+            for (int i{0};i<4;++i) {
+                cout << " has: " << _c4[i]->numEntries() << " Cu+Cu "<<i_str[i]<<" events." << endl;
             }
-            /* if (i==2) { */
-                /* cout << " w2 weighting: " << weight << endl; */
-            /* } */
         }
+        /* cout << " n_events vetoed " << temp_nVetoEvent << endl; */
 
-        /* if (has_pp) { */
-        /*     _h["pion_pT_pp"  ]->scaleW(1./_c["pp"]->sumW()); */
-        /* } */
-        if (has_pp) {
-            // No plots are saved for just pp runs.
-            // => Do nothing, as just saving the pp Histo1D output
-            //    is all that is required.
-        }
-
-        if (has_CuCu && has_pp) {
-            /* array<string, 4> i_str{"0_10","10_20","20_40","40_60"}; */
+        // don't process any histograms unless there are both Cu+Cu and pp events
+        if (has_CuCu) {
             bool first_loop = true;
             for (int i{0}; i<4; ++i) {
                 if (_c4[i]->sumW() == 0) {
                     cout << " No events for centrality class " << i_str[i] << endl;
                     continue;
                 }
-
 
                 // FIG 1a : pi+ and pi- spectra
                 _h4["PIminus"][i]->scaleW(1./_c4[i]->sumW());
@@ -355,16 +314,13 @@ namespace Rivet {
                 // FIG 4a : Proton Raa(pT)
                 if (first_loop) _h["_proton_pT_pp"]->scaleW(1./_c["pp"]->sumW());
                 if (has_pp) {
-                    divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton"][i]);
+                    divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton_pT"][i]);
                 }
 
                 // FIG 4b -- no data for this figure
 
                 // FIG 5a : p+p over pi+pi in 3-6 GeV range
                 _h4["_PI_3_to_6"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
-                /* cout << _h4["_PPBAR"][i]->sumW() << endl; */
-                /* cout << _h4["_PI_3_to_6"]->sumW() << endl; */
-                /* cout << _h4["ratio_PtoPI"][i]->sumW() << endl; */
 
                 divide(_h4["_PPBAR"][i],_h4["_PI_3_to_6"][i],_s4["ratio_PtoPI"][i]);
 
@@ -375,23 +331,21 @@ namespace Rivet {
                     divide(_h["_P_Cent_34"], _h["_PI_Cent_34"], _s["PItoP_34"]);
                 }
             }
-
         }
     }
 
     //@{
+    bool isCu;
     map<string, Histo1DPtr> _h;
-    /* Histo1D* hdummy; */
     map<string, CounterPtr> _c; // Counters: number of p+p event, Cu+Cu events
-    /* map<string, double> _c_dummy; // Counters: number of p+p event, Cu+Cu events */
     int i_event;
 
 	array<double,4> Npart{ 99., 74.6, 45.9, 21.5 };
     array<string,4>  i_str {"_0_10","_10_20","_20_40","_40_60"};
 
     // There are a set of four indentical measurements for four centralities
-    map<string, array<Histo1DPtr,4>> _h4; // Histograms at 4 bins of Cu+Cu centralities
-    array<CounterPtr,4>              _c4; // Counts of 4 bins of Cu+Cu centralities
+    map<string, array<Histo1DPtr,4>> _h4;   // Histograms at 4 bins of Cu+Cu centralities
+    array<CounterPtr,4>              _c4;   // Counts of 4 bins of Cu+Cu centralities
     array<double,4>              _c4_dummy; // Counts of 4 bins of Cu+Cu centralities
     array<double,4> event_ctr;
 
@@ -400,11 +354,8 @@ namespace Rivet {
 
     int debug { 1 };
 
-    /* int w2; */
-    /* int w_all; */
-
+    /* double temp_nVetoEvent {0.}; */
   };
 
   DECLARE_RIVET_PLUGIN(STAR_2010_I837075);
 }
-

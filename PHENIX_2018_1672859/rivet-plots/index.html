@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="PHENIX_2018_1672859/index.html" style="text-decoration:none;">&lt;A one-line informative PHENIX_2018_1672859 headline&gt; (PHENIX_2018_1672859)</a></h3>
+<p>Example: Eur.Phys.J. C76 (2016) no.7, 392 &#124; Example: DOI:10.1140/epjc/s10052-016-4184-8 &#124; Example: arXiv:1605.03814</p>
+<p style="font-size:smaller;">A brief description of what is measured and what it is useful for in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX for maths, e.g. $p_\perp &gt; 50\;\text{GeV}$.</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Sunday, 06. December 2020 12:33PM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd Rivet_final.yoda</pre></p>
+</footer>
+
+</body>
+</html>

@@ -5,6 +5,8 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Tools/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -16,6 +18,16 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2011_I886590);
 
+    // Function to get bin centers for scaling
+    bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
+    {
+        if(pT > hist.xMin() && pT < hist.xMax())
+        {
+        	deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+                return true;
+        }
+        else return false;
+    }
 
     /// @name Analysis methods
     //@{
@@ -24,15 +36,16 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-      const FinalState fsPI(Cuts::abseta < 0.35 && Cuts::pT > 0.3*GeV && Cuts::pT < 3*GeV);
+      const ALICE::PrimaryParticles fsPI(Cuts::abseta < 0.35 && Cuts::pT > 0.3*GeV && Cuts::pT < 3*GeV);
       declare(fsPI, "fsPI");
 
-      const FinalState fsK(Cuts::abseta < 0.35 && Cuts::pT > 0.4*GeV && Cuts::pT < 2*GeV);
+      const ALICE::PrimaryParticles fsK(Cuts::abseta < 0.35 && Cuts::pT > 0.4*GeV && Cuts::pT < 2*GeV);
       declare(fsK, "fsK");
 
-      const FinalState fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
+      const ALICE::PrimaryParticles fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
       declare(fsP, "fsP");
 
+      // Beam options
       beamOpt = getOption<string>("beam", "NONE");
       if (beamOpt == "pp200") collsys = pp200;
       if (beamOpt == "pp62") collsys = pp62;
@@ -56,22 +69,26 @@ namespace Rivet {
       book(_h["xsec_pbar_withFD_200_2"], 10, 1, 2);
 
       // Histos from HEPdata at 62.4GeV
-      book(_h["xsec_piplus_624"], 5, 1, 1);
-      book(_h["xsec_piminus_624"], 5, 1, 2);
+      book(_h["xsec_piplus_62"], 5, 1, 1);
+      book(_h["xsec_piminus_62"], 5, 1, 2);
 
-      book(_h["xsec_kplus_624"], 6, 1, 1);
-      book(_h["xsec_kminus_624"], 6, 1, 2);
+      book(_h["xsec_kplus_62"], 6, 1, 1);
+      book(_h["xsec_kminus_62"], 6, 1, 2);
 
-      book(_h["xsec_p_noFD_624_1"], 7, 1, 1);
-      book(_h["xsec_pbar_noFD_624_1"], 7, 1, 2);
+      book(_h["xsec_p_noFD_62"], 7, 1, 1);
+      book(_h["xsec_pbar_noFD_62"], 7, 1, 2);
 
-      book(_h["xsec_p_withFD_624_1"], 8, 1, 1);
-      book(_h["xsec_pbar_withFD_624_1"], 8, 1, 2);
+      book(_h["xsec_p_withFD_62"], 8, 1, 1);
+      book(_h["xsec_pbar_withFD_62"], 8, 1, 2);
 
-      //book(_Nevt_after_cuts,"Nevt_after_cuts");
-      //book(sow, "sow");
-      book(_c["sow_pp200"], "sow_pp200");
-      book(_c["sow_pp62"], "sow_pp62");
+      // Counter histos for event weights
+      book(_c["sow_pp200_pi"], "sow_pp200_pi");
+      book(_c["sow_pp62_pi"], "sow_pp62_pi");
+      book(_c["sow_pp200_k"], "sow_pp200_k");
+      book(_c["sow_pp62_k"], "sow_pp62_k");
+      book(_c["sow_pp200_p"], "sow_pp200_p");
+      book(_c["sow_pp62_p"], "sow_pp62_p");
+
 
     }
 
@@ -79,32 +96,51 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Particles fsPIParticles = applyProjection<FinalState>(event,"fsPI").particles();
-      Particles fsKParticles = applyProjection<FinalState>(event,"fsK").particles();
-      Particles fsPParticles = applyProjection<FinalState>(event,"fsP").particles();
-
-      //_Nevt_after_cuts->fill();
-      //sow->fill();
+      Particles fsPIParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsPI").particles();
+      Particles fsKParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsK").particles();
+      Particles fsPParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsP").particles();
      
       // Pions
       for( const Particle& pPI : fsPIParticles)
       {
-		
-		const double pPIWeight = 1.0 / pPI.pt() / 2. / M_PI;
+	      	double PtPI = pPI.pT()/GeV;
+                double PtPI_weight = 1./(2.*M_PI*0.7);
+                double deltaPtPI = 0;
+
 		// Fill histos 200GeV
 		if (collsys == pp200)
 		{
-			_c["sow_pp200"]->fill();
-      			if(pPI.pid() == 211) _h["xsec_piplus_200"]->fill(pPI.pT()/GeV, pPIWeight);
-			if(pPI.pid() == -211) _h["xsec_piminus_200"]->fill(pPI.pT()/GeV, 1.0);
+			_c["sow_pp200_pi"]->fill();
+
+			if(getDeltaPt(*_h["xsec_piplus_200"],PtPI,deltaPtPI))
+			{
+				PtPI_weight /= deltaPtPI;
+      				if(pPI.pid() == 211) _h["xsec_piplus_200"]->fill(pPI.pT()/GeV, PtPI_weight);
+			}
+
+			if(getDeltaPt(*_h["xsec_piminus_200"],PtPI,deltaPtPI))
+			{
+				PtPI_weight /= deltaPtPI;
+				if(pPI.pid() == -211) _h["xsec_piminus_200"]->fill(pPI.pT()/GeV, PtPI_weight);
+			}
 		}
 
 		// Fill histos 62.4GeV
 		if (collsys == pp62)
                 {
-			_c["sow_pp62"]->fill();
-                	if(pPI.pid() == 211) _h["xsec_piplus_624"]->fill(pPI.pT()/GeV, 1.0);
-                	if(pPI.pid() == -211) _h["xsec_piminus_624"]->fill(pPI.pT()/GeV, 1.0);
+			_c["sow_pp62_pi"]->fill();
+
+			if(getDeltaPt(*_h["xsec_piplus_62"],PtPI,deltaPtPI))
+			{
+				PtPI_weight /= deltaPtPI;
+                		if(pPI.pid() == 211) _h["xsec_piplus_62"]->fill(pPI.pT()/GeV, PtPI_weight);
+			}
+
+			if(getDeltaPt(*_h["xsec_piminus_62"],PtPI,deltaPtPI))
+			{
+				PtPI_weight /= deltaPtPI;
+                		if(pPI.pid() == -211) _h["xsec_piminus_62"]->fill(pPI.pT()/GeV, PtPI_weight);
+			}
 		}
 
       }
@@ -112,19 +148,44 @@ namespace Rivet {
       // Kaons
       for( const Particle& pK : fsKParticles)
       {
+                double PtK = pK.pT()/GeV;
+                double PtK_weight = 1./(2.*M_PI*0.7);
+                double deltaPtK = 0;
 	
 		// Fill histos 200GeV
 		if (collsys == pp200)
 		{
-                	if(pK.pid() == 321) _h["xsec_kplus_200"]->fill(pK.pT()/GeV, 1.0);
-                	if(pK.pid() == -321) _h["xsec_kminus_200"]->fill(pK.pT()/GeV, 1.0);
+                        _c["sow_pp200_k"]->fill();
+
+                        if(getDeltaPt(*_h["xsec_kplus_200"],PtK,deltaPtK))
+                        {
+				PtK_weight /= deltaPtK;
+                		if(pK.pid() == 321) _h["xsec_kplus_200"]->fill(pK.pT()/GeV, PtK_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_kminus_200"],PtK,deltaPtK))
+                        {
+                                PtK_weight /= deltaPtK;
+                		if(pK.pid() == -321) _h["xsec_kminus_200"]->fill(pK.pT()/GeV, PtK_weight);
+			}
 		}
 
 		// Fill histos 62.4GeV
 		if (collsys == pp62)
 		{
-                	if(pK.pid() == 321) _h["xsec_kplus_624"]->fill(pK.pT()/GeV, 1.0);
-                	if(pK.pid() == -321) _h["xsec_kminus_624"]->fill(pK.pT()/GeV, 1.0);
+                        _c["sow_pp62_k"]->fill();
+
+                        if(getDeltaPt(*_h["xsec_kplus_62"],PtK,deltaPtK))
+                        {
+                                PtK_weight /= deltaPtK;
+                		if(pK.pid() == 321) _h["xsec_kplus_62"]->fill(pK.pT()/GeV, PtK_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_kminus_62"],PtK,deltaPtK))
+                        {
+                                PtK_weight /= deltaPtK;
+                		if(pK.pid() == -321) _h["xsec_kminus_62"]->fill(pK.pT()/GeV, PtK_weight);
+			}
 		}
 
       }
@@ -132,33 +193,95 @@ namespace Rivet {
       // Protons and antiprotons
       for( const Particle& pP : fsPParticles)
       {
+                double PtP = pP.pT()/GeV;
+                double PtP_weight = 1./(2.*M_PI*0.7);
+                double deltaPtP = 0;
 
 		// Fill histos 200GeV
 		if (collsys == pp200)
 		{
-                	if(pP.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                        _c["sow_pp200_p"]->fill();
 
-                	if(pP.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(pP.pT()/GeV, 1.0);
+                        if(getDeltaPt(*_h["xsec_p_noFD_200_1"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == 2212) _h["xsec_p_noFD_200_1"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_p_noFD_200_2"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == 2212) _h["xsec_p_noFD_200_2"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_pbar_noFD_200_1"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_1"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_pbar_noFD_200_2"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == -2212) _h["xsec_pbar_noFD_200_2"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+			
+                        if(getDeltaPt(*_h["xsec_p_withFD_200_1"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == 2212) _h["xsec_p_withFD_200_1"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_p_withFD_200_2"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == 2212) _h["xsec_p_withFD_200_2"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_pbar_withFD_200_1"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_1"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_pbar_withFD_200_2"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == -2212) _h["xsec_pbar_withFD_200_2"]->fill(pP.pT()/GeV, PtP_weight);
+			}
 		}
 
 		// Fill histos 62.4GeV
 		if (collsys == pp62)
 		{
-                	if(pP.pid() == 2212) _h["xsec_p_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == -2212) _h["xsec_pbar_noFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                        _c["sow_pp62_p"]->fill();
 
-                	if(pP.pid() == 2212) _h["xsec_p_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
-                	if(pP.pid() == -2212) _h["xsec_pbar_withFD_624_1"]->fill(pP.pT()/GeV, 1.0);
+                        if(getDeltaPt(*_h["xsec_p_noFD_62"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == 2212) _h["xsec_p_noFD_62"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_pbar_noFD_62"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == -2212) _h["xsec_pbar_noFD_62"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_p_withFD_62"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == 2212) _h["xsec_p_withFD_62"]->fill(pP.pT()/GeV, PtP_weight);
+			}
+
+                        if(getDeltaPt(*_h["xsec_pbar_withFD_62"],PtP,deltaPtP))
+                        {
+                                PtP_weight /= deltaPtP;
+                		if(pP.pid() == -2212) _h["xsec_pbar_withFD_62"]->fill(pP.pT()/GeV, PtP_weight);
+			}
 		}
 
       }
-
 
     }
 
@@ -166,16 +289,33 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      //normalize(_h["xsec_piplus_200"]); // normalize to unity
-      //scale(_h["xsec_piplus_200"], 1.0/ *_Nevt_after_cuts);
-      //const double s = 1./sow->sumW();
-      //scale(_h["xsec_piplus_200"], s);
-      //normalize(_h["xsec_piplus_200"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      //scale(_h["xsec_piplus_200"], crossSection()/picobarn/sow->sumW()); // norm to generated cross-section in pb (after cuts)
-
       if (collsys == pp200)
       {
-		_h["xsec_piplus_200"]->scaleW(1.0/_c["sow_pp200"]->sumW());
+		_h["xsec_piplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_pi"]->sumW());
+                _h["xsec_piminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_pi"]->sumW());
+                _h["xsec_kplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_k"]->sumW());
+                _h["xsec_kminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_k"]->sumW());
+                _h["xsec_p_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_p_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_pbar_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_pbar_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_p_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_p_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_pbar_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+                _h["xsec_pbar_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+
+      }
+
+      if (collsys == pp62)
+      {
+		_h["xsec_piplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_pi"]->sumW());
+                _h["xsec_piminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_pi"]->sumW());
+                _h["xsec_kplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_k"]->sumW());
+                _h["xsec_kminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_k"]->sumW());
+                _h["xsec_p_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
+                _h["xsec_pbar_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
+                _h["xsec_p_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
+                _h["xsec_pbar_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
       }
 
     }
@@ -191,8 +331,6 @@ namespace Rivet {
     string beamOpt = "";
     enum CollisionSystem {pp200, pp62};
     CollisionSystem collsys;
-    //CounterPtr _Nevt_after_cuts;
-    //CounterPtr sow;
     //@}
 
   };

@@ -16,6 +16,7 @@ References:
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options:
+ - beam=CUAU200,PP200,AUAU200
  - cent=REF,GEN,IMP,USR
 Description:
   'A brief description of what is measured and what it is useful for

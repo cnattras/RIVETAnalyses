@@ -1,7 +1,7 @@
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d01-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.85, up: 0.85}, sys: {dn: -1.22, up: 1.22}}, 1: {stat: {dn: -0.33, up: 0.33}, sys: {dn: -0.44, up: 0.44}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+Path: /REF/STAR_2016_I1420183/d01-x01-y01
 Title: Table 1
 Type: Scatter2D
 ---
@@ -11,10 +11,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d02-x01-y01
 ErrorBreakdown: {0: {stat: {dn: 0.0, up: 3.8}, sys: {dn: 0.0, up: 2.1}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+Path: /REF/STAR_2016_I1420183/d02-x01-y01
 Title: Table 2
 Type: Scatter2D
 ---
@@ -23,10 +23,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d03-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -0.26, up: 0.26}, sys: {dn: -0.31, up: 0.37}}, 1: {stat: {dn: -0.26, up: 0.26}, sys: {dn: -0.35, up: 0.39}}, 2: {stat: {dn: -0.35, up: 0.35}, sys: {dn: -0.17, up: 0.27}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+Path: /REF/STAR_2016_I1420183/d03-x01-y01
 Title: Table 3
 Type: Scatter2D
 ---
@@ -37,10 +37,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d03-x01-y02
 ErrorBreakdown: {}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+Path: /REF/STAR_2016_I1420183/d03-x01-y02
 Title: Table 3
 Type: Scatter2D
 ---
@@ -51,10 +51,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d03-x01-y03
 ErrorBreakdown: {}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+Path: /REF/STAR_2016_I1420183/d03-x01-y03
 Title: Table 3
 Type: Scatter2D
 ---
@@ -65,10 +65,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d03-x01-y04
 ErrorBreakdown: {}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+Path: /REF/STAR_2016_I1420183/d03-x01-y04
 Title: Table 3
 Type: Scatter2D
 ---
@@ -79,10 +79,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d04-x01-y01
 ErrorBreakdown: {0: {error: {dn: -0.6, up: 0.6}}, 1: {error: {dn: -2.3, up: 2.3}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+Path: /REF/STAR_2016_I1420183/d04-x01-y01
 Title: Table 4
 Type: Scatter2D
 ---
@@ -92,10 +92,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d04-x01-y02
 ErrorBreakdown: {0: {error: {dn: -0.8, up: 0.8}}, 1: {error: {dn: -0.8, up: 0.8}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y02
+Path: /REF/STAR_2016_I1420183/d04-x01-y02
 Title: Table 4
 Type: Scatter2D
 ---
@@ -105,10 +105,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d04-x01-y03
 ErrorBreakdown: {0: {stat: {dn: -0.27, up: 0.27}, sys: {dn: -0.3, up: 0.39}}, 1: {stat: {dn: -0.21, up: 0.21}, sys: {dn: -0.33, up: 0.41}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y03
+Path: /REF/STAR_2016_I1420183/d04-x01-y03
 Title: Table 4
 Type: Scatter2D
 ---
@@ -118,10 +118,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d04-x01-y04
 ErrorBreakdown: {}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y04
+Path: /REF/STAR_2016_I1420183/d04-x01-y04
 Title: Table 4
 Type: Scatter2D
 ---
@@ -131,10 +131,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d04-x01-y05
 ErrorBreakdown: {}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y05
+Path: /REF/STAR_2016_I1420183/d04-x01-y05
 Title: Table 4
 Type: Scatter2D
 ---
@@ -144,10 +144,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d04-x01-y06
 ErrorBreakdown: {}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y06
+Path: /REF/STAR_2016_I1420183/d04-x01-y06
 Title: Table 4
 Type: Scatter2D
 ---
@@ -157,10 +157,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d05-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -1.3, up: 1.3}}, 1: {stat: {dn: -0.13, up: 0.13}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+Path: /REF/STAR_2016_I1420183/d05-x01-y01
 Title: Table 5
 Type: Scatter2D
 ---
@@ -170,10 +170,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/STAR_2016_I1420183/d06-x01-y01
 ErrorBreakdown: {0: {stat: {dn: -1.8, up: 1.8}, sys: {dn: -2.64, up: 2.17}}, 1: {stat: {dn: -0.96, up: 0.96}, sys: {dn: -1.43, up: 1.29}}, 2: {stat: {dn: -0.33, up: 0.33}, sys: {dn: -0.25, up: 0.16}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+Path: /REF/STAR_2016_I1420183/d06-x01-y01
 Title: Table 6
 Type: Scatter2D
 ---

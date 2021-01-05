@@ -1,15 +1,15 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
-DrawOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
-LegendOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
+DrawOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/sow_dAu
+LegendOnly=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/sow_dAu
 # END PLOT
 
-# BEGIN COUNTER //gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
+# BEGIN COUNTER //gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/sow_dAu
 LineColor=red
 LineStyle=solid
-Path=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet_dAu.yoda/STAR_2016_I1420183:beam=dAu:cent=GEN/sow_dAu
-Title=Rivet_dAu
+Path=//gpfs/mnt/gpfs01/star/pwg/lkosarz/Rivet/Rivetizing_Workshop/RIVETAnalyses/STAR_2016_I1420183/Rivet.yoda/STAR_2016_I1420183:cent=GEN/sow_dAu
+Title=Rivet
 # value	 error
 0.000000e+00	0.000000e+00
 # END COUNTER

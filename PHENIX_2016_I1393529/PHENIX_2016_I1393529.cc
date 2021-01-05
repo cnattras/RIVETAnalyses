@@ -44,7 +44,7 @@ namespace Rivet {
 
       book(_h["bfracn"], refname_1 + "_num", refdata_1);
       book(_h["bfracd"], refname_1 + "_den", refdata_1);
-      book(_s["bfrac"], refname_1);
+      book(_s["bfrac"], refname_1, true);
 
       //+++++++++++++++++++//
       //Figure 3
@@ -53,7 +53,7 @@ namespace Rivet {
 
       book(_h["RAA_c2en"], refname_2 + "_num", refdata_2);
       book(_h["RAA_c2ed"], refname_2 + "_den", refdata_2);
-      book(_s["RAA_c2e"], refname_2);
+      book(_s["RAA_c2e"], refname_2, true);
 
       
       string refname_3 = mkAxisCode(3, 1, 2);
@@ -61,7 +61,7 @@ namespace Rivet {
       
       book(_h["RAA_b2en"], refname_3 + "_num", refdata_3);
       book(_h["RAA_b2ed"], refname_3 + "_den", refdata_3);
-      book(_s["RAA_b2e"], refname_3);
+      book(_s["RAA_b2e"], refname_3, true);
       
       //+++++++++++++++++++//
       string refname_4 = mkAxisCode(4, 1, 1);
@@ -96,7 +96,7 @@ namespace Rivet {
 	  beamName = "AUAU";
 	  NN = 197.;
 	  if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) beamName += "200GeV";
-	  if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) beamName += "62GeV";
+	  //if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) beamName += "62GeV";
 	}
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
 	{
@@ -150,24 +150,24 @@ namespace Rivet {
       bool has_AuAu {_c["AuAu"]->sumW() > 0 };
       bool has_pp {_c["pp"]->sumW() > 0 };
       
-
+      double scale = 1./(2*M_PI);
       if(has_pp){
 	//denominators for the RAA Plots -- Fig 3
-	_h["RAA_c2ed"]->scaleW(1./_c["pp"]->sumW());
-	_h["RAA_b2ed"]->scaleW(1./_c["pp"]->sumW());
+	_h["RAA_c2ed"]->scaleW(scale/_c["pp"]->sumW());
+	_h["RAA_b2ed"]->scaleW(scale/_c["pp"]->sumW());
       }
       else if(has_AuAu){
 	//Figure 1
-	_h["InvYield_charm"]->scaleW(1./_c["AuAu"]->sumW());
-	_h["InvYield_bottom"]->scaleW(1./_c["AuAu"]->sumW());
+	_h["InvYield_charm"]->scaleW(scale/_c["AuAu"]->sumW());
+	_h["InvYield_bottom"]->scaleW(scale/_c["AuAu"]->sumW());
 	
 	//numerator and denominator for Figure 2
-	_h["bfracn"]->scaleW(1./_c["AuAu"]->sumW());
-	_h["bfracd"]->scaleW(1./_c["AuAu"]->sumW());
+	_h["bfracn"]->scaleW(scale/_c["AuAu"]->sumW());
+	_h["bfracd"]->scaleW(scale/_c["AuAu"]->sumW());
 	
 	//numerators for the RAA Plots -- Fig 3
-	_h["RAA_c2en"]->scaleW(1./_c["AuAu"]->sumW());
-	_h["RAA_b2en"]->scaleW(1./_c["AuAu"]->sumW());
+	_h["RAA_c2en"]->scaleW(scale/_c["AuAu"]->sumW());
+	_h["RAA_b2en"]->scaleW(scale/_c["AuAu"]->sumW());
 	
       }
 
