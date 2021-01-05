@@ -7,18 +7,18 @@
 #include <fstream>
 #include <iostream>
 #include <math.h>
-#include <vector> 
+#include <vector>
 #include "RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
 //Christine was here
 using namespace std;
 namespace Rivet {
-    
+
     class Correlator {
-  
+
   public:
-    
+
     /// Constructor
     Correlator(int index) {
       _index = index;
@@ -35,7 +35,7 @@ namespace Rivet {
         {
             _triggerBins.push_back(make_pair(tbins.at(i), tbins.at(i+1)));
         }
-        
+
         SetTriggerRange(_triggerBins.front().first, _triggerBins.back().second);
     }
     void SetAssiciatedBins(vector<double> abins)
@@ -45,10 +45,10 @@ namespace Rivet {
         {
             _associatedBins.push_back(make_pair(abins.at(i), abins.at(i+1)));
         }
-        
+
         SetAssociatedRange(_associatedBins.front().first, _associatedBins.back().second);
     }
-    
+
     string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
     pair<double,double> GetCentrality(){ return _centrality; }
     double GetCentralityMin(){ return _centrality.first; }
@@ -61,9 +61,9 @@ namespace Rivet {
     double GetAssociatedRangeMax(){ return _associatedRange.second; }
     vector<pair<double,double>> GetTriggerBins(){ return _triggerBins; }
     vector<pair<double,double>> GetAssociatedBins(){ return _associatedBins; }
-    
+
     int GetIndex(){ return _index; }
-    
+
     bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
     bool CheckCentrality(double cent){ return (cent>_centrality.first && cent<_centrality.second) ? true : false; }
     bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
@@ -73,25 +73,25 @@ namespace Rivet {
     {
         if(!CheckConditions(s, cent, tpt)) return false;
         if(!CheckAssociatedRange(apt)) return false;
-        
+
         return true;
-        
+
     }
     bool CheckConditions(string s, double cent, double tpt)
     {
         if(!CheckConditions(s, cent)) return false;
         if(!CheckTriggerRange(tpt)) return false;
-        
+
         return true;
-        
+
     }
     bool CheckConditions(string s, double cent)
     {
         if(!CheckCollSystemAndEnergy(s)) return false;
         if(!CheckCentrality(cent)) return false;
-        
+
         return true;
-        
+
     }
     bool CheckConditionsMaxTrigger(string s, double cent, double tpt, double apt)
     {
@@ -99,9 +99,9 @@ namespace Rivet {
         if(!CheckCentrality(cent)) return false;
         if(!CheckTriggerRange(tpt)) return false;
         if(!CheckAssociatedRangeMaxTrigger(apt,tpt)) return false;
-        
+
         return true;
-        
+
     }
     bool CheckTriggerBin(double tpt){ return (tpt>_triggerBins.front().first && tpt<_triggerBins.back().second) ? true : false; }
     int GetTriggerBinIndex(double tpt)
@@ -111,7 +111,7 @@ namespace Rivet {
         {
             if(tpt < _triggerBins.at(i).second) return i;
         }
-        
+
         return -1;
     }
     bool CheckAssociatedBin(double apt){ return (apt>_associatedBins.front().first && apt<_associatedBins.back().second) ? true : false; }
@@ -122,14 +122,14 @@ namespace Rivet {
         {
             if(apt < _associatedBins.at(i).second) return i;
         }
-        
+
         return -1;
     }
-    
-        
-        
-    
-    
+
+
+
+
+
     int _index;
     string _collSystemAndEnergy;
     pair<double,double> _centrality;
@@ -138,7 +138,7 @@ namespace Rivet {
     vector<pair<double,double>> _triggerBins;
     vector<pair<double,double>> _associatedBins;
 
-  
+
   };
 
   class STAR_2012_I943192 : public Analysis {
@@ -155,10 +155,10 @@ namespace Rivet {
         if(p1.pt() != p2.pt()) return false;
         if(p1.eta() != p2.eta()) return false;
         if(p1.phi() != p2.phi()) return false;
-    
+
         return true;
     }
-    
+
     bool isSecondary(Particle p)
     {
         //return true if is secondary
@@ -171,15 +171,15 @@ namespace Rivet {
 	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
         return true;
         else return false;
-        
+
     }
-    
+
     double CalculateVn(YODA::Histo1D& hist, int nth)
     {
         int nBins = hist.numBins();
 
         double integral = 0.;
-        
+
         double Vn = 0.;
 
         for (int i = 0; i < nBins; i++)
@@ -191,12 +191,12 @@ namespace Rivet {
         Vn /= integral;
         return Vn;
     }
-    
+
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
         int minBin = -1;
         double minVal = 1.e99;
-        
+
         for(unsigned int i = 0; i < hist.numBins(); i++)
         {
             if(hist.bin(i).numEntries() == 0) continue;
@@ -207,11 +207,11 @@ namespace Rivet {
                 minBin = i;
             }
         }
-        
+
         return minBin;
-        
+
     }
-    
+
     void SubtractBackground(YODA::Histo1D& fullHist, YODA::Histo1D& hist, vector<int> n, double bmin, double bmax)
     {
         vector<double> Vn(n.size(), 0);
@@ -219,19 +219,19 @@ namespace Rivet {
         {
             Vn[i] = CalculateVn(fullHist, n[i]);
         }
-        
+
         double bmod = 1.;
         int minBin = FindBinAtMinimum(fullHist, bmin, bmax);
-        
+
         if(minBin < 0) return;
-        
+
         for(unsigned int i = 0; i < Vn.size(); i++)
         {
             bmod += 2*Vn[i]*cos(n[i]*fullHist.bin(minBin).xMid());
         }
-        
+
         double b = (fullHist.bin(minBin).sumW()/fullHist.bin(minBin).xWidth())/bmod; //Divided by bin width in order to generalize it and enable it to be used for histograms with different binning
-                
+
         for(unsigned int ibin = 0; ibin < hist.numBins(); ibin++)
         {
             double modulation = 1;
@@ -242,18 +242,18 @@ namespace Rivet {
             modulation *= b;
             hist.bin(ibin).scaleW(1 - (modulation/(hist.bin(ibin).sumW()/hist.bin(ibin).xWidth()))); //Divided by bin width to compensate the calculation of "b"
         }
-        
+
     }
     //Instead of directly taking the calculated Delta_eta, this method takes the center of the bin associated to the Delta_eta.
     //This is done to avoid values of zero efficiency when |Delta_eta| is close to maxDeltaEta
     double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
     {
         double etaCorrFactor = 1.;
-        
+
         double maxDeltaEta = 2.;
-        
+
         int binEta = hist.binIndexAt(deltaEta);
-        
+
         if(binEta < 0 && abs(deltaEta) < 2)
         {
             etaCorrFactor = 1. - (1./maxDeltaEta)*abs(deltaEta);
@@ -263,62 +263,62 @@ namespace Rivet {
             double binCenterEta = hist.bin(binEta).xMid();
             etaCorrFactor = 1. - (1./maxDeltaEta)*abs(binCenterEta);
         }
-        
+
         return etaCorrFactor;
     }
-    
+
     //bmin and bmax are included in the integral. Range = [bmin, bmax]
     //Give the min and max bins to calculate the integral
     double GetYieldInBinRange(YODA::Histo1D& hist, int bmin, int bmax, double &n)
     {
         double integral = 0.;
         double entries = 0.;
-                
+
         if(bmin < 0 || bmax > (int)hist.numBins())
         {
             MSG_ERROR("Out of range!");
             return 0.;
         }
-        
+
         for(int i = bmin; i <= bmax; i++)
         {
             integral += hist.bin(i).sumW();
             entries += hist.bin(i).numEntries();
         }
-        
+
         n = entries;
-        
+
         return integral;
-        
+
     }
-    
+
     //vmin is included in the integral, but vmax is not. Range = [vmin, vmax[
     //Give the min and max values to calculate the integral
     double GetYieldInUserRange(YODA::Histo1D& hist, double vmin, double vmax, double &n)
-    {        
+    {
         double integral = 0.;
         double entries = 0.;
-        
+
         if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
         {
             MSG_ERROR("Out of range!");
             return 0.;
         }
-                
+
         int bmin = hist.binIndexAt(vmin);
         int bmax = hist.binIndexAt(vmax);
         if(bmax < 0) bmax = (int)hist.numBins()-1;
-        
+
         for(int i = bmin; i <= bmax; i++)
         {
             integral += hist.bin(i).sumW();
             entries += hist.bin(i).numEntries();
         }
-        
+
         n = entries;
-        
+
         return integral;
-        
+
     }
 
     /// Book histograms and initialise projections before the run
@@ -342,7 +342,7 @@ namespace Rivet {
       // Ex.: Correlator c1(1); -> is the correlator for histograms _h["0311"], _h["0411"], etc
       // Ex.: Correlator c2(2); -> is the correlator for histograms _h["0312"], _h["0412"], etc
        //==================================================
-      
+
       Correlator c1(1);
       c1.SetCollSystemAndEnergy("CuCu62GeV");
       c1.SetCentrality(0., 60.);
@@ -351,7 +351,7 @@ namespace Rivet {
       c1.SetAssiciatedBins(_assocBins);
       c1.SetTriggerBins(_trigBins);
       Correlators.push_back(c1);
-      
+
       Correlator c2(2);
       c2.SetCollSystemAndEnergy("AuAu62GeV");
       c2.SetCentrality(0., 80.);
@@ -360,7 +360,7 @@ namespace Rivet {
       c2.SetAssiciatedBins(_assocBins);
       c2.SetTriggerBins(_trigBins);
       Correlators.push_back(c2);
-      
+
       Correlator c3(3);
       c3.SetCollSystemAndEnergy("dAu200GeV");
       c3.SetCentrality(0., 95.);
@@ -369,7 +369,7 @@ namespace Rivet {
       c3.SetAssiciatedBins(_assocBins);
       c3.SetTriggerBins(_trigBins);
       Correlators.push_back(c3);
-      
+
       Correlator c4(4);
       c4.SetCollSystemAndEnergy("CuCu200GeV");
       c4.SetCentrality(0., 60.);
@@ -378,7 +378,7 @@ namespace Rivet {
       c4.SetAssiciatedBins(_assocBins);
       c4.SetTriggerBins(_trigBins);
       Correlators.push_back(c4);
-      
+
       Correlator c5(5);
       c5.SetCollSystemAndEnergy("AuAu200GeV");
       c5.SetCentrality(40., 80.);
@@ -387,7 +387,7 @@ namespace Rivet {
       c5.SetAssiciatedBins(_assocBins);
       c5.SetTriggerBins(_trigBins);
       Correlators.push_back(c5);
-      
+
       Correlator c6(6);
       c6.SetCollSystemAndEnergy("AuAu200GeV");
       c6.SetCentrality(0., 12.);
@@ -396,9 +396,9 @@ namespace Rivet {
       c6.SetAssiciatedBins(_assocBins);
       c6.SetTriggerBins(_trigBins);
       Correlators.push_back(c6);
-      
-      
-      
+
+
+
       /*
       book(_h["0311"], 3, 1, 1);
       book(_h["0312"], 3, 1, 2);
@@ -517,13 +517,13 @@ namespace Rivet {
       //book(_h["4011"], 40, 1, 1);
       //Add declaration of histograms for correlation functions with all correlation functions
       */
-      
-      
-      
+
+
+
       for(Correlator& corr : Correlators)
       {
           int index = corr.GetIndex();
-          
+
           book(sow[index],"sow" + to_string(index));
           book(_h["031" + to_string(index)], 3, 1, index);
           book(_h["041" + to_string(index)], 4, 1, index);
@@ -531,23 +531,23 @@ namespace Rivet {
           book(_DeltaPhi[index], "DeltaPhi" + to_string(index), 24, 0, M_PI);
           book(_DeltaPhiSub[index], "DeltaPhiSub" + to_string(index), 24, 0, M_PI);
           book(_DeltaEta[index], "DeltaEta" + to_string(index), 20, 0, 2);
-          
-          
-          
+
+
+
           for(unsigned int itr = 0; itr < corr.GetTriggerBins().size(); itr++)
           {
               book(_DeltaEtaForYieldsTriggerBins[index][itr], "DeltaEtaForYields" + to_string(index) + "_TriggerBin" + to_string(itr), 20, -2, 0);
               book(_DeltaEtaForYieldsTriggerBinsCorr[index][itr], "DeltaEtaForYieldsCorr" + to_string(index) + "_TriggerBin" + to_string(itr), 20, -2, 0);
           }
-          
+
           for(unsigned int ias = 0; ias < corr.GetAssociatedBins().size(); ias++)
           {
               book(_DeltaEtaForYieldsAssociatedBins[index][ias], "DeltaEtaForYields" + to_string(index) + "_AssociatedBin" + to_string(ias), 20, -2, 0);
               book(_DeltaEtaForYieldsAssociatedBinsCorr[index][ias], "DeltaEtaForYieldsCorr" + to_string(index) + "_AssociatedBin" + to_string(ias), 20, -2, 0);
           }
-          
+
       }
-      
+
       //Yields. Declared here because indeces of correlators do not match hepdata
       book(_YieldsDeltaEtaTriggerBins[c1.GetIndex()], 12, 1, 2);
       book(_YieldsDeltaEtaTriggerBins[c2.GetIndex()], 12, 1, 3);
@@ -555,15 +555,15 @@ namespace Rivet {
       book(_YieldsDeltaEtaTriggerBins[c4.GetIndex()], 12, 1, 6);
       book(_YieldsDeltaEtaTriggerBins[c5.GetIndex()], 12, 1, 7);
       book(_YieldsDeltaEtaTriggerBins[c6.GetIndex()], 12, 1, 8);
-      
-      nEvents.assign(Correlators.size()+1, 0); 
-      nTriggers.assign(Correlators.size()+1, 0); 
-      
+
+      nEvents.assign(Correlators.size()+1, 0);
+      nTriggers.assign(Correlators.size()+1, 0);
+
       vector<int> v;
       v.assign(7, 0);
       nTriggersPerTriggerBin.assign(Correlators.size()+1, v);
-     
-      
+
+
     }
 
 
@@ -585,12 +585,12 @@ namespace Rivet {
           CollSystem = "AuAu";
           nNucleons = 197.;
       }
-      else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630) 
+      else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
       {
           CollSystem = "CuCu";
           nNucleons = 63.;
       }
-      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) 
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
           CollSystem = "pp";
           nNucleons = 1.;
@@ -598,47 +598,47 @@ namespace Rivet {
       //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
       //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
       if(CollSystem.compare("Empty") == 0) return;
-      
+
       string cmsEnergy = "Empty";
       if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
       if (fuzzyEquals(sqrtS()/GeV, 62.3*nNucleons, 1E-3)) cmsEnergy = "62GeV";
       if(cmsEnergy.compare("Empty") == 0) return;
-      
+
       string SysAndEnergy = CollSystem + cmsEnergy;
 
       // Prepare centrality projection and value
       const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
       double centr = centProj();
-    
+
     double triggerptMin = 999.;
     double triggerptMax = -999.;
     double associatedptMin = 999.;
     double associatedptMax = -999.;
-    
+
     bool isVeto = true;
-    
+
     for(Correlator& corr : Correlators)
     {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
         if(!corr.CheckCentrality(centr)) continue;
-        
+
         //If event is accepted for the correlator, fill event weights
         sow[corr.GetIndex()]->fill();
         nEvents[corr.GetIndex()]++;
-        
+
         isVeto = false;
-        
+
         //Check min and max of the trigger and associated particles in order to speed up the particle loops
         if(corr.GetTriggerRangeMin() < triggerptMin) triggerptMin = corr.GetTriggerRangeMin();
         if(corr.GetTriggerRangeMax() > triggerptMax) triggerptMax = corr.GetTriggerRangeMax();
-        
+
         if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
         if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
-        
+
     }
-    
+
     if(isVeto) vetoEvent;
-    
+
     // loop over charged final state particles
       for(const Particle& pTrig : cfsTrig.particles()) {
 
@@ -646,7 +646,7 @@ namespace Rivet {
 
           //Check if is secondary
           if(isSecondary(pTrig)) continue;
-          
+
 		  if( abs(pTrig.pid())==211 || abs(pTrig.pid())==2212 || abs(pTrig.pid())==321){
 
             for(Correlator& corr : Correlators)
@@ -657,15 +657,15 @@ namespace Rivet {
             }
 
 		    for(const Particle& pAssoc : cfs.particles()) {
-                
+
                 if(pAssoc.pt()/GeV < associatedptMin || pAssoc.pt()/GeV > associatedptMax) continue;
-                
+
                 //Check if Trigger and Associated are the same particle
                 if(isSameParticle(pTrig,pAssoc)) continue;
-                
+
                 //Check if is secondary
                 if(isSecondary(pAssoc)) continue;
-                
+
 			  if( abs(pAssoc.pid())==211 || abs(pAssoc.pid())==2212 || abs(pAssoc.pid())==321){
 			    //int mybin = GetTrigBin(pTrig.pt());
 			    //int mybina = GetAssocBin(pAssoc.pt());
@@ -673,15 +673,15 @@ namespace Rivet {
 			    //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
 			    double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
 			    double dEta = deltaEta(pTrig, pAssoc);
-			    
+
                 for(Correlator& corr : Correlators)
                 {
                     if(!corr.CheckConditionsMaxTrigger(SysAndEnergy, centr, pTrig.pt()/GeV, pAssoc.pt()/GeV)) continue;
-                    
+
                     double etaCorrection = 1.;
-                    
+
                     //if(abs(dEta) < 1.78) etaCorrection = EtaEffCorrection(-abs(dEta), *_DeltaEta[corr.GetIndex()]);
-                    
+
                     //if(pTrig.pt()/GeV > 3. && pAssoc.pt()/GeV > 1.5)
                     //{
                     if(abs(dPhi) < 0.78)
@@ -695,15 +695,15 @@ namespace Rivet {
                                 _h["031" + to_string(corr.GetIndex())]->fill(-abs(dEta), 0.5/etaCorrection);
                             }
                         }
-                        
+
                         if(pTrig.pt()/GeV > 3.)
                         {
                             _DeltaEtaForYieldsAssociatedBins[corr.GetIndex()][corr.GetAssociatedBinIndex(pAssoc.pt()/GeV)]->fill(-abs(dEta), 0.5/etaCorrection);
                             _DeltaEtaForYieldsAssociatedBinsCorr[corr.GetIndex()][corr.GetAssociatedBinIndex(pAssoc.pt()/GeV)]->fill(-abs(dEta), 0.5/etaCorrection);
                         }
-                        
+
                     }
-                    
+
                     if(abs(dEta) < 1.78)
                     {
                         if(pTrig.pt()/GeV > 3. && pAssoc.pt()/GeV > 1.5 && pAssoc.pt()/GeV < pTrig.pt()/GeV)
@@ -713,17 +713,17 @@ namespace Rivet {
                             _DeltaPhi[corr.GetIndex()]->fill(abs(dPhi), 0.5/etaCorrection);
                             _DeltaPhiSub[corr.GetIndex()]->fill(abs(dPhi), 0.5/etaCorrection);
                         }
-                        
+
                     }
-                        
+
                     //}
-                    
-                    
-                    
-                    
-                    
-                } //end of correlators loop 
-                
+
+
+
+
+
+                } //end of correlators loop
+
 			  } // associated hadrons
 		    } // end of loop over associated particles
 		  } // trigger hadrons
@@ -734,64 +734,64 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-        
-        
-        
+
+
+
         //for(unsigned int i = 1; i <= Correlators.size(); i++)
         for(Correlator& corr : Correlators)
         {
             int index = corr.GetIndex();
-            
+
             if(nTriggers[index] > 0)
             {
                 _h["031" + to_string(index)]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
                 _h["041" + to_string(index)]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
                 _h["061" + to_string(index)]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
-                
+
                 _DeltaPhi[index]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
                 _DeltaPhiSub[index]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
-                
+
                 vector<int> n{2,3};
                 SubtractBackground(*_DeltaPhi[index], *_h["061" + to_string(index)], n, 0.63, 2.51);
                 SubtractBackground(*_DeltaPhi[index], *_DeltaPhiSub[index], n, 0.63, 2.51);
-                
+
                 for(unsigned int itr = 0; itr < corr.GetTriggerBins().size(); itr++)
                 {
                     //TO DO: Correct number of triggers has to be checked
                     //_DeltaEtaForYieldsTriggerBins[index][itr]->scaleW((double)nEvents[index]/(nTriggersPerTriggerBin[index][itr]*sow[index]->sumW()));
                     //_DeltaEtaForYieldsTriggerBinsCorr[index][itr]->scaleW((double)nEvents[index]/(nTriggersPerTriggerBin[index][itr]*sow[index]->sumW()));
-                    
+
                     _DeltaEtaForYieldsTriggerBins[index][itr]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
                     _DeltaEtaForYieldsTriggerBinsCorr[index][itr]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
-                    
+
                     SubtractBackground(*_DeltaEtaForYieldsTriggerBins[index][itr], *_DeltaEtaForYieldsTriggerBinsCorr[index][itr], n, -2, -0.78);
-                    
-                    
+
+
                     double entries = 0.;
                     double yields = GetYieldInUserRange(*_DeltaEtaForYieldsTriggerBinsCorr[index][itr],-0.78,0., entries);
-                    
-                    
+
+
                     (*_YieldsDeltaEtaTriggerBins[index]).bin(itr).fillBin(yields*2);
-                    
-                    
-                    
+
+
+
                 }
-                
+
                 for(unsigned int ias = 0; ias < corr.GetAssociatedBins().size(); ias++)
                 {
                     _DeltaEtaForYieldsAssociatedBins[index][ias]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
                     _DeltaEtaForYieldsAssociatedBinsCorr[index][ias]->scaleW((double)nEvents[index]/(nTriggers[index]*sow[index]->sumW()));
-                    
+
                     SubtractBackground(*_DeltaEtaForYieldsAssociatedBins[index][ias], *_DeltaEtaForYieldsAssociatedBinsCorr[index][ias], n, -2, -0.78);
                 }
-                
-                
+
+
             }
-            
+
         }
-        
-        
-        
+
+
+
       //normalize correlation histograms by scaling by 1.0/(Ntrig*binwidthphi*binwidtheta) in each bin BUT also be careful when rebinning.  Probably best to FIRST add histograms for correlation functions THEN normalize
       //do background subtraction ala zyam
       //calculate yields
@@ -807,15 +807,15 @@ namespace Rivet {
     map<int, Histo1DPtr> _DeltaPhi;
     map<int, Histo1DPtr> _DeltaEta;
     map<int, Histo1DPtr> _DeltaPhiSub;
-    
+
     map<int, map<int, Histo1DPtr>> _DeltaEtaForYieldsTriggerBins;
     map<int, map<int, Histo1DPtr>> _DeltaEtaForYieldsAssociatedBins;
-    
+
     map<int, map<int, Histo1DPtr>> _DeltaEtaForYieldsTriggerBinsCorr;
     map<int, map<int, Histo1DPtr>> _DeltaEtaForYieldsAssociatedBinsCorr;
-    
+
     map<int, Histo1DPtr> _YieldsDeltaEtaTriggerBins;
-    
+
     bool fillTrigger = true;
     vector<int> nTriggers;
     vector<int> nEvents;
