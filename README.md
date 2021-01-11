@@ -1,6 +1,68 @@
 # RIVETAnalyses
-This repository is for RIVET analyses developed at UTK.  The goal is that these analyses will eventually be included in the official version of RIVET.  After analyses have been officially committed, they may be removed from this repository.
+This repository is for RIVET analyses developed at UTK and in the 2020 Rivetizing Heavy Ion Collisions at RHIC workshop.  The goal is that these analyses will eventually be included in the official version of RIVET.  After analyses have been officially committed, they may be removed from this repository.
 
-Happy RIVETing!
+Here is a list of analyses and a brief summary of their status.  Please make sure to check the .info file before use as well.
 
-We have started class today
+Analyses implemented at UTK
+0603010/PHENIX_2006_I711951
+0604018/STAR_2006_I715470
+0611006v1/PHENIX_2006_I0611006
+0801.1665/PHENIX_2008_I777211 - Implemented by Christal Martin at UTK.  Pi0 RAA in 0-5% central Au+Au at 200 GeV.  Complete.
+
+0801.4020/PHENIX_2008_I778168
+08014545/PHENIX_2008_I778396
+0903.3399/PHENIX_2009_I815824
+0903.4886/PHENIX_2009_I816486 - Implemented by Christal Martin at UTK.  Pi0 RAA vs rxn plane Au+Au 200 GeV
+Outstanding questions/issues:
+Need to implement v_2 and phi vs RAA.
+Need to normalize RAA 
+CN: Maybe we can get Takahito's help with this one, with the reaction plane?
+
+1004.2377/STAR_2010_I851937
+1006.1347/PHENIX_2010_I857187
+1010.1521/PHENIX_2011_I872172
+1107.2955/STAR_2012_I918779
+1110.0121/ALICE_2012_I930312 ??
+1110.0579/STAR_2012_I930463 - Implemented by Christal Martin at UTK. Charged pi, K, p and K0S and rho spectra in Au+Au and p+p at 200 GeV.
+Outstanding questions/issues:
+Need to implement RAA Ratios (RAA/RAA)
+Need to normalize RAA 
+
+1110.5800/STAR_2012_I943192
+1204.1526/PHENIX_2012_I1107625 - Implemented by Christal Martin at UTK.  Pi0 RAA at 39, 62.4, 200 GeV.  Complete.
+
+1208.2254/PHENIX_2013_I1127262
+1212.3323/PHENIX_2013_I1207323
+1304.3410/PHENIX_2013_I1227971 - Implemented by Christal Martin at UTK.  Spectra and ratios of charged pi/k/p in Au+Au and d+Au collisions at sqrt(s_NN)=200 GeV
+Outstanding questions/issues:
+Check RCP
+Check finalize section (Ratio of yields, RCP, Ratio of Spectra)
+
+1603.05477/STAR_2016_I1429700
+1604.01117/STAR_2016_I1442357
+1812.10224/STAR_2019_I1711377 - Implemented by Christal Martin at UTK.  D0 meson spectra in Au+Au at 200 GeV.
+Outstanding questions/issues:
+Need to implement cross-sections
+Need to normalize RAA
+Does RAA and RCP have D0 defined as D0+D0bar/2? Is it scaled correctly in the finalize section (yields)?
+
+1910.04812/CMS_2020_I064906 - Implemented by Lauren Kasper at Vanderbilt.
+
+Analyses implemented as part of Rivetizing Heavy Ion Collisions at RHIC
+PHENIX_2008_I776624/PHENIX_2008_I776624
+PHENIX_2011_I886590/PHENIX_2011_I886590
+PHENIX_2011_I900703/PHENIX_2011_I900703
+PHENIX_2012_I1116179/PHENIX_2012_I1116179
+PHENIX_2016_I1393529/PHENIX_2016_I1393529
+PHENIX_2016_I1394433/PHENIX_2016_I1394433
+PHENIX_2018_1672859/PHENIX_2018_1672859
+PHENIX_2018_I1672476/PHENIX_2018_I1672476
+PHENIX_2019_I1672133/PHENIX_2019_I1672133
+PHENIX_2020_I1773662/PHENIX_2020_I1773662
+STAR_2003_I619063/STAR_2003_I619063
+STAR_2009_I793126/STAR_2009_I793126
+STAR_2010_I837075/STAR_2010_I837075
+STAR_2010_I840766/STAR_2010_I840766
+STAR_2016_I1420183/STAR_2016_I1420183
+STAR_2020_I1771348/STAR_2020_I1771348
+
