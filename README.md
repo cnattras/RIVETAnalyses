@@ -48,9 +48,17 @@ CN: Maybe we can get Takahito's help with this one, with the reaction plane?
 - Correlation Analysis
 - Seems in good shape. Should run and plot histograms for debugging
 
-1010.1521/PHENIX_2011_I872172
-1107.2955/STAR_2012_I918779
-1110.0121/ALICE_2012_I930312 ??
+1010.1521/PHENIX_2011_I872172: Andrew Bryant
+- Correlation Analysis
+- Some histograms to be implemented (I_AA)
+- Bkg subtraction to be implemented
+
+1107.2955/STAR_2012_I918779: Christal Martin
+- Spectra and ratio analysis
+- Some histograms to be implemented (Ratios)
+
+1110.0121/ALICE_2012_I930312: Shelby
+- Not implemented
 
 1110.0579/STAR_2012_I930463 - Implemented by Christal Martin at UTK. Charged pi, K, p and K0S and rho spectra in Au+Au and p+p at 200 GeV.
 Outstanding questions/issues:
