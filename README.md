@@ -4,23 +4,50 @@ This repository is for RIVET analyses developed at UTK and in the 2020 Rivetizin
 Here is a list of analyses and a brief summary of their status.  Please make sure to check the .info file before use as well.
 
 Analyses implemented at UTK
-0603010/PHENIX_2006_I711951
-0604018/STAR_2006_I715470
-0611006v1/PHENIX_2006_I0611006
+0603010/PHENIX_2006_I711951: Andi Mankolli
+- Spectra and ratio analysis
+- Need to implement ratio plots between particle species and R_dAu.
+- Need to implment double ratios
+- Remove secondary decays "by hand", need to implment primary Particles
+
+0604018/STAR_2006_I715470: Amber Threlkeld
+- Correlation analysis
+- This one needs more work
+
+0611006v1/PHENIX_2006_I0611006: Lauren Kasper
+- Spectra and ratio Analysis
+- Normalizations needs double check
+
 0801.1665/PHENIX_2008_I777211 - Implemented by Christal Martin at UTK.  Pi0 RAA in 0-5% central Au+Au at 200 GeV.  Complete.
 
-0801.4020/PHENIX_2008_I778168
-08014545/PHENIX_2008_I778396
-0903.3399/PHENIX_2009_I815824
+0801.4020/PHENIX_2008_I778168: Mani
+- Spectra and ratio Analysis
+- Check ratio normalizations
+- Use bin center instead of particle pt for normalizations
+
+08014545/PHENIX_2008_I778396: Nora Bauer
+- Correlation Analysis
+- Need some double check (Many histograms and very long code)
+
+0903.3399/PHENIX_2009_I815824: John Bridges
+- Correlation Analysis
+- Histograms booked but not properly implemented in analyze
 
 0903.4886/PHENIX_2009_I816486 - Implemented by Christal Martin at UTK.  Pi0 RAA vs rxn plane Au+Au 200 GeV
 Outstanding questions/issues:
 Need to implement v_2 and phi vs RAA.
-Need to normalize RAA 
+Need to normalize RAA
 CN: Maybe we can get Takahito's help with this one, with the reaction plane?
 
-1004.2377/STAR_2010_I851937
-1006.1347/PHENIX_2010_I857187
+1004.2377/STAR_2010_I851937: Eden Ross
+- Correlation Analysis
+- Some histograms to be implemented
+- Bkg subtraction with v2 needs to be tested and debugged
+
+1006.1347/PHENIX_2010_I857187: Jacob
+- Correlation Analysis
+- Seems in good shape. Should run and plot histograms for debugging
+
 1010.1521/PHENIX_2011_I872172
 1107.2955/STAR_2012_I918779
 1110.0121/ALICE_2012_I930312 ??
@@ -28,7 +55,7 @@ CN: Maybe we can get Takahito's help with this one, with the reaction plane?
 1110.0579/STAR_2012_I930463 - Implemented by Christal Martin at UTK. Charged pi, K, p and K0S and rho spectra in Au+Au and p+p at 200 GeV.
 Outstanding questions/issues:
 Need to implement RAA Ratios (RAA/RAA)
-Need to normalize RAA 
+Need to normalize RAA
 
 1110.5800/STAR_2012_I943192 - Started by Christine Nattrass.  Dihadron correlations at 62.4 and 200 GeV in Cu+Cu and Au+Au.  Not complete.  Needs a lot of work.  Probably should be treated virtually like an unstarted analysis.
 
@@ -72,4 +99,3 @@ STAR_2010_I837075/STAR_2010_I837075
 STAR_2010_I840766/STAR_2010_I840766
 STAR_2016_I1420183/STAR_2016_I1420183
 STAR_2020_I1771348/STAR_2020_I1771348
-
