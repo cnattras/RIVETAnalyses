@@ -4,14 +4,6 @@
 #include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #define _USE_MATH_DEFINES
 namespace Rivet {
-
-  bool isChargedHadron(Particle& p)
-  {
-      if((p.abspid() == PID::PROTON) || (p.abspid() == PID::PIPLUS) || (p.abspid() == PID::KPLUS)) return true;
-
-      return false;
-  }
-
   /// @brief Add a short analysis description here
   class STAR_2003_I619063 : public Analysis {
   public:
