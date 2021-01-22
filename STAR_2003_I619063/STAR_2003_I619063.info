@@ -19,10 +19,8 @@ Description:
   'We report high statistics measurements of inclusive charged hadron production in Au+Au and p+p collisions at $\sqrt{s_{\rm NN}}$=200 GeV. A large, approximately constant hadron suppression is observed in central Au+Au collisions for $5 < p_{T} < 12$ GeV/c. The collision energy dependence of the yields and the centrality and $p_{T}$ dependence of the suppression provide stringent constraints on theoretical models of suppression. Models incorporating initial-state gluon saturation or partonic energy loss in dense matter are largely consistent with observations. We observe no evidence of $p_{T}$-dependent suppression, which may be expected from models incorporating jet attentuation in cold nuclear matter or scattering of fragmentation hadrons.'
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP,AUAU130,AUAU200
 Keywords: []
-BibKey: 
+BibKey:
 BibTeX: ''
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
-

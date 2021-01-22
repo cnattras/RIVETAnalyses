@@ -1,10 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/PrimaryParticles.hh"
 #include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
 #define _USE_MATH_DEFINES
 namespace Rivet {
@@ -22,8 +18,6 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2003_I619063);
-
-
     /// @name Analysis methods
     //@{
 
@@ -32,14 +26,9 @@ namespace Rivet {
 
       // Initialise and register projections
 
-
-      // the basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      //NOLAN: You should change this to the pseudorapidity in the paper
-      const FinalState fs(Cuts::abseta < 0.5 && Cuts::abscharge > 0);
-      declare(fs,"fs");
-
+      std::initializer_list<int> pdgIds = {PID::PROTON, PID::PIPLUS, PID::KPLUS};
+		  const PrimaryParticles cpp(pdgIds, Cuts::absrap < 0.5);
+      declare(cpp,"cpp");
       //Ratios using AuAu at 130 GeV
       string refnameEnergyRatio05 = mkAxisCode(2,1,1);
       const Scatter2D& refdataEnergyRatio05 =refData(refnameEnergyRatio05);
@@ -73,7 +62,7 @@ namespace Rivet {
       const Scatter2D& refdatappRatio6080 =refData(refnameppRatio6080);
 
       //Centrality
-      declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");  
+      declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
       //pp at 200 GeV
       book(chSpectrum["chSpectrum0_5_pp"], refnameppRatio05 + "_pp", refdatappRatio05);
@@ -171,15 +160,14 @@ namespace Rivet {
           collSys = pp;
       }
 
-      FinalState fs = applyProjection<FinalState>(event,"fs");
-      Particles particles = fs.particles();
+      PrimaryParticles cpp = applyProjection<PrimaryParticles>(event,"cpp");
+      Particles particles = cpp.particles();
 
       if(collSys==pp)
       {
           sow["sow_pp"]->fill();
           for(Particle p : particles)
           {
-              if(!isChargedHadron(p)) continue;
               chSpectrum["chSpectrum0_5_pp"]->fill(p.pT()/GeV);
               chSpectrum["chSpectrum10_20_pp"]->fill(p.pT()/GeV);
               chSpectrum["chSpectrum20_30_pp"]->fill(p.pT()/GeV);
@@ -203,7 +191,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum0_5"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
                   chSpectrum["chSpectrum_C05_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C05_S200pp"]->fill(p.pT()/GeV);
@@ -214,7 +201,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum0_5_130"]->fill(p.pT()/GeV);
               }
               sow["sow0_5_130"]->fill();
@@ -226,7 +212,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum5_10"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
               }
               sow["sow5_10"]->fill();
@@ -238,7 +223,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum10_20"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
                   chSpectrum["chSpectrum_C1020_S200pp"]->fill(p.pT()/GeV);
               }
@@ -251,7 +235,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum20_30"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
                   chSpectrum["chSpectrum_C2030_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C2030_S200pp"]->fill(p.pT()/GeV);
@@ -262,7 +245,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum20_30_130"]->fill(p.pT()/GeV);
               }
               sow["sow20_30_130"]->fill();
@@ -274,7 +256,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum30_40"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
                   chSpectrum["chSpectrum_C3040_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C3040_S200pp"]->fill(p.pT()/GeV);
@@ -285,7 +266,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum30_40_130"]->fill(p.pT()/GeV);
               }
               sow["sow30_40_130"]->fill();
@@ -298,7 +278,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum40_60"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
                   chSpectrum["chSpectrum_C4060_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C4060_S200pp"]->fill(p.pT()/GeV);
@@ -309,7 +288,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum40_60_130"]->fill(p.pT()/GeV);
               }
               sow["sow40_60_130"]->fill();
@@ -321,7 +299,6 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  if(!isChargedHadron(p)) continue;
                   chSpectrum["chSpectrum60_80"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
                   chSpectrum["chSpectrum_C6080_S200pp"]->fill(p.pT()/GeV);
               }
@@ -433,7 +410,6 @@ namespace Rivet {
     map<string, Histo1DPtr> chSpectrum;
     map<string, CounterPtr> sow;
     map<string, Scatter2DPtr> R_AB;
-    string beamOpt;
     enum CollisionSystem {pp, AuAu130, AuAu200};
     CollisionSystem collSys;
     //@}
