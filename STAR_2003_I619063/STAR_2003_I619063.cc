@@ -12,6 +12,17 @@ namespace Rivet {
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2003_I619063);
     /// @name Analysis methods
     //@{
+    bool getBinCenter(YODA::Histo1D hist, double pT, double &deltaPt)
+    {
+        //cout << "pT: " << pT << endl;
+        if(pT > hist.xMin() && pT < hist.xMax())
+        {
+            deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+            //cout << "DeltapT: " << deltaPt << endl;
+            return true;
+        }
+        else return false;
+    }
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -176,6 +187,8 @@ namespace Rivet {
 
       if(c >= 80) vetoEvent;
 
+      double binCenter = 0.;
+
       if(c < 5.)
       {
 
@@ -183,7 +196,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum0_5"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum0_5"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum0_5"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
                   chSpectrum["chSpectrum_C05_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C05_S200pp"]->fill(p.pT()/GeV);
               }
@@ -204,7 +220,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum5_10"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum5_10"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum5_10"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
               }
               sow["sow5_10"]->fill();
           }
@@ -215,7 +234,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum10_20"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum10_20"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum10_20"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
                   chSpectrum["chSpectrum_C1020_S200pp"]->fill(p.pT()/GeV);
               }
               sow["sow10_20"]->fill();
@@ -227,7 +249,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum20_30"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum20_30"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum20_30"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
                   chSpectrum["chSpectrum_C2030_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C2030_S200pp"]->fill(p.pT()/GeV);
               }
@@ -248,7 +273,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum30_40"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum30_40"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum30_40"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
                   chSpectrum["chSpectrum_C3040_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C3040_S200pp"]->fill(p.pT()/GeV);
               }
@@ -270,7 +298,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum40_60"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum40_60"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum40_60"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
                   chSpectrum["chSpectrum_C4060_S200130"]->fill(p.pT()/GeV);
                   chSpectrum["chSpectrum_C4060_S200pp"]->fill(p.pT()/GeV);
               }
@@ -291,7 +322,10 @@ namespace Rivet {
           {
               for(Particle p : particles)
               {
-                  chSpectrum["chSpectrum60_80"]->fill(p.pT()/GeV,1.0/(p.pT()/GeV));
+                  if(getBinCenter(*chSpectrum["chSpectrum60_80"], p.pT()/GeV, binCenter))
+                  {
+                      chSpectrum["chSpectrum60_80"]->fill(p.pT()/GeV, 1./binCenter);
+                  }
                   chSpectrum["chSpectrum_C6080_S200pp"]->fill(p.pT()/GeV);
               }
               sow["sow60_80"]->fill();

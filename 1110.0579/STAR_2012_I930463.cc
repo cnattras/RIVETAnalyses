@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+#include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -41,13 +41,8 @@ namespace Rivet {
 		const PrimaryParticles np(pdgIds, Cuts::absrap < 0.5 && Cuts::abscharge == 0);
 		declare(np, "np");
 
-		beamOpt = getOption<string>("beam", "NONE");
 
-		if (beamOpt == "PP") collSys = pp;
-		else if (beamOpt == "AUAU200") collSys = AuAu200;
-
-
-		if (!(collSys == pp)) declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+		declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
 
 		book(sow["sow_pp"], "sow_pp");
@@ -159,96 +154,101 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
-		Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
-		Particles neutralParticles = applyProjection<PrimaryParticles>(event, "np").particles();
 
-		if (collSys == pp)
-		{
-			sow["sow_pp"]->fill();
-			for (Particle p : chargedParticles)
-			{
-				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
+      const ParticlePair& beam = beams();
 
-				switch (p.pid()) {
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
 
-				case 211: // pi+
-				{
-					hPionPosPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hPionPosPt["pp1"]->fill(partPt);
-					hPionPosPt["pp2"]->fill(partPt);
-					hPionPt["pp1"]->fill(partPt);
-					hPionPt["pp2"]->fill(partPt);
-					hPionPt["Raa_c12_pp"]->fill(partPt);
-					break;
-				}
-				case -211: // pi-
-				{
-					hPionNegPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hPionNegPt["pp1"]->fill(partPt);
-					hPionNegPt["pp2"]->fill(partPt);
-					hPionPt["pp1"]->fill(partPt);
-					hPionPt["pp2"]->fill(partPt);
-					hPionPt["Raa_c12_pp"]->fill(partPt);
-					break;
-				}
-				case  321: // K+
-				{
-					hKaonPosPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hKaonPosPt["pp"]->fill(partPt);
-					hKaonPt["pp"]->fill(partPt);
+      Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
+  		Particles neutralParticles = applyProjection<PrimaryParticles>(event, "np").particles();
 
-					break;
-				}
-				case  -321: // K-
-				{
-					hKaonNegPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hKaonNegPt["pp"]->fill(partPt);
-					hKaonPt["pp"]->fill(partPt);
-					hKpPt["Raa_c12_pp"]->fill(partPt);
-					break;
-				}
-				case 2212: // proton
-				{
-					hProtPosPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hProtPosPt["pp1"]->fill(partPt);
-					hProtPosPt["pp2"]->fill(partPt);
-					hKpPt["Raa_c12_pp"]->fill(partPt);
-					break;
-				}
-				case -2212: // anti-proton
-				{
-					hProtNegPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hProtNegPt["pp1"]->fill(partPt);
-					hProtNegPt["pp2"]->fill(partPt);
-					break;
-				}
-				}
-			}
+      if (collSys == pp)
+      {
+          sow["sow_pp"]->fill();
+          for (Particle p : chargedParticles)
+          {
+              double partPt = p.pT() / GeV;
+              double pt_weight = 1. / (partPt * 2. * M_PI);
 
-			for (Particle p : neutralParticles)
-			{
-				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
+              switch (p.pid()) {
 
-				switch (p.pid()) {
-				case 310: // K0S
-				{
-					hKaon0SPt["ptyieldspp"]->fill(partPt, pt_weight);
-					hKaon0SPt["pp"]->fill(partPt);
-					hKaon0SPt["Raa_c12_pp"]->fill(partPt);
-					break;
-				}
-				case 113: // rho0
-				{
-					hRho0Pt["ptyieldspp"]->fill(partPt, pt_weight);
-					hRho0Pt["Raa_c12_pp"]->fill(partPt);
-					break;
-				}
-				}
-			}
+                  case 211: // pi+
+				          {
+                      hPionPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hPionPosPt["pp1"]->fill(partPt);
+                      hPionPosPt["pp2"]->fill(partPt);
+                      hPionPt["pp1"]->fill(partPt);
+                      hPionPt["pp2"]->fill(partPt);
+                      hPionPt["Raa_c12_pp"]->fill(partPt);
+                      break;
+                  }
+                  case -211: // pi-
+                  {
+                      hPionNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hPionNegPt["pp1"]->fill(partPt);
+                      hPionNegPt["pp2"]->fill(partPt);
+                      hPionPt["pp1"]->fill(partPt);
+                      hPionPt["pp2"]->fill(partPt);
+                      hPionPt["Raa_c12_pp"]->fill(partPt);
+                      break;
+                  }
+                  case  321: // K+
+                  {
+                      hKaonPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hKaonPosPt["pp"]->fill(partPt);
+                      hKaonPt["pp"]->fill(partPt);
+                      break;
+                  }
+                  case  -321: // K-
+                  {
+                      hKaonNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hKaonNegPt["pp"]->fill(partPt);
+                      hKaonPt["pp"]->fill(partPt);
+                      hKpPt["Raa_c12_pp"]->fill(partPt);
+                      break;
+                  }
+                  case 2212: // proton
+                  {
+                      hProtPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hProtPosPt["pp1"]->fill(partPt);
+                      hProtPosPt["pp2"]->fill(partPt);
+                      hKpPt["Raa_c12_pp"]->fill(partPt);
+                      break;
+                  }
+                  case -2212: // anti-proton
+                  {
+                      hProtNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hProtNegPt["pp1"]->fill(partPt);
+                      hProtNegPt["pp2"]->fill(partPt);
+                      break;
+                  }
+              }
+          }
 
-			return;
+          for (Particle p : neutralParticles)
+          {
+              double partPt = p.pT() / GeV;
+              double pt_weight = 1. / (partPt * 2. * M_PI);
+
+              switch (p.pid()) {
+                  case 310: // K0S
+                  {
+                      hKaon0SPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hKaon0SPt["pp"]->fill(partPt);
+                      hKaon0SPt["Raa_c12_pp"]->fill(partPt);
+                      break;
+                  }
+                  case 113: // rho0
+                  {
+                      hRho0Pt["ptyieldspp"]->fill(partPt, pt_weight);
+                      hRho0Pt["Raa_c12_pp"]->fill(partPt);
+                      break;
+                  }
+              }
+          }
+
+          return;
 		}
 
 
@@ -341,6 +341,10 @@ namespace Rivet {
 		bool AuAu200_available = false;
 		bool pp_available = false;
 
+    if(sow["sow_pp"]->sumW() > 0) pp_available = true;
+    if(sow["sow_AuAuc12"]->sumW() > 0) AuAu200_available = true;
+
+/*
 		for (auto element : hKaonNegPt)
 		{
 			string name = element.second->name();
@@ -583,7 +587,7 @@ namespace Rivet {
 				}
 			}
 		}
-
+*/
 		if (!(AuAu200_available && pp_available)) return;
 
 
@@ -636,7 +640,7 @@ namespace Rivet {
 		hRho0Pt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c13_pp"], hRaa["Rho0_c13_AuAu"]);
 		//hRaa["Rho0_c13_AuAu"]->scaleY(1. / 960.2);
-	    
+
 	    	//Figure 3 RAA Ratio_____________Need to implement
 
 
