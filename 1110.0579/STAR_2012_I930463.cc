@@ -27,6 +27,16 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2012_I930463);
 
+  bool getBinCenter(YODA::Histo1D hist, double pT, double &binCenter)
+  {
+      if(pT > hist.xMin() && pT < hist.xMax())
+      {
+          binCenter = hist.bin(hist.binIndexAt(pT)).xMid();
+          return true;
+      }
+      else return false;
+  }
+
 
 	void init() {
 		std::initializer_list<int> pdgIds = { 321, -321, 211, -211, 2212, -2212, 310, 113 };  // pi+ 211  K+ 321   proton 2212	K0S 310		rho0 113
@@ -169,13 +179,18 @@ namespace Rivet {
           for (Particle p : chargedParticles)
           {
               double partPt = p.pT() / GeV;
-              double pt_weight = 1. / (partPt * 2. * M_PI);
+              double pt_weight = 1. / (2. * M_PI);
+              double binCenter = 0.;
 
               switch (p.pid()) {
 
                   case 211: // pi+
 				          {
-                      hPionPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hPionPosPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hPionPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hPionPosPt["pp1"]->fill(partPt);
                       hPionPosPt["pp2"]->fill(partPt);
                       hPionPt["pp1"]->fill(partPt);
@@ -185,7 +200,11 @@ namespace Rivet {
                   }
                   case -211: // pi-
                   {
-                      hPionNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hPionNegPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hPionNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hPionNegPt["pp1"]->fill(partPt);
                       hPionNegPt["pp2"]->fill(partPt);
                       hPionPt["pp1"]->fill(partPt);
@@ -195,14 +214,22 @@ namespace Rivet {
                   }
                   case  321: // K+
                   {
-                      hKaonPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hKaonPosPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hKaonPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hKaonPosPt["pp"]->fill(partPt);
                       hKaonPt["pp"]->fill(partPt);
                       break;
                   }
                   case  -321: // K-
                   {
-                      hKaonNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hKaonNegPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hKaonNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hKaonNegPt["pp"]->fill(partPt);
                       hKaonPt["pp"]->fill(partPt);
                       hKpPt["Raa_c12_pp"]->fill(partPt);
@@ -210,7 +237,11 @@ namespace Rivet {
                   }
                   case 2212: // proton
                   {
-                      hProtPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hProtPosPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hProtPosPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hProtPosPt["pp1"]->fill(partPt);
                       hProtPosPt["pp2"]->fill(partPt);
                       hKpPt["Raa_c12_pp"]->fill(partPt);
@@ -218,7 +249,11 @@ namespace Rivet {
                   }
                   case -2212: // anti-proton
                   {
-                      hProtNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hProtNegPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hProtNegPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hProtNegPt["pp1"]->fill(partPt);
                       hProtNegPt["pp2"]->fill(partPt);
                       break;
@@ -229,19 +264,28 @@ namespace Rivet {
           for (Particle p : neutralParticles)
           {
               double partPt = p.pT() / GeV;
-              double pt_weight = 1. / (partPt * 2. * M_PI);
+              double pt_weight = 1. / (2. * M_PI);
+              double binCenter = 0.;
 
               switch (p.pid()) {
                   case 310: // K0S
                   {
-                      hKaon0SPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hKaon0SPt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hKaon0SPt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hKaon0SPt["pp"]->fill(partPt);
                       hKaon0SPt["Raa_c12_pp"]->fill(partPt);
                       break;
                   }
                   case 113: // rho0
                   {
-                      hRho0Pt["ptyieldspp"]->fill(partPt, pt_weight);
+                      if(getBinCenter(*hRho0Pt["ptyieldspp"], partPt, binCenter))
+                      {
+                          pt_weight /= binCenter;
+                          hRho0Pt["ptyieldspp"]->fill(partPt, pt_weight);
+                      }
                       hRho0Pt["Raa_c12_pp"]->fill(partPt);
                       break;
                   }
@@ -263,7 +307,8 @@ namespace Rivet {
 			for (Particle p : chargedParticles)
 			{
 				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
+				double pt_weight = 1. / (2. * M_PI);
+        double binCenter = 0.;
 
 				switch (p.pid()) {
 				case 211: // pi+
@@ -280,26 +325,42 @@ namespace Rivet {
 				}
 				case  321: // K+
 				{
-					hKpPosPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          if(getBinCenter(*hKpPosPt["ptyieldsAuAuc12"], partPt, binCenter))
+          {
+              pt_weight /= binCenter;
+              hKpPosPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          }
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
 					break;
 				}
 				case  -321: // K-
 				{
-					hKpNegPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          if(getBinCenter(*hKpNegPt["ptyieldsAuAuc12"], partPt, binCenter))
+          {
+              pt_weight /= binCenter;
+              hKpNegPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          }
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
 					break;
 				}
 				case 2212: // proton
 				{
-					hKpPosPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          if(getBinCenter(*hKpPosPt["ptyieldsAuAuc12"], partPt, binCenter))
+          {
+              pt_weight /= binCenter;
+              hKpPosPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          }
 					hProtPosPt["AuAuc12"]->fill(partPt);
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
 					break;
 				}
 				case -2212: // anti-proton
 				{
-					hKpNegPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          if(getBinCenter(*hKpNegPt["ptyieldsAuAuc12"], partPt, binCenter))
+          {
+              pt_weight /= binCenter;
+              hKpNegPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          }
 					hProtNegPt["AuAuc12"]->fill(partPt);
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
 					break;
@@ -310,18 +371,27 @@ namespace Rivet {
 			for (Particle p : neutralParticles)
 			{
 				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
+				double pt_weight = 1. / (2. * M_PI);
+        double binCenter = 0.;
 
 				switch (p.pid()) {
 				case 310: // K0S
 				{
-					hKaon0SPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          if(getBinCenter(*hKaon0SPt["ptyieldsAuAuc12"], partPt, binCenter))
+          {
+              pt_weight /= binCenter;
+              hKaon0SPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          }
 					hKaon0SPt["Raa_c12_AuAu"]->fill(partPt);
 					break;
 				}
 				case 113: // rho0
 				{
-					hRho0Pt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          if(getBinCenter(*hRho0Pt["ptyieldsAuAuc12"], partPt, binCenter))
+          {
+              pt_weight /= binCenter;
+              hRho0Pt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
+          }
 					hRho0Pt["Raa_c12_AuAu"]->fill(partPt);
 					break;
 				}
