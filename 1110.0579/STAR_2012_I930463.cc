@@ -30,6 +30,23 @@ namespace Rivet {
       else return false;
   }
 
+  void DivideScatter2D(Scatter2DPtr s1, Scatter2DPtr s2, Scatter2DPtr s)
+  {
+      for(unsigned int i = 0; i < s2->numPoints(); i++)
+      {
+          if(s2->point(i).y() == 0)
+          {
+              s->addPoint(s2->point(i).x(), std::numeric_limits<double>::quiet_NaN());
+              continue;
+          }
+
+          double yErr = (s1->point(i).y()/s2->point(i).y())*std::sqrt(std::pow(s1->point(i).yErrPlus()/s1->point(i).y(), 2) + std::pow(s2->point(i).yErrPlus()/s2->point(i).y(), 2));
+
+          s->addPoint(s2->point(i).x(), s1->point(i).y()/s2->point(i).y(), s1->point(i).xErrPlus(), yErr);
+      }
+
+  }
+
 
 	void init() {
 		std::initializer_list<int> pdgIds = { 321, 211, 2212};  // pi+ 211  K+ 321   proton 2212	K0S 310		rho0 113
@@ -150,8 +167,37 @@ namespace Rivet {
 		book(hRho0Pt["Raa_c12_pp"], refname13 + "_pp", refdata13);
 		book(hRaa["Rho0_c12_AuAu"], refname13);
 
-		//Figure 3 RAA Ratio ?? Best way to do Raa ratio?
+		//Figure 3 RAA double ratios
 
+    string refname14 = mkAxisCode(14, 1, 1);
+		const Scatter2D& refdata14 = refData(refname14);
+		book(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"], refname14 + "_AuAu_KpOverPion_Kp", refdata14);
+    book(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"], refname14 + "_AuAu_KpOverPion_Pion", refdata14);
+		book(hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"], refname14 + "_pp_Kp", refdata14);
+    book(hHistos1DRaa["Raa_c12_pp_KpOverPion_Pion"], refname14 + "_pp_Pion", refdata14);
+    book(hDoubleRaa["Raa_c12_KpOverPion_Kp"], refname14 + "_Kp");
+    book(hDoubleRaa["Raa_c12_KpOverPion_Pion"], refname14 + "_Pion");
+		book(hDoubleRaa["Kp_c12_KpOverPion"], refname14);
+
+    string refname15 = mkAxisCode(15, 1, 1);
+		const Scatter2D& refdata15 = refData(refname15);
+		book(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Neg"], refname15 + "_AuAu_KpNegOverPos_Neg", refdata15);
+    book(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Pos"], refname15 + "_AuAu_KpNegOverPos_Pos", refdata15);
+		book(hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Neg"], refname15 + "_pp_Neg", refdata15);
+    book(hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Pos"], refname15 + "_pp_Pos", refdata15);
+    book(hDoubleRaa["Raa_c12_KpNeg"], refname15 + "_KpNeg");
+    book(hDoubleRaa["Raa_c12_KpPos"], refname15 + "_KpPos");
+		book(hDoubleRaa["Kp_c12_KpNegOverPos"], refname15);
+
+    string refname16 = mkAxisCode(16, 1, 1);
+		const Scatter2D& refdata16 = refData(refname16);
+		book(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Rho"], refname16 + "_AuAu_RhoOverPion_Rho", refdata16);
+    book(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Pion"], refname16 + "_AuAu_RhoOverPion_Pion", refdata16);
+		book(hHistos1DRaa["Raa_c12_pp_RhoOverPion_Rho"], refname16 + "_pp_RhoOverPion_Rho", refdata16);
+    book(hHistos1DRaa["Raa_c12_pp_RhoOverPion_Pion"], refname16 + "_pp_RhoOverPion_Pion", refdata16);
+    book(hDoubleRaa["Raa_c12_RhoOverPion_Rho"], refname16 + "_Rho");
+    book(hDoubleRaa["Raa_c12_RhoOverPion_Pion"], refname16 + "_Pion");
+		book(hDoubleRaa["Kp_c12__RhoOverPion"], refname16);
 
     }
 
@@ -190,6 +236,8 @@ namespace Rivet {
                       hPionPt["pp1"]->fill(partPt);
                       hPionPt["pp2"]->fill(partPt);
                       hPionPt["Raa_c12_pp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpOverPion_Pion"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_RhoOverPion_Pion"]->fill(partPt);
                       break;
                   }
                   case -211: // pi-
@@ -204,6 +252,8 @@ namespace Rivet {
                       hPionPt["pp1"]->fill(partPt);
                       hPionPt["pp2"]->fill(partPt);
                       hPionPt["Raa_c12_pp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpOverPion_Pion"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_RhoOverPion_Pion"]->fill(partPt);
                       break;
                   }
                   case  321: // K+
@@ -215,6 +265,8 @@ namespace Rivet {
                       }
                       hKaonPosPt["pp"]->fill(partPt);
                       hKaonPt["pp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Pos"]->fill(partPt);
                       break;
                   }
                   case  -321: // K-
@@ -227,6 +279,8 @@ namespace Rivet {
                       hKaonNegPt["pp"]->fill(partPt);
                       hKaonPt["pp"]->fill(partPt);
                       hKpPt["Raa_c12_pp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Neg"]->fill(partPt);
                       break;
                   }
                   case 2212: // proton
@@ -239,6 +293,8 @@ namespace Rivet {
                       hProtPosPt["pp1"]->fill(partPt);
                       hProtPosPt["pp2"]->fill(partPt);
                       hKpPt["Raa_c12_pp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Pos"]->fill(partPt);
                       break;
                   }
                   case -2212: // anti-proton
@@ -250,6 +306,8 @@ namespace Rivet {
                       }
                       hProtNegPt["pp1"]->fill(partPt);
                       hProtNegPt["pp2"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Neg"]->fill(partPt);
                       break;
                   }
               }
@@ -281,6 +339,7 @@ namespace Rivet {
                           hRho0Pt["ptyieldspp"]->fill(partPt, pt_weight);
                       }
                       hRho0Pt["Raa_c12_pp"]->fill(partPt);
+                      hHistos1DRaa["Raa_c12_pp_RhoOverPion_Rho"]->fill(partPt);
                       break;
                   }
               }
@@ -309,12 +368,16 @@ namespace Rivet {
 				{
 					hPionPosPt["AuAuc12"]->fill(partPt);
 					hPionPt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Pion"]->fill(partPt);
 					break;
 				}
 				case -211: // pi-
 				{
 					hPionNegPt["AuAuc12"]->fill(partPt);
 					hPionPt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Pion"]->fill(partPt);
 					break;
 				}
 				case  321: // K+
@@ -325,6 +388,8 @@ namespace Rivet {
               hKpPosPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
           }
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Pos"]->fill(partPt);
 					break;
 				}
 				case  -321: // K-
@@ -335,6 +400,8 @@ namespace Rivet {
               hKpNegPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
           }
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Neg"]->fill(partPt);
 					break;
 				}
 				case 2212: // proton
@@ -346,6 +413,8 @@ namespace Rivet {
           }
 					hProtPosPt["AuAuc12"]->fill(partPt);
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Pos"]->fill(partPt);
 					break;
 				}
 				case -2212: // anti-proton
@@ -357,6 +426,8 @@ namespace Rivet {
           }
 					hProtNegPt["AuAuc12"]->fill(partPt);
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Neg"]->fill(partPt);
 					break;
 				}
 				}
@@ -387,6 +458,7 @@ namespace Rivet {
               hRho0Pt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
           }
 					hRho0Pt["Raa_c12_AuAu"]->fill(partPt);
+          hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Rho"]->fill(partPt);
 					break;
 				}
 				}
@@ -459,9 +531,24 @@ namespace Rivet {
 		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c12_pp"], hRaa["Rho0_c12_AuAu"]);
 		//hRaa["Rho0_c13_AuAu"]->scaleY(1. / 960.2);
 
-	    	//Figure 3 RAA Ratio_____________Need to implement
+	  //Figure 3 RAA Ratio_____________Need to implement
+    hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
+    hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
+    hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"]->scaleW(1. / sow["sow_pp"]->sumW());
+    hHistos1DRaa["Raa_c12_pp_KpOverPion_Pion"]->scaleW(1. / sow["sow_pp"]->sumW());
 
 
+    divide(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"], hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"], hDoubleRaa["Raa_c12_KpOverPion_Kp"]);
+    divide(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"], hHistos1DRaa["Raa_c12_pp_KpOverPion_Pion"], hDoubleRaa["Raa_c12_KpOverPion_Pion"]);
+    DivideScatter2D(hDoubleRaa["Raa_c12_KpOverPion_Kp"], hDoubleRaa["Raa_c12_KpOverPion_Pion"], hDoubleRaa["Kp_c12_KpOverPion"]);
+
+    divide(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Neg"], hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Neg"], hDoubleRaa["Raa_c12_KpNeg"]);
+    divide(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Pos"], hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Pos"], hDoubleRaa["Raa_c12_KpPos"]);
+    DivideScatter2D(hDoubleRaa["Raa_c12_KpNeg"], hDoubleRaa["Raa_c12_KpPos"], hDoubleRaa["Kp_c12_KpNegOverPos"]);
+
+    divide(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Rho"], hHistos1DRaa["Raa_c12_pp_RhoOverPion_Rho"], hDoubleRaa["Raa_c12_RhoOverPion_Rho"]);
+    divide(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Pion"], hHistos1DRaa["Raa_c12_pp_RhoOverPion_Pion"], hDoubleRaa["Raa_c12_RhoOverPion_Pion"]);
+    DivideScatter2D(hDoubleRaa["Raa_c12_RhoOverPion_Rho"], hDoubleRaa["Raa_c12_RhoOverPion_Pion"], hDoubleRaa["Kp_c12__RhoOverPion"]);
     }
 
 
@@ -477,6 +564,8 @@ namespace Rivet {
 	map<string, Histo1DPtr> hKpPosPt;
 	map<string, Histo1DPtr> hKpPt;
 
+  map<string, Histo1DPtr> hHistos1DRaa;
+  map<string, Scatter2DPtr> hDoubleRaa;
 
 	map<string, Histo1DPtr> hKaonPt;
 	map<string, Histo1DPtr> hPionPt;
