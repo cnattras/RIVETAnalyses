@@ -55,10 +55,7 @@ namespace Rivet {
 		const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.5 && Cuts::pT > 3.5*GeV && Cuts::abscharge > 0);
 		declare(cp, "cp");
 
-		//neutral particles (changed fs to np)
-		//const PrimaryParticles np(pdgIds, Cuts::absrap < 0.5 && Cuts::abscharge == 0);
-		//declare(np, "np");
-
+    //neutral particles
     const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::pT > 3.5*GeV && (Cuts::abspid == 310 || Cuts::abspid == 113) );
     declare(np, "np");
 
@@ -200,8 +197,6 @@ namespace Rivet {
 		book(hDoubleRaa["Kp_c12__RhoOverPion"], refname16);
 
     }
-
-
 
     void analyze(const Event& event) {
 
@@ -583,7 +578,6 @@ namespace Rivet {
 
 
 	map<string, CounterPtr> sow;
-	string beamOpt;
 	enum CollisionSystem { pp, AuAu200 };
 	CollisionSystem collSys;
 
