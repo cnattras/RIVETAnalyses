@@ -1,15 +1,8 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
-#include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
-#include "Rivet/Projections/SingleValueProjection.hh"
-#include "Rivet/Projections/CentralityProjection.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
@@ -39,17 +32,18 @@ namespace Rivet {
 
 
 	void init() {
-		std::initializer_list<int> pdgIds = { 321, -321, 211, -211, 2212, -2212, 310, 113 };  // pi+ 211  K+ 321   proton 2212	K0S 310		rho0 113
-
-
+		std::initializer_list<int> pdgIds = { 321, 211, 2212};  // pi+ 211  K+ 321   proton 2212	K0S 310		rho0 113
 
 		//charged particles
-		const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.5 && Cuts::abscharge > 0);
+		const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.5 && Cuts::pT > 3.5*GeV && Cuts::abscharge > 0);
 		declare(cp, "cp");
 
 		//neutral particles (changed fs to np)
-		const PrimaryParticles np(pdgIds, Cuts::absrap < 0.5 && Cuts::abscharge == 0);
-		declare(np, "np");
+		//const PrimaryParticles np(pdgIds, Cuts::absrap < 0.5 && Cuts::abscharge == 0);
+		//declare(np, "np");
+
+    const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::pT > 3.5*GeV && (Cuts::abspid == 310 || Cuts::abspid == 113) );
+    declare(np, "np");
 
 
 		declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
@@ -171,7 +165,7 @@ namespace Rivet {
       else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
 
       Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
-  		Particles neutralParticles = applyProjection<PrimaryParticles>(event, "np").particles();
+  		Particles neutralParticles = applyProjection<UnstableParticles>(event, "np").particles();
 
       if (collSys == pp)
       {
