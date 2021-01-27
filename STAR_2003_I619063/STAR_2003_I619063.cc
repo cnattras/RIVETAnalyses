@@ -12,13 +12,11 @@ namespace Rivet {
     DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2003_I619063);
     /// @name Analysis methods
     //@{
-    bool getBinCenter(YODA::Histo1D hist, double pT, double &deltaPt)
+    bool getBinCenter(YODA::Histo1D hist, double pT, double &binCenter)
     {
-        //cout << "pT: " << pT << endl;
         if(pT > hist.xMin() && pT < hist.xMax())
         {
-            deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
-            //cout << "DeltapT: " << deltaPt << endl;
+            binCenter = hist.bin(hist.binIndexAt(pT)).xMid();
             return true;
         }
         else return false;
