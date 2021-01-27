@@ -282,14 +282,12 @@ namespace Rivet {
 				{
 					hKpPosPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
-
 					break;
 				}
 				case  -321: // K-
 				{
 					hKpNegPt["ptyieldsAuAuc12"]->fill(partPt, pt_weight);
 					hKpPt["Raa_c12_AuAu"]->fill(partPt);
-
 					break;
 				}
 				case 2212: // proton
@@ -344,250 +342,6 @@ namespace Rivet {
     if(sow["sow_pp"]->sumW() > 0) pp_available = true;
     if(sow["sow_AuAuc12"]->sumW() > 0) AuAu200_available = true;
 
-/*
-		for (auto element : hKaonNegPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hKaonPosPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hPionNegPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hPionPosPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hProtNegPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hProtPosPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hKaonPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hPionPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hProtPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hKaon0SPt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-		for (auto element : hRho0Pt)
-		{
-			string name = element.second->name();
-			if (name.find("AuAu") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) AuAu200_available = true;
-				else
-				{
-					AuAu200_available = false;
-					break;
-				}
-			}
-			else if (name.find("pp") != std::string::npos)
-			{
-				if (element.second->numEntries() > 0) pp_available = true;
-				else
-				{
-					pp_available = false;
-					break;
-				}
-			}
-		}
-*/
 		if (!(AuAu200_available && pp_available)) return;
 
 
@@ -638,7 +392,7 @@ namespace Rivet {
 
 		hRho0Pt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hRho0Pt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
-		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c13_pp"], hRaa["Rho0_c13_AuAu"]);
+		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c12_pp"], hRaa["Rho0_c12_AuAu"]);
 		//hRaa["Rho0_c13_AuAu"]->scaleY(1. / 960.2);
 
 	    	//Figure 3 RAA Ratio_____________Need to implement
@@ -669,8 +423,8 @@ namespace Rivet {
 	map<string, Scatter2DPtr> RatioKaon;
 	map<string, Scatter2DPtr> Ratioppipos;
 	map<string, Scatter2DPtr> Ratioppineg;
-  	map<string, Scatter2DPtr> RatioKpi;
-  	map<string, Scatter2DPtr> RatioK0spi;
+  map<string, Scatter2DPtr> RatioKpi;
+  map<string, Scatter2DPtr> RatioK0spi;
 
 	map<string, Scatter2DPtr> hRaa;
 
