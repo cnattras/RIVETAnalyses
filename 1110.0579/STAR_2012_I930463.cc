@@ -49,13 +49,13 @@ namespace Rivet {
 
 
 	void init() {
-		std::initializer_list<int> pdgIds = { 321, 211, 2212};  // pi+ 211  K+ 321   proton 2212	K0S 310		rho0 113
+		std::initializer_list<int> pdgIds = {321, 211, 2212};  // pi+ 211  K+ 321   proton 2212
 
 		//charged particles
 		const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.5 && Cuts::pT > 3.5*GeV && Cuts::abscharge > 0);
 		declare(cp, "cp");
 
-    //neutral particles
+    //neutral particles K0S 310		rho0 113
     const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::pT > 3.5*GeV && (Cuts::abspid == 310 || Cuts::abspid == 113) );
     declare(np, "np");
 
