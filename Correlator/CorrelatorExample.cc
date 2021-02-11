@@ -224,10 +224,6 @@ namespace Rivet {
 
     }
 
-
-
-
-
     bool isSameParticle(const Particle& p1, const Particle& p2)
       {
         //if pT, eta and phi are equal, they are the same particle
@@ -344,10 +340,6 @@ namespace Rivet {
 
 
 
-
-
-
-
     }
     void analyze(const Event& event) {
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
@@ -378,52 +370,16 @@ namespace Rivet {
       bool AuAu200_available = false;
       bool pp_available = false;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
- 	map<string, Histo1DPtr> _h;
- 	map<string, Profile1DPtr> _p;
+ 		map<string, Histo1DPtr> _h;
+ 		map<string, Profile1DPtr> _p;
     map<string, CounterPtr> sow;
     map<string, Histo1DPtr> _DeltaPhixE;
     map<int, Histo1DPtr> _DeltaPhiSub;
     map<string, int> nTriggers;
     vector<Correlator> Correlators;
-    vector<Correlator> Correlators38;
-    vector<Correlator> Correlators31;
-    vector<Correlator> Correlators30;
-    vector<Correlator> Correlators26;
-    vector<Correlator> Correlators25;
-    vector<Correlator> Correlators24;
-    vector<Correlator> Correlators23;
-    vector<Correlator> Correlators18;
-    vector<Correlator> Correlators17;
-    vector<Correlator> Correlators16;
-    vector<Correlator> Correlators12;
-    vector<Correlator> Correlators12corr;
-    vector<Correlator> Correlators11;
-    vector<Correlator> Correlators10;
-    vector<Correlator> Correlators9;
-    vector<Correlator> Correlators8;
-    vector<Correlator> Correlators7;
-    vector<Correlator> Correlators6;
-    vector<Correlator> Correlators4;
 
-    std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
-    std::initializer_list<int> pdgPhoton = {22};  // Pion 0
-
-    string beamOpt;
     enum CollisionSystem {pp0, AuAu};
     CollisionSystem collSys;
   };
