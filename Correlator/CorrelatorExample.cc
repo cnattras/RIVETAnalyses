@@ -30,6 +30,7 @@ namespace Rivet {
       vector<int> _pid;
       bool _noCentrality = false;
       bool _noAssoc = false;
+			int _nTriggers = 0;
     public:
 
       /// Constructor
@@ -72,12 +73,20 @@ namespace Rivet {
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex())+ to_string(GetSubIndex());
+          string fullIndex = "";
+					for(int index : _indices)
+					{
+							fullIndex += to_string(index);
+					}
           return fullIndex;
       }
+			void AddTrigger()
+			{
+					_nTriggers++;
+			}
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
-     bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
+      bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
       bool CheckAssociatedRange(double apt){ return ((apt>_associatedRange.first && apt<_associatedRange.second) || _noAssoc == true) ? true : false; }
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
@@ -338,6 +347,7 @@ namespace Rivet {
 
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
+				book(_h["DeltaPhi"], "DeltaPhi", 36, -M_PI/2., 1.5*M_PI);
 
 
     }
@@ -373,11 +383,7 @@ namespace Rivet {
     }
 
  		map<string, Histo1DPtr> _h;
- 		map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> sow;
-    map<string, Histo1DPtr> _DeltaPhixE;
-    map<int, Histo1DPtr> _DeltaPhiSub;
-    map<string, int> nTriggers;
+    map<string, CounterPtr> _c;
     vector<Correlator> Correlators;
 
     enum CollisionSystem {pp0, AuAu};
