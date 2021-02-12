@@ -391,6 +391,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2008_I778396);
+  DECLARE_RIVET_PLUGIN(CorrelatorExample);
 
 }
