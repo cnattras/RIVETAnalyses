@@ -31,6 +31,7 @@ namespace Rivet {
       bool _noCentrality = false;
       bool _noAssoc = false;
 			int _nTriggers = 0;
+			Histo1DPtr _deltaPhi;
     public:
 
       /// Constructor
@@ -57,6 +58,7 @@ namespace Rivet {
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
+			void AddCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -69,6 +71,30 @@ namespace Rivet {
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
       vector<int> GetPID(){ return _pid; }
+
+			double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+	    {
+	        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+	        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+
+	        if(dPhi < -M_PI/2.)
+	        {
+	            dPhi += 2.*M_PI;
+	        }
+	        else if(dPhi > 3.*M_PI/2.)
+	        {
+	            dPhi -= 2*M_PI;
+	        }
+
+	        return dPhi;
+	    }
+
+			void AddCorrelation(Particle pTrig, Particle pAssoc)
+			{
+					double dPhi = GetDeltaPhi(pTrig, pAssoc);
+
+					_deltaPhi->fill(dPhi);
+			}
 
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
@@ -342,12 +368,16 @@ namespace Rivet {
 
     void init() {
 
-        const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::abscharge > 0);
+        const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 3*GeV);
         declare(cfs, "CFS");
 
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
 				book(_h["DeltaPhi"], "DeltaPhi", 36, -M_PI/2., 1.5*M_PI);
+
+				Correlator corr(1);
+				corr.AddCorrelationFunction(_h["DeltaPhi"]);
+				Correlators.push_back(corr);
 
 
     }
@@ -371,6 +401,16 @@ namespace Rivet {
 
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
+
+			Correlator corr = Correlators[0];
+
+			for(auto pTrig : cfs.particles())
+			{
+					for(auto pAssoc : cfs.particles())
+					{
+							corr.AddCorrelation(pTrig, pAssoc);
+					}
+			}
 
 
     }
