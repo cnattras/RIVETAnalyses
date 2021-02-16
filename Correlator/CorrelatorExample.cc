@@ -31,7 +31,9 @@ namespace Rivet {
       bool _noCentrality = false;
       bool _noAssoc = false;
 			int _nTriggers = 0;
+			int _nEvents = 0;
 			Histo1DPtr _deltaPhi;
+			CounterPtr _counter;
     public:
 
       /// Constructor
@@ -58,7 +60,8 @@ namespace Rivet {
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
-			void AddCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
+			void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
+			void SetCounter(CounterPtr c){ _counter = c; }
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -71,6 +74,9 @@ namespace Rivet {
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
       vector<int> GetPID(){ return _pid; }
+			double GetWeight(){ return _counter->sumW(); }
+			Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
+			CounterPtr GetCounter(){ return _counter; }
 
 			double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 	    {
@@ -96,6 +102,12 @@ namespace Rivet {
 					_deltaPhi->fill(dPhi);
 			}
 
+			void AddWeight()
+			{
+					_counter->fill();
+					_nEvents++;
+			}
+
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
       {
@@ -106,9 +118,15 @@ namespace Rivet {
 					}
           return fullIndex;
       }
+
 			void AddTrigger()
 			{
 					_nTriggers++;
+			}
+
+			void Normalize(double weight = 1.)
+			{
+					if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
 			}
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
@@ -368,47 +386,77 @@ namespace Rivet {
 
     void init() {
 
-        const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 3*GeV);
+        const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV);
         declare(cfs, "CFS");
 
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
 				book(_h["DeltaPhi"], "DeltaPhi", 36, -M_PI/2., 1.5*M_PI);
+				book(_c["sow_AuAu200"], "sow_AuAu200");
 
 				Correlator corr(1);
-				corr.AddCorrelationFunction(_h["DeltaPhi"]);
+				corr.SetCollSystemAndEnergy("AuAu200GeV");
+				corr.SetCentrality(0., 80.);
+				corr.SetTriggerRange(1., 5.);
+				corr.SetAssociatedRange(0.5, 1.);
+				corr.SetCorrelationFunction(_h["DeltaPhi"]);
+				corr.SetCounter(_c["sow_AuAu200"]);
 				Correlators.push_back(corr);
 
 
     }
     void analyze(const Event& event) {
+
+			const ParticlePair& beam = beams();
+      string CollSystem = "Empty";
+      double NN = 197.;
+
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          CollSystem = "AuAu";
+          if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
+      }
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
+          CollSystem = "pp";
+          if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+      }
+
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-
-      string SysAndEnergy = "";
-      //string cmsEnergy = "200GeV";
-
-      if(collSys == pp0) SysAndEnergy = "pp200GeV";
-      else if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
-
-      //SysAndEnergy = collSys + cmsEnergy;
-
-      double triggerptMin = 999.;
-      double triggerptMax = -999.;
-      double associatedptMin = 999.;
-      double associatedptMax = -999.;
 
       bool isVeto = true;
 
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
 
+			for(Correlator& corr : Correlators)
+			{
+					if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+					if(corr.CheckCentrality(c)) continue;
+					corr.AddWeight();
+			}
+
 			Correlator corr = Correlators[0];
 
 			for(auto pTrig : cfs.particles())
 			{
+					for(Correlator& corr : Correlators)
+					{
+							if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+							if(corr.CheckCentrality(c)) continue;
+							if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+							corr.AddTrigger();
+					}
 					for(auto pAssoc : cfs.particles())
 					{
-							corr.AddCorrelation(pTrig, pAssoc);
+							for(Correlator& corr : Correlators)
+							{
+									if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+									if(corr.CheckCentrality(c)) continue;
+									if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+									if(!corr.CheckAssociatedRange(pAssoc.pT()/GeV)) continue;
+									corr.AddCorrelation(pTrig, pAssoc);
+							}
 					}
 			}
 
@@ -419,6 +467,13 @@ namespace Rivet {
 
       bool AuAu200_available = false;
       bool pp_available = false;
+
+			for(Correlator& corr : Correlators)
+			{
+					corr.Normalize();
+			}
+
+
 
     }
 
