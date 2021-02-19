@@ -5,6 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "../Centralities/RHICCentrality.hh"
 
 namespace Rivet {
 
@@ -22,6 +23,9 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+      
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+
 
       // Initialise and register projections
 
@@ -55,9 +59,9 @@ namespace Rivet {
       book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
       book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
+      //book(_h["AAAA"], 1, 1, 1);
+      //book(_p["BBBB"], 2, 1, 1);
+      //book(_c["CCCC"], 3, 1, 1);
 
     }
 
