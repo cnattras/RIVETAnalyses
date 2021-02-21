@@ -25,9 +25,22 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(CMS_2020_I064906);
+    
+    /// Function to get bin center to weight entries with
+        bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt) {
+        if(pT > hist.xMin() && pT < hist.xMax())
+        {
+            deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+
+            return true;
+        }
+        else return false;
+    }
 
     /// Book histograms and initialise projections before the run
     void init() {
+    
+      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M","V0M");
 
       // Initialise and register projections
 
@@ -111,19 +124,8 @@ namespace Rivet {
 	book(hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"], 9, 1, 5);
 	book(hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"], 9, 1, 6);
 	
-	//Y_asym for 0.3<y_CM<0.8 in pPB (fig 6.1)
-	//book(hYasymLowyCM["Yasym_K0S_pPB_0.3<yCM<0.8"], 10, 1, 1);
-	//book(hYasymLowyCM["Yasym_Lambda_pPB_0.3<yCM<0.8"], 10, 1, 2);
-	//book(hYasymLowyCM["Yasym_h+/-_pPB_0.3<yCM<0.8"], 10, 1, 3);
-	
-	//Y_asym for 0.8<y_CM<1.3 in pPB (fig 6.2)
-	//book(hYasymMidyCM["Yasym_K0S_pPB_0.8<yCM<1.3"], 11, 1, 1);
-	//book(hYasymMidyCM["Yasym_Lambda_pPB_0.8<yCM<1.3"], 11, 1, 2);
-	//book(hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"], 11, 1, 3);
-	
-	//Y_asym for 1.3<y_CM<1.8 in pPB (fig 6.3)
-	//book(hYasymHighyCM["Yasym_K0S_pPB_1.3<yCM<1.8"], 12, 1, 1);
-	//book(hYasymHighyCM["Yasym_Lambda_pPB_1.3<yCM<1.8"], 12, 1, 2);
+	book(h["K0S_yCM_low"], 10, 1, 1);
+	book(h["Lambda_yCM_low"], 11, 1, 1);
 	
 	book(h["charged_yCM_low"], 10, 1, 3);
 	book(h["charged_yCM_mid"], 11, 1, 3);
@@ -201,21 +203,21 @@ namespace Rivet {
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"], refname11 + "_0.3<yCM<0.8", refdata11);
 	book(YasymLow["K0S_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname11);
 	
-	string refname12 = mkAxisCode(11, 1, 1);
+	string refname12 = mkAxisCode(10, 1, 2);
 	const Scatter2D& refdata12 = refData(refname12);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"], refname12 + "_-0.8<yCM<-0.3", refdata12);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"], refname12 + "_0.3<yCM<0.8", refdata12);
 	book(YasymLow["Lambda_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname11);
 	
 	//Y_asym Low for h+/-
-	string refname17 = mkAxisCode(12, 1, 1);
+	string refname17 = mkAxisCode(10, 1, 3);
 	const Scatter2D& refdata17 = refData(refname17);
 	book(h["negative_charged_yCM_low"], refname17 + "_-0.8<yCM<-0.3", refdata17);
 	book(h["positive_charged_yCM_low"], refname17 + "_0.3<yCM<0.8", refdata17);
 	book(YasymLow["h+/-_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname17);
 	
 	//Y_asym for 0.8 < |yCM| < 1.3
-	string refname13 = mkAxisCode(10, 1, 2);
+	string refname13 = mkAxisCode(11, 1, 1);
 	const Scatter2D& refdata13 = refData(refname13);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"], refname13 + "_-1.3<yCM<-0.8", refdata13);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"], refname13 + "_0.8<yCM<1.3", refdata13);
@@ -228,20 +230,20 @@ namespace Rivet {
 	book(YasymMid["Lambda_-1.3<yCM<-0.8/0.8<yCM<1.3"], refname14);
 	
 	//Y_asym Mid for h+/-
-	string refname18 = mkAxisCode(12, 1, 2);
+	string refname18 = mkAxisCode(11, 1, 3);
 	const Scatter2D& refdata18 = refData(refname18);
 	book(h["negative_charged_yCM_mid"], refname18 + "_-1.3<yCM<-0.8", refdata18);
 	book(h["positive_charged_yCM_mid"], refname18 + "_0.8<yCM<1.3", refdata18);
 	book(YasymMid["h+/-_-1.3<yCM<-0.8/0.8<yCM<1.3"], refname18);
 	
 	//Y_asym for 1.3 < |yCM| < 1.8
-	string refname15 = mkAxisCode(10, 1, 3);
+	string refname15 = mkAxisCode(12, 1, 1);
 	const Scatter2D& refdata15 = refData(refname15);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"], refname15 + "_-1.8<yCM<-1.3", refdata15);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"], refname15 + "_1.3<yCM<1.8", refdata15);
 	book(YasymHigh["K0S_-1.8<yCM<-1.3/1.3<yCM<1.8"], refname15);
 	
-	string refname16 = mkAxisCode(11, 1, 3);
+	string refname16 = mkAxisCode(12, 1, 2);
 	const Scatter2D& refdata16 = refData(refname16);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"], refname16 + "_-1.8<yCM<-1.3", refdata16);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"], refname16 + "_1.3<yCM<1.8", refdata16);
@@ -262,6 +264,13 @@ namespace Rivet {
 
       Particles chargedParticles = applyProjection<PrimaryParticles>(event, "fs").particles();
       Particles neutralParticles = applyProjection<PrimaryParticles>(event, "ns").particles();
+      
+      // The centrality projection.
+      const CentralityProjection& centProj = apply<CentralityProjection>(event,"V0M");
+      // The centrality.
+      const double cent = centProj();
+      // Veto event for too large centralities since those are not used in the analysis at all
+      if ((cent < 0.) || (cent > 90.)) vetoEvent;
     
       if (collSys == pp)
 	{
@@ -270,10 +279,16 @@ namespace Rivet {
 		{
 			double partPt = p.pT() / GeV;
 			double pt_weight = 1. / (partPt * 2. * M_PI);
+			double deltaPt = 0.;
 			switch (p.pid()) {
 			case 310: // K0S
 			{
 				hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				//if(getDeltaPt(*hInvariantPTK0S->second, partPt, deltaPt)) {
+                        	//pt_weight /= deltaPt;
+                        	//hInvariantPTK0S->second->fill(partPt, pt_weight);
+                    		//}
+                    			
 				hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
 				hInvariantPTK0S["pT_K0S_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
@@ -373,10 +388,6 @@ namespace Rivet {
 				hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
 				hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
 	
-				//hYasymLowyCM["Yasym_K0S_pPB_0.3<yCM<0.8"]->fill(partPt);
-				//hYasymMidyCM["Yasym_K0S_pPB_0.8<yCM<1.3"]->fill(partPt);
-				//hYasymHighyCM["Yasym_K0S_pPB_1.3<yCM<1.8"]->fill(partPt);
-				
 				hInvariantPTK0S["pT_K0S_pPB_full"]->fill(partPt, pt_weight);
 				hInvariantPTK0S["pT_K0S_pPB_low"]->fill(partPt, pt_weight);
 				hInvariantPTK0S["pT_K0S_pPB_high"]->fill(partPt, pt_weight);
@@ -407,10 +418,6 @@ namespace Rivet {
 				hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
 				hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
 	
-				//hYasymLowyCM["Yasym_Lambda_pPB_0.3<yCM<0.8"]->fill(partPt);
-				//hYasymMidyCM["Yasym_Lambda_pPB_0.8<yCM<1.3"]->fill(partPt);
-				//hYasymHighyCM["Yasym_Lambda_pPB_1.3<yCM<1.8"]->fill(partPt);
-				
 				hInvariantPTLambda["pT_Lambda_pPB_full"]->fill(partPt, pt_weight);
 				hInvariantPTLambda["pT_Lambda_pPB_low"]->fill(partPt, pt_weight);
 				hInvariantPTLambda["pT_Lambda_pPB_high"]->fill(partPt, pt_weight);
@@ -442,10 +449,6 @@ namespace Rivet {
 				hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->fill(partPt);
 				hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->fill(partPt);
 				
-				//hYasymLowyCM["Yasym_h+/-_pPB_0.3<yCM<0.8"]->fill(partPt);
-				//hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"]->fill(partPt);
-				//hYasymHighyCM["Yasym_h+/-_pPB_1.3<yCM<1.8"]->fill(partPt);
-				
 				hInvariantPTXi["pT_Xi_pPB_full"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
@@ -469,10 +472,6 @@ namespace Rivet {
 				hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->fill(partPt);
 				hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->fill(partPt);
 				
-				//hYasymLowyCM["Yasym_h+/-_pPB_0.3<yCM<0.8"]->fill(partPt);
-				//hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"]->fill(partPt);
-				//hYasymHighyCM["Yasym_h+/-_pPB_1.3<yCM<1.8"]->fill(partPt);
-				
 				hInvariantPTXi["pT_Xi_pPB_full"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
@@ -493,10 +492,6 @@ namespace Rivet {
 
 				hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->fill(partPt);
 				
-				//hYasymLowyCM["Yasym_h+/-_pPB_0.3<yCM<0.8"]->fill(partPt);
-				//hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"]->fill(partPt);
-				//hYasymHighyCM["Yasym_h+/-_pPB_1.3<yCM<1.8"]->fill(partPt);
-				
 				hInvariantPTOmega["pT_Omega_pPB_full"]->fill(partPt, pt_weight);
 				
 				h["negative_charged_yCM_low"]->fill(partPt);
@@ -514,10 +509,6 @@ namespace Rivet {
 				hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
 
 				hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->fill(partPt);
-				
-				//hYasymLowyCM["Yasym_h+/-_pPB_0.3<yCM<0.8"]->fill(partPt);
-				//hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"]->fill(partPt);
-				//hYasymHighyCM["Yasym_h+/-_pPB_1.3<yCM<1.8"]->fill(partPt);
 				
 				hInvariantPTOmega["pT_Omega_pPB_full"]->fill(partPt, pt_weight);
 				
@@ -540,33 +531,33 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
     
-    bool pp_available = false;
-    bool pPB_available = false;
+//    bool pp_available = false;
+//    bool pPB_available = false;
     
-    for (auto element : hInvariantPTK0S)
-	{
-		string name = element.second->name();
-		if (name.find("pp") != std::string::npos)
-		{
-			if (element.second->numEntries() > 0) pp_available = true;
-			else
-			{
-				pp_available = false;
-				break;
-			}
-		}
-		else if (name.find("pPB") != std::string::npos)
-		{
-			if (element.second->numEntries() > 0) pPB_available = true;
-			else
-			{
-				pPB_available = false;
-				break;
-			}
-		}
-	}
+//    for (auto element : hInvariantPTK0S)
+//	{
+//		string name = element.second->name();
+//		if (name.find("pp") != std::string::npos)
+//		{
+//			if (element.second->numEntries() > 0) pp_available = true;
+//			else
+//			{
+//				pp_available = false;
+//				break;
+//			}
+//		}
+//		else if (name.find("pPB") != std::string::npos)
+//		{
+//			if (element.second->numEntries() > 0) pPB_available = true;
+//			else
+//			{
+//				pPB_available = false;
+//				break;
+//			}
+//		}
+//	}
 	
-	//if (!(pp_available && pPB_available)) return;
+//	if (!(pp_available && pPB_available)) return;
 
 	//*******Scale histograms*********
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
@@ -614,10 +605,6 @@ namespace Rivet {
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	
-	//hYasymLowyCM["Yasym_K0S_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	//hYasymMidyCM["Yasym_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	//hYasymHighyCM["Yasym_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
@@ -638,10 +625,6 @@ namespace Rivet {
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	//hYasymLowyCM["Yasym_Lambda_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	//hYasymMidyCM["Yasym_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	//hYasymHighyCM["Yasym_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-				
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
@@ -653,10 +636,6 @@ namespace Rivet {
 	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-				
-	//hYasymLowyCM["Yasym_h+/-_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	//hYasymMidyCM["Yasym_h+/-_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	//hYasymHighyCM["Yasym_h+/-_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
@@ -708,7 +687,9 @@ namespace Rivet {
 	//hInvariantPTK0SpPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleY(1. / 10.0);
 	//hInvariantPTK0SpPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleY(1. / 100.0);
 	//hInvariantPTK0SpPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleY(1. / 1000.0);
+	
 		return;
+	
 	//Scatter plots from division
 	divide(hInvariantPTXi["pT_Xi_pPB_high"], hInvariantPTXi["pT_Xi_pp_high"], RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_high"]);
 	divide(hInvariantPTXi["pT_Xi_pPB_low"], hInvariantPTXi["pT_Xi_pp_low"], RpPBLowyCM["pPB_pT_Xi/pp_pT_Xi_low"]);
@@ -747,9 +728,6 @@ namespace Rivet {
     	map<string, Histo1DPtr> hRpPBHighyCM;
     	map<string, Histo1DPtr> hInvariantPTK0SpPB;
     	map<string, Histo1DPtr> hInvariantPTLambdapPB;
-    	//map<string, Histo1DPtr> hYasymLowyCM;
-    	//map<string, Histo1DPtr> hYasymMidyCM;
-    	//map<string, Histo1DPtr> hYasymHighyCM;
     	map<string, Histo1DPtr> h;
     	
 	map<string, Scatter2DPtr> RpPBFullyCM;
