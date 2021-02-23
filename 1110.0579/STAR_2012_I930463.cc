@@ -509,22 +509,22 @@ namespace Rivet {
 		hPionPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hPionPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hPionPt["Raa_c12_AuAu"], hPionPt["Raa_c12_pp"], hRaa["pi_c12_AuAu"]);
-		//hRaa["pi_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["pi_c12_AuAu"]->scaleY(1. / 960.2);
 
 		hKpPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hKpPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hKpPt["Raa_c12_AuAu"], hKpPt["Raa_c12_pp"], hRaa["Kp_c12_AuAu"]);
-		//hRaa["Kp_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["Kp_c12_AuAu"]->scaleY(1. / 960.2);
 
 		hKaon0SPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hKaon0SPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hKaon0SPt["Raa_c12_AuAu"], hKaon0SPt["Raa_c12_pp"], hRaa["K0S_c12_AuAu"]);
-		//hRaa["K0S_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["K0S_c12_AuAu"]->scaleY(1. / 960.2);
 
 		hRho0Pt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hRho0Pt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c12_pp"], hRaa["Rho0_c12_AuAu"]);
-		//hRaa["Rho0_c13_AuAu"]->scaleY(1. / 960.2);
+		hRaa["Rho0_c12_AuAu"]->scaleY(1. / 960.2);
 
 	  //Figure 3 RAA Ratio_____________Need to implement
     hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
