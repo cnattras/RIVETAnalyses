@@ -93,20 +93,20 @@ namespace Rivet {
 	book(hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"], 4, 1, 2);
 	
 	//R_pPB for -1.8<y_CM<1.8 in pPB (fig 3)
-	book(hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"], 5, 1, 1);
-	book(hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"], 5, 1, 2);
-	book(hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"], 5, 1, 3);
-	book(hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"], 5, 1, 4);
+	//book(hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"], 5, 1, 1);
+	//book(hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"], 5, 1, 2);
+	//book(hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"], 5, 1, 3);
+	//book(hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"], 5, 1, 4);
 	
 	//R_pPB for -1.8<y_CM<0 in pPB (fig 4.1)
-	book(hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"], 6, 1, 1);
-	book(hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"], 6, 1, 2);
-	book(hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"], 6, 1, 3);
+	//book(hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"], 6, 1, 1);
+	//book(hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"], 6, 1, 2);
+	//book(hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"], 6, 1, 3);
 	
 	//R_pPB for 0<y_CM<1.8 in pPB (fig 4.2)
-	book(hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"], 7, 1, 1);
-	book(hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"], 7, 1, 2);
-	book(hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"], 7, 1, 3);
+	//book(hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"], 7, 1, 1);
+	//book(hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"], 7, 1, 2);
+	//book(hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"], 7, 1, 3);
 	
 	//Inv. pT of K0S for various y_CM in pPB (fig 5.1)
 	book(hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"], 8, 1, 1);
@@ -136,64 +136,64 @@ namespace Rivet {
 	//R_pPB for -1.8<y_CM<1.8 in pPB (fig 3)
 	string refname1 = mkAxisCode(5, 1, 1);
 	const Scatter2D& refdata1 = refData(refname1);
-	book(hInvariantPTK0S["pT_K0S_pPB_full"], refname1 + "_-1.8<yCM<1.8", refdata1);
-	book(hInvariantPTK0S["pT_K0S_pp_full"], refname1 + "_-1.8<yCM<1.8", refdata1);
+	book(hInvariantPTK0S["pT_K0S_pPB_full"], refname1 + "_-1.8<yCM<1.8_pPB", refdata1);
+	book(hInvariantPTK0S["pT_K0S_pp_full"], refname1 + "_-1.8<yCM<1.8_pp", refdata1);
 	book(RpPBFullyCM["pPB_pT_K0S/pp_pT_K0S_full"], refname1);
 	
 	string refname2 = mkAxisCode(5, 1, 2);
 	const Scatter2D& refdata2 = refData(refname2);
-	book(hInvariantPTLambda["pT_Lambda_pPB_full"], refname2 + "_-1.8<yCM<1.8", refdata2);
-	book(hInvariantPTLambda["pT_Lambda_pp_full"], refname2 + "_-1.8<yCM<1.8", refdata2);
+	book(hInvariantPTLambda["pT_Lambda_pPB_full"], refname2 + "_-1.8<yCM<1.8_pPB", refdata2);
+	book(hInvariantPTLambda["pT_Lambda_pp_full"], refname2 + "_-1.8<yCM<1.8_pp", refdata2);
 	book(RpPBFullyCM["pPB_pT_Lambda/pp_pT_Lambda_full"], refname2);
 	
 	string refname3 = mkAxisCode(5, 1, 3);
 	const Scatter2D& refdata3 = refData(refname3);
-	book(hInvariantPTXi["pT_Xi_pPB_full"], refname3 + "_-1.8<yCM<1.8", refdata3);
-	book(hInvariantPTXi["pT_Xi_pp_full"], refname3 + "_-1.8<yCM<1.8", refdata3);
+	book(hInvariantPTXi["pT_Xi_pPB_full"], refname3 + "_-1.8<yCM<1.8_pPB", refdata3);
+	book(hInvariantPTXi["pT_Xi_pp_full"], refname3 + "_-1.8<yCM<1.8_pp", refdata3);
 	book(RpPBFullyCM["pPB_pT_Xi/pp_pT_Xi_full"], refname3);
 	
 	string refname4 = mkAxisCode(5, 1, 4);
 	const Scatter2D& refdata4 = refData(refname4);
-	book(hInvariantPTOmega["pT_Omega_pPB_full"], refname4 + "_-1.8<yCM<1.8", refdata4);
-	book(hInvariantPTOmega["pT_Omega_pp_full"], refname4 + "_-1.8<yCM<1.8", refdata4);
+	book(hInvariantPTOmega["pT_Omega_pPB_full"], refname4 + "_-1.8<yCM<1.8_pPB", refdata4);
+	book(hInvariantPTOmega["pT_Omega_pp_full"], refname4 + "_-1.8<yCM<1.8_pp", refdata4);
 	book(RpPBFullyCM["pPB_pT_Omega/pp_pT_Omega_full"], refname4);
 	
 	//R_pPB for -1.8<y_CM<0 in pPB (fig 4.1)
 	string refname5 = mkAxisCode(6, 1, 1);
 	const Scatter2D& refdata5 = refData(refname5);
-	book(hInvariantPTK0S["pT_K0S_pPB_low"], refname5 + "_-1.8<yCM<0", refdata5);
-	book(hInvariantPTK0S["pT_K0S_pp_low"], refname5 + "_-1.8<yCM<0", refdata5);
+	book(hInvariantPTK0S["pT_K0S_pPB_low"], refname5 + "_-1.8<yCM<0_pPB", refdata5);
+	book(hInvariantPTK0S["pT_K0S_pp_low"], refname5 + "_-1.8<yCM<0_pp", refdata5);
 	book(RpPBLowyCM["pPB_pT_K0S/pp_pT_K0S_low"], refname5);
 	
 	string refname6 = mkAxisCode(6, 1, 2);
 	const Scatter2D& refdata6 = refData(refname6);
-	book(hInvariantPTLambda["pT_Lambda_pPB_low"], refname6 + "_-1.8<yCM<0", refdata6);
-	book(hInvariantPTLambda["pT_Lambda_pp_low"], refname6 + "_-1.8<yCM<0", refdata6);
+	book(hInvariantPTLambda["pT_Lambda_pPB_low"], refname6 + "_-1.8<yCM<0_pPB", refdata6);
+	book(hInvariantPTLambda["pT_Lambda_pp_low"], refname6 + "_-1.8<yCM<0_pp", refdata6);
 	book(RpPBLowyCM["pPB_pT_Lambda/pp_pT_Lambda_low"], refname6);
 	
 	string refname7 = mkAxisCode(6, 1, 3);
 	const Scatter2D& refdata7 = refData(refname7);
-	book(hInvariantPTXi["pT_Xi_pPB_low"], refname7 + "_-1.8<yCM<0", refdata7);
-	book(hInvariantPTXi["pT_Xi_pp_low"], refname7 + "_-1.8<yCM<0", refdata7);
+	book(hInvariantPTXi["pT_Xi_pPB_low"], refname7 + "_-1.8<yCM<0_pPB", refdata7);
+	book(hInvariantPTXi["pT_Xi_pp_low"], refname7 + "_-1.8<yCM<0_pp", refdata7);
 	book(RpPBLowyCM["pPB_pT_Xi/pp_pT_Xi_low"], refname7);
 	
 	//R_pPB for 0<y_CM<1.8 in pPB (fig 4.2)
 	string refname8 = mkAxisCode(7, 1, 1);
 	const Scatter2D& refdata8 = refData(refname8);
-	book(hInvariantPTK0S["pT_K0S_pPB_high"], refname8 + "_0<yCM<1.8", refdata8);
-	book(hInvariantPTK0S["pT_K0S_pp_high"], refname8 + "_0<yCM<1.8", refdata8);
+	book(hInvariantPTK0S["pT_K0S_pPB_high"], refname8 + "_0<yCM<1.8_pPB", refdata8);
+	book(hInvariantPTK0S["pT_K0S_pp_high"], refname8 + "_0<yCM<1.8_pp", refdata8);
 	book(RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_high"], refname8);
 	
 	string refname9 = mkAxisCode(7, 1, 2);
 	const Scatter2D& refdata9 = refData(refname9);
-	book(hInvariantPTLambda["pT_Lambda_pPB_high"], refname9 + "_0<yCM<1.8", refdata9);
-	book(hInvariantPTLambda["pT_Lambda_pp_high"], refname9 + "_0<yCM<1.8", refdata9);
+	book(hInvariantPTLambda["pT_Lambda_pPB_high"], refname9 + "_0<yCM<1.8_pPB", refdata9);
+	book(hInvariantPTLambda["pT_Lambda_pp_high"], refname9 + "_0<yCM<1.8_pp", refdata9);
 	book(RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_high"], refname9);
 	
 	string refname10 = mkAxisCode(7, 1, 3);
 	const Scatter2D& refdata10 = refData(refname10);
-	book(hInvariantPTXi["pT_Xi_pPB_high"], refname10 + "_0<yCM<1.8", refdata10);
-	book(hInvariantPTXi["pT_Xi_pp_high"], refname10 + "_0<yCM<1.8", refdata10);
+	book(hInvariantPTXi["pT_Xi_pPB_high"], refname10 + "_0<yCM<1.8_pPB", refdata10);
+	book(hInvariantPTXi["pT_Xi_pp_high"], refname10 + "_0<yCM<1.8_pp", refdata10);
 	book(RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_high"], refname10);
 	
 	//Y_asym for 0.3 < |yCM| < 0.8
