@@ -1,0 +1,3 @@
+#!/bin/bash
+rivet-build RivetPHENIX_2009_I815217.so PHENIX_2009_I815217.cc
+export RIVET_ANALYSIS_PATH=$PWD
