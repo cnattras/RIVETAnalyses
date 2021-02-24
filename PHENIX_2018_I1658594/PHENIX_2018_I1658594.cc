@@ -26,14 +26,17 @@ namespace Rivet {
       
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-
       // Initialise and register projections
 
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
       const FinalState fs(Cuts::abseta < 4.9);
+      
+      book(_h["XXXXX"], "myh1", 20, 0.0, 100.0);
+      book(_h["pi0Sepctra0To10"], 1, 1, 1);
 
+/*
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
@@ -62,13 +65,14 @@ namespace Rivet {
       //book(_h["AAAA"], 1, 1, 1);
       //book(_p["BBBB"], 2, 1, 1);
       //book(_c["CCCC"], 3, 1, 1);
-
+*/
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
+/*
       // Retrieve dressed leptons, sorted by pT
       vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
 
@@ -91,17 +95,17 @@ namespace Rivet {
 
       // Fill histogram with leading b-jet pT
       _h["XXXX"]->fill(bjets[0].pT()/GeV);
-
+*/
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
+/*
       normalize(_h["XXXX"]); // normalize to unity
       normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
-
+*/
     }
 
     //@}
