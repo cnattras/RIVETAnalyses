@@ -40,7 +40,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
     
-      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M","V0M");
+//      declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M","V0M");
 
       // Initialise and register projections
 
@@ -124,12 +124,12 @@ namespace Rivet {
 	book(hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"], 9, 1, 5);
 	book(hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"], 9, 1, 6);
 	
-	book(h["K0S_yCM_low"], 10, 1, 1);
-	book(h["Lambda_yCM_low"], 11, 1, 1);
+//	book(h["K0S_yCM_low"], 10, 1, 1);
+//	book(h["Lambda_yCM_low"], 11, 1, 1);
 	
-	book(h["charged_yCM_low"], 10, 1, 3);
-	book(h["charged_yCM_mid"], 11, 1, 3);
-	book(h["charged_yCM_high"], 12, 1, 3);
+//	book(h["charged_yCM_low"], 10, 1, 3);
+//	book(h["charged_yCM_mid"], 11, 1, 3);
+//	book(h["charged_yCM_high"], 12, 1, 3);
 	
 	//-----Book Scatter Plots from division-------
 	
@@ -207,7 +207,7 @@ namespace Rivet {
 	const Scatter2D& refdata12 = refData(refname12);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"], refname12 + "_-0.8<yCM<-0.3", refdata12);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"], refname12 + "_0.3<yCM<0.8", refdata12);
-	book(YasymLow["Lambda_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname11);
+	book(YasymLow["Lambda_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname12);
 	
 	//Y_asym Low for h+/-
 	string refname17 = mkAxisCode(10, 1, 3);
@@ -265,12 +265,12 @@ namespace Rivet {
       Particles chargedParticles = applyProjection<PrimaryParticles>(event, "fs").particles();
       Particles neutralParticles = applyProjection<PrimaryParticles>(event, "ns").particles();
       
-      // The centrality projection.
-      const CentralityProjection& centProj = apply<CentralityProjection>(event,"V0M");
-      // The centrality.
-      const double cent = centProj();
-      // Veto event for too large centralities since those are not used in the analysis at all
-      if ((cent < 0.) || (cent > 90.)) vetoEvent;
+//      // The centrality projection.
+//      const CentralityProjection& centProj = apply<CentralityProjection>(event,"V0M");
+//      // The centrality.
+//      const double cent = centProj();
+//      // Veto event for too large centralities since those are not used in the analysis at all
+//      if ((cent < 0.) || (cent > 90.)) vetoEvent;
     
       if (collSys == pp)
 	{
@@ -584,138 +584,138 @@ namespace Rivet {
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
 
-	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
+//	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
-	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());	
+//	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());	
 		
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
 				
 		
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 			
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 
-	hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
-	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-	//Figure 2 Y scalings
-	//hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->scaleY(10.0);
-	//hInvariantPTK0S["pT_K0S_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
-	//hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<0"]->scaleY(10.0);
-	//hInvariantPTLambda["pT_Lambda_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
-	//hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->scaleY(10.0);
-	//hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
-	//hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->scaleY(10.0);
-	//hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
+//	//Figure 2 Y scalings
+//	//hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->scaleY(10.0);
+//	//hInvariantPTK0S["pT_K0S_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
+//	//hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<0"]->scaleY(10.0);
+//	//hInvariantPTLambda["pT_Lambda_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
+//	//hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->scaleY(10.0);
+//	//hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
+//	//hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->scaleY(10.0);
+//	//hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->scaleY(1. / 10.0);
 	
 	//scale by # of binary collisions, N_coll
-	hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / 6.9);
-	hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
-	hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->scaleW(1. / 6.9);
-	hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / 6.9);
-	hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
-	hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->scaleW(1. / 6.9);
-	hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / 6.9);
-	hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
-	hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->scaleW(1. / 6.9);
-	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / 6.9);
+//	hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / 6.9);
+//	hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / 6.9);
+//	hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->scaleW(1. / 6.9);
+//	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / 6.9);
 	
 	//Figure 5 Y scalings
-	//hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->scaleY(100.0);
-	//hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->scaleY(10.0);
-	//hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleY(1. / 10.0);
-	//hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleY(1. / 100.0);
-	//hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleY(1. / 1000.0);
-	//hInvariantPTK0SpPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->scaleY(100.0);
-	//hInvariantPTK0SpPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->scaleY(10.0);
-	//hInvariantPTK0SpPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleY(1. / 10.0);
-	//hInvariantPTK0SpPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleY(1. / 100.0);
-	//hInvariantPTK0SpPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleY(1. / 1000.0);
+//	//hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->scaleY(100.0);
+//	//hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->scaleY(10.0);
+//	//hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleY(1. / 10.0);
+//	//hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleY(1. / 100.0);
+//	//hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleY(1. / 1000.0);
+//	//hInvariantPTK0SpPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->scaleY(100.0);
+//	//hInvariantPTK0SpPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->scaleY(10.0);
+//	//hInvariantPTK0SpPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleY(1. / 10.0);
+//	//hInvariantPTK0SpPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleY(1. / 100.0);
+//	//hInvariantPTK0SpPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleY(1. / 1000.0);
 	
 		return;
 	
 	//Scatter plots from division
-	divide(hInvariantPTXi["pT_Xi_pPB_high"], hInvariantPTXi["pT_Xi_pp_high"], RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_high"]);
-	divide(hInvariantPTXi["pT_Xi_pPB_low"], hInvariantPTXi["pT_Xi_pp_low"], RpPBLowyCM["pPB_pT_Xi/pp_pT_Xi_low"]);
-	divide(hInvariantPTXi["pT_Xi_pPB_full"], hInvariantPTXi["pT_Xi_pp_full"], RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_full"]);
+//	divide(hInvariantPTXi["pT_Xi_pPB_high"], hInvariantPTXi["pT_Xi_pp_high"], RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_high"]);
+//	divide(hInvariantPTXi["pT_Xi_pPB_low"], hInvariantPTXi["pT_Xi_pp_low"], RpPBLowyCM["pPB_pT_Xi/pp_pT_Xi_low"]);
+//	divide(hInvariantPTXi["pT_Xi_pPB_full"], hInvariantPTXi["pT_Xi_pp_full"], RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_full"]);
 	
-	divide(hInvariantPTLambda["pT_Lambda_pPB_high"], hInvariantPTLambda["pT_Lambda_pp_high"], RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_high"]);
-	divide(hInvariantPTLambda["pT_Lambda_pPB_low"], hInvariantPTLambda["pT_Lambda_pp_low"], RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_low"]);
-	divide(hInvariantPTLambda["pT_Lambda_pPB_full"], hInvariantPTLambda["pT_Lambda_pp_full"], RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_full"]);
+//	divide(hInvariantPTLambda["pT_Lambda_pPB_high"], hInvariantPTLambda["pT_Lambda_pp_high"], RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_high"]);
+//	divide(hInvariantPTLambda["pT_Lambda_pPB_low"], hInvariantPTLambda["pT_Lambda_pp_low"], RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_low"]);
+//	divide(hInvariantPTLambda["pT_Lambda_pPB_full"], hInvariantPTLambda["pT_Lambda_pp_full"], RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_full"]);
 	
-	divide(hInvariantPTK0S["pT_K0S_pPB_high"], hInvariantPTK0S["pT_K0S_pp_high"], RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_high"]);
-	divide(hInvariantPTK0S["pT_K0S_pPB_low"], hInvariantPTK0S["pT_K0S_pp_low"], RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_low"]);
-	divide(hInvariantPTK0S["pT_K0S_pPB_full"], hInvariantPTK0S["pT_K0S_pp_full"], RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_full"]);
+//	divide(hInvariantPTK0S["pT_K0S_pPB_high"], hInvariantPTK0S["pT_K0S_pp_high"], RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_high"]);
+//	divide(hInvariantPTK0S["pT_K0S_pPB_low"], hInvariantPTK0S["pT_K0S_pp_low"], RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_low"]);
+//	divide(hInvariantPTK0S["pT_K0S_pPB_full"], hInvariantPTK0S["pT_K0S_pp_full"], RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_full"]);
 	
-	divide(hInvariantPTOmega["pT_Omega_pPB_full"], hInvariantPTOmega["pT_Omega_pp_full"], RpPBHighyCM["pPB_pT_Omega/pp_pT_Omega_full"]);
+//	divide(hInvariantPTOmega["pT_Omega_pPB_full"], hInvariantPTOmega["pT_Omega_pp_full"], RpPBHighyCM["pPB_pT_Omega/pp_pT_Omega_full"]);
 	
-	divide(hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"], hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"], YasymLow["K0S_-0.8<yCM<-0.3/0.3<yCM<0.8"]);
-	divide(hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"], hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"], YasymLow["Lambda_-0.8<yCM<-0.3/0.3<yCM<0.8"]);
-	divide(h["negative_charged_yCM_low"], h["positive_charged_yCM_low"], YasymLow["h+/-_-0.8<yCM<-0.3/0.3<yCM<0.8"]);
+//	divide(hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"], hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"], YasymLow["K0S_-0.8<yCM<-0.3/0.3<yCM<0.8"]);
+//	divide(hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"], hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"], YasymLow["Lambda_-0.8<yCM<-0.3/0.3<yCM<0.8"]);
+//	divide(h["negative_charged_yCM_low"], h["positive_charged_yCM_low"], YasymLow["h+/-_-0.8<yCM<-0.3/0.3<yCM<0.8"]);
 
-	divide(hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"], hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"], YasymMid["K0S_-1.3<yCM<-0.8/0.8<yCM<1.3"]);
-	divide(hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"], hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"], YasymMid["Lambda_-1.3<yCM<-0.8/0.8<yCM<1.3"]);
-	divide(h["negative_charged_yCM_mid"], h["positive_charged_yCM_mid"], YasymMid["h+/-_-1.3<yCM<-0.8/0.8<yCM<1.3"]);
+//	divide(hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"], hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"], YasymMid["K0S_-1.3<yCM<-0.8/0.8<yCM<1.3"]);
+//	divide(hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"], hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"], YasymMid["Lambda_-1.3<yCM<-0.8/0.8<yCM<1.3"]);
+//	divide(h["negative_charged_yCM_mid"], h["positive_charged_yCM_mid"], YasymMid["h+/-_-1.3<yCM<-0.8/0.8<yCM<1.3"]);
 	
-	divide(hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"], hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"], YasymHigh["K0S_-1.8<yCM<-1.3/1.3<yCM<1.8"]);
-	divide(hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"], hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"], YasymHigh["Lambda_-1.8<yCM<-1.3/1.3<yCM<1.8"]);
-	divide(h["negative_charged_yCM_high"], h["positive_charged_yCM_high"], YasymHigh["h+/-_-1.8<yCM<-1.3/1.3<yCM<1.8"]);
+//	divide(hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"], hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"], YasymHigh["K0S_-1.8<yCM<-1.3/1.3<yCM<1.8"]);
+//	divide(hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"], hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"], YasymHigh["Lambda_-1.8<yCM<-1.3/1.3<yCM<1.8"]);
+//	divide(h["negative_charged_yCM_high"], h["positive_charged_yCM_high"], YasymHigh["h+/-_-1.8<yCM<-1.3/1.3<yCM<1.8"]);
 	
     }
 
