@@ -1,96 +1,24 @@
 BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d01-x01-y01
-ErrorBreakdown: {0: {stat: {dn: -4.1, up: 4.1}, sys: {dn: -1.0, up: 1.0}}}
+ErrorBreakdown: {0: {$stat$: {dn: -33, up: 33}, $syst$: {dn: -11, up: 11}}}
 IsRef: 1
 Path: /REF/PHENIX_2009_I815217/d01-x01-y01
-Title: doi:10.17182/hepdata.57350.v1/t1
+Title: Figure 4
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	9.900000e+00	4.220190e+00	4.220190e+00
+1.000000e+00	5.000000e-01	5.000000e-01	7.600000e+01	3.478505e+01	3.478505e+01
 END YODA_SCATTER2D_V2
 
 
 BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d02-x01-y01
-ErrorBreakdown: {0: {stat: {dn: -2.7, up: 2.7}, sys: {dn: -1.0, up: 1.0}}}
+ErrorBreakdown: {0: {$stat$: {dn: -23, up: 23}, $syst$: {dn: -16, up: 16}}}
 IsRef: 1
 Path: /REF/PHENIX_2009_I815217/d02-x01-y01
-Title: doi:10.17182/hepdata.57350.v1/t2
+Title: Supplemental
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	7.400000e+00	2.879236e+00	2.879236e+00
-END YODA_SCATTER2D_V2
-
-
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d02-x01-y02
-ErrorBreakdown: {0: {stat: {dn: -2.5, up: 2.5}, sys: {dn: -1.0, up: 1.0}}}
-IsRef: 1
-Path: /REF/PHENIX_2009_I815217/d02-x01-y02
-Title: doi:10.17182/hepdata.57350.v1/t2
-Type: Scatter2D
----
-# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	6.200000e+00	2.692582e+00	2.692582e+00
-END YODA_SCATTER2D_V2
-
-
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d02-x01-y03
-ErrorBreakdown: {0: {stat: {dn: -3.7, up: 3.7}, sys: {dn: -1.0, up: 1.0}}}
-IsRef: 1
-Path: /REF/PHENIX_2009_I815217/d02-x01-y03
-Title: doi:10.17182/hepdata.57350.v1/t2
-Type: Scatter2D
----
-# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	1.370000e+01	3.832754e+00	3.832754e+00
-END YODA_SCATTER2D_V2
-
-
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d03-x01-y01
-ErrorBreakdown: {0: {stat: {dn: -31.0, up: 31.0}, sys: {dn: -15.0, up: 15.0}}}
-IsRef: 1
-Path: /REF/PHENIX_2009_I815217/d03-x01-y01
-Title: doi:10.17182/hepdata.57350.v1/t3
-Type: Scatter2D
----
-# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	7.600000e+01	3.443835e+01	3.443835e+01
-END YODA_SCATTER2D_V2
-
-
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d04-x01-y01
-ErrorBreakdown: {0: {stat: {dn: -47.0, up: 47.0}, sys: {dn: -28.0, up: 28.0}}}
-IsRef: 1
-Path: /REF/PHENIX_2009_I815217/d04-x01-y01
-Title: doi:10.17182/hepdata.57350.v1/t4
-Type: Scatter2D
----
-# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	1.290000e+02	5.470832e+01	5.470832e+01
-END YODA_SCATTER2D_V2
-
-
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d04-x01-y02
-ErrorBreakdown: {0: {stat: {dn: -24.0, up: 24.0}, sys: {dn: -14.0, up: 14.0}}}
-IsRef: 1
-Path: /REF/PHENIX_2009_I815217/d04-x01-y02
-Title: doi:10.17182/hepdata.57350.v1/t4
-Type: Scatter2D
----
-# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	6.000000e+01	2.778489e+01	2.778489e+01
-END YODA_SCATTER2D_V2
-
-
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2009_I815217/d04-x01-y03
-ErrorBreakdown: {0: {stat: {dn: -23.0, up: 23.0}, sys: {dn: -16.0, up: 16.0}}}
-IsRef: 1
-Path: /REF/PHENIX_2009_I815217/d04-x01-y03
-Title: doi:10.17182/hepdata.57350.v1/t4
-Type: Scatter2D
----
-# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
-2.000000e+02	0.000000e+00	0.000000e+00	8.600000e+01	2.801785e+01	2.801785e+01
+1.000000e+00	5.000000e-01	5.000000e-01	8.600000e+01	2.801785e+01	2.801785e+01
 END YODA_SCATTER2D_V2
 
 

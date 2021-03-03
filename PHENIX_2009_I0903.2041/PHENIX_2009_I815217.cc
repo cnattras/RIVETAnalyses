@@ -31,8 +31,6 @@ namespace Rivet {
       book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
       book(_h["MyHisName1"], 1, 1, 1);
       book(_h["MyHisName2"], 2, 1, 1);
-      book(_h["MyHisName3"], 2, 1, 2);
-      book(_h["MyHisName3"], 2, 1, 3);
 
     }
 
