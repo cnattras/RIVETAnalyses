@@ -21,7 +21,6 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
-
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
@@ -30,7 +29,10 @@ namespace Rivet {
       // Book histograms
       // specify custom binning
       book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-     
+      book(_h["MyHisName1"], 1, 1, 1);
+      book(_h["MyHisName2"], 2, 1, 1);
+      book(_h["MyHisName3"], 2, 1, 2);
+      book(_h["MyHisName3"], 2, 1, 3);
 
     }
 
@@ -38,7 +40,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       // Fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
+     // _h["XXXX"]->fill(bjets[0].pT()/GeV);
 
     }
 
