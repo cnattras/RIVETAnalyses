@@ -19,23 +19,26 @@ namespace Rivet {
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
       vector<int> _pid;
+	int _underlyingEvent = 0;
       bool _noCentrality = false;
       bool _noAssoc = false;
-			int _nTriggers = 0;
-			int _nEvents = 0;
-			Histo1DPtr _deltaPhi;
-			CounterPtr _counter;
+	int _nTriggers = 0;
+	int _nEvents = 0;
+	Histo1DPtr _deltaPhi;
+	CounterPtr _counter;
+	
+
     public:
 
-Correlator(int index0, int index1, int index2) {
+	Correlator(int index0, int index1, int index2) {
         _indices = {index0, index1, index2};
       }
 
-			Correlator(int index0, int index1) {
+	Correlator(int index0, int index1) {
         _indices = {index0, index1};
       }
 
-			Correlator(int index0) {
+	Correlator(int index0) {
         _indices = {index0};
       }
 
@@ -50,8 +53,9 @@ Correlator(int index0, int index1, int index2) {
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
-			void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
-			void SetCounter(CounterPtr c){ _counter = c; }
+	void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
+	void SetCounter(CounterPtr c){ _counter = c; }
+	void SetUnderlyingEvent(int underEvent){ _underlyingEvent = underEvent; } 
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -68,8 +72,8 @@ Correlator(int index0, int index1, int index2) {
 			Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
 			CounterPtr GetCounter(){ return _counter; }
 
-			double GetDeltaPhi(Particle pAssoc, Particle pTrig)
-	    {
+      double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+  	    {
 	double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
 
 	        if(dPhi < -M_PI/2.)
@@ -84,39 +88,38 @@ Correlator(int index0, int index1, int index2) {
 	        return dPhi;
 	    }
 
-			void AddCorrelation(Particle pTrig, Particle pAssoc)
-			{
-					double dPhi = GetDeltaPhi(pTrig, pAssoc);
+	void AddCorrelation(Particle pTrig, Particle pAssoc)
+	{
+		double dPhi = GetDeltaPhi(pTrig, pAssoc);
+		_deltaPhi->fill(dPhi);
+	}
 
-					_deltaPhi->fill(dPhi);
-			}
-
-			void AddWeight()
-			{
-					_counter->fill();
-					_nEvents++;
-			}
+	void AddWeight()
+	{
+		_counter->fill();
+		_nEvents++;
+	}
 
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
       {
           string fullIndex = "";
-					for(int index : _indices)
-					{
-							fullIndex += to_string(index);
-					}
+  	  for(int index : _indices)	
+ 	  {
+		fullIndex += to_string(index);
+	  }
           return fullIndex;
       }
 
-			void AddTrigger()
-			{
-					_nTriggers++;
-			}
+      void AddTrigger()
+	{
+		_nTriggers++;
+	}
 
-			void Normalize(double weight = 1.)
-			{
-					if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
-			}
+      void Normalize(double weight = 1.)
+	{
+		if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
+	}
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
       bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
@@ -125,7 +128,6 @@ Correlator(int index0, int index1, int index2) {
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
       bool CheckPID(std::initializer_list<int> pid)
       {
-
           bool inList = false;
 
           for(int id : pid)
@@ -138,9 +140,7 @@ Correlator(int index0, int index1, int index2) {
                   break;
               }
           }
-
           return inList;
-
       }
 
       bool CheckConditions(string s, double cent, double tpt, double apt)
@@ -232,52 +232,52 @@ Correlator(int index0, int index1, int index2) {
       book(_h["pi0Spectra30to40V4psi2"],1,1,19);
       book(_h["pi0Spectra40to50V4psi2"],1,1,20);
 	//fig 12
-      book(_h["pi0Sepctra0to10&4-10x0.5-1"], 2, 1, 1);
-      book(_h["pi0Spectra0to10&4-10x1-2"],2,1,2);
-      book(_h["pi0Spectra0to10&4-10x2-4"],2,1,3);
-      book(_h["pi0Spectra0to10&4-10x4-10"],2,1,4);
-      book(_h["pi0Sepctra10to20&4-10x0.5-1"], 2, 1, 5);
-      book(_h["pi0Spectra10to20&4-10x1-2"],2,1,6);
-      book(_h["pi0Spectra10to20&4-10x2-4"],2,1,7);
-      book(_h["pi0Spectra10to20&4-10x4-10"],2,1,8);
-      book(_h["pi0Sepctra20to30&4-10x0.5-1"], 2, 1, 9);
-      book(_h["pi0Spectra20to30&4-10x1-2"],2,1,10);
-      book(_h["pi0Spectra20to30&4-10x2-4"],2,1,11);
-      book(_h["pi0Spectra20to30&4-10x4-10"],2,1,12);
-      book(_h["pi0Sepctra30to40&4-10x0.5-1"], 2, 1, 13);
-      book(_h["pi0Spectra30to40&4-10x1-2"],2,1,14);
-      book(_h["pi0Spectra30to40&4-10x2-4"],2,1,15);
-      book(_h["pi0Spectra30to40&4-10x4-10"],2,1,16);
-      book(_h["pi0Sepctra40to50&4-10x0.5-1"], 2, 1, 17);
-      book(_h["pi0Spectra40to50&4-10x1-2"],2,1,18);
-      book(_h["pi0Spectra40to50&4-10x2-4"],2,1,19);
-      book(_h["pi0Spectra40to50&4-10x4-10"],2,1,20);
+      book(_h["pi0Sepctra0to10_4-10x0.5-1"], 2, 1, 1);
+      book(_h["pi0Spectra0to10_4-10x1-2"],2,1,2);
+      book(_h["pi0Spectra0to10_4-10x2-4"],2,1,3);
+      book(_h["pi0Spectra0to10_4-10x4-10"],2,1,4);
+      book(_h["pi0Sepctra10to20_4-10x0.5-1"], 2, 1, 5);
+      book(_h["pi0Spectra10to20_4-10x1-2"],2,1,6);
+      book(_h["pi0Spectra10to20_4-10x2-4"],2,1,7);
+      book(_h["pi0Spectra10to20_4-10x4-10"],2,1,8);
+      book(_h["pi0Sepctra20to30_4-10x0.5-1"], 2, 1, 9);
+      book(_h["pi0Spectra20to30_4-10x1-2"],2,1,10);
+      book(_h["pi0Spectra20to30_4-10x2-4"],2,1,11);
+      book(_h["pi0Spectra20to30_4-10x4-10"],2,1,12);
+      book(_h["pi0Sepctra30to40_4-10x0.5-1"], 2, 1, 13);
+      book(_h["pi0Spectra30to40_4-10x1-2"],2,1,14);
+      book(_h["pi0Spectra30to40_4-10x2-4"],2,1,15);
+      book(_h["pi0Spectra30to40_4-10x4-10"],2,1,16);
+      book(_h["pi0Sepctra40to50_4-10x0.5-1"], 2, 1, 17);
+      book(_h["pi0Spectra40to50_4-10x1-2"],2,1,18);
+      book(_h["pi0Spectra40to50_4-10x2-4"],2,1,19);
+      book(_h["pi0Spectra40to50_4-10x4-10"],2,1,20);
 	//fig 15
-      book(_h["pi0Sepctra0to10&1-2x0.5-1"], 3, 1, 1);
-      book(_h["pi0Spectra0to10&1-2x1-2"],3,1,2);
-      book(_h["pi0Spectra0to10&2-4x0.5-1"],3,1,3);
-      book(_h["pi0Spectra0to10&2-4x1-2"],3,1,4);
-      book(_h["pi0Sepctra0to10&2-4x2-4"], 3, 1, 5);
-      book(_h["pi0Spectra10to20&1-2x0.5-1"],3,1,6);
-      book(_h["pi0Spectra10to20&1-2x1-2"],3,1,7);
-      book(_h["pi0Spectra10to20&2-4x0.5-1"],3,1,8);
-      book(_h["pi0Sepctra10to20&2-4x1-2"], 3, 1, 9);
-      book(_h["pi0Spectra10to20&2-4x2-4"],3,1,10);
-      book(_h["pi0Spectra20to30&1-2x0.5-1"],3,1,11);
-      book(_h["pi0Spectra20to30&1-2x1-2"],3,1,12);
-      book(_h["pi0Sepctra20to30&2-4x0.5-1"], 3, 1, 13);
-      book(_h["pi0Spectra20to30&2-4to1-2"],3,1,14);
-      book(_h["pi0Spectra20to30&2-4x2-4"],3,1,15);
-      book(_h["pi0Spectra30to40&1-2x0.5-1"],3,1,16);
-      book(_h["pi0Sepctra30to40&1-2x1-2"], 3, 1, 17);
-      book(_h["pi0Spectra30to40&2-4x2-4"],3,1,18);
-      book(_h["pi0Spectra30to40&2-4x1-2"],3,1,19);
-      book(_h["pi0Spectra30to40&2-4x2-4"],3,1,20);
-      book(_h["pi0Spectra40to50&1-2x0.5-1"],3,1,21);
-      book(_h["pi0Sepctra40to50&1-2x1-2"], 3, 1, 22);
-      book(_h["pi0Spectra40to50&2-4to2-4"],3,1,23);
-      book(_h["pi0Spectra40to50&2-4x1-2"],3,1,24);
-      book(_h["pi0Spectra40to50&2-4x2-4"],3,1,25);
+      book(_h["pi0Sepctra0to10_1-2x0.5-1"], 3, 1, 1);
+      book(_h["pi0Spectra0to10_1-2x1-2"],3,1,2);
+      book(_h["pi0Spectra0to10_2-4x0.5-1"],3,1,3);
+      book(_h["pi0Spectra0to10_2-4x1-2"],3,1,4);
+      book(_h["pi0Sepctra0to10_2-4x2-4"], 3, 1, 5);
+      book(_h["pi0Spectra10to20_1-2x0.5-1"],3,1,6);
+      book(_h["pi0Spectra10to20_1-2x1-2"],3,1,7);
+      book(_h["pi0Spectra10to20_2-4x0.5-1"],3,1,8);
+      book(_h["pi0Sepctra10to20_2-4x1-2"], 3, 1, 9);
+      book(_h["pi0Spectra10to20_2-4x2-4"],3,1,10);
+      book(_h["pi0Spectra20to30_1-2x0.5-1"],3,1,11);
+      book(_h["pi0Spectra20to30_1-2x1-2"],3,1,12);
+      book(_h["pi0Sepctra20to30_2-4x0.5-1"], 3, 1, 13);
+      book(_h["pi0Spectra20to30_2-4to1-2"],3,1,14);
+      book(_h["pi0Spectra20to30_2-4x2-4"],3,1,15);
+      book(_h["pi0Spectra30to40_1-2x0.5-1"],3,1,16);
+      book(_h["pi0Sepctra30to40_1-2x1-2"], 3, 1, 17);
+      book(_h["pi0Spectra30to40_2-4x2-4"],3,1,18);
+      book(_h["pi0Spectra30to40_2-4x1-2"],3,1,19);
+      book(_h["pi0Spectra30to40_2-4x2-4"],3,1,20);
+      book(_h["pi0Spectra40to50_1-2x0.5-1"],3,1,21);
+      book(_h["pi0Sepctra40to50_1-2x1-2"], 3, 1, 22);
+      book(_h["pi0Spectra40to50_2-4to2-4"],3,1,23);
+      book(_h["pi0Spectra40to50_2-4x1-2"],3,1,24);
+      book(_h["pi0Spectra40to50_2-4x2-4"],3,1,25);
 	//fig 18
       book(_h["pi0Sepctra0to10NearSide&2-4x1-2"], 4, 1, 1);
       book(_h["pi0Spectra0to10NearSide&2-4to2-4"],4,1,2);
@@ -309,6 +309,30 @@ Correlator(int index0, int index1, int index2) {
       book(_h["pi0Sepctra40to50FarSide&2-4x1-2"], 4, 1, 28);
       book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
       book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);
+
+	//fig 12
+	int minCent=0, maxCent=40, min_pT=4, max_pT=4, 
+		min_pA=0.5, max_pA=4, minV=1, maxV=1;
+	Correlator corrFig12(20);
+	for(int a=minCent; a<=maxCent; a+=10){
+		for(int b=min_pT; b<=max_pT; b*=2){
+			for(int c=min_pA; c<=max_pA; c*=2){
+				for(int d=minV; d<=maxV; d++){
+					corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
+					corrFig12.SetCentrality(a,a+10);
+					if(b==0.5 || b==1 || b==2) corrFig12.SetTriggerRange(b,b*2);
+					else corrFig12.SetTriggerRange(b,10);
+					if(c==0.5 || c==1 || c==2) corrFig12.SetAssociatedRange(c,c*2);
+					else corrFig12.SetAssociatedRange(b,10);
+					corrFig12.SetUnderlyingEvent(d);
+					//corrFig12.SetCorrelatorFunction(_h["???"])
+					//correFig12.SetCounter(_c["???"]);
+				}
+			}
+		}
+	}
+	Correlators.push_back(corrFig12);
+			
 
     }
 
