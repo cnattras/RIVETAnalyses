@@ -6,6 +6,7 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include <stdio.h>
 
 namespace Rivet {
 
@@ -19,7 +20,7 @@ namespace Rivet {
       pair<double,double> _triggerRange;
       pair<double,double> _associatedRange;
       vector<int> _pid;
-	int _underlyingEvent = 0;
+	int _RxnPlaneAngle = 0;
       bool _noCentrality = false;
       bool _noAssoc = false;
 	int _nTriggers = 0;
@@ -38,6 +39,7 @@ namespace Rivet {
         _indices = {index0, index1};
       }
 
+
 	Correlator(int index0) {
         _indices = {index0};
       }
@@ -55,7 +57,7 @@ namespace Rivet {
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
 	void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
 	void SetCounter(CounterPtr c){ _counter = c; }
-	void SetUnderlyingEvent(int underEvent){ _underlyingEvent = underEvent; } 
+	void SetRxnPlaneAngle(int underEvent){ _RxnPlaneAngle = underEvent; } 
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -73,7 +75,7 @@ namespace Rivet {
 			CounterPtr GetCounter(){ return _counter; }
 
       double GetDeltaPhi(Particle pAssoc, Particle pTrig)
-  	    {
+  	   {
 	double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
 
 	        if(dPhi < -M_PI/2.)
@@ -87,6 +89,7 @@ namespace Rivet {
 
 	        return dPhi;
 	    }
+
 
 	void AddCorrelation(Particle pTrig, Particle pAssoc)
 	{
@@ -310,28 +313,35 @@ namespace Rivet {
       book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
       book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);
 
-	//fig 12
-	int minCent=0, maxCent=40, min_pT=4, max_pT=4, 
-		min_pA=0.5, max_pA=4, minV=1, maxV=1;
-	Correlator corrFig12(20);
-	for(int a=minCent; a<=maxCent; a+=10){
-		for(int b=min_pT; b<=max_pT; b*=2){
-			for(int c=min_pA; c<=max_pA; c*=2){
-				for(int d=minV; d<=maxV; d++){
-					corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
-					corrFig12.SetCentrality(a,a+10);
-					if(b==0.5 || b==1 || b==2) corrFig12.SetTriggerRange(b,b*2);
-					else corrFig12.SetTriggerRange(b,10);
-					if(c==0.5 || c==1 || c==2) corrFig12.SetAssociatedRange(c,c*2);
-					else corrFig12.SetAssociatedRange(b,10);
-					corrFig12.SetUnderlyingEvent(d);
-					//corrFig12.SetCorrelatorFunction(_h["???"])
-					//correFig12.SetCounter(_c["???"]);
-				}
-			}
+	// //fig 12
+	 int minCent=0, maxCent=40;
+   float min_pT=4, max_pT=4,	min_pA=0.5, max_pA=4, minV=1, maxV=1;
+   float b=2;
+  char name[200];
+	 for(int a=minCent; a<=maxCent; a+=10){
+	 	//for(float b=min_pT; b<=max_pT; b*=2){
+	 		for(float c=min_pA; c<=max_pA; c*=2){
+        //cout<<"Min pTa "<<c<<" max pTa "<<c*2<<endl;
+	 			//for(float d=minV; d<=maxV; d++){
+
+  snprintf(name,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
+   Correlator corrFig12(a,(int) c*10);
+	 				corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
+	 				corrFig12.SetCentrality(a,a+10);
+	 				if(b==0.5 || b==1 || b==2) corrFig12.SetTriggerRange(b,b*2);
+	 				else corrFig12.SetTriggerRange(b,10);
+	 				if(c==0.5 || c==1 || c==2) corrFig12.SetAssociatedRange(c,c*2);
+	 				else corrFig12.SetAssociatedRange(b,10);
+	 				//corrFig12.SetRxnPlaneAngle(d);
+	 				//corrFig12.SetCorrelatorFunction(_h["???"])
+	 				corrFig12.SetCounter(_c[name]);
+
+     Correlators.push_back(corrFig12);
+				//}
+			//}
 		}
 	}
-	Correlators.push_back(corrFig12);
+	// Correlators.push_back(corrFig12);
 			
 
     }
