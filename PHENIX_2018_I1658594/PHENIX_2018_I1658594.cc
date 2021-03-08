@@ -312,36 +312,177 @@ namespace Rivet {
       book(_h["pi0Sepctra40to50FarSide&2-4x1-2"], 4, 1, 28);
       book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
       book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);
+	//fig 20
+	book(_h["NearSide0to10_2-4x1-2"],5,1,1);
+	book(_h["NearSide0to10_2x4x2-4"],5,1,2);
+	book(_h["NearSide0to10_4-10x2-4"],5,1,3);
+	book(_h["NearSide10to20_2-4x1-2"],5,1,4);
+        book(_h["NearSide10to20_2x4x2-4"],5,1,5);
+        book(_h["NearSide10to20_4-10x2-4"],5,1,6);
+	book(_h["NearSide20to30_2-4x1-2"],5,1,7);
+        book(_h["NearSide20to30_2x4x2-4"],5,1,8);
+        book(_h["NearSide20to30_4-10x2-4"],5,1,9);
+	book(_h["NearSide30to40_2-4x1-2"],5,1,10);
+        book(_h["NearSide30to40_2x4x2-4"],5,1,11);
+        book(_h["NearSide30to40_4-10x2-4"],5,1,12);
+	book(_h["NearSide40to50_2-4x1-2"],5,1,13);
+        book(_h["NearSide40to50_2x4x2-4"],5,1,14);
+        book(_h["NearSide40to50_4-10x2-4"],5,1,15);
+	book(_h["FarSide0to10_2-4x1-2"],5,1,16);
+        book(_h["FarSide0to10_2x4x2-4"],5,1,17);
+        book(_h["FarSide0to10_4-10x2-4"],5,1,18);
+        book(_h["FarSide10to20_2-4x1-2"],5,1,19);
+        book(_h["FarSide10to20_2x4x2-4"],5,1,20);
+        book(_h["FarSide10to20_4-10x2-4"],5,1,21);
+        book(_h["FarSide20to30_2-4x1-2"],5,1,22);
+        book(_h["FarSide20to30_2x4x2-4"],5,1,23);
+        book(_h["FarSide20to30_4-10x2-4"],5,1,24);
+        book(_h["FarSide30to40_2-4x1-2"],5,1,25);
+        book(_h["FarSide30to40_2x4x2-4"],5,1,26);
+        book(_h["FarSide30to40_4-10x2-4"],5,1,27);
+        book(_h["FarSide40to50_2-4x1-2"],5,1,28);
+        book(_h["FarSide40to50_2x4x2-4"],5,1,29);
+        book(_h["FarSide40to50_4-10x2-4"],5,1,30);
+	//Fig 21
+	book(_h["0to10_4-10x0.5-1"],6,1,1);
+	book(_h["0to10_4-10x1-2"],6,1,2);
+	book(_h["0to10_4-10x2-4"],6,1,3);
+	book(_h["0to10_4-10x4-10"],6,1,4);
+	book(_h["10to20_4-10x0.5-1"],6,1,5);
+        book(_h["10to20_4-10x1-2"],6,1,6);
+        book(_h["10to20_4-10x2-4"],6,1,7);
+        book(_h["10to20_4-10x4-10"],6,1,8);
+	book(_h["20to30_4-10x0.5-1"],6,1,9);
+        book(_h["20to30_4-10x1-2"],6,1,10);
+        book(_h["20to30_4-10x2-4"],6,1,11);
+        book(_h["20to30_4-10x4-10"],6,1,12);
+	book(_h["30to40_4-10x0.5-1"],6,1,13);
+        book(_h["30to40_4-10x1-2"],6,1,14);
+        book(_h["30to40_4-10x2-4"],6,1,15);
+        book(_h["30to40_4-10x4-10"],6,1,16);
+	book(_h["40to50_4-10x0.5-1"],6,1,17);
+        book(_h["40to50_4-10x1-2"],6,1,18);
+        book(_h["40to50_4-10x2-4"],6,1,19);
+        book(_h["40to50_4-10x4-10"],6,1,20);
+	//Fig 22
+	book(_h["0to10_1-2x0.5-1"],7,1,1);
+	book(_h["0to10_1-2x1-2"],7,1,2);
+	book(_h["0to10_2-4x0.5-1"],7,1,3);
+	book(_h["0to10_2-4x1-2"],7,1,4);
+	book(_h["0to10_2-4x2-4"],7,1,5);
+	book(_h["10to20_1-2x0.5-1"],7,1,6);
+        book(_h["10to20_1-2x1-2"],7,1,7);
+        book(_h["10to20_2-4x0.5-1"],7,1,8);
+        book(_h["10to20_2-4x1-2"],7,1,9);
+        book(_h["10to20_2-4x2-4"],7,1,10);
+	book(_h["20to30_1-2x0.5-1"],7,1,11);
+        book(_h["20to30_1-2x1-2"],7,1,12);
+        book(_h["20to30_2-4x0.5-1"],7,1,13);
+        book(_h["20to30_2-4x1-2"],7,1,14);
+        book(_h["20to30_2-4x2-4"],7,1,15);
+	book(_h["30to40_1-2x0.5-1"],7,1,16);
+        book(_h["30to40_1-2x1-2"],7,1,17);
+        book(_h["30to40_2-4x0.5-1"],7,1,18);
+        book(_h["30to40_2-4x1-2"],7,1,19);
+        book(_h["30to40_2-4x2-4"],7,1,20);
+	book(_h["40to50_1-2x0.5-1"],7,1,21);
+        book(_h["40to50_1-2x1-2"],7,1,22);
+        book(_h["40to50_2-4x0.5-1"],7,1,23);
+        book(_h["40to50_2-4x1-2"],7,1,24);
+        book(_h["40to50_2-4x2-4"],7,1,25);
+	//Fig 23
+	book(_h["0to10_-4pi/8<phi-Psi2<-3pi/8"],8,1,1);
+	book(_h["0to10_-3pi.8<phi-Psi2<-2pi/8"],8,1,2);
+	book(_h["0to10_-2pi/8<phi-Psi2<-pi/8"],8,1,3);
+	book(_h["0to10_-pi/8<phi-Psi2<0"],8,1,4);
+	book(_h["10to20_-4pi/8<phi-Psi2<-3pi/8"],8,1,5);
+        book(_h["10to20_-3pi.8<phi-Psi2<-2pi/8"],8,1,6);
+        book(_h["10to20_-2pi/8<phi-Psi2<-pi/8"],8,1,7);
+        book(_h["10to20_-pi/8<phi-Psi2<0"],8,1,8);
+	book(_h["20to30_-4pi/8<phi-Psi2<-3pi/8"],8,1,9);
+        book(_h["20to30_-3pi.8<phi-Psi2<-2pi/8"],8,1,10);
+        book(_h["20to30_-2pi/8<phi-Psi2<-pi/8"],8,1,11);
+        book(_h["20to30_-pi/8<phi-Psi2<0"],8,1,12);
+	book(_h["30to40_-4pi/8<phi-Psi2<-3pi/8"],8,1,13);
+        book(_h["30to40_-3pi.8<phi-Psi2<-2pi/8"],8,1,14);
+        book(_h["30to40_-2pi/8<phi-Psi2<-pi/8"],8,1,15);
+        book(_h["30to40_-pi/8<phi-Psi2<0"],8,1,16);
+	book(_h["40to50_-4pi/8<phi-Psi2<-3pi/8"],8,1,17);
+        book(_h["40to50_-3pi.8<phi-Psi2<-2pi/8"],8,1,18);
+        book(_h["40to50_-2pi/8<phi-Psi2<-pi/8"],8,1,19);
+        book(_h["40to50_-pi/8<phi-Psi2<0"],8,1,20);
+	//Fig 24
+	book(_h["0to10_-4pi/8<phi-Psi2<-3pi/8"],9,1,1);
+        book(_h["0to10_-3pi.8<phi-Psi2<-2pi/8"],9,1,2);
+        book(_h["0to10_-2pi/8<phi-Psi2<-pi/8"],9,1,3);
+        book(_h["0to10_-pi/8<phi-Psi2<0"],9,1,4);
+        book(_h["10to20_-4pi/8<phi-Psi2<-3pi/8"],9,1,5);
+        book(_h["10to20_-3pi.8<phi-Psi2<-2pi/8"],9,1,6);
+        book(_h["10to20_-2pi/8<phi-Psi2<-pi/8"],9,1,7);
+        book(_h["10to20_-pi/8<phi-Psi2<0"],9,1,8);
+        book(_h["20to30_-4pi/8<phi-Psi2<-3pi/8"],9,1,9);
+        book(_h["20to30_-3pi.8<phi-Psi2<-2pi/8"],9,1,10);
+        book(_h["20to30_-2pi/8<phi-Psi2<-pi/8"],9,1,11);
+        book(_h["20to30_-pi/8<phi-Psi2<0"],9,1,12);
+        book(_h["30to40_-4pi/8<phi-Psi2<-3pi/8"],9,1,13);
+        book(_h["30to40_-3pi.8<phi-Psi2<-2pi/8"],9,1,14);
+        book(_h["30to40_-2pi/8<phi-Psi2<-pi/8"],9,1,15);
+        book(_h["30to40_-pi/8<phi-Psi2<0"],9,1,16);
+        book(_h["40to50_-4pi/8<phi-Psi2<-3pi/8"],9,1,17);
+        book(_h["40to50_-3pi.8<phi-Psi2<-2pi/8"],9,1,18);
+        book(_h["40to50_-2pi/8<phi-Psi2<-pi/8"],9,1,19);
+        book(_h["40to50_-pi/8<phi-Psi2<0"],9,1,20);
+
+	//initialize iterators and varibles
+	int minCent=0, maxCent=0, a=0;
+	float min_pT=0, max_pT=0, min_pA=0, max_pA=0, minV=0, maxV=0, b=0, c=0, d=0;
+	char name[200];
 
 	// //fig 12
-	 int minCent=0, maxCent=40;
-   float min_pT=4, max_pT=4,	min_pA=0.5, max_pA=4, minV=1, maxV=1;
-   float b=2;
-  char name[200];
-	 for(int a=minCent; a<=maxCent; a+=10){
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=0.5, max_pA=4, minV=1, maxV=1;
+	b=2;
+	for(a=minCent; a<=maxCent; a+=10){
 	 	//for(float b=min_pT; b<=max_pT; b*=2){
-	 		for(float c=min_pA; c<=max_pA; c*=2){
-        //cout<<"Min pTa "<<c<<" max pTa "<<c*2<<endl;
-	 			//for(float d=minV; d<=maxV; d++){
-
-  snprintf(name,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
-   Correlator corrFig12(a,(int) c*10);
-	 				corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
-	 				corrFig12.SetCentrality(a,a+10);
-	 				if(b==0.5 || b==1 || b==2) corrFig12.SetTriggerRange(b,b*2);
-	 				else corrFig12.SetTriggerRange(b,10);
-	 				if(c==0.5 || c==1 || c==2) corrFig12.SetAssociatedRange(c,c*2);
-	 				else corrFig12.SetAssociatedRange(b,10);
-	 				//corrFig12.SetRxnPlaneAngle(d);
-	 				//corrFig12.SetCorrelatorFunction(_h["???"])
-	 				corrFig12.SetCounter(_c[name]);
-
-     Correlators.push_back(corrFig12);
+		for(c=min_pA; c<=max_pA; c*=2){
+        	//cout<<"Min pTa "<<c<<" max pTa "<<c*2<<endl;
+	 		//for(float d=minV; d<=maxV; d++){
+			snprintf(name,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
+			Correlator corrFig12(a,(int) c*10);
+	 		corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
+	 		corrFig12.SetCentrality(a,a+10);
+	 		if(b==0.5 || b==1 || b==2) corrFig12.SetTriggerRange(b,b*2);
+	 		else corrFig12.SetTriggerRange(b,10);
+	 		if(c==0.5 || c==1 || c==2) corrFig12.SetAssociatedRange(c,c*2);
+	 		else corrFig12.SetAssociatedRange(b,10);
+	 		//corrFig12.SetRxnPlaneAngle(d);
+	 		//corrFig12.SetCorrelatorFunction(_h["???"])
+	 		corrFig12.SetCounter(_c[name]);
+			Correlators.push_back(corrFig12);
 				//}
 			//}
 		}
 	}
-	// Correlators.push_back(corrFig12);
+
+	//fig 15
+	minCent=0, maxCent=40, min_pT=1, max_pT=2, min_pA=0.5, max_pA=2, minV=1, maxV=1;
+	for(a=minCent; a<=maxCent; a+=10){
+		for(b=min_pT; b<=max_pT; b*=2){
+			for(c=min_pA; c<=max_pA; c*=2){
+				snprintf(name,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+					a,a+10,b,b*2,c,c*2);
+				Correlator corrFig15(a,(int)b*10,(int)c*10);
+				corrFig15.SetCollSystemAndEnergy("AuAu200GeV");
+				corrFig15.SetCentrality(a,a+10);
+				if(b==0.5 || b==1 || b==2) corrFig15.SetTriggerRange(b,b*2);
+				else corrFig15.SetTriggerRange(b,10);
+				if(c==0.5 || c==1 || c==2) corrFig15.SetAssociatedRange(c,c*2);
+				else corrFig15.SetAssociatedRange(b,10);
+				corrFig15.SetCounter(_c[name]);
+				Correlators.push_back(corrFig15);
+			}
+		}
+	}
+	
 			
 
     }
