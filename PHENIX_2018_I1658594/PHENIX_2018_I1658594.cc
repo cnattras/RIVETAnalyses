@@ -235,7 +235,7 @@ namespace Rivet {
       book(_h["pi0Spectra30to40V4psi2"],1,1,19);
       book(_h["pi0Spectra40to50V4psi2"],1,1,20);
 	//fig 12
-      book(_h["pi0Sepctra0to10_4-10x0.5-1"], 2, 1, 1);
+      /*book(_h["pi0Sepctra0to10_4-10x0.5-1"], 2, 1, 1);
       book(_h["pi0Spectra0to10_4-10x1-2"],2,1,2);
       book(_h["pi0Spectra0to10_4-10x2-4"],2,1,3);
       book(_h["pi0Spectra0to10_4-10x4-10"],2,1,4);
@@ -254,9 +254,9 @@ namespace Rivet {
       book(_h["pi0Sepctra40to50_4-10x0.5-1"], 2, 1, 17);
       book(_h["pi0Spectra40to50_4-10x1-2"],2,1,18);
       book(_h["pi0Spectra40to50_4-10x2-4"],2,1,19);
-      book(_h["pi0Spectra40to50_4-10x4-10"],2,1,20);
+      book(_h["pi0Spectra40to50_4-10x4-10"],2,1,20);*/
 	//fig 15
-      book(_h["pi0Sepctra0to10_1-2x0.5-1"], 3, 1, 1);
+      /*book(_h["pi0Sepctra0to10_1-2x0.5-1"], 3, 1, 1);
       book(_h["pi0Spectra0to10_1-2x1-2"],3,1,2);
       book(_h["pi0Spectra0to10_2-4x0.5-1"],3,1,3);
       book(_h["pi0Spectra0to10_2-4x1-2"],3,1,4);
@@ -280,9 +280,9 @@ namespace Rivet {
       book(_h["pi0Sepctra40to50_1-2x1-2"], 3, 1, 22);
       book(_h["pi0Spectra40to50_2-4to2-4"],3,1,23);
       book(_h["pi0Spectra40to50_2-4x1-2"],3,1,24);
-      book(_h["pi0Spectra40to50_2-4x2-4"],3,1,25);
+      book(_h["pi0Spectra40to50_2-4x2-4"],3,1,25);*/
 	//fig 18
-      book(_h["pi0Sepctra0to10NearSide&2-4x1-2"], 4, 1, 1);
+      /*book(_h["pi0Sepctra0to10NearSide&2-4x1-2"], 4, 1, 1);
       book(_h["pi0Spectra0to10NearSide&2-4to2-4"],4,1,2);
       book(_h["pi0Spectra0to10NearSide&4-10x2-4"],4,1,3);
       book(_h["pi0Sepctra10to20NearSide&2-4x1-2"],4, 1, 4);
@@ -311,7 +311,7 @@ namespace Rivet {
       book(_h["pi0Spectra30to40FarSide&4-10x2-4"],4,1,27);
       book(_h["pi0Sepctra40to50FarSide&2-4x1-2"], 4, 1, 28);
       book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
-      book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);
+      book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);*/
 	//fig 20
 	book(_h["NearSide0to10_2-4x1-2"],5,1,1);
 	book(_h["NearSide0to10_2x4x2-4"],5,1,2);
@@ -434,11 +434,11 @@ namespace Rivet {
         book(_h["40to50_-pi/8<phi-Psi2<0"],9,1,20);
 
 	//initialize iterators and varibles
-	int minCent=0, maxCent=0, a=0;
+	int minCent=0, maxCent=0, a=0, iterator=0;
 	float min_pT=0, max_pT=0, min_pA=0, max_pA=0, minV=0, maxV=0, b=0, c=0, d=0;
-	char name[200];
+	char corrName[200], bookName[200];
 
-	// //fig 12
+	//fig 12
 	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=0.5, max_pA=4, minV=1, maxV=1;
 	b=2;
 	for(a=minCent; a<=maxCent; a+=10){
@@ -446,7 +446,9 @@ namespace Rivet {
 		for(c=min_pA; c<=max_pA; c*=2){
         	//cout<<"Min pTa "<<c<<" max pTa "<<c*2<<endl;
 	 		//for(float d=minV; d<=maxV; d++){
-			snprintf(name,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
+			snprintf(corrName,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
+			snprintf(bookName,200,"Fig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
+			book(_h[bookName],2,1,iterator);
 			Correlator corrFig12(a,(int) c*10);
 	 		corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
 	 		corrFig12.SetCentrality(a,a+10);
@@ -456,34 +458,69 @@ namespace Rivet {
 	 		else corrFig12.SetAssociatedRange(b,10);
 	 		//corrFig12.SetRxnPlaneAngle(d);
 	 		//corrFig12.SetCorrelatorFunction(_h["???"])
-	 		corrFig12.SetCounter(_c[name]);
+	 		corrFig12.SetCounter(_c[corrName]);
 			Correlators.push_back(corrFig12);
 				//}
 			//}
 		}
 	}
+	iterator=1;
 
 	//fig 15
 	minCent=0, maxCent=40, min_pT=1, max_pT=2, min_pA=0.5, max_pA=2, minV=1, maxV=1;
 	for(a=minCent; a<=maxCent; a+=10){
 		for(b=min_pT; b<=max_pT; b*=2){
-			for(c=min_pA; c<=max_pA; c*=2){
-				snprintf(name,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+			for(c=min_pA; c<=max_pA && c!=b ; c*=2){
+				snprintf(corrName,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
 					a,a+10,b,b*2,c,c*2);
+				snprintf(bookName,200,"Fig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+					a,a+10,b,b*2,c,c*2);
+				book(_h[bookName],3,1,iterator);
 				Correlator corrFig15(a,(int)b*10,(int)c*10);
 				corrFig15.SetCollSystemAndEnergy("AuAu200GeV");
 				corrFig15.SetCentrality(a,a+10);
 				if(b==0.5 || b==1 || b==2) corrFig15.SetTriggerRange(b,b*2);
 				else corrFig15.SetTriggerRange(b,10);
 				if(c==0.5 || c==1 || c==2) corrFig15.SetAssociatedRange(c,c*2);
-				else corrFig15.SetAssociatedRange(b,10);
-				corrFig15.SetCounter(_c[name]);
+				else corrFig15.SetAssociatedRange(c,10);
+				corrFig15.SetCounter(_c[corrName]);
 				Correlators.push_back(corrFig15);
+				iterator++;
 			}
 		}
 	}
+	iterator=1;
+
+	//Fig 18
+	minCent=0, maxCent=40, min_pT=2, max_pT=4, min_pA=1, max_pA=2, minV=1, maxV=1;
+	for(int sides=0; sides<=2; sides++){
+		for(a=minCent; a<=maxCent; a+=10){
+                	for(b=min_pT; b<=max_pT; b*=2){
+                        	for((b==4) ? c=min_pA*2 : c=min_pA; c<=max_pA; c*=2){
+				snprintf(corrName,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+                                        a,a+10,b,b*2,c,c*2);
+                                if(side==0) snprintf(bookName,200,
+				"NearSideFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",a,a+10,b,b*2,c,c*2);
+				else snprintf(bookName,200,
+				"FarSideFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",a,a+10,b,b*2,c,c*2);
+                                	book(_h[bookName],3,1,iterator);
+	                                Correlator corrFig15(a,(int)b*10,(int)c*10);
+        	                        corrFig15.SetCollSystemAndEnergy("AuAu200GeV");
+                	                corrFig15.SetCentrality(a,a+10);
+	                                if(b==0.5 || b==1 || b==2) corrFig15.SetTriggerRange(b,b*2);
+        	                        else corrFig15.SetTriggerRange(b,10);
+                	                if(c==0.5 || c==1 || c==2) corrFig15.SetAssociatedRange(c,c*2);
+                        	        else corrFig15.SetAssociatedRange(c,10);
+	                                corrFig15.SetCounter(_c[corrName]);
+        	                        Correlators.push_back(corrFig15);
+                	                iterator++;
+				}
+			}
+		}
+	}
+	iterator=1;
 	
-			
+
 
     }
 
