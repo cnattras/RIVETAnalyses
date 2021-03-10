@@ -313,7 +313,7 @@ namespace Rivet {
       book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
       book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);*/
 	//fig 20
-	book(_h["NearSide0to10_2-4x1-2"],5,1,1);
+	/*book(_h["NearSide0to10_2-4x1-2"],5,1,1);
 	book(_h["NearSide0to10_2x4x2-4"],5,1,2);
 	book(_h["NearSide0to10_4-10x2-4"],5,1,3);
 	book(_h["NearSide10to20_2-4x1-2"],5,1,4);
@@ -342,9 +342,9 @@ namespace Rivet {
         book(_h["FarSide30to40_4-10x2-4"],5,1,27);
         book(_h["FarSide40to50_2-4x1-2"],5,1,28);
         book(_h["FarSide40to50_2x4x2-4"],5,1,29);
-        book(_h["FarSide40to50_4-10x2-4"],5,1,30);
+        book(_h["FarSide40to50_4-10x2-4"],5,1,30);*/
 	//Fig 21
-	book(_h["0to10_4-10x0.5-1"],6,1,1);
+	/*book(_h["0to10_4-10x0.5-1"],6,1,1);
 	book(_h["0to10_4-10x1-2"],6,1,2);
 	book(_h["0to10_4-10x2-4"],6,1,3);
 	book(_h["0to10_4-10x4-10"],6,1,4);
@@ -363,9 +363,9 @@ namespace Rivet {
 	book(_h["40to50_4-10x0.5-1"],6,1,17);
         book(_h["40to50_4-10x1-2"],6,1,18);
         book(_h["40to50_4-10x2-4"],6,1,19);
-        book(_h["40to50_4-10x4-10"],6,1,20);
+        book(_h["40to50_4-10x4-10"],6,1,20);*/
 	//Fig 22
-	book(_h["0to10_1-2x0.5-1"],7,1,1);
+	/*book(_h["0to10_1-2x0.5-1"],7,1,1);
 	book(_h["0to10_1-2x1-2"],7,1,2);
 	book(_h["0to10_2-4x0.5-1"],7,1,3);
 	book(_h["0to10_2-4x1-2"],7,1,4);
@@ -389,7 +389,7 @@ namespace Rivet {
         book(_h["40to50_1-2x1-2"],7,1,22);
         book(_h["40to50_2-4x0.5-1"],7,1,23);
         book(_h["40to50_2-4x1-2"],7,1,24);
-        book(_h["40to50_2-4x2-4"],7,1,25);
+        book(_h["40to50_2-4x2-4"],7,1,25);*/
 	//Fig 23
 	book(_h["0to10_-4pi/8<phi-Psi2<-3pi/8"],8,1,1);
 	book(_h["0to10_-3pi.8<phi-Psi2<-2pi/8"],8,1,2);
@@ -474,7 +474,7 @@ namespace Rivet {
 				snprintf(corrName,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
 					a,a+10,b,b*2,c,c*2);
 				snprintf(bookName,200,"Fig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-					a,a+10,b,b*2,c,c*2);
+					a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 				book(_h[bookName],3,1,iterator);
 				Correlator corrFig15(a,(int)b*10,(int)c*10);
 				corrFig15.SetCollSystemAndEnergy("AuAu200GeV");
@@ -497,13 +497,16 @@ namespace Rivet {
 		for(a=minCent; a<=maxCent; a+=10){
                 	for(b=min_pT; b<=max_pT; b*=2){
                         	for((b==4) ? c=min_pA*2 : c=min_pA; c<=max_pA; c*=2){
-				snprintf(corrName,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-                                        a,a+10,b,b*2,c,c*2);
-                                if(side==0) snprintf(bookName,200,
-				"NearSideFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",a,a+10,b,b*2,c,c*2);
-				else snprintf(bookName,200,
-				"FarSideFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",a,a+10,b,b*2,c,c*2);
-                                	book(_h[bookName],3,1,iterator);
+					snprintf(corrName,200,
+						"CounterFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+                                        	a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                	if(sides==0) snprintf(bookName,200,
+						"NearSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+					else snprintf(bookName,200,
+						"FarSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                	book(_h[bookName],4,1,iterator);
 	                                Correlator corrFig15(a,(int)b*10,(int)c*10);
         	                        corrFig15.SetCollSystemAndEnergy("AuAu200GeV");
                 	                corrFig15.SetCentrality(a,a+10);
@@ -520,6 +523,86 @@ namespace Rivet {
 	}
 	iterator=1;
 	
+	//Fig 20
+	minCent=0, maxCent=40, min_pT=2, max_pT=4, min_pA=1, max_pA=2, minV=1, maxV=1;
+        for(int sides=0; sides<=2; sides++){
+                for(a=minCent; a<=maxCent; a+=10){
+                        for(b=min_pT; b<=max_pT; b*=2){
+                                for((b==4) ? c=min_pA*2 : c=min_pA; c<=max_pA; c*=2){
+                                	snprintf(corrName,200,
+						"CounterFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+                                        	a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                	if(sides==0) snprintf(bookName,200,
+						"NearSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                	else snprintf(bookName,200,
+						"FarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                        book(_h[bookName],5,1,iterator);
+                                        Correlator corrFig20(a,(int)b*10,(int)c*10);
+                                        corrFig20.SetCollSystemAndEnergy("AuAu200GeV");
+                                        corrFig20.SetCentrality(a,a+10);
+                                        if(b==0.5 || b==1 || b==2) corrFig20.SetTriggerRange(b,b*2);
+                                        else corrFig20.SetTriggerRange(b,10);
+                                        if(c==0.5 || c==1 || c==2) corrFig20.SetAssociatedRange(c,c*2);
+                                        else corrFig20.SetAssociatedRange(c,10);
+                                        corrFig20.SetCounter(_c[corrName]);
+                                        Correlators.push_back(corrFig20);
+                                        iterator++;
+				}
+			}
+		}
+	}
+	iterator=1;
+
+	//Fig 21
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=0.5, max_pA=4, minV=1, maxV=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(b=min_pT; b<=max_pT; b*=2){
+                        for(c=min_pA; c<=max_pA; c*=2){
+                                snprintf(corrName,200,"CounterFig21Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+				snprintf(bookName,200,
+					"NearSideFig21Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+					a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2);
+                                book(_h[bookName],6,1,iterator);
+                                Correlator corrFig21(a,(int)c*10);
+                                corrFig21.SetCollSystemAndEnergy("AuAu200GeV");
+                                corrFig21.SetCentrality(a,a+10);
+				corrFig21.SetTriggerRange(b,(b==4)?10:b*2);
+				corrFig21.SetAssociatedRange(c,(c==4)?10:c*2);
+                                corrFig21.SetCounter(_c[corrName]);
+                                Correlators.push_back(corrFig21);
+				iterator++;
+			}
+		}
+	}
+	iterator=1;
+	
+	//Fig22
+	minCent=0, maxCent=40, min_pT=1, max_pT=2, min_pA=0.5, max_pA=2, minV=1, maxV=1;
+	for(a=minCent; a<=maxCent; a+=10){
+        	for(b=min_pT; b<=max_pT; b*=2){
+        		for(c=min_pA; c<=max_pA && !(c>b); c*=2){
+                                snprintf(corrName,200,
+					"CounterFig22Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                snprintf(bookName,200,
+                                        "NearSideFig22Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+                                        a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2);
+                                book(_h[bookName],7,1,iterator);
+                                Correlator corrFig22(a,(int)c*10);
+                                corrFig22.SetCollSystemAndEnergy("AuAu200GeV");
+                                corrFig22.SetCentrality(a,a+10);
+                                corrFig22.SetTriggerRange(b,(b==4)?10:b*2);
+                                corrFig22.SetAssociatedRange(c,(c==4)?10:c*2);
+                                corrFig22.SetCounter(_c[corrName]);
+                                Correlators.push_back(corrFig22);
+                                iterator++;
+                        }
+                }
+        }
+        iterator=1;
 
 
     }
