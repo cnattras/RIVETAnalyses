@@ -47,19 +47,19 @@ namespace Rivet {
       book(hPion0Pt["ptyields62c86"], 4, 1, 1);
       book(hPion0Pt["ptyields62call"], 3, 1, 5);
 
-      book(sow["sow_39c10"],"sow_39c10");
-      book(sow["sow_39c20"],"sow_39c20");
-      book(sow["sow_39c40"],"sow_39c40");
-      book(sow["sow_39c60"],"sow_39c60");
-      book(sow["sow_39c86"],"sow_39c86");
-      book(sow["sow_39call"],"sow_39call");
+      book(sow["sow_AuAu39c10"],"sow_AuAu39c10");
+      book(sow["sow_AuAu39c20"],"sow_AuAu39c20");
+      book(sow["sow_AuAu39c40"],"sow_AuAu39c40");
+      book(sow["sow_AuAu39c60"],"sow_AuAu39c60");
+      book(sow["sow_AuAu39c86"],"sow_AuAu39c86");
+      book(sow["sow_AuAu39call"],"sow_AuAu39call");
 
-      book(sow["sow_62c10"],"sow_62c10");
-      book(sow["sow_62c20"],"sow_62c20");
-      book(sow["sow_62c40"],"sow_62c40");
-      book(sow["sow_62c60"],"sow_62c60");
-      book(sow["sow_62c86"],"sow_62c86");
-      book(sow["sow_62call"],"sow_62call");
+      book(sow["sow_AuAu62c10"],"sow_AuAu62c10");
+      book(sow["sow_AuAu62c20"],"sow_AuAu62c20");
+      book(sow["sow_AuAu62c40"],"sow_AuAu62c40");
+      book(sow["sow_AuAu62c60"],"sow_AuAu62c60");
+      book(sow["sow_AuAu62c86"],"sow_AuAu62c86");
+      book(sow["sow_AuAu62call"],"sow_AuAu62call");
 
       //RAA _______________________________
 
@@ -230,11 +230,11 @@ namespace Rivet {
 
             if (collSys==AuAu39)
             {
-                sow["sow_39call"]->fill();
+                sow["sow_AuAu39call"]->fill();
 
                 if((c >= 0.) && (c < 10.))
                 {
-                    sow["sow_39c10"]->fill();
+                    sow["sow_AuAu39c10"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -247,7 +247,7 @@ namespace Rivet {
                 }
                 else if((c >= 10.) && (c < 20.))
                 {
-                    sow["sow_39c20"]->fill();
+                    sow["sow_AuAu39c20"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -260,7 +260,7 @@ namespace Rivet {
                 }
                 else if((c >= 20.) && (c < 40.))
                 {
-                    sow["sow_39c40"]->fill();
+                    sow["sow_AuAu39c40"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -273,7 +273,7 @@ namespace Rivet {
                 }
                 else if((c >= 40.) && (c < 60.))
                 {
-                    sow["sow_39c60"]->fill();
+                    sow["sow_AuAu39c60"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -286,7 +286,7 @@ namespace Rivet {
                 }
                 else if((c >= 60.) && (c < 86.))
                 {
-                    sow["sow_39c86"]->fill();
+                    sow["sow_AuAu39c86"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -303,11 +303,11 @@ namespace Rivet {
 
             if (collSys==AuAu62)
             {
-                sow["sow_62call"]->fill();
+                sow["sow_AuAu62call"]->fill();
 
                 if((c >= 0.) && (c < 10.))
                 {
-                    sow["sow_62c10"]->fill();
+                    sow["sow_AuAu62c10"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -320,7 +320,7 @@ namespace Rivet {
                 }
                 else if((c >= 10.) && (c < 20.))
                 {
-                    sow["sow_62c20"]->fill();
+                    sow["sow_AuAu62c20"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -333,7 +333,7 @@ namespace Rivet {
                 }
                 else if((c >= 20.) && (c < 40.))
                 {
-                    sow["sow_62c40"]->fill();
+                    sow["sow_AuAu62c40"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -346,7 +346,7 @@ namespace Rivet {
                 }
                 else if((c >= 40.) && (c < 60.))
                 {
-                    sow["sow_62c60"]->fill();
+                    sow["sow_AuAu62c60"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -359,7 +359,7 @@ namespace Rivet {
                 }
                 else if((c >= 60.) && (c < 86.))
                 {
-                    sow["sow_62c86"]->fill();
+                    sow["sow_AuAu62c86"]->fill();
                     for(const Particle& p : neutralParticles)
                     {
                         double partPt = p.pT()/GeV;
@@ -382,60 +382,60 @@ namespace Rivet {
       bool pp39_available = false;
       bool pp62_available = false;
 
-      for(auto element : hPion0Pt)
+      for(auto element : sow)
       {
           string name = element.second->name();
           if(name.find("AuAu39") != std::string::npos)
           {
-              if(element.second->numEntries() > 0) AuAu39_available = true;
+              if(element.second->sumW() > 0) AuAu39_available = true;
           }
           else if(name.find("AuAu62") != std::string::npos)
           {
-              if(element.second->numEntries() > 0) AuAu62_available = true;
+              if(element.second->sumW() > 0) AuAu62_available = true;
           }
           else if(name.find("pp39") != std::string::npos)
           {
-              if(element.second->numEntries() > 0) pp39_available = true;
+              if(element.second->sumW() > 0) pp39_available = true;
           }
           else if(name.find("pp62") != std::string::npos)
           {
-              if(element.second->numEntries() > 0) pp62_available = true;
+              if(element.second->sumW() > 0) pp62_available = true;
           }
       }
 
       if(!(AuAu62_available && AuAu39_available && pp39_available && pp62_available)) return;
 
 //Yields_________________
-      hPion0Pt["ptyields39c10"]->scaleW(1./sow["sow_39c10"]->sumW());
-      hPion0Pt["ptyields39c20"]->scaleW(1./sow["sow_39c20"]->sumW());
-      hPion0Pt["ptyields39c40"]->scaleW(1./sow["sow_39c40"]->sumW());
-      hPion0Pt["ptyields39c60"]->scaleW(1./sow["sow_39c60"]->sumW());
-      hPion0Pt["ptyields39c86"]->scaleW(1./sow["sow_39c86"]->sumW());
-      hPion0Pt["ptyields39call"]->scaleW(1./sow["sow_39call"]->sumW());
+      hPion0Pt["ptyields39c10"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
+      hPion0Pt["ptyields39c20"]->scaleW(1./sow["sow_AuAu39c20"]->sumW());
+      hPion0Pt["ptyields39c40"]->scaleW(1./sow["sow_AuAu39c40"]->sumW());
+      hPion0Pt["ptyields39c60"]->scaleW(1./sow["sow_AuAu39c60"]->sumW());
+      hPion0Pt["ptyields39c86"]->scaleW(1./sow["sow_AuAu39c86"]->sumW());
+      hPion0Pt["ptyields39call"]->scaleW(1./sow["sow_AuAu39call"]->sumW());
 
-      hPion0Pt["ptyields62c10"]->scaleW(1./sow["sow_62c10"]->sumW());
-      hPion0Pt["ptyields62c20"]->scaleW(1./sow["sow_62c20"]->sumW());
-      hPion0Pt["ptyields62c40"]->scaleW(1./sow["sow_62c40"]->sumW());
-      hPion0Pt["ptyields62c60"]->scaleW(1./sow["sow_62c60"]->sumW());
-      hPion0Pt["ptyields62c86"]->scaleW(1./sow["sow_62c86"]->sumW());
-      hPion0Pt["ptyields62call"]->scaleW(1./sow["sow_62call"]->sumW());
+      hPion0Pt["ptyields62c10"]->scaleW(1./sow["sow_AuAu62c10"]->sumW());
+      hPion0Pt["ptyields62c20"]->scaleW(1./sow["sow_AuAu62c20"]->sumW());
+      hPion0Pt["ptyields62c40"]->scaleW(1./sow["sow_AuAu62c40"]->sumW());
+      hPion0Pt["ptyields62c60"]->scaleW(1./sow["sow_AuAu62c60"]->sumW());
+      hPion0Pt["ptyields62c86"]->scaleW(1./sow["sow_AuAu62c86"]->sumW());
+      hPion0Pt["ptyields62call"]->scaleW(1./sow["sow_AuAu62call"]->sumW());
 
 
 //RAA _______________________________
 
-      hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_39c10"]->sumW());
-      hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_39c20"]->sumW());
-      hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_39c40"]->sumW());
-      hPion0Pt["c60Pt_AuAu39"]->scaleW(1./sow["sow_39c60"]->sumW());
-      hPion0Pt["c86Pt_AuAu39"]->scaleW(1./sow["sow_39c86"]->sumW());
-      hPion0Pt["callPt_AuAu39"]->scaleW(1./sow["sow_39call"]->sumW());
+      hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
+      hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c20"]->sumW());
+      hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c40"]->sumW());
+      hPion0Pt["c60Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c60"]->sumW());
+      hPion0Pt["c86Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c86"]->sumW());
+      hPion0Pt["callPt_AuAu39"]->scaleW(1./sow["sow_AuAu39call"]->sumW());
 
-      hPion0Pt["c10Pt_AuAu62"]->scaleW(1./sow["sow_62c10"]->sumW());
-      hPion0Pt["c20Pt_AuAu62"]->scaleW(1./sow["sow_62c20"]->sumW());
-      hPion0Pt["c40Pt_AuAu62"]->scaleW(1./sow["sow_62c40"]->sumW());
-      hPion0Pt["c60Pt_AuAu62"]->scaleW(1./sow["sow_62c60"]->sumW());
-      hPion0Pt["c86Pt_AuAu62"]->scaleW(1./sow["sow_62c86"]->sumW());
-      hPion0Pt["callPt_AuAu62"]->scaleW(1./sow["sow_62call"]->sumW());
+      hPion0Pt["c10Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62c10"]->sumW());
+      hPion0Pt["c20Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62c20"]->sumW());
+      hPion0Pt["c40Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62c40"]->sumW());
+      hPion0Pt["c60Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62c60"]->sumW());
+      hPion0Pt["c86Pt_AuAu62"]->scaleW(1./sow["sow_AuAu62c86"]->sumW());
+      hPion0Pt["callPt_AuAu62"]->scaleW(1./sow["sow_AuAu62call"]->sumW());
 
       hPion0Pt["c10Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
       hPion0Pt["c20Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
