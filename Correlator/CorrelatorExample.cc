@@ -432,7 +432,7 @@ namespace Rivet {
 			for(Correlator& corr : Correlators)
 			{
 					if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
-					if(corr.CheckCentrality(c)) continue;
+					if(!corr.CheckCentrality(c)) continue;
 					corr.AddWeight();
 			}
 
@@ -443,7 +443,7 @@ namespace Rivet {
 					for(Correlator& corr : Correlators)
 					{
 							if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
-							if(corr.CheckCentrality(c)) continue;
+							if(!corr.CheckCentrality(c)) continue;
 							if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
 							corr.AddTrigger();
 					}
@@ -452,7 +452,7 @@ namespace Rivet {
 							for(Correlator& corr : Correlators)
 							{
 									if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
-									if(corr.CheckCentrality(c)) continue;
+									if(!corr.CheckCentrality(c)) continue;
 									if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
 									if(!corr.CheckAssociatedRange(pAssoc.pT()/GeV)) continue;
 									corr.AddCorrelation(pTrig, pAssoc);
