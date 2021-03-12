@@ -30,15 +30,6 @@ namespace Rivet {
       const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
       declare(fs, "fs");
 
-      beamOpt = getOption<string>("beam","NONE");
-
-
-      if(beamOpt=="PP39") collSys = pp39;
-      else if(beamOpt=="PP62") collSys = pp62;
-      else if(beamOpt=="AUAU39") collSys = AuAu39;
-      else if(beamOpt=="AUAU62") collSys = AuAu62;
-
-
       if(!(collSys == pp39 || collSys == pp62)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       //Yields_________________
@@ -73,73 +64,73 @@ namespace Rivet {
       //RAA _______________________________
 
       string refnameRaa1 = mkAxisCode(5,1,1);
-            const Scatter2D& refdataRaa1 =refData(refnameRaa1);
+      const Scatter2D& refdataRaa1 =refData(refnameRaa1);
       book(hPion0Pt["c10Pt_AuAu39"], refnameRaa1 + "_AuAu39", refdataRaa1);
       book(hPion0Pt["c10Pt39_pp"], refnameRaa1 + "_pp39", refdataRaa1);
       book(hRaa["Raa_c010_AuAu39"], refnameRaa1);
 
       string refnameRaa2 = mkAxisCode(5,1,2);
-            const Scatter2D& refdataRaa2 =refData(refnameRaa2);
+      const Scatter2D& refdataRaa2 =refData(refnameRaa2);
       book(hPion0Pt["c20Pt_AuAu39"], refnameRaa2 + "_AuAu39", refdataRaa2);
       book(hPion0Pt["c20Pt39_pp"], refnameRaa2 + "_pp39", refdataRaa2);
       book(hRaa["Raa_c1020_AuAu39"], refnameRaa2);
 
       string refnameRaa3 = mkAxisCode(6,1,1);
-            const Scatter2D& refdataRaa3 =refData(refnameRaa3);
+      const Scatter2D& refdataRaa3 =refData(refnameRaa3);
       book(hPion0Pt["c40Pt_AuAu39"], refnameRaa3 + "_AuAu39", refdataRaa3);
       book(hPion0Pt["c40Pt39_pp"], refnameRaa3 + "_pp39", refdataRaa3);
       book(hRaa["Raa_c2040_AuAu39"], refnameRaa3);
 
       string refnameRaa4 = mkAxisCode(5,1,3);
-            const Scatter2D& refdataRaa4 =refData(refnameRaa4);
+      const Scatter2D& refdataRaa4 =refData(refnameRaa4);
       book(hPion0Pt["c60Pt_AuAu39"], refnameRaa4 + "_AuAu39", refdataRaa4);
       book(hPion0Pt["c60Pt39_pp"], refnameRaa4 + "_pp39", refdataRaa4);
       book(hRaa["Raa_c4060_AuAu39"], refnameRaa4);
 
       string refnameRaa5 = mkAxisCode(5,1,4);
-            const Scatter2D& refdataRaa5 =refData(refnameRaa5);
+      const Scatter2D& refdataRaa5 =refData(refnameRaa5);
       book(hPion0Pt["c86Pt_AuAu39"], refnameRaa5 + "_AuAu39", refdataRaa5);
       book(hPion0Pt["c86Pt39_pp"], refnameRaa5 + "_pp39", refdataRaa5);
       book(hRaa["Raa_c6086_AuAu39"], refnameRaa5);
 
       string refnameRaa6 = mkAxisCode(6,1,2);
-            const Scatter2D& refdataRaa6 =refData(refnameRaa6);
+      const Scatter2D& refdataRaa6 =refData(refnameRaa6);
       book(hPion0Pt["callPt_AuAu39"], refnameRaa6 + "_AuAu39", refdataRaa6);
       book(hPion0Pt["callPt39_pp"], refnameRaa6 + "_pp39", refdataRaa6);
       book(hRaa["Raa_minbias_AuAu39"], refnameRaa6);
 
       string refnameRaa7 = mkAxisCode(7,1,1);
-            const Scatter2D& refdataRaa7 =refData(refnameRaa7);
+      const Scatter2D& refdataRaa7 =refData(refnameRaa7);
       book(hPion0Pt["c10Pt_AuAu62"], refnameRaa7 + "_AuAu62", refdataRaa7);
       book(hPion0Pt["c10Pt62_pp"], refnameRaa7 + "_pp62", refdataRaa7);
       book(hRaa["Raa_c010_AuAu62"], refnameRaa7);
-      
+
       string refnameRaa8 = mkAxisCode(7,1,2);
-            const Scatter2D& refdataRaa8 =refData(refnameRaa8);
+      const Scatter2D& refdataRaa8 =refData(refnameRaa8);
       book(hPion0Pt["c20Pt_AuAu62"], refnameRaa8 + "_AuAu62", refdataRaa8);
       book(hPion0Pt["c20Pt62_pp"], refnameRaa8 + "_pp62", refdataRaa8);
       book(hRaa["Raa_c1020_AuAu62"], refnameRaa8);
 
       string refnameRaa9 = mkAxisCode(7,1,3);
-            const Scatter2D& refdataRaa9 =refData(refnameRaa9);
+      const Scatter2D& refdataRaa9 =refData(refnameRaa9);
       book(hPion0Pt["c40Pt_AuAu62"], refnameRaa9 + "_AuAu62", refdataRaa9);
       book(hPion0Pt["c40Pt62_pp"], refnameRaa9 + "_pp62", refdataRaa9);
       book(hRaa["Raa_c2040_AuAu62"], refnameRaa9);
 
       string refnameRaa10 = mkAxisCode(7,1,4);
-            const Scatter2D& refdataRaa10 =refData(refnameRaa10);
+      const Scatter2D& refdataRaa10 =refData(refnameRaa10);
       book(hPion0Pt["c60Pt_AuAu62"], refnameRaa10 + "_AuAu62", refdataRaa10);
       book(hPion0Pt["c60Pt62_pp"], refnameRaa10 + "_pp62", refdataRaa10);
       book(hRaa["Raa_c4060_AuAu62"], refnameRaa10);
 
       string refnameRaa11 = mkAxisCode(8,1,1);
-            const Scatter2D& refdataRaa11 =refData(refnameRaa11);
+      const Scatter2D& refdataRaa11 =refData(refnameRaa11);
       book(hPion0Pt["c86Pt_AuAu62"], refnameRaa11 + "_AuAu62", refdataRaa11);
       book(hPion0Pt["c86Pt62_pp"], refnameRaa11 + "_pp62", refdataRaa11);
       book(hRaa["Raa_c6086_AuAu62"], refnameRaa11);
 
       string refnameRaa12 = mkAxisCode(7,1,5);
-            const Scatter2D& refdataRaa12 =refData(refnameRaa12);
+      const Scatter2D& refdataRaa12 =refData(refnameRaa12);
       book(hPion0Pt["callPt_AuAu62"], refnameRaa12 + "_AuAu62", refdataRaa12);
       book(hPion0Pt["callPt62_pp"], refnameRaa12 + "_pp62", refdataRaa12);
       book(hRaa["Raa_minbias_AuAu62"], refnameRaa12);
@@ -165,7 +156,7 @@ namespace Rivet {
       string refnameRaa16 = mkAxisCode(9,1,4);
       const Scatter2D& refdataRaa16 =refData(refnameRaa16);
       book(hRaaNpart["Raa_pt610_AuAu62"], refnameRaa16, refdataRaa16);
-      
+
       centBins.insert(pair<string, int>("Raa_c010_AuAu39",0));
       centBins.insert(pair<string, int>("Raa_c1020_AuAu39",1));
       centBins.insert(pair<string, int>("Raa_c2040_AuAu39",2));
@@ -181,6 +172,21 @@ namespace Rivet {
 
 
     void analyze(const Event& event) {
+
+      const ParticlePair& beam = beams();
+      int NN = 0;
+
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSys = AuAu39;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSys = AuAu62;
+      }
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
+          if (fuzzyEquals(sqrtS()/GeV, 39, 1E-3)) collSys = pp39;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4, 1E-3)) collSys = pp62;
+      }
 
 
             Particles neutralParticles = applyProjection<PrimaryParticles>(event,"fs").particles();
@@ -200,7 +206,7 @@ namespace Rivet {
                 }
                 return;
             }
-            
+
             if(collSys==pp62)
             {
                 sow["sow_pp62"]->fill();
@@ -216,12 +222,12 @@ namespace Rivet {
                 }
                 return;
             }
-            
+
             const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
             const double c = cent();
-            
+
             if ((c < 0.) || (c > 86.)) vetoEvent;
-                        
+
             if (collSys==AuAu39)
             {
                 sow["sow_39call"]->fill();
@@ -293,7 +299,7 @@ namespace Rivet {
                 }
                 return;
             }
-            
+
 
             if (collSys==AuAu62)
             {
@@ -366,11 +372,11 @@ namespace Rivet {
                 }
                 return;
             }
-              
+
     }
 
     void finalize() {
-        
+
       bool AuAu39_available = false;
       bool AuAu62_available = false;
       bool pp39_available = false;
@@ -398,7 +404,7 @@ namespace Rivet {
       }
 
       if(!(AuAu62_available && AuAu39_available && pp39_available && pp62_available)) return;
-      
+
 //Yields_________________
       hPion0Pt["ptyields39c10"]->scaleW(1./sow["sow_39c10"]->sumW());
       hPion0Pt["ptyields39c20"]->scaleW(1./sow["sow_39c20"]->sumW());
@@ -416,7 +422,7 @@ namespace Rivet {
 
 
 //RAA _______________________________
-      
+
       hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_39c10"]->sumW());
       hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_39c20"]->sumW());
       hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_39c40"]->sumW());
@@ -430,7 +436,7 @@ namespace Rivet {
       hPion0Pt["c60Pt_AuAu62"]->scaleW(1./sow["sow_62c60"]->sumW());
       hPion0Pt["c86Pt_AuAu62"]->scaleW(1./sow["sow_62c86"]->sumW());
       hPion0Pt["callPt_AuAu62"]->scaleW(1./sow["sow_62call"]->sumW());
-      
+
       hPion0Pt["c10Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
       hPion0Pt["c20Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
       hPion0Pt["c40Pt39_pp"]->scaleW(1./sow["sow_pp39"]->sumW());
@@ -444,7 +450,7 @@ namespace Rivet {
       hPion0Pt["c60Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
       hPion0Pt["c86Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
       hPion0Pt["callPt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
-      
+
       divide(hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa["Raa_c010_AuAu39"]);
       divide(hPion0Pt["c20Pt_AuAu39"],hPion0Pt["c20Pt39_pp"],hRaa["Raa_c1020_AuAu39"]);
       divide(hPion0Pt["c40Pt_AuAu39"],hPion0Pt["c40Pt39_pp"],hRaa["Raa_c2040_AuAu39"]);
@@ -458,7 +464,7 @@ namespace Rivet {
       divide(hPion0Pt["c60Pt_AuAu62"],hPion0Pt["c60Pt62_pp"],hRaa["Raa_c4060_AuAu62"]);
       divide(hPion0Pt["c86Pt_AuAu62"],hPion0Pt["c86Pt62_pp"],hRaa["Raa_c6086_AuAu62"]);
       divide(hPion0Pt["callPt_AuAu62"],hPion0Pt["callPt62_pp"],hRaa["Raa_minbias_AuAu62"]);
-      
+
       hRaa["Raa_c010_AuAu39"]->scaleY(1./777.2);
       hRaa["Raa_c1020_AuAu39"]->scaleY(1./496.7);
       hRaa["Raa_c2040_AuAu39"]->scaleY(1./253.6);
@@ -479,19 +485,19 @@ namespace Rivet {
       {
           string name = element.first;
           if(name.find("Raa_minbias_AuAu") != std::string::npos) continue;
-          
+
           YODA::Scatter2D yodaRaa = *element.second;
-              
+
           double averageRaaPt46 = 0.;
           double averageRaaPt610 = 0.;
           double averageRaaPt46Error = 0.;
           double averageRaaPt610Error = 0.;
           int nbinsPt46 = 0;
           int nbinsPt610 = 0;
-              
+
           for(auto &point : yodaRaa.points())
           {
-              
+
               if(point.x() > 4. && point.x() < 6.)
               {
                   if(!isnan(point.y()))
@@ -500,7 +506,7 @@ namespace Rivet {
                       averageRaaPt46Error += point.yErrPlus()*point.yErrPlus();
                       nbinsPt46++;
                   }
-                  
+
               }
               if(point.x() > 6.)
               {
@@ -512,8 +518,8 @@ namespace Rivet {
                   }
               }
           }
-          
-              
+
+
           if(name.find("39") != std::string::npos)
           {
               hRaaNpart["Raa_pt46_AuAu39"]->point(centBins[name]).setY(averageRaaPt46/nbinsPt46);
@@ -528,9 +534,9 @@ namespace Rivet {
               hRaaNpart["Raa_pt610_AuAu62"]->point(centBins[name]).setY(averageRaaPt610/nbinsPt610);
               hRaaNpart["Raa_pt610_AuAu62"]->point(centBins[name]).setYErr(sqrt(averageRaaPt610Error)/nbinsPt610);
           }
-          
+
       }
-      
+
 
     }
 
