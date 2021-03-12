@@ -30,7 +30,7 @@ namespace Rivet {
       const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
       declare(fs, "fs");
 
-      if(!(collSys == pp39 || collSys == pp62)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       //Yields_________________
       book(hPion0Pt["ptyields39c10"], 1, 1, 1);
