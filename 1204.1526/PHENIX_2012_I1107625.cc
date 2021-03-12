@@ -11,6 +11,7 @@
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
 #include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
+#include "Rivet/Projections/UnstableParticles.hh"
 #include <math.h>
 #define _USE_MATH_DEFINES
 
@@ -25,10 +26,12 @@ namespace Rivet {
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2012_I1107625);
 
     void init() {
-      std::initializer_list<int> pdgIds = {111};  // Pion 0
+      //std::initializer_list<int> pdgIds = {111};  // Pion 0
 
-      const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
-      declare(fs, "fs");
+      //const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
+      //declare(fs, "fs");
+      const UnstableParticles ufs(Cuts::abseta < 0.35 && Cuts::pT > 0.8*GeV && Cuts::pid == 111);
+      declare(ufs, "ufs");
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
@@ -189,7 +192,7 @@ namespace Rivet {
       }
 
 
-            Particles neutralParticles = applyProjection<PrimaryParticles>(event,"fs").particles();
+            Particles neutralParticles = applyProjection<UnstableParticles>(event,"ufs").particles();
 
             if(collSys==pp39)
             {
