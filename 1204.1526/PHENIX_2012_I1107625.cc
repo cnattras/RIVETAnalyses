@@ -10,7 +10,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "../Centrality/RHICCentrality.hh" //external header for Centrality calculation
+#include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #define _USE_MATH_DEFINES
 
