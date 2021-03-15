@@ -7,6 +7,7 @@
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include <fstream>
 #include <iostream>
 #include <math.h>
