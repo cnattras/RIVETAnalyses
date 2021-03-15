@@ -31,10 +31,11 @@ namespace Rivet {
       vector<int> _pid;
       bool _noCentrality = false;
       bool _noAssoc = false;
-			int _nTriggers = 0;
-			int _nEvents = 0;
-			Histo1DPtr _deltaPhi;
-			CounterPtr _counter;
+      int _nTriggers = 0;
+      int _nEvents = 0;
+      Histo1DPtr _deltaPhi;
+      CounterPtr _counter;
+
     public:
 
       /// Constructor
@@ -61,8 +62,8 @@ namespace Rivet {
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
-			void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
-			void SetCounter(CounterPtr c){ _counter = c; }
+      void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
+      void SetCounter(CounterPtr c){ _counter = c; }
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -75,60 +76,60 @@ namespace Rivet {
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
       vector<int> GetPID(){ return _pid; }
-			double GetWeight(){ return _counter->sumW(); }
-			Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
-			CounterPtr GetCounter(){ return _counter; }
+      double GetWeight(){ return _counter->sumW(); }
+      Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
+      CounterPtr GetCounter(){ return _counter; }
 
-			double GetDeltaPhi(Particle pAssoc, Particle pTrig)
-	    {
-	        //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
-	        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+      double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+      {
+              //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
+              double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
+              if(dPhi < -M_PI/2.)
+              {
+                      dPhi += 2.*M_PI;
+              }
+              else if(dPhi > 3.*M_PI/2.)
+              {
+                      dPhi -= 2*M_PI;
+              }
 
-	        if(dPhi < -M_PI/2.)
-	        {
-	            dPhi += 2.*M_PI;
-	        }
-	        else if(dPhi > 3.*M_PI/2.)
-	        {
-	            dPhi -= 2*M_PI;
-	        }
+              return dPhi;
+      }
 
-	        return dPhi;
-	    }
+      void AddCorrelation(Particle pTrig, Particle pAssoc)
+      {
+              double dPhi = GetDeltaPhi(pTrig, pAssoc);
 
-			void AddCorrelation(Particle pTrig, Particle pAssoc)
-			{
-					double dPhi = GetDeltaPhi(pTrig, pAssoc);
+              _deltaPhi->fill(dPhi);
+      }
 
-					_deltaPhi->fill(dPhi);
-			}
-
-			void AddWeight()
-			{
-					_counter->fill();
-					_nEvents++;
-			}
+      void AddWeight()
+      {
+              _counter->fill();
+              _nEvents++;
+      }
 
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
       {
-          string fullIndex = "";
-					for(int index : _indices)
-					{
-							fullIndex += to_string(index);
-					}
-          return fullIndex;
+              string fullIndex = "";
+              for(int index : _indices)
+              {
+                      fullIndex += to_string(index);
+              }
+
+              return fullIndex;
       }
 
-			void AddTrigger()
-			{
-					_nTriggers++;
-			}
+      void AddTrigger()
+      {
+              _nTriggers++;
+      }
 
-			void Normalize(double weight = 1.)
-			{
-					if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
-			}
+      void Normalize(double weight = 1.)
+      {
+              if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
+      }
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
       bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
@@ -475,16 +476,16 @@ namespace Rivet {
       bool AuAu200_available = false;
       bool pp_available = false;
 
-			for(Correlator& corr : Correlators)
-			{
-					corr.Normalize();
-			}
+      for(Correlator& corr : Correlators)
+      {
+              corr.Normalize();
+      }
 
 
 
     }
 
- 		map<string, Histo1DPtr> _h;
+    map<string, Histo1DPtr> _h;
     map<string, CounterPtr> _c;
     vector<Correlator> Correlators;
 
