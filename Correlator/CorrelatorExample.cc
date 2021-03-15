@@ -43,15 +43,15 @@ namespace Rivet {
         _indices = {index0, index1, index2};
       }
 
-			Correlator(int index0, int index1) {
+      Correlator(int index0, int index1) {
         _indices = {index0, index1};
       }
 
-			Correlator(int index0) {
+      Correlator(int index0) {
         _indices = {index0};
       }
 
-			Correlator(std::vector<int> vindex) {
+      Correlator(std::vector<int> vindex) {
         _indices = vindex;
       }
 
