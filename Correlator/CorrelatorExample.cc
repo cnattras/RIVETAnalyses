@@ -386,11 +386,11 @@ namespace Rivet {
 
     void init() {
 
-				//Unstable final state. This is not prompt
-				const UnstableParticles pi0(Cuts::absrap < 0.35 && Cuts::pT > 1*GeV && Cuts::abspid == 111 );
-				declare(pi0, "pi0");
-				//Prompt final state. Ex.: direct photons
-				const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);declare(pfs, "PFS");
+        //Unstable final state. This is not prompt
+		const UnstableParticles pi0(Cuts::absrap < 0.35 && Cuts::pT > 1*GeV && Cuts::abspid == 111 );
+        declare(pi0, "pi0");
+		//Prompt final state. Ex.: direct photons
+		const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);declare(pfs, "PFS");
 
         const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV);
         declare(cfs, "CFS");
