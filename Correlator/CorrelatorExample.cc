@@ -398,23 +398,23 @@ namespace Rivet {
 
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-				book(_h["DeltaPhi"], "DeltaPhi", 36, -M_PI/2., 1.5*M_PI);
-				book(_c["sow_AuAu200"], "sow_AuAu200");
+	book(_h["DeltaPhi"], "DeltaPhi", 36, -M_PI/2., 1.5*M_PI);
+	book(_c["sow_AuAu200"], "sow_AuAu200");
 
-				Correlator corr(1);
-				corr.SetCollSystemAndEnergy("AuAu200GeV");
-				corr.SetCentrality(0., 80.);
-				corr.SetTriggerRange(1., 5.);
-				corr.SetAssociatedRange(0.5, 1.);
-				corr.SetCorrelationFunction(_h["DeltaPhi"]);
-				corr.SetCounter(_c["sow_AuAu200"]);
-				Correlators.push_back(corr);
+	Correlator corr(1);
+	corr.SetCollSystemAndEnergy("AuAu200GeV");
+	corr.SetCentrality(0., 80.);
+	corr.SetTriggerRange(1., 5.);
+	corr.SetAssociatedRange(0.5, 1.);
+	corr.SetCorrelationFunction(_h["DeltaPhi"]);
+	corr.SetCounter(_c["sow_AuAu200"]);
+	Correlators.push_back(corr);
 
 
     }
     void analyze(const Event& event) {
 
-			const ParticlePair& beam = beams();
+	const ParticlePair& beam = beams();
       string CollSystem = "Empty";
       double NN = 197.;
 
@@ -436,37 +436,36 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
 
-			for(Correlator& corr : Correlators)
-			{
-					if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
-					if(!corr.CheckCentrality(c)) continue;
-					corr.AddWeight();
-			}
+      for(Correlator& corr : Correlators)
+      {
+              if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+              if(!corr.CheckCentrality(c)) continue;
+              corr.AddWeight();
+      }
 
-			Correlator corr = Correlators[0];
+      Correlator corr = Correlators[0];
 
-			for(auto pTrig : cfs.particles())
-			{
-					for(Correlator& corr : Correlators)
-					{
-							if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
-							if(!corr.CheckCentrality(c)) continue;
-							if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
-							corr.AddTrigger();
-					}
-					for(auto pAssoc : cfs.particles())
-					{
-							for(Correlator& corr : Correlators)
-							{
-									if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
-									if(!corr.CheckCentrality(c)) continue;
-									if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
-									if(!corr.CheckAssociatedRange(pAssoc.pT()/GeV)) continue;
-									corr.AddCorrelation(pTrig, pAssoc);
-							}
-					}
-			}
-
+      for(auto pTrig : cfs.particles())
+      {
+              for(Correlator& corr : Correlators)
+              {
+                      if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+                      if(!corr.CheckCentrality(c)) continue;
+                      if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                      corr.AddTrigger();
+              }
+              for(auto pAssoc : cfs.particles())
+              {
+                      for(Correlator& corr : Correlators)
+                      {
+                              if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+                              if(!corr.CheckCentrality(c)) continue;
+                              if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
+                              if(!corr.CheckAssociatedRange(pAssoc.pT()/GeV)) continue;
+                              corr.AddCorrelation(pTrig, pAssoc);
+                      }
+              }
+      }
 
     }
 
