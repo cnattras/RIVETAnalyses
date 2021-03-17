@@ -6,3 +6,10 @@ YLabel=[Insert $y$-axis label for histogram d01-x01-y01 here]
 END PLOT
 
 # ... add more histograms as you need them ...
+BEGIN PLOT /PHENIX_2018_I1658594/pi0Spectra0To10V2
+Title=V2 flow harmonics at 0-10% pT
+XLabel=centrality
+YLabel=Associated yield per trigger
+Options=LogY=<0>
+END PLOT
+
