@@ -30,7 +30,7 @@ namespace Rivet {
 
       //const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
       //declare(fs, "fs");
-      const UnstableParticles ufs(Cuts::abseta < 0.35 && Cuts::pT > 0.8*GeV && Cuts::pid == 111);
+      const UnstableParticles ufs(Cuts::abseta < 0.35 && Cuts::pT > 0.8*GeV && Cuts::pid = 111);
       declare(ufs, "ufs");
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
