@@ -392,7 +392,7 @@ namespace Rivet {
 	const UnstableParticles up(Cuts::absrap < 0.35 && Cuts::pT > 1*GeV && Cuts::abspid == 111 );
         declare(up, "up");
         //Prompt final state. Ex.: direct photons
-	const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);declare(pfs, "PFS");
+	const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
         declare(pfs, "pfs");
 
         const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV);
