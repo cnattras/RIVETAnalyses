@@ -27,7 +27,7 @@ namespace Rivet {
       declare(up_mid,"up_mid");
 
       beamOpt = getOption<string>("beam","NONE");
-
+      
       if(beamOpt=="PP200") collSys = pp200;
       else if(beamOpt=="CUCU200") collSys = CuCu200;
      
@@ -109,31 +109,68 @@ namespace Rivet {
     void analyze(const Event& event) {
 
      
-      // const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-      // const double c = cent();
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const double c = cent();
 
-      // if(c < 20.)
-      // 	{
-      // 	  _c["c_YAA_mid_020"]->fill();
-      // _c["c_YAA_fwd_020"]->fill();
-      // 	}
-      // else if(c >= 20. && c < 40.)
-      // 	{
-      // 	  _c["c_YAA_mid_2040"]->fill();
-      // 	  _c["c_YAA_fwd_2040"]->fill();
-      // 	}
-      // else if(c >= 40. && c < 60.)
-      // 	{
-      // 	  _c["c_YAA_mid_4060"]->fill();
-      // 	  _c["c_YAA_fwd_4060"]->fill();
-      // 	}
-      // else if(c >= 60. && c < 94.)
-      // 	{
-      // 	  _c["c_YAA_mid_6094"]->fill();
-      // 	  _c["c_YAA_fwd_6094"]->fill();
-      // 	}
-      // if(c > 94.) vetoEvent;
+      Particles FwdParticles = applyProjection<UnstableParticles>(event,"upFwd").particles();  // muons
+      Particles MidParticles = applyProjection<UnstableParticles>(event,"upMid").particles();  // electrons
 
+      if(collSys==CuCu200)
+      	{
+
+      	  // Fill counters (no associated particle types?)
+      	  if(c < 20.)
+      	    {
+      	      _c["c_YAA_fwd_020"]->fill();
+      	      _c["c_YAA_mid_020"]->fill();
+      	    }
+      	  else if(c >= 20. && c < 40.)
+      	    {
+      	      _c["c_YAA_fwd_2040"]->fill();
+      	      _c["c_YAA_mid_2040"]->fill();
+      	    }
+      	  else if(c >= 40. && c < 60.)
+      	    {
+      	      _c["c_YAA_fwd_4060"]->fill();
+      	      _c["c_YAA_mid_4060"]->fill();
+      	    }
+      	  else if(c >= 60. && c < 94.)
+      	    {
+      	      _c["c_YAA_fwd_6094"]->fill();
+      	      _c["c_YAA_mid_6094"]->fill();
+      	    }
+      	  if(c > 94.) vetoEvent;
+
+
+    	  // fill hisograms ( with associated particle types )
+      for(const Particle& p : FwdParticles)
+    	{
+    	  if(c < 20. && p.pid() == 443)
+    	    _h_1D["YAA_pT_fwd_020"]->fill(p.pT()/GeV);
+    	  else if(c >= 20. && c < 40. && p.pid() == 443)
+    	    _h_1D["YAA_pT_fwd_2040"]->fill(p.pT()/GeV);
+    	  else if(c >= 40. && c < 60. && p.pid() == 443)
+    	    _h_1D["YAA_pT_fwd_4060"]->fill(p.pT()/GeV);
+    	  else if(c >= 60. && c < 94. && p.pid() == 443)
+    	    _h_1D["YAA_pT_fwd_6094"]->fill(p.pT()/GeV);
+    	  if(c > 94.) vetoEvent;
+    	}
+      return;
+
+      for(const Particle& p : MidParticles)
+    	{
+    	  if(c < 20. && p.pid() == 443)
+    	    _h_1D["YAA_pT_mid_020"]->fill(p.pT()/GeV);
+    	  else if(c >= 20. && c < 40. && p.pid() == 443)
+    	    _h_1D["YAA_pT_mid_2040"]->fill(p.pT()/GeV);
+    	  else if(c >= 40. && c < 60. && p.pid() == 443)
+    	    _h_1D["YAA_pT_mid_4060"]->fill(p.pT()/GeV);
+    	  else if(c >= 60. && c < 94. && p.pid() == 443)
+    	    _h_1D["YAA_pT_mid_6094"]->fill(p.pT()/GeV);
+    	  if(c > 94.) vetoEvent;
+    	}
+      return;
+    } // if CuCu
 
 
       // Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
@@ -142,6 +179,7 @@ namespace Rivet {
       // 	{
       // 	  if(c < 10. && p.pid() == 321) _h["AAAA"]->fill(p.pT()/GeV);
       // 	}
+
 
     } // end analyze
 
@@ -191,86 +229,3 @@ namespace Rivet {
 } // namespace Rivet
 
 
-
-
-
- //      //////////////// 
- //      //  book(_h1D["ptsq_npart_mid"], 9, 1, 1); 
- //      // centBins.insert(pair<string, int>("ptsq_mid_020_CuCu",0));
- //      // centBins.insert(pair<string, int>("ptsq_mid_2040_CuCu",1));
- //      // centBins.insert(pair<string, int>("ptsq_mid_4060_CuCu",2));  // no 60-94 provided for mid rapidity
-           
- //      // //   book(_h1D["ptsq_npart_fwd"], 10, 1, 1); 
- //      // centBins.insert(pair<string, int>("ptsq_fwd_020_CuCu",0));
- //      // centBins.insert(pair<string, int>("ptsq_fwd_2040_CuCu",1));
- //      // centBins.insert(pair<string, int>("ptsq_fwd_4060_CuCu",2));
- //      // centBins.insert(pair<string, int>("ptsq_fwd_6094_CuCu",3));
- //      ///////////////
-
-
-// is this needed?
- //      //  book(_h1D["RAA_pT_npart_mid"], 14, 1, 1); 
- //      string refnameRaa4 = mkAxisCode(14,1,1);
- //      const Scatter2D& refdataRaa4 =refData(refnameRaa4);
- //      book(_h1D["CuCu_mid_npart"], refnameRaa4 + "_CuCu200", refdataRaa4);
- //      book(_h1D["pp_mid_npart"], refnameRaa4 + "_pp200", refdataRaa4);
- //      book(_h2D_RAA["RAA_pT_npart_mid"], refnameRaa4);
-
- //      // book(_h1D["RAA_pT_npart_fwd"], 15, 1, 1);
- //      string refnameRaa5 = mkAxisCode(15,1,1);
- //      const Scatter2D& refdataRaa5 =refData(refnameRaa5);
- //      book(_h1D["CuCu_fwd_npart"], refnameRaa5 + "_CuCu200", refdataRaa5);
- //      book(_h1D["pp_fwd_npart"], refnameRaa5 + "_pp200", refdataRaa5);
- //      book(_h2D_RAA["RAA_pT_npart_fwd"], refnameRaa5);
-     
-
-      // is this needed?
- //      // book(_h1D["RAA_npart_mid"], 14, 1, 1);
- //      // centBins.insert(pair<string, int>("RAA_mid_010_CuCu",0));
- //      // centBins.insert(pair<string, int>("RAA_mid_1020_CuCu",0));
- //      // centBins.insert(pair<string, int>("RAA_mid_2030_CuCu",1));
- //      // centBins.insert(pair<string, int>("RAA_mid_3040_CuCu",2));  
- //      // centBins.insert(pair<string, int>("RAA_mid_4050_CuCu",3));  
- //      // centBins.insert(pair<string, int>("RAA_mid_5060_CuCu",4));  
- //      // centBins.insert(pair<string, int>("RAA_mid_6094_CuCu",5));  
-           
- //      // //  book(_h1D["RAA_npart_fwd"], 15, 1, 1);
- //      // centBins.insert(pair<string, int>("RAA_fwd_010_CuCu",0));
- //      // centBins.insert(pair<string, int>("RAA_fwd_1020_CuCu",0));
- //      // centBins.insert(pair<string, int>("RAA_fwd_2030_CuCu",1));
- //      // centBins.insert(pair<string, int>("RAA_fwd_3040_CuCu",2));  
- //      // centBins.insert(pair<string, int>("RAA_fwd_4050_CuCu",3));  
- //      // centBins.insert(pair<string, int>("RAA_fwd_5060_CuCu",4));  
- //      // centBins.insert(pair<string, int>("RAA_fwd_6070_CuCu",5)); 
- //      // centBins.insert(pair<string, int>("RAA_fwd_7094_CuCu",6)); 
-
-
-// is this needed?
- //      // book HEPData histograms Data Tables 11-15 (RAA without counters)
-
- //      //  book(_h1D["RAA_pT_mid_020"], 11, 1, 1); 
- //      string refnameRaa1 = mkAxisCode(11,1,1);
- //      const Scatter2D& refdataRaa1 =refData(refnameRaa1);
- //      book(_h1D["YAA_pT_mid_020_CuCu"], refnameRaa1 + "_CuCu200", refdataRaa1);
- //      book(_h1D["YAA_pT_mid_pp"], refnameRaa1 + "_pp200", refdataRaa1);
- //      book(_h2D_RAA["RAA_pT_mid_020"], refnameRaa1);
-
- //      // book(_h1D["RAA_pT_fwd_020"], 12, 1, 1);
- //      string refnameRaa2 = mkAxisCode(12,1,1);
- //      const Scatter2D& refdataRaa2 =refData(refnameRaa2);
- //      book(_h1D["YAA_pT_fwd_020_CuCu"], refnameRaa2 + "_CuCu200", refdataRaa2);
- //      book(_h1D["YAA_pT_fwd_pp"], refnameRaa2 + "_pp200", refdataRaa2);
- //      book(_h2D_RAA["RAA_pT_fwd_020"], refnameRaa2);
-
- //      //  book(_h1D["RAA_y_020"], 13, 1, 1); 
- //      string refnameRaa3 = mkAxisCode(13,1,1);
- //      const Scatter2D& refdataRaa3 =refData(refnameRaa3);
- //      book(_h1D["YAA_y_020_CuCu"], refnameRaa3 + "_CuCu200", refdataRaa3);
- //      book(_h1D["YAA_y_pp"], refnameRaa3 + "_pp200", refdataRaa3);
- //      book(_h2D_RAA["RAA_y_020"], refnameRaa3);
-
-
- // std::initializer_list<int> pdgIds = {443};  // J/psi
-
-      //const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
-      // declare(fs, "fs");
