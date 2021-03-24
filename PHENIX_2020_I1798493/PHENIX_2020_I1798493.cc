@@ -6,6 +6,11 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Projections/PrimaryParticles.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
 #include <fstream>
 #include <iostream>
 #include <math.h>
@@ -161,7 +166,8 @@ namespace Rivet {
       {
         if(!CheckConditions(s, cent, tpt)) return false;
         if(!CheckAssociatedRange(apt)) return false;
-        if(!CheckXiRange(apt/tpt)) return false;
+        if(!CheckXiRange(log(apt/tpt))) return false;
+        // should the above be log(apt/tpt) or apt/tpt
         return true;
 
       }
@@ -214,7 +220,10 @@ namespace Rivet {
     void init() {
       const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV);
       declare(cfs, "CFS");
-	    declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+	    const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
+      declare(pfs, "pfs");
+      
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 	
 	    // const FinalState fs(Cuts::abseta < 4.9);
 
@@ -271,13 +280,24 @@ namespace Rivet {
       
       //corrolators
       //fig 4 a
-    	for (int i=0;i<6;i++){
+    	int dphibinNum = 36;
+      for (int i=0;i<6;i++){
         float xilower= 0+i*.4;
         float xiupper= xilower+.4;
-        string corra = "sow_AUAU200_GammaDirhPertriggerVsXiAUAU" + to_string(xilower) + "to" + to_string(xiupper);
-        string corrd = "sow_dAU200_GammaDirhPertriggerVsXidAU" + to_string(xilower) + "to" + to_string(xiupper);
+        char buffXiLow [5];
+        char buffXiUpp [5];
+        snprintf(buffXiLow,5,"%2.1f", xilower);
+        snprintf(buffXiUpp,5,"%2.1f", xiupper);
+        string Xilow = buffXiLow;
+        string Xiupp = buffXiUpp;
+        string corra = "sow_AUAU200_GammaDirhPertriggerVsXiAUAU" + Xilow + "to" + Xiupp;
+        string corrd = "sow_dAU200_GammaDirhPertriggerVsXidAU" + Xilow + "to" + Xiupp;
+        string corra2 = "dphi_AUAU200_GammaDirhPertriggerVsXiAUAU" + Xilow + "to" + Xiupp;
+        string corrd2 = "dphi_dAU200_GammaDirhPertriggerVsXidAU" + Xilow + "to" + Xiupp;
         book(_c[corra], corra);
     	  book(_c[corrd], corrd);
+        book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4a(1);
         corrfi4a.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfi4a.SetCentrality(0.,40.);
@@ -301,10 +321,20 @@ namespace Rivet {
       for (int i=0;i<6;i++){
         float xilower= 0+i*.4;
         float xiupper= xilower+.4;
-        string corra = "sow_AUAU200_IAA" + to_string(xilower) + "to" + to_string(xiupper);
-        string corrd = "sow_dAU200_IdA" + to_string(xilower) + "to" + to_string(xiupper);
+        char buffXiLow [5];
+        char buffXiUpp [5];
+        snprintf(buffXiLow,5,"%2.1f", xilower);
+        snprintf(buffXiUpp,5,"%2.1f", xiupper);
+        string Xilow = buffXiLow;
+        string Xiupp = buffXiUpp;
+        string corra = "sow_AUAU200_IAA" + Xilow + "to" + Xiupp;
+        string corrd = "sow_dAU200_IdA" + Xilow + "to" + Xiupp;
+        string corra2 = "dphi_AUAU200_IAA" + Xilow + "to" + Xiupp;
+        string corrd2 = "dphi_dAU200_IdA" + Xilow + "to" + Xiupp;
         book(_c[corra], corra);
     	  book(_c[corrd], corrd);
+        book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4b(1);
         corrfi4b.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfi4b.SetCentrality(0.,40.);
@@ -346,15 +376,19 @@ namespace Rivet {
             }
         string corrsless = "sow_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
         string corrsmore = "sow_AUAU200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
-    	  book(_c[corrsless], corrsless);
+    	  string corrsless2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
+        string corrsmore2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
+        book(_c[corrsless], corrsless);
     	  book(_c[corrsmore], corrsmore);
+        book(_h[corrsless2], corrsless2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        book(_h[corrsmore2], corrsmore2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig7less(1);
         corrfig7less.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig7less.SetCentrality(0.,40.);
     	  corrfig7less.SetTriggerRange(lower, upper);
 	      corrfig7less.SetAssociatedRange(.5, 7.);
         corrfig7less.SetXiRange(log(5./7.),1.2);
-    	  corrfig7less.SetCorrelationFunction(_h[corrsless+"h"]);
+    	  corrfig7less.SetCorrelationFunction(_h[corrsless2]);
 	      corrfig7less.SetCounter(_c[corrsless]);
         Correlators.push_back(corrfig7less);
         Correlator corrfig7more(1);
@@ -363,7 +397,7 @@ namespace Rivet {
     	  corrfig7more.SetTriggerRange(lower, upper);
 	      corrfig7more.SetAssociatedRange(.5, 7.);
         corrfig7more.SetXiRange(1.2,log(12./.5));
-    	  corrfig7more.SetCorrelationFunction(_h[corrsmore+"h"]);
+    	  corrfig7more.SetCorrelationFunction(_h[corrsmore2]);
 	      corrfig7more.SetCounter(_c[corrsmore]);
         Correlators.push_back(corrfig7more);
       }
@@ -380,10 +414,18 @@ namespace Rivet {
         float aup  = exp(xiup)/tlow;
         float alow = exp(xilow)/tup;
         //string corrnum = "corr" + to_string(i+1);
-        string books= "PerTriggerVsdphiAUAU" + to_string(((2.)-i*.4)) + "to" + to_string(((2.4)-i*.4));
-        string corrs= "sow_AUAU200_" + books;
+        char buffXiLow [5];
+        char buffXiUpp [5];
+        snprintf(buffXiLow,5,"%2.1f", xilow);
+        snprintf(buffXiUpp,5,"%2.1f", xiup);
+        string Xilow = buffXiLow;
+        string Xiupp = buffXiUpp;
+        string books = "PerTriggerVsdphiAUAU" + Xilow + "to" + Xiupp;
+        string corrs = "sow_AUAU200_" + books;
+        string corrs2 = "dphi_AuAu200_" + books;
         book(_h[books], 1, 1, i+1);
         book(_c[corrs], corrs);
+        book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig2(i);
         corrfig2.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig2.SetCentrality(0.,40.);
@@ -403,18 +445,26 @@ namespace Rivet {
         float xiup = ((2.4)-i*.4);
         float aup  = exp(xiup)/tlow;
         float alow = exp(xilow)/tup;
-        string corrnum = "corr" + to_string(i+1);
-        string books= "PerTriggerVsdphidAU" + to_string(((2.)-i*.4)) + "to" + to_string(((2.4)-i*.4));
-        string corrs= "sow_dAU200_" + books;
+        char buffXiLow [5];
+        char buffXiUpp [5];
+        snprintf(buffXiLow,5,"%2.1f", xilow);
+        snprintf(buffXiUpp,5,"%2.1f", xiup);
+        string Xilower = buffXiLow;
+        string XiUpper = buffXiUpp;
+        //string corrnum = "corr" + to_string(i+1);
+        string books = "PerTriggerVsdphidAU" + Xilower + "to" + XiUpper;
+        string corrs = "sow_dAU200_" + books;
+        string corrs2 = "dphi_duAu200_" + books;
         book(_h[books], 2, 1, i+1);
         book(_c[corrs], corrs);
-        Correlator corrfig3(i);
+        book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        Correlator corrfig3(i+1);
         corrfig3.SetCollSystemAndEnergy("dAU200GeV");
     	  corrfig3.SetCentrality(0.,40.);
     	  corrfig3.SetTriggerRange(tlow, tup);
 	      corrfig3.SetAssociatedRange(alow, aup);
         corrfig3.SetXiRange(xilow,xiup);
-    	  corrfig3.SetCorrelationFunction(_h[corrs+"h"]);
+    	  corrfig3.SetCorrelationFunction(_h[corrs2]);
 	      corrfig3.SetCounter(_c[corrs]);
         Correlators.push_back(corrfig3);
       };
@@ -460,7 +510,7 @@ namespace Rivet {
         }
         for(int k=0;k<binnum;k++){
           if (i==0){
-            xilower = (-0.1) +k*.4;
+            xilower = (-0.1)+k*.4;
             xiupper = xilower+.4;
           }
           if (i==1){
@@ -475,16 +525,22 @@ namespace Rivet {
             xilower = 0;
             xiupper = 0.3;
           }
-          string corrs = "sow_AuAu200_" + forcor + "AndXi" + to_string(xilower) + "to" + to_string(xiupper);
+          char buffXiLow5 [5];
+          char buffXiUpp5 [5];
+          snprintf(buffXiLow5,5,"%2.1f", xilower);
+          snprintf(buffXiUpp5,5,"%2.1f", xiupper);
+          string corrs = "sow_AuAu200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
+          string corrs2 = "dphi_AuAu200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
           //string corfunc= forcor + to_string(xilower) + "to" + to_string(xiupper);
           book(_c[corrs], corrs);
+          book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
           Correlator corrfi6(i+k+1);
           corrfi6.SetCollSystemAndEnergy("AUAU200GeV");
           corrfi6.SetCentrality(0., 40.);
           corrfi6.SetTriggerRange(lower, upper);
           corrfi6.SetAssociatedRange(alow, aup);
           corrfi6.SetXiRange(xilower, xiupper);
-          corrfi6.SetCorrelationFunction(_h[corrs+"h"]);
+          corrfi6.SetCorrelationFunction(_h[corrs2]);
           corrfi6.SetCounter(_c[corrs]);
           Correlators.push_back(corrfi6);
         }
@@ -495,17 +551,73 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      const CentralityProjection &cent = apply<CentralityProjection>(event, "CMULT");
+      const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const PromptFinalState& pfs = apply<PromptFinalState>(event, "pfs");
       const double c = cent();
+      const ParticlePair& beam = beams();
+      string CollSystem = "Empty";
 
-      if (c > 40){
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          CollSystem = "AUAU200GeV";
+          //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
+      }
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
+          CollSystem = "pp200GeV";
+          //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+      }
+      if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
+      {
+          CollSystem = "dAU200GeV";
+          //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+      }
+      if(CollSystem == "AUAU200GeV" && c > 40)
+      {
         vetoEvent;
       }
+      //cout << c << endl;
+      for(Correlator& corr : Correlators)
+      {
+	      if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+	      if(!corr.CheckCentrality(c)) continue;
+	      corr.AddWeight();
+      }
+      
+      //Correlator corr = Correlators[0];
+
+      //for(auto pTrig : pfs.particles()) <- real one to use
+      for(auto pTrig : cfs.particles())
+      {
+        for (Correlator &corr : Correlators)
+        {
+          if (!corr.CheckCollSystemAndEnergy(CollSystem))
+            continue;
+          if (!corr.CheckCentrality(c))
+            continue;
+          if (!corr.CheckTriggerRange(pTrig.pT() / GeV))
+            continue;
+          corr.AddTrigger();
+        }
+        for (auto pAssoc : cfs.particles())
+        {
+          for (Correlator &corr : Correlators)
+          {
+            if (!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+            if (!corr.CheckCentrality(c)) continue;
+            if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
+            if (!corr.CheckAssociatedRange(pAssoc.pT() / GeV)) continue;
+            if (!corr.CheckXiRange(pAssoc.pT() / GeV)) continue;
+            corr.AddCorrelation(pTrig, pAssoc);
+          }
+        }
+      }
+
       /*
       _c["CCCC"]->fill();
 
       Particles fsParticles = applyProjection<FinalState>(event, "fs").particles();
-
       for (const Particle &p : fsParticles)
       {
         if (p.pid() == 321){
