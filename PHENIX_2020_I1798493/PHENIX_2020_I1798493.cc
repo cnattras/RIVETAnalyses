@@ -343,7 +343,7 @@ namespace Rivet {
         book(_c[corrp], corrp);
         book(_c[corrp+"_Triggers"], corrp+"_Triggers");
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        book(_h[corrd2], corrd2, dphibinNum, +"_Triggers"-M_PI/2., 1.5*M_PI);
+        book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrp2], corrp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4b(1);
         corrfi4b.SetCollSystemAndEnergy("AUAU200GeV");
@@ -401,7 +401,7 @@ namespace Rivet {
     	  string corrsless2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
         string corrsmore2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
         book(_c[corrsless], corrsless);
-        book(_c[corrsless+"_Triggers"], corrsless"_Triggers");
+        book(_c[corrsless+"_Triggers"], corrsless+"_Triggers");
         book(_c[corrsmore], corrsmore);
         book(_c[corrsmore+"_Triggers"], corrsmore+"_Triggers");
         book(_h[corrsless2], corrsless2, dphibinNum, -M_PI/2., 1.5*M_PI);
