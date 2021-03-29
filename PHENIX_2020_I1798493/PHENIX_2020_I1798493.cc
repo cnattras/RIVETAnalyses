@@ -31,10 +31,10 @@ namespace Rivet {
       bool _noCentrality = false;
       bool _noAssoc = false;
       bool _noXi = false;
-			int _nTriggers = 0;
-			int _nEvents = 0;
-			Histo1DPtr _deltaPhi;
-			CounterPtr _counter;
+      Histo1DPtr _deltaPhi;
+      CounterPtr _counter;
+      CounterPtr _cTriggers;
+
     public:
 
       /// Constructor
@@ -42,15 +42,15 @@ namespace Rivet {
         _indices = {index0, index1, index2};
       }
 
-			Correlator(int index0, int index1) {
+      Correlator(int index0, int index1) {
         _indices = {index0, index1};
       }
 
-			Correlator(int index0) {
+      Correlator(int index0) {
         _indices = {index0};
       }
 
-			Correlator(std::vector<int> vindex) {
+      Correlator(std::vector<int> vindex) {
         _indices = vindex;
       }
 
@@ -63,8 +63,9 @@ namespace Rivet {
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetXiRange(double ximin, double ximax){ _XiRange = make_pair(ximin, ximax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
-			void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
-			void SetCounter(CounterPtr c){ _counter = c; }
+      void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
+      void SetCounter(CounterPtr c){ _counter = c; }
+      void SetTriggerCounter(CounterPtr c){ _cTriggers = c; }
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -78,14 +79,14 @@ namespace Rivet {
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
       pair<double,double> GetXiRange(){ return _XiRange; }
       double GetXiRangeMin(){ return _XiRange.first; }
-      double GetXiRangeMax(){ return _XiRange.second; }      
+      double GetXiRangeMax(){ return _XiRange.second; }
       vector<int> GetPID(){ return _pid; }
-			double GetWeight(){ return _counter->sumW(); }
-			Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
-			CounterPtr GetCounter(){ return _counter; }
+      double GetWeight(){ return _counter->sumW(); }
+      Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
+      CounterPtr GetCounter(){ return _counter; }
 
-			double GetDeltaPhi(Particle pAssoc, Particle pTrig)
-	    {
+      double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+      {
 	        // need to work on this dphi range
           //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
 	        double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
@@ -100,20 +101,18 @@ namespace Rivet {
 	        }
 
 	        return dPhi;
-	    }
+        }
 
-			void AddCorrelation(Particle pTrig, Particle pAssoc)
-			{
-					double dPhi = GetDeltaPhi(pTrig, pAssoc);
+        void AddCorrelation(Particle pTrig, Particle pAssoc)
+	{
+                double dPhi = GetDeltaPhi(pTrig, pAssoc);
+                _deltaPhi->fill(dPhi);
+        }
 
-					_deltaPhi->fill(dPhi);
-			}
-
-			void AddWeight()
-			{
-					_counter->fill();
-					_nEvents++;
-			}
+        void AddWeight()
+	{
+                _counter->fill();
+        }
 
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
@@ -126,15 +125,15 @@ namespace Rivet {
           return fullIndex;
       }
 
-			void AddTrigger()
-			{
-					_nTriggers++;
-			}
+      void AddTrigger()
+      {
+              _cTriggers->fill();
+      }
 
-			void Normalize(double weight = 1.)
-			{
-					if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
-			}
+      void Normalize(double weight = 1.)
+      {
+              if(_cTriggers->effNumEntries()*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_counter->effNumEntries())/(_cTriggers->effNumEntries()*_counter->sumW()));
+      }
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
       bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
@@ -203,15 +202,15 @@ namespace Rivet {
   };
 
 
-	
-  
+
+
 	/// @brief Add a short analysis description here
   class PHENIX_2020_I1798493 : public Analysis {
     public:
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2020_I1798493);
-	
+
 
     /// @name Analysis methods
     //@{
@@ -222,9 +221,9 @@ namespace Rivet {
       declare(cfs, "CFS");
 	    const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
       declare(pfs, "pfs");
-      
+
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-	
+
 	   /* // const FinalState fs(Cuts::abseta < 4.9);
 
 
@@ -267,17 +266,17 @@ namespace Rivet {
       book(_h["IAAVsXiDirectPhoton5to7GevC"], 5, 1, 1);
 	    book(_h["IAAVsXiDirectPhoton7to9GevC"], 6, 1, 1);
     	book(_h["IAAVsXiDirectPhoton9to12GevC"], 7, 1, 1);
-      
+
       // fig 7
     	book(_h["RatiosOfIAAVsDirectPhotonPtPiOver2"], 11, 1, 1);
     	book(_h["RatiosOfIAAVsDirectPhotonPtPiOver3"], 11, 1, 2);
     	book(_h["RatiosOfIAAVsDirectPhotonPtPiOver6"], 11, 1, 3);
-    	
+
       // fig 8
       book(_h["IAAVsXiDirectPhoton5to7GevC"], 12, 1, 1);
     	book(_h["IAAVsXiDirectPhoton7to9GevC"], 13, 1, 1);
     	book(_h["IAAVsXiDirectPhoton9to12GevC"], 14, 1, 1);
-      
+
       //corrolators
       //fig 4 a
     	int dphibinNum = 36;
@@ -295,7 +294,9 @@ namespace Rivet {
         string corra2 = "dphi_AUAU200_GammaDirhPertriggerVsXiAUAU" + Xilow + "to" + Xiupp;
         string corrd2 = "dphi_dAU200_GammaDirhPertriggerVsXidAU" + Xilow + "to" + Xiupp;
         book(_c[corra], corra);
-    	  book(_c[corrd], corrd);
+        book(_c[corra+"_Triggers"], corra+"_Triggers");
+        book(_c[corrd], corrd);
+        book(_c[corrd+"_Triggers"], corrd+"_Triggers");
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4a(1);
@@ -306,6 +307,7 @@ namespace Rivet {
         corrfi4a.SetXiRange(xilower,xiupper);
     	  corrfi4a.SetCorrelationFunction(_h[corra2]);
 	      corrfi4a.SetCounter(_c[corra]);
+              corrfi4a.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4a);
 	      Correlator corrfi4ad(1);
         corrfi4ad.SetCollSystemAndEnergy("dAU200GeV");
@@ -315,6 +317,7 @@ namespace Rivet {
         corrfi4ad.SetXiRange(xilower,xiupper);
     	  corrfi4ad.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4ad.SetCounter(_c[corrd]);
+              corrfi4ad.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4ad);
       }
       //fig 4 b
@@ -334,10 +337,13 @@ namespace Rivet {
         string corrp = "sow_pp200_IdA" + Xilow + "to" + Xiupp;
         string corrp2 = "dphi_pp200_IdA" + Xilow + "to" + Xiupp;
         book(_c[corra], corra);
-    	  book(_c[corrd], corrd);
+        book(_c[corra+"_Triggers"], corra+"_Triggers");
+        book(_c[corrd], corrd);
+        book(_c[corrd+"_Triggers"], corrd+"_Triggers");
         book(_c[corrp], corrp);
+        book(_c[corrp+"_Triggers"], corrp+"_Triggers");
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        book(_h[corrd2], corrd2, dphibinNum, +"_Triggers"-M_PI/2., 1.5*M_PI);
         book(_h[corrp2], corrp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4b(1);
         corrfi4b.SetCollSystemAndEnergy("AUAU200GeV");
@@ -347,6 +353,7 @@ namespace Rivet {
         corrfi4b.SetXiRange(xilower,xiupper);
     	  corrfi4b.SetCorrelationFunction(_h[corra2]);
 	      corrfi4b.SetCounter(_c[corra]);
+              corrfi4b.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4b);
         Correlator corrfi4bd(1);
         corrfi4bd.SetCollSystemAndEnergy("dAU200GeV");
@@ -356,6 +363,7 @@ namespace Rivet {
         corrfi4bd.SetXiRange(xilower,xiupper);
     	  corrfi4bd.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4bd.SetCounter(_c[corrd]);
+              corrfi4bd.SetCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4bd);
         Correlator corrfi4bp(1);
         corrfi4bp.SetCollSystemAndEnergy("pp200GeV");
@@ -365,9 +373,10 @@ namespace Rivet {
         corrfi4bp.SetXiRange(xilower,xiupper);
     	  corrfi4bp.SetCorrelationFunction(_h[corrp2]);
 	      corrfi4bp.SetCounter(_c[corrp]);
+              corrfi4bp.SetCounter(_c[corrp+"_Triggers"]);
         Correlators.push_back(corrfi4bp);
       }
-      
+
       //fig 5 same as pi/2's of fig 6
 
       //fig 7
@@ -376,15 +385,15 @@ namespace Rivet {
         int lower = 0;
 
             if (i==0){
-              upper = 7; 
+              upper = 7;
               lower = 5;
             }
             if (i==1){
-              upper = 9; 
+              upper = 9;
               lower = 7;
             }
             if (i==2){
-              upper = 12; 
+              upper = 12;
               lower = 9;
             }
         string corrsless = "sow_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
@@ -392,7 +401,9 @@ namespace Rivet {
     	  string corrsless2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
         string corrsmore2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
         book(_c[corrsless], corrsless);
-    	  book(_c[corrsmore], corrsmore);
+        book(_c[corrsless+"_Triggers"], corrsless"_Triggers");
+        book(_c[corrsmore], corrsmore);
+        book(_c[corrsmore+"_Triggers"], corrsmore+"_Triggers");
         book(_h[corrsless2], corrsless2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrsmore2], corrsmore2, dphibinNum, -M_PI/2., 1.5*M_PI);
         string corrslessp = "sow_pp200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
@@ -400,7 +411,9 @@ namespace Rivet {
     	  string corrslessp2 = "dphi_pp200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
         string corrsmorep2 = "dphi_pp200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
         book(_c[corrslessp], corrslessp);
-    	  book(_c[corrsmorep], corrsmorep);
+        book(_c[corrslessp+"_Triggers"], corrslessp+"_Triggers");
+        book(_c[corrsmorep], corrsmorep);
+        book(_c[corrsmorep+"_Triggers"], corrsmorep+"_Triggers");
         book(_h[corrslessp2], corrslessp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrsmorep2], corrsmorep2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig7less(1);
@@ -411,6 +424,7 @@ namespace Rivet {
         corrfig7less.SetXiRange(log(5./7.),1.2);
     	  corrfig7less.SetCorrelationFunction(_h[corrsless2]);
 	      corrfig7less.SetCounter(_c[corrsless]);
+              corrfig7less.SetTriggerCounter(_c[corrsless+"_Triggers"]);
         Correlators.push_back(corrfig7less);
         Correlator corrfig7more(1);
         corrfig7more.SetCollSystemAndEnergy("AUAU200GeV");
@@ -420,6 +434,7 @@ namespace Rivet {
         corrfig7more.SetXiRange(1.2,log(12./.5));
     	  corrfig7more.SetCorrelationFunction(_h[corrsmore2]);
 	      corrfig7more.SetCounter(_c[corrsmore]);
+              corrfig7more.SetTriggerCounter(_c[corrsmore+"_Triggers"]);
         Correlators.push_back(corrfig7more);
         Correlator corrfig7lessp(1);
         corrfig7lessp.SetCollSystemAndEnergy("pp200GeV");
@@ -429,6 +444,7 @@ namespace Rivet {
         corrfig7lessp.SetXiRange(log(5./7.),1.2);
     	  corrfig7lessp.SetCorrelationFunction(_h[corrslessp2]);
 	      corrfig7lessp.SetCounter(_c[corrslessp]);
+              corrfig7lessp.SetTriggerCounter(_c[corrslessp+"_Triggers"]);
         Correlators.push_back(corrfig7lessp);
         Correlator corrfig7morep(1);
         corrfig7morep.SetCollSystemAndEnergy("pp200GeV");
@@ -438,11 +454,12 @@ namespace Rivet {
         corrfig7morep.SetXiRange(1.2,log(12./.5));
     	  corrfig7morep.SetCorrelationFunction(_h[corrsmorep2]);
 	      corrfig7morep.SetCounter(_c[corrsmorep]);
+              corrfig7morep.SetTriggerCounter(_c[corrsmorep+"_Triggers"]);
         Correlators.push_back(corrfig7morep);
       }
 
       //fig 8 same as fig 5
-      
+
       //histogram and corralotor loops
       //fig 2
       for (int i=0;i<6;i++){
@@ -464,6 +481,7 @@ namespace Rivet {
         string corrs2 = "dphi_AuAu200_" + books;
         book(_h[books], 1, 1, i+1);
         book(_c[corrs], corrs);
+        book(_c[corrs+"_Triggers"], corrs+"_Triggers");
         book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig2(i);
         corrfig2.SetCollSystemAndEnergy("AUAU200GeV");
@@ -473,6 +491,7 @@ namespace Rivet {
         corrfig2.SetXiRange(xilow,xiup);
     	  corrfig2.SetCorrelationFunction(_h[corrs2]);
 	      corrfig2.SetCounter(_c[corrs]);
+              corrfig2.SetTriggerCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig2);
       };
 
@@ -496,6 +515,7 @@ namespace Rivet {
         string corrs2 = "dphi_duAu200_" + books;
         book(_h[books], 2, 1, i+1);
         book(_c[corrs], corrs);
+        book(_c[corrs+"_Triggers"], corrs+"_Triggers");
         book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig3(i+1);
         corrfig3.SetCollSystemAndEnergy("dAU200GeV");
@@ -505,10 +525,11 @@ namespace Rivet {
         corrfig3.SetXiRange(xilow,xiup);
     	  corrfig3.SetCorrelationFunction(_h[corrs2]);
 	      corrfig3.SetCounter(_c[corrs]);
+              corrfig3.SetCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig3);
       };
 
-      //fig 6 
+      //fig 6
       for (int i=0;i<3;i++){
         int upper = 0;
         int lower = 0;
@@ -574,8 +595,10 @@ namespace Rivet {
           string corrsp2 = "dphi_pp200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
           //string corfunc= forcor + to_string(xilower) + "to" + to_string(xiupper);
           book(_c[corrsp], corrsp);
+          book(_c[corrsp+"_Triggers"], corrsp+"_Triggers");
           book(_h[corrsp2], corrsp2, dphibinNum, -M_PI/2., 1.5*M_PI);
           book(_c[corrs], corrs);
+          book(_c[corrs+"_Triggers"], corrs+"_Triggers");
           book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
           Correlator corrfi6(i+k+1);
           corrfi6.SetCollSystemAndEnergy("AUAU200GeV");
@@ -585,6 +608,7 @@ namespace Rivet {
           corrfi6.SetXiRange(xilower, xiupper);
           corrfi6.SetCorrelationFunction(_h[corrs2]);
           corrfi6.SetCounter(_c[corrs]);
+          corrfi6.SetTriggerCounter(_c[corrs+"_Triggers"]);
           Correlators.push_back(corrfi6);
           Correlator corrfi6p(i+k+1);
           corrfi6p.SetCollSystemAndEnergy("pp200GeV");
@@ -594,6 +618,7 @@ namespace Rivet {
           corrfi6p.SetXiRange(xilower, xiupper);
           corrfi6p.SetCorrelationFunction(_h[corrsp2]);
           corrfi6p.SetCounter(_c[corrsp]);
+          corrfi6p.SetTriggerCounter(_c[corrsp+"_Triggers"]);
           Correlators.push_back(corrfi6p);
         }
       }
@@ -636,7 +661,7 @@ namespace Rivet {
 	      if(!corr.CheckCentrality(c)) continue;
 	      corr.AddWeight();
       }
-      
+
       //Correlator corr = Correlators[0];
 
       for(auto pTrig : pfs.particles())
@@ -682,7 +707,7 @@ namespace Rivet {
       // normalize(_h["XXXX"]); // normalize to unity
       // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
-      
+
     }
 
     //@}
