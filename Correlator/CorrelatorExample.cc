@@ -476,7 +476,7 @@ namespace Rivet {
 
       bool AuAu200_available = false;
       bool pp_available = false;
-
+      /*
       for (auto element : _c)
       {
               string name = element.second->name();
@@ -501,7 +501,7 @@ namespace Rivet {
       }
 
       if((!pp_available) || (!AuAu_available)) return;
-
+      */
       for(Correlator& corr : Correlators)
       {
               corr.Normalize();
