@@ -166,7 +166,7 @@ namespace Rivet {
       {
         if(!CheckConditions(s, cent, tpt)) return false;
         if(!CheckAssociatedRange(apt)) return false;
-        if(!CheckXiRange(log(apt/tpt))) return false;
+        if(!CheckXiRange(log(tpt/apt))) return false;
         // should the above be log(apt/tpt) or apt/tpt
         return true;
 
@@ -225,7 +225,7 @@ namespace Rivet {
       
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 	
-	    // const FinalState fs(Cuts::abseta < 4.9);
+	   /* // const FinalState fs(Cuts::abseta < 4.9);
 
 
       // Initialise and register projections
@@ -253,7 +253,7 @@ namespace Rivet {
 
       // Missing momentum
       declare(MissingMomentum(fs), "MET");
-      
+      */
       // Book histograms
       // fig 4 a
 	    book(_h["GammaDirhPertriggerVsXiAUAU"], 3, 1, 1);
@@ -304,16 +304,16 @@ namespace Rivet {
     	  corrfi4a.SetTriggerRange(5., 9.);
 	      corrfi4a.SetAssociatedRange(.5, 7.);
         corrfi4a.SetXiRange(xilower,xiupper);
-    	  corrfi4a.SetCorrelationFunction(_h[corra+"h"]);
+    	  corrfi4a.SetCorrelationFunction(_h[corra2]);
 	      corrfi4a.SetCounter(_c[corra]);
         Correlators.push_back(corrfi4a);
 	      Correlator corrfi4ad(1);
         corrfi4ad.SetCollSystemAndEnergy("dAU200GeV");
-    	  corrfi4ad.SetCentrality(0.,40.);
+    	  corrfi4ad.SetCentrality(0.,100.);
     	  corrfi4ad.SetTriggerRange(5., 9.);
 	      corrfi4ad.SetAssociatedRange(.5, 7.);
         corrfi4ad.SetXiRange(xilower,xiupper);
-    	  corrfi4ad.SetCorrelationFunction(_h[corrd+"h"]);
+    	  corrfi4ad.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4ad.SetCounter(_c[corrd]);
         Correlators.push_back(corrfi4ad);
       }
@@ -331,28 +331,41 @@ namespace Rivet {
         string corrd = "sow_dAU200_IdA" + Xilow + "to" + Xiupp;
         string corra2 = "dphi_AUAU200_IAA" + Xilow + "to" + Xiupp;
         string corrd2 = "dphi_dAU200_IdA" + Xilow + "to" + Xiupp;
+        string corrp = "sow_pp200_IdA" + Xilow + "to" + Xiupp;
+        string corrp2 = "dphi_pp200_IdA" + Xilow + "to" + Xiupp;
         book(_c[corra], corra);
     	  book(_c[corrd], corrd);
+        book(_c[corrp], corrp);
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        book(_h[corrp2], corrp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4b(1);
         corrfi4b.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfi4b.SetCentrality(0.,40.);
     	  corrfi4b.SetTriggerRange(5., 9.);
 	      corrfi4b.SetAssociatedRange(.5, 7.);
         corrfi4b.SetXiRange(xilower,xiupper);
-    	  corrfi4b.SetCorrelationFunction(_h[corra+"h"]);
+    	  corrfi4b.SetCorrelationFunction(_h[corra2]);
 	      corrfi4b.SetCounter(_c[corra]);
         Correlators.push_back(corrfi4b);
         Correlator corrfi4bd(1);
         corrfi4bd.SetCollSystemAndEnergy("dAU200GeV");
-    	  corrfi4bd.SetCentrality(0.,40.);
+    	  corrfi4bd.SetCentrality(0.,100.);
     	  corrfi4bd.SetTriggerRange(5., 9.);
 	      corrfi4bd.SetAssociatedRange(.5, 7.);
         corrfi4bd.SetXiRange(xilower,xiupper);
-    	  corrfi4bd.SetCorrelationFunction(_h[corrd+"h"]);
+    	  corrfi4bd.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4bd.SetCounter(_c[corrd]);
         Correlators.push_back(corrfi4bd);
+        Correlator corrfi4bp(1);
+        corrfi4bp.SetCollSystemAndEnergy("pp200GeV");
+    	  corrfi4bp.SetCentrality(0.,100.);
+    	  corrfi4bp.SetTriggerRange(5., 9.);
+	      corrfi4bp.SetAssociatedRange(.5, 7.);
+        corrfi4bp.SetXiRange(xilower,xiupper);
+    	  corrfi4bp.SetCorrelationFunction(_h[corrp2]);
+	      corrfi4bp.SetCounter(_c[corrp]);
+        Correlators.push_back(corrfi4bp);
       }
       
       //fig 5 same as pi/2's of fig 6
@@ -382,6 +395,14 @@ namespace Rivet {
     	  book(_c[corrsmore], corrsmore);
         book(_h[corrsless2], corrsless2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrsmore2], corrsmore2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        string corrslessp = "sow_pp200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
+        string corrsmorep = "sow_pp200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
+    	  string corrslessp2 = "dphi_pp200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
+        string corrsmorep2 = "dphi_pp200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
+        book(_c[corrslessp], corrslessp);
+    	  book(_c[corrsmorep], corrsmorep);
+        book(_h[corrslessp2], corrslessp2, dphibinNum, -M_PI/2., 1.5*M_PI);
+        book(_h[corrsmorep2], corrsmorep2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig7less(1);
         corrfig7less.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig7less.SetCentrality(0.,40.);
@@ -400,6 +421,24 @@ namespace Rivet {
     	  corrfig7more.SetCorrelationFunction(_h[corrsmore2]);
 	      corrfig7more.SetCounter(_c[corrsmore]);
         Correlators.push_back(corrfig7more);
+        Correlator corrfig7lessp(1);
+        corrfig7lessp.SetCollSystemAndEnergy("pp200GeV");
+    	  corrfig7lessp.SetCentrality(0.,100.);
+    	  corrfig7lessp.SetTriggerRange(lower, upper);
+	      corrfig7lessp.SetAssociatedRange(.5, 7.);
+        corrfig7lessp.SetXiRange(log(5./7.),1.2);
+    	  corrfig7lessp.SetCorrelationFunction(_h[corrslessp2]);
+	      corrfig7lessp.SetCounter(_c[corrslessp]);
+        Correlators.push_back(corrfig7lessp);
+        Correlator corrfig7morep(1);
+        corrfig7morep.SetCollSystemAndEnergy("pp200GeV");
+    	  corrfig7morep.SetCentrality(0.,100.);
+    	  corrfig7morep.SetTriggerRange(lower, upper);
+	      corrfig7morep.SetAssociatedRange(.5, 7.);
+        corrfig7morep.SetXiRange(1.2,log(12./.5));
+    	  corrfig7morep.SetCorrelationFunction(_h[corrsmorep2]);
+	      corrfig7morep.SetCounter(_c[corrsmorep]);
+        Correlators.push_back(corrfig7morep);
       }
 
       //fig 8 same as fig 5
@@ -432,7 +471,7 @@ namespace Rivet {
     	  corrfig2.SetTriggerRange(tlow, tup);
 	      corrfig2.SetAssociatedRange(alow, aup);
         corrfig2.SetXiRange(xilow,xiup);
-    	  corrfig2.SetCorrelationFunction(_h[corrs+"h"]);
+    	  corrfig2.SetCorrelationFunction(_h[corrs2]);
 	      corrfig2.SetCounter(_c[corrs]);
         Correlators.push_back(corrfig2);
       };
@@ -460,7 +499,7 @@ namespace Rivet {
         book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig3(i+1);
         corrfig3.SetCollSystemAndEnergy("dAU200GeV");
-    	  corrfig3.SetCentrality(0.,40.);
+    	  corrfig3.SetCentrality(0.,100.);
     	  corrfig3.SetTriggerRange(tlow, tup);
 	      corrfig3.SetAssociatedRange(alow, aup);
         corrfig3.SetXiRange(xilow,xiup);
@@ -531,7 +570,11 @@ namespace Rivet {
           snprintf(buffXiUpp5,5,"%2.1f", xiupper);
           string corrs = "sow_AuAu200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
           string corrs2 = "dphi_AuAu200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
+          string corrsp = "sow_pp200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
+          string corrsp2 = "dphi_pp200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
           //string corfunc= forcor + to_string(xilower) + "to" + to_string(xiupper);
+          book(_c[corrsp], corrsp);
+          book(_h[corrsp2], corrsp2, dphibinNum, -M_PI/2., 1.5*M_PI);
           book(_c[corrs], corrs);
           book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
           Correlator corrfi6(i+k+1);
@@ -543,6 +586,15 @@ namespace Rivet {
           corrfi6.SetCorrelationFunction(_h[corrs2]);
           corrfi6.SetCounter(_c[corrs]);
           Correlators.push_back(corrfi6);
+          Correlator corrfi6p(i+k+1);
+          corrfi6p.SetCollSystemAndEnergy("pp200GeV");
+          corrfi6p.SetCentrality(0., 100.);
+          corrfi6p.SetTriggerRange(lower, upper);
+          corrfi6p.SetAssociatedRange(alow, aup);
+          corrfi6p.SetXiRange(xilower, xiupper);
+          corrfi6p.SetCorrelationFunction(_h[corrsp2]);
+          corrfi6p.SetCounter(_c[corrsp]);
+          Correlators.push_back(corrfi6p);
         }
       }
 
@@ -587,17 +639,14 @@ namespace Rivet {
       
       //Correlator corr = Correlators[0];
 
-      //for(auto pTrig : pfs.particles()) <- real one to use
-      for(auto pTrig : cfs.particles())
+      for(auto pTrig : pfs.particles())
+      //for(auto pTrig : cfs.particles())
       {
         for (Correlator &corr : Correlators)
         {
-          if (!corr.CheckCollSystemAndEnergy(CollSystem))
-            continue;
-          if (!corr.CheckCentrality(c))
-            continue;
-          if (!corr.CheckTriggerRange(pTrig.pT() / GeV))
-            continue;
+          if (!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+          if (!corr.CheckCentrality(c)) continue;
+          if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
           corr.AddTrigger();
         }
         for (auto pAssoc : cfs.particles())
@@ -608,7 +657,7 @@ namespace Rivet {
             if (!corr.CheckCentrality(c)) continue;
             if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
             if (!corr.CheckAssociatedRange(pAssoc.pT() / GeV)) continue;
-            if (!corr.CheckXiRange(pAssoc.pT() / GeV)) continue;
+            if (!corr.CheckXiRange(log(pTrig.pT()/ pAssoc.pT()))) continue;
             corr.AddCorrelation(pTrig, pAssoc);
           }
         }
@@ -633,7 +682,7 @@ namespace Rivet {
       // normalize(_h["XXXX"]); // normalize to unity
       // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
-
+      
     }
 
     //@}
@@ -646,10 +695,10 @@ namespace Rivet {
     map<string, CounterPtr> _c;
     //@}
 
-  vector<Correlator> Correlators;
+    vector<Correlator> Correlators;
 
-  enum CollisionSystem {pp, AuAu, dAu};
-  CollisionSystem collSys;
+    enum CollisionSystem {pp, AuAu, dAu};
+    CollisionSystem collSys;
   };
 
 
@@ -657,4 +706,3 @@ namespace Rivet {
   DECLARE_RIVET_PLUGIN(PHENIX_2020_I1798493);
 
 }
-
