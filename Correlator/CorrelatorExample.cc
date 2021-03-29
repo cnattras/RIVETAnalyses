@@ -31,10 +31,9 @@ namespace Rivet {
       vector<int> _pid;
       bool _noCentrality = false;
       bool _noAssoc = false;
-      int _nTriggers = 0;
-      int _nEvents = 0;
       Histo1DPtr _deltaPhi;
       CounterPtr _counter;
+      CounterPtr _cTriggers;
 
     public:
 
@@ -64,6 +63,7 @@ namespace Rivet {
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
       void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
       void SetCounter(CounterPtr c){ _counter = c; }
+      void SetTriggerCounter(CounterPtr c){ _cTriggers = c; }
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -106,7 +106,6 @@ namespace Rivet {
       void AddWeight()
       {
               _counter->fill();
-              _nEvents++;
       }
 
       int GetIndex(int i){ return _indices[i]; }
@@ -123,12 +122,12 @@ namespace Rivet {
 
       void AddTrigger()
       {
-              _nTriggers++;
+              _cTriggers->fill();
       }
 
       void Normalize(double weight = 1.)
       {
-              if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
+              if(_cTriggers->effNumEntries()*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_counter->effNumEntries())/(_cTriggers->effNumEntries()*_counter->sumW()));
       }
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
@@ -402,6 +401,7 @@ namespace Rivet {
 
 	book(_h["DeltaPhi"], "DeltaPhi", 36, -M_PI/2., 1.5*M_PI);
 	book(_c["sow_AuAu200"], "sow_AuAu200");
+        book(_c["nTriggers"], "nTriggers");
 
 	Correlator corr(1);
 	corr.SetCollSystemAndEnergy("AuAu200GeV");
@@ -410,6 +410,7 @@ namespace Rivet {
 	corr.SetAssociatedRange(0.5, 1.);
 	corr.SetCorrelationFunction(_h["DeltaPhi"]);
 	corr.SetCounter(_c["sow_AuAu200"]);
+        corr.SetTriggerCounter(_c["nTriggers"]);
 	Correlators.push_back(corr);
 
 
@@ -475,6 +476,31 @@ namespace Rivet {
 
       bool AuAu200_available = false;
       bool pp_available = false;
+
+      for (auto element : _c)
+      {
+              string name = element.second->name();
+              if (name.find("AuAu") != std::string::npos)
+              {
+                      if (element.second->sumW()>0) AuAu_available=true;
+                      else
+                      {
+                              AuAu_available=false;
+                              break;
+                      }
+              }
+              else if (name.find("pp") != std::string::npos)
+              {
+                      if (element.second->sumW()>0) pp_available=true;
+                      else
+                      {
+                              pp_available=false;
+                              break;
+                      }
+              }
+      }
+
+      if((!pp_available) || (!AuAu_available)) return;
 
       for(Correlator& corr : Correlators)
       {
