@@ -474,7 +474,7 @@ namespace Rivet {
 
     void finalize() {
 
-      bool AuAu200_available = false;
+      bool AuAu_available = false;
       bool pp_available = false;
       /*
       for (auto element : _c)
