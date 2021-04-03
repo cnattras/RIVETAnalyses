@@ -283,30 +283,31 @@ namespace Rivet {
 			switch (p.pid()) {
 			case 310: // K0S
 			{
-				hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				
 				//if(getDeltaPt(*hInvariantPTK0S->second, partPt, deltaPt)) {
                         	//pt_weight /= deltaPt;
                         	//hInvariantPTK0S->second->fill(partPt, pt_weight);
                     		//}
                     			
 				hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTK0S["pT_K0S_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTK0S["pT_K0S_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
 				hInvariantPTK0S["pT_K0S_pp_full"]->fill(partPt, pt_weight);
-				hInvariantPTK0S["pT_K0S_pp_low"]->fill(partPt, pt_weight);
-				hInvariantPTK0S["pT_K0S_pp_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTK0S["pT_K0S_pp_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTK0S["pT_K0S_pp_high"]->fill(partPt, pt_weight);
 				
 				break;
 			}
 			case 3122: // Lambda
 			{
-				hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTLambda["pT_Lambda_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTLambda["pT_Lambda_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTLambda["pT_Lambda_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
 				hInvariantPTLambda["pT_Lambda_pp_full"]->fill(partPt, pt_weight);
-				hInvariantPTLambda["pT_Lambda_pp_low"]->fill(partPt, pt_weight);
-				hInvariantPTLambda["pT_Lambda_pp_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTLambda["pT_Lambda_pp_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTLambda["pT_Lambda_pp_high"]->fill(partPt, pt_weight);
 				
 				break;
 			}
@@ -320,25 +321,25 @@ namespace Rivet {
 			switch (p.pid()) {
 			case 3312: // Xi-
 			{
-				hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
 				hInvariantPTXi["pT_Xi_pp_full"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pp_low"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pp_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTXi["pT_Xi_pp_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTXi["pT_Xi_pp_high"]->fill(partPt, pt_weight);
 				
 				break;
 			}
 			case -3312: // Xi+
 			{
-				hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTXi["pT_Xi_pp_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pp_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTXi["pT_Xi_pp_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
 				hInvariantPTXi["pT_Xi_pp_full"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pp_low"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pp_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0) hInvariantPTXi["pT_Xi_pp_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0) hInvariantPTXi["pT_Xi_pp_high"]->fill(partPt, pt_weight);
 				
 				break;
 			}
@@ -373,31 +374,31 @@ namespace Rivet {
 			switch (p.pid()) {
 			case 310: // K0S
 			{
-				hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
 	
-				hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"]->fill(partPt);
-				hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"]->fill(partPt);
-				hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"]->fill(partPt);
+				//hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"]->fill(partPt);
+				//hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"]->fill(partPt);
+				//hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"]->fill(partPt);
 				
-				hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() < -1.3001)hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
+				if(p.rap() > 1.2999)hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
 	
 				hInvariantPTK0S["pT_K0S_pPB_full"]->fill(partPt, pt_weight);
-				hInvariantPTK0S["pT_K0S_pPB_low"]->fill(partPt, pt_weight);
-				hInvariantPTK0S["pT_K0S_pPB_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTK0S["pT_K0S_pPB_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTK0S["pT_K0S_pPB_high"]->fill(partPt, pt_weight);
 				
-				hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"]->fill(partPt, pt_weight);
-				hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -1.3001)hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 1.2999)hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"]->fill(partPt, pt_weight);
 				
 				break;
 			}
@@ -407,27 +408,27 @@ namespace Rivet {
 				hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
 				hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
 	
-				hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"]->fill(partPt);
-				hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"]->fill(partPt);
-				hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"]->fill(partPt);
+				//hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"]->fill(partPt);
+				//hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"]->fill(partPt);
+				//hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"]->fill(partPt);
 				
-				hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() < -1.3001)hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
+				if(p.rap() > 1.2999)hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
 	
 				hInvariantPTLambda["pT_Lambda_pPB_full"]->fill(partPt, pt_weight);
-				hInvariantPTLambda["pT_Lambda_pPB_low"]->fill(partPt, pt_weight);
-				hInvariantPTLambda["pT_Lambda_pPB_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTLambda["pT_Lambda_pPB_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTLambda["pT_Lambda_pPB_high"]->fill(partPt, pt_weight);
 				
-				hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"]->fill(partPt, pt_weight);
-				hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -1.3001)hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 1.2999)hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"]->fill(partPt, pt_weight);
 				
 				break;
 			}
@@ -441,47 +442,47 @@ namespace Rivet {
 			switch (p.pid()) {
 			case 3312: // Xi-
 			{
-				hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
-				hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->fill(partPt);
-				hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->fill(partPt);
-				hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->fill(partPt);
+				//hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->fill(partPt);
+				//hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->fill(partPt);
+				//hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->fill(partPt);
 				
 				hInvariantPTXi["pT_Xi_pPB_full"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
 				
-				h["negative_charged_yCM_low"]->fill(partPt);
-				h["positive_charged_yCM_low"]->fill(partPt);
-				h["negative_charged_yCM_mid"]->fill(partPt);
-				h["positive_charged_yCM_mid"]->fill(partPt);
-				h["negative_charged_yCM_high"]->fill(partPt);
-				h["positive_charged_yCM_high"]->fill(partPt);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
+				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
 				break;
 			}
 			case -3312: // Xi+
 			{
-				hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->fill(partPt, pt_weight);
 				hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->fill(partPt, pt_weight);
 				
-				hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->fill(partPt);
-				hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->fill(partPt);
-				hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->fill(partPt);
+				//hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->fill(partPt);
+				//hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->fill(partPt);
+				//hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->fill(partPt);
 				
 				hInvariantPTXi["pT_Xi_pPB_full"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
-				hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
+				if(p.rap() < 0)hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
+				if(p.rap() > 0)hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
 				
-				h["negative_charged_yCM_low"]->fill(partPt);
-				h["positive_charged_yCM_low"]->fill(partPt);
-				h["negative_charged_yCM_mid"]->fill(partPt);
-				h["positive_charged_yCM_mid"]->fill(partPt);
-				h["negative_charged_yCM_high"]->fill(partPt);
-				h["positive_charged_yCM_high"]->fill(partPt);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
+				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
 				break;
 			}
@@ -490,16 +491,16 @@ namespace Rivet {
 				
 				hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
 
-				hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->fill(partPt);
+				//hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->fill(partPt);
 				
 				hInvariantPTOmega["pT_Omega_pPB_full"]->fill(partPt, pt_weight);
 				
-				h["negative_charged_yCM_low"]->fill(partPt);
-				h["positive_charged_yCM_low"]->fill(partPt);
-				h["negative_charged_yCM_mid"]->fill(partPt);
-				h["positive_charged_yCM_mid"]->fill(partPt);
-				h["negative_charged_yCM_high"]->fill(partPt);
-				h["positive_charged_yCM_high"]->fill(partPt);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
+				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
 				break;
 			}
@@ -508,16 +509,16 @@ namespace Rivet {
 				
 				hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->fill(partPt, pt_weight);
 
-				hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->fill(partPt);
+				//hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->fill(partPt);
 				
 				hInvariantPTOmega["pT_Omega_pPB_full"]->fill(partPt, pt_weight);
 				
-				h["negative_charged_yCM_low"]->fill(partPt);
-				h["positive_charged_yCM_low"]->fill(partPt);
-				h["negative_charged_yCM_mid"]->fill(partPt);
-				h["positive_charged_yCM_mid"]->fill(partPt);
-				h["negative_charged_yCM_high"]->fill(partPt);
-				h["positive_charged_yCM_high"]->fill(partPt);
+				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
+				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
 				break;
 			}
@@ -584,75 +585,73 @@ namespace Rivet {
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_low"]->scaleW(1. / sow["sow_pp"]->sumW());
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTXi["pT_Xi_pp_high"]->scaleW(1. / sow["sow_pp"]->sumW());
 
-//	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<0"]->scaleW(1. / sow["sow_pp"]->sumW());
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());
-//	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_0<yCM<1.8"]->scaleW(1. / sow["sow_pp"]->sumW());	
 		
 	if(sow["sow_pp"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pp_full"]->scaleW(1. / sow["sow_pp"]->sumW());
 				
 		
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_K0S_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_K0S_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 			
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTK0S["pT_K0S_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Lambda_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Lambda_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTLambda["pT_Lambda_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBFullyCM["RpPB_Xi_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBLowyCM["RpPB_Xi_-1.8<yCM<0"]->scaleW(1. / sow["sow_pPB"]->sumW());
 //	if(sow["sow_pPB"]->sumW() > 0) hRpPBHighyCM["RpPB_Xi_0<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTXi["pT_Xi_pPB_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-//	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	hInvariantPTOmega["pT_Omega_pPB_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 
 //	hRpPBFullyCM["RpPB_Omega_-1.8<yCM<1.8"]->scaleW(1. / sow["sow_pPB"]->sumW());
 				
-//	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
-//	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_low"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_mid"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["negative_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) h["positive_charged_yCM_high"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
-//	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
+	if(sow["sow_pPB"]->sumW() > 0) hInvariantPTOmega["pT_Omega_pPB_full"]->scaleW(1. / sow["sow_pPB"]->sumW());
 	
 //	//Figure 2 Y scalings
 //	//hInvariantPTK0S["pT_K0S_pp_-1.8<yCM<0"]->scaleY(10.0);
