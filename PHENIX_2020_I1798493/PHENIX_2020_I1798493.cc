@@ -363,7 +363,7 @@ namespace Rivet {
         corrfi4bd.SetXiRange(xilower,xiupper);
     	  corrfi4bd.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4bd.SetCounter(_c[corrd]);
-        corrfi4bd.SetCounter(_c[corrd+"_Triggers"]);
+        corrfi4bd.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4bd);
         Correlator corrfi4bp(1);
         corrfi4bp.SetCollSystemAndEnergy("pp200GeV");
@@ -491,7 +491,7 @@ namespace Rivet {
         corrfig2.SetXiRange(xilow,xiup);
     	  corrfig2.SetCorrelationFunction(_h[corrs2]);
 	      corrfig2.SetCounter(_c[corrs]);
-              corrfig2.SetTriggerCounter(_c[corrs+"_Triggers"]);
+        corrfig2.SetTriggerCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig2);
       };
 
@@ -525,7 +525,7 @@ namespace Rivet {
         corrfig3.SetXiRange(xilow,xiup);
     	  corrfig3.SetCorrelationFunction(_h[corrs2]);
 	      corrfig3.SetCounter(_c[corrs]);
-        corrfig3.SetCounter(_c[corrs+"_Triggers"]);
+        corrfig3.SetTriggerCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig3);
       };
 
