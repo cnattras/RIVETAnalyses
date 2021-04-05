@@ -30,6 +30,7 @@ namespace Rivet {
       // the given eta acceptance
        
         const FinalState fs(Cuts::abseta < 4.9);//The cut is for particles we want thus <5 correponds to particles with 5 GeV or less.
+//        const FinalState fs(Cuts::pT > 5*Gev);
         declare(fs, "fs");
 
 
@@ -53,7 +54,8 @@ namespace Rivet {
         book(_h["CSPPt2"], "CSPPt2", pTedges);
         book(_h["CSAntiPPt2"], "CSAntiPPt2", pTedges);
 
-        book(_h["CrsSecPI+"], 1, 1, 1);
+        
+        book(_h["CrsSecPI-"], 1, 1, 1);
         book(_h["CrsSecPI-"], 2, 1, 1);
         book(_h["CrsSecK+"], 3, 1, 1);
         book(_h["CrsSecK-"], 4, 1, 1);
