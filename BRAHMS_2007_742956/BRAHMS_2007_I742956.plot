@@ -1,8 +1,12 @@
 BEGIN PLOT /BRAHMS_2007_I742956/d01-x01-y01
-Title=[Insert title for histogram d01-x01-y01 here]
-XLabel=[Insert $x$-axis label for histogram d01-x01-y01 here]
-YLabel=[Insert $y$-axis label for histogram d01-x01-y01 here]
-# + any additional plot settings you might like, see make-plots documentation
+
+Title=Invariant Differential Cross Sections (PI$+$)
+XLabel=$p_{T}$ (GeV)
+YLabel= \frac{1}{2\pi\p_{T}}\frac{d^2\sigma}{dp_{T}dy} \left[\frac{mb}{Gev^2}\right]$
 END PLOT
 
-# ... add more histograms as you need them ...
+BEGIN PLOT /BRAHMS_2007_I742956/PTDist:
+Title= $p_T$ Distribution
+XLabel=$p_T$ (Gev)
+YLabel= Counts
+END PLOT

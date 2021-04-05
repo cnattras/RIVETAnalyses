@@ -28,16 +28,16 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-//        const FinalState fs(Cuts::abseta > 5.0);
-        
-        const PromptFinalState pfs(Cuts::pT > 5.0);
-              declare(pfs, "pfs");
+       
+        const FinalState fs(Cuts::abseta < 4.9);//The cut is for particles we want thus <5 correponds to particles with 5 GeV or less.
+        declare(fs, "fs");
 
-          // Book histograms
-          // specify custom binning
+
         vector<double> pTedges{0.35, 0.4, 0.45, 0.5, 0.55, .6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2.0, 2.2, 2.4, 2.6, 3.0, 3.4, 3.8, 4.2, 5.2};
+        
+        book(_h["PtDist"], "pTDist", 100, 0.0, 5.0);
 
-        //First rapidity y = 2.95
+//        First rapidity y = 2.95
         book(_h["CSPi+Pt"], "CSPi+Pt", pTedges);
         book(_h["CSPi-Pt"], "CSPi-Pt", pTedges);
         book(_h["CSK+Pt"], "CSK+Pt", pTedges);
@@ -45,15 +45,14 @@ namespace Rivet {
         book(_h["CSPPt"], "CSPPt", pTedges);
         book(_h["CSAntiPPt"], "CSAntiPPt", pTedges);
         
+//        //Second rapidity y =3.3
         book(_h["CSPi+Pt2"], "CSPi+Pt2", pTedges);
         book(_h["CSPi-Pt2"], "CSPi-Pt2", pTedges);
         book(_h["CSK+Pt2"], "CSK+Pt2", pTedges);
         book(_h["CSK-Pt2"], "CSK-Pt2", pTedges);
         book(_h["CSPPt2"], "CSPPt2", pTedges);
         book(_h["CSAntiPPt2"], "CSAntiPPt2", pTedges);
-    
-        
-        //Second rapidity y =3.3
+
         book(_h["CrsSecPI+"], 1, 1, 1);
         book(_h["CrsSecPI-"], 2, 1, 1);
         book(_h["CrsSecK+"], 3, 1, 1);
@@ -74,27 +73,33 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-        Particles pfsParticles = applyProjection<FinalState>(event,"pfs").particles();
+        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
 
-        for(const Particle& p : pfsParticles) //Particle Looping
+        for(const Particle& p : fsParticles)   //Particle Looping
         {
+
+            
+            double partPt = p.pT() / GeV;
+            
+            _h["PtDist"]->fill(partPt);
+            
             if((abs(p.rapidity())/GeV<3.0)&&(abs(p.rapidity())/GeV<2.9)){ // Interested in regions near 2.95
                 if(p.pid() == 211) _h["CSPi+Pt"]->fill(p.pT()/GeV); //Pion
                 if(p.pid() == -211) _h["CSPi-Pt"]->fill(p.pT()/GeV);
-                
+
                 if(p.pid() == 321) _h["CSK+Pt"]->fill(p.pT()/GeV); //Kaon
                 if(p.pid() == -321) _h["CSK-Pt"]->fill(p.pT()/GeV);
-                
+
                 if(p.pid() == 2212) _h["CSPPt"]->fill(p.pT()/GeV); //Pion
                 if(p.pid() == -2212) _h["CSAntiPPt"]->fill(p.pT()/GeV);
             }
             if((abs(p.rapidity())/GeV<3.35)&&(abs(p.rapidity())/GeV<3.25)){ // Interested in regions near 2.95
                 if(p.pid() == 211) _h["CSPi+Pt2"]->fill(p.pT()/GeV); //Pion
                 if(p.pid() == -211) _h["CSPi-Pt2"]->fill(p.pT()/GeV);
-                
+
                 if(p.pid() == 321) _h["CSK+Pt2"]->fill(p.pT()/GeV); //Kaon
                 if(p.pid() == -321) _h["CSK-Pt2"]->fill(p.pT()/GeV);
-                
+
                 if(p.pid() == 2212) _h["CSPPt2"]->fill(p.pT()/GeV); //Pion
                 if(p.pid() == -2212) _h["CSAntiPPt2"]->fill(p.pT()/GeV);
             }
@@ -107,7 +112,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 //
-//      normalize(_h["XXXX"]); // normalize to unity
+//      normalize(_h["PtDist"]); // normalize to unity
 //      normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
 //      scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
