@@ -665,8 +665,8 @@ namespace Rivet {
 
       //Correlator corr = Correlators[0];
 
-      //for(auto pTrig : pfs.particles())
-      for(auto pTrig : cfs.particles())
+      for(auto pTrig : pfs.particles())
+      //for(auto pTrig : cfs.particles())
       {
         for (Correlator &corr : Correlators)
         {
