@@ -216,10 +216,10 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      //const FinalState fs(Cuts::abseta < 4.9);
      
 	//fig 6 
-      book(_h["XXXXX"], "myh1", 20, 0.0, 100.0);
+      //book(_h["XXXXX"], "myh1", 20, 0.0, 100.0);
       /*book(_h["pi0Sepctra0To10V2"], 1, 1, 1);
       book(_h["pi0Spectra10to20V2"],1,1,2);
       book(_h["pi0Spectra20to30V2"],1,1,3);
@@ -1260,6 +1260,66 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+    const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      //add calculation of reaction plane angle
+      const double c = cent();
+      const ParticlePair& beam = beams();
+      string CollSystem = "Empty";
+
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          CollSystem = "AUAU200GeV";
+          //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
+      }
+      
+      if(CollSystem == "AUAU200GeV" && c > 50)
+      {
+        vetoEvent;
+      }
+
+      //cout << c << endl;
+      for(Correlator& corr : Correlators)
+      {
+        if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+        if(!corr.CheckCentrality(c)) continue;
+        corr.AddWeight();
+      }
+
+      //Correlator corr = Correlators[0];
+
+      for(auto pTrig : cfs.particles())
+      {
+        for (Correlator &corr : Correlators)
+        {
+          if (!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+          if (!corr.CheckCentrality(c)) continue;
+          //cout << "hi" << '\n';
+          if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
+            ///Add a function to check reaction plane angle and make sure that the 
+            //if (!corr.CheckXiRange(log(pTrig.pT()/ pAssoc.pT()))) continue;
+          //somthing here is stoping the pp
+          //cout << c << '\n';
+          //cout << "hi" << '\n';
+          corr.AddTrigger();
+        }
+        for (auto pAssoc : cfs.particles())
+        {
+          for (Correlator &corr : Correlators)
+          {
+            if (!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
+            if (!corr.CheckCentrality(c)) continue;
+            if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
+            if (!corr.CheckAssociatedRange(pAssoc.pT() / GeV)) continue;
+            ///Add a function to check reaction plane angle and make sure that the 
+            //if (!corr.CheckXiRange(log(pTrig.pT()/ pAssoc.pT()))) continue;
+            corr.AddCorrelation(pTrig, pAssoc);
+          }
+        }
+      }
+
+
 
     }
 
