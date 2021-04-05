@@ -22,6 +22,7 @@ namespace Rivet {
 	pair<int,int> _RxnPlaneAngleRange;
       vector<int> _pid;
 	int _RxnPlaneAngle = 0;
+	int _eventPlaneMethod = 0;
       bool _noCentrality = false;
       bool _noAssoc = false;
 	int _nTriggers = 0;
@@ -58,7 +59,8 @@ namespace Rivet {
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
 	void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
 	void SetCounter(CounterPtr c){ _counter = c; }
-	void SetRxnPlaneAngle(int rxnMin, int rxnMax){ _RxnPlaneAngleRange = make_pair(rxnMin,rxnMax); } 
+	void SetRxnPlaneAngle(int rxnMin, int rxnMax){ _RxnPlaneAngleRange = make_pair(rxnMin,rxnMax); }
+	void SetEventPlaneMethod (int eventPlane) { _eventPlaneMethod = eventPlane; } 
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -71,6 +73,7 @@ namespace Rivet {
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
 	pair<int,int> GetRxnPlaneAngle() { return _RxnPlaneAngleRange; }
+	int GetEventPlaneMethod() { return _eventPlaneMethod; }
       vector<int> GetPID(){ return _pid; }
 	double GetWeight(){ return _counter->sumW(); }
 	Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
@@ -437,9 +440,36 @@ namespace Rivet {
         book(_h["40to50_-pi/8<phi-Psi2<0"],9,1,20);*/
 
 	//initialize iterators and varibles
-	int minCent=0, maxCent=0, a=0, iterator=1;
+	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
 	float min_pT=0, max_pT=0, min_pA=0, max_pA=0, minV=0, maxV=0, b=0, c=0, d=0;
 	char corrName[200], bookName[200];
+
+	//fig 6
+	minCent=0, maxCent=40, minPlane=2, maxPlane=5;
+	for(e=minPlane; e<=maxPlane; e++){
+		for(a=minCent; a<=maxCent; a+=10){
+			if(e!=5){
+				snprintf(corrName,200,"CounterFig6EventPlane%iCent%iTo%i",e,a,a+10);
+				snprintf(bookName,200,"Fig6EventPlane%iCent%iTo%i",e,a,a+10);
+			}
+			else{
+				snprintf(corrName,200,"CounterFig6EventPlane%i{Psi2}Cent%iTo%i",e,a,a+10);
+				snprintf(bookName,200,"Fig6EventPlane%i{Psi2}Cent%iTo%i",e,a,a+10);
+			}
+			book(_h[bookName],1,1,iterator);
+			book(_c[corrName], corrName);
+			
+			Correlator corrFig6(a,e);
+                        corrFig6.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig6.SetCentrality(a,a+10);
+                        corrFig6.SetEventPlaneMethod(e);
+                        corrFig6.SetCorrelationFunction(_h[bookName]);
+                        corrFig6.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig6);
+                        iterator++;
+		}
+	}
+	iterator=1;
 
 	//fig 12
 	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=0.5, max_pA=4, minV=1, maxV=1;
@@ -616,9 +646,9 @@ namespace Rivet {
         }
         iterator=1;
 
-/*	//Fig23
-	minCent=0, maxCent=40, min_pT=1, max_pT=1, min_pA=0.5, max_pA=0.5, minV=-4, maxV=-1;
-        b=4,c=1;
+	//Fig23
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
 	for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
 			snprintf(corrName,200,
@@ -643,7 +673,7 @@ namespace Rivet {
         iterator=1;	
 	
 	//Fig 24
-	minCent=0, maxCent=40, min_pT=1, max_pT=1, min_pA=0.5, max_pA=0.5, minV=-4, maxV=-1;
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
         b=2,c=2;
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
@@ -666,7 +696,564 @@ namespace Rivet {
                 }
         }
         iterator=1;
-*/
+
+	//Fig 25
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig25Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig25Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],10,1,iterator);
+                        Correlator corrFig25(a,d);
+                        corrFig25.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig25.SetCentrality(a,a+10);
+                        corrFig25.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig25.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig25.SetRxnPlaneAngle(d,d+1);
+                        corrFig25.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig25);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Fig 26
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig26Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig26Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],11,1,iterator);
+                        Correlator corrFig26(a,d);
+                        corrFig26.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig26.SetCentrality(a,a+10);
+                        corrFig26.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig26.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig26.SetRxnPlaneAngle(d,d+1);
+                        corrFig26.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig26);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Fig 27
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig27Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig27Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],12,1,iterator);
+                        Correlator corrFig27(a,d);
+                        corrFig27.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig27.SetCentrality(a,a+10);
+                        corrFig27.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig27.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig27.SetRxnPlaneAngle(d,d+1);
+                        corrFig27.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig27);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Fig 28
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig28Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig28Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],13,1,iterator);
+                        Correlator corrFig28(a,d);
+                        corrFig28.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig28.SetCentrality(a,a+10);
+                        corrFig28.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig28.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig28.SetRxnPlaneAngle(d,d+1);
+                        corrFig28.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig28);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Fig 29
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig29Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig29Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],14,1,iterator);
+                        Correlator corrFig29(a,d);
+                        corrFig29.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig29.SetCentrality(a,a+10);
+                        corrFig29.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig29.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig29.SetRxnPlaneAngle(d,d+1);
+                        corrFig29.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig29);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Fig 30
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig30Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig30Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],15,1,iterator);
+                        Correlator corrFig30(a,d);
+                        corrFig30.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig30.SetCentrality(a,a+10);
+                        corrFig30.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig30.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig30.SetRxnPlaneAngle(d,d+1);
+                        corrFig30.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig30);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Fig 31
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig31Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig31Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],16,1,iterator);
+                        Correlator corrFig31(a,d);
+                        corrFig31.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig31.SetCentrality(a,a+10);
+                        corrFig31.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig31.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig31.SetRxnPlaneAngle(d,d+1);
+                        corrFig31.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig31);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Fig 32
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig32Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig32Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],17,1,iterator);
+                        Correlator corrFig32(a,d);
+                        corrFig32.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig32.SetCentrality(a,a+10);
+                        corrFig32.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig32.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig32.SetRxnPlaneAngle(d,d+1);
+                        corrFig32.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig32);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Fig 33
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig33Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig33Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],18,1,iterator);
+                        Correlator corrFig33(a,d);
+                        corrFig33.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig33.SetCentrality(a,a+10);
+                        corrFig33.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig33.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig33.SetRxnPlaneAngle(d,d+1);
+                        corrFig33.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig33);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Fig 34
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig34Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig34Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],19,1,iterator);
+                        Correlator corrFig34(a,d);
+                        corrFig34.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig34.SetCentrality(a,a+10);
+                        corrFig34.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig34.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig34.SetRxnPlaneAngle(d,d+1);
+                        corrFig34.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig34);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi2_Cor2-4x1-2GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig35Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig35Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],20,1,iterator);
+                        Correlator corrFig35(a,d);
+                        corrFig35.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig35.SetCentrality(a,a+10);
+                        corrFig35.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig35.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig35.SetRxnPlaneAngle(d,d+1);
+                        corrFig35.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig35);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Psi2_Cor2-4x2-4GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig36Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig36Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],21,1,iterator);
+                        Correlator corrFig36(a,d);
+                        corrFig36.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig36.SetCentrality(a,a+10);
+                        corrFig36.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig36.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig36.SetRxnPlaneAngle(d,d+1);
+                        corrFig36.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig36);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi2_Cor4-10x2-4GeV
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig37Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig37Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],22,1,iterator);
+                        Correlator corrFig37(a,d);
+                        corrFig37.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig37.SetCentrality(a,a+10);
+                        corrFig37.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig37.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig37.SetRxnPlaneAngle(d,d+1);
+                        corrFig37.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig37);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Psi2_PTY2-4x1-2GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],23,1,iterator);
+                        Correlator corrFig38(a,d);
+                        corrFig38.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig38.SetCentrality(a,a+10);
+                        corrFig38.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig38.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig38.SetRxnPlaneAngle(d,d+1);
+                        corrFig38.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig38);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi2_PTY2-4x2-4GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],24,1,iterator);
+                        Correlator corrFig38(a,d);
+                        corrFig38.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig38.SetCentrality(a,a+10);
+                        corrFig38.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig38.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig38.SetRxnPlaneAngle(d,d+1);
+                        corrFig38.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig38);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Psi2_PTY4-10x2-4GeV
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig39Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig39Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],25,1,iterator);
+                        Correlator corrFig39(a,d);
+                        corrFig39.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig39.SetCentrality(a,a+10);
+                        corrFig39.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig39.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig39.SetRxnPlaneAngle(d,d+1);
+                        corrFig39.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig39);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi3_Cor2-4x1-2GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig(40)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig(40)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],26,1,iterator);
+                        Correlator corrFig40(a,d);
+                        corrFig40.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig40.SetCentrality(a,a+10);
+                        corrFig40.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig40.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig40.SetRxnPlaneAngle(d,d+1);
+                        corrFig40.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig40);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi3_Cor2-4x2-4GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig(41)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig(41)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],27,1,iterator);
+                        Correlator corrFig41(a,d);
+                        corrFig41.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig41.SetCentrality(a,a+10);
+                        corrFig41.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig41.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig41.SetRxnPlaneAngle(d,d+1);
+                        corrFig41.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig41);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi3_Cor4-10x2-4GeV
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig(42)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig(42)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],28,1,iterator);
+                        Correlator corrFig42(a,d);
+                        corrFig42.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig42.SetCentrality(a,a+10);
+                        corrFig42.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig42.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig42.SetRxnPlaneAngle(d,d+1);
+                        corrFig42.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig42);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+
+	//Psi3_PTY2-4x1-2GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
+        b=2,c=1;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig(43)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig(43)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],29,1,iterator);
+                        Correlator corrFig43(a,d);
+                        corrFig43.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig43.SetCentrality(a,a+10);
+                        corrFig43.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig43.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig43.SetRxnPlaneAngle(d,d+1);
+                        corrFig43.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig43);
+                        iterator++;
+                }
+        }
+        iterator=1;
+
+	//Psi3_PTY2-4x2-4GeV
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=2,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig(44)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig(44)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],30,1,iterator);
+                        Correlator corrFig44(a,d);
+                        corrFig44.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig44.SetCentrality(a,a+10);
+                        corrFig44.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig44.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig44.SetRxnPlaneAngle(d,d+1);
+                        corrFig44.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig44);
+                        iterator++;
+                }
+        }
+        iterator=1;
+	
+
+	//Psi3_PTY4-10x2-4GeV
+	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        b=4,c=2;
+        for(a=minCent; a<=maxCent; a+=10){
+                for(d=minV; d<=maxV; d++){
+                        snprintf(corrName,200,
+                                "CounterFig(45)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                        snprintf(bookName,200,
+                                "Fig(45)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                        book(_h[bookName],31,1,iterator);
+                        Correlator corrFig45(a,d);
+                        corrFig45.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig45.SetCentrality(a,a+10);
+                        corrFig45.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig45.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig45.SetRxnPlaneAngle(d,d+1);
+                        corrFig45.SetCounter(_c[corrName]);
+                        Correlators.push_back(corrFig45);
+                        iterator++;
+                }
+        }
+        iterator=1;
 
     }
 
