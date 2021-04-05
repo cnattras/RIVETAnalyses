@@ -373,7 +373,7 @@ namespace Rivet {
         corrfi4bp.SetXiRange(xilower,xiupper);
     	  corrfi4bp.SetCorrelationFunction(_h[corrp2]);
 	      corrfi4bp.SetCounter(_c[corrp]);
-        corrfi4bp.SetCounter(_c[corrp+"_Triggers"]);
+        corrfi4bp.SetTriggerCounter(_c[corrp+"_Triggers"]);
         Correlators.push_back(corrfi4bp);
       }
 
