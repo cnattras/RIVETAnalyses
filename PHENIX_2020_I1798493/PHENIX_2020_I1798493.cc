@@ -307,17 +307,17 @@ namespace Rivet {
         corrfi4a.SetXiRange(xilower,xiupper);
     	  corrfi4a.SetCorrelationFunction(_h[corra2]);
 	      corrfi4a.SetCounter(_c[corra]);
-              corrfi4a.SetTriggerCounter(_c[corra+"_Triggers"]);
+        corrfi4a.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4a);
 	      Correlator corrfi4ad(1);
         corrfi4ad.SetCollSystemAndEnergy("dAU200GeV");
-    	  corrfi4ad.SetCentrality(0.,100.);
+    	  corrfi4ad.SetNoCentrality();
     	  corrfi4ad.SetTriggerRange(5., 9.);
 	      corrfi4ad.SetAssociatedRange(.5, 7.);
         corrfi4ad.SetXiRange(xilower,xiupper);
     	  corrfi4ad.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4ad.SetCounter(_c[corrd]);
-              corrfi4ad.SetTriggerCounter(_c[corrd+"_Triggers"]);
+        corrfi4ad.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4ad);
       }
       //fig 4 b
@@ -353,27 +353,27 @@ namespace Rivet {
         corrfi4b.SetXiRange(xilower,xiupper);
     	  corrfi4b.SetCorrelationFunction(_h[corra2]);
 	      corrfi4b.SetCounter(_c[corra]);
-              corrfi4b.SetTriggerCounter(_c[corra+"_Triggers"]);
+        corrfi4b.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4b);
         Correlator corrfi4bd(1);
         corrfi4bd.SetCollSystemAndEnergy("dAU200GeV");
-    	  corrfi4bd.SetCentrality(0.,100.);
+    	  corrfi4bd.SetNoCentrality();
     	  corrfi4bd.SetTriggerRange(5., 9.);
 	      corrfi4bd.SetAssociatedRange(.5, 7.);
         corrfi4bd.SetXiRange(xilower,xiupper);
     	  corrfi4bd.SetCorrelationFunction(_h[corrd2]);
 	      corrfi4bd.SetCounter(_c[corrd]);
-              corrfi4bd.SetCounter(_c[corrd+"_Triggers"]);
+        corrfi4bd.SetCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4bd);
         Correlator corrfi4bp(1);
         corrfi4bp.SetCollSystemAndEnergy("pp200GeV");
-    	  corrfi4bp.SetCentrality(0.,100.);
+    	  corrfi4bp.SetNoCentrality();
     	  corrfi4bp.SetTriggerRange(5., 9.);
 	      corrfi4bp.SetAssociatedRange(.5, 7.);
         corrfi4bp.SetXiRange(xilower,xiupper);
     	  corrfi4bp.SetCorrelationFunction(_h[corrp2]);
 	      corrfi4bp.SetCounter(_c[corrp]);
-              corrfi4bp.SetCounter(_c[corrp+"_Triggers"]);
+        corrfi4bp.SetCounter(_c[corrp+"_Triggers"]);
         Correlators.push_back(corrfi4bp);
       }
 
@@ -424,7 +424,7 @@ namespace Rivet {
         corrfig7less.SetXiRange(log(5./7.),1.2);
     	  corrfig7less.SetCorrelationFunction(_h[corrsless2]);
 	      corrfig7less.SetCounter(_c[corrsless]);
-              corrfig7less.SetTriggerCounter(_c[corrsless+"_Triggers"]);
+        corrfig7less.SetTriggerCounter(_c[corrsless+"_Triggers"]);
         Correlators.push_back(corrfig7less);
         Correlator corrfig7more(1);
         corrfig7more.SetCollSystemAndEnergy("AUAU200GeV");
@@ -434,27 +434,27 @@ namespace Rivet {
         corrfig7more.SetXiRange(1.2,log(12./.5));
     	  corrfig7more.SetCorrelationFunction(_h[corrsmore2]);
 	      corrfig7more.SetCounter(_c[corrsmore]);
-              corrfig7more.SetTriggerCounter(_c[corrsmore+"_Triggers"]);
+        corrfig7more.SetTriggerCounter(_c[corrsmore+"_Triggers"]);
         Correlators.push_back(corrfig7more);
         Correlator corrfig7lessp(1);
         corrfig7lessp.SetCollSystemAndEnergy("pp200GeV");
-    	  corrfig7lessp.SetCentrality(0.,100.);
+    	  corrfig7lessp.SetNoCentrality();
     	  corrfig7lessp.SetTriggerRange(lower, upper);
 	      corrfig7lessp.SetAssociatedRange(.5, 7.);
         corrfig7lessp.SetXiRange(log(5./7.),1.2);
     	  corrfig7lessp.SetCorrelationFunction(_h[corrslessp2]);
 	      corrfig7lessp.SetCounter(_c[corrslessp]);
-              corrfig7lessp.SetTriggerCounter(_c[corrslessp+"_Triggers"]);
+        corrfig7lessp.SetTriggerCounter(_c[corrslessp+"_Triggers"]);
         Correlators.push_back(corrfig7lessp);
         Correlator corrfig7morep(1);
         corrfig7morep.SetCollSystemAndEnergy("pp200GeV");
-    	  corrfig7morep.SetCentrality(0.,100.);
+    	  corrfig7morep.SetNoCentrality();
     	  corrfig7morep.SetTriggerRange(lower, upper);
 	      corrfig7morep.SetAssociatedRange(.5, 7.);
         corrfig7morep.SetXiRange(1.2,log(12./.5));
     	  corrfig7morep.SetCorrelationFunction(_h[corrsmorep2]);
 	      corrfig7morep.SetCounter(_c[corrsmorep]);
-              corrfig7morep.SetTriggerCounter(_c[corrsmorep+"_Triggers"]);
+        corrfig7morep.SetTriggerCounter(_c[corrsmorep+"_Triggers"]);
         Correlators.push_back(corrfig7morep);
       }
 
@@ -519,13 +519,13 @@ namespace Rivet {
         book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig3(i+1);
         corrfig3.SetCollSystemAndEnergy("dAU200GeV");
-    	  corrfig3.SetCentrality(0.,100.);
+    	  corrfig3.SetNoCentrality();
     	  corrfig3.SetTriggerRange(tlow, tup);
 	      corrfig3.SetAssociatedRange(alow, aup);
         corrfig3.SetXiRange(xilow,xiup);
     	  corrfig3.SetCorrelationFunction(_h[corrs2]);
 	      corrfig3.SetCounter(_c[corrs]);
-              corrfig3.SetCounter(_c[corrs+"_Triggers"]);
+        corrfig3.SetCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig3);
       };
 
@@ -612,7 +612,7 @@ namespace Rivet {
           Correlators.push_back(corrfi6);
           Correlator corrfi6p(i+k+1);
           corrfi6p.SetCollSystemAndEnergy("pp200GeV");
-          corrfi6p.SetCentrality(0., 100.);
+          corrfi6p.SetNoCentrality();
           corrfi6p.SetTriggerRange(lower, upper);
           corrfi6p.SetAssociatedRange(alow, aup);
           corrfi6p.SetXiRange(xilower, xiupper);
@@ -654,6 +654,7 @@ namespace Rivet {
       {
         vetoEvent;
       }
+
       //cout << c << endl;
       for(Correlator& corr : Correlators)
       {
@@ -664,14 +665,18 @@ namespace Rivet {
 
       //Correlator corr = Correlators[0];
 
-      for(auto pTrig : pfs.particles())
-      //for(auto pTrig : cfs.particles())
+      //for(auto pTrig : pfs.particles())
+      for(auto pTrig : cfs.particles())
       {
         for (Correlator &corr : Correlators)
         {
           if (!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
           if (!corr.CheckCentrality(c)) continue;
+          //cout << "hi" << '\n';
           if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
+          //somthing here is stoping the pp
+          //cout << c << '\n';
+          //cout << "hi" << '\n';
           corr.AddTrigger();
         }
         for (auto pAssoc : cfs.particles())
