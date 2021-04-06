@@ -349,95 +349,6 @@ namespace Rivet {
         book(_h["FarSide40to50_2-4x1-2"],5,1,28);
         book(_h["FarSide40to50_2x4x2-4"],5,1,29);
         book(_h["FarSide40to50_4-10x2-4"],5,1,30);*/
-	//Fig 21
-	/*book(_h["0to10_4-10x0.5-1"],6,1,1);
-	book(_h["0to10_4-10x1-2"],6,1,2);
-	book(_h["0to10_4-10x2-4"],6,1,3);
-	book(_h["0to10_4-10x4-10"],6,1,4);
-	book(_h["10to20_4-10x0.5-1"],6,1,5);
-        book(_h["10to20_4-10x1-2"],6,1,6);
-        book(_h["10to20_4-10x2-4"],6,1,7);
-        book(_h["10to20_4-10x4-10"],6,1,8);
-	book(_h["20to30_4-10x0.5-1"],6,1,9);
-        book(_h["20to30_4-10x1-2"],6,1,10);
-        book(_h["20to30_4-10x2-4"],6,1,11);
-        book(_h["20to30_4-10x4-10"],6,1,12);
-	book(_h["30to40_4-10x0.5-1"],6,1,13);
-        book(_h["30to40_4-10x1-2"],6,1,14);
-        book(_h["30to40_4-10x2-4"],6,1,15);
-        book(_h["30to40_4-10x4-10"],6,1,16);
-	book(_h["40to50_4-10x0.5-1"],6,1,17);
-        book(_h["40to50_4-10x1-2"],6,1,18);
-        book(_h["40to50_4-10x2-4"],6,1,19);
-        book(_h["40to50_4-10x4-10"],6,1,20);*/
-	//Fig 22
-	/*book(_h["0to10_1-2x0.5-1"],7,1,1);
-	book(_h["0to10_1-2x1-2"],7,1,2);
-	book(_h["0to10_2-4x0.5-1"],7,1,3);
-	book(_h["0to10_2-4x1-2"],7,1,4);
-	book(_h["0to10_2-4x2-4"],7,1,5);
-	book(_h["10to20_1-2x0.5-1"],7,1,6);
-        book(_h["10to20_1-2x1-2"],7,1,7);
-        book(_h["10to20_2-4x0.5-1"],7,1,8);
-        book(_h["10to20_2-4x1-2"],7,1,9);
-        book(_h["10to20_2-4x2-4"],7,1,10);
-	book(_h["20to30_1-2x0.5-1"],7,1,11);
-        book(_h["20to30_1-2x1-2"],7,1,12);
-        book(_h["20to30_2-4x0.5-1"],7,1,13);
-        book(_h["20to30_2-4x1-2"],7,1,14);
-        book(_h["20to30_2-4x2-4"],7,1,15);
-	book(_h["30to40_1-2x0.5-1"],7,1,16);
-        book(_h["30to40_1-2x1-2"],7,1,17);
-        book(_h["30to40_2-4x0.5-1"],7,1,18);
-        book(_h["30to40_2-4x1-2"],7,1,19);
-        book(_h["30to40_2-4x2-4"],7,1,20);
-	book(_h["40to50_1-2x0.5-1"],7,1,21);
-        book(_h["40to50_1-2x1-2"],7,1,22);
-        book(_h["40to50_2-4x0.5-1"],7,1,23);
-        book(_h["40to50_2-4x1-2"],7,1,24);
-        book(_h["40to50_2-4x2-4"],7,1,25);*/
-	//Fig 23
-	/*book(_h["0to10_-4pi/8<phi-Psi2<-3pi/8"],8,1,1);
-	book(_h["0to10_-3pi.8<phi-Psi2<-2pi/8"],8,1,2);
-	book(_h["0to10_-2pi/8<phi-Psi2<-pi/8"],8,1,3);
-	book(_h["0to10_-pi/8<phi-Psi2<0"],8,1,4);
-	book(_h["10to20_-4pi/8<phi-Psi2<-3pi/8"],8,1,5);
-        book(_h["10to20_-3pi.8<phi-Psi2<-2pi/8"],8,1,6);
-        book(_h["10to20_-2pi/8<phi-Psi2<-pi/8"],8,1,7);
-        book(_h["10to20_-pi/8<phi-Psi2<0"],8,1,8);
-	book(_h["20to30_-4pi/8<phi-Psi2<-3pi/8"],8,1,9);
-        book(_h["20to30_-3pi.8<phi-Psi2<-2pi/8"],8,1,10);
-        book(_h["20to30_-2pi/8<phi-Psi2<-pi/8"],8,1,11);
-        book(_h["20to30_-pi/8<phi-Psi2<0"],8,1,12);
-	book(_h["30to40_-4pi/8<phi-Psi2<-3pi/8"],8,1,13);
-        book(_h["30to40_-3pi.8<phi-Psi2<-2pi/8"],8,1,14);
-        book(_h["30to40_-2pi/8<phi-Psi2<-pi/8"],8,1,15);
-        book(_h["30to40_-pi/8<phi-Psi2<0"],8,1,16);
-	book(_h["40to50_-4pi/8<phi-Psi2<-3pi/8"],8,1,17);
-        book(_h["40to50_-3pi.8<phi-Psi2<-2pi/8"],8,1,18);
-        book(_h["40to50_-2pi/8<phi-Psi2<-pi/8"],8,1,19);
-        book(_h["40to50_-pi/8<phi-Psi2<0"],8,1,20);*/
-	//Fig 24
-	/*book(_h["0to10_-4pi/8<phi-Psi2<-3pi/8"],9,1,1);
-        book(_h["0to10_-3pi.8<phi-Psi2<-2pi/8"],9,1,2);
-        book(_h["0to10_-2pi/8<phi-Psi2<-pi/8"],9,1,3);
-        book(_h["0to10_-pi/8<phi-Psi2<0"],9,1,4);
-        book(_h["10to20_-4pi/8<phi-Psi2<-3pi/8"],9,1,5);
-        book(_h["10to20_-3pi.8<phi-Psi2<-2pi/8"],9,1,6);
-        book(_h["10to20_-2pi/8<phi-Psi2<-pi/8"],9,1,7);
-        book(_h["10to20_-pi/8<phi-Psi2<0"],9,1,8);
-        book(_h["20to30_-4pi/8<phi-Psi2<-3pi/8"],9,1,9);
-        book(_h["20to30_-3pi.8<phi-Psi2<-2pi/8"],9,1,10);
-        book(_h["20to30_-2pi/8<phi-Psi2<-pi/8"],9,1,11);
-        book(_h["20to30_-pi/8<phi-Psi2<0"],9,1,12);
-        book(_h["30to40_-4pi/8<phi-Psi2<-3pi/8"],9,1,13);
-        book(_h["30to40_-3pi.8<phi-Psi2<-2pi/8"],9,1,14);
-        book(_h["30to40_-2pi/8<phi-Psi2<-pi/8"],9,1,15);
-        book(_h["30to40_-pi/8<phi-Psi2<0"],9,1,16);
-        book(_h["40to50_-4pi/8<phi-Psi2<-3pi/8"],9,1,17);
-        book(_h["40to50_-3pi.8<phi-Psi2<-2pi/8"],9,1,18);
-        book(_h["40to50_-2pi/8<phi-Psi2<-pi/8"],9,1,19);
-        book(_h["40to50_-pi/8<phi-Psi2<0"],9,1,20);*/
 
 	//initialize iterators and varibles
 	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
@@ -527,15 +438,22 @@ namespace Rivet {
 		for(a=minCent; a<=maxCent; a+=10){
                 	for(b=min_pT; b<=max_pT; b*=2){
                         	for((b==4) ? c=min_pA*2 : c=min_pA; c<=max_pA; c*=2){
-					snprintf(corrName,200,
-						"CounterFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-                                        	a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
-                                	if(sides==0) snprintf(bookName,200,
-						"NearSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
-					else snprintf(bookName,200,
-						"FarSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                	if(sides==0){
+						snprintf(bookName,200,
+							"NearSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+							a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+						snprintf(corrName,200,
+                                                	"CounterNearSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+	                                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+					}
+					else{
+						snprintf(bookName,200,
+							"FarSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+							a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+						snprintf(corrName,200,
+	                                                "CounterFarSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+        	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+					}
                                 	book(_h[bookName],4,1,iterator);
 					book(_c[corrName], corrName);
 
@@ -565,12 +483,23 @@ namespace Rivet {
                                 	snprintf(corrName,200,
 						"CounterFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
                                         	a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
-                                	if(sides==0) snprintf(bookName,200,
-						"NearSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
-                                	else snprintf(bookName,200,
-						"FarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
-						a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+                                	if(sides==0){
+						snprintf(bookName,200,
+							"NearSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+							a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+						snprintf(corrName,200,
+	                                                "CounterNearSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+        	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+					}
+                                	else{ 
+						snprintf(bookName,200,
+							"FarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+							a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+						snprintf(corrName,200,
+	                                                "CounterFarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
+        	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
+						
+					}
                                         book(_h[bookName],5,1,iterator);
 					book(_c[corrName], corrName);
 
