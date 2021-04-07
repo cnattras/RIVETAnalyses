@@ -29,8 +29,8 @@ namespace Rivet {
       // all final-state particles within
       // the given eta acceptance
        
-        const FinalState fs(Cuts::abseta < 4.9);//The cut is for particles we want thus <5 correponds to particles with 5 GeV or less.
-//        const FinalState fs(Cuts::pT > 5*Gev);
+        const FinalState fs(Cuts::abseta < 5);//The cut is for particles we want thus <5 correponds to particles with 5 GeV or less.
+//        const PromptFinalState fs(Cuts::pT > 5);
         declare(fs, "fs");
 
 
@@ -39,35 +39,35 @@ namespace Rivet {
         book(_h["PtDist"], "pTDist", 100, 0.0, 5.0);
 
 //        First rapidity y = 2.95
-        book(_h["CSPi+Pt"], "CSPi+Pt", pTedges);
-        book(_h["CSPi-Pt"], "CSPi-Pt", pTedges);
-        book(_h["CSK+Pt"], "CSK+Pt", pTedges);
-        book(_h["CSK-Pt"], "CSK-Pt", pTedges);
+        book(_h["CSPiplus"], "CSPiplus", pTedges);
+        book(_h["CSPiminus"], "CSPiminus", pTedges);
+        book(_h["CSKplus"], "CSKplus", pTedges);
+        book(_h["CSKminus"], "CSKminus", pTedges);
         book(_h["CSPPt"], "CSPPt", pTedges);
         book(_h["CSAntiPPt"], "CSAntiPPt", pTedges);
         
 //        //Second rapidity y =3.3
-        book(_h["CSPi+Pt2"], "CSPi+Pt2", pTedges);
-        book(_h["CSPi-Pt2"], "CSPi-Pt2", pTedges);
-        book(_h["CSK+Pt2"], "CSK+Pt2", pTedges);
-        book(_h["CSK-Pt2"], "CSK-Pt2", pTedges);
+        book(_h["CSPiplus2"], "CSPiplus2", pTedges);
+        book(_h["CSPiminus2"], "CSPiminus2", pTedges);
+        book(_h["CSKplus2"], "CSKplus2", pTedges);
+        book(_h["CSKminus2"], "CSKminus2", pTedges);
         book(_h["CSPPt2"], "CSPPt2", pTedges);
         book(_h["CSAntiPPt2"], "CSAntiPPt2", pTedges);
 
         
-        book(_h["CrsSecPI-"], 1, 1, 1);
-        book(_h["CrsSecPI-"], 2, 1, 1);
-        book(_h["CrsSecK+"], 3, 1, 1);
-        book(_h["CrsSecK-"], 4, 1, 1);
+        book(_h["CrsSecPIplus"], 1, 1, 1);
+        book(_h["CrsSecPIminus"], 2, 1, 1);
+        book(_h["CrsSecKplus"], 3, 1, 1);
+        book(_h["CrsSecKminus"], 4, 1, 1);
         book(_h["CrsSecP"], 5, 1, 1);
         book(_h["CrsSecAntiP"], 6, 1, 1);
 
-        book(_h["CrsSecPI+R2"], 7, 1, 1);
-        book(_h["CrsSecPI-R2"], 8, 1, 1);
-        book(_h["CrsSecK+R2"], 9, 1, 1);
-        book(_h["CrsSecPR2"], 10, 1, 1);
-        book(_h["CrsSecAntPR2"], 11, 1, 1);
-        book(_h["CrsSecK+R2"], 12, 1, 1);
+        book(_h["CrsSecPIplus2"], 7, 1, 1);
+        book(_h["CrsSecPIminus2"], 8, 1, 1);
+        book(_h["CrsSecKplus2"], 9, 1, 1);
+        book(_h["CrsSecKminus2"], 10, 1, 1);
+        book(_h["CrsSecP2"], 11, 1, 1);
+        book(_h["CrsSecAntiP2"], 12, 1, 1);
 
     }
 
@@ -86,21 +86,21 @@ namespace Rivet {
             _h["PtDist"]->fill(partPt);
             
             if((abs(p.rapidity())/GeV<3.0)&&(abs(p.rapidity())/GeV<2.9)){ // Interested in regions near 2.95
-                if(p.pid() == 211) _h["CSPi+Pt"]->fill(p.pT()/GeV); //Pion
-                if(p.pid() == -211) _h["CSPi-Pt"]->fill(p.pT()/GeV);
+                if(p.pid() == 211) _h["CSPiplus"]->fill(p.pT()/GeV); //Pion
+                if(p.pid() == -211) _h["CSPiminus"]->fill(p.pT()/GeV);
 
-                if(p.pid() == 321) _h["CSK+Pt"]->fill(p.pT()/GeV); //Kaon
-                if(p.pid() == -321) _h["CSK-Pt"]->fill(p.pT()/GeV);
+                if(p.pid() == 321) _h["CSKplus"]->fill(p.pT()/GeV); //Kaon
+                if(p.pid() == -321) _h["CSKminus"]->fill(p.pT()/GeV);
 
                 if(p.pid() == 2212) _h["CSPPt"]->fill(p.pT()/GeV); //Pion
                 if(p.pid() == -2212) _h["CSAntiPPt"]->fill(p.pT()/GeV);
             }
             if((abs(p.rapidity())/GeV<3.35)&&(abs(p.rapidity())/GeV<3.25)){ // Interested in regions near 2.95
-                if(p.pid() == 211) _h["CSPi+Pt2"]->fill(p.pT()/GeV); //Pion
-                if(p.pid() == -211) _h["CSPi-Pt2"]->fill(p.pT()/GeV);
+                if(p.pid() == 211) _h["CSPiplus2"]->fill(p.pT()/GeV); //Pion
+                if(p.pid() == -211) _h["CSPiminus2"]->fill(p.pT()/GeV);
 
-                if(p.pid() == 321) _h["CSK+Pt2"]->fill(p.pT()/GeV); //Kaon
-                if(p.pid() == -321) _h["CSK-Pt2"]->fill(p.pT()/GeV);
+                if(p.pid() == 321) _h["CSKplus2"]->fill(p.pT()/GeV); //Kaon
+                if(p.pid() == -321) _h["CSKminus2"]->fill(p.pT()/GeV);
 
                 if(p.pid() == 2212) _h["CSPPt2"]->fill(p.pT()/GeV); //Pion
                 if(p.pid() == -2212) _h["CSAntiPPt2"]->fill(p.pT()/GeV);
