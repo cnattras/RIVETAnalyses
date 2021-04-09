@@ -421,7 +421,7 @@ namespace Rivet {
     	  corrfig7less.SetCentrality(0.,40.);
     	  corrfig7less.SetTriggerRange(lower, upper);
 	      corrfig7less.SetAssociatedRange(.5, 7.);
-        corrfig7less.SetXiRange(log(5./7.),1.2);
+        corrfig7less.SetXiRange(log(lower/7.),1.2);
     	  corrfig7less.SetCorrelationFunction(_h[corrsless2]);
 	      corrfig7less.SetCounter(_c[corrsless]);
         corrfig7less.SetTriggerCounter(_c[corrsless+"_Triggers"]);
@@ -431,7 +431,7 @@ namespace Rivet {
     	  corrfig7more.SetCentrality(0.,40.);
     	  corrfig7more.SetTriggerRange(lower, upper);
 	      corrfig7more.SetAssociatedRange(.5, 7.);
-        corrfig7more.SetXiRange(1.2,log(12./.5));
+        corrfig7more.SetXiRange(1.2,log(upper/.5));
     	  corrfig7more.SetCorrelationFunction(_h[corrsmore2]);
 	      corrfig7more.SetCounter(_c[corrsmore]);
         corrfig7more.SetTriggerCounter(_c[corrsmore+"_Triggers"]);
@@ -467,9 +467,10 @@ namespace Rivet {
         float tup = 9;
         float xilow = ((2.)-i*.4);
         float xiup = ((2.4)-i*.4);
-        float aup  = exp(xiup)/tlow;
-        float alow = exp(xilow)/tup;
-        //string corrnum = "corr" + to_string(i+1);
+        float aup = tup/exp(xiup);
+        float alow  = tlow/exp(xilow);
+        cout << xilow << ' '<< xiup <<'\n';
+        cout << alow << ' '<< aup <<'\n';
         char buffXiLow [5];
         char buffXiUpp [5];
         snprintf(buffXiLow,5,"%2.1f", xilow);
@@ -478,7 +479,7 @@ namespace Rivet {
         string Xiupp = buffXiUpp;
         string books = "PerTriggerVsdphiAUAU" + Xilow + "to" + Xiupp;
         string corrs = "sow_AUAU200_" + books;
-        string corrs2 = "dphi_AuAu200_" + books;
+        string corrs2 = "dphi_AUAU200_" + books;
         book(_h[books], 1, 1, i+1);
         book(_c[corrs], corrs);
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
@@ -501,18 +502,17 @@ namespace Rivet {
         float tup = 9;
         float xilow = ((2.)-i*.4);
         float xiup = ((2.4)-i*.4);
-        float aup  = exp(xiup)/tlow;
-        float alow = exp(xilow)/tup;
+        float aup = tup/exp(xiup);
+        float alow  = tlow/exp(xilow);
         char buffXiLow [5];
         char buffXiUpp [5];
         snprintf(buffXiLow,5,"%2.1f", xilow);
         snprintf(buffXiUpp,5,"%2.1f", xiup);
         string Xilower = buffXiLow;
         string XiUpper = buffXiUpp;
-        //string corrnum = "corr" + to_string(i+1);
         string books = "PerTriggerVsdphidAU" + Xilower + "to" + XiUpper;
         string corrs = "sow_dAU200_" + books;
-        string corrs2 = "dphi_duAu200_" + books;
+        string corrs2 = "dphi_dAU200_" + books;
         book(_h[books], 2, 1, i+1);
         book(_c[corrs], corrs);
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
@@ -589,11 +589,10 @@ namespace Rivet {
           char buffXiUpp5 [5];
           snprintf(buffXiLow5,5,"%2.1f", xilower);
           snprintf(buffXiUpp5,5,"%2.1f", xiupper);
-          string corrs = "sow_AuAu200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
-          string corrs2 = "dphi_AuAu200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
+          string corrs = "sow_AUAU200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
+          string corrs2 = "dphi_AUAU200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
           string corrsp = "sow_pp200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
           string corrsp2 = "dphi_pp200_" + forcor + "AndXi" + buffXiLow5 + "to" + buffXiUpp5;
-          //string corfunc= forcor + to_string(xilower) + "to" + to_string(xiupper);
           book(_c[corrsp], corrsp);
           book(_c[corrsp+"_Triggers"], corrsp+"_Triggers");
           book(_h[corrsp2], corrsp2, dphibinNum, -M_PI/2., 1.5*M_PI);
@@ -665,18 +664,14 @@ namespace Rivet {
 
       //Correlator corr = Correlators[0];
 
-      for(auto pTrig : pfs.particles())
-      //for(auto pTrig : cfs.particles())
+      //for(auto pTrig : pfs.particles())
+      for(auto pTrig : cfs.particles())
       {
         for (Correlator &corr : Correlators)
         {
           if (!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
           if (!corr.CheckCentrality(c)) continue;
-          //cout << "hi" << '\n';
           if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
-          //somthing here is stoping the pp
-          //cout << c << '\n';
-          //cout << "hi" << '\n';
           corr.AddTrigger();
         }
         for (auto pAssoc : cfs.particles())
