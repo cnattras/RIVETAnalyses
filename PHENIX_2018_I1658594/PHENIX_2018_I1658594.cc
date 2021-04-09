@@ -25,11 +25,10 @@ namespace Rivet {
 	int _eventPlaneMethod = 0;
       bool _noCentrality = false;
       bool _noAssoc = false;
-	int _nTriggers = 0;
-	int _nEvents = 0;
 	Histo1DPtr _deltaPhi;
 	CounterPtr _counter;
-	
+        CounterPtr _cTriggers;
+
 
     public:
 
@@ -60,7 +59,8 @@ namespace Rivet {
 	void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
 	void SetCounter(CounterPtr c){ _counter = c; }
 	void SetRxnPlaneAngle(int rxnMin, int rxnMax){ _RxnPlaneAngleRange = make_pair(rxnMin,rxnMax); }
-	void SetEventPlaneMethod (int eventPlane) { _eventPlaneMethod = eventPlane; } 
+	void SetEventPlaneMethod (int eventPlane) { _eventPlaneMethod = eventPlane; }
+        void SetTriggerCounter(CounterPtr c){ _cTriggers = c; }
 
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
@@ -106,14 +106,13 @@ namespace Rivet {
 	void AddWeight()
 	{
 		_counter->fill();
-		_nEvents++;
 	}
 
       int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
       {
           string fullIndex = "";
-  	  for(int index : _indices)	
+  	  for(int index : _indices)
  	  {
 		fullIndex += to_string(index);
 	  }
@@ -122,12 +121,12 @@ namespace Rivet {
 
       void AddTrigger()
 	{
-		_nTriggers++;
+		_cTriggers->fill();
 	}
 
       void Normalize(double weight = 1.)
 	{
-		if(_nTriggers*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_nEvents)/(_nTriggers*_counter->sumW()));
+		if(_cTriggers->effNumEntries()*_counter->sumW() > 0) _deltaPhi->scaleW((weight*_counter->effNumEntries())/(_cTriggers->effNumEntries()*_counter->sumW()));
 	}
 
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
@@ -190,7 +189,7 @@ namespace Rivet {
 
       }
      };
-	
+
 
   /// @brief Add a short analysis description here
   class PHENIX_2018_I1658594 : public Analysis {
@@ -208,7 +207,7 @@ namespace Rivet {
 
       const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV);
       declare(cfs, "CFS");
-      
+
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       // Initialise and register projections
@@ -217,8 +216,8 @@ namespace Rivet {
       // all final-state particles within
       // the given eta acceptance
       //const FinalState fs(Cuts::abseta < 4.9);
-     
-	//fig 6 
+
+	//fig 6
       //book(_h["XXXXX"], "myh1", 20, 0.0, 100.0);
       /*book(_h["pi0Sepctra0To10V2"], 1, 1, 1);
       book(_h["pi0Spectra10to20V2"],1,1,2);
@@ -353,7 +352,7 @@ namespace Rivet {
 	//initialize iterators and varibles
 	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
 	float min_pT=0, max_pT=0, min_pA=0, max_pA=0, minV=0, maxV=0, b=0, c=0, d=0;
-	char corrName[200], bookName[200];
+	char corrName[200], bookName[200], corrNameTrigger[200];
 
 	//fig 6
 	minCent=0, maxCent=40, minPlane=2, maxPlane=5;
@@ -361,21 +360,25 @@ namespace Rivet {
 		for(a=minCent; a<=maxCent; a+=10){
 			if(e!=5){
 				snprintf(corrName,200,"CounterFig6EventPlane%iCent%iTo%i",e,a,a+10);
+                                snprintf(corrNameTrigger,200,"CounterFig6EventPlane%iCent%iTo%i%s",e,a,a+10,"_Triggers");
 				snprintf(bookName,200,"Fig6EventPlane%iCent%iTo%i",e,a,a+10);
 			}
 			else{
 				snprintf(corrName,200,"CounterFig6EventPlane%i{Psi2}Cent%iTo%i",e,a,a+10);
+                                snprintf(corrNameTrigger,200,"CounterFig6EventPlane%i{Psi2}Cent%iTo%i%s",e,a,a+10,"_Triggers");
 				snprintf(bookName,200,"Fig6EventPlane%i{Psi2}Cent%iTo%i",e,a,a+10);
 			}
 			book(_h[bookName],1,1,iterator);
 			book(_c[corrName], corrName);
-			
+                        book(_c[corrNameTrigger], corrNameTrigger);
+
 			Correlator corrFig6(a,e);
                         corrFig6.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig6.SetCentrality(a,a+10);
                         corrFig6.SetEventPlaneMethod(e);
                         corrFig6.SetCorrelationFunction(_h[bookName]);
                         corrFig6.SetCounter(_c[corrName]);
+                        corrFig6.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig6);
                         iterator++;
 		}
@@ -388,9 +391,11 @@ namespace Rivet {
 	for(a=minCent; a<=maxCent; a+=10){
 		for(c=min_pA; c<=max_pA; c*=2){
 			snprintf(corrName,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
+                        snprintf(corrNameTrigger,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f%s",a,a+10,c,c*2, "_Triggers");
 			snprintf(bookName,200,"Fig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
 			book(_h[bookName],2,1,iterator);
-			book(_c[corrName], corrName);			
+			book(_c[corrName], corrName);
+                        book(_c[corrNameTrigger], corrNameTrigger);
 
 			Correlator corrFig12(a,(int) c*10);
 	 		corrFig12.SetCollSystemAndEnergy("AuAu200GeV");
@@ -399,6 +404,7 @@ namespace Rivet {
 	 		corrFig12.SetAssociatedRange(c,(c==4)?10:c*2);
 	 		corrFig12.SetCorrelationFunction(_h[bookName]);
 	 		corrFig12.SetCounter(_c[corrName]);
+                        corrFig12.SetTriggerCounter(_c[corrNameTrigger]);
 			Correlators.push_back(corrFig12);
 			iterator++;
 		}
@@ -473,7 +479,7 @@ namespace Rivet {
 		}
 	}
 	iterator=1;
-	
+
 	//Fig 20
 	minCent=0, maxCent=40, min_pT=2, max_pT=4, min_pA=1, max_pA=2, minV=1, maxV=1;
         for(int sides=0; sides<2; sides++){
@@ -491,14 +497,14 @@ namespace Rivet {
 	                                                "CounterNearSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
         	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 					}
-                                	else{ 
+                                	else{
 						snprintf(bookName,200,
 							"FarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
 							a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 						snprintf(corrName,200,
 	                                                "CounterFarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
         	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
-						
+
 					}
                                         book(_h[bookName],5,1,iterator);
 					book(_c[corrName], corrName);
@@ -546,7 +552,7 @@ namespace Rivet {
 		}
 	}
 	iterator=1;
-	
+
 	//Fig22
 	minCent=0, maxCent=40, min_pT=1, max_pT=2, min_pA=0.5, max_pA=2, minV=1, maxV=1;
 	for(a=minCent; a<=maxCent; a+=10){
@@ -599,8 +605,8 @@ namespace Rivet {
                         iterator++;
                 }
         }
-        iterator=1;	
-	
+        iterator=1;
+
 	//Fig 24
 	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
         b=2,c=2;
@@ -1157,7 +1163,7 @@ namespace Rivet {
                 }
         }
         iterator=1;
-	
+
 
 	//Psi3_PTY4-10x2-4GeV
 	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
@@ -1202,7 +1208,7 @@ namespace Rivet {
           CollSystem = "AUAU200GeV";
           //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
       }
-      
+
       if(CollSystem == "AUAU200GeV" && c > 50)
       {
         vetoEvent;
@@ -1226,7 +1232,7 @@ namespace Rivet {
           if (!corr.CheckCentrality(c)) continue;
           //cout << "hi" << '\n';
           if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
-            ///Add a function to check reaction plane angle and make sure that the 
+            ///Add a function to check reaction plane angle and make sure that the
             //if (!corr.CheckXiRange(log(pTrig.pT()/ pAssoc.pT()))) continue;
           //somthing here is stoping the pp
           //cout << c << '\n';
@@ -1241,7 +1247,7 @@ namespace Rivet {
             if (!corr.CheckCentrality(c)) continue;
             if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
             if (!corr.CheckAssociatedRange(pAssoc.pT() / GeV)) continue;
-            ///Add a function to check reaction plane angle and make sure that the 
+            ///Add a function to check reaction plane angle and make sure that the
             //if (!corr.CheckXiRange(log(pTrig.pT()/ pAssoc.pT()))) continue;
             corr.AddCorrelation(pTrig, pAssoc);
           }
@@ -1256,7 +1262,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 /*
-  
+
 */
     }
 
