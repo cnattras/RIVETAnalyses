@@ -1,0 +1,33 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=[My title]
+XLabel=[$\Delta\phi$(red)]
+YLabel=[Per-trigger yield]
+DrawOnly=/PHENIX_2009_I815217/d01-x01-y01 //direct/phenix+u/reema/YAML_Maker/tmp25Jan20/RIVETAnalyses/PHENIX_2009_I0903.2041/Rivet.yoda/PHENIX_2009_I815217:cent=GEN/d01-x01-y01
+LegendOnly=/PHENIX_2009_I815217/d01-x01-y01 //direct/phenix+u/reema/YAML_Maker/tmp25Jan20/RIVETAnalyses/PHENIX_2009_I0903.2041/Rivet.yoda/PHENIX_2009_I815217:cent=GEN/d01-x01-y01
+RatioPlot=1
+RatioPlotReference=/PHENIX_2009_I815217/d01-x01-y01
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2009_I815217/d01-x01-y01
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2009_I815217/d01-x01-y01
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	1.500000e+00	7.600000e+01	3.478505e+01	3.478505e+01
+# END HISTO1D
+
+
+# BEGIN HISTO1D //direct/phenix+u/reema/YAML_Maker/tmp25Jan20/RIVETAnalyses/PHENIX_2009_I0903.2041/Rivet.yoda/PHENIX_2009_I815217:cent=GEN/d01-x01-y01
+LineColor=red
+LineStyle=solid
+Path=//direct/phenix+u/reema/YAML_Maker/tmp25Jan20/RIVETAnalyses/PHENIX_2009_I0903.2041/Rivet.yoda/PHENIX_2009_I815217:cent=GEN/d01-x01-y01
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	1.500000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+
