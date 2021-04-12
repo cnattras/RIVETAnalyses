@@ -1197,7 +1197,8 @@ namespace Rivet {
       const ParticlePair& beam = beams();
       string CollSystem = "Empty";
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      //add pp collision eventually
+	if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           CollSystem = "AUAU200GeV";
           //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
