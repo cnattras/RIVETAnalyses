@@ -469,8 +469,8 @@ namespace Rivet {
         float xiup = ((2.4)-i*.4);
         float aup = tup/exp(xiup);
         float alow  = tlow/exp(xilow);
-        cout << xilow << ' '<< xiup <<'\n';
-        cout << alow << ' '<< aup <<'\n';
+        //cout << xilow << ' '<< xiup <<'\n';
+        //cout << alow << ' '<< aup <<'\n';
         char buffXiLow [5];
         char buffXiUpp [5];
         snprintf(buffXiLow,5,"%2.1f", xilow);
@@ -494,6 +494,23 @@ namespace Rivet {
 	      corrfig2.SetCounter(_c[corrs]);
         corrfig2.SetTriggerCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig2);
+        /*
+        string corrsp = "sow_pp200_" + books;
+        string corrs2p = "dphi_pp200_" + books;
+        book(_c[corrsp], corrsp);
+        book(_c[corrsp+"_Triggers"], corrsp+"_Triggers");
+        book(_h[corrs2p], corrs2p, dphibinNum, -M_PI/2., 1.5*M_PI);
+        Correlator corrfig2(i);
+        corrfig2p.SetCollSystemAndEnergy("pp200GeV");
+    	  corrfig2p.SetCentrality(0.,40.);
+    	  corrfig2p.SetTriggerRange(tlow, tup);
+	      corrfig2p.SetAssociatedRange(alow, aup);
+        corrfig2p.SetXiRange(xilow,xiup);
+    	  corrfig2p.SetCorrelationFunction(_h[corrs2p]);
+	      corrfig2p.SetCounter(_c[corrsp]);
+        corrfig2p.SetTriggerCounter(_c[corrsp+"_Triggers"]);
+        Correlators.push_back(corrfig2p);
+        */
       };
 
       //fig 3
@@ -527,6 +544,23 @@ namespace Rivet {
 	      corrfig3.SetCounter(_c[corrs]);
         corrfig3.SetTriggerCounter(_c[corrs+"_Triggers"]);
         Correlators.push_back(corrfig3);
+        /*
+        string corrs = "sow_pp200_" + books;
+        string corrs2 = "dphi_pp200_" + books;
+        book(_c[corrsp], corrs);
+        book(_c[corrsp+"_Triggers"], corrsp+"_Triggers");
+        book(_h[corrs2p], corrs2p, dphibinNum, -M_PI/2., 1.5*M_PI);
+        Correlator corrfig3p(i+1);
+        corrfig3p.SetCollSystemAndEnergy("pp200GeV");
+    	  corrfig3p.SetNoCentrality();
+    	  corrfig3p.SetTriggerRange(tlow, tup);
+	      corrfig3p.SetAssociatedRange(alow, aup);
+        corrfig3p.SetXiRange(xilow,xiup);
+    	  corrfig3p.SetCorrelationFunction(_h[corrs2p]);
+	      corrfig3p.SetCounter(_c[corrsp]);
+        corrfig3p.SetTriggerCounter(_c[corrsp+"_Triggers"]);
+        Correlators.push_back(corrfig3p);
+        */
       };
 
       //fig 6
@@ -703,7 +737,50 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      /*
+      bool AuAu_available = false;
+      bool pp_available = false;
+      bool dAu_available = false;
 
+      for (auto element : _c)
+      {
+        string name = element.second->name();
+        if (name.find("AUAU") != std::string::npos)
+        {
+          if (element.second->sumW() > 0) AuAu_available = true;
+          else
+          {
+            AuAu_available = false;
+            break;
+          }
+        }
+        else if (name.find("pp") != std::string::npos)
+        {
+          if (element.second->sumW() > 0) pp_available = true;
+          else
+          {
+            pp_available = false;
+            break;
+          }
+        }
+        else if (name.find("dAU") != std::string::npos)
+        {
+          if (element.second->sumW() > 0) dAu_available = true;
+          else
+          {
+            dAu_available = false;
+            break;
+          }
+        }
+      }
+      if ((!pp_available) || (!AuAu_available) || (!dAu_available)) return;
+
+      /*
+      for(Correlator& corr : Correlators)
+      {
+        corr.Normalize();
+      }
+      */
       // normalize(_h["XXXX"]); // normalize to unity
       // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
