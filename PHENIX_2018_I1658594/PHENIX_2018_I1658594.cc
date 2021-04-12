@@ -421,7 +421,7 @@ namespace Rivet {
 					a,a+10,b,b*2,c,c*2);
 				snprintf(bookName,200,"Fig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
 					a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
-				 snprintf(corrName,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
+				 snprintf(corrNameTrigger,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
                                         a,a+10,b,b*2,c,c*2, "_Trigger");
 				book(_h[bookName],3,1,iterator);
 				book(_c[corrName], corrName);
