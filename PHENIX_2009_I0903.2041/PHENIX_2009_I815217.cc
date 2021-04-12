@@ -5,7 +5,6 @@
 
 namespace Rivet {
 
-
   /// @brief Add a short analysis description here
   class PHENIX_2009_I815217 : public Analysis {
   public:
