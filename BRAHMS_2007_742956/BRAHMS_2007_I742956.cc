@@ -75,10 +75,17 @@ namespace Rivet {
             if((abs(p.rapidity())<3.35)&&(abs(p.rapidity())<3.25)){ // Interested in regions near 2.95
                 if(p.pid() == 211) _h["CrsSecPIplus2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize)); //Pion
                 if(p.pid() == -211) _h["CrsSecPIminus2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize));
+<<<<<<< HEAD
             
                 if(p.pid() == 321) _h["CrsSecKplus2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize)); //Kaon
                 if(p.pid() == -321) _h["CrsSecKminus2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize));
             
+=======
+            
+                if(p.pid() == 321) _h["CrsSecKplus2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize)); //Kaon
+                if(p.pid() == -321) _h["CrsSecKminus2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize));
+            
+>>>>>>> dae383376ddc13a159f6cd722bd477cfb9cd81d7
                 if(p.pid() == 2212) _h["CrsSecP2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize)); //Pion
                 if(p.pid() == -2212) _h["CrsSecAntiP2"]->fill(p.pT()/GeV,(1/p.pT())*(1/(2*pi))*(1/ySize));
             }
@@ -91,6 +98,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+<<<<<<< HEAD
         
         scale(_h["CrsSecPIplus"], ((crossSection()*pow(10,-6))/sumOfWeights())); // Still missing mean pT, pTbinsize and general nEvents, 1/Lum, also what does scale do?
         scale(_h["CrsSecPIminus"], ((crossSection()*pow(10,-6))/sumOfWeights()));
@@ -104,6 +112,24 @@ namespace Rivet {
         scale(_h["CrsSecKminus2"], ((crossSection()*pow(10,-6))/sumOfWeights()));
         scale(_h["CrsSecP2"], ((crossSection()*pow(10,-6))/sumOfWeights()));
         scale(_h["CrsSecAntiP2"], ((crossSection()*pow(10,-6))/sumOfWeights()));
+=======
+//
+//      normalize(_h["PtDist"]); // normalize to unity
+//      normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
+//
+//        scale(_h["CSPiplus"], (crossSection()/picobarn/sumOfWeights())); // Still missing mean pT, pTbinsize and general nEvents, 1/Lum, also what does scale do?
+//        scale(_h["CSPiminus"],(crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSKplus"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSKminus"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSPPt"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSAntiPPt"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSPiplus2"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSPiminus2"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSKplus2"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSKminus2"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSPPt2"], (crossSection()/picobarn/sumOfWeights()));
+//        scale(_h["CSAntiPPt2"], (crossSection()/picobarn/sumOfWeights()));
+>>>>>>> dae383376ddc13a159f6cd722bd477cfb9cd81d7
         
         
     }
