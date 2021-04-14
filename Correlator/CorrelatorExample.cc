@@ -226,6 +226,8 @@ namespace Rivet {
             }
         }
 
+        if(minValue == 0 || minValueEntries==0) return histo;
+
         hist.reset();
 
         for(auto &bin : hist.bins())
