@@ -87,7 +87,7 @@ namespace Rivet {
              const Scatter2D& refdataRaa2 =refData(refnameRaa2);
        book(_h["c10Pt_AuAu"], refnameRaa2 + "_AuAu", refdataRaa2);
        book(_h["c10Pt_pp"], refnameRaa2 + "_pp", refdataRaa2);
-       book(hRaa["Raa_c510_AuAu"], refnameRaa2);
+       book(hRaa["Raa_c010_AuAu"], refnameRaa2);
 
        string refnameRaa3 = mkAxisCode(6,1,2);
              const Scatter2D& refdataRaa3 =refData(refnameRaa3);
@@ -430,7 +430,7 @@ namespace Rivet {
        _h["callPt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
 
        divide(_h["c5Pt_AuAu"],_h["c5Pt_pp"],hRaa["Raa_c05_AuAu"]);
-       divide(_h["c10Pt_AuAu"],_h["c10Pt_pp"],hRaa["Raa_c510_AuAu"]);
+       divide(_h["c10Pt_AuAu"],_h["c10Pt_pp"],hRaa["Raa_c010_AuAu"]);
        divide(_h["c20Pt_AuAu"],_h["c20Pt_pp"],hRaa["Raa_c1020_AuAu"]);
        divide(_h["c30Pt_AuAu"],_h["c30Pt_pp"],hRaa["Raa_c2030_AuAu"]);
        divide(_h["c40Pt_AuAu"],_h["c40Pt_pp"],hRaa["Raa_c3040_AuAu"]);
