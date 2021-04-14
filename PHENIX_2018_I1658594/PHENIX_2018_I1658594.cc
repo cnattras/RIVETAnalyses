@@ -217,49 +217,6 @@ namespace Rivet {
       // the given eta acceptance
       //const FinalState fs(Cuts::abseta < 4.9);
 
-	//fig 6
-      //book(_h["XXXXX"], "myh1", 20, 0.0, 100.0);
-      /*book(_h["pi0Sepctra0To10V2"], 1, 1, 1);
-      book(_h["pi0Spectra10to20V2"],1,1,2);
-      book(_h["pi0Spectra20to30V2"],1,1,3);
-      book(_h["pi0Spectra30to40V2"],1,1,4);
-      book(_h["pi0Spectra40to50V2"],1,1,5);
-      book(_h["pi0Sepctra0To10V3"],1,1,6);
-      book(_h["pi0Spectra10to20V3"],1,1,7);
-      book(_h["pi0Spectra20to30V3"],1,1,8);
-      book(_h["pi0Spectra30to40V3"],1,1,9);
-      book(_h["pi0Spectra40to50V3"],1,1,10);
-      book(_h["pi0Sepctra0to10V4"], 1, 1, 11);
-      book(_h["pi0Spectra10to20V4"],1,1,12);
-      book(_h["pi0Spectra20to30V4"],1,1,13);
-      book(_h["pi0Spectra30to40V4"],1,1,14);
-      book(_h["pi0Spectra40to50V4"],1,1,15);
-      book(_h["pi0Sepctra0To10V4psi2"],1,1,16);
-      book(_h["pi0Spectra10to20V4psi2"],1,1,17);
-      book(_h["pi0Spectra20to30V4psi2"],1,1,18);
-      book(_h["pi0Spectra30to40V4psi2"],1,1,19);
-      book(_h["pi0Spectra40to50V4psi2"],1,1,20);*/
-	//fig 12
-      /*book(_h["pi0Sepctra0to10_4-10x0.5-1"], 2, 1, 1);
-      book(_h["pi0Spectra0to10_4-10x1-2"],2,1,2);
-      book(_h["pi0Spectra0to10_4-10x2-4"],2,1,3);
-      book(_h["pi0Spectra0to10_4-10x4-10"],2,1,4);
-      book(_h["pi0Sepctra10to20_4-10x0.5-1"], 2, 1, 5);
-      book(_h["pi0Spectra10to20_4-10x1-2"],2,1,6);
-      book(_h["pi0Spectra10to20_4-10x2-4"],2,1,7);
-      book(_h["pi0Spectra10to20_4-10x4-10"],2,1,8);
-      book(_h["pi0Sepctra20to30_4-10x0.5-1"], 2, 1, 9);
-      book(_h["pi0Spectra20to30_4-10x1-2"],2,1,10);
-      book(_h["pi0Spectra20to30_4-10x2-4"],2,1,11);
-      book(_h["pi0Spectra20to30_4-10x4-10"],2,1,12);
-      book(_h["pi0Sepctra30to40_4-10x0.5-1"], 2, 1, 13);
-      book(_h["pi0Spectra30to40_4-10x1-2"],2,1,14);
-      book(_h["pi0Spectra30to40_4-10x2-4"],2,1,15);
-      book(_h["pi0Spectra30to40_4-10x4-10"],2,1,16);
-      book(_h["pi0Sepctra40to50_4-10x0.5-1"], 2, 1, 17);
-      book(_h["pi0Spectra40to50_4-10x1-2"],2,1,18);
-      book(_h["pi0Spectra40to50_4-10x2-4"],2,1,19);
-      book(_h["pi0Spectra40to50_4-10x4-10"],2,1,20);*/
 	//fig 15
       /*book(_h["pi0Sepctra0to10_1-2x0.5-1"], 3, 1, 1);
       book(_h["pi0Spectra0to10_1-2x1-2"],3,1,2);
@@ -318,36 +275,6 @@ namespace Rivet {
       book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
       book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);*/
 	//fig 20
-	/*book(_h["NearSide0to10_2-4x1-2"],5,1,1);
-	book(_h["NearSide0to10_2x4x2-4"],5,1,2);
-	book(_h["NearSide0to10_4-10x2-4"],5,1,3);
-	book(_h["NearSide10to20_2-4x1-2"],5,1,4);
-        book(_h["NearSide10to20_2x4x2-4"],5,1,5);
-        book(_h["NearSide10to20_4-10x2-4"],5,1,6);
-	book(_h["NearSide20to30_2-4x1-2"],5,1,7);
-        book(_h["NearSide20to30_2x4x2-4"],5,1,8);
-        book(_h["NearSide20to30_4-10x2-4"],5,1,9);
-	book(_h["NearSide30to40_2-4x1-2"],5,1,10);
-        book(_h["NearSide30to40_2x4x2-4"],5,1,11);
-        book(_h["NearSide30to40_4-10x2-4"],5,1,12);
-	book(_h["NearSide40to50_2-4x1-2"],5,1,13);
-        book(_h["NearSide40to50_2x4x2-4"],5,1,14);
-        book(_h["NearSide40to50_4-10x2-4"],5,1,15);
-	book(_h["FarSide0to10_2-4x1-2"],5,1,16);
-        book(_h["FarSide0to10_2x4x2-4"],5,1,17);
-        book(_h["FarSide0to10_4-10x2-4"],5,1,18);
-        book(_h["FarSide10to20_2-4x1-2"],5,1,19);
-        book(_h["FarSide10to20_2x4x2-4"],5,1,20);
-        book(_h["FarSide10to20_4-10x2-4"],5,1,21);
-        book(_h["FarSide20to30_2-4x1-2"],5,1,22);
-        book(_h["FarSide20to30_2x4x2-4"],5,1,23);
-        book(_h["FarSide20to30_4-10x2-4"],5,1,24);
-        book(_h["FarSide30to40_2-4x1-2"],5,1,25);
-        book(_h["FarSide30to40_2x4x2-4"],5,1,26);
-        book(_h["FarSide30to40_4-10x2-4"],5,1,27);
-        book(_h["FarSide40to50_2-4x1-2"],5,1,28);
-        book(_h["FarSide40to50_2x4x2-4"],5,1,29);
-        book(_h["FarSide40to50_4-10x2-4"],5,1,30);*/
 
 	//initialize iterators and varibles
 	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
@@ -355,17 +282,17 @@ namespace Rivet {
 	char corrName[200], bookName[200], corrNameTrigger[200];
 
 	//fig 6
-/*	minCent=0, maxCent=40, minPlane=2, maxPlane=5;
+	minCent=0, maxCent=40, minPlane=2, maxPlane=5;
 	for(e=minPlane; e<=maxPlane; e++){
 		for(a=minCent; a<=maxCent; a+=10){
 			if(e!=5){
 				snprintf(corrName,200,"CounterFig6EventPlane%iCent%iTo%i",e,a,a+10);
-                                snprintf(corrNameTrigger,200,"CounterFig6EventPlane%iCent%iTo%i%s",e,a,a+10,"_Triggers");
+                                snprintf(corrNameTrigger,200,"CounterFig6EventPlane%iCent%iTo%i%s",e,a,a+10,"Triggers");
 				snprintf(bookName,200,"Fig6EventPlane%iCent%iTo%i",e,a,a+10);
 			}
 			else{
 				snprintf(corrName,200,"CounterFig6EventPlane%i{Psi2}Cent%iTo%i",e,a,a+10);
-                                snprintf(corrNameTrigger,200,"CounterFig6EventPlane%i{Psi2}Cent%iTo%i%s",e,a,a+10,"_Triggers");
+                                snprintf(corrNameTrigger,200,"CounterFig6EventPlane%i{Psi2}Cent%iTo%i%s",e,a,a+10,"Triggers");
 				snprintf(bookName,200,"Fig6EventPlane%i{Psi2}Cent%iTo%i",e,a,a+10);
 			}
 			book(_h[bookName],1,1,iterator);
@@ -391,7 +318,7 @@ namespace Rivet {
 	for(a=minCent; a<=maxCent; a+=10){
 		for(c=min_pA; c<=max_pA; c*=2){
 			snprintf(corrName,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
-                        snprintf(corrNameTrigger,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f%s",a,a+10,c,c*2, "_Triggers");
+                        snprintf(corrNameTrigger,200,"CounterFig12Cent%iTo%iPtA%2.1fTo%2.1f%s",a,a+10,c,c*2, "Triggers");
 			snprintf(bookName,200,"Fig12Cent%iTo%iPtA%2.1fTo%2.1f",a,a+10,c,c*2);
 			book(_h[bookName],2,1,iterator);
 			book(_c[corrName], corrName);
@@ -422,7 +349,7 @@ namespace Rivet {
 				snprintf(bookName,200,"Fig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
 					a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 				 snprintf(corrNameTrigger,200,"CounterFig15Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                        a,a+10,b,b*2,c,c*2, "_Trigger");
+                                        a,a+10,b,b*2,c,c*2, "Trigger");
 				book(_h[bookName],3,1,iterator);
 				book(_c[corrName], corrName);
 				book(_c[corrNameTrigger], corrNameTrigger);
@@ -457,7 +384,7 @@ namespace Rivet {
 	                                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 						snprintf(corrNameTrigger,200,
                                                         "CounterNearSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "_Triggers");
+                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "Triggers");
 					}
 					else{
 						snprintf(bookName,200,
@@ -468,7 +395,7 @@ namespace Rivet {
         	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 						snprintf(corrNameTrigger,200,
                                                         "CounterFarSideFig18Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "_Triggers");
+                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "Triggers");
 					}
                                 	book(_h[bookName],4,1,iterator);
 					book(_c[corrName], corrName);
@@ -507,7 +434,7 @@ namespace Rivet {
         	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 						 snprintf(corrNameTrigger,200,
                                                         "CounterNearSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "_Trigger");
+                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "Trigger");
 					}
                                 	else{
 						snprintf(bookName,200,
@@ -518,7 +445,7 @@ namespace Rivet {
         	                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2);
 						 snprintf(corrNameTrigger,200,
                                                         "CounterFarSideFig20Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "_Trigger");
+                                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "Trigger");
 
 					}
                                         book(_h[bookName],5,1,iterator);
@@ -554,7 +481,7 @@ namespace Rivet {
 					"Fig21Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f",
 					a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2);
 				snprintf(corrNameTrigger,200,"CounterFig21Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "_Triggers");
+                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "Triggers");
                                 book(_h[bookName],6,1,iterator);
 				book(_c[corrName], corrName);
 				book(_c[corrNameTrigger], corrNameTrigger);
@@ -587,7 +514,7 @@ namespace Rivet {
                                         a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2);
 				snprintf(corrNameTrigger,200,
                                         "CounterFig22Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1f%s",
-                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "_Triggers");
+                                        a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2, "Triggers");
                                 book(_h[bookName],7,1,iterator);
 				book(_c[corrName], corrName);
 				book(_c[corrNameTrigger], corrNameTrigger);
@@ -620,7 +547,7 @@ namespace Rivet {
                                 a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
 			snprintf(corrNameTrigger,200,
                                 "CounterFig23Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Trigger");
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "Trigger");
                         book(_h[bookName],8,1,iterator);
 			book(_c[corrName], corrName);
 			book(_c[corrNameTrigger], corrNameTrigger);
@@ -640,23 +567,25 @@ namespace Rivet {
         }
         iterator=1;
 
-	//Fig 24
-	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+
+
+	//Fig24
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
         b=2,c=2;
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig24Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/pi<phiToPsi<%i/pi",
+                                "CounterFig24Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
                                 a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig24Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/pi<phiToPsi<%i/pi",
+                                "Fig24Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
                                 a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
-			snprintf(corrNameTrigger,200,
-                                "CounterFig24Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/pi<phiToPsi<%i/pi%s",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
+                        snprintf(corrNameTrigger,200,
+                                "CounterFig24Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "Trigger");
                         book(_h[bookName],9,1,iterator);
-			book(_c[corrName], corrName);
-			book(_c[corrNameTrigger], corrNameTrigger);	
+                        book(_c[corrName], corrName);
+                        book(_c[corrNameTrigger], corrNameTrigger);
 
                         Correlator corrFig24(a,(int)d);
                         corrFig24.SetCollSystemAndEnergy("AuAu200GeV");
@@ -664,32 +593,32 @@ namespace Rivet {
                         corrFig24.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig24.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig24.SetRxnPlaneAngle(d,d+1);
-			corrFig24.SetCorrelationFunction(_h[bookName]);
+                        corrFig24.SetCorrelationFunction(_h[bookName]);
                         corrFig24.SetCounter(_c[corrName]);
-			corrFig24.SetTriggerCounter(_c[corrNameTrigger]);
+                        corrFig24.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig24);
                         iterator++;
                 }
         }
-        iterator=1;
-*/
-	//Fig 25
-	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=2, max_pA=2, minV=-4, maxV=-1;
+        iterator=1;	
+
+	//Fig25
+	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
         b=4,c=2;
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig25Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/pi<phiToPsi<%i/pi",
+                                "CounterFig25Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
                                 a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig25Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/pi<phiToPsi<%i/pi",
+                                "Fig25Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
                                 a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
-			snprintf(corrNameTrigger,200,
-                                "CounterFig25Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/pi<phiToPsi<%i/pi%s",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");		
+                        snprintf(corrNameTrigger,200,
+                                "CounterFig25Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "Trigger");
                         book(_h[bookName],10,1,iterator);
-			book(_c[corrName], corrName);
-			book(_c[corrNameTrigger], corrNameTrigger);
+                        book(_c[corrName], corrName);
+                        book(_c[corrNameTrigger], corrNameTrigger);
 
                         Correlator corrFig25(a,(int)d);
                         corrFig25.SetCollSystemAndEnergy("AuAu200GeV");
@@ -697,35 +626,42 @@ namespace Rivet {
                         corrFig25.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig25.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig25.SetRxnPlaneAngle(d,d+1);
-
-			corrFig25.SetCorrelationFunction(_h[bookName]);
+                        corrFig25.SetCorrelationFunction(_h[bookName]);
                         corrFig25.SetCounter(_c[corrName]);
-			corrFig25.SetTriggerCounter(_c[corrNameTrigger]);
+                        corrFig25.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig25);
                         iterator++;
                 }
         }
         iterator=1;
 
-/*	//Fig 26
+	//Fig 26
 	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
         b=2,c=1;
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig26Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig26Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig26Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig26Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig26Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],11,1,iterator);
-                        Correlator corrFig26(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);			
+
+                        Correlator corrFig26(a,(int)d);
                         corrFig26.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig26.SetCentrality(a,a+10);
                         corrFig26.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig26.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig26.SetRxnPlaneAngle(d,d+1);
+			corrFig26.SetCorrelationFunction(_h[bookName]);
                         corrFig26.SetCounter(_c[corrName]);
+			corrFig26.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig26);
                         iterator++;
                 }
@@ -738,19 +674,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig27Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig27Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig27Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig27Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig27Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],12,1,iterator);
-                        Correlator corrFig27(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);			
+
+                        Correlator corrFig27(a,(int)d);
                         corrFig27.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig27.SetCentrality(a,a+10);
                         corrFig27.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig27.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig27.SetRxnPlaneAngle(d,d+1);
+			corrFig27.SetCorrelationFunction(_h[bookName]);
                         corrFig27.SetCounter(_c[corrName]);
+			corrFig27.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig27);
                         iterator++;
                 }
@@ -764,19 +708,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig28Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig28Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig28Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig28Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig28Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],13,1,iterator);
-                        Correlator corrFig28(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig28(a,(int)d);
                         corrFig28.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig28.SetCentrality(a,a+10);
                         corrFig28.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig28.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig28.SetRxnPlaneAngle(d,d+1);
+			corrFig28.SetCorrelationFunction(_h[bookName]);
                         corrFig28.SetCounter(_c[corrName]);
+			corrFig28.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig28);
                         iterator++;
                 }
@@ -789,19 +741,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig29Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig29Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig29Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig29Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig29Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1,"_Triggers");
                         book(_h[bookName],14,1,iterator);
-                        Correlator corrFig29(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig29(a,(int)d);
                         corrFig29.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig29.SetCentrality(a,a+10);
                         corrFig29.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig29.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig29.SetRxnPlaneAngle(d,d+1);
+			corrFig29.SetCorrelationFunction(_h[bookName]);
                         corrFig29.SetCounter(_c[corrName]);
+			corrFig29.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig29);
                         iterator++;
                 }
@@ -815,19 +775,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig30Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig30Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig30Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig30Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig30Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],15,1,iterator);
-                        Correlator corrFig30(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig30(a,(int)d);
                         corrFig30.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig30.SetCentrality(a,a+10);
                         corrFig30.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig30.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig30.SetRxnPlaneAngle(d,d+1);
+			corrFig30.SetCorrelationFunction(_h[bookName]);
                         corrFig30.SetCounter(_c[corrName]);
+			corrFig30.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig30);
                         iterator++;
                 }
@@ -840,19 +808,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig31Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig31Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig31Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig31Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig31Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Trigger");
                         book(_h[bookName],16,1,iterator);
-                        Correlator corrFig31(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig31(a,(int)d);
                         corrFig31.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig31.SetCentrality(a,a+10);
                         corrFig31.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig31.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig31.SetRxnPlaneAngle(d,d+1);
+			corrFig31.SetCorrelationFunction(_h[bookName]);
                         corrFig31.SetCounter(_c[corrName]);
+			corrFig31.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig31);
                         iterator++;
                 }
@@ -866,19 +842,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig32Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig32Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig32Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig32Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig32Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Trigger");
                         book(_h[bookName],17,1,iterator);
-                        Correlator corrFig32(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig32(a,(int)d);
                         corrFig32.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig32.SetCentrality(a,a+10);
                         corrFig32.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig32.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig32.SetRxnPlaneAngle(d,d+1);
+			corrFig32.SetCorrelationFunction(_h[bookName]);
                         corrFig32.SetCounter(_c[corrName]);
+			corrFig32.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig32);
                         iterator++;
                 }
@@ -891,19 +875,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig33Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig33Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig33Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
+                                "Fig33Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
                                 a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig33Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Trigger");
                         book(_h[bookName],18,1,iterator);
-                        Correlator corrFig33(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig33(a,(int)d);
                         corrFig33.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig33.SetCentrality(a,a+10);
                         corrFig33.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig33.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig33.SetRxnPlaneAngle(d,d+1);
+			corrFig33.SetCorrelationFunction(_h[bookName]);
                         corrFig33.SetCounter(_c[corrName]);
+			corrFig33.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig33);
                         iterator++;
                 }
@@ -916,19 +908,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig34Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig34Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig34Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig34Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig34Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Trigger");
                         book(_h[bookName],19,1,iterator);
-                        Correlator corrFig34(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig34(a,(int)d);
                         corrFig34.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig34.SetCentrality(a,a+10);
                         corrFig34.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig34.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig34.SetRxnPlaneAngle(d,d+1);
+			corrFig34.SetCorrelationFunction(_h[bookName]);
                         corrFig34.SetCounter(_c[corrName]);
+			corrFig34.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig34);
                         iterator++;
                 }
@@ -941,19 +941,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig35Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(35)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig35Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(35)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(35)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],20,1,iterator);
-                        Correlator corrFig35(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig35(a,(int)d);
                         corrFig35.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig35.SetCentrality(a,a+10);
                         corrFig35.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig35.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig35.SetRxnPlaneAngle(d,d+1);
+			corrFig35.SetCorrelationFunction(_h[bookName]);
                         corrFig35.SetCounter(_c[corrName]);
+			corrFig35.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig35);
                         iterator++;
                 }
@@ -967,19 +975,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig36Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(36)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig36Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig36Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(36)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],21,1,iterator);
-                        Correlator corrFig36(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig36(a,(int)d);
                         corrFig36.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig36.SetCentrality(a,a+10);
                         corrFig36.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig36.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig36.SetRxnPlaneAngle(d,d+1);
+			corrFig36.SetCorrelationFunction(_h[bookName]);
                         corrFig36.SetCounter(_c[corrName]);
+			corrFig36.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig36);
                         iterator++;
                 }
@@ -992,19 +1008,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig37Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(37)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig37Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(37)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig(37)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],22,1,iterator);
-                        Correlator corrFig37(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig37(a,(int)d);
                         corrFig37.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig37.SetCentrality(a,a+10);
                         corrFig37.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig37.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig37.SetRxnPlaneAngle(d,d+1);
+			corrFig37.SetCorrelationFunction(_h[bookName]);
                         corrFig37.SetCounter(_c[corrName]);
+			corrFig37.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig37);
                         iterator++;
                 }
@@ -1018,19 +1042,27 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(38)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(38)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(38)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],23,1,iterator);
-                        Correlator corrFig38(a,d);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig38(a,(int)d);
                         corrFig38.SetCollSystemAndEnergy("AuAu200GeV");
                         corrFig38.SetCentrality(a,a+10);
                         corrFig38.SetTriggerRange(b,(b==4)?10:b*2);
                         corrFig38.SetAssociatedRange(c,(c==4)?10:c*2);
                         corrFig38.SetRxnPlaneAngle(d,d+1);
+			corrFig38.SetCorrelationFunction(_h[bookName]);
                         corrFig38.SetCounter(_c[corrName]);
+			corrFig38.SetTriggerCounter(_c[corrNameTrigger]);
                         Correlators.push_back(corrFig38);
                         iterator++;
                 }
@@ -1043,20 +1075,28 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(39)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig38Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(39)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig(39)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],24,1,iterator);
-                        Correlator corrFig38(a,d);
-                        corrFig38.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig38.SetCentrality(a,a+10);
-                        corrFig38.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig38.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig38.SetRxnPlaneAngle(d,d+1);
-                        corrFig38.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig38);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig39(a,(int)d);
+                        corrFig39.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig39.SetCentrality(a,a+10);
+                        corrFig39.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig39.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig39.SetRxnPlaneAngle(d,d+1);
+			corrFig39.SetCorrelationFunction(_h[bookName]);
+                        corrFig39.SetCounter(_c[corrName]);
+			corrFig39.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig39);
                         iterator++;
                 }
         }
@@ -1069,20 +1109,29 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig39Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(40)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%iTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig39Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(40)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(40)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%iTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],25,1,iterator);
-                        Correlator corrFig39(a,d);
-                        corrFig39.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig39.SetCentrality(a,a+10);
-                        corrFig39.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig39.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig39.SetRxnPlaneAngle(d,d+1);
-                        corrFig39.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig39);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+
+                        Correlator corrFig40(a,(int)d);
+                        corrFig40.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig40.SetCentrality(a,a+10);
+                        corrFig40.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig40.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig40.SetRxnPlaneAngle(d,d+1);
+			corrFig40.SetCorrelationFunction(_h[bookName]);
+                        corrFig40.SetCounter(_c[corrName]);
+			corrFig40.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig40);
                         iterator++;
                 }
         }
@@ -1094,20 +1143,28 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig(40)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(41)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig(40)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(41)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			 snprintf(corrNameTrigger,200,
+                                "CounterFig(41)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],26,1,iterator);
-                        Correlator corrFig40(a,d);
-                        corrFig40.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig40.SetCentrality(a,a+10);
-                        corrFig40.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig40.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig40.SetRxnPlaneAngle(d,d+1);
-                        corrFig40.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig40);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig41(a,(int)d);
+                        corrFig41.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig41.SetCentrality(a,a+10);
+                        corrFig41.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig41.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig41.SetRxnPlaneAngle(d,d+1);
+			corrFig41.SetCorrelationFunction(_h[bookName]);
+                        corrFig41.SetCounter(_c[corrName]);
+			corrFig41.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig41);
                         iterator++;
                 }
         }
@@ -1119,20 +1176,28 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig(41)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(42)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig(41)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(42)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(42)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],27,1,iterator);
-                        Correlator corrFig41(a,d);
-                        corrFig41.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig41.SetCentrality(a,a+10);
-                        corrFig41.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig41.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig41.SetRxnPlaneAngle(d,d+1);
-                        corrFig41.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig41);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig42(a,(int)d);
+                        corrFig42.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig42.SetCentrality(a,a+10);
+                        corrFig42.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig42.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig42.SetRxnPlaneAngle(d,d+1);
+			corrFig42.SetCorrelationFunction(_h[bookName]);
+                        corrFig42.SetCounter(_c[corrName]);
+			corrFig42.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig42);
                         iterator++;
                 }
         }
@@ -1144,20 +1209,28 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig(42)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(43)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig(42)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(43)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(43)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],28,1,iterator);
-                        Correlator corrFig42(a,d);
-                        corrFig42.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig42.SetCentrality(a,a+10);
-                        corrFig42.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig42.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig42.SetRxnPlaneAngle(d,d+1);
-                        corrFig42.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig42);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig43(a,(int)d);
+                        corrFig43.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig43.SetCentrality(a,a+10);
+                        corrFig43.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig43.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig43.SetRxnPlaneAngle(d,d+1);
+			corrFig43.SetCorrelationFunction(_h[bookName]);
+                        corrFig43.SetCounter(_c[corrName]);
+			corrFig43.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig43);
                         iterator++;
                 }
         }
@@ -1170,20 +1243,28 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig(43)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(44)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%iTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig(43)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(44)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(44)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%iTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],29,1,iterator);
-                        Correlator corrFig43(a,d);
-                        corrFig43.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig43.SetCentrality(a,a+10);
-                        corrFig43.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig43.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig43.SetRxnPlaneAngle(d,d+1);
-                        corrFig43.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig43);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig44(a,(int)d);
+                        corrFig44.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig44.SetCentrality(a,a+10);
+                        corrFig44.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig44.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig44.SetRxnPlaneAngle(d,d+1);
+			corrFig44.SetCorrelationFunction(_h[bookName]);
+                        corrFig44.SetCounter(_c[corrName]);
+			corrFig44.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig44);
                         iterator++;
                 }
         }
@@ -1195,20 +1276,28 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig(44)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(45)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig(44)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(45)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(45)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],30,1,iterator);
-                        Correlator corrFig44(a,d);
-                        corrFig44.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig44.SetCentrality(a,a+10);
-                        corrFig44.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig44.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig44.SetRxnPlaneAngle(d,d+1);
-                        corrFig44.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig44);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig45(a,(int)d);
+                        corrFig45.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig45.SetCentrality(a,a+10);
+                        corrFig45.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig45.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig45.SetRxnPlaneAngle(d,d+1);
+			corrFig45.SetCorrelationFunction(_h[bookName]);
+                        corrFig45.SetCounter(_c[corrName]);
+			corrFig45.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig45);
                         iterator++;
                 }
         }
@@ -1221,25 +1310,33 @@ namespace Rivet {
         for(a=minCent; a<=maxCent; a+=10){
                 for(d=minV; d<=maxV; d++){
                         snprintf(corrName,200,
-                                "CounterFig(45)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,d,d+1);
+                                "CounterFig(46)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1);
                         snprintf(bookName,200,
-                                "Fig(45)Cent%i-%iPtT%2.1f-%2.1fPtA%2.1f-%2.1fAngle%i/pi<phi-Psi<%i/pi",
-                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,d,d+1);
+                                "Fig(46)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi",
+                                a,a+10,b,(b==4)?10:b*2,c,(b==4)?10:c*2,(int)d,(int)d+1);
+			snprintf(corrNameTrigger,200,
+                                "CounterFig(46)Cent%iTo%iPtT%2.1fTo%2.1fPtA%2.1fTo%2.1fAngle%i/piTo%i/pi%s",
+                                a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],31,1,iterator);
-                        Correlator corrFig45(a,d);
-                        corrFig45.SetCollSystemAndEnergy("AuAu200GeV");
-                        corrFig45.SetCentrality(a,a+10);
-                        corrFig45.SetTriggerRange(b,(b==4)?10:b*2);
-                        corrFig45.SetAssociatedRange(c,(c==4)?10:c*2);
-                        corrFig45.SetRxnPlaneAngle(d,d+1);
-                        corrFig45.SetCounter(_c[corrName]);
-                        Correlators.push_back(corrFig45);
+			book(_c[corrName], corrName);
+			book(_c[corrNameTrigger], corrNameTrigger);
+
+                        Correlator corrFig46(a,(int)d);
+                        corrFig46.SetCollSystemAndEnergy("AuAu200GeV");
+                        corrFig46.SetCentrality(a,a+10);
+                        corrFig46.SetTriggerRange(b,(b==4)?10:b*2);
+                        corrFig46.SetAssociatedRange(c,(c==4)?10:c*2);
+                        corrFig46.SetRxnPlaneAngle(d,d+1);
+			corrFig46.SetCorrelationFunction(_h[bookName]);
+                        corrFig46.SetCounter(_c[corrName]);
+			corrFig46.SetTriggerCounter(_c[corrNameTrigger]);
+                        Correlators.push_back(corrFig46);
                         iterator++;
                 }
         }
         iterator=1;
-	*/
+
 
     }
 
