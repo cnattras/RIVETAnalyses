@@ -226,6 +226,7 @@ namespace Rivet {
             }
         }
 
+        //If the minValue is already zero, do not subtract
         if(minValue == 0 || minValueEntries==0) return histo;
 
         hist.reset();
