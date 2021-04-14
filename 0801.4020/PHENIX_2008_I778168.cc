@@ -441,6 +441,18 @@ namespace Rivet {
        divide(_h["c92Pt_AuAu"],_h["c92Pt_pp"],hRaa["Raa_c8092_AuAu"]);
        divide(_h["callPt_AuAu"],_h["callPt_pp"],hRaa["Raa_minbias_AuAu"]);
 
+       hRaa["Raa_c05_AuAu"]->scaleY(1./1065.4);
+       hRaa["Raa_c010_AuAu"]->scaleY(1./955.4);
+       hRaa["Raa_c1020_AuAu"]->scaleY(1./602.6);
+       hRaa["Raa_c2030_AuAu"]->scaleY(1./373.8);
+       hRaa["Raa_c3040_AuAu"]->scaleY(1./219.8);
+       hRaa["Raa_c4050_AuAu"]->scaleY(1./120.3);
+       hRaa["Raa_c5060_AuAu"]->scaleY(1./61.0);
+       hRaa["Raa_c6070_AuAu"]->scaleY(1./28.5);
+       hRaa["Raa_c7080_AuAu"]->scaleY(1./12.4);
+       hRaa["Raa_c8092_AuAu"]->scaleY(1./4.9);
+       hRaa["Raa_minbias_AuAu"]->scaleY(1./257.8);
+
 // // Scale???
 // // Directly copy/pasted?
        /*
