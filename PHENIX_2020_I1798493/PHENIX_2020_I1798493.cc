@@ -287,7 +287,7 @@ namespace Rivet {
         return integral;
 
     }
-   
+
 
 
     /// @name Analysis methods
@@ -734,6 +734,13 @@ namespace Rivet {
         }
       }
 
+      //Figure 4.b
+      string refname = mkAxisCode(4,1,1);
+      const Scatter2D& refdata = refData(refname);
+      book(_h["IAA_AuAu"], refname + "_AuAu", refdata);
+      book(_h["IAA_pp"], refname + "_pp", refdata);
+      book(_s["IAA"], refname);
+
     };
 
 
@@ -815,14 +822,19 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      
+
       for(Correlator& corr : Correlators)
       {
         corr.Normalize();
         Histo1DPtr h = corr.GetCorrelationFunction();
         h = SubtractBackgroundZYAM(h);
+        double fraction = 0.;
+        double yield = getYieldRangeUser(h, M_PI/2., 3.*M_PI/2., fraction);
+        
+        _h["IAA_AuAu"]
+
       }
-      
+
       // normalize(_h["XXXX"]); // normalize to unity
       // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
@@ -837,6 +849,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    map<string, Scatter2DPtr> _s;
     //@}
 
     vector<Correlator> Correlators;
