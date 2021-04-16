@@ -1413,6 +1413,11 @@ namespace Rivet {
 /*
 
 */
+
+	         for(Correlator& corr : Correlators)
+      {
+              corr.Normalize();
+      }
     }
 
     //@}
