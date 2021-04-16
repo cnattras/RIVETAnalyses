@@ -6,7 +6,6 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
-#include "SelectedParticles.hh"
 //#include "Rivet/Projections/EventPlane.hh"
 #include <cmath>
 #include <iostream>
@@ -33,7 +32,7 @@ namespace Rivet {
                 QRn += (p.pT()/GeV)*cos(n*p.phi());
             }
 
-            double eventPlane = (1./_nthOrder[n])*atan2(QIn,QRn);
+            double eventPlane = (1./n)*atan2(QIn,QRn);
 
             return eventPlane;
     }
@@ -49,7 +48,7 @@ namespace Rivet {
                 QRn += cos(n*p.phi());
             }
 
-            double eventPlane = (1./_nthOrder[n])*atan2(QIn,QRn);
+            double eventPlane = (1./n)*atan2(QIn,QRn);
 
             return eventPlane;
     }
@@ -207,7 +206,7 @@ namespace Rivet {
 
             if((x < 0) && (n%2 == 1)) besselIn = -besselIn;
 
-            return result;
+            return besselIn;
     }
 
     double Resolution(double chi)
@@ -227,16 +226,8 @@ namespace Rivet {
 
       // Initialise and register projections
 
-      // the basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
       const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.150*GeV);
       declare(fs, "fs");
-
-      std::initializer_list<int> pdgIds = {211,-211};
-
-      const PrimaryParticles pp(pdgIds, Cuts::abseta < 0.5);
-      declare(pp, "pp");
 
 
 
@@ -251,6 +242,7 @@ namespace Rivet {
       EventPlane bbcN(2,cutsBBCN);
       declare(bbcN, "bbcN");
       */
+      /*
       cout << "CalculateChi: " << CalculateChi(0.2) << endl;
 
       double chi = CalculateChi(0.2);
@@ -262,7 +254,7 @@ namespace Rivet {
       chi = CalculateChi(0.2/sqrt(2.));
 
       cout << "Resolution: " << Resolution(chi)*sqrt(2.) << endl;
-
+      */
       book(hPhi, "hPhi", 36, 0, 2*M_PI);
 
     }
@@ -273,11 +265,7 @@ namespace Rivet {
 
       const FinalState& fs = apply<FinalState>(event, "fs");
 
-      const PrimaryParticles& pp = apply<PrimaryParticles>(event, "pp");
-
-      const SelectedParticles& sp = apply<SelectedParticles>(event, "sp");
-
-      Particles particles = sp.particles();
+      Particles particles = fs.particles();
 
       /*
       EventPlane bbcP = apply<EventPlane>(event,"bbcP");
@@ -293,15 +281,8 @@ namespace Rivet {
 
       for(Particle& p : particles)
       {
-          if(abs(p.pid()) >= 11)
-          {
               hPhi->fill(p.phi());
-              //cout << "PID: " << p.pid() << endl;
-          }
-
-
       }
-
     }
 
 
