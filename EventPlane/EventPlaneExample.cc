@@ -34,6 +34,8 @@ namespace Rivet {
 
             double eventPlane = (1./n)*atan2(QIn,QRn);
 
+            if(eventPlane < 0) eventPlane += 2.*M_PI;
+
             return eventPlane;
     }
 
@@ -49,6 +51,35 @@ namespace Rivet {
             }
 
             double eventPlane = (1./n)*atan2(QIn,QRn);
+
+            if(eventPlane < 0) eventPlane += 2.*M_PI;
+
+            return eventPlane;
+    }
+
+    double GetEventPlaneDetectorAcc(int n, const FinalState pf, vector<Cut> etaRxP, int nPhiSections)
+    {
+            double QIn = 0.;
+            double QRn = 0.;
+
+            for(auto eta : etaRxP)
+            {
+                    for(int iphi = 0; iphi < nPhiSections; iphi++)
+                    {
+                            Cut aCut = eta && Cuts::phi > iphi*(2.*M_PI/nPhiSections) && Cuts::phi < (iphi+1)*(2.*M_PI/nPhiSections);
+                            Particles particles = pf.particles(aCut);
+                            int weight = particles.size();
+                            for(const Particle& p : particles)
+                            {
+                                    QIn += weight*sin(n*p.phi());
+                                    QRn += weight*cos(n*p.phi());
+                            }
+                    }
+            }
+
+            double eventPlane = (1./n)*atan2(QIn,QRn);
+
+            if(eventPlane < 0) eventPlane += 2.*M_PI;
 
             return eventPlane;
     }
@@ -211,9 +242,9 @@ namespace Rivet {
 
     double Resolution(double chi)
     {
-        double con = sqrt(M_PI)/2.;
+        double A = sqrt(M_PI/2.)/2.;
 
-        double funcRes = (con*chi*exp(-chi*chi/2.))*( BesselI0(chi *chi /2.) + BesselI1(chi*chi /2.));
+        double funcRes = (A*chi*exp(-chi*chi/4.))*( BesselI0(chi *chi /4.) + BesselI1(chi*chi /4.));
 
         return funcRes;
     }
@@ -229,6 +260,8 @@ namespace Rivet {
       const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.150*GeV);
       declare(fs, "fs");
 
+      const FinalState RxP(Cuts::abseta > 1. && Cuts::abseta < 2.8);
+      declare(RxP, "RxP");
 
 
       /*
@@ -264,6 +297,18 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const FinalState& fs = apply<FinalState>(event, "fs");
+
+      const FinalState& RxP = apply<FinalState>(event, "RxP");
+
+      //Inner and Outer rings of the North and South sections of the RxP detector
+      vector<Cut> etaRxP = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8, Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
+      int nPhiSections = 12;
+
+      double evPm = GetEventPlaneDetectorAcc(2, RxP, etaRxP, nPhiSections);
+
+      double evPpt = GetEventPlanePtWeight(2, RxP.particles());
+
+
 
       Particles particles = fs.particles();
 
