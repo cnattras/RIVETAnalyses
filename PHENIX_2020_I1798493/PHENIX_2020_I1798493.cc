@@ -211,6 +211,84 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2020_I1798493);
 
+    Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+    {
+
+        YODA::Histo1D hist = *histo;
+
+        double minValue = sqrt(-2);
+        double binWidth = 0.;
+        int minValueEntries = 0.;
+
+        for(auto &bin : hist.bins())
+        {
+            if(std::isnan(minValue))
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+            if(bin.sumW()/bin.width() < minValue/binWidth)
+            {
+                minValue = bin.sumW();
+                binWidth = bin.width();
+                minValueEntries = bin.numEntries();
+            }
+        }
+        if(minValue == 0 || minValueEntries==0) return histo;
+
+        hist.reset();
+
+        for(auto &bin : hist.bins())
+        {
+            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+        }
+
+        *histo = YODA::subtract(*histo, hist);
+
+        return histo;
+
+    }
+
+    double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax, double &fraction)
+    {
+        //This will include bins partially covered by the user range
+
+        YODA::Histo1D hist = *histo;
+
+        double integral = 0.;
+
+        if(xmax < xmin) throw RangeError("Error: xmin > xmax");
+        if(xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
+        if(xmax > hist.bin(hist.numBins()-1).xMax()) throw RangeError("xmax is out of range");
+
+        for(auto &bin : hist.bins())
+        {
+            if((bin.xMin() > xmin) && (bin.xMax() < xmax))
+            {
+                integral += bin.sumW();
+                fraction += bin.numEntries();
+            }
+            else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
+            {
+                double perc = bin.xMax() - xmin;
+                integral += perc*bin.sumW();
+                fraction += perc*bin.numEntries();
+
+            }
+            else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
+            {
+                double perc = xmax - bin.xMin();
+                integral += perc*bin.sumW();
+                fraction += perc*bin.numEntries();
+            }
+        }
+
+        return integral;
+
+    }
+
+
 
     /// @name Analysis methods
     //@{
@@ -502,7 +580,7 @@ namespace Rivet {
         book(_h[corrs2p], corrs2p, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig2(i);
         corrfig2p.SetCollSystemAndEnergy("pp200GeV");
-    	  corrfig2p.SetCentrality(0.,40.);
+    	  corrfig2p.SetNoCentrality();
     	  corrfig2p.SetTriggerRange(tlow, tup);
 	      corrfig2p.SetAssociatedRange(alow, aup);
         corrfig2p.SetXiRange(xilow,xiup);
@@ -656,6 +734,13 @@ namespace Rivet {
         }
       }
 
+      //Figure 4.b
+      string refname = mkAxisCode(4,1,1);
+      const Scatter2D& refdata = refData(refname);
+      book(_h["IAA_AuAu"], refname + "_AuAu", refdata);
+      book(_h["IAA_pp"], refname + "_pp", refdata);
+      book(_s["IAA"], refname);
+
     };
 
 
@@ -737,50 +822,19 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      /*
-      bool AuAu_available = false;
-      bool pp_available = false;
-      bool dAu_available = false;
 
-      for (auto element : _c)
-      {
-        string name = element.second->name();
-        if (name.find("AUAU") != std::string::npos)
-        {
-          if (element.second->sumW() > 0) AuAu_available = true;
-          else
-          {
-            AuAu_available = false;
-            break;
-          }
-        }
-        else if (name.find("pp") != std::string::npos)
-        {
-          if (element.second->sumW() > 0) pp_available = true;
-          else
-          {
-            pp_available = false;
-            break;
-          }
-        }
-        else if (name.find("dAU") != std::string::npos)
-        {
-          if (element.second->sumW() > 0) dAu_available = true;
-          else
-          {
-            dAu_available = false;
-            break;
-          }
-        }
-      }
-      if ((!pp_available) || (!AuAu_available) || (!dAu_available)) return;
-
-      /*
       for(Correlator& corr : Correlators)
       {
         corr.Normalize();
+        Histo1DPtr h = corr.GetCorrelationFunction();
+        h = SubtractBackgroundZYAM(h);
+        double fraction = 0.;
+        double yield = getYieldRangeUser(h, M_PI/2., 3.*M_PI/2., fraction);
+        
+        _h["IAA_AuAu"]
+
       }
-      */
+
       // normalize(_h["XXXX"]); // normalize to unity
       // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
@@ -795,6 +849,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    map<string, Scatter2DPtr> _s;
     //@}
 
     vector<Correlator> Correlators;
