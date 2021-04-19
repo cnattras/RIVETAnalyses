@@ -383,7 +383,7 @@ namespace Rivet {
                     centBin += 10.;
             }
 
-            double v2 = GetVn(_h["v2Histo"], 2);
+            double v2raw = GetVn(_h["v2Histo"], 2); //still has to be divided by event plane resolution
 
     }
 
