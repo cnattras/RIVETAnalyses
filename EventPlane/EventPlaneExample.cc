@@ -6,6 +6,7 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
+#include "../Centralities/RHICCentrality.hh"
 //#include "Rivet/Projections/EventPlane.hh"
 #include <cmath>
 #include <iostream>
@@ -84,7 +85,7 @@ namespace Rivet {
             return eventPlane;
     }
 
-    double CalculateVn(const Particles& particles, double eventPlane, int nth, double minPt, int nBins=-1)
+    double CalculateVn(const Particles& particles, double eventPlane, int n, double minPt, int nBins=-1)
     {
         if (nBins == -1) nBins = sqrt(particles.size());
 
@@ -107,7 +108,7 @@ namespace Rivet {
         for (int i = 0; i < nBins; i++)
         {
             integral += phiBins[i];
-            Vn += phiBins[i]*cos(nth*((i*binWidth) + binCenter));
+            Vn += phiBins[i]*cos(n*((i*binWidth) + binCenter));
         }
 
         Vn /= integral;
@@ -257,12 +258,22 @@ namespace Rivet {
 
       // Initialise and register projections
 
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+
       const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.150*GeV);
       declare(fs, "fs");
 
       const FinalState RxP(Cuts::abseta > 1. && Cuts::abseta < 2.8);
       declare(RxP, "RxP");
 
+      const FinalState RxPPos(Cuts::eta > 1. && Cuts::eta < 2.8);
+      declare(RxPPos, "RxPPos");
+
+      const FinalState RxPNeg(Cuts::eta < -1. && Cuts::eta > -2.8);
+      declare(RxPNeg, "RxPNeg");
+
+      book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
+      book(_s["ResCent"], "ResCent");
 
       /*
       Cut cutsBBCP = Cuts::eta < 0.5 && Cuts::eta > 0. && Cuts::pT > 0.150*GeV;
@@ -296,18 +307,27 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
+            const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+            //add calculation of reaction plane angle
+            const double c = cent();
+
       const FinalState& fs = apply<FinalState>(event, "fs");
 
       const FinalState& RxP = apply<FinalState>(event, "RxP");
+      const FinalState& RxPPos = apply<FinalState>(event, "RxPPos");
+      const FinalState& RxPNeg = apply<FinalState>(event, "RxPNeg");
 
       //Inner and Outer rings of the North and South sections of the RxP detector
       vector<Cut> etaRxP = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8, Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
       int nPhiSections = 12;
 
-      double evPm = GetEventPlaneDetectorAcc(2, RxP, etaRxP, nPhiSections);
+      vector<Cut> etaRxPPos = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8};
+      vector<Cut> etaRxPNeg = {Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
 
-      double evPpt = GetEventPlanePtWeight(2, RxP.particles());
+      double evPPos = GetEventPlaneDetectorAcc(2, RxPPos, etaRxPPos, nPhiSections);
+      double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
 
+      _p["RxPcosPos"]->fill(int(floor(fmod(c,10)))+0.5, cos(2*(evPPos-evPNeg)));
 
 
       Particles particles = fs.particles();
@@ -334,7 +354,19 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
+            double centBin = 5.;
 
+            for(auto bin : _p["RxPcosPos"]->bins())
+            {
+                    double RxPcosPos = bin.mean();
+
+                    double chiRxPPos = CalculateChi(sqrt(RxPcosPos));
+
+                    double res = Resolution(sqrt(2)*chiRxPPos);
+
+                    _s["ResCent"]->addPoint(centBin, res, 5., 0.);
+                    centBin += 10.;
+            }
 
     }
 
@@ -344,6 +376,8 @@ namespace Rivet {
     /// @name Histograms
     //@{
     Histo1DPtr hPhi;
+    map<string, Profile1DPtr> _p;
+    map<string, Scatter2DPtr> _s;
     //@}
 
 
