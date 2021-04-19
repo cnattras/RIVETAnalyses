@@ -85,7 +85,7 @@ namespace Rivet {
             return eventPlane;
     }
 
-    double CalculateVn(const Particles& particles, double eventPlane, int n, double minPt, int nBins=-1)
+    double CalculateVn(const Particles& particles, double eventPlane, int n, double minPt, double maxPt, int nBins=-1)
     {
         if (nBins == -1) nBins = sqrt(particles.size());
 
@@ -95,7 +95,7 @@ namespace Rivet {
 
         for(const Particle &p : particles)
         {
-            if (p.pT()/GeV < minPt)
+            if((p.pT()/GeV > minPt) && (p.pT()/GeV < maxPt))
             {
                 phiBins[static_cast<int>(mapAngle0To2Pi(p.phi() - eventPlane)/binWidth)] += p.pT()/GeV;
             }
@@ -109,6 +109,53 @@ namespace Rivet {
         {
             integral += phiBins[i];
             Vn += phiBins[i]*cos(n*((i*binWidth) + binCenter));
+        }
+
+        Vn /= integral;
+        return Vn;
+    }
+
+    void FillVn(Histo1DPtr vnHisto, const Particles& particles, double eventPlane, double minPt, double maxPt)
+    {
+        for(const Particle &p : particles)
+        {
+            if((p.pT()/GeV > minPt) && (p.pT()/GeV < maxPt))
+            {
+                vnHisto->fill(mapAngle0To2Pi(p.phi() - eventPlane), p.pT()/GeV);
+            }
+        }
+    }
+
+    double GetVn(Histo1DPtr vnHisto, int n)
+    {
+        double integral = 0.;
+        double Vn = 0.;
+
+        for(auto bin : vnHisto->bins())
+        {
+            integral += vnHisto->sumW();
+            Vn += vnHisto->sumW()*cos(n*bin.xMid());
+        }
+
+        if(integral > 0.) Vn /= integral;
+        else return 0.;
+
+        return Vn;
+    }
+
+    double CalculateVnAlt(const Particles& particles, double eventPlane, int n, double minPt, double maxPt)
+    {
+
+        double integral = 0.;
+        double Vn = 0.;
+
+        for(const Particle &p : particles)
+        {
+            if ((p.pT()/GeV > minPt) && (p.pT()/GeV < maxPt))
+            {
+                integral += p.pT()/GeV;
+                Vn += (p.pT()/GeV)*cos(n*mapAngle0To2Pi(p.phi() - eventPlane));
+            }
         }
 
         Vn /= integral;
@@ -275,31 +322,7 @@ namespace Rivet {
       book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
       book(_s["ResCent"], "ResCent");
 
-      /*
-      Cut cutsBBCP = Cuts::eta < 0.5 && Cuts::eta > 0. && Cuts::pT > 0.150*GeV;
-
-      EventPlane bbcP(2,cutsBBCP);
-      declare(bbcP, "bbcP");
-
-      Cut cutsBBCN = Cuts::eta > -0.5 && Cuts::eta < 0. && Cuts::pT > 0.150*GeV;
-
-      EventPlane bbcN(2,cutsBBCN);
-      declare(bbcN, "bbcN");
-      */
-      /*
-      cout << "CalculateChi: " << CalculateChi(0.2) << endl;
-
-      double chi = CalculateChi(0.2);
-
-      cout << "Resolution: " << Resolution(chi) << endl;
-
-      cout << "CalculateChi: " << CalculateChi(0.2/sqrt(2.)) << endl;
-
-      chi = CalculateChi(0.2/sqrt(2.));
-
-      cout << "Resolution: " << Resolution(chi)*sqrt(2.) << endl;
-      */
-      book(hPhi, "hPhi", 36, 0, 2*M_PI);
+      book(_h["v2Histo"], "v2Histo", 36, 0, 2*M_PI);
 
     }
 
@@ -307,9 +330,9 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-            const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-            //add calculation of reaction plane angle
-            const double c = cent();
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      //add calculation of reaction plane angle
+      const double c = cent();
 
       const FinalState& fs = apply<FinalState>(event, "fs");
 
@@ -321,33 +344,23 @@ namespace Rivet {
       vector<Cut> etaRxP = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8, Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
       int nPhiSections = 12;
 
+      double evPPosNeg = GetEventPlaneDetectorAcc(2, RxP, etaRxP, nPhiSections);
+
       vector<Cut> etaRxPPos = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8};
       vector<Cut> etaRxPNeg = {Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
 
       double evPPos = GetEventPlaneDetectorAcc(2, RxPPos, etaRxPPos, nPhiSections);
       double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
 
-      _p["RxPcosPos"]->fill(int(floor(fmod(c,10)))+0.5, cos(2*(evPPos-evPNeg)));
+      double deltaEP = abs(evPPos-evPNeg);
 
+      if(deltaEP > M_PI) deltaEP = (2.*M_PI) - deltaEP;
+
+      _p["RxPcosPos"]->fill(int(floor(fmod(c,10)))+0.5, cos(2*(deltaEP)));
 
       Particles particles = fs.particles();
 
-      /*
-      EventPlane bbcP = apply<EventPlane>(event,"bbcP");
-      double epBBCP = bbcP.getNthOrderAngle(2);
-
-      EventPlane bbcN = apply<EventPlane>(event,"bbcN");
-      double epBBCN = bbcN.getNthOrderAngle(2);
-
-      cout << "epBBCP: " << epBBCP << " epBBCN: " << epBBCN << endl;
-      */
-
-      //cout << "nparticles: " << particles.size() << endl;
-
-      for(Particle& p : particles)
-      {
-              hPhi->fill(p.phi());
-      }
+      FillVn(_h["v2Histo"], particles, evPPosNeg, 0.15, 5.);
     }
 
 
@@ -358,15 +371,19 @@ namespace Rivet {
 
             for(auto bin : _p["RxPcosPos"]->bins())
             {
-                    double RxPcosPos = bin.mean();
+                    if(bin.numEntries() > 0 && bin.mean() > 0.)
+                    {
+                            double RxPPosRes = sqrt(bin.mean()); //resolution of one of the RxP sides (positive eta)
+                            double chiRxPPos = CalculateChi(RxPPosRes); //Chi of one of the RxP sides (positive eta)
+                            //Using the approx chiRxP(pos+neg) = sqrt(2)*chiRxPPos
+                            double res = Resolution(sqrt(2)*chiRxPPos); //resolution of RxP(pos+neg)
 
-                    double chiRxPPos = CalculateChi(sqrt(RxPcosPos));
-
-                    double res = Resolution(sqrt(2)*chiRxPPos);
-
-                    _s["ResCent"]->addPoint(centBin, res, 5., 0.);
+                            _s["ResCent"]->addPoint(centBin, res, 5., 0.);
+                    }
                     centBin += 10.;
             }
+
+            double v2 = GetVn(_h["v2Histo"], 2);
 
     }
 
@@ -375,7 +392,7 @@ namespace Rivet {
 
     /// @name Histograms
     //@{
-    Histo1DPtr hPhi;
+    map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, Scatter2DPtr> _s;
     //@}
