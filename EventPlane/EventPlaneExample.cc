@@ -178,7 +178,7 @@ namespace Rivet {
         double con = sqrt(M_PI)/2.;
         for ( int i = 0; i < 15; i++)
         {
-            chi = (( con*chi*exp(-chi*chi/2.))*( BesselI(0, chi *chi /2.) + BesselI(1, chi*chi /2.) )  < res) ? chi + delta : chi - delta ;
+            chi = (( con*chi*exp(-chi*chi/2.))*( BesselIn(0, chi *chi /2.) + BesselIn(1, chi*chi /2.) )  < res) ? chi + delta : chi - delta ;
             delta = delta / 2.;
         }
 
@@ -245,7 +245,7 @@ namespace Rivet {
             return besselI1;
     }
 
-    double BesselI(int n,double x)
+    double BesselIn(int n, double x)
     {
             //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
 
