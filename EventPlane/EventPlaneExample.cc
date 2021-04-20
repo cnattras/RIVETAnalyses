@@ -126,11 +126,11 @@ namespace Rivet {
         }
     }
 
-    void FillVn(Histo1DPtr vnHisto, const Particles& particles, double eventPlane)
+    void FillVn(Profile1DPtr vnHisto, const Particles& particles, double eventPlane, int n)
     {
         for(const Particle &p : particles)
         {
-            vnHisto->fill(mapAngle0To2Pi(p.phi() - eventPlane), p.pT()/GeV);
+            vnHisto->fill(p.pT()/GeV, cos(n*(p.phi() - eventPlane)));
         }
     }
 
@@ -338,22 +338,10 @@ namespace Rivet {
       book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
       book(_s["ResCent"], "ResCent");
 
-
-
-
-
-
-      for(int icent = 0; icent < v2centBins.size()-1; icent++)
+      for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
       {
               string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-
-              book(_s[v2string], v2string);
-
-              for(int ipt = 0; ipt < v2ptBins.size()-1; ipt++)
-              {
-                      string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
-                      book(_h[phiEP], phiEP,  36, 0, 2*M_PI);
-              }
+              book(_p[v2string], v2string,  v2ptBins);
       }
 
 
@@ -395,17 +383,10 @@ namespace Rivet {
       //std::floor(double a) returns the largest integer value smaller than a
       _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(deltaEP)));
 
-      //Particles particles = fs.particles();
+      Particles particles = fs.particles();
 
-      for(int ipt = 0; ipt < v2ptBins.size()-1; ipt++)
-      {
-              string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
-              string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
-              //FillVn(_h[phiEP], particles, evPPosNeg, v2ptBins[i], v2ptBins[i+1]);
-              Particles particles = fs.particles(Cuts::pT > v2ptBins[ipt]*GeV && Cuts::pT < v2ptBins[ipt+1]*GeV);
-
-              FillVn(_h[phiEP], particles, evPPosNeg);
-      }
+      string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+      FillVn(_p[v2string], particles, evPPosNeg, 2);
 
 
     }
@@ -433,19 +414,11 @@ namespace Rivet {
                     centBin++;
             }
 
-            for(int icent = 0; icent < v2centBins.size()-1; icent++)
+            for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
             {
                     string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                    _p[v2string]->scaleY(1./EPres[icent]);
 
-                    for(int ipt = 0; ipt < v2ptBins.size()-1; ipt++)
-                    {
-                            string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
-                            double v2raw = GetVn(_h[phiEP], 2);
-                            double v2 = 0.;
-                            if(EPres[icent] > 0) v2 = v2raw / EPres[icent]; //v2 = v2_raw / EP_resolution
-                            double binCenter = (v2ptBins[ipt]+v2ptBins[ipt+1])/2.;
-                            _s[v2string]->addPoint(binCenter, v2, v2ptBins[ipt+1]-binCenter, 0.);
-                    }
             }
 
 
@@ -459,7 +432,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, Scatter2DPtr> _s;
-    std::vector<double> v2ptBins = {0.25, 0.5, 7.5, 1., 1.25, 1.5, 1.75, 2., 2.5, 3., 3.5, 4., 4.5, 5., 6., 8.};
+    std::vector<double> v2ptBins = {0.25, 0.5, 0.75, 1., 1.25, 1.5, 1.75, 2., 2.5, 3., 3.5, 4., 4.5, 5., 6., 8.};
     std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50.};
     //@}
 
