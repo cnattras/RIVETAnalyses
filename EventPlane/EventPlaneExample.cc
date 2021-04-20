@@ -178,7 +178,7 @@ namespace Rivet {
         double con = sqrt(M_PI)/2.;
         for ( int i = 0; i < 15; i++)
         {
-            chi = (( con*chi*exp(-chi*chi/2.))*( BesselI0(chi *chi /2.) + BesselI1(chi*chi /2.) )  < res) ? chi + delta : chi - delta ;
+            chi = (( con*chi*exp(-chi*chi/2.))*( BesselI(0, chi *chi /2.) + BesselI(1, chi*chi /2.) )  < res) ? chi + delta : chi - delta ;
             delta = delta / 2.;
         }
 
@@ -403,7 +403,7 @@ namespace Rivet {
               string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
               //FillVn(_h[phiEP], particles, evPPosNeg, v2ptBins[i], v2ptBins[i+1]);
               Particles particles = fs.particles(Cuts::pT > v2ptBins[ipt]*GeV && Cuts::pT < v2ptBins[ipt+1]*GeV);
-              
+
               FillVn(_h[phiEP], particles, evPPosNeg);
       }
 
