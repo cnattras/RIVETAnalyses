@@ -126,6 +126,14 @@ namespace Rivet {
         }
     }
 
+    void FillVn(Histo1DPtr vnHisto, const Particles& particles, double eventPlane)
+    {
+        for(const Particle &p : particles)
+        {
+            vnHisto->fill(mapAngle0To2Pi(p.phi() - eventPlane), p.pT()/GeV);
+        }
+    }
+
     double GetVn(Histo1DPtr vnHisto, int n)
     {
         double integral = 0.;
@@ -297,6 +305,14 @@ namespace Rivet {
         return funcRes;
     }
 
+    string Form(double number, int precision)
+    {
+            std::stringstream stream;
+            stream << std::fixed << std::setprecision(precision) << number;
+
+            return stream.str();
+    }
+
     /// @name Analysis methods
     //@{
 
@@ -322,7 +338,25 @@ namespace Rivet {
       book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
       book(_s["ResCent"], "ResCent");
 
-      book(_h["v2Histo"], "v2Histo", 36, 0, 2*M_PI);
+
+
+
+
+
+      for(int icent = 0; icent < v2centBins.size()-1; icent++)
+      {
+              string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+
+              book(_s[v2string], v2string);
+
+              for(int ipt = 0; ipt < v2ptBins.size()-1; ipt++)
+              {
+                      string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
+                      book(_h[phiEP], phiEP,  36, 0, 2*M_PI);
+              }
+      }
+
+
 
     }
 
@@ -333,6 +367,8 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       //add calculation of reaction plane angle
       const double c = cent();
+
+      if(c >= 50.) vetoEvent;
 
       const FinalState& fs = apply<FinalState>(event, "fs");
 
@@ -356,34 +392,62 @@ namespace Rivet {
 
       if(deltaEP > M_PI) deltaEP = (2.*M_PI) - deltaEP;
 
-      _p["RxPcosPos"]->fill(int(floor(fmod(c,10)))+0.5, cos(2*(deltaEP)));
+      //std::floor(double a) returns the largest integer value smaller than a
+      _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(deltaEP)));
 
-      Particles particles = fs.particles();
+      //Particles particles = fs.particles();
 
-      FillVn(_h["v2Histo"], particles, evPPosNeg, 0.15, 5.);
+      for(int ipt = 0; ipt < v2ptBins.size()-1; ipt++)
+      {
+              string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+              string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
+              //FillVn(_h[phiEP], particles, evPPosNeg, v2ptBins[i], v2ptBins[i+1]);
+              Particles particles = fs.particles(Cuts::pT > v2ptBins[ipt]*GeV && Cuts::pT < v2ptBins[ipt+1]*GeV);
+              
+              FillVn(_h[phiEP], particles, evPPosNeg);
+      }
+
+
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
 
-            double centBin = 5.;
+            int centBin = 0;
+
+            std::vector<double> EPres(5, 0.);
 
             for(auto bin : _p["RxPcosPos"]->bins())
             {
-                    if(bin.numEntries() > 0 && bin.mean() > 0.)
+                    //if(bin.numEntries() > 0 && bin.mean() > 0.)
+                    if(bin.numEntries() > 0)
                     {
                             double RxPPosRes = sqrt(bin.mean()); //resolution of one of the RxP sides (positive eta)
                             double chiRxPPos = CalculateChi(RxPPosRes); //Chi of one of the RxP sides (positive eta)
                             //Using the approx chiRxP(pos+neg) = sqrt(2)*chiRxPPos
                             double res = Resolution(sqrt(2)*chiRxPPos); //resolution of RxP(pos+neg)
-
-                            _s["ResCent"]->addPoint(centBin, res, 5., 0.);
+                            EPres[centBin] = res;
+                            _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
                     }
-                    centBin += 10.;
+                    centBin++;
             }
 
-            double v2raw = GetVn(_h["v2Histo"], 2); //still has to be divided by event plane resolution
+            for(int icent = 0; icent < v2centBins.size()-1; icent++)
+            {
+                    string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+
+                    for(int ipt = 0; ipt < v2ptBins.size()-1; ipt++)
+                    {
+                            string phiEP = "phiEP_pt_" + Form(v2ptBins[ipt], 2) + "_" + Form(v2ptBins[ipt+1], 2) + v2string;
+                            double v2raw = GetVn(_h[phiEP], 2);
+                            double v2 = 0.;
+                            if(EPres[icent] > 0) v2 = v2raw / EPres[icent]; //v2 = v2_raw / EP_resolution
+                            double binCenter = (v2ptBins[ipt]+v2ptBins[ipt+1])/2.;
+                            _s[v2string]->addPoint(binCenter, v2, v2ptBins[ipt+1]-binCenter, 0.);
+                    }
+            }
+
 
     }
 
@@ -395,6 +459,8 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, Scatter2DPtr> _s;
+    std::vector<double> v2ptBins = {0.25, 0.5, 7.5, 1., 1.25, 1.5, 1.75, 2., 2.5, 3., 3.5, 4., 4.5, 5., 6., 8.};
+    std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50.};
     //@}
 
 
