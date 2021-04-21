@@ -33,9 +33,7 @@ namespace Rivet {
                 QRn += (p.pT()/GeV)*cos(n*p.phi());
             }
 
-            double eventPlane = (1./n)*atan2(QIn,QRn);
-
-            if(eventPlane < 0) eventPlane += 2.*M_PI;
+            double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
 
             return eventPlane;
     }
@@ -51,9 +49,7 @@ namespace Rivet {
                 QRn += cos(n*p.phi());
             }
 
-            double eventPlane = (1./n)*atan2(QIn,QRn);
-
-            if(eventPlane < 0) eventPlane += 2.*M_PI;
+            double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
 
             return eventPlane;
     }
@@ -78,9 +74,7 @@ namespace Rivet {
                     }
             }
 
-            double eventPlane = (1./n)*atan2(QIn,QRn);
-
-            if(eventPlane < 0) eventPlane += 2.*M_PI;
+            double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
 
             return eventPlane;
     }
@@ -376,12 +370,8 @@ namespace Rivet {
       double evPPos = GetEventPlaneDetectorAcc(2, RxPPos, etaRxPPos, nPhiSections);
       double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
 
-      double deltaEP = abs(evPPos-evPNeg);
-
-      if(deltaEP > M_PI) deltaEP = (2.*M_PI) - deltaEP;
-
       //std::floor(double a) returns the largest integer value smaller than a
-      _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(deltaEP)));
+      _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
 
       Particles particles = fs.particles();
 
