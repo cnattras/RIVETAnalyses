@@ -231,6 +231,31 @@ namespace Rivet {
 	        return histo;
 	}
 
+    double GetEventPlaneDetectorAcc(int n, const FinalState pf, vector<Cut> etaRxP, int nPhiSections)
+    {
+            double QIn = 0.;
+            double QRn = 0.;
+
+            for(auto eta : etaRxP)
+            {
+                    for(int iphi = 0; iphi < nPhiSections; iphi++)
+                    {
+                            Cut aCut = eta && Cuts::phi > iphi*(2.*M_PI/nPhiSections) && Cuts::phi < (iphi+1)*(2.*M_PI/nPhiSections);
+                            Particles particles = pf.particles(aCut);
+                            int weight = particles.size();
+                            for(const Particle& p : particles)
+                            {
+                                    QIn += weight*sin(n*p.phi());
+                                    QRn += weight*cos(n*p.phi());
+                            }
+                    }
+            }
+
+            double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
+
+            return eventPlane;
+    }
+
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -238,6 +263,18 @@ namespace Rivet {
       declare(cfs, "CFS");
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+
+      const FinalState RxP(Cuts::abseta > 1. && Cuts::abseta < 2.8);
+      declare(RxP, "RxP");
+
+      const FinalState RxPPos(Cuts::eta > 1. && Cuts::eta < 2.8);
+      declare(RxPPos, "RxPPos");
+
+      const FinalState RxPNeg(Cuts::eta < -1. && Cuts::eta > -2.8);
+      declare(RxPNeg, "RxPNeg");
+
+      book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
+      book(_s["ResCent"], "ResCent");
 
       // Initialise and register projections
 
@@ -1374,6 +1411,25 @@ namespace Rivet {
         }
       }
 
+	const FinalState& RxP = apply<FinalState>(event, "RxP");
+      const FinalState& RxPPos = apply<FinalState>(event, "RxPPos");
+      const FinalState& RxPNeg = apply<FinalState>(event, "RxPNeg");
+
+	//Inner and Outer rings of the North and South sections of the RxP detector
+	vector<Cut> etaRxP = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8, Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
+      int nPhiSections = 12;
+
+      double evPPosNeg = GetEventPlaneDetectorAcc(2, RxP, etaRxP, nPhiSections);
+
+      vector<Cut> etaRxPPos = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8};
+      vector<Cut> etaRxPNeg = {Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
+
+      double evPPos = GetEventPlaneDetectorAcc(2, RxPPos, etaRxPPos, nPhiSections);
+      double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
+
+	//std::floor(double a) returns the largest integer value smaller than a
+	 _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
+
 
 
     }
@@ -1385,6 +1441,7 @@ namespace Rivet {
 	for(Correlator& corr : Correlators) 
 	{
 		//normalize
+		corr.Normalize();
 		Histo1DPtr h = corr.GetCorrelationFunction();
 		if((i>=11&&i<=60)||(i>=161&&i<=280)||(i>=401&&i<=460)||(i>=521&&i<=580)){
 			//cout << i << " " << corr.GetTriggerRange() << "x" << corr.GetAssociatedRange() << " " << corr.findIndicies() << '\n';
@@ -1392,16 +1449,34 @@ namespace Rivet {
 		}
 		i++;
 	}
+	
+	int centBin = 0;
 
+            std::vector<double> EPres(5, 0.);
+
+            for(auto bin : _p["RxPcosPos"]->bins())
+            {
+		if(bin.numEntries() > 0)
+                    {
+                         double RxPPosRes = sqrt(bin.mean()); 
+			// double chiRxPPos = CalculateChi(RxPPosRes); 
+			 //double res = Resolution(sqrt(2)*chiRxPPos);
+		//	EPres[centBin] = res;
+                           // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+                    }
+                    centBin++;
+            }
+
+/*
 <<<<<<< HEAD
 =======
-*/
+
 
 	         for(Correlator& corr : Correlators)
       {
               corr.Normalize();
       }
->>>>>>> 968959d13c8f8d35f16d92923403a26295e69023
+>>>>>>> 968959d13c8f8d35f16d92923403a26295e69023*/
     }
 
     //@}
@@ -1411,6 +1486,7 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
+    map<string, Scatter2DPtr> _s;
     map<string, CounterPtr> _c;
     //@}
 
