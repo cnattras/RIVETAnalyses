@@ -175,10 +175,10 @@ namespace Rivet {
         //Implementation from A. M. Poskanzer and S. A. Voloshin, Phys. Rev. C 58, 1671 – Published 1 September 1998
         double chi = 2.;
         double delta = 1.;
-        double con = sqrt(M_PI)/2.;
+        double con = sqrt(M_PI/2.)/2.;
         for ( int i = 0; i < 15; i++)
         {
-            chi = (( con*chi*exp(-chi*chi/2.))*( BesselIn(0, chi *chi /2.) + BesselIn(1, chi*chi /2.) )  < res) ? chi + delta : chi - delta ;
+            chi = (( con*chi*exp(-chi*chi/4.))*( BesselIn(0, chi *chi /4.) + BesselIn(1, chi*chi /4.) )  < res) ? chi + delta : chi - delta ;
             delta = delta / 2.;
         }
 
