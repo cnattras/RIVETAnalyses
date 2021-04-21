@@ -32,22 +32,12 @@ namespace Rivet {
 
     public:
 
-	Correlator(int index0, int index1, int index2) {
-        _indices = {index0, index1, index2};
-      }
+	vector<int> findIndicies(){return _indices; }
 
-	Correlator(int index0, int index1) {
-        _indices = {index0, index1};
-      }
-
-
-	Correlator(int index0) {
-        _indices = {index0};
-      }
-
-	Correlator(std::vector<int> vindex) {
-        _indices = vindex;
-      }
+	Correlator(int index0, int index1, int index2) { _indices = {index0, index1, index2};}
+	Correlator(int index0, int index1) {_indices = {index0, index1};}
+	Correlator(int index0) {_indices = {index0};}
+	Correlator(std::vector<int> vindex) {_indices = vindex;}
 
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
@@ -79,9 +69,9 @@ namespace Rivet {
 	Histo1DPtr GetCorrelationFunction(){ return _deltaPhi; }
 	CounterPtr GetCounter(){ return _counter; }
 
-      double GetDeltaPhi(Particle pAssoc, Particle pTrig)
-  	   {
-	double dPhi = deltaPhi(pTrig, pAssoc, true);
+	double GetDeltaPhi(Particle pAssoc, Particle pTrig)
+	{
+		double dPhi = deltaPhi(pTrig, pAssoc, true);
 		//this does NOT rotate the delta phi to be in a given range
 
 	        if(dPhi < -M_PI/2.)
@@ -94,7 +84,7 @@ namespace Rivet {
 	        }
 
 	        return dPhi;
-	    }
+	}
 
 
 	void AddCorrelation(Particle pTrig, Particle pAssoc)
@@ -108,7 +98,7 @@ namespace Rivet {
 		_counter->fill();
 	}
 
-      int GetIndex(int i){ return _indices[i]; }
+	int GetIndex(int i){ return _indices[i]; }
       string GetFullIndex()
       {
           string fullIndex = "";
@@ -202,6 +192,45 @@ namespace Rivet {
     /// @name Analysis methods
     //@{
 
+	Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+	{
+		YODA::Histo1D hist = *histo;
+
+		double minValue = sqrt(-2);
+	        double binWidth = 0.;
+	        int minValueEntries = 0.;
+
+        	for(auto &bin : hist.bins())
+	        {
+	            if(std::isnan(minValue))
+	            {
+	                minValue = bin.sumW();
+	                binWidth = bin.width();
+	                minValueEntries = bin.numEntries();
+	            }
+	            if(bin.sumW()/bin.width() < minValue/binWidth)
+	            {
+	                minValue = bin.sumW();
+	                binWidth = bin.width();
+	                minValueEntries = bin.numEntries();
+	            }
+        	}
+	
+		//if the minValue is already zero, do not subtract	
+		if(minValue == 0 || minValueEntries==0) return histo;
+
+	        hist.reset();
+
+	        for(auto &bin : hist.bins())
+	        {
+	            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+	        }
+	
+	        *histo = YODA::subtract(*histo, hist);
+
+	        return histo;
+	}
+
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -217,64 +246,6 @@ namespace Rivet {
       // the given eta acceptance
       //const FinalState fs(Cuts::abseta < 4.9);
 
-	//fig 15
-      /*book(_h["pi0Sepctra0to10_1-2x0.5-1"], 3, 1, 1);
-      book(_h["pi0Spectra0to10_1-2x1-2"],3,1,2);
-      book(_h["pi0Spectra0to10_2-4x0.5-1"],3,1,3);
-      book(_h["pi0Spectra0to10_2-4x1-2"],3,1,4);
-      book(_h["pi0Sepctra0to10_2-4x2-4"], 3, 1, 5);
-      book(_h["pi0Spectra10to20_1-2x0.5-1"],3,1,6);
-      book(_h["pi0Spectra10to20_1-2x1-2"],3,1,7);
-      book(_h["pi0Spectra10to20_2-4x0.5-1"],3,1,8);
-      book(_h["pi0Sepctra10to20_2-4x1-2"], 3, 1, 9);
-      book(_h["pi0Spectra10to20_2-4x2-4"],3,1,10);
-      book(_h["pi0Spectra20to30_1-2x0.5-1"],3,1,11);
-      book(_h["pi0Spectra20to30_1-2x1-2"],3,1,12);
-      book(_h["pi0Sepctra20to30_2-4x0.5-1"], 3, 1, 13);
-      book(_h["pi0Spectra20to30_2-4to1-2"],3,1,14);
-      book(_h["pi0Spectra20to30_2-4x2-4"],3,1,15);
-      book(_h["pi0Spectra30to40_1-2x0.5-1"],3,1,16);
-      book(_h["pi0Sepctra30to40_1-2x1-2"], 3, 1, 17);
-      book(_h["pi0Spectra30to40_2-4x2-4"],3,1,18);
-      book(_h["pi0Spectra30to40_2-4x1-2"],3,1,19);
-      book(_h["pi0Spectra30to40_2-4x2-4"],3,1,20);
-      book(_h["pi0Spectra40to50_1-2x0.5-1"],3,1,21);
-      book(_h["pi0Sepctra40to50_1-2x1-2"], 3, 1, 22);
-      book(_h["pi0Spectra40to50_2-4to2-4"],3,1,23);
-      book(_h["pi0Spectra40to50_2-4x1-2"],3,1,24);
-      book(_h["pi0Spectra40to50_2-4x2-4"],3,1,25);*/
-	//fig 18
-      /*book(_h["pi0Sepctra0to10NearSide&2-4x1-2"], 4, 1, 1);
-      book(_h["pi0Spectra0to10NearSide&2-4to2-4"],4,1,2);
-      book(_h["pi0Spectra0to10NearSide&4-10x2-4"],4,1,3);
-      book(_h["pi0Sepctra10to20NearSide&2-4x1-2"],4, 1, 4);
-      book(_h["pi0Spectra10to20NearSide&2-4x2-4"],4,1,5);
-      book(_h["pi0Spectra10to20NearSide&4-10x2-4"],4,1,6);
-      book(_h["pi0Sepctra20to30NearSide&2-4x1-2"], 4, 1,7);
-      book(_h["pi0Spectra20to30NearSide&2-4x2-4"],4,1,8);
-      book(_h["pi0Spectra20to30NearSide&4-10x2-4"],4,1,9);
-      book(_h["pi0Sepctra30to40NearSide&2-4x1-2"], 4, 1, 10);
-      book(_h["pi0Spectra30to40NearSide&2-4x2-4"],4,1,11);
-      book(_h["pi0Spectra30to40NearSide&4-10x2-4"],4,1,12);
-      book(_h["pi0Sepctra40to50NearSide&2-4x1-2"], 4, 1, 13);
-      book(_h["pi0Spectra40to50NearSide&2-4x2-4"],4,1,14);
-      book(_h["pi0Spectra40to50NearSide&4-10x2-4"],4,1,15);
-      book(_h["pi0Sepctra0to10FarSide&2-4x1-2"], 4, 1, 16);
-      book(_h["pi0Spectra0to10FarSide&2-4to2-4"],4,1,17);
-      book(_h["pi0Spectra0to10FarSide&4-10x2-4"],4,1,18);
-      book(_h["pi0Sepctra10to20FarSide&2-4x1-2"],4, 1, 19);
-      book(_h["pi0Spectra10to20FarSide&2-4x2-4"],4,1,20);
-      book(_h["pi0Spectra10to20FarSide&4-10x2-4"],4,1,21);
-      book(_h["pi0Sepctra20to30FarSide&2-4x1-2"], 4, 1, 22);
-      book(_h["pi0Spectra20to30FarSide&2-4x2-4"],4,1,23);
-      book(_h["pi0Spectra20to30FarSide&4-10x2-4"],4,1,24);
-      book(_h["pi0Sepctra30to40FarSide&2-4x1-2"], 4, 1, 25);
-      book(_h["pi0Spectra30to4FarSide&2-4x2-4"],4,1,26);
-      book(_h["pi0Spectra30to40FarSide&4-10x2-4"],4,1,27);
-      book(_h["pi0Sepctra40to50FarSide&2-4x1-2"], 4, 1, 28);
-      book(_h["pi0Spectra40to50FarSide&2-4x2-4"],4,1,29);
-      book(_h["pi0Spectra40to50FarSide&4-10x2-4"],4,1,30);*/
-	//fig 20
 
 	//initialize iterators and varibles
 	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
@@ -1344,7 +1315,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-    const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
+      const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       //add calculation of reaction plane angle
       const double c = cent();
@@ -1410,14 +1381,27 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-/*
+	int i=1;	
+	for(Correlator& corr : Correlators) 
+	{
+		//normalize
+		Histo1DPtr h = corr.GetCorrelationFunction();
+		if((i>=11&&i<=60)||(i>=161&&i<=280)||(i>=401&&i<=460)||(i>=521&&i<=580)){
+			//cout << i << " " << corr.GetTriggerRange() << "x" << corr.GetAssociatedRange() << " " << corr.findIndicies() << '\n';
+			h = SubtractBackgroundZYAM(h);
+		}
+		i++;
+	}
 
+<<<<<<< HEAD
+=======
 */
 
 	         for(Correlator& corr : Correlators)
       {
               corr.Normalize();
       }
+>>>>>>> 968959d13c8f8d35f16d92923403a26295e69023
     }
 
     //@}
