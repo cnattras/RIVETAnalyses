@@ -215,8 +215,8 @@ namespace Rivet {
 	                minValueEntries = bin.numEntries();
 	            }
         	}
-	
-		//if the minValue is already zero, do not subtract	
+
+		//if the minValue is already zero, do not subtract
 		if(minValue == 0 || minValueEntries==0) return histo;
 
 	        hist.reset();
@@ -225,7 +225,7 @@ namespace Rivet {
 	        {
 	            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
 	        }
-	
+
 	        *histo = YODA::subtract(*histo, hist);
 
 	        return histo;
@@ -254,6 +254,157 @@ namespace Rivet {
             double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
 
             return eventPlane;
+    }
+
+    void FillVn(Profile1DPtr vnHisto, const Particles& particles, double eventPlane, int n)
+    {
+        for(const Particle &p : particles)
+        {
+            vnHisto->fill(p.pT()/GeV, cos(n*(p.phi() - eventPlane)));
+        }
+    }
+
+    double CalculateChi(double res)
+    {
+        //Implementation from A. M. Poskanzer and S. A. Voloshin, Phys. Rev. C 58, 1671 – Published 1 September 1998
+        double chi = 2.;
+        double delta = 1.;
+        double con = sqrt(M_PI/2.)/2.;
+        for ( int i = 0; i < 15; i++)
+        {
+            chi = (( con*chi*exp(-chi*chi/4.))*( BesselIn(0, chi *chi /4.) + BesselIn(1, chi*chi /4.) )  < res) ? chi + delta : chi - delta ;
+            delta = delta / 2.;
+        }
+
+        return chi;
+    }
+
+    double BesselI0(double x)
+    {
+            //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
+
+            //Polynomial parameters
+            double p[7] = {1.0, 3.5156229, 3.0899424, 1.2067492, 0.2659732, 0.360768e-1, 0.45813e-2};
+            double q[9] = {0.39894228, 0.1328592e-1, 0.225319e-2, -0.157565e-2, 0.916281e-2, -0.2057706e-1, 0.2635537e-1, -0.1647633e-1, 0.392377e-2};
+
+            double absx = abs(x);
+            double y = 0.;
+            double besselI0 = 0.;
+
+            //Polynomial fit
+            if (absx < 3.75)
+            {
+                    y = x/3.75;
+                    y *= y;
+                    besselI0 = p[0]+y*(p[1]+y*(p[2]+y*(p[3]+y*(p[4]+y*(p[5]+y*p[6])))));
+            }
+            else
+            {
+                    y = 3.75/absx;
+                    besselI0 = (exp(absx)/sqrt(absx))*(q[0]+y*(q[1]+y*(q[2]+y*(q[3]+y*(q[4]+y*(q[5]+y*(q[6]+y*(q[7]+y*q[8]))))))));
+            }
+
+            return besselI0;
+    }
+
+    double BesselI1(double x)
+    {
+            //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
+
+            //Polynomial parameters
+            double p[7] = {0.5, 0.87890594, 0.51498869, 0.15084934, 0.2658733e-1, 0.301532e-2, 0.32411e-3};
+
+            double q[9] = {0.39894228, -0.3988024e-1, -0.362018e-2, 0.163801e-2, -0.1031555e-1, 0.2282967e-1, -0.2895312e-1, 0.1787654e-1, -0.420059e-2};
+
+            double absx = abs(x);
+
+            double y = 0.;
+            double besselI1 = 0.;
+
+            //Polynomial fit
+            if (absx < 3.75)
+            {
+                    y = x/3.75;
+                    y *= y;
+                    besselI1 = x*(p[0]+y*(p[1]+y*(p[2]+y*(p[3]+y*(p[4]+y*(p[5]+y*p[6]))))));
+            }
+            else
+            {
+                    y = 3.75/absx;
+                    besselI1 = (exp(absx)/sqrt(absx))*(q[0]+y*(q[1]+y*(q[2]+y*(q[3]+y*(q[4]+y*(q[5]+y*(q[6]+y*(q[7]+y*q[8]))))))));
+            }
+
+            if (x < 0) besselI1 = -besselI1;
+
+            return besselI1;
+    }
+
+    double BesselIn(int n, double x)
+    {
+            //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
+
+            int acc = 40; //accuracy
+            double bigN = 1.e10;
+            double smallN = 1.e-10;
+
+            if(n < 0)
+            {
+                    throw UserError("bessel n has to be larger than zero: return 0");
+                    return 0;
+            }
+
+            if(n == 0) return BesselI0(x);
+            if(n == 1) return BesselI1(x);
+
+            if(x == 0) return 0;
+            if(abs(x) > bigN) return 0;
+
+            double tox = 2/abs(x);
+            double bip = 0.;
+            double bim = 0.;
+            double bi  = 1.;
+            double besselIn = 0.;
+            int init = 2*((n + int(sqrt(float(acc*n)))));
+
+            for(int j = init; j>=1; j--)
+            {
+                    bim = bip + (j*tox*bi);
+                    bip = bi;
+                    bi  = bim;
+
+                    // Renormalise to prevent overflows
+                    if(abs(bi) > bigN)
+                    {
+                            besselIn *= smallN;
+                            bi *= smallN;
+                            bip *= smallN;
+                    }
+
+                    if(j==n) besselIn=bip;
+            }
+
+            besselIn *= BesselI0(x)/bi; // Normalise with BesselI0(x)
+
+            if((x < 0) && (n%2 == 1)) besselIn = -besselIn;
+
+            return besselIn;
+    }
+
+    double Resolution(double chi)
+    {
+        double A = sqrt(M_PI/2.)/2.;
+
+        double funcRes = (A*chi*exp(-chi*chi/4.))*( BesselI0(chi *chi /4.) + BesselI1(chi*chi /4.));
+
+        return funcRes;
+    }
+
+    string Form(double number, int precision)
+    {
+            std::stringstream stream;
+            stream << std::fixed << std::setprecision(precision) << number;
+
+            return stream.str();
     }
 
     /// Book histograms and initialise projections before the run
@@ -608,7 +759,7 @@ namespace Rivet {
                         iterator++;
                 }
         }
-        iterator=1;	
+        iterator=1;
 
 	//Fig25
 	minCent=0, maxCent=40, min_pT=2, max_pT=2, min_pA=1, max_pA=1, minV=-4, maxV=-1;
@@ -659,7 +810,7 @@ namespace Rivet {
                                 a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],11,1,iterator);
 			book(_c[corrName], corrName);
-			book(_c[corrNameTrigger], corrNameTrigger);			
+			book(_c[corrNameTrigger], corrNameTrigger);
 
                         Correlator corrFig26(a,(int)d);
                         corrFig26.SetCollSystemAndEnergy("AuAu200GeV");
@@ -692,7 +843,7 @@ namespace Rivet {
                                 a,a+10,b,(b==4)?10:b*2,c,(c==4)?10:c*2,(int)d,(int)d+1, "_Triggers");
                         book(_h[bookName],12,1,iterator);
 			book(_c[corrName], corrName);
-			book(_c[corrNameTrigger], corrNameTrigger);			
+			book(_c[corrNameTrigger], corrNameTrigger);
 
                         Correlator corrFig27(a,(int)d);
                         corrFig27.SetCollSystemAndEnergy("AuAu200GeV");
@@ -1345,6 +1496,11 @@ namespace Rivet {
         }
         iterator=1;
 
+        for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
+        {
+                string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                book(_p[v2string], 1, 1, 1+icent);
+        }
 
     }
 
@@ -1430,6 +1586,11 @@ namespace Rivet {
 	//std::floor(double a) returns the largest integer value smaller than a
 	 _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
 
+         Particles particles = cfs.particles();
+
+         string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+         FillVn(_p[v2string], particles, evPPosNeg, 2);
+
 
 
     }
@@ -1437,8 +1598,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-	int i=1;	
-	for(Correlator& corr : Correlators) 
+	int i=1;
+	for(Correlator& corr : Correlators)
 	{
 		//normalize
 		corr.Normalize();
@@ -1449,7 +1610,7 @@ namespace Rivet {
 		}
 		i++;
 	}
-	
+
 	int centBin = 0;
 
             std::vector<double> EPres(5, 0.);
@@ -1458,13 +1619,20 @@ namespace Rivet {
             {
 		if(bin.numEntries() > 0)
                     {
-                         double RxPPosRes = sqrt(bin.mean()); 
-			// double chiRxPPos = CalculateChi(RxPPosRes); 
-			 //double res = Resolution(sqrt(2)*chiRxPPos);
-		//	EPres[centBin] = res;
+                         double RxPPosRes = sqrt(bin.mean());
+			 double chiRxPPos = CalculateChi(RxPPosRes);
+			 double res = Resolution(sqrt(2)*chiRxPPos);
+			EPres[centBin] = res;
                            // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
                     }
                     centBin++;
+            }
+
+            for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
+            {
+                    string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                    _p[v2string]->scaleY(1./EPres[icent]);
+
             }
 
 /*
@@ -1488,6 +1656,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, Scatter2DPtr> _s;
     map<string, CounterPtr> _c;
+    std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50.};
     //@}
 
     vector<Correlator> Correlators;
