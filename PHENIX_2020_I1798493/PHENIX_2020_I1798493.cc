@@ -200,19 +200,28 @@ namespace Rivet {
 
       }
   };
-
-
-
-
+  void DivideScatter2D(Scatter2DPtr s1, Scatter2DPtr s2, Scatter2DPtr s)
+  {
+    for(unsigned int i = 0; i < s2->numPoints(); i++)
+    {
+      if(s2->point(i).y() == 0)
+      {
+        s->addPoint(s2->point(i).x(), std::numeric_limits<double>::quiet_NaN());
+        continue;
+      }
+      double yErr = (s1->point(i).y()/s2->point(i).y())*std::sqrt(std::pow(s1->point(i).yErrPlus()/s1->point(i).y(), 2) + std::pow(s2->point(i).yErrPlus()/s2->point(i).y(), 2));
+      s->addPoint(s2->point(i).x(), s1->point(i).y()/s2->point(i).y(), s1->point(i).xErrPlus(), yErr);
+    }
+  }
 	/// @brief Add a short analysis description here
   class PHENIX_2020_I1798493 : public Analysis {
     public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2020_I1798493);
+      DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2020_I1798493);
 
-    Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
-    {
+      Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
+      {
 
         YODA::Histo1D hist = *histo;
 
@@ -220,75 +229,70 @@ namespace Rivet {
         double binWidth = 0.;
         int minValueEntries = 0.;
 
-        for(auto &bin : hist.bins())
+        for (auto &bin : hist.bins())
         {
-            if(std::isnan(minValue))
-            {
-                minValue = bin.sumW();
-                binWidth = bin.width();
-                minValueEntries = bin.numEntries();
-            }
-            if(bin.sumW()/bin.width() < minValue/binWidth)
-            {
-                minValue = bin.sumW();
-                binWidth = bin.width();
-                minValueEntries = bin.numEntries();
-            }
+          if (std::isnan(minValue))
+          {
+            minValue = bin.sumW();
+            binWidth = bin.width();
+            minValueEntries = bin.numEntries();
+          }
+          if (bin.sumW() / bin.width() < minValue / binWidth)
+          {
+            minValue = bin.sumW();
+            binWidth = bin.width();
+            minValueEntries = bin.numEntries();
+          }
         }
-        if(minValue == 0 || minValueEntries==0) return histo;
+        if (minValue == 0 || minValueEntries == 0) return histo;
 
         hist.reset();
 
-        for(auto &bin : hist.bins())
+        for (auto &bin : hist.bins())
         {
-            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+          bin.fillBin((minValue * bin.width()) / (minValueEntries * binWidth), minValueEntries);
         }
 
         *histo = YODA::subtract(*histo, hist);
 
         return histo;
+      }
 
-    }
-
-    double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax, double &fraction)
-    {
+      double getYieldRangeUser(Histo1DPtr histo, double xmin, double xmax, double &fraction)
+      {
         //This will include bins partially covered by the user range
 
         YODA::Histo1D hist = *histo;
 
         double integral = 0.;
 
-        if(xmax < xmin) throw RangeError("Error: xmin > xmax");
-        if(xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
-        if(xmax > hist.bin(hist.numBins()-1).xMax()) throw RangeError("xmax is out of range");
+        if (xmax < xmin) throw RangeError("Error: xmin > xmax");
+        if (xmin < hist.bin(0).xMin()) throw RangeError("xmin is out of range");
+        if (xmax > hist.bin(hist.numBins() - 1).xMax()) throw RangeError("xmax is out of range");
 
-        for(auto &bin : hist.bins())
+        for (auto &bin : hist.bins())
         {
-            if((bin.xMin() > xmin) && (bin.xMax() < xmax))
-            {
-                integral += bin.sumW();
-                fraction += bin.numEntries();
-            }
-            else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
-            {
-                double perc = bin.xMax() - xmin;
-                integral += perc*bin.sumW();
-                fraction += perc*bin.numEntries();
-
-            }
-            else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
-            {
-                double perc = xmax - bin.xMin();
-                integral += perc*bin.sumW();
-                fraction += perc*bin.numEntries();
-            }
+          if ((bin.xMin() > xmin) && (bin.xMax() < xmax))
+          {
+            integral += bin.sumW();
+            fraction += bin.numEntries();
+          }
+          else if ((bin.xMin() < xmin) && (bin.xMax() > xmin))
+          {
+            double perc = bin.xMax() - xmin;
+            integral += perc * bin.sumW();
+            fraction += perc * bin.numEntries();
+          }
+          else if ((bin.xMin() < xmax) && (bin.xMax() > xmax))
+          {
+            double perc = xmax - bin.xMin();
+            integral += perc * bin.sumW();
+            fraction += perc * bin.numEntries();
+          }
         }
 
         return integral;
-
-    }
-
-
+      }
 
     /// @name Analysis methods
     //@{
@@ -302,62 +306,79 @@ namespace Rivet {
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-	   /* // const FinalState fs(Cuts::abseta < 4.9);
-
-
-      // Initialise and register projections
-
-      // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
-
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
-
-      // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
-
-      // Missing momentum
-      declare(MissingMomentum(fs), "MET");
-      */
       // Book histograms
       // fig 4 a
 	    book(_h["GammaDirhPertriggerVsXiAUAU"], 3, 1, 1);
     	book(_h["GammaDirhPertriggerVsXidAU"], 3, 1, 2);
-
-      // fig 4 b
-      book(_h["IAA"], 4, 1 , 1 );
-	    book(_h["IdA"], 4,  1,  2);
-
-      // fig 5
-      book(_h["IAAVsXiDirectPhoton5to7GevC"], 5, 1, 1);
-	    book(_h["IAAVsXiDirectPhoton7to9GevC"], 6, 1, 1);
-    	book(_h["IAAVsXiDirectPhoton9to12GevC"], 7, 1, 1);
+      
+      //fig 4 b
+      string refname = mkAxisCode(4,1,1);
+      const Scatter2D& refdata = refData(refname);
+      string refname1 = mkAxisCode(4,1,2);
+      const Scatter2D& refdata1 = refData(refname1);
+      book(_h["IAA_AuAu_4.b"], refname + "_AuAu", refdata);
+      book(_h["IAA_pp_4.b"], refname + "_pp", refdata);
+      book(_h["IdA_dAu_4.b"], refname1 + "_dAu", refdata1);
+      book(_s["IdA_4.b"], refname1);
+      book(_s["IAA_4.b"], refname);
 
       // fig 7
-    	book(_h["RatiosOfIAAVsDirectPhotonPtPiOver2"], 11, 1, 1);
-    	book(_h["RatiosOfIAAVsDirectPhotonPtPiOver3"], 11, 1, 2);
-    	book(_h["RatiosOfIAAVsDirectPhotonPtPiOver6"], 11, 1, 3);
+    	for (int i=0;i<3;i++){
+        string pt = "0";
+        if (i==0){pt="2";};
+        if (i==1){pt="3";};
+        if (i==2){pt="6";};
+        string refname = mkAxisCode(11,1,1+i);
+        const Scatter2D& refdata = refData(refname);
+        string hAA = "IAA_AuAu_7.less." + pt;
+        string hpp = "IAA_pp_7.less." + pt;
+        string siaa = "IAA_7.less."+ pt;
+        book(_h[hAA], refname + "_AuAu_less", refdata);
+        book(_h[hpp], refname + "_pp_less", refdata);
+        book(_s[siaa], refname + "_IAA_less");
+        hAA = "IAA_AuAu_7.over." + pt;
+        hpp = "IAA_pp_7.over." + pt;
+        siaa = "IAA_7.over."+ pt;
+        book(_h[hAA], refname + "_AuAu_over", refdata);
+        book(_h[hpp], refname + "_pp_over", refdata);
+        book(_s[siaa], refname + "_IAA_over");
+        siaa = "IAA_7."+ pt;
+        book(_s[siaa], refname);
+      }
 
-      // fig 8
-      book(_h["IAAVsXiDirectPhoton5to7GevC"], 12, 1, 1);
-    	book(_h["IAAVsXiDirectPhoton7to9GevC"], 13, 1, 1);
-    	book(_h["IAAVsXiDirectPhoton9to12GevC"], 14, 1, 1);
+      //fig 6 and 5 and 8
+      for (int i=0;i<3;i++){
+        for (int k=0;k<3;k++){
+          string pt = "0";
+          string pii = "0";
+          if (i==0){pt="a";};
+          if (i==1){pt="b";};
+          if (i==2){pt="c";};
+          if (k==0){pii = ".2";};
+          if (k==1){pii = ".3";};
+          if (k==2){pii = ".6";};
+          string hAA = "IAA_AuAu_6." + pt + pii;
+          string hpp = "IAA_pp_6." + pt + pii;
+          string siaa = "IAA_6."+ pt + pii;
+          string refname = mkAxisCode(8+i,1,1+k);
+          const Scatter2D& refdata = refData(refname);
+          book(_h[hAA], refname + "_AuAu", refdata);
+          book(_h[hpp], refname + "_pp", refdata);
+          book(_s[siaa], refname);
+          //fig 5 and 8
+          if (k==0){
+            string siaa5 = "IAA_5." + pt;
+            string siaa8 = "IAA_8." + pt;
+            book(_s[siaa5], 5+i, 1, 1);
+            book(_s[siaa8], 12+i, 1, 1);
+          };
+        }
+      }
 
       //corrolators
+      int dphibinNum = 60;
+      int dphibinNumCor = 20;
       //fig 4 a
-    	int dphibinNum = 36;
       for (int i=0;i<6;i++){
         float xilower= 0+i*.4;
         float xiupper= xilower+.4;
@@ -377,7 +398,7 @@ namespace Rivet {
         book(_c[corrd+"_Triggers"], corrd+"_Triggers");
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        Correlator corrfi4a(1);
+        Correlator corrfi4a(4010);
         corrfi4a.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfi4a.SetCentrality(0.,40.);
     	  corrfi4a.SetTriggerRange(5., 9.);
@@ -387,7 +408,7 @@ namespace Rivet {
 	      corrfi4a.SetCounter(_c[corra]);
         corrfi4a.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4a);
-	      Correlator corrfi4ad(1);
+	      Correlator corrfi4ad(4020);
         corrfi4ad.SetCollSystemAndEnergy("dAU200GeV");
     	  corrfi4ad.SetNoCentrality();
     	  corrfi4ad.SetTriggerRange(5., 9.);
@@ -398,6 +419,7 @@ namespace Rivet {
         corrfi4ad.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4ad);
       }
+      
       //fig 4 b
       for (int i=0;i<6;i++){
         float xilower= 0+i*.4;
@@ -423,7 +445,7 @@ namespace Rivet {
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrp2], corrp2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        Correlator corrfi4b(1);
+        Correlator corrfi4b(4110);
         corrfi4b.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfi4b.SetCentrality(0.,40.);
     	  corrfi4b.SetTriggerRange(5., 9.);
@@ -433,7 +455,7 @@ namespace Rivet {
 	      corrfi4b.SetCounter(_c[corra]);
         corrfi4b.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4b);
-        Correlator corrfi4bd(1);
+        Correlator corrfi4bd(4120);
         corrfi4bd.SetCollSystemAndEnergy("dAU200GeV");
     	  corrfi4bd.SetNoCentrality();
     	  corrfi4bd.SetTriggerRange(5., 9.);
@@ -443,7 +465,7 @@ namespace Rivet {
 	      corrfi4bd.SetCounter(_c[corrd]);
         corrfi4bd.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4bd);
-        Correlator corrfi4bp(1);
+        Correlator corrfi4bp(4130);
         corrfi4bp.SetCollSystemAndEnergy("pp200GeV");
     	  corrfi4bp.SetNoCentrality();
     	  corrfi4bp.SetTriggerRange(5., 9.);
@@ -461,19 +483,18 @@ namespace Rivet {
       for (int i=0;i<3;i++){
         int upper = 0;
         int lower = 0;
-
-            if (i==0){
-              upper = 7;
-              lower = 5;
-            }
-            if (i==1){
-              upper = 9;
-              lower = 7;
-            }
-            if (i==2){
-              upper = 12;
-              lower = 9;
-            }
+        if (i==0){
+          upper = 7;
+          lower = 5;
+        }
+        if (i==1){
+          upper = 9;
+          lower = 7;
+        }
+        if (i==2){
+          upper = 12;
+          lower = 9;
+        }
         string corrsless = "sow_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
         string corrsmore = "sow_AUAU200_RatiosOfIAAVsDirectPhotonPtmoreThan1.2" + to_string(lower) + "to" + to_string(upper);
     	  string corrsless2 = "dphi_AUAU200_RatiosOfIAAVsDirectPhotonPtLessThan1.2" + to_string(lower) + "to" + to_string(upper);
@@ -494,7 +515,7 @@ namespace Rivet {
         book(_c[corrsmorep+"_Triggers"], corrsmorep+"_Triggers");
         book(_h[corrslessp2], corrslessp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrsmorep2], corrsmorep2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        Correlator corrfig7less(1);
+        Correlator corrfig7less(7010);
         corrfig7less.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig7less.SetCentrality(0.,40.);
     	  corrfig7less.SetTriggerRange(lower, upper);
@@ -504,7 +525,7 @@ namespace Rivet {
 	      corrfig7less.SetCounter(_c[corrsless]);
         corrfig7less.SetTriggerCounter(_c[corrsless+"_Triggers"]);
         Correlators.push_back(corrfig7less);
-        Correlator corrfig7more(1);
+        Correlator corrfig7more(7110);
         corrfig7more.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig7more.SetCentrality(0.,40.);
     	  corrfig7more.SetTriggerRange(lower, upper);
@@ -514,7 +535,7 @@ namespace Rivet {
 	      corrfig7more.SetCounter(_c[corrsmore]);
         corrfig7more.SetTriggerCounter(_c[corrsmore+"_Triggers"]);
         Correlators.push_back(corrfig7more);
-        Correlator corrfig7lessp(1);
+        Correlator corrfig7lessp(7030);
         corrfig7lessp.SetCollSystemAndEnergy("pp200GeV");
     	  corrfig7lessp.SetNoCentrality();
     	  corrfig7lessp.SetTriggerRange(lower, upper);
@@ -524,7 +545,7 @@ namespace Rivet {
 	      corrfig7lessp.SetCounter(_c[corrslessp]);
         corrfig7lessp.SetTriggerCounter(_c[corrslessp+"_Triggers"]);
         Correlators.push_back(corrfig7lessp);
-        Correlator corrfig7morep(1);
+        Correlator corrfig7morep(7130);
         corrfig7morep.SetCollSystemAndEnergy("pp200GeV");
     	  corrfig7morep.SetNoCentrality();
     	  corrfig7morep.SetTriggerRange(lower, upper);
@@ -547,8 +568,6 @@ namespace Rivet {
         float xiup = ((2.4)-i*.4);
         float aup = tup/exp(xiup);
         float alow  = tlow/exp(xilow);
-        //cout << xilow << ' '<< xiup <<'\n';
-        //cout << alow << ' '<< aup <<'\n';
         char buffXiLow [5];
         char buffXiUpp [5];
         snprintf(buffXiLow,5,"%2.1f", xilow);
@@ -561,8 +580,8 @@ namespace Rivet {
         book(_h[books], 1, 1, i+1);
         book(_c[corrs], corrs);
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
-        book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        Correlator corrfig2(i);
+        book(_h[corrs2], corrs2, dphibinNumCor, -M_PI/2., 1.5*M_PI);
+        Correlator corrfig2(2000);
         corrfig2.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig2.SetCentrality(0.,40.);
     	  corrfig2.SetTriggerRange(tlow, tup);
@@ -611,8 +630,8 @@ namespace Rivet {
         book(_h[books], 2, 1, i+1);
         book(_c[corrs], corrs);
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
-        book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
-        Correlator corrfig3(i+1);
+        book(_h[corrs2], corrs2, dphibinNumCor, -M_PI/2., 1.5*M_PI);
+        Correlator corrfig3(3000);
         corrfig3.SetCollSystemAndEnergy("dAU200GeV");
     	  corrfig3.SetNoCentrality();
     	  corrfig3.SetTriggerRange(tlow, tup);
@@ -645,7 +664,6 @@ namespace Rivet {
       for (int i=0;i<3;i++){
         int upper = 0;
         int lower = 0;
-        int pi = 0;
         int binnum = 0;
         float xiupper = 0;
         float xilower = 0;
@@ -667,19 +685,6 @@ namespace Rivet {
           binnum = 6;
         }
         string forcor = "IAAVsXiDirectPhoton" + to_string(lower) + "to" + to_string(upper);
-        for (int j = 0; j < 3; j++){
-          if (j==0){
-            pi = 2;
-          }
-          if (j==1){
-            pi = 3;
-          }
-          if (j==2){
-            pi = 6;
-          }
-          string books = forcor + "PiOver" + to_string(pi);
-          book(_h[books], 8+i, 1, 1+j);
-        }
         for(int k=0;k<binnum;k++){
           if (i==0){
             xilower = (-0.1)+k*.4;
@@ -711,7 +716,7 @@ namespace Rivet {
           book(_c[corrs], corrs);
           book(_c[corrs+"_Triggers"], corrs+"_Triggers");
           book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
-          Correlator corrfi6(i+k+1);
+          Correlator corrfi6(6010+(i*100));
           corrfi6.SetCollSystemAndEnergy("AUAU200GeV");
           corrfi6.SetCentrality(0., 40.);
           corrfi6.SetTriggerRange(lower, upper);
@@ -721,7 +726,7 @@ namespace Rivet {
           corrfi6.SetCounter(_c[corrs]);
           corrfi6.SetTriggerCounter(_c[corrs+"_Triggers"]);
           Correlators.push_back(corrfi6);
-          Correlator corrfi6p(i+k+1);
+          Correlator corrfi6p(6030+(i*100));
           corrfi6p.SetCollSystemAndEnergy("pp200GeV");
           corrfi6p.SetNoCentrality();
           corrfi6p.SetTriggerRange(lower, upper);
@@ -733,14 +738,6 @@ namespace Rivet {
           Correlators.push_back(corrfi6p);
         }
       }
-
-      //Figure 4.b
-      string refname = mkAxisCode(4,1,1);
-      const Scatter2D& refdata = refData(refname);
-      book(_h["IAA_AuAu"], refname + "_AuAu", refdata);
-      book(_h["IAA_pp"], refname + "_pp", refdata);
-      book(_s["IAA"], refname);
-
     };
 
 
@@ -755,33 +752,30 @@ namespace Rivet {
 
       if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
-          CollSystem = "AUAU200GeV";
-          //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
+        CollSystem = "AUAU200GeV";
+        //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
-          CollSystem = "pp200GeV";
-          //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+        CollSystem = "pp200GeV";
+        //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
       {
-          CollSystem = "dAU200GeV";
-          //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+        CollSystem = "dAU200GeV";
+        //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
       }
       if(CollSystem == "AUAU200GeV" && c > 40)
       {
         vetoEvent;
       }
 
-      //cout << c << endl;
       for(Correlator& corr : Correlators)
       {
 	      if(!corr.CheckCollSystemAndEnergy(CollSystem)) continue;
 	      if(!corr.CheckCentrality(c)) continue;
 	      corr.AddWeight();
       }
-
-      //Correlator corr = Correlators[0];
 
       //for(auto pTrig : pfs.particles())
       for(auto pTrig : cfs.particles())
@@ -806,22 +800,12 @@ namespace Rivet {
           }
         }
       }
-
-      /*
-      _c["CCCC"]->fill();
-
-      Particles fsParticles = applyProjection<FinalState>(event, "fs").particles();
-      for (const Particle &p : fsParticles)
-      {
-        if (p.pid() == 321){
-          _h["AAAA"]->fill(p.pT() / GeV);
-        }
-      }*/
     }
 
-
+    // for possable later use: mapAngle0ToPi() changing 02pi to 0pi
     /// Normalise histograms etc., after the run
     void finalize() {
+
 
       for(Correlator& corr : Correlators)
       {
@@ -830,14 +814,107 @@ namespace Rivet {
         h = SubtractBackgroundZYAM(h);
         double fraction = 0.;
         double yield = getYieldRangeUser(h, M_PI/2., 3.*M_PI/2., fraction);
-        
-        _h["IAA_AuAu"]
+        double yield3 = getYieldRangeUser(h, 2.*M_PI/3., 4.*M_PI/3., fraction);
+        double yield6 = getYieldRangeUser(h, 5.*M_PI/6., 7.*M_PI/6., fraction);
 
+        //figure 4.b
+        if(corr.GetIndex(0) == 4110) _h["IAA_AuAu_4.b"]->bin(_h["IAA_AuAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4120) _h["IdA_dAu_4.b"]->bin(_h["IdA_dAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4130) _h["IAA_pp_4.b"]->bin(_h["IAA_pp_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+        
+        //figure 6
+        for (int i=0;i<3;i++){
+          for (int k=0;k<3;k++){
+            double y = 0;
+            string pt = "0";
+            string pii = "0";
+            int aaid = (6010+i*100);
+            int ppid = (6030+i*100);
+            if (i==0){pt="a";};
+            if (i==1){pt="b";};
+            if (i==2){pt="c";};
+            if (k==0){y=yield; pii = ".2";};
+            if (k==1){y=yield3; pii = ".3";};
+            if (k==2){y=yield6; pii = ".6";};
+            string hAA = "IAA_AuAu_6." + pt + pii;
+            string hpp = "IAA_pp_6." + pt + pii;
+            if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(y/fraction, fraction);
+            if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(y/fraction, fraction);
+          }
+        }
+
+        //figure 7
+        for (int i=0;i<3;i++){
+          string pt = "0";
+          double y = 0;
+          if (i==0){pt="2"; y=yield;};
+          if (i==1){pt="3"; y=yield3;};
+          if (i==2){pt="6"; y=yield6;};
+          //<1.2
+          int aaid = (7010);
+          int ppid = (7030);
+          string hAA = "IAA_AuAu_7.less." + pt;
+          string hpp = "IAA_pp_7.less." + pt;
+          if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
+          if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
+          //>1.2
+          aaid = (7110);
+          ppid = (7130);
+          hAA = "IAA_AuAu_7.over." + pt;
+          hpp = "IAA_pp_7.over." + pt;
+          if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
+          if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
+        }
+        
       }
 
-      // normalize(_h["XXXX"]); // normalize to unity
-      // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
+      //fill mod charts
+      //fig 4.b
+      divide(_h["IAA_AuAu_4.b"], _h["IAA_pp_4.b"], _s["IAA_4.b"]);
+      divide(_h["IdA_dAu_4.b"], _h["IAA_pp_4.b"], _s["IdA_4.b"]);
+      
+      //fig 6
+      for (int i=0;i<3;i++){
+        for (int k=0;k<3;k++){
+          string pt = "0";
+          string pii = "0";
+          if (i==0){pt="a";};
+          if (i==1){pt="b";};
+          if (i==2){pt="c";};
+          if (k==0){pii = ".2";};
+          if (k==1){pii = ".3";};
+          if (k==2){pii = ".6";};
+          string hAA = "IAA_AuAu_6." + pt + pii;
+          string hpp = "IAA_pp_6." + pt + pii;
+          string siaa = "IAA_6."+ pt + pii;
+          divide(_h[hAA], _h[hpp], _s[siaa]);
+          //fig 5 and 8
+          if (k==0){
+            string siaa5 = "IAA_5." + pt;
+            string siaa8 = "IAA_8." + pt;
+            divide(_h[hAA], _h[hpp], _s[siaa5]);
+            divide(_h[hAA], _h[hpp], _s[siaa8]);
+          };
+        }
+      }
+
+      //fig 7
+      for (int i=0;i<3;i++){
+        string pt = "0";
+        if (i==0){pt="2";};
+        if (i==1){pt="3";};
+        if (i==2){pt="6";};
+        string hAA = "IAA_AuAu_7.less." + pt;
+        string hpp = "IAA_pp_7.less." + pt;
+        string siaal = "IAA_7.less."+ pt;
+        divide(_h[hAA], _h[hpp], _s[siaal]);
+        hAA = "IAA_AuAu_7.over." + pt;
+        hpp = "IAA_pp_7.over." + pt;
+        string siaam = "IAA_7.over."+ pt;
+        divide(_h[hAA], _h[hpp], _s[siaam]);
+        string siaa = "IAA_7."+ pt;
+        DivideScatter2D(_s[siaal], _s[siaam], _s[siaa]);
+      }
 
     }
 
