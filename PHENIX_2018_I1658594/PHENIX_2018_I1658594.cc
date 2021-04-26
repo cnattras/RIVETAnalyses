@@ -1501,6 +1501,16 @@ namespace Rivet {
                 string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                 book(_p[v2string], 1, 1, 1+icent);
         }
+	for(unsigned int icent = 0; icent < v3centBins.size()-1; icent++)
+        {
+                string v3string = "v3_cent" + Form(v3centBins[icent], 0) + Form(v3centBins[icent+1], 0);
+                book(_p[v3string], 1, 1, 1+icent);
+        }
+        for(unsigned int icent = 0; icent < v3centBins.size()-1; icent++)
+        {
+		string v4string = "v4_cent" + Form(v4centBins[icent], 0) + Form(v4centBins[icent+1], 0);
+		book(_p[v4string], 1, 1, 1+icent);
+        }
 
     }
 
@@ -1591,7 +1601,11 @@ namespace Rivet {
          string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
          FillVn(_p[v2string], particles, evPPosNeg, 2);
 
+	string v3string = "v3_cent" + Form(floor(c/10)*10.,0) + Form((floor(c/10)*10.)+10.,0);
+        FillVn(_p[v3string], particles, evPPosNeg, 3);
 
+        string v4string = "v4_cent" + Form(floor(c/10)*10.,0) + Form((floor(c/10)*10.)+10.,0);
+        FillVn(_p[v4string], particles, evPPosNeg, 4);
 
     }
 
@@ -1634,17 +1648,16 @@ namespace Rivet {
                     _p[v2string]->scaleY(1./EPres[icent]);
 
             }
+	for(unsigned int icent = 0; icent < v3centBins.size()-1; icent++){
+                string v3string = "v3_cent" + Form(v3centBins[icent], 0) + Form(v3centBins[icent+1], 0);
+                _p[v3string]->scaleY(1./EPres[icent]);
+        }
+        for(unsigned int icent=0; icent < v4centBins.size()-1; icent++){
+                string v4string = "v4_cent" + Form(v4centBins[icent], 0) + Form(v4centBins[icent+1], 0);
+                _p[v4string]->scaleY(1./EPres[icent]);
+        }	
 
-/*
-<<<<<<< HEAD
-=======
 
-
-	         for(Correlator& corr : Correlators)
-      {
-              corr.Normalize();
-      }
->>>>>>> 968959d13c8f8d35f16d92923403a26295e69023*/
     }
 
     //@}
@@ -1657,6 +1670,8 @@ namespace Rivet {
     map<string, Scatter2DPtr> _s;
     map<string, CounterPtr> _c;
     std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50.};
+    std::vector<double> v3centBins = {0., 10., 20., 30., 40., 50.};
+    std::vector<double> v4centBins = {0., 10., 20., 30., 40., 50.};
     //@}
 
     vector<Correlator> Correlators;
