@@ -439,7 +439,7 @@ namespace Rivet {
 	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
 	float min_pT=0, max_pT=0, min_pA=0, max_pA=0, minV=0, maxV=0, b=0, c=0, d=0;
 	char corrName[200], bookName[200], corrNameTrigger[200];
-
+/*
 	//fig 6
 	minCent=0, maxCent=40, minPlane=2, maxPlane=5;
 	for(e=minPlane; e<=maxPlane; e++){
@@ -470,7 +470,7 @@ namespace Rivet {
 		}
 	}
 	iterator=1;
-
+*/
 	//fig 12
 	minCent=0, maxCent=40, min_pT=4, max_pT=4, min_pA=0.5, max_pA=4, minV=1, maxV=1;
 	b=2;
