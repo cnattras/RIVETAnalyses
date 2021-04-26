@@ -103,10 +103,19 @@ namespace Rivet {
 	        return dPhi;
         }
 
-        void AddCorrelation(Particle pTrig, Particle pAssoc)
+        void AddCorrelation(Particle pTrig, Particle pAssoc, bool is0toPI = false)
 	{
                 double dPhi = GetDeltaPhi(pTrig, pAssoc);
-                _deltaPhi->fill(dPhi);
+                if(is0toPI)
+                {
+                        dPhi = mapAngle0ToPi(dPhi);
+                        _deltaPhi->fill(dPhi, 0.5);
+                }
+                else
+                {
+                        _deltaPhi->fill(dPhi);
+                }
+
         }
 
         void AddWeight()
@@ -310,7 +319,7 @@ namespace Rivet {
       // fig 4 a
 	    book(_h["GammaDirhPertriggerVsXiAUAU"], 3, 1, 1);
     	book(_h["GammaDirhPertriggerVsXidAU"], 3, 1, 2);
-      
+
       //fig 4 b
       string refname = mkAxisCode(4,1,1);
       const Scatter2D& refdata = refData(refname);
@@ -419,7 +428,7 @@ namespace Rivet {
         corrfi4ad.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4ad);
       }
-      
+
       //fig 4 b
       for (int i=0;i<6;i++){
         float xilower= 0+i*.4;
@@ -580,7 +589,7 @@ namespace Rivet {
         book(_h[books], 1, 1, i+1);
         book(_c[corrs], corrs);
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
-        book(_h[corrs2], corrs2, dphibinNumCor, -M_PI/2., 1.5*M_PI);
+        book(_h[corrs2], corrs2, dphibinNumCor, 0, M_PI);
         Correlator corrfig2(2000);
         corrfig2.SetCollSystemAndEnergy("AUAU200GeV");
     	  corrfig2.SetCentrality(0.,40.);
@@ -630,7 +639,7 @@ namespace Rivet {
         book(_h[books], 2, 1, i+1);
         book(_c[corrs], corrs);
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
-        book(_h[corrs2], corrs2, dphibinNumCor, -M_PI/2., 1.5*M_PI);
+        book(_h[corrs2], corrs2, dphibinNumCor, -0, M_PI);
         Correlator corrfig3(3000);
         corrfig3.SetCollSystemAndEnergy("dAU200GeV");
     	  corrfig3.SetNoCentrality();
@@ -796,7 +805,8 @@ namespace Rivet {
             if (!corr.CheckTriggerRange(pTrig.pT() / GeV)) continue;
             if (!corr.CheckAssociatedRange(pAssoc.pT() / GeV)) continue;
             if (!corr.CheckXiRange(log(pTrig.pT()/ pAssoc.pT()))) continue;
-            corr.AddCorrelation(pTrig, pAssoc);
+            if(corr.GetIndex(0) == 2000 || corr.GetIndex(0) == 3000) corr.AddCorrelation(pTrig, pAssoc, true);
+            else corr.AddCorrelation(pTrig, pAssoc);
           }
         }
       }
@@ -821,7 +831,7 @@ namespace Rivet {
         if(corr.GetIndex(0) == 4110) _h["IAA_AuAu_4.b"]->bin(_h["IAA_AuAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
         if(corr.GetIndex(0) == 4120) _h["IdA_dAu_4.b"]->bin(_h["IdA_dAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
         if(corr.GetIndex(0) == 4130) _h["IAA_pp_4.b"]->bin(_h["IAA_pp_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
-        
+
         //figure 6
         for (int i=0;i<3;i++){
           for (int k=0;k<3;k++){
@@ -865,14 +875,14 @@ namespace Rivet {
           if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
           if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
         }
-        
+
       }
 
       //fill mod charts
       //fig 4.b
       divide(_h["IAA_AuAu_4.b"], _h["IAA_pp_4.b"], _s["IAA_4.b"]);
       divide(_h["IdA_dAu_4.b"], _h["IAA_pp_4.b"], _s["IdA_4.b"]);
-      
+
       //fig 6
       for (int i=0;i<3;i++){
         for (int k=0;k<3;k++){
