@@ -425,6 +425,8 @@ namespace Rivet {
       declare(RxPNeg, "RxPNeg");
 
       book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
+      book(_p["RxPcosPosv3"], "RxPcosPosv3", 10, 0., 10.);
+      book(_p["RxPcosPosv4"], "RxPcosPosv4", 10, 0., 10.);
       book(_s["ResCent"], "ResCent");
 
       // Initialise and register projections
@@ -1500,16 +1502,15 @@ namespace Rivet {
         {
                 string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                 book(_p[v2string], 1, 1, 1+icent);
-        }
-	for(unsigned int icent = 0; icent < v3centBins.size()-1; icent++)
-        {
-                string v3string = "v3_cent" + Form(v3centBins[icent], 0) + Form(v3centBins[icent+1], 0);
-                book(_p[v3string], 1, 1, 1+icent);
-        }
-        for(unsigned int icent = 0; icent < v3centBins.size()-1; icent++)
-        {
-		string v4string = "v4_cent" + Form(v4centBins[icent], 0) + Form(v4centBins[icent+1], 0);
-		book(_p[v4string], 1, 1, 1+icent);
+
+                string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                book(_p[v3string], 1, 1, 6+icent);
+
+                string v4string = "v4_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                book(_p[v4string], 1, 1, 11+icent);
+
+                string v4ep2string = "v4ep2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                book(_p[v4ep2string], 1, 1, 16+icent);
         }
 
     }
@@ -1596,16 +1597,40 @@ namespace Rivet {
 	//std::floor(double a) returns the largest integer value smaller than a
 	 _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
 
+         //EP3 and Resolution
+
+         double evPPosNeg3 = GetEventPlaneDetectorAcc(3, RxP, etaRxP, nPhiSections);
+
+         double evPPos3 = GetEventPlaneDetectorAcc(3, RxPPos, etaRxPPos, nPhiSections);
+         double evPNeg3 = GetEventPlaneDetectorAcc(3, RxPNeg, etaRxPNeg, nPhiSections);
+
+         _p["RxPcosPosv3"]->fill(int(floor(c/10))+0.5, cos(3*(evPPos3-evPNeg3)));
+
+         //EP4 and Resolution
+
+         double evPPosNeg4 = GetEventPlaneDetectorAcc(4, RxP, etaRxP, nPhiSections);
+
+         double evPPos4 = GetEventPlaneDetectorAcc(4, RxPPos, etaRxPPos, nPhiSections);
+         double evPNeg4 = GetEventPlaneDetectorAcc(4, RxPNeg, etaRxPNeg, nPhiSections);
+
+         _p["RxPcosPosv4"]->fill(int(floor(c/10))+0.5, cos(4*(evPPos4-evPNeg4)));
+
+
          Particles particles = cfs.particles();
 
          string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
          FillVn(_p[v2string], particles, evPPosNeg, 2);
 
-	string v3string = "v3_cent" + Form(floor(c/10)*10.,0) + Form((floor(c/10)*10.)+10.,0);
-        FillVn(_p[v3string], particles, evPPosNeg, 3);
+         string v3string = "v3_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+         FillVn(_p[v3string], particles, evPPosNeg3, 3);
 
-        string v4string = "v4_cent" + Form(floor(c/10)*10.,0) + Form((floor(c/10)*10.)+10.,0);
-        FillVn(_p[v4string], particles, evPPosNeg, 4);
+         string v4string = "v4_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+         FillVn(_p[v4string], particles, evPPosNeg4, 4);
+
+         string v4ep2string = "v4ep2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+         FillVn(_p[v4ep2string], particles, evPPosNeg, 4);
+
+
 
     }
 
@@ -1642,22 +1667,64 @@ namespace Rivet {
                     centBin++;
             }
 
+            centBin = 0;
+            std::vector<double> EPres3(5, 0.);
+
+            for(auto bin : _p["RxPcosPosv3"]->bins())
+            {
+		if(bin.numEntries() > 0)
+                    {
+                         double RxPPosRes = sqrt(bin.mean());
+			 double chiRxPPos = CalculateChi(RxPPosRes);
+			 double res = Resolution(sqrt(2)*chiRxPPos);
+			EPres3[centBin] = res;
+                           // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+                    }
+                    centBin++;
+            }
+
+            centBin = 0;
+            std::vector<double> EPres4(5, 0.);
+
+            for(auto bin : _p["RxPcosPosv4"]->bins())
+            {
+		if(bin.numEntries() > 0)
+                    {
+                         double RxPPosRes = sqrt(bin.mean());
+			 double chiRxPPos = CalculateChi(RxPPosRes);
+			 double res = Resolution(sqrt(2)*chiRxPPos);
+			EPres4[centBin] = res;
+                           // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+                    }
+                    centBin++;
+            }
+
             for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
             {
                     string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                     _p[v2string]->scaleY(1./EPres[icent]);
 
+                    string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                    _p[v3string]->scaleY(1./EPres3[icent]);
+
+                    string v4string = "v4_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                    _p[v4string]->scaleY(1./EPres4[icent]);
+
+                    string v4ep2string = "v4ep2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                    _p[v4ep2string]->scaleY(1./EPres[icent]);
+
             }
-	for(unsigned int icent = 0; icent < v3centBins.size()-1; icent++){
-                string v3string = "v3_cent" + Form(v3centBins[icent], 0) + Form(v3centBins[icent+1], 0);
-                _p[v3string]->scaleY(1./EPres[icent]);
-        }
-        for(unsigned int icent=0; icent < v4centBins.size()-1; icent++){
-                string v4string = "v4_cent" + Form(v4centBins[icent], 0) + Form(v4centBins[icent+1], 0);
-                _p[v4string]->scaleY(1./EPres[icent]);
-        }	
+
+/*
+<<<<<<< HEAD
+=======
 
 
+	         for(Correlator& corr : Correlators)
+      {
+              corr.Normalize();
+      }
+>>>>>>> 968959d13c8f8d35f16d92923403a26295e69023*/
     }
 
     //@}
@@ -1670,8 +1737,6 @@ namespace Rivet {
     map<string, Scatter2DPtr> _s;
     map<string, CounterPtr> _c;
     std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50.};
-    std::vector<double> v3centBins = {0., 10., 20., 30., 40., 50.};
-    std::vector<double> v4centBins = {0., 10., 20., 30., 40., 50.};
     //@}
 
     vector<Correlator> Correlators;
