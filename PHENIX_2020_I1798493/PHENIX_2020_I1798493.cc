@@ -822,6 +822,7 @@ namespace Rivet {
         corr.Normalize();
         Histo1DPtr h = corr.GetCorrelationFunction();
         h = SubtractBackgroundZYAM(h);
+        if(corr.GetIndex(0) == 2000 || corr.GetIndex(0) == 3000) continue;
         double fraction = 0.;
         double yield = getYieldRangeUser(h, M_PI/2., 3.*M_PI/2., fraction);
         double yield3 = getYieldRangeUser(h, 2.*M_PI/3., 4.*M_PI/3., fraction);
