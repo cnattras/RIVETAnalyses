@@ -786,8 +786,8 @@ namespace Rivet {
 	      corr.AddWeight();
       }
 
-      //for(auto pTrig : pfs.particles())
-      for(auto pTrig : cfs.particles())
+      for(auto pTrig : pfs.particles())
+      //for(auto pTrig : cfs.particles())
       {
         for (Correlator &corr : Correlators)
         {
