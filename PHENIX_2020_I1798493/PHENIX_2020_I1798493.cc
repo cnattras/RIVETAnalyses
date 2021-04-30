@@ -828,6 +828,10 @@ namespace Rivet {
         double yield3 = getYieldRangeUser(h, 2.*M_PI/3., 4.*M_PI/3., fraction);
         double yield6 = getYieldRangeUser(h, 5.*M_PI/6., 7.*M_PI/6., fraction);
 
+        //figure 4 a
+        if(corr.GetIndex(0) == 4010) _h["GammaDirhPertriggerVsXiAUAU"]->bin(_h["GammaDirhPertriggerVsXiAUAU"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4030) _h["GammaDirhPertriggerVsXidAU"]->bin(_h["GammaDirhPertriggerVsXidAU"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+
         //figure 4.b
         if(corr.GetIndex(0) == 4110) _h["IAA_AuAu_4.b"]->bin(_h["IAA_AuAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
         if(corr.GetIndex(0) == 4120) _h["IdA_dAu_4.b"]->bin(_h["IdA_dAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
