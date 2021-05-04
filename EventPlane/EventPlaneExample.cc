@@ -330,12 +330,17 @@ namespace Rivet {
       declare(RxPNeg, "RxPNeg");
 
       book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
+      book(_p["RxPcosPosv3"], "RxPcosPosv3", 10, 0., 10.);
       book(_s["ResCent"], "ResCent");
+      book(_s["ResCentv3"], "ResCentv3");
 
       for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
       {
               string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
               book(_p[v2string], v2string,  v2ptBins);
+
+              string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+              book(_p[v3string], v3string,  v2ptBins);
       }
 
 
@@ -373,10 +378,22 @@ namespace Rivet {
       //std::floor(double a) returns the largest integer value smaller than a
       _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
 
+      //v3
+
+      double evPPosNegv3 = GetEventPlaneDetectorAcc(3, RxP, etaRxP, nPhiSections);
+      double evPPosv3 = GetEventPlaneDetectorAcc(3, RxPPos, etaRxPPos, nPhiSections);
+      double evPNegv3 = GetEventPlaneDetectorAcc(3, RxPNeg, etaRxPNeg, nPhiSections);
+
+      //std::floor(double a) returns the largest integer value smaller than a
+      _p["RxPcosPosv3"]->fill(int(floor(c/10))+0.5, cos(3*(evPPosv3-evPNegv3)));
+
       Particles particles = fs.particles();
 
       string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
       FillVn(_p[v2string], particles, evPPosNeg, 2);
+
+      string v3string = "v3_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+      FillVn(_p[v3string], particles, evPPosNegv3, 3);
 
 
     }
@@ -388,6 +405,7 @@ namespace Rivet {
             int centBin = 0;
 
             std::vector<double> EPres(5, 0.);
+            std::vector<double> EPresv3(5, 0.);
 
             for(auto bin : _p["RxPcosPos"]->bins())
             {
@@ -404,10 +422,30 @@ namespace Rivet {
                     centBin++;
             }
 
+            centBin = 0;
+
+            for(auto bin : _p["RxPcosPosv3"]->bins())
+            {
+                    //if(bin.numEntries() > 0 && bin.mean() > 0.)
+                    if(bin.numEntries() > 0)
+                    {
+                            double RxPPosRes = sqrt(bin.mean()); //resolution of one of the RxP sides (positive eta)
+                            double chiRxPPos = CalculateChi(RxPPosRes); //Chi of one of the RxP sides (positive eta)
+                            //Using the approx chiRxP(pos+neg) = sqrt(2)*chiRxPPos
+                            double res = Resolution(sqrt(2)*chiRxPPos); //resolution of RxP(pos+neg)
+                            EPresv3[centBin] = res;
+                            _s["ResCentv3"]->addPoint((centBin*10.)+5., res, 5., 0.);
+                    }
+                    centBin++;
+            }
+
             for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
             {
                     string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                     _p[v2string]->scaleY(1./EPres[icent]);
+
+                    string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+                    _p[v3string]->scaleY(1./EPresv3[icent]);
 
             }
 
