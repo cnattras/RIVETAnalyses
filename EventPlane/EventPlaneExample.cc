@@ -74,7 +74,7 @@ namespace Rivet {
                     }
             }
 
-            double eventPlane = mapAngle0To2Pi((1./n)*atan(QIn/QRn));
+            double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
 
             return eventPlane;
     }
