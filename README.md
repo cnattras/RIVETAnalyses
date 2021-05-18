@@ -14,7 +14,7 @@ Analyses implemented at UTK
 - Correlation analysis
 - This one needs more work
 
-0611006v1/PHENIX_2006_I0611006: Lauren Kasper
+PHENIX_2006_I0611006: Lauren Kasper
 - Spectra and ratio Analysis
 - Normalizations needs double check
 
@@ -98,7 +98,10 @@ PHENIX_2012_I1116179/PHENIX_2012_I1116179
 PHENIX_2016_I1393529/PHENIX_2016_I1393529
 PHENIX_2016_I1394433/PHENIX_2016_I1394433
 PHENIX_2018_1672859/PHENIX_2018_1672859
+
 PHENIX_2018_I1672476/PHENIX_2018_I1672476
+Done by Zhangdong Sun.  HEPData needs to be uploaded!  This analysis was started but the analysis is empty.
+
 PHENIX_2019_I1672133/PHENIX_2019_I1672133
 PHENIX_2020_I1773662/PHENIX_2020_I1773662
 STAR_2003_I619063/STAR_2003_I619063
