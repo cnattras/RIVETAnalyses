@@ -1,0 +1,34 @@
+Name: PHENIX_2006_I711951
+Year: 2006
+Summary: <Nuclear effects on hadron production in d+Au and p+p collisions at $\sqrt{s_{NN}}$ = 200 GeV>
+Experiment: PHENIX
+Collider: <Relativistic Heavy Ion Collider (RHIC)>
+InspireID: 711951
+Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Authors:
+ - Andi Mankolli <andi.mankolli@vanderbilt.edu>, Christine Nattrass <cnattrass@utk.edu>, Antonio Silva <antonio.silva@cern.ch>
+References:
+ - 'Phys.Rev. C74, 024904 (2006)'
+ - 'DOI:10.1103/PhysRevC.74.024904'
+ - 'arXiv:nucl-ex/0603010'
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=PP,AUAU200,PBPB,dAU200
+Description:
+  'A brief description of what is measured and what it is useful for.
+   Use LaTeX for maths, e.g. $\pT > 50\;\GeV$.'
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey:
+BibTeX: ''
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
