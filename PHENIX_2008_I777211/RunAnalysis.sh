@@ -9,7 +9,7 @@ export RIVET_ANALYSIS_PATH=$PWD
 
 
 rivet-build RivetPHENIX_2008_I777211.so PHENIX_2008_I777211.cc
-rivet --pwd -p ../Centralities/Calibration/calibration_PHENIX_AUAU200GeV.yoda -a PHENIX_2008_I777211:cent=GEN:beam=AUAU200 -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
+rivet --pwd -p ../Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda -a PHENIX_2008_I777211:cent=GEN:beam=AUAU200 -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
 
 
 #rivet --pwd -a RHIC_2019_CentralityCalibration:exp=STAR -o calibration_AuAu_130GeV_STAR.yoda --ignore-beams $SIMULATION_DIR/hepmc_AuAu_130GeV_1.hepmc $SIMULATION_DIR/hepmc_AuAu_130GeV_2.hepmc $SIMULATION_DIR/hepmc_AuAu_130GeV_3.hepmc $SIMULATION_DIR/hepmc_AuAu_130GeV_4.hepmc $SIMULATION_DIR/hepmc_AuAu_130GeV_5.hepmc

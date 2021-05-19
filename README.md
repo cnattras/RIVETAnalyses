@@ -19,6 +19,7 @@ PHENIX_2006_I0611006: Lauren Kasper
 - Normalizations needs double check
 
 0801.1665/PHENIX_2008_I777211 - Implemented by Christal Martin at UTK.  Pi0 RAA in 0-5% central Au+Au at 200 GeV.  Complete.
+- "Error in PHENIX_2008_I777211:beam=AUAU200:cent=GEN::analyze method: Missing implementation for a Cuts::Quantity."
 
 0801.4020/PHENIX_2008_I778168: Mani
 - Spectra and ratio Analysis
