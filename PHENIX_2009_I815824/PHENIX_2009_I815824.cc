@@ -9,7 +9,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector> 
-#include "Rivet/Projections/RHICCentrality.hh"
+#include "../Centralities/RHICCentrality.hh"
 
 #define _USE_MATH_DEFINES
 
@@ -626,7 +626,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 		
-		cout<<"Hi"<< endl;
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
 	  
