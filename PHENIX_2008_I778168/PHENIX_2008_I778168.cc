@@ -17,7 +17,7 @@
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 
-#include "RHICCentrality.hh" //external header for Centrality calculation
+#include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #define _USE_MATH_DEFINES
 

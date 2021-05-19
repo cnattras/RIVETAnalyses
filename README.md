@@ -26,6 +26,8 @@ PHENIX_2006_I0611006: Lauren Kasper
 - Check ratio normalizations
 - Use bin center instead of particle pt for normalizations
 
+- "Error in PHENIX_2008_I778168:beam=AUAU:cent=GEN::analyze method: Missing implementation for a Cuts::Quantity."
+
 08014545/PHENIX_2008_I778396: Nora Bauer
 - Correlation Analysis
 - Need some double check (Many histograms and very long code)
