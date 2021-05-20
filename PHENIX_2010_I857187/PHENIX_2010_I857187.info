@@ -1,0 +1,30 @@
+Name: PHENIX_2010_I857187
+Year: 2010
+Summary: <Insert short PHENIX_2010_I857187 description>
+Experiment: PHENIX
+Collider: <Insert the collider name>
+InspireID: 857187
+Status: UNVALIDATED
+Authors:
+ - Your Name <your@email.address>
+#References:
+#- '<Example: Eur.Phys.J. C76 (2016) no.7, 392>'
+#- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
+#- '<Example: arXiv:1605.03814>'
+RunInfo: <Describe event types, cuts, and other general generator config tips.>
+Beams: [p+, p+]
+Energies: [200]
+#Luminosity_fb: <Insert integrated luminosity, in inverse fb>
+Description:
+  '<A fairly long description, including what is measured
+  and if possible what it is useful for in terms of MC validation
+  and tuning. Use LaTeX for maths like $\pT > 50\;\GeV$.>'
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=PP,AUAU200
+Keywords: []
+BibKey: 
+BibTeX: ''
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
