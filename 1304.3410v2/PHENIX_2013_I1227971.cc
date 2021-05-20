@@ -11,7 +11,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "RHICCentrality.hh"
+#include "../Centralities/RHICCentrality.hh"
 #include <math.h>
 #include <iostream>
 #include <string>
