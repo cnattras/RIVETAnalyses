@@ -8,7 +8,7 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
-#include "RHICCentrality.hh"
+#include "../Centralities/RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
 //Christine was here
