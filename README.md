@@ -73,6 +73,8 @@ Need to normalize RAA
 -"Error in STAR_2012_I930463:beam=AUAU:cent=GEN::analyze method: Missing implementation for a Cuts::Quantity."
 
 1110.5800/STAR_2012_I943192 - Started by Christine Nattrass.  Dihadron correlations at 62.4 and 200 GeV in Cu+Cu and Au+Au.  Not complete.  Needs a lot of work.  Probably should be treated virtually like an unstarted analysis.
+-"Error in PHENIX_2012_I1107625:beam=AUAU:cent=GEN::analyze method: Missing implementation for a Cuts::Quantity."
+
 
 1204.1526/PHENIX_2012_I1107625 - Implemented by Christal Martin at UTK.  Pi0 RAA at 39, 62.4, 200 GeV.  Complete.
 
