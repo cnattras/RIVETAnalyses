@@ -47,6 +47,8 @@ CN: Maybe we can get Takahito's help with this one, with the reaction plane?
 - Some histograms to be implemented
 - Bkg subtraction with v2 needs to be tested and debugged
 
+- "Segmentation fault"
+
 1006.1347/PHENIX_2010_I857187: Jacob
 - Correlation Analysis
 - Seems in good shape. Should run and plot histograms for debugging
