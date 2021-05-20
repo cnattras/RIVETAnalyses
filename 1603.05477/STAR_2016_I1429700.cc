@@ -9,9 +9,9 @@
 #include <iostream>
 #include <math.h>
 #include <vector> 
-==============================================
-#include "RHICCentrality.hh"
-============================================
+
+#include "../Centralities/RHICCentrality.hh"
+
 #define _USE_MATH_DEFINES
 static const int numTrigPtBins = 8;
 static const float pTTrigBins[] = {2.0,2.5,3.0,3.5,4.0,4.5,5.0};
