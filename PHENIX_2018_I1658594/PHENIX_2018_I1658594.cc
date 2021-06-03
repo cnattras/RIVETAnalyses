@@ -1591,6 +1591,7 @@ namespace Rivet {
       vector<Cut> etaRxPPos = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8};
       vector<Cut> etaRxPNeg = {Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
 
+      //event plane calcaulted with the dectector in the positive/negative absolute rapidity
       double evPPos = GetEventPlaneDetectorAcc(2, RxPPos, etaRxPPos, nPhiSections);
       double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
 
@@ -1640,11 +1641,10 @@ namespace Rivet {
 	int i=1;
 	for(Correlator& corr : Correlators)
 	{
-		//normalize
 		corr.Normalize();
 		Histo1DPtr h = corr.GetCorrelationFunction();
 		if((i>=11&&i<=60)||(i>=161&&i<=280)||(i>=401&&i<=460)||(i>=521&&i<=580)){
-			//cout << i << " " << corr.GetTriggerRange() << "x" << corr.GetAssociatedRange() << " " << corr.findIndicies() << '\n';
+	  	   //cout << i << " " << corr.GetTriggerRange() << "x" << corr.GetAssociatedRange() << " " << corr.findIndicies() << '\n';
 			h = SubtractBackgroundZYAM(h);
 		}
 		i++;
@@ -1674,7 +1674,9 @@ namespace Rivet {
             {
 		if(bin.numEntries() > 0)
                     {
-                         double RxPPosRes = sqrt(bin.mean());
+                         double RxPPosRes;
+			 if(bin.mean()>0) RxPPosRes = sqrt(bin.mean());
+				else RxPPosRes = sqrt(abs(bin.mean()));
 			 double chiRxPPos = CalculateChi(RxPPosRes);
 			 double res = Resolution(sqrt(2)*chiRxPPos);
 			EPres3[centBin] = res;
@@ -1690,7 +1692,9 @@ namespace Rivet {
             {
 		if(bin.numEntries() > 0)
                     {
-                         double RxPPosRes = sqrt(bin.mean());
+                        double RxPPosRes;
+			if (bin.mean()>0) RxPPosRes = sqrt(bin.mean());
+				else RxPPosRes = sqrt(abs(bin.mean())); 
 			 double chiRxPPos = CalculateChi(RxPPosRes);
 			 double res = Resolution(sqrt(2)*chiRxPPos);
 			EPres4[centBin] = res;
@@ -1705,10 +1709,12 @@ namespace Rivet {
                     _p[v2string]->scaleY(1./EPres[icent]);
 
                     string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    _p[v3string]->scaleY(1./EPres3[icent]);
+                    if(EPres3[icent]>0) _p[v3string]->scaleY(1./EPres3[icent]);
+			else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
 
                     string v4string = "v4_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    _p[v4string]->scaleY(1./EPres4[icent]);
+                    if(EPres4[icent]>0) _p[v4string]->scaleY(1./EPres4[icent]);
+			else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
 
                     string v4ep2string = "v4ep2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                     _p[v4ep2string]->scaleY(1./EPres[icent]);
