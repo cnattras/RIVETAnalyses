@@ -16,6 +16,33 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2013_I1127262);
 
+    //adding a function to get the acc of the event plant dectector
+    //so that reaction plant dependency can be calculated
+    double GetEventPlaneDetectorAcc(int n, const FinalState pf, vector<Cut> etaRxP, int nPhiSections)
+    {
+            double QIn = 0.;
+            double QRn = 0.;
+
+            for(auto eta : etaRxP)
+            {
+                    for(int iphi = 0; iphi < nPhiSections; iphi++)
+                    {
+                            Cut aCut = eta && Cuts::phi > iphi*(2.*M_PI/nPhiSections) && Cuts::phi < (iphi+1)*(2.*M_PI/nPhiSections);
+                            Particles particles = pf.particles(aCut);
+                            int weight = particles.size();
+                            for(const Particle& p : particles)
+                            {
+                                    QIn += weight*sin(n*p.phi());
+                                    QRn += weight*cos(n*p.phi());
+                            }
+                    }
+            }
+
+            double eventPlane = mapAngle0To2Pi((1./n)*atan2(QIn,QRn));
+
+            return eventPlane;
+    }
+
 
     /// @name Analysis methods
     //@{
@@ -88,6 +115,29 @@ namespace Rivet {
       // Fill histogram with leading b-jet pT
       _h["XXXX"]->fill(bjets[0].pT()/GeV);
 
+      //Calcualte Reaction Plane Dependency:
+      
+      //get reaction plane positive and negative final state values
+      const FinalState& RxP = apply<FinalState>(event, "RxP");
+      const FinalState& RxPPos = apply<FinalState>(event, "RxPPos");
+      const FinalState& RxPNeg = apply<FinalState>(event, "RxPNeg");
+
+      //Inner and Outer rings of North and South sections of the RxP dectector
+      vector<Cut> etaRxP = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8, Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
+      int nPhiSections = 12;
+
+      double evPPosNeg = GetEventPlaneDetectorAcc(2, RxP, etaRxP, nPhiSections);
+
+      vector<Cut> etaRxPPos = {Cuts::eta > 1. && Cuts::eta < 1.5, Cuts::eta > 1.5 && Cuts::eta < 2.8};
+      vector<Cut> etaRxPNeg = {Cuts::eta < -1. && Cuts::eta > -1.5, Cuts::eta < -1.5 && Cuts::eta > -2.8};
+
+      double evPPos = GetEventPlaneDetectorAcc(2, RxPPos, etaRxPPos, nPhiSections);
+      double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
+
+      _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
+
+
+
     }
 
 
@@ -108,6 +158,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50., 60.};
     //@}
 
 
