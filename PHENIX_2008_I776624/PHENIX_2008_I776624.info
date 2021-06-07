@@ -1,16 +1,16 @@
 Name: PHENIX_2008_I776624
 Year: 2008
-Summary: <A one-line informative PHENIX_2008_I776624 headline>
+Summary: <J/psi Production in $\sqrt{s_{NN}}$=200GeV Cu+Cu Collisions>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: <RHIC>
 InspireID: 776624
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Your Name <your@email.address>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'Phys.Rev.Lett.101:122301,2008'
+ - 'DOI:10.1103/PhysRevLett.101.122301'
+ - 'arXiv:0801.0220'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -18,9 +18,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
 Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+  'Yields for J/psi production in Cu+Cu collisions at $\sqrt{s_{NN}}$=200GeV have been measured by the PHENIX experiment over the rapidity range $|y| < 2.2$ at transverse momenta from 0 to beyond 5 GeV/c. The invariant yield is obtained as a function of rapidity, transverse momentum and collision centrality, and compared with results in p+p and Au+Au collisions at the same energy. The Cu+Cu data provide greatly improved precision over existing Au+Au data for J/psi production in collisions with small to intermediate numbers of participants, providing a key constraint that is needed for disentangling cold and hot nuclear matter effects.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
