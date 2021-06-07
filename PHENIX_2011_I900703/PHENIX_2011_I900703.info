@@ -1,16 +1,16 @@
 Name: PHENIX_2011_I900703
 Year: 2011
-Summary: <A one-line informative PHENIX_2011_I900703 headline>
+Summary: <Measurements of Higher-Order Flow Harmonics in Au+Au Collisions at $\sqrt{s_{NN}}$=200GeV>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: <RHIC>
 InspireID: 900703
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Your Name <your@email.address>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'Phys. Rev. Lett. 107,252301 (2011)'
+ - 'DOI:10.1103/PhysRevLett.107.252301'
+ - 'arXiv:1105.3928'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -20,9 +20,7 @@ Options:
 Options:
  - beam=AUAU,PP
 Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+  'Flow coefficients $v_{n}$ for n = 2, 3, 4, characterizing the anisotropic collective flow in Au+Au collisions at $\sqrt{s_{NN}}$=200GeV, are measured relative to event planes $\psi_{n}$, determined at large rapidity. We report $v_{n}$as a function of transverse momentum and collision centrality, and study the correlations among the event planes of different order n. The $v_{n}$ are well described by hydrodynamic models which employ a Glauber Monte Carlo initial state geometry with fluctuations, providing additional constraining power on the interplay between initial conditions and the effects of viscosity as the system evolves. This new constraint can serve to improve the precision of the extracted shear viscosity to entropy density ratio $\eta/s$.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
