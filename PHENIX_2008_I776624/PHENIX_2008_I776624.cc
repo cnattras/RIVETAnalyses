@@ -31,7 +31,7 @@ namespace Rivet {
       beamOpt = getOption<string>("beam","NONE");
       
       if(beamOpt=="PP200") CollSys = pp200;
-      else if(beamOpt=="AUAU200") CollSys = AuAu200;
+      else if(beamOpt=="CUCU200") CollSys = CuCu200;
      
       if(!(CollSys == pp200)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
@@ -64,10 +64,10 @@ namespace Rivet {
    
      //  /////////////////////////////////////////////////////////////
    //    // FIGURE 2
-   //    // x-axis for AuAu ptsq Table 9 as function of Npart - up to 5 GeV
+   //    // x-axis for CuCu ptsq Table 9 as function of Npart - up to 5 GeV
    //    vector<double> centBins3{0.0, 20.0, 40.0, 60.0};   // no 60-94 provided for mid rapidity
    //    book(_h1D_npart3["ptsq_mid_cent"], "ptsq_mid_cent", centBins3);  
-   //    // x-axis for AuAu ptsq Table 10
+   //    // x-axis for CuCu ptsq Table 10
    //    vector<double> centBins4{0.0, 20.0, 40.0, 60.0, 94.0};
    //    book(_h1D_npart4["ptsq_fwd_cent"], "ptsq_fwd_cent", centBins4);
    
@@ -80,24 +80,24 @@ namespace Rivet {
     
       string refnameRaa1 = mkAxisCode(11,1,1);
       const Scatter2D& refdataRaa1 =refData(refnameRaa1);
-      book(_h_RAA_1D["020_pT_mid_AuAu"], refnameRaa1 + "_AuAu200", refdataRaa1);
+      book(_h_RAA_1D["020_pT_mid_CuCu"], refnameRaa1 + "_CuCu200", refdataRaa1);
       book(_h_RAA_1D["pT_mid_pp"], refnameRaa1 + "_pp200", refdataRaa1);
       book(_h2D_RAA["RAA_pT_mid_020"], refnameRaa1);
 
       string refnameRaa2 = mkAxisCode(12,1,1);
       const Scatter2D& refdataRaa2 =refData(refnameRaa2);
-      book(_h_RAA_1D["020_pT_fwd_AuAu"], refnameRaa2 + "_AuAu200", refdataRaa2);
+      book(_h_RAA_1D["020_pT_fwd_CuCu"], refnameRaa2 + "_CuCu200", refdataRaa2);
       book(_h_RAA_1D["pT_fwd_pp"], refnameRaa2 + "_pp200", refdataRaa2);
       book(_h2D_RAA["RAA_pT_fwd_020"], refnameRaa2);
 
       centBins1.insert(pair<string, int>("RAA_pT_mid_020",0));
       centBins1.insert(pair<string, int>("RAA_pT_fwd_020",1));
  
-      book(_c["c_AuAu_rap_all_020"], "c_AuAu_rap_all_020");
+      book(_c["c_CuCu_rap_all_020"], "c_CuCu_rap_all_020");
 
       string refnameRaa3 = mkAxisCode(13,1,1);
       const Scatter2D& refdataRaa3 =refData(refnameRaa3);
-      book(_h_RAA_1D_rap["020_rap_all_AuAu"], refnameRaa3 + "_AuAu200", refdataRaa3);
+      book(_h_RAA_1D_rap["020_rap_all_CuCu"], refnameRaa3 + "_CuCu200", refdataRaa3);
       book(_h_RAA_1D_rap["rap_all_pp"], refnameRaa3 + "_pp200", refdataRaa3);
       book(_h2D_RAA_rap["RAA_rap_all_020"], refnameRaa3);
 
@@ -112,37 +112,37 @@ namespace Rivet {
 
       // FIGURE 4
    
-      book(_c["c_AuAu_010"], "c_AuAu_010");
-      book(_c["c_AuAu_1020"], "c_AuAu_1020");
-      book(_c["c_AuAu_2030"], "c_AuAu_2030");
-      book(_c["c_AuAu_3040"], "c_AuAu_3040");
-      book(_c["c_AuAu_4050"], "c_AuAu_4050");
-      book(_c["c_AuAu_5060"], "c_AuAu_5060");
-      book(_c["c_AuAu_6094"], "c_AuAu_6094");
-      book(_c["c_AuAu_6070"], "c_AuAu_6070");
-      book(_c["c_AuAu_7094"], "c_AuAu_7094");
+      book(_c["c_CuCu_010"], "c_CuCu_010");
+      book(_c["c_CuCu_1020"], "c_CuCu_1020");
+      book(_c["c_CuCu_2030"], "c_CuCu_2030");
+      book(_c["c_CuCu_3040"], "c_CuCu_3040");
+      book(_c["c_CuCu_4050"], "c_CuCu_4050");
+      book(_c["c_CuCu_5060"], "c_CuCu_5060");
+      book(_c["c_CuCu_6094"], "c_CuCu_6094");
+      book(_c["c_CuCu_6070"], "c_CuCu_6070");
+      book(_c["c_CuCu_7094"], "c_CuCu_7094");
 
 
       vector<double> pTBins{0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0};  
       book(_h_RAA_1D_cent_pT["pT_cent_mid_pp"], "pT_cent_mid_pp", pTBins);
       book(_h_RAA_1D_cent_pT["pT_cent_fwd_pp"], "pT_cent_fwd_pp", pTBins);
 
-      book(_h_RAA_1D_cent_pT["010_pT_mid_AuAu"], "010_pT_mid_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["1020_pT_mid_AuAu"], "1020_pT_mid_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["2030_pT_mid_AuAu"], "2030_pT_mid_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["3040_pT_mid_AuAu"], "3040_pT_mid_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["4050_pT_mid_AuAu"], "4050_pT_mid_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["5060_pT_mid_AuAu"], "5060_pT_mid_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["6094_pT_mid_AuAu"], "6094_pT_mid_AuAu", pTBins);
+      book(_h_RAA_1D_cent_pT["010_pT_mid_CuCu"], "010_pT_mid_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"], "1020_pT_mid_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"], "2030_pT_mid_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"], "3040_pT_mid_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"], "4050_pT_mid_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"], "5060_pT_mid_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"], "6094_pT_mid_CuCu", pTBins);
 
-      book(_h_RAA_1D_cent_pT["010_pT_fwd_AuAu"], "010_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["1020_pT_fwd_AuAu"], "1020_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["2030_pT_fwd_AuAu"], "2030_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["3040_pT_fwd_AuAu"], "3040_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["4050_pT_fwd_AuAu"], "4050_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["5060_pT_fwd_AuAu"], "5060_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["6070_pT_fwd_AuAu"], "6070_pT_fwd_AuAu", pTBins);
-      book(_h_RAA_1D_cent_pT["7094_pT_fwd_AuAu"], "7094_pT_fwd_AuAu", pTBins);
+      book(_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"], "010_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"], "1020_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"], "2030_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"], "3040_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"], "4050_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"], "5060_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"], "6070_pT_fwd_CuCu", pTBins);
+      book(_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"], "7094_pT_fwd_CuCu", pTBins);
 
       // for RAA vs pT per centrality slice, before summing over pT
       book(_h2D_RAA_cent_pT["RAA_pT_mid_010"], "RAA_pT_mid_010");
@@ -170,13 +170,13 @@ namespace Rivet {
       // for pT integrated results using SetPoint
       string refnameRaa4 = mkAxisCode(14,1,1);
       const Scatter2D& refdataRaa4 =refData(refnameRaa4);
-      book(_h_RAA_1D_cent["Cent_mid_AuAu"], refnameRaa4 + "_AuAu200", refdataRaa4);
+      book(_h_RAA_1D_cent["Cent_mid_CuCu"], refnameRaa4 + "_CuCu200", refdataRaa4);
       book(_h_RAA_1D_cent["mid_pp"], refnameRaa4 + "_pp200", refdataRaa4);
       book(_h2D_RAA_mid_Npart["RAA_mid_Npart"], refnameRaa4);
 
       string refnameRaa5 = mkAxisCode(15,1,1);
       const Scatter2D& refdataRaa5 =refData(refnameRaa5);
-      book(_h_RAA_1D_cent["Cent_fwd_AuAu"], refnameRaa5 + "_AuAu200", refdataRaa5);
+      book(_h_RAA_1D_cent["Cent_fwd_CuCu"], refnameRaa5 + "_CuCu200", refdataRaa5);
       book(_h_RAA_1D_cent["fwd_pp"], refnameRaa5 + "_pp200", refdataRaa5);
       book(_h2D_RAA_fwd_Npart["RAA_fwd_Npart"], refnameRaa5);
 
@@ -200,15 +200,15 @@ namespace Rivet {
       Particles MidParticles = applyProjection<UnstableParticles>(event,"up_mid").particles();  // electrons
       Particles AllParticles = applyProjection<UnstableParticles>(event,"up_all").particles();  // electrons
 
-      if(CollSys==AuAu200)
+      if(CollSys==CuCu200)
       	{
-      	  // AuAu event counters 
+      	  // CuCu event counters 
       	  /////////////////////////////////////////////////////////
       	  if((c > 0.) && (c <= 20.))
       	    {
 	      _c["c_YAA_pT_fwd_020"]->fill();
 	      _c["c_YAA_pT_mid_020"]->fill();
-	      _c["c_AuAu_rap_all_020"]->fill();
+	      _c["c_CuCu_rap_all_020"]->fill();
       	    }
 	  else if((c > 20.) && (c <= 40.))
       	    {
@@ -229,26 +229,26 @@ namespace Rivet {
       	  /////////////////////////////////////////////////////////
 	  
 	  if((c > 0.) && (c <= 10.))
-	    _c["c_AuAu_010"]->fill();
+	    _c["c_CuCu_010"]->fill();
 	  if((c > 10.) && (c <= 20.))
-	    _c["c_AuAu_1020"]->fill();
+	    _c["c_CuCu_1020"]->fill();
 	  if((c > 20.) && (c <= 30.))
-	    _c["c_AuAu_2030"]->fill();
+	    _c["c_CuCu_2030"]->fill();
 	  if((c > 30.) && (c <= 40.))
-	    _c["c_AuAu_3040"]->fill();
+	    _c["c_CuCu_3040"]->fill();
 	  if((c > 40.) && (c <= 50.))
-	    _c["c_AuAu_4050"]->fill();
+	    _c["c_CuCu_4050"]->fill();
 	  if((c > 50.) && (c <= 60.))
-	    _c["c_AuAu_5060"]->fill();
+	    _c["c_CuCu_5060"]->fill();
 	  if((c > 60.) && (c <= 70.))
-	    _c["c_AuAu_6070"]->fill();
+	    _c["c_CuCu_6070"]->fill();
 	  if((c > 60.) && (c <= 94.))
-	    _c["c_AuAu_6094"]->fill();
+	    _c["c_CuCu_6094"]->fill();
 	  if((c > 70.) && (c <= 94.))
-	    _c["c_AuAu_7094"]->fill();
+	    _c["c_CuCu_7094"]->fill();
 	
   
-      	  // // AuAu fwd J/psi
+      	  // // CuCu fwd J/psi
       	  // /////////////////////////////////////////////////////////
 	  for(const Particle& p : FwdParticles)
       	    {
@@ -263,7 +263,7 @@ namespace Rivet {
       	  	      if(jpsi_pT < 6.)
 			{
 			  _h_1D["YAA_pT_fwd_020"]->fill(jpsi_pT, pt_weight); // Fig 1
-			  _h_RAA_1D["020_pT_fwd_AuAu"]->fill(jpsi_pT);  // Fig 3
+			  _h_RAA_1D["020_pT_fwd_CuCu"]->fill(jpsi_pT);  // Fig 3
 			}
 		    }
       	  	  else if((c > 20.) && (c <= 40.))
@@ -285,7 +285,7 @@ namespace Rivet {
       	  	} // 443
       	    } // for
 
-      	  // // AuAu mid J/psi
+      	  // // CuCu mid J/psi
       	  // /////////////////////////////////////////////////////////
       	  for(const Particle& p : MidParticles)
       	    {
@@ -300,7 +300,7 @@ namespace Rivet {
       	  	      if(jpsi_pT < 10.)
 			{
 			  _h_1D["YAA_pT_mid_020"]->fill(jpsi_pT, pt_weight); // Fig 1 
-			  _h_RAA_1D["020_pT_mid_AuAu"]->fill(jpsi_pT); // Fig 3
+			  _h_RAA_1D["020_pT_mid_CuCu"]->fill(jpsi_pT); // Fig 3
 			}
 		    }
       	  	  else if((c > 20.) && (c <= 40.))
@@ -322,7 +322,7 @@ namespace Rivet {
 		} // 443
 	    } // for
 	 
-	  // for pAu RAA vs rapidity, Figure 3
+	  // for pCu RAA vs rapidity, Figure 3
       	  /////////////////////////////////////////////////////////
       	  for(const Particle& p :AllParticles)
       	    {
@@ -331,7 +331,7 @@ namespace Rivet {
 		  double jpsi_rap = p.rapidity();
 		  
 		  if( (c > 0.) && (c <= 20.))
-		    _h_RAA_1D_rap["020_rap_all_AuAu"]->fill(jpsi_rap);  // Fig 3
+		    _h_RAA_1D_rap["020_rap_all_CuCu"]->fill(jpsi_rap);  // Fig 3
 
       		}
       	    }
@@ -345,19 +345,19 @@ namespace Rivet {
 	  	  if(jpsi_pT < 5.)
 	  	    {
 	  	      if( (c > 0.) && (c <= 10.))
-	  		_h_RAA_1D_cent_pT["010_pT_mid_AuAu"]->fill(jpsi_pT);	 // Fig 4     	  	    	  	    	      	  	    
+	  		_h_RAA_1D_cent_pT["010_pT_mid_CuCu"]->fill(jpsi_pT);	 // Fig 4     	  	    	  	    	      	  	    
 	  	      else if((c > 10.) && (c <= 20.))
-	  		_h_RAA_1D_cent_pT["1020_pT_mid_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  		_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 20.) && (c <= 30.))
-	  	      	_h_RAA_1D_cent_pT["2030_pT_mid_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 30.) && (c <= 40.))
-	  	      	_h_RAA_1D_cent_pT["3040_pT_mid_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 40.) && (c <= 50.))
-	  	      	_h_RAA_1D_cent_pT["4050_pT_mid_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 50.) && (c <= 60.))
-	  	      	_h_RAA_1D_cent_pT["5060_pT_mid_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 60.) && (c <= 94.))
-	  	      	_h_RAA_1D_cent_pT["6094_pT_mid_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if(c > 94.) vetoEvent;
 	  	    }
       	  	}
@@ -372,31 +372,31 @@ namespace Rivet {
 	  	  if(jpsi_pT < 5.)
 	  	    {
 		      if( (c > 0.) && (c <= 10.))
-			_h_RAA_1D_cent_pT["010_pT_fwd_AuAu"]->fill(jpsi_pT);	  // Fig 4    	  	    	  	    	      	  	    
+			_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"]->fill(jpsi_pT);	  // Fig 4    	  	    	  	    	      	  	    
 	  	      else if((c > 10.) && (c <= 20.))
-	  		_h_RAA_1D_cent_pT["1020_pT_fwd_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  		_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 20.) && (c <= 30.))
-	  	      	_h_RAA_1D_cent_pT["2030_pT_fwd_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 30.) && (c <= 40.))
-	  	      	_h_RAA_1D_cent_pT["3040_pT_fwd_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 40.) && (c <= 50.))
-	  	      	_h_RAA_1D_cent_pT["4050_pT_fwd_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 50.) && (c <= 60.))
-	  	      	_h_RAA_1D_cent_pT["5060_pT_fwd_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if((c > 60.) && (c <= 70.))
-	  	      	_h_RAA_1D_cent_pT["6070_pT_fwd_AuAu"]->fill(jpsi_pT);
+	  	      	_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"]->fill(jpsi_pT);
 	  	      else if((c > 70.) && (c <= 94.))
-	  	      	_h_RAA_1D_cent_pT["7094_pT_fwd_AuAu"]->fill(jpsi_pT);	      	  	    	  	    
+	  	      	_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
 	  	      else if(c > 94.) vetoEvent;
 	  	    }
 	  	}
 	    } // for
 
-	} // if AuAu
+	} // if CuCu
 
       //////////////////////////////////////////////////////////////////////////////
        if(CollSys == pp200)
-	 //if(CollSys == AuAu200)
+	 //if(CollSys == CuCu200)
 	//////////////////////////////////////////////////////////////////////////////
       	{
 
@@ -469,105 +469,105 @@ namespace Rivet {
       /////////////////////////
 
       // Figure 3a - RAA mid and fwd vs pT
-      _h_RAA_1D["020_pT_mid_AuAu"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
+      _h_RAA_1D["020_pT_mid_CuCu"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
       _h_RAA_1D["pT_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      divide(_h_RAA_1D["020_pT_mid_AuAu"], _h_RAA_1D["pT_mid_pp"],_h2D_RAA["RAA_pT_mid_020"]);
+      divide(_h_RAA_1D["020_pT_mid_CuCu"], _h_RAA_1D["pT_mid_pp"],_h2D_RAA["RAA_pT_mid_020"]);
       _h2D_RAA["RAA_pT_mid_020"]->scaleY(1./151.8);  // Ncoll from PHENIX AN 638, page 100
 
-       _h_RAA_1D["020_pT_fwd_AuAu"]->scaleW(1./_c["c_YAA_pT_fwd_020"]->sumW());
+       _h_RAA_1D["020_pT_fwd_CuCu"]->scaleW(1./_c["c_YAA_pT_fwd_020"]->sumW());
        _h_RAA_1D["pT_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-       divide(_h_RAA_1D["020_pT_fwd_AuAu"], _h_RAA_1D["pT_fwd_pp"],_h2D_RAA["RAA_pT_fwd_020"]);
+       divide(_h_RAA_1D["020_pT_fwd_CuCu"], _h_RAA_1D["pT_fwd_pp"],_h2D_RAA["RAA_pT_fwd_020"]);
        _h2D_RAA["RAA_pT_fwd_020"]->scaleY(1./151.8);
 
       // // Figure 3b - RAA vs rap
-       _h_RAA_1D_rap["020_rap_all_AuAu"]->scaleW(1./_c["c_AuAu_rap_all_020"]->sumW());
+       _h_RAA_1D_rap["020_rap_all_CuCu"]->scaleW(1./_c["c_CuCu_rap_all_020"]->sumW());
        _h_RAA_1D_rap["rap_all_pp"]->scaleW(1./_c["c_pp"]->sumW());
-       divide(_h_RAA_1D_rap["020_rap_all_AuAu"], _h_RAA_1D_rap["rap_all_pp"],_h2D_RAA_rap["RAA_rap_all_020"]);
+       divide(_h_RAA_1D_rap["020_rap_all_CuCu"], _h_RAA_1D_rap["rap_all_pp"],_h2D_RAA_rap["RAA_rap_all_020"]);
        _h2D_RAA_rap["RAA_rap_all_020"]->scaleY(1./151.8);  // Ncoll from PHENIX AN 638, page 100
 
       // Figure 4 - RAA vs Npart
       /////////////////////
       // 0 -10 %
-      // _h_RAA_1D_cent_pT["010_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_010"]->sumW());
+      // _h_RAA_1D_cent_pT["010_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_010"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["010_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_010"]);
+      // divide(_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_010"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_010"]->scaleY(1./98.2); 
 
-      // _h_RAA_1D_cent_pT["010_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_010"]->sumW());
+      // _h_RAA_1D_cent_pT["010_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_010"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["010_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_010"]);
+      // divide(_h_RAA_1D_cent_pT["010_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_010"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_010"]->scaleY(1./98.2); 
 
       // // 10 - 20 %
-      // _h_RAA_1D_cent_pT["1020_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_1020"]->sumW());
+      // _h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_1020"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["1020_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_1020"]);
+      // divide(_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_1020"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_1020"]->scaleY(1./73.6);
 
-      // _h_RAA_1D_cent_pT["1020_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_1020"]->sumW());
+      // _h_RAA_1D_cent_pT["1020_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_1020"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["1020_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_1020"]);
+      // divide(_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_1020"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_1020"]->scaleY(1./73.6); 
 
       // // // 20 - 30 %
-      // _h_RAA_1D_cent_pT["2030_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_2030"]->sumW());
+      // _h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_2030"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["2030_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_2030"]);
+      // divide(_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_2030"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_2030"]->scaleY(1./53.0); 
 
-      // _h_RAA_1D_cent_pT["2030_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_2030"]->sumW());
+      // _h_RAA_1D_cent_pT["2030_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_2030"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["2030_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_2030"]);
+      // divide(_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_2030"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_2030"]->scaleY(1./53.0); 
 
       // // // 30 - 40 %
-      // _h_RAA_1D_cent_pT["3040_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_3040"]->sumW());
+      // _h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_3040"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["3040_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_3040"]);
+      // divide(_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_3040"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_3040"]->scaleY(1./37.3); 
 
-      // _h_RAA_1D_cent_pT["3040_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_3040"]->sumW());
+      // _h_RAA_1D_cent_pT["3040_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_3040"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["3040_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_3040"]);
+      // divide(_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_3040"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_3040"]->scaleY(1./37.3); 
 
       // // // 40 - 50 %
-      // _h_RAA_1D_cent_pT["4050_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_4050"]->sumW());
+      // _h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_4050"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["4050_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_4050"]);
+      // divide(_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_4050"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_4050"]->scaleY(1./25.4); 
 
-      // _h_RAA_1D_cent_pT["4050_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_4050"]->sumW());
+      // _h_RAA_1D_cent_pT["4050_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_4050"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["4050_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_4050"]);
+      // divide(_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_4050"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_4050"]->scaleY(1./25.4); 
 
       // // // 50 - 60 %
-      // _h_RAA_1D_cent_pT["5060_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_5060"]->sumW());
+      // _h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_5060"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["5060_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_5060"]);
+      // divide(_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_5060"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_5060"]->scaleY(1./16.7); 
 
-      // _h_RAA_1D_cent_pT["5060_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_5060"]->sumW());
+      // _h_RAA_1D_cent_pT["5060_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_5060"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["5060_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_5060"]);
+      // divide(_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_5060"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_5060"]->scaleY(1./16.7); 
 
       // // 60 - 94 %, 60 - 70%
-      // _h_RAA_1D_cent_pT["6070_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_6070"]->sumW());
+      // _h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_6070"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["6070_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_6070"]);
+      // divide(_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_6070"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_6070"]->scaleY(1./10.4); 
 
-      // _h_RAA_1D_cent_pT["6094_pT_mid_AuAu"]->scaleW(1./_c["c_AuAu_6094"]->sumW());
+      // _h_RAA_1D_cent_pT["6094_pT_mid_CuCu"]->scaleW(1./_c["c_CuCu_6094"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["6094_pT_mid_AuAu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_6094"]);
+      // divide(_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"],_h_RAA_1D_cent_pT["pT_cent_mid_pp"],_h2D_RAA_cent_pT["RAA_pT_mid_6094"]);
       // _h2D_RAA_cent_pT["RAA_pT_mid_6094"]->scaleY(1./6.4); 
 
       // // // 70 - 94% at fwd only
-      // _h_RAA_1D_cent_pT["7094_pT_fwd_AuAu"]->scaleW(1./_c["c_AuAu_7094"]->sumW());
+      // _h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"]->scaleW(1./_c["c_CuCu_7094"]->sumW());
       // _h_RAA_1D_cent_pT["pT_cent_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
-      // divide(_h_RAA_1D_cent_pT["7094_pT_fwd_AuAu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_7094"]);
+      // divide(_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"],_h_RAA_1D_cent_pT["pT_cent_fwd_pp"],_h2D_RAA_cent_pT["RAA_pT_fwd_7094"]);
       // _h2D_RAA_cent_pT["RAA_pT_fwd_7094"]->scaleY(1./4.7);
 
 
@@ -985,7 +985,7 @@ namespace Rivet {
      
     /////////////////////////////////////////////////////////////////////////
     string beamOpt;
-    enum CollisionSystem {pp200, AuAu200};
+    enum CollisionSystem {pp200, CuCu200};
     CollisionSystem CollSys;
     /////////////////////////////////////////////////////////////////////////
 
