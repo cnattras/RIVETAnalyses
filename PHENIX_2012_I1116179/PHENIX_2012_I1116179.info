@@ -1,24 +1,21 @@
 Name: PHENIX_2012_I1116179
 Year: 2012
-Summary: <A one-line informative PHENIX_2012_I1116179 headline>
+Summary: <Measurement of Direct Photons in Au+Au Collisions at $\sqrt{s_{NN}}$=200GeV>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: <RHIC>
 InspireID: 1116179
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Your Name <your@email.address>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'DOI:10.1103/PhysRevLett.109.152302'
+ - 'arXiv:1205.5759'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+  'We report the measurement of direct photons at midrapidity in Au+Au collisions at $\sqrt{s_{NN}}=200GeV. The direct photon signal was extracted for the transverse-momentum range of 4 GeV/c < $p_{T}$ < 22 GeV/c, using a statistical method to subtract decay photons from the inclusive-photon sample. The direct-photon nuclear-modification factor $R_{AA}$ was calculated as a function of $p_{T}$ for different Au+Au collision centralities using the measured p+p direct-photon spectrum and compared to theoretical predictions. $R_{AA}$ was found to be consistent with unity for all centralities over the entire measured $p_{T}$ range. Theoretical models that account for modifications of initial-direct-photon production due to modified-parton-distribution functions in Au and the different isospin composition of the nuclei, predict a modest change of $R_{AA}$ from unity and are consistent with the data. Models with compensating effects of the quark-gluon plasma on high-energy photons, such as suppression of jet-fragmentation photons and induced-photon bremsstrahlung from partons traversing the medium, are also consistent with this measurement.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
