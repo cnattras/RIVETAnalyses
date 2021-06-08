@@ -221,6 +221,24 @@ namespace Rivet {
       book(_p["BBBB"], 2, 1, 1);
       book(_c["CCCC"], 3, 1, 1);
 
+      //booking and delcaring RxP profiles for calculations
+      const FinalState RxP(Cuts::abseta > 1. && Cuts::abseta < 2.8);
+      declare(RxP, "RxP");
+
+      const FinalState RxPPos(Cuts::eta > 1. && Cuts::eta < 2.8);
+      declare(RxPPos, "RxPPos");
+
+      const FinalState RxPNeg(Cuts::eta < -1. && Cuts::eta > -2.8);
+      declare(RxPNeg, "RxPNeg");
+
+      book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
+
+      for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
+      {
+            string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+            book(_p[v2string], v2string, 1, 1, 1+icent);
+      }
+      
     }
 
 
@@ -294,7 +312,7 @@ namespace Rivet {
 
       int centBin = 0;
 
-      std::vector<double> EPres(6, 0.);
+      std::vector<double> EPres(7, 0.);
 
      for(auto bin : _p["RxPcosPos"]->bins())
       {
@@ -309,8 +327,11 @@ namespace Rivet {
         centBin++;
       }
 
-
-	//_p["RxPcosPos"]->bins();
+      for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
+      {
+               string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+	       _p[v2string]->scaleY(1./EPres[icent]);
+      }
 
     }
 
