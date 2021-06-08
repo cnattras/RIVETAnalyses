@@ -5,6 +5,8 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "../Centralities/RHICCentrality.hh"
+
 
 namespace Rivet {
 
@@ -42,6 +44,139 @@ namespace Rivet {
 
             return eventPlane;
     }
+
+    //adding this funcion to help with RxP calculations
+    string Form(double number, int precision)
+    {
+            std::stringstream stream;
+            stream << std::fixed << std::setprecision(precision) << number;
+
+            return stream.str();
+    }
+
+    double Resolution(double chi)
+    {
+        double A = sqrt(M_PI/2.)/2.;
+
+        double funcRes = (A*chi*exp(-chi*chi/4.))*( BesselI0(chi *chi /4.) + BesselI1(chi*chi /4.));
+
+        return funcRes;
+    }
+    
+    void FillVn(Profile1DPtr vnHisto, const Particles& particles, double eventPlane, int n)
+    {
+        for(const Particle &p : particles)
+        {
+            vnHisto->fill(p.pT()/GeV, cos(n*(p.phi() - eventPlane)));
+        }
+    }
+
+    double CalculateChi(double res)
+    {
+	double chi = 2.;
+        double delta = 1.;
+        double con = sqrt(M_PI/2.)/2.;
+        for ( int i = 0; i < 15; i++)
+        {
+            chi = (( con*chi*exp(-chi*chi/4.))*( BesselIn(0, chi *chi /4.) + BesselIn(1, chi*chi /4.) )  < res) ? chi + delta : chi - delta ;
+            delta = delta / 2.;
+        }
+
+        return chi;
+    }
+
+    double BesselIn(int n, double x)
+    {
+	int acc = 40; //accuracy
+	double bigN = 1.e10;
+            double smallN = 1.e-10;
+
+            if(n < 0){
+                    throw UserError("bessel n has to be larger than zero: return 0");
+                    return 0;
+            }
+
+            if(n == 0) return BesselI0(x);
+            if(n == 1) return BesselI1(x);
+
+            if(x == 0) return 0;
+            if(abs(x) > bigN) return 0;
+
+            double tox = 2/abs(x);
+            double bip = 0.;
+            double bim = 0.;
+            double bi  = 1.;
+            double besselIn = 0.;
+            int init = 2*((n + int(sqrt(float(acc*n)))));
+
+            for(int j = init; j>=1; j--)
+            {
+                    bim = bip + (j*tox*bi);
+                    bip = bi;
+                    bi  = bim;
+		    if(abs(bi) > bigN)
+                    {
+                            besselIn *= smallN;
+                            bi *= smallN;
+                            bip *= smallN;
+                    }
+
+                    if(j==n) besselIn=bip;
+            }
+
+            besselIn *= BesselI0(x)/bi;
+	    if((x < 0) && (n%2 == 1)) besselIn = -besselIn;
+
+            return besselIn;
+    }
+
+    double BesselI0(double x)
+    {
+	    double p[7] = {1.0, 3.5156229, 3.0899424, 1.2067492, 0.2659732, 0.360768e-1, 0.45813e-2};
+            double q[9] = {0.39894228, 0.1328592e-1, 0.225319e-2, -0.157565e-2, 0.916281e-2, -0.2057706e-1, 0.2635537e-1, -0.1647633e-1, 0.392377e-2};
+
+            double absx = abs(x);
+            double y = 0.;
+            double besselI0 = 0.;
+    	    
+	    if (absx < 3.75){
+                    y = x/3.75;
+                    y *= y;
+                    besselI0 = p[0]+y*(p[1]+y*(p[2]+y*(p[3]+y*(p[4]+y*(p[5]+y*p[6])))));
+            }
+            else{
+                    y = 3.75/absx;
+                    besselI0 = (exp(absx)/sqrt(absx))*(q[0]+y*(q[1]+y*(q[2]+y*(q[3]+y*(q[4]+y*(q[5]+y*(q[6]+y*(q[7]+y*q[8]))))))));
+            }
+
+            return besselI0;
+    }
+
+    double BesselI1(double x)
+    {
+	    double p[7] = {0.5, 0.87890594, 0.51498869, 0.15084934, 0.2658733e-1, 0.301532e-2, 0.32411e-3};
+            double q[9] = {0.39894228, -0.3988024e-1, -0.362018e-2, 0.163801e-2, -0.1031555e-1, 0.2282967e-1, -0.2895312e-1, 0.1787654e-1, -0.420059e-2};
+            double absx = abs(x);
+            double y = 0.;
+            double besselI1 = 0.;
+	     
+	    if (absx < 3.75){
+                    y = x/3.75;
+                    y *= y;
+                    besselI1 = x*(p[0]+y*(p[1]+y*(p[2]+y*(p[3]+y*(p[4]+y*(p[5]+y*p[6]))))));
+            }
+            else{
+                    y = 3.75/absx;
+                    besselI1 = (exp(absx)/sqrt(absx))*(q[0]+y*(q[1]+y*(q[2]+y*(q[3]+y*(q[4]+y*(q[5]+y*(q[6]+y*(q[7]+y*q[8]))))))));
+            }
+
+            if (x < 0) besselI1 = -besselI1;
+
+            return besselI1;
+    }
+
+
+
 
 
     /// @name Analysis methods
@@ -117,6 +252,10 @@ namespace Rivet {
 
       //Calcualte Reaction Plane Dependency:
       
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
+      const double c = cent();
+  
       //get reaction plane positive and negative final state values
       const FinalState& RxP = apply<FinalState>(event, "RxP");
       const FinalState& RxPPos = apply<FinalState>(event, "RxPPos");
@@ -136,7 +275,10 @@ namespace Rivet {
 
       _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
 
+     Particles particles = cfs.particles();
 
+     string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
+     FillVn(_p[v2string], particles, evPPosNeg, 2);
 
     }
 
@@ -148,6 +290,28 @@ namespace Rivet {
       normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
+      //Reaction Plane Dependency Claculations:
+
+      int centBin = 0;
+
+      std::vector<double> EPres(6, 0.);
+
+     for(auto bin : _p["RxPcosPos"]->bins())
+      {
+	if(bin.numEntries() > 0)
+        {
+		double RxPPosRes = sqrt(bin.mean());
+		double chiRxPPos = CalculateChi(RxPPosRes);
+		double res = Resolution(sqrt(2)*chiRxPPos);
+		EPres[centBin] = res;
+                // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+        }
+        centBin++;
+      }
+
+
+	//_p["RxPcosPos"]->bins();
+
     }
 
     //@}
@@ -158,7 +322,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50., 60.};
+    std::vector<double> v2centBins = {0., 5., 10., 20., 30., 40., 50., 60.};
     //@}
 
 
