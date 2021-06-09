@@ -1,5 +1,5 @@
 // -*- C++ -*-
-#include <boost/math/special_functions/bessel.hpp> 
+//#include <boost/math/special_functions/bessel.hpp>
 
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
@@ -13,7 +13,7 @@
 
 const int NCEN = 6; // Centrality : 0-10, 10-20, 20-30, 30-40, 40-50, 50-60\%
 const int NPTB = 2; // Pt : 0.75 - 1.0, 1.75 - 2.0 GeV/$c$
-const int NHAR = 3; // Harmonics : $v_2$, $v_3$, $v_4$ 
+const int NHAR = 3; // Harmonics : $v_2$, $v_3$, $v_4$
 const int NSBE = 3; // EP Subevent, 1 < |eta| < 2.8, -2.8 < eta < -1, 1 < eta < 2.8
 
 namespace Rivet {
@@ -28,6 +28,118 @@ namespace Rivet {
 
       /// @name Analysis methods
       //@{
+
+      double BesselI0(double x)
+      {
+              //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
+
+              //Polynomial parameters
+              double p[7] = {1.0, 3.5156229, 3.0899424, 1.2067492, 0.2659732, 0.360768e-1, 0.45813e-2};
+              double q[9] = {0.39894228, 0.1328592e-1, 0.225319e-2, -0.157565e-2, 0.916281e-2, -0.2057706e-1, 0.2635537e-1, -0.1647633e-1, 0.392377e-2};
+
+              double absx = abs(x);
+              double y = 0.;
+              double besselI0 = 0.;
+
+              //Polynomial fit
+              if (absx < 3.75)
+              {
+                      y = x/3.75;
+                      y *= y;
+                      besselI0 = p[0]+y*(p[1]+y*(p[2]+y*(p[3]+y*(p[4]+y*(p[5]+y*p[6])))));
+              }
+              else
+              {
+                      y = 3.75/absx;
+                      besselI0 = (exp(absx)/sqrt(absx))*(q[0]+y*(q[1]+y*(q[2]+y*(q[3]+y*(q[4]+y*(q[5]+y*(q[6]+y*(q[7]+y*q[8]))))))));
+              }
+
+              return besselI0;
+      }
+
+      double BesselI1(double x)
+      {
+              //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
+
+              //Polynomial parameters
+              double p[7] = {0.5, 0.87890594, 0.51498869, 0.15084934, 0.2658733e-1, 0.301532e-2, 0.32411e-3};
+
+              double q[9] = {0.39894228, -0.3988024e-1, -0.362018e-2, 0.163801e-2, -0.1031555e-1, 0.2282967e-1, -0.2895312e-1, 0.1787654e-1, -0.420059e-2};
+
+              double absx = abs(x);
+
+              double y = 0.;
+              double besselI1 = 0.;
+
+              //Polynomial fit
+              if (absx < 3.75)
+              {
+                      y = x/3.75;
+                      y *= y;
+                      besselI1 = x*(p[0]+y*(p[1]+y*(p[2]+y*(p[3]+y*(p[4]+y*(p[5]+y*p[6]))))));
+              }
+              else
+              {
+                      y = 3.75/absx;
+                      besselI1 = (exp(absx)/sqrt(absx))*(q[0]+y*(q[1]+y*(q[2]+y*(q[3]+y*(q[4]+y*(q[5]+y*(q[6]+y*(q[7]+y*q[8]))))))));
+              }
+
+              if (x < 0) besselI1 = -besselI1;
+
+              return besselI1;
+      }
+
+      double BesselIn(int n, double x)
+      {
+              //From NUMERICAL RECIPES IN C: THE ART OF SCIENTIFIC COMPUTING (ISBN 0-521-43108-5)
+
+              int acc = 40; //accuracy
+              double bigN = 1.e10;
+              double smallN = 1.e-10;
+
+              if(n < 0)
+              {
+                      throw UserError("bessel n has to be larger than zero: return 0");
+                      return 0;
+              }
+
+              if(n == 0) return BesselI0(x);
+              if(n == 1) return BesselI1(x);
+
+              if(x == 0) return 0;
+              if(abs(x) > bigN) return 0;
+
+              double tox = 2/abs(x);
+              double bip = 0.;
+              double bim = 0.;
+              double bi  = 1.;
+              double besselIn = 0.;
+              int init = 2*((n + int(sqrt(float(acc*n)))));
+
+              for(int j = init; j>=1; j--)
+              {
+                      bim = bip + (j*tox*bi);
+                      bip = bi;
+                      bi  = bim;
+
+                      // Renormalise to prevent overflows
+                      if(abs(bi) > bigN)
+                      {
+                              besselIn *= smallN;
+                              bi *= smallN;
+                              bip *= smallN;
+                      }
+
+                      if(j==n) besselIn=bip;
+              }
+
+              besselIn *= BesselI0(x)/bi; // Normalise with BesselI0(x)
+
+              if((x < 0) && (n%2 == 1)) besselIn = -besselIn;
+
+              return besselIn;
+      }
+
       double resEventPlane(double chi) {
         //Calculates the event plane resolution as a function of chi
 
@@ -35,7 +147,7 @@ namespace Rivet {
         double con = sqrt(pi/2.)/2.;
         double arg = chi * chi / 4.;
 
-        double res = con * chi * exp(-arg) * (cyl_bessel_i(0, arg) + cyl_bessel_i(1, arg));
+        double res = con * chi * exp(-arg) * (BesselIn(0, arg) + BesselIn(1, arg));
         return res;
       }
 
@@ -55,7 +167,7 @@ namespace Rivet {
       // Histogram Names
       const char *name_vn_pt[NCEN][NHAR] =
       {
-        // $v_2$        $v_3$          $v_4$ 
+        // $v_2$        $v_3$          $v_4$
         {"d01-x01-y01", "d01-x01-y02", "d01-x01-y03"}, // 0-10%
         {"d02-x01-y01", "d02-x01-y02", "d02-x01-y03"}, // 10-20%
         {"d03-x01-y01", "d03-x01-y02", "d03-x01-y03"}, // 20-30%
@@ -66,14 +178,14 @@ namespace Rivet {
 
       const char *name_vn_cen[NPTB][NHAR] =
       {
-        // $v_2$        $v_3$          $v_4$ 
+        // $v_2$        $v_3$          $v_4$
         {"d08-x01-y01", "d08-x01-y03", "d09-x01-y01"}, // pT = 0.75 - 1 GeV/c
         {"d08-x01-y02", "d08-x01-y04", "d09-x01-y02"}  // pT = 1.75 - 2 GeV/c
       };
 
       const char *name_epcor[NHAR] =
       {
-        // Psi2    Psi3       Psi4 
+        // Psi2    Psi3       Psi4
         "Psi2Cor", "Psi3Cor", "Psi4Cor"
       };
 
@@ -199,26 +311,26 @@ namespace Rivet {
       void finalize() {
 
         //D. Scale vn with the EP resolutions
-        for(int icen = 0; icen<NCEN; icen++){ 
+        for(int icen = 0; icen<NCEN; icen++){
           for(int ihar = 0; ihar<NHAR; ihar++){
             if(icen==5 && ihar==2) continue; // No $v_4$ measurment in 50-60%
             if(_p_epcor_cen[name_epcor[ihar]]-> bin(icen).sumWY() == 0) continue;
             double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).mean();
             double chi_sub = chi(sqrt(epcor));
             double res = resEventPlane(sqrt(2.0)*chi_sub);
-            _p_vn_pt[name_vn_pt[icen][ihar]] -> scaleY(1./res);  
+            _p_vn_pt[name_vn_pt[icen][ihar]] -> scaleY(1./res);
           }
         }
 
         for(int iptb = 0; iptb<NPTB; iptb++){
           for(int ihar = 0; ihar<NHAR; ihar++){
-            for(int icen = 0; icen<NCEN; icen++){ 
+            for(int icen = 0; icen<NCEN; icen++){
               if(icen==5 && ihar==2) continue; // No $v_4$ measurment in 50-60%
               if(_p_epcor_cen[name_epcor[ihar]]-> bin(icen).sumWY() == 0) continue;
               double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).mean();
               double chi_sub = chi(sqrt(epcor));
               double res = resEventPlane(sqrt(2.0)*chi_sub);
-              _p_vn_cen[name_vn_cen[iptb][ihar]] -> bin(icen).scaleY(1./res);  
+              _p_vn_cen[name_vn_cen[iptb][ihar]] -> bin(icen).scaleY(1./res);
             }
           }
         }
