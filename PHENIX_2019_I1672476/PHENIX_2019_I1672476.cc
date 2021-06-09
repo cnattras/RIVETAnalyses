@@ -24,6 +24,9 @@ namespace Rivet {
     void init() {
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       // Initialise and register projections
+      
+      const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
+      declare(pfs, "pfs");
 
       // The basic final-state projection:
       // all final-state particles within
@@ -81,12 +84,54 @@ namespace Rivet {
       book(_h["fig4-1b"], 19, 1, 1);
       book(_h["fig4-1c"], 20, 1, 1);
      // book(_h["fig4-2-a"], 21, 1, 1);
+     //
+      book(sow["sow-fig1-1-a"],"sow-fig1-1-a");
+      book(sow["sow-fig1-1-b"],"sow-fig1-1-b");
+      book(sow["sow-fig1-2"],"sow-fig1-2");
+      book(sow["sow-fig2-1a"],"sow-fig2-1a");
+      book(sow["sow-fig2-1b-a"],"sow-fig2-1b-a");
+      book(sow["sow-fig2-1b-b"],"sow-fig2-1b-b");
+      book(sow["sow-fig3-1a"],"sow-fig3-1a");
+      book(sow["sow-fig3-1b"],"sow-fig3-1b");
+      book(sow["sow-fig3-1c"],"sow-fig3-1c");
+      book(sow["sow-fig3-1d"],"sow-fig3-1d");
+      book(sow["sow-fig3-1e"],"sow-fig3-1e");
+      book(sow["sow-fig3-1f"],"sow-fig3-1f");
+      book(sow["sow-fig3-2a"],"sow-fig3-2a");
+      book(sow["sow-fig3-2b"],"sow-fig3-2b");
+      book(sow["sow-fig3-2c"],"sow-fig3-2c");
+      book(sow["sow-fig3-2d"],"sow-fig3-2d");
+      book(sow["sow-fig3-2e"],"sow-fig3-2e");
+      book(sow["sow-fig3-2f"],"sow-fig3-2f");
+      book(sow["sow-fig4-1a"],"sow-fig4-1a");
+      book(sow["sow-fig4-1b"],"sow-fig4-1b");
+      book(sow["sow-fig4-1c"],"sow-fig4-1c");
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+      const PromptFinalState pfs = apply<PromptFinalState>(event, "pfs");
+      const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+      const double c = cent();
+      const ParticlePair& beam = beams();
+      string CollSystem = "Empty";
+      int NN = 0;
+
+
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 100791970)
+      {
+	 NN = 197.;
+         if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) CollSystem = AuAu39;
+	 if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) CollSystem = AuAu62;
+      }
+	 Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
+
+
+
+
 
       // Retrieve dressed leptons, sorted by pT
       vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
@@ -130,7 +175,8 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
+    map<string, CounterPtr> sow;
+    enum CollSystem {AuAu39, AuAu62};
     //@}
 
 
