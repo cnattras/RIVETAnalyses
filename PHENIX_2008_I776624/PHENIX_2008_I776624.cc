@@ -112,55 +112,55 @@ namespace Rivet {
 
       // FIGURE 4
    
-      book(_c["c_CuCu_010"], "c_CuCu_010");
-      book(_c["c_CuCu_1020"], "c_CuCu_1020");
-      book(_c["c_CuCu_2030"], "c_CuCu_2030");
-      book(_c["c_CuCu_3040"], "c_CuCu_3040");
-      book(_c["c_CuCu_4050"], "c_CuCu_4050");
-      book(_c["c_CuCu_5060"], "c_CuCu_5060");
-      book(_c["c_CuCu_6094"], "c_CuCu_6094");
-      book(_c["c_CuCu_6070"], "c_CuCu_6070");
-      book(_c["c_CuCu_7094"], "c_CuCu_7094");
+      // book(_c["c_CuCu_010"], "c_CuCu_010");
+      // book(_c["c_CuCu_1020"], "c_CuCu_1020");
+      // book(_c["c_CuCu_2030"], "c_CuCu_2030");
+      // book(_c["c_CuCu_3040"], "c_CuCu_3040");
+      // book(_c["c_CuCu_4050"], "c_CuCu_4050");
+      // book(_c["c_CuCu_5060"], "c_CuCu_5060");
+      // book(_c["c_CuCu_6094"], "c_CuCu_6094");
+      // book(_c["c_CuCu_6070"], "c_CuCu_6070");
+      // book(_c["c_CuCu_7094"], "c_CuCu_7094");
 
 
-      vector<double> pTBins{0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0};  
-      book(_h_RAA_1D_cent_pT["pT_cent_mid_pp"], "pT_cent_mid_pp", pTBins);
-      book(_h_RAA_1D_cent_pT["pT_cent_fwd_pp"], "pT_cent_fwd_pp", pTBins);
+      // vector<double> pTBins{0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0};  
+      // book(_h_RAA_1D_cent_pT["pT_cent_mid_pp"], "pT_cent_mid_pp", pTBins);
+      // book(_h_RAA_1D_cent_pT["pT_cent_fwd_pp"], "pT_cent_fwd_pp", pTBins);
 
-      book(_h_RAA_1D_cent_pT["010_pT_mid_CuCu"], "010_pT_mid_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"], "1020_pT_mid_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"], "2030_pT_mid_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"], "3040_pT_mid_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"], "4050_pT_mid_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"], "5060_pT_mid_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"], "6094_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["010_pT_mid_CuCu"], "010_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"], "1020_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"], "2030_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"], "3040_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"], "4050_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"], "5060_pT_mid_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"], "6094_pT_mid_CuCu", pTBins);
 
-      book(_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"], "010_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"], "1020_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"], "2030_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"], "3040_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"], "4050_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"], "5060_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"], "6070_pT_fwd_CuCu", pTBins);
-      book(_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"], "7094_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"], "010_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"], "1020_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"], "2030_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"], "3040_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"], "4050_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"], "5060_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"], "6070_pT_fwd_CuCu", pTBins);
+      // book(_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"], "7094_pT_fwd_CuCu", pTBins);
 
-      // for RAA vs pT per centrality slice, before summing over pT
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_010"], "RAA_pT_mid_010");
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_1020"], "RAA_pT_mid_1020");
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_2030"], "RAA_pT_mid_2030");
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_3040"], "RAA_pT_mid_3040");
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_4050"], "RAA_pT_mid_4050");
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_5060"], "RAA_pT_mid_5060");
-      book(_h2D_RAA_cent_pT["RAA_pT_mid_6094"], "RAA_pT_mid_6094");
+      // // for RAA vs pT per centrality slice, before summing over pT
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_010"], "RAA_pT_mid_010");
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_1020"], "RAA_pT_mid_1020");
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_2030"], "RAA_pT_mid_2030");
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_3040"], "RAA_pT_mid_3040");
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_4050"], "RAA_pT_mid_4050");
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_5060"], "RAA_pT_mid_5060");
+      // book(_h2D_RAA_cent_pT["RAA_pT_mid_6094"], "RAA_pT_mid_6094");
     
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_010"], "RAA_pT_fwd_010");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_1020"], "RAA_pT_fwd_1020");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_2030"], "RAA_pT_fwd_2030");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_3040"], "RAA_pT_fwd_3040");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_4050"], "RAA_pT_fwd_4050");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_5060"], "RAA_pT_fwd_5060");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_6070"], "RAA_pT_fwd_6070");
-      book(_h2D_RAA_cent_pT["RAA_pT_fwd_7094"], "RAA_pT_fwd_7094");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_010"], "RAA_pT_fwd_010");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_1020"], "RAA_pT_fwd_1020");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_2030"], "RAA_pT_fwd_2030");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_3040"], "RAA_pT_fwd_3040");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_4050"], "RAA_pT_fwd_4050");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_5060"], "RAA_pT_fwd_5060");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_6070"], "RAA_pT_fwd_6070");
+      // book(_h2D_RAA_cent_pT["RAA_pT_fwd_7094"], "RAA_pT_fwd_7094");
 
       ///////////////////////////////////////////////////////////////////////////////////////////////
       ///////////////////////////////////////////////////////////////////////////////////////////////
@@ -168,24 +168,21 @@ namespace Rivet {
       ///////////////////////////////////////////////////////////////////////////////////////////////
 
       // for pT integrated results using SetPoint
-      string refnameRaa4 = mkAxisCode(14,1,1);
-      const Scatter2D& refdataRaa4 =refData(refnameRaa4);
-      book(_h_RAA_1D_cent["Cent_mid_CuCu"], refnameRaa4 + "_CuCu200", refdataRaa4);
-      book(_h_RAA_1D_cent["mid_pp"], refnameRaa4 + "_pp200", refdataRaa4);
-      book(_h2D_RAA_mid_Npart["RAA_mid_Npart"], refnameRaa4);
+      // string refnameRaa4 = mkAxisCode(14,1,1);
+      // const Scatter2D& refdataRaa4 =refData(refnameRaa4);
+      // book(_h_RAA_1D_cent["Cent_mid_CuCu"], refnameRaa4 + "_CuCu200", refdataRaa4);
+      // book(_h_RAA_1D_cent["mid_pp"], refnameRaa4 + "_pp200", refdataRaa4);
+      // book(_h2D_RAA_mid_Npart["RAA_mid_Npart"], refnameRaa4);
 
-      string refnameRaa5 = mkAxisCode(15,1,1);
-      const Scatter2D& refdataRaa5 =refData(refnameRaa5);
-      book(_h_RAA_1D_cent["Cent_fwd_CuCu"], refnameRaa5 + "_CuCu200", refdataRaa5);
-      book(_h_RAA_1D_cent["fwd_pp"], refnameRaa5 + "_pp200", refdataRaa5);
-      book(_h2D_RAA_fwd_Npart["RAA_fwd_Npart"], refnameRaa5);
+      // string refnameRaa5 = mkAxisCode(15,1,1);
+      // const Scatter2D& refdataRaa5 =refData(refnameRaa5);
+      // book(_h_RAA_1D_cent["Cent_fwd_CuCu"], refnameRaa5 + "_CuCu200", refdataRaa5);
+      // book(_h_RAA_1D_cent["fwd_pp"], refnameRaa5 + "_pp200", refdataRaa5);
+      // book(_h2D_RAA_fwd_Npart["RAA_fwd_Npart"], refnameRaa5);
 
-      centBins3.insert(pair<string, int>("RAA_mid_Npart",0));
-      centBins4.insert(pair<string, int>("RAA_fwd_Npart",0));
+      // centBins3.insert(pair<string, int>("RAA_mid_Npart",0));
+      // centBins4.insert(pair<string, int>("RAA_fwd_Npart",0));
 
-      // 2D scatter connected to the data
-      //  book( _h2D_RAA_mid_Npart["RAA_mid_Npart"], 14,1,1);  
-      //  book(_h2D_RAA_mid_Npart["RAA_fwd_Npart", 15,1,1);  
  
     }
 
@@ -228,24 +225,24 @@ namespace Rivet {
       	  if(c > 94.) vetoEvent;
       	  /////////////////////////////////////////////////////////
 	  
-	  if((c > 0.) && (c <= 10.))
-	    _c["c_CuCu_010"]->fill();
-	  if((c > 10.) && (c <= 20.))
-	    _c["c_CuCu_1020"]->fill();
-	  if((c > 20.) && (c <= 30.))
-	    _c["c_CuCu_2030"]->fill();
-	  if((c > 30.) && (c <= 40.))
-	    _c["c_CuCu_3040"]->fill();
-	  if((c > 40.) && (c <= 50.))
-	    _c["c_CuCu_4050"]->fill();
-	  if((c > 50.) && (c <= 60.))
-	    _c["c_CuCu_5060"]->fill();
-	  if((c > 60.) && (c <= 70.))
-	    _c["c_CuCu_6070"]->fill();
-	  if((c > 60.) && (c <= 94.))
-	    _c["c_CuCu_6094"]->fill();
-	  if((c > 70.) && (c <= 94.))
-	    _c["c_CuCu_7094"]->fill();
+	  // if((c > 0.) && (c <= 10.))
+	  //   _c["c_CuCu_010"]->fill();
+	  // if((c > 10.) && (c <= 20.))
+	  //   _c["c_CuCu_1020"]->fill();
+	  // if((c > 20.) && (c <= 30.))
+	  //   _c["c_CuCu_2030"]->fill();
+	  // if((c > 30.) && (c <= 40.))
+	  //   _c["c_CuCu_3040"]->fill();
+	  // if((c > 40.) && (c <= 50.))
+	  //   _c["c_CuCu_4050"]->fill();
+	  // if((c > 50.) && (c <= 60.))
+	  //   _c["c_CuCu_5060"]->fill();
+	  // if((c > 60.) && (c <= 70.))
+	  //   _c["c_CuCu_6070"]->fill();
+	  // if((c > 60.) && (c <= 94.))
+	  //   _c["c_CuCu_6094"]->fill();
+	  // if((c > 70.) && (c <= 94.))
+	  //   _c["c_CuCu_7094"]->fill();
 	
   
       	  // // CuCu fwd J/psi
@@ -336,61 +333,61 @@ namespace Rivet {
       		}
       	    }
 
-	  for(const Particle& p : MidParticles)
-      	    {
-	      double jpsi_pT = p.pT()/GeV;
+	  // for(const Particle& p : MidParticles)
+      	  //   {
+	  //     double jpsi_pT = p.pT()/GeV;
 	     	    
-      	      if(p.pid() == 443)
-      	  	{
-	  	  if(jpsi_pT < 5.)
-	  	    {
-	  	      if( (c > 0.) && (c <= 10.))
-	  		_h_RAA_1D_cent_pT["010_pT_mid_CuCu"]->fill(jpsi_pT);	 // Fig 4     	  	    	  	    	      	  	    
-	  	      else if((c > 10.) && (c <= 20.))
-	  		_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 20.) && (c <= 30.))
-	  	      	_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 30.) && (c <= 40.))
-	  	      	_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 40.) && (c <= 50.))
-	  	      	_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 50.) && (c <= 60.))
-	  	      	_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 60.) && (c <= 94.))
-	  	      	_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if(c > 94.) vetoEvent;
-	  	    }
-      	  	}
-	    }
+      	  //     if(p.pid() == 443)
+      	  // 	{
+	  // 	  if(jpsi_pT < 5.)
+	  // 	    {
+	  // 	      if( (c > 0.) && (c <= 10.))
+	  // 		_h_RAA_1D_cent_pT["010_pT_mid_CuCu"]->fill(jpsi_pT);	 // Fig 4     	  	    	  	    	      	  	    
+	  // 	      else if((c > 10.) && (c <= 20.))
+	  // 		_h_RAA_1D_cent_pT["1020_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 20.) && (c <= 30.))
+	  // 	      	_h_RAA_1D_cent_pT["2030_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 30.) && (c <= 40.))
+	  // 	      	_h_RAA_1D_cent_pT["3040_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 40.) && (c <= 50.))
+	  // 	      	_h_RAA_1D_cent_pT["4050_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 50.) && (c <= 60.))
+	  // 	      	_h_RAA_1D_cent_pT["5060_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 60.) && (c <= 94.))
+	  // 	      	_h_RAA_1D_cent_pT["6094_pT_mid_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if(c > 94.) vetoEvent;
+	  // 	    }
+      	  // 	}
+	  //   }
 	  
-	  for(const Particle& p : FwdParticles)
-	    {
-	      double jpsi_pT = p.pT()/GeV;
+	  // for(const Particle& p : FwdParticles)
+	  //   {
+	  //     double jpsi_pT = p.pT()/GeV;
 	    		  
-	      if(p.pid() == 443)
-	  	{
-	  	  if(jpsi_pT < 5.)
-	  	    {
-		      if( (c > 0.) && (c <= 10.))
-			_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"]->fill(jpsi_pT);	  // Fig 4    	  	    	  	    	      	  	    
-	  	      else if((c > 10.) && (c <= 20.))
-	  		_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 20.) && (c <= 30.))
-	  	      	_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 30.) && (c <= 40.))
-	  	      	_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 40.) && (c <= 50.))
-	  	      	_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 50.) && (c <= 60.))
-	  	      	_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if((c > 60.) && (c <= 70.))
-	  	      	_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"]->fill(jpsi_pT);
-	  	      else if((c > 70.) && (c <= 94.))
-	  	      	_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
-	  	      else if(c > 94.) vetoEvent;
-	  	    }
-	  	}
-	    } // for
+	  //     if(p.pid() == 443)
+	  // 	{
+	  // 	  if(jpsi_pT < 5.)
+	  // 	    {
+	  // 	      if( (c > 0.) && (c <= 10.))
+	  // 		_h_RAA_1D_cent_pT["010_pT_fwd_CuCu"]->fill(jpsi_pT);	  // Fig 4    	  	    	  	    	      	  	    
+	  // 	      else if((c > 10.) && (c <= 20.))
+	  // 		_h_RAA_1D_cent_pT["1020_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 20.) && (c <= 30.))
+	  // 	      	_h_RAA_1D_cent_pT["2030_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 30.) && (c <= 40.))
+	  // 	      	_h_RAA_1D_cent_pT["3040_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 40.) && (c <= 50.))
+	  // 	      	_h_RAA_1D_cent_pT["4050_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 50.) && (c <= 60.))
+	  // 	      	_h_RAA_1D_cent_pT["5060_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if((c > 60.) && (c <= 70.))
+	  // 	      	_h_RAA_1D_cent_pT["6070_pT_fwd_CuCu"]->fill(jpsi_pT);
+	  // 	      else if((c > 70.) && (c <= 94.))
+	  // 	      	_h_RAA_1D_cent_pT["7094_pT_fwd_CuCu"]->fill(jpsi_pT);	      	  	    	  	    
+	  // 	      else if(c > 94.) vetoEvent;
+	  // 	    }
+	  // 	}
+	  //   } // for
 
 	} // if CuCu
 
@@ -998,3 +995,7 @@ namespace Rivet {
 
 
 
+  // 2D scatter connected to the data
+      //  book( _h2D_RAA_mid_Npart["RAA_mid_Npart"], 14,1,1);  
+      //  book(_h2D_RAA_mid_Npart["RAA_fwd_Npart", 15,1,1);  
+ 
