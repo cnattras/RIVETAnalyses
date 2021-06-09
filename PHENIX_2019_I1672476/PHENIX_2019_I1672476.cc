@@ -5,7 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-
+#include "../Centralities/RHICCentrality.hh"
 namespace Rivet {
 
 
@@ -22,7 +22,7 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       // Initialise and register projections
 
       // The basic final-state projection:
@@ -55,9 +55,32 @@ namespace Rivet {
       book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
       book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
+
+      book(_h["fig1-1-a"], 1, 1, 1);
+      book(_h["fig1-1-b"], 1, 1, 2);
+      book(_h["fig1-2"], 2, 1, 1);
+      book(_h["fig2-1a"], 3, 1, 1);
+      book(_h["fig2-1b-a"], 4, 1, 1);
+      book(_h["fig2-1b-b"], 4, 1, 2);      
+     // book(_h["fig2-2-a"], 5, 1, 1);
+     // book(_h["fig2-2-b"], 5, 1, 2);
+     // book(_h["fig2-2-c"], 5, 1, 3);
+      book(_h["fig3-1a"], 6, 1, 1);
+      book(_h["fig3-1b"], 7, 1, 1);
+      book(_h["fig3-1c"], 8, 1, 1);
+      book(_h["fig3-1d"], 9, 1, 1);
+      book(_h["fig3-1e"], 10, 1, 1);
+      book(_h["fig3-1f"], 11, 1, 1);
+      book(_h["fig3-2a"], 12, 1, 1);
+      book(_h["fig3-2b"], 13, 1, 1);
+      book(_h["fig3-2c"], 14, 1, 1);
+      book(_h["fig3-2d"], 15, 1, 1);
+      book(_h["fig3-2e"], 16, 1, 1);
+      book(_h["fig3-2f"], 17, 1, 1);
+      book(_h["fig4-1a"], 18, 1, 1);
+      book(_h["fig4-1b"], 19, 1, 1);
+      book(_h["fig4-1c"], 20, 1, 1);
+     // book(_h["fig4-2-a"], 21, 1, 1);
 
     }
 
