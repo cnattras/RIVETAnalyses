@@ -236,8 +236,12 @@ namespace Rivet {
       for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
       {
             string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
+	    string RAAstring = "RAA" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
             book(_p[v2string], v2string, 1, 1, 1+icent);
+	    book(_p[RAA], RAAstring, 1, 1, 1+icent);
       }
+      
+      book(_p["RdelPhipT"], "RdelPhipT", 10, 0., 10);
       
     }
 
@@ -297,6 +301,7 @@ namespace Rivet {
 
      string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
      FillVn(_p[v2string], particles, evPPosNeg, 2);
+     
 
     }
 
