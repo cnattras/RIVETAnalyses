@@ -6,6 +6,8 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include <math.h>
+#define _USE_MATH_DEFINES
 namespace Rivet {
 
 
@@ -15,7 +17,8 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2019_I1672476);
-
+     enum CollisionSystem {AuAu39, AuAu62};
+     CollisionSystem collSystem;
 
     /// @name Analysis methods
     //@{
@@ -59,9 +62,9 @@ namespace Rivet {
       book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
 
-      book(_h["fig1-1-a"], 1, 1, 1);
-      book(_h["fig1-1-b"], 1, 1, 2);
-      book(_h["fig1-2"], 2, 1, 1);
+      book(_h["AuAu62_c0-20"], 1, 1, 1);
+      book(_h["AuAu62_c0-86"], 1, 1, 2);
+      book(_h["AuAu39_c0-86"], 2, 1, 1);
       book(_h["fig2-1a"], 3, 1, 1);
       book(_h["fig2-1b-a"], 4, 1, 1);
       book(_h["fig2-1b-b"], 4, 1, 2);      
@@ -85,7 +88,7 @@ namespace Rivet {
       book(_h["fig4-1c"], 20, 1, 1);
      // book(_h["fig4-2-a"], 21, 1, 1);
      //
-      book(sow["sow-fig1-1-a"],"sow-fig1-1-a");
+      book(sow["sow-fig1-1-a"],"sow-fig1-1-a");//these are currently unused counters
       book(sow["sow-fig1-1-b"],"sow-fig1-1-b");
       book(sow["sow-fig1-2"],"sow-fig1-2");
       book(sow["sow-fig2-1a"],"sow-fig2-1a");
@@ -117,21 +120,53 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
       const ParticlePair& beam = beams();
-      string CollSystem = "Empty";
+     
       int NN = 0;
 
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 100791970)
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
 	 NN = 197.;
-         if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) CollSystem = AuAu39;
-	 if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) CollSystem = AuAu62;
+         if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSystem = AuAu39;
+	 if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
       }
 	 Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
 
+      if(collSystem == AuAu62)//for now I am attempting to only fill the first three histogram(AuAu62 cent0-20 and 0-86, and AuAu39 cent0-86), where pT is x-ax, and inv yield is y-ax
+      {
+         if((c >= 0.) && (c < 20.))
+	 {
+	    for(const Particle& p : photons)
+	    {
+		double partPt = p.pT()/GeV;
+		double pt_weight = 1./(partPt*2.*M_PI);
+		_h["AuAu62_c0-20"]->fill(partPt, pt_weight); //I Copied this from Chrsital's cc file for PHENIX_2012_I1107625, But i think mine should have inv yield instead of pt_weight(not sure what this is)
+	    }
+	 }
+	 else if((c >= 0.) && (c < 86. ))
+	 {
+	     for(const Particle& p : photons)
+	     {
+		 double partPt = p.pT()/GeV;
+		 double pt_weight = 1./(partPt*2.*M_PI);
+		 _h["AuAu62_c0-86"]->fill(partPt, pt_weight);
+	     }
+	 }
+      }
 
-
-
+      if (collSystem == AuAu39)
+      {
+	  if((c >= 0.) && (c <86.))
+	  {
+	      for(const Particle& p : photons)
+	      {
+		  double partPt = p.pT()/GeV;
+		  double pt_weight = 1./(partPt*2.*M_PI);
+		  _h["AuAu39_c0-86"]->fill(partPt, pt_weight);
+	      }
+	  }
+      }
+      
 
       // Retrieve dressed leptons, sorted by pT
       vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
@@ -176,7 +211,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> sow;
-    enum CollSystem {AuAu39, AuAu62};
+    
     //@}
 
 
