@@ -5,6 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
 #include <math.h>
 #define _USE_MATH_DEFINES
@@ -17,8 +18,7 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2019_I1672476);
-     enum CollisionSystem {AuAu39, AuAu62};
-     CollisionSystem collSystem;
+    
 
     /// @name Analysis methods
     //@{
@@ -30,11 +30,12 @@ namespace Rivet {
       
       const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
       declare(pfs, "pfs");
+      const FinalState fs(Cuts::abseta < 0.35 && Cuts::abscharge > 0);
+      declare(fs, "fs");
 
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
@@ -45,6 +46,7 @@ namespace Rivet {
       // FinalState of prompt photons and bare muons and electrons in the event
       PromptFinalState photons(Cuts::abspid == PID::PHOTON);
       PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
+      
 
       // Dress the prompt bare leptons with prompt photons within dR < 0.1,
       // and apply some fiducial cuts on the dressed leptons
@@ -65,9 +67,9 @@ namespace Rivet {
       book(_h["AuAu62_c0-20"], 1, 1, 1);
       book(_h["AuAu62_c0-86"], 1, 1, 2);
       book(_h["AuAu39_c0-86"], 2, 1, 1);
-      book(_h["fig2-1a"], 3, 1, 1);
-      book(_h["fig2-1b-a"], 4, 1, 1);
-      book(_h["fig2-1b-b"], 4, 1, 2);      
+      book(_p["AuAu39_chPMult"], 3, 1, 1);
+      book(_p["AuAu62_chPMult"], 4, 1, 1);
+      book(_p["AuAu200_chPMult"], 4, 1, 2);      
      // book(_h["fig2-2-a"], 5, 1, 1);
      // book(_h["fig2-2-b"], 5, 1, 2);
      // book(_h["fig2-2-c"], 5, 1, 3);
@@ -117,10 +119,11 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const PromptFinalState pfs = apply<PromptFinalState>(event, "pfs");
+      const FinalState fs = apply<FinalState>(event, "fs");
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
       const ParticlePair& beam = beams();
-     
+ 
       int NN = 0;
 
 
@@ -131,7 +134,7 @@ namespace Rivet {
 	 if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
       }
 	 Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
-
+	 Particles chargedParticles = applyProjection<FinalState>(event, "fs").particles();
       if(collSystem == AuAu62)//for now I am attempting to only fill the first three histogram(AuAu62 cent0-20 and 0-86, and AuAu39 cent0-86), where pT is x-ax, and inv yield is y-ax
       {
          if((c >= 0.) && (c < 20.))
@@ -139,8 +142,8 @@ namespace Rivet {
 	    for(const Particle& p : photons)
 	    {
 		double partPt = p.pT()/GeV;
-		double pt_weight = 1./(partPt*2.*M_PI);
-		_h["AuAu62_c0-20"]->fill(partPt, pt_weight); //I Copied this from Chrsital's cc file for PHENIX_2012_I1107625, But i think mine should have inv yield instead of pt_weight(not sure what this is)
+		//double pt_weight = 1./(partPt*2.*M_PI);
+		_h["AuAu62_c0-20"]->fill(partPt); //I Copied this from Chrsital's cc file for PHENIX_2012_I1107625, But i think mine should have inv yield instead of pt_weight(not sure what this is)
 	    }
 	 }
 	 else if((c >= 0.) && (c < 86. ))
@@ -148,10 +151,11 @@ namespace Rivet {
 	     for(const Particle& p : photons)
 	     {
 		 double partPt = p.pT()/GeV;
-		 double pt_weight = 1./(partPt*2.*M_PI);
-		 _h["AuAu62_c0-86"]->fill(partPt, pt_weight);
+		 //double pt_weight = 1./(partPt*2.*M_PI);
+		 _h["AuAu62_c0-86"]->fill(partPt);
 	     }
 	 }
+
       }
 
       if (collSystem == AuAu39)
@@ -161,12 +165,53 @@ namespace Rivet {
 	      for(const Particle& p : photons)
 	      {
 		  double partPt = p.pT()/GeV;
-		  double pt_weight = 1./(partPt*2.*M_PI);
-		  _h["AuAu39_c0-86"]->fill(partPt, pt_weight);
+		  //double pt_weight = 1./(partPt*2.*M_PI);
+		  _h["AuAu39_c0-86"]->fill(partPt);
 	      }
 	  }
       }
-      
+     
+
+      int nCh39count = 0;
+      int nCh62count = 0;
+      int nCh200count = 0;
+      int absEta = 0.7;
+       
+
+      //count charged particels for diff AuAu enegeries
+      if (collSystem == AuAu39)
+      {
+	   nCh39count ++;   
+      }
+      else if(collSystem == AuAu62)
+      {
+	   nCh62count ++;
+      }
+      else if(collSystem == AuAu200)
+      {
+	   nCh200count ++;
+      }
+
+      //fill histos with cent c and charged particle count/abs val of Eta
+      if (collSystem == AuAu39)
+      {
+	   _p["AuAu39_chPMult"]->fill(c,nCh39count/absEta);
+      }  
+      else if(collSystem == AuAu62)
+      {
+	   _p["AuAu62_chPMult"]->fill(c,nCh62count/absEta);
+      }
+      else if(collSystem ==AuAu200)
+      {
+	   _p["AuAu200_chPMult"]->fill(c,nCh200count/absEta);
+      }
+
+
+
+
+
+
+ 
 
       // Retrieve dressed leptons, sorted by pT
       vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
@@ -200,7 +245,6 @@ namespace Rivet {
       normalize(_h["XXXX"]); // normalize to unity
       normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
       scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
-
     }
 
     //@}
@@ -211,7 +255,10 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> sow;
-    
+    enum CollisionSystem {AuAu39, AuAu62, AuAu200};
+    CollisionSystem collSystem;
+    string beamOpt;
+
     //@}
 
 
