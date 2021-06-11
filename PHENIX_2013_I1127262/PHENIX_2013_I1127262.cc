@@ -71,6 +71,20 @@ namespace Rivet {
         }
     }
 
+    void FillRAA(Histo1DPtr RAAHisto, const Particles& particles, double eventPlane, int n)
+    {
+    	for(const Particle &p : particles){
+		RAAHisto->fill(p.pT()/GeV, cos(n*(p.phi() - eventPlane)));
+	}
+    }
+
+    /*void FillRAA(Scatter2DPtr RAAHisto, const Particles& particles, double eventPlane, int n)
+    {
+        for(const Particle &p : particles){
+                RAAHisto->fill(p.pT()/GeV, cos(n*(p.phi() - eventPlane)));
+        }
+    }*/
+
     double CalculateChi(double res)
     {
 	double chi = 2.;
@@ -236,12 +250,45 @@ namespace Rivet {
       for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
       {
             string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-	    string RAAstring = "RAA" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
             book(_p[v2string], v2string, 1, 1, 1+icent);
-	    book(_p[RAA], RAAstring, 1, 1, 1+icent);
       }
       
-      book(_p["RdelPhipT"], "RdelPhipT", 10, 0., 10);
+      //booking the histograms for table 4/fig. 20 for the calcualtions of RAA dependency
+      string refname4_1 = mkAxisCode(4, 1, 1);
+      const Scatter2D& refdata4_1 = refData(refname4_1);
+      book(_h["RAA_pt_411_AuAu"], refname4_1 + "_AuAu", refdata4_1);
+      book(_h["RAA_pt_411_pp"], refname4_1 + "_pp", refdata4_1);
+      book(_s["RAA_pt_411"], refname4_1);
+
+      string refname4_2 = mkAxisCode(4,1,2);
+      const Scatter2D& refdata4_2 = refData(refname4_2);
+      book(_h["RAA_pt_412_AuAu"], refname4_2 + "_AuAu", refdata4_2);
+      book(_h["RAA_pt_412_pp"], refname4_2 + "_pp", refdata4_2);
+      book(_s["RAA_pt_412"], refname4_2);
+
+      string refname4_3 = mkAxisCode(4,1,3);
+      const Scatter2D& refdata4_3 = refData(refname4_3);
+      book(_h["RAA_pt_413_AuAu"], refname4_3 + "_AuAu", refdata4_3);
+      book(_h["RAA_pt_413_pp"], refname4_3 + "_pp", refdata4_3);
+      book(_s["RAA_pt_413"], refname4_3);  
+
+      string refname4_4 = mkAxisCode(4,1,4);
+      const Scatter2D& refdata4_4 = refData(refname4_4);
+      book(_h["RAA_pt_414_AuAu"], refname4_4 + "_AuAu", refdata4_4);
+      book(_h["RAA_pt_414_pp"], refname4_4 + "_pp", refdata4_4);
+      book(_s["RAA_pt_414"], refname4_4);
+
+      string refname4_5 = mkAxisCode(4,1,5);
+      const Scatter2D& refdata4_5 = refData(refname4_5);
+      book(_h["RAA_pt_415_AuAu"], refname4_5 + "_AuAu", refdata4_5);
+      book(_h["RAA_pt_415_pp"], refname4_5 + "_pp", refdata4_5);
+      book(_s["RAA_pt_415"], refname4_5);
+
+      string refname4_6 = mkAxisCode(4,1,6);
+      const Scatter2D& refdata4_6 = refData(refname4_6);
+      book(_h["RAA_pt_416_AuAu"], refname4_6 + "_AuAu", refdata4_6);
+      book(_h["RAA_pt_416_pp"], refname4_6 + "_pp", refdata4_6);
+      book(_s["RAA_pt_416"], refname4_6);
       
     }
 
@@ -302,8 +349,21 @@ namespace Rivet {
      string v2string = "v2_cent" + Form(floor(c/10)*10., 0) + Form((floor(c/10)*10.)+10., 0);
      FillVn(_p[v2string], particles, evPPosNeg, 2);
      
+     //filling the RAA histograms for AuAu and pp RAA dependecy calculations
+     FillRAA(_h["RAA_pt_411_AuAu"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_412_AuAu"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_413_AuAu"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_414_AuAu"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_415_AuAu"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_416_AuAu"], particles, evPPosNeg, 1);
 
-    }
+     FillRAA(_h["RAA_pt_411_pp"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_412_pp"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_413_pp"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_414_pp"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_415_pp"], particles, evPPosNeg, 1);
+     FillRAA(_h["RAA_pt_416_pp"], particles, evPPosNeg, 1); 
+   }
 
 
     /// Normalise histograms etc., after the run
@@ -347,6 +407,7 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
+    map<string, Scatter2DPtr> _s;
     map<string, CounterPtr> _c;
     std::vector<double> v2centBins = {0., 5., 10., 20., 30., 40., 50., 60.};
     //@}
