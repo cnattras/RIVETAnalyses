@@ -129,10 +129,14 @@ namespace Rivet {
 	 NN = 197.;
          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSystem = AuAu39;
 	 if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
-	 if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = AuAu200
+	 if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = AuAu200;
       }
-	 Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
-	 Particles chargedParticles = applyProjection<FinalState>(event, "fs").particles();
+
+
+      Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
+      Particles chargedParticles = applyProjection<FinalState>(event, "fs").particles();
+
+
       if(collSystem == AuAu62)//for now I am attempting to only fill the first three histogram(AuAu62 cent0-20 and 0-86, and AuAu39 cent0-86), where pT is x-ax, and inv yield is y-ax
       {
          if((c >= 0.) && (c < 20.))
@@ -177,18 +181,22 @@ namespace Rivet {
        
 
       //count charged particels for diff AuAu enegeries
-      if (collSystem == AuAu39)
+      for(const Particle& p : chargedParticles)
       {
-	   nCh39count ++;   
+	  if (collSystem == AuAu39)
+          {
+	       nCh39count ++;   
+          }
+          else if(collSystem == AuAu62)
+          {
+	       nCh62count ++;
+          }
+          else if(collSystem == AuAu200)
+          {
+	       nCh200count ++;
+          }
       }
-      else if(collSystem == AuAu62)
-      {
-	   nCh62count ++;
-      }
-      else if(collSystem == AuAu200)
-      {
-	   nCh200count ++;
-      }
+      
 
       //fill histos with cent c and charged particle count/abs val of Eta
       if (collSystem == AuAu39)
