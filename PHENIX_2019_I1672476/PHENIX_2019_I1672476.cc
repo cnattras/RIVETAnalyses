@@ -59,9 +59,6 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
 
       book(_h["AuAu62_c0-20"], 1, 1, 1);
@@ -89,7 +86,7 @@ namespace Rivet {
       book(_h["fig4-1b"], 19, 1, 1);
       book(_h["fig4-1c"], 20, 1, 1);
      // book(_h["fig4-2-a"], 21, 1, 1);
-     //
+     /*
       book(sow["sow-fig1-1-a"],"sow-fig1-1-a");//these are currently unused counters
       book(sow["sow-fig1-1-b"],"sow-fig1-1-b");
       book(sow["sow-fig1-2"],"sow-fig1-2");
@@ -111,7 +108,7 @@ namespace Rivet {
       book(sow["sow-fig4-1a"],"sow-fig4-1a");
       book(sow["sow-fig4-1b"],"sow-fig4-1b");
       book(sow["sow-fig4-1c"],"sow-fig4-1c");
-
+      */
     }
 
 
@@ -132,6 +129,7 @@ namespace Rivet {
 	 NN = 197.;
          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSystem = AuAu39;
 	 if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
+	 if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = AuAu200
       }
 	 Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
 	 Particles chargedParticles = applyProjection<FinalState>(event, "fs").particles();
@@ -142,8 +140,8 @@ namespace Rivet {
 	    for(const Particle& p : photons)
 	    {
 		double partPt = p.pT()/GeV;
-		//double pt_weight = 1./(partPt*2.*M_PI);
-		_h["AuAu62_c0-20"]->fill(partPt); //I Copied this from Chrsital's cc file for PHENIX_2012_I1107625, But i think mine should have inv yield instead of pt_weight(not sure what this is)
+		double pt_weight = 1./(partPt*2.*M_PI);
+		_h["AuAu62_c0-20"]->fill(partPt, pt_weight); //I Copied this from Chrsital's cc file for PHENIX_2012_I1107625, But i think mine should have inv yield instead of pt_weight(not sure what this is)
 	    }
 	 }
 	 else if((c >= 0.) && (c < 86. ))
@@ -151,8 +149,8 @@ namespace Rivet {
 	     for(const Particle& p : photons)
 	     {
 		 double partPt = p.pT()/GeV;
-		 //double pt_weight = 1./(partPt*2.*M_PI);
-		 _h["AuAu62_c0-86"]->fill(partPt);
+		 double pt_weight = 1./(partPt*2.*M_PI);
+		 _h["AuAu62_c0-86"]->fill(partPt, pt_weight);
 	     }
 	 }
 
@@ -165,8 +163,8 @@ namespace Rivet {
 	      for(const Particle& p : photons)
 	      {
 		  double partPt = p.pT()/GeV;
-		  //double pt_weight = 1./(partPt*2.*M_PI);
-		  _h["AuAu39_c0-86"]->fill(partPt);
+		  double pt_weight = 1./(partPt*2.*M_PI);
+		  _h["AuAu39_c0-86"]->fill(partPt, pt_weight);
 	      }
 	  }
       }
