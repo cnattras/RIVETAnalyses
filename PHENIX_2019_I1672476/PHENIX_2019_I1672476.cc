@@ -1,9 +1,6 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -32,27 +29,27 @@ public:
 		book(_h["AuAu62_c0-20"], 1, 1, 1);
 		book(_h["AuAu62_c0-86"], 1, 1, 2);
 		book(_h["AuAu39_c0-86"], 2, 1, 1);
-		book(_p["AuAu39_chPMult"], 3, 1, 1);
-		book(_p["AuAu62_chPMult"], 4, 1, 1);
-		book(_p["AuAu200_chPMult"], 4, 1, 2);      
+		book(_p["AuAu39_chPMult_c0-55"], 3, 1, 1);
+		book(_p["AuAu62_chPMult_c0-60"], 4, 1, 1);
+		book(_p["AuAu200_chPMult_c0-60"], 4, 1, 2);      
 		// book(_h["fig2-2-a"], 5, 1, 1);
 		// book(_h["fig2-2-b"], 5, 1, 2);
 		// book(_h["fig2-2-c"], 5, 1, 3);
-		book(_h["AuAu62_chPMult_c0-40"], 6, 1, 1);
-		book(_h["AuAu62_chPMult_c0-86"], 7, 1, 1);
-		book(_h["AuAu39_chPMult_c0-86"], 8, 1, 1);
-		book(_h["CuCu200_chPMult_c0-40"], 9, 1, 1);
-		book(_h["CuCu200_chPMult_c0-40"], 10, 1, 1);
-		book(_h["pp200_chPMult"], 11, 1, 1);
-		book(_h["fig3-2a"], 12, 1, 1);
-		book(_h["fig3-2b"], 13, 1, 1);
-		book(_h["fig3-2c"], 14, 1, 1);
-		book(_h["fig3-2d"], 15, 1, 1);
-		book(_h["fig3-2e"], 16, 1, 1);
-		book(_h["fig3-2f"], 17, 1, 1);
-		book(_h["fig4-1a"], 18, 1, 1);
-		book(_h["fig4-1b"], 19, 1, 1);
-		book(_h["fig4-1c"], 20, 1, 1);
+		book(_p["AuAu62_chPMult_c0-40"], 6, 1, 1);
+		book(_p["AuAu62_chPMult_c0-86"], 7, 1, 1);
+		book(_p["AuAu39_chPMult_c0-86"], 8, 1, 1);
+		book(_p["CuCu200_chPMult_c0-40"], 9, 1, 1);
+		book(_p["CuCu200_chPMult_c0-94"], 10, 1, 1);
+		book(_p["pp200_chPMult"], 11, 1, 1);
+		book(_h["AuAu62_phtYld_c0-40"], 12, 1, 1);
+		book(_h["AuAu62_phtYld_c0-86"], 13, 1, 1);
+		book(_h["AuAu39_phtYld_c0-86"], 14, 1, 1);
+		book(_h["CuCu200_phtYld_c0-40"], 15, 1, 1);
+		book(_h["CuCu200_phtYld_c0-94"], 16, 1, 1);
+		book(_h["pp200_phtYld"], 17, 1, 1);
+		book(_p["AuAu200_chPMult_c0-92"], 18, 1, 1);
+		//book(_h["pp200_chPMult_c0-100"], 19, 1, 1); exact same as 3-1f
+		book(_p["pp62_chPMult"], 20, 1, 1);
 		// book(_h["fig4-2-a"], 21, 1, 1);
 		//
 		/*
@@ -78,7 +75,7 @@ public:
 		book(sow["sow-fig4-1b"],"sow-fig4-1b");
 		book(sow["sow-fig4-1c"],"sow-fig4-1c");
 		*/
-}
+	}
 
 
 	void analyze(const Event& event) {
@@ -111,12 +108,13 @@ public:
 		if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
 		{
 			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = pp200;
+			if (fuzzyEquals(sqrtS()/GeV, 62*NN, 1E-3)) collSystem = pp62;
 		}
 
 	
 
-		Particles photons = applyProjection<PromptFinalState>(event, "pfs").particles();
-		Particles chargedParticles = applyProjection<FinalState>(event, "fs").particles();
+		const Particles photons = pfs.particles(Cuts::pT > 1.*GeV && Cuts::pT < 5.*GeV);
+		const Particles chargedParticles = fs.particles();
 
 
 
@@ -159,102 +157,92 @@ public:
 	}
      
 
-	int nAuAu39 = 0;
-	int nAuAu62 = 0;
-	int nAuAu200 = 0;
-	int nCuCu200 = 0;
-	int npp200 = 0;
 	int absEta = 0.7;
-       
 
-	//count charged particles for diff AuAu enegeries
-	for(const Particle& p : chargedParticles)
-	{
-		if (collSystem == AuAu39)
-		{
-			nAuAu39 ++;   
-		}
-
-		else if(collSystem == AuAu62)
-		{
-			nAuAu62 ++;
-		}
-
-		else if(collSystem == AuAu200)
-		{
-			nAuAu200 ++;
-		}
-
-		else if(collSystem == CuCu200)
-		{
-			nCuCu200 ++;
-		}
-
-		else if(collSystem == pp200)
-		{
-			npp200 ++;
-		}
-	}
       
 
 	//fill histos with cent c and charged particle count/abs val of Eta
 	if (collSystem == AuAu39)
 	{
-		_p["AuAu39_chPMult"]->fill(c,nAuAu39/absEta);
+		if((c >= 0.) && (c < 55.))
+		{
+			_p["AuAu39_chPMult_c0-55"]->fill(c,chargedParticles.size()/absEta);
+		}
 
 		if((c >= 0.) && (c < 86.))
 		{
-			_p["AuAu39_chPMult_c0-86"]->fill(c,nAuAu39/absEta);
+			_p["AuAu39_chPMult_c0-86"]->fill(c,chargedParticles.size()/absEta);
+			_p["AuAu39_phtYld_c0-86"]->fill(c,photons.size()/absEta);
 		}
 	}
 
 	else if(collSystem == AuAu62)
 	{
-		_p["AuAu62_chPMult"]->fill(c,nAuAu62/absEta);
+		if((c >= 0.) && (c < 60.))
+		{
+			_p["AuAu62_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
+		}
 
 		if((c >= 0.) && (c < 40.))
 		{
-			_p["AuAu62_chPMult_c0-40"]->fill(c,nAuAu62/absEta);
+			_p["AuAu62_chPMult_c0-40"]->fill(c,chargedParticles.size()/absEta);
+			_p["AuAu62_phtYld_c0-40"]->fill(c,photons.size()/absEta);
 		}
 
 		if((c >= 0.) && (c < 86.))
 		{
-			_p["AuAu62_chPMult_c0-86"]->fill(c,nAuAu62/absEta);
+			_p["AuAu62_chPMult_c0-86"]->fill(c,chargedParticles.size()/absEta);
+			_p["AuAu62_phtYld_c0-86"]->fill(c,photons.size()/absEta);
 		}
 	}
 
 	else if(collSystem == AuAu200)
 	{
-		_p["AuAu200_chPMult"]->fill(c,nAuAu200/absEta);
+		if((c >= 0.) && (c < 60.))
+		{
+			_p["AuAu200_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
+		
+		}
+		
+		if((c >= 0.) && (c < 92.))
+		{
+			_p["AuAu200_chPMult_c0-92"]->fill(c,chargedParticles.size()/absEta);
+		}
 	}
 	
 	else if(collSystem == CuCu200)
 	{
 		if((c >= 0.) && (c < 40.))
 		{
-			_p["CuCu200_chPMult_c0-40"]->fill(c,nCuCu200/absEta);
+			_p["CuCu200_chPMult_c0-40"]->fill(c,chargedParticles.size()/absEta);
+			_p["CuCu200_phtYld_c0-40"]->fill(c,photons.size()/absEta);
 		}
 		
 		if((c >= 0.) && (c < 94.))
 		{
-			_p["CuCu200_chPMult_c0-94"]->fill(c,nCuCu200/absEta);
+			_p["CuCu200_chPMult_c0-94"]->fill(c,chargedParticles.size()/absEta);
+			_p["CuCu200_phtYld_c0-40"]->fill(c,photons.size()/absEta);
 
 		}
 	}
 	
 	else if(collSystem == pp200)
 	{
-		_p["pp200_chPMult"]->fill(c,npp200/absEta);
+		_p["pp200_chPMult"]->fill(c,chargedParticles.size()/absEta);
+		_p["pp200_phtYld"]->fill(c,photons.size()/absEta);
 	}
 
-
+	else if(collSystem == pp62)
+	{
+		_p["pp62_chPMult"]->fill(c,chargedParticles.size()/absEta);
+	}
 
 
 
  
 
 
-}
+	}
 
 
 	/// Normalise histograms etc., after the run
@@ -268,16 +256,16 @@ public:
 
 
 	/// @name Histograms
-	//@{
+	
 	map<string, Histo1DPtr> _h;
 	map<string, Profile1DPtr> _p;
 	map<string, CounterPtr> sow;
-	enum CollisionSystem {AuAu39, AuAu62, AuAu200, CuCu200, pp200};
+	enum CollisionSystem {AuAu39, AuAu62, AuAu200, CuCu200, pp200, pp62};
 	CollisionSystem collSystem;
 	string beamOpt;
+	
 
-
-
+	
 
 	};
 
