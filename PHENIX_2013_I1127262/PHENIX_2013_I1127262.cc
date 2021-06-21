@@ -5,6 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include "../Centralities/RHICCentrality.hh"
 
 
@@ -227,6 +228,9 @@ namespace Rivet {
       const FinalState fs(Cuts::pT > 1*GeV && Cuts::abseta < 0.35);
       declare(fs, "fs");
 
+      const UnstableParticles ufs(Cuts::abseta < 0.35 && Cuts::pT > 1*GeV && Cuts::pid == 111);
+      declare(ufs, "ufs");
+
       //booking and delcaring RxP profiles for calculations
       const FinalState RxP(Cuts::abseta > 1. && Cuts::abseta < 2.8);
       declare(RxP, "RxP");
@@ -305,7 +309,8 @@ namespace Rivet {
       }
 
       const FinalState& fs = apply<FinalState>(event, "fs");
-      const Particles particles = fs.particles();
+      const UnstableParticles& ufs = apply<UnstableParticles>(event, "ufs");
+      const Particles particles = ufs.particles();
 
       //Calcualte Reaction Plane Dependency:
 
