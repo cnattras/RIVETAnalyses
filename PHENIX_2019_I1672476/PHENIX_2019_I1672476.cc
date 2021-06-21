@@ -87,7 +87,7 @@ public:
 		const ParticlePair& beam = beams();
  
 		int NN = 0;
-
+		double absEta = 0.7;
 
 		if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
 		{
@@ -128,6 +128,7 @@ public:
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu62_c0-20"]->fill(partPt, pt_weight); 
 				_h["AuAu62_c0-86"]->fill(partPt, pt_weight);
+				cpmAU62_20 = chargedParticles.size()/absEta;
 			}
 		}
 
@@ -138,6 +139,7 @@ public:
 				double partPt = p.pT()/GeV;
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu62_c0-86"]->fill(partPt, pt_weight);
+				cpmAU62_86 = chargedParticles.size()/absEta;
 			}
 		}
 
@@ -152,12 +154,13 @@ public:
 				double partPt = p.pT()/GeV;
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu39_c0-86"]->fill(partPt, pt_weight);
+				cpmAU39_86 = chargedParticles.size()/absEta;
 			}
 		}
 	}
      
 
-	int absEta = 0.7;
+	
 
       
 
@@ -248,9 +251,11 @@ public:
 	/// Normalise histograms etc., after the run
 	void finalize() {
 
-		normalize(_h["XXXX"]); // normalize to unity
-		normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-		scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
+		_h["AuAu62_c0-20"]->scaleW(1./cpmAU62_20>sumW());
+		
+		_h["AuAu62_c0-86"]->scaleW(1./cpmAU62_86>sumW());
+
+		_h["AuAu39_c0-86"]->scaleW(1./cpmAU39_86>sumW());
 	}
 
 
@@ -263,6 +268,8 @@ public:
 	enum CollisionSystem {AuAu39, AuAu62, AuAu200, CuCu200, pp200, pp62};
 	CollisionSystem collSystem;
 	string beamOpt;
+	double cpmAU39_86, cpmAU62_20, cpmAU62_86;
+	
 	
 
 	
