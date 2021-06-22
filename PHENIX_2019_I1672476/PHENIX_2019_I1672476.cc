@@ -24,6 +24,8 @@ public:
 		declare(pfs, "pfs");
 		const FinalState fs(Cuts::abseta < 0.35 && Cuts::abscharge > 0);
 		declare(fs, "fs");
+
+		// All yields are 1D histos, charged particle multiplicities are profiles
       
 
 		book(_h["AuAu62_c0-20"], 1, 1, 1);
@@ -128,8 +130,10 @@ public:
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu62_c0-20"]->fill(partPt, pt_weight); 
 				_h["AuAu62_c0-86"]->fill(partPt, pt_weight);
-				cpmAU62_20 = chargedParticles.size()/absEta;
-			}
+			}	
+	
+			cpmAU62_20 = chargedParticles.size()/absEta;
+			
 		}
 
 		else if((c >= 0.) && (c < 86. ))
@@ -139,8 +143,10 @@ public:
 				double partPt = p.pT()/GeV;
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu62_c0-86"]->fill(partPt, pt_weight);
-				cpmAU62_86 = chargedParticles.size()/absEta;
 			}
+			
+			cpmAU62_86 = chargedParticles.size()/absEta;
+			
 		}
 
 	}
@@ -154,8 +160,10 @@ public:
 				double partPt = p.pT()/GeV;
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu39_c0-86"]->fill(partPt, pt_weight);
-				cpmAU39_86 = chargedParticles.size()/absEta;
 			}
+
+			cpmAU39_86 = chargedParticles.size()/absEta;
+			
 		}
 	}
      
