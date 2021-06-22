@@ -1,7 +1,8 @@
 #!/bin/bash
 rivet-build RivetPHENIX_2011_I886590.so PHENIX_2011_I886590.cc
 export RIVET_ANALYSIS_PATH=$PWD
-rivet --pwd -a PHENIX_2011_I886590:beam=pp200 -o Rivet_pp200.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
+rivet --pwd -a PHENIX_2011_I886590:beam=pp200 -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
+rivet-merge --pwd -o /tmp/Rivet.yoda Rivet.yoda Rivet.yoda
 #../../sims/pp_200GeV/hepmc_pp_200GeV_*.hepmc
 #rivet --pwd -a PHENIX_2011_I886590:beam=pp62 -o Rivet_pp62.yoda ../../sims/pp_200GeV/hepmc_pp_200GeV_*.hepmc
 #../testfiles/PYTHIAAuAuFileSMALLTEST.dat

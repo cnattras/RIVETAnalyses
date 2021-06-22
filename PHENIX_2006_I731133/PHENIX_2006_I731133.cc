@@ -11,7 +11,7 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "RHICCentrality.hh" //external header for Centrality calculation
+#include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
 #include <math.h>
 #include <fstream>
 #include <iostream>
@@ -23,11 +23,11 @@ namespace Rivet {
 
 
   /// @brief Add a short analysis description here
-  class PHENIX_2006_I0611006 : public Analysis {
+  class PHENIX_2006_I731133 : public Analysis {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2006_I0611006);
+    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2006_I731133);
 
 
     /// Book histograms and initialise projections before the run
@@ -1627,6 +1627,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2006_I0611006);
+  DECLARE_RIVET_PLUGIN(PHENIX_2006_I731133);
 
 }

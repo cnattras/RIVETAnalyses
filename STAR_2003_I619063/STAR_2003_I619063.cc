@@ -1,7 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
-#include "Centrality/RHICCentrality.hh" //external header for Centrality calculation
+#include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
 #define _USE_MATH_DEFINES
 namespace Rivet {
   /// @brief Add a short analysis description here

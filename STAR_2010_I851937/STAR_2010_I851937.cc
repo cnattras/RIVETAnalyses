@@ -28,7 +28,7 @@ using namespace std;
 namespace Rivet {
 
 class Correlator {
-      
+
     private:
       int _index;
       int _subindex;
@@ -42,7 +42,7 @@ class Correlator {
       bool _noCentrality = false;
 
     public:
-    
+
       /// Constructor
       Correlator(int index, int subindex, int subsubindex = 0) {
         _index = index;
@@ -57,7 +57,7 @@ class Correlator {
       void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
       void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
       void SetPID(std::initializer_list<int> pid){ _pid = pid; }
-    
+
       string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
       pair<double,double> GetCentrality(){ return _centrality; }
       double GetCentralityMin(){ return _centrality.first; }
@@ -69,7 +69,7 @@ class Correlator {
       double GetAssociatedRangeMin(){ return _associatedRange.first; }
       double GetAssociatedRangeMax(){ return _associatedRange.second; }
       vector<int> GetPID(){ return _pid; }
-    
+
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
       int GetSubSubIndex(){ return _subsubindex; }
@@ -78,7 +78,7 @@ class Correlator {
           string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
           return fullIndex;
       }
-    
+
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
       bool CheckCentrality(double cent){ return ((cent>_centrality.first && cent<_centrality.second) || _noCentrality == true) ? true : false; }
       bool CheckTriggerRange(double tpt){ return (tpt>_triggerRange.first && tpt<_triggerRange.second) ? true : false; }
@@ -86,63 +86,63 @@ class Correlator {
       bool CheckAssociatedRangeMaxTrigger(double apt, double tpt){ return (apt>_associatedRange.first && apt<tpt) ? true : false; }
       bool CheckPID(std::initializer_list<int> pid)
       {
-          
+
           bool inList = false;
-          
+
           for(int id : pid)
           {
               auto it = std::find(_pid.begin(), _pid.end(), id);
-              
+
               if(it != _pid.end())
               {
                   inList = true;
                   break;
               }
           }
-          
+
           return inList;
-          
+
       }
-      
+
       bool CheckConditions(string s, double cent, double tpt, double apt)
       {
         if(!CheckConditions(s, cent, tpt)) return false;
         if(!CheckAssociatedRange(apt)) return false;
-        
+
         return true;
-        
+
       }
-    
+
       bool CheckConditions(string s, double cent, double tpt)
       {
         if(!CheckConditions(s, cent)) return false;
         if(!CheckTriggerRange(tpt)) return false;
-        
+
         return true;
-        
+
       }
-    
+
       bool CheckConditions(string s, double cent)
       {
         if(!CheckCollSystemAndEnergy(s)) return false;
         if(!CheckCentrality(cent)) return false;
-        
+
         return true;
-        
+
       }
-      
+
       bool CheckConditionsMaxTrigger(string s, double cent, double tpt, double apt)
       {
         if(!CheckCollSystemAndEnergy(s)) return false;
         if(!CheckCentrality(cent)) return false;
         if(!CheckTriggerRange(tpt)) return false;
         if(!CheckAssociatedRangeMaxTrigger(apt,tpt)) return false;
-        
+
         return true;
-        
+
       }
   };
-  
+
   /// @brief Add a short analysis description here
   class STAR_2010_I851937 : public Analysis {
   public:
@@ -158,10 +158,10 @@ class Correlator {
         if(p1.pt() != p2.pt()) return false;
         if(p1.eta() != p2.eta()) return false;
         if(p1.phi() != p2.phi()) return false;
-    
+
         return true;
       }
-    
+
       bool isSecondary(Particle p)
       {
         //return true if is secondary
@@ -174,7 +174,7 @@ class Correlator {
           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
           return true;
         else return false;
-        
+
       }
 
     double CalculateVn(YODA::Histo1D& hist, int nth)
@@ -182,7 +182,7 @@ class Correlator {
         int nBins = hist.numBins();
 
         double integral = 0.;
-        
+
         double Vn = 0.;
 
         for (int i = 0; i < nBins; i++)
@@ -194,12 +194,12 @@ class Correlator {
         Vn /= integral;
         return Vn;
     }
-    
+
     int FindBinAtMinimum(YODA::Histo1D& hist, double bmin, double bmax)
     {
         int minBin = -1;
         double minVal = 999.;
-        
+
         for(unsigned int i = 0; i < hist.numBins(); i++)
         {
             if(hist.bin(i).xMid() < bmin || hist.bin(i).xMid() > bmax) continue;
@@ -209,11 +209,11 @@ class Correlator {
                 minBin = i;
             }
         }
-        
+
         return minBin;
-        
+
     }
-    
+
     void SubtractBackground(YODA::Histo1D& fullHist, YODA::Histo1D& hist, vector<int> n, double bmin, double bmax)
     {
         vector<double> Vn(n.size(), 0);
@@ -221,17 +221,17 @@ class Correlator {
         {
             Vn[i] = CalculateVn(fullHist, n[i]);
         }
-        
+
         double bmod = 1.;
         int minBin = FindBinAtMinimum(fullHist, bmin, bmax);
-        
+
         for(unsigned int i = 0; i < Vn.size(); i++)
         {
             bmod += 2*Vn[i]*cos(n[i]*fullHist.bin(minBin).xMid());
         }
-        
+
         double b = (fullHist.bin(minBin).sumW()/fullHist.bin(minBin).xWidth())/bmod; //Divided by bin width in order to generalize it and enable it to be used for histograms with different binning
-                
+
         for(unsigned int ibin = 0; ibin < hist.numBins(); ibin++)
         {
             double modulation = 1;
@@ -242,14 +242,14 @@ class Correlator {
             modulation *= b;
             hist.bin(ibin).scaleW(1 - (modulation/(hist.bin(ibin).sumW()/hist.bin(ibin).xWidth()))); //Divided by bin width to compensate the calculation of "b"
         }
-        
+
     }
 
 double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     {
         //https://rivet.hepforge.org/code/dev/structRivet_1_1DeltaPhiInRange.html
         double dPhi = deltaPhi(pTrig, pAssoc, true);//this does NOT rotate the delta phi to be in a given range
-                    
+
         if(dPhi < -M_PI/2.)
         {
             dPhi += 2.*M_PI;
@@ -258,19 +258,19 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         {
             dPhi -= 2*M_PI;
         }
-                    
-        return dPhi;   
+
+        return dPhi;
       }
-      
+
       Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
       {
-        
+
         YODA::Histo1D hist = *histo;
-        
+
         double minValue = sqrt(-2);
         double binWidth = 0.;
         int minValueEntries = 0.;
-        
+
         for(auto &bin : hist.bins())
         {
             if(std::isnan(minValue))
@@ -286,18 +286,18 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
                 minValueEntries = bin.numEntries();
             }
         }
-                
+
         hist.reset();
-        
+
         for(auto &bin : hist.bins())
         {
             bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
         }
-        
+
         *histo = YODA::subtract(*histo, hist);
-        
+
         return histo;
-                
+
       }
 
     /// @name Analysis methods
@@ -311,15 +311,15 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
         const ChargedFinalState cfsEta(Cuts::abseta < 0.7);
         declare(cfsEta, "CFSETA");
-        
+
         beamOpt = getOption<string>("beam", "NONE");
 
         if (beamOpt == "DAU") collSys = dAu;
         else if (beamOpt == "AUAU") collSys = AuAu;
-     
+
         declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
-       
-        
+
+
       //===========================================================
       //===========================================================
       //                   Figure 2   : FIX ME: add in the nTriggers
@@ -360,7 +360,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
               book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
 
           }
-        
+
         if(corr.GetIndex() == 2)
         {
             if(corr.GetSubIndex() <= 2)
@@ -385,19 +385,19 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
                 book(sow[name_raw], "sow" + name_raw);
                 //limited eta acceptance |eta| < 0.7
                 string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
-                book(_h[name_eta], (corr.GetIndex()*2)+2, 1, 1);
+                book(_h[name_eta], (corr.GetIndex()*2)+2, 1, 2);
                 nTriggers[name_eta]=0;
                 book(sow[name_eta], "sow" + name_eta);
 
             }
-            
+
             //Background subtracted |eta| < 1
             string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
             book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
-            
+
         }
-        
-        
+
+
         if(corr.GetIndex() == 3)
         {
             //raw |eta| < 1
@@ -416,19 +416,19 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         }
       }
 
-    
+
     //YODA FILE EXPLANATION
     //d01,x01,y01 is raw 0-12%
     //d01,x01,y02 is deta 0-12%
     //d01,x01,y03 is raw 20-40% etc.
     //Only for figure 2 and 3 when the title is not background subtracted.
 
-  
+
 
       //===================================================================
       //===================================================================
       //Figure 3 FIX ME:
-      // 
+      //
       //===================================================================
       //===================================================================
       for (int ptt = 0; ptt < numTrigPtBins; ptt++)
@@ -470,7 +470,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
          book(_h[name_dEta], 13, 1, corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
          nTriggers[name_dEta]=0;
          book(sow[name_dEta], "sow" + name_dEta);
- 
+
       }
 
      ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -492,7 +492,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 			c6.SetCollSystemAndEnergy("dAu200GeV");
 			c6.SetNoCentrality();
 			}
-			else 
+			else
 			{
 			c6.SetCollSystemAndEnergy("AuAu200GeV");
 			c6.SetCentrality(0.0,12.0);
@@ -504,7 +504,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
       }
 
-		for (Correlator corr : Correlators6) 
+		for (Correlator corr : Correlators6)
 	  {
       		if (corr.GetSubSubIndex() == 0)
       		{
@@ -513,11 +513,11 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       		string name_rawA = "rawA_d14x1y" + to_string((corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
       		book(_h[name_rawA], 14, 1, (corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
 
-      		//6c Away Side	
+      		//6c Away Side
       		string name_rawC = "rawC_d16x1y" + to_string((corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
       		book(_h[name_rawC], 16, 1, (corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
-  	  		
-  	  			
+
+
   	  			if (corr.GetSubIndex() == 0)
   	  			{
 
@@ -559,8 +559,8 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 				Correlators6b.push_back(c6b);
       		}
       	}
-    
-      	
+
+
   	  for (Correlator corr : Correlators6b)
   	  {
   	  	if (corr.GetSubSubIndex() == 0)
@@ -590,8 +590,8 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
   	  	nTriggers[name_corrFunc6b] = 0;
   	  }
 
-  	  
-  	  
+
+
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      ////////////////////////////////////////////////////////////////////////////////////////////////////
      //                                  Figure 7    : add in book(sow)                                                  //
@@ -689,17 +689,17 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      
+
       const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
       const double c = cent();
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      
+
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
       //==================================================
-     
+
       string SysAndEnergy = "";
 
       if (collSys == dAu) SysAndEnergy = "dAu200GeV";
@@ -712,7 +712,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       double triggerptMax = -999.;
       double associatedptMin = 999.;
       double associatedptMax = -999.;
-    
+
       bool isVeto = true;
 
       //INCOMPLETE: Fill Histograms for figure 2
@@ -720,7 +720,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       {
           if(!corr.CheckCentrality(c)) continue;
           if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
-          
+
           if(corr.GetIndex() <=1)
           {
           string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
@@ -772,10 +772,10 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       //Fill Histograms for figure 3
       for (Correlator corr : Correlators3)
       {
-        
+
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
 
-        string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1); 
+        string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
         sow[name_sub]->fill();
 
         string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
@@ -796,7 +796,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       	string name_corrFunc = "CorrFunc_" + to_string(corr.GetIndex()) + "_" + to_string(corr.GetSubIndex()) + "_" + to_string(corr.GetSubSubIndex());
       	sow[name_corrFunc]->fill();
- 
+
       }
 
       for (Correlator corr : Correlators6b)
@@ -850,7 +850,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       }
 
 Particles chargedParticles = cfs.particles();
-        
+
         for(Particle pTrig : chargedParticles)
         {
             for(Correlator corr : Correlators)
@@ -858,24 +858,24 @@ Particles chargedParticles = cfs.particles();
                 if(!corr.CheckCentrality(c)) continue;
                 if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
                 if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
-                
+
                 string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
                 nTriggers[name_raw]++;
-                
+
             }
-            
+
             for(Particle pAssoc : chargedParticles)
             {
                 if(isSameParticle(pTrig, pAssoc)) continue;
-                
+
                 double DeltaPhi = GetDeltaPhi(pAssoc, pTrig);
-            
+
                 for(Correlator corr : Correlators)
                 {
                     if(!corr.CheckCentrality(c)) continue;
                     if(!corr.CheckTriggerRange(pTrig.pt()/GeV)) continue;
                     if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
-                    
+
                     if(corr.GetIndex() <= 1)
                     {
                         string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
@@ -883,36 +883,36 @@ Particles chargedParticles = cfs.particles();
                     }
                     else if(corr.GetIndex() == 2)
                     {
-                        
-                        
+
+
                     }
-                    
-        
+
+
                 }
-            
+
             }
-        
-        
+
+
         }
-    
+
       for(Correlator& corr : Correlators)
       {
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
         //if(!corr.CheckCentrality(centr)) continue;
-        
+
         //If event is accepted for the correlator, fill event weights
         sow[corr.GetFullIndex()]->fill();
-        
+
         isVeto = false;
-        
+
         //Check min and max of the trigger and associated particles in order to speed up the particle loops
         if(corr.GetTriggerRangeMin() < triggerptMin) triggerptMin = corr.GetTriggerRangeMin();
         if(corr.GetTriggerRangeMax() > triggerptMax) triggerptMax = corr.GetTriggerRangeMax();
-        
+
         if(corr.GetAssociatedRangeMin() < associatedptMin) associatedptMin = corr.GetAssociatedRangeMin();
         if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
       }
-    
+
       if(isVeto) vetoEvent;
     }
 
@@ -942,20 +942,20 @@ Particles chargedParticles = cfs.particles();
             dAu_available=false;
             break;
           }
-          
+
         }
       }
-      
+
       //if((!AuAu200_available) || (!dAu_available)) return;
-      
+
       for(Correlator corr : Correlators) //Finish with rest of logic
       {
           string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
           _h[name_raw]->scaleW(sow[name_raw]->numEntries()/(nTriggers[name_raw]*sow[name_raw]->sumW()));
-          
+
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
           _h[name_sub] = SubtractBackgroundZYAM(_h[name_raw]);
-      } 
+      }
   }
 
 
@@ -972,7 +972,7 @@ Particles chargedParticles = cfs.particles();
     vector<Correlator> Correlators6b;
     vector<Correlator> Correlators7;
     vector<Correlator> Correlators8;
-    
+
     string beamOpt;
     enum CollisionSystem {dAu, AuAu};
     CollisionSystem collSys;

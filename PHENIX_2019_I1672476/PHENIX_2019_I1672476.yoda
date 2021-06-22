@@ -11,10 +11,10 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	4.586960e-01	3.686566e-01	3.686566e-01
 1.200000e+00	1.000000e-01	1.000000e-01	1.842470e-01	1.578971e-01	1.578971e-01
 1.400000e+00	1.000000e-01	1.000000e-01	2.757670e-01	1.132252e-01	1.132252e-01
+1.600000e+00	1.000000e-01	1.000000e-01	6.752180e-02	4.262038e-02	4.262038e-02
 1.800000e+00	1.000000e-01	1.000000e-01	5.129720e-03	1.589957e-02	1.589957e-02
 2.000000e+00	1.000000e-01	1.000000e-01	3.447530e-02	2.220796e-02	2.220796e-02
 2.300000e+00	2.000000e-01	2.000000e-01	7.183240e-03	4.977707e-03	4.977707e-03
-2.600000e+00	1.000000e-01	1.000000e-01	6.752180e-02	4.262038e-02	4.262038e-02
 2.750000e+00	2.500000e-01	2.500000e-01	3.148150e-03	2.871199e-03	2.871199e-03
 END YODA_SCATTER2D_V2
 
@@ -32,10 +32,10 @@ Type: Scatter2D
 1.000000e+00	1.000000e-01	1.000000e-01	1.668920e-01	1.279067e-01	1.279067e-01
 1.200000e+00	1.000000e-01	1.000000e-01	5.722930e-02	5.252645e-02	5.252645e-02
 1.400000e+00	1.000000e-01	1.000000e-01	5.341660e-02	2.661497e-02	2.661497e-02
+1.600000e+00	1.000000e-01	1.000000e-01	1.238230e-02	1.128330e-02	1.128330e-02
 1.800000e+00	1.000000e-01	1.000000e-01	3.194870e-03	5.320713e-03	5.320713e-03
 2.000000e+00	1.000000e-01	1.000000e-01	1.043150e-02	5.028448e-03	5.028448e-03
 2.300000e+00	2.000000e-01	2.000000e-01	1.964860e-03	1.267183e-03	1.267183e-03
-2.600000e+00	1.000000e-01	1.000000e-01	1.238230e-02	1.128330e-02	1.128330e-02
 2.750000e+00	2.500000e-01	2.500000e-01	3.120750e-04	3.490101e-04	3.490101e-04
 END YODA_SCATTER2D_V2
 
@@ -63,7 +63,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d03-x01-y01
 ErrorBreakdown: {0: {$error$: {dn: -31.6, up: 31.6}}, 1: {$error$: {dn: -25.8, up: 25.8}}, 2: {$error$: {dn: -21.3, up: 21.3}}, 3: {$error$: {dn: -17.5, up: 17.5}}, 4: {$error$: {dn: -14.4, up: 14.4}}, 5: {$error$: {dn: -11.8, up: 11.8}}, 6: {$error$: {dn: -9.6, up: 9.6}}, 7: {$error$: {dn: -7.7, up: 7.7}}, 8: {$error$: {dn: -6.1, up: 6.1}}, 9: {$error$: {dn: -4.8, up: 4.8}}, 10: {$error$: {dn: -3.7, up: 3.7}}}
 IsRef: 1
 Path: /REF/PHENIX_2019_I1672476/d03-x01-y01
-Title: Figure 2-1
+Title: Figure 2-1a
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -81,11 +81,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d03-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d04-x01-y01
 ErrorBreakdown: {0: {$error$: {dn: -38.9, up: 38.9}}, 1: {$error$: {dn: -31.6, up: 31.6}}, 2: {$error$: {dn: -25.8, up: 25.8}}, 3: {$error$: {dn: -21.0, up: 21.0}}, 4: {$error$: {dn: -17.1, up: 17.1}}, 5: {$error$: {dn: -13.8, up: 13.8}}, 6: {$error$: {dn: -11.1, up: 11.1}}, 7: {$error$: {dn: -8.76, up: 8.76}}, 8: {$error$: {dn: -6.83, up: 6.83}}, 9: {$error$: {dn: -5.24, up: 5.24}}, 10: {$error$: {dn: -3.95, up: 3.95}}, 11: {$error$: {dn: -2.92, up: 2.92}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d03-x01-y02
-Title: Figure 2-1
+Path: /REF/PHENIX_2019_I1672476/d04-x01-y01
+Title: Figure 2-1b
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -104,11 +104,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d03-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d04-x01-y02
 ErrorBreakdown: {0: {$error$: {dn: -110.0, up: 110.0}}, 1: {$error$: {dn: -87.2, up: 87.2}}, 2: {$error$: {dn: -68.5, up: 68.5}}, 3: {$error$: {dn: -53.7, up: 53.7}}, 4: {$error$: {dn: -39.5, up: 39.5}}, 5: {$error$: {dn: -31.8, up: 31.8}}, 6: {$error$: {dn: -24.2, up: 24.2}}, 7: {$error$: {dn: -18.3, up: 18.3}}, 8: {$error$: {dn: -12.6, up: 12.6}}, 9: {$error$: {dn: -9.0, up: 9.0}}, 10: {$error$: {dn: -8.1, up: 8.1}}, 11: {$error$: {dn: -7.6, up: 7.6}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d03-x01-y03
-Title: Figure 2-1
+Path: /REF/PHENIX_2019_I1672476/d04-x01-y02
+Title: Figure 2-1b
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -127,10 +127,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d04-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y01
 ErrorBreakdown: {0: {$error$: {dn: -144.2, up: 144.2}}, 1: {$error$: {dn: -114.1, up: 114.1}}, 2: {$error$: {dn: -83.95, up: 83.95}}, 3: {$error$: {dn: -65.42, up: 65.42}}, 4: {$error$: {dn: -51.19, up: 51.19}}, 5: {$error$: {dn: -42.94, up: 42.94}}, 6: {$error$: {dn: -31.56, up: 31.56}}, 7: {$error$: {dn: -22.97, up: 22.97}}, 8: {$error$: {dn: -17.83, up: 17.83}}, 9: {$error$: {dn: -14.28, up: 14.28}}, 10: {$error$: {dn: -12.54, up: 12.54}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d04-x01-y01
+Path: /REF/PHENIX_2019_I1672476/d05-x01-y01
 Title: Figure 2-2
 Type: Scatter2D
 ---
@@ -149,10 +149,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d04-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y02
 ErrorBreakdown: {0: {$error$: {dn: -127.2, up: 127.2}}, 1: {$error$: {dn: -97.82, up: 97.82}}, 2: {$error$: {dn: -74.34, up: 74.34}}, 3: {$error$: {dn: -56.77, up: 56.77}}, 4: {$error$: {dn: -41.34, up: 41.34}}, 5: {$error$: {dn: -32.57, up: 32.57}}, 6: {$error$: {dn: -25.26, up: 25.26}}, 7: {$error$: {dn: -19.04, up: 19.04}}, 8: {$error$: {dn: -14.19, up: 14.19}}, 9: {$error$: {dn: -12.06, up: 12.06}}, 10: {$error$: {dn: -8.945, up: 8.945}}, 11: {$error$: {dn: -6.446, up: 6.446}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d04-x01-y02
+Path: /REF/PHENIX_2019_I1672476/d05-x01-y02
 Title: Figure 2-2
 Type: Scatter2D
 ---
@@ -172,10 +172,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d04-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y03
 ErrorBreakdown: {0: {$error$: {dn: -36.6, up: 36.6}}, 1: {$error$: {dn: -27.9, up: 27.9}}, 2: {$error$: {dn: -22.3, up: 22.3}}, 3: {$error$: {dn: -18.2, up: 18.2}}, 4: {$error$: {dn: -15.8, up: 15.8}}, 5: {$error$: {dn: -13.8, up: 13.8}}, 6: {$error$: {dn: -12.2, up: 12.2}}, 7: {$error$: {dn: -10.9, up: 10.9}}, 8: {$error$: {dn: -9.6, up: 9.6}}, 9: {$error$: {dn: -8.6, up: 8.6}}, 10: {$error$: {dn: -7.6, up: 7.6}}, 11: {$error$: {dn: -6.5, up: 6.5}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d04-x01-y03
+Path: /REF/PHENIX_2019_I1672476/d05-x01-y03
 Title: Figure 2-2
 Type: Scatter2D
 ---
@@ -195,25 +195,36 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y01
-ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -29.325, up: 29.325}}, 1: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -12.69, up: 12.69}}, 2: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -11.152, up: 11.152}}}
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d06-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -29.325, up: 29.325}}, 1: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -12.69, up: 12.69}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d05-x01-y01
-Title: Figure 3-1
+Path: /REF/PHENIX_2019_I1672476/d06-x01-y01
+Title: Figure 3-1a
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 1.000000e+01	1.000000e+01	1.000000e+01	3.411750e+02	2.932500e+01	2.932500e+01
 3.000000e+01	1.000000e+01	1.000000e+01	1.517500e+02	1.269000e+01	1.269000e+01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d07-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -11.152, up: 11.152}}}
+IsRef: 1
+Path: /REF/PHENIX_2019_I1672476/d07-x01-y01
+Title: Figure 3-1b
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 4.300000e+01	4.300000e+01	4.300000e+01	1.315250e+02	1.115200e+01	1.115200e+01
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d08-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -8.882, up: 8.882}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d05-x01-y02
-Title: Figure 3-1
+Path: /REF/PHENIX_2019_I1672476/d08-x01-y01
+Title: Figure 3-1c
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -221,24 +232,35 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y03
-ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -7.813, up: 7.813}}, 1: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -3.559, up: 3.559}}}
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d09-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -7.813, up: 7.813}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d05-x01-y03
-Title: Figure 3-1
+Path: /REF/PHENIX_2019_I1672476/d09-x01-y01
+Title: Figure 3-1d
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 2.000000e+01	2.000000e+01	2.000000e+01	1.092630e+02	7.813000e+00	7.813000e+00
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d10-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -3.559, up: 3.559}}}
+IsRef: 1
+Path: /REF/PHENIX_2019_I1672476/d10-x01-y01
+Title: Figure 3-1e
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 4.700000e+01	4.700000e+01	4.700000e+01	5.165400e+01	3.559000e+00	3.559000e+00
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d05-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d11-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -0.17, up: 0.17}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d05-x01-y04
-Title: Figure 3-1
+Path: /REF/PHENIX_2019_I1672476/d11-x01-y01
+Title: Figure 3-1f
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -246,25 +268,36 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d06-x01-y01
-ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.271747, up: 0.271747}}, 1: {$Uncertainty of integrated direct photon yield$: {dn: -0.115494, up: 0.115494}}, 2: {$Uncertainty of integrated direct photon yield$: {dn: -0.0652705, up: 0.0652705}}}
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d12-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.271747, up: 0.271747}}, 1: {$Uncertainty of integrated direct photon yield$: {dn: -0.115494, up: 0.115494}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d06-x01-y01
-Title: Figure 3-2
+Path: /REF/PHENIX_2019_I1672476/d12-x01-y01
+Title: Figure 3-2a
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 1.000000e+01	1.000000e+01	1.000000e+01	1.288730e+00	2.717470e-01	2.717470e-01
 3.000000e+01	1.000000e+01	1.000000e+01	4.157010e-01	1.154940e-01	1.154940e-01
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d13-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.0652705, up: 0.0652705}}}
+IsRef: 1
+Path: /REF/PHENIX_2019_I1672476/d13-x01-y01
+Title: Figure 3-2b
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 4.300000e+01	4.300000e+01	4.300000e+01	3.361630e-01	6.527050e-02	6.527050e-02
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d06-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d14-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.110752, up: 0.110752}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d06-x01-y02
-Title: Figure 3-2
+Path: /REF/PHENIX_2019_I1672476/d14-x01-y01
+Title: Figure 3-2c
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -272,24 +305,35 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d06-x01-y03
-ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.0597752, up: 0.0597752}}, 1: {$Uncertainty of integrated direct photon yield$: {dn: -0.0212248, up: 0.0212248}}}
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d15-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.0597752, up: 0.0597752}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d06-x01-y03
-Title: Figure 3-2
+Path: /REF/PHENIX_2019_I1672476/d15-x01-y01
+Title: Figure 3-2d
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 2.000000e+01	2.000000e+01	2.000000e+01	1.524380e-01	5.977520e-02	5.977520e-02
+END YODA_SCATTER2D_V2
+
+
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d16-x01-y01
+ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -0.0212248, up: 0.0212248}}}
+IsRef: 1
+Path: /REF/PHENIX_2019_I1672476/d16-x01-y01
+Title: Figure 3-2e
+Type: Scatter2D
+---
+# xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
 4.700000e+01	4.700000e+01	4.700000e+01	6.081540e-02	2.122480e-02	2.122480e-02
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d06-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d17-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of integrated direct photon yield$: {dn: -6.5655e-05, up: 6.5655e-05}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d06-x01-y04
-Title: Figure 3-2
+Path: /REF/PHENIX_2019_I1672476/d17-x01-y01
+Title: Figure 3-2f
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -297,11 +341,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d07-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d18-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -36.59, up: 36.59}}, 1: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -27.9, up: 27.9}}, 2: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -22.3, up: 22.3}}, 3: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -18.2, up: 18.2}}, 4: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -14.8, up: 14.8}}, 5: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -11.55, up: 11.55}}, 6: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -9.1, up: 9.1}}, 7: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -7.05, up: 7.05}}, 8: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -2.814, up: 2.814}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d07-x01-y01
-Title: Figure 4-1
+Path: /REF/PHENIX_2019_I1672476/d18-x01-y01
+Title: Figure 4-1a
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -317,11 +361,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d07-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d19-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {dn: -0.17, up: 0.17}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d07-x01-y02
-Title: Figure 4-1
+Path: /REF/PHENIX_2019_I1672476/d19-x01-y01
+Title: Figure 4-1b
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -329,11 +373,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d07-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d20-x01-y01
 ErrorBreakdown: {0: {$Uncertainty of the charged hadron multiplicity at midrapidity$: {}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d07-x01-y03
-Title: Figure 4-1
+Path: /REF/PHENIX_2019_I1672476/d20-x01-y01
+Title: Figure 4-1c
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -341,10 +385,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d08-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d21-x01-y01
 ErrorBreakdown: {0: {$statistical Uncertainty of integrated direct photon yield$: {dn: -1.61525e-05, up: 1.61525e-05}, $systematic Uncertainty of integrated direct photon yield$: {dn: -0.000137183, up: 0.000137183}}, 1: {$statistical Uncertainty of integrated direct photon yield$: {dn: -1.3954e-05, up: 1.3954e-05}, $systematic Uncertainty of integrated direct photon yield$: {dn: -0.000106954, up: 0.000106954}}, 2: {$statistical Uncertainty of integrated direct photon yield$: {dn: -1.29484e-05, up: 1.29484e-05}, $systematic Uncertainty of integrated direct photon yield$: {dn: -9.87226e-05, up: 9.87226e-05}}, 3: {$statistical Uncertainty of integrated direct photon yield$: {dn: -1.11083e-05, up: 1.11083e-05}, $systematic Uncertainty of integrated direct photon yield$: {dn: -7.99094e-05, up: 7.99094e-05}}, 4: {$statistical Uncertainty of integrated direct photon yield$: {dn: -7.56005e-06, up: 7.56005e-06}, $systematic Uncertainty of integrated direct photon yield$: {dn: -6.40234e-05, up: 6.40234e-05}}, 5: {$statistical Uncertainty of integrated direct photon yield$: {dn: -5.73184e-06, up: 5.73184e-06}, $systematic Uncertainty of integrated direct photon yield$: {dn: -4.30884e-05, up: 4.30884e-05}}, 6: {$statistical Uncertainty of integrated direct photon yield$: {dn: -3.95786e-06, up: 3.95786e-06}, $systematic Uncertainty of integrated direct photon yield$: {dn: -2.61958e-05, up: 2.61958e-05}}, 7: {$statistical Uncertainty of integrated direct photon yield$: {dn: -2.10334e-06, up: 2.10334e-06}, $systematic Uncertainty of integrated direct photon yield$: {dn: -1.23307e-05, up: 1.23307e-05}}, 8: {$statistical Uncertainty of integrated direct photon yield$: {dn: -6.21928e-07, up: 6.21928e-07}, $systematic Uncertainty of integrated direct photon yield$: {dn: -3.31787e-06, up: 3.31787e-06}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d08-x01-y01
+Path: /REF/PHENIX_2019_I1672476/d21-x01-y01
 Title: Figure 4-2
 Type: Scatter2D
 ---
@@ -361,10 +405,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d08-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d21-x01-y02
 ErrorBreakdown: {0: {$statistical Uncertainty of integrated direct photon yield$: {dn: -1.75546e-08, up: 1.75546e-08}, $systematic Uncertainty of integrated direct photon yield$: {dn: -2.24352e-07, up: 2.24352e-07}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d08-x01-y02
+Path: /REF/PHENIX_2019_I1672476/d21-x01-y02
 Title: Figure 4-2
 Type: Scatter2D
 ---
@@ -373,10 +417,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d08-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2019_I1672476/d21-x01-y03
 ErrorBreakdown: {0: {$statistical Uncertainty of integrated direct photon yield$: {dn: -7.00663e-08, up: 7.00663e-08}, $systematic Uncertainty of integrated direct photon yield$: {dn: -8.19705e-08, up: 8.19705e-08}}}
 IsRef: 1
-Path: /REF/PHENIX_2019_I1672476/d08-x01-y03
+Path: /REF/PHENIX_2019_I1672476/d21-x01-y03
 Title: Figure 4-2
 Type: Scatter2D
 ---
