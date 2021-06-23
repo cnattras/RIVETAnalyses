@@ -312,12 +312,24 @@ namespace Rivet {
 	book(sow["sow_AUAU80"],"sow_AUAU80");
 	book(sow["sow_AUAU92"],"sow_AUAU92");
 	book(sow["sow_AUAU60_92"],"sow_AUAU60_92");
-	
+	book(sow["sow_AUAU0_10"],"sow_AUAU0_10");
 	book(sow["sow_AUAUall"],"sow_AUAUall");
 
 	//____Rcp____
-	book(sow["sow_AUAU0_10"],"sow_AUAU0_10");
-    }
+	
+	string refnameRcpPi = mkAxiscode(20,1,1);
+	book(hRcp["Pions"], refnameRcpPi);
+
+	string refnameRcpK = mkAxiscode(21,1,1);
+	book(hRcp["Kaons"], refnameRcpK);
+
+	string refnameRcpP = mkAxiscode(22,1,1);
+	book(hRcp["Pbar+P"], refnameRcpP);
+
+	string refnameRcpPi0 = mkAxiscode(23,1,1);
+	book(hRcp["Pi0"], refnameRcpPi0);
+	
+	}
 
 
     /// Perform the per-event analysis
@@ -328,87 +340,159 @@ namespace Rivet {
 		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
 		const double c = cent();
 		const ParticlePair& beam = beams();
-
-		int NN = 0;
-
-
-		if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) {
-	  
-			NN = 197.;
-			
-			if (fuzzyEquals(sqrt()/GeV, 200*NN, 1E-3)) collSystem = AUAU200;
-		}
-
 		const Particles chargedParticles = cp.particles();
 
 		if ((c < 0.) || (c > 92.2)) vetoEvent;
 
-		if (collSystem == AUAU200) {
-
-			sow["sow_AUAUall"]->fill();
+		sow["sow_AUAUall"]->fill();
 			
-			if ((c >= 0.) && (c < 5.)) {
+		if ((c >= 0.) && (c < 5.)) {
 				
-				sow["sow_AUAU5"]->fill();
-				sow["sow_AUAU0_10"]->fill();
+			sow["sow_AUAU5"]->fill();
+			sow["sow_AUAU0_10"]->fill();
 
-				for (const Particle& p : chargedParticles) {
+			for (const Particle& p : chargedParticles) {
 		
-					double partPt = p.pT()/GeV;
-					double pt_weight = 1./(partPt*2.*M_PI);
+				double partPt = p.pT()/GeV;
+				double pt_weight = 1./(partPt*2.*M_PI);
 					
-					switch (p.pid() {
+				switch (p.pid() {
 		
-						case 211:	//pi+
+					case 211:	//pi+
 						
-							hAUAU_Yields["Piplusmin"]->fill(partPt, pt_weight);
-							hAUAU_Yields["Piplus5"]->fill(partPt);
+						hAUAU_Yields["Piplusmin"]->fill(partPt, pt_weight);
+						hAUAU_Yields["Piplus5"]->fill(partPt);
 			
-						case -211:	//pi-
+					case -211:	//pi-
 						
-							hAUAU_Yields["Piminusmin"]->fill(partPt, pt_weight);
-							hAUAU_Yields["Piminus5"]->fill(partPt);
+						hAUAU_Yields["Piminusmin"]->fill(partPt, pt_weight);
+						hAUAU_Yields["Piminus5"]->fill(partPt);
 					
+					case 321:	//K+
+						
+						hAUAU_Yields["Kplusmin"]->fill(partPt, pt_weight);
+						hAUAU_Yields["Kplus5"]->fill(partPt);			
 
-						case 321:	//K+
+					case -321:	//K-
 						
-							hAUAU_Yields["Kplusmin"]->fill(partPt, pt_weight);
-							hAUAU_Yields["Kplus5"]->fill(partPt);
+						hAUAU_Yields["Kminusmin"]->fill(partPt, pt_weight);
+						hAUAU_Yields["Kminus5"]->fill(partPt);
 					
+					case 2212:	//proton
+						
+						hAUAU_Yields["Protonsmin"]->fill(partPt, pt_weight);
+						hAUAU_Yields["Protons5"]->fill(partPt);			
 
-						case -321:	//K-
+					case -2212:	//antiproton
 						
-							hAUAU_Yields["Kminusmin"]->fill(partPt, pt_weight);
-							hAUAU_Yields["Kminus5"]->fill(partPt);
-					
-		
-						case 2212:	//proton
-						
-							hAUAU_Yields["Protonsmin"]->fill(partPt, pt_weight);
-							hAUAU_Yields["Protons5"]->fill(partPt);
-					
-
-						case -2212:	//antiproton
-						
-							hAUAU_Yields["Pbarmin"]->fill(partPt, pt_weight);
-							hAUAU_Yields["Pbar5"]->fill(partPt);
-					}
+						hAUAU_Yields["Pbarmin"]->fill(partPt, pt_weight);
+						hAUAU_Yields["Pbar5"]->fill(partPt);
 				}
 			}
 		}
 	}
 
 
-	/// Normalise histograms etc., after the run
 	void finalize() {
+
+		//____Yields____
+		hAUAU_Yields["Piplusmin"]->scaleW(1./sow["AUAU_min"]->sumW());	//minimum bias centrality
+		hAUAU_Yields["Piminusmin"]->scaleW(1./sow["AUAU_min"]->sumW());
+		hAUAU_Yields["Kplusmin"]->scaleW(1./sow["AUAU_min"]->sumW());
+		hAUAU_Yields["Kminusmin"]->scaleW(1./sow["AUAU_min"]->sumW());
+		hAUAU_Yields["Protonsmin"]->scaleW(1./sow["AUAU_min"]->sumW());
+		hAUAU_Yields["Pbarmin"]->scaleW(1./sow["AUAU_min"]->sumW());
+
+		hAUAU_Yields["Piplus5"]->scaleW(1./sow["AUAU_5"]->sumW());	//0-5% centrality
+		hAUAU_Yields["Piminus5"]->scaleW(1./sow["AUAU_5"]->sumW());
+		hAUAU_Yields["Kplus5"]->scaleW(1./sow["AUAU_5"]->sumW());
+		hAUAU_Yields["Kminus5"]->scaleW(1./sow["AUAU_5"]->sumW());
+		hAUAU_Yields["Protons5"]->scaleW(1./sow["AUAU_5"]->sumW());
+		hAUAU_Yields["Pbar5"]->scaleW(1./sow["AUAU_5"]->sumW());
+
+		hAUAU_Yields["Piplus10"]->scaleW(1./sow["AUAU_10"]->sumW());	//5-10% centrality
+		hAUAU_Yields["Piminus10"]->scaleW(1./sow["AUAU_10"]->sumW());
+		hAUAU_Yields["Kplus10"]->scaleW(1./sow["AUAU_10"]->sumW());
+		hAUAU_Yields["Kminus10"]->scaleW(1./sow["AUAU_10"]->sumW());
+		hAUAU_Yields["Protons10"]->scaleW(1./sow["AUAU_10"]->sumW());
+		hAUAU_Yields["Pbar10"]->scaleW(1./sow["AUAU_10"]->sumW());
+
+		hAUAU_Yields["Piplus15"]->scaleW(1./sow["AUAU_15"]->sumW());	//10-15% centrality
+		hAUAU_Yields["Piminus15"]->scaleW(1./sow["AUAU_15"]->sumW());
+		hAUAU_Yields["Kplus15"]->scaleW(1./sow["AUAU_15"]->sumW());
+		hAUAU_Yields["Kminus15"]->scaleW(1./sow["AUAU_15"]->sumW());
+		hAUAU_Yields["Protons15"]->scaleW(1./sow["AUAU_15"]->sumW());
+		hAUAU_Yields["Pbar15"]->scaleW(1./sow["AUAU_15"]->sumW());
+
+		hAUAU_Yields["Piplus20"]->scaleW(1./sow["AUAU_20"]->sumW());	//15-20% centrality
+		hAUAU_Yields["Piminus20"]->scaleW(1./sow["AUAU_20"]->sumW());
+		hAUAU_Yields["Kplus20"]->scaleW(1./sow["AUAU_20"]->sumW());
+		hAUAU_Yields["Kminus20"]->scaleW(1./sow["AUAU_20"]->sumW());
+		hAUAU_Yields["Protons20"]->scaleW(1./sow["AUAU_20"]->sumW());
+		hAUAU_Yields["Pbar20"]->scaleW(1./sow["AUAU_20"]->sumW());
+
+		hAUAU_Yields["Piplus30"]->scaleW(1./sow["AUAU_30"]->sumW());	//20-30% centrality
+		hAUAU_Yields["Piminus30"]->scaleW(1./sow["AUAU_30"]->sumW());
+		hAUAU_Yields["Kplus30"]->scaleW(1./sow["AUAU_30"]->sumW());
+		hAUAU_Yields["Kminus30"]->scaleW(1./sow["AUAU_30"]->sumW());
+		hAUAU_Yields["Protons30"]->scaleW(1./sow["AUAU_30"]->sumW());
+		hAUAU_Yields["Pbar30"]->scaleW(1./sow["AUAU_30"]->sumW());
+
+		hAUAU_Yields["Piplus40"]->scaleW(1./sow["AUAU_40"]->sumW());	//30-40% centrality
+		hAUAU_Yields["Piminus40"]->scaleW(1./sow["AUAU_40"]->sumW());
+		hAUAU_Yields["Kplus40"]->scaleW(1./sow["AUAU_40"]->sumW());
+		hAUAU_Yields["Kminus40"]->scaleW(1./sow["AUAU_40"]->sumW());
+		hAUAU_Yields["Protons40"]->scaleW(1./sow["AUAU_40"]->sumW());
+		hAUAU_Yields["Pbar40"]->scaleW(1./sow["AUAU_40"]->sumW());
+
+		hAUAU_Yields["Piplus50"]->scaleW(1./sow["AUAU_50"]->sumW());	//40-50% centrality
+		hAUAU_Yields["Piminus50"]->scaleW(1./sow["AUAU_50"]->sumW());
+		hAUAU_Yields["Kplus50"]->scaleW(1./sow["AUAU_50"]->sumW());
+		hAUAU_Yields["Kminus50"]->scaleW(1./sow["AUAU_50"]->sumW());
+		hAUAU_Yields["Protons50"]->scaleW(1./sow["AUAU_50"]->sumW());
+		hAUAU_Yields["Pbar50"]->scaleW(1./sow["AUAU_50"]->sumW());
+
+		hAUAU_Yields["Piplus60"]->scaleW(1./sow["AUAU_60"]->sumW());	//50-60% centrality
+		hAUAU_Yields["Piminus60"]->scaleW(1./sow["AUAU_60"]->sumW());
+		hAUAU_Yields["Kplus60"]->scaleW(1./sow["AUAU_60"]->sumW());
+		hAUAU_Yields["Kminus60"]->scaleW(1./sow["AUAU_60"]->sumW());
+		hAUAU_Yields["Protons60"]->scaleW(1./sow["AUAU_60"]->sumW());
+		hAUAU_Yields["Pbar60"]->scaleW(1./sow["AUAU_60"]->sumW());
+
+		hAUAU_Yields["Piplus70"]->scaleW(1./sow["AUAU_70"]->sumW());	//60-70% centrality
+		hAUAU_Yields["Piminus70"]->scaleW(1./sow["AUAU_70"]->sumW());
+		hAUAU_Yields["Kplus70"]->scaleW(1./sow["AUAU_70"]->sumW());
+		hAUAU_Yields["Kminus70"]->scaleW(1./sow["AUAU_70"]->sumW());
+		hAUAU_Yields["Protons70"]->scaleW(1./sow["AUAU_70"]->sumW());
+		hAUAU_Yields["Pbar70"]->scaleW(1./sow["AUAU_70"]->sumW());
+
+		hAUAU_Yields["Piplus80"]->scaleW(1./sow["AUAU_80"]->sumW());	//70-80% centrality
+		hAUAU_Yields["Piminus80"]->scaleW(1./sow["AUAU_80"]->sumW());
+		hAUAU_Yields["Kplus80"]->scaleW(1./sow["AUAU_80"]->sumW());
+		hAUAU_Yields["Kminus80"]->scaleW(1./sow["AUAU_80"]->sumW());
+		hAUAU_Yields["Protons80"]->scaleW(1./sow["AUAU_80"]->sumW());
+		hAUAU_Yields["Pbar80"]->scaleW(1./sow["AUAU_80"]->sumW());
+
+		hAUAU_Yields["Piplus92"]->scaleW(1./sow["AUAU_92"]->sumW());	//80-92% centrality
+		hAUAU_Yields["Piminus92"]->scaleW(1./sow["AUAU_92"]->sumW());
+		hAUAU_Yields["Kplus92"]->scaleW(1./sow["AUAU_92"]->sumW());
+		hAUAU_Yields["Kminus92"]->scaleW(1./sow["AUAU_92"]->sumW());
+		hAUAU_Yields["Protons92"]->scaleW(1./sow["AUAU_92"]->sumW());
+		hAUAU_Yields["Pbar92"]->scaleW(1./sow["AUAU_92"]->sumW());
+
+		hAUAU_Yields["Piplus60_92"]->scaleW(1./sow["AUAU_60_92"]->sumW());	//60-92% centrality
+		hAUAU_Yields["Piminus60_92"]->scaleW(1./sow["AUAU_60_92"]->sumW());
+		hAUAU_Yields["Kplus60_92"]->scaleW(1./sow["AUAU_60_92"]->sumW());
+		hAUAU_Yields["Kminus60_92"]->scaleW(1./sow["AUAU_60_92"]->sumW());
+		hAUAU_Yields["Protons60_92"]->scaleW(1./sow["AUAU_60_92"]->sumW());
+		hAUAU_Yields["Pbar60_92"]->scaleW(1./sow["AUAU_60_92"]->sumW());
+
+
+		//____Rcp____
 
 	};
 
-	map<string, Histo1DPtr> _h;
-	map<string, Profile1DPtr> _p;
+	map<string, Histo1DPtr> hAUAU_Yields;
 	map<string, CounterPtr> sow;
-	enum CollisionSystem {AUAU200};
-	CollisionSystem collSystem;
-	string beamOpt;
 
 }
