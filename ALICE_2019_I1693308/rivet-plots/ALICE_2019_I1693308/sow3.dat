@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//afs/cern.ch/user/j/jpiel/Rivet/RIVETAnalyses/ALICE_2019_I1693308/Rivet.yoda/ALICE_2019_I1693308/sow3
+LegendOnly=//afs/cern.ch/user/j/jpiel/Rivet/RIVETAnalyses/ALICE_2019_I1693308/Rivet.yoda/ALICE_2019_I1693308/sow3
+# END PLOT
+
+# BEGIN COUNTER //afs/cern.ch/user/j/jpiel/Rivet/RIVETAnalyses/ALICE_2019_I1693308/Rivet.yoda/ALICE_2019_I1693308/sow3
+LineColor=red
+LineStyle=solid
+Path=//afs/cern.ch/user/j/jpiel/Rivet/RIVETAnalyses/ALICE_2019_I1693308/Rivet.yoda/ALICE_2019_I1693308/sow3
+Title=Rivet
+# value	 error
+8.140000e+02	2.853069e+01
+# END COUNTER
+
