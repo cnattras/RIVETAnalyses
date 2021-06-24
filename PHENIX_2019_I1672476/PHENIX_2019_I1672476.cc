@@ -54,11 +54,13 @@ public:
 		book(_p["pp62_chPMult"], 20, 1, 1);
 		// book(_h["fig4-2-a"], 21, 1, 1);
 		//
+		
+		book(sow["AuAu62_c0-20_Nevent"],"AuAu_c0-20_Nevent");
+		book(sow["AuAu62_c0-86_Nevent"],"AuAu62_c0-86_Nevent");
+		book(sow["AuAu39_c0-86_Nevent"],"AuAu39_c0-86_Nevent");
+		
 		/*
-		book(sow["sow-fig1-1-a"],"sow-fig1-1-a");//these are currently unused counters
-		book(sow["sow-fig1-1-b"],"sow-fig1-1-b");
-		book(sow["sow-fig1-2"],"sow-fig1-2");
-		book(sow["sow-fig2-1a"],"sow-fig2-1a");
+		book(sow["sow-fig2-1a"],"sow-fig2-1a"); //currently unused counters
 		book(sow["sow-fig2-1b-a"],"sow-fig2-1b-a");
 		book(sow["sow-fig2-1b-b"],"sow-fig2-1b-b");
 		book(sow["sow-fig3-1a"],"sow-fig3-1a");
@@ -77,6 +79,11 @@ public:
 		book(sow["sow-fig4-1b"],"sow-fig4-1b");
 		book(sow["sow-fig4-1c"],"sow-fig4-1c");
 		*/
+
+		book(_p["AuAu62_c0-20_norm"], "AuAu62_c0-20_norm", 1, 0., 1.);
+		book(_p["AuAu62_c0-86_norm"], "AuAu62_C0-86_norm", 1, 0., 1.);
+		book(_p["AuAu39_c0-86_norm"], "AuAu39_c0-86_norm", 1, 0., 1.);
+
 	}
 
 
@@ -124,20 +131,25 @@ public:
 	{
 		if((c >= 0.) && (c < 20.))
 		{
+
+			sow["AuAu62_c0-20_Nevent"]->fill();
+	
 			for(const Particle& p : photons)
 			{
 				double partPt = p.pT()/GeV;
 				double pt_weight = 1./(partPt*2.*M_PI);
 				_h["AuAu62_c0-20"]->fill(partPt, pt_weight); 
-				_h["AuAu62_c0-86"]->fill(partPt, pt_weight);
 			}	
 	
-			cpmAU62_20 = chargedParticles.size()/absEta;
+			_p["AuAu62_c0-20_norm"]->fill(0.5, chargedParticles.size()/absEta);
 			
 		}
 
-		else if((c >= 0.) && (c < 86. ))
+		if((c >= 0.) && (c < 86. ))
 		{
+
+			sow["AuAu62_c0-86_Nevent"]->fill();
+
 			for(const Particle& p : photons)
 			{
 				double partPt = p.pT()/GeV;
@@ -145,7 +157,7 @@ public:
 				_h["AuAu62_c0-86"]->fill(partPt, pt_weight);
 			}
 			
-			cpmAU62_86 = chargedParticles.size()/absEta;
+			_p["AuAu62_c0-86_norm"]->fill(0.5, chargedParticles.size()/absEta);
 			
 		}
 
@@ -155,6 +167,9 @@ public:
 	{
 		if((c >= 0.) && (c <86.))
 		{
+
+			sow["AuAu39_c0-86_Nevent"]->fill();
+
 			for(const Particle& p : photons)
 			{
 				double partPt = p.pT()/GeV;
@@ -162,7 +177,7 @@ public:
 				_h["AuAu39_c0-86"]->fill(partPt, pt_weight);
 			}
 
-			cpmAU39_86 = chargedParticles.size()/absEta;
+			_p["AuAu39_c0-86_norm"]->fill(0.5, chargedParticles.size()/absEta);
 			
 		}
 	}
@@ -259,11 +274,11 @@ public:
 	/// Normalise histograms etc., after the run
 	void finalize() {
 
-		_h["AuAu62_c0-20"]->scaleW(1./cpmAU62_20>sumW());
+		_h["AuAu62_c0-20"]->scaleW(1./(_p["AuAu62_c0-20_norm"]->bin(0).mean()*sow["AuAu62_c0-20_Nevent"]->sumW()));
 		
-		_h["AuAu62_c0-86"]->scaleW(1./cpmAU62_86>sumW());
+		_h["AuAu62_c0-86"]->scaleW(1./(_p["AuAu62_c0-86_norm"]->bin(0).mean()*sow["AuAu62_c0-86_Nevent"]->sumW()));
 
-		_h["AuAu39_c0-86"]->scaleW(1./cpmAU39_86>sumW());
+		_h["AuAu39_c0-86"]->scaleW(1./(_p["AuAu39_c0-86_norm"]->bin(0).mean()*sow["AuAu39_c0-86_Nevent"]->sumW()));
 	}
 
 
@@ -276,7 +291,6 @@ public:
 	enum CollisionSystem {AuAu39, AuAu62, AuAu200, CuCu200, pp200, pp62};
 	CollisionSystem collSystem;
 	string beamOpt;
-	double cpmAU39_86, cpmAU62_20, cpmAU62_86;
 	
 	
 
