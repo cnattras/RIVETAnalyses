@@ -5,6 +5,8 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Tools/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -24,7 +26,8 @@ namespace Rivet {
     void init() {
       const FinalState fs(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV);
       declare(fs, "fs");
-
+      const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
+      declare(aprim, "aprim");
       FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4);
       declare(jetfs, "jetsfs");
 
@@ -45,9 +48,14 @@ namespace Rivet {
     void analyze(const Event& event) {
 
       const FinalState fs = apply<FinalState>(event, "fs");
-      const FastJets jetsfs = apply<FastJets>(event, "jetsfs");
+      FastJets jetsfs = apply<FastJets>(event, "jetsfs");
+      const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
+      const Particles ALICEparticles = aprim.particles();
+
+      jetsfs.calc(ALICEparticles);
 
       Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV);
+
       //Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
       _c["sow"]->fill();
 
@@ -91,8 +99,11 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      //double norm = (crossSection()*1.E-9)/sow->sumW();
+      //Above has "sow" which isn't anything that is declared so I changed it to the ptr _c["sow"]
+      double norm = (crossSection()*1.E-9)/_c["sow"]->sumW();
 
-      double norm = (crossSection()*1.E-9)/sow->sumW();
+
 
       _h["PPS7"]->scaleW(norm);
 
