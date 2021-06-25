@@ -329,6 +329,16 @@ namespace Rivet {
 	string refnameRcpPi0 = mkAxiscode(23,1,1);
 	book(hRcp["Pi0"], refnameRcpPi0);
 	
+
+	//____dN/dy____
+	
+	book(pmeanPt["Piplus"],11,1,1);
+	book(pmeanPt["Piminus"],11,1,2);
+	book(pmeanPt["Kplus"],11,1,3);
+	book(pmeanPt["Kminus"],11,1,4);
+	book(pmeanPt["Protons"],11,1,5);
+	book(pmeanPt["Pbar"],11,1,6);
+
 	}
 
 
@@ -341,6 +351,14 @@ namespace Rivet {
 		const double c = cent();
 		const ParticlePair& beam = beams();
 		const Particles chargedParticles = cp.particles();
+		const Particles Piplus = cp.particles(Cuts::pid == 211);
+		const Particles Piminus = cp.particles(Cuts::pid == -211);
+		const Particles Kplus = cp.particles(Cuts::pid == 321);
+		const Particles Kminus = cp.particles(Cuts::pid == -321);
+		const Particles Protons = cp.particles(Cuts::pid == 2212);
+		const Particles Pbar = cp.particles(Cuts::pid == -2212);
+
+		
 
 		if ((c < 0.) || (c > 92.2)) vetoEvent;
 
@@ -361,32 +379,50 @@ namespace Rivet {
 					case 211:	//pi+
 						
 						hAUAU_Yields["Piplusmin"]->fill(partPt, pt_weight);
-						hAUAU_Yields["Piplus5"]->fill(partPt);
+						hAUAU_Yields["Piplus5"]->fill(partPt, pt_weight);
+						pmeanPt["Piplus"]->fill(c, partPt);
+
+						break;
 			
 					case -211:	//pi-
 						
 						hAUAU_Yields["Piminusmin"]->fill(partPt, pt_weight);
-						hAUAU_Yields["Piminus5"]->fill(partPt);
+						hAUAU_Yields["Piminus5"]->fill(partPt, pt_weight);
+						pmeanPt["Piminus"]->fill(c, partPt);
+
+						break;
 					
 					case 321:	//K+
 						
 						hAUAU_Yields["Kplusmin"]->fill(partPt, pt_weight);
-						hAUAU_Yields["Kplus5"]->fill(partPt);			
+						hAUAU_Yields["Kplus5"]->fill(partPt, pt_weight);			
+						pmeanPt["Kplus"]->fill(c, partPt);
+
+						break;
 
 					case -321:	//K-
 						
 						hAUAU_Yields["Kminusmin"]->fill(partPt, pt_weight);
-						hAUAU_Yields["Kminus5"]->fill(partPt);
+						hAUAU_Yields["Kminus5"]->fill(partPt, pt_weight);
+						pmeanPt["Kminus"]->fill(c, partPt);
+
+						break;
 					
 					case 2212:	//proton
 						
 						hAUAU_Yields["Protonsmin"]->fill(partPt, pt_weight);
-						hAUAU_Yields["Protons5"]->fill(partPt);			
+						hAUAU_Yields["Protons5"]->fill(partPt, pt_weight);			
+						pmeanPt["Protons"]->fill(c, partPt);
+
+						break;
 
 					case -2212:	//antiproton
 						
 						hAUAU_Yields["Pbarmin"]->fill(partPt, pt_weight);
-						hAUAU_Yields["Pbar5"]->fill(partPt);
+						hAUAU_Yields["Pbar5"]->fill(partPt, pt_weight);
+						pmeanPt["Pbar"]->fill(c, partPt);
+
+						break;
 				}
 			}
 		}
@@ -494,5 +530,5 @@ namespace Rivet {
 
 	map<string, Histo1DPtr> hAUAU_Yields;
 	map<string, CounterPtr> sow;
-
+	map<string, Profile1DPtr> meanPt;
 }
