@@ -24,10 +24,13 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
-      const FinalState fs(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV);
+      const FinalState fs(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(fs, "fs");
       const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(aprim, "aprim");
+      //The second primary particles is so that the jet specctra goes over all particles instead of cutting out pT < 0.15GeV
+      const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
+      declare(aprimall, "aprimall");
       FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4);
       declare(jetfs, "jetsfs");
 
@@ -47,21 +50,54 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
+      _c["sow"]->fill();
+
       const FinalState fs = apply<FinalState>(event, "fs");
       FastJets jetsfs = apply<FastJets>(event, "jetsfs");
+      //For spectra
+      const ALICE::PrimaryParticles aprimall = apply<ALICE::PrimaryParticles>(event, "aprimall");
+      const Particles ALICEparticlesall = aprimall.particles();
+      //For fragmentation functions
       const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
       const Particles ALICEparticles = aprim.particles();
 
-      jetsfs.calc(ALICEparticles);
+
+      //jetsfs.calc(ALICEparticles);
+      jetsfs.calc(ALICEparticlesall);
 
       Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV);
 
-      //Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
-      _c["sow"]->fill();
+      if(jets.size() == 0) vetoEvent;
+
+      double UEphiPlus = mapAngle0To2Pi(jets[0].phi() + M_PI/2.);
+      double UEphiMinus = mapAngle0To2Pi(jets[0].phi() - M_PI/2.);
+      double UEeta = jets[0].eta();
+
+      double UEpT = 0.;
+
+      for(const Particle& p : ALICEparticlesall)
+      {
+              double DeltaRPlus = sqrt(pow(p.eta()-UEeta, 2) + pow(p.phi()-UEphiPlus, 2));
+              double DeltaRMinus = sqrt(pow(p.eta()-UEeta, 2) + pow(p.phi()-UEphiMinus, 2));
+              if(DeltaRPlus > 0.4 && DeltaRMinus > 0.4) continue;
+
+              UEpT += p.pT()/GeV;
+      }
+
+      //Dividing by 2 because two cones were used
+      UEpT /= 2.;
+
 
       for(auto jet : jets)
       {
-        _h["PPS7"]->fill(jet.pT()/GeV);
+        _h["PPS7"]->fill(jet.pT()/GeV - UEpT);
+      }
+
+      jetsfs.calc(ALICEparticles);
+      Jets jets2 = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV);
+      for(auto jet : jets2)
+      {
+
         if(jet.pT() >= 5*GeV && jet.pT() < 10*GeV){
 
           _c["sow2"]->fill();
@@ -75,6 +111,7 @@ namespace Rivet {
           _c["sow4"]->fill();
 
         }
+
         for(const Particle&p:jet.particles()){
         if(jet.pT() >= 5*GeV && jet.pT() < 10*GeV){
 
@@ -91,10 +128,8 @@ namespace Rivet {
         }
       }
 
-      }
-
-
     }
+  }
 
 
     /// Normalise histograms etc., after the run
