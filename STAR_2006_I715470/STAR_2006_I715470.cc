@@ -31,7 +31,7 @@ namespace Rivet {
   class Correlator {
       
     private:
-
+		std::vector<int> _indices; //added
       int _index;
       int _subindex;
       string _collSystemAndEnergy;
@@ -40,6 +40,11 @@ namespace Rivet {
       pair<double,double> _associatedRange;
       pair<double,double> _zTRange;
       vector<int> _pid;
+	  bool _noCentrality = false; //added
+	  bool _noAssoc = false; //added
+	  Histo1DPtr _deltaPhi; //added
+	  CounterPtr _counter; //added
+	  CounterPtr _cTriggers; //added
 
     public:
     
@@ -48,6 +53,26 @@ namespace Rivet {
         _index = index;
         _subindex = subindex;
       }
+
+	  Correlator(int index0, int index1, int index2) {
+		  _indices = { index0, index1, index2 };
+	  } //added
+
+	  Correlator(int index0, int index1) {
+		  _indices = { index0, index1 };
+	  }
+
+	  Correlator(int index0) {
+		  _indices = { index0 };
+	  } //added
+
+	  Correlator(std::vector<int> vindex) {
+		  _indices = vindex;
+	  } //added
+
+
+
+
 
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
@@ -421,24 +446,27 @@ double highedge = 3.0*pi/2.0;
 
       }//end loop over centrality bins
 
-        //Table 1 Fig. 3.1 - yield per trigger vs centrality
+        //Fig. 3.0 - yield per trigger vs centrality
         book(_h["010101"], 1, 1, 1);//pTassoc = 3-4 NS
         book(_h["010102"], 1, 1, 2);//pTassoc = 4-6 NS
         book(_h["010103"], 1, 1, 3);//pTassoc > 6 NS
-        book(_h["010104"], 1, 1, 4);//pTassoc = 3-4 AS
-        book(_h["010105"], 1, 1, 5);//pTassoc = 4-6 AS 
-        book(_h["010106"], 1, 1, 6);//pTassoc > 6 AS
-        //Table 2 Fig. 3.2 - yield per trigger vs pTassoc
-        book(_h["020101"], 2, 1, 1);//Near side
-        book(_h["020102"], 2, 1, 2);//Near side
-        //Table 3 - D(z) vs z_T
+
+		//Fig. 3.1 - yield per trigger vs centrality
+        book(_h["010104"], 2, 1, 1);//pTassoc = 3-4 AS
+        book(_h["010105"], 2, 1, 2);//pTassoc = 4-6 AS 
+        book(_h["010106"], 2, 1, 3);//pTassoc > 6 AS
+
+
+        //Fig 4 - D(z) vs z_T
         book(_h["030101"], 3, 1, 1);//d+Au NS
-        book(_h["030102"], 3, 1, 2);//Au+Au 20-40% NS *can't fill yet
-        book(_h["030103"], 3, 1, 3);//Au+Au 0-5% NS
-        book(_h["030104"], 3, 1, 4);//d+Au AS
-        book(_h["030105"], 3, 1, 5);//Au+Au 20-40% AS *can't fill yet
-        //Au+Au D(z) vs z_T - Away side
-        book(_h["040101"], 4, 1, 1);//0-5% AS
+        
+		book(_h["030103"], 4, 1, 1);//Au+Au 0-5% NS
+		book(_h["030102"], 4, 1, 2);//Au+Au 20-40% NS *can't fill yet
+        
+
+        book(_h["030104"], 5, 1, 1);//d+Au AS
+        book(_h["040101"], 5, 1, 2);//0-5% AS
+		book(_h["030105"], 5, 1, 3);//Au+Au 20-40% AS *can't fill yet
     }
     void analyze(const Event& event) {
         
@@ -597,6 +625,8 @@ double highedge = 3.0*pi/2.0;
             if(corr.CheckConditions("AuAu200GeV",2.5,10,3.5)){
               cout<<" name "<<name<<" "<<corr.GetFullIndex()<<"  "<<corr.GetCollSystemAndEnergy()<<" "<<corr.GetCentrality()<<endl;
             }
+
+
 if(corr.CheckConditions("AuAu200GeV",2.5)){//Central Au+Au
 //cout<<"I am AuAu200GeV 0-5%"<<endl;
 }
