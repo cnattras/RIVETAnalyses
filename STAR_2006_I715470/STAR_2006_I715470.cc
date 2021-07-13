@@ -446,27 +446,22 @@ double highedge = 3.0*pi/2.0;
 
       }//end loop over centrality bins
 
-        //Fig. 3.0 - yield per trigger vs centrality
+        //Fig 3 - yield per trigger vs centrality
         book(_h["010101"], 1, 1, 1);//pTassoc = 3-4 NS
         book(_h["010102"], 1, 1, 2);//pTassoc = 4-6 NS
         book(_h["010103"], 1, 1, 3);//pTassoc > 6 NS
-
-		//Fig. 3.1 - yield per trigger vs centrality
-        book(_h["010104"], 2, 1, 1);//pTassoc = 3-4 AS
-        book(_h["010105"], 2, 1, 2);//pTassoc = 4-6 AS 
-        book(_h["010106"], 2, 1, 3);//pTassoc > 6 AS
-
+        book(_h["020101"], 2, 1, 1);//pTassoc = 3-4 AS
+        book(_h["020102"], 2, 1, 2);//pTassoc = 4-6 AS 
+        book(_h["020103"], 2, 1, 3);//pTassoc > 6 AS
 
         //Fig 4 - D(z) vs z_T
-        book(_h["030101"], 3, 1, 1);//d+Au NS
-        
-		book(_h["030103"], 4, 1, 1);//Au+Au 0-5% NS
-		book(_h["030102"], 4, 1, 2);//Au+Au 20-40% NS *can't fill yet
-        
+        book(_h["030101"], 3, 1, 1);//d+Au NS   
+		book(_h["040101"], 4, 1, 1);//Au+Au 0-5% NS
+		book(_h["040102"], 4, 1, 2);//Au+Au 20-40% NS *can't fill yet
 
-        book(_h["030104"], 5, 1, 1);//d+Au AS
-        book(_h["040101"], 5, 1, 2);//0-5% AS
-		book(_h["030105"], 5, 1, 3);//Au+Au 20-40% AS *can't fill yet
+        book(_h["050101"], 5, 1, 1);//d+Au AS
+        book(_h["050102"], 5, 1, 2);//0-5% AS
+		book(_h["050103"], 5, 1, 3);//Au+Au 20-40% AS *can't fill yet
     }
     void analyze(const Event& event) {
         
