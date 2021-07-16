@@ -40,6 +40,8 @@ class Correlator {
       vector<int> _pid;
       bool _NoPTassociated = false;
       bool _noCentrality = false;
+	//updated block
+	Histo1DPtr _deltaPhi;
 
     public:
 
@@ -50,6 +52,11 @@ class Correlator {
         _subsubindex = subsubindex;
 
       }
+
+	//updated block
+	void SetCorrelationFunction(Histo1DPtr cf){ _deltaPhi = cf; }
+
+
       void SetCollSystemAndEnergy(string s){ _collSystemAndEnergy = s; }
       void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
       void SetNoCentrality(){_noCentrality = true; }
@@ -306,6 +313,9 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     /// Book histograms and initialise projections before the run
     void init() {
 
+	char bookName[200];
+	int iterator=1;
+
         const ChargedFinalState cfs(Cuts::abseta < 1.0);
         declare(cfs, "CFS");
 
@@ -326,18 +336,26 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         //   for the raw und eta. book (sow) for all but sub.
       //===========================================================
       //===========================================================
-      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
+      
+      for (int ptt = 0; ptt < numTrigPtBins; ptt++)
       {
-        for (int cb = 0; cb < numCentBins - 1; cb++)
+        for (int cb = 0; cb < numCentBins-3; cb++)
         {
+	//	cout << numTrigPtBins << " " << numCentBins << " " << iterator << endl;
+	    snprintf(bookName,200,"Fig2Cent%iPtt%2.1f",cb,ptt);
+	    book(_h[bookName],1,1,iterator);
+
             Correlator c1 (ptt,cb);
             c1.SetCollSystemAndEnergy("AuAu200GeV");
             c1.SetCentrality(CentBins[cb], CentBins[cb+1]);
             c1.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt + 1]);
             c1.SetNoPTassociated();
+	    c1.SetCorrelationFunction(_h[bookName]);
             Correlators.push_back(c1);
+	    iterator++;
         }
       }
+	iterator=1;
 
       for(Correlator corr : Correlators)
       {
@@ -423,7 +441,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     //d01,x01,y03 is raw 20-40% etc.
     //Only for figure 2 and 3 when the title is not background subtracted.
 
-
+/*
 
       //===================================================================
       //===================================================================
@@ -435,6 +453,9 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       {
         for (int pta = 1; pta < numAssocPtBins; pta++)
         {
+	    snprintf(bookName,200,"Fig3Pta%iPtt%2.1f",pta,ptt);
+            book(_h[bookName],1,1,iterator);
+ 
             Correlator c2 (ptt,pta);
             c2.SetCollSystemAndEnergy("AuAu200GeV");
             c2.SetCentrality(pTAssocBins[pta], pTAssocBins[pta + 1]);
@@ -481,66 +502,59 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       for (int pta = 0; pta < numAssocPtBins6; pta++)
       {
-      for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
-      {
-      	for (int cb = 0; cb < 2; cb++)
-		{
-
-			Correlator c6 (ptt,cb,pta);
-			if (cb == 0)
-			{
-			c6.SetCollSystemAndEnergy("dAu200GeV");
-			c6.SetNoCentrality();
-			}
-			else
-			{
-			c6.SetCollSystemAndEnergy("AuAu200GeV");
-			c6.SetCentrality(0.0,12.0);
-			}
-			c6.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
-			c6.SetAssociatedRange(pTAssocBins6[pta], pTAssocBins6[pta+1]);
-			Correlators6.push_back(c6);
-		}
-      }
-      }
-
-		for (Correlator corr : Correlators6)
-	  {
-      		if (corr.GetSubSubIndex() == 0)
+      	for (int ptt = 0; ptt < numTrigPtBins - 1; ptt++)
       		{
+      			for (int cb = 0; cb < 2; cb++)
+			{
 
-      		//6a Near Side
-      		string name_rawA = "rawA_d14x1y" + to_string((corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
-      		book(_h[name_rawA], 14, 1, (corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
+				Correlator c6 (ptt,cb,pta);
+				if (cb == 0){
+					c6.SetCollSystemAndEnergy("dAu200GeV");
+					c6.SetNoCentrality();
+				}
+				else{
+					c6.SetCollSystemAndEnergy("AuAu200GeV");
+					c6.SetCentrality(0.0,12.0);
+				}
+				c6.SetTriggerRange(pTTrigBins[ptt], pTTrigBins[ptt+1]);
+				c6.SetAssociatedRange(pTAssocBins6[pta], pTAssocBins6[pta+1]);
+				Correlators6.push_back(c6);
+			}
+      		}
+     }
 
-      		//6c Away Side
-      		string name_rawC = "rawC_d16x1y" + to_string((corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
-      		book(_h[name_rawC], 16, 1, (corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
+     for (Correlator corr : Correlators6)
+     {
+     		if (corr.GetSubSubIndex() == 0){
+	      		//6a Near Side
+	      		string name_rawA = "rawA_d14x1y" + to_string((corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
+	      		book(_h[name_rawA], 14, 1, (corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
 
+	      		//6c Away Side
+	      		string name_rawC = "rawC_d16x1y" + to_string((corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
+	      		book(_h[name_rawC], 16, 1, (corr.GetIndex() * 2) + corr.GetSubIndex() + 1);
 
-  	  			if (corr.GetSubIndex() == 0)
-  	  			{
-
+    			if (corr.GetSubIndex() == 0){
   	  			//6b Near Side
   	  			string name_ratioB = mkAxisCode(15,1,corr.GetIndex() + 1);
   	  			book(_s[name_ratioB],name_ratioB);
 
   	  			//6d Away Side
-      			string name_ratioD = mkAxisCode(17,1,corr.GetIndex() + 1);
+	      			string name_ratioD = mkAxisCode(17,1,corr.GetIndex() + 1);
   	  			book(_s[name_ratioD],name_ratioD);
 
-
-  	  			}
-  	  		}
+			}
+  	  	}
 
   	  	string name_corrFunc = "CorrFunc_" + to_string(corr.GetIndex()) + "_" + to_string(corr.GetSubIndex()) + "_" + to_string(corr.GetSubSubIndex());
   	  	book(_h[name_corrFunc], name_corrFunc, 72, - M_PI/2,3*(M_PI/2));
   	  	book(sow[name_corrFunc], "sow" + name_corrFunc);
   	  	nTriggers[name_corrFunc] = 0;
-  	  }
+      }
 
-		for (int cb = 0; cb < 2; cb++)
-      	{
+	
+      for (int cb = 0; cb < 2; cb++)
+      {
       		for (int pta = 0; pta < numAssocPtBins6b; pta++)
       		{
       			Correlator c6b (0,cb,pta);
@@ -682,7 +696,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         book(_h[name_dAuAu], 30,1, 1);
 
       }
-
+	*/
     } //ends the init
 
 
@@ -690,7 +704,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
+    /*  const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
       const double c = cent();
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
@@ -730,7 +744,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
           sow[name_eta]->fill();
 
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
-          sow[name_sub]->fill();
+          //sow[name_sub]->fill();
       	  }
 
       	  if (corr.GetIndex() == 2)
@@ -753,7 +767,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       	  	}
 
       	  	string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
-      	  	sow[name_sub]->fill();
+      	  	//sow[name_sub]->fill();
       	  }
 
       	  if (corr.GetIndex() == 3)
@@ -765,10 +779,10 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       	  	sow[name_eta]->fill();
 
       	  	string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
-      	  	sow[name_sub]->fill();
+      	  	//sow[name_sub]->fill();
       	  }
       }
-
+/*
       //Fill Histograms for figure 3
       for (Correlator corr : Correlators3)
       {
@@ -913,12 +927,12 @@ Particles chargedParticles = cfs.particles();
         if(corr.GetAssociatedRangeMax() > associatedptMax) associatedptMax = corr.GetAssociatedRangeMax();
       }
 
-      if(isVeto) vetoEvent;
+      if(isVeto) vetoEvent;*/
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      bool AuAu200_available = false;
+ /*     bool AuAu200_available = false;
       bool dAu_available = false;
 
       for (auto element : _h)
@@ -955,7 +969,7 @@ Particles chargedParticles = cfs.particles();
 
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
           _h[name_sub] = SubtractBackgroundZYAM(_h[name_raw]);
-      }
+      }*/
   }
 
 
