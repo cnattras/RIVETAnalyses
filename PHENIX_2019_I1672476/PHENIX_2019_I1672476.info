@@ -1,20 +1,23 @@
 Name: PHENIX_2019_I1672476
 Year: 2019
-Summary: <A one-line informative PHENIX_2019_I1672476 headline>
+Summary: Beam-energy and centrality dependence of direct-photon emission from ultra-relativistic heavy-ion collisions
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: RHIC
 InspireID: 1672476
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Christine Nattrass cnattras@utk.edu
 References:
  - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
  - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
  - 'Example: arXiv:1605.03814'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
+#Beams: [AU, AU]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AuAu62,AuAu39
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
