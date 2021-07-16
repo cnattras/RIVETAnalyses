@@ -34,7 +34,7 @@ public:
 		book(_p["AuAu39_chPMult_c0-55"], 3, 1, 1);
 		book(_p["AuAu62_chPMult_c0-60"], 4, 1, 1);
 		book(_p["AuAu200_chPMult_c0-60"], 4, 1, 2);      
-		// book(_h["fig2-2-a"], 5, 1, 1);
+		// book(_h["fig2-2-a"], 5, 1, 1); //these cannot be done with rivet
 		// book(_h["fig2-2-b"], 5, 1, 2);
 		// book(_h["fig2-2-c"], 5, 1, 3);
 		book(_p["AuAu62_chPMult_c0-40"], 6, 1, 1);
@@ -43,47 +43,28 @@ public:
 		book(_p["CuCu200_chPMult_c0-40"], 9, 1, 1);
 		book(_p["CuCu200_chPMult_c0-94"], 10, 1, 1);
 		book(_p["pp200_chPMult"], 11, 1, 1);
-		book(_h["AuAu62_phtYld_c0-40"], 12, 1, 1);
-		book(_h["AuAu62_phtYld_c0-86"], 13, 1, 1);
-		book(_h["AuAu39_phtYld_c0-86"], 14, 1, 1);
-		book(_h["CuCu200_phtYld_c0-40"], 15, 1, 1);
-		book(_h["CuCu200_phtYld_c0-94"], 16, 1, 1);
-		book(_h["pp200_phtYld"], 17, 1, 1);
+		book(_p["AuAu62_phtYld_c0-40"], 12, 1, 1);
+		book(_p["AuAu62_phtYld_c0-86"], 13, 1, 1);
+		book(_p["AuAu39_phtYld_c0-86"], 14, 1, 1);
+		book(_p["CuCu200_phtYld_c0-40"], 15, 1, 1);
+		book(_p["CuCu200_phtYld_c0-94"], 16, 1, 1);
+		book(_p["pp200_phtYld"], 17, 1, 1);
 		book(_p["AuAu200_chPMult_c0-92"], 18, 1, 1);
-		//book(_h["pp200_chPMult_c0-100"], 19, 1, 1); exact same as 3-1f
+		//book(_p["pp200_chPMult_c0-100"], 19, 1, 1); exact same as 3-1f (11, 1, 1)
 		book(_p["pp62_chPMult"], 20, 1, 1);
-		// book(_h["fig4-2-a"], 21, 1, 1);
-		//
+		// book(_h["fig4-2-a"], 21, 1, 1); //cannot be done with rivet
 		
-		book(sow["AuAu62_c0-20_Nevent"],"AuAu_c0-20_Nevent");
+
+		book(sow["AuAu62_c0-20_Nevent"],"AuAu62_c0-20_Nevent");
 		book(sow["AuAu62_c0-86_Nevent"],"AuAu62_c0-86_Nevent");
 		book(sow["AuAu39_c0-86_Nevent"],"AuAu39_c0-86_Nevent");
+		//stores number of events for later normalization of inv yields
 		
-		/*
-		book(sow["sow-fig2-1a"],"sow-fig2-1a"); //currently unused counters
-		book(sow["sow-fig2-1b-a"],"sow-fig2-1b-a");
-		book(sow["sow-fig2-1b-b"],"sow-fig2-1b-b");
-		book(sow["sow-fig3-1a"],"sow-fig3-1a");
-		book(sow["sow-fig3-1b"],"sow-fig3-1b");
-		book(sow["sow-fig3-1c"],"sow-fig3-1c");
-		book(sow["sow-fig3-1d"],"sow-fig3-1d");
-		book(sow["sow-fig3-1e"],"sow-fig3-1e");
-		book(sow["sow-fig3-1f"],"sow-fig3-1f");
-		book(sow["sow-fig3-2a"],"sow-fig3-2a");
-		book(sow["sow-fig3-2b"],"sow-fig3-2b");
-		book(sow["sow-fig3-2c"],"sow-fig3-2c");
-		book(sow["sow-fig3-2d"],"sow-fig3-2d");
-		book(sow["sow-fig3-2e"],"sow-fig3-2e");
-		book(sow["sow-fig3-2f"],"sow-fig3-2f");
-		book(sow["sow-fig4-1a"],"sow-fig4-1a");
-		book(sow["sow-fig4-1b"],"sow-fig4-1b");
-		book(sow["sow-fig4-1c"],"sow-fig4-1c");
-		*/
 
 		book(_p["AuAu62_c0-20_norm"], "AuAu62_c0-20_norm", 1, 0., 1.);
 		book(_p["AuAu62_c0-86_norm"], "AuAu62_C0-86_norm", 1, 0., 1.);
 		book(_p["AuAu39_c0-86_norm"], "AuAu39_c0-86_norm", 1, 0., 1.);
-
+		//these are used to store the charged particle muliplicity dN(ch)/dEta, for later normalization of inv. yields
 	}
 
 
@@ -96,7 +77,7 @@ public:
 		const ParticlePair& beam = beams();
  
 		int NN = 0;
-		double absEta = 0.7;
+		double absEta = 0.7; //paper gives pseudorapidity as 0.35
 
 		if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
 		{
@@ -124,6 +105,7 @@ public:
 
 		const Particles photons = pfs.particles(Cuts::pT > 1.*GeV && Cuts::pT < 5.*GeV);
 		const Particles chargedParticles = fs.particles();
+		//photons and chargedParticles are both vectors, so size can be called later to calculate charged particle multiplicity and integrated direct photon yield
 
 
 
@@ -178,6 +160,7 @@ public:
 			}
 
 			_p["AuAu39_c0-86_norm"]->fill(0.5, chargedParticles.size()/absEta);
+
 			
 		}
 	}
@@ -191,7 +174,7 @@ public:
 	if (collSystem == AuAu39)
 	{
 		if((c >= 0.) && (c < 55.))
-		{
+		{ 
 			_p["AuAu39_chPMult_c0-55"]->fill(c,chargedParticles.size()/absEta);
 		}
 
@@ -205,7 +188,7 @@ public:
 	else if(collSystem == AuAu62)
 	{
 		if((c >= 0.) && (c < 60.))
-		{
+		{   
 			_p["AuAu62_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
 		}
 
@@ -272,13 +255,22 @@ public:
 
 
 	/// Normalise histograms etc., after the run
+	//dividing inv yield by number of events, and charged particle multiplicity
 	void finalize() {
 
+	if(_p["AuAu62_c0-20_norm"]->bin(0).numEntries() > 0)
+	{
 		_h["AuAu62_c0-20"]->scaleW(1./(_p["AuAu62_c0-20_norm"]->bin(0).mean()*sow["AuAu62_c0-20_Nevent"]->sumW()));
-		
+	}
+	if(_p["AuAu62_c0-86_norm"]->bin(0).numEntries() > 0)
+	{	
 		_h["AuAu62_c0-86"]->scaleW(1./(_p["AuAu62_c0-86_norm"]->bin(0).mean()*sow["AuAu62_c0-86_Nevent"]->sumW()));
-
+	}
+	if(_p["AuAu39_c0-86_norm"]->bin(0).numEntries() > 0)
+	{
 		_h["AuAu39_c0-86"]->scaleW(1./(_p["AuAu39_c0-86_norm"]->bin(0).mean()*sow["AuAu39_c0-86_Nevent"]->sumW()));
+	}
+
 	}
 
 
