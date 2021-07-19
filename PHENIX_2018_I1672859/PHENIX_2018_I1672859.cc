@@ -162,6 +162,31 @@ public:
 		book(_h["pp_pi0_4050"], refname44 + "_pp", refdata44);
 		book(_s["R_AB_pi0_4050_AuAu"], refname44);
 
+		string refname45 = mkAxisCode(45, 1, 1);
+		const Scatter2D& refdata45 = refData(refname45);
+		book(_h["CuAu_pi0_int5"], refname45 + "_CuAu_int5", refdata45);
+		book(_h["pp_pi0_int5_CuAu"], refname45 + "pp", refdata45);
+		book(_s["R_AB_pi0_int5_CuAu"], refname45);
+
+		string refname46 = mkAxisCode(46, 1, 1);
+		const Scatter2D& refdata46 = refData(refname46);
+		book(_h["AuAu_pi0_int5"], refname46 + "_AuAu_int5", refdata46);
+		book(_h["pp_pi0_int5_AuAu"], refname46 + "pp", refdata46);
+		book(_s["R_AB_pi0_int5_AuAu"], refname46);
+
+		string refname47 = mkAxisCode(47, 1, 1);
+		const Scatter2D& refdata47 = refData(refname47);
+		book(_h["CuAu_pi0_int10"], refname47 + "_CuAu_int10", refdata47);
+		book(_h["pp_pi0_int10_CuAu"], refname47 + "pp", refdata47);
+		book(_s["R_AB_pi0_int10_CuAu"], refname47);
+
+		string refname48 = mkAxisCode(48, 1, 1);
+		const Scatter2D& refdata48 = refData(refname48);
+		book(_h["AuAu_pi0_int10"], refname48 + "_AuAu_int10", refdata48);
+		book(_h["pp_pi0_int10_AuAu"], refname48 + "pp", refdata48);
+		book(_s["R_AB_pi0_int10_AuAu"], refname48);
+
+
 
 		//Counters for normalization
 
@@ -172,11 +197,17 @@ public:
 		book(sow["Nevent_2040_CuAu"],"Nevent_2040_CuAu");
 		book(sow["Nevent_4060_CuAu"],"Nevent_4060_CuAu"); 
  		book(sow["Nevent_6090_CuAu"],"Nevent_6090_CuAu");
+		book(sow["Nevent_int5_CuAu"],"Nevent_int5_CuAu");
+		book(sow["Nevent_int10_CuAu"],"Nevent_int10_CuAu");
 
 		book(sow["Nevent_PP"],"Nevent_PP");
+		book(sow["Nevent_int5_PP"],"Nevent_int5_PP");
+		book(sow["Nevent_int10_PP"],"Nevent_int10_PP");
 	
 		book(sow["Nevent_2030_AuAu"],"Nevent_2030_AuAu");
 		book(sow["Nevent_4050_AuAu"],"Nevent_4050_AuAu");
+		book(sow["Nevent_int5_AuAu"],"Nevent_int5_AuAu");
+		book(sow["Nevent_int10_AuAu"],"Nevent_int10_AuAu");
 
 		book(sow["Nevent_0010_CuCu"],"Nevent_0010_CuCu");
 	
@@ -255,6 +286,11 @@ public:
 					_h["pi0_minbias"]->fill(partPt, ptWeight);
 					_h["pi0_mb"]->fill(partPt, ptWeight);
 					_h["CuAu_minbias_pi0"]->fill(partPt);
+
+
+					if(p.pT()/GeV > 5) _h["CuAu_pi0_int5"]->fill(c);
+					
+					if(p.pT()/GeV > 10) _h["CuAu_pi0_int10"]->fill(c);					
 				}
           
 				else if(p.pid() == PID::ETA)
@@ -309,6 +345,7 @@ public:
 			{          
 				if(p.pid() == PID::PI0)
 				{
+					
 					_h["pp_pi0_minbias"]->fill(p.pT()/GeV);
 					
 					_h["pp_pi0_0020"]->fill(p.pT()/GeV);
@@ -319,11 +356,27 @@ public:
 
 					_h["pp_pi0_6090"]->fill(p.pT()/GeV);
 
-					_h["pp_pi0_0010"]->fill(c);	//does filling this with c make sense? Its for Rab over centrality...
+					_h["pp_pi0_0010"]->fill(p.pT()/GeV);
 
-					_h["pp_pi0_2030"]->fill(c);
+					_h["pp_pi0_2030"]->fill(p.pT()/GeV);
 
-					_h["pp_pi0_4050"]->fill(c);
+					_h["pp_pi0_4050"]->fill(p.pT()/GeV);
+			
+					if(p.pT()/GeV > 5) 
+					{
+						_h["pp_pi0_int5_CuAu"]->fill(c);
+					
+						_h["pp_pi0_int5_AuAu"]->fill(c);
+
+					}
+					if(p.pT()/GeV > 10)
+					{
+						_h["pp_pi0_int10_CuAu"]->fill(c);
+
+						_h["pp_pi0_int10_AuAu"]->fill(c);
+
+					}
+
 
 				}
 				else if(p.pid() == PID::ETA)
@@ -345,10 +398,13 @@ public:
 			{
 				if(p.pid() == PID::PI0)
 				{
-					if(c > 20 && c < 30.) _h["AuAu_2030_pi0"]->fill(c);
+					if(c > 20 && c < 30.) _h["AuAu_2030_pi0"]->fill(p.pT()/GeV);
 					
-					if(c > 40 && c < 50.) _h["AuAu_4050_pi0"]->fill(c);
+					if(c > 40 && c < 50.) _h["AuAu_4050_pi0"]->fill(p.pT()/GeV);
 
+					if(p.pT()/GeV > 5) _h["AuAu_pi0_int5"]->fill(c);
+					
+					if(p.pT()/GeV > 10) _h["AuAu_pi0_int10"]->fill(c);						
 
 				}
 			}
@@ -356,7 +412,7 @@ public:
 			{
 				if(p.pid() == PID::PI0)
 				{
-					if(c > 0 && c < 10.) _h["CuCu_0010_pi0"]->fill(c);
+					if(c > 0 && c < 10.) _h["CuCu_0010_pi0"]->fill(p.pT()/GeV);
 
 
 				}
@@ -368,6 +424,10 @@ public:
 
 		if(beamOpt == "CUAU200")
 		{
+			if(p.pT()/GeV > 5) sow["Nevent_int5_CuAu"]->fill();
+
+			if(p.pT()/GeV > 10) sow["Nevent_int10_CuAu"]->fill();
+	
 			sow["Nevent_minbias_CuAu"]->fill();
 
 			if(c > 0 && c < 10.) sow["Nevent_0010_CuAu"]->fill();
@@ -383,10 +443,20 @@ public:
 			if(c > 60 && c < 90.) sow["Nevent_6090_CuAu"]->fill();
 
 		}
-		else if(beamOpt == "PP200") sow["Nevent_PP"]->fill();
+		else if(beamOpt == "PP200")
+		{
+			sow["Nevent_PP"]->fill();
+				
+			if(p.pT()/GeV > 5) sow["Nevent_int5_PP"]->fill();
 
+			if(p.pT()/GeV > 10) sow["Nevent_int10_PP"]->fill();
+		}
 		else if(beamOpt == "AUAU200")
 		{
+			if(p.pT()/GeV > 5) sow["Nevent_int5_AuAu"]->fill();
+
+			if(p.pT()/GeV > 10) sow["Nevent_int10_AuAu"]->fill();
+
 			if(c > 20 && c < 30.) sow["Nevent_2030_AuAu"]->fill();	
       			
 			if(c > 40 && c < 50.) sow["Nevent_4050_AuAu"]->fill();
@@ -425,12 +495,16 @@ public:
 		_h["CuAu_2040_pi0"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));
 		_h["CuAu_4060_pi0"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
 		_h["CuAu_6090_pi0"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));
-
-			//Pi0 Rab vs centrality constituent normalizations
 		
 		_h["AuAu_2030_pi0"]->scaleW(1./(sow["Nevent_2030_AuAu"]->sumW()));
 		_h["AuAu_4050_pi0"]->scaleW(1./(sow["Nevent_4050_AuAu"]->sumW()));
 		_h["CuCu_0010_pi0"]->scaleW(1./(sow["Nevent_0010_CuCu"]->sumW()));
+
+		_h["CuAu_pi0_int5"]->scaleW(1./(sow["Nevent_int5_CuAu"]->sumW()));
+		_h["CuAu_pi0_int10"]->scaleW(1./(sow["Nevent_int10_CuAu"]->sumW()));
+		_h["AuAu_pi0_int5"]->scaleW(1./(sow["Nevent_int5_AuAu"]->sumW()));
+		_h["AuAu_pi0_int10"]->scaleW(1./(sow["Nevent_int10_AuAu"]->sumW()));
+		
 
 
 			//eta normalizations
@@ -467,11 +541,14 @@ public:
 		_h["pp_eta_4060"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
 		_h["pp_eta_6090"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
 
-			//pp Rab vs centrality constituent normalizations
-
 		_h["pp_pi0_0010"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
 		_h["pp_pi0_2030"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
-		_h["pp_pi0_4050"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_pi0_4050"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+
+		_h["pp_pi0_int5_CuAu"]->scaleW(1./(sow["Nevent_int5_PP"]->sumW()));
+		_h["pp_pi0_int10_CuAu"]->scaleW(1./(sow["Nevent_int10_PP"]->sumW()));
+		_h["pp_pi0_int5_AuAu"]->scaleW(1./(sow["Nevent_int5_PP"]->sumW()));
+		_h["PP_pi0_int10_AuAu"]->scaleW(1./(sow["Nevent_int10_PP"]->sumW()));	
 
 		//ratio plots
       
@@ -495,11 +572,15 @@ public:
 		divide(_h["CuAu_4060_eta"],_h["pp_eta_4060"],_s["R_AB_eta_4060"]);
 		divide(_h["CuAu_6090_eta"],_h["pp_eta_6090"],_s["R_AB_eta_6090"]);
 
-		//RAB vs Centrality
-
 		divide(_h["CuCu_0010_pi0"],_h["pp_pi0_0010"],_s["R_AB_pi0_0010_CuCu"]);
 		divide(_h["AuAu_2030_pi0"],_h["pp_pi0_2030"],_s["R_AB_pi0_2030_AuAu"]);
 		divide(_h["AuAu_4050_pi0"],_h["pp_pi0_4050"],_s["R_AB_pi0_4050_AuAu"]);
+
+		divide(_h["CuAu_pi0_int5"],_h["pp_pi0_int5_CuAu"],_s["R_AB_pi0_int5_CuAu"]);
+		divide(_h["CuAu_pi0_int10"],_h["pp_pi0_int10_CuAu"],_s["R_AB_pi0_int10_CuAu"]);
+		divide(_h["AuAu_pi0_int5"],_h["pp_pi0_int5_AuAu"],_s["R_AB_pi0_int5_AuAu"]);
+		divide(_h["AuAu_pi0_int10"],_h["pp_pi0_int10_AuAu"],_s["R_AB_pi0_int10_AuAu"]);
+
 
 		//RAB normalization by TAb Nuclear overlap 
 
