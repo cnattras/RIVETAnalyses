@@ -1616,6 +1616,34 @@ namespace Rivet {
 				hPPi["AUAU60_92PbarPi0"]->fill(partPt);	//ratio denominator for Pbar/Pi0 60-92%
 				hPi0["AUAU60_92"]->fill(p.pT()/GeV);	//Rcp denominator for Pi0
 			}
+
+			if (partPt > 1.5) {
+				
+				switch(p.pid()) {
+			
+					case 211:	//pi+
+						
+						break;
+
+					case -211:	//pi-
+						
+						break;
+
+					case 321:	//K+
+	
+						break;
+
+					case -321:	//K-
+					
+						break;
+
+					case 2212:	//proton
+
+						break;
+
+					case -2212:	//anti-proton
+				}
+			}
 		}
 	}
 
