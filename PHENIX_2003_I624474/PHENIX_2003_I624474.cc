@@ -699,6 +699,48 @@ namespace Rivet {
 				hPPi["AUAU0_10PbarPi0"]->fill(partPt);	//ratio denominator for Pbar/Pi0 0-10%
 				hPi0["AUAU0_10"]->fill(p.pT()/GeV);	//Rcp numerator for Pi0
 			}
+
+			if (partPt > 1.5) {
+				
+				switch(p.pid()) {
+			
+					case 211:	//pi+
+						
+						hPi["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Pions above 1.5GeV
+						
+						break;
+
+					case -211:	//pi-
+					
+						hPi["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Pions above 1.5GeV
+						
+						break;
+
+					case 321:	//K+
+	
+						hK["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Kaons above 1.5GeV
+						
+						break;
+
+					case -321:	//K-
+				
+						hK["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Kaons above 1.5GeV
+						
+						break;
+
+					case 2212:	//proton
+
+						hP["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Protons above 1.5GeV
+						
+						break;
+
+					case -2212:	//anti-proton
+
+						hP["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Protons above 1.5GeV
+						
+						break;
+				}
+			}
 		}
 
 		else if ((c >= 5.) && (c < 10.)) {
@@ -800,6 +842,48 @@ namespace Rivet {
 				hPPi["AUAU0_10PPi0"]->fill(partPt);	//ratio denominator for P/Pi0 0-10%
 				hPPi["AUAU0_10PbarPi0"]->fill(partPt);	//ratio denominator for Pbar/Pi0 0-10%
 				hPi0["AUAU0_10"]->fill(p.pT()/GeV);	//Rcp numerator for Pi0
+			}
+
+			if (partPt > 1.5) {
+				
+				switch(p.pid()) {
+			
+					case 211:	//pi+
+						
+						hPi["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Pions above 1.5GeV
+						
+						break;
+
+					case -211:	//pi-
+					
+						hPi["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Pions above 1.5GeV
+						
+						break;
+
+					case 321:	//K+
+	
+						hK["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Kaons above 1.5GeV
+						
+						break;
+
+					case -321:	//K-
+				
+						hK["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Kaons above 1.5GeV
+						
+						break;
+
+					case 2212:	//proton
+
+						hP["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Protons above 1.5GeV
+						
+						break;
+
+					case -2212:	//anti-proton
+
+						hP["AUAU0_10GeV1_5"]->fill(p.pT()/GeV);	//Rcp numerator for Protons above 1.5GeV
+						
+						break;
+				}
 			}
 		}
 
@@ -1623,25 +1707,39 @@ namespace Rivet {
 			
 					case 211:	//pi+
 						
+						hPi["AUAU60_92GeV1_5"]->fill(p.pT()/GeV);	//Rcp denominator for Pions above 1.5GeV
+						
 						break;
 
 					case -211:	//pi-
+					
+						hPi["AUAU60_92GeV1_5"]->fill(p.pT()/GeV);	//Rcp denominator for Pions above 1.5GeV
 						
 						break;
 
 					case 321:	//K+
 	
+						hK["AUAU60_92GeV1_5"]->fill(p.pT()/GeV);	//Rcp denominator for Kaons above 1.5GeV
+						
 						break;
 
 					case -321:	//K-
-					
+				
+						hK["AUAU60_92GeV1_5"]->fill(p.pT()/GeV);	//Rcp denominator for Kaons above 1.5GeV
+						
 						break;
 
 					case 2212:	//proton
 
+						hP["AUAU60_92GeV1_5"]->fill(p.pT()/GeV);	//Rcp denominator for Protons above 1.5GeV
+						
 						break;
 
 					case -2212:	//anti-proton
+
+						hP["AUAU60_92GeV1_5"]->fill(p.pT()/GeV);	//Rcp denominator for Protons above 1.5GeV
+						
+						break;
 				}
 			}
 		}
