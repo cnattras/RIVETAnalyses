@@ -197,17 +197,18 @@ public:
 		book(sow["Nevent_2040_CuAu"],"Nevent_2040_CuAu");
 		book(sow["Nevent_4060_CuAu"],"Nevent_4060_CuAu"); 
  		book(sow["Nevent_6090_CuAu"],"Nevent_6090_CuAu");
-		book(sow["Nevent_int5_CuAu"],"Nevent_int5_CuAu");
-		book(sow["Nevent_int10_CuAu"],"Nevent_int10_CuAu");
+		//book(sow["Nevent_int5_CuAu"],"Nevent_int5_CuAu");
+		//book(sow["Nevent_int10_CuAu"],"Nevent_int10_CuAu");
 
 		book(sow["Nevent_PP"],"Nevent_PP");
-		book(sow["Nevent_int5_PP"],"Nevent_int5_PP");
-		book(sow["Nevent_int10_PP"],"Nevent_int10_PP");
+		//book(sow["Nevent_int5_PP"],"Nevent_int5_PP");
+		//book(sow["Nevent_int10_PP"],"Nevent_int10_PP");
 	
 		book(sow["Nevent_2030_AuAu"],"Nevent_2030_AuAu");
 		book(sow["Nevent_4050_AuAu"],"Nevent_4050_AuAu");
-		book(sow["Nevent_int5_AuAu"],"Nevent_int5_AuAu");
-		book(sow["Nevent_int10_AuAu"],"Nevent_int10_AuAu");
+		book(sow["Nevent_minbias_AuAu"],"Nevent_minbias_AuAu");
+		//book(sow["Nevent_int5_AuAu"],"Nevent_int5_AuAu");
+		//book(sow["Nevent_int10_AuAu"],"Nevent_int10_AuAu");
 
 		book(sow["Nevent_0010_CuCu"],"Nevent_0010_CuCu");
 	
@@ -424,9 +425,9 @@ public:
 
 		if(beamOpt == "CUAU200")
 		{
-			if(p.pT()/GeV > 5) sow["Nevent_int5_CuAu"]->fill();
+	//		if(p.pT()/GeV > 5) sow["Nevent_int5_CuAu"]->fill();
 
-			if(p.pT()/GeV > 10) sow["Nevent_int10_CuAu"]->fill();
+	//		if(p.pT()/GeV > 10) sow["Nevent_int10_CuAu"]->fill();
 	
 			sow["Nevent_minbias_CuAu"]->fill();
 
@@ -447,15 +448,17 @@ public:
 		{
 			sow["Nevent_PP"]->fill();
 				
-			if(p.pT()/GeV > 5) sow["Nevent_int5_PP"]->fill();
+	//		if(p.pT()/GeV > 5) sow["Nevent_int5_PP"]->fill();
 
-			if(p.pT()/GeV > 10) sow["Nevent_int10_PP"]->fill();
+	//		if(p.pT()/GeV > 10) sow["Nevent_int10_PP"]->fill();
 		}
 		else if(beamOpt == "AUAU200")
 		{
-			if(p.pT()/GeV > 5) sow["Nevent_int5_AuAu"]->fill();
+	//		if(p.pT()/GeV > 5) sow["Nevent_int5_AuAu"]->fill();
 
-			if(p.pT()/GeV > 10) sow["Nevent_int10_AuAu"]->fill();
+	//		if(p.pT()/GeV > 10) sow["Nevent_int10_AuAu"]->fill();
+	//
+			sow["Nevent_minbias_AuAu"]->fill();
 
 			if(c > 20 && c < 30.) sow["Nevent_2030_AuAu"]->fill();	
       			
@@ -500,12 +503,10 @@ public:
 		_h["AuAu_4050_pi0"]->scaleW(1./(sow["Nevent_4050_AuAu"]->sumW()));
 		_h["CuCu_0010_pi0"]->scaleW(1./(sow["Nevent_0010_CuCu"]->sumW()));
 
-		_h["CuAu_pi0_int5"]->scaleW(1./(sow["Nevent_int5_CuAu"]->sumW()));
-		_h["CuAu_pi0_int10"]->scaleW(1./(sow["Nevent_int10_CuAu"]->sumW()));
-		_h["AuAu_pi0_int5"]->scaleW(1./(sow["Nevent_int5_AuAu"]->sumW()));
-		_h["AuAu_pi0_int10"]->scaleW(1./(sow["Nevent_int10_AuAu"]->sumW()));
-		
-
+		_h["CuAu_pi0_int5"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
+		_h["CuAu_pi0_int10"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
+		_h["AuAu_pi0_int5"]->scaleW(1./(sow["Nevent_minbias_AuAu"]->sumW()));
+		_h["AuAu_pi0_int10"]->scaleW(1./(sow["Nevent_minbias_AuAu"]->sumW()));	
 
 			//eta normalizations
 
@@ -545,10 +546,10 @@ public:
 		_h["pp_pi0_2030"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
 		_h["pp_pi0_4050"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
 
-		_h["pp_pi0_int5_CuAu"]->scaleW(1./(sow["Nevent_int5_PP"]->sumW()));
-		_h["pp_pi0_int10_CuAu"]->scaleW(1./(sow["Nevent_int10_PP"]->sumW()));
-		_h["pp_pi0_int5_AuAu"]->scaleW(1./(sow["Nevent_int5_PP"]->sumW()));
-		_h["PP_pi0_int10_AuAu"]->scaleW(1./(sow["Nevent_int10_PP"]->sumW()));	
+		_h["pp_pi0_int5_CuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_int10_CuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_int5_AuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_int10_AuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
 
 		//ratio plots
       
