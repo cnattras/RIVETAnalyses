@@ -1860,10 +1860,13 @@ namespace Rivet {
 		divide(hPi0["AUAU0_10"], hPi0["AUAU60_92"], hRcp["Pi0"]);	//Rcp Pi0		
 
 
-		//____Mean Pt____
+		//____Rcp 1.5GeV+____
 
+		divide(hPi["AUAU0_10GeV1_5"], hPi["AUAU60_92GeV1_5"], hRcp["Pions1_5"]);	//Rcp Pi 1.5GeV
 
-		//____dN/dy____
+		divide(hK["AUAU0_10GeV1_5"], hK["AUAU60_92GeV1_5"], hRcp["Kaons1_5"]);	//Rcp K 1.5GeV
+
+		divide(hP["AUAU0_10GeV1_5"], hP["AUAU60_92GeV1_5"], hRcp["Pbar+P1_5"]);	//RcP Proton 1.5GeV
 
 
 		//____Particle Ratios____
