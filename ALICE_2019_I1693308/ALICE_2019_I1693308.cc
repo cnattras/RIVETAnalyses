@@ -136,8 +136,10 @@ namespace Rivet {
     void finalize() {
       //double norm = (crossSection()*1.E-9)/sow->sumW();
       //Above has "sow" which isn't anything that is declared so I changed it to the ptr _c["sow"]
-      double norm = (crossSection()*1.E-9)/_c["sow"]->sumW();
-
+      //double norm = (crossSection()*1.E-9)/(_c["sow"]->sumW());
+      double norm = (crossSection()/millibarn)/(_c["sow"]->sumW()*931);
+      //double norm = (crossSection()/millibarn)/(_c["sow"]->sumW());
+      //double norm = (7.106483E+10*1.E-9)/(_c["sow"]->sumW());
 
 
       _h["PPS7"]->scaleW(norm);
