@@ -361,23 +361,23 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       for(Correlator corr : Correlators)
       {
-          cout << iterator << endl;
+  		cout << corr.GetIndex() << " " << corr.GetSubIndex() << endl;
 	  if(corr.GetIndex() <= 1)
           {
               //raw |eta| < 1
-              name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
+              name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
               book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
               nTriggers[name_raw]=0;
               book(sow[name_raw], "sow" + name_raw);
 
               //limited eta acceptance |eta| < 0.7
-              name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
+              name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
               book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
               nTriggers[name_eta]=0;
               book(sow[name_eta], "sow" + name_eta);
 
               //Background subtracted |eta| < 1
-              name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" + to_string(iterator);
+              name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
               book(_h[name_sub], (corr.GetIndex()*2)+2, 1, corr.GetSubIndex()+1);
 
           }
@@ -387,12 +387,12 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
             if(corr.GetSubIndex() <= 2)
             {
                 //raw |eta| < 1
-                name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
+                name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
                 book(_h[name_raw], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+1);
                 nTriggers[name_raw]=0;
                 book(sow[name_raw], "sow" + name_raw);
                 //limited eta acceptance |eta| < 0.7
-                name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
+                name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
                 book(_h[name_eta], (corr.GetIndex()*2)+1, 1, (corr.GetSubIndex()*2)+2);
                 nTriggers[name_eta]=0;
                 book(sow[name_eta], "sow" + name_eta);
@@ -400,56 +400,37 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
             else
             {
                 //raw |eta| < 1
-                name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1" + "-" + to_string(iterator);
+                name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
                 book(_h[name_raw], (corr.GetIndex()*2)+2, 1, 1);
                 nTriggers[name_raw]=0;
                 book(sow[name_raw], "sow" + name_raw);
                 //limited eta acceptance |eta| < 0.7
-                name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1" + "-" + to_string(iterator);
+                name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y2";
                 book(_h[name_eta], (corr.GetIndex()*2)+2, 1, 2);
                 nTriggers[name_eta]=0;
                 book(sow[name_eta], "sow" + name_eta);
             }
             //Background subtracted |eta| < 1
-            name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" + to_string(iterator);
+            name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
             book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
         }
 
         if(corr.GetIndex() == 3)
         {
             //raw |eta| < 1
-            name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
+            name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
             book(_h[name_raw], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+1);
             nTriggers[name_raw]=0;
             book(sow[name_raw], "sow" + name_raw);
             //limited eta acceptance |eta| < 0.7
-            name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
+            name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
             book(_h[name_eta], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+2);
             nTriggers[name_eta]=0;
             book(sow[name_eta], "sow" + name_eta);
             //Background subtracted |eta| < 1
-            name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" + to_string(iterator);
+            name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
             book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
         }
-	
-	if(corr.GetIndex() == 4)
-	{
- 	   name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) 
-		+ "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
-            book(_h[name_raw], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+1);
-            nTriggers[name_raw]=0;
-            book(sow[name_raw], "sow" + name_raw);
-            //limited eta acceptance |eta| < 0.7
-          name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) 
-		+ "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
-          book(_h[name_eta], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+2);
-          nTriggers[name_eta]=0;
-          book(sow[name_eta], "sow" + name_eta);
-          //Background subtracted |eta|  1
-           name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" + to_string(iterator);
-              book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);		
-		
-	}
 	
 	cout << name_raw << " " << name_eta << " " << name_sub << endl;
 	iterator++;
@@ -789,14 +770,13 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
           if(corr.GetIndex() <=1)
           {
-            name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
-	    //name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
-          //sow[name_raw]->fill();
+	    name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
+            //sow[name_raw]->fill();
 
-           name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
+           name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
 //          sow[name_eta]->fill();
 
-           name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" +to_string(iterator);
+           name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
   //        sow[name_sub]->fill();
       	  }
 
@@ -804,34 +784,34 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       	  {
       	  	if (corr.GetSubIndex() <= 2)
       	  	{
-      	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1)+ "-" + to_string(iterator);
+      	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
       	  //		sow[name_raw]->fill();
 
-      	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2)+ "-" + to_string(iterator);
+      	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
       	  //		sow[name_eta]->fill();
       	  	}
       	  	else
       	  	{
-      	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1"+ "-" + to_string(iterator);
+      	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
       	  //		sow[name_raw]->fill();
 
-      	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1"+ "-" + to_string(iterator);
+      	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y2";
       	  //		sow[name_raw]->fill();
       	  	}
 
-      	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1)+ "-" + to_string(iterator);
+      	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
       	  	//sow[name_sub]->fill();
       	  }
 
       	  if (corr.GetIndex() == 3)
       	  {
-      	  	name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1)+ "-" + to_string(iterator);
+      	  	name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
       	  //	sow[name_raw]->fill();
 
-      	  	name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2)+ "-" + to_string(iterator);
+      	  	name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
       	  //	sow[name_eta]->fill();
 
-      	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1)+ "-" + to_string(iterator);
+      	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
       	  	//sow[name_sub]->fill();
       	  }
 	cout << name_raw << " " << name_eta << " " << name_sub << endl;
