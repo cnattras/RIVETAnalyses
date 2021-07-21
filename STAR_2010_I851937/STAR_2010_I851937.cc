@@ -337,10 +337,11 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         //   for the raw und eta. book (sow) for all but sub.
       //===========================================================
       //===========================================================
-      
-      for (int ptt = 0; ptt < numTrigPtBins; ptt++)
+      cout << numTrigPtBins << " " << numCentBins << endl;
+	
+      for (int ptt = 0; ptt < numTrigPtBins-1; ptt++)
       {
-        for (int cb = 0; cb < numCentBins-3; cb++)
+        for (int cb = 0; cb < numCentBins-1; cb++)
         {
 	//	cout << numTrigPtBins << " " << numCentBins << " " << iterator << endl;
 	//    snprintf(bookName,200,"Fig2Cent%iPtt%2.1f",cb,ptt);
@@ -430,6 +431,26 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
             name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" + to_string(iterator);
             book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
         }
+	
+	if(corr.GetIndex() == 4)
+	{
+ 	   name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) 
+		+ "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
+            book(_h[name_raw], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+1);
+            nTriggers[name_raw]=0;
+            book(sow[name_raw], "sow" + name_raw);
+            //limited eta acceptance |eta| < 0.7
+          name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) 
+		+ "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
+          book(_h[name_eta], (corr.GetIndex()*2)+2, 1, (corr.GetSubIndex()*2)+2);
+          nTriggers[name_eta]=0;
+          book(sow[name_eta], "sow" + name_eta);
+          //Background subtracted |eta|  1
+           name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" + to_string(iterator);
+              book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);		
+		
+	}
+	
 	cout << name_raw << " " << name_eta << " " << name_sub << endl;
 	iterator++;
       }
@@ -743,6 +764,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       //==================================================
 
       string SysAndEnergy = "";
+      string name_raw="", name_sub="", name_eta="";
 
       if (collSys == dAu) SysAndEnergy = "dAu200GeV";
       else if (collSys == AuAu) SysAndEnergy = "AuAu200GeV";
@@ -758,6 +780,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       bool isVeto = true;
 
       int iterator=1;
+
       //INCOMPLETE: Fill Histograms for figure 2
       for(Correlator corr : Correlators)
       {
@@ -766,52 +789,54 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
           if(corr.GetIndex() <=1)
           {
-          string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
-          sow[name_raw]->fill();
+            name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
+	    //name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1) + "-" + to_string(iterator);
+          //sow[name_raw]->fill();
 
-          string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
-  //        sow[name_eta]->fill();
+           name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2) + "-" + to_string(iterator);
+//          sow[name_eta]->fill();
 
-          string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" +to_string(iterator);
-    //      sow[name_sub]->fill();
+           name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1) + "-" +to_string(iterator);
+  //        sow[name_sub]->fill();
       	  }
 
-      /*  if (corr.GetIndex() == 2)
+        if (corr.GetIndex() == 2)
       	  {
       	  	if (corr.GetSubIndex() <= 2)
       	  	{
-      	  		string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-      	  		sow[name_raw]->fill();
+      	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1)+ "-" + to_string(iterator);
+      	  //		sow[name_raw]->fill();
 
-      	  		string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
-      	  		sow[name_eta]->fill();
+      	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2)+ "-" + to_string(iterator);
+      	  //		sow[name_eta]->fill();
       	  	}
       	  	else
       	  	{
-      	  		string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
-      	  		sow[name_raw]->fill();
+      	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1"+ "-" + to_string(iterator);
+      	  //		sow[name_raw]->fill();
 
-      	  		string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
-      	  		sow[name_raw]->fill();
+      	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y1"+ "-" + to_string(iterator);
+      	  //		sow[name_raw]->fill();
       	  	}
 
-      	  	string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+      	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1)+ "-" + to_string(iterator);
       	  	//sow[name_sub]->fill();
       	  }
 
       	  if (corr.GetIndex() == 3)
       	  {
-      	  	string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-      	  	sow[name_raw]->fill();
+      	  	name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1)+ "-" + to_string(iterator);
+      	  //	sow[name_raw]->fill();
 
-      	  	string name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
-      	  	sow[name_eta]->fill();
+      	  	name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2)+ "-" + to_string(iterator);
+      	  //	sow[name_eta]->fill();
 
-      	  	string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
+      	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1)+ "-" + to_string(iterator);
       	  	//sow[name_sub]->fill();
-      	  }*/
+      	  }
+	cout << name_raw << " " << name_eta << " " << name_sub << endl;
 	iterator++;
-      }
+      	}
 /*
       //Fill Histograms for figure 3
       for (Correlator corr : Correlators3)
