@@ -144,27 +144,74 @@ public:
 		book(_h["pp_eta_6090"], refname27 + "_pp", refdata27);
 		book(_s["R_AB_eta_6090"], refname27);
 
+		string refname42 = mkAxisCode(42, 1, 1);
+		const Scatter2D& refdata42 = refData(refname42);
+		book(_h["AuAu_2030_pi0"], refname42 + "_AuAu_2030", refdata42);
+		book(_h["pp_pi0_2030"], refname42 + "_pp", refdata42);
+		book(_s["R_AB_pi0_2030_AuAu"], refname42);
+
+		string refname43 = mkAxisCode(43, 1, 1);
+		const Scatter2D& refdata43 = refData(refname43);
+		book(_h["CuCu_0010_pi0"], refname43 + "_CuCu_0010", refdata43);
+		book(_h["pp_pi0_0010"], refname43 + "_pp", refdata43);
+		book(_s["R_AB_pi0_0010_CuCu"], refname43);
+
+		string refname44 = mkAxisCode(44, 1, 1);
+		const Scatter2D& refdata44 = refData(refname44);
+		book(_h["AuAu_4050_pi0"], refname44 + "_AuAu_4050", refdata44);
+		book(_h["pp_pi0_4050"], refname44 + "_pp", refdata44);
+		book(_s["R_AB_pi0_4050_AuAu"], refname44);
+
+		string refname45 = mkAxisCode(45, 1, 1);
+		const Scatter2D& refdata45 = refData(refname45);
+		book(_h["CuAu_pi0_int5"], refname45 + "_CuAu_int5", refdata45);
+		book(_h["pp_pi0_int5_CuAu"], refname45 + "pp", refdata45);
+		book(_s["R_AB_pi0_int5_CuAu"], refname45);
+
+		string refname46 = mkAxisCode(46, 1, 1);
+		const Scatter2D& refdata46 = refData(refname46);
+		book(_h["AuAu_pi0_int5"], refname46 + "_AuAu_int5", refdata46);
+		book(_h["pp_pi0_int5_AuAu"], refname46 + "pp", refdata46);
+		book(_s["R_AB_pi0_int5_AuAu"], refname46);
+
+		string refname47 = mkAxisCode(47, 1, 1);
+		const Scatter2D& refdata47 = refData(refname47);
+		book(_h["CuAu_pi0_int10"], refname47 + "_CuAu_int10", refdata47);
+		book(_h["pp_pi0_int10_CuAu"], refname47 + "pp", refdata47);
+		book(_s["R_AB_pi0_int10_CuAu"], refname47);
+
+		string refname48 = mkAxisCode(48, 1, 1);
+		const Scatter2D& refdata48 = refData(refname48);
+		book(_h["AuAu_pi0_int10"], refname48 + "_AuAu_int10", refdata48);
+		book(_h["pp_pi0_int10_AuAu"], refname48 + "pp", refdata48);
+		book(_s["R_AB_pi0_int10_AuAu"], refname48);
+
+
 
 		//Counters for normalization
 
-		book(sow["pp_pi0_N"],"pp_pi0_N");
-		book(sow["pi0_0010_N"],"pi0_0010_N");
-		book(sow["pi0_1020_N"],"pi0_1020_N");
-    		book(sow["pi0_0020_N"],"pi0_0020_N");
-		book(sow["pi0_2040_N"],"pi0_2040_N");
-		book(sow["pi0_4060_N"],"pi0_4060_N");
-		book(sow["pi0_6090_N"],"pi0_6090_N");
-		book(sow["pi0_minbias_N"],"pi0_minbias_N");
+		book(sow["Nevent_minbias_CuAu"],"Nevent_minbias_CuAu"); 
+		book(sow["Nevent_0010_CuAu"],"Nevent_0010_CuAu"); 
+		book(sow["Nevent_1020_CuAu"],"Nevent_1020_CuAu");
+		book(sow["Nevent_0020_CuAu"],"Nevent_0020_CuAu");   
+		book(sow["Nevent_2040_CuAu"],"Nevent_2040_CuAu");
+		book(sow["Nevent_4060_CuAu"],"Nevent_4060_CuAu"); 
+ 		book(sow["Nevent_6090_CuAu"],"Nevent_6090_CuAu");
+		//book(sow["Nevent_int5_CuAu"],"Nevent_int5_CuAu");
+		//book(sow["Nevent_int10_CuAu"],"Nevent_int10_CuAu");
 
-		book(sow["pp_eta_N"],"pp_eta_N");
-		book(sow["eta_0020_N"],"eta_0020_N");
-		book(sow["eta_2040_N"],"eta_2040_N");
-		book(sow["eta_4060_N"],"eta_4060_N");
-		book(sow["eta_6090_N"],"eta_6090_N");
-		book(sow["eta_minbias_N"],"eta_minbias_N");
+		book(sow["Nevent_PP"],"Nevent_PP");
+		//book(sow["Nevent_int5_PP"],"Nevent_int5_PP");
+		//book(sow["Nevent_int10_PP"],"Nevent_int10_PP");
+	
+		book(sow["Nevent_2030_AuAu"],"Nevent_2030_AuAu");
+		book(sow["Nevent_4050_AuAu"],"Nevent_4050_AuAu");
+		book(sow["Nevent_minbias_AuAu"],"Nevent_minbias_AuAu");
+		//book(sow["Nevent_int5_AuAu"],"Nevent_int5_AuAu");
+		//book(sow["Nevent_int10_AuAu"],"Nevent_int10_AuAu");
 
- 
- 
+		book(sow["Nevent_0010_CuCu"],"Nevent_0010_CuCu");
+	
 	}
 
 
@@ -188,24 +235,21 @@ public:
 					{
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
-						_h["pi0_0010"]->fill(partPt, ptWeight);
-						sow["pi0_0010_N"]->fill();		
+						_h["pi0_0010"]->fill(partPt, ptWeight);	
 					}
 					if(c > 10 && c < 20.)
 					{
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
 						_h["pi0_1020"]->fill(partPt, ptWeight);
-						sow["pi0_1020_N"]->fill();
 					}
 					if(c > 0 && c < 20.)
 					{
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
 						_h["pi0_0020"]->fill(partPt, ptWeight);
-						sow["pi0_0020_N"]->fill();
 						_h["pi0_0p"]->fill(partPt, ptWeight);
-						_h["CuAu_0020_pi0"]->fill(partPt, ptWeight);
+						_h["CuAu_0020_pi0"]->fill(partPt);
 
 					}
 					if(c > 20 && c < 40.)
@@ -213,9 +257,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
 						_h["pi0_2040"]->fill(partPt, ptWeight);
-						sow["pi0_2040_N"]->fill();
 						_h["pi0_20p"]->fill(partPt, ptWeight);
-						_h["CuAu_2040_pi0"]->fill(partPt, ptWeight);
+						_h["CuAu_2040_pi0"]->fill(partPt);
 							
 					}
 					if(c > 40 && c < 60.)
@@ -223,9 +266,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);			
 						_h["pi0_4060"]->fill(partPt, ptWeight);
-						sow["pi0_4060_N"]->fill();
 						_h["pi0_40p"]->fill(partPt, ptWeight);
-						_h["CuAu_4060_pi0"]->fill(partPt, ptWeight);
+						_h["CuAu_4060_pi0"]->fill(partPt);
 
 
 					}
@@ -234,9 +276,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);
 						_h["pi0_6090"]->fill(partPt, ptWeight);
-						sow["pi0_6090_N"]->fill();
 						_h["pi0_60p"]->fill(partPt, ptWeight);
-						_h["CuAu_6090_pi0"]->fill(partPt, ptWeight);
+						_h["CuAu_6090_pi0"]->fill(partPt);
 
 
 					}
@@ -245,8 +286,12 @@ public:
 					double ptWeight = 1./(partPt*2.*M_PI);
 					_h["pi0_minbias"]->fill(partPt, ptWeight);
 					_h["pi0_mb"]->fill(partPt, ptWeight);
-					_h["CuAu_minbias_pi0"]->fill(partPt, ptWeight);
-					sow["pi0_minbias_N"]->fill();
+					_h["CuAu_minbias_pi0"]->fill(partPt);
+
+
+					if(p.pT()/GeV > 5) _h["CuAu_pi0_int5"]->fill(c);
+					
+					if(p.pT()/GeV > 10) _h["CuAu_pi0_int10"]->fill(c);					
 				}
           
 				else if(p.pid() == PID::ETA)
@@ -257,9 +302,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
 						_h["eta_0020"]->fill(partPt, ptWeight);
-						sow["eta_0020_N"]->fill();
 						_h["eta_0p"]->fill(partPt, ptWeight);
-						_h["CuAu_0020_eta"]->fill(partPt, ptWeight);
+						_h["CuAu_0020_eta"]->fill(partPt);
 	
 					}
 					if(c > 20 && c < 40.)
@@ -267,9 +311,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
 						_h["eta_2040"]->fill(partPt, ptWeight);
-						sow["eta_2040_N"]->fill();
 						_h["eta_20p"]->fill(partPt, ptWeight);	
-						_h["CuAu_2040_eta"]->fill(partPt, ptWeight);
+						_h["CuAu_2040_eta"]->fill(partPt);
 
 					}
 					if(c > 40 && c < 60.)
@@ -277,9 +320,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);	
 						_h["eta_4060"]->fill(partPt, ptWeight);
-						sow["eta_4060_N"]->fill();
 						_h["eta_40p"]->fill(partPt, ptWeight);
-						_h["CuAu_4060_eta"]->fill(partPt, ptWeight);
+						_h["CuAu_4060_eta"]->fill(partPt);
 
 					}
 					if(c > 60 && c < 90.)
@@ -287,9 +329,8 @@ public:
 						double partPt = p.pT()/GeV;
 						double ptWeight = 1./(partPt*2.*M_PI);
 						_h["eta_6090"]->fill(partPt, ptWeight);
-						sow["eta_6090_N"]->fill();
 						_h["eta_60p"]->fill(partPt, ptWeight);
-						_h["CuAu_6090_eta"]->fill(partPt, ptWeight);
+						_h["CuAu_6090_eta"]->fill(partPt);
 
 					}
 
@@ -297,9 +338,7 @@ public:
 					double ptWeight = 1./(partPt*2.*M_PI);	
 					_h["eta_minbias"]->fill(partPt, ptWeight);
 					_h["eta_mb"]->fill(partPt, ptWeight);	
-					
-					_h["CuAu_minbias_eta"]->fill(partPt, ptWeight);
-					sow["eta_minbias_N"]->fill();
+					_h["CuAu_minbias_eta"]->fill(partPt);
 					
 				}
 			}        
@@ -307,8 +346,8 @@ public:
 			{          
 				if(p.pid() == PID::PI0)
 				{
+					
 					_h["pp_pi0_minbias"]->fill(p.pT()/GeV);
-					sow["pp_pi0_N"]->fill();
 					
 					_h["pp_pi0_0020"]->fill(p.pT()/GeV);
 
@@ -318,12 +357,32 @@ public:
 
 					_h["pp_pi0_6090"]->fill(p.pT()/GeV);
 
+					_h["pp_pi0_0010"]->fill(p.pT()/GeV);
+
+					_h["pp_pi0_2030"]->fill(p.pT()/GeV);
+
+					_h["pp_pi0_4050"]->fill(p.pT()/GeV);
+			
+					if(p.pT()/GeV > 5) 
+					{
+						_h["pp_pi0_int5_CuAu"]->fill(c);
+					
+						_h["pp_pi0_int5_AuAu"]->fill(c);
+
+					}
+					if(p.pT()/GeV > 10)
+					{
+						_h["pp_pi0_int10_CuAu"]->fill(c);
+
+						_h["pp_pi0_int10_AuAu"]->fill(c);
+
+					}
+
 
 				}
 				else if(p.pid() == PID::ETA)
 				{
 					_h["pp_eta_minbias"]->fill(p.pT()/GeV);
-					sow["pp_eta_N"]->fill();
 
 					_h["pp_eta_0020"]->fill(p.pT()/GeV);
            
@@ -336,85 +395,161 @@ public:
 
 				}
 			}
+			else if(beamOpt == "AUAU200")
+			{
+				if(p.pid() == PID::PI0)
+				{
+					if(c > 20 && c < 30.) _h["AuAu_2030_pi0"]->fill(p.pT()/GeV);
+					
+					if(c > 40 && c < 50.) _h["AuAu_4050_pi0"]->fill(p.pT()/GeV);
+
+					if(p.pT()/GeV > 5) _h["AuAu_pi0_int5"]->fill(c);
+					
+					if(p.pT()/GeV > 10) _h["AuAu_pi0_int10"]->fill(c);						
+
+				}
+			}
+			else if(beamOpt == "CUCU200")
+			{
+				if(p.pid() == PID::PI0)
+				{
+					if(c > 0 && c < 10.) _h["CuCu_0010_pi0"]->fill(p.pT()/GeV);
+
+
+				}
+			}
+
 		}
-      
+
+		//fill counters outside of the particle loop
+
+		if(beamOpt == "CUAU200")
+		{
+	//		if(p.pT()/GeV > 5) sow["Nevent_int5_CuAu"]->fill();
+
+	//		if(p.pT()/GeV > 10) sow["Nevent_int10_CuAu"]->fill();
+	
+			sow["Nevent_minbias_CuAu"]->fill();
+
+			if(c > 0 && c < 10.) sow["Nevent_0010_CuAu"]->fill();
+			
+			if(c > 10 && c < 20.) sow["Nevent_1020_CuAu"]->fill();
+
+			if(c > 0 && c < 20.) sow["Nevent_0020_CuAu"]->fill();
+
+			if(c > 20 && c < 40.) sow["Nevent_2040_CuAu"]->fill();
+
+			if(c > 40 && c < 60.) sow["Nevent_4060_CuAu"]->fill();
+
+			if(c > 60 && c < 90.) sow["Nevent_6090_CuAu"]->fill();
+
+		}
+		else if(beamOpt == "PP200")
+		{
+			sow["Nevent_PP"]->fill();
+				
+	//		if(p.pT()/GeV > 5) sow["Nevent_int5_PP"]->fill();
+
+	//		if(p.pT()/GeV > 10) sow["Nevent_int10_PP"]->fill();
+		}
+		else if(beamOpt == "AUAU200")
+		{
+	//		if(p.pT()/GeV > 5) sow["Nevent_int5_AuAu"]->fill();
+
+	//		if(p.pT()/GeV > 10) sow["Nevent_int10_AuAu"]->fill();
+	//
+			sow["Nevent_minbias_AuAu"]->fill();
+
+			if(c > 20 && c < 30.) sow["Nevent_2030_AuAu"]->fill();	
+      			
+			if(c > 40 && c < 50.) sow["Nevent_4050_AuAu"]->fill();
+		}
+		else if(beamOpt == "CUCU200")
+		{
+			if(c > 0 && c < 10.) sow["Nevent_0010_CuCu"]->fill();
+		}
 	}
 
 
 	/// Normalise histograms etc., after the run
 	void finalize()
 	{
-/*		normalize(_h["pi0_minbias"]); // normalize to unity		//not sure if this is needed rn
-		normalize(_h["pi0_0010"]); // normalize to unity
-		normalize(_h["pi0_1020"]); // normalize to unity
-		normalize(_h["pi0_0020"]); // normalize to unity
-		normalize(_h["pi0_2040"]); // normalize to unity
-		normalize(_h["pi0_4060"]); // normalize to unity
-		
-      
-		normalize(_h["eta_minbias"]); // normalize to unity
-		normalize(_h["eta_0020"]); // normalize to unity
-		normalize(_h["eta_2040"]); // normalize to unity
-		normalize(_h["eta_4060"]); // normalize to unity
-*/
 
 		//dividing yields by # of events N
 
 			//pi 0 normalizations			
 		
-		_h["pi0_0010"]->scaleW(1./(sow["pi0_0010_N"]->sumW()));	
-		_h["pi0_1020"]->scaleW(1./(sow["pi0_1020_N"]->sumW()));
-		_h["pi0_0020"]->scaleW(1./(sow["pi0_0020_N"]->sumW()));	
-		_h["pi0_2040"]->scaleW(1./(sow["pi0_2040_N"]->sumW()));	
-		_h["pi0_4060"]->scaleW(1./(sow["pi0_4060_N"]->sumW()));
-		_h["pi0_6090"]->scaleW(1./(sow["pi0_6090_N"]->sumW()));	
-		_h["pi0_minbias"]->scaleW(1./(sow["pi0_minbias_N"]->sumW()));
+		_h["pi0_0010"]->scaleW(1./(sow["Nevent_0010_CuAu"]->sumW()));	
+		_h["pi0_1020"]->scaleW(1./(sow["Nevent_1020_CuAu"]->sumW()));
+		_h["pi0_0020"]->scaleW(1./(sow["Nevent_0020_CuAu"]->sumW()));	
+		_h["pi0_2040"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));	
+		_h["pi0_4060"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
+		_h["pi0_6090"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));	
+		_h["pi0_minbias"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
 	
-		_h["pi0_mb"]->scaleW(1./(sow["pi0_minbias_N"]->sumW()));
-		_h["pi0_0p"]->scaleW(1./(sow["pi0_0020_N"]->sumW()));
-		_h["pi0_20p"]->scaleW(1./(sow["pi0_2040_N"]->sumW()));
-		_h["pi0_40p"]->scaleW(1./(sow["pi0_4060_N"]->sumW()));
-		_h["pi0_60p"]->scaleW(1./(sow["pi0_6090_N"]->sumW()));
+		_h["pi0_mb"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
+		_h["pi0_0p"]->scaleW(1./(sow["Nevent_0020_CuAu"]->sumW()));
+		_h["pi0_20p"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));
+		_h["pi0_40p"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
+		_h["pi0_60p"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));
 			
-		_h["CuAu_minbias_pi0"]->scaleW(1./(sow["pi0_minbias_N"]->sumW()));	
-		_h["CuAu_0020_pi0"]->scaleW(1./(sow["pi0_0020_N"]->sumW()));
-		_h["CuAu_2040_pi0"]->scaleW(1./(sow["pi0_2040_N"]->sumW()));
-		_h["CuAu_4060_pi0"]->scaleW(1./(sow["pi0_4060_N"]->sumW()));
-		_h["CuAu_6090_pi0"]->scaleW(1./(sow["pi0_6090_N"]->sumW()));
+		_h["CuAu_minbias_pi0"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));	
+		_h["CuAu_0020_pi0"]->scaleW(1./(sow["Nevent_0020_CuAu"]->sumW()));
+		_h["CuAu_2040_pi0"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));
+		_h["CuAu_4060_pi0"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
+		_h["CuAu_6090_pi0"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));
+		
+		_h["AuAu_2030_pi0"]->scaleW(1./(sow["Nevent_2030_AuAu"]->sumW()));
+		_h["AuAu_4050_pi0"]->scaleW(1./(sow["Nevent_4050_AuAu"]->sumW()));
+		_h["CuCu_0010_pi0"]->scaleW(1./(sow["Nevent_0010_CuCu"]->sumW()));
+
+		_h["CuAu_pi0_int5"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
+		_h["CuAu_pi0_int10"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
+		_h["AuAu_pi0_int5"]->scaleW(1./(sow["Nevent_minbias_AuAu"]->sumW()));
+		_h["AuAu_pi0_int10"]->scaleW(1./(sow["Nevent_minbias_AuAu"]->sumW()));	
 
 			//eta normalizations
 
-		_h["eta_0020"]->scaleW(1./(sow["eta_0020_N"]->sumW()));		
-		_h["eta_2040"]->scaleW(1./(sow["eta_2040_N"]->sumW()));	
-		_h["eta_4060"]->scaleW(1./(sow["eta_4060_N"]->sumW()));
-		_h["eta_6090"]->scaleW(1./(sow["eta_6090_N"]->sumW()));		
-		_h["eta_minbias"]->scaleW(1./(sow["eta_minbias_N"]->sumW()));
+		_h["eta_0020"]->scaleW(1./(sow["Nevent_0020_CuAu"]->sumW()));		
+		_h["eta_2040"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));	
+		_h["eta_4060"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
+		_h["eta_6090"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));		
+		_h["eta_minbias"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
 	
-		_h["eta_mb"]->scaleW(1./(sow["eta_minbias_N"]->sumW()));
-		_h["eta_0p"]->scaleW(1./(sow["eta_0020_N"]->sumW()));
-		_h["eta_20p"]->scaleW(1./(sow["eta_2040_N"]->sumW()));
-		_h["eta_40p"]->scaleW(1./(sow["eta_4060_N"]->sumW()));
-		_h["eta_60p"]->scaleW(1./(sow["eta_6090_N"]->sumW()));
+		_h["eta_mb"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));
+		_h["eta_0p"]->scaleW(1./(sow["Nevent_0020_CuAu"]->sumW()));
+		_h["eta_20p"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));
+		_h["eta_40p"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
+		_h["eta_60p"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));
 			
-		_h["CuAu_minbias_eta"]->scaleW(1./(sow["eta_minbias_N"]->sumW()));	
-		_h["CuAu_0020_eta"]->scaleW(1./(sow["eta_0020_N"]->sumW()));
-		_h["CuAu_2040_eta"]->scaleW(1./(sow["eta_2040_N"]->sumW()));
-		_h["CuAu_4060_eta"]->scaleW(1./(sow["eta_4060_N"]->sumW()));
-		_h["CuAu_6090_eta"]->scaleW(1./(sow["eta_6090_N"]->sumW()));
+		_h["CuAu_minbias_eta"]->scaleW(1./(sow["Nevent_minbias_CuAu"]->sumW()));	
+		_h["CuAu_0020_eta"]->scaleW(1./(sow["Nevent_0020_CuAu"]->sumW()));
+		_h["CuAu_2040_eta"]->scaleW(1./(sow["Nevent_2040_CuAu"]->sumW()));
+		_h["CuAu_4060_eta"]->scaleW(1./(sow["Nevent_4060_CuAu"]->sumW()));
+		_h["CuAu_6090_eta"]->scaleW(1./(sow["Nevent_6090_CuAu"]->sumW()));
 
 			//pp normalizations
 
-		_h["pp_pi0_minbias"]->scaleW(1./(sow["pp_pi0_N"]->sumW()));
-		_h["pp_pi0_0020"]->scaleW(1./(sow["pp_pi0_N"]->sumW()));			
-		_h["pp_pi0_2040"]->scaleW(1./(sow["pp_pi0_N"]->sumW()));	
-		_h["pp_pi0_4060"]->scaleW(1./(sow["pp_pi0_N"]->sumW()));	
-		_h["pp_pi0_6090"]->scaleW(1./(sow["pp_pi0_N"]->sumW()));
+		_h["pp_pi0_minbias"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_0020"]->scaleW(1./(sow["Nevent_PP"]->sumW()));			
+		_h["pp_pi0_2040"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_pi0_4060"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_pi0_6090"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
 
-		_h["pp_eta_minbias"]->scaleW(1./(sow["pp_eta_N"]->sumW()));	
-		_h["pp_eta_0020"]->scaleW(1./(sow["pp_eta_N"]->sumW()));		
-		_h["pp_eta_2040"]->scaleW(1./(sow["pp_eta_N"]->sumW()));	
-		_h["pp_eta_4060"]->scaleW(1./(sow["pp_eta_N"]->sumW()));	
-		_h["pp_eta_6090"]->scaleW(1./(sow["pp_eta_N"]->sumW()));	
+		_h["pp_eta_minbias"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_eta_0020"]->scaleW(1./(sow["Nevent_PP"]->sumW()));		
+		_h["pp_eta_2040"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_eta_4060"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_eta_6090"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+
+		_h["pp_pi0_0010"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_pi0_2030"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
+		_h["pp_pi0_4050"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+
+		_h["pp_pi0_int5_CuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_int10_CuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_int5_AuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));
+		_h["pp_pi0_int10_AuAu"]->scaleW(1./(sow["Nevent_PP"]->sumW()));	
 
 		//ratio plots
       
@@ -438,7 +573,47 @@ public:
 		divide(_h["CuAu_4060_eta"],_h["pp_eta_4060"],_s["R_AB_eta_4060"]);
 		divide(_h["CuAu_6090_eta"],_h["pp_eta_6090"],_s["R_AB_eta_6090"]);
 
+		divide(_h["CuCu_0010_pi0"],_h["pp_pi0_0010"],_s["R_AB_pi0_0010_CuCu"]);
+		divide(_h["AuAu_2030_pi0"],_h["pp_pi0_2030"],_s["R_AB_pi0_2030_AuAu"]);
+		divide(_h["AuAu_4050_pi0"],_h["pp_pi0_4050"],_s["R_AB_pi0_4050_AuAu"]);
 
+		divide(_h["CuAu_pi0_int5"],_h["pp_pi0_int5_CuAu"],_s["R_AB_pi0_int5_CuAu"]);
+		divide(_h["CuAu_pi0_int10"],_h["pp_pi0_int10_CuAu"],_s["R_AB_pi0_int10_CuAu"]);
+		divide(_h["AuAu_pi0_int5"],_h["pp_pi0_int5_AuAu"],_s["R_AB_pi0_int5_AuAu"]);
+		divide(_h["AuAu_pi0_int10"],_h["pp_pi0_int10_AuAu"],_s["R_AB_pi0_int10_AuAu"]);
+
+
+		//RAB normalization by TAb Nuclear overlap 
+
+		_s["R_AB_pi0_minbias"]->scaleY(1./TAB[0]);
+		_s["R_AB_pi0_0020"]->scaleY(1./TAB[3]);
+		_s["R_AB_pi0_2040"]->scaleY(1./TAB[4]);
+		_s["R_AB_pi0_4060"]->scaleY(1./TAB[5]);
+
+		_s["R_AB_eta_minbias"]->scaleY(1./TAB[0]);
+		_s["R_AB_eta_0020"]->scaleY(1./TAB[3]);
+		_s["R_AB_eta_2040"]->scaleY(1./TAB[4]);
+		_s["R_AB_pi0_4060"]->scaleY(1./TAB[5]);
+
+
+
+/*
+
+		normalize(_h["pi0_minbias"]); // normalize to unity		//not sure if this is needed rn
+		normalize(_h["pi0_0010"]); // normalize to unity
+		normalize(_h["pi0_1020"]); // normalize to unity
+		normalize(_h["pi0_0020"]); // normalize to unity
+		normalize(_h["pi0_2040"]); // normalize to unity
+		normalize(_h["pi0_4060"]); // normalize to unity
+		normalize(_h["pi0_6090"]);	
+      
+		normalize(_h["eta_minbias"]); // normalize to unity
+		normalize(_h["eta_0020"]); // normalize to unity
+		normalize(_h["eta_2040"]); // normalize to unity
+		normalize(_h["eta_4060"]); // normalize to unity
+		normalize(_h["eta_6090"]);
+
+*/
 
 
 		//checking beam type used and which histos will be empty

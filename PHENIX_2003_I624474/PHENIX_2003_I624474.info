@@ -1,24 +1,22 @@
 Name: PHENIX_2003_I624474
 Year: 2003
-Summary: <A one-line informative PHENIX_2003_I624474 headline>
+Summary: <Identified Charged Particle Spectra and Yields in Au+Au Collisions at $\sqrt{s_{NN}}$=200GeV>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: <RHIC>
 InspireID: 624474
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Adam C. Tilley <atilley2@vols.utk.edu>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
-#RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
+ - 'Phys.Rev.C69:034909,2004'
+ - 'DOI:10.1103/PhysRevC.69.034909'
+ - 'arXiv:nucl-ex/0307022'
+#RunInfo: <Absolute Eta is below .35 for all identified particles. Charged particles are sorted using absolute charge above 0.>
+#Beams: [Au, Au]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+  'The centrality dependence of transverse momentum distributions and yields for $\pi^{\pm}$, $K^{\pm}$,$p$, and $bar{p} in Au+Au collisions at $\sqrt{s_{NN}}$=200GeV at mid-rapidity are measured by the PHENIX experiment at RHIC. We observe a clear particle mass dependence of the shapes of transverse momentum spectra in central collisions below ~ 2 GeV/c in $p_{T}$. Both mean transverse momenta and particle yields per participant pair increase from peripheral to mid-central and saturate at the most central collisions for all particle species. We also measure particle ratios of $\frac{\pi^{-}}{\pi^{+}}$, $\frac{K^{-}}{K^{+}}$, $\frac{bar{p}}{p}$, $\frac{K}{\pi}$, $\frac{p}{\pi^{0}}$, and $\frac{bar{p}}{\pi^{0}}$ as a function of $p_{T}$ and collision centrality. The ratios of equal mass particle yields are independent of $p_{T}$ and centrality within the experimental uncertainties. In central collisions at intermediate transverse momenta ~ 1.5 – 4.5 GeV/c, proton and anti-proton yields constitute a significant fraction of the charged hadron production and show a scaling behavior different from that of pions.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

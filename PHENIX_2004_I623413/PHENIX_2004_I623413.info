@@ -1,27 +1,24 @@
-Name: PHENIX_2019_I1672476
-Year: 2019
-Summary: Beam-energy and centrality dependence of direct-photon emission from ultra-relativistic heavy-ion collisions
+Name: PHENIX_2004_I623413
+Year: 2004
+Summary: <A one-line informative PHENIX_2004_I623413 headline>
 Experiment: PHENIX
-Collider: RHIC
-InspireID: 1672476
-Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Collider: <Insert the collider name>
+InspireID: 623413
+Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Reentrant: False
 Authors:
- - Christine Nattrass cnattras@utk.edu
+ - Your Name <your@email.address>
 References:
  - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
  - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
  - 'Example: arXiv:1605.03814'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [AU, AU]
+#Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Options:
- - cent=REF,GEN,IMP,USR
- - beam=AuAu62,AuAu39
 Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+  'A brief description of what is measured and what it is useful for.
+   Use LaTeX for maths, e.g. $\pT > 50\;\GeV$.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
