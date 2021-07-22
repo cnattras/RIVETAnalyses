@@ -692,6 +692,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
 	string name_AuAu = "AuAu_d" + to_string(24+correction) + "x1y" + to_string(y_axis);
 	book(_h[name_AuAu],24+correction,1,y_axis);
+	book(sow[name_AuAu], "sow" + name_AuAu);
 
 	cout << name_AuAu << endl;
 
@@ -884,7 +885,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         if(iterator==2 || iterator==5 || iterator==8) y_axis=2;
 
         string name_AuAu = "AuAu_d" + to_string(24+correction) + "x1y" + to_string(y_axis);
-        //sow[name_AuAu]->fill();
+        sow[name_AuAu]->fill();
 
         y_axis=1;
         iterator++;	
