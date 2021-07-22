@@ -5,6 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include "../Centralities/RHICCentrality.hh"
 #include <math.h>
 #include <iostream>
@@ -25,6 +26,11 @@ namespace Rivet {
 		void init() {
 		
 			//Particles: eta meson, Pi0?
+			
+			std::initializer_list<int> pdgIds = {221, 111};
+
+			const UnstableParticles np(pdgIds, Cuts::abseta < .35);
+			declare(np, "np");
 
 			declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 		
@@ -114,6 +120,12 @@ namespace Rivet {
 		/// Perform the per-event analysis
 		void analyze(const Event& event) {
 
+			const UnstableParticles np = apply<UnstableParticles>(event, "np");
+			const double c = cent();
+			const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+			const Particles unstableParticles = np.particles();
+
+			
 		}
 
 
