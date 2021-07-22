@@ -63,7 +63,7 @@ Type: Scatter2D
 8.500000e-01	5.000000e-02	5.000000e-02	3.800000e+00	1.000000e-01	1.000000e-01
 9.500000e-01	5.000000e-02	5.000000e-02	2.400000e+00	8.000000e-02	8.000000e-02
 1.050000e+00	5.000000e-02	5.000000e-02	1.610000e+00	6.000000e-02	6.000000e-02
-1.150000e+00	5.000000e-02	5.000000e-02	1.030000e+02	4.000000e-02	4.000000e-02
+1.150000e+00	5.000000e-02	5.000000e-02	1.030000e+00	4.000000e-02	4.000000e-02
 1.250000e+00	5.000000e-02	5.000000e-02	7.100000e-01	3.000000e-02	3.000000e-02
 1.350000e+00	5.000000e-02	5.000000e-02	4.600000e-01	2.000000e-02	2.000000e-02
 1.450000e+00	5.000000e-02	5.000000e-02	3.500000e-01	2.000000e-02	2.000000e-02
@@ -1756,7 +1756,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2004_I623413/d26-x01-y01
 ErrorBreakdown: {}
 IsRef: 1
 Path: /REF/PHENIX_2004_I623413/d26-x01-y01
-Title: Table 2 $_{coll}$
+Title: Table 2 $N_{coll}$
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+
@@ -1772,7 +1772,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2004_I623413/d27-x01-y01
 ErrorBreakdown: {0: {Syst error: {dn: -10, up: 10}}, 1: {Syst error: {dn: -8.4, up: 8.4}}, 2: {Syst error: {dn: -6.6, up: 6.6}}, 3: {Syst error: {dn: -4.6, up: 4.6}}, 4: {Syst error: {dn: -3.3, up: 3.3}}}
 IsRef: 1
 Path: /REF/PHENIX_2004_I623413/d27-x01-y01
-Title: Table 2 $_{part}$
+Title: Table 2 $N_{part}$
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+
