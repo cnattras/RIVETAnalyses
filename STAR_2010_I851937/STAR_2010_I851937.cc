@@ -723,7 +723,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
         string name_dAuAu = "dAuAu_d30x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
         book(_h[name_dAuAu], 30,1, 1);
-	*/
+*/	
         }
 	cout << iterator << endl;
 
@@ -757,10 +757,10 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       double triggerptMax = -999.;
       double associatedptMin = 999.;
       double associatedptMax = -999.;
+	
+      int iterator = 1;
 
       bool isVeto = true;
-
-      int iterator=1;
 
       //INCOMPLETE: Fill Histograms for figure 2
       for(Correlator corr : Correlators)
@@ -771,13 +771,12 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
           if(corr.GetIndex() <=1)
           {
 	    name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-            //sow[name_raw]->fill();
+            sow[name_raw]->fill();
 
            name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
-//          sow[name_eta]->fill();
+          sow[name_eta]->fill();
 
            name_sub = "sub_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string(corr.GetSubIndex()+1);
-  //        sow[name_sub]->fill();
       	  }
 
         if (corr.GetIndex() == 2)
@@ -785,39 +784,37 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
       	  	if (corr.GetSubIndex() <= 2)
       	  	{
       	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-      	  //		sow[name_raw]->fill();
+      	  		sow[name_raw]->fill();
 
       	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
-      	  //		sow[name_eta]->fill();
+      	  		sow[name_eta]->fill();
       	  	}
       	  	else
       	  	{
       	  		name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y1";
-      	  //		sow[name_raw]->fill();
+      	  		sow[name_raw]->fill();
 
       	  		name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y2";
-      	  //		sow[name_raw]->fill();
+      	  		sow[name_raw]->fill();
       	  	}
 
       	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
-      	  	//sow[name_sub]->fill();
       	  }
 
       	  if (corr.GetIndex() == 3)
       	  {
       	  	name_raw = "raw_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-      	  //	sow[name_raw]->fill();
+      	  	sow[name_raw]->fill();
 
       	  	name_eta = "eta_d" + to_string((corr.GetIndex()*2)+2) + "x1y" + to_string((corr.GetSubIndex()*2)+2);
-      	  //	sow[name_eta]->fill();
+      	  	sow[name_eta]->fill();
 
       	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
-      	  	//sow[name_sub]->fill();
       	  }
 	cout << name_raw << " " << name_eta << " " << name_sub << endl;
 	iterator++;
       	}
-/*
+
       //Fill Histograms for figure 3
       for (Correlator corr : Correlators3)
       {
@@ -825,7 +822,6 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         if(!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
 
         string name_sub = "sub_d10x01y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
-        sow[name_sub]->fill();
 
         string name_AuAuRaw = "AuAuRaw_d11x1y" + to_string(corr.GetIndex() + ((corr.GetSubIndex()-1)*4)+1);
         sow[name_AuAuRaw]->fill();
@@ -871,11 +867,29 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         sow[name_dPhi3]->fill();
       }
 
+	iterator=1;
+	int correction=0, y_axis=1;
       //Fill Histograms for figure 8; FIX ME TO THE FIG 8 LOGIC
       for (Correlator corr : Correlators8)
       {
         if (!corr.CheckCollSystemAndEnergy(SysAndEnergy)) continue;
+	
+	if(iterator>2)correction=1;
+        if (iterator>3) correction=2;
+        if (iterator>5) correction=3;
+        if (iterator>6) correction=4;
+        if (iterator>8) correction=5;
+        if (iterator>9) correction=6;
 
+        if(iterator==2 || iterator==5 || iterator==8) y_axis=2;
+
+        string name_AuAu = "AuAu_d" + to_string(24+correction) + "x1y" + to_string(y_axis);
+        //sow[name_AuAu]->fill();
+
+        y_axis=1;
+        iterator++;	
+	
+/*	
         string name_AuAu = "AuAu_d24x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
         sow[name_AuAu]->fill();
 
@@ -896,6 +910,8 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
         string name_dAuAu = "dAuAu_d30x1y" + to_string(corr.GetIndex() + corr.GetSubIndex());
         sow[name_dAuAu]->fill();
+*/	
+
       }
 
 Particles chargedParticles = cfs.particles();
@@ -950,7 +966,7 @@ Particles chargedParticles = cfs.particles();
         //if(!corr.CheckCentrality(centr)) continue;
 
         //If event is accepted for the correlator, fill event weights
-        sow[corr.GetFullIndex()]->fill();
+        //sow[corr.GetFullIndex()]->fill();
 
         isVeto = false;
 
@@ -963,12 +979,12 @@ Particles chargedParticles = cfs.particles();
       }
 
       if(isVeto) vetoEvent;
-	*/
+	
     }
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      /*bool AuAu200_available = false;
+      bool AuAu200_available = false;
       bool dAu_available = false;
 
       for (auto element : _h)
@@ -1001,11 +1017,11 @@ Particles chargedParticles = cfs.particles();
       for(Correlator corr : Correlators) //Finish with rest of logic
       {
           string name_raw = "raw_d" + to_string((corr.GetIndex()*2)+1) + "x1y" + to_string((corr.GetSubIndex()*2)+1);
-          _h[name_raw]->scaleW(sow[name_raw]->numEntries()/(nTriggers[name_raw]*sow[name_raw]->sumW()));
+          //_h[name_raw]->scaleW(sow[name_raw]->numEntries()/(nTriggers[name_raw]*sow[name_raw]->sumW()));
 
           string name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
-          _h[name_sub] = SubtractBackgroundZYAM(_h[name_raw]);
-      }*/
+         // _h[name_sub] = SubtractBackgroundZYAM(_h[name_raw]);
+      }
   }
 
 
