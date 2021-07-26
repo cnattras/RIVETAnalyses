@@ -1,9 +1,12 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
+#include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Projections/MissingMomentum.hh"
+#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/FinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
 #include <math.h>
-#include "Rivet/Tools/Cuts.hh"
 #include <iostream>
 #define _USE_MATH_DEFINES
 
@@ -120,7 +123,7 @@ namespace Rivet {
 			book(hPi["PPcross0_92Pi"], refnameRaaPi + "_0_92Pi", refdataRaaPi);
 			book(sRaa["RaaPi0_92"], refnameRaaPi);
 
-			book(pcross["cross_section"]1,0,1);
+			book(pcross["cross_section"],1,0,1);
 
 
 
@@ -132,7 +135,7 @@ namespace Rivet {
 
 			const ParticlePair& beam = beams();
 
-			if (beam.first.pid() == 1000791970 && beam.secondpid() == 1000791970) collSys = AuAu200;
+			if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
 			
 			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
 			
@@ -316,8 +319,21 @@ namespace Rivet {
 
 
 			hEta["AUAUyield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
-			hEta["PPcross0_5"]->scaleW(Taa*xsec/sow["sow_PP"]->sumW());
+			hEta["PPcross0_5"]->scaleW(25.37*xsec/sow["sow_PP"]->sumW());
 			divide(hEta["AUAUyield0_5"], hEta["PPcross0_5"], sRaa["RaaEta0_5"]);
+		
+			
+
+			//Taa values
+			//0-5: 25.37
+			//0-10: 22.75
+			//10-20: 14.35
+			//0-20: 
+			//20-40: 
+			//40-60: 
+			//20-60: 
+			//60-92: 0.35
+			//0-92: 6.14
 		}
 
 		map<string, Histo1DPtr> AUAU_yieldEta;
