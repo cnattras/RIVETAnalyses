@@ -3,6 +3,7 @@
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "../Centralities/RHICCentrality.hh"
 #include <math.h>
+#include "Rivet/Tools/Cuts.hh"
 #include <iostream>
 #define _USE_MATH_DEFINES
 
@@ -43,83 +44,83 @@ namespace Rivet {
 			book(sow["sow_PP"],"sow_PP");
 
 
-			//____Cross Section vs. pT____
+			//____Yields vs. pT____
 
-			book(AUAU_cross["cross0_5"],1,1,1);
-			book(AUAU_cross["cross0_10"],2,1,1);
-			book(AUAU_cross["cross10_20"],3,1,1);
-			book(AUAU_cross["cross0_20"],4,1,1);
-			book(AUAU_cross["cross20_40"],5,1,1);
-			book(AUAU_cross["cross40_60"],6,1,1);
-			book(AUAU_cross["cross20_60"],7,1,1);
-			book(AUAU_cross["cross60_92"],8,1,1);
-			book(AUAU_cross["cross0_92"],9,1,1);
-			book(AUAU_cross["crossPP"],10,1,1);
+			book(AUAU_yield["yield0_5"],1,1,1);
+			book(AUAU_yield["yield0_10"],2,1,1);
+			book(AUAU_yield["yield10_20"],3,1,1);
+			book(AUAU_yield["yield0_20"],4,1,1);
+			book(AUAU_yield["yield20_40"],5,1,1);
+			book(AUAU_yield["yield40_60"],6,1,1);
+			book(AUAU_yield["yield20_60"],7,1,1);
+			book(AUAU_yield["yield60_92"],8,1,1);
+			book(AUAU_yield["yield0_92"],9,1,1);
+			book(PP_yield["yieldPP"],10,1,1);
 
 
 			//____Eta Raa____
 
 			string refnameRaaEta = mkAxisCode(11,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_0_5Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_0_5Eta", refdataRaaEta);
+			book(hEta["AUAUyield0_5"], refnameRaaEta + "_0_5Eta", refdataRaaEta);
+			book(hEta["AUAUcross0_5"], refnameRaaEta + "_0_5Eta", refdataRaaEta);
 			book(sRaa["RaaEta0_5"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(12,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_0_10Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_0_10Eta", refdataRaaEta);
+			book(hEta["AUAUyield0_10"], refnameRaaEta + "_0_10Eta", refdataRaaEta);
+			book(hEta["AUAUcross0_10"], refnameRaaEta + "_0_10Eta", refdataRaaEta);
 			book(sRaa["RaaEta0_10"], refnameRaaEta);
 	
 			string refnameRaaEta = mkAxisCode(13,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_10_20Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_10_20Eta", refdataRaaEta);
+			book(hEta["AUAUyield10_20"], refnameRaaEta + "_10_20Eta", refdataRaaEta);
+			book(hEta["AUAUcross10_20"], refnameRaaEta + "_10_20Eta", refdataRaaEta);
 			book(sRaa["RaaEta10_20"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(14,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_0_20Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_0_20Eta", refdataRaaEta);
+			book(hEta["AUAUyield0_20"], refnameRaaEta + "_0_20Eta", refdataRaaEta);
+			book(hEta["AUAUcross0_20"], refnameRaaEta + "_0_20Eta", refdataRaaEta);
 			book(sRaa["RaaEta0_20"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(15,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_20_40Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_20_40Eta", refdataRaaEta);
+			book(hEta["AUAUyield20_40"], refnameRaaEta + "_20_40Eta", refdataRaaEta);
+			book(hEta["AUAUcross20_40"], refnameRaaEta + "_20_40Eta", refdataRaaEta);
 			book(sRaa["RaaEta20_40"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(16,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_40_60Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_40_60Eta", refdataRaaEta);
+			book(hEta["AUAUyield40_60"], refnameRaaEta + "_40_60Eta", refdataRaaEta);
+			book(hEta["AUAUcross40_60"], refnameRaaEta + "_40_60Eta", refdataRaaEta);
 			book(sRaa["RaaEta40_60"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(17,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_20_60Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_20_60Eta", refdataRaaEta);
+			book(hEta["AUAUyield20_60"], refnameRaaEta + "_20_60Eta", refdataRaaEta);
+			book(hEta["AUAUcross20_60"], refnameRaaEta + "_20_60Eta", refdataRaaEta);
 			book(sRaa["RaaEta20_60"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(18,1,1);
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_60_92Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_60_92Eta", refdataRaaEta);
+			book(hEta["AUAUyield60_92"], refnameRaaEta + "_60_92Eta", refdataRaaEta);
+			book(hEta["AUAUcross60_92"], refnameRaaEta + "_60_92Eta", refdataRaaEta);
 			book(sRaa["RaaEta60_92"], refnameRaaEta);
 
 			string refnameRaaEta = mkAxisCode(19,1,1);	//Figures 3-9 and 4-2 in HEPData; should be used twice in finalize
 			const Scatter2D& refdataRaaEta = refData(refnameRaaEta);
-			book(hEta["AUAUyield"], refnameRaaEta + "_0_92Eta", refdataRaaEta);
-			book(hEta["AUAUcross"], refnameRaaEta + "_0_92Eta", refdataRaaEta);
+			book(hEta["AUAUyield0_92"], refnameRaaEta + "_0_92Eta", refdataRaaEta);
+			book(hEta["AUAUcross0_92"], refnameRaaEta + "_0_92Eta", refdataRaaEta);
 			book(sRaa["RaaEta0_92"], refnameRaaEta);
 
 			string refnameRaaPi = mkAxisCode(20,1,1);
 			const Scatter2D& refdataRaaPi = refData(refnameRaaPi);
-			book(hPi["AUAUyield"], refnameRaaPi + "_0_92Pi", refdataRaaPi);
-			book(hPi["AUAUcross"], refnameRaaPi + "_0_92Pi", refdataRaaPi);
+			book(hPi["AUAUyield0_92Pi"], refnameRaaPi + "_0_92Pi", refdataRaaPi);
+			book(hPi["AUAUcross0_92Pi"], refnameRaaPi + "_0_92Pi", refdataRaaPi);
 			book(sRaa["RaaPi0_92"], refnameRaaPi);
 
-
+			book(pcross["cross_section"]1,0,1);
 
 
 
@@ -129,6 +130,12 @@ namespace Rivet {
 		/// Perform the per-event analysis
 		void analyze(const Event& event) {
 
+			const ParticlePair& beam = beams();
+
+			if (beam.first.pid() == 1000791970 && beam.secondpid() == 1000791970) collSys = AuAu200;
+			
+			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+			
 			const UnstableParticles up = apply<UnstableParticles>(event, "up");
 			const double c = cent();
 			const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
@@ -136,22 +143,47 @@ namespace Rivet {
 
 			if ((c < 0.) || (c > 92.)) vetoEvent;
 
-			if ((c >= 0.) && (c < 5.)) {
-	
+			if (collSys == pp) {
+
 				
+
+			}
+
+			if (collSys == AuAu200) {
+
+				if ((c >= 0.) && (c < 5.)) {
+	
+					sow["AUAU0_5"]->fill();
+				}
+			}
 		}
-
-
 		/// Normalise histograms etc., after the run
 		void finalize() {
-		
+
+			if(collSys == pp) pcross["cross_section"]->fill(0.5, crossSection());
+			double xsec = pcross["cross_section"]->bin(0).mean()/millibarn;
+
+
+			AUAU_yield["yield0_5"]->scaleW(1./sow["AUAU0_5"]);
+
+			PP_yield["yieldPP"]->scaleW(xsec/sow["sow_PP"]);
+
+
+			hEta["AUAUyield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
+			hEta["AUAUcross0_5"]->scaleW(Taa*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield0_5"], hEta["AUAUcross0_5"], sRaa["RaaEta0_5"]);
 		}
 
-		map<string, Histo1DPtr> AUAU_cross;
+		map<string, Histo1DPtr> AUAU_yield;
+		map<string, Histo1DPtr> PP_yield;
 		map<string, CounterPtr> sow;
 		map<string, Scatter2DPtr> sRaa;
 		map<string, Histo1DPtr> hPi;
 		map<string, Histo1DPtr> hEta;
+		map<string, Profile1DPtr> pcross;
+
+		enum CollisionSystem {empty, pp, AuAu200};
+		CollisionSystem collSys = empty;
 	};
 
 
