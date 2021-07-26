@@ -154,6 +154,16 @@ namespace Rivet {
 				if ((c >= 0.) && (c < 5.)) {
 	
 					sow["AUAU0_5"]->fill();
+
+					for (const Particle& : unstableParticles) {
+			
+						double partPt = p.pT()/GeV;
+
+						if (p.pid == 221) {
+
+							AUAU_yieldEta["yield0_5"]->fill(partPt);
+						}
+					}
 				}
 			}
 		}
@@ -163,10 +173,17 @@ namespace Rivet {
 			if(collSys == pp) pcross["cross_section"]->fill(0.5, crossSection());
 			double xsec = pcross["cross_section"]->bin(0).mean()/millibarn;
 
-
-			AUAU_yield["yield0_5"]->scaleW(1./sow["AUAU0_5"]);
-
-			PP_yield["yieldPP"]->scaleW(xsec/sow["sow_PP"]);
+			//____Yields vs. pT____
+			AUAU_yieldEta["yield0_5"]->scaleW(1./sow["AUAU0_5"]);
+			AUAU_yieldEta["yield0_10"]->scaleW(1./sow["sow_AUAU0_10"]);
+			AUAU_yieldEta["yield10_20"]->scaleW(1./sow["sow_AUAU10_20"]);
+			AUAU_yieldEta["yield0_20"]->scaleW(1./sow["sow_AUAU0_20"]);
+			AUAU_yieldEta["yield20_40"]->scaleW(1./sow["sow_AUAU20_40"]);
+			AUAU_yieldEta["yield40_60"]->scaleW(1./sow["sow_AUAU40_60"]);
+			AUAU_yieldEta["yield20_60"]->scaleW(1./sow["sow_AUAU20_60"]);
+			AUAU_yieldEta["yield60_92"]->scaleW(1./sow["sow_AUAU60_92"]);
+			AUAU_yieldEta["yield0_92"]->scaleW(1./sow["sow_AUAU0_92"]);
+			PP_yieldEta["yieldPP"]->scaleW(1./sow["sow_PP"]);
 
 
 			hEta["AUAUyield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
@@ -174,8 +191,8 @@ namespace Rivet {
 			divide(hEta["AUAUyield0_5"], hEta["AUAUcross0_5"], sRaa["RaaEta0_5"]);
 		}
 
-		map<string, Histo1DPtr> AUAU_yield;
-		map<string, Histo1DPtr> PP_yield;
+		map<string, Histo1DPtr> AUAU_yieldEta;
+		map<string, Histo1DPtr> PP_yieldEta;
 		map<string, CounterPtr> sow;
 		map<string, Scatter2DPtr> sRaa;
 		map<string, Histo1DPtr> hPi;
