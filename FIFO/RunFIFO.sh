@@ -7,7 +7,7 @@
 #Have your centrality calibration file in the same folder or point $CALIBRATION to the right path/file
 ANALYSIS="PHENIX_2008_I778168"
 ANALYSIS_DIR=$PWD
-source /lustre/haven/proj/UTK0019/Rivet3.1.3/local/rivetenv.sh
+source /lustre/haven/proj/UTK0019/Rivet/rivet.sh
 rm RivetPHENIX_2008_I778168.so
 rivet-build RivetPHENIX_2008_I778168.so PHENIX_2008_I778168.cc
 FIFOFILE="fifo$ANALYSIS.hepmc"
