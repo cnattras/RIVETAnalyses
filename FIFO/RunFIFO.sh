@@ -1,7 +1,7 @@
 #!/bin/bash
 #ATTENTION! FIFO requires a lot of virtual memory. When entering in debug more, use: qsub -I -l nodes=1:ppn=4 -q debug
 #This will request 4 cores and sufficient virtual memory
-#Copy the main113 file to the same directory where you have your Rivet Analysis
+#Copy the runPythia file to the same directory where you have your Rivet Analysis
 #On ACF you can find runPythia here: /lustre/haven/proj/UTK0019/Rivet
 #Change the name "PHENIX_2008_I778168" to your Rivet Analysis
 #Have your centrality calibration file in the same folder or point $CALIBRATION to the right path/file
