@@ -148,7 +148,7 @@ namespace Rivet {
 
 			if (collSys == pp) {
 
-				for (const Particle& : unstableParticles) {
+				for (const Particle& p : unstableParticles) {
 			
 					double partPt = p.pT()/GeV;
 
@@ -163,9 +163,9 @@ namespace Rivet {
 
 				if ((c >= 0.) && (c < 5.)) {
 	
-					sow["AUAU0_5"]->fill();
+					sow["sow_AUAU0_5"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -178,9 +178,9 @@ namespace Rivet {
 
 				if ((c >= 0.) && (c < 10.)) {
 	
-					sow["AUAU0_10"]->fill();
+					sow["sow_AUAU0_10"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -193,9 +193,9 @@ namespace Rivet {
 
 				if ((c >= 10.) && (c < 20.)) {
 	
-					sow["AUAU10_20"]->fill();
+					sow["sow_AUAU10_20"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -208,9 +208,9 @@ namespace Rivet {
 
 				if ((c >= 0.) && (c < 20.)) {
 	
-					sow["AUAU0_20"]->fill();
+					sow["sow_AUAU0_20"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -223,9 +223,9 @@ namespace Rivet {
 
 				if ((c >= 20.) && (c < 40.)) {
 	
-					sow["AUAU20_40"]->fill();
+					sow["sow_AUAU20_40"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -238,9 +238,9 @@ namespace Rivet {
 
 				if ((c >= 40.) && (c < 60.)) {
 	
-					sow["AUAU40_60"]->fill();
+					sow["sow_AUAU40_60"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -253,9 +253,9 @@ namespace Rivet {
 
 				if ((c >= 20.) && (c < 60.)) {
 	
-					sow["AUAU20_60"]->fill();
+					sow["sow_AUAU20_60"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -268,9 +268,9 @@ namespace Rivet {
 
 				if ((c >= 60.) && (c < 92.)) {
 	
-					sow["AUAU60_92"]->fill();
+					sow["sow_AUAU60_92"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -283,9 +283,9 @@ namespace Rivet {
 
 				if ((c >= 0.) && (c < 92.)) {
 	
-					sow["AUAU0_92"]->fill();
+					sow["sow_AUAU0_92"]->fill();
 
-					for (const Particle& : unstableParticles) {
+					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
 
@@ -306,16 +306,16 @@ namespace Rivet {
 			double xsec = pcross["cross_section"]->bin(0).mean()/millibarn;
 
 			//____Yields vs. pT____
-			AUAU_yieldEta["yield0_5"]->scaleW(1./sow["AUAU0_5"]);
-			AUAU_yieldEta["yield0_10"]->scaleW(1./sow["sow_AUAU0_10"]);
-			AUAU_yieldEta["yield10_20"]->scaleW(1./sow["sow_AUAU10_20"]);
-			AUAU_yieldEta["yield0_20"]->scaleW(1./sow["sow_AUAU0_20"]);
-			AUAU_yieldEta["yield20_40"]->scaleW(1./sow["sow_AUAU20_40"]);
-			AUAU_yieldEta["yield40_60"]->scaleW(1./sow["sow_AUAU40_60"]);
-			AUAU_yieldEta["yield20_60"]->scaleW(1./sow["sow_AUAU20_60"]);
-			AUAU_yieldEta["yield60_92"]->scaleW(1./sow["sow_AUAU60_92"]);
-			AUAU_yieldEta["yield0_92"]->scaleW(1./sow["sow_AUAU0_92"]);
-			PP_yieldEta["yieldPP"]->scaleW(1./sow["sow_PP"]);
+			AUAU_yieldEta["yield0_5"]->scaleW(1./sow["AUAU0_5"]->sumW());
+			AUAU_yieldEta["yield0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
+			AUAU_yieldEta["yield10_20"]->scaleW(1./sow["sow_AUAU10_20"]->sumW());
+			AUAU_yieldEta["yield0_20"]->scaleW(1./sow["sow_AUAU0_20"]->sumW());
+			AUAU_yieldEta["yield20_40"]->scaleW(1./sow["sow_AUAU20_40"]->sumW());
+			AUAU_yieldEta["yield40_60"]->scaleW(1./sow["sow_AUAU40_60"]->sumW());
+			AUAU_yieldEta["yield20_60"]->scaleW(1./sow["sow_AUAU20_60"]->sumW());
+			AUAU_yieldEta["yield60_92"]->scaleW(1./sow["sow_AUAU60_92"]->sumW());
+			AUAU_yieldEta["yield0_92"]->scaleW(1./sow["sow_AUAU0_92"]->sumW());
+			PP_yieldEta["yieldPP"]->scaleW(1./sow["sow_PP"]->sumW());
 
 
 			hEta["AUAUyield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
