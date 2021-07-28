@@ -194,6 +194,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield0_5"]->fill(partPt);
+							hEta["AUAUyield0_5"]->fill(partPt);
+							hEta["PPcross0_5"]->fill(partPt);
 						}
 					}
 				}
@@ -209,6 +211,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield0_10"]->fill(partPt);
+							hEta["AUAUyield0_10"]->fill(partPt);
+							hEta["PPcross0_10"]->fill(partPt);
 						}
 					}
 				}
@@ -224,6 +228,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield10_20"]->fill(partPt);
+							hEta["AUAUyield10_20"]->fill(partPt);
+							hEta["PPcross10_20"]->fill(partPt);
 						}
 					}
 				}
@@ -239,6 +245,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield0_20"]->fill(partPt);
+							hEta["AUAUyield0_20"]->fill(partPt);
+							hEta["PPcross0_20"]->fill(partPt);
 						}
 					}
 				}
@@ -254,6 +262,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield20_40"]->fill(partPt);
+							hEta["AUAUyield20_40"]->fill(partPt);
+							hEta["PPcross20_40"]->fill(partPt);
 						}
 					}
 				}
@@ -269,6 +279,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield40_60"]->fill(partPt);
+							hEta["AUAUyield40_60"]->fill(partPt);
+							hEta["PPcross40_60"]->fill(partPt);
 						}
 					}
 				}
@@ -284,6 +296,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield20_60"]->fill(partPt);
+							hEta["AUAUyield20_60"]->fill(partPt);
+							hEta["PPcross20_60"]->fill(partPt);
 						}
 					}
 				}
@@ -299,6 +313,8 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield60_92"]->fill(partPt);
+							hEta["AUAUyield60_92"]->fill(partPt);
+							hEta["PPcross60_92"]->fill(partPt);
 						}
 					}
 				}
@@ -314,6 +330,14 @@ namespace Rivet {
 						if (p.pid() == 221) {
 
 							AUAU_yieldEta["yield0_92"]->fill(partPt);
+							hEta["AUAUyield0_92"]->fill(partPt);
+							hEta["PPcross0_92"]->fill(partPt);
+						}
+
+						if (p.pid() == 111) {
+
+							hPi["AUAUyield0_92Pi"]->fill(partPt);
+							hPi["PPcross0_92Pi"]->fill(partPt);
 						}
 					}
 				}
