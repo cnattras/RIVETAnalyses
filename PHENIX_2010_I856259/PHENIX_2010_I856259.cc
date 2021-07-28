@@ -28,7 +28,7 @@ namespace Rivet {
 			
 			//std::initializer_list<int> pdgIds = {221, 111};
 
-			const UnstableParticles up(Cuts::abspid == 221 && Cuts::abspid == 111 && Cuts::abseta < .35);
+			const UnstableParticles up((Cuts::abspid == 221 || Cuts::abspid == 111) && Cuts::abseta < .35);
 			declare(up, "up");
 
 			declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
@@ -45,7 +45,7 @@ namespace Rivet {
 			book(sow["sow_AUAU60_92"],"sow_AUAU60_92");
 			book(sow["sow_AUAU0_92"],"sow_AUAU0_92");
 			book(sow["sow_PP"],"sow_PP");
-
+			book(sow["sow_AUAU0_92Pi"], "sow_AUAU0_92Pi");
 
 			//____Yields vs. pT____
 
@@ -111,7 +111,7 @@ namespace Rivet {
 			book(hEta["PPcross60_92"], refnameRaaEta60_92 + "_60_92Pcross", refdataRaaEta60_92);
 			book(sRaa["RaaEta60_92"], refnameRaaEta60_92);
 
-			string refnameRaaEta0_92 = mkAxisCode(19,1,1);	//Figures 3-9 and 4-2 in HEPData; should be used twice in finalize
+			string refnameRaaEta0_92 = mkAxisCode(19,1,1);	//Figures 3-9 and 4-2 in HEPData; should maybe be used twice in finalize
 			const Scatter2D& refdataRaaEta0_92 = refData(refnameRaaEta0_92);
 			book(hEta["AUAUyield0_92"], refnameRaaEta0_92 + "_0_92Eta", refdataRaaEta0_92);
 			book(hEta["PPcross0_92"], refnameRaaEta0_92 + "_0_92Pcross", refdataRaaEta0_92);
@@ -123,7 +123,27 @@ namespace Rivet {
 			book(hPi["PPcross0_92Pi"], refnameRaaPi0_92 + "_0_92PiPcross", refdataRaaPi0_92);
 			book(sRaa["RaaPi0_92"], refnameRaaPi0_92);
 
-			book(pcross["cross_section"],"cross_section",1,0,1);
+			string refnameRaaEtapT20 = mkAxisCode(22,1,1);
+			const Scatter2D& refdataRaaEtapT20 = refData(refnameRaaEtapT20);
+			book(hPi["AUAUyieldEtapT20"], refnameRaaEtapT20 + "_EtapT20", refdataRaaEtapT20);
+			book(hPi["PPcrossEtapT20"], refnameRaaEtapT20 + "_PcrossEtapT20", refdataRaaEtapT20);
+			book(sRaa["RaaEtapT20"], refnameRaaEtapT20);
+
+			string refnameRaaEtapT5 = mkAxisCode(23,1,1);
+			const Scatter2D& refdataRaaEtapT5 = refData(refnameRaaEtapT5);
+			book(hPi["AUAUyieldEtapT5"], refnameRaaEtapT5 + "_EtapT5", refdataRaaEtapT5);
+			book(hPi["PPcrossEtapT5"], refnameRaaEtapT5 + "_PcrossEtapT5", refdataRaaEtapT5);
+			book(sRaa["RaaEtapT5"], refnameRaaEtapT5);
+
+			string refnameRaaEtapT5_18 = mkAxisCode(24,1,1);
+			const Scatter2D& refdataRaaEtapT5_18 = refData(refnameRaaEtapT5_18);
+			book(hPi["AUAUyieldEtapT5_18"], refnameRaaEtapT5_18 + "_EtapT5_18", refdataRaaEtapT5_18);
+			book(hPi["PPcrossEtapT5_18"], refnameRaaEtapT5_18 + "_PcrossEtapT5_18", refdataRaaEtapT5_18);
+			book(sRaa["RaaEtapT5_18"], refnameRaaEtapT5_18);
+
+
+
+			book(pcross["cross_section"],"cross_section",1,0,1);	//cross section binning profile
 
 
 
@@ -148,6 +168,8 @@ namespace Rivet {
 
 			if (collSys == pp) {
 
+				sow["sow_PP"]->fill();
+			
 				for (const Particle& p : unstableParticles) {
 			
 					double partPt = p.pT()/GeV;
@@ -323,21 +345,56 @@ namespace Rivet {
 			AUAU_yieldEta["yield0_92"]->scaleW(1./sow["sow_AUAU0_92"]->sumW());
 			PP_yieldEta["yieldPP"]->scaleW(1./sow["sow_PP"]->sumW());
 
+			//____Raa____
 
 			hEta["AUAUyield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
 			hEta["PPcross0_5"]->scaleW(25.37*xsec/sow["sow_PP"]->sumW());
 			divide(hEta["AUAUyield0_5"], hEta["PPcross0_5"], sRaa["RaaEta0_5"]);
 		
-			
+			hEta["AUAUyield0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
+			hEta["PPcross0_10"]->scaleW(22.75*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield0_10"], hEta["PPcross0_10"], sRaa["RaaEta0_10"]);
+
+			hEta["AUAUyield10_20"]->scaleW(1./sow["sow_AUAU10_20"]->sumW());
+			hEta["PPcross10_20"]->scaleW(14.35*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield10_20"], hEta["PPcross10_20"], sRaa["RaaEta10_20"]);
+
+			hEta["AUAUyield0_20"]->scaleW(1./sow["sow_AUAU0_20"]->sumW());
+			hEta["PPcross0_20"]->scaleW(18.55*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield0_20"], hEta["PPcross0_20"], sRaa["RaaEta0_20"]);
+
+			hEta["AUAUyield20_40"]->scaleW(1./sow["sow_AUAU20_40"]->sumW());
+			hEta["PPcross20_40"]->scaleW(7.065*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield20_40"], hEta["PPcross20_40"], sRaa["RaaEta20_40"]);
+
+			hEta["AUAUyield40_60"]->scaleW(1./sow["sow_AUAU40_60"]->sumW());
+			hEta["PPcross40_60"]->scaleW(2.155*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield40_60"], hEta["PPcross40_60"], sRaa["RaaEta40_60"]);
+
+			hEta["AUAUyield20_60"]->scaleW(1./sow["sow_AUAU20_60"]->sumW());
+			hEta["PPcross20_60"]->scaleW(4.61*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield20_60"], hEta["PPcross20_60"], sRaa["RaaEta20_60"]);
+
+			hEta["AUAUyield60_92"]->scaleW(1./sow["sow_AUAU60_92"]->sumW());
+			hEta["PPcross60_92"]->scaleW(.35*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield60_92"], hEta["PPcross60_92"], sRaa["RaaEta60_92"]);
+
+			hEta["AUAUyield0_92"]->scaleW(1./sow["sow_AUAU0_92"]->sumW());
+			hEta["PPcross0_92"]->scaleW(6.14*xsec/sow["sow_PP"]->sumW());
+			divide(hEta["AUAUyield0_92"], hEta["PPcross0_92"], sRaa["RaaEta0_92"]);
+
+			hPi["AUAUyield0_92Pi"]->scaleW(1./sow["sow_AUAU0_92Pi"]->sumW());
+			hPi["PPcross0_92Pi"]->scaleW(6.14*xsec/sow["sow_PP"]->sumW());
+			divide(hPi["AUAUyield0_92Pi"], hPi["PPcross0_92Pi"], sRaa["RaaPi0_92"]);
 
 			//Taa values
 			//0-5: 25.37
 			//0-10: 22.75
 			//10-20: 14.35
-			//0-20: 
-			//20-40: 
-			//40-60: 
-			//20-60: 
+			//0-20: 18.55
+			//20-40: 7.065
+			//40-60: 2.155
+			//20-60: 4.61
 			//60-92: 0.35
 			//0-92: 6.14
 		}
