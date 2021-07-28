@@ -37,7 +37,7 @@ namespace Rivet {
       book(_h["PionMinusMinBias"], 2, 1, 2);
       book(_h["ProtonMinBias"], 3, 1, 1);
       book(_h["AntiProtonMinBias"], 3, 1, 2);
-      book(_h["PionPlusCent0_5"], 4, 1, 1);
+      /*book(_h["PionPlusCent0_5"], 4, 1, 1);
       book(_h["PionPlusCent5_15"], 4, 1, 2);
       book(_h["PionPlusCent15_30"], 4, 1, 3);
       book(_h["PionPlusCent30_60"], 4, 1, 4);
@@ -133,7 +133,7 @@ namespace Rivet {
       book(_h["BestFitCentrality"], 31, 1, 3);
       book(_h["BestFitCentrality"], 32, 1, 1);
       book(_h["BestFitCentrality"], 32, 1, 2);
-      book(_h["BestFitCentrality"], 32, 1, 3);
+      book(_h["BestFitCentrality"], 32, 1, 3);*/
       book(_c["MinBias"], "MinBias");
     }
 
@@ -179,6 +179,11 @@ namespace Rivet {
           _h["PionMinusMinBias"]->fill(p.pT()/GeV);
 
         }
+        if(p.pid() == -211)
+        {
+          _h["PionMinusMinBias"]->fill(p.pT()/GeV);
+
+        }
        }
 
 
@@ -187,6 +192,13 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      _h["KaonPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["KaonMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["ProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["AntiProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["PionPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["PionMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      
 
 
     }
