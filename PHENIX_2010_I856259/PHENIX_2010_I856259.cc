@@ -123,24 +123,17 @@ namespace Rivet {
 			book(hPi["PPcross0_92Pi"], refnameRaaPi0_92 + "_0_92PiPcross", refdataRaaPi0_92);
 			book(sRaa["RaaPi0_92"], refnameRaaPi0_92);
 
-			string refnameRaaEtapT20 = mkAxisCode(22,1,1);
-			const Scatter2D& refdataRaaEtapT20 = refData(refnameRaaEtapT20);
-			book(hPi["AUAUyieldEtapT20"], refnameRaaEtapT20 + "_EtapT20", refdataRaaEtapT20);
-			book(hPi["PPcrossEtapT20"], refnameRaaEtapT20 + "_PcrossEtapT20", refdataRaaEtapT20);
-			book(sRaa["RaaEtapT20"], refnameRaaEtapT20);
+			//string refnameRaaEtapT20 = mkAxisCode(22,1,1);
+			//const Scatter2D& refdataRaaEtapT20 = refData(refnameRaaEtapT20);
+			//book(hPi["AUAUyieldEtapT20"], refnameRaaEtapT20 + "_EtapT20", refdataRaaEtapT20);
+			//book(hPi["PPcrossEtapT20"], refnameRaaEtapT20 + "_PcrossEtapT20", refdataRaaEtapT20);
+			//book(sRaa["RaaEtapT20"], refnameRaaEtapT20);
 
-			string refnameRaaEtapT5 = mkAxisCode(23,1,1);
-			const Scatter2D& refdataRaaEtapT5 = refData(refnameRaaEtapT5);
-			book(hPi["AUAUyieldEtapT5"], refnameRaaEtapT5 + "_EtapT5", refdataRaaEtapT5);
-			book(hPi["PPcrossEtapT5"], refnameRaaEtapT5 + "_PcrossEtapT5", refdataRaaEtapT5);
-			book(sRaa["RaaEtapT5"], refnameRaaEtapT5);
-
-			string refnameRaaEtapT5_18 = mkAxisCode(24,1,1);
-			const Scatter2D& refdataRaaEtapT5_18 = refData(refnameRaaEtapT5_18);
-			book(hPi["AUAUyieldEtapT5_18"], refnameRaaEtapT5_18 + "_EtapT5_18", refdataRaaEtapT5_18);
-			book(hPi["PPcrossEtapT5_18"], refnameRaaEtapT5_18 + "_PcrossEtapT5_18", refdataRaaEtapT5_18);
-			book(sRaa["RaaEtapT5_18"], refnameRaaEtapT5_18);
-
+			//string refnameRaaEtapT5 = mkAxisCode(23,1,1);
+			//const Scatter2D& refdataRaaEtapT5 = refData(refnameRaaEtapT5);
+			//book(hPi["AUAUyieldEtapT5"], refnameRaaEtapT5 + "_EtapT5", refdataRaaEtapT5);
+			//book(hPi["PPcrossEtapT5"], refnameRaaEtapT5 + "_PcrossEtapT5", refdataRaaEtapT5);
+			//book(sRaa["RaaEtapT5"], refnameRaaEtapT5);
 
 
 			book(pcross["cross_section"],"cross_section",1,0,1);	//cross section binning profile
@@ -173,11 +166,12 @@ namespace Rivet {
 				for (const Particle& p : unstableParticles) {
 			
 					double partPt = p.pT()/GeV;
+					double pt_weight = 1./(partPt*2.*M_PI);
 
 					if (p.pid() == 221) {
 
-						PP_yieldEta["yieldPP"]->fill(partPt);
-					}
+						PP_yieldEta["yieldPP"]->fill(partPt, pt_weight);
+					
 				}
 			}
 
@@ -190,12 +184,14 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
+
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield0_5"]->fill(partPt);
-							hEta["AUAUyield0_5"]->fill(partPt);
-							hEta["PPcross0_5"]->fill(partPt);
+							AUAU_yieldEta["yield0_5"]->fill(partPt, pt_weight);
+							hEta["AUAUyield0_5"]->fill(partPt, pt_weight);
+							hEta["PPcross0_5"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -207,12 +203,13 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield0_10"]->fill(partPt);
-							hEta["AUAUyield0_10"]->fill(partPt);
-							hEta["PPcross0_10"]->fill(partPt);
+							AUAU_yieldEta["yield0_10"]->fill(partPt, pt_weight);
+							hEta["AUAUyield0_10"]->fill(partPt, pt_weight);
+							hEta["PPcross0_10"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -224,12 +221,13 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield10_20"]->fill(partPt);
-							hEta["AUAUyield10_20"]->fill(partPt);
-							hEta["PPcross10_20"]->fill(partPt);
+							AUAU_yieldEta["yield10_20"]->fill(partPt, pt_weight);
+							hEta["AUAUyield10_20"]->fill(partPt, pt_weight);
+							hEta["PPcross10_20"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -241,12 +239,13 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield0_20"]->fill(partPt);
-							hEta["AUAUyield0_20"]->fill(partPt);
-							hEta["PPcross0_20"]->fill(partPt);
+							AUAU_yieldEta["yield0_20"]->fill(partPt, pt_weight);
+							hEta["AUAUyield0_20"]->fill(partPt, pt_weight);
+							hEta["PPcross0_20"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -258,12 +257,13 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield20_40"]->fill(partPt);
-							hEta["AUAUyield20_40"]->fill(partPt);
-							hEta["PPcross20_40"]->fill(partPt);
+							AUAU_yieldEta["yield20_40"]->fill(partPt, pt_weight);
+							hEta["AUAUyield20_40"]->fill(partPt, pt_weight);
+							hEta["PPcross20_40"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -278,9 +278,9 @@ namespace Rivet {
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield40_60"]->fill(partPt);
-							hEta["AUAUyield40_60"]->fill(partPt);
-							hEta["PPcross40_60"]->fill(partPt);
+							AUAU_yieldEta["yield40_60"]->fill(partPt, pt_weight);
+							hEta["AUAUyield40_60"]->fill(partPt, pt_weight);
+							hEta["PPcross40_60"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -292,12 +292,13 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield20_60"]->fill(partPt);
-							hEta["AUAUyield20_60"]->fill(partPt);
-							hEta["PPcross20_60"]->fill(partPt);
+							AUAU_yieldEta["yield20_60"]->fill(partPt, pt_weight);
+							hEta["AUAUyield20_60"]->fill(partPt, pt_weight);
+							hEta["PPcross20_60"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -309,12 +310,13 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield60_92"]->fill(partPt);
-							hEta["AUAUyield60_92"]->fill(partPt);
-							hEta["PPcross60_92"]->fill(partPt);
+							AUAU_yieldEta["yield60_92"]->fill(partPt, pt_weight);
+							hEta["AUAUyield60_92"]->fill(partPt, pt_weight);
+							hEta["PPcross60_92"]->fill(partPt, pt_weight);
 						}
 					}
 				}
@@ -326,18 +328,19 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
-							AUAU_yieldEta["yield0_92"]->fill(partPt);
-							hEta["AUAUyield0_92"]->fill(partPt);
-							hEta["PPcross0_92"]->fill(partPt);
+							AUAU_yieldEta["yield0_92"]->fill(partPt, pt_weight);
+							hEta["AUAUyield0_92"]->fill(partPt, pt_weight);
+							hEta["PPcross0_92"]->fill(partPt, pt_weight);
 						}
 
 						if (p.pid() == 111) {
 
-							hPi["AUAUyield0_92Pi"]->fill(partPt);
-							hPi["PPcross0_92Pi"]->fill(partPt);
+							hPi["AUAUyield0_92Pi"]->fill(partPt, pt_weight);
+							hPi["PPcross0_92Pi"]->fill(partPt, pt_weight);
 						}
 					}
 				}
