@@ -1,4 +1,4 @@
-// -*- C++ -*-
+i/ -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
@@ -24,6 +24,8 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+
+      beamOpt = getOption<string>("beam", "NONE");
 
       // Initialise and register projections
 
@@ -150,21 +152,21 @@ namespace Rivet {
       const ParticlePair& beam = beams();
       int NN = 0;
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-      {
-          NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
-          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
-      }
-      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-      {
-          collSys = pp;
-      }
+      //if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      //{
+      //    NN = 197.;
+      //    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+      //    if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+      //}
+      //if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      //{
+      //    collSys = pp;
+      //}
 
       PrimaryParticles cpp = applyProjection<PrimaryParticles>(event,"cpp");
       Particles particles = cpp.particles();
 
-      if(collSys==pp)
+      if(beamOpt == "PP200" || collSys == pp)
       {
           sow["sow_pp"]->fill();
           for(Particle p : particles)
@@ -190,7 +192,7 @@ namespace Rivet {
       if(c < 5.)
       {
 
-          if(collSys==AuAu200)
+          if(beamOpt == "AUAU200")
           {
               for(Particle p : particles)
               {
@@ -203,7 +205,7 @@ namespace Rivet {
               }
               sow["sow0_5"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(beamOpt == "AUAU130")
           {
               for(Particle p : particles)
               {
@@ -214,7 +216,7 @@ namespace Rivet {
       }
       else if(c >= 5 && c < 10)
       {
-          if(collSys==AuAu200)
+          if(beamOpt=="AUAU200")
           {
               for(Particle p : particles)
               {
@@ -228,7 +230,7 @@ namespace Rivet {
       }
       else if(c >= 10 && c < 20)
       {
-          if(collSys==AuAu200)
+          if(beamOpt=="AUAU200")
           {
               for(Particle p : particles)
               {
@@ -243,7 +245,7 @@ namespace Rivet {
       }
       else if(c >= 20 && c < 30)
       {
-          if(collSys==AuAu200)
+          if(beamOpt=="AUAU200")
           {
               for(Particle p : particles)
               {
@@ -256,7 +258,7 @@ namespace Rivet {
               }
               sow["sow20_30"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(beamOpt=="AUAU130")
           {
               for(Particle p : particles)
               {
@@ -267,7 +269,7 @@ namespace Rivet {
       }
       else if(c >= 30 && c < 40)
       {
-          if(collSys==AuAu200)
+          if(beamOpt=="AUAU200")
           {
               for(Particle p : particles)
               {
@@ -280,7 +282,7 @@ namespace Rivet {
               }
               sow["sow30_40"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(beamOpt=="AUAU130")
           {
               for(Particle p : particles)
               {
@@ -292,7 +294,7 @@ namespace Rivet {
       }
       else if(c >= 40 && c < 60)
       {
-          if(collSys==AuAu200)
+          if(beamOpt=="AUAU200")
           {
               for(Particle p : particles)
               {
@@ -305,7 +307,7 @@ namespace Rivet {
               }
               sow["sow40_60"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(beamOpt=="AUAU130")
           {
               for(Particle p : particles)
               {
@@ -316,7 +318,7 @@ namespace Rivet {
       }
       else if(c >= 60 && c < 80)
       {
-          if(collSys==AuAu200)
+          if(beamOpt=="AUAU200")
           {
               for(Particle p : particles)
               {
