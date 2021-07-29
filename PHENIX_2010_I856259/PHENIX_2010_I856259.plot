@@ -58,4 +58,64 @@ XLabel=[$p_{T}$(GeV/c))]
 YLabel=[$E\frac{dN^{3}}{dp^{3}}$]
 END PLOT
 
+BEGIN PLOT /PHENIX_2010_I856259/d11-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($0-5\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d12-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($0-10\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d13-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($10-20\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d14-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($0-20\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d15-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($20-40\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d16-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($40-60\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d17-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($20-60\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d18-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($60-92\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d19-x01-y01
+Title=[$R_{AA}$ of $\eta$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($0-92\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
+BEGIN PLOT /PHENIX_2010_I856259/d11-x01-y01
+Title=[$R_{AA}$ of $\pi$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($0-92\%$)]
+XLabel=[$p_{T}$(GeV/c))]
+YLabel=[$R_{AA}$]
+END PLOT
+
 
