@@ -1,24 +1,23 @@
 Name: PHENIX_2010_I856259
 Year: 2010
-Summary: <A one-line informative PHENIX_2010_I856259 headline>
+Summary: <Transverse momentum dependence of $\eta$ meson suppression in Au+Au collisions at $sqrt{s_{NN}}=$ 200GeV>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: <RHIC>
 InspireID: 856259
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Reentrant: False
 Authors:
- - Your Name <your@email.address>
+ - Adam C. Tilley <atilley2@vols.utk.edu>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
-#RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
+ - 'Phys.Rev.C82:011902,2010'
+ - '10.1103/PhysRevC.82.011902'
+ - 'arXiv:1005.4916'
+#RunInfo: <Absolute eta cuts at .35.>
+#Beams: [p+, p+; Au, Au]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Description:
-  'A brief description of what is measured and what it is useful for.
-   Use LaTeX for maths, e.g. $\pT > 50\;\GeV$.'
+  'New measurements by the PHENIX experiment at RHIC for $\eta$ production at midrapidity as a function of transverse momentum ($p_{T}$) and collision centrality in $\sqrt{s_{NN}}=$ 200 GeV Au+Au and p+p collisions are presented. They indicate nuclear modification factors ($R_{AA}$) which are similar both in magnitude and trend to those found in earlier $\pi^{0}$ measurements.  Linear fits to $R_{AA}$ as a function of $p_{T}$ in 5–20 GeV/c show that the slope is consistent with zero within two standard deviations at all centralities although a slow rise cannot be excluded. Having different statistical and systematic uncertainties, the $\pi^{0}$ and $\eta$ measurements are complementary at high $p_{T}$; thus, along with the extended $p_{T}$ range of these data they can provide additional constraints for theoretical modeling and the extraction of transport properties'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
