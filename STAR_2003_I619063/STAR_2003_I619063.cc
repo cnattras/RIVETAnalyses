@@ -152,21 +152,29 @@ namespace Rivet {
       const ParticlePair& beam = beams();
       int NN = 0;
 
-      //if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-      //{
-      //    NN = 197.;
-      //    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
-      //    if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
-      //}
-      //if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-      //{
-      //    collSys = pp;
-      //}
+      if(beamOpt == "NONE")
+      {
+              if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+              {
+                  NN = 197.;
+                  if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+                  if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+              }
+              if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+              {
+                  collSys = pp;
+              }
+      }
+      else if(beamOpt == "PP200") collSys = pp;
+      else if(beamOpt == "AUAU200") collSys = AuAu200;
+      else if(beamOpt == "AUAU130") collSys = AuAu130;
+
+
 
       PrimaryParticles cpp = applyProjection<PrimaryParticles>(event,"cpp");
       Particles particles = cpp.particles();
 
-      if(beamOpt == "PP200" || collSys == pp)
+      if(collSys == pp)
       {
           sow["sow_pp"]->fill();
           for(Particle p : particles)
@@ -192,7 +200,7 @@ namespace Rivet {
       if(c < 5.)
       {
 
-          if(beamOpt == "AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -205,7 +213,7 @@ namespace Rivet {
               }
               sow["sow0_5"]->fill();
           }
-          else if(beamOpt == "AUAU130")
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -216,7 +224,7 @@ namespace Rivet {
       }
       else if(c >= 5 && c < 10)
       {
-          if(beamOpt=="AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -230,7 +238,7 @@ namespace Rivet {
       }
       else if(c >= 10 && c < 20)
       {
-          if(beamOpt=="AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -245,7 +253,7 @@ namespace Rivet {
       }
       else if(c >= 20 && c < 30)
       {
-          if(beamOpt=="AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -258,7 +266,7 @@ namespace Rivet {
               }
               sow["sow20_30"]->fill();
           }
-          else if(beamOpt=="AUAU130")
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -269,7 +277,7 @@ namespace Rivet {
       }
       else if(c >= 30 && c < 40)
       {
-          if(beamOpt=="AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -282,7 +290,7 @@ namespace Rivet {
               }
               sow["sow30_40"]->fill();
           }
-          else if(beamOpt=="AUAU130")
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -294,7 +302,7 @@ namespace Rivet {
       }
       else if(c >= 40 && c < 60)
       {
-          if(beamOpt=="AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -307,7 +315,7 @@ namespace Rivet {
               }
               sow["sow40_60"]->fill();
           }
-          else if(beamOpt=="AUAU130")
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -318,7 +326,7 @@ namespace Rivet {
       }
       else if(c >= 60 && c < 80)
       {
-          if(beamOpt=="AUAU200")
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -438,6 +446,7 @@ namespace Rivet {
     map<string, Scatter2DPtr> R_AB;
     enum CollisionSystem {pp, AuAu130, AuAu200};
     CollisionSystem collSys;
+    string beamOpt = "NONE";
     //@}
 
 
