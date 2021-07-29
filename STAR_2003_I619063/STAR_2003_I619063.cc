@@ -1,4 +1,4 @@
-i/ -*- C++ -*-
+// -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "../Centralities/RHICCentrality.hh" //external header for Centrality calculation
@@ -349,29 +349,6 @@ namespace Rivet {
     void finalize() {
       //These lines normalize per event and pT bin width.
       //You need to also scale by 1.0/(2.0*3.14159*[eta acceptance])
-
-      bool AuAu130_available = false;
-      bool AuAu200_available = false;
-      bool pp200_available = false;
-
-      for(auto element : chSpectrum)
-      {
-          string name = element.second->name();
-          if(name.find("200") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) AuAu200_available = true;
-          }
-          else if(name.find("130") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) AuAu130_available = true;
-          }
-          else if(name.find("pp") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) pp200_available = true;
-          }
-      }
-
-      if(!(AuAu200_available && AuAu130_available && pp200_available)) return;
 
       chSpectrum["chSpectrum0_5"]->scaleW(1./(sow["sow0_5"]->sumW()*4.0*M_PI));
       chSpectrum["chSpectrum5_10"]->scaleW(1./(sow["sow5_10"]->sumW()*4.0*M_PI));
