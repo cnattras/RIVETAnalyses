@@ -218,13 +218,34 @@ public:
 	/// Perform the per-event analysis
 	void analyze(const Event& event)
 	{
+
+		const ParticlePair& beam = beams();
 		const UnstableParticles& usp = applyProjection<UnstableParticles>(event, "UFS");
 		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
 		const double c = cent();
       
+		if (beamOpt == "NONE") {
+		
+			if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+
+			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+
+			else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630) collSys = CuCu200;
+
+			else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970) collSys = CuAu200;
+		}
+
+		else if (beamOpt == "AUAU200") collSys = AuAu200;
+		
+		else if (beamOpt == "PP200") collSys = pp;
+
+		else if (beamOpt == "CUCU200") collSys = CuCu200;
+		
+		else if (beamOpt == "CUAU200") collSys = CuAu200;
+
 		for(const Particle & p : usp.particles())
 		{
-			if(beamOpt == "CUAU200") 
+			if(collSys == CuAu200) 
 			{
 				if(c > 90.) vetoEvent;
 				
@@ -342,7 +363,7 @@ public:
 					
 				}
 			}        
-			else if(beamOpt == "PP200")
+			else if(collSys == pp)
 			{          
 				if(p.pid() == PID::PI0)
 				{
@@ -395,7 +416,7 @@ public:
 
 				}
 			}
-			else if(beamOpt == "AUAU200")
+			else if(collSys == AuAu200)
 			{
 				if(p.pid() == PID::PI0)
 				{
@@ -409,7 +430,7 @@ public:
 
 				}
 			}
-			else if(beamOpt == "CUCU200")
+			else if(collSys == CuCu200)
 			{
 				if(p.pid() == PID::PI0)
 				{
@@ -423,7 +444,7 @@ public:
 
 		//fill counters outside of the particle loop
 
-		if(beamOpt == "CUAU200")
+		if(collSys == CuAu200)
 		{
 	//		if(p.pT()/GeV > 5) sow["Nevent_int5_CuAu"]->fill();
 
@@ -444,7 +465,7 @@ public:
 			if(c > 60 && c < 90.) sow["Nevent_6090_CuAu"]->fill();
 
 		}
-		else if(beamOpt == "PP200")
+		else if(collSys == pp)
 		{
 			sow["Nevent_PP"]->fill();
 				
@@ -452,7 +473,7 @@ public:
 
 	//		if(p.pT()/GeV > 10) sow["Nevent_int10_PP"]->fill();
 		}
-		else if(beamOpt == "AUAU200")
+		else if(collSys == AuAu200)
 		{
 	//		if(p.pT()/GeV > 5) sow["Nevent_int5_AuAu"]->fill();
 
@@ -464,7 +485,7 @@ public:
       			
 			if(c > 40 && c < 50.) sow["Nevent_4050_AuAu"]->fill();
 		}
-		else if(beamOpt == "CUCU200")
+		else if(collSys == CuCu200)
 		{
 			if(c > 0 && c < 10.) sow["Nevent_0010_CuCu"]->fill();
 		}
@@ -674,7 +695,9 @@ public:
 	map<string, Profile1DPtr> _p;
 	map<string, CounterPtr> sow;
 	map<string, Scatter2DPtr> _s;
-	string beamOpt = "";
+	string beamOpt = "NONE";
+	enum CollisionSystem {pp, AuAu200, CuCu200, CuAu200};
+	CollisionSystem collSys;
 	///@}
 
 
