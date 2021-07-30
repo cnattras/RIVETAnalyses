@@ -18,22 +18,32 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+
+        beamOpt = getOption<string>("beam", "NONE");
+
         i_event = 0;
 
 		int pid_p  = 2212;
 		int pid_Cu = 1000290630;
 
 		const ParticlePair& beam = beams();
-		if (beam.first.pid() == pid_Cu && beam.second.pid() == pid_Cu)
-		{
-            cout << " getting centrality " << endl;
-			isCu = true;
-            declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
-		} else if (beam.first.pid() == pid_p && beam.second.pid() == pid_p) {
-			isCu = false;
-		} else {
-            cout << " Error: don't run on these beams! (beam id's should both be either " << pid_Cu << " or " << pid_p << endl;
-        }
+
+		if (beamOpt == "NONE") {
+
+			if (beam.first.pid() == pid_Cu && beam.second.pid() == pid_Cu)
+			{
+            			cout << " getting centrality " << endl;
+				isCu = true;
+            			declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+			} else if (beam.first.pid() == pid_p && beam.second.pid() == pid_p) {
+				isCu = false;
+			} else {
+            			cout << " Error: don't run on these beams! (beam id's should both be either " << pid_Cu << " or " << pid_p << endl;
+        		}
+		}
+
+		else if (beamOpt == "CUCU200") isCu = true;
+		else if (beamOpt == "PP200") isCu = false;
 
         // ----------------------------------------------------------
         // Cuts used to see if there is a trigger hit in the BBC
@@ -351,6 +361,8 @@ namespace Rivet {
 
     map<string, array<Scatter2DPtr,4>> _s4; // Scatterplots of divisions at 4 bins of Cu+Cu centralities
     map<string, Scatter2DPtr> _s;           // Ratio plots for ratio events
+
+    string beamOpt = "NONE";
 
     int debug { 1 };
 
