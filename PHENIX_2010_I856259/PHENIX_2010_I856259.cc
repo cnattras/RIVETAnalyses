@@ -26,7 +26,7 @@ namespace Rivet {
 		
 			//Particles: eta meson, Pi0?
 			
-			//std::initializer_list<int> pdgIds = {221, 111};
+			beamOpt = getOption<string>("beam", "NONE");
 
 			const UnstableParticles up((Cuts::abspid == 221 || Cuts::abspid == 111) && Cuts::abseta < .35);
 			declare(up, "up");
@@ -148,10 +148,16 @@ namespace Rivet {
 
 			const ParticlePair& beam = beams();
 
-			if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+			if (beamOpt == "NONE") {
+
+				if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
 			
-			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
-			
+				else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+			}
+
+			else if (beamOpt == "PP200") collSys = pp;
+			else if (beamOpt == "AUAU200") collSys = AuAu200;
+
 			const UnstableParticles up = apply<UnstableParticles>(event, "up");
 			const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
 			const double c = cent();
@@ -171,7 +177,7 @@ namespace Rivet {
 					if (p.pid() == 221) {
 
 						PP_yieldEta["yieldPP"]->fill(partPt, pt_weight);
-					
+					}
 				}
 			}
 
@@ -275,6 +281,7 @@ namespace Rivet {
 					for (const Particle& p : unstableParticles) {
 			
 						double partPt = p.pT()/GeV;
+						double pt_weight = 1./(partPt*2.*M_PI);
 
 						if (p.pid() == 221) {
 
@@ -436,6 +443,7 @@ namespace Rivet {
 
 		enum CollisionSystem {empty, pp, AuAu200};
 		CollisionSystem collSys = empty;
+		string beamOpt = "NONE";
 	};
 
 
