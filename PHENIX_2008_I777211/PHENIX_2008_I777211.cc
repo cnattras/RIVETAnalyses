@@ -20,6 +20,8 @@ namespace Rivet {
 
     void init() {
 
+      beamOpt = getOption<string>("beam", "NONE");
+
       const UnstableParticles pi0(Cuts::absrap < 0.35 && Cuts::pT > 1*GeV && Cuts::abspid == 111 );
       declare(pi0, "pi0");
 
@@ -42,8 +44,14 @@ namespace Rivet {
 
       const ParticlePair& beam = beams();
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
-      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      if (beamOpt == "NONE") {
+
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      }
+
+      else if (beamOpt == "PP200") collSys = pp;
+      else if (beamOpt == "AUAU200") collSys = AuAu200;
 
       Particles neutralParticles = applyProjection<UnstableParticles>(event,"pi0").particles();
 
@@ -73,24 +81,6 @@ namespace Rivet {
 
     void finalize() {
 
-      bool AuAu200_available = false;
-      bool pp200_available = false;
-
-      for(auto element : hPion0Pt)
-      {
-          string name = element.second->name();
-          if(name.find("AuAu") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) AuAu200_available = true;
-          }
-          else if(name.find("pp") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) pp200_available = true;
-          }
-      }
-
-      if(!(AuAu200_available && pp200_available)) return;
-
       hPion0Pt["Pion0Pt_AuAu"]->scaleW(1./sow["sow_AuAu"]->sumW());
       hPion0Pt["Pion0Pt_pp"]->scaleW(1./sow["sow_pp"]->sumW());
 
@@ -104,7 +94,7 @@ namespace Rivet {
     map<string, CounterPtr> sow;
     enum CollisionSystem {pp, AuAu200};
     CollisionSystem collSys;
-
+    string beamOpt = "NONE";
 
   };
 
