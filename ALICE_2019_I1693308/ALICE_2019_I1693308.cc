@@ -29,7 +29,7 @@ namespace Rivet {
       const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(aprim, "aprim");
       //The second primary particles is so that the jet specctra goes over all particles instead of cutting out pT < 0.15GeV
-      const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
+      const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.9 && Cuts::abscharge > 0 && (Cuts::abspid == Rivet::PID::PIPLUS || Cuts::abspid == Rivet::PID::KPLUS || Cuts::abspid == Rivet::PID::PROTON || Cuts::abspid == Rivet::PID::ELECTRON || Cuts::abspid == Rivet::PID::MUON));
       declare(aprimall, "aprimall");
 
       // jets à la ALICE - Jet area will be available using the pseudojet
@@ -144,8 +144,11 @@ namespace Rivet {
       //Above has "sow" which isn't anything that is declared so I changed it to the ptr _c["sow"]
       //double norm = (crossSection()*1.E-9)/(_c["sow"]->sumW());
       double norm = (crossSection()/millibarn)/(_c["sow"]->sumW());
+<<<<<<< HEAD
+=======
       //double norm = (crossSection()/millibarn)/(_c["sow"]->sumW());
       //double norm = (7.106483E+10*1.E-9)/(_c["sow"]->sumW());
+>>>>>>> fafdb3932c6622670985e5078b03481af696919b
 
 
       _h["PPS7"]->scaleW(norm);
