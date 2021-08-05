@@ -337,7 +337,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         //   for the raw und eta. book (sow) for all but sub.
       //===========================================================
       //===========================================================
-      cout << numTrigPtBins << " " << numCentBins << endl;
+//      cout << numTrigPtBins << " " << numCentBins << endl;
 	
       for (int ptt = 0; ptt < numTrigPtBins-1; ptt++)
       {
@@ -361,7 +361,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       for(Correlator corr : Correlators)
       {
-  		cout << corr.GetIndex() << " " << corr.GetSubIndex() << endl;
+//  		cout << corr.GetIndex() << " " << corr.GetSubIndex() << endl;
 	  if(corr.GetIndex() <= 1)
           {
               //raw |eta| < 1
@@ -432,10 +432,10 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
             book(_h[name_sub], (corr.GetIndex()*2)+3, 1, corr.GetSubIndex()+1);
         }
 	
-	cout << name_raw << " " << name_eta << " " << name_sub << endl;
+//	cout << name_raw << " " << name_eta << " " << name_sub << endl;
 	iterator++;
       }
-	cout << "!" << iterator << endl;
+//	cout << "!" << iterator << endl;
       iterator=1;
 
 
@@ -694,7 +694,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 	book(_h[name_AuAu],24+correction,1,y_axis);
 	book(sow[name_AuAu], "sow" + name_AuAu);
 
-	cout << name_AuAu << endl;
+//	cout << name_AuAu << endl;
 
 	y_axis=1;
 	iterator++;
@@ -726,7 +726,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
         book(_h[name_dAuAu], 30,1, 1);
 */	
         }
-	cout << iterator << endl;
+//	cout << iterator << endl;
 
     } //ends the init
 
@@ -812,7 +812,7 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
       	  	name_sub = "sub_d" + to_string((corr.GetIndex()*2)+3) + "x1y" + to_string(corr.GetSubIndex()+1);
       	  }
-	cout << name_raw << " " << name_eta << " " << name_sub << endl;
+//	cout << name_raw << " " << name_eta << " " << name_sub << endl;
 	iterator++;
       	}
 
