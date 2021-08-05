@@ -6,7 +6,7 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/AliceCommon.hh"
-#include "RHICCentrality.hh"
+#include "../Centralities/RHICCentrality.hh"
 
 namespace Rivet {
   /// @brief Add a short analysis description here
