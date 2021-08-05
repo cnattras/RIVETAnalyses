@@ -62,6 +62,7 @@ namespace Rivet {
 
 		declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
+		beamOpt = getOption<string>("beam", "NONE");
 
 		book(sow["sow_pp"], "sow_pp");
 		book(sow["sow_AuAuc12"], "sow_AuAuc12");
@@ -202,8 +203,14 @@ namespace Rivet {
 
       const ParticlePair& beam = beams();
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
-      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      if (beamOpt == "NONE") {
+
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      }
+
+      else if (beamOpt == "AUAU200") collSys = AuAu200;
+      else if (beamOpt == "PP200") collSys = pp;
 
       Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
   		Particles neutralParticles = applyProjection<UnstableParticles>(event, "np").particles();
@@ -580,7 +587,8 @@ namespace Rivet {
 	map<string, CounterPtr> sow;
 	enum CollisionSystem { pp, AuAu200 };
 	CollisionSystem collSys;
-
+        string beamOpt = "NONE";
+	
   };
 
 
