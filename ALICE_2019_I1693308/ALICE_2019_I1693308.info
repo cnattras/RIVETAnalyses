@@ -1,16 +1,14 @@
 Name: ALICE_2019_I1693308
 Year: 2019
-Summary: <A one-line informative ALICE_2019_I1693308 headline>
+Summary: Charged jet cross section and fragmentation in proton-proton collisions at $\sqrt{s}$ = 7 TeV
 Experiment: ALICE
 Collider: LHC
 InspireID: 1693308
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Justin Piel <your@email.address>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - arXiv:1809.03232
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -25,8 +23,7 @@ ValidationInfo:
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
-BibKey: 
+BibKey:
 BibTeX: ''
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
-

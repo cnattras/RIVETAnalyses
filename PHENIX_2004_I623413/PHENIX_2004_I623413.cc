@@ -1,10 +1,7 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/PromptFinalState.hh"
+#include "../Centralities/RHICCentrality.hh"
 
 namespace Rivet {
 
@@ -28,75 +25,181 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
-
+      const FinalState fs(Cuts::abseta < 0.35);
+      declare(fs, "fs");
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
-
-      // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // Dress the prompt bare leptons with prompt photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
-
-      // Missing momentum
-      declare(MissingMomentum(fs), "MET");
-
-      // Book histograms
-      // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
-
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      book(_h["KaonPlusMinBias"], 1, 1, 1);
+      book(_h["KaonMinusMinBias"], 1, 1, 2);
+      book(_h["PionPlusMinBias"], 2, 1, 1);
+      book(_h["PionMinusMinBias"], 2, 1, 2);
+      book(_h["ProtonMinBias"], 3, 1, 1);
+      book(_h["AntiProtonMinBias"], 3, 1, 2);
+      /*book(_h["PionPlusCent0_5"], 4, 1, 1);
+      book(_h["PionPlusCent5_15"], 4, 1, 2);
+      book(_h["PionPlusCent15_30"], 4, 1, 3);
+      book(_h["PionPlusCent30_60"], 4, 1, 4);
+      book(_h["PionMinusCent0_5"], 4, 1, 5);
+      book(_h["PionMinusCent5_15"], 4, 1, 6);
+      book(_h["PionMinusCent15_30"], 4, 1, 7);
+      book(_h["PionMinusCent30_60"], 4, 1, 8);
+      book(_h["PionPlusCent60_92"], 5, 1, 1);
+      book(_h["PionMinusCent60_92"], 5, 1, 2);
+      book(_h["KaonPlusCent0_5"], 6, 1, 1);
+      book(_h["KaonPlusCent5_15"], 6, 1, 2);
+      book(_h["KaonPlusCent15_30"], 6, 1, 3);
+      book(_h["KaonPlusCent30_60"], 6, 1, 4);
+      book(_h["KaonMinusCent0_5"], 6, 1, 5);
+      book(_h["KaonMinusCent5_15"], 6, 1, 6);
+      book(_h["KaonMinusCent15_30"], 6, 1, 7);
+      book(_h["KaonMinusCent30_60"], 6, 1, 8);
+      book(_h["KaonPlusCent60_92"], 7, 1, 1);
+      book(_h["KaonMinusCent60_92"], 7, 1, 2);
+      book(_h["ProtonCent0_5"], 8, 1, 1);
+      book(_h["ProtonCent0_5"], 8, 1, 2);
+      book(_h["ProtonCent5_15"], 9, 1, 1);
+      book(_h["AntiProtonCent5_15"], 9, 1, 2);
+      book(_h["ProtonCent15_30"], 10, 1, 1);
+      book(_h["AntiProtonCent15_30"], 11, 1, 1);
+      book(_h["ProtonCent30_60"], 12, 1, 1);
+      book(_h["AntiProtonCent30_60"], 13, 1, 1);
+      book(_h["ProtonCent60_92"], 14, 1, 1);
+      book(_h["AntiProtonCent60_92"], 14, 1, 2);
+      book(_h["PionPlusMinBias"], 15, 1, 1);
+      book(_h["PionMinusMinBias"], 15, 1, 2);
+      book(_h["KaonPlusMinBias"], 16, 1, 1);
+      book(_h["KaonMinusMinBias"], 16, 1, 2);
+      book(_h["ProtonMinBias"], 17, 1, 1);
+      book(_h["AntiProtonMinBias"], 17, 1, 2);
+      book(_h["PionPlusCent0_5"], 18, 1, 1);
+      book(_h["PionPlusCent5_15"], 18, 1, 2);
+      book(_h["PionPlusCent15_30"], 18, 1, 3);
+      book(_h["PionPlusCent30_60"], 18, 1, 4);
+      book(_h["PionMinusCent0_15"], 18, 1, 5);
+      book(_h["PionMinusCent5_15"], 18, 1, 6);
+      book(_h["PionMinusCent15_30"], 18, 1, 7);
+      book(_h["PionMinusCent30_60"], 18, 1, 8);
+      book(_h["PionPlusCent60_92"], 19, 1, 1);
+      book(_h["PionMinusCent60_92"], 19, 1, 2);
+      book(_h["KaonPlusCent0_5"], 20, 1, 1);
+      book(_h["KaonPlusCent5_15"], 20, 1, 2);
+      book(_h["KaonPlusCent15_30"], 20, 1, 3);
+      book(_h["KaonPlusCent30_60"], 20, 1, 4);
+      book(_h["KaonPlusCent60_92"], 20, 1, 5);
+      book(_h["KaonMinusCent0_5"], 20, 1, 6);
+      book(_h["KaonMinusCent5_15"], 20, 1, 7);
+      book(_h["KaonMinusCent15_30"], 20, 1, 8);
+      book(_h["KaonMinusCent30_60"], 20, 1, 9);
+      book(_h["KaonMinusCent60_92"], 20, 1, 10);
+      book(_h["ProtonCent0_5"], 21, 1, 1);
+      book(_h["ProtonCent5_15"], 21, 1, 2);
+      book(_h["ProtonCent15_30"], 21, 1, 3);
+      book(_h["ProtonCent30_60"], 21, 1, 4);
+      book(_h["AntiProtonCent0_5"], 21, 1, 5);
+      book(_h["AntiProtonCent5_15"], 21, 1, 6);
+      book(_h["AntiProtonCent15_30"], 21, 1, 7);
+      book(_h["AntiProtonCent30_60"], 21, 1, 8);
+      book(_h["ProtonCent60_92"], 22, 1, 1);
+      book(_h["AntiProtonCent60_92"], 22, 1, 2);
+      book(_h["Table7FitParameters_Apart"], 23, 1, 1);
+      book(_h["Table7FitParameters_Acoll"], 23, 1, 2);
+      book(_h["Table8FitParameters_Apart"], 24, 1, 1);
+      book(_h["Table8FitParameters_Acoll"], 24, 1, 2);
+      book(_h["PionPlusParticle"], 25, 1, 1);
+      book(_h["PionMinusParticle"], 25, 1, 2);
+      book(_h["KaonPlusParticle"], 25, 1, 3);
+      book(_h["KaonMinusParticle"], 25, 1, 4);
+      book(_h["ProtonParticle"], 25, 1, 5);
+      book(_h["AntiProtonParticle"], 25, 1, 6);
+      book(_h["N_collCentrality"], 26, 1, 1);
+      book(_h["N_partCentrality"], 27, 1, 1);
+      book(_h["PionPlusCentrality"], 28, 1, 1);
+      book(_h["PionMinusCentrality"], 28, 1, 2);
+      book(_h["KaonPlusCentrality"], 28, 1, 3);
+      book(_h["KaonMinusCentrality"], 28, 1, 4);
+      book(_h["ProtonCentrality"], 28, 1, 5);
+      book(_h["AntiProtonCentrality"], 28, 1, 6);
+      book(_h["PionPlusCentrality"], 29, 1, 1);
+      book(_h["PionMinusCentrality"], 29, 1, 2);
+      book(_h["KaonPlusCentrality"], 29, 1, 3);
+      book(_h["KaonMinusCentrality"], 29, 1, 4);
+      book(_h["ProtonCentrality"], 29, 1, 5);
+      book(_h["AntiProtonCentrality"], 29, 1, 6);
+      book(_h["BestFitCentrality"], 30, 1, 1);
+      book(_h["BestFitCentrality"], 31, 1, 1);
+      book(_h["BestFitCentrality"], 31, 1, 2);
+      book(_h["BestFitCentrality"], 31, 1, 3);
+      book(_h["BestFitCentrality"], 32, 1, 1);
+      book(_h["BestFitCentrality"], 32, 1, 2);
+      book(_h["BestFitCentrality"], 32, 1, 3);*/
+      book(_c["MinBias"], "MinBias");
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
+      const double cent = centProj();
+      Particles particles = applyProjection<FinalState>(event,"fs").particles();
+      if(cent > 92.) vetoEvent;
+        _c["MinBias"]->fill();
 
-      // Retrieve dressed leptons, sorted by pT
-      vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
 
-      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
 
-      // Remove all jets within dR < 0.2 of a dressed lepton
-      idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
+      for(Particle& p : particles){
+        if(p.pid() == 321)
+        {
+          _h["KaonPlusMinBias"]->fill(p.pT()/GeV);
 
-      // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, [](const Jet& jet) {
-        return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-      });
+        }
+        if(p.pid() == -321)
+        {
+          _h["KaonMinusMinBias"]->fill(p.pT()/GeV);
 
-      // Veto event if there are no b-jets
-      if (bjets.empty())  vetoEvent;
+        }
+        if(p.pid() == 2212)
+        {
+          _h["ProtonMinBias"]->fill(p.pT()/GeV);
 
-      // Apply a missing-momentum cut
-      if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
+        }
+        if(p.pid() == -2212)
+        {
+          _h["AntiProtonMinBias"]->fill(p.pT()/GeV);
 
-      // Fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
+        }
+        if(p.pid() == 211)
+        {
+          _h["PionPlusMinBias"]->fill(p.pT()/GeV);
+
+        }
+        if(p.pid() == -211)
+        {
+          _h["PionMinusMinBias"]->fill(p.pT()/GeV);
+
+        }
+        if(p.pid() == -211)
+        {
+          _h["PionMinusMinBias"]->fill(p.pT()/GeV);
+
+        }
+       }
+
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      _h["KaonPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["KaonMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["ProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["AntiProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["PionPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      _h["PionMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      
 
-      normalize(_h["XXXX"]); // normalize to unity
-      normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
     }
 

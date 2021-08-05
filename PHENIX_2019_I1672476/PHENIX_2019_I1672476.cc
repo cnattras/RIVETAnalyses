@@ -18,6 +18,9 @@ public:
 
 	/// Book histograms and initialise projections before the run
 	void init() {
+
+		beamOpt = getOption<string>("beam", "NONE");
+
 		declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       
 		const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
@@ -79,35 +82,46 @@ public:
 		int NN = 0;
 		double absEta = 0.7; //paper gives pseudorapidity as 0.35
 
-		if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-		{
-			NN = 197.;
+		if (beamOpt == "NONE") {
 
-			if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSystem = AuAu39;
-			if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
-			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = AuAu200;
-		}
+			if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+			{
+				NN = 197.;
 
-		if (beam.first.pid() == 1000290640 && beam.second.pid() == 1000290640)
-		{
-			NN = 64.;
+				if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSystem = AuAu39;
+				if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = AuAu200;
+			}
 
-			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = CuCu200;
-		}
+			if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
+			{
+				NN = 63.;
+
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = CuCu200;
+			}
 		
-		if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-		{
-			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = pp200;
-			if (fuzzyEquals(sqrtS()/GeV, 62*NN, 1E-3)) collSystem = pp62;
+			if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+			{
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = pp_200;
+				if (fuzzyEquals(sqrtS()/GeV, 62*NN, 1E-3)) collSystem = pp_62;
+			}
 		}
 
-	
+		else if (beamOpt == "AUAU39") collSystem = AuAu39;
+
+		else if (beamOpt == "AUAU62") collSystem = AuAu62;
+
+		else if (beamOpt == "AUAU200") collSystem = AuAu200;
+
+		else if (beamOpt == "CUCU200") collSystem = CuCu200;
+
+		else if (beamOpt == "PP200") collSystem = pp_200;
+
+		else if (beamOpt == "PP62") collSystem = pp_62;
 
 		const Particles photons = pfs.particles(Cuts::pT > 1.*GeV && Cuts::pT < 5.*GeV);
 		const Particles chargedParticles = fs.particles();
 		//photons and chargedParticles are both vectors, so size can be called later to calculate charged particle multiplicity and integrated direct photon yield
-
-
 
 	if(collSystem == AuAu62)
 	{
@@ -235,13 +249,13 @@ public:
 		}
 	}
 	
-	else if(collSystem == pp200)
+	else if(collSystem == pp_200)
 	{
 		_p["pp200_chPMult"]->fill(c,chargedParticles.size()/absEta);
 		_p["pp200_phtYld"]->fill(c,photons.size()/absEta);
 	}
 
-	else if(collSystem == pp62)
+	else if(collSystem == pp_62)
 	{
 		_p["pp62_chPMult"]->fill(c,chargedParticles.size()/absEta);
 	}
@@ -280,9 +294,9 @@ public:
 	map<string, Histo1DPtr> _h;
 	map<string, Profile1DPtr> _p;
 	map<string, CounterPtr> sow;
-	enum CollisionSystem {AuAu39, AuAu62, AuAu200, CuCu200, pp200, pp62};
+	enum CollisionSystem {AuAu39, AuAu62, AuAu200, CuCu200, pp_200, pp_62};
 	CollisionSystem collSystem;
-	string beamOpt;
+	string beamOpt = "NONE";
 	
 	
 
