@@ -23,7 +23,9 @@ namespace Rivet {
     
     /// Book histograms and initialise projections before the run
     void init() {
-      
+     
+      beamOpt = getOption<string>("beam", "NONE");
+ 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       
       const FinalState fs(Cuts::abseta < 0.35 && Cuts::pT > 0.0*GeV && Cuts::pT < 20.0*GeV);
@@ -88,35 +90,36 @@ namespace Rivet {
       cout<<"cent: "<<c<<endl;
       
       const ParticlePair& beam = beams();
-      double NN=0; 
-      string beamName="Empty";
-      
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-	{
-	  beamName = "AUAU";
-	  NN = 197.;
-	  if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) beamName += "200GeV";
-	  //if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) beamName += "62GeV";
-	}
-      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-	{
-	  beamName = "pp";
-	  NN = 1.;
-	  if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) beamName += "200GeV";
-	}
-      
+      double NN=0;
+
+      if (beamOpt == "NONE") {
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+	  {
+	    NN = 197.;
+	    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = "AuAu200";
+	    //if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) beamName += "62GeV";
+	  }
+        if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+	  {
+	    NN = 1.;
+	    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = "pp_200";
+	  }
+      }
+      else if (beamOpt == "AUAU200") collSys = AuAu200;
+      else if (beamOpt == "PP200") collSys = pp_200;      
+
       Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
       
       for(const Particle& p : fsParticles) 
 	{
 	  if(p.fromCharm()){
 	    _h["InvYield_charm"]->fill(p.pT()/GeV);
-	    if(beamName=="AUAU"){
+	    if(collSys=="AuAu200"){
 	      _c["AuAu"]->fill();
 	      _h["RAA_c2en"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_c2en"]->fill(p.pT()/GeV);
 	    }
-	    else if(beamName=="PP"){
+	    else if(collSys=="pp_200"){
 	      _c["pp"]->fill();
 	      _h["RAA_c2ed"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_c2ed"]->fill(p.pT()/GeV);
@@ -125,12 +128,12 @@ namespace Rivet {
 	  if(p.fromBottom()){
 	    _h["InvYield_bottom"]->fill(p.pT()/GeV);
 	    _h["bfracn"]->fill(p.pT()/GeV);
-	    if(beamName=="AUAU"){
+	    if(collSys=="AuAu200"){
 	      _c["AuAu"]->fill();
 	      _h["RAA_b2en"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_b2en"]->fill(p.pT()/GeV);
 	    }
-	    else if(beamName=="PP"){
+	    else if(collSys=="pp_200"){
 	      _c["pp"]->fill();
 	      _h["RAA_b2ed"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_b2ed"]->fill(p.pT()/GeV);
@@ -208,6 +211,9 @@ namespace Rivet {
     map<string, Profile1DPtr> _p; 
     map<string, CounterPtr> _c; 
     map<string, Scatter2DPtr> _s;
+    enum CollisionSystem {pp_200, AuAu200};
+    CollisionSystem collSys;
+    string beamOpt = "NONE";
     //@}
 
   };
