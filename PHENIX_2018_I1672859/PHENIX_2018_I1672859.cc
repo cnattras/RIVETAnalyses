@@ -5,7 +5,10 @@
 #include "../Centralities/RHICCentrality.hh"
 #include <math.h>
 #define _USE_MATH_DEFINES
-const double TAB[6] = {2.54, 8.8, 6.0, 7.5, 3.1, 1.0};
+const double TAB[9] = {2.54, 8.8, 6.0, 7.5, 3.1, 1.0, 0.179, 8.9, 2.86};
+
+//TAB/TAA  values order: CuAuMinbias, CuAu0-10, CuAu10-20, CuAu0-20, CuAu20-40, CuAu40-60, CuAu60-90, AuAu20-30, AuAu40-50. All in units of mb^-1.
+//still missing CuCu0-10
 
 namespace Rivet {
 
@@ -589,13 +592,17 @@ public:
 		_s["R_AB_pi0_0020"]->scaleY(1./TAB[3]);
 		_s["R_AB_pi0_2040"]->scaleY(1./TAB[4]);
 		_s["R_AB_pi0_4060"]->scaleY(1./TAB[5]);
+		_s["R_AB_pi0_6090"]->scaleY(1./TAB[6]);
+
 
 		_s["R_AB_eta_minbias"]->scaleY(1./TAB[0]);
 		_s["R_AB_eta_0020"]->scaleY(1./TAB[3]);
 		_s["R_AB_eta_2040"]->scaleY(1./TAB[4]);
-		_s["R_AB_pi0_4060"]->scaleY(1./TAB[5]);
+		_s["R_AB_eta_4060"]->scaleY(1./TAB[5]);
+		_s["R_AB_eta_4060"]->scaleY(1./TAB[6]);
 
-
+		_s["R_AB_pi0_2030_AuAu"]->scaleY(1./TAB[7]);
+		_s["R_AB_pi0_4050_AuAu"]->scaleY(1./TAB[8]);
 
 /*
 
