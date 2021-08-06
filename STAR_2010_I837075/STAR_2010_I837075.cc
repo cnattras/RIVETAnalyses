@@ -7,6 +7,7 @@
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/AliceCommon.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include <iostream>
 
 namespace Rivet {
   /// @brief Add a short analysis description here
@@ -21,6 +22,8 @@ namespace Rivet {
 
         beamOpt = getOption<string>("beam", "NONE");
 
+	declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
+
         i_event = 0;
 
 		int pid_p  = 2212;
@@ -34,7 +37,6 @@ namespace Rivet {
 			{
             			cout << " getting centrality " << endl;
 				isCu = true;
-            			declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 			} else if (beam.first.pid() == pid_p && beam.second.pid() == pid_p) {
 				isCu = false;
 			} else {

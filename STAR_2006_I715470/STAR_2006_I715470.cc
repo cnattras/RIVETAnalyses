@@ -364,8 +364,8 @@ namespace Rivet {
 
       beamOpt = getOption<string>("beam", "NONE");
 
-      if (beamOpt == "AUAU") collSys = AuAu;
-      else if (beamOpt == "DAU") collSys = dAu;
+      if (beamOpt == "AUAU200") collSys = AuAu200;
+      else if (beamOpt == "dAU200") collSys = dAu200;
       
       declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
@@ -378,7 +378,7 @@ double highedge = 3.0*pi/2.0;
           for(int nassoc=0;nassoc<numAssocPtBins;nassoc++){
       //Correlators
             Correlator c1(ncb,nassoc);
-            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCollSystemAndEnergy("AuAu200");
             c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
             c1.SetTriggerRange(8., 15.);
             c1.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
@@ -393,7 +393,7 @@ double highedge = 3.0*pi/2.0;
             if(ncb==0){
 
               Correlator c2(100,nassoc);
-              c2.SetCollSystemAndEnergy("dAu200GeV");
+              c2.SetCollSystemAndEnergy("dAu200");
               c2.SetCentrality(0,80);
               c2.SetTriggerRange(8., 15.);
               c2.SetAssociatedRange(pTAssocBins[nassoc],pTAssocBins[nassoc+1]);
@@ -414,7 +414,7 @@ double highedge = 3.0*pi/2.0;
 
       //Correlators
             Correlator c1(ncb,1000);
-            c1.SetCollSystemAndEnergy("AuAu200GeV");
+            c1.SetCollSystemAndEnergy("AuAu200");
             c1.SetCentrality(centBins[ncb], centBins[ncb+1]);
             c1.SetTriggerRange(8,15);
             c1.SetzTRange(zTBins[nzT],zTBins[nzT+1]);
@@ -429,7 +429,7 @@ double highedge = 3.0*pi/2.0;
             if(ncb==0){
 
               Correlator c2(1000,1000);
-              c2.SetCollSystemAndEnergy("dAu200GeV");
+              c2.SetCollSystemAndEnergy("dAu200");
               c2.SetCentrality(0,80);
               c2.SetTriggerRange(8,15);
               c2.SetzTRange(zTBins[nzT],zTBins[nzT+1]);
@@ -473,8 +473,8 @@ double highedge = 3.0*pi/2.0;
       //==================================================
       string SysAndEnergy = "";
 
-      if(collSys == AuAu) SysAndEnergy = "AuAu200GeV";
-      else if(collSys == dAu) SysAndEnergy = "dAu200GeV";
+      if(collSys == AuAu200) SysAndEnergy = "AuAu200";
+      else if(collSys == dAu200) SysAndEnergy = "dAu200";
 
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
@@ -568,7 +568,7 @@ double highedge = 3.0*pi/2.0;
         for (auto element : _h)
         {
             string name = element.second->name();
-            if (name.find("AuAu") != std::string::npos)
+            if (name.find("AuAu200") != std::string::npos)
             {
             if (element.second->numEntries()>0) AuAu200_available=true;
             else
@@ -578,7 +578,7 @@ double highedge = 3.0*pi/2.0;
             }
 
         }
-        else if (name.find("dAu") != std::string::npos)
+        else if (name.find("dAu200") != std::string::npos)
         {
           if (element.second->numEntries()>0) dAu_available=true;
           else
@@ -617,18 +617,18 @@ double highedge = 3.0*pi/2.0;
             //  _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
             cout<<name<<endl;
             //Histogram 1: all correlators with pTassoc = 3-4 GeV, trigger 8-15
-            if(corr.CheckConditions("AuAu200GeV",2.5,10,3.5)){
+            if(corr.CheckConditions("AuAu200",2.5,10,3.5)){
               cout<<" name "<<name<<" "<<corr.GetFullIndex()<<"  "<<corr.GetCollSystemAndEnergy()<<" "<<corr.GetCentrality()<<endl;
             }
 
 
-if(corr.CheckConditions("AuAu200GeV",2.5)){//Central Au+Au
+if(corr.CheckConditions("AuAu200",2.5)){//Central Au+Au
 //cout<<"I am AuAu200GeV 0-5%"<<endl;
 }
-if(corr.CheckConditions("AuAu200GeV",35)){//Central Au+Au
+if(corr.CheckConditions("AuAu200",35)){//Central Au+Au
 //cout<<"I am AuAu200GeV 20-40%"<<endl;
 }
-if(corr.CheckConditions("dAu200GeV",2.5)){//Central Au+Au
+if(corr.CheckConditions("dAu200",2.5)){//Central Au+Au
 //cout<<"I am dAu200GeV"<<endl;
 }
         }
@@ -641,7 +641,7 @@ if(corr.CheckConditions("dAu200GeV",2.5)){//Central Au+Au
     vector<Correlator> Correlators;
     
     string beamOpt;
-    enum CollisionSystem {AuAu, dAu};
+    enum CollisionSystem {AuAu200, dAu200};
     CollisionSystem collSys;
 
 

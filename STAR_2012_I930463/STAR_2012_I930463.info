@@ -17,7 +17,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP,AUAU200
+ - beam=AUAU200, PP200
 Description:
   'We report transverse momentum ($p_T \leq 15$ GeV/c) spectra of $\pi^{\pm}$, $K^{\pm}$ and $p$, $\bar{p}$, $K^0_S$, and $\rho^0$ at mid-rapidity in p+p and Au+Au collisions at $\sqrt{s_{NN}} = 200$ GeV. Perturbative QCD calculations are consistent with $\pi^{\pm}$ spectra in p+p collisions but do not reproduce $K$ and $p$($\bar{p}$) spectra. The observed decreasing antiparticle-to-particle ratios with increasing $p_T$ provide experimental evidence for varying quark and gluon jet contributions to high-$p_T$ hadron yields. The relative hadron abundances in Au+Au at $p_T > 8$ GeV/c are measured to be similar to the p+p results, despite the expected Casimir effect for parton energy loss.'
 ValidationInfo:

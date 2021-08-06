@@ -408,7 +408,7 @@ namespace Rivet {
         book(_h[corra2], corra2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4a(4010);
-        corrfi4a.SetCollSystemAndEnergy("AUAU200GeV");
+        corrfi4a.SetCollSystemAndEnergy("AUAU200");
     	  corrfi4a.SetCentrality(0.,40.);
     	  corrfi4a.SetTriggerRange(5., 9.);
 	      corrfi4a.SetAssociatedRange(.5, 7.);
@@ -418,7 +418,7 @@ namespace Rivet {
         corrfi4a.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4a);
 	      Correlator corrfi4ad(4020);
-        corrfi4ad.SetCollSystemAndEnergy("dAU200GeV");
+        corrfi4ad.SetCollSystemAndEnergy("dAU200");
     	  corrfi4ad.SetNoCentrality();
     	  corrfi4ad.SetTriggerRange(5., 9.);
 	      corrfi4ad.SetAssociatedRange(.5, 7.);
@@ -455,7 +455,7 @@ namespace Rivet {
         book(_h[corrd2], corrd2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrp2], corrp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfi4b(4110);
-        corrfi4b.SetCollSystemAndEnergy("AUAU200GeV");
+        corrfi4b.SetCollSystemAndEnergy("AUAU200");
     	  corrfi4b.SetCentrality(0.,40.);
     	  corrfi4b.SetTriggerRange(5., 9.);
 	      corrfi4b.SetAssociatedRange(.5, 7.);
@@ -465,7 +465,7 @@ namespace Rivet {
         corrfi4b.SetTriggerCounter(_c[corra+"_Triggers"]);
         Correlators.push_back(corrfi4b);
         Correlator corrfi4bd(4120);
-        corrfi4bd.SetCollSystemAndEnergy("dAU200GeV");
+        corrfi4bd.SetCollSystemAndEnergy("dAU200");
     	  corrfi4bd.SetNoCentrality();
     	  corrfi4bd.SetTriggerRange(5., 9.);
 	      corrfi4bd.SetAssociatedRange(.5, 7.);
@@ -475,7 +475,7 @@ namespace Rivet {
         corrfi4bd.SetTriggerCounter(_c[corrd+"_Triggers"]);
         Correlators.push_back(corrfi4bd);
         Correlator corrfi4bp(4130);
-        corrfi4bp.SetCollSystemAndEnergy("pp200GeV");
+        corrfi4bp.SetCollSystemAndEnergy("PP200");
     	  corrfi4bp.SetNoCentrality();
     	  corrfi4bp.SetTriggerRange(5., 9.);
 	      corrfi4bp.SetAssociatedRange(.5, 7.);
@@ -525,7 +525,7 @@ namespace Rivet {
         book(_h[corrslessp2], corrslessp2, dphibinNum, -M_PI/2., 1.5*M_PI);
         book(_h[corrsmorep2], corrsmorep2, dphibinNum, -M_PI/2., 1.5*M_PI);
         Correlator corrfig7less(7010);
-        corrfig7less.SetCollSystemAndEnergy("AUAU200GeV");
+        corrfig7less.SetCollSystemAndEnergy("AUAU200");
     	  corrfig7less.SetCentrality(0.,40.);
     	  corrfig7less.SetTriggerRange(lower, upper);
 	      corrfig7less.SetAssociatedRange(.5, 7.);
@@ -535,7 +535,7 @@ namespace Rivet {
         corrfig7less.SetTriggerCounter(_c[corrsless+"_Triggers"]);
         Correlators.push_back(corrfig7less);
         Correlator corrfig7more(7110);
-        corrfig7more.SetCollSystemAndEnergy("AUAU200GeV");
+        corrfig7more.SetCollSystemAndEnergy("AUAU200");
     	  corrfig7more.SetCentrality(0.,40.);
     	  corrfig7more.SetTriggerRange(lower, upper);
 	      corrfig7more.SetAssociatedRange(.5, 7.);
@@ -545,7 +545,7 @@ namespace Rivet {
         corrfig7more.SetTriggerCounter(_c[corrsmore+"_Triggers"]);
         Correlators.push_back(corrfig7more);
         Correlator corrfig7lessp(7030);
-        corrfig7lessp.SetCollSystemAndEnergy("pp200GeV");
+        corrfig7lessp.SetCollSystemAndEnergy("PP200");
     	  corrfig7lessp.SetNoCentrality();
     	  corrfig7lessp.SetTriggerRange(lower, upper);
 	      corrfig7lessp.SetAssociatedRange(.5, 7.);
@@ -555,7 +555,7 @@ namespace Rivet {
         corrfig7lessp.SetTriggerCounter(_c[corrslessp+"_Triggers"]);
         Correlators.push_back(corrfig7lessp);
         Correlator corrfig7morep(7130);
-        corrfig7morep.SetCollSystemAndEnergy("pp200GeV");
+        corrfig7morep.SetCollSystemAndEnergy("PP200");
     	  corrfig7morep.SetNoCentrality();
     	  corrfig7morep.SetTriggerRange(lower, upper);
 	      corrfig7morep.SetAssociatedRange(.5, 7.);
@@ -591,7 +591,7 @@ namespace Rivet {
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
         //book(_h[corrs2], corrs2, dphibinNumCor, 0, M_PI);
         Correlator corrfig2(2000);
-        corrfig2.SetCollSystemAndEnergy("AUAU200GeV");
+        corrfig2.SetCollSystemAndEnergy("AUAU200");
     	  corrfig2.SetCentrality(0.,40.);
     	  corrfig2.SetTriggerRange(tlow, tup);
 	      corrfig2.SetAssociatedRange(alow, aup);
@@ -641,7 +641,7 @@ namespace Rivet {
         book(_c[corrs+"_Triggers"], corrs+"_Triggers");
         //book(_h[corrs2], corrs2, dphibinNumCor, -0, M_PI);
         Correlator corrfig3(3000);
-        corrfig3.SetCollSystemAndEnergy("dAU200GeV");
+        corrfig3.SetCollSystemAndEnergy("dAU200");
     	  corrfig3.SetNoCentrality();
     	  corrfig3.SetTriggerRange(tlow, tup);
 	      corrfig3.SetAssociatedRange(alow, aup);
@@ -726,7 +726,7 @@ namespace Rivet {
           book(_c[corrs+"_Triggers"], corrs+"_Triggers");
           book(_h[corrs2], corrs2, dphibinNum, -M_PI/2., 1.5*M_PI);
           Correlator corrfi6(6010+(i*100));
-          corrfi6.SetCollSystemAndEnergy("AUAU200GeV");
+          corrfi6.SetCollSystemAndEnergy("AUAU200");
           corrfi6.SetCentrality(0., 40.);
           corrfi6.SetTriggerRange(lower, upper);
           corrfi6.SetAssociatedRange(alow, aup);
@@ -736,7 +736,7 @@ namespace Rivet {
           corrfi6.SetTriggerCounter(_c[corrs+"_Triggers"]);
           Correlators.push_back(corrfi6);
           Correlator corrfi6p(6030+(i*100));
-          corrfi6p.SetCollSystemAndEnergy("pp200GeV");
+          corrfi6p.SetCollSystemAndEnergy("PP200");
           corrfi6p.SetNoCentrality();
           corrfi6p.SetTriggerRange(lower, upper);
           corrfi6p.SetAssociatedRange(alow, aup);
@@ -761,20 +761,20 @@ namespace Rivet {
 
       if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
-        CollSystem = "AUAU200GeV";
+        CollSystem = "AUAU200";
         //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
-        CollSystem = "pp200GeV";
+        CollSystem = "PP200";
         //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
       {
-        CollSystem = "dAU200GeV";
+        CollSystem = "dAU200";
         //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
       }
-      if(CollSystem == "AUAU200GeV" && c > 40)
+      if(CollSystem == "AUAU200" && c > 40)
       {
         vetoEvent;
       }
