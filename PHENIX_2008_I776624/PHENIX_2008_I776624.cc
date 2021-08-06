@@ -981,7 +981,7 @@ namespace Rivet {
     map<string, Scatter2DPtr> _h2D_RAA_fwd_Npart;
      
     /////////////////////////////////////////////////////////////////////////
-    string beamOpt;
+    string beamOpt = "NONE";
     enum CollisionSystem {pp200, CuCu200};
     CollisionSystem CollSys;
     /////////////////////////////////////////////////////////////////////////
