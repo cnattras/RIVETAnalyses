@@ -15,6 +15,9 @@ References:
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU200,PP200
 Description:
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
