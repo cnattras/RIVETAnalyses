@@ -87,7 +87,7 @@ namespace Rivet {
       
       const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
       const double c=cent();
-      cout<<"cent: "<<c<<endl;
+//      cout<<"cent: "<<c<<endl;
       
       const ParticlePair& beam = beams();
       double NN=0;
@@ -96,13 +96,13 @@ namespace Rivet {
         if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
 	  {
 	    NN = 197.;
-	    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = "AuAu200";
+	    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
 	    //if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) beamName += "62GeV";
 	  }
         if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
 	  {
 	    NN = 1.;
-	    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = "pp_200";
+	    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = pp_200;
 	  }
       }
       else if (beamOpt == "AUAU200") collSys = AuAu200;
@@ -114,12 +114,12 @@ namespace Rivet {
 	{
 	  if(p.fromCharm()){
 	    _h["InvYield_charm"]->fill(p.pT()/GeV);
-	    if(collSys=="AuAu200"){
+	    if(collSys==AuAu200){
 	      _c["AuAu"]->fill();
 	      _h["RAA_c2en"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_c2en"]->fill(p.pT()/GeV);
 	    }
-	    else if(collSys=="pp_200"){
+	    else if(collSys==pp_200){
 	      _c["pp"]->fill();
 	      _h["RAA_c2ed"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_c2ed"]->fill(p.pT()/GeV);
@@ -128,12 +128,12 @@ namespace Rivet {
 	  if(p.fromBottom()){
 	    _h["InvYield_bottom"]->fill(p.pT()/GeV);
 	    _h["bfracn"]->fill(p.pT()/GeV);
-	    if(collSys=="AuAu200"){
+	    if(collSys==AuAu200){
 	      _c["AuAu"]->fill();
 	      _h["RAA_b2en"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_b2en"]->fill(p.pT()/GeV);
 	    }
-	    else if(collSys=="pp_200"){
+	    else if(collSys==pp_200){
 	      _c["pp"]->fill();
 	      _h["RAA_b2ed"]->fill(p.pT()/GeV);
 	      _h["RAA_ratio_b2ed"]->fill(p.pT()/GeV);
