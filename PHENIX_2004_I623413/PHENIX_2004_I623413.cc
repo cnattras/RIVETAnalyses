@@ -38,7 +38,7 @@ namespace Rivet {
       book(_h["ProtonMinBias"], 3, 1, 1);
       book(_h["AntiProtonMinBias"], 3, 1, 2);
       book(_h["Fig10PionPlusCent0_5"], 4, 1, 1);
-      book(_h["FIg10PionPlusCent5_15"], 4, 1, 2);
+      book(_h["Fig10PionPlusCent5_15"], 4, 1, 2);
       book(_h["Fig10PionPlusCent15_30"], 4, 1, 3);
       book(_h["Fig10PionPlusCent30_60"], 4, 1, 4);
       book(_h["Fig10PionMinusCent0_5"], 4, 1, 5);
@@ -67,12 +67,43 @@ namespace Rivet {
       book(_h["Fig10AntiProtonCent30_60"], 13, 1, 1);
       book(_h["Fig10ProtonCent60_92"], 14, 1, 1);
       book(_h["Fig10AntiProtonCent60_92"], 14, 1, 2);
-      book(_h["Fig11PionPlusMinBias"], 15, 1, 1);
-      book(_h["Fig11PionMinusMinBias"], 15, 1, 2);
-      book(_h["Fig11KaonPlusMinBias"], 16, 1, 1);
-      book(_h["Fig11KaonMinusMinBias"], 16, 1, 2);
-      book(_h["Fig11ProtonMinBias"], 17, 1, 1);
-      book(_h["Fig11AntiProtonMinBias"], 17, 1, 2);
+
+      string refnameRcpPionPlus = mkAxisCode(15,1,1);
+      const Scatter2D& refdataRcpPionPlus =refData(refnameRcpPionPlus);
+      book(_h["Fig11PionPlusCentral"], refnameRcpPionPlus + "_Central", refdataRcpPionPlus);
+      book(_h["Fig11PionPlusPeripheral"], refnameRcpPionPlus + "_Peripheral", refdataRcpPionPlus);
+      book(_s["Fig11PionPlus"], refnameRcpPionPlus);
+
+      string refnameRcpPionMinus = mkAxisCode(15,1,2);
+      const Scatter2D& refdataRcpPionMinus =refData(refnameRcpPionMinus);
+      book(_h["Fig11PionMinusCentral"], refnameRcpPionMinus + "_Central", refdataRcpPionMinus);
+      book(_h["Fig11PionMinusPeripheral"], refnameRcpPionMinus + "_Peripheral", refdataRcpPionMinus);
+      book(_s["Fig11PionMinus"], refnameRcpPionMinus);
+
+      string refnameRcpKaonPlus = mkAxisCode(16,1,1);
+      const Scatter2D& refdataRcpKaonPlus =refData(refnameRcpKaonPlus);
+      book(_h["Fig11KaonPlusCentral"], refnameRcpKaonPlus + "_Central", refdataRcpKaonPlus);
+      book(_h["Fig11KaonPlusPeripheral"], refnameRcpKaonPlus + "_Peripheral", refdataRcpKaonPlus);
+      book(_s["Fig11KaonPlus"], refnameRcpKaonPlus);
+
+      string refnameRcpKaonMinus = mkAxisCode(16,1,2);
+      const Scatter2D& refdataRcpKaonMinus =refData(refnameRcpKaonMinus);
+      book(_h["Fig11KaonMinusCentral"], refnameRcpKaonMinus + "_Central", refdataRcpKaonMinus);
+      book(_h["Fig11KaonMinusPeripheral"], refnameRcpKaonMinus + "_Peripheral", refdataRcpKaonMinus);
+      book(_s["Fig11KaonMinus"], refnameRcpKaonMinus);
+
+      string refnameRcpProton = mkAxisCode(17,1,1);
+      const Scatter2D& refdataRcpProton =refData(refnameRcpProton);
+      book(_h["Fig11ProtonCentral"], refnameRcpProton + "_Central", refdataRcpProton);
+      book(_h["Fig11ProtonPeripheral"], refnameRcpProton + "_Peripheral", refdataRcpProton);
+      book(_s["Fig11Proton"], refnameRcpProton);
+
+      string refnameRcpAntiProton = mkAxisCode(17,1,2);
+      const Scatter2D& refdataRcpAntiProton =refData(refnameRcpAntiProton);
+      book(_h["Fig11AntiProtonCentral"], refnameRcpAntiProton + "_Central", refdataRcpAntiProton);
+      book(_h["Fig11AntiProtonPeripheral"], refnameRcpAntiProton + "_Peripheral", refdataRcpAntiProton);
+      book(_s["Fig11AntiProton"], refnameRcpAntiProton);
+
       book(_h["Fig12PionPlusCent0_5"], 18, 1, 1);
       book(_h["Fig12PionPlusCent5_15"], 18, 1, 2);
       book(_h["Fig12PionPlusCent15_30"], 18, 1, 3);
@@ -111,18 +142,20 @@ namespace Rivet {
       book(_h["AntiProtonParticle"], 25, 1, 6);
       book(_h["N_collCentrality"], 26, 1, 1);
       book(_h["N_partCentrality"], 27, 1, 1);
-      book(_h["PionPlusCentrality"], 28, 1, 1);
-      book(_h["PionMinusCentrality"], 28, 1, 2);
-      book(_h["KaonPlusCentrality"], 28, 1, 3);
-      book(_h["KaonMinusCentrality"], 28, 1, 4);
-      book(_h["ProtonCentrality"], 28, 1, 5);
-      book(_h["AntiProtonCentrality"], 28, 1, 6);
+      book(_p["PionPlusCentrality"], 28, 1, 1);
+      book(_p["PionMinusCentrality"], 28, 1, 2);
+      book(_p["KaonPlusCentrality"], 28, 1, 3);
+      book(_p["KaonMinusCentrality"], 28, 1, 4);
+      book(_p["ProtonCentrality"], 28, 1, 5);
+      book(_p["AntiProtonCentrality"], 28, 1, 6);
+      /*
       book(_h["Table4PionPlusCentrality"], 29, 1, 1);
       book(_h["Table4PionMinusCentrality"], 29, 1, 2);
       book(_h["Table4KaonPlusCentrality"], 29, 1, 3);
       book(_h["Table4KaonMinusCentrality"], 29, 1, 4);
       book(_h["Table4ProtonCentrality"], 29, 1, 5);
       book(_h["Table4AntiProtonCentrality"], 29, 1, 6);
+      */
       book(_c["MinBias"], "MinBias");
       book(_c["Cent0_5"], "Cent0_5");
       book(_c["Cent5_15"], "Cent5_15");
@@ -150,50 +183,30 @@ namespace Rivet {
         if(p.pid() == 321)
         {
           _h["KaonPlusMinBias"]->fill(p.pT()/GeV);
-          _h["Fig11KaonPlusMinBias"]->fill(p.pT()/GeV);
+          _h["KaonPlusParticle"]->fill(cent);
+          _p["KaonPlusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
-            _h["KaonPlusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig10KaonPlusCent0_5"]->fill(p.pT()/GeV);
-            _h["Fig11KaonPlusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent0_5"]->fill(p.pT()/GeV);
-            _h["KaonPlusParticle0_5"]->fill(p.pT()/GeV);
-            _h["KaonPlusCentrality0_5"]->fill(p.pT()/GeV);
-            _h["Table4KaonPlusCentrality0_5"]->fill(p.pT()/GeV);
+            _h["Fig11KaonPlusCentral"]->fill(p.pT()/GeV);
+
             }
           else if(cent >= 5. && cent < 15.)  {
-            _h["KaonPlusCent5_15"]->fill(p.pT()/GeV);
             _h["Fig10KaonPlusCent5_15"]->fill(p.pT()/GeV);
-            _h["KaonPlusParticle5_15"]->fill(p.pT()/GeV);
-            _h["Fig11KaonPlusCent5_15"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent5_15"]->fill(p.pT()/GeV);
-            _h["KaonPlusCentrality5_15"]->fill(p.pT()/GeV);
-            _h["Table4KaonPlusCentrality5_15"]->fill(p.pT()/GeV);
             }
           else if(cent >= 15. && cent < 30.)  {
-            _h["KaonPlusCent15_30"]->fill(p.pT()/GeV);
-            _h["Fig11KaonPlusCent15_30"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent15_30"]->fill(p.pT()/GeV);
-            _h["KaonPlusParticle15_30"]->fill(p.pT()/GeV);
-            _h["KaonPlusCentrality15_30"]->fill(p.pT()/GeV);
-            _h["Table4KaonPlusCentrality15_30"]->fill(p.pT()/GeV);
             }
           else if(cent >= 30. && cent < 60.)  {
-            _h["KaonPlusCent30_60"]->fill(p.pT()/GeV);
             _h["Fig10KaonPlusCent30_60"]->fill(p.pT()/GeV);
-            _h["Fig11KaonPlusCent30_60"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent30_60"]->fill(p.pT()/GeV);
-            _h["KaonPlusParticle30_60"]->fill(p.pT()/GeV);
-            _h["Table4KaonPlusCentrality30_60"]->fill(p.pT()/GeV);
             }
           else if(cent >= 60. && cent < 92.)  {
-            _h["KaonPlusCent60_92"]->fill(p.pT()/GeV);
             _h["Fig10KaonPlusCent60_92"]->fill(p.pT()/GeV);
-            _h["Fig11KaonPlusCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent60_92"]->fill(p.pT()/GeV);
-            _h["KaonPlusParticle60_92"]->fill(p.pT()/GeV);
-            _h["KaonPlusCentrality60_92"]->fill(p.pT()/GeV);
-            _h["Table4KaonPlusCentrality60_92"]->fill(p.pT()/GeV);
+            _h["Fig11KaonPlusPeripheral"]->fill(p.pT()/GeV);
             }
 
 
@@ -201,58 +214,52 @@ namespace Rivet {
         if(p.pid() == -321)
         {
           _h["KaonMinusMinBias"]->fill(p.pT()/GeV);
-          _h["Fig11KaonMinusMinBias"]->fill(p.pT()/GeV);
           _h["KaonMinusParticle"]->fill(cent);
+          _p["KaonMinusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
-            _h["KaonMinusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig10KaonMinusCent0_5"]->fill(p.pT()/GeV);
-            _h["Fig12KaonMinus0_5"]->fill(p.pT()/GeV);
-            _h["KaonMinusCentrality0_5"]->fill(p.pT()/GeV);
-            _h["Table4KaonMinusCentrality0_5"]->fill(p.pT()/GeV);
+            _h["Fig12KaonMinusCent0_5"]->fill(p.pT()/GeV);
+            _h["Fig11KaonMinusCentral"]->fill(p.pT()/GeV);
+
+            //_h["Table4KaonMinusCentrality0_5"]->fill(p.pT()/GeV);
             }
           else if(cent >= 5. && cent < 15.)  {
-            _h["KaonMinusCent5_15"]->fill(p.pT()/GeV);
             _h["Fig10KaonMinusCent5_15"]->fill(p.pT()/GeV);
-            _h["Fig12KaonMinus5_15"]->fill(p.pT()/GeV);
-            _h["KaonMinusCentrality5_15"]->fill(p.pT()/GeV);
-            _h["Table4KaonMinusCentrality5_15"]->fill(p.pT()/GeV);
+            _h["Fig12KaonMinusCent5_15"]->fill(p.pT()/GeV);
+            //_h["Table4KaonMinusCentrality5_15"]->fill(p.pT()/GeV);
             }
           else if(cent >= 15. && cent < 30.)  {
-            _h["KaonMinusCent15_30"]->fill(p.pT()/GeV);
             _h["Fig10KaonMinusCent15_30"]->fill(p.pT()/GeV);
-            _h["Fig12KaonMinus15_30"]->fill(p.pT()/GeV);
-            _h["KaonMinusCentrality15_30"]->fill(p.pT()/GeV);
-            _h["Table4KaonMinusCentrality15_30"]->fill(p.pT()/GeV);
+            _h["Fig12KaonMinusCent15_30"]->fill(p.pT()/GeV);
+            //_h["Table4KaonMinusCentrality15_30"]->fill(p.pT()/GeV);
             }
             else if(cent >= 30. && cent < 60.)  {
-              _h["KaonMinusCent30_60"]->fill(p.pT()/GeV);
               _h["Fig10KaonMinusCent30_60"]->fill(p.pT()/GeV);
-              _h["Fig12KaonMinus30_60"]->fill(p.pT()/GeV);
-              _h["KaonMinusCentrality30_60"]->fill(p.pT()/GeV);
-              _h["Table4KaonMinusCentrality30_60"]->fill(p.pT()/GeV);
+              _h["Fig12KaonMinusCent30_60"]->fill(p.pT()/GeV);
+             // _h["Table4KaonMinusCentrality30_60"]->fill(p.pT()/GeV);
             }
             else if(cent >= 60. && cent < 92.)  {
-              _h["KaonMinusCent60_92"]->fill(p.pT()/GeV);
               _h["Fig10KaonMinusCent60_92"]->fill(p.pT()/GeV);
-              _h["Fig12KaonMinus60_92"]->fill(p.pT()/GeV);
-              _h["KaonMinusCentrality60_92"]->fill(p.pT()/GeV);
-              _h["Table4KaonMinusCentrality60_92"]->fill(p.pT()/GeV);
+              _h["Fig12KaonMinusCent60_92"]->fill(p.pT()/GeV);
+              _h["Fig11KaonMinusPeripheral"]->fill(p.pT()/GeV);
+             // _h["Table4KaonMinusCentrality60_92"]->fill(p.pT()/GeV);
             }
         }
         if(p.pid() == 2212)
         {
           _h["ProtonMinBias"]->fill(p.pT()/GeV);
-          _h["Fig11ProtonMinBias"]->fill(p.pT()/GeV);
           _h["ProtonParticle"]->fill(cent);
+          _p["ProtonCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10ProtonCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12ProtonCent0_5"]->fill(p.pT()/GeV);
+            _h["Fig11ProtonCentral"]->fill(p.pT()/GeV);
           }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10ProtonCent5_15"]->fill(p.pT()/GeV);
-            _h["Fig12ProtonCent5_ 5"]->fill(p.pT()/GeV);
+            _h["Fig12ProtonCent5_15"]->fill(p.pT()/GeV);
           }
           else if(cent >= 15. && cent < 30.)  {
             _h["Fig10ProtonCent15_30"]->fill(p.pT()/GeV);
@@ -265,17 +272,19 @@ namespace Rivet {
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10ProtonCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12ProtonCent60_92"]->fill(p.pT()/GeV);
+            _h["Fig11ProtonPeripheral"]->fill(p.pT()/GeV);
           }
         }
         if(p.pid() == -2212)
         {
           _h["AntiProtonMinBias"]->fill(p.pT()/GeV);
-          _h["Fig11AntiProtonMinBias"]->fill(p.pT()/GeV);
           _h["AntiProtonParticle"]->fill(cent);
+          _p["AntiProtonCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10AntiProtonCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12AntiProtonCent0_5"]->fill(p.pT()/GeV);
+            _h["Fig11AntiProtonCentral"]->fill(p.pT()/GeV);
             }
             else if(cent >= 5. && cent < 15.)  {
               _h["Fig10AntiProtonCent5_15"]->fill(p.pT()/GeV);
@@ -292,81 +301,70 @@ namespace Rivet {
             else if(cent >= 60. && cent < 92.)  {
               _h["Fig10AntiProtonCent60_92"]->fill(p.pT()/GeV);
               _h["Fig12AntiProtonCent60_92"]->fill(p.pT()/GeV);
+              _h["Fig11AntiProtonPeripheral"]->fill(p.pT()/GeV);
             }
            }
 
         if(p.pid() == 211)
         {
+
           _h["PionPlusMinBias"]->fill(p.pT()/GeV);
-          _h["Fig11PionPlusMinBias"]->fill(p.pT()/GeV);
           _h["PionPlusParticle"]->fill(cent);
+          _p["PionPlusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionPlusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent0_5"]->fill(p.pT()/GeV);
-            _h["PionPlusCentrality0_5"]->fill(p.pT()/GeV);
-            _h["Table4PionPlusCentrality0_5"]->fill(p.pT()/GeV);
+            _h["Fig11PionPlusCentral"]->fill(p.pT()/GeV);
+
           }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10PionPlusCent5_15"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent5_15"]->fill(p.pT()/GeV);
-            _h["PionPlusCentrality5_15"]->fill(p.pT()/GeV);
-            _h["Table4PionPlusCentrality5_15"]->fill(p.pT()/GeV);
+
           }
           else if(cent >= 15. && cent < 30.)  {
             _h["Fig10PionPlusCent15_30"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent15_30"]->fill(p.pT()/GeV);
-            _h["PionPlusCentrality15_30"]->fill(p.pT()/GeV);
-            _h["Table4PionPlusCentrality15_30"]->fill(p.pT()/GeV);
           }
           else if(cent >= 30. && cent < 60.)  {
             _h["Fig10PionPlusCent30_60"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent30_60"]->fill(p.pT()/GeV);
-            _h["PionPlusCentrality30_60"]->fill(p.pT()/GeV);
-            _h["Table4PionPlusCentrality30_60"]->fill(p.pT()/GeV);
           }
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10PionPlusCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent60_92"]->fill(p.pT()/GeV);
-            _h["PionPlusCentrality60_92"]->fill(p.pT()/GeV);
-            _h["Table4PionPlusCentrality60_92"]->fill(p.pT()/GeV);
+            _h["Fig11PionPlusPeripheral"]->fill(p.pT()/GeV);
           }
         }
         if(p.pid() == -211)
         {
           _h["PionMinusMinBias"]->fill(p.pT()/GeV);
-          _h["Fig11PionMinusMinBias"]->fill(p.pT()/GeV);
           _h["PionMinusParticle"]->fill(cent);
+          _p["PionMinusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionMinusCent0_5"]->fill(p.pT()/GeV);
-            _h["Fig12PionPlusCent0_5"]->fill(p.pT()/GeV);
-            _h["PionMinusCentrality0_5"]->fill(p.pT()/GeV);
-            _h["Table4PionMinusCentrality0_5"]->fill(p.pT()/GeV);
+            _h["Fig12PionMinusCent0_5"]->fill(p.pT()/GeV);
+            _h["Fig11PionMinusCentral"]->fill(p.pT()/GeV);
+
           }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10PionMinusCent5_15"]->fill(p.pT()/GeV);
-            _h["Fig12PionPlusCent5_15"]->fill(p.pT()/GeV);
-            _h["PionMinusCentrality5_15"]->fill(p.pT()/GeV);
-            _h["Table4PionMinusCentrality5_15"]->fill(p.pT()/GeV);
+            _h["Fig12PionMinusCent5_15"]->fill(p.pT()/GeV);
           }
           else if(cent >= 15. && cent < 30.)  {
             _h["Fig10PionMinusCent15_30"]->fill(p.pT()/GeV);
-            _h["Fig12PionPlusCent15_30"]->fill(p.pT()/GeV);
-            _h["PionMinusCentrality15_30"]->fill(p.pT()/GeV);
-            _h["Table4PionMinusCentrality15_30"]->fill(p.pT()/GeV);
+            _h["Fig12PionMinusCent15_30"]->fill(p.pT()/GeV);
           }
           else if(cent >= 30. && cent < 60.)  {
             _h["Fig10PionMinusCent30_60"]->fill(p.pT()/GeV);
-            _h["Fig12PionPlusCent30_60"]->fill(p.pT()/GeV);
-            _h["PionMinusCentrality30_60"]->fill(p.pT()/GeV);
-            _h["Table4PionMinusCentrality30_60"]->fill(p.pT()/GeV);
+            _h["Fig12PionMinusCent30_60"]->fill(p.pT()/GeV);
           }
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10PionMinusCent60_92"]->fill(p.pT()/GeV);
-            _h["Fig12PionPlusCent60_92"]->fill(p.pT()/GeV);
-            _h["PionMinusCentrality60_92"]->fill(p.pT()/GeV);
-            _h["Table4PionMinusCentrality60_92"]->fill(p.pT()/GeV);
+            _h["Fig12PionMinusCent60_92"]->fill(p.pT()/GeV);
+            _h["Fig11PionMinusPeripheral"]->fill(p.pT()/GeV);
           }
         }
         }
@@ -392,20 +390,41 @@ namespace Rivet {
       _h["Fig10KaonMinusCent30_60"] ->scaleW(1./_c["Cent30_60"]->sumW());
       _h["Fig10KaonMinusCent60_92"] ->scaleW(1./_c["Cent60_92"]->sumW());
       _h["Fig10ProtonCent0_5"] ->scaleW(1./_c["Cent0_5"]->sumW());
-      _h["Fig10ProtonCent0_5"] ->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig10AntiProtonCent0_5"] ->scaleW(1./_c["Cent0_5"]->sumW());
       _h["Fig10ProtonCent5_15"]->scaleW(1./_c["Cent5_15"]->sumW());
       _h["Fig10AntiProtonCent5_15"]->scaleW(1./_c["Cent5_15"]->sumW());
       _h["Fig10ProtonCent15_30"]->scaleW(1./_c["Cent15_30"]->sumW());
       _h["Fig10AntiProtonCent15_30"]->scaleW(1./_c["Cent15_30"]->sumW());
       _h["Fig10ProtonCent30_60"] ->scaleW(1./_c["Cent30_60"]->sumW());
+      _h["Fig10AntiProtonCent30_60"] ->scaleW(1./_c["Cent30_60"]->sumW());
       _h["Fig10ProtonCent60_92"]->scaleW(1./_c["Cent60_92"]->sumW());
       _h["Fig10AntiProtonCent60_92"]->scaleW(1./_c["Cent60_92"]->sumW());
-      _h["Fig11PionPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["Fig11PionMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["Fig11KaonPlusMinBias"] ->scaleW(1./_c["MinBias"]->sumW());
-      _h["Fig11KaonMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["Fig11ProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["Fig11AntiProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+
+      _h["Fig11PionPlusCentral"]->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig11PionPlusPeripheral"]->scaleW(1./_c["Cent60_92"]->sumW());
+      divide(_h["Fig11PionPlusCentral"], _h["Fig11PionPlusPeripheral"], _s["Fig11PionPlus"]);
+
+      _h["Fig11PionMinusCentral"]->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig11PionMinusPeripheral"]->scaleW(1./_c["Cent60_92"]->sumW());
+      divide(_h["Fig11PionMinusCentral"], _h["Fig11PionMinusPeripheral"], _s["Fig11PionMinus"]);
+
+      _h["Fig11KaonPlusCentral"]->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig11KaonPlusPeripheral"]->scaleW(1./_c["Cent60_92"]->sumW());
+      divide(_h["Fig11KaonPlusCentral"], _h["Fig11KaonPlusPeripheral"], _s["Fig11KaonPlus"]);
+
+      _h["Fig11KaonMinusCentral"]->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig11KaonMinusPeripheral"]->scaleW(1./_c["Cent60_92"]->sumW());
+      divide(_h["Fig11KaonMinusCentral"], _h["Fig11KaonMinusPeripheral"], _s["Fig11KaonMinus"]);
+
+      _h["Fig11ProtonCentral"]->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig11ProtonPeripheral"]->scaleW(1./_c["Cent60_92"]->sumW());
+      divide(_h["Fig11ProtonCentral"], _h["Fig11ProtonPeripheral"], _s["Fig11Proton"]);
+
+      _h["Fig11AntiProtonCentral"]->scaleW(1./_c["Cent0_5"]->sumW());
+      _h["Fig11AntiProtonPeripheral"]->scaleW(1./_c["Cent60_92"]->sumW());
+      divide(_h["Fig11AntiProtonCentral"], _h["Fig11AntiProtonPeripheral"], _s["Fig11AntiProton"]);
+
+
       _h["Fig12PionPlusCent0_5"]->scaleW(1./_c["Cent0_5"]->sumW());
       _h["Fig12PionPlusCent5_15"]->scaleW(1./_c["Cent5_15"]->sumW());
       _h["Fig12PionPlusCent15_30"]->scaleW(1./_c["Cent15_30"]->sumW());
@@ -436,12 +455,12 @@ namespace Rivet {
       _h["Fig12AntiProtonCent30_60"]->scaleW(1./_c["Cent30_60"]->sumW());
       _h["Fig12ProtonCent60_92"]->scaleW(1./_c["Cent60_92"]->sumW());
       _h["Fig12AntiProtonCent60_92"]->scaleW(1./_c["Cent60_92"]->sumW());
-/*
+
       vector<int> centBins = {0, 5, 15, 30, 60, 92};
 
-      for(int i = 1; i <= _h["PionPlusParticle"]->numBins(); i++)
+      for(int i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
       {
-              string scounter = "Cent" + to_string(centBins[i-1]) + "_" + to_string(centBins[i]);
+              string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
               double normCent = 1./_c[scounter]->sumW();
               _h["PionPlusParticle"]->bin(i).scaleW(normCent);
               _h["PionMinusParticle"]->bin(i).scaleW(normCent);
@@ -451,7 +470,7 @@ namespace Rivet {
               _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
       }
 
-*/
+
 
 
 
@@ -465,6 +484,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    map<string, Scatter2DPtr> _s;
     ///@}
 
 
