@@ -1,35 +1,38 @@
 #!/bin/perl
 #@analyses = (619063,731133,711951,776624,777211,778168,793126,837075,851937,886590,900703,1107625,930463,1227971,1393529,1658594,1672859,1798493);
-@analyses = (619063,711951,776624,777211,778168, 793126,837075,886590,1107625,930463, 1227971,1393529,1658594,1672859,1798493, 1672476);
-@isAu200 =   (1,0,0,1,1,  0,0,0,0,1, 1,1,1,0,1, 1);
-@isAu130 =   (1,0,0,0,0,  1,0,0,0,0, 0,0,0,0,0, 0);
-@ispp200 =   (1,1,1,1,1,  0,1,1,0,1, 1,1,0,1,1, 1);
-@isCuCu200 = (0,0,1,0,0,  0,1,0,0,0, 0,0,0,0,0, 1);
-@isdAu200 =  (0,1,0,0,0,  1,0,0,0,0, 1,0,0,0,1, 0);
-@isAu62 =    (0,0,0,0,0,  1,0,0,1,0, 0,0,0,0,0, 1);
-@ispp62 =    (0,0,0,0,0,  0,0,1,1,0, 0,0,0,0,0, 1);
-@ispp39 =    (0,0,0,0,0,  0,0,0,1,0, 0,0,0,0,0, 0);
-@isAu39 =    (0,0,0,0,0,  0,0,0,1,0, 0,0,0,0,0, 1);
-@isCuAu200=  (0,0,0,0,0,  0,0,0,0,0, 0,0,0,1,0, 0);
+@analyses = (619063,711951,776624,777211,778168, 793126,837075,886590,1107625,930463, 1227971,1393529,1658594,1672859,1798493, 1672476,851937,715470,856259,623413, 624474,562409,1127262);
+#failing Aug 5 21: 837075
+@isAu200 =   (1,0,0,1,1,  0,0,0,0,1, 1,1,1,0,1, 1,1,1,1,0, 1,0,1);
+@isAu130 =   (1,0,0,0,0,  1,0,0,0,0, 0,0,0,0,0, 0,0,0,0,1, 0,1,0);
+@ispp200 =   (1,1,1,1,1,  0,1,1,0,1, 1,1,0,1,1, 1,0,0,1,0, 0,0,1);
+@isCuCu200 = (0,0,1,0,0,  0,1,0,0,0, 0,0,0,0,0, 1,0,0,0,0, 0,0,0);
+@isdAu200 =  (0,1,0,0,0,  1,0,0,0,0, 1,0,0,0,1, 0,1,1,0,0, 0,0,0);
+@isAu62 =    (0,0,0,0,0,  1,0,0,1,0, 0,0,0,0,0, 1,0,0,0,0, 0,0,0);
+@ispp62 =    (0,0,0,0,0,  0,0,1,1,0, 0,0,0,0,0, 1,0,0,0,0, 0,0,0);
+@ispp39 =    (0,0,0,0,0,  0,0,0,1,0, 0,0,0,0,0, 0,0,0,0,0, 0,0,0);
+@isAu39 =    (0,0,0,0,0,  0,0,0,1,0, 0,0,0,0,0, 1,0,0,0,0, 0,0,0);
+@isCuAu200=  (0,0,0,0,0,  0,0,0,0,0, 0,0,0,1,0, 0,0,0,0,0, 0,0,0);
 
 
-$workdir = "/phenix/scratch/cen/sampleHepData/LocalAnalyses/";
+#$workdir = "/phenix/scratch/cen/sampleHepData/LocalAnalyses/";
+$workdir = "../LocalAnalyses/";
+$gitrepodir = "~/UTK/Jetscape/RIVETAnalyses";
 $AuAuCommand = "";
 $ppCommand = "";
 print "$#analyses analyses\n";
 for($i=0;$i<=$#analyses;$i++){
 #print "$i\n";
 	$test = `ls ../ | grep $analyses[$i]`;
-	#print "$test";
+	print "$test";
 	chomp($test);
 	#system "ls $test/*.sh"
 	chdir("../$test");
-	#system "bash RunAnalysis.sh";
+	system "bash RunAnalysis.sh";
 	#print "Analysis $analyses[$1] $test :\n";
-	system "cp ~/RIVETAnalyses/$test/$test.* $workdir/.";
-	print "rivet-build Rivet$test.so $test.cc\n";
-	#system "rivet-merge --pwd -o /tmp/Rivet.yoda Rivet.yoda Rivet.yoda";i
-	#print "\n\n\n";
+	system "cp $gitrepodir/$test/$test.* $workdir/.";
+	#print "rivet-build Rivet$test.so $test.cc\n";
+	system "rivet-merge --pwd -o /tmp/Rivet.yoda Rivet.yoda Rivet.yoda";
+	print "\n\n\n";
 	if($isAu200[$i]==1){$AuAu200=" -a $test:cent=GEN $AuAu200";}
         if($isAu130[$i]==1){$AuAu130=" -a $test:cent=GEN $AuAu130";}
         if($ispp200[$i]==1){$pp200=" -a $test:cent=GEN $pp200";}

@@ -1,0 +1,16 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=//gpfs/mnt/gpfs02/phenix/scratch/rodavenport/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=dAU200:cent=GEN/MinBias
+LegendOnly=//gpfs/mnt/gpfs02/phenix/scratch/rodavenport/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=dAU200:cent=GEN/MinBias
+# END PLOT
+
+# BEGIN COUNTER //gpfs/mnt/gpfs02/phenix/scratch/rodavenport/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=dAU200:cent=GEN/MinBias
+LineColor=red
+LineStyle=solid
+Path=//gpfs/mnt/gpfs02/phenix/scratch/rodavenport/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=dAU200:cent=GEN/MinBias
+Title=Rivet
+# value	 error
+4.364004e+36	4.364004e+36
+# END COUNTER
+
