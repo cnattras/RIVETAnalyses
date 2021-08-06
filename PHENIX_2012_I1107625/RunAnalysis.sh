@@ -19,4 +19,4 @@ rivet-build RivetPHENIX_2012_I1107625.so PHENIX_2012_I1107625.cc
 #rivet --pwd -a PHENIX_2012_I1107625:cent=GEN:beam=PP39 -o Angantyr_pp_39GeV.yoda $FILESPP39
 #rivet --pwd -a PHENIX_2012_I1107625:cent=GEN:beam=PP62 -o Angantyr_pp_62GeV.yoda $FILESPP62
 
-rivet --pwd -p ../Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda -a PHENIX_2012_I1107625:cent=GEN:beam=AUAU -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
+rivet --pwd -p ../Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda -a PHENIX_2012_I1107625:cent=GEN:beam=AUAU62 -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat

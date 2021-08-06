@@ -47,8 +47,8 @@ namespace Rivet {
 
       // Beam options
       beamOpt = getOption<string>("beam", "NONE");
-      if (beamOpt == "pp200") collsys = pp200;
-      if (beamOpt == "pp62") collsys = pp62;
+      if (beamOpt == "PP200") collsys = pp200;
+      if (beamOpt == "PP62") collsys = pp62;
 
       // Book histograms
       // Histos from HEPdata at 200GeV
@@ -108,6 +108,15 @@ namespace Rivet {
                 double deltaPtPI = 0;
 
 		// Fill histos 200GeV
+
+		if(beamOpt == "NONE")
+      		{
+              	
+			int NN = 1.;
+			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collsys = pp200;
+			if (fuzzyEquals(sqrtS()/GeV, 62*NN, 1E-3)) collsys = pp62;
+		}
+
 		if (collsys == pp200)
 		{
 			_c["sow_pp200_pi"]->fill();
@@ -328,7 +337,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Scatter2DPtr> _s;
-    string beamOpt = "";
+    string beamOpt = "NONE";
     enum CollisionSystem {pp200, pp62};
     CollisionSystem collsys;
     //@}

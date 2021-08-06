@@ -25,6 +25,8 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
+      beamOpt = getOption<string>("beam", "NONE");
+
       // Initialise and register projections
 
       std::initializer_list<int> pdgIds = {PID::PROTON, PID::PIPLUS, PID::KPLUS};
@@ -150,21 +152,29 @@ namespace Rivet {
       const ParticlePair& beam = beams();
       int NN = 0;
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      if(beamOpt == "NONE")
       {
-          NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
-          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+              if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+              {
+                  NN = 197.;
+                  if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+                  if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+              }
+              if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+              {
+                  collSys = pp;
+              }
       }
-      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-      {
-          collSys = pp;
-      }
+      else if(beamOpt == "PP200") collSys = pp;
+      else if(beamOpt == "AUAU200") collSys = AuAu200;
+      else if(beamOpt == "AUAU130") collSys = AuAu130;
+
+
 
       PrimaryParticles cpp = applyProjection<PrimaryParticles>(event,"cpp");
       Particles particles = cpp.particles();
 
-      if(collSys==pp)
+      if(collSys == pp)
       {
           sow["sow_pp"]->fill();
           for(Particle p : particles)
@@ -190,7 +200,7 @@ namespace Rivet {
       if(c < 5.)
       {
 
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -203,7 +213,7 @@ namespace Rivet {
               }
               sow["sow0_5"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -214,7 +224,7 @@ namespace Rivet {
       }
       else if(c >= 5 && c < 10)
       {
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -228,7 +238,7 @@ namespace Rivet {
       }
       else if(c >= 10 && c < 20)
       {
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -243,7 +253,7 @@ namespace Rivet {
       }
       else if(c >= 20 && c < 30)
       {
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -256,7 +266,7 @@ namespace Rivet {
               }
               sow["sow20_30"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -267,7 +277,7 @@ namespace Rivet {
       }
       else if(c >= 30 && c < 40)
       {
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -280,7 +290,7 @@ namespace Rivet {
               }
               sow["sow30_40"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -292,7 +302,7 @@ namespace Rivet {
       }
       else if(c >= 40 && c < 60)
       {
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -305,7 +315,7 @@ namespace Rivet {
               }
               sow["sow40_60"]->fill();
           }
-          else if(collSys==AuAu130)
+          else if(collSys == AuAu130)
           {
               for(Particle p : particles)
               {
@@ -316,7 +326,7 @@ namespace Rivet {
       }
       else if(c >= 60 && c < 80)
       {
-          if(collSys==AuAu200)
+          if(collSys == AuAu200)
           {
               for(Particle p : particles)
               {
@@ -339,29 +349,6 @@ namespace Rivet {
     void finalize() {
       //These lines normalize per event and pT bin width.
       //You need to also scale by 1.0/(2.0*3.14159*[eta acceptance])
-
-      bool AuAu130_available = false;
-      bool AuAu200_available = false;
-      bool pp200_available = false;
-
-      for(auto element : chSpectrum)
-      {
-          string name = element.second->name();
-          if(name.find("200") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) AuAu200_available = true;
-          }
-          else if(name.find("130") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) AuAu130_available = true;
-          }
-          else if(name.find("pp") != std::string::npos)
-          {
-              if(element.second->numEntries() > 0) pp200_available = true;
-          }
-      }
-
-      if(!(AuAu200_available && AuAu130_available && pp200_available)) return;
 
       chSpectrum["chSpectrum0_5"]->scaleW(1./(sow["sow0_5"]->sumW()*4.0*M_PI));
       chSpectrum["chSpectrum5_10"]->scaleW(1./(sow["sow5_10"]->sumW()*4.0*M_PI));
@@ -436,6 +423,7 @@ namespace Rivet {
     map<string, Scatter2DPtr> R_AB;
     enum CollisionSystem {pp, AuAu130, AuAu200};
     CollisionSystem collSys;
+    string beamOpt = "NONE";
     //@}
 
 

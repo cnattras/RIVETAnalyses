@@ -42,7 +42,7 @@ namespace Rivet {
       const UnstableParticles up(Cuts::abseta < 0.35 && Cuts::pid == 111);
       declare(up, "up");
 
-      //beamOpt = getOption<string>("beam","NONE");
+      beamOpt = getOption<string>("beam","NONE");
 
 
       //if(beamOpt=="PP") collSys = pp;
@@ -188,14 +188,20 @@ namespace Rivet {
         const ParticlePair& beam = beams();
         string CollSystem = "Empty";
 
-        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-        {
-                CollSystem = "AuAu";
+        if (beamOpt == "NONE") {
+
+          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+          {
+                  CollSystem = "AuAu";
+          }
+          if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+          {
+                  CollSystem = "pp";
+          }
         }
-        if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-        {
-                CollSystem = "pp";
-        }
+
+        else if (beamOpt == "PP200") CollSystem = "pp";
+	else if (beamOpt == "AUAU200") CollSystem = "AuAu";
 
         if(CollSystem == "pp")
         {
@@ -361,36 +367,6 @@ namespace Rivet {
 
     void finalize() {
 
-	bool AuAu_available = true;
-	bool pp_available = true;
-
-	// Is this for-loop needed?
- 	for(auto element : _c)
-        {
-                string name = element.second->name();
-                if(name.find("AuAu") != std::string::npos)
-                {
-                        if(element.second->sumW() > 0) AuAu_available = true;
-                        else
-                        {
-                                AuAu_available = false;
-                                break;
-                        }
-                }
-                else if(name.find("pp") != std::string::npos)
-                {
-                        if(element.second->sumW() > 0) pp_available = true;
-                        else
-                        {
-                                pp_available = false;
-                                break;
-                        }
-                }
-        }
-
- 	if(!(AuAu_available && pp_available)) return;
-
-
  //Yields_________________
        _h["ptyieldsc5"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
        _h["ptyieldsc10"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
@@ -541,7 +517,7 @@ namespace Rivet {
 
      map<string, Scatter2DPtr> hRaaNpart;
      //map<string, int> centBins;
-    //string beamOpt;
+    string beamOpt = "NONE";
     //enum CollisionSystem {pp, AuAu};
     //CollisionSystem collSys;
 

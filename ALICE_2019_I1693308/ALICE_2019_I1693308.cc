@@ -29,9 +29,14 @@ namespace Rivet {
       const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(aprim, "aprim");
       //The second primary particles is so that the jet specctra goes over all particles instead of cutting out pT < 0.15GeV
-      const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
+      const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.9 && Cuts::abscharge > 0 && (Cuts::abspid == Rivet::PID::PIPLUS || Cuts::abspid == Rivet::PID::KPLUS || Cuts::abspid == Rivet::PID::PROTON || Cuts::abspid == Rivet::PID::ELECTRON || Cuts::abspid == Rivet::PID::MUON));
       declare(aprimall, "aprimall");
-      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4);
+
+      // jets à la ALICE - Jet area will be available using the pseudojet
+      fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
+      fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
+      fjAreaDef = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
+      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(jetfs, "jetsfs");
 
       book(_h["PPS7"],1,1,1);
@@ -84,13 +89,14 @@ namespace Rivet {
               UEpT += p.pT()/GeV;
       }
 
-      //Dividing by 2 because two cones were used
-      UEpT /= 2.;
+      //Dividing by 2 because two cones were used and by cone area piR^2
+      //pT-density
+      UEpT /= 2.*M_PI*0.16;
 
 
       for(auto jet : jets)
       {
-        _h["PPS7"]->fill(jet.pT()/GeV - UEpT);
+        _h["PPS7"]->fill(jet.pT()/GeV - (UEpT*jet.pseudojet().area())); //pT-density*JetArea
       }
 
       jetsfs.calc(ALICEparticles);
@@ -137,9 +143,7 @@ namespace Rivet {
       //double norm = (crossSection()*1.E-9)/sow->sumW();
       //Above has "sow" which isn't anything that is declared so I changed it to the ptr _c["sow"]
       //double norm = (crossSection()*1.E-9)/(_c["sow"]->sumW());
-      double norm = (crossSection()/millibarn)/(_c["sow"]->sumW()*931);
-      //double norm = (crossSection()/millibarn)/(_c["sow"]->sumW());
-      //double norm = (7.106483E+10*1.E-9)/(_c["sow"]->sumW());
+      double norm = (crossSection()/millibarn)/(_c["sow"]->sumW());
 
 
       _h["PPS7"]->scaleW(norm);
@@ -158,6 +162,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    fastjet::AreaDefinition *fjAreaDef;
     ///@}
 
 
