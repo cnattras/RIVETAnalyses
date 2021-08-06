@@ -461,9 +461,7 @@ namespace Rivet {
       for(int i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
       {
               string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
-              cout << scounter << endl;
               double normCent = 1./_c[scounter]->sumW();
-              cout << normCent << endl;
               _h["PionPlusParticle"]->bin(i).scaleW(normCent);
               _h["PionMinusParticle"]->bin(i).scaleW(normCent);
               _h["KaonPlusParticle"]->bin(i).scaleW(normCent);
