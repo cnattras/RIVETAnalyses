@@ -294,7 +294,7 @@ namespace Rivet {
               _h["Fig12AntiProtonCent60_92"]->fill(p.pT()/GeV);
             }
            }
-        }
+
         if(p.pid() == 211)
         {
           _h["PionPlusMinBias"]->fill(p.pT()/GeV);
@@ -369,6 +369,7 @@ namespace Rivet {
             _h["Table4PionMinusCentrality60_92"]->fill(p.pT()/GeV);
           }
         }
+        }
     }
 
 
@@ -435,8 +436,22 @@ namespace Rivet {
       _h["Fig12AntiProtonCent30_60"]->scaleW(1./_c["Cent30_60"]->sumW());
       _h["Fig12ProtonCent60_92"]->scaleW(1./_c["Cent60_92"]->sumW());
       _h["Fig12AntiProtonCent60_92"]->scaleW(1./_c["Cent60_92"]->sumW());
+/*
+      vector<int> centBins = {0, 5, 15, 30, 60, 92};
 
+      for(int i = 1; i <= _h["PionPlusParticle"]->numBins(); i++)
+      {
+              string scounter = "Cent" + to_string(centBins[i-1]) + "_" + to_string(centBins[i]);
+              double normCent = 1./_c[scounter]->sumW();
+              _h["PionPlusParticle"]->bin(i).scaleW(normCent);
+              _h["PionMinusParticle"]->bin(i).scaleW(normCent);
+              _h["KaonPlusParticle"]->bin(i).scaleW(normCent);
+              _h["KaonMinusParticle"]->bin(i).scaleW(normCent);
+              _h["ProtonParticle"]->bin(i).scaleW(normCent);
+              _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
+      }
 
+*/
 
 
 
