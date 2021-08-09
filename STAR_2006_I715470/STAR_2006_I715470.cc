@@ -49,10 +49,10 @@ namespace Rivet {
     public:
     
       /// Constructor
-      Correlator(int index, int subindex) {
-        _index = index;
-        _subindex = subindex;
-      }
+      // Correlator(int index, int subindex) {
+      //   _index = index;
+      //   _subindex = subindex;
+      // }
 
 	  Correlator(int index0, int index1, int index2) {
 		  _indices = { index0, index1, index2 };
@@ -98,10 +98,15 @@ namespace Rivet {
     
       int GetIndex(){ return _index; }
       int GetSubIndex(){ return _subindex; }
-      string GetFullIndex()
+            string GetFullIndex()
       {
-          string fullIndex = to_string(GetIndex()) + to_string(GetSubIndex());
-          return fullIndex;
+              string fullIndex = "";
+              for(int index : _indices)
+              {
+                      fullIndex += to_string(index);
+              }
+
+              return fullIndex;
       }
     
       bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) == 0 ? true : false; }
@@ -387,7 +392,7 @@ double highedge = 3.0*pi/2.0;
             string name = c1.GetCollSystemAndEnergy()+c1.GetFullIndex();
             //string name3 = c1.GetCollSystemAndEnergy()+c1.GetFullIndex()+"BkgdSubtracted";
             book(_h[name], name, ndPhiBins,lowedge,highedge);
-            cout<<"making "<<name<<endl;
+            cout<<"395 making "<<name<<endl;
             //book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
             if(ncb==0){
@@ -404,14 +409,14 @@ double highedge = 3.0*pi/2.0;
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
             //book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
-            cout<<"making* "<<name2<<endl;
+            cout<<"412 making* "<<name2<<endl;
             }
           }
 
 
 
           for(int nzT=0;nzT<numzTBins;nzT++){
-
+cout<<"This loop repeats some names for histograms which are made above.  I did not find the logic error.  6 Aug 2021 CN"<<endl;
       //Correlators
             Correlator c1(ncb,1000);
             c1.SetCollSystemAndEnergy("AuAu200");
@@ -425,7 +430,7 @@ double highedge = 3.0*pi/2.0;
             book(_h[name], name, ndPhiBins,lowedge,highedge);
             //book(_h[name3], name3, ndPhiBins,lowedge,highedge);
             book(sow[c1.GetFullIndex()],"sow" + c1.GetFullIndex());
-            cout<<"making* "<<name<<endl;
+            cout<<"433 making* "<<name<<endl;
             if(ncb==0){
 
               Correlator c2(1000,1000);
@@ -440,7 +445,7 @@ double highedge = 3.0*pi/2.0;
             book(_h[name2], name2, ndPhiBins,lowedge,highedge);
             //book(_h[name4], name4, ndPhiBins,lowedge,highedge);
             book(sow[c2.GetFullIndex()],"sow" + c2.GetFullIndex());
-            cout<<"making* "<<name2<<endl;
+            cout<<"448 making* "<<name2<<endl;
             }
           }//End of the zT loop
 

@@ -15,6 +15,9 @@ References:
 #Beams: [Au, Au]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU200
 Description:
   'The centrality dependence of transverse momentum distributions and yields for $\pi^{\pm}$, $K^{\pm}$,$p$, and $bar{p} in Au+Au collisions at $\sqrt{s_{NN}}$=200GeV at mid-rapidity are measured by the PHENIX experiment at RHIC. We observe a clear particle mass dependence of the shapes of transverse momentum spectra in central collisions below ~ 2 GeV/c in $p_{T}$. Both mean transverse momenta and particle yields per participant pair increase from peripheral to mid-central and saturate at the most central collisions for all particle species. We also measure particle ratios of $\frac{\pi^{-}}{\pi^{+}}$, $\frac{K^{-}}{K^{+}}$, $\frac{bar{p}}{p}$, $\frac{K}{\pi}$, $\frac{p}{\pi^{0}}$, and $\frac{bar{p}}{\pi^{0}}$ as a function of $p_{T}$ and collision centrality. The ratios of equal mass particle yields are independent of $p_{T}$ and centrality within the experimental uncertainties. In central collisions at intermediate transverse momenta ~ 1.5 – 4.5 GeV/c, proton and anti-proton yields constitute a significant fraction of the charged hadron production and show a scaling behavior different from that of pions.'
 ValidationInfo:
