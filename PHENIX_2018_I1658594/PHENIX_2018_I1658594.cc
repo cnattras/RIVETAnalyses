@@ -424,10 +424,9 @@ namespace Rivet {
       const FinalState RxPNeg(Cuts::eta < -1. && Cuts::eta > -2.8);
       declare(RxPNeg, "RxPNeg");
 
-      book(_p["RxPcosPos"], "RxPcosPos", 10, 0., 10.);
+      book(_p["RxPcosPosv2"], "RxPcosPosv2", 10, 0., 10.);
       book(_p["RxPcosPosv3"], "RxPcosPosv3", 10, 0., 10.);
       book(_p["RxPcosPosv4"], "RxPcosPosv4", 10, 0., 10.);
-      book(_s["ResCent"], "ResCent");
 
       // Initialise and register projections
 
@@ -1596,7 +1595,7 @@ namespace Rivet {
       double evPNeg = GetEventPlaneDetectorAcc(2, RxPNeg, etaRxPNeg, nPhiSections);
 
 	//std::floor(double a) returns the largest integer value smaller than a
-	 _p["RxPcosPos"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
+	 _p["RxPcosPosv2"]->fill(int(floor(c/10))+0.5, cos(2*(evPPos-evPNeg)));
 
          //EP3 and Resolution
 
@@ -1654,15 +1653,20 @@ namespace Rivet {
 
             std::vector<double> EPres(5, 0.);
 
-            for(auto bin : _p["RxPcosPos"]->bins())
+            for(auto bin : _p["RxPcosPosv2"]->bins())
             {
 		if(bin.numEntries() > 0)
                     {
-                         double RxPPosRes = sqrt(bin.mean());
-			 double chiRxPPos = CalculateChi(RxPPosRes);
-			 double res = Resolution(sqrt(2)*chiRxPPos);
-			EPres[centBin] = res;
-                           // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+                         double RxPPosRes;
+                         if(bin.mean()>0)
+                         {
+                                 RxPPosRes = sqrt(bin.mean());
+                                 double chiRxPPos = CalculateChi(RxPPosRes);
+        			 double res = Resolution(sqrt(2)*chiRxPPos);
+                                 EPres[centBin] = res;
+                         }
+                         else EPres[centBin] = 0;
+
                     }
                     centBin++;
             }
@@ -1675,12 +1679,16 @@ namespace Rivet {
 		if(bin.numEntries() > 0)
                     {
                          double RxPPosRes;
-			 if(bin.mean()>0) RxPPosRes = sqrt(bin.mean());
-				else RxPPosRes = sqrt(abs(bin.mean()));
-			 double chiRxPPos = CalculateChi(RxPPosRes);
-			 double res = Resolution(sqrt(2)*chiRxPPos);
-			EPres3[centBin] = res;
-                           // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+			 if(bin.mean()>0)
+                         {
+
+                                 RxPPosRes = sqrt(bin.mean());
+                                 double chiRxPPos = CalculateChi(RxPPosRes);
+        			 double res = Resolution(sqrt(2)*chiRxPPos);
+                                 EPres3[centBin] = res;
+                         }
+                         else EPres3[centBin] = 0;
+
                     }
                     centBin++;
             }
@@ -1693,12 +1701,15 @@ namespace Rivet {
 		if(bin.numEntries() > 0)
                     {
                         double RxPPosRes;
-			if (bin.mean()>0) RxPPosRes = sqrt(bin.mean());
-				else RxPPosRes = sqrt(abs(bin.mean())); 
-			 double chiRxPPos = CalculateChi(RxPPosRes);
-			 double res = Resolution(sqrt(2)*chiRxPPos);
-			EPres4[centBin] = res;
-                           // _s["ResCent"]->addPoint((centBin*10.)+5., res, 5., 0.);
+			if (bin.mean()>0)
+                        {
+                                RxPPosRes = sqrt(bin.mean());
+                                double chiRxPPos = CalculateChi(RxPPosRes);
+                                double res = Resolution(sqrt(2)*chiRxPPos);
+                                EPres4[centBin] = res;
+                        }
+                        else EPres4[centBin] = 0;
+
                     }
                     centBin++;
             }
