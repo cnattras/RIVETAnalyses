@@ -1717,18 +1717,20 @@ namespace Rivet {
             for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
             {
                     string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    _p[v2string]->scaleY(1./EPres[icent]);
+                    if(EPres[icent]>0) _p[v2string]->scaleY(1./EPres[icent]);
+                    else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
 
                     string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                     if(EPres3[icent]>0) _p[v3string]->scaleY(1./EPres3[icent]);
-			else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
+                    else throw UserError("EPres3[icent] is less than/equal to 0, scaling not occuring");
 
                     string v4string = "v4_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
                     if(EPres4[icent]>0) _p[v4string]->scaleY(1./EPres4[icent]);
-			else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
+                    else throw UserError("EPres4[icent] is less than/equal to 0, scaling not occuring");
 
                     string v4ep2string = "v4ep2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    _p[v4ep2string]->scaleY(1./EPres[icent]);
+                    if(EPres[icent]>0) _p[v4ep2string]->scaleY(1./EPres[icent]);
+                    else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
 
             }
 
