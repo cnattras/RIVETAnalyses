@@ -241,31 +241,31 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y01
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p$ $0-10\%$ centrality
+YLabel=Yields, Au+Au $\bar{p} $0-10\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y02
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p$ $10-20\%$ centrality
+YLabel=Yields, Au+Au $\bar{p} $10-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y03
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p$ $20-40\%$ centrality
+YLabel=Yields, Au+Au $\bar{p}$ $20-40\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y04
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p$ $40-60\%$ centrality
+YLabel=Yields, Au+Au $\bar{p}$ $40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y05
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p$ $60-92\%$ centrality
+YLabel=Yields, Au+Au $\bar{p}$ $60-92\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y06
@@ -301,31 +301,31 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d06-x01-y01
 Title= proton dAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, d+AU $\bar{p$ $0-20\%$ centrality
+YLabel=Yields, d+AU $\bar{p}$ $0-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d06-x01-y02
 Title= proton dAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, d+AU $\bar{p$ $0-100\%$ centrality
+YLabel=Yields, d+AU $\bar{p}$ $0-100\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d06-x01-y03
 Title= proton dAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, d+AU $\bar{p$ $20-40\%$ centrality
+YLabel=Yields, d+AU $\bar{p}$ $20-40\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d06-x01-y04
 Title= proton dAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, d+AU $\bar{p$ $40-60\%$ centrality
+YLabel=Yields, d+AU $\bar{p}$ $40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d06-x01-y05
 Title= proton dAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, d+AU $\bar{p$ $60-88\%$ centrality
+YLabel=Yields, d+AU $\bar{p}$ $60-88\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d06-x01-y06
@@ -481,61 +481,61 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d11-x01-y01
 Title= AuAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p^-/p$ $0-10\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}^-/p$ $0-10\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d11-x01-y02
 Title= AuAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p^-/p$ $10-20\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}^-/p$ $10-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d11-x01-y03
 Title= AuAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p^-/p$ $20-40\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}^-/p$ $20-40\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d11-x01-y04
 Title= AuAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p^-/p$ $40-60\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}^-/p$ $40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d11-x01-y05
 Title= AuAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p^-/p$ $60-92\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}^-/p$ $60-92\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d12-x01-y01
 Title= dAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p^-/p$ $0-20\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}^-/p$ $0-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d12-x01-y02
 Title= dAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p^-/p$ $0-100\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}^-/p$ $0-100\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d12-x01-y03
 Title= dAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p^-/p$ $20-40\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}^-/p$ $20-40\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d12-x01-y04
 Title= dAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p^-/p$ $40-60\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}^-/p$ $40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d12-x01-y05
 Title= dAu Ratio proton versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p^-/p$ $60-88\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}^-/p$ $60-88\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d13-x01-y01
@@ -691,31 +691,31 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d15-x01-y06
 Title= AuAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p/\pi^-$ $0-10\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}/\pi^-$ $0-10\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d15-x01-y07
 Title= AuAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p/\pi^-$ $10-20\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}/\pi^-$ $10-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d15-x01-y08
 Title= AuAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p/\pi^-$ $20-40\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}/\pi^-$ $20-40\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d15-x01-y09
 Title= AuAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p/\pi^-$ $40-60\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}/\pi^-$ $40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d15-x01-y10
 Title= AuAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, Au+Au $\bar{p/\pi^-$ $60-92\%$ centrality
+YLabel=Ratio of Yields, Au+Au $\bar{p}/\pi^-$ $60-92\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d16-x01-y01
@@ -751,31 +751,31 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d16-x01-y06
 Title= dAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p/\pi^-$ $0-20\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}/\pi^-$ $0-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d16-x01-y07
 Title= dAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p/\pi^-$ $0-100\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}/\pi^-$ $0-100\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d16-x01-y08
 Title= dAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p/\pi^-$ $20-40\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}/\pi^-$ $20-40\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d16-x01-y09
 Title= dAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p/\pi^-$ $40-60\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}/\pi^-$ $40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d16-x01-y10
 Title= dAu Ratio $p/\pi$ versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Yields, d+Au $\bar{p/\pi^-$ $60-88\%$ centrality
+YLabel=Ratio of Yields, d+Au $\bar{p}/\pi^-$ $60-88\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d17-x01-y01
@@ -841,13 +841,13 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d19-x01-y03
 Title= AuAu proton $R_{CP}$ versus $p_T$
 XLabel=$p_T$
-YLabel=$R_{CP}$, AuAu $\bar{p$ $0-10\%/40-60\%$ centrality
+YLabel=$R_{CP}$, AuAu $\bar{p}$ $0-10\%/40-60\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d19-x01-y04
 Title= AuAu proton $R_{CP}$ versus $p_T$
 XLabel=$p_T$
-YLabel=$R_{CP}$, AuAu $\bar{p$ $0-10\%/60-92\%$ centrality
+YLabel=$R_{CP}$, AuAu $\bar{p}$ $0-10\%/60-92\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d20-x01-y01
@@ -1045,5 +1045,5 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d28-x01-y01
 Title= proton AuAu Ratio of Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Ratio of Inv Yield 
+YLabel=Ratio of Inv Yield
 END PLOT
