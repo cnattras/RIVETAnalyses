@@ -241,13 +241,13 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y01
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p} $0-10\%$ centrality
+YLabel=Yields, Au+Au $\bar{p}$ $0-10\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y02
 Title= proton AuAu Invariant yields versus $p_T$
 XLabel=$p_T$
-YLabel=Yields, Au+Au $\bar{p} $10-20\%$ centrality
+YLabel=Yields, Au+Au $\bar{p}$ $10-20\%$ centrality
 END PLOT
 
 BEGIN PLOT /PHENIX_2013_I1227971/d05-x01-y03
