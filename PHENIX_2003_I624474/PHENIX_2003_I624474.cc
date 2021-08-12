@@ -293,21 +293,21 @@ namespace Rivet {
 
 	//____Counters____
 
-	book(sow["sow_AUAUmin"],"sow_AUAUmin");
-	book(sow["sow_AUAU5"],"sow_AUAU5");
-	book(sow["sow_AUAU10"],"sow_AUAU10");
-	book(sow["sow_AUAU15"],"sow_AUAU15");
-	book(sow["sow_AUAU20"],"sow_AUAU20");
-	book(sow["sow_AUAU30"],"sow_AUAU30");
-	book(sow["sow_AUAU40"],"sow_AUAU40");
-	book(sow["sow_AUAU50"],"sow_AUAU50");
-	book(sow["sow_AUAU60"],"sow_AUAU60");
-	book(sow["sow_AUAU70"],"sow_AUAU70");
-	book(sow["sow_AUAU80"],"sow_AUAU80");
-	book(sow["sow_AUAU92"],"sow_AUAU92");
-	book(sow["sow_AUAU_60_92"],"sow_AUAU_60_92");
-	book(sow["sow_AUAU0_10"],"sow_AUAU0_10");
-	book(sow["sow_AUAUall"],"sow_AUAUall");
+	book(sow["sow_AUAUmin"],"_sow_AUAUmin");
+	book(sow["sow_AUAU5"],"_sow_AUAU5");
+	book(sow["sow_AUAU10"],"_sow_AUAU10");
+	book(sow["sow_AUAU15"],"_sow_AUAU15");
+	book(sow["sow_AUAU20"],"_sow_AUAU20");
+	book(sow["sow_AUAU30"],"_sow_AUAU30");
+	book(sow["sow_AUAU40"],"_sow_AUAU40");
+	book(sow["sow_AUAU50"],"_sow_AUAU50");
+	book(sow["sow_AUAU60"],"_sow_AUAU60");
+	book(sow["sow_AUAU70"],"_sow_AUAU70");
+	book(sow["sow_AUAU80"],"_sow_AUAU80");
+	book(sow["sow_AUAU92"],"_sow_AUAU92");
+	book(sow["sow_AUAU_60_92"],"_sow_AUAU_60_92");
+	book(sow["sow_AUAU0_10"],"_sow_AUAU0_10");
+	book(sow["sow_AUAUall"],"_sow_AUAUall");
 
 	//____Rcp____
 	
