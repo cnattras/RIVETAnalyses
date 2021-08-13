@@ -57,11 +57,11 @@ namespace Rivet {
 
 
       //****Counters****
-      book(sow["sow_pp"],"sow_pp");
-      book(sow["sow_dAU20"],"sow_dAU20");
-      book(sow["sow_dAU40"],"sow_dAU40");
-      book(sow["sow_dAU60"],"sow_dAU60");
-      book(sow["sow_dAU88"],"sow_dAU88");
+      book(sow["sow_pp"],"_sow_pp");
+      book(sow["sow_dAU20"],"_sow_dAU20");
+      book(sow["sow_dAU40"],"_sow_dAU40");
+      book(sow["sow_dAU60"],"_sow_dAU60");
+      book(sow["sow_dAU88"],"_sow_dAU88");
       //book(sow,"sow");
 
       //****Book Histos****
