@@ -50,19 +50,19 @@ namespace Rivet {
       book(hPion0Pt["ptyields62c86"], 4, 1, 1);
       book(hPion0Pt["ptyields62call"], 3, 1, 5);
 
-      book(sow["sow_AuAu39c10"],"sow_AuAu39c10");
-      book(sow["sow_AuAu39c20"],"sow_AuAu39c20");
-      book(sow["sow_AuAu39c40"],"sow_AuAu39c40");
-      book(sow["sow_AuAu39c60"],"sow_AuAu39c60");
-      book(sow["sow_AuAu39c86"],"sow_AuAu39c86");
-      book(sow["sow_AuAu39call"],"sow_AuAu39call");
+      book(sow["sow_AuAu39c10"],"_sow_AuAu39c10");
+      book(sow["sow_AuAu39c20"],"_sow_AuAu39c20");
+      book(sow["sow_AuAu39c40"],"_sow_AuAu39c40");
+      book(sow["sow_AuAu39c60"],"_sow_AuAu39c60");
+      book(sow["sow_AuAu39c86"],"_sow_AuAu39c86");
+      book(sow["sow_AuAu39call"],"_sow_AuAu39call");
 
-      book(sow["sow_AuAu62c10"],"sow_AuAu62c10");
-      book(sow["sow_AuAu62c20"],"sow_AuAu62c20");
-      book(sow["sow_AuAu62c40"],"sow_AuAu62c40");
-      book(sow["sow_AuAu62c60"],"sow_AuAu62c60");
-      book(sow["sow_AuAu62c86"],"sow_AuAu62c86");
-      book(sow["sow_AuAu62call"],"sow_AuAu62call");
+      book(sow["sow_AuAu62c10"],"_sow_AuAu62c10");
+      book(sow["sow_AuAu62c20"],"_sow_AuAu62c20");
+      book(sow["sow_AuAu62c40"],"_sow_AuAu62c40");
+      book(sow["sow_AuAu62c60"],"_sow_AuAu62c60");
+      book(sow["sow_AuAu62c86"],"_sow_AuAu62c86");
+      book(sow["sow_AuAu62call"],"_sow_AuAu62call");
 
       //RAA _______________________________
 
@@ -138,8 +138,8 @@ namespace Rivet {
       book(hPion0Pt["callPt62_pp"], refnameRaa12 + "_pp62", refdataRaa12);
       book(hRaa["Raa_minbias_AuAu62"], refnameRaa12);
 
-      book(sow["sow_pp39"],"sow_pp39");
-      book(sow["sow_pp62"],"sow_pp62");
+      book(sow["sow_pp39"],"_sow_pp39");
+      book(sow["sow_pp62"],"_sow_pp62");
 
 
 //Centrality vs RAA
