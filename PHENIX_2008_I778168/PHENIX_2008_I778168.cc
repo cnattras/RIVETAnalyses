@@ -64,17 +64,17 @@ namespace Rivet {
        book(_h["ptyieldsc92"], 5, 1, 2);
        book(_h["ptyieldscall"], 1, 1, 3);
 
-       book(_c["sow_AuAu_c5"],"sow_AuAu_c5");
-       book(_c["sow_AuAu_c10"],"sow_AuAu_c10");
-       book(_c["sow_AuAu_c20"],"sow_AuAu_c20");
-       book(_c["sow_AuAu_c30"],"sow_AuAu_c30");
-       book(_c["sow_AuAu_c40"],"sow_AuAu_c40");
-       book(_c["sow_AuAu_c50"],"sow_AuAu_c50");
-       book(_c["sow_AuAu_c60"],"sow_AuAu_c60");
-       book(_c["sow_AuAu_c70"],"sow_AuAu_c70");
-       book(_c["sow_AuAu_c80"],"sow_AuAu_c80");
-       book(_c["sow_AuAu_c92"],"sow_AuAu_c92");
-       book(_c["sow_AuAu_call"],"sow_AuAu_call");
+       book(_c["sow_AuAu_c5"],"_sow_AuAu_c5");
+       book(_c["sow_AuAu_c10"],"_sow_AuAu_c10");
+       book(_c["sow_AuAu_c20"],"_sow_AuAu_c20");
+       book(_c["sow_AuAu_c30"],"_sow_AuAu_c30");
+       book(_c["sow_AuAu_c40"],"_sow_AuAu_c40");
+       book(_c["sow_AuAu_c50"],"_sow_AuAu_c50");
+       book(_c["sow_AuAu_c60"],"_sow_AuAu_c60");
+       book(_c["sow_AuAu_c70"],"_sow_AuAu_c70");
+       book(_c["sow_AuAu_c80"],"_sow_AuAu_c80");
+       book(_c["sow_AuAu_c92"],"_sow_AuAu_c92");
+       book(_c["sow_AuAu_call"],"_sow_AuAu_call");
 
  //RAA _______________________________
        string refnameRaa1 = mkAxisCode(7,1,3);
@@ -144,7 +144,7 @@ namespace Rivet {
        book(hRaa["Raa_minbias_AuAu"], refnameRaa11);
 
 
-       book(_c["sow_pp"],"sow_pp");
+       book(_c["sow_pp"],"_sow_pp");
 
  //Centrality vs RAA
        /*
