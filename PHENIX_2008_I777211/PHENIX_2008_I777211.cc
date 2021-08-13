@@ -34,8 +34,8 @@ namespace Rivet {
       book(hPion0Pt["Pion0Pt_pp"], refnameRaa + "_pp", refdataRaa);
       book(hRaa, refnameRaa);
 
-      book(sow["sow_AuAu"],"sow_AuAu");
-      book(sow["sow_pp"],"sow_pp");
+      book(sow["sow_AuAu"],"_sow_AuAu");
+      book(sow["sow_pp"],"_sow_pp");
 
     }
 
