@@ -64,8 +64,8 @@ namespace Rivet {
 
 		beamOpt = getOption<string>("beam", "NONE");
 
-		book(sow["sow_pp"], "sow_pp");
-		book(sow["sow_AuAuc12"], "sow_AuAuc12");
+		book(sow["sow_pp"], "_sow_pp");
+		book(sow["sow_AuAuc12"], "_sow_AuAuc12");
 
 		//Figure 1 Yield pp
 		book(hPionPosPt["ptyieldspp"], 1, 1, 1);
