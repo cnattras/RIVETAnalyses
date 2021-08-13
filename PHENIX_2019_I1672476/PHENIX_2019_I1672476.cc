@@ -58,9 +58,9 @@ public:
 		// book(_h["fig4-2-a"], 21, 1, 1); //cannot be done with rivet
 		
 
-		book(sow["AuAu62_c0-20_Nevent"],"AuAu62_c0-20_Nevent");
-		book(sow["AuAu62_c0-86_Nevent"],"AuAu62_c0-86_Nevent");
-		book(sow["AuAu39_c0-86_Nevent"],"AuAu39_c0-86_Nevent");
+		book(sow["AuAu62_c0-20_Nevent"],"_AuAu62_c0-20_Nevent");
+		book(sow["AuAu62_c0-86_Nevent"],"_AuAu62_c0-86_Nevent");
+		book(sow["AuAu39_c0-86_Nevent"],"_AuAu39_c0-86_Nevent");
 		//stores number of events for later normalization of inv yields
 		
 
