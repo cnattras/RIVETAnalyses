@@ -53,9 +53,9 @@ namespace Rivet {
       if (beamOpt == "AUAU130") collSys = AuAu130;
 
       //Event counters
-      book(_c["sow_dAu200"], "sow_dAu200");
-      book(_c["sow_AuAu62"], "sow_AuAu62");
-      book(_c["sow_AuAu130"], "sow_AuAu130");
+      book(_c["sow_dAu200"], "_sow_dAu200");
+      book(_c["sow_AuAu62"], "_sow_AuAu62");
+      book(_c["sow_AuAu130"], "_sow_AuAu130");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
