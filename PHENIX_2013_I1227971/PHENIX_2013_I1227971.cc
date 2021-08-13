@@ -41,7 +41,7 @@ namespace Rivet {
 
 				if (!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-				book(sow["sow_pp"], "sow_pp");
+				book(sow["sow_pp"], "_sow_pp");
 
 				for (int i = 0, N = AUAUCentralityBins.size(); i < N; ++i)
 				{
@@ -59,8 +59,8 @@ namespace Rivet {
 					book(hPionPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])], 4, 1, 6 + i);
 					book(hProtPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])], 6, 1, 6 + i);
 
-					book(sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])], "sow_AUAUc" + std::to_string(AUAUCentralityBins[i]));
-					book(sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])], "sow_dAUc" + std::to_string(dAUCentralityBins[i]));
+					book(sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])], "_sow_AUAUc" + std::to_string(AUAUCentralityBins[i]));
+					book(sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])], "_sow_dAUc" + std::to_string(dAUCentralityBins[i]));
 
 
 					//Ratio of yields (figs 5-9)_________________
