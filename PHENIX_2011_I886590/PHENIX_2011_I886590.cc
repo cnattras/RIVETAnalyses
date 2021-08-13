@@ -82,12 +82,12 @@ namespace Rivet {
       book(_h["xsec_pbar_withFD_62"], 8, 1, 2);
 
       // Counter histos for event weights
-      book(_c["sow_pp200_pi"], "sow_pp200_pi");
-      book(_c["sow_pp62_pi"], "sow_pp62_pi");
-      book(_c["sow_pp200_k"], "sow_pp200_k");
-      book(_c["sow_pp62_k"], "sow_pp62_k");
-      book(_c["sow_pp200_p"], "sow_pp200_p");
-      book(_c["sow_pp62_p"], "sow_pp62_p");
+      book(_c["sow_pp200_pi"], "_sow_pp200_pi");
+      book(_c["sow_pp62_pi"], "_sow_pp62_pi");
+      book(_c["sow_pp200_k"], "_sow_pp200_k");
+      book(_c["sow_pp62_k"], "_sow_pp62_k");
+      book(_c["sow_pp200_p"], "_sow_pp200_p");
+      book(_c["sow_pp62_p"], "_sow_pp62_p");
 
 
     }
