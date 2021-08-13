@@ -50,17 +50,17 @@ namespace Rivet {
       book(_h_1D["YAA_pT_fwd_6094"], 8, 1, 1);   // up to 6 GeV at fwd
 
      // counter histograms
-      book(_c["c_YAA_pT_mid_020"], "c_YAA_pT_mid_020");  
-      book(_c["c_YAA_pT_mid_2040"], "c_YAA_pT_mid_2040");  
-      book(_c["c_YAA_pT_mid_4060"], "c_YAA_pT_mid_4060");  
-      book(_c["c_YAA_pT_mid_6094"], "c_YAA_pT_mid_6094");  
+      book(_c["c_YAA_pT_mid_020"], "_c_YAA_pT_mid_020");  
+      book(_c["c_YAA_pT_mid_2040"], "_c_YAA_pT_mid_2040");  
+      book(_c["c_YAA_pT_mid_4060"], "_c_YAA_pT_mid_4060");  
+      book(_c["c_YAA_pT_mid_6094"], "_c_YAA_pT_mid_6094");  
      
-      book(_c["c_YAA_pT_fwd_020"], "c_YAA_pT_fwd_020");
-      book(_c["c_YAA_pT_fwd_2040"], "c_YAA_pT_fwd_2040");
-      book(_c["c_YAA_pT_fwd_4060"], "c_YAA_pT_fwd_4060");
-      book(_c["c_YAA_pT_fwd_6094"], "c_YAA_pT_fwd_6094");
+      book(_c["c_YAA_pT_fwd_020"], "_c_YAA_pT_fwd_020");
+      book(_c["c_YAA_pT_fwd_2040"], "_c_YAA_pT_fwd_2040");
+      book(_c["c_YAA_pT_fwd_4060"], "_c_YAA_pT_fwd_4060");
+      book(_c["c_YAA_pT_fwd_6094"], "_c_YAA_pT_fwd_6094");
 
-      book(_c["c_pp"], "c_pp");
+      book(_c["c_pp"], "_c_pp");
    
      //  /////////////////////////////////////////////////////////////
    //    // FIGURE 2
@@ -93,7 +93,7 @@ namespace Rivet {
       centBins1.insert(pair<string, int>("RAA_pT_mid_020",0));
       centBins1.insert(pair<string, int>("RAA_pT_fwd_020",1));
  
-      book(_c["c_CuCu_rap_all_020"], "c_CuCu_rap_all_020");
+      book(_c["c_CuCu_rap_all_020"], "_c_CuCu_rap_all_020");
 
       string refnameRaa3 = mkAxisCode(13,1,1);
       const Scatter2D& refdataRaa3 =refData(refnameRaa3);
