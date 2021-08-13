@@ -193,27 +193,27 @@ public:
 
 		//Counters for normalization
 
-		book(sow["Nevent_minbias_CuAu"],"Nevent_minbias_CuAu"); 
-		book(sow["Nevent_0010_CuAu"],"Nevent_0010_CuAu"); 
-		book(sow["Nevent_1020_CuAu"],"Nevent_1020_CuAu");
-		book(sow["Nevent_0020_CuAu"],"Nevent_0020_CuAu");   
-		book(sow["Nevent_2040_CuAu"],"Nevent_2040_CuAu");
-		book(sow["Nevent_4060_CuAu"],"Nevent_4060_CuAu"); 
- 		book(sow["Nevent_6090_CuAu"],"Nevent_6090_CuAu");
+		book(sow["Nevent_minbias_CuAu"],"_Nevent_minbias_CuAu"); 
+		book(sow["Nevent_0010_CuAu"],"_Nevent_0010_CuAu"); 
+		book(sow["Nevent_1020_CuAu"],"_Nevent_1020_CuAu");
+		book(sow["Nevent_0020_CuAu"],"_Nevent_0020_CuAu");   
+		book(sow["Nevent_2040_CuAu"],"_Nevent_2040_CuAu");
+		book(sow["Nevent_4060_CuAu"],"_Nevent_4060_CuAu"); 
+ 		book(sow["Nevent_6090_CuAu"],"_Nevent_6090_CuAu");
 		//book(sow["Nevent_int5_CuAu"],"Nevent_int5_CuAu");
 		//book(sow["Nevent_int10_CuAu"],"Nevent_int10_CuAu");
 
-		book(sow["Nevent_PP"],"Nevent_PP");
+		book(sow["Nevent_PP"],"_Nevent_PP");
 		//book(sow["Nevent_int5_PP"],"Nevent_int5_PP");
 		//book(sow["Nevent_int10_PP"],"Nevent_int10_PP");
 	
-		book(sow["Nevent_2030_AuAu"],"Nevent_2030_AuAu");
-		book(sow["Nevent_4050_AuAu"],"Nevent_4050_AuAu");
-		book(sow["Nevent_minbias_AuAu"],"Nevent_minbias_AuAu");
+		book(sow["Nevent_2030_AuAu"],"_Nevent_2030_AuAu");
+		book(sow["Nevent_4050_AuAu"],"_Nevent_4050_AuAu");
+		book(sow["Nevent_minbias_AuAu"],"_Nevent_minbias_AuAu");
 		//book(sow["Nevent_int5_AuAu"],"Nevent_int5_AuAu");
 		//book(sow["Nevent_int10_AuAu"],"Nevent_int10_AuAu");
 
-		book(sow["Nevent_0010_CuCu"],"Nevent_0010_CuCu");
+		book(sow["Nevent_0010_CuCu"],"_Nevent_0010_CuCu");
 	
 	}
 
