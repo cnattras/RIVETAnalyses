@@ -96,13 +96,13 @@ namespace Rivet {
       book(chSpectrum["chSpectrum30_40"], 1, 1, 5);
       book(chSpectrum["chSpectrum40_60"], 1, 1, 6);
       book(chSpectrum["chSpectrum60_80"], 1, 1, 7);
-      book(sow["sow0_5"], "sow0_5");
-      book(sow["sow5_10"], "sow5_10");
-      book(sow["sow10_20"], "sow10_20");
-      book(sow["sow20_30"], "sow20_30");
-      book(sow["sow30_40"], "sow30_40");
-      book(sow["sow40_60"], "sow40_60");
-      book(sow["sow60_80"], "sow60_80");
+      book(sow["sow0_5"], "_sow0_5");
+      book(sow["sow5_10"], "_sow5_10");
+      book(sow["sow10_20"], "_sow10_20");
+      book(sow["sow20_30"], "_sow20_30");
+      book(sow["sow30_40"], "_sow30_40");
+      book(sow["sow40_60"], "_sow40_60");
+      book(sow["sow60_80"], "_sow60_80");
 
       string refnameCentRatio05_4060 = mkAxisCode(4,1,1);
       book(R_AB["Rcp0_5_over_40_60"], refnameCentRatio05_4060);
@@ -123,10 +123,10 @@ namespace Rivet {
       book(chSpectrum["chSpectrum_C6080_S200pp"], refnameppRatio6080 + "_200", refdatappRatio6080);
 
       //AuAu at 130 GeV
-      book(sow["sow0_5_130"], "sow0_5_130");
-      book(sow["sow20_30_130"], "sow20_30_130");
-      book(sow["sow30_40_130"], "sow30_40_130");
-      book(sow["sow40_60_130"], "sow40_60_130");
+      book(sow["sow0_5_130"], "_sow0_5_130");
+      book(sow["sow20_30_130"], "_sow20_30_130");
+      book(sow["sow30_40_130"], "_sow30_40_130");
+      book(sow["sow40_60_130"], "_sow40_60_130");
 
 
       book(chSpectrum["chSpectrum0_5_130"], refnameEnergyRatio05 + "_130", refdataEnergyRatio05);
