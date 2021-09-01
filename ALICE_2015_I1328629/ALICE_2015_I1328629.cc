@@ -5,6 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include <stdio.h>
 
 namespace Rivet {
 
@@ -33,6 +34,7 @@ namespace Rivet {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
+      
       FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(jetfs, "jets");
 
@@ -55,9 +57,14 @@ namespace Rivet {
       book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
       book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
+
+
+      // Creates histograms for all Tables in .yoda file (73 tables in total, all in order)
+      char histogramName[100];
+      for (int i = 1; i < 74; i++) {
+        snprintf(histogramName, sizeof(histogramName), "Figure%d", i);
+        book(_h[histogramName], i, 1, 1);
+      }
 
     }
 
