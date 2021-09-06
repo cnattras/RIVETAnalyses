@@ -2,9 +2,9 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/PromptFinalState.hh"
+//#include "Rivet/Projections/DressedLeptons.hh"
+//#include "Rivet/Projections/MissingMomentum.hh"
+//#include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 
@@ -50,15 +50,23 @@ namespace Rivet {
       //book(_h["AAAA"], 1, 1, 1);
       //book(_p["BBBB"], 2, 1, 1);
       //book(_c["CCCC"], 3, 1, 1);
+      
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-
+      // Getting the jets
+      const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
+      const Particles ALICEparticles = aprim.particles();
+      FastJets FJjets = apply<FastJets>(event, "jets");
+      FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      Jets jets = FJjets.jetsByPt(); //get jets (ordered by pT)
+      
+      
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+      //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
       
 
     }
