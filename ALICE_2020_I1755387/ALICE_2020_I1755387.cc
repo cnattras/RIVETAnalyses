@@ -3,6 +3,9 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Tools/AliceCommon.hh"
+
 
 namespace Rivet {
 
@@ -22,6 +25,8 @@ namespace Rivet {
     void init() {
 
       // Initialise and register projections
+	const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
+	declare(aprim, "aprim");
 
       // The basic final-state projection:
       // all final-state particles within
@@ -51,7 +56,11 @@ namespace Rivet {
 
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+        const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
+	const Particles ALICEparticles = aprim.particles();
+	FastJets FJjets = apply<FastJets>(event, "jets");
+	FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+	Jets jets = FJjets.jetsByPt(); //get jets (ordered by pT)
 
 
     }
