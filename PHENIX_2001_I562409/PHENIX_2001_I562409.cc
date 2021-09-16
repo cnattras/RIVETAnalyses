@@ -5,6 +5,9 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "../Centralities/RHICCentrality.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
+#include "Rivet/Projections/HadronicFinalState.hh"
 
 namespace Rivet {
 
@@ -40,6 +43,8 @@ namespace Rivet {
       book(_h["ChHadronsCent60_80"], 6, 1, 1);
       book(_c["Cent0_10"], "Cent0_10");
       book(_c["Cent60_80"], "Cent60_80");
+      book(_h["Pi0PbScCent0_10"], 1, 1, 1);
+      book(_h["Pi0PbScCent60_80"], 2, 1, 1);
 
     }
 
@@ -53,6 +58,9 @@ namespace Rivet {
       const HadronicFinalState hfs = apply<HadronicFinalState>(event, "hfs");
       const Particles hfsParticles = hfs.particles();
 
+      const UnstableParticles pi0UP = apply<UnstableParticles>(event, "pi0UP");
+      const Particles pi0UPParticles = pi0UP.particles();
+
       double inv2PI = 1./(2.*M_PI);
 
             if(cent < 10.) //Check centrality of the event
@@ -62,6 +70,11 @@ namespace Rivet {
               {
                       _h["ChHadronsCent0_10"]->fill(p.pT()/GeV, inv2PI/(2.*p.pT()/GeV)); //additional 1/2 factor to take into account h^(+)+h^(-)/2
               }
+              
+              for(auto p : pi0UPParticles) //loop over pi0s
+              {
+                      _h["Pi0PbScCent0_10"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV));
+              }
       }
       else if(cent >= 60. && cent < 80.) //Check centrality of the event
       {
@@ -69,6 +82,11 @@ namespace Rivet {
               for(auto p : hfsParticles) //loop over charged hadrons
               {
                       _h["ChHadronsCent60_80"]->fill(p.pT()/GeV, inv2PI/(2.*p.pT()/GeV)); //additional 1/2 factor to take into account h^(+)+h^(-)/2
+              }
+
+              for(auto p : pi0UPParticles) //loop over pi0s
+              {
+                      _h["Pi0PbScCent60_80"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV)); 
               }
       }
     }
@@ -80,6 +98,8 @@ namespace Rivet {
       //Divide histograms by number of events
       _h["ChHadronsCent0_10"]->scaleW(1./_c["Cent0_10"]->sumW());
       _h["ChHadronsCent60_80"]->scaleW(1./_c["Cent60_80"]->sumW());
+      _h["Pi0PbScCent0_10"]->scaleW(1./_c["Cent0_10"]->sumW());
+      _h["Pi0PbScCent60_80"]->scaleW(1./_c["Cent60_80"]->sumW());
     }
 
       ///@}
