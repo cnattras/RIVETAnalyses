@@ -24,14 +24,11 @@ namespace Rivet {
 
 				// Initialise and register projections
 
-				// The basic final-state projection:
-				// all final-state particles within
-				// the given eta acceptance
+				// The basic final-state projection: all final-state particles within the given eta acceptance
 				const FinalState fs(Cuts::abseta < 4.9);
-				// The final-state particles declared above are clustered using FastJet with
-				// the anti-kT algorithm and a jet-radius parameter 0.4
-				// muons and neutrinos are excluded from the clustering
 
+				/* The final-state particles declared above are clustered using FastJet with the anti-kT 
+				   algorithm and a jet-radius parameter 0.4 muons & neutrinos are excluded from the clustering */
 				FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetfs, "jets");
 
@@ -73,7 +70,7 @@ namespace Rivet {
 
 			/// Normalise histograms etc., after the run
 			void finalize() {
-				_h["Figure1"]->scaleW(1./_c["counter"]->sumW());
+				_h["Figure1"]->scaleW(1./_c["sow"]->sumW());
 			}
 
 			///@}
