@@ -47,7 +47,8 @@ namespace Rivet {
       book(_h["hist2"], 2, 1, 1);
       book(_h["hist3"], 3, 1, 1);
       book(_h["hist4"], 4, 1, 1);
-
+      
+      book(_c["sow"], "sow");
     }
 
 
@@ -60,14 +61,24 @@ namespace Rivet {
 	const Particles ALICEparticles = aprim.particles();
 	FastJets FJjets = apply<FastJets>(event, "jets");
 	FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-	Jets jets = FJjets.jetsByPt(); //get jets (ordered by pT)
+	Jets jets = FJjets.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
+	
+	_c["sow"]->fill();
 
+	for(auto jet : jets)
+	{
+	
+		_h["Figure1"]->fill(jet.pT()/GeV);
+		
+	}
 
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
+
+	_h["Figure1"]->scaleW(1./_c["sow"]->sumW());
 
     }
 
