@@ -28,6 +28,8 @@ namespace Rivet {
       // Declaring ALICE primary particles
       const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
       declare(aprim, "aprim");
+      // Booking counter (number of events)
+      book(_c["sow"], "sow");
       // Initialise and register projections
 
       // The basic final-state projection:
@@ -40,7 +42,15 @@ namespace Rivet {
       // muons and neutrinos are excluded from the clustering
       FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(jetfs, "jets");
-
+      
+      // Creates histograms for all Tables in .yoda file (73 tables in total, all in order)
+      char histogramName[100];
+      for(int i = 1; i < 74; i++){
+      	snprintf(histogramName, sizeof(histogramName), "Figure%d", i);
+      	book(_h[histogramName], i, 1, 1);
+      }
+      
+      
       // Book histograms
       // specify custom binning
       book(_h["Jet spectra X"], "myh1", 20, 0.0, 100.0);
@@ -62,9 +72,16 @@ namespace Rivet {
       const Particles ALICEparticles = aprim.particles();
       FastJets FJjets = apply<FastJets>(event, "jets");
       FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-      Jets jets = FJjets.jetsByPt(); //get jets (ordered by pT)
+      Jets jets = FJjets.jetsByPt(Cuts::pT > 20.*GeV); //get jets (ordered by pT), only above 20GeV
       
+      _c["sow"]->fill();
       
+      for(auto jet : jets){
+      	// Normalizing histogram by number of events
+      	_h["Figure1"]->fill(jet.pT()/GeV);
+      	
+      	
+      }
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
       
@@ -75,7 +92,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      
+      _h["Figure1"]->scaleW(1./_c["sow"]->sumW());
 
     }
 
