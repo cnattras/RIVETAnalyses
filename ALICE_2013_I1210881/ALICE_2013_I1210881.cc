@@ -28,19 +28,22 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      const FinalState fs(Cuts::abseta < 1.0);
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
+      FastJets jets04(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(jets04, "jets04");
+      FastJets jets02(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(jets02, "jets02");
 
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       book(_h["SpectraR0.2"], 1, 1, 1);
       book(_h["SpectraR0.4"], 1, 1, 2);
       book(_h["ratio"], 2, 1, 1);
 
+      book(_c["sow"], "sow");
     }
 
 
@@ -49,7 +52,20 @@ namespace Rivet {
 
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+      Jets jets04 = apply<FastJets>(event, "jets04").jetsByPt(Cuts::pT > 0*GeV && Cuts::abseta <0.5);
+      Jets jets02 = apply<FastJets>(event, "jets02").jetsByPt(Cuts::pT > 0*GeV && Cuts::abseta <0.5);
+
+
+      _c["sow"]->fill();
+
+      for(auto jet : jets04)
+      {
+        _h["SpectraR0.4"]->fill(jet.pT()/GeV); 
+      }
+      for(auto jet : jets02)
+      {
+        _h["SpectraR0.2"]->fill(jet.pT()/GeV); 
+      }
 
 
     }
@@ -57,8 +73,8 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-
+      _h["SpectraR0.4"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
+      _h["SpectraR0.2"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
     }
 
     ///@}
