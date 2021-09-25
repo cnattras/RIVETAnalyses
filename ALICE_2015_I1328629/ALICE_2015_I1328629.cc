@@ -97,15 +97,15 @@ namespace Rivet {
 				// FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
 
 				// "sow" - Sum of Weights - Adding up equivalent proton-proton collisions that occurred
-				_c["sow"]->fill();
-				for(auto jet : jetsAKT04) { _h["all3JetFinders_R04"]->fill(jet.pT()/GeV); }
+				// _c["sow"]->fill();
+				// for(auto jet : jetsAKT04) { _h["all3JetFinders_R04"]->fill(jet.pT()/GeV); }
 
 			}
 
 
 			/// Normalise histograms etc., after the run
 			void finalize() {
-				// _h["Figure1"]->scaleW(1./_c["sow"]->sumW());
+				// _h["all3JetFinders_R04"]->scaleW(1./_c["sow"]->sumW());
 			}
 
 			///@}
