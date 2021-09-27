@@ -30,12 +30,16 @@ namespace Rivet {
       declare(aprim, "aprim");
       // Booking counter (number of events)
       book(_c["sow"], "sow");
+      
       // Initialise and register projections
-
+      
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      const FinalState fs(Cuts::abseta < 0.9);
+      
+      // Defining map for ratio to be calculated
+      map<string, Scatter2DPtr> _s;
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
@@ -43,23 +47,23 @@ namespace Rivet {
       FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(jetfs, "jets");
       
-      // Creates histograms for all Tables in .yoda file (73 tables in total, all in order)
-      char histogramName[100];
-      for(int i = 1; i < 74; i++){
-      	snprintf(histogramName, sizeof(histogramName), "Figure%d", i);
-      	book(_h[histogramName], i, 1, 1);
-      }
       
       
       // Book histograms
       // specify custom binning
-      book(_h["Jet spectra X"], "myh1", 20, 0.0, 100.0);
+      book(_h["Jet spectra X"], "myh1", 20, 0., 100.);
       book(_h["Jet spectra Y"], "myh2", logspace(20, 1e-2, 1e3));
-      //book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
+      book(_h["JetSpectrum"], "JetSpectrum", 10, 0, 100);
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       //book(_h["AAAA"], 1, 1, 1);
-      //book(_p["BBBB"], 2, 1, 1);
-      //book(_c["CCCC"], 3, 1, 1);
+      
+      // Calculating ratios
+      string refname = mkAxisCode(20., 0., 100.);
+      const Scatter2D& refdata = refData(refname);
+      book(_h["Numerator"], refname + "Numerator", refdata);
+      book(_h["Denominator"], refname + "Denominator", refdata);
+      book(_s["Ratio"], refname);
+      
       
 
     }
@@ -72,18 +76,18 @@ namespace Rivet {
       const Particles ALICEparticles = aprim.particles();
       FastJets FJjets = apply<FastJets>(event, "jets");
       FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-      Jets jets = FJjets.jetsByPt(Cuts::pT > 20.*GeV); //get jets (ordered by pT), only above 20GeV
+      Jets jets = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
       
       _c["sow"]->fill();
       
       for(auto jet : jets){
       	// Normalizing histogram by number of events
-      	_h["Figure1"]->fill(jet.pT()/GeV);
+      	_h["JetSpectrum"]->fill(jet.pT()/GeV);
       	
       	
       }
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
+      //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 0*GeV && Cuts::abseta < 0.5);
       
 
     }
@@ -91,8 +95,14 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      _h["Figure1"]->scaleW(1./_c["sow"]->sumW());
+      
+      //_h["JetSpectrum"]->scaleW(crossSection()/_c["sow"]->sumW());
+      _h["JetSpectrum"]->scaleW(1./_c["sow"]->sumW());
+      
+      // Defining map for ratio to be calculated
+      map<string, Scatter2DPtr> _s;
+      // Ratio
+      divide(_h["Numerator"], _h["Denominator"], _s["Ratio"]);
 
     }
 
