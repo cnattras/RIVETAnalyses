@@ -379,7 +379,7 @@ namespace Rivet {
     }
 
     void finalize() {
-
+/*
       bool AuAu39_available = false;
       bool AuAu62_available = false;
       bool pp39_available = false;
@@ -407,7 +407,7 @@ namespace Rivet {
       }
 
       if(!(AuAu62_available && AuAu39_available && pp39_available && pp62_available)) return;
-
+*/
 //Yields_________________
       hPion0Pt["ptyields39c10"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
       hPion0Pt["ptyields39c20"]->scaleW(1./sow["sow_AuAu39c20"]->sumW());
