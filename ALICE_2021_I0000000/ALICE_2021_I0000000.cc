@@ -38,8 +38,6 @@ namespace Rivet {
       // the given eta acceptance
       const FinalState fs(Cuts::abseta < 0.9);
       
-      // Defining map for ratio to be calculated
-      map<string, Scatter2DPtr> _s;
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
@@ -99,8 +97,7 @@ namespace Rivet {
       //_h["JetSpectrum"]->scaleW(crossSection()/_c["sow"]->sumW());
       _h["JetSpectrum"]->scaleW(1./_c["sow"]->sumW());
       
-      // Defining map for ratio to be calculated
-      map<string, Scatter2DPtr> _s;
+      
       // Ratio
       divide(_h["Numerator"], _h["Denominator"], _s["Ratio"]);
 
@@ -114,6 +111,8 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    // Defining map for ratio to be calculated
+    map<string, Scatter2DPtr> _s;
     ///@}
 
 
