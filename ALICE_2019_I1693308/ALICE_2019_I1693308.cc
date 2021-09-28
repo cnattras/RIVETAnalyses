@@ -83,8 +83,8 @@ namespace Rivet {
 
       for(const Particle& p : ALICEparticlesall)
       {
-              double DeltaRPlus = sqrt(pow(p.eta()-UEeta, 2) + pow(p.phi()-UEphiPlus, 2));
-              double DeltaRMinus = sqrt(pow(p.eta()-UEeta, 2) + pow(p.phi()-UEphiMinus, 2));
+              double DeltaRPlus = sqrt(pow(p.eta()-UEeta, 2) + pow(mapAngle0To2Pi(p.phi()-UEphiPlus), 2));
+              double DeltaRMinus = sqrt(pow(p.eta()-UEeta, 2) + pow(mapAngle0To2Pi(p.phi()-UEphiMinus), 2));
               if(DeltaRPlus > 0.4 && DeltaRMinus > 0.4) continue;
 
               UEpT += p.pT()/GeV;
