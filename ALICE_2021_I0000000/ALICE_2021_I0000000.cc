@@ -25,11 +25,6 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
       
-      // Declaring ALICE primary particles
-      const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
-      declare(aprim, "aprim");
-      // Booking counter (number of events)
-      book(_c["sow"], "sow");
       
       // Initialise and register projections
       
@@ -45,15 +40,21 @@ namespace Rivet {
       FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(jetfs, "jets");
       
-      
+      // Declaring ALICE primary particles
+      const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
+      declare(aprim, "aprim");
+      // Booking counter (number of events)
+      book(_c["sow"], "sow");
       
       // Book histograms
       // specify custom binning
-      book(_h["Jet spectra X"], "myh1", 20, 0., 100.);
-      book(_h["Jet spectra Y"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["JetSpectrum"], "JetSpectrum", 10, 0, 100);
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       //book(_h["AAAA"], 1, 1, 1);
+      book(_h["CrossSectionAntikT"], 1, 1, 1); //Figure 3 Anti-kT
+      //book(_h["Jet spectra X"], "myh1", 20, 0., 100.);
+      //book(_h["JetSpectrum"], "JetSpectrum", 10, 0, 100);
+      
+      
       
       // Calculating ratios
       string refname = mkAxisCode(20., 0., 100.);
@@ -75,12 +76,12 @@ namespace Rivet {
       FastJets FJjets = apply<FastJets>(event, "jets");
       FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
       Jets jets = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
-      
+      // Sum of weights counter
       _c["sow"]->fill();
       
       for(auto jet : jets){
       	// Normalizing histogram by number of events
-      	_h["JetSpectrum"]->fill(jet.pT()/GeV);
+      	_h["CrossSectionAntikT"]->fill(jet.pT()/GeV);
       	
       	
       }
@@ -95,7 +96,7 @@ namespace Rivet {
     void finalize() {
       
       //_h["JetSpectrum"]->scaleW(crossSection()/_c["sow"]->sumW());
-      _h["JetSpectrum"]->scaleW(1./_c["sow"]->sumW());
+      _h["CrossSectionAntikT"]->scaleW(1./_c["sow"]->sumW());
       
       
       // Ratio
