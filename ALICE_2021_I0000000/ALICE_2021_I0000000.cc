@@ -35,10 +35,20 @@ namespace Rivet {
       
 
       // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
+      // the anti-kT algorithm and a jet-radius parameter 0.2, 0.3, 0.4, 0.5, 0.6, 0.7
       // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
+      FastJets JetPtR02(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(JetPtR02, "JetPtR02");
+      FastJets JetPtR03(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(JetPtR03, "JetPtR03");
+      FastJets JetPtR04(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(JetPtR04, "JetPtR04");
+      FastJets JetPtR05(fs, FastJets::ANTIKT, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(JetPtR05, "JetPtR05");
+      FastJets JetPtR06(fs, FastJets::ANTIKT, 0.6, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(JetPtR06, "JetPtR06");
+      FastJets JetPtR07(fs, FastJets::ANTIKT, 0.7, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      declare(JetPtR07, "JetPtR07");
       
       // Declaring ALICE primary particles
       const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
@@ -49,19 +59,21 @@ namespace Rivet {
       // Book histograms
       // specify custom binning
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      //book(_h["AAAA"], 1, 1, 1);
-      book(_h["CrossSectionAntikT"], 1, 1, 1); //Figure 3 Anti-kT
-      //book(_h["Jet spectra X"], "myh1", 20, 0., 100.);
-      //book(_h["JetSpectrum"], "JetSpectrum", 10, 0, 100);
+      book(_h["JetPtR02"], 1, 1, 1); //Figure 3 R = 0.2
+      book(_h["JetPtR03"], 1, 1, 2); //Figure 3 R = 0.3
+      book(_h["JetPtR04"], 1, 1, 3); //Figure 3 R = 0.4
+      book(_h["JetPtR05"], 1, 1, 4); //Figure 3 R = 0.5
+      book(_h["JetPtR06"], 1, 1, 5); //Figure 3 R = 0.6
+      book(_h["JetPtR07"], 1, 1, 6); //Figure 3 R = 0.7
       
       
       
       // Calculating ratios
-      string refname = mkAxisCode(20., 0., 100.);
+      /*string refname = mkAxisCode(20., 0., 100.);
       const Scatter2D& refdata = refData(refname);
       book(_h["Numerator"], refname + "Numerator", refdata);
       book(_h["Denominator"], refname + "Denominator", refdata);
-      book(_s["Ratio"], refname);
+      book(_s["Ratio"], refname);*/
       
       
 
@@ -73,20 +85,52 @@ namespace Rivet {
       // Getting the jets
       const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
       const Particles ALICEparticles = aprim.particles();
-      FastJets FJjets = apply<FastJets>(event, "jets");
+      
+      FastJets FJjets = apply<FastJets>(event, "JetPtR02");
       FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-      Jets jets = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
+      
+      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
+      // R = 0.2
+      Jets JetPtR02 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
+      for(auto jet : JetPtR02){
+      	// Normalizing histogram by number of events
+      	_h["JetPtR02"]->fill(jet.pT()/GeV);
+      }
+      // R = 0.3
+      Jets JetPtR03 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      for(auto jet : JetPtR03){
+      	// Normalizing histogram by number of events
+      	_h["JetPtR03"]->fill(jet.pT()/GeV);
+      }
+      // R = 0.4
+      Jets JetPtR04 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      for(auto jet : JetPtR04){
+      	// Normalizing histogram by number of events
+      	_h["JetPtR04"]->fill(jet.pT()/GeV);
+      }
+      // R = 0.5
+      Jets JetPtR05 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      for(auto jet : JetPtR05){
+      	// Normalizing histogram by number of events
+      	_h["JetPtR05"]->fill(jet.pT()/GeV);
+      }
+      // R = 0.6
+      Jets JetPtR06 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      for(auto jet : JetPtR06){
+      	// Normalizing histogram by number of events
+      	_h["JetPtR06"]->fill(jet.pT()/GeV);
+      }
+      // R = 0.7
+      Jets JetPtR07 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      for(auto jet : JetPtR07){
+      	// Normalizing histogram by number of events
+      	_h["JetPtR07"]->fill(jet.pT()/GeV);
+      }
       // Sum of weights counter
       _c["sow"]->fill();
       
-      for(auto jet : jets){
-      	// Normalizing histogram by number of events
-      	_h["CrossSectionAntikT"]->fill(jet.pT()/GeV);
-      	
-      	
-      }
-      // Retrieve clustered jets, sorted by pT, with a minimum pT cut
-      //Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 0*GeV && Cuts::abseta < 0.5);
+      
+      
       
 
     }
@@ -95,12 +139,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       
-      //_h["JetSpectrum"]->scaleW(crossSection()/_c["sow"]->sumW());
-      _h["CrossSectionAntikT"]->scaleW(1./_c["sow"]->sumW());
+      _h["JetPtR02"]->scaleW(crossSection()/_c["sow"]->sumW());
+      //_h["JetPtR02"]->scaleW(1./_c["sow"]->sumW());
       
       
       // Ratio
-      divide(_h["Numerator"], _h["Denominator"], _s["Ratio"]);
+      //divide(_h["Numerator"], _h["Denominator"], _s["Ratio"]);
 
     }
 
@@ -113,7 +157,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     // Defining map for ratio to be calculated
-    map<string, Scatter2DPtr> _s;
+    //map<string, Scatter2DPtr> _s;
     ///@}
 
 
