@@ -29,22 +29,21 @@ namespace Rivet {
 
 				/* The final-state particles declared above are clustered using FastJet with the anti-kT 
 				   algorithm and a jet-radius parameter 0.4 muons & neutrinos are excluded from the clustering */
-				FastJets jetsAKT02(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-				declare(jetsAKT02, "jetsAKT02");
+				FastJets jetsAKT02FJ(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				declare(jetsAKT02FJ, "jetsAKT02FJ");
 
+				FastJets jetsAKT03FJ(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				declare(jetsAKT03FJ, "jetsAKT03FJ");
 
-				FastJets jetsAKT03(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-				declare(jetsAKT03, "jetsAKT03");
+				FastJets jetsAKTR04E05FJ(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				declare(jetsAKTR04E05FJ, "jetsAKTR04E05FJ");
+				FastJets jetsKT04FJ(fs, FastJets::KT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				declare(jetsKT04FJ, "jetsKT04FJ");
+				FastJets jetsCONE04FJ(fs, FastJets::SISCONE, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				declare(jetsCONE04FJ, "jetsCONE04FJ");
 
-				FastJets jetsAKT04(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-				declare(jetsAKT04, "jetsAKT04");
-				FastJets jetsKT04(fs, FastJets::KT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-				declare(jetsKT04, "jetsKT04");
-				FastJets jetsCONE04(fs, FastJets::SISCONE, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-				declare(jetsCONE04, "jetsCONE04");
-
-				FastJets jetsAKT06(fs, FastJets::ANTIKT, 0.6, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-				declare(jetsAKT06, "jetsAKT06");
+				FastJets jetsAKT06FJ(fs, FastJets::ANTIKT, 0.6, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				declare(jetsAKT06FJ, "jetsAKT06FJ");
 
 				
 				const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
@@ -119,43 +118,46 @@ namespace Rivet {
 				_c["sow"]->fill();
 
 				// Retrieve clustered jets, sorted by pT, with a minimum pT cut
-				// Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
-
 				const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
 				const Particles ALICEparticles = aprim.particles();
 
+				// Anti-KT alg. - Resolution = 0.2, Eta = 0.7 (From 0.9 - 0.2)
+				FastJets jetsAKTR02E07FJ = apply<FastJets>(event, "jetsAKTR02E07FJ");
+				jetsAKTR02E07FJ.calc(ALICEparticles);
+				Jets jetsAKTR02E07 = jetsAKTR02E07FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.7);
+				for(auto jet: jetsAKTR02E07FJ) {
 
-				// Jets jetsAKT02 = apply<FastJets>(event, "jetsAKT02").jetsByPt(Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9);
-				// Jets jetsKT02 = apply<FastJets>(event, "jetsKT02").jetsByPt(Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9);
-				// Jets jetsCONE02 = apply<FastJets>(event, "jetsCONE02").jetsByPt(Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9);
+				}
 
-				 Jets jetsAKT04FJ = apply<FastJets>(event, "jetsAKT04").jetsByPt(Cuts::pT > 0.00*GeV && Cuts::abseta < 0.9);
-				 //The next two lines are only required to trick Rivet into using primary particles
-				//jetsAKT04FJ.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-				//Jets jetsAKT04 = jetsAKT04FJ.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
-				for(auto jet : jetsAKT04FJ){_h["CrossSectionAntikT_R04"]->fill(jet.pT()/GeV);}
+				// Anti-KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
+				FastJets jetsAKTR04E05FJ = apply<FastJets>(event, "jetsAKTR04E05FJ");
+				jetsAKTR04E05FJ.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+				Jets jetsAKTR04E05 = jetsAKTR04E05FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5); // abseta = 0.9 - R
+				for(auto jet : jetsAKTR04E05FJ) {
+					_h["CrossSectionAntikT_R04"]->fill(jet.pT()/GeV);
+				}
 
+				// KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
+				FastJets jetsKT04FJ = apply<FastJets>(event, "jetsKT04FJ");
+				jetsKT04FJ.calc(ALICEparticles); 
+				Jets jetsKT04 = jetsKT04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
+				for(auto jet : jetsKT04FJ) {
+					_h["CrossSectionkT_R04"]->fill(jet.pT()/GeV);
+				}
 
-				 Jets jetsKT04FJ = apply<FastJets>(event, "jetsKT04").jetsByPt(Cuts::pT > 0.00*GeV && Cuts::abseta < 0.9);
-				// jetsKT04FJ.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-				// Jets jetsKT04 = jetsKT04FJ.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
-				for(auto jet : jetsKT04FJ){_h["CrossSectionkT_R04"]->fill(jet.pT()/GeV);}
-
-				 Jets jetsCONE04FJ = apply<FastJets>(event, "jetsCONE04").jetsByPt(Cuts::pT > 0.00*GeV && Cuts::abseta < 0.9);
-				// jetsCONE04FJ.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-				 //Jets jetsCONE04 = jetsCONE04FJ.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
+ 				// CONE alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
+				FastJets jetsCONE04FJ = apply<FastJets>(event, "jetsCONE04FJ");
+				jetsCONE04FJ.calc(ALICEparticles); 
+				Jets jetsCONE04 = jetsCONE04FJ.jetsByPt(Cuts::pT >= 20.*GeV); 
 				for(auto jet : jetsCONE04FJ){_h["CrossSectionSisCone_R04"]->fill(jet.pT()/GeV);}
 
-				// Jets jetsAKT06 = apply<FastJets>(event, "jetsAKT06").jetsByPt(Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9);
-				// Jets jetsKT06 = apply<FastJets>(event, "jetsKT06").jetsByPt(Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9);
-				// Jets jetsCONE06 = apply<FastJets>(event, "jetsCONE06").jetsByPt(Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9);
-				
-				// FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-
-				// "sow" - Sum of Weights - Adding up equivalent proton-proton collisions that occurred
-				// _c["sow"]->fill();
-				// for(auto jet : jetsAKT04) { _h["all3JetFinders_R04"]->fill(jet.pT()/GeV); }
-
+				// Anti-KT alg. - Resolution = 0.6, Eta = 0.3 (From 0.9 - 0.6)
+				FastJets jetsAKTR06E03FJ = apply<FastJets>(event, "jetsAKTR06E03FJ");
+				jetsAKTR06E03FJ.calc(ALICEparticles);
+				Jets jetsAKTR06E03 = jetsAKTR06E03FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.3);
+				for(auto jet: jetsAKTR06E03FJ) {
+					
+				}
 			}
 
 
