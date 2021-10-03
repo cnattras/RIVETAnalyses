@@ -56,21 +56,60 @@ namespace Rivet {
 				book(_h["CrossSectionAntikT_R04"], 1, 1, 1);  // Figure 2 Anti-kT
 				book(_h["CrossSectionkT_R04"], 2, 1, 1);  // Figure 2 kT
 				book(_h["CrossSectionSisCone_R04"], 3, 1, 1);  // Figure 2 SisCone
+
 				book(_h["antiKTR02"], 4, 1, 1);  // Figure 3
 				book(_h["antiKTR03"], 5, 1, 1);  // Figure 3
 				book(_h["antiKTR04"], 6, 1, 1);  // Figure 3
 				book(_h["antiKTR06"], 7, 1, 1);  // Figure 3
-				book(_h["antiKT_R04_06_ALICE_ATLAS"], 8, 1, 1); // Figure 4
-				book(_h["antiKT_ALICEvsMCAlgs_R02_04_06_Eta07_05_03"], 10, 1, 1);  // Figure 5
-				book(_h["ratio_AntiKT_R0204_0206_Eta03"], 13, 1, 1);  // Figure 6
-				book(_h["mean_ALICEvsMC_R06_04_02_Eta_03_05_07"], 15, 1, 1);  // Figure 7
-				book(_h["pTR02_Eta07Bins_2030_3040_4060_6080"], 18, 1, 1); // Figure 8
-				book(_h["pTR04_Eta05Bins_2030_3040_4060_6080"], 22, 1, 1);  // Figure 9
-				book(_h["pTR04_Eta03Bins_2030_3040_4060_6080"], 26, 1, 1);  // Figure 10
-				book(_h["avgR80pT_R02_04_06_Eta07_05_03"], 30, 1, 1);  // Figure 11
-				book(_h["pTSpectraR04_Eta05Bins_ALICEvsMC"], 33, 1, 1);  // Figure 12
-				book(_h["pTSpectraR04_Eta05Bins0to1"], 37, 1, 1);  // Figure 13
-				book(_h["pTSpectraR04_Eta05Bins0to6"], 41, 1, 1);  // Figure 14
+
+				book(_h["antiKT_R04_ALICE_ATLAS"], 8, 1, 1); // Figure 4
+				book(_h["antiKT_R06_ALICE_ATLAS"], 9, 1, 1); // Figure 4
+
+				book(_h["ALICEvsMC_R02_Eta07"], 10, 1, 1);  // Figure 5
+				book(_h["ALICEvsMC_R04_Eta05"], 11, 1, 1);  // Figure 5
+				book(_h["ALICEvsMC_R06_Eta03"], 12, 1, 1);  // Figure 5
+
+				book(_h["ratio_AntiKT_R0204"], 13, 1, 1);  // Figure 6
+				book(_h["ratio_AntiKT_R0206"], 14, 1, 1);  // Figure 6
+
+				book(_h["mean_ALICEvsMC_R02_Eta_07"], 15, 1, 1);  // Figure 7
+				book(_h["mean_ALICEvsMC_R04_Eta_05"], 16, 1, 1);  // Figure 7
+				book(_h["mean_ALICEvsMC_R06_Eta_03"], 17, 1, 1);  // Figure 7
+
+				book(_h["pTR02_Eta07_2030"], 18, 1, 1);  // Figure 8
+				book(_h["pTR02_Eta07_3040"], 19, 1, 1);  // Figure 8
+				book(_h["pTR02_Eta07_4060"], 20, 1, 1);  // Figure 8
+				book(_h["pTR02_Eta07_6080"], 21, 1, 1);  // Figure 8
+
+				book(_h["pTR04_Eta05_2030"], 22, 1, 1);  // Figure 9
+				book(_h["pTR04_Eta05_3040"], 23, 1, 1);  // Figure 9
+				book(_h["pTR04_Eta05_4060"], 24, 1, 1);  // Figure 9
+				book(_h["pTR04_Eta05_6080"], 25, 1, 1);  // Figure 9
+
+				book(_h["pTR04_Eta03_2030"], 26, 1, 1);  // Figure 10
+				book(_h["pTR04_Eta03_3040"], 27, 1, 1);  // Figure 10
+				book(_h["pTR04_Eta03_4060"], 28, 1, 1);  // Figure 10
+				book(_h["pTR04_Eta03_6080"], 29, 1, 1);  // Figure 10
+
+				book(_h["avgpT_R02_Eta07"], 30, 1, 1);  // Figure 11
+				book(_h["avgpT_R04_Eta05"], 31, 1, 1);  // Figure 11
+				book(_h["avgpT_R06_Eta03"], 32, 1, 1);  // Figure 11
+
+				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], 33, 1, 1);  // Figure 12
+				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], 34, 1, 1);  // Figure 12
+				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], 35, 1, 1);  // Figure 12
+				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], 36, 1, 1);  // Figure 12
+
+				book(_h["pTSpectraR04_Eta05_2030_0to1"], 37, 1, 1);  // Figure 13
+				book(_h["pTSpectraR04_Eta05_3040_0to1"], 38, 1, 1);  // Figure 13
+				book(_h["pTSpectraR04_Eta05_4060_0to1"], 39, 1, 1);  // Figure 13
+				book(_h["pTSpectraR04_Eta05_6080_0to1"], 40, 1, 1);  // Figure 13
+
+				book(_h["pTSpectraR04_Eta05_2030_0to6"], 41, 1, 1);  // Figure 14
+				book(_h["pTSpectraR04_Eta05_3040_0to6"], 42, 1, 1);  // Figure 14
+				book(_h["pTSpectraR04_Eta05_4060_0to6"], 43, 1, 1);  // Figure 14
+				book(_h["pTSpectraR04_Eta05_6080_0to6"], 44, 1, 1);  // Figure 14
+
 			}
 
 
