@@ -71,9 +71,11 @@ namespace Rivet {
 				book(_h["ALICEvsMC_R04_Eta05"], 11, 1, 1);  // Figure 5
 				book(_h["ALICEvsMC_R06_Eta03"], 12, 1, 1);  // Figure 5
 
-				book(_h["ratio_AntiKT_R0204"], 13, 1, 1);  // Figure 6
-				book(_h["ratio_AntiKT_R0206"], 14, 1, 1);  // Figure 6
-
+				string refname0204 = mkAxisCode(13, 1, 1);   // Figure 6
+				book(_s["Ratio0204"], refname0204);
+				string refname0206 = mkAxisCode(14, 1, 1);   // Figure 6
+				book(_s["Ratio0206"], refname0206);				
+				
 				book(_h["mean_ALICEvsMC_R02_Eta_07"], 15, 1, 1);  // Figure 7
 				book(_h["mean_ALICEvsMC_R04_Eta_05"], 16, 1, 1);  // Figure 7
 				book(_h["mean_ALICEvsMC_R06_Eta_03"], 17, 1, 1);  // Figure 7
@@ -128,7 +130,7 @@ namespace Rivet {
 				FastJets jetsAKTR02FJ = apply<FastJets>(event, "jetsAKTR02FJ");
 				jetsAKTR02FJ.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
 				Jets jetsAKTR02 = jetsAKTR02FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.7);
-				for(auto jet: jetsAKTR02FJ) {
+				for(auto jet: jetsAKTR02) {
 					_h["antiKTR02"]->fill(jet.pT()/GeV); // Figure 3
 					_h["ALICEvsMC_R02_Eta07"]->fill(jet.pT()/GeV); // Figure 5
 					_h["mean_ALICEvsMC_R02_Eta_07"]->fill(jet.pT()/GeV); // Figure 7
@@ -146,7 +148,7 @@ namespace Rivet {
 				FastJets jetsAKTR03FJ = apply<FastJets>(event, "jetsAKTR03FJ");
 				jetsAKTR03FJ.calc(ALICEparticles); 
 				Jets jetsAKTR03 = jetsAKTR03FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.6);
-				for(auto jet: jetsAKTR03FJ) {
+				for(auto jet: jetsAKTR03) {
 					_h["antiKTR03"]->fill(jet.pT()/GeV); // Figure 3
 
 				}
@@ -155,7 +157,7 @@ namespace Rivet {
 				FastJets jetsAKTR04FJ = apply<FastJets>(event, "jetsAKTR04FJ");
 				jetsAKTR04FJ.calc(ALICEparticles); 
 				Jets jetsAKTR04 = jetsAKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5); 
-				for(auto jet : jetsAKTR04FJ) {
+				for(auto jet : jetsAKTR04) {
 					_h["CrossSectionAntikT_R04"]->fill(jet.pT()/GeV); // Figure 2
 					_h["antiKTR04"]->fill(jet.pT()/GeV); // Figure 3
 					_h["antiKT_R04_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
@@ -184,7 +186,7 @@ namespace Rivet {
 				FastJets jetsKTR04FJ = apply<FastJets>(event, "jetsKTR04FJ");
 				jetsKTR04FJ.calc(ALICEparticles); 
 				Jets jetsKTR04 = jetsKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
-				for(auto jet : jetsKTR04FJ) {
+				for(auto jet : jetsKTR04) {
 					_h["CrossSectionkT_R04"]->fill(jet.pT()/GeV); // Figure 2
 				}
 
@@ -192,7 +194,7 @@ namespace Rivet {
 				FastJets jetsCONER04FJ = apply<FastJets>(event, "jetsCONER04FJ");
 				jetsCONER04FJ.calc(ALICEparticles); 
 				Jets jetsCONER04 = jetsCONER04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5); 
-				for(auto jet : jetsCONER04FJ){
+				for(auto jet : jetsCONER04){
 					_h["CrossSectionSisCone_R04"]->fill(jet.pT()/GeV); // Figure 2
 				}
 
@@ -200,7 +202,7 @@ namespace Rivet {
 				FastJets jetsAKTR06FJ = apply<FastJets>(event, "jetsAKTR06FJ");
 				jetsAKTR06FJ.calc(ALICEparticles);
 				Jets jetsAKTR06 = jetsAKTR06FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.3);
-				for(auto jet: jetsAKTR06FJ) {
+				for(auto jet: jetsAKTR06) {
 					_h["antiKTR06"]->fill(jet.pT()/GeV); // Figure 3
 					_h["antiKT_R06_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
 					_h["ALICEvsMC_R06_Eta03"]->fill(jet.pT()/GeV); // Figure 5
@@ -224,7 +226,7 @@ namespace Rivet {
 				_h["antiKTR02"]->scaleW(crossSection()/_c["sow"]->sumW()); 
 				_h["antiKTR03"]->scaleW(crossSection()/_c["sow"]->sumW());  
 				_h["antiKTR04"]->scaleW(crossSection()/_c["sow"]->sumW());  
-				_h["antiKTR06"]->scaleW(crossSection()/_c["sow"]->sumW()));  
+				_h["antiKTR06"]->scaleW(crossSection()/_c["sow"]->sumW());  
 
 				// Figure 4
 				_h["antiKT_R04_ALICE_ATLAS"]->scaleW(crossSection()/_c["sow"]->sumW()); 
@@ -236,8 +238,8 @@ namespace Rivet {
 				_h["ALICEvsMC_R06_Eta03"]->scaleW(crossSection()/_c["sow"]->sumW());
 
 				// Figure 6
-				// _h["ratio_AntiKT_R0204"]
-				// _h["ratio_AntiKT_R0206"] 
+				divide(_h["antiKTR02"], _h["antiKTR04"], _s["Ratio0204"]);
+				divide(_h["antiKTR02"], _h["antiKTR06"], _s["Ratio0206"]);
 
 				// Figure 7 - Are these correct???? V
 				_h["mean_ALICEvsMC_R02_Eta_07"]->scaleW(crossSection()/_c["sow"]->sumW());
@@ -294,6 +296,7 @@ namespace Rivet {
 			map<string, Histo1DPtr> _h;
 			map<string, Profile1DPtr> _p;
 			map<string, CounterPtr> _c;
+			map<string, Scatter2DPtr> _s;
 			///@}
 
 
