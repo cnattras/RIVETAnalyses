@@ -139,9 +139,6 @@ namespace Rivet {
 					_h["pTR02_Eta07_4060"]->fill(jet.pT()/GeV); // Figure 8
 					_h["pTR02_Eta07_6080"]->fill(jet.pT()/GeV); // Figure 8
 					_h["avgpT_R02_Eta07"]->fill(jet.pT()/GeV); // Figure 11
-					_h["avgpT_R04_Eta05"]->fill(jet.pT()/GeV); // Figure 11
-					_h["avgpT_R06_Eta03"]->fill(jet.pT()/GeV); // Figure 11
-
 				}
 
 				// Anti-KT alg. - Resolution = 0.3, Eta = 0.6 (From 0.9 - 0.3)
@@ -167,6 +164,7 @@ namespace Rivet {
 					_h["pTR04_Eta05_3040"]->fill(jet.pT()/GeV); // Figure 9
 					_h["pTR04_Eta05_4060"]->fill(jet.pT()/GeV); // Figure 9
 					_h["pTR04_Eta05_6080"]->fill(jet.pT()/GeV); // Figure 9
+					_h["avgpT_R04_Eta05"]->fill(jet.pT()/GeV); // Figure 11
 					_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->fill(jet.pT()/GeV); // Figure 12
 					_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->fill(jet.pT()/GeV); // Figure 12
 					_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->fill(jet.pT()/GeV); // Figure 12
@@ -211,6 +209,7 @@ namespace Rivet {
 					_h["pTR06_Eta03_3040"]->fill(jet.pT()/GeV); // Figure 10
 					_h["pTR06_Eta03_4060"]->fill(jet.pT()/GeV); // Figure 10
 					_h["pTR06_Eta03_6080"]->fill(jet.pT()/GeV); // Figure 10
+					_h["avgpT_R06_Eta03"]->fill(jet.pT()/GeV); // Figure 11
 				}
 			}
 
