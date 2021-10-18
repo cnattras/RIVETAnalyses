@@ -1,7 +1,7 @@
-BEGIN PLOT /ALICE_2020_I1755387/d01-x01-y01
-Title=[Insert title for histogram d01-x01-y01 here]
-XLabel=[Insert $x$-axis label for histogram d01-x01-y01 here]
-YLabel=[Insert $y$-axis label for histogram d01-x01-y01 here]
+BEGIN PLOT /ALICE_2020_I1755387/ppspectraR0.1
+Title=[pp full jet sigma R = 0.1]
+XLabel=[pT jet (GeV)]
+YLabel=[d2sigma/dpTdeta (mb c/GeV)]
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
