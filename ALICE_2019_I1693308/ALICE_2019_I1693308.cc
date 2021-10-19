@@ -149,9 +149,9 @@ namespace Rivet {
 
       _h["PPS7"]->scaleW(norm);
 
-      _h["pTJ5-10"]->scaleW(1./_c["sow"]->sumW()*(_c["sow"]->effNumEntries()/_c["sow2"]->effNumEntries()));
-      _h["pTJ10-15"]->scaleW(1./_c["sow"]->sumW()*(_c["sow"]->effNumEntries()/_c["sow3"]->effNumEntries()));
-      _h["pTJ15-20"]->scaleW(1./_c["sow"]->sumW()*(_c["sow"]->effNumEntries()/_c["sow4"]->effNumEntries()));
+      _h["pTJ5-10"]->scaleW(1./_c["sow2"]->sumW());
+      _h["pTJ10-15"]->scaleW(1./_c["sow3"]->sumW());
+      _h["pTJ15-20"]->scaleW(1./_c["sow4"]->sumW());
 
     }
 
