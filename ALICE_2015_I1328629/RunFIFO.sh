@@ -10,7 +10,7 @@ ANALYSIS_DIR=$PWD
 source /lustre/haven/proj/UTK0019/Rivet/rivet.sh
 rm RivetALICE_2015_I1328629.so
 rivet-build RivetALICE_2015_I1328629.so ALICE_2015_I1328629.cc
-FIFOFILE="fifo$ANALYSIS.hepmc"
+FIFOFILE="fifoRia.hepmc"
 # Number of events
 NEVENTS="1000"
 # Beams
@@ -21,12 +21,12 @@ CMS_ENERGY="7000"
 # Pythia seed. If 0 pythia will generate a random number
 GENERATOR_SEED="0"
 # Min and max pT-hard. if PTHARDMIN > PTHARDMAX then pythia switches to minimum bias (No pt-hard)
-PTHARDMIN="20"
-PTHARDMAX="30"
+PTHARDMIN="50"
+PTHARDMAX="70"
 # Centrality Calibration file
-CALIBRATION="/lustre/haven/proj/UTK0019/Rivet_gitrepo/RIVETAnalyses/Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda"
+CALIBRATION="/lustre/haven/proj/UTK0019/rpatel77/RIVETAnalyses/Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda"
 # Flags of your analysis (Ex. centrality: cent=GEN)
 RIVET_FLAGS=""
 rm /tmp/$FIFOFILE
 mkfifo /tmp/$FIFOFILE
-./runPythia /tmp $FIFOFILE $NEVENTS $BEAM1 $BEAM2 $CMS_ENERGY $GENERATOR_SEED $PTHARDMIN $PTHARDMAX & rivet --pwd -p -a $ANALYSIS$RIVET_FLAGS -o RivetAU.yoda /tmp/$FIFOFILE
+./runPythia /tmp $FIFOFILE $NEVENTS $BEAM1 $BEAM2 $CMS_ENERGY $GENERATOR_SEED $PTHARDMIN $PTHARDMAX & rivet --pwd -a $ANALYSIS$RIVET_FLAGS -o Rivet.yoda /tmp/$FIFOFILE
