@@ -12,7 +12,7 @@ rm RivetALICE_2015_I1328629.so
 rivet-build RivetALICE_2015_I1328629.so ALICE_2015_I1328629.cc
 FIFOFILE="fifoRia.hepmc"
 # Number of events
-NEVENTS="1000"
+NEVENTS="100000"
 # Beams
 BEAM1="p"
 BEAM2="p"
@@ -21,8 +21,8 @@ CMS_ENERGY="7000"
 # Pythia seed. If 0 pythia will generate a random number
 GENERATOR_SEED="0"
 # Min and max pT-hard. if PTHARDMIN > PTHARDMAX then pythia switches to minimum bias (No pt-hard)
-PTHARDMIN="50"
-PTHARDMAX="70"
+PTHARDMIN="70"
+PTHARDMAX="80"
 # Centrality Calibration file
 CALIBRATION="/lustre/haven/proj/UTK0019/rpatel77/RIVETAnalyses/Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda"
 # Flags of your analysis (Ex. centrality: cent=GEN)

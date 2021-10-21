@@ -217,74 +217,74 @@ namespace Rivet {
 			/// Normalise histograms etc., after the run
 			void finalize() {
 				// Figure 2
-				_h["CrossSectionAntikT_R04"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["CrossSectionkT_R04"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["CrossSectionSisCone_R04"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["CrossSectionAntikT_R04"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["CrossSectionkT_R04"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["CrossSectionSisCone_R04"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 3
-				_h["antiKTR02"]->scaleW(crossSection()/_c["sow"]->sumW()); 
-				_h["antiKTR03"]->scaleW(crossSection()/_c["sow"]->sumW());  
-				_h["antiKTR04"]->scaleW(crossSection()/_c["sow"]->sumW());  
-				_h["antiKTR06"]->scaleW(crossSection()/_c["sow"]->sumW());  
+				_h["antiKTR02"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW())); 
+				_h["antiKTR03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));  
+				_h["antiKTR04"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));  
+				_h["antiKTR06"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));  
 
 				// Figure 4
-				_h["antiKT_R04_ALICE_ATLAS"]->scaleW(crossSection()/_c["sow"]->sumW()); 
-				_h["antiKT_R06_ALICE_ATLAS"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["antiKT_R04_ALICE_ATLAS"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW())); 
+				_h["antiKT_R06_ALICE_ATLAS"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 5
-				_h["ALICEvsMC_R02_Eta07"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["ALICEvsMC_R04_Eta05"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["ALICEvsMC_R06_Eta03"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["ALICEvsMC_R02_Eta07"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["ALICEvsMC_R04_Eta05"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["ALICEvsMC_R06_Eta03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 6
 				divide(_h["antiKTR02"], _h["antiKTR04"], _s["Ratio0204"]);
 				divide(_h["antiKTR02"], _h["antiKTR06"], _s["Ratio0206"]);
 
 				// Figure 7 - Are these correct???? V
-				_h["mean_ALICEvsMC_R02_Eta_07"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["mean_ALICEvsMC_R04_Eta_05"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["mean_ALICEvsMC_R06_Eta_03"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["mean_ALICEvsMC_R02_Eta_07"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["mean_ALICEvsMC_R04_Eta_05"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["mean_ALICEvsMC_R06_Eta_03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 8
-				_h["pTR02_Eta07_2030"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR02_Eta07_3040"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR02_Eta07_4060"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR02_Eta07_6080"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["pTR02_Eta07_2030"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_3040"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_4060"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_6080"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 9
-				_h["pTR04_Eta05_2030"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR04_Eta05_3040"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR04_Eta05_4060"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR04_Eta05_6080"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["pTR04_Eta05_2030"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR04_Eta05_3040"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR04_Eta05_4060"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR04_Eta05_6080"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 10
-				_h["pTR06_Eta03_2030"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR06_Eta03_3040"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR06_Eta03_4060"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTR06_Eta03_6080"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["pTR06_Eta03_2030"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_3040"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_4060"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_6080"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 11 
-				_h["avgpT_R02_Eta07"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["avgpT_R04_Eta05"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["avgpT_R06_Eta03"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["avgpT_R02_Eta07"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["avgpT_R04_Eta05"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["avgpT_R06_Eta03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 12
-				_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 13
-				_h["pTSpectraR04_Eta05_2030_0to1"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_0to1"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_0to1"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_0to1"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_0to1"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_0to1"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_0to1"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_0to1"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 14
-				_h["pTSpectraR04_Eta05_2030_0to6"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(crossSection()/_c["sow"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(crossSection()/_c["sow"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 			}
 
 			///@}
