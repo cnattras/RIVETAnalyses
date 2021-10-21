@@ -10,7 +10,7 @@ ANALYSIS_DIR=$PWD
 source /lustre/haven/proj/UTK0019/Rivet/rivet.sh
 rm RivetALICE_2013_I1210881.so
 rivet-build RivetALICE_2013_I1210881.so ALICE_2013_I1210881.cc
-FIFOFILE="fifo$ANALYSIS.hepmc"
+FIFOFILE="fifo2$ANALYSIS.hepmc"
 # Number of events
 NEVENTS="1000"
 # Beams
@@ -30,3 +30,4 @@ RIVET_FLAGS=""
 rm /tmp/$FIFOFILE
 mkfifo /tmp/$FIFOFILE
 ./runPythia /tmp $FIFOFILE $NEVENTS $BEAM1 $BEAM2 $CMS_ENERGY $GENERATOR_SEED $PTHARDMIN $PTHARDMAX & rivet --pwd -a $ANALYSIS$RIVET_FLAGS -o RivetLong.yoda /tmp/$FIFOFILE
+rm $FIFOFILE
