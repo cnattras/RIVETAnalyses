@@ -69,11 +69,13 @@ namespace Rivet {
       
       
       // Calculating ratios
-      /*string refname = mkAxisCode(20., 0., 100.);
-      const Scatter2D& refdata = refData(refname);
-      book(_h["Numerator"], refname + "Numerator", refdata);
-      book(_h["Denominator"], refname + "Denominator", refdata);
-      book(_s["Ratio"], refname);*/
+      /*string refname1 = mkAxisCode(20., 0., 100.); //(table,1,1)
+      book(_s["Ratio1"], refname1);
+      
+      //const Scatter2D& refdata = refData(refname); //am I using refData?
+      //book(_h["Numerator"], refname + "Numerator", refdata);
+      //book(_h["Denominator"], refname + "Denominator", refdata);
+      */
       
       
 
