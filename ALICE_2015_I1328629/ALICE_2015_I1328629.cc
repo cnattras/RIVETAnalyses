@@ -72,8 +72,13 @@ namespace Rivet {
 				book(_h["ALICEvsMC_R06_Eta03"], 12, 1, 1);  // Figure 5
 
 				string refname0204 = mkAxisCode(13, 1, 1);   // Figure 6
+				const Scatter2D& refdata0204 = refData(refname0204);
+				book(_h["Ratio02_Numerator"], refname0204 + "Ratio02_Numerator", refdata0204);
+				book(_h["Ratio04_Denominator"], refname0204 + "Ratio04_Denominator", refdata0204);
 				book(_s["Ratio0204"], refname0204);
 				string refname0206 = mkAxisCode(14, 1, 1);   // Figure 6
+				const Scatter2D& refdata0206 = refData(refname0206);
+				book(_h["Ratio06_Denominator"], refname0206 + "Ratio06_Denominator", refdata0206);
 				book(_s["Ratio0206"], refname0206);				
 				
 				book(_h["mean_ALICEvsMC_R02_Eta_07"], 15, 1, 1);  // Figure 7
@@ -133,6 +138,7 @@ namespace Rivet {
 				for(auto jet: jetsAKTR02) {
 					_h["antiKTR02"]->fill(jet.pT()/GeV); // Figure 3
 					_h["ALICEvsMC_R02_Eta07"]->fill(jet.pT()/GeV); // Figure 5
+					_h["Ratio02_Numerator"]->fill(jet.pT()/GeV); // Figure 6
 					_h["mean_ALICEvsMC_R02_Eta_07"]->fill(jet.pT()/GeV); // Figure 7
 					_h["pTR02_Eta07_2030"]->fill(jet.pT()/GeV); // Figure 8
 					_h["pTR02_Eta07_3040"]->fill(jet.pT()/GeV); // Figure 8
@@ -159,6 +165,7 @@ namespace Rivet {
 					_h["antiKTR04"]->fill(jet.pT()/GeV); // Figure 3
 					_h["antiKT_R04_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
 					_h["ALICEvsMC_R04_Eta05"]->fill(jet.pT()/GeV); // Figure 5
+					_h["Ratio04_Denominator"]->fill(jet.pT()/GeV); // Figure 6
 					_h["mean_ALICEvsMC_R04_Eta_05"]->fill(jet.pT()/GeV); // Figure 7
 					_h["pTR04_Eta05_2030"]->fill(jet.pT()/GeV); // Figure 9
 					_h["pTR04_Eta05_3040"]->fill(jet.pT()/GeV); // Figure 9
@@ -204,6 +211,7 @@ namespace Rivet {
 					_h["antiKTR06"]->fill(jet.pT()/GeV); // Figure 3
 					_h["antiKT_R06_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
 					_h["ALICEvsMC_R06_Eta03"]->fill(jet.pT()/GeV); // Figure 5
+					_h["Ratio06_Denominator"]->fill(jet.pT()/GeV); // Figure 6
 					_h["mean_ALICEvsMC_R06_Eta_03"]->fill(jet.pT()/GeV); // Figure 7
 					_h["pTR06_Eta03_2030"]->fill(jet.pT()/GeV); // Figure 10
 					_h["pTR06_Eta03_3040"]->fill(jet.pT()/GeV); // Figure 10
@@ -222,34 +230,37 @@ namespace Rivet {
 				_h["CrossSectionSisCone_R04"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 3
-				_h["antiKTR02"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW())); 
-				_h["antiKTR03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));  
-				_h["antiKTR04"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));  
-				_h["antiKTR06"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));  
+				_h["antiKTR02"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW())); // 0.7 * 2 = 1.4
+				_h["antiKTR03"]->scaleW(crossSection()/(millibarn*1.2*_c["sow"]->sumW()));  // 0.6 * 2 = 1.2
+				_h["antiKTR04"]->scaleW(crossSection()/(millibarn*1.0*_c["sow"]->sumW()));  // 0.5 * 2 = 1
+				_h["antiKTR06"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));  // 0.3 * 2 = 0.6
 
 				// Figure 4
 				_h["antiKT_R04_ALICE_ATLAS"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW())); 
-				_h["antiKT_R06_ALICE_ATLAS"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["antiKT_R06_ALICE_ATLAS"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
 
 				// Figure 5
-				_h["ALICEvsMC_R02_Eta07"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["ALICEvsMC_R02_Eta07"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
 				_h["ALICEvsMC_R04_Eta05"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["ALICEvsMC_R06_Eta03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["ALICEvsMC_R06_Eta03"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
 
 				// Figure 6
-				divide(_h["antiKTR02"], _h["antiKTR04"], _s["Ratio0204"]);
-				divide(_h["antiKTR02"], _h["antiKTR06"], _s["Ratio0206"]);
+				_h["Ratio02_Numerator"]->scaleW(1/(1.4*_c["sow"]->sumW()));
+				_h["Ratio04_Denominator"]->scaleW(1/_c["sow"]->sumW());
+				_h["Ratio06_Denominator"]->scaleW(1/(0.6*_c["sow"]->sumW()));
+				divide(_h["Ratio02_Numerator"], _h["Ratio04_Denominator"], _s["Ratio0204"]);
+				divide(_h["Ratio02_Numerator"], _h["Ratio06_Denominator"], _s["Ratio0206"]);
 
 				// Figure 7 - Are these correct???? V
-				_h["mean_ALICEvsMC_R02_Eta_07"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["mean_ALICEvsMC_R02_Eta_07"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
 				_h["mean_ALICEvsMC_R04_Eta_05"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["mean_ALICEvsMC_R06_Eta_03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["mean_ALICEvsMC_R06_Eta_03"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
 
 				// Figure 8
-				_h["pTR02_Eta07_2030"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["pTR02_Eta07_3040"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["pTR02_Eta07_4060"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["pTR02_Eta07_6080"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_2030"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_3040"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_4060"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
+				_h["pTR02_Eta07_6080"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
 
 				// Figure 9
 				_h["pTR04_Eta05_2030"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
@@ -258,15 +269,15 @@ namespace Rivet {
 				_h["pTR04_Eta05_6080"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 
 				// Figure 10
-				_h["pTR06_Eta03_2030"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["pTR06_Eta03_3040"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["pTR06_Eta03_4060"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["pTR06_Eta03_6080"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_2030"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_3040"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_4060"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
+				_h["pTR06_Eta03_6080"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
 
 				// Figure 11 
-				_h["avgpT_R02_Eta07"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["avgpT_R02_Eta07"]->scaleW(crossSection()/(millibarn*1.4*_c["sow"]->sumW()));
 				_h["avgpT_R04_Eta05"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
-				_h["avgpT_R06_Eta03"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["avgpT_R06_Eta03"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
 
 				// Figure 12
 				_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));

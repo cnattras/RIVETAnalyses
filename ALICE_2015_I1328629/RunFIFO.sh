@@ -12,7 +12,8 @@ rm RivetALICE_2015_I1328629.so
 rivet-build RivetALICE_2015_I1328629.so ALICE_2015_I1328629.cc
 FIFOFILE="fifoRia.hepmc"
 # Number of events
-NEVENTS="100000"
+# NEVENTS="100000"
+NEVENTS="1000"
 # Beams
 BEAM1="p"
 BEAM2="p"
