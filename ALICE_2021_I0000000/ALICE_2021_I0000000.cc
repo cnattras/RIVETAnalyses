@@ -27,6 +27,9 @@ namespace Rivet {
       
       
       // Initialise and register projections
+      // Declaring ALICE primary particles
+      const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
+      declare(aprim, "aprim");
       
       // The basic final-state projection:
       // all final-state particles within
@@ -37,6 +40,7 @@ namespace Rivet {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.2, 0.3, 0.4, 0.5, 0.6, 0.7
       // muons and neutrinos are excluded from the clustering
+      
       FastJets JetPtR02(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(JetPtR02, "JetPtR02");
       FastJets JetPtR03(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
@@ -49,12 +53,6 @@ namespace Rivet {
       declare(JetPtR06, "JetPtR06");
       FastJets JetPtR07(fs, FastJets::ANTIKT, 0.7, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
       declare(JetPtR07, "JetPtR07");
-      
-      // Declaring ALICE primary particles
-      const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
-      declare(aprim, "aprim");
-      // Booking counter (number of events)
-      book(_c["sow"], "sow");
       
       // Book histograms
       // specify custom binning
@@ -77,6 +75,8 @@ namespace Rivet {
       //book(_h["Denominator"], refname + "Denominator", refdata);
       */
       
+      // Booking counter (number of events)
+      book(_c["sow"], "sow");
       
 
     }
@@ -88,46 +88,69 @@ namespace Rivet {
       const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
       const Particles ALICEparticles = aprim.particles();
       
-      FastJets FJjets = apply<FastJets>(event, "JetPtR02");
-      FJjets.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      // R = 0.2
+      FastJets FJjetsR02 = apply<FastJets>(event, "JetPtR02");
+      FJjetsR02.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      
+      // R = 0.3
+      FastJets FJjetsR03 = apply<FastJets>(event, "JetPtR02");
+      FJjetsR03.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      
+      // R = 0.4
+      FastJets FJjetsR04 = apply<FastJets>(event, "JetPtR02");
+      FJjetsR04.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      
+      // R = 0.5
+      FastJets FJjetsR05 = apply<FastJets>(event, "JetPtR02");
+      FJjetsR05.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      
+      // R = 0.6
+      FastJets FJjetsR06 = apply<FastJets>(event, "JetPtR02");
+      FJjetsR06.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      
+      // R = 0.7
+      FastJets FJjetsR07 = apply<FastJets>(event, "JetPtR02");
+      FJjetsR07.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+      
       
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       // R = 0.2
-      Jets JetPtR02 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
+      Jets JetPtR02 = FJjetsR02.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
       for(auto jet : JetPtR02){
       	// Normalizing histogram by number of events
       	_h["JetPtR02"]->fill(jet.pT()/GeV);
       }
       // R = 0.3
-      Jets JetPtR03 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR03 = FJjetsR03.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
       for(auto jet : JetPtR03){
       	// Normalizing histogram by number of events
       	_h["JetPtR03"]->fill(jet.pT()/GeV);
       }
       // R = 0.4
-      Jets JetPtR04 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR04 = FJjetsR04.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
       for(auto jet : JetPtR04){
       	// Normalizing histogram by number of events
       	_h["JetPtR04"]->fill(jet.pT()/GeV);
       }
       // R = 0.5
-      Jets JetPtR05 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR05 = FJjetsR05.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
       for(auto jet : JetPtR05){
       	// Normalizing histogram by number of events
       	_h["JetPtR05"]->fill(jet.pT()/GeV);
       }
       // R = 0.6
-      Jets JetPtR06 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR06 = FJjetsR06.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
       for(auto jet : JetPtR06){
       	// Normalizing histogram by number of events
       	_h["JetPtR06"]->fill(jet.pT()/GeV);
       }
       // R = 0.7
-      Jets JetPtR07 = FJjets.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR07 = FJjetsR07.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
       for(auto jet : JetPtR07){
       	// Normalizing histogram by number of events
       	_h["JetPtR07"]->fill(jet.pT()/GeV);
       }
+      
       // Sum of weights counter
       _c["sow"]->fill();
       
@@ -141,8 +164,14 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       
-      _h["JetPtR02"]->scaleW(crossSection()/_c["sow"]->sumW());
       //_h["JetPtR02"]->scaleW(1./_c["sow"]->sumW());
+      _h["JetPtR02"]->scaleW((crossSection()/millibarn)/(_c["sow"]->sumW()));
+      _h["JetPtR03"]->scaleW((crossSection()/millibarn)/(_c["sow"]->sumW()));
+      _h["JetPtR04"]->scaleW((crossSection()/millibarn)/(_c["sow"]->sumW()));
+      _h["JetPtR05"]->scaleW((crossSection()/millibarn)/(_c["sow"]->sumW()));
+      _h["JetPtR06"]->scaleW((crossSection()/millibarn)/(_c["sow"]->sumW()));
+      _h["JetPtR07"]->scaleW((crossSection()/millibarn)/(_c["sow"]->sumW()));
+      
       
       
       // Ratio
