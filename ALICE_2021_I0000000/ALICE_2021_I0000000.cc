@@ -67,13 +67,13 @@ namespace Rivet {
       
       
       // Calculating ratios
-      /*string refname1 = mkAxisCode(20., 0., 100.); //(table,1,1)
+      /*string refname1 = mkAxisCode(, , ); //(table,1,1)
       book(_s["Ratio1"], refname1);
       
       //const Scatter2D& refdata = refData(refname); //am I using refData?
-      //book(_h["Numerator"], refname + "Numerator", refdata);
-      //book(_h["Denominator"], refname + "Denominator", refdata);
-      */
+      book(_h["Numerator"], refname + "Numerator", refdata);
+      book(_h["Denominator"], refname + "Denominator", refdata);*/
+      
       
       // Booking counter (number of events)
       book(_c["sow"], "sow");
@@ -115,13 +115,13 @@ namespace Rivet {
       
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       // R = 0.2
-      Jets JetPtR02 = FJjetsR02.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5); //get jets (ordered by pT), only above 20GeV
+      Jets JetPtR02 = FJjetsR02.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.7); //get jets (ordered by pT), only above 20GeV
       for(auto jet : JetPtR02){
       	// Normalizing histogram by number of events
       	_h["JetPtR02"]->fill(jet.pT()/GeV);
       }
       // R = 0.3
-      Jets JetPtR03 = FJjetsR03.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR03 = FJjetsR03.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.6);
       for(auto jet : JetPtR03){
       	// Normalizing histogram by number of events
       	_h["JetPtR03"]->fill(jet.pT()/GeV);
@@ -133,19 +133,19 @@ namespace Rivet {
       	_h["JetPtR04"]->fill(jet.pT()/GeV);
       }
       // R = 0.5
-      Jets JetPtR05 = FJjetsR05.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR05 = FJjetsR05.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.4);
       for(auto jet : JetPtR05){
       	// Normalizing histogram by number of events
       	_h["JetPtR05"]->fill(jet.pT()/GeV);
       }
       // R = 0.6
-      Jets JetPtR06 = FJjetsR06.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR06 = FJjetsR06.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.3);
       for(auto jet : JetPtR06){
       	// Normalizing histogram by number of events
       	_h["JetPtR06"]->fill(jet.pT()/GeV);
       }
       // R = 0.7
-      Jets JetPtR07 = FJjetsR07.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.5);
+      Jets JetPtR07 = FJjetsR07.jetsByPt(Cuts::pT > 20.*GeV && Cuts::abseta < 0.2);
       for(auto jet : JetPtR07){
       	// Normalizing histogram by number of events
       	_h["JetPtR07"]->fill(jet.pT()/GeV);
