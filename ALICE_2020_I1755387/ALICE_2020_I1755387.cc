@@ -23,6 +23,9 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+     
+      // Centralities
+	declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
 
       // Initialise and register projections
 	const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
@@ -61,32 +64,91 @@ namespace Rivet {
       book(_h["ppspectraR0.5"], 5, 1, 1);
       book(_h["ppspectraR0.6"], 6, 1, 1);
 //      book(_s["ppratioR0.1divR0.2"], 13, 1, 1);
-      book(_s["ppratioR0.1divR0.3"], 14, 1, 1);
-      book(_s["ppratioR0.1divR0.4"], 15, 1, 1);
-      book(_s["ppratioR0.1divR0.5"], 16, 1, 1);
-      book(_s["ppratioR0.1divR0.6"], 17, 1, 1);
-      book(_s["ppratioR0.2divR0.3"], 18, 1, 1);
-      book(_s["ppratioR0.2divR0.4"], 19, 1, 1);
-      book(_s["ppratioR0.2divR0.5"], 20,1, 1);
-      book(_s["ppratioR0.2divR0.6"], 21, 1, 1);
+//      book(_s["ppratioR0.1divR0.3"], 14, 1, 1);
+//      book(_s["ppratioR0.1divR0.4"], 15, 1, 1);
+//      book(_s["ppratioR0.1divR0.5"], 16, 1, 1);
+//      book(_s["ppratioR0.1divR0.6"], 17, 1, 1);
+//      book(_s["ppratioR0.2divR0.3"], 18, 1, 1);
+//      book(_s["ppratioR0.2divR0.4"], 19, 1, 1);
+//      book(_s["ppratioR0.2divR0.5"], 20,1, 1);
+//      book(_s["ppratioR0.2divR0.6"], 21, 1, 1);
       book(_h["ppspectra5GeVleadtrackR0.2"], 22, 1, 1);
       book(_h["pbspectra5GeVleadtrackR0.2"], 23, 1, 1);
       book(_h["ppspectra7GeVleadtrackR0.4"], 24, 1, 1);
       book(_h["pbspectra7GeVleadtrackR0.4"], 25, 1, 1);
-      book(_h["ppcrossleadtrackbias5div0"], 26, 1, 1);
-      book(_h["ppcrossleadtrackbias7div0"], 27, 1, 1);
-      book(_h["ppcrossleadtrackbias7div5"], 28, 1, 1);
-      book(_h["pbcross7to5leadchargeR0.2"], 29, 1, 1);
-      book(_h["jetRaa5GeVleadtrackR0.2"], 30, 1, 1);
-      book(_h["jetRaa7GeVleadtrackR0.4"], 31, 1, 1);
-      book(_h["jetRaa5GeVpbleadtrackR0.2"], 32, 1, 1);
-      book(_h["jetRaa7GeVpbleadtrackR0.4"], 33, 1, 1);
+//      book(_s["ppcrossleadtrackbias5div0"], 26, 1, 1);
+//      book(_s["ppcrossleadtrackbias7div0"], 27, 1, 1);
+      book(_s["ppcrossleadtrackbias7div5"], 28, 1, 1);
+      book(_s["pbcross7to5leadchargeR0.2"], 29, 1, 1);
+      book(_s["jetRaa5GeVleadtrackR0.2"], 30, 1, 1);
+      book(_s["jetRaa7GeVleadtrackR0.4"], 31, 1, 1);
+      book(_s["jetRaa5GeVpbleadtrackR0.2"], 32, 1, 1);
+      book(_s["jetRaa7GeVpbleadtrackR0.4"], 33, 1, 1);
 
-string refname = mkAxisCode(13, 1, 1);
-const Scatter2D& refdata = refData(refname);
-book(_h["ppratioR0.1divR0.2_R0.1"], refname + "_R0.1", refdata);
-book(_h["ppratioR0.1divR0.2_R0.2"], refname + "_R0.2", refdata);
-book(_s["ppratioR0.1divR0.2"], refname);
+string refname13 = mkAxisCode(13, 1, 1);
+const Scatter2D& refdata13 = refData(refname13);
+book(_h["ppratioR0.1divR0.2_R0.1"], refname13 + "_R0.1", refdata13);
+book(_h["ppratioR0.1divR0.2_R0.2"], refname13 + "_R0.2", refdata13);
+book(_s["ppratioR0.1divR0.2"], refname13);
+
+string refname14 = mkAxisCode(14, 1, 1);
+const Scatter2D& refdata14 = refData(refname14);
+book(_h["ppratioR0.1divR0.3_R0.1"], refname14 + "_R0.1", refdata14);
+book(_h["ppratioR0.1divR0.3_R0.3"], refname14 + "_R0.3", refdata14);
+book(_s["ppratioR0.1divR0.3"], refname14);
+
+string refname15 = mkAxisCode(15, 1, 1);
+const Scatter2D& refdata15 = refData(refname15);
+book(_h["ppratioR0.1divR0.4_R0.1"], refname15 + "_R0.1", refdata15);
+book(_h["ppratioR0.1divR0.4_R0.4"], refname15 + "_R0.4", refdata15);
+book(_s["ppratioR0.1divR0.4"], refname15);
+
+string refname16 = mkAxisCode(16, 1, 1);
+const Scatter2D& refdata16 = refData(refname16);
+book(_h["ppratioR0.1divR0.5_R0.1"], refname16 + "_R0.1", refdata16);
+book(_h["ppratioR0.1divR0.5_R0.5"], refname16 + "_R0.5", refdata16);
+book(_s["ppratioR0.1divR0.5"], refname16);
+
+string refname17 = mkAxisCode(17, 1, 1);
+const Scatter2D& refdata17 = refData(refname17);
+book(_h["ppratioR0.1divR0.6_R0.1"], refname17 + "_R0.1", refdata17);
+book(_h["ppratioR0.1divR0.6_R0.6"], refname17 + "_R0.6", refdata17);
+book(_s["ppratioR0.1divR0.6"], refname17);
+
+string refname18 = mkAxisCode(18, 1, 1);
+const Scatter2D& refdata18 = refData(refname18);
+book(_h["ppratioR0.2divR0.3_R0.2"], refname18 + "_R0.2", refdata18);
+book(_h["ppratioR0.2divR0.3_R0.3"], refname18 + "_R0.3", refdata18);
+book(_s["ppratioR0.2divR0.3"], refname18);
+
+string refname19 = mkAxisCode(19, 1, 1);
+const Scatter2D& refdata19 = refData(refname19);
+book(_h["ppratioR0.2divR0.4_R0.2"], refname19 + "_R0.2", refdata19);
+book(_h["ppratioR0.2divR0.4_R0.4"], refname19 + "_R0.4", refdata19);
+book(_s["ppratioR0.2divR0.4"], refname19);
+
+string refname20 = mkAxisCode(20, 1, 1);
+const Scatter2D& refdata20 = refData(refname20);
+book(_h["ppratioR0.2divR0.5_R0.2"], refname20 + "_R0.2", refdata20);
+book(_h["ppratioR0.2divR0.5_R0.5"], refname20 + "_R0.5", refdata20);
+book(_s["ppratioR0.2divR0.5"], refname20);
+
+string refname21 = mkAxisCode(21, 1, 1);
+const Scatter2D& refdata21 = refData(refname21);
+book(_h["ppratioR0.2divR0.6_R0.2"], refname21 + "_R0.2", refdata21);
+book(_h["ppratioR0.2divR0.6_R0.6"], refname21 + "_R0.6", refdata21);
+book(_s["ppratioR0.2divR0.6"], refname21);
+
+string refname26 = mkAxisCode(26, 1, 1);
+const Scatter2D& refdata26 = refData(refname26);
+book(_h["ppcrossleadtrackbias5"], refname26 + "_5GeV_R0.2", refdata26);
+book(_s["ppcrossleadtrackbias5div0"], refname26);
+
+string refname27 = mkAxisCode(27, 1, 1);
+const Scatter2D& refdata27 = refData(refname27);
+book(_h["ppcrossleadtrackbias7"], refname27 + "_7GeV_R0.2", refdata27);
+book(_s["ppcrossleadtrackbias7div0"], refname27);
+
 
       book(_c["sow"], "sow");
     }
@@ -126,34 +188,69 @@ book(_s["ppratioR0.1divR0.2"], refname);
 
 	for(auto jet : jets01)
 	{
+		
 		_h["ppspectraR0.1"]->fill(jet.pT()/GeV);
 		_h["ppratioR0.1divR0.2_R0.1"]->fill(jet.pT()/GeV);
-   	}
+                _h["ppratioR0.1divR0.3_R0.1"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.1divR0.4_R0.1"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.1divR0.5_R0.1"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.1divR0.6_R0.1"]->fill(jet.pT()/GeV);
+
+	}
 
         for(auto jet : jets02)
         {
-                _h["ppspectraR0.2"]->fill(jet.pT()/GeV);
+		if(jet.particles(Cuts::pT > 5.*GeV).size() > 0){
+			_h["ppcrossleadtrackbias5"]->fill(jet.pT()/GeV);
+ 			_h["ppspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+		}
+                if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
+                        _h["ppcrossleadtrackbias7"]->fill(jet.pT()/GeV);
+                        _h["ppspectra7GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+               	}
+	        _h["ppspectraR0.2"]->fill(jet.pT()/GeV);
                 _h["ppratioR0.1divR0.2_R0.2"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.3_R0.2"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.4_R0.2"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.5_R0.2"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.6_R0.2"]->fill(jet.pT()/GeV);
+
     }
 
         for(auto jet : jets03)
         {
                 _h["ppspectraR0.3"]->fill(jet.pT()/GeV);
-        }
+                _h["ppratioR0.1divR0.3_R0.3"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.3_R0.3"]->fill(jet.pT()/GeV);
+
+	 }
 
         for(auto jet : jets04)
         {
-                _h["ppspectraR0.4"]->fill(jet.pT()/GeV);
+                if(jet.particles(Cuts::pT > 5.*GeV).size() > 0)
+                        _h["ppspectra5GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
+                if(jet.particles(Cuts::pT > 7.*GeV).size() > 0)
+                        _h["ppspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
+
+		 _h["ppspectraR0.4"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.1divR0.4_R0.4"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.4_R0.4"]->fill(jet.pT()/GeV);
+
         }
 
         for(auto jet : jets05)
         {
                 _h["ppspectraR0.5"]->fill(jet.pT()/GeV);
-        }
+                _h["ppratioR0.1divR0.5_R0.5"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.5_R0.5"]->fill(jet.pT()/GeV);
+
+	 }
 
         for(auto jet : jets06)
         {
                 _h["ppspectraR0.6"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.1divR0.6_R0.6"]->fill(jet.pT()/GeV);
+                _h["ppratioR0.2divR0.6_R0.6"]->fill(jet.pT()/GeV);
         }
 
     }
@@ -169,16 +266,20 @@ book(_s["ppratioR0.1divR0.2"], refname);
         _h["ppspectraR0.5"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         _h["ppspectraR0.6"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
 	divide(_h["ppratioR0.1divR0.2_R0.1"], _h["ppratioR0.1divR0.2_R0.2"], _s["ppratioR0.1divR0.2"]);
-/*        divide(_h[], _h["ppspectraR0.3"], _s["ppratioR0.1divR0.3"]);
-        divide(_h["ppspectraR0.1"], _h["ppspectraR0.4"], _s["ppratioR0.1divR0.4"]);
-        divide(_h["ppspectraR0.1"], _h["ppspectraR0.5"], _s["ppratioR0.1divR0.5"]);
-        divide(_h["ppspectraR0.1"], _h["ppspectraR0.6"], _s["ppratioR0.1divR0.6"]);
-        divide(_h["ppspectraR0.2"], _h["ppspectraR0.3"], _s["ppratioR0.2divR0.3"]);
-        divide(_h["ppspectraR0.2"], _h["ppspectraR0.4"], _s["ppratioR0.2divR0.4"]);
-        divide(_h["ppspectraR0.2"], _h["ppspectraR0.5"], _s["ppratioR0.2divR0.5"]);
-        divide(_h["ppspectraR0.2"], _h["ppspectraR0.6"], _s["ppratioR0.2divR0.6"]);
-*/
-	
+        divide(_h["ppratioR0.1divR0.3_R0.1"], _h["ppratioR0.1divR0.3_R0.3"], _s["ppratioR0.1divR0.3"]);
+        divide(_h["ppratioR0.1divR0.4_R0.1"], _h["ppratioR0.1divR0.4_R0.4"], _s["ppratioR0.1divR0.4"]);
+        divide(_h["ppratioR0.1divR0.5_R0.1"], _h["ppratioR0.1divR0.5_R0.5"], _s["ppratioR0.1divR0.5"]);
+        divide(_h["ppratioR0.1divR0.6_R0.1"], _h["ppratioR0.1divR0.6_R0.6"], _s["ppratioR0.1divR0.6"]);
+        divide(_h["ppratioR0.2divR0.3_R0.2"], _h["ppratioR0.2divR0.3_R0.3"], _s["ppratioR0.2divR0.3"]);
+        divide(_h["ppratioR0.2divR0.4_R0.2"], _h["ppratioR0.2divR0.4_R0.4"], _s["ppratioR0.2divR0.4"]);
+        divide(_h["ppratioR0.2divR0.5_R0.2"], _h["ppratioR0.2divR0.5_R0.5"], _s["ppratioR0.2divR0.5"]);
+        divide(_h["ppratioR0.2divR0.6_R0.2"], _h["ppratioR0.2divR0.6_R0.6"], _s["ppratioR0.2divR0.6"]);
+
+        _h["ppcrossleadtrackbias5"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
+        divide(_h["ppcrossleadtrackbias5"], _h["ppspectraR0.2"], _s["ppcrossleadtrackbias5div0"]);
+        _h["ppcrossleadtrackbias7"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
+        divide(_h["ppcrossleadtrackbias7"], _h["ppspectraR0.2"], _s["ppcrossleadtrackbias7div0"]);
+        divide(_h["ppcrossleadtrackbias7"], _h["ppcrossleadtrackbias5"], _s["ppcrossleadtrackbias7div5"]);
     }
 
     ///@}
