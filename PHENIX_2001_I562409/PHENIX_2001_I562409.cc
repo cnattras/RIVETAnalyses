@@ -45,6 +45,8 @@ namespace Rivet {
       book(_c["Cent60_80"], "Cent60_80");
       book(_h["Pi0PbScCent0_10"], 1, 1, 1);
       book(_h["Pi0PbScCent60_80"], 2, 1, 1);
+      book(_h["Pi0PbGlCent0_10"], 3, 1, 1);
+      book(_h["Pi0PbGlCent60_80"], 4, 1, 1);
 
     }
 
@@ -74,6 +76,7 @@ namespace Rivet {
               for(auto p : pi0UPParticles) //loop over pi0s
               {
                       _h["Pi0PbScCent0_10"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV));
+		      _h["Pi0PbGlCent0_10"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV));
               }
       }
       else if(cent >= 60. && cent < 80.) //Check centrality of the event
@@ -86,7 +89,8 @@ namespace Rivet {
 
               for(auto p : pi0UPParticles) //loop over pi0s
               {
-                      _h["Pi0PbScCent60_80"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV)); 
+                      _h["Pi0PbScCent60_80"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV));
+		      _h["Pi0PbGlCent60_80"]->fill(p.pT()/GeV, inv2PI/(p.pT()/GeV)); 
               }
       }
     }
@@ -100,6 +104,8 @@ namespace Rivet {
       _h["ChHadronsCent60_80"]->scaleW(1./_c["Cent60_80"]->sumW());
       _h["Pi0PbScCent0_10"]->scaleW(1./_c["Cent0_10"]->sumW());
       _h["Pi0PbScCent60_80"]->scaleW(1./_c["Cent60_80"]->sumW());
+      _h["Pi0PbGlCent0_10"]->scaleW(1./_c["Cent0_10"]->sumW());
+      _h["Pi0PbGlCent60_80"]->scaleW(1./_c["Cent0_10"]->sumW());
     }
 
       ///@}
