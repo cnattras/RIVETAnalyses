@@ -32,7 +32,32 @@ namespace Rivet {
 				}
 			}
 
+			void FillRadius80PercPt(Profile1DPtr prof1D, Jet jet)
+			{
+				std::vector<pair<double, Particle>> jetConsRPt;
+				double Jet80Pt = 0.;
+				double r80 = 0.;
 
+				for(Particle p : jet.particles())
+				{
+					double r = deltaR(p.eta(), p.phi(), jet.eta(), jet.phi());
+					jetConsRPt.push_back(make_pair(r, p));
+				}
+				//sort the vector jetConsRPt by the first argument r (c++14)
+				std::sort(jetConsRPt.begin(), jetConsRPt.end(),[](auto &left, auto &right) {
+					return left.first < right.first;
+				});
+
+				for(auto pair : jetConsRPt)
+				{
+					Jet80Pt += pair.second.pT()/GeV;
+					if (Jet80Pt >= 0.8 * jet.pT()/GeV){
+						r80 = deltaR(pair.second.eta(), pair.second.phi(), jet.eta(), jet.phi());
+						break;
+					}
+				}
+				prof1D->fill(jet.pT()/GeV, r80);
+			}
 
 			/// Book histograms and initialise projections before the run
 			void init() {
@@ -145,7 +170,6 @@ namespace Rivet {
 			void analyze(const Event& event) {
 				//Increment the counter to keep track of the cross section
 				_c["sow"]->fill();
-				
 
 				// Retrieve clustered jets, sorted by pT, with a minimum pT cut
 				const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
