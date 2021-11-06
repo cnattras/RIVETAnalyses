@@ -175,46 +175,46 @@ namespace Rivet {
 				book(_h["pTSpectraR04_Eta05_4060_0to6"], 43, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_6080_0to6"], 44, 1, 1);  
 
-				// Figure A.1
+				// Figure A.1 - Like Figure 5
 				book(_h["ALICEvsMC_R04_Eta05_WithoutUESub"], 45, 1, 1); 
 				book(_h["ALICEvsMC_R06_Eta03_WithoutUESub"], 46, 1, 1); 
 
-				// Figure A.2
+				// Figure A.2 - Like Figure 7
 				book(_p["mean_ALICEvsMC_R02_Eta_07_WithoutUESub"], 47, 1, 1);
 				book(_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"], 48, 1, 1);  
 				book(_p["mean_ALICEvsMC_R06_Eta_03_WithoutUESub"], 49, 1, 1); 
 
-				// Figure A.3
+				// Figure A.3 - Like Figure 8
 				book(_p["pTR02_Eta07_2030_WithoutUESub"], 50, 1, 1); 
 				book(_p["pTR02_Eta07_3040_WithoutUESub"], 51, 1, 1); 
 				book(_p["pTR02_Eta07_4060_WithoutUESub"], 52, 1, 1); 
 				book(_p["pTR02_Eta07_6080_WithoutUESub"], 53, 1, 1);
 
-				// Figure A.4
+				// Figure A.4 - Like Figure 9
 				book(_p["pTR04_Eta05_2030_WithoutUESub"], 54, 1, 1);
 				book(_p["pTR04_Eta05_3040_WithoutUESub"], 55, 1, 1);  
 				book(_p["pTR04_Eta05_4060_WithoutUESub"], 56, 1, 1);  
 				book(_p["pTR04_Eta05_6080_WithoutUESub"], 57, 1, 1);
 
-				// Figure A.5
+				// Figure A.5 - Like Figure 10
 				book(_p["pTR06_Eta03_2030_WithoutUESub"], 58, 1, 1);  
 				book(_p["pTR06_Eta03_3040_WithoutUESub"], 59, 1, 1);  
 				book(_p["pTR06_Eta03_4060_WithoutUESub"], 60, 1, 1);  
 				book(_p["pTR06_Eta03_6080_WithoutUESub"], 61, 1, 1); 
 
-				// Figure A.6
+				// Figure A.6 - Like Figure 12
 				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"], 62, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"], 63, 1, 1);  
 				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"], 64, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"], 65, 1, 1);
 
-				// Figure A.7
+				// Figure A.7 - Like Figure 13
 				book(_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"], 66, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"], 67, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"], 68, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"], 69, 1, 1);
 
-				// Figure A.8
+				// Figure A.8 - Like Figure 14
 				book(_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"], 70, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], 71, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], 72, 1, 1); 
@@ -239,18 +239,23 @@ namespace Rivet {
 
 				if(jetsAKTR02.size() != 0) {
 					_p["mean_ALICEvsMC_R02_Eta_07"]->fill(jetsAKTR02[0].pT()/GeV, jetsAKTR02[0].particles().size()); // Figure 7
+					_p["mean_ALICEvsMC_R02_Eta_07_WithoutUESub"]->fill(jetsAKTR02[0].pT()/GeV, jetsAKTR02[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R02_Eta07"], jetsAKTR02[0]); // Figure 11
 					if(jetsAKTR02[0].pT() >= 20*GeV && jetsAKTR02[0].pT() < 30*GeV) {
 						FillRadialDistribution(_p["pTR02_Eta07_2030"], jetsAKTR02[0]); // Figure 8
+						FillRadialDistribution(_p["pTR02_Eta07_2030_WithoutUESub"], jetsAKTR02[0]); // Figure A.3
 					}
 					if(jetsAKTR02[0].pT() >= 30*GeV && jetsAKTR02[0].pT() < 40*GeV) {
 						FillRadialDistribution(_p["pTR02_Eta07_3040"], jetsAKTR02[0]); // Figure 8
+						FillRadialDistribution(_p["pTR02_Eta07_3040_WithoutUESub"], jetsAKTR02[0]); // Figure A.3
 					}
 					if(jetsAKTR02[0].pT() >= 40*GeV && jetsAKTR02[0].pT() < 60*GeV) {
 						FillRadialDistribution(_p["pTR02_Eta07_4060"], jetsAKTR02[0]); // Figure 8
+						FillRadialDistribution(_p["pTR02_Eta07_4060_WithoutUESub"], jetsAKTR02[0]); // Figure A.3
 					}
 					if(jetsAKTR02[0].pT() >= 60*GeV && jetsAKTR02[0].pT() < 80*GeV) {
 						FillRadialDistribution(_p["pTR02_Eta07_6080"], jetsAKTR02[0]); // Figure 8
+						FillRadialDistribution(_p["pTR02_Eta07_6080_WithoutUESub"], jetsAKTR02[0]); // Figure A.3
 					}
 				}
 
@@ -276,33 +281,42 @@ namespace Rivet {
 
 				if(jetsAKTR04.size() != 0) {
 					_p["mean_ALICEvsMC_R04_Eta_05"]->fill(jetsAKTR04[0].pT()/GeV, jetsAKTR04[0].particles().size()); // Figure 7
+					_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"]->fill(jetsAKTR04[0].pT()/GeV, jetsAKTR04[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R04_Eta05"], jetsAKTR04[0]); // Figure 11
 					if(jetsAKTR04[0].pT() >= 20*GeV && jetsAKTR04[0].pT() < 30*GeV) {
 						_c["sow2030"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_2030"], jetsAKTR04[0]); // Figure 9
+						FillRadialDistribution(_p["pTR04_Eta05_2030_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
 							_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+							_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
 						}
 					}
 					if(jetsAKTR04[0].pT() >= 30*GeV && jetsAKTR04[0].pT() < 40*GeV) {
 						_c["sow3040"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_3040"], jetsAKTR04[0]); // Figure 9
+						FillRadialDistribution(_p["pTR04_Eta05_3040_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
 							_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+							_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
 						}
 					}
 					if(jetsAKTR04[0].pT() >= 40*GeV && jetsAKTR04[0].pT() < 60*GeV) {
 						_c["sow4060"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_4060"], jetsAKTR04[0]); // Figure 9
+						FillRadialDistribution(_p["pTR04_Eta05_4060_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
 							_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+							_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
 						}
 					}
 					if(jetsAKTR04[0].pT() >= 60*GeV && jetsAKTR04[0].pT() < 80*GeV) {
 						_c["sow6080"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_6080"], jetsAKTR04[0]); // Figure 9
+						FillRadialDistribution(_p["pTR04_Eta05_6080_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
 							_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+							_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
 						}
 					}
 				}
@@ -321,6 +335,15 @@ namespace Rivet {
 					_h["pTSpectraR04_Eta05_3040_0to6"]->fill(jet.pT()/GeV); // Figure 14
 					_h["pTSpectraR04_Eta05_4060_0to6"]->fill(jet.pT()/GeV); // Figure 14
 					_h["pTSpectraR04_Eta05_6080_0to6"]->fill(jet.pT()/GeV); // Figure 14
+					_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.1
+					_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
+					_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
+					_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
+					_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
+					_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
+					_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
+					_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
+					_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
 				}
 
 				// KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
@@ -346,18 +369,23 @@ namespace Rivet {
 				
 				if(jetsAKTR06.size() != 0) {
 					_p["mean_ALICEvsMC_R06_Eta_03"]->fill(jetsAKTR06[0].pT()/GeV, jetsAKTR06[0].particles().size()); // Figure 7
+					_p["mean_ALICEvsMC_R06_Eta_03_WithoutUESub"]->fill(jetsAKTR06[0].pT()/GeV, jetsAKTR06[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R06_Eta03"], jetsAKTR06[0]); // Figure 11
 					if(jetsAKTR06[0].pT() >= 20*GeV && jetsAKTR06[0].pT() < 30*GeV) {
 						FillRadialDistribution(_p["pTR06_Eta03_2030"], jetsAKTR06[0]); // Figure 10
+						FillRadialDistribution(_p["pTR06_Eta03_2030_WithoutUESub"], jetsAKTR06[0]); // Figure A.5
 					}
 					if(jetsAKTR06[0].pT() >= 30*GeV && jetsAKTR06[0].pT() < 40*GeV) {
 						FillRadialDistribution(_p["pTR06_Eta03_3040"], jetsAKTR06[0]); // Figure 10
+						FillRadialDistribution(_p["pTR06_Eta03_3040_WithoutUESub"], jetsAKTR06[0]); // Figure A.5
 					}
 					if(jetsAKTR06[0].pT() >= 40*GeV && jetsAKTR06[0].pT() < 60*GeV) {
 						FillRadialDistribution(_p["pTR06_Eta03_4060"], jetsAKTR06[0]); // Figure 10
+						FillRadialDistribution(_p["pTR06_Eta03_4060_WithoutUESub"], jetsAKTR06[0]); // Figure A.5
 					}
 					if(jetsAKTR06[0].pT() >= 60*GeV && jetsAKTR06[0].pT() < 80*GeV) {
 						FillRadialDistribution(_p["pTR06_Eta03_6080"], jetsAKTR06[0]); // Figure 10
+						FillRadialDistribution(_p["pTR06_Eta03_6080_WithoutUESub"], jetsAKTR06[0]); // Figure A.5
 					}
 				}
 
@@ -366,6 +394,7 @@ namespace Rivet {
 					_h["antiKT_R06_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
 					_h["ALICEvsMC_R06_Eta03"]->fill(jet.pT()/GeV); // Figure 5
 					_h["Ratio06_Denominator"]->fill(jet.pT()/GeV); // Figure 6
+					_h["ALICEvsMC_R06_Eta03_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.1
 				}
 			}
 
@@ -418,6 +447,31 @@ namespace Rivet {
 				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
 				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+
+				// Figure A.1
+				_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["ALICEvsMC_R06_Eta03_WithoutUESub"]->scaleW(crossSection()/(millibarn*0.6*_c["sow"]->sumW()));
+
+				// Figures A.2, A.3, A.4, & A.5 do not need to be normalized
+
+				// Figure A.6
+				_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow2030"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow3040"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow4060"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow6080"]->sumW());
+
+				// Figure A.7
+				_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+
+				// Figure A.8
+				_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->scaleW(crossSection()/(millibarn*_c["sow"]->sumW()));
+
 			}
 
 			///@}
