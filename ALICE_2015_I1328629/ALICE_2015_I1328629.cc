@@ -175,6 +175,51 @@ namespace Rivet {
 				book(_h["pTSpectraR04_Eta05_4060_0to6"], 43, 1, 1); 
 				book(_h["pTSpectraR04_Eta05_6080_0to6"], 44, 1, 1);  
 
+				// Figure A.1
+				book(_h["ALICEvsMC_R04_Eta05_WithoutUESub"], 45, 1, 1); 
+				book(_h["ALICEvsMC_R06_Eta03_WithoutUESub"], 46, 1, 1); 
+
+				// Figure A.2
+				book(_p["mean_ALICEvsMC_R02_Eta_07_WithoutUESub"], 47, 1, 1);
+				book(_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"], 48, 1, 1);  
+				book(_p["mean_ALICEvsMC_R06_Eta_03_WithoutUESub"], 49, 1, 1); 
+
+				// Figure A.3
+				book(_p["pTR02_Eta07_2030_WithoutUESub"], 50, 1, 1); 
+				book(_p["pTR02_Eta07_3040_WithoutUESub"], 51, 1, 1); 
+				book(_p["pTR02_Eta07_4060_WithoutUESub"], 52, 1, 1); 
+				book(_p["pTR02_Eta07_6080_WithoutUESub"], 53, 1, 1);
+
+				// Figure A.4
+				book(_p["pTR04_Eta05_2030_WithoutUESub"], 54, 1, 1);
+				book(_p["pTR04_Eta05_3040_WithoutUESub"], 55, 1, 1);  
+				book(_p["pTR04_Eta05_4060_WithoutUESub"], 56, 1, 1);  
+				book(_p["pTR04_Eta05_6080_WithoutUESub"], 57, 1, 1);
+
+				// Figure A.5
+				book(_p["pTR06_Eta03_2030_WithoutUESub"], 58, 1, 1);  
+				book(_p["pTR06_Eta03_3040_WithoutUESub"], 59, 1, 1);  
+				book(_p["pTR06_Eta03_4060_WithoutUESub"], 60, 1, 1);  
+				book(_p["pTR06_Eta03_6080_WithoutUESub"], 61, 1, 1); 
+
+				// Figure A.6
+				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"], 62, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"], 63, 1, 1);  
+				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"], 64, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"], 65, 1, 1);
+
+				// Figure A.7
+				book(_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"], 66, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"], 67, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"], 68, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"], 69, 1, 1);
+
+				// Figure A.8
+				book(_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"], 70, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], 71, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], 72, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"], 73, 1, 1);
+
 			}
 
 
