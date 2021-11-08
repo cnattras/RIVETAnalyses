@@ -59,6 +59,35 @@ namespace Rivet {
 				prof1D->fill(jet.pT()/GeV, r80);
 			}
 
+			double GetRho(Particles eventParticles, double jetR, Jet leadingJet)
+			{
+				double UEphiPlus = mapAngle0To2Pi(leadingJet.phi() + M_PI/2.);
+				double UEphiMinus = mapAngle0To2Pi(leadingJet.phi() - M_PI/2.);
+				double UEeta = leadingJet.eta();
+
+				double rho = 0.;
+
+				for(const Particle& p : eventParticles)
+				{
+					double DeltaRPlus = deltaR(p.eta(), p.phi(), UEeta, UEphiPlus);
+					double DeltaRMinus = deltaR(p.eta(), p.phi(), UEeta, UEphiMinus);
+					if(DeltaRPlus > jetR && DeltaRMinus > jetR) continue;
+
+					rho += p.pT()/GeV;
+				}
+
+				//Dividing by 2 because two cones were used and by cone area piR^2
+				//pT-density
+				rho /= 2.*M_PI*jetR*jetR;
+
+				return rho;
+			}
+
+			double GetJetPtCorr(Jet jet, double rho)
+			{
+				return jet.pT()/GeV - (rho*jet.pseudojet().area());
+			}
+
 			/// Book histograms and initialise projections before the run
 			void init() {
 
@@ -69,22 +98,32 @@ namespace Rivet {
 					The final-state particles declared above are clustered using FastJet with the anti-kT 
 					algorithm and a jet-radius parameter 0.4 muons & neutrinos are excluded from the clustering 
 				*/
-				FastJets jetsAKTR02FJ(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+
+				// For the area of the jets
+				fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
+				fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
+
+				fjAreaDef02 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
+				FastJets jetsAKTR02FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetsAKTR02FJ, "jetsAKTR02FJ");
 
-				FastJets jetsAKTR03FJ(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				fjAreaDef03 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
+				FastJets jetsAKTR03FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.3, fjAreaDef03, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetsAKTR03FJ, "jetsAKTR03FJ");
 
-				FastJets jetsAKTR04FJ(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				fjAreaDef04 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
+				FastJets jetsAKTR04FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetsAKTR04FJ, "jetsAKTR04FJ");
 
-				FastJets jetsKTR04FJ(fs, FastJets::KT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				fjAreaDef04KT = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
+				FastJets jetsKTR04FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04KT, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetsKTR04FJ, "jetsKTR04FJ");
 
 				FastJets jetsCONER04FJ(fs, FastJets::SISCONE, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetsCONER04FJ, "jetsCONER04FJ");
 
-				FastJets jetsAKTR06FJ(fs, FastJets::ANTIKT, 0.6, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				fjAreaDef06 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
+				FastJets jetsAKTR06FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.6, fjAreaDef06, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
 				declare(jetsAKTR06FJ, "jetsAKTR06FJ");
 
 				// Initialize ALICE primary particles
@@ -236,9 +275,12 @@ namespace Rivet {
 				FastJets jetsAKTR02FJ = apply<FastJets>(event, "jetsAKTR02FJ");
 				jetsAKTR02FJ.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
 				Jets jetsAKTR02 = jetsAKTR02FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.7);
+				double rho02 = 0.;
 
 				if(jetsAKTR02.size() != 0) {
-					_p["mean_ALICEvsMC_R02_Eta_07"]->fill(jetsAKTR02[0].pT()/GeV, jetsAKTR02[0].particles().size()); // Figure 7
+					rho02 = GetRho(ALICEparticles, 0.2, jetsAKTR02[0]);
+
+					_p["mean_ALICEvsMC_R02_Eta_07"]->fill(GetJetPtCorr(jetsAKTR02[0], rho02), jetsAKTR02[0].particles().size()); // Figure 7
 					_p["mean_ALICEvsMC_R02_Eta_07_WithoutUESub"]->fill(jetsAKTR02[0].pT()/GeV, jetsAKTR02[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R02_Eta07"], jetsAKTR02[0]); // Figure 11
 					if(jetsAKTR02[0].pT() >= 20*GeV && jetsAKTR02[0].pT() < 30*GeV) {
@@ -260,27 +302,34 @@ namespace Rivet {
 				}
 
 				for(auto jet: jetsAKTR02) {
-					_h["antiKTR02"]->fill(jet.pT()/GeV); // Figure 3
-					_h["ALICEvsMC_R02_Eta07"]->fill(jet.pT()/GeV); // Figure 5
-					_h["Ratio02_Numerator"]->fill(jet.pT()/GeV); // Figure 6
+					_h["antiKTR02"]->fill(GetJetPtCorr(jet, rho02)); // Figure 3
+					_h["ALICEvsMC_R02_Eta07"]->fill(GetJetPtCorr(jet, rho02)); // Figure 5
+					_h["Ratio02_Numerator"]->fill(GetJetPtCorr(jet, rho02)); // Figure 6
 				}
 
 				// Anti-KT alg. - Resolution = 0.3, Eta = 0.6 (From 0.9 - 0.3)
 				FastJets jetsAKTR03FJ = apply<FastJets>(event, "jetsAKTR03FJ");
 				jetsAKTR03FJ.calc(ALICEparticles); 
 				Jets jetsAKTR03 = jetsAKTR03FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.6);
-				for(auto jet: jetsAKTR03) {
-					_h["antiKTR03"]->fill(jet.pT()/GeV); // Figure 3
+				double rho03 = 0;
 
+				if (jetsAKTR03.size() != 0) {
+					rho03 = GetRho(ALICEparticles, 0.3, jetsAKTR03[0]);
+				}
+
+				for(auto jet: jetsAKTR03) {
+					_h["antiKTR03"]->fill(GetJetPtCorr(jet, rho03)); // Figure 3
 				}
 
 				// Anti-KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
 				FastJets jetsAKTR04FJ = apply<FastJets>(event, "jetsAKTR04FJ");
 				jetsAKTR04FJ.calc(ALICEparticles); 
 				Jets jetsAKTR04 = jetsAKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5); 
-
+				double rho04 = 0; 
 				if(jetsAKTR04.size() != 0) {
-					_p["mean_ALICEvsMC_R04_Eta_05"]->fill(jetsAKTR04[0].pT()/GeV, jetsAKTR04[0].particles().size()); // Figure 7
+					rho04 = GetRho(ALICEparticles, 0.4, jetsAKTR04[0]);
+
+					_p["mean_ALICEvsMC_R04_Eta_05"]->fill(GetJetPtCorr(jetsAKTR04[0], rho04), jetsAKTR04[0].particles().size()); // Figure 7
 					_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"]->fill(jetsAKTR04[0].pT()/GeV, jetsAKTR04[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R04_Eta05"], jetsAKTR04[0]); // Figure 11
 					if(jetsAKTR04[0].pT() >= 20*GeV && jetsAKTR04[0].pT() < 30*GeV) {
@@ -322,36 +371,41 @@ namespace Rivet {
 				}
 
 				for(auto jet : jetsAKTR04) {
-					_h["CrossSectionAntikT_R04"]->fill(jet.pT()/GeV); // Figure 2
-					_h["antiKTR04"]->fill(jet.pT()/GeV); // Figure 3
-					_h["antiKT_R04_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
-					_h["ALICEvsMC_R04_Eta05"]->fill(jet.pT()/GeV); // Figure 5
-					_h["Ratio04_Denominator"]->fill(jet.pT()/GeV); // Figure 6
-					_h["pTSpectraR04_Eta05_2030_0to1"]->fill(jet.pT()/GeV); // Figure 13
-					_h["pTSpectraR04_Eta05_3040_0to1"]->fill(jet.pT()/GeV); // Figure 13
-					_h["pTSpectraR04_Eta05_4060_0to1"]->fill(jet.pT()/GeV); // Figure 13
-					_h["pTSpectraR04_Eta05_6080_0to1"]->fill(jet.pT()/GeV); // Figure 13
-					_h["pTSpectraR04_Eta05_2030_0to6"]->fill(jet.pT()/GeV); // Figure 14
-					_h["pTSpectraR04_Eta05_3040_0to6"]->fill(jet.pT()/GeV); // Figure 14
-					_h["pTSpectraR04_Eta05_4060_0to6"]->fill(jet.pT()/GeV); // Figure 14
-					_h["pTSpectraR04_Eta05_6080_0to6"]->fill(jet.pT()/GeV); // Figure 14
-					_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.1
-					_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
-					_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
-					_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
-					_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.7
-					_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
-					_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
-					_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
-					_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.8
+					_h["CrossSectionAntikT_R04"]->fill(GetJetPtCorr(jet, rho04)); // Figure 2
+					_h["antiKTR04"]->fill(GetJetPtCorr(jet, rho04)); // Figure 3
+					_h["antiKT_R04_ALICE_ATLAS"]->fill(GetJetPtCorr(jet, rho04)); // Figure 4
+					_h["ALICEvsMC_R04_Eta05"]->fill(GetJetPtCorr(jet, rho04)); // Figure 5
+					_h["Ratio04_Denominator"]->fill(GetJetPtCorr(jet, rho04)); // Figure 6
+					_h["pTSpectraR04_Eta05_2030_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
+					_h["pTSpectraR04_Eta05_3040_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
+					_h["pTSpectraR04_Eta05_4060_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
+					_h["pTSpectraR04_Eta05_6080_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
+					_h["pTSpectraR04_Eta05_2030_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
+					_h["pTSpectraR04_Eta05_3040_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
+					_h["pTSpectraR04_Eta05_4060_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
+					_h["pTSpectraR04_Eta05_6080_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
+					_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.1
+					_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+					_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+					_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+					_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
 				}
 
 				// KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
 				FastJets jetsKTR04FJ = apply<FastJets>(event, "jetsKTR04FJ");
 				jetsKTR04FJ.calc(ALICEparticles); 
 				Jets jetsKTR04 = jetsKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
+				double rho04KT = 0;
+
+				if (jetsKTR04.size() != 0) {
+					rho04KT = GetRho(ALICEparticles, 0.4, jetsKTR04[0]);
+				}
 				for(auto jet : jetsKTR04) {
-					_h["CrossSectionkT_R04"]->fill(jet.pT()/GeV); // Figure 2
+					_h["CrossSectionkT_R04"]->fill(GetJetPtCorr(jet, rho04KT)); // Figure 2
 				}
 
  				// CONE alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
@@ -366,9 +420,12 @@ namespace Rivet {
 				FastJets jetsAKTR06FJ = apply<FastJets>(event, "jetsAKTR06FJ");
 				jetsAKTR06FJ.calc(ALICEparticles);
 				Jets jetsAKTR06 = jetsAKTR06FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.3);
-				
+				double rho06 = 0; 
+
 				if(jetsAKTR06.size() != 0) {
-					_p["mean_ALICEvsMC_R06_Eta_03"]->fill(jetsAKTR06[0].pT()/GeV, jetsAKTR06[0].particles().size()); // Figure 7
+					rho06 = GetRho(ALICEparticles, 0.6, jetsAKTR06[0]);
+
+					_p["mean_ALICEvsMC_R06_Eta_03"]->fill(GetJetPtCorr(jetsAKTR06[0], rho06), jetsAKTR06[0].particles().size()); // Figure 7
 					_p["mean_ALICEvsMC_R06_Eta_03_WithoutUESub"]->fill(jetsAKTR06[0].pT()/GeV, jetsAKTR06[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R06_Eta03"], jetsAKTR06[0]); // Figure 11
 					if(jetsAKTR06[0].pT() >= 20*GeV && jetsAKTR06[0].pT() < 30*GeV) {
@@ -390,10 +447,10 @@ namespace Rivet {
 				}
 
 				for(auto jet: jetsAKTR06) {
-					_h["antiKTR06"]->fill(jet.pT()/GeV); // Figure 3
-					_h["antiKT_R06_ALICE_ATLAS"]->fill(jet.pT()/GeV); // Figure 4
-					_h["ALICEvsMC_R06_Eta03"]->fill(jet.pT()/GeV); // Figure 5
-					_h["Ratio06_Denominator"]->fill(jet.pT()/GeV); // Figure 6
+					_h["antiKTR06"]->fill(GetJetPtCorr(jet, rho06)); // Figure 3
+					_h["antiKT_R06_ALICE_ATLAS"]->fill(GetJetPtCorr(jet, rho06)); // Figure 4
+					_h["ALICEvsMC_R06_Eta03"]->fill(GetJetPtCorr(jet, rho06)); // Figure 5
+					_h["Ratio06_Denominator"]->fill(GetJetPtCorr(jet, rho06)); // Figure 6
 					_h["ALICEvsMC_R06_Eta03_WithoutUESub"]->fill(jet.pT()/GeV); // Figure A.1
 				}
 			}
@@ -483,6 +540,12 @@ namespace Rivet {
 			map<string, Profile1DPtr> _p;
 			map<string, CounterPtr> _c;
 			map<string, Scatter2DPtr> _s;
+
+			fastjet::AreaDefinition *fjAreaDef02;
+			fastjet::AreaDefinition *fjAreaDef03;
+			fastjet::AreaDefinition *fjAreaDef04;
+			fastjet::AreaDefinition *fjAreaDef04KT;
+			fastjet::AreaDefinition *fjAreaDef06;
 			///@}
 
 
