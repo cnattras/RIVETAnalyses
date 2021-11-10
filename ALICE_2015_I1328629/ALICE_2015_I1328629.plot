@@ -83,15 +83,15 @@ END PLOT
 BEGIN PLOT /ALICE_2015_I1328629/d13-x01-y01
 Title=Ratios of Jet Cross Sections Anti-KT R = $\frac{0.2}{0.4}$
 YLabel=$\frac{\sigma^{\text{jet, ch}} \text{R = 0.2}}{\sigma^{\text{jet, ch}} \text{(R = 0.4)}}$
-YLabelSep=5
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
-XLabelSep=5
+LogY=0 
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d14-x01-y01
 Title=Ratios of Jet Cross Sections Anti-KT R = $\frac{0.2}{0.6}$
 YLabel=$\frac{\sigma^{\text{jet, ch}} \text{R = 0.2}}{\sigma^{\text{jet, ch}} \text{(R = 0.6)}}$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 # Figure 7
@@ -100,18 +100,21 @@ BEGIN PLOT /ALICE_2015_I1328629/d15-x01-y01
 Title=Mean charged particle multiplicity in the leading charged jet (R = 0.2)
 YLabel=$\langle N_{\text{ch}} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d16-x01-y01
 Title=Mean charged particle multiplicity in the leading charged jet (R = 0.4)
 YLabel=$\langle N_{\text{ch}} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d17-x01-y01
 Title=Mean charged particle multiplicity in the leading charged jet (R = 0.6)
 YLabel=$\langle N_{\text{ch}} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 # Figure 8
@@ -198,18 +201,21 @@ BEGIN PLOT /ALICE_2015_I1328629/d30-x01-y01
 Title=Distributions of Average Radius '$\langle R_{80} \rangle$' (R = 0.2)
 YLabel=$\langle R_{80} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d31-x01-y01
 Title=Distributions of Average Radius '$\langle R_{80} \rangle$' (R = 0.4)
 YLabel=$\langle R_{80} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d32-x01-y01
 Title=Distributions of Average Radius '$\langle R_{80} \rangle$' (R = 0.6)
 YLabel=$\langle R_{80} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 # Figure 12
@@ -270,24 +276,28 @@ BEGIN PLOT /ALICE_2015_I1328629/d41-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ in Leading Jets, Bin 20 - 30
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d42-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ in Leading Jets, Bin 30 - 40
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d43-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ in Leading Jets, Bin 40 - 60
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d44-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ in Leading Jets, Bin 60 - 80
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 # Figure A.1 
@@ -310,18 +320,21 @@ BEGIN PLOT /ALICE_2015_I1328629/d47-x01-y01
 Title=Mean Charged Particle Multiplicity in the Leading Charged Jet (R = 0.2) Without UE Subtraction
 YLabel=$\langle N_{\text{ch}} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d48-x01-y01
 Title=Mean Charged Particle Multiplicity in the Leading Charged Jet (R = 0.4) Without UE Subtraction
 YLabel=$\langle N_{\text{ch}} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d49-x01-y01
 Title=Mean Charged Particle Multiplicity in the Leading Charged Jet (R = 0.6) Without UE Subtraction
 YLabel=$\langle N_{\text{ch}} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
+LogY=0
 END PLOT
 
 # Figure A.3 
@@ -460,22 +473,26 @@ BEGIN PLOT /ALICE_2015_I1328629/d70-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ Without UE Subtraction, Bin 20 - 30
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d71-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ Without UE Subtraction, Bin 30 - 40
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d72-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ Without UE Subtraction, Bin 40 - 60
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d73-x01-y01
 Title=Charged Particle Scaled $p_{T}$ Spectra $\text{d}N/\text{d}\xi^{\text{ch}}$ Without UE Subtraction, Bin 60 - 80
 YLabel=$1/N_{\text{jets}}\text{ dN/d}\xi^{\text{ch}}$
 XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{particle}}\text{)}$
+LogY=0
 END PLOT
