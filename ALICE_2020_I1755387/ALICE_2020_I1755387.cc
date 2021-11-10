@@ -79,7 +79,7 @@ namespace Rivet {
 //      book(_s["ppcrossleadtrackbias5div0"], 26, 1, 1);
 //      book(_s["ppcrossleadtrackbias7div0"], 27, 1, 1);
       book(_s["ppcrossleadtrackbias7div5"], 28, 1, 1);
-      book(_s["pbcross7to5leadchargeR0.2"], 29, 1, 1);
+//      book(_s["pbcross7to5leadcharge"], 29, 1, 1);
       book(_s["jetRaa5GeVleadtrackR0.2"], 30, 1, 1);
       book(_s["jetRaa7GeVleadtrackR0.4"], 31, 1, 1);
       book(_s["jetRaa5GeVpbleadtrackR0.2"], 32, 1, 1);
@@ -146,9 +146,13 @@ book(_s["ppcrossleadtrackbias5div0"], refname26);
 
 string refname27 = mkAxisCode(27, 1, 1);
 const Scatter2D& refdata27 = refData(refname27);
-book(_h["ppcrossleadtrackbias7"], refname27 + "_7GeV_R0.2", refdata27);
+book(_h["ppcrossleadtrackbias7"], refname27 + "_7GeV_R0.4", refdata27);
 book(_s["ppcrossleadtrackbias7div0"], refname27);
 
+string refname29 = mkAxisCode(29, 1, 1);
+const Scatter2D& refdata29 = refData(refname29);
+book(_h["pbcrossleadtrackbias7"], refname29 + "_7GeV_R0.4", refdata29);
+book(_s["pbcrossleadtrackbias7div5"], refname29);
 
       book(_c["sow"], "sow");
     }
@@ -156,6 +160,21 @@ book(_s["ppcrossleadtrackbias7div0"], refname27);
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+ 
+      // beam generation
+        
+	const ParticlePair& beam = beams();
+            string CollSystem = "Empty";
+
+        if (beam.first.pid() == 1000822080 && beam.second.pid() == 1000822080)
+	{
+    	CollSystem = "PBPB";
+	}
+
+	if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+	{
+    	CollSystem = "PP";
+	}
 
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
@@ -163,24 +182,48 @@ book(_s["ppcrossleadtrackbias7div0"], refname27);
         const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
 	const Particles ALICEparticles = aprim.particles();
 
-	FastJets FJjets01 = apply<FastJets>(event, "jets01");
         FastJets FJjets02 = apply<FastJets>(event, "jets02");
-        FastJets FJjets03 = apply<FastJets>(event, "jets03");
         FastJets FJjets04 = apply<FastJets>(event, "jets04");
-        FastJets FJjets05 = apply<FastJets>(event, "jets05");
-        FastJets FJjets06 = apply<FastJets>(event, "jets06");
- 
-	FJjets01.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+
         FJjets02.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
-        FJjets03.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
         FJjets04.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+
+        Jets jets02 = FJjets02.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
+        Jets jets04 = FJjets04.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
+
+	if (CollSystem == "PBPB") {
+		const CentralityProjection& centProj = apply<CentralityProjection>(event,"V0M");
+		const double cent = centProj();
+		if (cent >= 10) vetoEvent; 
+	        for(auto jet : jets02)
+       		 {
+       		         if(jet.particles(Cuts::pT > 5.*GeV).size() > 0){
+                        _h["pbspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+                      //  _h["ppspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+                }
+		}
+                for(auto jet : jets04)
+                 {
+                         if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
+                        _h["pbcrossleadtrackbias7"]->fill(jet.pT()/GeV);
+                      //  _h["ppspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
+                }
+                }
+		return;
+		}
+
+	FastJets FJjets01 = apply<FastJets>(event, "jets01");
+	FastJets FJjets03 = apply<FastJets>(event, "jets03");
+	FastJets FJjets05 = apply<FastJets>(event, "jets05");
+	FastJets FJjets06 = apply<FastJets>(event, "jets06");
+
+	FJjets01.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
+        FJjets03.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
         FJjets05.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
         FJjets06.calc(ALICEparticles); //give ALICE primary particles to FastJet projection
 
 	Jets jets01 = FJjets01.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
-        Jets jets02 = FJjets02.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
         Jets jets03 = FJjets03.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
-        Jets jets04 = FJjets04.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
         Jets jets05 = FJjets05.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
         Jets jets06 = FJjets06.jetsByPt(Cuts::pT >= 20.*GeV); //get jets (ordered by pT)
 	
