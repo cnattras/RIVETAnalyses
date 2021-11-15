@@ -155,6 +155,8 @@ book(_h["pbcrossleadtrackbias7"], refname29 + "_7GeV_R0.4", refdata29);
 book(_s["pbcrossleadtrackbias7div5"], refname29);
 
       book(_c["sow"], "sow");
+      book(_c["sowPBPB"], "sowPBPB");
+
     }
 
 
