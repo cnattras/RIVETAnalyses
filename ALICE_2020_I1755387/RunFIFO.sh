@@ -24,9 +24,11 @@ GENERATOR_SEED="0"
 PTHARDMIN="0"
 PTHARDMAX="-1"
 #Centrality Calibration file
-CALIBRATION="calibration_PHENIX_AuAu62GeV.yoda"
+CALIBRATION="../Centralities/Calibration/calibration_ALICE_PbPb5020GeV.yoda"
 #Flags of your analysis (Ex. centrality: cent=GEN)
 RIVET_FLAGS=""
 rm /tmp/$FIFOFILE
 mkfifo /tmp/$FIFOFILE
-./runPythia /tmp $FIFOFILE $NEVENTS $BEAM1 $BEAM2 $CMS_ENERGY $GENERATOR_SEED $PTHARDMIN $PTHARDMAX & rivet --pwd -a $ANALYSIS$RIVET_FLAGS -o Rivet.yoda /tmp/$FIFOFILE
+#rivet --pwd -p ../Centralities/Calibration/calibration_ALICE_PbPb5020GeV.yoda -a ALICE_2020_I1755387:cent=GEN -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
+./runPythia /tmp $FIFOFILE $NEVENTS $BEAM1 $BEAM2 $CMS_ENERGY $GENERATOR_SEED $PTHARDMIN $PTHARDMAX & rivet --pwd -p $CALIBRATION -a $ANALYSIS$RIVET_FLAGS -o Rivet.yoda /tmp/$FIFOFILE
+rm /tmp/$FIFOFILE
