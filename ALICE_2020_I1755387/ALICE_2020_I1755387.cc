@@ -151,7 +151,8 @@ book(_s["ppcrossleadtrackbias7div0"], refname27);
 
 string refname29 = mkAxisCode(29, 1, 1);
 const Scatter2D& refdata29 = refData(refname29);
-book(_h["pbcrossleadtrackbias7"], refname29 + "_7GeV_R0.4", refdata29);
+book(_h["pbcrossleadtrackbias7R0.2"], refname29 + "_7GeV_R0.2", refdata29);
+book(_h["pbcrossleadtrackbias5R0.2"], refname29 + "_5GeV_R0.2", refdata29);
 book(_s["pbcrossleadtrackbias7div5"], refname29);
 
       book(_c["sow"], "sow");
@@ -200,14 +201,18 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
 	        for(auto jet : jets02)
        		 {
        		         if(jet.particles(Cuts::pT > 5.*GeV).size() > 0){
-                        _h["pbspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+                        _h["pbspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);//histo 23
                       //  _h["ppspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+                        _h["pbcrossleadtrackbias5R0.2"]->fill(jet.pT()/GeV);//histo 29
                 }
+                     if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
+                        _h["pbcrossleadtrackbias7R0.2"]->fill(jet.pT()/GeV);//histo 29
+                    }
 		}
                 for(auto jet : jets04)
                  {
                          if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
-                        _h["pbcrossleadtrackbias7"]->fill(jet.pT()/GeV);
+                        _h["pbspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);//histo 25
                       //  _h["ppspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
                 }
                 }
@@ -330,6 +335,14 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
         }
 
         if (_c["sowPBPB"]->sumW()>0){
+        divide(_h["pbcrossleadtrackbias7R0.2"], _h["ppbcrossleadtrackbias5R0.2"], _s["pbcrossleadtrackbias7div5"]);
+        
+    _h["pbcrossleadtrackbias7R0.2"]->scaleW((crossSection()/millibarn)/_c["sowPBPB"]->sumW());
+    _h["pbcrossleadtrackbias5R0.2"]->scaleW((crossSection()/millibarn)/_c["sowPBPB"]->sumW());
+    _h["pbspectra5GeVleadtrackR0.2"]->scaleW(1.0/_c["sowPBPB"]->sumW());
+    _h["pbspectra7GeVleadtrackR0.4"]->scaleW(1.0/_c["sowPBPB"]->sumW());
+
+            
 
 	}
 	}
