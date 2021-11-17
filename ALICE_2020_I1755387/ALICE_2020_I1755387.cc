@@ -304,6 +304,8 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
     /// Normalise histograms etc., after the run
     void finalize() {
 
+        if (_c["sow"]->sumW()>0){
+
 	_h["ppspectraR0.1"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         _h["ppspectraR0.2"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         _h["ppspectraR0.3"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
@@ -325,8 +327,12 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
         _h["ppcrossleadtrackbias7"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         divide(_h["ppcrossleadtrackbias7"], _h["ppspectraR0.2"], _s["ppcrossleadtrackbias7div0"]);
         divide(_h["ppcrossleadtrackbias7"], _h["ppcrossleadtrackbias5"], _s["ppcrossleadtrackbias7div5"]);
-    }
+        }
 
+        if (_c["sowPBPB"]->sumW()>0){
+
+	}
+	}
     ///@}
 
 
