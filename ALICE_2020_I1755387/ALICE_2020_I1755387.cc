@@ -256,7 +256,7 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
 		}
                 if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
                         _h["ppcrossleadtrackbias7"]->fill(jet.pT()/GeV);
-                        _h["ppspectra7GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+                        //_h["ppspectra7GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
                	}
 	        _h["ppspectraR0.2"]->fill(jet.pT()/GeV);
                 _h["ppratioR0.1divR0.2_R0.2"]->fill(jet.pT()/GeV);
@@ -277,8 +277,8 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
 
         for(auto jet : jets04)
         {
-                if(jet.particles(Cuts::pT > 5.*GeV).size() > 0)
-                        _h["ppspectra5GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
+                //if(jet.particles(Cuts::pT > 5.*GeV).size() > 0)
+                  //      _h["ppspectra5GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
                 if(jet.particles(Cuts::pT > 7.*GeV).size() > 0)
                         _h["ppspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
 
