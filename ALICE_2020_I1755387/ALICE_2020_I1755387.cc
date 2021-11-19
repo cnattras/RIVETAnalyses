@@ -80,10 +80,10 @@ namespace Rivet {
 //      book(_s["ppcrossleadtrackbias7div0"], 27, 1, 1);
       book(_s["ppcrossleadtrackbias7div5"], 28, 1, 1);
 //      book(_s["pbcross7to5leadcharge"], 29, 1, 1);
-      book(_s["jetRaa5GeVleadtrackR0.2"], 30, 1, 1);
-      book(_s["jetRaa7GeVleadtrackR0.4"], 31, 1, 1);
-      book(_s["jetRaa5GeVpbleadtrackR0.2"], 32, 1, 1);
-      book(_s["jetRaa7GeVpbleadtrackR0.4"], 33, 1, 1);
+      // book(_s["jetRaa5GeVleadtrackR0.2"], 30, 1, 1);
+      // book(_s["jetRaa7GeVleadtrackR0.4"], 31, 1, 1);
+      // book(_s["jetRaa5GeVpbleadtrackR0.2"], 32, 1, 1);
+      // book(_s["jetRaa7GeVpbleadtrackR0.4"], 33, 1, 1);
 
 string refname13 = mkAxisCode(13, 1, 1);
 const Scatter2D& refdata13 = refData(refname13);
@@ -155,6 +155,33 @@ book(_h["pbcrossleadtrackbias7R0.2"], refname29 + "_7GeV_R0.2", refdata29);
 book(_h["pbcrossleadtrackbias5R0.2"], refname29 + "_5GeV_R0.2", refdata29);
 book(_s["pbcrossleadtrackbias7div5"], refname29);
 
+
+string refname30 = mkAxisCode(30, 1, 1);
+const Scatter2D& refdata30 = refData(refname30);
+book(_h["pbscaledspectrumtrackbias5R0.2Table30Figure6"], refname30 + "_5GeV_R0.2pb", refdata30);
+book(_h["ppcrossleadtrackbias5R0.2Table30Figure6"], refname30 + "_5GeV_R0.2pp", refdata30);
+book(_s["RAAbias5R0.2"], refname30);
+
+string refname31 = mkAxisCode(31, 1, 1);
+const Scatter2D& refdata31 = refData(refname31);
+book(_h["pbscaledspectrumtrackbias7R0.4Table31Figure6"], refname31 + "_7GeV_R0.4pb", refdata31);
+book(_h["ppcrossleadtrackbias7R0.4Table31Figure6"], refname31 + "_7GeV_R0.4pp", refdata31);
+book(_s["RAAbias7R0.4"], refname31);
+
+
+
+string refname32 = mkAxisCode(32, 1, 1);
+const Scatter2D& refdata32 = refData(refname32);
+book(_h["pbscaledspectrumtrackbias5R0.2Table32Figure6"], refname32 + "_5GeV_R0.2pb", refdata32);
+book(_h["ppcrossleadtrackbias0R0.2Table32Figure6"], refname32 + "_0GeV_R0.2pp", refdata32);
+book(_s["RAAbias0and5R0.2"], refname32);
+
+string refname33 = mkAxisCode(33, 1, 1);
+const Scatter2D& refdata33 = refData(refname33);
+book(_h["pbscaledspectrumtrackbias7R0.4Table33Figure6"], refname33 + "_7GeV_R0.4pb", refdata33);
+book(_h["ppcrossleadtrackbias0R0.4Table33Figure6"], refname33 + "_0GeV_R0.4pp", refdata33);
+book(_s["RAAbias0and7R0.4"], refname33);
+
       book(_c["sow"], "sow");
       book(_c["sowPBPB"], "sowPBPB");
 
@@ -204,6 +231,8 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
                         _h["pbspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);//histo 23
                       //  _h["ppspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
                         _h["pbcrossleadtrackbias5R0.2"]->fill(jet.pT()/GeV);//histo 29
+                        _h["ppbscaledspectrumtrackbias5R0.2Table30Figure6"]->fill(jet.pT()/GeV);//histo 30
+                        _h["pbscaledspectrumtrackbias5R0.2Table32Figure6"]->fill(jet.pT()/GeV);//histo 32
                 }
                      if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
                         _h["pbcrossleadtrackbias7R0.2"]->fill(jet.pT()/GeV);//histo 29
@@ -213,6 +242,8 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
                  {
                          if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
                         _h["pbspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);//histo 25
+                        _h["pbscaledspectrumtrackbias7R0.4Table31Figure6"]->fill(jet.pT()/GeV);//histo 31
+                        _h["pbscaledspectrumtrackbias7R0.4Table33Figure6"]->fill(jet.pT()/GeV);//histo 33
                       //  _h["ppspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
                 }
                 }
@@ -253,6 +284,7 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
 		if(jet.particles(Cuts::pT > 5.*GeV).size() > 0){
 			_h["ppcrossleadtrackbias5"]->fill(jet.pT()/GeV);
  			_h["ppspectra5GeVleadtrackR0.2"]->fill(jet.pT()/GeV);
+            _h["ppcrossleadtrackbias5R0.2Table30Figure6"]->fill(jet.pT()/GeV);//Table 30
 		}
                 if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
                         _h["ppcrossleadtrackbias7"]->fill(jet.pT()/GeV);
@@ -264,6 +296,7 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
                 _h["ppratioR0.2divR0.4_R0.2"]->fill(jet.pT()/GeV);
                 _h["ppratioR0.2divR0.5_R0.2"]->fill(jet.pT()/GeV);
                 _h["ppratioR0.2divR0.6_R0.2"]->fill(jet.pT()/GeV);
+                _h["ppcrossleadtrackbias0R0.2Table32Figure6"]->fill(jet.pT()/GeV);//Table 32
 
     }
 
@@ -279,12 +312,15 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
         {
                 //if(jet.particles(Cuts::pT > 5.*GeV).size() > 0)
                   //      _h["ppspectra5GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
-                if(jet.particles(Cuts::pT > 7.*GeV).size() > 0)
+                if(jet.particles(Cuts::pT > 7.*GeV).size() > 0){
                         _h["ppspectra7GeVleadtrackR0.4"]->fill(jet.pT()/GeV);
+                        _h["ppcrossleadtrackbias7R0.4Table31Figure6"]->fill(jet.pT()/GeV);//Table 31
+                    }
 
 		 _h["ppspectraR0.4"]->fill(jet.pT()/GeV);
                 _h["ppratioR0.1divR0.4_R0.4"]->fill(jet.pT()/GeV);
                 _h["ppratioR0.2divR0.4_R0.4"]->fill(jet.pT()/GeV);
+                _h["ppcrossleadtrackbias0R0.4Table33Figure6"]->fill(jet.pT()/GeV);
 
         }
 
@@ -309,7 +345,7 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
     /// Normalise histograms etc., after the run
     void finalize() {
 
-        if (_c["sow"]->sumW()>0){
+        if (_c["sow"]->sumW()>0){//pp only histograms
 
 	_h["ppspectraR0.1"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         _h["ppspectraR0.2"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
@@ -327,24 +363,47 @@ book(_s["pbcrossleadtrackbias7div5"], refname29);
         divide(_h["ppratioR0.2divR0.5_R0.2"], _h["ppratioR0.2divR0.5_R0.5"], _s["ppratioR0.2divR0.5"]);
         divide(_h["ppratioR0.2divR0.6_R0.2"], _h["ppratioR0.2divR0.6_R0.6"], _s["ppratioR0.2divR0.6"]);
 
+        //Figure 5 left
         _h["ppcrossleadtrackbias5"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         divide(_h["ppcrossleadtrackbias5"], _h["ppspectraR0.2"], _s["ppcrossleadtrackbias5div0"]);
         _h["ppcrossleadtrackbias7"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         divide(_h["ppcrossleadtrackbias7"], _h["ppspectraR0.2"], _s["ppcrossleadtrackbias7div0"]);
         divide(_h["ppcrossleadtrackbias7"], _h["ppcrossleadtrackbias5"], _s["ppcrossleadtrackbias7div5"]);
+
+        //Figure 6 histos
+        _h["ppcrossleadtrackbias5R0.2Table30Figure6"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
+        _h["ppcrossleadtrackbias7R0.4Table31Figure6"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
+        _h["ppcrossleadtrackbias0R0.2Table32Figure6"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
+        _h["ppcrossleadtrackbias0R0.4Table33Figure6"]->scaleW((crossSection()/millibarn)/_c["sow"]->sumW());
         }
 
-        if (_c["sowPBPB"]->sumW()>0){
-        divide(_h["pbcrossleadtrackbias7R0.2"], _h["ppbcrossleadtrackbias5R0.2"], _s["pbcrossleadtrackbias7div5"]);
+        if (_c["sowPBPB"]->sumW()>0){//pb only histograms
+        divide(_h["pbcrossleadtrackbias7R0.2"], _h["ppbcrossleadtrackbias5R0.2"], _s["pbcrossleadtrackbias7div5"]);//Fig. 5 right
         
+        float TAA = 23.07;
     _h["pbcrossleadtrackbias7R0.2"]->scaleW((crossSection()/millibarn)/_c["sowPBPB"]->sumW());
     _h["pbcrossleadtrackbias5R0.2"]->scaleW((crossSection()/millibarn)/_c["sowPBPB"]->sumW());
-    _h["pbspectra5GeVleadtrackR0.2"]->scaleW(1.0/_c["sowPBPB"]->sumW());
-    _h["pbspectra7GeVleadtrackR0.4"]->scaleW(1.0/_c["sowPBPB"]->sumW());
+    _h["pbspectra5GeVleadtrackR0.2"]->scaleW(1.0/TAA*_c["sowPBPB"]->sumW());//Table 23, figure 4
+    _h["pbspectra7GeVleadtrackR0.4"]->scaleW(1.0/TAA*_c["sowPBPB"]->sumW());//Table 25, figure 5
+    //Figure 6 histos
+    _h["pbscaledspectrumtrackbias5R0.2Table30Figure6"]->scaleW(1.0/TAA*_c["sowPBPB"]->sumW());//Table 30, figure 6
+    _h["pbscaledspectrumtrackbias7R0.4Table31Figure6"]->scaleW(1.0/TAA*_c["sowPBPB"]->sumW());//Table 31, figure 6
+    _h["pbscaledspectrumtrackbias5R0.2Table32Figure6"]->scaleW(1.0/TAA*_c["sowPBPB"]->sumW());//Table 32, figure 6
+    _h["pbscaledspectrumtrackbias7R0.4Table33Figure6"]->scaleW(1.0/TAA*_c["sowPBPB"]->sumW());//Table 33, figure 6
 
             
 
 	}
+//pb and pp histograms
+        if (_c["sow"]->sumW()>0 && _c["sowPBPB"]->sumW()>0){//pp only histograms
+//Figure 6
+        divide(_h["pbscaledspectrumtrackbias5R0.2Table30Figure6"], _h["ppcrossleadtrackbias5R0.2Table30Figure6"], _s["RAAbias5R0.2"]);//Table 30
+        divide(_h["pbscaledspectrumtrackbias7R0.4Table31Figure6"], _h["ppcrossleadtrackbias7R0.4Table31Figure6"], _s["RAAbias7R0.4"]);//Table 31
+        divide(_h["pbscaledspectrumtrackbias5R0.2Table32Figure6"], _h["ppcrossleadtrackbias0R0.2Table32Figure6"], _s["RAAbias0and5R0.2"]);//Table 32
+        divide(_h["pbscaledspectrumtrackbias7R0.4Table33Figure6"], _h["ppcrossleadtrackbias0R0.4Table33Figure6"], _s["RAAbias0and7R0.4"]);//Table 33
+
+        }
+
 	}
     ///@}
 
