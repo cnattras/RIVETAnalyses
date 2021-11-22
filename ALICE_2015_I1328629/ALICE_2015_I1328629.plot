@@ -84,7 +84,7 @@ BEGIN PLOT /ALICE_2015_I1328629/d13-x01-y01
 Title=Ratios of Jet Cross Sections Anti-KT R = $\frac{0.2}{0.4}$
 YLabel=$\frac{\sigma^{\text{jet, ch}} \text{R = 0.2}}{\sigma^{\text{jet, ch}} \text{(R = 0.4)}}$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
-LogY=0 
+LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d14-x01-y01
@@ -198,21 +198,21 @@ END PLOT
 # Figure 11
 
 BEGIN PLOT /ALICE_2015_I1328629/d30-x01-y01
-Title=Distributions of Average Radius '$\langle R_{80} \rangle$' (R = 0.2)
+Title=Distributions of Average Radius $\langle R_{80} \rangle$ (R = 0.2)
 YLabel=$\langle R_{80} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
 LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d31-x01-y01
-Title=Distributions of Average Radius '$\langle R_{80} \rangle$' (R = 0.4)
+Title=Distributions of Average Radius $\langle R_{80} \rangle$ (R = 0.4)
 YLabel=$\langle R_{80} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
 LogY=0
 END PLOT
 
 BEGIN PLOT /ALICE_2015_I1328629/d32-x01-y01
-Title=Distributions of Average Radius '$\langle R_{80} \rangle$' (R = 0.6)
+Title=Distributions of Average Radius $\langle R_{80} \rangle$ (R = 0.6)
 YLabel=$\langle R_{80} \rangle$
 XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
 LogY=0
@@ -300,7 +300,7 @@ XLabel=$\xi^{\text{ch}} = \text{log(}p_{T}^{\text{jet, ch}} / p_{T}^{\text{parti
 LogY=0
 END PLOT
 
-# Figure A.1 
+# Figure A.1
 
 BEGIN PLOT /ALICE_2015_I1328629/d45-x01-y01
 Title=Charged Jet Cross Sections Anti-KT R = 0.4 Without UE Subtraction Compared to MC Generators
@@ -337,7 +337,7 @@ XLabel=$p_{T}^{\text{jet, ch}}$ $\text{(GeV/\emph{c})}$
 LogY=0
 END PLOT
 
-# Figure A.3 
+# Figure A.3
 
 BEGIN PLOT /ALICE_2015_I1328629/d50-x01-y01
 Title=Radial Distributions of $p_{T}$ Without UE Subtraction, Bin 20 - 30 (R = 0.2)

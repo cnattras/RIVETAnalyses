@@ -88,6 +88,16 @@ namespace Rivet {
 				return jet.pT()/GeV - (rho*jet.pseudojet().area());
 			}
 
+                        void FillFragmentation(Jet jet, Histo1DPtr HistoZ, Histo1DPtr HistoXi, CounterPtr c)
+                        {
+                                c->fill();
+                                for(auto p : jet.particles())
+                                {
+                                        HistoZ->fill(p.pT()/jet.pT());
+                                        HistoXi->fill(log(jet.pT()/p.pT()));
+                                }
+                        }
+
 			/// Book histograms and initialise projections before the run
 			void init() {
 
@@ -95,8 +105,8 @@ namespace Rivet {
 				const FinalState fs(Cuts::abseta < 0.75);
 
 				/*
-					The final-state particles declared above are clustered using FastJet with the anti-kT 
-					algorithm and a jet-radius parameter 0.4 muons & neutrinos are excluded from the clustering 
+					The final-state particles declared above are clustered using FastJet with the anti-kT
+					algorithm and a jet-radius parameter 0.4 muons & neutrinos are excluded from the clustering
 				*/
 
 				// For the area of the jets
@@ -137,126 +147,138 @@ namespace Rivet {
 				book(_c["sow4060"], "sow4060");
 				book(_c["sow6080"], "sow6080");
 
-				// Creates histograms 
+                                //Jet counters for fragmentation function normalization (Figures 13 and 14)
+                                book(_c["sow2030Frag"], "sow2030Frag");
+				book(_c["sow3040Frag"], "sow3040Frag");
+				book(_c["sow4060Frag"], "sow4060Frag");
+				book(_c["sow6080Frag"], "sow6080Frag");
+
+                                //Jet counters for fragmentation function normalization (Figures A.7 and A.8)
+                                book(_c["sow2030FragWOUE"], "sow2030FragWOUE");
+				book(_c["sow3040FragWOUE"], "sow3040FragWOUE");
+				book(_c["sow4060FragWOUE"], "sow4060FragWOUE");
+				book(_c["sow6080FragWOUE"], "sow6080FragWOUE");
+
+				// Creates histograms
 				book(_h["CrossSectionAntikT_R04"], 1, 1, 1);  // Figure 2 Anti-kT
 				book(_h["CrossSectionkT_R04"], 2, 1, 1);      // Figure 2 kT
 				book(_h["CrossSectionSisCone_R04"], 3, 1, 1); // Figure 2 SisCone
 
 				// Figure 3
-				book(_h["antiKTR02"], 4, 1, 1);  
-				book(_h["antiKTR03"], 5, 1, 1); 
-				book(_h["antiKTR04"], 6, 1, 1);  
-				book(_h["antiKTR06"], 7, 1, 1);  
+				book(_h["antiKTR02"], 4, 1, 1);
+				book(_h["antiKTR03"], 5, 1, 1);
+				book(_h["antiKTR04"], 6, 1, 1);
+				book(_h["antiKTR06"], 7, 1, 1);
 
 				// Figure 4
-				book(_h["antiKT_R04_ALICE_ATLAS"], 8, 1, 1); 
-				book(_h["antiKT_R06_ALICE_ATLAS"], 9, 1, 1); 
+				book(_h["antiKT_R04_ALICE_ATLAS"], 8, 1, 1);
+				book(_h["antiKT_R06_ALICE_ATLAS"], 9, 1, 1);
 
 				// Figure 5
-				book(_h["ALICEvsMC_R02_Eta07"], 10, 1, 1);  
-				book(_h["ALICEvsMC_R04_Eta05"], 11, 1, 1);  
-				book(_h["ALICEvsMC_R06_Eta03"], 12, 1, 1); 
+				book(_h["ALICEvsMC_R02_Eta07"], 10, 1, 1);
+				book(_h["ALICEvsMC_R04_Eta05"], 11, 1, 1);
+				book(_h["ALICEvsMC_R06_Eta03"], 12, 1, 1);
 
 				// Figure 6 - Ratios
-				string refname0204 = mkAxisCode(13, 1, 1);   
+				string refname0204 = mkAxisCode(13, 1, 1);
 				const Scatter2D& refdata0204 = refData(refname0204);
 				book(_h["Ratio02_Numerator"], refname0204 + "Ratio02_Numerator", refdata0204);
 				book(_h["Ratio04_Denominator"], refname0204 + "Ratio04_Denominator", refdata0204);
 				book(_s["Ratio0204"], refname0204);
-				string refname0206 = mkAxisCode(14, 1, 1);   
+				string refname0206 = mkAxisCode(14, 1, 1);
 				const Scatter2D& refdata0206 = refData(refname0206);
 				book(_h["Ratio06_Denominator"], refname0206 + "Ratio06_Denominator", refdata0206);
-				book(_s["Ratio0206"], refname0206);				
-				
+				book(_s["Ratio0206"], refname0206);
+
 				// Figure 7
-				book(_p["mean_ALICEvsMC_R02_Eta_07"], 15, 1, 1);  
-				book(_p["mean_ALICEvsMC_R04_Eta_05"], 16, 1, 1);  
-				book(_p["mean_ALICEvsMC_R06_Eta_03"], 17, 1, 1);  
+				book(_p["mean_ALICEvsMC_R02_Eta_07"], 15, 1, 1);
+				book(_p["mean_ALICEvsMC_R04_Eta_05"], 16, 1, 1);
+				book(_p["mean_ALICEvsMC_R06_Eta_03"], 17, 1, 1);
 
 				// Figure 8
-				book(_p["pTR02_Eta07_2030"], 18, 1, 1); 
-				book(_p["pTR02_Eta07_3040"], 19, 1, 1); 
-				book(_p["pTR02_Eta07_4060"], 20, 1, 1); 
-				book(_p["pTR02_Eta07_6080"], 21, 1, 1); 
+				book(_p["pTR02_Eta07_2030"], 18, 1, 1);
+				book(_p["pTR02_Eta07_3040"], 19, 1, 1);
+				book(_p["pTR02_Eta07_4060"], 20, 1, 1);
+				book(_p["pTR02_Eta07_6080"], 21, 1, 1);
 
 				// Figure 9
 				book(_p["pTR04_Eta05_2030"], 22, 1, 1);
-				book(_p["pTR04_Eta05_3040"], 23, 1, 1);  
-				book(_p["pTR04_Eta05_4060"], 24, 1, 1);  
+				book(_p["pTR04_Eta05_3040"], 23, 1, 1);
+				book(_p["pTR04_Eta05_4060"], 24, 1, 1);
 				book(_p["pTR04_Eta05_6080"], 25, 1, 1);
 
 				// Figure 10
-				book(_p["pTR06_Eta03_2030"], 26, 1, 1);  
-				book(_p["pTR06_Eta03_3040"], 27, 1, 1);  
-				book(_p["pTR06_Eta03_4060"], 28, 1, 1);  
-				book(_p["pTR06_Eta03_6080"], 29, 1, 1); 
+				book(_p["pTR06_Eta03_2030"], 26, 1, 1);
+				book(_p["pTR06_Eta03_3040"], 27, 1, 1);
+				book(_p["pTR06_Eta03_4060"], 28, 1, 1);
+				book(_p["pTR06_Eta03_6080"], 29, 1, 1);
 
 				// Figure 11
-				book(_p["avgpT_R02_Eta07"], 30, 1, 1); 
-				book(_p["avgpT_R04_Eta05"], 31, 1, 1); 
-				book(_p["avgpT_R06_Eta03"], 32, 1, 1); 
+				book(_p["avgpT_R02_Eta07"], 30, 1, 1);
+				book(_p["avgpT_R04_Eta05"], 31, 1, 1);
+				book(_p["avgpT_R06_Eta03"], 32, 1, 1);
 
 				// Figure 12
-				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], 33, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], 34, 1, 1);  
-				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], 35, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], 36, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], 33, 1, 1);
+				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], 34, 1, 1);
+				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], 35, 1, 1);
+				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], 36, 1, 1);
 
 				// Figure 13
-				book(_h["pTSpectraR04_Eta05_2030_0to1"], 37, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_3040_0to1"], 38, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_4060_0to1"], 39, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_6080_0to1"], 40, 1, 1);  
+				book(_h["pTSpectraR04_Eta05_2030_0to1"], 37, 1, 1);
+				book(_h["pTSpectraR04_Eta05_3040_0to1"], 38, 1, 1);
+				book(_h["pTSpectraR04_Eta05_4060_0to1"], 39, 1, 1);
+				book(_h["pTSpectraR04_Eta05_6080_0to1"], 40, 1, 1);
 
 				// Figure 14
-				book(_h["pTSpectraR04_Eta05_2030_0to6"], 41, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_3040_0to6"], 42, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_4060_0to6"], 43, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_6080_0to6"], 44, 1, 1);  
+				book(_h["pTSpectraR04_Eta05_2030_0to6"], 41, 1, 1);
+				book(_h["pTSpectraR04_Eta05_3040_0to6"], 42, 1, 1);
+				book(_h["pTSpectraR04_Eta05_4060_0to6"], 43, 1, 1);
+				book(_h["pTSpectraR04_Eta05_6080_0to6"], 44, 1, 1);
 
 				// Figure A.1 - Like Figure 5
-				book(_h["ALICEvsMC_R04_Eta05_WithoutUESub"], 45, 1, 1); 
-				book(_h["ALICEvsMC_R06_Eta03_WithoutUESub"], 46, 1, 1); 
+				book(_h["ALICEvsMC_R04_Eta05_WithoutUESub"], 45, 1, 1);
+				book(_h["ALICEvsMC_R06_Eta03_WithoutUESub"], 46, 1, 1);
 
 				// Figure A.2 - Like Figure 7
 				book(_p["mean_ALICEvsMC_R02_Eta_07_WithoutUESub"], 47, 1, 1);
-				book(_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"], 48, 1, 1);  
-				book(_p["mean_ALICEvsMC_R06_Eta_03_WithoutUESub"], 49, 1, 1); 
+				book(_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"], 48, 1, 1);
+				book(_p["mean_ALICEvsMC_R06_Eta_03_WithoutUESub"], 49, 1, 1);
 
 				// Figure A.3 - Like Figure 8
-				book(_p["pTR02_Eta07_2030_WithoutUESub"], 50, 1, 1); 
-				book(_p["pTR02_Eta07_3040_WithoutUESub"], 51, 1, 1); 
-				book(_p["pTR02_Eta07_4060_WithoutUESub"], 52, 1, 1); 
+				book(_p["pTR02_Eta07_2030_WithoutUESub"], 50, 1, 1);
+				book(_p["pTR02_Eta07_3040_WithoutUESub"], 51, 1, 1);
+				book(_p["pTR02_Eta07_4060_WithoutUESub"], 52, 1, 1);
 				book(_p["pTR02_Eta07_6080_WithoutUESub"], 53, 1, 1);
 
 				// Figure A.4 - Like Figure 9
 				book(_p["pTR04_Eta05_2030_WithoutUESub"], 54, 1, 1);
-				book(_p["pTR04_Eta05_3040_WithoutUESub"], 55, 1, 1);  
-				book(_p["pTR04_Eta05_4060_WithoutUESub"], 56, 1, 1);  
+				book(_p["pTR04_Eta05_3040_WithoutUESub"], 55, 1, 1);
+				book(_p["pTR04_Eta05_4060_WithoutUESub"], 56, 1, 1);
 				book(_p["pTR04_Eta05_6080_WithoutUESub"], 57, 1, 1);
 
 				// Figure A.5 - Like Figure 10
-				book(_p["pTR06_Eta03_2030_WithoutUESub"], 58, 1, 1);  
-				book(_p["pTR06_Eta03_3040_WithoutUESub"], 59, 1, 1);  
-				book(_p["pTR06_Eta03_4060_WithoutUESub"], 60, 1, 1);  
-				book(_p["pTR06_Eta03_6080_WithoutUESub"], 61, 1, 1); 
+				book(_p["pTR06_Eta03_2030_WithoutUESub"], 58, 1, 1);
+				book(_p["pTR06_Eta03_3040_WithoutUESub"], 59, 1, 1);
+				book(_p["pTR06_Eta03_4060_WithoutUESub"], 60, 1, 1);
+				book(_p["pTR06_Eta03_6080_WithoutUESub"], 61, 1, 1);
 
 				// Figure A.6 - Like Figure 12
-				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"], 62, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"], 63, 1, 1);  
-				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"], 64, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"], 62, 1, 1);
+				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"], 63, 1, 1);
+				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"], 64, 1, 1);
 				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"], 65, 1, 1);
 
 				// Figure A.7 - Like Figure 13
-				book(_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"], 66, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"], 67, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"], 68, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"], 66, 1, 1);
+				book(_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"], 67, 1, 1);
+				book(_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"], 68, 1, 1);
 				book(_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"], 69, 1, 1);
 
 				// Figure A.8 - Like Figure 14
-				book(_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"], 70, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], 71, 1, 1); 
-				book(_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], 72, 1, 1); 
+				book(_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"], 70, 1, 1);
+				book(_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], 71, 1, 1);
+				book(_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], 72, 1, 1);
 				book(_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"], 73, 1, 1);
 
 			}
@@ -319,7 +341,7 @@ namespace Rivet {
 
 				// Anti-KT alg. - Resolution = 0.3, Eta = 0.6 (From 0.9 - 0.3)
 				FastJets jetsAKTR03FJ = apply<FastJets>(event, "jetsAKTR03FJ");
-				jetsAKTR03FJ.calc(ALICEparticles); 
+				jetsAKTR03FJ.calc(ALICEparticles);
 				Jets jetsAKTR03 = jetsAKTR03FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.6);
 				double rho03 = 0;
 
@@ -333,9 +355,9 @@ namespace Rivet {
 
 				// Anti-KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
 				FastJets jetsAKTR04FJ = apply<FastJets>(event, "jetsAKTR04FJ");
-				jetsAKTR04FJ.calc(ALICEparticles); 
-				Jets jetsAKTR04 = jetsAKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5); 
-				double rho04 = 0; 
+				jetsAKTR04FJ.calc(ALICEparticles);
+				Jets jetsAKTR04 = jetsAKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
+				double rho04 = 0;
 				if(jetsAKTR04.size() != 0) {
 					rho04 = GetRho(ALICEparticles, 0.4, jetsAKTR04[0]);
 
@@ -396,28 +418,36 @@ namespace Rivet {
 					_h["antiKT_R04_ALICE_ATLAS"]->fill(GetJetPtCorr(jet, rho04)); // Figure 4
 					_h["ALICEvsMC_R04_Eta05"]->fill(GetJetPtCorr(jet, rho04)); // Figure 5
 					_h["Ratio04_Denominator"]->fill(GetJetPtCorr(jet, rho04)); // Figure 6
-					_h["pTSpectraR04_Eta05_2030_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
-					_h["pTSpectraR04_Eta05_3040_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
-					_h["pTSpectraR04_Eta05_4060_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
-					_h["pTSpectraR04_Eta05_6080_0to1"]->fill(GetJetPtCorr(jet, rho04)); // Figure 13
-					_h["pTSpectraR04_Eta05_2030_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
-					_h["pTSpectraR04_Eta05_3040_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
-					_h["pTSpectraR04_Eta05_4060_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
-					_h["pTSpectraR04_Eta05_6080_0to6"]->fill(GetJetPtCorr(jet, rho04)); // Figure 14
+
+                                        //Filling fragmentation functions
+                                        if(inRange(GetJetPtCorr(jet, rho04), 20., 30.))
+                                        {
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_2030_0to1"], _h["pTSpectraR04_Eta05_2030_0to6"], _c["sow2030Frag"]);
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"], _c["sow2030FragWOUE"]);
+                                        }
+                                        else if(inRange(GetJetPtCorr(jet, rho04), 30., 40.))
+                                        {
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_3040_0to1"], _h["pTSpectraR04_Eta05_3040_0to6"], _c["sow3040Frag"]);
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], _c["sow3040FragWOUE"]);
+                                        }
+                                        else if(inRange(GetJetPtCorr(jet, rho04), 40., 60.))
+                                        {
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_4060_0to1"], _h["pTSpectraR04_Eta05_4060_0to6"], _c["sow4060Frag"]);
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], _c["sow4060FragWOUE"]);
+                                        }
+                                        else if(inRange(GetJetPtCorr(jet, rho04), 60., 80.))
+                                        {
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_6080_0to1"], _h["pTSpectraR04_Eta05_6080_0to6"], _c["sow6080Frag"]);
+                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"], _c["sow6080FragWOUE"]);
+                                        }
+
 					_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.1
-					_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
-					_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
-					_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
-					_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
-					_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
-					_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
-					_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
-					_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+
 				}
 
 				// KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
 				FastJets jetsKTR04FJ = apply<FastJets>(event, "jetsKTR04FJ");
-				jetsKTR04FJ.calc(ALICEparticles); 
+				jetsKTR04FJ.calc(ALICEparticles);
 				Jets jetsKTR04 = jetsKTR04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
 				double rho04KT = 0;
 
@@ -430,8 +460,8 @@ namespace Rivet {
 
  				// CONE alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
 				FastJets jetsCONER04FJ = apply<FastJets>(event, "jetsCONER04FJ");
-				jetsCONER04FJ.calc(ALICEparticles); 
-				Jets jetsCONER04 = jetsCONER04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5); 
+				jetsCONER04FJ.calc(ALICEparticles);
+				Jets jetsCONER04 = jetsCONER04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
 				for(auto jet : jetsCONER04){
 					_h["CrossSectionSisCone_R04"]->fill(jet.pT()/GeV); // Figure 2
 				}
@@ -440,7 +470,7 @@ namespace Rivet {
 				FastJets jetsAKTR06FJ = apply<FastJets>(event, "jetsAKTR06FJ");
 				jetsAKTR06FJ.calc(ALICEparticles);
 				Jets jetsAKTR06 = jetsAKTR06FJ.jetsByPt(Cuts::pT >= 20*GeV && Cuts::abseta < 0.3);
-				double rho06 = 0; 
+				double rho06 = 0;
 
 				if(jetsAKTR06.size() != 0) {
 					rho06 = GetRho(ALICEparticles, 0.6, jetsAKTR06[0]);
@@ -500,7 +530,7 @@ namespace Rivet {
 				_h["antiKTR06"]->scaleW(crossSection()/(nanobarn*0.6*_c["sow"]->sumW()));  // 0.3 * 2 = 0.6
 
 				// Figure 4
-				_h["antiKT_R04_ALICE_ATLAS"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW())); 
+				_h["antiKT_R04_ALICE_ATLAS"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
 				_h["antiKT_R06_ALICE_ATLAS"]->scaleW(crossSection()/(nanobarn*0.6*_c["sow"]->sumW()));
 
 				// Figure 5
@@ -524,16 +554,16 @@ namespace Rivet {
 				_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->scaleW(1/_c["sow6080"]->sumW());
 
 				// Figure 13
-				_h["pTSpectraR04_Eta05_2030_0to1"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_3040_0to1"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_4060_0to1"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_6080_0to1"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_2030_0to1"]->scaleW(1./_c["sow2030Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to1"]->scaleW(1./_c["sow3040Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to1"]->scaleW(1./_c["sow4060Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to1"]->scaleW(1./_c["sow6080Frag"]->sumW());
 
 				// Figure 14
-				_h["pTSpectraR04_Eta05_2030_0to6"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_2030_0to6"]->scaleW(1./_c["sow2030Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(1./_c["sow3040Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(1./_c["sow4060Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(1./_c["sow6080Frag"]->sumW());
 
 				// Figure A.1
 				_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
@@ -548,16 +578,16 @@ namespace Rivet {
 				_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow6080"]->sumW());
 
 				// Figure A.7
-				_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->scaleW(1./_c["sow2030FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->scaleW(1./_c["sow3040FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->scaleW(1./_c["sow4060FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->scaleW(1./_c["sow6080FragWOUE"]->sumW());
 
 				// Figure A.8
-				_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
-				_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
+				_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->scaleW(1./_c["sow2030FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->scaleW(1./_c["sow3040FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->scaleW(1./_c["sow4060FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->scaleW(1./_c["sow6080FragWOUE"]->sumW());
 
 			}
 
