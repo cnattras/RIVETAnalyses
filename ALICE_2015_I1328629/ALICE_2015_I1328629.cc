@@ -83,19 +83,35 @@ namespace Rivet {
 				return rho;
 			}
 
+                        void FillUEDist(Particles eventParticles, double jetR, Jet leadingJet, Histo1DPtr HistoUEPt, Histo1DPtr HistoUEZ, Histo1DPtr HistoUEXi)
+			{
+				double UEphiPlus = mapAngle0To2Pi(leadingJet.phi() + M_PI/2.);
+				double UEphiMinus = mapAngle0To2Pi(leadingJet.phi() - M_PI/2.);
+				double UEeta = leadingJet.eta();
+
+				for(const Particle& p : eventParticles)
+				{
+					double DeltaRPlus = deltaR(p.eta(), p.phi(), UEeta, UEphiPlus);
+					double DeltaRMinus = deltaR(p.eta(), p.phi(), UEeta, UEphiMinus);
+                                        if(DeltaRPlus > jetR && DeltaRMinus > jetR) continue;
+
+                                        HistoUEPt->fill(p.pT()/GeV);
+                                        HistoUEZ->fill(p.pT()/leadingJet.pT());
+                                        HistoUEXi->fill(log(leadingJet.pT()/p.pT()));
+				}
+
+			}
+
 			double GetJetPtCorr(Jet jet, double rho)
 			{
 				return jet.pT()/GeV - (rho*jet.pseudojet().area());
 			}
 
-                        void FillFragmentation(Jet jet, Histo1DPtr HistoZ, Histo1DPtr HistoXi, CounterPtr c)
+                        void Subtract(Histo1DPtr Histo, Histo1DPtr hSub)
                         {
-                                c->fill();
-                                for(auto p : jet.particles())
-                                {
-                                        HistoZ->fill(p.pT()/jet.pT());
-                                        HistoXi->fill(log(jet.pT()/p.pT()));
-                                }
+                                const string path = Histo->path();
+                                *Histo = YODA::subtract(*Histo, *hSub);
+                                Histo->setPath(path);
                         }
 
 			/// Book histograms and initialise projections before the run
@@ -146,18 +162,10 @@ namespace Rivet {
 				book(_c["sow3040"], "sow3040");
 				book(_c["sow4060"], "sow4060");
 				book(_c["sow6080"], "sow6080");
-
-                                //Jet counters for fragmentation function normalization (Figures 13 and 14)
-                                book(_c["sow2030Frag"], "sow2030Frag");
-				book(_c["sow3040Frag"], "sow3040Frag");
-				book(_c["sow4060Frag"], "sow4060Frag");
-				book(_c["sow6080Frag"], "sow6080Frag");
-
-                                //Jet counters for fragmentation function normalization (Figures A.7 and A.8)
-                                book(_c["sow2030FragWOUE"], "sow2030FragWOUE");
-				book(_c["sow3040FragWOUE"], "sow3040FragWOUE");
-				book(_c["sow4060FragWOUE"], "sow4060FragWOUE");
-				book(_c["sow6080FragWOUE"], "sow6080FragWOUE");
+                                book(_c["sow2030UESub"], "sow2030UESub");
+				book(_c["sow3040UESub"], "sow3040UESub");
+				book(_c["sow4060UESub"], "sow4060UESub");
+				book(_c["sow6080UESub"], "sow6080UESub");
 
 				// Creates histograms
 				book(_h["CrossSectionAntikT_R04"], 1, 1, 1);  // Figure 2 Anti-kT
@@ -219,22 +227,67 @@ namespace Rivet {
 				book(_p["avgpT_R06_Eta03"], 32, 1, 1);
 
 				// Figure 12
-				book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], 33, 1, 1);
-				book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], 34, 1, 1);
-				book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], 35, 1, 1);
-				book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], 36, 1, 1);
+                                string refnameFig12_33 = mkAxisCode(33, 1, 1);
+				const Scatter2D& refdataFig12_33 = refData(refnameFig12_33);
+                                book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], refnameFig12_33, refdataFig12_33);
+                                book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC_UE"], refnameFig12_33 + "_UE", refdataFig12_33);
+
+                                string refnameFig12_34 = mkAxisCode(34, 1, 1);
+				const Scatter2D& refdataFig12_34 = refData(refnameFig12_34);
+                                book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], refnameFig12_34, refdataFig12_34);
+                                book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC_UE"], refnameFig12_34 + "_UE", refdataFig12_34);
+
+                                string refnameFig12_35 = mkAxisCode(35, 1, 1);
+				const Scatter2D& refdataFig12_35 = refData(refnameFig12_35);
+                                book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], refnameFig12_35, refdataFig12_35);
+                                book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC_UE"], refnameFig12_35 + "_UE", refdataFig12_35);
+
+                                string refnameFig12_36 = mkAxisCode(36, 1, 1);
+				const Scatter2D& refdataFig12_36 = refData(refnameFig12_36);
+                                book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], refnameFig12_36, refdataFig12_36);
+                                book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC_UE"], refnameFig12_36 + "_UE", refdataFig12_36);
 
 				// Figure 13
-				book(_h["pTSpectraR04_Eta05_2030_0to1"], 37, 1, 1);
-				book(_h["pTSpectraR04_Eta05_3040_0to1"], 38, 1, 1);
-				book(_h["pTSpectraR04_Eta05_4060_0to1"], 39, 1, 1);
-				book(_h["pTSpectraR04_Eta05_6080_0to1"], 40, 1, 1);
+                                string refnameFig13_37 = mkAxisCode(37, 1, 1);
+				const Scatter2D& refdataFig13_37 = refData(refnameFig13_37);
+				book(_h["pTSpectraR04_Eta05_2030_0to1"], refnameFig13_37, refdataFig13_37);
+                                book(_h["pTSpectraR04_Eta05_2030_0to1_UE"], refnameFig13_37 + "_UE", refdataFig13_37);
+
+                                string refnameFig13_38 = mkAxisCode(38, 1, 1);
+				const Scatter2D& refdataFig13_38 = refData(refnameFig13_38);
+				book(_h["pTSpectraR04_Eta05_3040_0to1"], refnameFig13_38, refdataFig13_38);
+                                book(_h["pTSpectraR04_Eta05_3040_0to1_UE"], refnameFig13_38 + "_UE", refdataFig13_38);
+
+                                string refnameFig13_39 = mkAxisCode(39, 1, 1);
+				const Scatter2D& refdataFig13_39 = refData(refnameFig13_39);
+				book(_h["pTSpectraR04_Eta05_4060_0to1"], refnameFig13_39, refdataFig13_39);
+                                book(_h["pTSpectraR04_Eta05_4060_0to1_UE"], refnameFig13_39 + "_UE", refdataFig13_39);
+
+                                string refnameFig13_40 = mkAxisCode(40, 1, 1);
+				const Scatter2D& refdataFig13_40 = refData(refnameFig13_40);
+				book(_h["pTSpectraR04_Eta05_6080_0to1"], refnameFig13_40, refdataFig13_40);
+                                book(_h["pTSpectraR04_Eta05_6080_0to1_UE"], refnameFig13_40 + "_UE", refdataFig13_40);
 
 				// Figure 14
-				book(_h["pTSpectraR04_Eta05_2030_0to6"], 41, 1, 1);
-				book(_h["pTSpectraR04_Eta05_3040_0to6"], 42, 1, 1);
-				book(_h["pTSpectraR04_Eta05_4060_0to6"], 43, 1, 1);
-				book(_h["pTSpectraR04_Eta05_6080_0to6"], 44, 1, 1);
+                                string refnameFig14_41 = mkAxisCode(41, 1, 1);
+				const Scatter2D& refdataFig14_41 = refData(refnameFig14_41);
+				book(_h["pTSpectraR04_Eta05_2030_0to6"], refnameFig14_41, refdataFig14_41);
+                                book(_h["pTSpectraR04_Eta05_2030_0to6_UE"], refnameFig14_41 + "_UE", refdataFig14_41);
+
+                                string refnameFig14_42 = mkAxisCode(42, 1, 1);
+				const Scatter2D& refdataFig14_42 = refData(refnameFig14_42);
+				book(_h["pTSpectraR04_Eta05_3040_0to6"], refnameFig14_42, refdataFig14_42);
+                                book(_h["pTSpectraR04_Eta05_3040_0to6_UE"], refnameFig14_42 + "_UE", refdataFig14_42);
+
+                                string refnameFig14_43 = mkAxisCode(43, 1, 1);
+				const Scatter2D& refdataFig14_43 = refData(refnameFig14_43);
+				book(_h["pTSpectraR04_Eta05_4060_0to6"], refnameFig14_43, refdataFig14_43);
+                                book(_h["pTSpectraR04_Eta05_4060_0to6_UE"], refnameFig14_43 + "_UE", refdataFig14_43);
+
+                                string refnameFig14_44 = mkAxisCode(44, 1, 1);
+				const Scatter2D& refdataFig14_44 = refData(refnameFig14_44);
+				book(_h["pTSpectraR04_Eta05_6080_0to6"], refnameFig14_44, refdataFig14_44);
+                                book(_h["pTSpectraR04_Eta05_6080_0to6_UE"], refnameFig14_44 + "_UE", refdataFig14_44);
 
 				// Figure A.1 - Like Figure 5
 				book(_h["ALICEvsMC_R04_Eta05_WithoutUESub"], 45, 1, 1);
@@ -280,6 +333,7 @@ namespace Rivet {
 				book(_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], 71, 1, 1);
 				book(_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], 72, 1, 1);
 				book(_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"], 73, 1, 1);
+
 
 			}
 
@@ -365,49 +419,81 @@ namespace Rivet {
 					_p["mean_ALICEvsMC_R04_Eta_05_WithoutUESub"]->fill(jetsAKTR04[0].pT()/GeV, jetsAKTR04[0].particles().size()); // Figure A.2
 					FillRadius80PercPt(_p["avgpT_R04_Eta05"], jetsAKTR04[0]); // Figure 11
 
-					if ((GetJetPtCorr(jetsAKTR04[0], rho04) >= 20*GeV) && (GetJetPtCorr(jetsAKTR04[0], rho04) < 30*GeV)) {
+                                        if (inRange(GetJetPtCorr(jetsAKTR04[0], rho04), 20., 30.)) {
+                                                _c["sow2030UESub"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_2030"], jetsAKTR04[0]); // Figure 9
+                                                FillUEDist(ALICEparticles, 0.4, jetsAKTR04[0], _h["pTSpectraR04_Eta05_2030_ALICEvsMC_UE"], _h["pTSpectraR04_Eta05_2030_0to1_UE"], _h["pTSpectraR04_Eta05_2030_0to6_UE"]);
+						for (auto p : jetsAKTR04[0].particles()) {
+							_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+                                                        _h["pTSpectraR04_Eta05_2030_0to1"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure 13
+                                                        _h["pTSpectraR04_Eta05_2030_0to6"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure 14
+						}
 					}
-					if ((GetJetPtCorr(jetsAKTR04[0], rho04) >= 30*GeV) && (GetJetPtCorr(jetsAKTR04[0], rho04) < 40*GeV)) {
+                                        else if(inRange(GetJetPtCorr(jetsAKTR04[0], rho04), 30., 40.)) {
+                                                _c["sow3040UESub"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_3040"], jetsAKTR04[0]); // Figure 9
+                                                FillUEDist(ALICEparticles, 0.4, jetsAKTR04[0], _h["pTSpectraR04_Eta05_3040_ALICEvsMC_UE"], _h["pTSpectraR04_Eta05_3040_0to1_UE"], _h["pTSpectraR04_Eta05_3040_0to6_UE"]);
+						for (auto p : jetsAKTR04[0].particles()) {
+							_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+                                                        _h["pTSpectraR04_Eta05_3040_0to1"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure 13
+                                                        _h["pTSpectraR04_Eta05_3040_0to6"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure 14
+						}
 					}
-					if ((GetJetPtCorr(jetsAKTR04[0], rho04) >= 40*GeV) && (GetJetPtCorr(jetsAKTR04[0], rho04) < 60*GeV)) {
+                                        else if(inRange(GetJetPtCorr(jetsAKTR04[0], rho04), 40., 60.)) {
+                                                _c["sow4060UESub"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_4060"], jetsAKTR04[0]); // Figure 9
+                                                FillUEDist(ALICEparticles, 0.4, jetsAKTR04[0], _h["pTSpectraR04_Eta05_4060_ALICEvsMC_UE"], _h["pTSpectraR04_Eta05_4060_0to1_UE"], _h["pTSpectraR04_Eta05_4060_0to6_UE"]);
+						for (auto p : jetsAKTR04[0].particles()) {
+							_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+                                                        _h["pTSpectraR04_Eta05_4060_0to1"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure 13
+                                                        _h["pTSpectraR04_Eta05_4060_0to6"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure 14
+						}
 					}
-					if ((GetJetPtCorr(jetsAKTR04[0], rho04) >= 60*GeV) && (GetJetPtCorr(jetsAKTR04[0], rho04) < 80*GeV)) {
+                                        else if(inRange(GetJetPtCorr(jetsAKTR04[0], rho04), 60., 80.)) {
+                                                _c["sow6080UESub"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_6080"], jetsAKTR04[0]); // Figure 9
+                                                FillUEDist(ALICEparticles, 0.4, jetsAKTR04[0], _h["pTSpectraR04_Eta05_6080_ALICEvsMC_UE"], _h["pTSpectraR04_Eta05_6080_0to1_UE"], _h["pTSpectraR04_Eta05_6080_0to6_UE"]);
+						for (auto p : jetsAKTR04[0].particles()) {
+							_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
+                                                        _h["pTSpectraR04_Eta05_6080_0to1"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure 13
+                                                        _h["pTSpectraR04_Eta05_6080_0to6"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure 14
+						}
 					}
 
-					if(jetsAKTR04[0].pT() >= 20*GeV && jetsAKTR04[0].pT() < 30*GeV) {
+                                        if(inRange(jetsAKTR04[0].pT(), 20., 30.)) {
 						_c["sow2030"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_2030_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
-							_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
 							_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
+                                                        _h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure A.7
+                                                        _h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure A.8
 						}
 					}
-					if(jetsAKTR04[0].pT() >= 30*GeV && jetsAKTR04[0].pT() < 40*GeV) {
+                                        else if(inRange(jetsAKTR04[0].pT(), 30., 40.)) {
 						_c["sow3040"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_3040_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
-							_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
 							_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
+                                                        _h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure A.7
+                                                        _h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure A.8
 						}
 					}
-					if(jetsAKTR04[0].pT() >= 40*GeV && jetsAKTR04[0].pT() < 60*GeV) {
+                                        else if(inRange(jetsAKTR04[0].pT(), 40., 60.)) {
 						_c["sow4060"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_4060_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
-							_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
 							_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
+                                                        _h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure A.7
+                                                        _h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure A.8
 						}
 					}
-					if(jetsAKTR04[0].pT() >= 60*GeV && jetsAKTR04[0].pT() < 80*GeV) {
+                                        else if(inRange(jetsAKTR04[0].pT(), 60., 80.)) {
 						_c["sow6080"]->fill();
 						FillRadialDistribution(_p["pTR04_Eta05_6080_WithoutUESub"], jetsAKTR04[0]); // Figure A.4
 						for (auto p : jetsAKTR04[0].particles()) {
-							_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->fill(p.pT()/GeV); // Figure 12
 							_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"]->fill(p.pT()/GeV); // Figure A.6
+                                                        _h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->fill(p.pT()/jetsAKTR04[0].pT()); // Figure A.7
+                                                        _h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->fill(log(jetsAKTR04[0].pT()/p.pT())); // Figure A.8
 						}
 					}
 				}
@@ -418,31 +504,15 @@ namespace Rivet {
 					_h["antiKT_R04_ALICE_ATLAS"]->fill(GetJetPtCorr(jet, rho04)); // Figure 4
 					_h["ALICEvsMC_R04_Eta05"]->fill(GetJetPtCorr(jet, rho04)); // Figure 5
 					_h["Ratio04_Denominator"]->fill(GetJetPtCorr(jet, rho04)); // Figure 6
-
-                                        //Filling fragmentation functions
-                                        if(inRange(GetJetPtCorr(jet, rho04), 20., 30.))
-                                        {
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_2030_0to1"], _h["pTSpectraR04_Eta05_2030_0to6"], _c["sow2030Frag"]);
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"], _c["sow2030FragWOUE"]);
-                                        }
-                                        else if(inRange(GetJetPtCorr(jet, rho04), 30., 40.))
-                                        {
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_3040_0to1"], _h["pTSpectraR04_Eta05_3040_0to6"], _c["sow3040Frag"]);
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"], _c["sow3040FragWOUE"]);
-                                        }
-                                        else if(inRange(GetJetPtCorr(jet, rho04), 40., 60.))
-                                        {
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_4060_0to1"], _h["pTSpectraR04_Eta05_4060_0to6"], _c["sow4060Frag"]);
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"], _c["sow4060FragWOUE"]);
-                                        }
-                                        else if(inRange(GetJetPtCorr(jet, rho04), 60., 80.))
-                                        {
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_6080_0to1"], _h["pTSpectraR04_Eta05_6080_0to6"], _c["sow6080Frag"]);
-                                                FillFragmentation(jet, _h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"], _h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"], _c["sow6080FragWOUE"]);
-                                        }
-
 					_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.1
-
+					_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.7
+					_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+					_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+					_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
+					_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->fill(GetJetPtCorr(jet, rho04)); // Figure A.8
 				}
 
 				// KT alg. - Resolution = 0.4, Eta = 0.5 (From 0.9 - 0.4)
@@ -462,8 +532,14 @@ namespace Rivet {
 				FastJets jetsCONER04FJ = apply<FastJets>(event, "jetsCONER04FJ");
 				jetsCONER04FJ.calc(ALICEparticles);
 				Jets jetsCONER04 = jetsCONER04FJ.jetsByPt(Cuts::pT >= 20.*GeV && Cuts::abseta < 0.5);
+                                double rho04CONE = 0;
+
+                                if (jetsCONER04.size() != 0) {
+					rho04CONE = GetRho(ALICEparticles, 0.4, jetsCONER04[0]);
+				}
+
 				for(auto jet : jetsCONER04){
-					_h["CrossSectionSisCone_R04"]->fill(jet.pT()/GeV); // Figure 2
+					_h["CrossSectionSisCone_R04"]->fill(jet.pT()/GeV - (rho04CONE*M_PI*0.4*0.4)); // Figure 2
 				}
 
 				// Anti-KT alg. - Resolution = 0.6, Eta = 0.3 (From 0.9 - 0.6)
@@ -548,22 +624,50 @@ namespace Rivet {
 				// Figure 7, 8, 9, 10, & 11 do not need to be normalized
 
 				// Figure 12
-				_h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->scaleW(1/_c["sow2030"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->scaleW(1/_c["sow3040"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->scaleW(1/_c["sow4060"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->scaleW(1/_c["sow6080"]->sumW());
+                                _h["pTSpectraR04_Eta05_2030_ALICEvsMC"]->scaleW(1/_c["sow2030UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_ALICEvsMC"]->scaleW(1/_c["sow3040UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_ALICEvsMC"]->scaleW(1/_c["sow4060UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_ALICEvsMC"]->scaleW(1/_c["sow6080UESub"]->sumW());
+                                // Divided by 2 because there are two cones for UE calculation
+                                _h["pTSpectraR04_Eta05_2030_ALICEvsMC_UE"]->scaleW(1./(2.*_c["sow2030UESub"]->sumW()));
+                                _h["pTSpectraR04_Eta05_3040_ALICEvsMC_UE"]->scaleW(1./(2.*_c["sow3040UESub"]->sumW()));
+                                _h["pTSpectraR04_Eta05_4060_ALICEvsMC_UE"]->scaleW(1./(2.*_c["sow4060UESub"]->sumW()));
+                                _h["pTSpectraR04_Eta05_6080_ALICEvsMC_UE"]->scaleW(1./(2.*_c["sow6080UESub"]->sumW()));
+                                Subtract(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], _h["pTSpectraR04_Eta05_2030_ALICEvsMC_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], _h["pTSpectraR04_Eta05_3040_ALICEvsMC_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], _h["pTSpectraR04_Eta05_4060_ALICEvsMC_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], _h["pTSpectraR04_Eta05_6080_ALICEvsMC_UE"]);
+
 
 				// Figure 13
-				_h["pTSpectraR04_Eta05_2030_0to1"]->scaleW(1./_c["sow2030Frag"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_0to1"]->scaleW(1./_c["sow3040Frag"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_0to1"]->scaleW(1./_c["sow4060Frag"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_0to1"]->scaleW(1./_c["sow6080Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_0to1"]->scaleW(1./_c["sow2030UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to1"]->scaleW(1./_c["sow3040UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to1"]->scaleW(1./_c["sow4060UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to1"]->scaleW(1./_c["sow6080UESub"]->sumW());
+                                // Divided by 2 because there are two cones for UE calculation
+                                _h["pTSpectraR04_Eta05_2030_0to1_UE"]->scaleW(1./(2.*_c["sow2030UESub"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_0to1_UE"]->scaleW(1./(2.*_c["sow3040UESub"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_0to1_UE"]->scaleW(1./(2.*_c["sow4060UESub"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_0to1_UE"]->scaleW(1./(2.*_c["sow6080UESub"]->sumW()));
+                                Subtract(_h["pTSpectraR04_Eta05_2030_0to1"], _h["pTSpectraR04_Eta05_2030_0to1_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_3040_0to1"], _h["pTSpectraR04_Eta05_3040_0to1_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_4060_0to1"], _h["pTSpectraR04_Eta05_4060_0to1_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_6080_0to1"], _h["pTSpectraR04_Eta05_6080_0to1_UE"]);
 
 				// Figure 14
-				_h["pTSpectraR04_Eta05_2030_0to6"]->scaleW(1./_c["sow2030Frag"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(1./_c["sow3040Frag"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(1./_c["sow4060Frag"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(1./_c["sow6080Frag"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_0to6"]->scaleW(1./_c["sow2030UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to6"]->scaleW(1./_c["sow3040UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to6"]->scaleW(1./_c["sow4060UESub"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to6"]->scaleW(1./_c["sow6080UESub"]->sumW());
+                                // Divided by 2 because there are two cones for UE calculation
+                                _h["pTSpectraR04_Eta05_2030_0to6_UE"]->scaleW(1./(2.*_c["sow2030UESub"]->sumW()));
+				_h["pTSpectraR04_Eta05_3040_0to6_UE"]->scaleW(1./(2.*_c["sow3040UESub"]->sumW()));
+				_h["pTSpectraR04_Eta05_4060_0to6_UE"]->scaleW(1./(2.*_c["sow4060UESub"]->sumW()));
+				_h["pTSpectraR04_Eta05_6080_0to6_UE"]->scaleW(1./(2.*_c["sow6080UESub"]->sumW()));
+                                Subtract(_h["pTSpectraR04_Eta05_2030_0to6"], _h["pTSpectraR04_Eta05_2030_0to6_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_3040_0to6"], _h["pTSpectraR04_Eta05_3040_0to6_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_4060_0to6"], _h["pTSpectraR04_Eta05_4060_0to6_UE"]);
+                                Subtract(_h["pTSpectraR04_Eta05_6080_0to6"], _h["pTSpectraR04_Eta05_6080_0to6_UE"]);
 
 				// Figure A.1
 				_h["ALICEvsMC_R04_Eta05_WithoutUESub"]->scaleW(crossSection()/(nanobarn*_c["sow"]->sumW()));
@@ -572,22 +676,22 @@ namespace Rivet {
 				// Figures A.2, A.3, A.4, & A.5 do not need to be normalized
 
 				// Figure A.6
-				_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow2030"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow3040"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow4060"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"]->scaleW(1/_c["sow6080"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_ALICEvsMC_WithoutUESub"]->scaleW(1./_c["sow2030"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_ALICEvsMC_WithoutUESub"]->scaleW(1./_c["sow3040"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_ALICEvsMC_WithoutUESub"]->scaleW(1./_c["sow4060"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_ALICEvsMC_WithoutUESub"]->scaleW(1./_c["sow6080"]->sumW());
 
 				// Figure A.7
-				_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->scaleW(1./_c["sow2030FragWOUE"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->scaleW(1./_c["sow3040FragWOUE"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->scaleW(1./_c["sow4060FragWOUE"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->scaleW(1./_c["sow6080FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_0to1_WithoutUESub"]->scaleW(1./_c["sow2030"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to1_WithoutUESub"]->scaleW(1./_c["sow3040"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to1_WithoutUESub"]->scaleW(1./_c["sow4060"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to1_WithoutUESub"]->scaleW(1./_c["sow6080"]->sumW());
 
 				// Figure A.8
-				_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->scaleW(1./_c["sow2030FragWOUE"]->sumW());
-				_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->scaleW(1./_c["sow3040FragWOUE"]->sumW());
-				_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->scaleW(1./_c["sow4060FragWOUE"]->sumW());
-				_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->scaleW(1./_c["sow6080FragWOUE"]->sumW());
+				_h["pTSpectraR04_Eta05_2030_0to6_WithoutUESub"]->scaleW(1./_c["sow2030"]->sumW());
+				_h["pTSpectraR04_Eta05_3040_0to6_WithoutUESub"]->scaleW(1./_c["sow3040"]->sumW());
+				_h["pTSpectraR04_Eta05_4060_0to6_WithoutUESub"]->scaleW(1./_c["sow4060"]->sumW());
+				_h["pTSpectraR04_Eta05_6080_0to6_WithoutUESub"]->scaleW(1./_c["sow6080"]->sumW());
 
 			}
 
