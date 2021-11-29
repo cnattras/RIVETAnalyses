@@ -10,35 +10,35 @@ END PLOT
 BEGIN PLOT /ALICE_2020_I1755387/d02-x01-y01
 Title=PP Full Jet $\sigma$ at $\sqrt{5.02}$ TeV for R = 0.2
 XLabel=$p_{\rm T}$ jet [GeV/c]
-YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ [mb (GeV/c)^{-1}]
+YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ $[mb (GeV/c)^{-1}]$
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ALICE_2020_I1755387/d03-x01-y01
 Title=PP Full Jet $\sigma$ at $\sqrt{5.02}$ TeV for R = 0.3
 XLabel=$p_{\rm T}$ jet [GeV/c]
-YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ [mb (GeV/c)^{-1}]
+YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ $[mb (GeV/c)^{-1}]$
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ALICE_2020_I1755387/d04-x01-y01
 Title=PP Full Jet $\sigma$ at $\sqrt{5.02}$ TeV for R = 0.4
 XLabel=$p_{\rm T}$ jet [GeV/c]
-YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ [mb (GeV/c)^{-1}]
+YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ $[mb (GeV/c)^{-1}]$
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ALICE_2020_I1755387/d05-x01-y01
 Title=PP Full Jet $\sigma$ at $\sqrt{5.02}$ TeV for R = 0.5
 XLabel=$p_{\rm T}$ jet [GeV/c]
-YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ [mb (GeV/c)^{-1}]
+YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ $[mb (GeV/c)^{-1}]$
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 BEGIN PLOT /ALICE_2020_I1755387/d06-x01-y01
 Title=PP Full Jet $\sigma$ at $\sqrt{5.02}$ TeV for R = 0.6
 XLabel=$p_{\rm T}$ jet [GeV/c]
-YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ [mb (GeV/c)^{-1}]
+YLabel=$\frac{d^{2}\sigma}{dp_{\rm T, jet} d\eta_{\rm jet}}$ $[mb (GeV/c)^{-1}]$
 # + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
