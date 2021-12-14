@@ -71,7 +71,7 @@ namespace Rivet {
 
       // Initialise and register projections
 	//const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::abscharge > 0);
-        const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.7 && ((Cuts::abscharge > 0 && Cuts::pT > 0.15*GeV) || (Cuts::abscharge == 0 && Cuts::pT > 0.3*GeV)));
+        const ALICE::PrimaryParticles aprim((Cuts::abscharge > 0 && Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9) || (Cuts::abscharge == 0 && Cuts::pT > 0.3*GeV && Cuts::abseta < 0.7));
 	declare(aprim, "aprim");
 
       // The basic final-state projection:
