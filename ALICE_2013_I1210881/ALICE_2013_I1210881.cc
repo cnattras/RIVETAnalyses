@@ -25,7 +25,7 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 0.9);
+      const FinalState fs((Cuts::abscharge > 0 && Cuts::pT > 0.15*GeV && Cuts::abseta < 0.9) || (Cuts::abscharge == 0 && Cuts::pT > 0.3*GeV && Cuts::abseta < 0.7));
 
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
