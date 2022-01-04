@@ -493,11 +493,6 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-//
-      
-
-      //if (!(dAu200_available && pp_available)) return;
-//
 
       //****Scale Histos****
 
@@ -537,79 +532,23 @@ namespace Rivet {
       hPP_Yields["P_barPP"]->scaleW(1./sow["sow_pp"]->sumW());
 
 
-/*
-      const double s = 1./sow->sumW();
-      hdAu_Yields["PiplusC20"]->scaleW(s);
-      hdAu_Yields["PiminusC20"]->scaleW(s);
-      hdAu_Yields["KplusC20"]->scaleW(s);
-      hdAu_Yields["KminusC20"]->scaleW(s);
-      hdAu_Yields["PC20"]->scaleW(s);
-      hdAu_Yields["P_barC20"]->scaleW(s);
 
-      hdAu_Yields["PiplusC40"]->scaleW(s);
-      hdAu_Yields["PiminusC40"]->scaleW(s);
-      hdAu_Yields["KplusC40"]->scaleW(s);
-      hdAu_Yields["KminusC40"]->scaleW(s);
-      hdAu_Yields["PC40"]->scaleW(s);
-      hdAu_Yields["P_barC40"]->scaleW(s);
-
-      hdAu_Yields["PiplusC60"]->scaleW(s);
-      hdAu_Yields["PiminusC60"]->scaleW(s);
-      hdAu_Yields["KplusC60"]->scaleW(s);
-      hdAu_Yields["KminusC60"]->scaleW(s);
-      hdAu_Yields["PC60"]->scaleW(s);
-      hdAu_Yields["P_barC60"]->scaleW(s);
-
-      hdAu_Yields["PiplusC88"]->scaleW(s);
-      hdAu_Yields["PiminusC88"]->scaleW(s);
-      hdAu_Yields["KplusC88"]->scaleW(s);
-      hdAu_Yields["KminusC88"]->scaleW(s);
-      hdAu_Yields["PC88"]->scaleW(s);
-      hdAu_Yields["P_barC88"]->scaleW(s);
-
-      hPP_Yields["PiplusPP"]->scaleW(s);
-      hPP_Yields["PiminusPP"]->scaleW(s);
-      hPP_Yields["KplusPP"]->scaleW(s);
-      hPP_Yields["KminusPP"]->scaleW(s);
-      hPP_Yields["PPP"]->scaleW(s);
-      hPP_Yields["P_barPP"]->scaleW(s);
-
-*/
     }
 
     ///@}
 
+    /// @name Histograms
+    ///@{
     map<string, Histo1DPtr> hdAu_Yields;
     map<string, Histo1DPtr> hPP_Yields;
-
-/*  map<string, Histo1DPtr> hdAu_Yields;
-    map<string, Histo1DPtr> hdAu_Yields;
-    map<string, Histo1DPtr> hdAu_Yields;
-    map<string, Histo1DPtr> hdAu_Yields;
-    map<string, Histo1DPtr> hdAu_Yields;
-    map<string, Histo1DPtr> hdAu_Yields;
-
-    map<string, Histo1DPtr> hPP_Yields;
-    map<string, Histo1DPtr> hPP_Yields;
-    map<string, Histo1DPtr> hPP_Yields;
-    map<string, Histo1DPtr> hPP_Yields;
-    map<string, Histo1DPtr> hPP_Yields;
-    map<string, Histo1DPtr> hPP_Yields;
-*/
 
     map<string, CounterPtr> sow;
     string beamOpt;
     enum CollisionSystem { pp, dAu200 };
     CollisionSystem collSys;
 
-    /// @name Histograms
-    ///@{
-    //Histo1DPtr hPionPlusPt;
-    //Histo1DPtr hPionMinusPt;
-    //CounterPtr sow;
     ///@}
-
-
+    
   };
 
 
