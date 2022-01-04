@@ -425,8 +425,8 @@ namespace Rivet {
         for (const Particle& p : fsParticles) {
 
           //for filling pT bin center
-          double partPt = p.pT()/GeV; 
-          double pt_weight = 1./(2.*M_PI); 
+          double partPt = p.pT()/GeV;
+          double pt_weight = 1./(2.*M_PI);
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_18_kaon_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
@@ -481,7 +481,7 @@ namespace Rivet {
               if (c > 40.0) _h["Figure_18_proton_8"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
           }
-       
+
         }
       }//closing bracket for if beam is dAu @ 200 GeV
 
@@ -493,8 +493,8 @@ namespace Rivet {
         for (const Particle& p : fsParticles) {
 
           //for filling pT bin center
-          double partPt = p.pT()/GeV; 
-          double pt_weight = 1./(2.*M_PI); 
+          double partPt = p.pT()/GeV;
+          double pt_weight = 1./(2.*M_PI);
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_19_kaon_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
@@ -578,7 +578,7 @@ namespace Rivet {
               if (c > 50.0 && c < 60.0) _h["Figure_19_proton_16"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
               if (c > 60.0 && c < 70.0) _h["Figure_19_proton_17"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
               if (c > 70.0 && c < 80.0) _h["Figure_19_proton_18"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
-            } 
+            }
 
           }
 
@@ -593,8 +593,8 @@ namespace Rivet {
         for (const Particle& p : fsParticles) {
 
           //for filling pT bin center
-          double partPt = p.pT()/GeV; 
-          double pt_weight = 1./(2.*M_PI); 
+          double partPt = p.pT()/GeV;
+          double pt_weight = 1./(2.*M_PI);
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_20_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
@@ -632,14 +632,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      //normalize(_h["XXXX"]); // normalize to unity
-      //normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in fb (no cuts)
-      //scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
-      //_h["AAAA"]->scaleW(1./_c["CCCC"]->sumW());
-
-      if (collSys == dAu200)
-      {
         _h["Figure_18_kaon_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
         _h["Figure_18_kaon_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
         _h["Figure_18_kaon_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
@@ -665,60 +658,6 @@ namespace Rivet {
         _h["Figure_18_proton_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
         _h["Figure_18_proton_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
 
-        /*normalize(_h["Figure_18_kaon_1"]);
-        normalize(_h["Figure_18_kaon_2"]);
-        normalize(_h["Figure_18_kaon_3"]);
-        normalize(_h["Figure_18_kaon_4"]);
-        normalize(_h["Figure_18_kaon_5"]);
-        normalize(_h["Figure_18_kaon_6"]);
-        normalize(_h["Figure_18_kaon_7"]);
-        normalize(_h["Figure_18_kaon_8"]);
-        normalize(_h["Figure_18_pion_1"]);
-        normalize(_h["Figure_18_pion_2"]);
-        normalize(_h["Figure_18_pion_3"]);
-        normalize(_h["Figure_18_pion_4"]);
-        normalize(_h["Figure_18_pion_5"]);
-        normalize(_h["Figure_18_pion_6"]);
-        normalize(_h["Figure_18_pion_7"]);
-        normalize(_h["Figure_18_pion_8"]);
-        normalize(_h["Figure_18_proton_1"]);
-        normalize(_h["Figure_18_proton_2"]);
-        normalize(_h["Figure_18_proton_3"]);
-        normalize(_h["Figure_18_proton_4"]);
-        normalize(_h["Figure_18_proton_5"]);
-        normalize(_h["Figure_18_proton_6"]);
-        normalize(_h["Figure_18_proton_7"]);
-        normalize(_h["Figure_18_proton_8"]);
-*/
-
-        scale(_h["Figure_18_kaon_1"], 4.0);
-        scale(_h["Figure_18_kaon_2"], 2.0);
-        scale(_h["Figure_18_kaon_3"], 1.0);
-        scale(_h["Figure_18_kaon_4"], 0.5);
-        scale(_h["Figure_18_kaon_5"], 4.0);
-        scale(_h["Figure_18_kaon_6"], 2.0);
-        scale(_h["Figure_18_kaon_7"], 1.0);
-        scale(_h["Figure_18_kaon_8"], 0.5);
-        scale(_h["Figure_18_pion_1"], 4.0);
-        scale(_h["Figure_18_pion_2"], 2.0);
-        scale(_h["Figure_18_pion_3"], 1.0);
-        scale(_h["Figure_18_pion_4"], 0.5);
-        scale(_h["Figure_18_pion_5"], 4.0);
-        scale(_h["Figure_18_pion_6"], 2.0);
-        scale(_h["Figure_18_pion_7"], 1.0);
-        scale(_h["Figure_18_pion_8"], 0.5);
-        scale(_h["Figure_18_proton_1"], 4.0);
-        scale(_h["Figure_18_proton_2"], 2.0);
-        scale(_h["Figure_18_proton_3"], 1.0);
-        scale(_h["Figure_18_proton_4"], 0.5);
-        scale(_h["Figure_18_proton_5"], 4.0);
-        scale(_h["Figure_18_proton_6"], 2.0);
-        scale(_h["Figure_18_proton_7"], 1.0);
-        scale(_h["Figure_18_proton_8"], 0.5);
-      }
-
-      if (collSys == AuAu62)
-      {
         _h["Figure_19_kaon_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
         _h["Figure_19_kaon_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
         _h["Figure_19_kaon_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
@@ -774,64 +713,7 @@ namespace Rivet {
         _h["Figure_19_proton_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
         _h["Figure_19_proton_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
 
-        /*normalize(_h["Figure_19_kaon_1"]);
-        normalize(_h["Figure_19_kaon_2"]);
-        normalize(_h["Figure_19_kaon_3"]);
-        normalize(_h["Figure_19_kaon_4"]);
-        normalize(_h["Figure_19_kaon_5"]);
-        normalize(_h["Figure_19_kaon_6"]);
-        normalize(_h["Figure_19_kaon_7"]);
-        normalize(_h["Figure_19_kaon_8"]);
-        normalize(_h["Figure_19_kaon_9"]);
-        normalize(_h["Figure_19_kaon_10"]);
-        normalize(_h["Figure_19_kaon_11"]);
-        normalize(_h["Figure_19_kaon_12"]);
-        normalize(_h["Figure_19_kaon_13"]);
-        normalize(_h["Figure_19_kaon_14"]);
-        normalize(_h["Figure_19_kaon_15"]);
-        normalize(_h["Figure_19_kaon_16"]);
-        normalize(_h["Figure_19_kaon_17"]);
-        normalize(_h["Figure_19_kaon_18"]);
-        normalize(_h["Figure_19_pion_1"]);
-        normalize(_h["Figure_19_pion_2"]);
-        normalize(_h["Figure_19_pion_3"]);
-        normalize(_h["Figure_19_pion_4"]);
-        normalize(_h["Figure_19_pion_5"]);
-        normalize(_h["Figure_19_pion_6"]);
-        normalize(_h["Figure_19_pion_7"]);
-        normalize(_h["Figure_19_pion_8"]);
-        normalize(_h["Figure_19_pion_9"]);
-        normalize(_h["Figure_19_pion_10"]);
-        normalize(_h["Figure_19_pion_11"]);
-        normalize(_h["Figure_19_pion_12"]);
-        normalize(_h["Figure_19_pion_13"]);
-        normalize(_h["Figure_19_pion_14"]);
-        normalize(_h["Figure_19_pion_15"]);
-        normalize(_h["Figure_19_pion_16"]);
-        normalize(_h["Figure_19_pion_17"]);
-        normalize(_h["Figure_19_pion_18"]);
-        normalize(_h["Figure_19_proton_1"]);
-        normalize(_h["Figure_19_proton_2"]);
-        normalize(_h["Figure_19_proton_3"]);
-        normalize(_h["Figure_19_proton_4"]);
-        normalize(_h["Figure_19_proton_5"]);
-        normalize(_h["Figure_19_proton_6"]);
-        normalize(_h["Figure_19_proton_7"]);
-        normalize(_h["Figure_19_proton_8"]);
-        normalize(_h["Figure_19_proton_9"]);
-        normalize(_h["Figure_19_proton_10"]);
-        normalize(_h["Figure_19_proton_11"]);
-        normalize(_h["Figure_19_proton_12"]);
-        normalize(_h["Figure_19_proton_13"]);
-        normalize(_h["Figure_19_proton_14"]);
-        normalize(_h["Figure_19_proton_15"]);
-        normalize(_h["Figure_19_proton_16"]);
-        normalize(_h["Figure_19_proton_17"]);
-        normalize(_h["Figure_19_proton_18"]);*/
-      }
 
-      if (collSys == AuAu130)
-      {
         _h["Figure_20_1"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
         _h["Figure_20_2"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
         _h["Figure_20_3"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
@@ -848,23 +730,6 @@ namespace Rivet {
         _h["Figure_20_15"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
         _h["Figure_20_16"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
 
-        /*normalize(_h["Figure_20_1"]);
-        normalize(_h["Figure_20_2"]);
-        normalize(_h["Figure_20_3"]);
-        normalize(_h["Figure_20_4"]);
-        normalize(_h["Figure_20_5"]);
-        normalize(_h["Figure_20_6"]);
-        normalize(_h["Figure_20_7"]);
-        normalize(_h["Figure_20_8"]);
-        normalize(_h["Figure_20_9"]);
-        normalize(_h["Figure_20_10"]);
-        normalize(_h["Figure_20_11"]);
-        normalize(_h["Figure_20_12"]);
-        normalize(_h["Figure_20_13"]);
-        normalize(_h["Figure_20_14"]);
-        normalize(_h["Figure_20_15"]);
-        normalize(_h["Figure_20_16"]);*/
-      }
 
     }
 
