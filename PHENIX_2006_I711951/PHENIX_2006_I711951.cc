@@ -494,54 +494,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 //
-      bool dAu200_available = false;
-      bool pp_available = false;
-
-      for (auto element : hdAu_Yields)
-      {
-        string name = element.second->name();
-        if (name.find("pp") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) pp_available = true;
-          else
-          {
-            pp_available = false;
-            break;
-          }
-        }
-        else if (name.find("C") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) dAu200_available = true;
-          else
-          {
-            dAu200_available = false;
-            break;
-          }
-        }
-      }
-
-      for (auto element : hPP_Yields)
-      {
-        string name = element.second->name();
-        if (name.find("pp") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) pp_available = true;
-          else
-          {
-            pp_available = false;
-            break;
-          }
-        }
-        else if (name.find("C") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) dAu200_available = true;
-          else
-          {
-            dAu200_available = false;
-            break;
-          }
-        }
-      }
+      
 
       //if (!(dAu200_available && pp_available)) return;
 //
