@@ -426,11 +426,11 @@ namespace Rivet {
 
           //for filling pT bin center
           double partPt = p.pT()/GeV;
-          double pt_weight = 1./(2.*M_PI);
+          double OneOver2pi = 1./(2.*M_PI);
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_18_kaon_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
               if (c < 20.0) _h["Figure_18_kaon_1"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
@@ -448,7 +448,7 @@ namespace Rivet {
            }
 
           if(getDeltaPt(*_h["Figure_18_pion_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
               if (c < 20.0) _h["Figure_18_pion_1"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
@@ -466,7 +466,7 @@ namespace Rivet {
            }
 
           if(getDeltaPt(*_h["Figure_18_proton_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
               if (c < 20.0) _h["Figure_18_proton_1"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
@@ -494,11 +494,11 @@ namespace Rivet {
 
           //for filling pT bin center
           double partPt = p.pT()/GeV;
-          double pt_weight = 1./(2.*M_PI);
+          double OneOver2pi = 1./(2.*M_PI);
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_19_kaon_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
               if (c < 5.0) _h["Figure_19_kaon_1"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
@@ -527,7 +527,7 @@ namespace Rivet {
           }
 
           if(getDeltaPt(*_h["Figure_19_pion_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
               if (c < 5.0) _h["Figure_19_pion_1"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
@@ -555,7 +555,7 @@ namespace Rivet {
           }
 
           if(getDeltaPt(*_h["Figure_19_proton_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
               if (c < 5.0) _h["Figure_19_proton_1"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
@@ -594,11 +594,11 @@ namespace Rivet {
 
           //for filling pT bin center
           double partPt = p.pT()/GeV;
-          double pt_weight = 1./(2.*M_PI);
+          double OneOver2pi = 1./(2.*M_PI);
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_20_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            pt_weight /= deltaPt; //divide by the ben center (the above should ALWAYS return true)
+            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
             if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
               if (c < 6.0) _h["Figure_20_1"]->fill(p.pT()/GeV, pt_weight); // 0-6% centrality
