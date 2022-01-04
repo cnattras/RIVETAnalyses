@@ -379,31 +379,28 @@ namespace Rivet {
     void finalize() {
 
 
-		_h["xsec_piplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_pi"]->sumW());
-                _h["xsec_piminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_pi"]->sumW());
-                _h["xsec_kplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_k"]->sumW());
-                _h["xsec_kminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_k"]->sumW());
-                _h["xsec_p_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_p_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_pbar_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_pbar_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_p_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_p_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_pbar_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
-                _h["xsec_pbar_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200_p"]->sumW());
+		_h["xsec_piplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_piminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_kplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_kminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_p_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_p_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_p_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_p_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
 
-      }
 
-      if (collsys == pp62)
-      {
-		_h["xsec_piplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_pi"]->sumW());
-                _h["xsec_piminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_pi"]->sumW());
-                _h["xsec_kplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_k"]->sumW());
-                _h["xsec_kminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_k"]->sumW());
-                _h["xsec_p_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
-                _h["xsec_pbar_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
-                _h["xsec_p_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
-                _h["xsec_pbar_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62_p"]->sumW());
+		_h["xsec_piplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_piminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_kplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_kminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_p_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_pbar_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_p_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
+                _h["xsec_pbar_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
       }
 
     }
