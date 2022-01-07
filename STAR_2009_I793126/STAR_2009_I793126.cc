@@ -54,8 +54,31 @@ namespace Rivet {
 
       //Event counters
       book(_c["sow_dAu200"], "_sow_dAu200");
-      book(_c["sow_AuAu62"], "_sow_AuAu62");
-      book(_c["sow_AuAu130"], "_sow_AuAu130");
+      book(_c["sow_dAu200c0020"], "sow_dAu200c0020");
+      book(_c["sow_dAu200c2040"], "sow_dAu200c2040");
+      book(_c["sow_dAu200c40100"], "sow_dAu200c40100");
+
+
+
+      book(_c["sow_AuAu62c0005"], "sow_AuAu62c0005");
+      book(_c["sow_AuAu62c0510"], "sow_AuAu62c0510");
+      book(_c["sow_AuAu62c1020"], "sow_AuAu62c1020");
+      book(_c["sow_AuAu62c2030"], "sow_AuAu62c2030");
+      book(_c["sow_AuAu62c3040"], "sow_AuAu62c3040");
+      book(_c["sow_AuAu62c4050"], "sow_AuAu62c4050");
+      book(_c["sow_AuAu62c5060"], "sow_AuAu62c5060");
+      book(_c["sow_AuAu62c6070"], "sow_AuAu62c6070");
+      book(_c["sow_AuAu62c7080"], "sow_AuAu62c7080");
+
+
+      book(_c["sow_AuAu130c0006"], "sow_AuAu130c0006");
+      book(_c["sow_AuAu130c0611"], "sow_AuAu130c0611");
+      book(_c["sow_AuAu130c1118"], "sow_AuAu130c1118");
+      book(_c["sow_AuAu130c1826"], "sow_AuAu130c1826");
+      book(_c["sow_AuAu130c2634"], "sow_AuAu130c2634");
+      book(_c["sow_AuAu130c3445"], "sow_AuAu130c3445");
+      book(_c["sow_AuAu130c4558"], "sow_AuAu130c4558");
+      book(_c["sow_AuAu130c5885"], "sow_AuAu130c5885");
 
       //Booking histograms for figures in paper
       /*//Figure 1 AuAu200
@@ -415,13 +438,62 @@ namespace Rivet {
 
       Particles fsParticles = applyProjection<FinalState>(event, "fs").particles();
 
+      if(beamOpt == "NONE")
+      {
+        const ParticlePair& beam = beams();
+        double NNAuAu = 197.;
+
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+        {
+            if(fuzzyEquals(sqrtS()/GeV, 62.4*NNAuAu, 1E-3))
+            {
+              collSys = AuAu62;
+              if(c < 5.) _c["sow_AuAu62c0005"]->fill();
+              else if(c >=5. && c < 10.) _c["sow_AuAu62c0510"]->fill();
+              else if(c >=10. && c < 20.) _c["sow_AuAu62c1020"]->fill();
+              else if(c >=20. && c < 30.) _c["sow_AuAu62c2030"]->fill();
+              else if(c >=30. && c < 40.) _c["sow_AuAu62c3040"]->fill();
+              else if(c >=40. && c < 50.) _c["sow_AuAu62c4050"]->fill();
+              else if(c >=50. && c < 60.) _c["sow_AuAu62c5060"]->fill();
+              else if(c >=60. && c < 70.) _c["sow_AuAu62c6070"]->fill();
+              else if(c >=70. && c < 80.) _c["sow_AuAu62c7080"]->fill();
+            }
+            else if(fuzzyEquals(sqrtS()/GeV, 130.*NNAuAu, 1E-3))
+            {
+              collSys = AuAu130;
+              if(c < 6.) _c["sow_AuAu130c0006"]->fill();
+              else if(c >= 6. && c < 11.) _c["sow_AuAu130c0611"]->fill();
+              else if(c >= 11. && c < 18.) _c["sow_AuAu130c1118"]->fill();
+              else if(c >= 18. && c < 26.) _c["sow_AuAu130c1826"]->fill();
+              else if(c >= 26. && c < 34.) _c["sow_AuAu130c2634"]->fill();
+              else if(c >= 34. && c < 45.) _c["sow_AuAu130c3445"]->fill();
+              else if(c >= 45. && c < 58.) _c["sow_AuAu130c4558"]->fill();
+              else if(c >= 58. && c < 85.) _c["sow_AuAu130c5885"]->fill();
+            }
+        }
+        else if(beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
+        {
+          collSys = dAu200;
+          _c["sow_dAu200"]->fill();
+          if(c < 20.) _c["sow_dAu200c0020"]->fill();
+          else if(c >= 20. && c < 40.) _c["sow_dAu200c2040"]->fill();
+          else _c["sow_dAu200c40100"]->fill();
+        }
+        else if(beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020)
+        {
+          collSys = dAu200;
+          _c["sow_dAu200"]->fill();
+          if(c < 20.) _c["sow_dAu200c0020"]->fill();
+          else if(c >= 20. && c < 40.) _c["sow_dAu200c2040"]->fill();
+          else _c["sow_dAu200c40100"]->fill();
+        }
+      }
+
       //Sorting events by energy
       //Fig 18 dAu spectra @ 200 Gev
       //Sorting particles by type
       if (collSys == dAu200)
       {
-	       _c["sow_dAu200"]->fill();
-
         for (const Particle& p : fsParticles) {
 
           //for filling pT bin center
@@ -430,55 +502,59 @@ namespace Rivet {
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_18_kaon_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
-              if (c < 20.0) _h["Figure_18_kaon_1"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
-              if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_2"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
-              _h["Figure_18_kaon_3"]->fill(p.pT()/GeV, pt_weight); // Min Bias
-              if (c > 40.0) _h["Figure_18_kaon_4"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
+
+            if (p.pid() == -321) { //kaon+ (KPLUS Pdgid = 321)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 20.0) _h["Figure_18_kaon_4"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
+              if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_3"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
+              _h["Figure_18_kaon_1"]->fill(p.pT()/GeV, pt_weight); // Min Bias
+              if (c > 40.0) _h["Figure_18_kaon_2"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
-            if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
-              if (c < 20.0) _h["Figure_18_kaon_5"]->fill(p.pT()/GeV, pt_weight);
-              if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_6"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
-              _h["Figure_18_kaon_7"]->fill(p.pT()/GeV, pt_weight); // Min Bias
-              if (c > 40.0) _h["Figure_18_kaon_8"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
+            if (p.pid() == 321) { //kaon- (KMINUS Pdgid = -321)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 20.0) _h["Figure_18_kaon_8"]->fill(p.pT()/GeV, pt_weight);
+              if (c > 20.0 && c < 40.0) _h["Figure_18_kaon_7"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
+              _h["Figure_18_kaon_5"]->fill(p.pT()/GeV, pt_weight); // Min Bias
+              if (c > 40.0) _h["Figure_18_kaon_6"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
 
            }
 
           if(getDeltaPt(*_h["Figure_18_pion_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
-              if (c < 20.0) _h["Figure_18_pion_1"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
-              if (c > 20.0 && c < 40.0) _h["Figure_18_pion_2"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
-              _h["Figure_18_pion_3"]->fill(p.pT()/GeV, pt_weight); // Min Bias
-              if (c > 40.0) _h["Figure_18_pion_4"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
+            if (p.pid() == -211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 20.0) _h["Figure_18_pion_4"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
+              if (c > 20.0 && c < 40.0) _h["Figure_18_pion_3"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
+              _h["Figure_18_pion_1"]->fill(p.pT()/GeV, pt_weight); // Min Bias
+              if (c > 40.0) _h["Figure_18_pion_2"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
-            if (p.pid() == -211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion- (PIMINUS Pdgis = -211)
-              if (c < 20.0) _h["Figure_18_pion_5"]->fill(p.pT()/GeV, pt_weight);
-              if (c > 20.0 && c < 40.0) _h["Figure_18_pion_6"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
-              _h["Figure_18_pion_7"]->fill(p.pT()/GeV, pt_weight); // Min Bias
-              if (c > 40.0) _h["Figure_18_pion_8"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
+            if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion- (PIMINUS Pdgis = -211)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 20.0) _h["Figure_18_pion_8"]->fill(p.pT()/GeV, pt_weight);
+              if (c > 20.0 && c < 40.0) _h["Figure_18_pion_7"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
+              _h["Figure_18_pion_5"]->fill(p.pT()/GeV, pt_weight); // Min Bias
+              if (c > 40.0) _h["Figure_18_pion_6"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
 
            }
 
           if(getDeltaPt(*_h["Figure_18_proton_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
-              if (c < 20.0) _h["Figure_18_proton_1"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
-              if (c > 20.0 && c < 40.0) _h["Figure_18_proton_2"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
-              _h["Figure_18_proton_3"]->fill(p.pT()/GeV, pt_weight); // Min Bias
-              if (c > 40.0) _h["Figure_18_proton_4"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
+            if (p.pid() == -2212) { //proton+ (PROTON Pdgid = 2212)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 20.0) _h["Figure_18_proton_4"]->fill(p.pT()/GeV, pt_weight); // 0-20% centrality
+              if (c > 20.0 && c < 40.0) _h["Figure_18_proton_3"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
+              _h["Figure_18_proton_1"]->fill(p.pT()/GeV, pt_weight); // Min Bias
+              if (c > 40.0) _h["Figure_18_proton_2"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
-            if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
-              if (c < 20.0) _h["Figure_18_proton_5"]->fill(p.pT()/GeV, pt_weight);
-              if (c > 20.0 && c < 40.0) _h["Figure_18_proton_6"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
-              _h["Figure_18_proton_7"]->fill(p.pT()/GeV, pt_weight); // Min Bias
-              if (c > 40.0) _h["Figure_18_proton_8"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
+            if (p.pid() == 2212) { //proton- (ANTIPROTON Pdgid = -2212)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 20.0) _h["Figure_18_proton_8"]->fill(p.pT()/GeV, pt_weight);
+              if (c > 20.0 && c < 40.0) _h["Figure_18_proton_7"]->fill(p.pT()/GeV, pt_weight); // 20-40% centrality
+              _h["Figure_18_proton_5"]->fill(p.pT()/GeV, pt_weight); // Min Bias
+              if (c > 40.0) _h["Figure_18_proton_6"]->fill(p.pT()/GeV, pt_weight); // 40-100% centrality
             }
           }
 
@@ -488,8 +564,6 @@ namespace Rivet {
       //Figure 19 AuAu @ 62.4 GeV
       if (collSys == AuAu62)
       {
-        _c["sow_AuAu62"]->fill();
-
         for (const Particle& p : fsParticles) {
 
           //for filling pT bin center
@@ -498,86 +572,89 @@ namespace Rivet {
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_19_kaon_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 321) { //kaon+ (KPLUS Pdgid = 321)
-              if (c < 5.0) _h["Figure_19_kaon_1"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
-              if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_2"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
-              if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_3"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
-              if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_4"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
+            if (p.pid() == -321) { //kaon+ (KPLUS Pdgid = 321)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 5.0) _h["Figure_19_kaon_9"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
+              if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_8"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
+              if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_7"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
+              if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_6"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
               if (c > 30.0 && c < 40.0) _h["Figure_19_kaon_5"]->fill(p.pT()/GeV, pt_weight); // 30-40% centrality
-              if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_6"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
-              if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_7"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
-              if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_8"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
-              if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_9"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
+              if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_4"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
+              if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_3"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
+              if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_2"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
+              if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_1"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
             }
 
-            if (p.pid() == -321) { //kaon- (KMINUS Pdgid = -321)
-              if (c < 5.0) _h["Figure_19_kaon_10"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
-              if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_11"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
-              if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_12"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
-              if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_13"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
+            if (p.pid() == 321) { //kaon- (KMINUS Pdgid = -321)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 5.0) _h["Figure_19_kaon_18"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
+              if (c > 5.0 && c < 10.0) _h["Figure_19_kaon_17"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
+              if (c > 10.0 && c < 20.0) _h["Figure_19_kaon_16"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
+              if (c > 20.0 && c < 30.0) _h["Figure_19_kaon_15"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
               if (c > 30.0 && c < 40.0) _h["Figure_19_kaon_14"]->fill(p.pT()/GeV, pt_weight); // 30-40% centrality
-              if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_15"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
-              if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_16"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
-              if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_17"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
-              if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_18"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
+              if (c > 40.0 && c < 50.0) _h["Figure_19_kaon_13"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
+              if (c > 50.0 && c < 60.0) _h["Figure_19_kaon_12"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
+              if (c > 60.0 && c < 70.0) _h["Figure_19_kaon_11"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
+              if (c > 70.0 && c < 80.0) _h["Figure_19_kaon_10"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
             }
 
           }
 
           if(getDeltaPt(*_h["Figure_19_pion_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
-              if (c < 5.0) _h["Figure_19_pion_1"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
-              if (c > 5.0 && c < 10.0) _h["Figure_19_pion_2"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
-              if (c > 10.0 && c < 20.0) _h["Figure_19_pion_3"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
-              if (c > 20.0 && c < 30.0) _h["Figure_19_pion_4"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
+            if (p.pid() == -211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 5.0) _h["Figure_19_pion_9"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
+              if (c > 5.0 && c < 10.0) _h["Figure_19_pion_8"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
+              if (c > 10.0 && c < 20.0) _h["Figure_19_pion_7"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
+              if (c > 20.0 && c < 30.0) _h["Figure_19_pion_6"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
               if (c > 30.0 && c < 40.0) _h["Figure_19_pion_5"]->fill(p.pT()/GeV, pt_weight); // 30-40% centrality
-              if (c > 40.0 && c < 50.0) _h["Figure_19_pion_6"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
-              if (c > 50.0 && c < 60.0) _h["Figure_19_pion_7"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
-              if (c > 60.0 && c < 70.0) _h["Figure_19_pion_8"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
-              if (c > 70.0 && c < 80.0) _h["Figure_19_pion_9"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
+              if (c > 40.0 && c < 50.0) _h["Figure_19_pion_4"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
+              if (c > 50.0 && c < 60.0) _h["Figure_19_pion_3"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
+              if (c > 60.0 && c < 70.0) _h["Figure_19_pion_2"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
+              if (c > 70.0 && c < 80.0) _h["Figure_19_pion_1"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
             }
-            if (p.pid() == -211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion- (PIMINUS Pdgis = -211)
-              if (c < 5.0) _h["Figure_19_pion_10"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
-              if (c > 5.0 && c < 10.0) _h["Figure_19_pion_11"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
-              if (c > 10.0 && c < 20.0) _h["Figure_19_pion_12"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
-              if (c > 20.0 && c < 30.0) _h["Figure_19_pion_13"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
+            if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion- (PIMINUS Pdgis = -211)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 5.0) _h["Figure_19_pion_18"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
+              if (c > 5.0 && c < 10.0) _h["Figure_19_pion_17"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
+              if (c > 10.0 && c < 20.0) _h["Figure_19_pion_16"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
+              if (c > 20.0 && c < 30.0) _h["Figure_19_pion_15"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
               if (c > 30.0 && c < 40.0) _h["Figure_19_pion_14"]->fill(p.pT()/GeV, pt_weight); // 30-40% centrality
-              if (c > 40.0 && c < 50.0) _h["Figure_19_pion_15"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
-              if (c > 50.0 && c < 60.0) _h["Figure_19_pion_16"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
-              if (c > 60.0 && c < 70.0) _h["Figure_19_pion_17"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
-              if (c > 70.0 && c < 80.0) _h["Figure_19_pion_18"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
+              if (c > 40.0 && c < 50.0) _h["Figure_19_pion_13"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
+              if (c > 50.0 && c < 60.0) _h["Figure_19_pion_12"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
+              if (c > 60.0 && c < 70.0) _h["Figure_19_pion_11"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
+              if (c > 70.0 && c < 80.0) _h["Figure_19_pion_10"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
             }
 
           }
 
           if(getDeltaPt(*_h["Figure_19_proton_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center (all have same bin width)
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 2212) { //proton+ (PROTON Pdgid = 2212)
-              if (c < 5.0) _h["Figure_19_proton_1"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
-              if (c > 5.0 && c < 10.0) _h["Figure_19_proton_2"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
-              if (c > 10.0 && c < 20.0) _h["Figure_19_proton_3"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
-              if (c > 20.0 && c < 30.0) _h["Figure_19_proton_4"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
+            if (p.pid() == -2212) { //proton+ (PROTON Pdgid = 2212)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 5.0) _h["Figure_19_proton_9"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
+              if (c > 5.0 && c < 10.0) _h["Figure_19_proton_8"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
+              if (c > 10.0 && c < 20.0) _h["Figure_19_proton_7"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
+              if (c > 20.0 && c < 30.0) _h["Figure_19_proton_6"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
               if (c > 30.0 && c < 40.0) _h["Figure_19_proton_5"]->fill(p.pT()/GeV, pt_weight); // 30-40% centrality
-              if (c > 40.0 && c < 50.0) _h["Figure_19_proton_6"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
-              if (c > 50.0 && c < 60.0) _h["Figure_19_proton_7"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
-              if (c > 60.0 && c < 70.0) _h["Figure_19_proton_8"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
-              if (c > 70.0 && c < 80.0) _h["Figure_19_proton_9"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
+              if (c > 40.0 && c < 50.0) _h["Figure_19_proton_4"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
+              if (c > 50.0 && c < 60.0) _h["Figure_19_proton_3"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
+              if (c > 60.0 && c < 70.0) _h["Figure_19_proton_2"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
+              if (c > 70.0 && c < 80.0) _h["Figure_19_proton_1"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
             }
-            if (p.pid() == -2212) { //proton- (ANTIPROTON Pdgid = -2212)
-              if (c < 5.0) _h["Figure_19_proton_10"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
-              if (c > 5.0 && c < 10.0) _h["Figure_19_proton_11"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
-              if (c > 10.0 && c < 20.0) _h["Figure_19_proton_12"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
-              if (c > 20.0 && c < 30.0) _h["Figure_19_proton_13"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
+            if (p.pid() == 2212) { //proton- (ANTIPROTON Pdgid = -2212)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 5.0) _h["Figure_19_proton_18"]->fill(p.pT()/GeV, pt_weight); // 0-5% centrality
+              if (c > 5.0 && c < 10.0) _h["Figure_19_proton_17"]->fill(p.pT()/GeV, pt_weight); // 5-10% centrality
+              if (c > 10.0 && c < 20.0) _h["Figure_19_proton_16"]->fill(p.pT()/GeV, pt_weight); // 10-20% centrality
+              if (c > 20.0 && c < 30.0) _h["Figure_19_proton_15"]->fill(p.pT()/GeV, pt_weight); // 20-30% centrality
               if (c > 30.0 && c < 40.0) _h["Figure_19_proton_14"]->fill(p.pT()/GeV, pt_weight); // 30-40% centrality
-              if (c > 40.0 && c < 50.0) _h["Figure_19_proton_15"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
-              if (c > 50.0 && c < 60.0) _h["Figure_19_proton_16"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
-              if (c > 60.0 && c < 70.0) _h["Figure_19_proton_17"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
-              if (c > 70.0 && c < 80.0) _h["Figure_19_proton_18"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
+              if (c > 40.0 && c < 50.0) _h["Figure_19_proton_13"]->fill(p.pT()/GeV, pt_weight); // 40-50% centrality
+              if (c > 50.0 && c < 60.0) _h["Figure_19_proton_12"]->fill(p.pT()/GeV, pt_weight); // 50-60% centrality
+              if (c > 60.0 && c < 70.0) _h["Figure_19_proton_11"]->fill(p.pT()/GeV, pt_weight); // 60-70% centrality
+              if (c > 70.0 && c < 80.0) _h["Figure_19_proton_10"]->fill(p.pT()/GeV, pt_weight); // 70-80% centrality
             }
 
           }
@@ -588,8 +665,6 @@ namespace Rivet {
       //Figure 20 AuAu @ 130 GeV
       if (collSys == AuAu130)
       {
-        _c["sow_AuAu130"]->fill();
-
         for (const Particle& p : fsParticles) {
 
           //for filling pT bin center
@@ -598,27 +673,28 @@ namespace Rivet {
           double deltaPt = 0.;
 
           if(getDeltaPt(*_h["Figure_20_1"], partPt, deltaPt)){  //line from Antonio for filling with pT bin center
-            double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
 
-            if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
-              if (c < 6.0) _h["Figure_20_1"]->fill(p.pT()/GeV, pt_weight); // 0-6% centrality
-              if (c > 6.0 && c < 11.0) _h["Figure_20_2"]->fill(p.pT()/GeV, pt_weight); // 6-11% centrality
-              if (c > 11.0 && c < 18.0) _h["Figure_20_3"]->fill(p.pT()/GeV, pt_weight); // 11-18% centrality
-              if (c > 18.0 && c < 26.0) _h["Figure_20_4"]->fill(p.pT()/GeV, pt_weight); // 18-26% centrality
-              if (c > 26.0 && c < 34.0) _h["Figure_20_5"]->fill(p.pT()/GeV, pt_weight); // 26-34% centrality
-              if (c > 34.0 && c < 45.0) _h["Figure_20_6"]->fill(p.pT()/GeV, pt_weight); // 34-45% centrality
-              if (c > 45.0 && c < 58.0) _h["Figure_20_7"]->fill(p.pT()/GeV, pt_weight); // 45-58% centrality
-              if (c > 58.0 && c < 85.0) _h["Figure_20_8"]->fill(p.pT()/GeV, pt_weight); // 58-85% centrality
+            if (p.pid() == -211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion+ (PIPLUS Pdgid = 211)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 6.0) _h["Figure_20_8"]->fill(p.pT()/GeV, pt_weight); // 0-6% centrality
+              if (c > 6.0 && c < 11.0) _h["Figure_20_7"]->fill(p.pT()/GeV, pt_weight); // 6-11% centrality
+              if (c > 11.0 && c < 18.0) _h["Figure_20_6"]->fill(p.pT()/GeV, pt_weight); // 11-18% centrality
+              if (c > 18.0 && c < 26.0) _h["Figure_20_5"]->fill(p.pT()/GeV, pt_weight); // 18-26% centrality
+              if (c > 26.0 && c < 34.0) _h["Figure_20_4"]->fill(p.pT()/GeV, pt_weight); // 26-34% centrality
+              if (c > 34.0 && c < 45.0) _h["Figure_20_3"]->fill(p.pT()/GeV, pt_weight); // 34-45% centrality
+              if (c > 45.0 && c < 58.0) _h["Figure_20_2"]->fill(p.pT()/GeV, pt_weight); // 45-58% centrality
+              if (c > 58.0 && c < 85.0) _h["Figure_20_1"]->fill(p.pT()/GeV, pt_weight); // 58-85% centrality
             }
-            if (p.pid() == -211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion- (PIMINUS Pdgis = -211)
-              if (c < 6.0) _h["Figure_20_9"]->fill(p.pT()/GeV, pt_weight); // 0-6% centrality
-              if (c > 6.0 && c < 11.0) _h["Figure_20_10"]->fill(p.pT()/GeV, pt_weight); // 6-11% centrality
-              if (c > 11.0 && c < 18.0) _h["Figure_20_11"]->fill(p.pT()/GeV, pt_weight); // 11-18% centrality
-              if (c > 18.0 && c < 26.0) _h["Figure_20_12"]->fill(p.pT()/GeV, pt_weight); // 18-26% centrality
-              if (c > 26.0 && c < 34.0) _h["Figure_20_13"]->fill(p.pT()/GeV, pt_weight); // 26-34% centrality
-              if (c > 34.0 && c < 45.0) _h["Figure_20_14"]->fill(p.pT()/GeV, pt_weight); // 34-45% centrality
-              if (c > 45.0 && c < 58.0) _h["Figure_20_15"]->fill(p.pT()/GeV, pt_weight); // 45-58% centrality
-              if (c > 58.0 && c < 85.0) _h["Figure_20_16"]->fill(p.pT()/GeV, pt_weight); // 58-85% centrality
+            if (p.pid() == 211 && p.parents()[0].abspid() != 3122 && p.parents()[0].abspid() != 310 && p.parents()[0].abspid() != 13) { //pion- (PIMINUS Pdgis = -211)
+              double pt_weight = OneOver2pi/deltaPt; //divide by the ben center (the above should ALWAYS return true)
+              if (c < 6.0) _h["Figure_20_16"]->fill(p.pT()/GeV, pt_weight); // 0-6% centrality
+              if (c > 6.0 && c < 11.0) _h["Figure_20_15"]->fill(p.pT()/GeV, pt_weight); // 6-11% centrality
+              if (c > 11.0 && c < 18.0) _h["Figure_20_14"]->fill(p.pT()/GeV, pt_weight); // 11-18% centrality
+              if (c > 18.0 && c < 26.0) _h["Figure_20_13"]->fill(p.pT()/GeV, pt_weight); // 18-26% centrality
+              if (c > 26.0 && c < 34.0) _h["Figure_20_12"]->fill(p.pT()/GeV, pt_weight); // 26-34% centrality
+              if (c > 34.0 && c < 45.0) _h["Figure_20_11"]->fill(p.pT()/GeV, pt_weight); // 34-45% centrality
+              if (c > 45.0 && c < 58.0) _h["Figure_20_10"]->fill(p.pT()/GeV, pt_weight); // 45-58% centrality
+              if (c > 58.0 && c < 85.0) _h["Figure_20_9"]->fill(p.pT()/GeV, pt_weight); // 58-85% centrality
             }
           }
 
@@ -632,103 +708,102 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
+        _h["Figure_18_kaon_1"]->scaleW(1.0/(0.2*_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_kaon_2"]->scaleW(1.0/(0.2*_c["sow_dAu200c40100"]->sumW()));
+        _h["Figure_18_kaon_3"]->scaleW(1.0/(0.2*_c["sow_dAu200c2040"]->sumW()));
+	      _h["Figure_18_kaon_4"]->scaleW(1.0/(0.2*_c["sow_dAu200c0020"]->sumW()));
+	      _h["Figure_18_kaon_5"]->scaleW(1.0/(0.2*_c["sow_dAu200"]->sumW()));
+	      _h["Figure_18_kaon_6"]->scaleW(1.0/(0.2*_c["sow_dAu200c40100"]->sumW()));
+        _h["Figure_18_kaon_7"]->scaleW(1.0/(0.2*_c["sow_dAu200c2040"]->sumW()));
+	      _h["Figure_18_kaon_8"]->scaleW(1.0/(0.2*_c["sow_dAu200c0020"]->sumW()));
+        _h["Figure_18_pion_1"]->scaleW(1.0/(0.2*_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_2"]->scaleW(1.0/(0.2*_c["sow_dAu200c40100"]->sumW()));
+        _h["Figure_18_pion_3"]->scaleW(1.0/(0.2*_c["sow_dAu200c2040"]->sumW()));
+        _h["Figure_18_pion_4"]->scaleW(1.0/(0.2*_c["sow_dAu200c0020"]->sumW()));
+        _h["Figure_18_pion_5"]->scaleW(1.0/(0.2*_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_pion_6"]->scaleW(1.0/(0.2*_c["sow_dAu200c40100"]->sumW()));
+        _h["Figure_18_pion_7"]->scaleW(1.0/(0.2*_c["sow_dAu200c2040"]->sumW()));
+        _h["Figure_18_pion_8"]->scaleW(1.0/(0.2*_c["sow_dAu200c0020"]->sumW()));
+        _h["Figure_18_proton_1"]->scaleW(1.0/(0.2*_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_2"]->scaleW(1.0/(0.2*_c["sow_dAu200c40100"]->sumW()));
+        _h["Figure_18_proton_3"]->scaleW(1.0/(0.2*_c["sow_dAu200c2040"]->sumW()));
+        _h["Figure_18_proton_4"]->scaleW(1.0/(0.2*_c["sow_dAu200c0020"]->sumW()));
+        _h["Figure_18_proton_5"]->scaleW(1.0/(0.2*_c["sow_dAu200"]->sumW()));
+        _h["Figure_18_proton_6"]->scaleW(1.0/(0.2*_c["sow_dAu200c40100"]->sumW()));
+        _h["Figure_18_proton_7"]->scaleW(1.0/(0.2*_c["sow_dAu200c2040"]->sumW()));
+        _h["Figure_18_proton_8"]->scaleW(1.0/(0.2*_c["sow_dAu200c0020"]->sumW()));
 
-        _h["Figure_18_kaon_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_kaon_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_kaon_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-	      _h["Figure_18_kaon_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-	      _h["Figure_18_kaon_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-	      _h["Figure_18_kaon_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_kaon_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-	      _h["Figure_18_kaon_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_pion_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_1"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_2"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_3"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_4"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_5"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_6"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_7"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
-        _h["Figure_18_proton_8"]->scaleW(1.0/_c["sow_dAu200"]->sumW());
+        _h["Figure_19_kaon_1"]->scaleW(1.0/(0.2*_c["sow_AuAu62c7080"]->sumW()));
+        _h["Figure_19_kaon_2"]->scaleW(1.0/(0.2*_c["sow_AuAu62c6070"]->sumW()));
+        _h["Figure_19_kaon_3"]->scaleW(1.0/(0.2*_c["sow_AuAu62c5060"]->sumW()));
+	      _h["Figure_19_kaon_4"]->scaleW(1.0/(0.2*_c["sow_AuAu62c4050"]->sumW()));
+	      _h["Figure_19_kaon_5"]->scaleW(1.0/(0.2*_c["sow_AuAu62c3040"]->sumW()));
+	      _h["Figure_19_kaon_6"]->scaleW(1.0/(0.2*_c["sow_AuAu62c2030"]->sumW()));
+        _h["Figure_19_kaon_7"]->scaleW(1.0/(0.2*_c["sow_AuAu62c1020"]->sumW()));
+	      _h["Figure_19_kaon_8"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0510"]->sumW()));
+        _h["Figure_19_kaon_9"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0005"]->sumW()));
+	      _h["Figure_19_kaon_10"]->scaleW(1.0/(0.2*_c["sow_AuAu62c7080"]->sumW()));
+        _h["Figure_19_kaon_11"]->scaleW(1.0/(0.2*_c["sow_AuAu62c6070"]->sumW()));
+        _h["Figure_19_kaon_12"]->scaleW(1.0/(0.2*_c["sow_AuAu62c5060"]->sumW()));
+        _h["Figure_19_kaon_13"]->scaleW(1.0/(0.2*_c["sow_AuAu62c4050"]->sumW()));
+	      _h["Figure_19_kaon_14"]->scaleW(1.0/(0.2*_c["sow_AuAu62c3040"]->sumW()));
+	      _h["Figure_19_kaon_15"]->scaleW(1.0/(0.2*_c["sow_AuAu62c2030"]->sumW()));
+	      _h["Figure_19_kaon_16"]->scaleW(1.0/(0.2*_c["sow_AuAu62c1020"]->sumW()));
+        _h["Figure_19_kaon_17"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0510"]->sumW()));
+	      _h["Figure_19_kaon_18"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0005"]->sumW()));
+        _h["Figure_19_pion_1"]->scaleW(1.0/(0.2*_c["sow_AuAu62c7080"]->sumW()));
+        _h["Figure_19_pion_2"]->scaleW(1.0/(0.2*_c["sow_AuAu62c6070"]->sumW()));
+        _h["Figure_19_pion_3"]->scaleW(1.0/(0.2*_c["sow_AuAu62c5060"]->sumW()));
+	      _h["Figure_19_pion_4"]->scaleW(1.0/(0.2*_c["sow_AuAu62c4050"]->sumW()));
+	      _h["Figure_19_pion_5"]->scaleW(1.0/(0.2*_c["sow_AuAu62c3040"]->sumW()));
+	      _h["Figure_19_pion_6"]->scaleW(1.0/(0.2*_c["sow_AuAu62c2030"]->sumW()));
+        _h["Figure_19_pion_7"]->scaleW(1.0/(0.2*_c["sow_AuAu62c1020"]->sumW()));
+	      _h["Figure_19_pion_8"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0510"]->sumW()));
+        _h["Figure_19_pion_9"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0005"]->sumW()));
+	      _h["Figure_19_pion_10"]->scaleW(1.0/(0.2*_c["sow_AuAu62c7080"]->sumW()));
+        _h["Figure_19_pion_11"]->scaleW(1.0/(0.2*_c["sow_AuAu62c6070"]->sumW()));
+        _h["Figure_19_pion_12"]->scaleW(1.0/(0.2*_c["sow_AuAu62c5060"]->sumW()));
+        _h["Figure_19_pion_13"]->scaleW(1.0/(0.2*_c["sow_AuAu62c4050"]->sumW()));
+	      _h["Figure_19_pion_14"]->scaleW(1.0/(0.2*_c["sow_AuAu62c3040"]->sumW()));
+	      _h["Figure_19_pion_15"]->scaleW(1.0/(0.2*_c["sow_AuAu62c2030"]->sumW()));
+	      _h["Figure_19_pion_16"]->scaleW(1.0/(0.2*_c["sow_AuAu62c1020"]->sumW()));
+        _h["Figure_19_pion_17"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0510"]->sumW()));
+	      _h["Figure_19_pion_18"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0005"]->sumW()));
+        _h["Figure_19_proton_1"]->scaleW(1.0/(0.2*_c["sow_AuAu62c7080"]->sumW()));
+        _h["Figure_19_proton_2"]->scaleW(1.0/(0.2*_c["sow_AuAu62c6070"]->sumW()));
+        _h["Figure_19_proton_3"]->scaleW(1.0/(0.2*_c["sow_AuAu62c5060"]->sumW()));
+        _h["Figure_19_proton_4"]->scaleW(1.0/(0.2*_c["sow_AuAu62c4050"]->sumW()));
+        _h["Figure_19_proton_5"]->scaleW(1.0/(0.2*_c["sow_AuAu62c3040"]->sumW()));
+        _h["Figure_19_proton_6"]->scaleW(1.0/(0.2*_c["sow_AuAu62c2030"]->sumW()));
+        _h["Figure_19_proton_7"]->scaleW(1.0/(0.2*_c["sow_AuAu62c1020"]->sumW()));
+        _h["Figure_19_proton_8"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0510"]->sumW()));
+        _h["Figure_19_proton_9"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0005"]->sumW()));
+        _h["Figure_19_proton_10"]->scaleW(1.0/(0.2*_c["sow_AuAu62c7080"]->sumW()));
+        _h["Figure_19_proton_11"]->scaleW(1.0/(0.2*_c["sow_AuAu62c6070"]->sumW()));
+        _h["Figure_19_proton_12"]->scaleW(1.0/(0.2*_c["sow_AuAu62c5060"]->sumW()));
+        _h["Figure_19_proton_13"]->scaleW(1.0/(0.2*_c["sow_AuAu62c4050"]->sumW()));
+        _h["Figure_19_proton_14"]->scaleW(1.0/(0.2*_c["sow_AuAu62c3040"]->sumW()));
+        _h["Figure_19_proton_15"]->scaleW(1.0/(0.2*_c["sow_AuAu62c2030"]->sumW()));
+        _h["Figure_19_proton_16"]->scaleW(1.0/(0.2*_c["sow_AuAu62c1020"]->sumW()));
+        _h["Figure_19_proton_17"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0510"]->sumW()));
+        _h["Figure_19_proton_18"]->scaleW(1.0/(0.2*_c["sow_AuAu62c0005"]->sumW()));
 
-        _h["Figure_19_kaon_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_kaon_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_kaon_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_pion_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-	      _h["Figure_19_pion_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_1"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_2"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_3"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_4"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_5"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_6"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_7"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_8"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_9"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_10"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_11"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_12"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_13"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_14"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_15"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_16"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_17"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-        _h["Figure_19_proton_18"]->scaleW(1.0/_c["sow_AuAu62"]->sumW());
-
-
-        _h["Figure_20_1"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_2"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_3"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-	      _h["Figure_20_4"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-	      _h["Figure_20_5"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-	      _h["Figure_20_6"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_7"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-	      _h["Figure_20_8"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_9"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_10"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_12"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_13"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_14"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_15"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
-        _h["Figure_20_16"]->scaleW(1.0/_c["sow_AuAu130"]->sumW());
+        _h["Figure_20_1"]->scaleW(1.0/(0.2*_c["sow_AuAu130c5885"]->sumW()));
+        _h["Figure_20_2"]->scaleW(1.0/(0.2*_c["sow_AuAu130c4558"]->sumW()));
+        _h["Figure_20_3"]->scaleW(1.0/(0.2*_c["sow_AuAu130c3445"]->sumW()));
+	      _h["Figure_20_4"]->scaleW(1.0/(0.2*_c["sow_AuAu130c2634"]->sumW()));
+	      _h["Figure_20_5"]->scaleW(1.0/(0.2*_c["sow_AuAu130c1826"]->sumW()));
+	      _h["Figure_20_6"]->scaleW(1.0/(0.2*_c["sow_AuAu130c1118"]->sumW()));
+        _h["Figure_20_7"]->scaleW(1.0/(0.2*_c["sow_AuAu130c0611"]->sumW()));
+	      _h["Figure_20_8"]->scaleW(1.0/(0.2*_c["sow_AuAu130c0006"]->sumW()));
+        _h["Figure_20_9"]->scaleW(1.0/(0.2*_c["sow_AuAu130c5885"]->sumW()));
+        _h["Figure_20_10"]->scaleW(1.0/(0.2*_c["sow_AuAu130c4558"]->sumW()));
+        _h["Figure_20_11"]->scaleW(1.0/(0.2*_c["sow_AuAu130c3445"]->sumW()));
+        _h["Figure_20_12"]->scaleW(1.0/(0.2*_c["sow_AuAu130c2634"]->sumW()));
+        _h["Figure_20_13"]->scaleW(1.0/(0.2*_c["sow_AuAu130c1826"]->sumW()));
+        _h["Figure_20_14"]->scaleW(1.0/(0.2*_c["sow_AuAu130c1118"]->sumW()));
+        _h["Figure_20_15"]->scaleW(1.0/(0.2*_c["sow_AuAu130c0611"]->sumW()));
+        _h["Figure_20_16"]->scaleW(1.0/(0.2*_c["sow_AuAu130c0006"]->sumW()));
 
 
     }
