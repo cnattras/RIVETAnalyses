@@ -22,34 +22,11 @@ namespace Rivet {
 
         beamOpt = getOption<string>("beam", "NONE");
 
-	declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
-
-        i_event = 0;
-
-		int pid_p  = 2212;
-		int pid_Cu = 1000290630;
-
-		const ParticlePair& beam = beams();
-
-		if (beamOpt == "NONE") {
-
-			if (beam.first.pid() == pid_Cu && beam.second.pid() == pid_Cu)
-			{
-            			cout << " getting centrality " << endl;
-				isCu = true;
-			} else if (beam.first.pid() == pid_p && beam.second.pid() == pid_p) {
-				isCu = false;
-			} else {
-            			cout << " Error: don't run on these beams! (beam id's should both be either " << pid_Cu << " or " << pid_p << endl;
-        		}
-		}
-
-		else if (beamOpt == "CUCU200") isCu = true;
-		else if (beamOpt == "PP200") isCu = false;
+    declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
 
         // ----------------------------------------------------------
         // Cuts used to see if there is a trigger hit in the BBC
-        // Refer to example/precedent from: 
+        // Refer to example/precedent from:
         //   https://rivet.hepforge.org/analyses/ALICE_2010_I880049
         // ----------------------------------------------------------
         /* declare(ChargedFinalState((Cuts::eta >= 3.3 && Cuts::eta < 5.0) && */
@@ -61,7 +38,7 @@ namespace Rivet {
 
         // ----------------------------------------------------------
         // Cuts used to get final state pi+, pi-, proton, pbar
-        // Refer to example/precedent from: 
+        // Refer to example/precedent from:
         //   https://rivet.hepforge.org/analyses/STAR_2006_S6500200.html
         // ----------------------------------------------------------
         const double min_pi_pT =  3. * GeV;
@@ -95,7 +72,7 @@ namespace Rivet {
             // FIG 1a : pi+ and pi- spectra
             book( _h4["PIminus"][i], 1, 1, i_minus[i]) ; // 3-10 GeV/c [A]
             book( _h4["PIplus" ][i], 1, 1, i_plus [i]) ; // [A]
-            
+
             // FIG 1b : p and pbar spectra
             book( _h4["PBAR"   ][i], 2, 1, i_minus[i]) ; // 3-6 GeV/c [A]
             book( _h4["P"      ][i], 2, 1, i_plus [i]) ; // [A]
@@ -104,7 +81,7 @@ namespace Rivet {
 
             // FIG 2a : ratio pi- to pi+
             book( _s4["PIminusOverPIplus"][i], mkAxisCode(3,1,i+1), true); // (f)
-            
+
             // FIG 2b : ratio pbar to p
             book( _s4["PBARoverP"][i], mkAxisCode(4,1,i+1), true); // (f)
 
@@ -127,7 +104,7 @@ namespace Rivet {
             if (i==0) {
                 book(_h["_proton_pT_pp"],   "_proton_pt_pp", refData(7,1,1));// [A]
             }
-            
+
             // FIG 4b -- no data for this figure
 
             // FIG 5a : p+p over pi+pi in 3-6 GeV range -- will use spectra from and FIG 1b for p+pbar
@@ -148,10 +125,21 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-        if (debug > 1) {
-            cout << " event: " << i_event++;
-            for (auto e : event.weights()) cout <<" "<<e << "  sumW: " << _c["CuCu"]->sumW() <<  endl;
+
+      const ParticlePair& beam = beams();
+
+      if (beamOpt == "NONE") {
+
+        if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
+        {
+          isCu = true;
+        } else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) {
+          isCu = false;
         }
+      }
+
+      else if (beamOpt == "CUCU200") isCu = true;
+      else if (beamOpt == "PP200") isCu = false;
 
         // move to init -- init uses data from the first event and fill a global flag
         // assumes all events are the same in analyze
@@ -164,7 +152,7 @@ namespace Rivet {
         /* } */
 
         // get final state particles:
-        int k {0}; 
+        int k {0};
         double cent{-2.};
         if (isCu) {
             cent = apply<CentralityProjection>(event,"CMULT")();
@@ -199,7 +187,7 @@ namespace Rivet {
 					_h4["_PI_3_to_6"][k]->fill(pT,w);
 				}
 				if (pT > 5. && pT < 8.) _h["pion_cent_CuCu_58"]->fill(cent,1./Npart[k]);
-				if (pT < 4. ) _h["_PI_Cent_34"]->fill(cent); 
+				if (pT < 4. ) _h["_PI_Cent_34"]->fill(cent);
 			}
 			for (auto& p : piplus ) {
 				const double pT {p.pT()/GeV};
@@ -261,96 +249,63 @@ namespace Rivet {
     /* /// Normalise histograms etc., after the run */
     void finalize() {
 
-        bool has_CuCu { _c["CuCu"]->numEntries() != 0 };
-        bool has_pp   { _c["pp"]  ->numEntries() != 0 };
-        
-        // print out some run statistics 
-        cout << " has_CuCu: " << has_CuCu << endl;
-        cout << " has_pp:   " << has_pp   << endl;
-        
-        cout << " has: " << _c["pp"]  ->numEntries() << "  pp events. " << endl;
-        cout << " has: " << _c["CuCu"]->numEntries() << "  CuCu events. " << endl;
 
-        if (has_CuCu) {
-            cout << " distribution of Cu+Cu centralities: " << endl;
-            for (int i{0};i<4;++i) {
-                cout << " has: " << _c4[i]->numEntries() << " Cu+Cu "<<i_str[i]<<" events." << endl;
-            }
-        }
         /* cout << " n_events vetoed " << temp_nVetoEvent << endl; */
 
         // don't process any histograms unless there are both Cu+Cu and pp events
-        if (has_CuCu) {
-            bool first_loop = true;
-            for (int i{0}; i<4; ++i) {
-                if (_c4[i]->sumW() == 0) {
-                    cout << " No events for centrality class " << i_str[i] << endl;
-                    continue;
-                }
+        for (int i{0}; i<4; ++i) {
+            // FIG 1a : pi+ and pi- spectra
+            _h4["PIminus"][i]->scaleW(1./_c4[i]->sumW());
+            _h4["PIplus" ][i]->scaleW(1./_c4[i]->sumW());
 
-                // FIG 1a : pi+ and pi- spectra
-                _h4["PIminus"][i]->scaleW(1./_c4[i]->sumW());
-                _h4["PIplus" ][i]->scaleW(1./_c4[i]->sumW());
+            // FIG 1b : p and pbar spectra
+            _h4["P"      ][i]->scaleW(1./_c4[i]->sumW());
+            _h4["PBAR"   ][i]->scaleW(1./_c4[i]->sumW());
 
-                // FIG 1b : p and pbar spectra
-                _h4["P"      ][i]->scaleW(1./_c4[i]->sumW());
-                _h4["PBAR"   ][i]->scaleW(1./_c4[i]->sumW());
+            // FIG 2a : ratio pi- to pi+
+            divide (_h4["PIminus"][i], _h4["PIplus"][i], _s4["PIminusOverPIplus"][i]);
 
-                // FIG 2a : ratio pi- to pi+
-                divide (_h4["PIminus"][i], _h4["PIplus"][i], _s4["PIminusOverPIplus"][i]);
+            // FIG 2b : ratio pbar to p
+            divide (_h4["PBAR"][i], _h4["P"][i], _s4["PBARoverP"][i]);
 
-                // FIG 2b : ratio pbar to p
-                divide (_h4["PBAR"][i], _h4["P"][i], _s4["PBARoverP"][i]);
+            // FIG 3a : Pion Raa(pT)
+            _h["_pion_pT_pp"]->scaleW(1./_c["pp"]->sumW());
+            _h4["_pion_pT_CuCu"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
+            divide(_h4["_pion_pT_CuCu"][i], _h["_pion_pT_pp"], _s4["Raa_pion_pT"][i]);
+            _s4["Raa_pion_pT"][i]->scaleY(1./Npart[i]);
 
-                // FIG 3a : Pion Raa(pT)
-                if (has_pp) {
-                    if (first_loop) _h["_pion_pT_pp"]->scaleW(1./_c["pp"]->sumW());
-                    _h4["_pion_pT_CuCu"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
-                    divide(_h4["_pion_pT_CuCu"][i], _h["_pion_pT_pp"], _s4["Raa_pion_pT"][i]);
-                    _s4["Raa_pion_pT"][i]->scaleY(1./Npart[i]);
-                }
+            // FIG 3b : Pion RAA in centrality bins
+            _h["pion_cent_CuCu_58"]->scaleW(1./_c["CuCu"]->sumW());
+            _c["_pion_cent_pp_58" ]->scaleW(1./_c["pp"  ]->sumW());
+            _h["pion_cent_CuCu_58"]->scaleW(1./_c["_pion_cent_pp_58"]->sumW());
 
-                // FIG 3b : Pion RAA in centrality bins
-                if (first_loop && has_pp) {
-                    _h["pion_cent_CuCu_58"]->scaleW(1./_c["CuCu"]->sumW());
-                    _c["_pion_cent_pp_58" ]->scaleW(1./_c["pp"  ]->sumW());
-                    _h["pion_cent_CuCu_58"]->scaleW(1./_c["_pion_cent_pp_58"]->sumW());
-                    /* *_s["Raa_pion_cent"] = *_h["_pion_cent_CuCu_58"]; */
-                    /* divide(_h["_pion_cent_CuCu_58"], _c["_pion_cent_pp_58"], _s["Raa_pion_cent"]); */
-                }
 
-                // need spectra of p + pbar for FIG 4a and FIG 5a
-                *_h4["_PPBAR"][i]  = *_h4["P"][i];
-                *_h4["_PPBAR"][i] += *_h4["PBAR"][i];
+            // need spectra of p + pbar for FIG 4a and FIG 5a
+            *_h4["_PPBAR"][i]  = *_h4["P"][i];
+            *_h4["_PPBAR"][i] += *_h4["PBAR"][i];
 
-                // FIG 4a : Proton Raa(pT)
-                if (first_loop) _h["_proton_pT_pp"]->scaleW(1./_c["pp"]->sumW());
-                if (has_pp) {
-                    divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton_pT"][i]);
-                }
+            // FIG 4a : Proton Raa(pT)
+            _h["_proton_pT_pp"]->scaleW(1./_c["pp"]->sumW());
+            divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton_pT"][i]);
 
-                // FIG 4b -- no data for this figure
+            // FIG 4b -- no data for this figure
 
-                // FIG 5a : p+p over pi+pi in 3-6 GeV range
-                _h4["_PI_3_to_6"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
+            // FIG 5a : p+p over pi+pi in 3-6 GeV range
+            _h4["_PI_3_to_6"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
 
-                divide(_h4["_PPBAR"][i],_h4["_PI_3_to_6"][i],_s4["ratio_PtoPI"][i]);
+            divide(_h4["_PPBAR"][i],_h4["_PI_3_to_6"][i],_s4["ratio_PtoPI"][i]);
 
-                // FIG 5b (outside of centrality loop)
-                if (first_loop) {
-                    _h["_P_Cent_34"]  ->scaleW(1./_c["CuCu"]->sumW());
-                    _h["_PI_Cent_34"] ->scaleW(1./_c["CuCu"]->sumW());
-                    divide(_h["_P_Cent_34"], _h["_PI_Cent_34"], _s["PItoP_34"]);
-                }
-            }
+            // FIG 5b (outside of centrality loop)
+            _h["_P_Cent_34"]  ->scaleW(1./_c["CuCu"]->sumW());
+            _h["_PI_Cent_34"] ->scaleW(1./_c["CuCu"]->sumW());
+            divide(_h["_P_Cent_34"], _h["_PI_Cent_34"], _s["PItoP_34"]);
         }
     }
 
     //@{
-    bool isCu;
+    bool isCu = false;
     map<string, Histo1DPtr> _h;
     map<string, CounterPtr> _c; // Counters: number of p+p event, Cu+Cu events
-    int i_event;
 
 	array<double,4> Npart{ 99., 74.6, 45.9, 21.5 };
     array<string,4>  i_str {"_0_10","_10_20","_20_40","_40_60"};
