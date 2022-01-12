@@ -85,7 +85,9 @@ namespace Rivet {
       book(_c["sow_pp200"], "_sow_pp200");
       book(_c["sow_pp62"], "_sow_pp62");
 
-
+      //Cross sections
+      book(_c["xsec_pp200"], "xsec_pp200");
+      book(_c["xsec_pp62"], "xsec_pp62");
 
     }
 
@@ -97,6 +99,8 @@ namespace Rivet {
       Particles fsKParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsK").particles();
       Particles fsPParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsP").particles();
 
+      pair<double,double> cs = HepMCUtils::crossSection(*event.genEvent());
+
       if(beamOpt == "NONE")
         		{
 
@@ -105,11 +109,13 @@ namespace Rivet {
         {
           collsys = pp200;
           _c["sow_pp200"]->fill();
+          _c["xsec_pp200"]->fill(cs.first);
         }
-  			if (fuzzyEquals(sqrtS()/GeV, 62*NN, 1E-3))
+  			if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3))
         {
           collsys = pp62;
           _c["sow_pp62"]->fill();
+          _c["xsec_pp62"]->fill(cs.first);
         }
   		}
 
@@ -378,30 +384,32 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
+      double xsec200 = (_c["xsec_pp200"]->sumW()/millibarn)/_c["sow_pp200"]->sumW();
+      double xsec62 = (_c["xsec_pp62"]->sumW()/millibarn)/_c["sow_pp62"]->sumW();
 
-		_h["xsec_piplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_piminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_kplus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_kminus_200"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_p_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_p_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_noFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_noFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_p_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_p_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_withFD_200_1"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_withFD_200_2"]->scaleW(crossSection()*1.E-9/_c["sow_pp200"]->sumW());
+		_h["xsec_piplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_piminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_kplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_kminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_p_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_p_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_p_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_p_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
 
 
-		_h["xsec_piplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_piminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_kplus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_kminus_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_p_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_pbar_noFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_p_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-                _h["xsec_pbar_withFD_62"]->scaleW(crossSection()*1.E-9/_c["sow_pp62"]->sumW());
-      }
+		_h["xsec_piplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_piminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_kplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_kminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_p_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_p_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+                _h["xsec_pbar_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+
 
     }
 
