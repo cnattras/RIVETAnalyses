@@ -249,57 +249,61 @@ namespace Rivet {
     /* /// Normalise histograms etc., after the run */
     void finalize() {
 
+      for (int i{0}; i<4; ++i) {
+          // FIG 1a : pi+ and pi- spectra
+          _h4["PIminus"][i]->scaleW(1./_c4[i]->sumW());
+          _h4["PIplus" ][i]->scaleW(1./_c4[i]->sumW());
 
-        /* cout << " n_events vetoed " << temp_nVetoEvent << endl; */
+          // FIG 1b : p and pbar spectra
+          _h4["P"      ][i]->scaleW(1./_c4[i]->sumW());
+          _h4["PBAR"   ][i]->scaleW(1./_c4[i]->sumW());
 
-        // don't process any histograms unless there are both Cu+Cu and pp events
-        for (int i{0}; i<4; ++i) {
-            // FIG 1a : pi+ and pi- spectra
-            _h4["PIminus"][i]->scaleW(1./_c4[i]->sumW());
-            _h4["PIplus" ][i]->scaleW(1./_c4[i]->sumW());
+          // FIG 2a : ratio pi- to pi+
+          divide (_h4["PIminus"][i], _h4["PIplus"][i], _s4["PIminusOverPIplus"][i]);
 
-            // FIG 1b : p and pbar spectra
-            _h4["P"      ][i]->scaleW(1./_c4[i]->sumW());
-            _h4["PBAR"   ][i]->scaleW(1./_c4[i]->sumW());
+          // FIG 2b : ratio pbar to p
+          divide (_h4["PBAR"][i], _h4["P"][i], _s4["PBARoverP"][i]);
 
-            // FIG 2a : ratio pi- to pi+
-            divide (_h4["PIminus"][i], _h4["PIplus"][i], _s4["PIminusOverPIplus"][i]);
+          // FIG 3a : Pion Raa(pT)
+          if(i==0) _h["_pion_pT_pp"]->scaleW(1./_c["pp"]->sumW());
+          _h4["_pion_pT_CuCu"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
+          divide(_h4["_pion_pT_CuCu"][i], _h["_pion_pT_pp"], _s4["Raa_pion_pT"][i]);
+          _s4["Raa_pion_pT"][i]->scaleY(1./Npart[i]);
 
-            // FIG 2b : ratio pbar to p
-            divide (_h4["PBAR"][i], _h4["P"][i], _s4["PBARoverP"][i]);
-
-            // FIG 3a : Pion Raa(pT)
-            _h["_pion_pT_pp"]->scaleW(1./_c["pp"]->sumW());
-            _h4["_pion_pT_CuCu"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
-            divide(_h4["_pion_pT_CuCu"][i], _h["_pion_pT_pp"], _s4["Raa_pion_pT"][i]);
-            _s4["Raa_pion_pT"][i]->scaleY(1./Npart[i]);
-
-            // FIG 3b : Pion RAA in centrality bins
-            _h["pion_cent_CuCu_58"]->scaleW(1./_c["CuCu"]->sumW());
+          // FIG 3b : Pion RAA in centrality bins
+          if(i==0)
+          {
+            for(unsigned int ibin=0; ibin<_h["pion_cent_CuCu_58"]->numBins(); ibin++)
+            {
+              _h["pion_cent_CuCu_58"]->bin(ibin).scaleW(1./_c4[i]->sumW());
+            }
+            //_h["pion_cent_CuCu_58"]->scaleW(1./_c["CuCu"]->sumW());
             _c["_pion_cent_pp_58" ]->scaleW(1./_c["pp"  ]->sumW());
             _h["pion_cent_CuCu_58"]->scaleW(1./_c["_pion_cent_pp_58"]->sumW());
+          }
 
 
-            // need spectra of p + pbar for FIG 4a and FIG 5a
-            *_h4["_PPBAR"][i]  = *_h4["P"][i];
-            *_h4["_PPBAR"][i] += *_h4["PBAR"][i];
 
-            // FIG 4a : Proton Raa(pT)
-            _h["_proton_pT_pp"]->scaleW(1./_c["pp"]->sumW());
-            divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton_pT"][i]);
+          // need spectra of p + pbar for FIG 4a and FIG 5a
+          *_h4["_PPBAR"][i]  = *_h4["P"][i];
+          *_h4["_PPBAR"][i] += *_h4["PBAR"][i];
 
-            // FIG 4b -- no data for this figure
+          // FIG 4a : Proton Raa(pT)
+          if(i==0) _h["_proton_pT_pp"]->scaleW(1./_c["pp"]->sumW());
+          divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton_pT"][i]);
+          _s4["Raa_proton_pT"][i]->scaleY(1./Npart[i]);
 
-            // FIG 5a : p+p over pi+pi in 3-6 GeV range
-            _h4["_PI_3_to_6"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
 
-            divide(_h4["_PPBAR"][i],_h4["_PI_3_to_6"][i],_s4["ratio_PtoPI"][i]);
+          // FIG 4b -- no data for this figure
 
-            // FIG 5b (outside of centrality loop)
-            _h["_P_Cent_34"]  ->scaleW(1./_c["CuCu"]->sumW());
-            _h["_PI_Cent_34"] ->scaleW(1./_c["CuCu"]->sumW());
-            divide(_h["_P_Cent_34"], _h["_PI_Cent_34"], _s["PItoP_34"]);
-        }
+          // FIG 5a : p+p over pi+pi in 3-6 GeV range
+          _h4["_PI_3_to_6"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
+
+          divide(_h4["_PPBAR"][i],_h4["_PI_3_to_6"][i],_s4["ratio_PtoPI"][i]);
+
+      }
+      // FIG 5b (outside of centrality loop)
+      divide(_h["_P_Cent_34"], _h["_PI_Cent_34"], _s["PItoP_34"]);
     }
 
     //@{
