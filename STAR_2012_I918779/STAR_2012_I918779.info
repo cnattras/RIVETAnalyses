@@ -1,6 +1,6 @@
 Name: STAR_2012_I918779
 Year: 2012
-Summary: <Strangeness Enhancement in Cu+Cu and Au+Au Collisions at $\sqrt{s_{NN}} = 200$ GeV>
+Summary: Strangeness Enhancement in Cu+Cu and Au+Au Collisions at $\sqrt{s_{NN}} = 200$ GeV
 Experiment: STAR
 Collider: <Insert the collider name>
 InspireID: 918779
@@ -18,8 +18,9 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP, AUAU200,CUCU200
-Description:
-  'We report new STAR measurements of mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^0_S$, $\Xi^-$, $\bar{\Xi}^+$, $\Omega^-$, $\bar{\Omega}^+$ particles in Cu+Cu collisions at $\sqrt{s_{NN}} = 200$ GeV, and mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^0_S$ particles in Au+Au at $\sqrt{s_{NN}} = 200$ GeV. We show that at a given number of participating nucleons, the production of strange hadrons is higher in Cu+Cu collisions than in Au+Au collisions at the same center-of-mass energy. We find that aspects of the enhancement factors for all particles can be described by a parameterization based on the fraction of participants that undergo multiple collisions.'
+Description: We report new STAR measurements of mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^{0}_{S}$, $\Xi^{-}$, $\bar{\Xi}^{+}$, $\Omega^{-}$, $\bar{\Omega}^{+}$ particles in Cu+Cu collisions at \sNN{200}, and mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^{0}_{S}$ particles in Au+Au at \sNN{200}. 
+We show that at a given number of participating nucleons, the production of strange hadrons is higher in Cu+Cu collisions than in Au+Au collisions at the same center-of-mass energy. 
+We find that aspects of the enhancement factors for all particles can be described by a parameterization based on the fraction of participants that undergo multiple collisions.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

@@ -1,6 +1,6 @@
 Name: STAR_2003_I619063
 Year: 2003
-Summary: <Insert short STAR_2003_I619063 description>
+Summary: Transverse momentum and collision energy dependence of high p(T) hadron suppression in Au+Au collisions at ultrarelativistic energies
 Experiment: STAR
 Collider: <Insert the collider name>
 InspireID: 619063
@@ -15,8 +15,11 @@ RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: <Insert beam pair(s), e.g. [p+, p+] or [[p-, e-], [p-, e+]]>
 #Energies: <Run energies or beam energy pairs in GeV, e.g. [13000] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
-Description:
-  'We report high statistics measurements of inclusive charged hadron production in Au+Au and p+p collisions at $\sqrt{s_{\rm NN}}$=200 GeV. A large, approximately constant hadron suppression is observed in central Au+Au collisions for $5 < p_{T} < 12$ GeV/c. The collision energy dependence of the yields and the centrality and $p_{T}$ dependence of the suppression provide stringent constraints on theoretical models of suppression. Models incorporating initial-state gluon saturation or partonic energy loss in dense matter are largely consistent with observations. We observe no evidence of $p_{T}$-dependent suppression, which may be expected from models incorporating jet attentuation in cold nuclear matter or scattering of fragmentation hadrons.'
+Description: We report high statistics measurements of inclusive charged hadron production in Au+Au and p+p collisions at \sqrtsNN=200 GeV. 
+A large, approximately constant hadron suppression is observed in central Au+Au collisions for $5\lt\pT\lt12$ GeV/c. 
+The collision energy dependence of the yields and the centrality and \pT dependence of the suppression provide stringent constraints on theoretical models of suppression. 
+Models incorporating initial-state gluon saturation or partonic energy loss in dense matter are largely consistent with observations. 
+We observe no evidence of \pT-dependent suppression, which may be expected from models incorporating jet attentuation in cold nuclear matter or scattering of fragmentation hadrons.
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU130, AUAU200, PP200

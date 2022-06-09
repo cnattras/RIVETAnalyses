@@ -1,6 +1,6 @@
 Name: STAR_2010_I851937
 Year: 2010
-Summary: <A one-line informative STAR_2010_I851937 headline>
+Summary: Azimuthal di-hadron correlations in d+Au and Au+Au collisions at $\sqrt{s_{NN}}=200$ GeV from STAR
 Experiment: STAR
 Collider: <Relativistic Heavy Ion Collider (RHIC)>
 InspireID: 851937
@@ -19,10 +19,10 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=DAU,AUAU
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: Yields, correlation shapes, and mean transverse momenta \pt{} of charged particles associated with intermediate to high-\pt{} trigger particles ($2.5 < \pt < 10$ \GeVc) in d+Au and Au+Au collisions at $\snn=200$ GeV are presented. 
+For associated particles at higher $\pt \gtrsim 2.5$ \GeVc, narrow correlation peaks are seen in d+Au and Au+Au, indicating that the main production mechanism is jet fragmentation. 
+At lower associated particle $\pt < 2$ \GeVc, a large enhancement of the near- ($\dphi \sim 0$) and away-side ($\dphi \sim \pi$) associated yields is found, together with a strong broadening of the away-side azimuthal distributions in Au+Au collisions compared to d+Au measurements, suggesting that other particle production mechanisms play a role. 
+This is further supported by the observed significant softening of the away-side associated particle yield distribution at $\dphi \sim \pi$ in central Au+Au collisions.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

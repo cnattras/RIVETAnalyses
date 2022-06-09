@@ -1,6 +1,6 @@
 Name: STAR_2016_I1420183
 Year: 2016
-Summary: <A one-line informative STAR_2016_I1420183 headline>
+Summary: $\rm{J}/\psi$ production at low transverse momentum in p+p and d+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV
 Experiment: STAR
 Collider: <Insert the collider name>
 InspireID: 1420183
@@ -18,10 +18,11 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=pp,dAu
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: We report on the measurement of J/ψ production in the dielectron channel at midrapidity (|y|<1) in p+p and d+Au collisions at sNN=200GeV from the STAR experiment at the Relativistic Heavy Ion Collider. 
+The transverse momentum pT spectra in p+p for pT<4GeV/c and d+Au collisions for pT<3GeV/c are presented. 
+These measurements extend the STAR coverage for J/ψ production in p+p collisions to low pT. 
+The 〈pT2〉 from the measured J/ψ invariant cross section in p+p and d+Au collisions are evaluated and compared to similar measurements at other collision energies. 
+The nuclear modification factor for J/ψ is extracted as a function of pT and collision centrality in d+Au and compared to model calculations using the modified nuclear parton distribution function and a final-state J/ψ nuclear absorption cross section.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

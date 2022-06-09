@@ -1,6 +1,6 @@
 Name: PHENIX_2020_I1773662
 Year: 2020
-Summary: <A one-line informative PHENIX_2020_I1773662 headline>
+Summary: $J/\psi$ and $\psi(2S)$ production at forward rapidity in $p$+$p$ collisions at $\sqrt{s}=510$ GeV
 Experiment: PHENIX
 Collider: <Insert the collider name>
 InspireID: 1773662
@@ -19,10 +19,12 @@ Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU200
 
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: The PHENIX experiment at the Relativistic Heavy Ion Collider has measured the differential cross section, mean transverse momentum, mean transverse momentum squared of inclusive J/ψ, and cross section ratio of ψ(2S) to J/ψ at forward rapidity in p+p collisions at s=510  GeV via the dimuon decay channel. 
+Comparison is made to inclusive J/ψ cross sections measured at s=200  GeV and 2.76–13 TeV. 
+The result is also compared to leading-order nonrelativistic QCD calculations coupled to a color-glass-condensate description of the low-x gluons in the proton at low transverse momentum (pT) and to next-to-leading order nonrelativistic QCD calculations for the rest of the pT range. 
+These calculations overestimate the data at low pT. 
+While consistent with the data within uncertainties above ≈3  GeV/c, the calculations are systematically below the data. 
+The total cross section times the branching ratio is BR dσppJ/ψ/dy(1.2<|y|<2.2,0<pT<10  GeV/c)=54.3±0.5(stat)±5.5(syst)  nb.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

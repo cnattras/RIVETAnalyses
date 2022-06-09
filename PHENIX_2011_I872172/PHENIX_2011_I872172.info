@@ -1,6 +1,6 @@
 Name: PHENIX_2011_I872172
 Year: 2011
-Summary: <Insert short PHENIX_2011_I872172 description>
+Summary: Suppression of away-side jet fragments with respect to the reaction plane in Au+Au collisions at $\sqrt{s_{NN}}=200$ GeV
 Experiment: PHENIX
 Collider: <Insert the collider name>
 InspireID: 872172
@@ -17,10 +17,12 @@ Energies: [39400]
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
 Options:
  - cent=GEN
-Description:
-  '<A fairly long description, including what is measured
-  and if possible what it is useful for in terms of MC validation
-  and tuning. Use LaTeX for maths like $\pT > 50\;\GeV$.>'
+Description: Pair correlations between large transverse momentum neutral pion triggers (p_T=4--7 GeV/c) and charged hadron partners (p_T=3--7 GeV/c) in central (0--20%) and midcentral (20--60%) Au+Au collisions are presented as a function of trigger orientation with respect to the reaction plane. 
+The particles are at larger momentum than where jet shape modifications have been observed, and the correlations are sensitive to the energy loss of partons traveling through hot dense matter. 
+An out-of-plane trigger particle produces only 26+/-20% of the away-side pairs that are observed opposite of an in-plane trigger particle. 
+In contrast, near-side jet fragments are consistent with no suppression or dependence on trigger orientation with respect to the reaction plane. 
+These observations are qualitatively consistent with a picture of little near-side parton energy loss either due to surface bias or fluctuations and increased away-side parton energy loss due to a long path through the medium. 
+The away-side suppression as a function of reaction-plane angle is shown to be sensitive to both the energy loss mechanism in and the space-time evolution of heavy-ion collisions.
 Keywords: []
 BibKey: 
 BibTeX: ''

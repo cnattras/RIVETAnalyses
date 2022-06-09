@@ -1,6 +1,6 @@
 Name: PHENIX_2009_I816486
 Year: 2009
-Summary: <High-$p_T$ $\pi^0$ Production with Respect to the Reaction Plane in Au+Au Collisions at $\sqrt{sNN} = 200$ GeV>
+Summary: High-pT pi0 Production with Respect to the Reaction Plane in Au + Au Collisions at s(NN)**(1/2) = 200-GeV
 Experiment: PHENIX
 Collider: <Insert the collider name>
 InspireID: 816486
@@ -18,8 +18,13 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU200
-Description:
-  'Measurements of the azimuthal anisotropy of high-$p_T$ neutral pion ($\pi^0$) production in Au+Au collisions at $\sqrt{sNN} = 200$ GeV by the PHENIX experiment are presented. The data included in this paper were collected during the 2004 RHIC running period and represent approximately an order of magnitude increase in the number of analyzed events relative to previously published results. Azimuthal angle distributions of $\pi^0$s detected in the PHENIX electromagnetic calorimeters are measured relative to the reaction plane determined event-by-event using the forward and backward beam-beam counters. Amplitudes of the second Fourier component ($v_2$) of the angular distributions are presented as a function of $\pi^0$ transverse momentum (pT) for different bins in collision centrality. Measured reaction plane dependent $\pi^0$ yields are used to determine the azimuthal dependence of the $\pi^0$ suppression as a function of pT, RAA(∆φ, pT). A jet-quenching motivated geometric analysis is presented that attempts to simultaneously describe the centrality dependence and reaction plane angle dependence of the $\pi^0$ suppression in terms of the path lengths of hypothetical parent partons 3 in the medium. This set of results allows for a detailed examination of the influence of geometry in the collision region, and of the interplay between collective flow and jet-quenching effects along the azimuthal axis.'
+Description: Measurements of the azimuthal anisotropy of high-\pT neutral pion neutral pion production in Au+Au collisions at sqrt(s_NN) = 200 GeV by the PHENIX experiment are presented. 
+The data included in this paper were collected during the 2004 RHIC running period and represent approximately an order of magnitude increase in the number of analyzed events relative to previously published results. 
+Azimuthal angle distributions of pi^0s detected in the PHENIX electromagnetic calorimeters are measured relative to the reaction plane determined event-by-event using the forward and backward beam-beam counters. 
+Amplitudes of the second Fourier component (v_2) of the angular distributions are presented as a function of pi^0 transverse momentum p_T for different bins in collision centrality. 
+Measured reaction plane dependent pi^0 yields are used to determine the azimuthal dependence of the pi^0 suppression as a function of p_T, R_AA (Delta phi,p_T). 
+A jet-quenching motivated geometric analysis is presented that attempts to simultaneously describe the centrality dependence and reaction plane angle dependence of the pi^0 suppression in terms of the path lengths of hypothetical parent partons in the medium. 
+This set of results allows for a detailed examination of the influence of geometry in the collision region, and of the interplay between collective flow and jet-quenching effects along the azimuthal axis.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

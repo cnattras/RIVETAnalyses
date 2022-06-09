@@ -1,6 +1,6 @@
 Name: PHENIX_2008_I778168
 Year: 2008
-Summary: <Suppression pattern of neutral pions at high transverse momentum in Au+Au collisions at $\sqrt{s_{NN}} = 200$ GeV and constraints on medium transport coefficients>
+Summary: Suppression pattern of neutral pions at high transverse momentum in Au$+$Au collisions at $\sqrt{s_{NN}}=$ 200 GeV and constraints on medium transport coefficients
 Experiment: PHENIX
 Collider: <Insert PHENIX_2008_I778168 collider>
 InspireID: 778168
@@ -22,8 +22,11 @@ NeedCrossSection: no
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU
-Description:
-  'For Au + Au collisions at 200 GeV we measure neutral pion production with good statistics for transverse momentum, $p_T$, up to 20 GeV/c. A fivefold suppression is found, which is essentially constant for $5 < p_T < 20$ GeV/c. Experimental uncertainties are small enough to constrain any model-dependent parameterization for the transport coefficient of the medium, e.g. $\langle \hat{q} \rangle$ in the parton quenching model. The spectral shape is similar for all collision classes, and the suppression does not saturate in Au+Au collisions; instead, it increases proportional to the number of participating nucleons, as $N^{2/3}_{part}$.'
+Description: For Au + Au collisions at 200 GeV we measure neutral pion production with good statistics for transverse momentum, p_T, up to 20 GeV/c. 
+A fivefold suppression is found, which is essentially constant for 5 < p_T < 20 GeV/c. 
+Experimental uncertainties are small enough to constrain any model-dependent parameterization for the transport coefficient of the medium, e.g. 
+\mean(q^hat) in the parton quenching model. 
+The spectral shape is similar for all collision classes, and the suppression does not saturate in Au+Au collisions/ instead, it increases proportional to the number of participating nucleons, as N_part^2/3.
 BibKey: 
 BibTeX: ''
 ToDo:

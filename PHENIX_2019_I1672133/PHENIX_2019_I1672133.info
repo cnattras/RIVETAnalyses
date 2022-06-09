@@ -1,6 +1,6 @@
 Name: PHENIX_2019_I1672133
 Year: 2019
-Summary: <A one-line informative PHENIX_2019_I1672133 headline>
+Summary: Creation of quark–gluon plasma droplets with three distinct geometries
 Experiment: PHENIX
 Collider: <Insert the collider name>
 InspireID: 1672133
@@ -17,10 +17,12 @@ References:
 #Luminosity_fb: 139.0
 Options:
 - cent=REF,GEN,IMP,USR
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: Experimental studies of the collisions of heavy nuclei at relativistic energies have established the properties of the quark–gluon plasma (QGP), a state of hot, dense nuclear matter in which quarks and gluons are not bound into hadrons1–4. 
+In this state, matter behaves as a nearly inviscid fluid5 that efficiently translates initial spatial anisotropies into correlated momentum anisotropies among the particles produced, creating a common velocity field pattern known as collective flow. 
+In recent years, comparable momentum anisotropies have been measured in small-system proton–proton (p+p) and proton–nucleus (p+A) collisions, despite expectations that the volume and lifetime of the medium produced would be too small to form a QGP. 
+Here we report on the observation of elliptic and triangular flow patterns of charged particles produced in proton–gold (p+Au), deuteron–gold (d+Au) and helium–gold (3He+Au) collisions at a nucleon–nucleon centre-of-mass energy $\sqrt {s_{{\mathrm{NN}}}} = 200$ GeV. 
+The unique combination of three distinct initial geometries and two flow patterns provides unprecedented model discrimination. 
+Hydrodynamical models, which include the formation of a short-lived QGP droplet, provide the best simultaneous description of these measurements.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

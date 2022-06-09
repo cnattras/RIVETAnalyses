@@ -1,6 +1,6 @@
 Name: PHENIX_2008_I778396
 Year: 2008
-Summary: <A one-line informative PHENIX_2008_I778396 headline>
+Summary: Dihadron azimuthal correlations in Au$+$Au collisions at $\sqrt{s_{NN}}=$ 200 GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider
 InspireID: 778396
@@ -19,7 +19,17 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU
-Description:
+Description: Azimuthal angle (Delta phi) correlations are presented for a broad range of transverse momentum (0.4 < pT < 10 GeV/c) and centrality (0-92%) selections for charged hadrons from di-jets in Au+Au collisions at sqrt(s_NN) = 200 GeV. 
+With increasing pT, the away-side Delta phi distribution evolves from a broad and relatively flat shape to a concave shape, then to a convex shape. 
+Comparisons to p+p data suggest that the away-side distribution can be divided into a partially suppressed head region centered at Delta phi ~ \pi, and an enhanced shoulder region centered at Delta phi ~ \pi \pm 1:1. 
+The pT spectrum for the associated hadrons in the head region softens toward central collisions. 
+The spectral slope for the shoulder region is independent of centrality and trigger pT . 
+The properties of the near-side distributions are also modified relative to those in p + p collisions, reflected by the broadening of the jet shape in Delta phi and Delta eta, and an enhancement of the per-trigger yield. 
+However, these modifications seem to be limited to pT < 4 GeV/c, above which both the dihadron pair shape and per-trigger yield become similar to p + p collisions. 
+These observations suggest that both the away- and near-side distributions contain a jet fragmentation component which dominates for pT \ge 5GeV and a medium-induced component which is important for pT \le 4 GeV/c. 
+We also quantify the role of jets at intermediate and low pT through the yield of jet-induced pairs in comparison to binary scaled p + p pair yield. 
+The yield of jet-induced pairs is suppressed at high pair proxy energy (sum of the pT magnitudes of the two hadrons) and is enhanced at low pair proxy energy. 
+The former is consistent with jet quenching/ the latter is consistent with the enhancement of soft hadron pairs due to transport of lost energy to lower pT.
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
   for maths, e.g. $\pT > 50\;\GeV$.'

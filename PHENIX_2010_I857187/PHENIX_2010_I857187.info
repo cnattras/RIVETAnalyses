@@ -1,6 +1,6 @@
 Name: PHENIX_2010_I857187
 Year: 2010
-Summary: <Insert short PHENIX_2010_I857187 description>
+Summary: High $p_T$ direct photon and $\pi^0$ triggered azimuthal jet correlations and measurement of $k_T$ for isolated direct photons in $p+p$ collisions at $sqrt{s}=200$ GeV
 Experiment: PHENIX
 Collider: <Insert the collider name>
 InspireID: 857187
@@ -15,10 +15,11 @@ RunInfo: <Describe event types, cuts, and other general generator config tips.>
 Beams: [p+, p+]
 Energies: [200]
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
-Description:
-  '<A fairly long description, including what is measured
-  and if possible what it is useful for in terms of MC validation
-  and tuning. Use LaTeX for maths like $\pT > 50\;\GeV$.>'
+Description: Correlations of charged hadrons of 1 < pT < 10 GeV/c with high pT direct photons and pi^ 0 mesons in the range 5 <pT < 15 GeV/c are used to study jet fragmentation in the photon+jet and di-jet channels, respectively. 
+The magnitude of the partonic transverse momentum, kT, is obtained by comparing to a model incorporating a Gaussian kT smearing. 
+The sensitivity of the associated charged hadron spectra to the underlying fragmentation function is tested and the data are compared to calculations using recent global fit results. 
+The shape of the direct photon-associated hadron spectrum as well as its charge asymmetry are found to be consistent with a sample dominated by quark-gluon Compton scattering. 
+No significant evidence of fragmentation photon correlated production is observed within experimental uncertainties.
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU200

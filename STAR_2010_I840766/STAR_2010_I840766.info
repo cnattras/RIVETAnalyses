@@ -1,6 +1,6 @@
 Name: STAR_2010_I840766
 Year: 2010
-Summary: <A one-line informative STAR_2010_I840766 headline>
+Summary: Inclusive $\pi^0$, $\eta$, and direct photon production at high transverse momentum in $p+p$ and $d+$Au collisions at $\sqrt{s_{NN}}=200$ GeV
 Experiment: STAR
 Collider: <Insert the collider name>
 InspireID: 840766
@@ -15,9 +15,11 @@ References:
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description:
-  'A brief description of what is measured and what it is useful for.
-   Use LaTeX for maths, e.g. $\pT > 50\;\GeV$.'
+Description: We report a measurement of high-p_T inclusive pi^0, eta, and direct photon production in p+p and d+Au collisions at sqrt(s_NN) = 200 GeV at midrapidity (0 < eta < 1). 
+Photons from the decay pi^0 -> gamma gamma were detected in the Barrel Electromagnetic Calorimeter of the STAR experiment at the Relativistic Heavy Ion Collider. 
+The eta -> gamma gamma decay was also observed and constituted the first eta measurement by STAR. 
+The first direct photon cross section measurement by STAR is also presented, the signal was extracted statistically by subtracting the pi^0, eta, and omega(782) decay background from the inclusive photon distribution observed in the calorimeter. 
+The analysis is described in detail, and the results are found to be in good agreement with earlier measurements and with next-to-leading order perturbative QCD calculations.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

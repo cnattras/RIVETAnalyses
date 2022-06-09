@@ -1,6 +1,6 @@
 Name: STAR_2009_I793126
 Year: 2009
-Summary: Systematic Measurements of Identified Particle Spectra in pp, d+Au and Au+Au Collisions from STAR
+Summary: Systematic Measurements of Identified Particle Spectra in $p p, d^+$ Au and Au+Au Collisions from STAR
 Experiment: STAR
 Collider: RHIC
 InspireID: 793126
@@ -18,7 +18,10 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=DAU200,AUAU62,AUAU130
-Description:
+Description: Identified charged particle spectra of $\pi^{\pm}$, $K^{\pm}$, $p$ and $\pbar$ at mid-rapidity ($|y|<0.1$) measured by the $\dedx$ method in the STAR-TPC are reported for $pp$ and d+Au collisions at $\snn = 200$ GeV and for Au+Au collisions at 62.4 GeV, 130 GeV, and 200 GeV. 
+... 
+[Shortened for arXiv list. 
+Full abstract in manuscript.]
   'This rivet analysis plots spectra of charges pions, kaons, protons and antiprotons 
   for three collision systems: dAu at 200 GeV, AuAu at 62.4 GeV, and AuAu at 130 GeV.'
 ValidationInfo:

@@ -1,6 +1,6 @@
 Name: STAR_2020_I1771348
 Year: 2020
-Summary: <A one-line informative STAR_2020_I1771348 headline>
+Summary: Underlying event measurements in $p+p$ collisions at $\sqrt s=$ 200  GeV at RHIC
 Experiment: STAR
 Collider: <Insert the collider name>
 InspireID: 1771348
@@ -17,10 +17,12 @@ References:
 #Luminosity_fb: 139.0
 Options:
 - cent=REF,GEN,IMP,USR
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: Particle production sensitive to nonfactorizable and nonperturbative processes that contribute to the underlying event associated with a high transverse momentum (pT) jet in proton+proton collisions at s=200  GeV is studied with the STAR detector. 
+Each event is divided into three regions based on the azimuthal angle with respect to the highest-pT jet direction: in the leading jet direction (“Toward”), opposite to the leading jet (“Away”), and perpendicular to the leading jet (“Transverse”). 
+In the Transverse region, the average charged particle density is found to be between 0.4 and 0.6 and the mean transverse momentum, ⟨pT⟩, between 0.5 and 0.7  GeV/c for particles with pT>0.2  GeV/c at mid-pseudorapidity (|η|<1) and jet pT>15  GeV/c. 
+Both average particle density and ⟨pT⟩ depend weakly on the leading jet pT. 
+Closer inspection of the Transverse region hints that contributions to the underlying event from initial- and final-state radiation are significantly smaller in these collisions than at the higher energies, up to 13 TeV, recorded at the LHC. 
+Underlying event measurements associated with a high-pT jet will contribute to our understanding of QCD processes at hard and soft scales at RHIC energies, as well as provide constraints to modeling of underlying event dynamics.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

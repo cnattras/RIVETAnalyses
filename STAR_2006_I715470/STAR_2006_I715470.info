@@ -1,6 +1,6 @@
 Name: STAR_2006_I715470
 Year: 2006
-Summary: <A one-line informative STAR_2006_I715470 headline>
+Summary: Direct observation of dijets in central Au+Au collisions at s(NN)**(1/2) = 200-GeV
 Experiment: STAR
 Collider: <Insert the collider name>
 InspireID: 715470
@@ -18,10 +18,9 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU200, dAU200
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: The STAR Collaboration at RHIC reports measurements of azimuthal correlations of high transverse momentum (p_T) charged hadrons in Au+Au collisions at higher p_T than reported previously. 
+As p_T is increased, a narrow, back-to-back peak emerges above the decreasing background, providing a clear dijet signal for all collision centralities studied. 
+Using these correlations, we perform a systematic study of dijet production and suppression in nuclear collisions, providing new constraints on the mechanisms underlying partonic energy loss in dense matter.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

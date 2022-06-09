@@ -1,6 +1,6 @@
 Name: PHENIX_2016_I1393529
 Year: 2016
-Summary: <A one-line informative PHENIX_2016_I1393529 headline>
+Summary: Single electron yields from semileptonic charm and bottom hadron decays in Au$+$Au collisions at $\sqrt{s_{NN}}=200$ GeV
 Experiment: PHENIX
 Collider: <Insert the collider name>
 InspireID: 1393529
@@ -18,7 +18,12 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU,PP
-Description:
+Description: The PHENIX Collaboration at the Relativistic Heavy Ion Collider has measured open heavy flavor production in minimum bias Au+Au collisions at sNN=200 GeV via the yields of electrons from semileptonic decays of charm and bottom hadrons. 
+Previous heavy flavor electron measurements indicated substantial modification in the momentum distribution of the parent heavy quarks owing to the quark-gluon plasma created in these collisions. 
+For the first time, using the PHENIX silicon vertex detector to measure precision displaced tracking, the relative contributions from charm and bottom hadrons to these electrons as a function of transverse momentum are measured in Au+Au collisions. 
+We compare the fraction of electrons from bottom hadrons to previously published results extracted from electron-hadron correlations in p+p collisions at sNN=200 GeV and find the fractions to be similar within the large uncertainties on both measurements for pT>4GeV/c. 
+We use the bottom electron fractions in Au+Au and p+p along with the previously measured heavy flavor electron RAA to calculate the RAA for electrons from charm and bottom hadron decays separately. 
+We find that electrons from bottom hadron decays are less suppressed than those from charm for the region 3<pT<4GeV/c.
   'A brief description of what is measured and what it is useful for
   in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
   for maths, e.g. $\pT > 50\;\GeV$.'

@@ -1,6 +1,6 @@
 Name: BRAHMS_2007_I742956
 Year: 2007
-Summary: <A one-line informative BRAHMS_2007_I742956 headline>
+Summary: Production of mesons and baryons at high rapidity and high P(T) in proton-proton collisions at s**(1/2) = 200-GeV
 Experiment: BRAHMS
 Collider: <Insert the collider name>
 InspireID: 742956
@@ -15,10 +15,10 @@ References:
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: We present particle spectra for charged hadrons $\pi^\pm, K^\pm, p$ and $\bar{p}$ from pp collisions at $\sqrt{s}=200$ GeV measured for the first time at forward rapidities (2.95 and 3.3). 
+The kinematics of these measurements are skewed in a way that probes the small momentum fraction in one of the protons and large fractions in the other. 
+Large proton to pion ratios are observed at values of transverse momentum that extend up to 4 GeV/c, where protons have momenta up to 35 GeV. 
+Next-to-leading order perturbative QCD calculations describe the production of pions and kaons well at these rapidities, but fail to account for the large proton yields and small $\bar{p}/p$ ratios.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

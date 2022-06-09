@@ -1,6 +1,6 @@
 Name: PHENIX_2019_I1672476
 Year: 2019
-Summary: Beam-energy and centrality dependence of direct-photon emission from ultra-relativistic heavy-ion collisions
+Summary: Beam Energy and Centrality Dependence of Direct-Photon Emission from Ultrarelativistic Heavy-Ion Collisions
 Experiment: PHENIX
 Collider: RHIC
 InspireID: 1672476
@@ -18,10 +18,11 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AuAu62,AuAu39
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: The PHENIX collaboration presents first measurements of low-momentum (0.4<pT<3  GeV/c) direct-photon yields from Au+Au collisions at sNN=39 and 62.4 GeV. 
+For both beam energies the direct-photon yields are substantially enhanced with respect to expectations from prompt processes, similar to the yields observed in Au+Au collisions at sNN=200. 
+Analyzing the photon yield as a function of the experimental observable dNch/dη reveals that the low-momentum (>1  GeV/c) direct-photon yield dNγdir/dη is a smooth function of dNch/dη and can be well described as proportional to (dNch/dη)α with α≈1.25. 
+This scaling behavior holds for a wide range of beam energies at the Relativistic Heavy Ion Collider and the Large Hadron Collider, for centrality selected samples, as well as for different A+A collision systems. 
+At a given beam energy, the scaling also holds for high pT (>5  GeV/c), but when results from different collision energies are compared, an additional sNN-dependent multiplicative factor is needed to describe the integrated-direct-photon yield.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

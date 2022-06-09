@@ -1,6 +1,6 @@
 Name: PHENIX_2010_I856259
 Year: 2010
-Summary: <Transverse momentum dependence of $\eta$ meson suppression in Au+Au collisions at $sqrt{s_{NN}}=$ 200GeV>
+Summary: Transverse momentum dependence of meson suppression $\eta$ suppression in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV
 Experiment: PHENIX
 Collider: <RHIC>
 InspireID: 856259
@@ -19,8 +19,10 @@ References:
 Options:
 - cent=REF,GEN,IMP,USR
 - beam=PP200, AUAU200
-Description:
-  'New measurements by the PHENIX experiment at RHIC for $\eta$ production at midrapidity as a function of transverse momentum ($p_{T}$) and collision centrality in $\sqrt{s_{NN}}=$ 200 GeV Au+Au and p+p collisions are presented. They indicate nuclear modification factors ($R_{AA}$) which are similar both in magnitude and trend to those found in earlier $\pi^{0}$ measurements.  Linear fits to $R_{AA}$ as a function of $p_{T}$ in 5–20 GeV/c show that the slope is consistent with zero within two standard deviations at all centralities although a slow rise cannot be excluded. Having different statistical and systematic uncertainties, the $\pi^{0}$ and $\eta$ measurements are complementary at high $p_{T}$; thus, along with the extended $p_{T}$ range of these data they can provide additional constraints for theoretical modeling and the extraction of transport properties'
+Description: New measurements by the PHENIX experiment at RHIC for eta production at midrapidity as a function of transverse momentum (p_T) and collision centrality in sqrt(s_NN) = 200 GeV Au+Au and p+p collisions are presented. 
+They indicate nuclear modification factors (R_AA) that are similar both in magnitude and trend to those found in earlier pi^0 measurements. 
+Linear fits to R_AA in the 5--20 GeV/c p_T region show that the slope is consistent with zero within two standard deviations at all centralities although a slow rise cannot be excluded. 
+Having different statistical and systematic uncertainties the pi^0 and eta measurements are complementary at high p_T/ thus, along with the extended p_T range of these data they can provide additional constraints for theoretical modeling and the extraction of transport properties.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information

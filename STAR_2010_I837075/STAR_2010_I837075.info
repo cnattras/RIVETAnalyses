@@ -1,36 +1,51 @@
 Name: STAR_2010_I837075
 Year: 2010
-Summary: <A one-line informative STAR_2010_I837075 headline>
+Summary: Spectra of identified high-$p_{T}$ $\pi^\pm$ and $p(\bar{p})$ in Cu$+$Cu collisions at $\sqrt{s_{NN}}=200$ GeV
 Experiment: STAR
-Collider: <Insert the collider name>
 InspireID: 837075
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Your Name <ds.johnny@gmail.com>
+ - Your Name <your@email.address>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+- 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
+- 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
+- 'Example: arXiv:1605.03814'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Options:
- - cent=REF,GEN,IMP,USR
- - beam=CUCU200, PP200
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+-Options:
+-cent=REF,GEN,IMP,USR
+Description: We report new results on identified (anti)proton and charged pion spectra at large transverse momenta (3<$p_{T}$<10 GeV/c) from Cu+Cu collisions at $\sqrt{s_{NN}}$=200 GeV using the STAR detector at the Relativistic Heavy Ion Collider (RHIC). This study explores the system size dependence of two novel features observed at RHIC with heavy ions: the hadron suppression at high-$p_{T}$ and the anomalous baryon to meson enhancement at intermediate transverse momenta. Both phenomena could be attributed to the creation of a new form of QCD matter. The results presented here bridge the system size gap between the available pp and Au+Au data, and allow the detailed exploration for the on-set of the novel features. Comparative analysis of all available 200 GeV data indicates that the system size is a major factor determining both the magnitude of the hadron spectra suppression at large transverse momenta and the relative baryon to meson enhancement.
 ValidationInfo:
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
+   'A description of the process used to validate the Rivet code against
+   the original experimental analysis. Cut-flow tables and similar information
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
-BibKey: 
-BibTeX: ''
+BibKey:
+BibTeX: '@article{Abelev_2010,
+	doi = {10.1103/physrevc.81.054907},
+  
+	url = {https://doi.org/10.1103%2Fphysrevc.81.054907},
+  
+	year = 2010,
+	month = {may},
+  
+	publisher = {American Physical Society ({APS})},
+  
+	volume = {81},
+  
+	number = {5},
+  
+	author = {B. I. Abelev and M. M. Aggarwal and Z. Ahammed and A. V. Alakhverdyants and B. D. Anderson and D. Arkhipkin and G. S. Averichev and J. Balewski and L. S. Barnby and S. Baumgart and D. R. Beavis and R. Bellwied and F. Benedosso and M. J. Betancourt and R. R. Betts and A. Bhasin and A. K. Bhati and H. Bichsel and J. Bielcik and J. Bielcikova and B. Biritz and L. C. Bland and B. E. Bonner and J. Bouchet and E. Braidot and A. V. Brandin and A. Bridgeman and E. Bruna and S. Bueltmann and I. Bunzarov and T. P. Burton and X. Z. Cai and H. Caines and M. Calder{\'{o}
+}n de la Barca S{\'{a}}nchez and O. Catu and D. Cebra and R. Cendejas and M. C. Cervantes and Z. Chajecki and P. Chaloupka and S. Chattopadhyay and H. F. Chen and J. H. Chen and J. Y. Chen and J. Cheng and M. Cherney and A. Chikanian and K. E. Choi and W. Christie and P. Chung and R. F. Clarke and M. J. M. Codrington and R. Corliss and J. G. Cramer and H. J. Crawford and D. Das and S. Dash and A. Davila Leyva and L. C. De Silva and R. R. Debbe and T. G. Dedovich and M. DePhillips and A. A. Derevschikov and R. Derradi de Souza and L. Didenko and P. Djawotho and S. M. Dogra and X. Dong and J. L. Drachenberg and J. E. Draper and J. C. Dunlop and M. R. Dutta Mazumdar and L. G. Efimov and E. Elhalhuli and M. Elnimr and J. Engelage and G. Eppley and B. Erazmus and M. Estienne and L. Eun and O. Evdokimov and P. Fachini and R. Fatemi and J. Fedorisin and R. G. Fersch and P. Filip and E. Finch and V. Fine and Y. Fisyak and C. A. Gagliardi and D. R. Gangadharan and M. S. Ganti and E. J. Garcia-Solis and A. Geromitsos and F. Geurts and V. Ghazikhanian and P. Ghosh and Y. N. Gorbunov and A. Gordon and O. Grebenyuk and D. Grosnick and B. Grube and S. M. Guertin and A. Gupta and N. Gupta and W. Guryn and B. Haag and T. J. Hallman and A. Hamed and L.-X. Han and J. W. Harris and J. P. Hays-Wehle and M. Heinz and S. Heppelmann and A. Hirsch and E. Hjort and A. M. Hoffman and G. W. Hoffmann and D. J. Hofman and R. S. Hollis and H. Z. Huang and T. J. Humanic and L. Huo and G. Igo and A. Iordanova and P. Jacobs and W. W. Jacobs and P. Jakl and C. Jena and F. Jin and C. L. Jones and P. G. Jones and J. Joseph and E. G. Judd and S. Kabana and K. Kajimoto and K. Kang and J. Kapitan and K. Kauder and D. Keane and A. Kechechyan and D. Kettler and D. P. Kikola and J. Kiryluk and A. Kisiel and S. R. Klein and A. G. Knospe and A. Kocoloski and D. D. Koetke and T. Kollegger and J. Konzer and M. Kopytine and I. Koralt and W. Korsch and L. Kotchenda and V. Kouchpil and P. Kravtsov and K. Krueger and M. Krus and L. Kumar and P. Kurnadi and M. A. C. Lamont and J. M. Landgraf and S. LaPointe and J. Lauret and A. Lebedev and R. Lednicky and C.-H. Lee and J. H. Lee and W. Leight and M. J. LeVine and C. Li and L. Li and N. Li and W. Li and X. Li and X. Li and Y. Li and Z. Li and G. Lin and S. J. Lindenbaum and M. A. Lisa and F. Liu and H. Liu and J. Liu and T. Ljubicic and W. J. Llope and R. S. Longacre and W. A. Love and Y. Lu and G. L. Ma and Y. G. Ma and D. P. Mahapatra and R. Majka and O. I. Mall and L. K. Mangotra and R. Manweiler and S. Margetis and C. Markert and H. Masui and H. S. Matis and Yu. A. Matulenko and D. McDonald and T. S. McShane and A. Meschanin and R. Milner and N. G. Minaev and S. Mioduszewski and A. Mischke and M. K. Mitrovski and B. Mohanty and M. M. Mondal and D. A. Morozov and M. G. Munhoz and B. K. Nandi and C. Nattrass and T. K. Nayak and J. M. Nelson and P. K. Netrakanti and M. J. Ng and L. V. Nogach and S. B. Nurushev and G. Odyniec and A. Ogawa and H. Okada and V. Okorokov and D. Olson and M. Pachr and B. S. Page and S. K. Pal and Y. Pandit and Y. Panebratsev and T. Pawlak and T. Peitzmann and V. Perevoztchikov and C. Perkins and W. Peryt and S. C. Phatak and P. Pile and M. Planinic and M. A. Ploskon and J. Pluta and D. Plyku and N. Poljak and A. M. Poskanzer and B. V. K. S. Potukuchi and C. B. Powell and D. Prindle and C. Pruneau and N. K. Pruthi and P. R. Pujahari and J. Putschke and R. Raniwala and S. Raniwala and R. L. Ray and R. Redwine and R. Reed and J. M. Rehberg and H. G. Ritter and J. B. Roberts and O. V. Rogachevskiy and J. L. Romero and A. Rose and C. Roy and L. Ruan and M. J. Russcher and R. Sahoo and S. Sakai and I. Sakrejda and T. Sakuma and S. Salur and J. Sandweiss and E. Sangaline and J. Schambach and R. P. Scharenberg and N. Schmitz and T. R. Schuster and J. Seele and J. Seger and I. Selyuzhenkov and P. Seyboth and E. Shahaliev and M. Shao and M. Sharma and S. S. Shi and E. P. Sichtermann and F. Simon and R. N. Singaraju and M. J. Skoby and N. Smirnov and P. Sorensen and J. Sowinski and H. M. Spinka and B. Srivastava and T. D. S. Stanislaus and D. Staszak and J. R. Stevens and R. Stock and M. Strikhanov and B. Stringfellow and A. A. P. Suaide and M. C. Suarez and N. L. Subba and M. Sumbera and X. M. Sun and Y. Sun and Z. Sun and B. Surrow and T. J. M. Symons and A. Szanto de Toledo and J. Takahashi and A. H. Tang and Z. Tang and L. H. Tarini and T. Tarnowsky and D. Thein and J. H. Thomas and J. Tian and A. R. Timmins and S. Timoshenko and D. Tlusty and M. Tokarev and T. A. Trainor and V. N. Tram and S. Trentalange and R. E. Tribble and O. D. Tsai and J. Ulery and T. Ullrich and D. G. Underwood and G. Van Buren and G. van Nieuwenhuizen and J. A. Vanfossen and R. Varma and G. M. S. Vasconcelos and A. N. Vasiliev and F. Videbaek and Y. P. Viyogi and S. Vokal and S. A. Voloshin and M. Wada and M. Walker and F. Wang and G. Wang and H. Wang and J. S. Wang and Q. Wang and X. Wang and X. L. Wang and Y. Wang and G. Webb and J. C. Webb and G. D. Westfall and C. Whitten and H. Wieman and E. Wingfield and S. W. Wissink and R. Witt and Y. Wu and W. Xie and N. Xu and Q. H. Xu and W. Xu and Y. Xu and Z. Xu and L. Xue and Y. Yang and P. Yepes and K. Yip and I.-K. Yoo and Q. Yue and M. Zawisza and H. Zbroszczyk and W. Zhan and S. Zhang and W. M. Zhang and X. P. Zhang and Y. Zhang and Z. P. Zhang and J. Zhao and C. Zhong and J. Zhou and W. Zhou and X. Zhu and Y. H. Zhu and R. Zoulkarneev and Y. Zoulkarneeva},
+  
+	title = {Spectra of identified high-$\less$mml:math xmlns:mml="http://www.w3.org/1998/Math/{MathML}" display="inline"$\greater$$\less$mml:mrow$\greater$$\less$mml:msub$\greater$$\less$mml:mi$\greater$p$\less$/mml:mi$\greater$$\less$mml:mrow$\greater$$\less$mml:mi$\greater$T$\less$/mml:mi$\greater$$\less$/mml:mrow$\greater$$\less$/mml:msub$\greater$$\less$/mml:mrow$\greater$$\less$/mml:math$\greater$$\less$mml:math xmlns:mml="http://www.w3.org/1998/Math/{MathML}" display="inline"$\greater$$\less$mml:mrow$\greater$$\less$mml:msup$\greater$$\less$mml:mi$\greater$$\uppi$$\less$/mml:mi$\greater$$\less$mml:mrow$\greater$$\less$mml:mo$\greater$$\pm$$\less$/mml:mo$\greater$$\less$/mml:mrow$\greater$$\less$/mml:msup$\greater$$\less$/mml:mrow$\greater$$\less$/mml:math$\greater$and$\less$mml:math xmlns:mml="http://www.w3.org/1998/Math/{MathML}" display="inline"$\greater$$\less$mml:mrow$\greater$$\less$mml:mi$\greater$p$\less$/mml:mi$\greater$$\less$mml:mo stretchy="false"$\greater$($\less$/mml:mo$\greater$$\less$mml:mi$\greater$p{\textasciimacron}$\less$/mml:mi$\greater$$\less$mml:mo stretchy="false"$\greater$)$\less$/mml:mo$\greater$$\less$/mml:mrow$\greater$$\less$/mml:math$\greater$in$\less$mml:math xmlns:mml="http://www.w3.org/1998/Math/{MathML}" display="inline"$\greater$$\less$mml:mrow$\greater$$\less$mml:mi mathvariant="normal"$\greater$Cu$\less$/mml:mi$\greater$$\less$mml:mo$\greater$$\mathplus$$\less$/mml:mo$\greater$$\less$mml:mi mathvariant="normal"$\greater$Cu$\less$/mml:mi$\greater$$\less$/mml:mrow$\greater$$\less$/mml:math$\greater$collisions at$\less$mml:math xmlns:mml="http://www.w3.org/1998/Math/{MathML}" display="inline"$\greater$$\less$mml:mrow$\greater$$\less$mml:msqrt$\greater$$\less$mml:mrow$\greater$$\less$mml:msub$\greater$$\less$mml:mi$\greater$s$\less$/mml:mi$\greater$$\less$mml:mrow$\greater$$\less$mml:mi mathvariant="italic"$\greater${NN}$\less$/mml:mi$\greater$$\less$/mml:mrow$\greater$$\less$/mml:msub$\greater$$\less$/mml:mrow$\greater$$\less$/mml:msqrt$\greater$$\less$mml:mo$\greater$=$\less$/mml:mo$\greater$$\less$mml:mn$\greater$200$\less$/mml:mn$\greater$$\less$/mml:mrow$\greater$$\less$/mml:math$\greater${GeV}},
+  
+	journal = {Physical Review C}
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 
