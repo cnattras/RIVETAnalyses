@@ -1,7 +1,7 @@
 # BEGIN PLOT /PHENIX_BBC_CentralityCalibration/CMULT
-Title=Centrality distribution $\eta_{ch} < 0.5$.
+Title=Charged-particle distribution
 XLabel=$N_{\rm ch}$
-YLabel=Events
+YLabel=Normalized Events
 LogX=0
 LogY=1
 # END PLOT
