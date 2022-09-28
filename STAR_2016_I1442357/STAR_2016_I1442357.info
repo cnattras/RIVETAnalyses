@@ -2,15 +2,16 @@ Name: STAR_2016_I1442357
 Year: 2016
 Summary: Jet-like Correlations with Direct-Photon and Neutral-Pion Triggers at $\sqrt{s_{_{NN}}} = 200$ GeV
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1442357
 Status: UNVALIDATED
 Authors:
- - Your Name <your@email.address>
-#References:
-#- '<Example: Eur.Phys.J. C76 (2016) no.7, 392>'
-#- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
-#- '<Example: arXiv:1605.03814>'
+ - Brittney Contreras <bcontrer@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: <Insert beam pair(s), e.g. [p+, p+] or [[p-, e-], [p-, e+]]>
 #Energies: <Run energies or beam energy pairs in GeV, e.g. [13000] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
@@ -18,15 +19,22 @@ RunInfo: <Describe event types, cuts, and other general generator config tips.>
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU
-Description: Azimuthal correlations of charged hadrons with direct-photon ( γdir ) and neutral-pion ( π0 ) trigger particles are analyzed in central Au+Au and minimum-bias p+p collisions at sNN=200 GeV in the STAR experiment. 
-The charged-hadron per-trigger yields at mid-rapidity from central Au+Au collisions are compared with p+p collisions to quantify the suppression in Au+Au collisions. 
-The suppression of the away-side associated-particle yields per γdir trigger is independent of the transverse momentum of the trigger particle ( pTtrig ), whereas the suppression is smaller at low transverse momentum of the associated charged hadrons ( pTassoc ). 
-Within uncertainty, similar levels of suppression are observed for γdir and π0 triggers as a function of zT ( ≡pTassoc/pTtrig ). 
-The results are compared with energy-loss-inspired theoretical model predictions. 
-Our studies support previous conclusions that the lost energy reappears predominantly at low transverse momentum, regardless of the trigger energy.
+Description: Azimuthal correlations of charged hadrons with direct-photon ( γdir ) and neutral-pion ( π0 ) trigger particles are analyzed in central Au+Au and minimum-bias p+p collisions at sNN=200 GeV in the STAR experiment. The charged-hadron per-trigger yields at mid-rapidity from central Au+Au collisions are compared with p+p collisions to quantify the suppression in Au+Au collisions. The suppression of the away-side associated-particle yields per γdir trigger is independent of the transverse momentum of the trigger particle ( pTtrig ), whereas the suppression is smaller at low transverse momentum of the associated charged hadrons ( pTassoc ). Within uncertainty, similar levels of suppression are observed for γdir and π0 triggers as a function of zT ( ≡pTassoc/pTtrig ). The results are compared with energy-loss-inspired theoretical model predictions. Our studies support previous conclusions that the lost energy reappears predominantly at low transverse momentum, regardless of the trigger energy.
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{STAR:2016jdz,
+    author = "Adamczyk, L. and others",
+    collaboration = "STAR",
+    title = "{Jet-like Correlations with Direct-Photon and Neutral-Pion Triggers at $\sqrt{s_{_{NN}}} = 200$ GeV}",
+    eprint = "1604.01117",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1016/j.physletb.2016.07.046",
+    journal = "Phys. Lett. B",
+    volume = "760",
+    pages = "689--696",
+    year = "2016"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

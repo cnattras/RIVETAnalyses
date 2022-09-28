@@ -2,15 +2,14 @@ Name: STAR_2016_I1420183
 Year: 2016
 Summary: $\rm{J}/\psi$ production at low transverse momentum in p+p and d+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1420183
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Leszek Kosarzewski <leszek.kosarzewski@gmail.com>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[200,200]]
@@ -18,11 +17,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=pp,dAu
-Description: We report on the measurement of J/ψ production in the dielectron channel at midrapidity (|y|<1) in p+p and d+Au collisions at sNN=200GeV from the STAR experiment at the Relativistic Heavy Ion Collider. 
-The transverse momentum pT spectra in p+p for pT<4GeV/c and d+Au collisions for pT<3GeV/c are presented. 
-These measurements extend the STAR coverage for J/ψ production in p+p collisions to low pT. 
-The 〈pT2〉 from the measured J/ψ invariant cross section in p+p and d+Au collisions are evaluated and compared to similar measurements at other collision energies. 
-The nuclear modification factor for J/ψ is extracted as a function of pT and collision centrality in d+Au and compared to model calculations using the modified nuclear parton distribution function and a final-state J/ψ nuclear absorption cross section.
+Description: We report on the measurement of J/ψ production in the dielectron channel at midrapidity (|y|<1) in p+p and d+Au collisions at sNN=200GeV from the STAR experiment at the Relativistic Heavy Ion Collider. The transverse momentum pT spectra in p+p for pT<4GeV/c and d+Au collisions for pT<3GeV/c are presented. These measurements extend the STAR coverage for J/ψ production in p+p collisions to low pT. The 〈pT2〉 from the measured J/ψ invariant cross section in p+p and d+Au collisions are evaluated and compared to similar measurements at other collision energies. The nuclear modification factor for J/ψ is extracted as a function of pT and collision centrality in d+Au and compared to model calculations using the modified nuclear parton distribution function and a final-state J/ψ nuclear absorption cross section.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -31,7 +26,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{STAR:2016uxt,
+    author = "Adamczyk, L. and others",
+    collaboration = "STAR",
+    title = "{$\rm{J}/\psi$ production at low transverse momentum in p+p and d+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV}",
+    eprint = "1602.02212",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevC.93.064904",
+    journal = "Phys. Rev. C",
+    volume = "93",
+    number = "6",
+    pages = "064904",
+    year = "2016"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

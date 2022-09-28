@@ -2,11 +2,12 @@ Name: PHENIX_2008_I778396
 Year: 2008
 Summary: Dihadron azimuthal correlations in Au$+$Au collisions at $\sqrt{s_{NN}}=$ 200 GeV
 Experiment: PHENIX
-Collider: Relativistic Heavy Ion Collider
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 778396
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Nora Bauer <nbauer1@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
  - Christine Nattrass <cnattras@utk.edu>
 References:
  - 'Phys. Rev C. 78 (2008) 014901'
@@ -19,20 +20,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU
-Description: Azimuthal angle (Delta phi) correlations are presented for a broad range of transverse momentum (0.4 < pT < 10 GeV/c) and centrality (0-92%) selections for charged hadrons from di-jets in Au+Au collisions at sqrt(s_NN) = 200 GeV. 
-With increasing pT, the away-side Delta phi distribution evolves from a broad and relatively flat shape to a concave shape, then to a convex shape. 
-Comparisons to p+p data suggest that the away-side distribution can be divided into a partially suppressed head region centered at Delta phi ~ \pi, and an enhanced shoulder region centered at Delta phi ~ \pi \pm 1:1. 
-The pT spectrum for the associated hadrons in the head region softens toward central collisions. 
-The spectral slope for the shoulder region is independent of centrality and trigger pT . 
-The properties of the near-side distributions are also modified relative to those in p + p collisions, reflected by the broadening of the jet shape in Delta phi and Delta eta, and an enhancement of the per-trigger yield. 
-However, these modifications seem to be limited to pT < 4 GeV/c, above which both the dihadron pair shape and per-trigger yield become similar to p + p collisions. 
-These observations suggest that both the away- and near-side distributions contain a jet fragmentation component which dominates for pT \ge 5GeV and a medium-induced component which is important for pT \le 4 GeV/c. 
-We also quantify the role of jets at intermediate and low pT through the yield of jet-induced pairs in comparison to binary scaled p + p pair yield. 
-The yield of jet-induced pairs is suppressed at high pair proxy energy (sum of the pT magnitudes of the two hadrons) and is enhanced at low pair proxy energy. 
-The former is consistent with jet quenching/ the latter is consistent with the enhancement of soft hadron pairs due to transport of lost energy to lower pT.
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: Azimuthal angle (Delta phi) correlations are presented for a broad range of transverse momentum (0.4 < pT < 10 GeV/c) and centrality (0-92%) selections for charged hadrons from di-jets in Au+Au collisions at sqrt(s_NN) = 200 GeV. With increasing pT, the away-side Delta phi distribution evolves from a broad and relatively flat shape to a concave shape, then to a convex shape. Comparisons to p+p data suggest that the away-side distribution can be divided into a partially suppressed head region centered at Delta phi ~ \pi, and an enhanced shoulder region centered at Delta phi ~ \pi \pm 1:1. The pT spectrum for the associated hadrons in the head region softens toward central collisions. The spectral slope for the shoulder region is independent of centrality and trigger pT . The properties of the near-side distributions are also modified relative to those in p + p collisions, reflected by the broadening of the jet shape in Delta phi and Delta eta, and an enhancement of the per-trigger yield. However, these modifications seem to be limited to pT < 4 GeV/c, above which both the dihadron pair shape and per-trigger yield become similar to p + p collisions. These observations suggest that both the away- and near-side distributions contain a jet fragmentation component which dominates for pT \ge 5GeV and a medium-induced component which is important for pT \le 4 GeV/c. We also quantify the role of jets at intermediate and low pT through the yield of jet-induced pairs in comparison to binary scaled p + p pair yield. The yield of jet-induced pairs is suppressed at high pair proxy energy (sum of the pT magnitudes of the two hadrons) and is enhanced at low pair proxy energy. The former is consistent with jet quenching/ the latter is consistent with the enhancement of soft hadron pairs due to transport of lost energy to lower pT.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -41,7 +29,19 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2008osq,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Dihadron azimuthal correlations in Au$+$Au collisions at $\sqrt{s_{NN}}=$ 200 GeV}",
+    eprint = "0801.4545",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevC.78.014901",
+    journal = "Phys. Rev. C",
+    volume = "78",
+    pages = "014901",
+    year = "2008"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

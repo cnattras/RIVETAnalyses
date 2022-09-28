@@ -2,27 +2,21 @@ Name: STAR_2020_I1771348
 Year: 2020
 Summary: Underlying event measurements in $p+p$ collisions at $\sqrt s=$ 200  GeV at RHIC
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1771348
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Yang He <yanghe@rcf.rhic.bnl.gov>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options:
 - cent=REF,GEN,IMP,USR
-Description: Particle production sensitive to nonfactorizable and nonperturbative processes that contribute to the underlying event associated with a high transverse momentum (pT) jet in proton+proton collisions at s=200  GeV is studied with the STAR detector. 
-Each event is divided into three regions based on the azimuthal angle with respect to the highest-pT jet direction: in the leading jet direction (“Toward”), opposite to the leading jet (“Away”), and perpendicular to the leading jet (“Transverse”). 
-In the Transverse region, the average charged particle density is found to be between 0.4 and 0.6 and the mean transverse momentum, ⟨pT⟩, between 0.5 and 0.7  GeV/c for particles with pT>0.2  GeV/c at mid-pseudorapidity (|η|<1) and jet pT>15  GeV/c. 
-Both average particle density and ⟨pT⟩ depend weakly on the leading jet pT. 
-Closer inspection of the Transverse region hints that contributions to the underlying event from initial- and final-state radiation are significantly smaller in these collisions than at the higher energies, up to 13 TeV, recorded at the LHC. 
-Underlying event measurements associated with a high-pT jet will contribute to our understanding of QCD processes at hard and soft scales at RHIC energies, as well as provide constraints to modeling of underlying event dynamics.
+Description: Particle production sensitive to nonfactorizable and nonperturbative processes that contribute to the underlying event associated with a high transverse momentum (pT) jet in proton+proton collisions at s=200  GeV is studied with the STAR detector. Each event is divided into three regions based on the azimuthal angle with respect to the highest-pT jet direction: in the leading jet direction (“Toward”), opposite to the leading jet (“Away”), and perpendicular to the leading jet (“Transverse”). In the Transverse region, the average charged particle density is found to be between 0.4 and 0.6 and the mean transverse momentum, ⟨pT⟩, between 0.5 and 0.7  GeV/c for particles with pT>0.2  GeV/c at mid-pseudorapidity (|η|<1) and jet pT>15  GeV/c. Both average particle density and ⟨pT⟩ depend weakly on the leading jet pT. Closer inspection of the Transverse region hints that contributions to the underlying event from initial- and final-state radiation are significantly smaller in these collisions than at the higher energies, up to 13 TeV, recorded at the LHC. Underlying event measurements associated with a high-pT jet will contribute to our understanding of QCD processes at hard and soft scales at RHIC energies, as well as provide constraints to modeling of underlying event dynamics.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -31,7 +25,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{STAR:2019cie,
+    author = "Adam, Jaroslav and others",
+    collaboration = "STAR",
+    title = "{Underlying event measurements in $p+p$ collisions at $\sqrt s=$ 200  GeV at RHIC}",
+    eprint = "1912.08187",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevD.101.052004",
+    journal = "Phys. Rev. D",
+    volume = "101",
+    number = "5",
+    pages = "052004",
+    year = "2020"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

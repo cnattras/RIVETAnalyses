@@ -2,11 +2,13 @@ Name: PHENIX_2008_I778168
 Year: 2008
 Summary: Suppression pattern of neutral pions at high transverse momentum in Au$+$Au collisions at $\sqrt{s_{NN}}=$ 200 GeV and constraints on medium transport coefficients
 Experiment: PHENIX
-Collider: <Insert PHENIX_2008_I778168 collider>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 778168
 Status: UNVALIDATED
 Authors:
- - Antonio Silva <antonio.silva@cern.ch>, Immanuel Schmidt <ischmid1@vols.utk.edu>, Christine Nattrass <cnattras@utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch> 
+ - Immanuel Schmidt <ischmid1@vols.utk.edu> 
+ - Christine Nattrass <cnattras@utk.edu>
 References:
  - '<Phys.Rev.Lett.101 (2008) 232301>'
  - '<doi:10.1103/PhysRevLett.101.232301>'
@@ -22,13 +24,21 @@ NeedCrossSection: no
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU
-Description: For Au + Au collisions at 200 GeV we measure neutral pion production with good statistics for transverse momentum, p_T, up to 20 GeV/c. 
-A fivefold suppression is found, which is essentially constant for 5 < p_T < 20 GeV/c. 
-Experimental uncertainties are small enough to constrain any model-dependent parameterization for the transport coefficient of the medium, e.g. 
-\mean(q^hat) in the parton quenching model. 
-The spectral shape is similar for all collision classes, and the suppression does not saturate in Au+Au collisions/ instead, it increases proportional to the number of participating nucleons, as N_part^2/3.
+Description: For Au + Au collisions at 200 GeV we measure neutral pion production with good statistics for transverse momentum, $p_T$, up to 20 GeV/c. A fivefold suppression is found, which is essentially constant for 5 < $p_T$ < 20 GeV/c. Experimental uncertainties are small enough to constrain any model-dependent parameterization for the transport coefficient of the medium, e.g. $\bar{\hat{q}}$ in the parton quenching model. The spectral shape is similar for all collision classes, and the suppression does not saturate in Au+Au collisions, instead, it increases proportional to the number of participating nucleons, as $N_{part}^2/3$.
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2008saf,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Suppression pattern of neutral pions at high transverse momentum in Au$+$Au collisions at $\sqrt{s_{NN}}=$ 200 GeV and constraints on medium transport coefficients}",
+    eprint = "0801.4020",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevLett.101.232301",
+    journal = "Phys. Rev. Lett.",
+    volume = "101",
+    pages = "232301",
+    year = "2008"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

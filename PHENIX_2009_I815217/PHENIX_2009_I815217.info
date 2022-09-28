@@ -2,23 +2,21 @@ Name: PHENIX_2009_I815217
 Year: 2009
 Summary: Photoproduction of J/psi and of high mass e+e- in ultra-peripheral Au+Au collisions at s**(1/2) = 200-GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 815217
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Reem Alshredi <reemalreshidi@outlook.com>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description: We present the first measurement of photoproduction of J/ψ and of two-photon production of high-mass e+e− pairs in electromagnetic (or ultra-peripheral) nucleus–nucleus interactions, using Au + Au data at sNN=200 GeV . 
-The events are tagged with forward neutrons emitted following Coulomb excitation of one or both Au ⋆ nuclei. 
-The event sample consists of 28 events with me+e−>2 GeV/c2 with zero like-sign background. 
-The measured cross sections at midrapidity of dσ/dy(J/ψ+Xn,y=0)=76±33(stat)±11(syst) μb and d2σ/dmdy(e+e−+Xn,y=0)=86±23(stat)±16(syst) μb/(GeV/c2) for me+e−∈[2.0,2.8] GeV/c2 have been compared and found to be consistent with models for photoproduction of J/ψ and QED based calculations of two-photon production of e+e− pairs.
+Description: We present the first measurement of photoproduction of J/ψ and of two-photon production of high-mass e+e− pairs in electromagnetic (or ultra-peripheral) nucleus–nucleus interactions, using Au + Au data at sNN=200 GeV . The events are tagged with forward neutrons emitted following Coulomb excitation of one or both Au ⋆ nuclei. The event sample consists of 28 events with me+e−>2 GeV/c2 with zero like-sign background. The measured cross sections at midrapidity of dσ/dy(J/ψ+Xn,y=0)=76±33(stat)±11(syst) μb and d2σ/dmdy(e+e−+Xn,y=0)=86±23(stat)±16(syst) μb/(GeV/c2) for me+e−∈[2.0,2.8] GeV/c2 have been compared and found to be consistent with models for photoproduction of J/ψ and QED based calculations of two-photon production of e+e− pairs.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -27,7 +25,19 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2009xtn,
+    author = "Afanasiev, S. and others",
+    collaboration = "PHENIX",
+    title = "{Photoproduction of J/psi and of high mass e+e- in ultra-peripheral Au+Au collisions at s**(1/2) = 200-GeV}",
+    eprint = "0903.2041",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1016/j.physletb.2009.07.061",
+    journal = "Phys. Lett. B",
+    volume = "679",
+    pages = "321--329",
+    year = "2009"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

@@ -2,15 +2,16 @@ Name: PHENIX_2019_I1672476
 Year: 2019
 Summary: Beam Energy and Centrality Dependence of Direct-Photon Emission from Ultrarelativistic Heavy-Ion Collisions
 Experiment: PHENIX
-Collider: RHIC
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1672476
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Christine Nattrass cnattras@utk.edu
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Kip Hunt <nhunt5@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [AU, AU]
 #Energies: [[6500,6500]]
@@ -18,11 +19,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AuAu62,AuAu39
-Description: The PHENIX collaboration presents first measurements of low-momentum (0.4<pT<3  GeV/c) direct-photon yields from Au+Au collisions at sNN=39 and 62.4 GeV. 
-For both beam energies the direct-photon yields are substantially enhanced with respect to expectations from prompt processes, similar to the yields observed in Au+Au collisions at sNN=200. 
-Analyzing the photon yield as a function of the experimental observable dNch/dη reveals that the low-momentum (>1  GeV/c) direct-photon yield dNγdir/dη is a smooth function of dNch/dη and can be well described as proportional to (dNch/dη)α with α≈1.25. 
-This scaling behavior holds for a wide range of beam energies at the Relativistic Heavy Ion Collider and the Large Hadron Collider, for centrality selected samples, as well as for different A+A collision systems. 
-At a given beam energy, the scaling also holds for high pT (>5  GeV/c), but when results from different collision energies are compared, an additional sNN-dependent multiplicative factor is needed to describe the integrated-direct-photon yield.
+Description: The PHENIX collaboration presents first measurements of low-momentum (0.4<pT<3  GeV/c) direct-photon yields from Au+Au collisions at sNN=39 and 62.4 GeV. For both beam energies the direct-photon yields are substantially enhanced with respect to expectations from prompt processes, similar to the yields observed in Au+Au collisions at sNN=200. Analyzing the photon yield as a function of the experimental observable dNch/dη reveals that the low-momentum (>1  GeV/c) direct-photon yield dNγdir/dη is a smooth function of dNch/dη and can be well described as proportional to (dNch/dη)α with α≈1.25. This scaling behavior holds for a wide range of beam energies at the Relativistic Heavy Ion Collider and the Large Hadron Collider, for centrality selected samples, as well as for different A+A collision systems. At a given beam energy, the scaling also holds for high pT (>5  GeV/c), but when results from different collision energies are compared, an additional sNN-dependent multiplicative factor is needed to describe the integrated-direct-photon yield.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -31,7 +28,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2018for,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Beam Energy and Centrality Dependence of Direct-Photon Emission from Ultrarelativistic Heavy-Ion Collisions}",
+    eprint = "1805.04084",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevLett.123.022301",
+    journal = "Phys. Rev. Lett.",
+    volume = "123",
+    number = "2",
+    pages = "022301",
+    year = "2019"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

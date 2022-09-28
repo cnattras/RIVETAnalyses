@@ -2,15 +2,16 @@ Name: STAR_2012_I918779
 Year: 2012
 Summary: Strangeness Enhancement in Cu+Cu and Au+Au Collisions at $\sqrt{s_{NN}} = 200$ GeV
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 918779
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
-  - Antonio Silva <antonio.silva@cern.ch>, Christal Martin <cbaillar@vols.utk.edu>, Christine Nattrass <cnattras@utk.edu>
-References:
- - '<Phys.Rev.Lett.108:072301,2012>'
- - '<DOI: 10.1103/PhysRevLett.108.072301>'
- - '<arXiv:1107.2955>'
+  - Antonio Silva <antonio.silva@cern.ch> 
+  - Christal Martin <cbaillar@vols.utk.edu> 
+  - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -18,9 +19,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP, AUAU200,CUCU200
-Description: We report new STAR measurements of mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^{0}_{S}$, $\Xi^{-}$, $\bar{\Xi}^{+}$, $\Omega^{-}$, $\bar{\Omega}^{+}$ particles in Cu+Cu collisions at \sNN{200}, and mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^{0}_{S}$ particles in Au+Au at \sNN{200}. 
-We show that at a given number of participating nucleons, the production of strange hadrons is higher in Cu+Cu collisions than in Au+Au collisions at the same center-of-mass energy. 
-We find that aspects of the enhancement factors for all particles can be described by a parameterization based on the fraction of participants that undergo multiple collisions.
+Description: We report new STAR measurements of mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^{0}_{S}$, $\Xi^{-}$, $\bar{\Xi}^{+}$, $\Omega^{-}$, $\bar{\Omega}^{+}$ particles in Cu+Cu collisions at \sNN{200}, and mid-rapidity yields for the $\Lambda$, $\bar{\Lambda}$, $K^{0}_{S}$ particles in Au+Au at \sNN{200}. We show that at a given number of participating nucleons, the production of strange hadrons is higher in Cu+Cu collisions than in Au+Au collisions at the same center-of-mass energy. We find that aspects of the enhancement factors for all particles can be described by a parameterization based on the fraction of participants that undergo multiple collisions.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -29,7 +28,19 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{STAR:2011fbd,
+    author = "Agakishiev, G. and others",
+    collaboration = "STAR",
+    title = "{Strangeness Enhancement in Cu+Cu and Au+Au Collisions at $\sqrt{s_{NN}} = 200$ GeV}",
+    eprint = "1107.2955",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevLett.108.072301",
+    journal = "Phys. Rev. Lett.",
+    volume = "108",
+    pages = "072301",
+    year = "2012"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

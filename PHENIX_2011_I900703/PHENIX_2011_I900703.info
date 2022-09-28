@@ -2,11 +2,11 @@ Name: PHENIX_2011_I900703
 Year: 2011
 Summary: Measurements of Higher-Order Flow Harmonics in Au+Au Collisions at $\sqrt{s_{NN}} = 200$ GeV
 Experiment: PHENIX
-Collider: <RHIC>
+Collider: Relativisitc Heavy Ion Collider (RHIC)
 InspireID: 900703
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
+ - Takahito Todoroki <todoroki@bnl.gov>
 References:
  - 'Phys. Rev. Lett. 107,252301 (2011)'
  - 'DOI:10.1103/PhysRevLett.107.252301'
@@ -19,10 +19,7 @@ Options:
  - cent=REF,GEN,IMP,USR
 Options:
  - beam=AUAU,PP
-Description: Flow coefficients v_n for n = 2, 3, 4, characterizing the anisotropic collective flow in Au+Au collisions at sqrt(s_NN) = 200 GeV, are measured relative to event planes \Psi_n determined at large rapidity. 
-We report v_n as a function of transverse momentum and collision centrality, and study the correlations among the event planes of different order n. 
-The v_n are well described by hydrodynamic models which employ a Glauber Monte Carlo initial state geometry with fluctuations, providing additional constraining power on the interplay between initial conditions and the effects of viscosity as the system evolves. 
-This new constraint improves precision of the extracted viscosity to entropy density ratio eta/s.
+Description: Flow coefficients v_n for n = 2, 3, 4, characterizing the anisotropic collective flow in Au+Au collisions at sqrt(s_NN) = 200 GeV, are measured relative to event planes \Psi_n determined at large rapidity. We report v_n as a function of transverse momentum and collision centrality, and study the correlations among the event planes of different order n. The v_n are well described by hydrodynamic models which employ a Glauber Monte Carlo initial state geometry with fluctuations, providing additional constraining power on the interplay between initial conditions and the effects of viscosity as the system evolves. This new constraint improves precision of the extracted viscosity to entropy density ratio eta/s.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -31,7 +28,19 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2011yyh,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Measurements of Higher-Order Flow Harmonics in Au+Au Collisions at $\sqrt{s_{NN}} = 200$ GeV}",
+    eprint = "1105.3928",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevLett.107.252301",
+    journal = "Phys. Rev. Lett.",
+    volume = "107",
+    pages = "252301",
+    year = "2011"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

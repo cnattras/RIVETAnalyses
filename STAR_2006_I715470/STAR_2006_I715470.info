@@ -2,15 +2,16 @@ Name: STAR_2006_I715470
 Year: 2006
 Summary: Direct observation of dijets in central Au+Au collisions at s(NN)**(1/2) = 200-GeV
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 715470
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - AJ Threlkeld <athrelk2@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -18,9 +19,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU200, dAU200
-Description: The STAR Collaboration at RHIC reports measurements of azimuthal correlations of high transverse momentum (p_T) charged hadrons in Au+Au collisions at higher p_T than reported previously. 
-As p_T is increased, a narrow, back-to-back peak emerges above the decreasing background, providing a clear dijet signal for all collision centralities studied. 
-Using these correlations, we perform a systematic study of dijet production and suppression in nuclear collisions, providing new constraints on the mechanisms underlying partonic energy loss in dense matter.
+Description: The STAR Collaboration at RHIC reports measurements of azimuthal correlations of high transverse momentum (p_T) charged hadrons in Au+Au collisions at higher p_T than reported previously. As p_T is increased, a narrow, back-to-back peak emerges above the decreasing background, providing a clear dijet signal for all collision centralities studied. Using these correlations, we perform a systematic study of dijet production and suppression in nuclear collisions, providing new constraints on the mechanisms underlying partonic energy loss in dense matter.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -29,7 +28,18 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{STAR:2006vcp,
+    author = "Adams, J. and others",
+    collaboration = "STAR",
+    title = "{Direct observation of dijets in central Au+Au collisions at s(NN)**(1/2) = 200-GeV}",
+    eprint = "nucl-ex/0604018",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.97.162301",
+    journal = "Phys. Rev. Lett.",
+    volume = "97",
+    pages = "162301",
+    year = "2006"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

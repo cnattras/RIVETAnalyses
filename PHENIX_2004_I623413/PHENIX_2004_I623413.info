@@ -2,16 +2,17 @@ Name: PHENIX_2004_I623413
 Year: 2004
 Summary: Single identified hadron spectra from s(NN)**(1/2) = 130-GeV Au+Au collisions
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 623413
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Reentrant: False
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Ralph Davenport <rodavenport02@my.fisk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -19,21 +20,23 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU130
-Description: Transverse momentum spectra and yields of hadrons are measured by the PHENIX collaboration in Au + Au collisions at sqrt(s_NN) = 130 GeV at the Relativistic Heavy Ion Collider (RHIC). 
-The time-of-flight resolution allows identification of pions to transverse momenta of 2 GeV/c and protons and antiprotons to 4 GeV/c. 
-The yield of pions rises approximately linearly with the number of nucleons participating in the collision, while the number of kaons, protons, and antiprotons increases more rapidly. 
-The shape of the momentum distribution changes between peripheral and central collisions. 
-Simultaneous analysis of all the p_T spectra indicates radial collective expansion, consistent with predictions of hydrodynamic models. 
-Hydrodynamic analysis of the spectra shows that the expansion velocity increases with collision centrality and collision energy. 
-This expansion boosts the particle momenta, causing the yield from soft processes to exceed that for hard to large transverse momentum, perhaps as large as 3 GeV/c.
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
+Description: Transverse momentum spectra and yields of hadrons are measured by the PHENIX collaboration in Au + Au collisions at sqrt(s_NN) = 130 GeV at the Relativistic Heavy Ion Collider (RHIC). The time-of-flight resolution allows identification of pions to transverse momenta of 2 GeV/c and protons and antiprotons to 4 GeV/c. The yield of pions rises approximately linearly with the number of nucleons participating in the collision, while the number of kaons, protons, and antiprotons increases more rapidly. The shape of the momentum distribution changes between peripheral and central collisions. Simultaneous analysis of all the p_T spectra indicates radial collective expansion, consistent with predictions of hydrodynamic models. Hydrodynamic analysis of the spectra shows that the expansion velocity increases with collision centrality and collision energy. This expansion boosts the particle momenta, causing the yield from soft processes to exceed that for hard to large transverse momentum, perhaps as large as 3 GeV/c.
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2003wtu,
+    author = "Adcox, K. and others",
+    collaboration = "PHENIX",
+    title = "{Single identified hadron spectra from s(NN)**(1/2) = 130-GeV Au+Au collisions}",
+    eprint = "nucl-ex/0307010",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevC.69.024904",
+    journal = "Phys. Rev. C",
+    volume = "69",
+    pages = "024904",
+    year = "2004"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

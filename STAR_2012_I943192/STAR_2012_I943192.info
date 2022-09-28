@@ -2,44 +2,43 @@ Name: STAR_2012_I943192
 Year: 2012
 Summary: System size and energy dependence of near-side di-hadron correlations
 Experiment: STAR
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 943192
 Status: UNVALIDATED
 Authors:
- - Your Name <your@email.address>
-#References:
-#- '<Example: Eur.Phys.J. C76 (2016) no.7, 392>'
-#- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
-#- '<Example: arXiv:1605.03814>'
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 RunInfo: <Describe event types, cuts, and other general generator config tips.>
 Beams: [[Au, Au], [Cu, Cu], [p, p]]
 Energies: [39400, 3931.2, 200]
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
 Options:
  - cent=REF,GEN,IMP,USR
-Description: Two-particle azimuthal ($\Delta\phi$) and pseudorapidity ($\Delta\eta$) correlations using a trigger particle with large transverse momentum ($p_T$) in $d$+Au, Cu+Cu and Au+Au collisions at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV and 200~GeV from the STAR experiment at RHIC are presented. 
-The \ns correlation is separated into a jet-like component, narrow in both $\Delta\phi$ and $\Delta\eta$, and the ridge, narrow in $\Delta\phi$ but broad in $\Delta\eta$. 
-Both components are studied as a function of collision centrality, and the jet-like correlation is studied as a function of the trigger and associated $p_T$. 
-The behavior of the jet-like component is remarkably consistent for different collision systems, suggesting it is produced by fragmentation. 
-The width of the jet-like correlation is found to increase with the system size. 
-The ridge, previously observed in Au+Au collisions at $\sqrt{s_{{NN}}}$ = 200 GeV, is also found in Cu+Cu collisions and in collisions at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV, but is found to be substantially smaller at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV than at $\sqrt{s_{{NN}}}$ = 200 GeV for the same average number of participants ($ \langle N_{\mathrm{part}}\rangle$). 
-Measurements of the ridge are compared to models.
+Description: Two-particle azimuthal ($\Delta\phi$) and pseudorapidity ($\Delta\eta$) correlations using a trigger particle with large transverse momentum ($p_T$) in $d$+Au, Cu+Cu and Au+Au collisions at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV and 200~GeV from the STAR experiment at RHIC are presented. The \ns correlation is separated into a jet-like component, narrow in both $\Delta\phi$ and $\Delta\eta$, and the ridge, narrow in $\Delta\phi$ but broad in $\Delta\eta$. Both components are studied as a function of collision centrality, and the jet-like correlation is studied as a function of the trigger and associated $p_T$. The behavior of the jet-like component is remarkably consistent for different collision systems, suggesting it is produced by fragmentation. The width of the jet-like correlation is found to increase with the system size. The ridge, previously observed in Au+Au collisions at $\sqrt{s_{{NN}}}$ = 200 GeV, is also found in Cu+Cu collisions and in collisions at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV, but is found to be substantially smaller at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV than at $\sqrt{s_{{NN}}}$ = 200 GeV for the same average number of participants ($ \langle N_{\mathrm{part}}\rangle$). Measurements of the ridge are compared to models.
 Keywords: []
 BibKey: Agakishiev:2011st
-BibTeX: '@article{Agakishiev:2011st,
-      author         = "Agakishiev, G. and others",
-      title          = "{System size and energy dependence of near-side di-hadron
-                        correlations}",
-      collaboration  = "STAR",
-      journal        = "Phys. Rev.",
-      volume         = "C85",
-      year           = "2012",
-      pages          = "014903",
-      doi            = "10.1103/PhysRevC.85.014903",
-      eprint         = "1110.5800",
-      archivePrefix  = "arXiv",
-      primaryClass   = "nucl-ex",
-      SLACcitation   = "%%CITATION = ARXIV:1110.5800;%%"
+BibTeX: '@article{Agakishiev_2012,
+	doi = {10.1103/physrevc.85.014903},
+  
+	url = {https://doi.org/10.1103%2Fphysrevc.85.014903},
+  
+	year = 2012,
+	month = {jan},
+  
+	publisher = {American Physical Society ({APS})},
+  
+	volume = {85},
+  
+	number = {1},
+  
+	author = {G. Agakishiev and M. M. Aggarwal and Z. Ahammed and A. V. Alakhverdyants and I. Alekseev and J. Alford and B. D. Anderson and C.~D. Anson and D. Arkhipkin and G. S. Averichev and J. Balewski and L. S. Barnby and D. R. Beavis and R. Bellwied and M. J. Betancourt and R. R. Betts and A. Bhasin and A. K. Bhati and H. Bichsel and J. Bielcik and J. Bielcikova and L. C. Bland and M. Bombara and I. G. Bordyuzhin and W. Borowski and J. Bouchet and E. Braidot and A. V. Brandin and S. G. Brovko and E. Bruna and S. Bueltmann and I. Bunzarov and T. P. Burton and X. Z. Cai and H. Caines and M. Calder{\'{o}
+}n de la Barca S{\'{a}}nchez and D. Cebra and R. Cendejas and M. C. Cervantes and P. Chaloupka and S. Chattopadhyay and H. F. Chen and J. H. Chen and J. Y. Chen and L. Chen and J. Cheng and M. Cherney and A. Chikanian and W. Christie and P. Chung and M. J. M. Codrington and R. Corliss and J. G. Cramer and H. J. Crawford and X. Cui and A. Davila Leyva and L. C. De Silva and R. R. Debbe and T. G. Dedovich and J. Deng and A. A. Derevschikov and R. Derradi de Souza and S. Dhamija and L. Didenko and P. Djawotho and X. Dong and J. L. Drachenberg and J. E. Draper and C. M. Du and L. E. Dunkelberger and J. C. Dunlop and L. G. Efimov and M. Elnimr and J. Engelage and G. Eppley and L. Eun and O. Evdokimov and R. Fatemi and J. Fedorisin and R. G. Fersch and P. Filip and E. Finch and Y. Fisyak and C. A. Gagliardi and L. Gaillard and D. R. Gangadharan and F. Geurts and P. Ghosh and S. Gliske and Y. N. Gorbunov and O. G. Grebenyuk and D. Grosnick and A. Gupta and S. Gupta and W. Guryn and B. Haag and O. Hajkova and A. Hamed and L.-X. Han and J. W. Harris and J. P. Hays-Wehle and S. Heppelmann and A. Hirsch and G. W. Hoffmann and D. J. Hofman and S. Horvat and B. Huang and H. Z. Huang and T. J. Humanic and L. Huo and G. Igo and W. W. Jacobs and C. Jena and P. G. Jones and J. Joseph and E. G. Judd and S. Kabana and K. Kang and J. Kapitan and K. Kauder and H. W. Ke and D. Keane and A. Kechechyan and D. Kettler and D. P. Kikola and J. Kiryluk and A. Kisiel and V. Kizka and S. R. Klein and D. D. Koetke and T. Kollegger and J. Konzer and I. Koralt and L. Koroleva and W. Korsch and L. Kotchenda and P. Kravtsov and K. Krueger and L. Kumar and M. A. C. Lamont and J. M. Landgraf and S. LaPointe and J. Lauret and A. Lebedev and R. Lednicky and J. H. Lee and W. Leight and M. J. LeVine and C. Li and L. Li and W. Li and X. Li and X. Li and Y. Li and Z. M. Li and L. M. Lima and M. A. Lisa and F. Liu and T. Ljubicic and W. J. Llope and R. S. Longacre and Y. Lu and E. V. Lukashov and X. Luo and G. L. Ma and Y. G. Ma and D. P. Mahapatra and R. Majka and O. I. Mall and S. Margetis and C. Markert and H. Masui and H. S. Matis and D. McDonald and T. S. McShane and N. G. Minaev and S. Mioduszewski and M. K. Mitrovski and Y. Mohammed and B. Mohanty and M. M. Mondal and B. Morozov and D. A. Morozov and M. G. Munhoz and M. K. Mustafa and M. Naglis and B. K. Nandi and C. Nattrass and Md. Nasim and T. K. Nayak and L. V. Nogach and S. B. Nurushev and G. Odyniec and A. Ogawa and K. Oh and A. Ohlson and V. Okorokov and E. W. Oldag and R. A. N. Oliveira and D. Olson and M. Pachr and B. S. Page and S. K. Pal and  Pan and Y. Pandit and Y. Panebratsev and T. Pawlak and H. Pei and C. Perkins and W. Peryt and P. Pile and M. Planinic and J. Pluta and D. Plyku and N. Poljak and J. Porter and A. M. Poskanzer and C. B. Powell and D. Prindle and C. Pruneau and N. K. Pruthi and P. R. Pujahari and J. Putschke and H. Qiu and R. Raniwala and S. Raniwala and R. L. Ray and R. Redwine and R. Reed and C. K. Riley and H. G. Ritter and J. B. Roberts and O. V. Rogachevskiy and J. L. Romero and L. Ruan and J. Rusnak and N. R. Sahoo and I. Sakrejda and S. Salur and J. Sandweiss and E. Sangaline and A. Sarkar and J. Schambach and R. P. Scharenberg and A. M. Schmah and N. Schmitz and T. R. Schuster and J. Seele and J. Seger and P. Seyboth and N. Shah and E. Shahaliev and M. Shao and B. Sharma and M. Sharma and S. S. Shi and Q. Y. Shou and E. P. Sichtermann and R. N. Singaraju and M. J. Skoby and N. Smirnov and D. Solanki and P. Sorensen and U. G. deSouza and H. M. Spinka and B. Srivastava and T. D. S. Stanislaus and S. G. Steadman and J. R. Stevens and R. Stock and M. Strikhanov and B. Stringfellow and A. A. P. Suaide and M. C. Suarez and M. Sumbera and X. M. Sun and Y. Sun and Z. Sun and B. Surrow and D. N. Svirida and T. J. M. Symons and A. Szanto de Toledo and J. Takahashi and A. H. Tang and Z. Tang and L. H. Tarini and T. Tarnowsky and D. Thein and J. H. Thomas and J. Tian and A. R. Timmins and D. Tlusty and M. Tokarev and S. Trentalange and R. E. Tribble and P. Tribedy and B. A. Trzeciak and O. D. Tsai and T. Ullrich and D. G. Underwood and G. Van Buren and G. van Nieuwenhuizen and J. A. Vanfossen and R. Varma and G. M. S. Vasconcelos and A. N. Vasiliev and F. Videb{\ae}k and Y. P. Viyogi and S. Vokal and S. A. Voloshin and A. Vossen and M. Wada and G. Wang and H. Wang and J. S. Wang and Q. Wang and X. L. Wang and Y. Wang and G. Webb and J. C. Webb and G. D. Westfall and C. Whitten and H. Wieman and S. W. Wissink and R. Witt and W. Witzke and Y. F. Wu and Z. Xiao and W. Xie and H. Xu and N. Xu and Q. H. Xu and W. Xu and Y. Xu and Z. Xu and L. Xue and Y. Yang and Y. Yang and P. Yepes and Y. Yi and K. Yip and I.-K. Yoo and M. Zawisza and H. Zbroszczyk and W. Zhan and J. B. Zhang and S. Zhang and W. M. Zhang and X. P. Zhang and Y. Zhang and Z. P. Zhang and F. Zhao and J. Zhao and C. Zhong and X. Zhu and Y. H. Zhu and Y. Zoulkarneeva},
+  
+	title = {System size and energy dependence of near-side dihadron correlations},
+  
+	journal = {Physical Review C}
 }'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)

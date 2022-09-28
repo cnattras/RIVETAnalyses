@@ -2,11 +2,13 @@ Name: PHENIX_2018_I1672859
 Year: <2018>
 Summary: <Production of $\pi^{0}$ and $\eta$ mesons in Cu+Au collisions at $\sqrt{s_{NN}}$=200 GeV>
 Experiment: <PHENIX>
-Collider: <RHIC>
+Collider: Relativisitc Heavy Ion Collider (RHIC)
 InspireID: <1672859>
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Kip Hunt <nhunt5@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
 References:
  - 'Phys. Rev. C 98, 054903 (2018)'
  - 'DOI:10.1103/PhysRevC.98.054903'
@@ -28,7 +30,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2018uod,
+    author = "Aidala, C. and others",
+    collaboration = "PHENIX",
+    title = "{Production of $\pi^0$ and $\eta$ mesons in Cu$+$Au collisions at $\sqrt{s_{_{NN}}}$=200 GeV}",
+    eprint = "1805.04389",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevC.98.054903",
+    journal = "Phys. Rev. C",
+    volume = "98",
+    number = "5",
+    pages = "054903",
+    year = "2018"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

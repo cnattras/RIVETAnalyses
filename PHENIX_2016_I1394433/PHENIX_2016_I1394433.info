@@ -1,16 +1,15 @@
 Name: PHENIX_2016_I1394433
 Year: 2016
-Summary: <A one-line informative PHENIX_2016_I1394433 headline>
+Summary: Transverse energy production and charged-particle multiplicity at midrapidity in various systems from $\sqrt{s_{NN}}=7.7$ to 200 GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1394433
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Ejiro Umaka <eumaka@iastate.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -19,10 +18,7 @@ Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU,CUCU,CUAU,UU,dAU,HEAU
  - ENG=twoh,sixtwo,threenine
-Description:
-  'A brief description of what is measured and what it is useful for
-  in terms of MC testing, tuning, reinterpretation, etc. Use LaTeX
-  for maths, e.g. $\pT > 50\;\GeV$.'
+Description: Measurements of midrapidity charged-particle multiplicity distributions, dNch/dη, and midrapidity transverse-energy distributions, dET/dη, are presented for a variety of collision systems and energies. Included are distributions for Au+Au collisions at sNN=200, 130, 62.4, 39, 27, 19.6, 14.5, and 7.7 GeV, Cu+Cu collisions at sNN=200 and 62.4 GeV, Cu+Au collisions at sNN=200 GeV, U+U collisions at sNN=193 GeV, d+Au collisions at sNN=200 GeV, He3+Au collisions at sNN=200 GeV, and p+p collisions at sNN=200 GeV. Centrality-dependent distributions at midrapidity are presented in terms of the number of nucleon participants, Npart, and the number of constituent quark participants, Nqp. For all A+A collisions down to sNN=7.7 GeV, it is observed that the midrapidity data are better described by scaling with Nqp than scaling with Npart. Also presented are estimates of the Bjorken energy density, ɛBJ, and the ratio of dET/dη to dNch/dη, the latter of which is seen to be constant as a function of centrality for all systems.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -31,7 +27,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2015tbb,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Transverse energy production and charged-particle multiplicity at midrapidity in various systems from $\sqrt{s_{NN}}=7.7$ to 200 GeV}",
+    eprint = "1509.06727",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevC.93.024901",
+    journal = "Phys. Rev. C",
+    volume = "93",
+    number = "2",
+    pages = "024901",
+    year = "2016"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

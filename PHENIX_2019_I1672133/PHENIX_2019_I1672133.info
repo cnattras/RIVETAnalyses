@@ -2,27 +2,21 @@ Name: PHENIX_2019_I1672133
 Year: 2019
 Summary: Creation of quark–gluon plasma droplets with three distinct geometries
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1672133
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Weizhuang Peng <weizhuang.peng@vanderbilt.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options:
 - cent=REF,GEN,IMP,USR
-Description: Experimental studies of the collisions of heavy nuclei at relativistic energies have established the properties of the quark–gluon plasma (QGP), a state of hot, dense nuclear matter in which quarks and gluons are not bound into hadrons1–4. 
-In this state, matter behaves as a nearly inviscid fluid5 that efficiently translates initial spatial anisotropies into correlated momentum anisotropies among the particles produced, creating a common velocity field pattern known as collective flow. 
-In recent years, comparable momentum anisotropies have been measured in small-system proton–proton (p+p) and proton–nucleus (p+A) collisions, despite expectations that the volume and lifetime of the medium produced would be too small to form a QGP. 
-Here we report on the observation of elliptic and triangular flow patterns of charged particles produced in proton–gold (p+Au), deuteron–gold (d+Au) and helium–gold (3He+Au) collisions at a nucleon–nucleon centre-of-mass energy $\sqrt {s_{{\mathrm{NN}}}} = 200$ GeV. 
-The unique combination of three distinct initial geometries and two flow patterns provides unprecedented model discrimination. 
-Hydrodynamical models, which include the formation of a short-lived QGP droplet, provide the best simultaneous description of these measurements.
+Description: Experimental studies of the collisions of heavy nuclei at relativistic energies have established the properties of the quark–gluon plasma (QGP), a state of hot, dense nuclear matter in which quarks and gluons are not bound into hadrons1–4. In this state, matter behaves as a nearly inviscid fluid5 that efficiently translates initial spatial anisotropies into correlated momentum anisotropies among the particles produced, creating a common velocity field pattern known as collective flow. In recent years, comparable momentum anisotropies have been measured in small-system proton–proton (p+p) and proton–nucleus (p+A) collisions, despite expectations that the volume and lifetime of the medium produced would be too small to form a QGP. Here we report on the observation of elliptic and triangular flow patterns of charged particles produced in proton–gold (p+Au), deuteron–gold (d+Au) and helium–gold (3He+Au) collisions at a nucleon–nucleon centre-of-mass energy $\sqrt {s_{{\mathrm{NN}}}} = 200$ GeV. The unique combination of three distinct initial geometries and two flow patterns provides unprecedented model discrimination. Hydrodynamical models, which include the formation of a short-lived QGP droplet, provide the best simultaneous description of these measurements.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -31,7 +25,21 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2018lia,
+    author = "Aidala, C. and others",
+    collaboration = "PHENIX",
+    title = "{Creation of quark\textendash{}gluon plasma droplets with three distinct geometries}",
+    eprint = "1805.02973",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1038/s41567-018-0360-0",
+    journal = "Nature Phys.",
+    volume = "15",
+    number = "3",
+    pages = "214--220",
+    year = "2019"
+}'
+
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

@@ -2,30 +2,39 @@ Name: PHENIX_2010_I857187
 Year: 2010
 Summary: High $p_T$ direct photon and $\pi^0$ triggered azimuthal jet correlations and measurement of $k_T$ for isolated direct photons in $p+p$ collisions at $sqrt{s}=200$ GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 857187
 Status: UNVALIDATED
 Authors:
- - Your Name <your@email.address>
-#References:
-#- '<Example: Eur.Phys.J. C76 (2016) no.7, 392>'
-#- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
-#- '<Example: arXiv:1605.03814>'
+ - Peter Lewiz <plewiz@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 RunInfo: <Describe event types, cuts, and other general generator config tips.>
 Beams: [p+, p+]
 Energies: [200]
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
-Description: Correlations of charged hadrons of 1 < pT < 10 GeV/c with high pT direct photons and pi^ 0 mesons in the range 5 <pT < 15 GeV/c are used to study jet fragmentation in the photon+jet and di-jet channels, respectively. 
-The magnitude of the partonic transverse momentum, kT, is obtained by comparing to a model incorporating a Gaussian kT smearing. 
-The sensitivity of the associated charged hadron spectra to the underlying fragmentation function is tested and the data are compared to calculations using recent global fit results. 
-The shape of the direct photon-associated hadron spectrum as well as its charge asymmetry are found to be consistent with a sample dominated by quark-gluon Compton scattering. 
-No significant evidence of fragmentation photon correlated production is observed within experimental uncertainties.
+Description: Correlations of charged hadrons of 1 < pT < 10 GeV/c with high pT direct photons and pi^ 0 mesons in the range 5 <pT < 15 GeV/c are used to study jet fragmentation in the photon+jet and di-jet channels, respectively. The magnitude of the partonic transverse momentum, kT, is obtained by comparing to a model incorporating a Gaussian kT smearing. The sensitivity of the associated charged hadron spectra to the underlying fragmentation function is tested and the data are compared to calculations using recent global fit results. The shape of the direct photon-associated hadron spectrum as well as its charge asymmetry are found to be consistent with a sample dominated by quark-gluon Compton scattering. No significant evidence of fragmentation photon correlated production is observed within experimental uncertainties.
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU200
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2010vgy,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{High $p_T$ direct photon and $\pi^0$ triggered azimuthal jet correlations and measurement of $k_T$ for isolated direct photons in $p+p$ collisions at $sqrt{s}=200$ GeV}",
+    eprint = "1006.1347",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.82.072001",
+    journal = "Phys. Rev. D",
+    volume = "82",
+    pages = "072001",
+    year = "2010"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

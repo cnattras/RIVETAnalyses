@@ -2,15 +2,14 @@ Name: PHENIX_2020_I1773662
 Year: 2020
 Summary: $J/\psi$ and $\psi(2S)$ production at forward rapidity in $p$+$p$ collisions at $\sqrt{s}=510$ GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1773662
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Stacyann Nelson <stacyann1.nelson@famu.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -18,13 +17,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP,AUAU200
-
-Description: The PHENIX experiment at the Relativistic Heavy Ion Collider has measured the differential cross section, mean transverse momentum, mean transverse momentum squared of inclusive J/ψ, and cross section ratio of ψ(2S) to J/ψ at forward rapidity in p+p collisions at s=510  GeV via the dimuon decay channel. 
-Comparison is made to inclusive J/ψ cross sections measured at s=200  GeV and 2.76–13 TeV. 
-The result is also compared to leading-order nonrelativistic QCD calculations coupled to a color-glass-condensate description of the low-x gluons in the proton at low transverse momentum (pT) and to next-to-leading order nonrelativistic QCD calculations for the rest of the pT range. 
-These calculations overestimate the data at low pT. 
-While consistent with the data within uncertainties above ≈3  GeV/c, the calculations are systematically below the data. 
-The total cross section times the branching ratio is BR dσppJ/ψ/dy(1.2<|y|<2.2,0<pT<10  GeV/c)=54.3±0.5(stat)±5.5(syst)  nb.
+Description: The PHENIX experiment at the Relativistic Heavy Ion Collider has measured the differential cross section, mean transverse momentum, mean transverse momentum squared of inclusive J/ψ, and cross section ratio of ψ(2S) to J/ψ at forward rapidity in p+p collisions at s=510  GeV via the dimuon decay channel. Comparison is made to inclusive J/ψ cross sections measured at s=200  GeV and 2.76–13 TeV. The result is also compared to leading-order nonrelativistic QCD calculations coupled to a color-glass-condensate description of the low-x gluons in the proton at low transverse momentum (pT) and to next-to-leading order nonrelativistic QCD calculations for the rest of the pT range. These calculations overestimate the data at low pT. While consistent with the data within uncertainties above ≈3  GeV/c, the calculations are systematically below the data. The total cross section times the branching ratio is BR dσppJ/ψ/dy(1.2<|y|<2.2,0<pT<10  GeV/c)=54.3±0.5(stat)±5.5(syst)  nb.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -33,7 +26,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2019ihw,
+    author = "Acharya, U. A. and others",
+    collaboration = "PHENIX",
+    title = "{$J/\psi$ and $\psi(2S)$ production at forward rapidity in $p$+$p$ collisions at $\sqrt{s}=510$ GeV}",
+    eprint = "1912.13424",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevD.101.052006",
+    journal = "Phys. Rev. D",
+    volume = "101",
+    number = "5",
+    pages = "052006",
+    year = "2020"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

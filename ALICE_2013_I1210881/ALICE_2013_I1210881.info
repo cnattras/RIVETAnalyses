@@ -2,24 +2,22 @@ Name: ALICE_2013_I1210881
 Year: 2013
 Summary: Measurement of the inclusive differential jet cross section in $pp$ collisions at $\sqrt{s} = 2.76$ TeV
 Experiment: ALICE
-Collider: LHC
+Collider: Large Hadron Collider (LHC)
 InspireID: 1210881
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Reentrant: False
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Maris Griffin <mgriff76@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description: The ALICE Collaboration at the CERN Large Hadron Collider reports the first measurement of the inclusive differential jet cross section at mid-rapidity in pp collisions at s=2.76 TeV, with integrated luminosity of 13.6 nb^-^1. 
-Jets are measured over the transverse momentum range 20 to 125 GeV/c and are corrected to the particle level. 
-Calculations based on Next-to-Leading Order perturbative QCD are in good agreement with the measurements. 
-The ratio of inclusive jet cross sections for jet radii R=0.2 and R=0.4 is reported, and is also well reproduced by a Next-to-Leading Order perturbative QCD calculation when hadronization effects are included.
+Description: The ALICE Collaboration at the CERN Large Hadron Collider reports the first measurement of the inclusive differential jet cross section at mid-rapidity in pp collisions at s=2.76 TeV, with integrated luminosity of 13.6 nb^-^1. Jets are measured over the transverse momentum range 20 to 125 GeV/c and are corrected to the particle level. Calculations based on Next-to-Leading Order perturbative QCD are in good agreement with the measurements. The ratio of inclusive jet cross sections for jet radii R=0.2 and R=0.4 is reported, and is also well reproduced by a Next-to-Leading Order perturbative QCD calculation when hadronization effects are included.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -28,7 +26,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{ALICE:2013yva,
+    author = "Abelev, B. and others",
+    collaboration = "ALICE",
+    title = "{Measurement of the inclusive differential jet cross section in $pp$ collisions at $\sqrt{s} = 2.76$ TeV}",
+    eprint = "1301.3475",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-PH-EP-2012-301",
+    doi = "10.1016/j.physletb.2013.04.026",
+    journal = "Phys. Lett. B",
+    volume = "722",
+    pages = "262--272",
+    year = "2013"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

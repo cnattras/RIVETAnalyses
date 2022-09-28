@@ -1,0 +1,45 @@
+Name: ALICE_2019_I1693308
+Year: 2019
+Summary: Charged jet cross section and fragmentation in proton-proton collisions at $\sqrt{s}$ = 7 TeV
+Experiment: ALICE
+Collider: LHC
+InspireID: 1693308
+Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Authors:
+ - Justin Piel <jpiel1300@gmail.com>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References:
+ - arXiv:1809.03232
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[7000,7000]]
+#Luminosity_fb: 139.0
+Description: We report the differential charged jet cross section and jet fragmentation distributions measured with the ALICE detector in proton-proton collisions at a center-of-mass energy s=7  TeV. 
+Jets with pseudorapidity |η|<0.5 are reconstructed from charged particles using the anti-kT jet-finding algorithm with a resolution parameter R=0.4. 
+The jet cross section is measured in the transverse momentum interval 5≤pTch jet<100  GeV/c. 
+Jet fragmentation is studied measuring the scaled transverse momentum spectra of the charged constituents of jets in four intervals of jet transverse momentum between 5 and 30  GeV/c. 
+The measurements are compared to calculations from the pythia model as well as next-to-leading-order perturbative QCD calculations with powheg+pythia8. 
+The charged jet cross section is well described by powheg for the entire measured range of pTch jet. 
+For pTch jet>40  GeV/c, the pythia calculations also agree with the measured charged jet cross section. 
+pythia6 simulations describe the fragmentation distributions to 15%. 
+Larger discrepancies are observed for pythia8.
+Jets with pseudorapidity |η|<0.5 are reconstructed from charged particles using the anti-kT jet-finding algorithm with a resolution parameter R=0.4. 
+The jet cross section is measured in the transverse momentum interval 5≤pTch jet<100  GeV/c. 
+Jet fragmentation is studied measuring the scaled transverse momentum spectra of the charged constituents of jets in four intervals of jet transverse momentum between 5 and 30  GeV/c. 
+The measurements are compared to calculations from the pythia model as well as next-to-leading-order perturbative QCD calculations with powheg+pythia8. 
+The charged jet cross section is well described by powheg for the entire measured range of pTch jet. 
+For pTch jet>40  GeV/c, the pythia calculations also agree with the measured charged jet cross section. 
+pythia6 simulations describe the fragmentation distributions to 15%. 
+Larger discrepancies are observed for pythia8.
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey:
+BibTeX: ''
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)

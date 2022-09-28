@@ -2,15 +2,16 @@ Name: PHENIX_2020_I1798493
 Year: 2020
 Summary: Measurement of jet-medium interactions via direct photon-hadron correlations in Au$+$Au and $d$ $+$Au collisions at $\sqrt{s_{_{NN}}}=200$ GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1798493
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Ryan Goodman <rgoodma7@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -18,12 +19,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU200, dAU200, PP200
-Description: We present direct photon-hadron correlations in 200 GeV/A Au+Au, d+Au, and p+p collisions, for direct photon pT from 5–12 GeV/c, collected by the PHENIX Collaboration in the years from 2006 to 2011. 
-We observe no significant modification of jet fragmentation in d+Au collisions, indicating that cold nuclear matter effects are small or absent. 
-Hadrons carrying a large fraction of the quark's momentum are suppressed in Au+Au compared to p+p and d+Au. 
-As the momentum fraction decreases, the yield of hadrons in Au+Au increases to an excess over the yield in p+p collisions. 
-The excess is at large angles and at low hadron pT and is most pronounced for hadrons associated with lower momentum direct photons. 
-Comparison to theoretical calculations suggests that the hadron excess arises from medium response to energy deposited by jets.
+Description: We present direct photon-hadron correlations in 200 GeV/A Au+Au, d+Au, and p+p collisions, for direct photon pT from 5–12 GeV/c, collected by the PHENIX Collaboration in the years from 2006 to 2011. We observe no significant modification of jet fragmentation in d+Au collisions, indicating that cold nuclear matter effects are small or absent. Hadrons carrying a large fraction of the quark's momentum are suppressed in Au+Au compared to p+p and d+Au. As the momentum fraction decreases, the yield of hadrons in Au+Au increases to an excess over the yield in p+p collisions. The excess is at large angles and at low hadron pT and is most pronounced for hadrons associated with lower momentum direct photons. Comparison to theoretical calculations suggests that the hadron excess arises from medium response to energy deposited by jets.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -32,7 +28,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2020alr,
+    author = "Acharya, U. and others",
+    collaboration = "PHENIX",
+    title = "{Measurement of jet-medium interactions via direct photon-hadron correlations in Au$+$Au and $d$ $+$Au collisions at $\sqrt{s_{_{NN}}}=200$ GeV}",
+    eprint = "2005.14270",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevC.102.054910",
+    journal = "Phys. Rev. C",
+    volume = "102",
+    number = "5",
+    pages = "054910",
+    year = "2020"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

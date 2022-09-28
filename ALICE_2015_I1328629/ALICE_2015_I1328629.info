@@ -2,30 +2,22 @@ Name: ALICE_2015_I1328629
 Year: 2015
 Summary: Charged jet cross sections and properties in proton-proton collisions at $\sqrt{s}=7$ TeV
 Experiment: ALICE
-Collider: LHC
+Collider: Large Hadron Collider (LHC)
 InspireID: 1328629
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Reentrant: False
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Ria Patel <rpatel77@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description: The differential charged jet cross sections, jet fragmentation distributions, and jet shapes are measured in minimum bias proton-proton collisions at center-of-mass energy s=7  TeV using the ALICE detector at the LHC. 
-Jets are reconstructed from charged particle momenta in the midrapidity region using the sequential recombination kT and anti-kT as well as the SISCone jet finding algorithms with several resolution parameters in the range R=0.2–0.6. 
-Differential jet production cross sections measured with the three jet finders are in agreement in the transverse momentum (pT) interval 20<pTjet,ch<100  GeV/c. 
-They are also consistent with prior measurements carried out at the LHC by the ATLAS Collaboration. 
-The jet charged particle multiplicity rises monotonically with increasing jet pT, in qualitative agreement with prior observations at lower energies. 
-The transverse profiles of leading jets are investigated using radial momentum density distributions as well as distributions of the average radius containing 80% (⟨R80⟩) of the reconstructed jet pT. 
-The fragmentation of leading jets with R=0.4 using scaled pT spectra of the jet constituents is studied. 
-The measurements are compared to model calculations from event generators (PYTHIA, PHOJET, HERWIG). 
-The measured radial density distributions and ⟨R80⟩ distributions are well described by the PYTHIA model (tune Perugia-2011). 
-The fragmentation distributions are better described by HERWIG.
+Description: The differential charged jet cross sections, jet fragmentation distributions, and jet shapes are measured in minimum bias proton-proton collisions at center-of-mass energy s=7  TeV using the ALICE detector at the LHC. Jets are reconstructed from charged particle momenta in the midrapidity region using the sequential recombination kT and anti-kT as well as the SISCone jet finding algorithms with several resolution parameters in the range R=0.2–0.6. Differential jet production cross sections measured with the three jet finders are in agreement in the transverse momentum (pT) interval 20<pTjet,ch<100  GeV/c. They are also consistent with prior measurements carried out at the LHC by the ATLAS Collaboration. The jet charged particle multiplicity rises monotonically with increasing jet pT, in qualitative agreement with prior observations at lower energies. The transverse profiles of leading jets are investigated using radial momentum density distributions as well as distributions of the average radius containing 80% (⟨R80⟩) of the reconstructed jet pT. The fragmentation of leading jets with R=0.4 using scaled pT spectra of the jet constituents is studied. The measurements are compared to model calculations from event generators (PYTHIA, PHOJET, HERWIG). The measured radial density distributions and ⟨R80⟩ distributions are well described by the PYTHIA model (tune Perugia-2011). The fragmentation distributions are better described by HERWIG.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -34,7 +26,21 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{ALICE:2014dla,
+    author = "Abelev, Betty Bezverkhny and others",
+    collaboration = "ALICE",
+    title = "{Charged jet cross sections and properties in proton-proton collisions at $\sqrt{s}=7$ TeV}",
+    eprint = "1411.4969",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-PH-EP-2014-254",
+    doi = "10.1103/PhysRevD.91.112012",
+    journal = "Phys. Rev. D",
+    volume = "91",
+    number = "11",
+    pages = "112012",
+    year = "2015"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

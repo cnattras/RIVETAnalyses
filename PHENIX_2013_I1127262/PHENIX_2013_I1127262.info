@@ -2,15 +2,17 @@ Name: PHENIX_2013_I1127262
 Year: 2013
 Summary: Neutral pion production with respect to centrality and reaction plane in Au$+$Au collisions at $\sqrt{s_{NN}}$=200 GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1127262
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Christal Martin <cbaillar@vols.utk.edu>
+ - Jason Spriggs <jsprigg2@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -18,16 +20,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU200,PP200
-Description: The PHENIX experiment has measured the production of π0s in Au+Au collisions at sNN = 200 GeV. 
-The new data offer a fourfold increase in recorded luminosity, providing higher precision and a larger reach in transverse momentum, pT, to 20 GeV/c. 
-The production ratio of η/π0 is 0.46±0.01(stat)±0.05(syst), constant with pT and collision centrality. 
-The observed ratio is consistent with earlier measurements, as well as with the p+p and d+Au values. 
-π0 are suppressed by a factor of 5, as in earlier findings. 
-However, with the improved statistical precision a small but significant rise of the nuclear modification factor RAA vs pT, with a slope of 0.0106±0.00290.0034 (Gev/c)−1, is discernible in central collisions. 
-A phenomenological extraction of the average fractional parton energy loss shows a decrease with increasing pT. 
-To study the path-length dependence of suppression, the π0 yield is measured at different angles with respect to the event plane; a strong azimuthal dependence of the π0 RAA is observed. 
-The data are compared to theoretical models of parton energy loss as a function of the path length L in the medium. 
-Models based on perturbative quantum chromodynamics are insufficient to describe the data, while a hybrid model utilizing pQCD for the hard interactions and anti-de-Sitter space/conformal field theory (AdS/CFT) for the soft interactions is consistent with the data.
+Description: The PHENIX experiment has measured the production of π0s in Au+Au collisions at sNN = 200 GeV. The new data offer a fourfold increase in recorded luminosity, providing higher precision and a larger reach in transverse momentum, pT, to 20 GeV/c. The production ratio of η/π0 is 0.46±0.01(stat)±0.05(syst), constant with pT and collision centrality. The observed ratio is consistent with earlier measurements, as well as with the p+p and d+Au values. π0 are suppressed by a factor of 5, as in earlier findings. However, with the improved statistical precision a small but significant rise of the nuclear modification factor RAA vs pT, with a slope of 0.0106±0.00290.0034 (Gev/c)−1, is discernible in central collisions. A phenomenological extraction of the average fractional parton energy loss shows a decrease with increasing pT. To study the path-length dependence of suppression, the π0 yield is measured at different angles with respect to the event plane; a strong azimuthal dependence of the π0 RAA is observed. The data are compared to theoretical models of parton energy loss as a function of the path length L in the medium. Models based on perturbative quantum chromodynamics are insufficient to describe the data, while a hybrid model utilizing pQCD for the hard interactions and anti-de-Sitter space/conformal field theory (AdS/CFT) for the soft interactions is consistent with the data.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -36,7 +29,20 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{PHENIX:2012jha,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Neutral pion production with respect to centrality and reaction plane in Au$+$Au collisions at $\sqrt{s_{NN}}$=200 GeV}",
+    eprint = "1208.2254",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    doi = "10.1103/PhysRevC.87.034911",
+    journal = "Phys. Rev. C",
+    volume = "87",
+    number = "3",
+    pages = "034911",
+    year = "2013"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

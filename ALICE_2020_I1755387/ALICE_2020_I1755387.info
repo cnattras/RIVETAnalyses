@@ -2,36 +2,25 @@ Name: ALICE_2020_I1755387
 Year: 2020
 Summary: Measurements of inclusive jet spectra in pp and central Pb-Pb collisions at $\sqrt{s_{\rm{NN}}}$ = 5.02 TeV
 Experiment: ALICE
-Collider: LHC
+Collider: Large Hadron Collider (LHC)
 InspireID: 1755387
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Reentrant: False
 Authors:
- - Your Name <your@email.address>
-References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - Garrett Burnette <gburnet3@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 Options:
  - cent=REF,GEN,IMP,USR
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description: This article reports measurements of the pT-differential inclusive jet cross section in pp collisions at s=5.02TeV and the pT-differential inclusive jet yield in Pb-Pb 0–10% central collisions at sNN=5.02TeV. 
-Jets were reconstructed at midrapidity with the ALICE tracking detectors and electromagnetic calorimeter using the anti-kT algorithm. 
-For pp collisions, we report jet cross sections for jet resolution parameters R=0.1–0.6 over the range 20<pT,jet<140 GeV/c, as well as the jet cross-section ratios of different R and comparisons to two next-to-leading-order (NLO)–based theoretical predictions. 
-For Pb-Pb collisions, we report the R=0.2 and R=0.4 jet spectra for 40<pT,jet<140 GeV/c and 60<pT,jet<140 GeV/c, respectively. 
-The scaled ratio of jet yields observed in Pb-Pb to pp collisions, RAA, is constructed, and exhibits strong jet quenching and a clear pT dependence for R=0.2. 
-No significant R dependence of the jet RAA is observed within the uncertainties of the measurement. 
-These results are compared to several theoretical predictions.
-Jets were reconstructed at midrapidity with the ALICE tracking detectors and electromagnetic calorimeter using the anti-kT algorithm. 
-For pp collisions, we report jet cross sections for jet resolution parameters R=0.1–0.6 over the range 20<pT,jet<140 GeV/c, as well as the jet cross-section ratios of different R and comparisons to two next-to-leading-order (NLO)–based theoretical predictions. 
-For Pb-Pb collisions, we report the R=0.2 and R=0.4 jet spectra for 40<pT,jet<140 GeV/c and 60<pT,jet<140 GeV/c, respectively. 
-The scaled ratio of jet yields observed in Pb-Pb to pp collisions, RAA, is constructed, and exhibits strong jet quenching and a clear pT dependence for R=0.2. 
-No significant R dependence of the jet RAA is observed within the uncertainties of the measurement. 
-These results are compared to several theoretical predictions.
-ValidationInfo:
+Description: This article reports measurements of the pT-differential inclusive jet cross section in pp collisions at s=5.02TeV and the pT-differential inclusive jet yield in Pb-Pb 0–10% central collisions at sNN=5.02TeV. Jets were reconstructed at midrapidity with the ALICE tracking detectors and electromagnetic calorimeter using the anti-kT algorithm. For pp collisions, we report jet cross sections for jet resolution parameters R=0.1–0.6 over the range 20<pT,jet<140 GeV/c, as well as the jet cross-section ratios of different R and comparisons to two next-to-leading-order (NLO)–based theoretical predictions. For Pb-Pb collisions, we report the R=0.2 and R=0.4 jet spectra for 40<pT,jet<140 GeV/c and 60<pT,jet<140 GeV/c, respectively. The scaled ratio of jet yields observed in Pb-Pb to pp collisions, RAA, is constructed, and exhibits strong jet quenching and a clear pT dependence for R=0.2. No significant R dependence of the jet RAA is observed within the uncertainties of the measurement. These results are compared to several theoretical predictions.
+ValidationInfo:  
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
   are welcome'
@@ -39,7 +28,21 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: '@article{ALICE:2019qyj,
+    author = "Acharya, Shreyasi and others",
+    collaboration = "ALICE",
+    title = "{Measurements of inclusive jet spectra in pp and central Pb-Pb collisions at $\sqrt{s_{\rm{NN}}}$ = 5.02 TeV}",
+    eprint = "1909.09718",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-EP-2019-200",
+    doi = "10.1103/PhysRevC.101.034911",
+    journal = "Phys. Rev. C",
+    volume = "101",
+    number = "3",
+    pages = "034911",
+    year = "2020"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 
