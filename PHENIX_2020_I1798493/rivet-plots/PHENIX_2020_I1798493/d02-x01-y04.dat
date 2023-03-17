@@ -1,0 +1,42 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=Per-trigger yield of hadrons associated to direct photons in d+Au collisions for direct photon $p_T$ 7-9 GeV/$c$, compared with p+p baseline. 0.8 $\le$ $\xi$ $\le$ 1.2 bin.
+XLabel=$\Delta\phi$ [$rad$]
+YLabel=$(1/N_{\gamma}) dN/d\Delta\phi$
+DrawOnly=/PHENIX_2020_I1798493/d02-x01-y04 //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d02-x01-y04
+LegendOnly=/PHENIX_2020_I1798493/d02-x01-y04 //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d02-x01-y04
+RatioPlot=1
+RatioPlotReference=/PHENIX_2020_I1798493/d02-x01-y04
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2020_I1798493/d02-x01-y04
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2020_I1798493/d02-x01-y04
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	1.028000e+00	-3.500000e-03	7.992496e-03	7.992496e-03
+1.028000e+00	1.556000e+00	-2.500000e-03	9.492102e-03	9.492102e-03
+1.556000e+00	2.084000e+00	1.390000e-02	1.006578e-02	1.006578e-02
+2.084000e+00	2.612000e+00	1.790000e-02	1.008018e-02	1.008018e-02
+2.612000e+00	3.140000e+00	6.720000e-02	1.029272e-02	1.029272e-02
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d02-x01-y04
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d02-x01-y04
+ScaledBy=1.00000000000000000e+00
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	1.028000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.028000e+00	1.556000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+1.556000e+00	2.084000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+2.084000e+00	2.612000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+2.612000e+00	3.140000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+

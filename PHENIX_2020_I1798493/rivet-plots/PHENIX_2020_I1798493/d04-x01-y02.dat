@@ -1,0 +1,44 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=Integrated away-side $\gamma_{dir}$-h per-trigger $I_{dA}$ of d+Au
+XLabel=$\xi$
+YLabel=$I_{dA}$
+DrawOnly=/PHENIX_2020_I1798493/d04-x01-y02 //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d04-x01-y02
+LegendOnly=/PHENIX_2020_I1798493/d04-x01-y02 //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d04-x01-y02
+RatioPlot=1
+RatioPlotReference=/PHENIX_2020_I1798493/d04-x01-y02
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2020_I1798493/d04-x01-y02
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2020_I1798493/d04-x01-y02
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	4.000000e-01	7.800000e-01	2.828427e-01	2.828427e-01
+4.000000e-01	8.000000e-01	9.400000e-01	1.780449e-01	1.780449e-01
+8.000000e-01	1.200000e+00	9.600000e-01	1.562050e-01	1.562050e-01
+1.200000e+00	1.600000e+00	1.440000e+00	3.047950e-01	3.047950e-01
+1.600000e+00	2.000000e+00	1.030000e+00	2.051828e-01	2.051828e-01
+2.000000e+00	2.400000e+00	7.500000e-01	3.257299e-01	3.257299e-01
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d04-x01-y02
+ErrorBreakdown={0: {"": {up: -nan, dn: -nan}}, 1: {"": {up: -nan, dn: -nan}}, 2: {"": {up: -nan, dn: -nan}}, 3: {"": {up: -nan, dn: -nan}}, 4: {"": {up: -nan, dn: -nan}}, 5: {"": {up: -nan, dn: -nan}}}
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/d04-x01-y02
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	4.000000e-01	nan	nan	nan
+4.000000e-01	8.000000e-01	nan	nan	nan
+8.000000e-01	1.200000e+00	nan	nan	nan
+1.200000e+00	1.600000e+00	nan	nan	nan
+1.600000e+00	2.000000e+00	nan	nan	nan
+2.000000e+00	2.400000e+00	nan	nan	nan
+# END HISTO1D
+

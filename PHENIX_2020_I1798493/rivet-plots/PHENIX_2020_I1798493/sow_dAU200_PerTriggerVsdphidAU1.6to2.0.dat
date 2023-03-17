@@ -1,0 +1,20 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=$\Delta\phi$ vs. $N_{trig}$ in $d$+Au for 1.6 $\le$ $\xi$ $\le$ 2.0
+XLabel=$\Delta\phi$ [rad]
+YLabel=$N_{trig}$
+DrawOnly=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_PerTriggerVsdphidAU1.6to2.0
+LegendOnly=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_PerTriggerVsdphidAU1.6to2.0
+# END PLOT
+
+# BEGIN COUNTER //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_PerTriggerVsdphidAU1.6to2.0
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_PerTriggerVsdphidAU1.6to2.0
+ScaledBy=1.00000000000000000e+00
+Title=Rivet
+# value	 error
+0.000000e+00	0.000000e+00
+# END COUNTER
+

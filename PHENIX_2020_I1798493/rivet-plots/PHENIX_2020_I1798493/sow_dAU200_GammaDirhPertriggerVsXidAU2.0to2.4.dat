@@ -1,0 +1,20 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=$\gamma_{dir}$-h Per-trigger for $d$+Au 2.0 $\le$ $\xi$ $\le$ 2.4
+XLabel=$\Delta\phi$ [rad]
+YLabel=$I_{AA}$
+DrawOnly=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_GammaDirhPertriggerVsXidAU2.0to2.4
+LegendOnly=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_GammaDirhPertriggerVsXidAU2.0to2.4
+# END PLOT
+
+# BEGIN COUNTER //lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_GammaDirhPertriggerVsXidAU2.0to2.4
+LineColor=red
+LineStyle=solid
+Path=//lustre/haven/proj/UTK0019/nnelso13/Rivet_Analyses/RIVETANALYSES/PHENIX_2020_I1798493/Rivet.yoda/PHENIX_2020_I1798493:beam=AUAU200:cent=GEN/sow_dAU200_GammaDirhPertriggerVsXidAU2.0to2.4
+ScaledBy=1.00000000000000000e+00
+Title=Rivet
+# value	 error
+0.000000e+00	0.000000e+00
+# END COUNTER
+
