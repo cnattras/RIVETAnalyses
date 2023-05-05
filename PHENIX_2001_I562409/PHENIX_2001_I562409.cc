@@ -5,7 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-#include "RHICCentrality.hh"
+#include "../Centralities/RHICCentrality.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/HadronicFinalState.hh"
 
@@ -41,45 +41,45 @@ namespace Rivet {
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       book(_h["ChHadronsCent0_10"], 5, 1, 1);
       book(_h["ChHadronsCent60_80"], 6, 1, 1);
-      book(_c["Cent0_10"], "Cent0_10");
-      book(_c["Cent60_80"], "Cent60_80");
-      book(_c["pp_130"], "Sow_pp");
+      book(_c["Cent0_10"], "_Cent0_10");
+      book(_c["Cent60_80"], "_Cent60_80");
+      book(_c["pp_130"], "_Sow_pp");
       book(_h["Pi0PbScCent0_10"], 1, 1, 1);
       book(_h["Pi0PbScCent60_80"], 2, 1, 1);
       book(_h["Pi0PbGlCent0_10"], 3, 1, 1);
       book(_h["Pi0PbGlCent60_80"], 4, 1, 1);
       string refnameRaa1  = mkAxisCode(7,1,1);
       const Scatter2D& refdataRaa1 =refData(refnameRaa1);
-      book(_h["c10Pt_AuAu130_t7"], refnameRaa1 + "_AuAu130", refdataRaa1);
-      book(_h["c10Pt130_pp_t7"], refnameRaa1 + "_pp130", refdataRaa1);
+      book(_h["c10Pt_AuAu130_t7"], "_" + refnameRaa1 + "_AuAu130", refdataRaa1);
+      book(_h["c10Pt130_pp_t7"], "_" + refnameRaa1 + "_pp130", refdataRaa1);
       book(_s["Raa_c010_AuAu130_t7"], refnameRaa1);
       string refnameRaa2  = mkAxisCode(8,1,1);
       const Scatter2D& refdataRaa2 =refData(refnameRaa2);
-      book(_h["c10Pt_AuAu130_t8"], refnameRaa2 + "_AuAu130", refdataRaa2);
-      book(_h["c10Pt130_pp_t8"], refnameRaa2 + "_pp130", refdataRaa2);
+      book(_h["c10Pt_AuAu130_t8"], "_" + refnameRaa2 + "_AuAu130", refdataRaa2);
+      book(_h["c10Pt130_pp_t8"], "_" + refnameRaa2 + "_pp130", refdataRaa2);
       book(_s["Raa_c010_AuAu130_t8"], refnameRaa2);
       string refnameRaa3  = mkAxisCode(9,1,1);
       const Scatter2D& refdataRaa3 =refData(refnameRaa3);
-      book(_h["c10Pt_AuAu130_t9"], refnameRaa3 + "_AuAu130", refdataRaa3);
-      book(_h["c10Pt130_pp_t9"], refnameRaa3 + "_pp130", refdataRaa3);
+      book(_h["c10Pt_AuAu130_t9"], "_" + refnameRaa3 + "_AuAu130", refdataRaa3);
+      book(_h["c10Pt130_pp_t9"], "_" + refnameRaa3 + "_pp130", refdataRaa3);
       book(_s["Raa_c010_AuAu130_t9"], refnameRaa3);
       
       string refnameRCP1  = mkAxisCode(10,1,1);
       const Scatter2D& refdataRCP1 =refData(refnameRCP1);
-      book(_h["c10Pt_AuAu130_t10"], refnameRCP1 + "_cAuAu130", refdataRCP1);
-      book(_h["p80Pt130_AuAu130_t10"], refnameRCP1 + "_pAuAu130", refdataRCP1);
+      book(_h["c10Pt_AuAu130_t10"], "_" + refnameRCP1 + "_cAuAu130", refdataRCP1);
+      book(_h["p80Pt130_AuAu130_t10"], "_" + refnameRCP1 + "_pAuAu130", refdataRCP1);
       book(_s["RCP_AuAu130_t10"], refnameRCP1);
 
       string refnameRCP2  = mkAxisCode(11,1,1);
       const Scatter2D& refdataRCP2 =refData(refnameRCP2);
-      book(_h["c10Pt_AuAu130_t11"], refnameRCP2 + "_cAuAu130", refdataRCP2);
-      book(_h["p80Pt130_AuAu130_t11"], refnameRCP2 + "_pAuAu130", refdataRCP2);
+      book(_h["c10Pt_AuAu130_t11"], "_" + refnameRCP2 + "_cAuAu130", refdataRCP2);
+      book(_h["p80Pt130_AuAu130_t11"], "_" + refnameRCP2 + "_pAuAu130", refdataRCP2);
       book(_s["RCP_AuAu130_t11"], refnameRCP2);
 
       string refnameRCP3  = mkAxisCode(12,1,1);
       const Scatter2D& refdataRCP3 =refData(refnameRCP3);
-      book(_h["c10Pt_AuAu130_t12"], refnameRCP3 + "_cAuAu130", refdataRCP3);
-      book(_h["p80Pt130_AuAu130_t12"], refnameRCP3 + "_pAuAu130", refdataRCP3);
+      book(_h["c10Pt_AuAu130_t12"], "_" + refnameRCP3 + "_cAuAu130", refdataRCP3);
+      book(_h["p80Pt130_AuAu130_t12"], "_" + refnameRCP3 + "_pAuAu130", refdataRCP3);
       book(_s["RCP_AuAu130_t12"], refnameRCP3);
 
 
