@@ -188,3 +188,57 @@ Title= Ratio $\eta/\pi^{0}$ in Au+Au versus $p_T$
 XLabel=$p_T$
 YLabel=Ratio of Yields, $\eta/\pi^{0}$ $60-92\%$ centrality
 END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d10-x01-y01
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for 0-88% MB Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d10-x01-y02
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for 0-20% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d10-x01-y03
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for 20-40% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d10-x01-y04
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for 40-60% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d10-x01-y05
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for 60-88% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d11-x01-y01
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for 0-92% MB Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d11-x01-y02
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for 0-20% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d11-x01-y03
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for 20-60% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
+
+BEGIN PLOT /PHENIX_2006_I731133/d11-x01-y04
+Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for 60-92% Centrality
+XLabel=$p_T$
+YLabel=
+END PLOT
