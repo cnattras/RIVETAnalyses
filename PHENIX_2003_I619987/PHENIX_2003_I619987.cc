@@ -5,6 +5,11 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
+#include "../Centralities/RHICCentrality.hh"
+#include <math.h>
+#include <iostream>
+#include <string>
+#define _USE_MATH_DEFINES
 
 namespace Rivet {
 
@@ -15,50 +20,63 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2003_I619987);
-
-
-    /// @name Analysis methods
-    //@{
-
+    
+    // I figure that this is establishing binning for out pT
+    bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
+    {
+        if(pT > xMin() && hist.xMax())
+        {
+            deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+            return true;
+        }
+        else return false;
+    }
+      
+      
     /// Book histograms and initialise projections before the run
     void init() {
 
       // Initialise and register projections
 
-      // the basic final-state projection: 
+      // Particles: pi^+, pi^-, pi^0, p, p_bar
       // all final-state particles within 
       // the given eta acceptance
       const FinalState fs(Cuts::abseta < 4.9);
 
-      // the final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
-      declare(jetfs, "jets");
-
-      // FinalState of prompt photons and bare muons and electrons in the event
-      PromptFinalState photons(Cuts::abspid == PID::PHOTON);
-      PromptFinalState bare_leps(Cuts::abspid == PID::MUON || Cuts::abspid == PID::ELECTRON);
-
-      // dress the prompt bare leptons with prompt photons within dR < 0.1
-      // apply some fiducial cuts on the dressed leptons
-      Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
-      declare(dressed_leps, "leptons");
-
-      // missing momentum
-      declare(MissingMomentum(fs), "MET");
-
-      // Book histograms
-      // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      book(_h["AAAA"], 1, 1, 1);
-      book(_p["BBBB"], 2, 1, 1);
-      book(_c["CCCC"], 3, 1, 1);
-
+      // Declare centrality projection for centrality estimation
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
+        
+      //*****Counters******
+      book(sow["sow_AuAu10"], "sow_AuAu10");
+      book(sow["sow_AuAu20"], "sow_AuAu30");
+      book(sow["sow_AuAu50"], "sow_AuAu50");
+      book(sow["sow_AuAu50"], "sow_AuAu60");
+      book(sow["sow_AuAu92"], "sow_AuAu92");
+        
+      //Ratio of protons/pions
+      //d01-x01-y01
+      book(hTemp_ratio_AuAu["PC10"], "PC10_AuAu", refData(1,1,1));
+      book(hTemp_ratio_AuAu["PC30"], "PC30_AuAu", refData(1,1,2));
+      book(hTemp_ratio_AuAu["PC92"], "PC92_AuAu", refData(1,1,3));
+      book(hTemp_ratio_AuAu["P_barC10"], "P_barC10_AuAu", refData(1,1,4));
+      book(hTemp_ratio_AuAu["P_barC30"], "P_barC30_AuAu", refData(1,1,5));
+      book(hTemp_ratio_AuAu["P_barC92"], "P_barC92_AuAu", refData(1,1,6));
+      book(hTemp_ratio_AuAu["PiplusC10"], "PiplusC10_AuAu", refData(1,1,1));
+      book(hTemp_ratio_AuAu["PiplusC30"], "PiplusC30_AuAu", refData(1,1,2));
+      book(hTemp_ratio_AuAu["PiplusC92"], "PiplusC92_AuAu", refData(1,1,3));
+      book(hTemp_ratio_AuAu["PiminusC10"], "Piminus10_AuAu", refData(1,1,4));
+      book(hTemp_ratio_AuAu["PiminusC30"], "PiminusC30_AuAu", refData(1,1,5));
+      book(hTemp_ratio_AuAu["PiminusC92"], "PiminusC92_AuAu", refData(1,1,6));
+      book(RatioAuAu["PtoPiplusC10"], 1,1,1);
+      book(RatioAuAu["PtoPiplusC30"], 1,1,2);
+      book(RatioAuAu["PtoPiplusC92"], 1,1,3);
+      book(RatioAuAu["P_bartoPiminusC10"], 1,1,4);
+      book(RatioAuAu["P_bartoPiminusC30"], 1,1,5);
+      book(RatioAuAu["P_bartoPiminusC92"], 1,1,6);
+        
+       
+    
+        
     }
 
 
@@ -101,21 +119,19 @@ namespace Rivet {
 
     }
 
-    //@}
 
 
-    /// @name Histograms
-    //@{
-    map<string, Histo1DPtr> _h;
-    map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
-    //@}
+    map<string, Histo1DPtr> hAuAu_Yields;
+    
+    map<string, Histo1DPtr> hRcp;
+    map<string, Histo1DPtr> hRAA;
+    
+    map<string, CounterPtr> sow;
 
 
   };
 
 
-  // The hook for the plugin system
   DECLARE_RIVET_PLUGIN(PHENIX_2003_I619987);
 
 
