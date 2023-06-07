@@ -2,7 +2,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0016, up: 0.0016}}, 1: {Stat. + Sys.: {dn: -0.0022, up: 0.0022}}, 2: {Stat. + Sys.: {dn: -0.0031, up: 0.0031}}, 3: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 4: {Stat. + Sys.: {dn: -0.006, up: 0.006}}, 5: {Stat. + Sys.: {dn: -0.007, up: 0.007}}, 6: {Stat. + Sys.: {dn: -0.009, up: 0.009}}, 7: {Stat. + Sys.: {dn: -0.011, up: 0.011}}, 8: {Stat. + Sys.: {dn: -0.013, up: 0.013}}, 9: {Stat. + Sys.: {dn: -0.018, up: 0.018}}, 10: {Stat. + Sys.: {dn: -0.02, up: 0.02}}, 11: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 12: {Stat. + Sys.: {dn: -0.028, up: 0.028}}, 13: {Stat. + Sys.: {dn: -0.031, up: 0.031}}, 14: {Stat. + Sys.: {dn: -0.026, up: 0.026}}, 15: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 16: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 17: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 18: {Stat. + Sys.: {dn: -0.16, up: 0.16}}}
 IsRef: 1
 Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
-Title: Figure 1a
+Title: Proton-pionplus ratios 0-10% cent
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -32,7 +32,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0023, up: 0.0023}}, 1: {Stat. + Sys.: {dn: -0.0033, up: 0.0033}}, 2: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 3: {Stat. + Sys.: {dn: -0.006, up: 0.006}}, 4: {Stat. + Sys.: {dn: -0.008, up: 0.008}}, 5: {Stat. + Sys.: {dn: -0.01, up: 0.01}}, 6: {Stat. + Sys.: {dn: -0.012, up: 0.012}}, 7: {Stat. + Sys.: {dn: -0.015, up: 0.015}}, 8: {Stat. + Sys.: {dn: -0.017, up: 0.017}}, 9: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 10: {Stat. + Sys.: {dn: -0.025, up: 0.025}}, 11: {Stat. + Sys.: {dn: -0.028, up: 0.028}}, 12: {Stat. + Sys.: {dn: -0.033, up: 0.033}}, 13: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 14: {Stat. + Sys.: {dn: -0.031, up: 0.031}}, 15: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 16: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 17: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 18: {Stat. + Sys.: {dn: -0.1, up: 0.1}}}
 IsRef: 1
 Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
-Title: Figure 1a
+Title: Proton-pionplus ratios 20-30% cent
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -62,7 +62,7 @@ BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 1: {Stat. + Sys.: {dn: -0.005, up: 0.005}}, 2: {Stat. + Sys.: {dn: -0.007, up: 0.007}}, 3: {Stat. + Sys.: {dn: -0.009, up: 0.009}}, 4: {Stat. + Sys.: {dn: -0.012, up: 0.012}}, 5: {Stat. + Sys.: {dn: -0.015, up: 0.015}}, 6: {Stat. + Sys.: {dn: -0.018, up: 0.018}}, 7: {Stat. + Sys.: {dn: -0.022, up: 0.022}}, 8: {Stat. + Sys.: {dn: -0.026, up: 0.026}}, 9: {Stat. + Sys.: {dn: -0.033, up: 0.033}}, 10: {Stat. + Sys.: {dn: -0.035, up: 0.035}}, 11: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 12: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 13: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 14: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 15: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 16: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 17: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 18: {Stat. + Sys.: {dn: -0.13, up: 0.13}}}
 IsRef: 1
 Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
-Title: Figure 1a
+Title: Proton-pionplus ratios 60-92% cent
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
