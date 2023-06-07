@@ -21,7 +21,7 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2003_I619987);
     
-    // I figure that this is establishing binning for out pT
+    // I figure that this is establishing binning for our pT
     bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
     {
         if(pT > xMin() && hist.xMax())
@@ -39,9 +39,12 @@ namespace Rivet {
       // Initialise and register projections
 
       // Particles: pi^+, pi^-, pi^0, p, p_bar
+      //pids (respectively): 211, -211, 111, 2212, -2212
       // all final-state particles within 
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 4.9);
+      /// Found the cuts on page 3, paragraph 3
+      const FinalState fs(Cuts::absrap < 0.35 && Cuts::phi == 0.392);
+      declare(fs,"fs");
 
       // Declare centrality projection for centrality estimation
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
@@ -83,31 +86,69 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      /// @todo Do the event by event analysis here
+      //A reminder of pids as writing switch statements:
+        // Particles: pi^+, pi^-, pi^0, p, p_bar
+        //pids (respectively): 211, -211, 111, 2212, -2212
+        
+      Particles chargedP = applyProjection<FinalState>(event,"fs").partices();
 
-      // retrieve dressed leptons, sorted by pT
-      vector<DressedLepton> leptons = apply<DressedLeptons>(event, "leptons").dressedLeptons();
-
-      // retrieve clustered jets, sorted by pT, with a minimum pT cut
-      Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 30*GeV);
-
-      // remove all jets within dR < 0.2 of a dressed lepton
-      idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
-
-      // select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, [](const Jet& jet) {
-        return  jet.bTagged(Cuts::pT > 5*GeV && Cuts::abseta < 2.5);
-      });
-
-      // veto event if there are no b-jets
-      if (bjets.empty())  vetoEvent;
-
-      // apply a missing-momentum cut
-      if (apply<MissingMomentum>(event, "MET").missingPt() < 30*GeV)  vetoEvent;
-
-      // fill histogram with leading b-jet pT
-      _h["XXXX"]->fill(bjets[0].pT()/GeV);
-
+      // All figures are for S_NN = 200 GeV collisions, so no if statement required
+        
+      /// We will need to write for centrality
+      const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
+      const double cent = centProj();
+        
+      // events with centrality < 0 or > 92 are invalid. We use vetoEvent.
+      //*** @Christal, is a . needed after 92? ***
+      if (cent < 0. || cent > 92) vetoEvent;
+        
+      // 0-10% centrality
+      if (cent ) 0. && cent < 10.) {
+          //fill our counter
+          sow["sow_AUAU10"]->fill();
+          for (const Particle& p : chargedParticles)
+          {
+              double partPt = p.pT() / GeV;
+              double pt_weight = 1. / (partPt * 2. * M_PI);
+              
+              switch(p.pid()) {
+                  case 211: //pi^+
+                      if (getDeltaPt(*hTemp_ratio_AuAu["PiplusC10"], partPt, deltaPt){
+                          pt_weight /= deltaPt;
+                          hTemp_ratio_AuAu["PiplusC10"]->fill(partPt, pt_weight);
+                      }
+                  case -211: //pi^-
+                  case 111: //pi^0
+                  case 2212: //p
+                  case -2212: //p_bar
+                
+              }
+          }
+          
+            }
+      else if ((c >= 10.) && (c < 20.)){
+          sow["sow_AUAU20"]->fill();
+            }
+        
+      else if ((c >= 20.) && (c < 30.)){
+          sow["sow_AUAU30"]->fill();
+            }
+          
+      else if ((c >= 30.) && (c < 40.)){
+          sow["sow_AUAU40"]->fill();
+            }
+        
+      else if ((c >= 40.) && (c < 50.)){
+          sow["sow_AUAU50"]->fill();
+            }
+        
+      else if ((c >= 50.) && (c < 60.)){
+          sow["sow_AUAU60"]->fill();
+            }
+        
+      else{
+          sow["sow_AUAU92"]->fill();
+            }
     }
 
 
@@ -127,8 +168,10 @@ namespace Rivet {
     map<string, Histo1DPtr> hRAA;
     
     map<string, CounterPtr> sow;
+    CollisionSystem collSys;
+    vector<int> AUAUCentralityBins{ 10, 20, 30, 40, 50, 60, 92};
 
-
+      
   };
 
 
