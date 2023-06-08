@@ -5,7 +5,6 @@ Experiment: PHENIX
 Collider: <Relativistic Heavy Ion Collider (RHIC)>
 InspireID: 619987
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
-Reentrant: false
 Authors:
  - Joesph Beller <josdbell@vols.utk.edu>, Christal Martin <cbaillar@vols.utk.edu>, Christine Nattrass <cnattrass@utk.edu>
 References:
@@ -13,9 +12,12 @@ References:
  - 'https://doi.org/10.1103/PhysRevLett.91.172301'
  - 'arXiv:0305036'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
+#Beams: [AU, AU]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU200
 Description:
   'Ratios of particles produced in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV.'
 ValidationInfo:
