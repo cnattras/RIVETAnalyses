@@ -65,76 +65,77 @@ public:
         
         
         //Ratio of protons/pions
+        //note: the a added to hProtonPt. since there are different binnings and both d01 and d02 use hProtonPt
         //d01-x01-y01
         string refname1 = mkAxisCode(1, 1, 1);
         const Scatter2D& refdata1 = refData(refname1);
-        book(hProtonPt["AuAuc0010"], refname1 + "_AuAuc0010_Proton",refdata1);
+        book(hProtonPt["AuAuc0010a"], refname1 + "_AuAuc0010_Proton",refdata1);
         book(hPionPosPt["AuAuc0010"], refname1 + "_AuAuc0010_PiPos",refdata1);
         book(RatioPtoPiPos["AuAuc0010"], refname1);
         //d01-x01-y02
         string refname2 = mkAxisCode(1, 1, 2);
         const Scatter2D& refdata2 = refData(refname2);
-        book(hProtonPt["AuAuc2030"], refname2 + "_AuAuc2030_Proton",refdata2);
+        book(hProtonPt["AuAuc2030a"], refname2 + "_AuAuc2030_Proton",refdata2);
         book(hPionPosPt["AuAuc2030"], refname2 + "_AuAuc2030_PiPos",refdata2);
         book(RatioPtoPiPos["AuAuc2030"], refname2);
         //d01-x01-y03
         string refname3 = mkAxisCode(1, 1, 3);
         const Scatter2D& refdata3 = refData(refname3);
-        book(hProtonPt["AuAuc6092"], refname3 + "_AuAuc6092_Proton",refdata3);
+        book(hProtonPt["AuAuc6092a"], refname3 + "_AuAuc6092_Proton",refdata3);
         book(hPionPosPt["AuAuc6092"], refname3 + "_AuAuc6092_PiPos",refdata3);
         book(RatioPtoPiPos["AuAuc6092"], refname3);
         //d01-x01-y04
         string refname4 = mkAxisCode(1, 1, 4);
         const Scatter2D& refdata4 = refData(refname4);
-        book(hProBarPt["AuAuc0010"], refname4 + "_AuAuc0010_ProBar",refdata4);
-        book(hPionNegPt["AuAuc0010"], refname4 + "_AuAuc0010_PiNeg",refdata4);
+        book(hProBarPt["AuAuc0010a"], refname4 + "_AuAuc0010_ProBar",refdata4);
+        book(hPionNegPt["AuAuc0010a"], refname4 + "_AuAuc0010_PiNeg",refdata4);
         book(RatioPBartoPiNeg["AuAuc0010"], refname4);
         //d01-x01-y05
         string refname5 = mkAxisCode(1, 1, 5);
         const Scatter2D& refdata5 = refData(refname5);
-        book(hProBarPt["AuAuc2030"], refname5 + "_AuAuc2030_ProBar",refdata5);
-        book(hPionNegPt["AuAuc2030"], refname5 + "_AuAuc2030_PiNeg",refdata5);
+        book(hProBarPt["AuAuc2030a"], refname5 + "_AuAuc2030_ProBar",refdata5);
+        book(hPionNegPt["AuAuc2030a"], refname5 + "_AuAuc2030_PiNeg",refdata5);
         book(RatioPBartoPiNeg["AuAuc2030"], refname5);
         //d01-x01-y06
         string refname6 = mkAxisCode(1, 1, 6);
         const Scatter2D& refdata6 = refData(refname6);
-        book(hProBarPt["AuAuc6092"], refname6 + "_AuAuc6092_ProBar",refdata6);
-        book(hPionNegPt["AuAuc6092"], refname6 + "_AuAuc6092_PiNeg",refdata6);
+        book(hProBarPt["AuAuc6092a"], refname6 + "_AuAuc6092_ProBar",refdata6);
+        book(hPionNegPt["AuAuc6092a"], refname6 + "_AuAuc6092_PiNeg",refdata6);
         book(RatioPBartoPiNeg["AuAuc6092"], refname6);
         //d02-x01-y01
         string refname7 = mkAxisCode(2, 1, 1);
         const Scatter2D& refdata7 = refData(refname7);
-        book(hProtonPt["AuAuc0010"], refname7 + "_AuAuc0010_Proton",refdata7);
-        book(hPionNegPt["AuAuc0010"], refname7 + "_AuAuc0010_PiNeg",refdata7);
+        book(hProtonPt["AuAuc0010b"], refname7 + "_AuAuc0010_Proton",refdata7);
+        book(hPionNegPt["AuAuc0010b"], refname7 + "_AuAuc0010_PiNeg",refdata7);
         book(RatioPtoPiNeg["AuAuc0010"], refname7);
         //d02-x01-y02
         string refname8 = mkAxisCode(2, 1, 2);
         const Scatter2D& refdata8 = refData(refname8);
-        book(hProtonPt["AuAuc2030"], refname8 + "_AuAuc2030_Proton",refdata8);
-        book(hPionNegPt["AuAuc2030"], refname8 + "_AuAuc2030_PiNeg",refdata8);
+        book(hProtonPt["AuAuc2030b"], refname8 + "_AuAuc2030_Proton",refdata8);
+        book(hPionNegPt["AuAuc2030b"], refname8 + "_AuAuc2030_PiNeg",refdata8);
         book(RatioPtoPiNeg["AuAuc2030"], refname8);
         //d02-x01-y03
         string refname9 = mkAxisCode(2, 1, 3);
         const Scatter2D& refdata9 = refData(refname9);
-        book(hProtonPt["AuAuc6092"], refname9 + "_AuAuc6092_Proton",refdata9);
-        book(hPionNegPt["AuAuc6092"], refname9 + "_AuAuc6092_PiNeg",refdata9);
+        book(hProtonPt["AuAuc6092b"], refname9 + "_AuAuc6092_Proton",refdata9);
+        book(hPionNegPt["AuAuc6092b"], refname9 + "_AuAuc6092_PiNeg",refdata9);
         book(RatioPtoPiNeg["AuAuc6092"], refname9);
         //d02-x01-y04
         string refname10 = mkAxisCode(2, 1, 4);
         const Scatter2D& refdata10 = refData(refname10);
-        book(hProBarPt["AuAuc0010"], refname10 + "_AuAuc0010_ProBar",refdata10);
+        book(hProBarPt["AuAuc0010b"], refname10 + "_AuAuc0010_ProBar",refdata10);
         book(hPionPt["AuAuc0010"], refname10 + "_AuAuc0010_Pion",refdata10);
         book(RatioPBartoPion["AuAuc0010"], refname10);
         //d02-x01-y05
         string refname11 = mkAxisCode(2, 1, 5);
         const Scatter2D& refdata11 = refData(refname11);
-        book(hProBarPt["AuAuc2030"], refname11 + "_AuAuc2030_ProBar",refdata11);
+        book(hProBarPt["AuAuc2030b"], refname11 + "_AuAuc2030_ProBar",refdata11);
         book(hPionPt["AuAuc2030"], refname11 + "_AuAuc2030_Pion",refdata11);
         book(RatioPBartoPion["AuAuc2030"], refname11);
         //d02-x01-y06
         string refname12 = mkAxisCode(2, 1, 6);
         const Scatter2D& refdata12 = refData(refname12);
-        book(hProBarPt["AuAuc6092"], refname12 + "_AuAuc6092_ProBar",refdata12);
+        book(hProBarPt["AuAuc6092b"], refname12 + "_AuAuc6092_ProBar",refdata12);
         book(hPionPt["AuAuc6092"], refname12 + "_AuAuc6092_Pion",refdata12);
         book(RatioPBartoPion["AuAuc6092"], refname12);
         
@@ -179,17 +180,20 @@ public:
                         }
                         case -211: //pi^-
                         {
-                            hPionNegPt["AuAuc0010"]->fill(partPt);
+                            hPionNegPt["AuAuc0010a"]->fill(partPt);
+                            hPionNegPt["AuAuc0010b"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
                         {
-                            hProtonPt["AuAuc0010"]->fill(partPt);
+                            hProtonPt["AuAuc0010a"]->fill(partPt);
+                            hProtonPt["AuAuc0010b"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
                         {
-                            hProBarPt["AuAuc0010"]->fill(partPt);
+                            hProBarPt["AuAuc0010a"]->fill(partPt);
+                            hProBarPt["AuAuc0010b"]->fill(partPt);
                             break;
                         }
                     }
@@ -215,17 +219,20 @@ public:
                         }
                         case -211: //pi^-
                         {
-                            hPionNegPt["AuAuc2030"]->fill(partPt);
+                            hPionNegPt["AuAuc2030a"]->fill(partPt);
+                            hPionNegPt["AuAuc2030b"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
                         {
-                            hProtonPt["AuAuc2030"]->fill(partPt);
+                            hProtonPt["AuAuc2030a"]->fill(partPt);
+                            hProtonPt["AuAuc2030b"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
                         {
-                            hProBarPt["AuAuc2030"]->fill(partPt);
+                            hProBarPt["AuAuc2030a"]->fill(partPt);
+                            hProBarPt["AuAuc2030b"]->fill(partPt);
                             break;
                         }
                     }
@@ -259,17 +266,20 @@ public:
                         }
                         case -211: //pi^-
                         {
-                            hPionNegPt["AuAuc6092"]->fill(partPt);
+                            hPionNegPt["AuAuc6092a"]->fill(partPt);
+                            hPionNegPt["AuAuc6092b"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
                         {
-                            hProtonPt["AuAuc6092"]->fill(partPt);
+                            hProtonPt["AuAuc6092a"]->fill(partPt);
+                            hProtonPt["AuAuc6092b"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
                         {
-                            hProBarPt["AuAuc6092"]->fill(partPt);
+                            hProBarPt["AuAuc6092a"]->fill(partPt);
+                            hProBarPt["AuAuc6092b"]->fill(partPt);
                             break;
                         }
                     }
@@ -372,20 +382,20 @@ public:
     void finalize() {
         
         //d01: ratios
-        divide(hProtonPt["AuAuc0010"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]); //error here
-        divide(hProtonPt["AuAuc2030"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
-        divide(hProtonPt["AuAuc6092"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
-        divide(hProBarPt["AuAuc0010"], hPionNegPt["AuAuc0010"], RatioPBartoPiNeg["AuAuc0010"]);
-        divide(hProBarPt["AuAuc2030"], hPionNegPt["AuAuc2030"], RatioPBartoPiNeg["AuAuc2030"]);
-        divide(hProBarPt["AuAuc6092"], hPionNegPt["AuAuc6092"], RatioPBartoPiNeg["AuAuc6092"]);
+        divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]); //error here
+        divide(hProtonPt["AuAuc2030a"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
+        divide(hProtonPt["AuAuc6092a"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
+        divide(hProBarPt["AuAuc0010a"], hPionNegPt["AuAuc0010a"], RatioPBartoPiNeg["AuAuc0010"]);
+        divide(hProBarPt["AuAuc2030a"], hPionNegPt["AuAuc2030a"], RatioPBartoPiNeg["AuAuc2030"]);
+        divide(hProBarPt["AuAuc6092a"], hPionNegPt["AuAuc6092a"], RatioPBartoPiNeg["AuAuc6092"]);
         
         //d02
-        divide(hProtonPt["AuAuc0010"], hPionNegPt["AuAuc0010"], RatioPtoPiNeg["AuAuc0010"]);
-        divide(hProtonPt["AuAuc2030"], hPionNegPt["AuAuc2030"], RatioPtoPiNeg["AuAuc2030"]);
-        divide(hProtonPt["AuAuc6092"], hPionNegPt["AuAuc6092"], RatioPtoPiNeg["AuAuc6092"]); //error here
-        divide(hProBarPt["AuAuc0010"], hPionPt["AuAuc0010"], RatioPBartoPion["AuAuc0010"]);
-        divide(hProBarPt["AuAuc2030"], hPionPt["AuAuc2030"], RatioPBartoPion["AuAuc2030"]);
-        divide(hProBarPt["AuAuc6092"], hPionPt["AuAuc6092"], RatioPBartoPion["AuAuc6092"]);
+        divide(hProtonPt["AuAuc0010b"], hPionNegPt["AuAuc0010b"], RatioPtoPiNeg["AuAuc0010"]);
+        divide(hProtonPt["AuAuc2030b"], hPionNegPt["AuAuc2030b"], RatioPtoPiNeg["AuAuc2030"]);
+        divide(hProtonPt["AuAuc6092b"], hPionNegPt["AuAuc6092b"], RatioPtoPiNeg["AuAuc6092"]); //error here
+        divide(hProBarPt["AuAuc0010b"], hPionPt["AuAuc0010"], RatioPBartoPion["AuAuc0010"]);
+        divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030"], RatioPBartoPion["AuAuc2030"]);
+        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092"], RatioPBartoPion["AuAuc6092"]);
     }
     
     //Particles
