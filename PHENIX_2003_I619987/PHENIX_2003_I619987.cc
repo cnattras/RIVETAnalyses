@@ -63,7 +63,18 @@ public:
         book(hProtonPt["AuAuc0010"], refname1 + "_AuAuc0010_Proton",refdata1);
         book(hPionPosPt["AuAuc0010"], refname1 + "_AuAuc0010_PiPos",refdata1);
         book(RatioPtoPiPos["Proton/PiPos"], refname1);
-        
+        //d01-x01-y02
+        string refname2 = mkAxisCode(1, 1, 2);
+        const Scatter2D& refdata2 = refData(refname2);
+        book(hProtonPt["AuAuc2030"], refname2 + "_AuAuc2030_Proton",refdata2);
+        book(hPionPosPt["AuAuc2030"], refname2 + "_AuAuc2030_PiPos",refdata2);
+        book(RatioPtoPiPos["Proton/PiPos"], refname2);
+        //d01-x01-y03
+        string refname3 = mkAxisCode(1, 1, 3);
+        const Scatter2D& refdata3 = refData(refname3);
+        book(hProtonPt["AuAuc6092"], refname3 + "_AuAuc6092_Proton",refdata3);
+        book(hPionPosPt["AuAuc6092"], refname3 + "_AuAuc6092_PiPos",refdata3);
+        book(RatioPtoPiPos["Proton/PiPos"], refname3);
         
         
         
@@ -128,8 +139,39 @@ public:
                 break;
             }
             
-            else if ((c >= 20.) && (c < 30.)){
-                break;
+            else if ((c >= 20.) && (c < 30.))
+            {
+                for (const Particle& p : chargedParticles)
+                {
+                    double partPt = p.pT() / GeV;
+                    //double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    
+                    switch(p.pid()) {
+                        case 211: //pi^+
+                        {
+                            hPionPosPt["AuAuc2030"]->fill(partPt);
+                            break;
+                        }
+                        case -211: //pi^-
+                        {
+                            break;
+                        }
+                        case 111: //pi^0
+                        {
+                            break;
+                        }
+                        case 2212: //p
+                        {
+                            hProtonPt["AuAuc2030"]->fill(partPt);
+                            break;
+                        }
+                        case -2212: //p_bar
+                        {
+                            break;
+                        }
+                    }
+                    
+                }
             }
             
             else if ((c >= 30.) && (c < 40.)){
@@ -143,6 +185,39 @@ public:
             else if ((c >= 50.) && (c < 60.)){
                 break;
             }
+            else if ((c >= 60.) && (c < 92.)){
+                for (const Particle& p : chargedParticles)
+                {
+                    double partPt = p.pT() / GeV;
+                    //double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    
+                    switch(p.pid()) {
+                        case 211: //pi^+
+                        {
+                            hPionPosPt["AuAuc6092"]->fill(partPt);
+                            break;
+                        }
+                        case -211: //pi^-
+                        {
+                            break;
+                        }
+                        case 111: //pi^0
+                        {
+                            break;
+                        }
+                        case 2212: //p
+                        {
+                            hProtonPt["AuAuc6092"]->fill(partPt);
+                            break;
+                        }
+                        case -2212: //p_bar
+                        {
+                            break;
+                        }
+                    }
+                    
+                }
+            }
             
             else{
                 break;
@@ -155,7 +230,8 @@ public:
     void finalize() {
         
         divide(hProtonPt["AuAuc0010"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
-        
+        divide(hProtonPt["AuAuc2030"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
+        divide(hProtonPt["AuAuc6092"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
     }
     
     //Particles

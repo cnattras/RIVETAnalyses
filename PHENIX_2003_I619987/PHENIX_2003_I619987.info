@@ -1,28 +1,31 @@
 Name: PHENIX_2003_I619987
 Year: 2003
-Summary: <Insert short PHENIX_2003_I619987 description>
+Summary: <Scaling properties of protin and antiproton productions in $\sqrt{s_{NN}}$ = 200 GeV Au+Au collisions>
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: <Relativistic Heavy Ion Collider (RHIC)>
 InspireID: 619987
-Status: UNVALIDATED
+Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Reentrant: false
 Authors:
- - Your Name <your@email.address>
-#References:
-#- '<Example: Eur.Phys.J. C76 (2016) no.7, 392>'
-#- '<Example: DOI:10.1140/epjc/s10052-016-4184-8>'
-#- '<Example: arXiv:1605.03814>'
-RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: <Insert beam pair(s), e.g. [p+, p+] or [[p-, e-], [p-, e+]]>
-#Energies: <Run energies or beam energy pairs in GeV, e.g. [13000] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
-#Luminosity_fb: <Insert integrated luminosity, in inverse fb>
-Options:
- - cent=REF,GEN,IMP,USR
+ - Joesph Beller <josdbell@vols.utk.edu>, Christal Martin <cbaillar@vols.utk.edu>, Christine Nattrass <cnattrass@utk.edu>
+References:
+ - 'Phys.Rev. Lett. 91, 172301 (2003)'
+ - 'https://doi.org/10.1103/PhysRevLett.91.172301'
+ - 'arXiv:0305036'
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
 Description:
-  '<A fairly long description, including what is measured
-  and if possible what it is useful for in terms of MC validation
-  and tuning. Use LaTeX for maths like $\pT > 50\;\GeV$.>'
+  'Ratios of particles produced in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV.'
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
-BibKey: 
+BibKey:
 BibTeX: ''
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
