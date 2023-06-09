@@ -1,7 +1,7 @@
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d01-x01-y01
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0016, up: 0.0016}}, 1: {Stat. + Sys.: {dn: -0.0022, up: 0.0022}}, 2: {Stat. + Sys.: {dn: -0.0031, up: 0.0031}}, 3: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 4: {Stat. + Sys.: {dn: -0.006, up: 0.006}}, 5: {Stat. + Sys.: {dn: -0.007, up: 0.007}}, 6: {Stat. + Sys.: {dn: -0.009, up: 0.009}}, 7: {Stat. + Sys.: {dn: -0.011, up: 0.011}}, 8: {Stat. + Sys.: {dn: -0.013, up: 0.013}}, 9: {Stat. + Sys.: {dn: -0.018, up: 0.018}}, 10: {Stat. + Sys.: {dn: -0.02, up: 0.02}}, 11: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 12: {Stat. + Sys.: {dn: -0.028, up: 0.028}}, 13: {Stat. + Sys.: {dn: -0.031, up: 0.031}}, 14: {Stat. + Sys.: {dn: -0.026, up: 0.026}}, 15: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 16: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 17: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 18: {Stat. + Sys.: {dn: -0.16, up: 0.16}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+Path: /REF/PHENIX_2003_I619987/d01-x01-y01
 Title: Proton-pionplus ratios 0-10% cent
 Type: Scatter2D
 ---
@@ -28,10 +28,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d01-x01-y02
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0023, up: 0.0023}}, 1: {Stat. + Sys.: {dn: -0.0033, up: 0.0033}}, 2: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 3: {Stat. + Sys.: {dn: -0.006, up: 0.006}}, 4: {Stat. + Sys.: {dn: -0.008, up: 0.008}}, 5: {Stat. + Sys.: {dn: -0.01, up: 0.01}}, 6: {Stat. + Sys.: {dn: -0.012, up: 0.012}}, 7: {Stat. + Sys.: {dn: -0.015, up: 0.015}}, 8: {Stat. + Sys.: {dn: -0.017, up: 0.017}}, 9: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 10: {Stat. + Sys.: {dn: -0.025, up: 0.025}}, 11: {Stat. + Sys.: {dn: -0.028, up: 0.028}}, 12: {Stat. + Sys.: {dn: -0.033, up: 0.033}}, 13: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 14: {Stat. + Sys.: {dn: -0.031, up: 0.031}}, 15: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 16: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 17: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 18: {Stat. + Sys.: {dn: -0.1, up: 0.1}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+Path: /REF/PHENIX_2003_I619987/d01-x01-y02
 Title: Proton-pionplus ratios 20-30% cent
 Type: Scatter2D
 ---
@@ -58,10 +58,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d01-x01-y03
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 1: {Stat. + Sys.: {dn: -0.005, up: 0.005}}, 2: {Stat. + Sys.: {dn: -0.007, up: 0.007}}, 3: {Stat. + Sys.: {dn: -0.009, up: 0.009}}, 4: {Stat. + Sys.: {dn: -0.012, up: 0.012}}, 5: {Stat. + Sys.: {dn: -0.015, up: 0.015}}, 6: {Stat. + Sys.: {dn: -0.018, up: 0.018}}, 7: {Stat. + Sys.: {dn: -0.022, up: 0.022}}, 8: {Stat. + Sys.: {dn: -0.026, up: 0.026}}, 9: {Stat. + Sys.: {dn: -0.033, up: 0.033}}, 10: {Stat. + Sys.: {dn: -0.035, up: 0.035}}, 11: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 12: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 13: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 14: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 15: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 16: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 17: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 18: {Stat. + Sys.: {dn: -0.13, up: 0.13}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+Path: /REF/PHENIX_2003_I619987/d01-x01-y03
 Title: Proton-pionplus ratios 60-92% cent
 Type: Scatter2D
 ---
@@ -88,10 +88,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d01-x01-y04
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0011, up: 0.0011}}, 1: {Stat. + Sys.: {dn: -0.0016, up: 0.0016}}, 2: {Stat. + Sys.: {dn: -0.0022, up: 0.0022}}, 3: {Stat. + Sys.: {dn: -0.003, up: 0.003}}, 4: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 5: {Stat. + Sys.: {dn: -0.005, up: 0.005}}, 6: {Stat. + Sys.: {dn: -0.007, up: 0.007}}, 7: {Stat. + Sys.: {dn: -0.008, up: 0.008}}, 8: {Stat. + Sys.: {dn: -0.011, up: 0.011}}, 9: {Stat. + Sys.: {dn: -0.012, up: 0.012}}, 10: {Stat. + Sys.: {dn: -0.016, up: 0.016}}, 11: {Stat. + Sys.: {dn: -0.018, up: 0.018}}, 12: {Stat. + Sys.: {dn: -0.022, up: 0.022}}, 13: {Stat. + Sys.: {dn: -0.025, up: 0.025}}, 14: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 15: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 16: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 17: {Stat. + Sys.: {dn: -0.08, up: 0.08}}, 18: {Stat. + Sys.: {dn: -0.11, up: 0.11}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+Path: /REF/PHENIX_2003_I619987/d01-x01-y04
 Title: Figure 1a
 Type: Scatter2D
 ---
@@ -118,10 +118,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d01-x01-y05
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0017, up: 0.0017}}, 1: {Stat. + Sys.: {dn: -0.0025, up: 0.0025}}, 2: {Stat. + Sys.: {dn: -0.0034, up: 0.0034}}, 3: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 4: {Stat. + Sys.: {dn: -0.006, up: 0.006}}, 5: {Stat. + Sys.: {dn: -0.008, up: 0.008}}, 6: {Stat. + Sys.: {dn: -0.009, up: 0.009}}, 7: {Stat. + Sys.: {dn: -0.011, up: 0.011}}, 8: {Stat. + Sys.: {dn: -0.014, up: 0.014}}, 9: {Stat. + Sys.: {dn: -0.016, up: 0.016}}, 10: {Stat. + Sys.: {dn: -0.02, up: 0.02}}, 11: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 12: {Stat. + Sys.: {dn: -0.025, up: 0.025}}, 13: {Stat. + Sys.: {dn: -0.03, up: 0.03}}, 14: {Stat. + Sys.: {dn: -0.026, up: 0.026}}, 15: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 16: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 17: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 18: {Stat. + Sys.: {dn: -0.08, up: 0.08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+Path: /REF/PHENIX_2003_I619987/d01-x01-y05
 Title: Figure 1a
 Type: Scatter2D
 ---
@@ -148,10 +148,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d01-x01-y06
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.0032, up: 0.0032}}, 1: {Stat. + Sys.: {dn: -0.004, up: 0.004}}, 2: {Stat. + Sys.: {dn: -0.006, up: 0.006}}, 3: {Stat. + Sys.: {dn: -0.007, up: 0.007}}, 4: {Stat. + Sys.: {dn: -0.009, up: 0.009}}, 5: {Stat. + Sys.: {dn: -0.011, up: 0.011}}, 6: {Stat. + Sys.: {dn: -0.015, up: 0.015}}, 7: {Stat. + Sys.: {dn: -0.017, up: 0.017}}, 8: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 9: {Stat. + Sys.: {dn: -0.023, up: 0.023}}, 10: {Stat. + Sys.: {dn: -0.027, up: 0.027}}, 11: {Stat. + Sys.: {dn: -0.034, up: 0.034}}, 12: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 13: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 14: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 15: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 16: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 17: {Stat. + Sys.: {dn: -0.08, up: 0.08}}, 18: {Stat. + Sys.: {dn: -0.1, up: 0.1}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+Path: /REF/PHENIX_2003_I619987/d01-x01-y06
 Title: Figure 1a
 Type: Scatter2D
 ---
@@ -178,10 +178,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d02-x01-y01
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 1: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 2: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 3: {Stat. + Sys.: {dn: -0.11, up: 0.11}}, 4: {Stat. + Sys.: {dn: -0.13, up: 0.13}}, 5: {Stat. + Sys.: {dn: -0.16, up: 0.16}}, 6: {Stat. + Sys.: {dn: -0.26, up: 0.26}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+Path: /REF/PHENIX_2003_I619987/d02-x01-y01
 Title: Figure 1b
 Type: Scatter2D
 ---
@@ -196,10 +196,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d02-x01-y02
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 1: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 2: {Stat. + Sys.: {dn: -0.08, up: 0.08}}, 3: {Stat. + Sys.: {dn: -0.1, up: 0.1}}, 4: {Stat. + Sys.: {dn: -0.1, up: 0.1}}, 5: {Stat. + Sys.: {dn: -0.14, up: 0.14}}, 6: {Stat. + Sys.: {dn: -0.21, up: 0.21}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+Path: /REF/PHENIX_2003_I619987/d02-x01-y02
 Title: Figure 1b
 Type: Scatter2D
 ---
@@ -214,10 +214,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d02-x01-y03
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.031, up: 0.031}}, 1: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 2: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 3: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 4: {Stat. + Sys.: {dn: -0.1, up: 0.1}}, 5: {Stat. + Sys.: {dn: -0.15, up: 0.15}}, 6: {Stat. + Sys.: {dn: -0.27, up: 0.27}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y03
+Path: /REF/PHENIX_2003_I619987/d02-x01-y03
 Title: Figure 1b
 Type: Scatter2D
 ---
@@ -232,10 +232,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d02-x01-y04
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.034, up: 0.034}}, 1: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 2: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 3: {Stat. + Sys.: {dn: -0.08, up: 0.08}}, 4: {Stat. + Sys.: {dn: -0.09, up: 0.09}}, 5: {Stat. + Sys.: {dn: -0.12, up: 0.12}}, 6: {Stat. + Sys.: {dn: -0.19, up: 0.19}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y04
+Path: /REF/PHENIX_2003_I619987/d02-x01-y04
 Title: Figure 1b
 Type: Scatter2D
 ---
@@ -250,10 +250,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d02-x01-y05
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.029, up: 0.029}}, 1: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 2: {Stat. + Sys.: {dn: -0.06, up: 0.06}}, 3: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 4: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 5: {Stat. + Sys.: {dn: -0.11, up: 0.11}}, 6: {Stat. + Sys.: {dn: -0.16, up: 0.16}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y05
+Path: /REF/PHENIX_2003_I619987/d02-x01-y05
 Title: Figure 1b
 Type: Scatter2D
 ---
@@ -268,10 +268,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d02-x01-y06
 ErrorBreakdown: {0: {Stat. + Sys.: {dn: -0.025, up: 0.025}}, 1: {Stat. + Sys.: {dn: -0.04, up: 0.04}}, 2: {Stat. + Sys.: {dn: -0.05, up: 0.05}}, 3: {Stat. + Sys.: {dn: -0.07, up: 0.07}}, 4: {Stat. + Sys.: {dn: -0.08, up: 0.08}}, 5: {Stat. + Sys.: {dn: -0.1, up: 0.1}}, 6: {Stat. + Sys.: {dn: -0.18, up: 0.18}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y06
+Path: /REF/PHENIX_2003_I619987/d02-x01-y06
 Title: Figure 1b
 Type: Scatter2D
 ---
@@ -286,10 +286,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y01
 ErrorBreakdown: {0: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -8.0e-05, up: 8.0e-05}}, 1: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -8.0e-05, up: 8.0e-05}}, 2: {stat.: {dn: -5.0e-05, up: 5.0e-05}, sys.: {dn: -7.0e-05, up: 7.0e-05}}, 3: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 4: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 5: {stat.: {dn: -3.5e-05, up: 3.5e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 6: {stat.: {dn: -2.9e-05, up: 2.9e-05}, sys.: {dn: -3.3e-05, up: 3.3e-05}}, 7: {stat.: {dn: -2.5e-05, up: 2.5e-05}, sys.: {dn: -2.8e-05, up: 2.8e-05}}, 8: {stat.: {dn: -2.0e-05, up: 2.0e-05}, sys.: {dn: -2.1e-05, up: 2.1e-05}}, 9: {stat.: {dn: -1.8e-05, up: 1.8e-05}, sys.: {dn: -1.7e-05, up: 1.7e-05}}, 10: {stat.: {dn: -1.4e-05, up: 1.4e-05}, sys.: {dn: -1.3e-05, up: 1.3e-05}}, 11: {stat.: {dn: -1.1e-05, up: 1.1e-05}, sys.: {dn: -1.0e-05, up: 1.0e-05}}, 12: {stat.: {dn: -1.0e-05, up: 1.0e-05}, sys.: {dn: -8.0e-06, up: 8.0e-06}}, 13: {stat.: {dn: -8.0e-06, up: 8.0e-06}, sys.: {dn: -6.0e-06, up: 6.0e-06}}, 14: {stat.: {dn: -3.5e-06, up: 3.5e-06}, sys.: {dn: -4.0e-06, up: 4.0e-06}}, 15: {stat.: {dn: -2.5e-06, up: 2.5e-06}, sys.: {dn: -2.3e-06, up: 2.3e-06}}, 16: {stat.: {dn: -1.8e-06, up: 1.8e-06}, sys.: {dn: -1.3e-06, up: 1.3e-06}}, 17: {stat.: {dn: -1.3e-06, up: 1.3e-06}, sys.: {dn: -7.0e-07, up: 7.0e-07}}, 18: {stat.: {dn: -1.0e-06, up: 1.0e-06}, sys.: {dn: -4.0e-07, up: 4.0e-07}}, 19: {stat.: {dn: -4.0e-07, up: 4.0e-07}, sys.: {dn: -1.7e-07, up: 1.7e-07}}, 20: {stat.: {dn: -2.2e-07, up: 2.2e-07}, sys.: {dn: -6.0e-08, up: 6.0e-08}}, 21: {stat.: {dn: -1.5e-07, up: 1.5e-07}, sys.: {dn: -2.5e-08, up: 2.5e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+Path: /REF/PHENIX_2003_I619987/d03-x01-y01
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -319,10 +319,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y02
 ErrorBreakdown: {0: {stat.: {dn: -0.00012, up: 0.00012}, sys.: {dn: -0.00011, up: 0.00011}}, 1: {stat.: {dn: -0.00011, up: 0.00011}, sys.: {dn: -0.0001, up: 0.0001}}, 2: {stat.: {dn: -9.0e-05, up: 9.0e-05}, sys.: {dn: -8.0e-05, up: 8.0e-05}}, 3: {stat.: {dn: -8.0e-05, up: 8.0e-05}, sys.: {dn: -7.0e-05, up: 7.0e-05}}, 4: {stat.: {dn: -7.0e-05, up: 7.0e-05}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 5: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 6: {stat.: {dn: -5.0e-05, up: 5.0e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 7: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -3.2e-05, up: 3.2e-05}}, 8: {stat.: {dn: -3.1e-05, up: 3.1e-05}, sys.: {dn: -2.3e-05, up: 2.3e-05}}, 9: {stat.: {dn: -2.8e-05, up: 2.8e-05}, sys.: {dn: -1.9e-05, up: 1.9e-05}}, 10: {stat.: {dn: -2.2e-05, up: 2.2e-05}, sys.: {dn: -1.4e-05, up: 1.4e-05}}, 11: {stat.: {dn: -1.8e-05, up: 1.8e-05}, sys.: {dn: -1.1e-05, up: 1.1e-05}}, 12: {stat.: {dn: -1.5e-05, up: 1.5e-05}, sys.: {dn: -9.0e-06, up: 9.0e-06}}, 13: {stat.: {dn: -1.2e-05, up: 1.2e-05}, sys.: {dn: -6.0e-06, up: 6.0e-06}}, 14: {stat.: {dn: -6.0e-06, up: 6.0e-06}, sys.: {dn: -5.0e-06, up: 5.0e-06}}, 15: {stat.: {dn: -4.0e-06, up: 4.0e-06}, sys.: {dn: -2.6e-06, up: 2.6e-06}}, 16: {stat.: {dn: -2.9e-06, up: 2.9e-06}, sys.: {dn: -1.4e-06, up: 1.4e-06}}, 17: {stat.: {dn: -2.1e-06, up: 2.1e-06}, sys.: {dn: -9.0e-07, up: 9.0e-07}}, 18: {stat.: {dn: -1.6e-06, up: 1.6e-06}, sys.: {dn: -5.0e-07, up: 5.0e-07}}, 19: {stat.: {dn: -6.0e-07, up: 6.0e-07}, sys.: {dn: -2.0e-07, up: 2.0e-07}}, 20: {stat.: {dn: -3.5e-07, up: 3.5e-07}, sys.: {dn: -7.0e-08, up: 7.0e-08}}, 21: {stat.: {dn: -2.2e-07, up: 2.2e-07}, sys.: {dn: -2.5e-08, up: 2.5e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+Path: /REF/PHENIX_2003_I619987/d03-x01-y02
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -352,10 +352,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y03
 ErrorBreakdown: {0: {stat.: {dn: -0.00019, up: 0.00019}, sys.: {dn: -0.00016, up: 0.00016}}, 1: {stat.: {dn: -0.00016, up: 0.00016}, sys.: {dn: -0.00013, up: 0.00013}}, 2: {stat.: {dn: -0.00013, up: 0.00013}, sys.: {dn: -0.00011, up: 0.00011}}, 3: {stat.: {dn: -0.00011, up: 0.00011}, sys.: {dn: -9.0e-05, up: 9.0e-05}}, 4: {stat.: {dn: -0.0001, up: 0.0001}, sys.: {dn: -7.0e-05, up: 7.0e-05}}, 5: {stat.: {dn: -8.0e-05, up: 8.0e-05}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 6: {stat.: {dn: -7.0e-05, up: 7.0e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 7: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -3.5e-05, up: 3.5e-05}}, 8: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -2.6e-05, up: 2.6e-05}}, 9: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -2.1e-05, up: 2.1e-05}}, 10: {stat.: {dn: -3.1e-05, up: 3.1e-05}, sys.: {dn: -1.5e-05, up: 1.5e-05}}, 11: {stat.: {dn: -2.6e-05, up: 2.6e-05}, sys.: {dn: -1.2e-05, up: 1.2e-05}}, 12: {stat.: {dn: -2.3e-05, up: 2.3e-05}, sys.: {dn: -9.0e-06, up: 9.0e-06}}, 13: {stat.: {dn: -1.8e-05, up: 1.8e-05}, sys.: {dn: -6.0e-06, up: 6.0e-06}}, 14: {stat.: {dn: -9.0e-06, up: 9.0e-06}, sys.: {dn: -5.0e-06, up: 5.0e-06}}, 15: {stat.: {dn: -6.0e-06, up: 6.0e-06}, sys.: {dn: -2.4e-06, up: 2.4e-06}}, 16: {stat.: {dn: -5.0e-06, up: 5.0e-06}, sys.: {dn: -1.5e-06, up: 1.5e-06}}, 17: {stat.: {dn: -4.0e-06, up: 4.0e-06}, sys.: {dn: -9.0e-07, up: 9.0e-07}}, 18: {stat.: {dn: -2.8e-06, up: 2.8e-06}, sys.: {dn: -6.0e-07, up: 6.0e-07}}, 19: {stat.: {dn: -1.1e-06, up: 1.1e-06}, sys.: {dn: -2.1e-07, up: 2.1e-07}}, 20: {stat.: {dn: -6.0e-07, up: 6.0e-07}, sys.: {dn: -8.0e-08, up: 8.0e-08}}, 21: {stat.: {dn: -4.0e-07, up: 4.0e-07}, sys.: {dn: -2.7e-08, up: 2.7e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+Path: /REF/PHENIX_2003_I619987/d03-x01-y03
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -385,10 +385,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y04
 ErrorBreakdown: {0: {stat.: {dn: -0.00033, up: 0.00033}, sys.: {dn: -0.00024, up: 0.00024}}, 1: {stat.: {dn: -0.00027, up: 0.00027}, sys.: {dn: -0.00019, up: 0.00019}}, 2: {stat.: {dn: -0.00021, up: 0.00021}, sys.: {dn: -0.00015, up: 0.00015}}, 3: {stat.: {dn: -0.00018, up: 0.00018}, sys.: {dn: -0.00011, up: 0.00011}}, 4: {stat.: {dn: -0.00014, up: 0.00014}, sys.: {dn: -9.0e-05, up: 9.0e-05}}, 5: {stat.: {dn: -0.00012, up: 0.00012}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 6: {stat.: {dn: -9.0e-05, up: 9.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 7: {stat.: {dn: -8.0e-05, up: 8.0e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 8: {stat.: {dn: -7.0e-05, up: 7.0e-05}, sys.: {dn: -2.6e-05, up: 2.6e-05}}, 9: {stat.: {dn: -5.0e-05, up: 5.0e-05}, sys.: {dn: -1.8e-05, up: 1.8e-05}}, 10: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -1.3e-05, up: 1.3e-05}}, 11: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -1.1e-05, up: 1.1e-05}}, 12: {stat.: {dn: -3.2e-05, up: 3.2e-05}, sys.: {dn: -7.0e-06, up: 7.0e-06}}, 13: {stat.: {dn: -2.7e-05, up: 2.7e-05}, sys.: {dn: -6.0e-06, up: 6.0e-06}}, 14: {stat.: {dn: -1.2e-05, up: 1.2e-05}, sys.: {dn: -4.0e-06, up: 4.0e-06}}, 15: {stat.: {dn: -9.0e-06, up: 9.0e-06}, sys.: {dn: -2.2e-06, up: 2.2e-06}}, 16: {stat.: {dn: -7.0e-06, up: 7.0e-06}, sys.: {dn: -1.1e-06, up: 1.1e-06}}, 17: {stat.: {dn: -5.0e-06, up: 5.0e-06}, sys.: {dn: -7.0e-07, up: 7.0e-07}}, 18: {stat.: {dn: -4.0e-06, up: 4.0e-06}, sys.: {dn: -4.0e-07, up: 4.0e-07}}, 19: {stat.: {dn: -1.6e-06, up: 1.6e-06}, sys.: {dn: -1.8e-07, up: 1.8e-07}}, 20: {stat.: {dn: -9.0e-07, up: 9.0e-07}, sys.: {dn: -6.0e-08, up: 6.0e-08}}, 21: {stat.: {dn: -6.0e-07, up: 6.0e-07}, sys.: {dn: -2.6e-08, up: 2.6e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+Path: /REF/PHENIX_2003_I619987/d03-x01-y04
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -418,10 +418,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y05
 ErrorBreakdown: {0: {stat.: {dn: -5.0e-05, up: 5.0e-05}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 1: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 2: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 3: {stat.: {dn: -3.4e-05, up: 3.4e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 4: {stat.: {dn: -2.9e-05, up: 2.9e-05}, sys.: {dn: -3.5e-05, up: 3.5e-05}}, 5: {stat.: {dn: -2.7e-05, up: 2.7e-05}, sys.: {dn: -3.2e-05, up: 3.2e-05}}, 6: {stat.: {dn: -2.3e-05, up: 2.3e-05}, sys.: {dn: -2.6e-05, up: 2.6e-05}}, 7: {stat.: {dn: -1.9e-05, up: 1.9e-05}, sys.: {dn: -2.1e-05, up: 2.1e-05}}, 8: {stat.: {dn: -1.7e-05, up: 1.7e-05}, sys.: {dn: -1.7e-05, up: 1.7e-05}}, 9: {stat.: {dn: -1.3e-05, up: 1.3e-05}, sys.: {dn: -1.3e-05, up: 1.3e-05}}, 10: {stat.: {dn: -1.1e-05, up: 1.1e-05}, sys.: {dn: -1.0e-05, up: 1.0e-05}}, 11: {stat.: {dn: -9.0e-06, up: 9.0e-06}, sys.: {dn: -8.0e-06, up: 8.0e-06}}, 12: {stat.: {dn: -8.0e-06, up: 8.0e-06}, sys.: {dn: -6.0e-06, up: 6.0e-06}}, 13: {stat.: {dn: -6.0e-06, up: 6.0e-06}, sys.: {dn: -4.0e-06, up: 4.0e-06}}, 14: {stat.: {dn: -2.9e-06, up: 2.9e-06}, sys.: {dn: -2.8e-06, up: 2.8e-06}}, 15: {stat.: {dn: -2.2e-06, up: 2.2e-06}, sys.: {dn: -1.7e-06, up: 1.7e-06}}, 16: {stat.: {dn: -1.6e-06, up: 1.6e-06}, sys.: {dn: -9.0e-07, up: 9.0e-07}}, 17: {stat.: {dn: -1.1e-06, up: 1.1e-06}, sys.: {dn: -5.0e-07, up: 5.0e-07}}, 18: {stat.: {dn: -8.0e-07, up: 8.0e-07}, sys.: {dn: -2.9e-07, up: 2.9e-07}}, 19: {stat.: {dn: -3.3e-07, up: 3.3e-07}, sys.: {dn: -1.2e-07, up: 1.2e-07}}, 20: {stat.: {dn: -1.9e-07, up: 1.9e-07}, sys.: {dn: -4.0e-08, up: 4.0e-08}}, 21: {stat.: {dn: -1.2e-07, up: 1.2e-07}, sys.: {dn: -1.5e-08, up: 1.5e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+Path: /REF/PHENIX_2003_I619987/d03-x01-y05
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -451,10 +451,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y06
 ErrorBreakdown: {0: {stat.: {dn: -9.0e-05, up: 9.0e-05}, sys.: {dn: -8.0e-05, up: 8.0e-05}}, 1: {stat.: {dn: -8.0e-05, up: 8.0e-05}, sys.: {dn: -7.0e-05, up: 7.0e-05}}, 2: {stat.: {dn: -7.0e-05, up: 7.0e-05}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 3: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 4: {stat.: {dn: -5.0e-05, up: 5.0e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 5: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -4.0e-05, up: 4.0e-05}}, 6: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -2.9e-05, up: 2.9e-05}}, 7: {stat.: {dn: -3.0e-05, up: 3.0e-05}, sys.: {dn: -2.3e-05, up: 2.3e-05}}, 8: {stat.: {dn: -2.7e-05, up: 2.7e-05}, sys.: {dn: -1.9e-05, up: 1.9e-05}}, 9: {stat.: {dn: -2.1e-05, up: 2.1e-05}, sys.: {dn: -1.4e-05, up: 1.4e-05}}, 10: {stat.: {dn: -1.8e-05, up: 1.8e-05}, sys.: {dn: -1.1e-05, up: 1.1e-05}}, 11: {stat.: {dn: -1.4e-05, up: 1.4e-05}, sys.: {dn: -8.0e-06, up: 8.0e-06}}, 12: {stat.: {dn: -1.2e-05, up: 1.2e-05}, sys.: {dn: -6.0e-06, up: 6.0e-06}}, 13: {stat.: {dn: -1.0e-05, up: 1.0e-05}, sys.: {dn: -5.0e-06, up: 5.0e-06}}, 14: {stat.: {dn: -5.0e-06, up: 5.0e-06}, sys.: {dn: -3.1e-06, up: 3.1e-06}}, 15: {stat.: {dn: -3.3e-06, up: 3.3e-06}, sys.: {dn: -1.8e-06, up: 1.8e-06}}, 16: {stat.: {dn: -2.4e-06, up: 2.4e-06}, sys.: {dn: -1.0e-06, up: 1.0e-06}}, 17: {stat.: {dn: -1.7e-06, up: 1.7e-06}, sys.: {dn: -5.0e-07, up: 5.0e-07}}, 18: {stat.: {dn: -1.4e-06, up: 1.4e-06}, sys.: {dn: -3.5e-07, up: 3.5e-07}}, 19: {stat.: {dn: -5.0e-07, up: 5.0e-07}, sys.: {dn: -1.3e-07, up: 1.3e-07}}, 20: {stat.: {dn: -2.9e-07, up: 2.9e-07}, sys.: {dn: -4.0e-08, up: 4.0e-08}}, 21: {stat.: {dn: -1.7e-07, up: 1.7e-07}, sys.: {dn: -1.4e-08, up: 1.4e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y06
+Path: /REF/PHENIX_2003_I619987/d03-x01-y06
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -484,10 +484,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y07
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y07
 ErrorBreakdown: {0: {stat.: {dn: -0.00014, up: 0.00014}, sys.: {dn: -0.00011, up: 0.00011}}, 1: {stat.: {dn: -0.00013, up: 0.00013}, sys.: {dn: -0.0001, up: 0.0001}}, 2: {stat.: {dn: -0.0001, up: 0.0001}, sys.: {dn: -8.0e-05, up: 8.0e-05}}, 3: {stat.: {dn: -9.0e-05, up: 9.0e-05}, sys.: {dn: -7.0e-05, up: 7.0e-05}}, 4: {stat.: {dn: -7.0e-05, up: 7.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 5: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 6: {stat.: {dn: -5.0e-05, up: 5.0e-05}, sys.: {dn: -3.4e-05, up: 3.4e-05}}, 7: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -2.6e-05, up: 2.6e-05}}, 8: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -2.1e-05, up: 2.1e-05}}, 9: {stat.: {dn: -3.0e-05, up: 3.0e-05}, sys.: {dn: -1.5e-05, up: 1.5e-05}}, 10: {stat.: {dn: -2.5e-05, up: 2.5e-05}, sys.: {dn: -1.1e-05, up: 1.1e-05}}, 11: {stat.: {dn: -2.1e-05, up: 2.1e-05}, sys.: {dn: -9.0e-06, up: 9.0e-06}}, 12: {stat.: {dn: -1.8e-05, up: 1.8e-05}, sys.: {dn: -7.0e-06, up: 7.0e-06}}, 13: {stat.: {dn: -1.5e-05, up: 1.5e-05}, sys.: {dn: -5.0e-06, up: 5.0e-06}}, 14: {stat.: {dn: -7.0e-06, up: 7.0e-06}, sys.: {dn: -3.2e-06, up: 3.2e-06}}, 15: {stat.: {dn: -5.0e-06, up: 5.0e-06}, sys.: {dn: -1.8e-06, up: 1.8e-06}}, 16: {stat.: {dn: -4.0e-06, up: 4.0e-06}, sys.: {dn: -1.0e-06, up: 1.0e-06}}, 17: {stat.: {dn: -3.0e-06, up: 3.0e-06}, sys.: {dn: -6.0e-07, up: 6.0e-07}}, 18: {stat.: {dn: -2.5e-06, up: 2.5e-06}, sys.: {dn: -4.0e-07, up: 4.0e-07}}, 19: {stat.: {dn: -9.0e-07, up: 9.0e-07}, sys.: {dn: -1.4e-07, up: 1.4e-07}}, 20: {stat.: {dn: -5.0e-07, up: 5.0e-07}, sys.: {dn: -4.0e-08, up: 4.0e-08}}, 21: {stat.: {dn: -2.9e-07, up: 2.9e-07}, sys.: {dn: -1.4e-08, up: 1.4e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y07
+Path: /REF/PHENIX_2003_I619987/d03-x01-y07
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -517,10 +517,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y08
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d03-x01-y08
 ErrorBreakdown: {0: {stat.: {dn: -0.00026, up: 0.00026}, sys.: {dn: -0.00018, up: 0.00018}}, 1: {stat.: {dn: -0.00021, up: 0.00021}, sys.: {dn: -0.00014, up: 0.00014}}, 2: {stat.: {dn: -0.00017, up: 0.00017}, sys.: {dn: -0.00011, up: 0.00011}}, 3: {stat.: {dn: -0.00014, up: 0.00014}, sys.: {dn: -8.0e-05, up: 8.0e-05}}, 4: {stat.: {dn: -0.00011, up: 0.00011}, sys.: {dn: -6.0e-05, up: 6.0e-05}}, 5: {stat.: {dn: -0.0001, up: 0.0001}, sys.: {dn: -5.0e-05, up: 5.0e-05}}, 6: {stat.: {dn: -8.0e-05, up: 8.0e-05}, sys.: {dn: -3.5e-05, up: 3.5e-05}}, 7: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -2.6e-05, up: 2.6e-05}}, 8: {stat.: {dn: -6.0e-05, up: 6.0e-05}, sys.: {dn: -2.1e-05, up: 2.1e-05}}, 9: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -1.3e-05, up: 1.3e-05}}, 10: {stat.: {dn: -4.0e-05, up: 4.0e-05}, sys.: {dn: -1.0e-05, up: 1.0e-05}}, 11: {stat.: {dn: -3.1e-05, up: 3.1e-05}, sys.: {dn: -8.0e-06, up: 8.0e-06}}, 12: {stat.: {dn: -2.6e-05, up: 2.6e-05}, sys.: {dn: -5.0e-06, up: 5.0e-06}}, 13: {stat.: {dn: -2.3e-05, up: 2.3e-05}, sys.: {dn: -4.0e-06, up: 4.0e-06}}, 14: {stat.: {dn: -1.1e-05, up: 1.1e-05}, sys.: {dn: -2.5e-06, up: 2.5e-06}}, 15: {stat.: {dn: -8.0e-06, up: 8.0e-06}, sys.: {dn: -1.5e-06, up: 1.5e-06}}, 16: {stat.: {dn: -6.0e-06, up: 6.0e-06}, sys.: {dn: -8.0e-07, up: 8.0e-07}}, 17: {stat.: {dn: -4.0e-06, up: 4.0e-06}, sys.: {dn: -5.0e-07, up: 5.0e-07}}, 18: {stat.: {dn: -4.0e-06, up: 4.0e-06}, sys.: {dn: -3.1e-07, up: 3.1e-07}}, 19: {stat.: {dn: -1.3e-06, up: 1.3e-06}, sys.: {dn: -1.1e-07, up: 1.1e-07}}, 20: {stat.: {dn: -6.0e-07, up: 6.0e-07}, sys.: {dn: -2.3e-08, up: 2.3e-08}}, 21: {stat.: {dn: -4.0e-07, up: 4.0e-07}, sys.: {dn: -1.1e-08, up: 1.1e-08}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y08
+Path: /REF/PHENIX_2003_I619987/d03-x01-y08
 Title: Figure 2
 Type: Scatter2D
 ---
@@ -550,10 +550,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d04-x01-y01
 ErrorBreakdown: {0: {stat. + sys.: {dn: -0.006, up: 0.006}}, 1: {stat. + sys.: {dn: -0.008, up: 0.008}}, 2: {stat. + sys.: {dn: -0.01, up: 0.01}}, 3: {stat. + sys.: {dn: -0.012, up: 0.012}}, 4: {stat. + sys.: {dn: -0.015, up: 0.015}}, 5: {stat. + sys.: {dn: -0.018, up: 0.018}}, 6: {stat. + sys.: {dn: -0.023, up: 0.023}}, 7: {stat. + sys.: {dn: -0.026, up: 0.026}}, 8: {stat. + sys.: {dn: -0.031, up: 0.031}}, 9: {stat. + sys.: {dn: -0.04, up: 0.04}}, 10: {stat. + sys.: {dn: -0.05, up: 0.05}}, 11: {stat. + sys.: {dn: -0.05, up: 0.05}}, 12: {stat. + sys.: {dn: -0.07, up: 0.07}}, 13: {stat. + sys.: {dn: -0.07, up: 0.07}}, 14: {stat. + sys.: {dn: -0.06, up: 0.06}}, 15: {stat. + sys.: {dn: -0.07, up: 0.07}}, 16: {stat. + sys.: {dn: -0.11, up: 0.11}}, 17: {stat. + sys.: {dn: -0.14, up: 0.14}}, 18: {stat. + sys.: {dn: -0.15, up: 0.15}}, 19: {stat. + sys.: {dn: -0.16, up: 0.16}}, 20: {stat. + sys.: {dn: -0.4, up: 0.4}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+Path: /REF/PHENIX_2003_I619987/d04-x01-y01
 Title: Figure 3a
 Type: Scatter2D
 ---
@@ -582,10 +582,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d05-x01-y01
 ErrorBreakdown: {0: {stat. + sys.: {dn: -0.06, up: 0.06}}, 1: {stat. + sys.: {dn: -0.06, up: 0.06}}, 2: {stat. + sys.: {dn: -0.06, up: 0.06}}, 3: {stat. + sys.: {dn: -0.05, up: 0.05}}, 4: {stat. + sys.: {dn: -0.04, up: 0.04}}, 5: {stat. + sys.: {dn: -0.04, up: 0.04}}, 6: {stat. + sys.: {dn: -0.04, up: 0.04}}, 7: {stat. + sys.: {dn: -0.05, up: 0.05}}, 8: {stat. + sys.: {dn: -0.04, up: 0.04}}, 9: {stat. + sys.: {dn: -0.04, up: 0.04}}, 10: {stat. + sys.: {dn: -0.04, up: 0.04}}, 11: {stat. + sys.: {dn: -0.05, up: 0.05}}, 12: {stat. + sys.: {dn: -0.12, up: 0.12}}, 13: {stat. + sys.: {dn: -0.29, up: 0.29}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+Path: /REF/PHENIX_2003_I619987/d05-x01-y01
 Title: Figure 3b
 Type: Scatter2D
 ---
@@ -607,10 +607,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d06-x01-y01
 ErrorBreakdown: {0: {stat. + sys.: {dn: -0.21, up: 0.21}}, 1: {stat. + sys.: {dn: -0.22, up: 0.22}}, 2: {stat. + sys.: {dn: -0.23, up: 0.23}}, 3: {stat. + sys.: {dn: -0.26, up: 0.26}}, 4: {stat. + sys.: {dn: -0.27, up: 0.27}}, 5: {stat. + sys.: {dn: -0.23, up: 0.23}}, 6: {stat. + sys.: {dn: -0.22, up: 0.22}}, 7: {stat. + sys.: {dn: -0.18, up: 0.18}}, 8: {stat. + sys.: {dn: -0.21, up: 0.21}}, 9: {stat. + sys.: {dn: -0.28, up: 0.28}}, 10: {stat. + sys.: {dn: -0.33, up: 0.33}}, 11: {stat. + sys.: {dn: -0.6, up: 0.6}}, 12: {stat. + sys.: {dn: -0.6, up: 0.6}}, 13: {stat. + sys.: {dn: -0.5, up: 0.5}}, 14: {stat. + sys.: {dn: -1.4, up: 1.4}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+Path: /REF/PHENIX_2003_I619987/d06-x01-y01
 Title: Figure 4a
 Type: Scatter2D
 ---
@@ -633,10 +633,10 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2003_I619987/d07-x01-y01
 ErrorBreakdown: {0: {stat. + sys.: {dn: -0.16, up: 0.16}}, 1: {stat. + sys.: {dn: -0.16, up: 0.16}}, 2: {stat. + sys.: {dn: -0.16, up: 0.16}}, 3: {stat. + sys.: {dn: -0.18, up: 0.18}}, 4: {stat. + sys.: {dn: -0.18, up: 0.18}}, 5: {stat. + sys.: {dn: -0.19, up: 0.19}}, 6: {stat. + sys.: {dn: -0.2, up: 0.2}}, 7: {stat. + sys.: {dn: -0.25, up: 0.25}}, 8: {stat. + sys.: {dn: -0.27, up: 0.27}}, 9: {stat. + sys.: {dn: -0.35, up: 0.35}}, 10: {stat. + sys.: {dn: -0.4, up: 0.4}}, 11: {stat. + sys.: {dn: -0.5, up: 0.5}}, 12: {stat. + sys.: {dn: -1.0, up: 1.0}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y01
+Path: /REF/PHENIX_2003_I619987/d07-x01-y01
 Title: Figure 4b
 Type: Scatter2D
 ---

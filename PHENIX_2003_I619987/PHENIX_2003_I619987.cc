@@ -382,7 +382,7 @@ public:
     void finalize() {
         
         //d01: ratios
-        divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]); //error here
+        divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]); 
         divide(hProtonPt["AuAuc2030a"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
         divide(hProtonPt["AuAuc6092a"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
         divide(hProBarPt["AuAuc0010a"], hPionNegPt["AuAuc0010a"], RatioPBartoPiNeg["AuAuc0010"]);
@@ -392,7 +392,7 @@ public:
         //d02
         divide(hProtonPt["AuAuc0010b"], hPionNegPt["AuAuc0010b"], RatioPtoPiNeg["AuAuc0010"]);
         divide(hProtonPt["AuAuc2030b"], hPionNegPt["AuAuc2030b"], RatioPtoPiNeg["AuAuc2030"]);
-        divide(hProtonPt["AuAuc6092b"], hPionNegPt["AuAuc6092b"], RatioPtoPiNeg["AuAuc6092"]); //error here
+        divide(hProtonPt["AuAuc6092b"], hPionNegPt["AuAuc6092b"], RatioPtoPiNeg["AuAuc6092"]);
         divide(hProBarPt["AuAuc0010b"], hPionPt["AuAuc0010"], RatioPBartoPion["AuAuc0010"]);
         divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030"], RatioPBartoPion["AuAuc2030"]);
         divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092"], RatioPBartoPion["AuAuc6092"]);
