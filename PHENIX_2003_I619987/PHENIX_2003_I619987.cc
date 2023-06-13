@@ -66,6 +66,7 @@ public:
         
         //Ratio of protons/pions
         //note: the a added to hProtonPt. since there are different binnings and both d01 and d02 use hProtonPt
+        //Figure 1
         //d01-x01-y01
         string refname1 = mkAxisCode(1, 1, 1);
         const Scatter2D& refdata1 = refData(refname1);
@@ -139,6 +140,46 @@ public:
         book(hPionPt["AuAuc6092"], refname12 + "_AuAuc6092_Pion",refdata12);
         book(RatioPBartoPion["AuAuc6092"], refname12);
         
+        //yields
+        //figure 2
+        //counters per each centrality; I don't think needed since this is yield/Ncoll
+        //book(sow["sow_AuAuc0010"], "_sow_AuAuc0010");
+        //book(sow["sow_AuAuc2030"], "_sow_AuAuc2030");
+        //book(sow["sow_AuAuc4050"], "_sow_AuAuc4050");
+        //book(sow["sow_AuAuc6092"], "_sow_AuAuc6092");
+        
+        //d03-x01-y01
+        string refname13 = mkAxisCode(3, 1, 1);
+        const Scatter2D& refdata13 = refData(refname13);
+        book(hProtonPt["ptyieldsAuAuc0010"], refname13 + "_AuAuc0010_Proton",refdata13);
+        //d03-x01-y02
+        string refname14 = mkAxisCode(3, 1, 2);
+        const Scatter2D& refdata14 = refData(refname14);
+        book(hProtonPt["ptyieldsAuAuc2030"], refname14 + "_AuAuc2030_Proton",refdata14);
+        //d03-x01-y03
+        string refname15 = mkAxisCode(3, 1, 3);
+        const Scatter2D& refdata15 = refData(refname15);
+        book(hProtonPt["ptyieldsAuAuc4050"], refname15 + "_AuAuc4050_Proton",refdata15);
+        //d03-x01-y04
+        string refname16 = mkAxisCode(3, 1, 4);
+        const Scatter2D& refdata16 = refData(refname16);
+        book(hProtonPt["ptyieldsAuAuc6092"], refname16 + "_AuAuc6092_Proton",refdata16);
+        //d03-x01-y05
+        string refname17 = mkAxisCode(3, 1, 5);
+        const Scatter2D& refdata17 = refData(refname17);
+        book(hProBarPt["ptyieldsAuAuc0010"], refname17 + "_AuAuc0010_Proton",refdata17);
+        //d03-x01-y06
+        string refname18 = mkAxisCode(3, 1, 6);
+        const Scatter2D& refdata18 = refData(refname18);
+        book(hProBarPt["ptyieldsAuAuc2030"], refname18 + "_AuAuc2030_Proton",refdata18);
+        //d03-x01-y07
+        string refname19 = mkAxisCode(3, 1, 7);
+        const Scatter2D& refdata19 = refData(refname19);
+        book(hProBarPt["ptyieldsAuAuc4050"], refname19 + "_AuAuc4050_Proton",refdata19);
+        //d03-x01-y08
+        string refname20 = mkAxisCode(3, 1, 8);
+        const Scatter2D& refdata20 = refData(refname20);
+        book(hProBarPt["ptyieldsAuAuc6092"], refname20 + "_AuAuc6092_Proton",refdata20);
         
     }
     
@@ -167,10 +208,11 @@ public:
             // 0-10% centrality
             if ((c > 0.) && (c < 10.))
             {
+                //sow["sow_AuAuc0010"]->fill();
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
-                    //double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    double pt_weight = 1. / (partPt * 2. * M_PI);
                     
                     switch(p.pid()) {
                         case 211: //pi^+
@@ -188,12 +230,14 @@ public:
                         {
                             hProtonPt["AuAuc0010a"]->fill(partPt);
                             hProtonPt["AuAuc0010b"]->fill(partPt);
+                            hProtonPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
                             break;
                         }
                         case -2212: //p_bar
                         {
                             hProBarPt["AuAuc0010a"]->fill(partPt);
                             hProBarPt["AuAuc0010b"]->fill(partPt);
+                            hProBarPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
                             break;
                         }
                     }
@@ -209,7 +253,7 @@ public:
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
-                    //double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
                     
                     switch(p.pid()) {
                         case 211: //pi^+
@@ -227,12 +271,14 @@ public:
                         {
                             hProtonPt["AuAuc2030a"]->fill(partPt);
                             hProtonPt["AuAuc2030b"]->fill(partPt);
+                            hProtonPt["ptyieldsAuAuc2030"]->fill(partPt, pt_weight);
                             break;
                         }
                         case -2212: //p_bar
                         {
                             hProBarPt["AuAuc2030a"]->fill(partPt);
                             hProBarPt["AuAuc2030b"]->fill(partPt);
+                            hProBarPt["ptyieldsAuAuc2030"]->fill(partPt, pt_weight);
                             break;
                         }
                     }
@@ -241,22 +287,51 @@ public:
                 
             }
             
-            else if ((c >= 30.) && (c < 40.)){
+            else if ((c >= 30.) && (c < 40.))
+            {
                 break;
             }
             
-            else if ((c >= 40.) && (c < 50.)){
-                break;
+            else if ((c >= 40.) && (c < 50.))
+            {
+                for (const Particle& p : chargedParticles)
+                {
+                    double partPt = p.pT() / GeV;
+                    double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    
+                    switch(p.pid()) {
+                        case 211: //pi^+
+                        {
+                            break;
+                        }
+                        case -211: //pi^-
+                        {
+                            break;
+                        }
+                        case 2212: //p
+                        {
+                            hProtonPt["ptyieldsAuAuc4050"]->fill(partPt, pt_weight);
+                            break;
+                        }
+                        case -2212: //p_bar
+                        {
+                            hProBarPt["ptyieldsAuAuc4050"]->fill(partPt, pt_weight);
+                            break;
+                        }
+                    }
+                    
+                }
             }
             
             else if ((c >= 50.) && (c < 60.)){
                 break;
             }
+            
             else if ((c >= 60.) && (c < 92.)){
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
-                    //double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
                     
                     switch(p.pid()) {
                         case 211: //pi^+
@@ -274,12 +349,15 @@ public:
                         {
                             hProtonPt["AuAuc6092a"]->fill(partPt);
                             hProtonPt["AuAuc6092b"]->fill(partPt);
+                            hProtonPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
                             break;
                         }
                         case -2212: //p_bar
                         {
                             hProBarPt["AuAuc6092a"]->fill(partPt);
                             hProBarPt["AuAuc6092b"]->fill(partPt);
+                            hProBarPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
+                            
                             break;
                         }
                     }
@@ -320,7 +398,8 @@ public:
                     
                 }
             }
-            else if ((c >= 10.) && (c < 20.)){
+            else if ((c >= 10.) && (c < 20.))
+            {
                 break;
             }
             
@@ -343,18 +422,22 @@ public:
                 
             }
             
-            else if ((c >= 30.) && (c < 40.)){
+            else if ((c >= 30.) && (c < 40.))
+            {
                 break;
             }
             
-            else if ((c >= 40.) && (c < 50.)){
+            else if ((c >= 40.) && (c < 50.))
+            {
                 break;
             }
             
-            else if ((c >= 50.) && (c < 60.)){
+            else if ((c >= 50.) && (c < 60.))
+            {
                 break;
             }
-            else if ((c >= 60.) && (c < 92.)){
+            else if ((c >= 60.) && (c < 92.))
+            {
                 for (const Particle& p : neutralParticles)
                 {
                     double partPt = p.pT() / GeV;
@@ -371,7 +454,8 @@ public:
                 }
             }
             
-            else{
+            else
+            {
                 break;
             }
         }
@@ -396,6 +480,17 @@ public:
         divide(hProBarPt["AuAuc0010b"], hPionPt["AuAuc0010"], RatioPBartoPion["AuAuc0010"]);
         divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030"], RatioPBartoPion["AuAuc2030"]);
         divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092"], RatioPBartoPion["AuAuc6092"]);
+        
+        //d03
+        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+        hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
+        hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
+        hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
+        hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+        hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
+        hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
+        hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
+        
     }
     
     //Particles
