@@ -189,6 +189,15 @@ public:
         book(hPPlusPBarPt["ppluspbarAuAuc0010"], refname21 + "_AuAuc0010",refdata21);
         book(hPPlusPBarPt["ppluspbarAuAuc6092"], refname21 + "_AuAuc6092",refdata21);
         book(hRcp["ppluspbar"], refname21);
+        
+        //Figure 3b
+        //d05-x01-y01
+        string refname22 = mkAxisCode(5, 1, 1);
+        const Scatter2D& refdata22 = refData(refname22);
+        //VVV not needed since hPionPt is already booked and filled for //d02
+        //book(hPionPt["AuAuc0010"], refname22 + "_AuAuc0010",refdata22);
+        //book(hPionPt["AuAuc6092"], refname22 + "_AuAuc6092",refdata22);
+        book(hRcp["pion"], refname22);
     }
     
     
@@ -477,7 +486,7 @@ public:
     void finalize() {
         
         //d01: p and p_bar ratios
-        divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]); 
+        divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
         divide(hProtonPt["AuAuc2030a"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
         divide(hProtonPt["AuAuc6092a"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
         divide(hProBarPt["AuAuc0010a"], hPionNegPt["AuAuc0010a"], RatioPBartoPiNeg["AuAuc0010"]);
@@ -513,6 +522,18 @@ public:
         //Rcp
         divide(hPPlusPBarPt["ppluspbarAuAuc0010"], hPPlusPBarPt["ppluspbarAuAuc6092"], hRcp["ppluspbar"]);
         //divide(hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4), hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5), hRcp["ppluspbar"]);    >>>not successful when ran
+        
+        //d05
+        //0-10%
+        hPionPt["AuAuc0010"]->scaleW(1. / 955.4);
+        //60-92%
+        hPionPt["AuAuc6092"]->scaleW(1. / 14.5);
+        
+        //Rcp
+        divide(hPionPt["AuAuc0010"], hPionPt["AuAuc6092"], hRcp["pion"]);
+        
+        
+        
     }
     
     //Particles
