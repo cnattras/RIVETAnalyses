@@ -125,19 +125,19 @@ public:
         string refname10 = mkAxisCode(2, 1, 4);
         const Scatter2D& refdata10 = refData(refname10);
         book(hProBarPt["AuAuc0010b"], refname10 + "_AuAuc0010_ProBar",refdata10);
-        book(hPionPt["AuAuc0010"], refname10 + "_AuAuc0010_Pion",refdata10);
+        book(hPionPt["AuAuc0010a"], refname10 + "_AuAuc0010_Pion",refdata10);
         book(RatioPBartoPion["AuAuc0010"], refname10);
         //d02-x01-y05
         string refname11 = mkAxisCode(2, 1, 5);
         const Scatter2D& refdata11 = refData(refname11);
         book(hProBarPt["AuAuc2030b"], refname11 + "_AuAuc2030_ProBar",refdata11);
-        book(hPionPt["AuAuc2030"], refname11 + "_AuAuc2030_Pion",refdata11);
+        book(hPionPt["AuAuc2030a"], refname11 + "_AuAuc2030_Pion",refdata11);
         book(RatioPBartoPion["AuAuc2030"], refname11);
         //d02-x01-y06
         string refname12 = mkAxisCode(2, 1, 6);
         const Scatter2D& refdata12 = refData(refname12);
         book(hProBarPt["AuAuc6092b"], refname12 + "_AuAuc6092_ProBar",refdata12);
-        book(hPionPt["AuAuc6092"], refname12 + "_AuAuc6092_Pion",refdata12);
+        book(hPionPt["AuAuc6092a"], refname12 + "_AuAuc6092_Pion",refdata12);
         book(RatioPBartoPion["AuAuc6092"], refname12);
         
         //yields
@@ -193,11 +193,27 @@ public:
         //Figure 3b
         //d05-x01-y01
         string refname22 = mkAxisCode(5, 1, 1);
-        const Scatter2D& refdata22 = refData(refname22);
-        //VVV not needed since hPionPt is already booked and filled for //d02
+        //const Scatter2D& refdata22 = refData(refname22);
+        //next two lines: not needed since hPionPt is already booked and filled for //d02
         //book(hPionPt["AuAuc0010"], refname22 + "_AuAuc0010",refdata22);
         //book(hPionPt["AuAuc6092"], refname22 + "_AuAuc6092",refdata22);
         book(hRcp["pion"], refname22);
+        
+        //Figure 4a
+        //d06-x01-y01
+        string refname23 = mkAxisCode(6, 1, 1);
+        const Scatter2D& refdata23 = refData(refname23);
+        book(hChHadrons["AuAuc0010"], refname23 + "_AuAuc0010",refdata23);
+        book(hPionPt["AuAuc0010b"], refname23 + "_AuAuc0010_Pion",refdata23);
+        book(RatioHadtoPion["AuAuc0010"], refname23);
+        
+        //Figure 4b
+        //d07-x01-y01
+        string refname24 = mkAxisCode(7, 1, 1);
+        const Scatter2D& refdata24 = refData(refname24);
+        book(hChHadrons["AuAuc6092"], refname24 + "_AuAuc6092",refdata24);
+        book(hPionPt["AuAuc6092b"], refname24 + "_AuAuc6092_Pion",refdata24);
+        book(RatioHadtoPion["AuAuc6092"], refname24);
     }
     
     
@@ -235,12 +251,14 @@ public:
                         case 211: //pi^+
                         {
                             hPionPosPt["AuAuc0010"]->fill(partPt);
+                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                         case -211: //pi^-
                         {
                             hPionNegPt["AuAuc0010a"]->fill(partPt);
                             hPionNegPt["AuAuc0010b"]->fill(partPt);
+                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
@@ -249,6 +267,7 @@ public:
                             hProtonPt["AuAuc0010b"]->fill(partPt);
                             hProtonPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc0010"]->fill(partPt);
+                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
@@ -257,6 +276,7 @@ public:
                             hProBarPt["AuAuc0010b"]->fill(partPt);
                             hProBarPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc0010"]->fill(partPt);
+                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                     }
@@ -356,12 +376,14 @@ public:
                         case 211: //pi^+
                         {
                             hPionPosPt["AuAuc6092"]->fill(partPt);
+                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                         case -211: //pi^-
                         {
                             hPionNegPt["AuAuc6092a"]->fill(partPt);
                             hPionNegPt["AuAuc6092b"]->fill(partPt);
+                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
@@ -370,6 +392,7 @@ public:
                             hProtonPt["AuAuc6092b"]->fill(partPt);
                             hProtonPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc6092"]->fill(partPt);
+                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
@@ -378,6 +401,7 @@ public:
                             hProBarPt["AuAuc6092b"]->fill(partPt);
                             hProBarPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc6092"]->fill(partPt);
+                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                     }
@@ -411,7 +435,8 @@ public:
                     switch(p.pid()) {
                         case 111: //pi^0
                         {
-                            hPionPt["AuAuc0010"]->fill(partPt);
+                            hPionPt["AuAuc0010a"]->fill(partPt);
+                            hPionPt["AuAuc0010b"]->fill(partPt);
                             break;
                         }
                     }
@@ -433,7 +458,7 @@ public:
                     switch(p.pid()) {
                         case 111: //pi^0
                         {
-                            hPionPt["AuAuc2030"]->fill(partPt);
+                            hPionPt["AuAuc2030a"]->fill(partPt);
                             break;
                         }
                     }
@@ -466,7 +491,8 @@ public:
                     switch(p.pid()) {
                         case 111: //pi^0
                         {
-                            hPionPt["AuAuc6092"]->fill(partPt);
+                            hPionPt["AuAuc6092a"]->fill(partPt);
+                            hPionPt["AuAuc6092b"]->fill(partPt);
                             break;
                         }
                     }
@@ -497,9 +523,9 @@ public:
         divide(hProtonPt["AuAuc0010b"], hPionNegPt["AuAuc0010b"], RatioPtoPiNeg["AuAuc0010"]);
         divide(hProtonPt["AuAuc2030b"], hPionNegPt["AuAuc2030b"], RatioPtoPiNeg["AuAuc2030"]);
         divide(hProtonPt["AuAuc6092b"], hPionNegPt["AuAuc6092b"], RatioPtoPiNeg["AuAuc6092"]);
-        divide(hProBarPt["AuAuc0010b"], hPionPt["AuAuc0010"], RatioPBartoPion["AuAuc0010"]);
-        divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030"], RatioPBartoPion["AuAuc2030"]);
-        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092"], RatioPBartoPion["AuAuc6092"]);
+        divide(hProBarPt["AuAuc0010b"], hPionPt["AuAuc0010a"], RatioPBartoPion["AuAuc0010"]);
+        divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030a"], RatioPBartoPion["AuAuc2030"]);
+        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);
         
         //d03 p and p_bar yields
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
@@ -525,14 +551,20 @@ public:
         
         //d05
         //0-10%
-        hPionPt["AuAuc0010"]->scaleW(1. / 955.4);
+        hPionPt["AuAuc0010a"]->scaleW(1. / 955.4);
         //60-92%
-        hPionPt["AuAuc6092"]->scaleW(1. / 14.5);
+        hPionPt["AuAuc6092a"]->scaleW(1. / 14.5);
         
         //Rcp
-        divide(hPionPt["AuAuc0010"], hPionPt["AuAuc6092"], hRcp["pion"]);
+        divide(hPionPt["AuAuc0010a"], hPionPt["AuAuc6092a"], hRcp["pion"]);
         
+        //d06
+        hChHadrons["AuAuc0010"]->scaleW(1. / 2.); //scale by two before divide
+        divide(hChHadrons["AuAuc0010"], hPionPt["AuAuc0010b"], RatioHadtoPion["AuAuc0010"]);
         
+        //d07
+        hChHadrons["AuAuc6092"]->scaleW(1. / 2.); //scale by two before divide
+        divide(hChHadrons["AuAuc6092"], hPionPt["AuAuc6092b"], RatioHadtoPion["AuAuc6092"]);
         
     }
     
@@ -550,6 +582,7 @@ public:
     map<string, Scatter2DPtr> RatioPBartoPiNeg;
     map<string, Scatter2DPtr> RatioPtoPiNeg;
     map<string, Scatter2DPtr> RatioPBartoPion;
+    map<string, Scatter2DPtr> RatioHadtoPion;
     
     //Rcp, Raa **TBD**
     map<string, Scatter2DPtr> hRcp;
