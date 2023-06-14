@@ -181,6 +181,14 @@ public:
         const Scatter2D& refdata20 = refData(refname20);
         book(hProBarPt["ptyieldsAuAuc6092"], refname20 + "_AuAuc6092_Proton",refdata20);
         
+        //Rcp
+        //Figure 3a
+        //d04-x01-y01
+        string refname21 = mkAxisCode(4, 1, 1);
+        const Scatter2D& refdata21 = refData(refname21);
+        book(hPPlusPBarPt["ppluspbarAuAuc0010"], refname21 + "_AuAuc0010",refdata21);
+        book(hPPlusPBarPt["ppluspbarAuAuc6092"], refname21 + "_AuAuc6092",refdata21);
+        book(hRcp["ppluspbar"], refname21);
     }
     
     
@@ -231,6 +239,7 @@ public:
                             hProtonPt["AuAuc0010a"]->fill(partPt);
                             hProtonPt["AuAuc0010b"]->fill(partPt);
                             hProtonPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
+                            hPPlusPBarPt["ppluspbarAuAuc0010"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
@@ -238,6 +247,7 @@ public:
                             hProBarPt["AuAuc0010a"]->fill(partPt);
                             hProBarPt["AuAuc0010b"]->fill(partPt);
                             hProBarPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
+                            hPPlusPBarPt["ppluspbarAuAuc0010"]->fill(partPt);
                             break;
                         }
                     }
@@ -331,7 +341,7 @@ public:
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
-                    double pt_weight = 1. / (partPt * 2. * M_PI);  //Commented to avoid warning
+                    double pt_weight = 1. / (partPt * 2. * M_PI);
                     
                     switch(p.pid()) {
                         case 211: //pi^+
@@ -350,6 +360,7 @@ public:
                             hProtonPt["AuAuc6092a"]->fill(partPt);
                             hProtonPt["AuAuc6092b"]->fill(partPt);
                             hProtonPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
+                            hPPlusPBarPt["ppluspbarAuAuc6092"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
@@ -357,7 +368,7 @@ public:
                             hProBarPt["AuAuc6092a"]->fill(partPt);
                             hProBarPt["AuAuc6092b"]->fill(partPt);
                             hProBarPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
-                            
+                            hPPlusPBarPt["ppluspbarAuAuc6092"]->fill(partPt);
                             break;
                         }
                     }
@@ -465,7 +476,7 @@ public:
     /// Normalise histograms etc., after the run
     void finalize() {
         
-        //d01: ratios
+        //d01: p and p_bar ratios
         divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]); 
         divide(hProtonPt["AuAuc2030a"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
         divide(hProtonPt["AuAuc6092a"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
@@ -473,7 +484,7 @@ public:
         divide(hProBarPt["AuAuc2030a"], hPionNegPt["AuAuc2030a"], RatioPBartoPiNeg["AuAuc2030"]);
         divide(hProBarPt["AuAuc6092a"], hPionNegPt["AuAuc6092a"], RatioPBartoPiNeg["AuAuc6092"]);
         
-        //d02
+        //d02 p and p_bar ratios
         divide(hProtonPt["AuAuc0010b"], hPionNegPt["AuAuc0010b"], RatioPtoPiNeg["AuAuc0010"]);
         divide(hProtonPt["AuAuc2030b"], hPionNegPt["AuAuc2030b"], RatioPtoPiNeg["AuAuc2030"]);
         divide(hProtonPt["AuAuc6092b"], hPionNegPt["AuAuc6092b"], RatioPtoPiNeg["AuAuc6092"]);
@@ -481,7 +492,7 @@ public:
         divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030"], RatioPBartoPion["AuAuc2030"]);
         divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092"], RatioPBartoPion["AuAuc6092"]);
         
-        //d03
+        //d03 p and p_bar yields
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
         hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
         hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
@@ -491,6 +502,17 @@ public:
         hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
         hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
         
+        //d04
+        //0-10%
+        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.); //Scale by two to account for sum
+        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4); //Scaling by N_coll
+        //60-92%
+        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
+        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5); //Scaling by N_coll
+        
+        //Rcp
+        divide(hPPlusPBarPt["ppluspbarAuAuc0010"], hPPlusPBarPt["ppluspbarAuAuc6092"], hRcp["ppluspbar"]);
+        //divide(hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4), hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5), hRcp["ppluspbar"]);    >>>not successful when ran
     }
     
     //Particles
@@ -499,6 +521,8 @@ public:
     map<string, Histo1DPtr> hProBarPt; //p_bar
     map<string, Histo1DPtr> hPionNegPt; //pi^-
     map<string, Histo1DPtr> hPionPt; //pi^0
+    map<string, Histo1DPtr> hPPlusPBarPt; //p + p_bar
+    map<string, Histo1DPtr> hChHadrons; //p + p_bar + pi^+ + pi^-
     
     //Ratios
     map<string, Scatter2DPtr> RatioPtoPiPos;
@@ -507,7 +531,7 @@ public:
     map<string, Scatter2DPtr> RatioPBartoPion;
     
     //Rcp, Raa **TBD**
-    //map<string, Scatter2DPtr> hRcp;
+    map<string, Scatter2DPtr> hRcp;
     //map<string, Scatter2DPtr> hRaa;
     
     //Counter
