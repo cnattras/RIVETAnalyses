@@ -539,11 +539,11 @@ public:
         
         //d04
         //0-10%
-        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.); //Scale by two to account for sum
-        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4); //Scaling by N_coll
+        //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.); //Scale by two to account for sum
+        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / (2. * 955.4)); //Scaling by N_coll and 2 for sum
         //60-92%
-        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
-        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5); //Scaling by N_coll
+        //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
+        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / (2. * 14.5)); //Scaling by N_coll and 2 for sum
         
         //Rcp
         divide(hPPlusPBarPt["ppluspbarAuAuc0010"], hPPlusPBarPt["ppluspbarAuAuc6092"], hRcp["ppluspbar"]);

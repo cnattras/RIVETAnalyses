@@ -1,16 +1,17 @@
 Name: PHENIX_2003_I619987
 Year: 2003
-Summary: <Scaling properties of protin and antiproton productions in $\sqrt{s_{NN}}$ = 200 GeV Au+Au collisions>
+Summary: Scaling properties of protin and antiproton productions in $\sqrt{s_{NN}}$ = 200 GeV Au+Au collisions
 Experiment: PHENIX
-Collider: <Relativistic Heavy Ion Collider (RHIC)>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 619987
-Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
- - Joesph Beller <josdbell@vols.utk.edu>, Christal Martin <cbaillar@vols.utk.edu>, Christine Nattrass <cnattrass@utk.edu>
+ - Joesph Beller <josdbell@vols.utk.edu>
+ - Christal Martin <cbaillar@vols.utk.edu>
+ - Christine Nattrass <cnattrass@utk.edu>
 References:
- - 'Phys.Rev. Lett. 91, 172301 (2003)'
- - 'https://doi.org/10.1103/PhysRevLett.91.172301'
- - 'arXiv:0305036'
+ - arXiv:0305036
+ - Phys.Rev. Lett. 91, 172301 (2003)
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [AU, AU]
 #Energies: [[6500,6500]]
@@ -18,8 +19,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU200
-Description:
-  'Ratios of particles produced in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV.'
+Description: 'We report on the yield of protons and anti-protons, as a function of centrality and transverse momentum, in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV measured at mid-rapidity by the PHENIX experiment at RHIC. In central collisions at intermediate transverse momenta (1.5 < $p_T$ < 4.5 GeV/$c$) a significant fraction of all produced particles are protons and anti-protons. They show a centrality-scaling behavior different from that of pions. The $\bar{p}$/$\pi$ and $p$/$\pi$ ratios are enhanced compared to peripheral Au+Au, $p$+$p$, and $e^+$$e^-$ collisions. This enhancement is limited to $p_T$ < 5 GeV/$c$ as deduced from the ratio of charged hadrons to $\pi^0$ measured in the range 1.5 < $p_T$ < 9 GeV/c.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
@@ -28,7 +28,18 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey:
-BibTeX: ''
+BibTeX: '@article{PHENIX:2003tvk,
+    author = "Adler, S. S. and others",
+    collaboration = "PHENIX",
+    title = "{Scaling properties of proton and anti-proton production in s(NN)**(1/2) 200-GeV Au+Au collisions}",
+    eprint = "nucl-ex/0305036",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.91.172301",
+    journal = "Phys. Rev. Lett.",
+    volume = "91",
+    pages = "172301",
+    year = "2003"
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 
