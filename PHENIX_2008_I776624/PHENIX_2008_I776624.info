@@ -1,6 +1,6 @@
 Name: PHENIX_2008_I776624
 Year: 2008
-Summary: J/psi Production in s(NN)**(1/2) = 200-GeV Cu+Cu Collisions
+Summary: $J/\psi$ Production in $\sqrt{s_{NN}}$ = 200-GeV Cu+Cu Collisions
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 776624
@@ -18,7 +18,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=CUCU200, PP200
-Description: Yields for J/psi production in Cu+Cu collisions at $\sqrt{s_{NN}}$= 200 GeV have been measured by the PHENIX experiment over the rapidity range $|y|$ < 2.2 at transverse momenta from 0 to beyond 5 GeV/c. The invariant yield is obtained as a function of rapidity, transverse momentum and collision centrality, and compared with results in p+p and Au+Au collisions at the same energy. The Cu+Cu data provide greatly improved precision over existing Au+Au data for J/psi production in collisions with small to intermediate numbers of participants, providing a key constraint that is needed for disentangling cold and hot nuclear matter effects.
+Description: Yields for $J/\psi$ production in Cu+Cu collisions at $\sqrt{s_{NN}}$= 200 GeV have been measured by the PHENIX experiment over the rapidity range $|y|$ < 2.2 at transverse momenta from 0 to beyond 5 GeV/$c$. The invariant yield is obtained as a function of rapidity, transverse momentum and collision centrality, and compared with results in $p$+$p$ and Au+Au collisions at the same energy. The Cu+Cu data provide greatly improved precision over existing Au+Au data for $J/\psi$ production in collisions with small to intermediate numbers of participants, providing a key constraint that is needed for disentangling cold and hot nuclear matter effects.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
