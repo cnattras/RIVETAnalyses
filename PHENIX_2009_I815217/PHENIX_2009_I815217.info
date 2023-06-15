@@ -1,6 +1,6 @@
 Name: PHENIX_2009_I815217
 Year: 2009
-Summary: Photoproduction of J/psi and of high mass e+e- in ultra-peripheral Au+Au collisions at s**(1/2) = 200-GeV
+Summary: Photoproduction of $J/\psi$ and of high mass e+e- in ultra-peripheral Au+Au collisions at $\sqrt{s}$ = 200-GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 815217
@@ -16,7 +16,7 @@ References:
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
-Description: We present the first measurement of photoproduction of J/ψ and of two-photon production of high-mass e+e− pairs in electromagnetic (or ultra-peripheral) nucleus–nucleus interactions, using Au + Au data at sNN=200 GeV . The events are tagged with forward neutrons emitted following Coulomb excitation of one or both Au ⋆ nuclei. The event sample consists of 28 events with me+e−>2 GeV/c2 with zero like-sign background. The measured cross sections at midrapidity of dσ/dy(J/ψ+Xn,y=0)=76±33(stat)±11(syst) μb and d2σ/dmdy(e+e−+Xn,y=0)=86±23(stat)±16(syst) μb/(GeV/c2) for me+e−∈[2.0,2.8] GeV/c2 have been compared and found to be consistent with models for photoproduction of J/ψ and QED based calculations of two-photon production of e+e− pairs.
+Description: We present the first measurement of photoproduction of J/ψ and of two-photon production of high-mass e+e− pairs in electromagnetic (or ultra-peripheral) nucleus–nucleus interactions, using Au + Au data at $\sqrt{s_{NN}}$ = 200 GeV . The events are tagged with forward neutrons emitted following Coulomb excitation of one or both Au ⋆ nuclei. The event sample consists of 28 events with $me+e$−>2 GeV/$c^2$ with zero like-sign background. The measured cross sections at midrapidity of dσ/dy(J/ψ+Xn,y=0)=76±33(stat)±11(syst) μb and d2σ/dmdy(e+e−+Xn,y=0)=86±23(stat)±16(syst) μb/(GeV/$c^2$) for me+e−∈[2.0,2.8] GeV/c2 have been compared and found to be consistent with models for photoproduction of J/ψ and QED based calculations of two-photon production of e+e− pairs.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
