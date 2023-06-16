@@ -3,6 +3,7 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
@@ -41,8 +42,8 @@ namespace Rivet {
           declare(cp, "cp");
           
           //Uncharged particles
-          //const UnstableParticles np(pdgIds, Cuts::abseta < 2.2 && Cuts::abseta > 1.2 && Cuts::abscharge == 0 && Cuts::absrap < 0.35);
-          //declare(np, "np");
+          const UnstableParticles np(Cuts::abspid == 111 && Cuts::abseta < 2.2 && Cuts::abseta > 1.2 && Cuts::abscharge == 0 && Cuts::absrap < 0.35);
+          declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
 
@@ -56,15 +57,21 @@ namespace Rivet {
 
           //Counters, for N_{evt}
           book(sow["sow_pp"], "_sow_pp");
+          //book(sow["sow_dAu"], "_sow_dAu");
           
-          //figure 13
+          //figure 13 (12.1 in hepdata)
           //d01-x01-y01
           string refname1 = mkAxisCode(1, 1, 1);
           //mkAxisCode gives us the internal histogram name for a given d, x, and y
           const Scatter2D& refdata1 = refData(refname1);
           //here we have to define a Scatter2D& for the next part, we can use the refData function on refname
-          book(hCrossSec["ppMesontoGamma"], refname1 + "_pp_GammaGamma", refdata1);
+          book(hCrossSec["ppEtatoGamma"], refname1 + "_pp_GammaGamma", refdata1);
           //here, we are using book() as: book(1DPtr&, const string &name, const Scatter2D), and this books a histograms with binning using d01-x01-y01 from our yoda as a reference.
+          
+          //d02-x01-y01 (12.2 in hepdata)
+          string refname2 = mkAxisCode(2, 1, 1);
+          const Scatter2D& refdata2 = refData(refname2);
+          book(hCrossSec["ppEtatoPion"], refname2 + "_pp_Pion", refdata2);
           
     }
 
@@ -73,11 +80,11 @@ namespace Rivet {
     /// Perform the per-event analysis
       void analyze(const Event& event) {
           Particles chargedParticles = applyProjection<PrimaryParticles>(event,"cp").particles();
-          
+          Particles neutralParticles = applyProjection<UnstableParticles>(event,"np").particles();
           
           if (collSys == pp)
           {
-              //Fill our counter; this will be useful at the end when we want to run ->sum() to find N_{evt}
+              //Fill our counter; this will be useful at the end when we want to run ->sumW()
               sow["sow_pp"]->fill();
               
               //a conditional for the charged particles: eta, pi+, pi-, gamma
@@ -92,13 +99,15 @@ namespace Rivet {
                   switch (p.pid()) {
                           //particle ids for convenience: { 221, 211, -211, 22};
                       case 221: {  //eta
-                          hCrossSec["ppMesontoGamma"]->fill(partPt, pt_weight);
+                          hCrossSec["ppEtatoGamma"]->fill(partPt, pt_weight);
                           break;
                       }
                       case 211: { //pi+
+                          hCrossSec["ppEtatoPion"]->fill(partPt,pt_weight);
                           break;
                       }
                       case -211: { //pi-
+                          hCrossSec["ppEtatoPion"]->fill(partPt,pt_weight);
                           break;
                       }
                       case 22: { //gamma
@@ -106,14 +115,29 @@ namespace Rivet {
                       }
                   }
               }
-          }
-          
-          //Nik, SEE HERE: this is where your first figure will go 
-          if (collSys == dAu200){
               
-              for (Particle p : chargedParticles) {
+              //a conditional for the neutral particles: pi^0
+              for (Particle p : neutralParticles){
+                  
+                  
+                  //define what we will fill our histograms with
+                  //we technically don't have to do this, but it's convenient
                   double partPt = p.pT() / GeV;
                   double pt_weight = 1. / (partPt * 2. * M_PI);
+                  
+                  hCrossSec["ppEtatoPion"]->fill(partPt, pt_weight);
+              }
+          }
+          
+          //Nik, SEE HERE: down below is where you will do your edit for figure 13.1 and 13.2
+          if (collSys == dAu200){
+              
+              //sow["sow_dAu"]->fill();
+              
+              for (Particle p : chargedParticles) {
+                  //comment these next two lines out; they are only commented to avoid an unused variable warning
+                  //double partPt = p.pT() / GeV;
+                  //double pt_weight = 1. / (partPt * 2. * M_PI);
                   
                   switch (p.pid()) {
                       case 221: {  //eta
@@ -130,6 +154,15 @@ namespace Rivet {
                       }
                   }
               }
+              
+              //a conditional for the neutral particles: pi^0
+              for (Particle p : neutralParticles){
+                  //define what we will fill our histograms with below
+                  //we technically don't have to do this, but it's convenient
+                  //double partPt = p.pT() / GeV;
+                  //double pt_weight = 1. / (partPt * 2. * M_PI);
+                  break;
+              }
           }
       }
 
@@ -138,7 +171,18 @@ namespace Rivet {
       void finalize() {
           double cross = crossSection() / picobarn;
           
-          hCrossSec["ppMesontoGamma"]->scaleW(cross);
+          //Figure 13: d01-x01-y01
+          hCrossSec["ppEtatoGamma"]->scaleW(1. / sow["sow_pp"]->sumW());
+          hCrossSec["ppEtatoGamma"]->scaleW(cross);
+          
+          //Figure 13: d02-x01-y01
+          hCrossSec["ppEtatoPion"]->scaleW(1. / sow["sow_pp"]->sumW());
+          hCrossSec["ppEtatoPion"]->scaleW(cross);
+          
+          //Figure 13: d03-x01-y01
+          
+          //Figure 14: d04-x01-y01
+          
       }
 
       //histograms
