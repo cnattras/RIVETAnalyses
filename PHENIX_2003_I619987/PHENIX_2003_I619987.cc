@@ -60,12 +60,9 @@ public:
         //if (!(collSys == pp))
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
         
-        //*****Counters******
-        //book(sow["sow_AuAu10"], "sow_AuAu10");
-        
         
         //Ratio of protons/pions
-        //note: the a added to hProtonPt. since there are different binnings and both d01 and d02 use hProtonPt
+        //note: the "a" added to hProtonPt; since there are different binnings and both d01 and d02 use hProtonPt
         //Figure 1
         //d01-x01-y01
         string refname1 = mkAxisCode(1, 1, 1);
@@ -142,11 +139,11 @@ public:
         
         //yields
         //figure 2
-        //counters per each centrality; I don't think needed since this is yield/Ncoll
-        //book(sow["sow_AuAuc0010"], "_sow_AuAuc0010");
-        //book(sow["sow_AuAuc2030"], "_sow_AuAuc2030");
-        //book(sow["sow_AuAuc4050"], "_sow_AuAuc4050");
-        //book(sow["sow_AuAuc6092"], "_sow_AuAuc6092");
+        //counters per each centrality
+        book(sow["AuAuc0010"], "_sow_AuAuc0010");
+        book(sow["AuAuc2030"], "_sow_AuAuc2030");
+        book(sow["AuAuc4050"], "_sow_AuAuc4050");
+        book(sow["AuAuc6092"], "_sow_AuAuc6092");
         
         //d03-x01-y01
         string refname13 = mkAxisCode(3, 1, 1);
@@ -529,13 +526,28 @@ public:
         
         //d03 p and p_bar yields
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+        
         hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
+        hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+        
         hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
+        hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+        
         hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
+        hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+        
         hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+        
         hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
+        hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+        
         hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
+        hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+        
         hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
+        hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
         
         //d04
         //0-10%
@@ -589,7 +601,7 @@ public:
     //map<string, Scatter2DPtr> hRaa;
     
     //Counter
-    //map<string, CounterPtr> sow;
+    map<string, CounterPtr> sow;
     
     //Initialize collision system and AUAU centrality bins
     string beamOpt;
