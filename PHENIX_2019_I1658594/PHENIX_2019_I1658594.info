@@ -1,0 +1,46 @@
+Name: PHENIX_2019_I1658594
+Year: 2019
+Summary: Measurement of two-particle correlations with respect to second- and third-order event planes in Au$+$Au collisions at $\sqrt{s_{_{NN}}}=200$ GeV
+Experiment: PHENIX
+Collider: Relativistic Heavy Ion Collider (RHIC)
+InspireID: 1658594
+Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Authors:
+ - Jason Spriggs <jsprigg2@vols.utk.edu>
+ - Antonio Silva <antonio.silva@cern.ch>
+ - Christine Nattrass <cnattras@utk.edu>
+References: 
+- arXiv:1603.05477
+- 10.1103/PhysRevC.94.014910
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+Description: We present measurements of azimuthal correlations of charged hadron pairs in $\sqrt{s_{NN}}$ = 200 GeV Au+Au collisions for the trigger and associated particle transverse-momentum ranges of 1 < $p_T^t$ < 10 GeV/$c$ and 0.5 < $p_T^a$ < 10 GeV/$c$. After subtraction of an underlying event using a model that includes higher-order azimuthal anisotropy $v_2$, $v_3$, and $v_4$, the away-side yield of the highest trigger-$p_T$($p_T^t$ > 4 GeV/$c$) correlations is suppressed compared with that of correlations measured in $p$+$p$ collisions. At the lowest associated particle $p_T$(0.5 < $p_T^a$ < 1 GeV/$c$), the away-side shape and yield are modified relative to those in $p$+$p$ collisions. These observations are consistent with the scenario of radiative-jet energy loss. For the low-$p_T$ trigger correlations (2 < $p_T^t$ < 4 GeV/$c$), a finite away-side yield exists and we explore the dependence of the shape of the away-side within the context of an underlying-event model. Correlations are also studied differentially versus event-plane angle $\Phi_2$ and $\Phi_3$. The angular correlations show an asymmetry when selecting the sign of the difference between the trigger-particle azimuthal angle and the $\Phi_2$ event plane. This asymmetry and the measured suppression of the pair yield out-of-plane is consistent with a path-length-dependent energy loss. No $\Phi_3$ dependence can be resolved within experimental uncertainties.
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: '@article{PHENIX:2018wex,
+    author = "Adare, A. and others",
+    collaboration = "PHENIX",
+    title = "{Measurement of two-particle correlations with respect to second- and third-order event planes in Au$+$Au collisions at $\sqrt{s_{_{NN}}}=200$ GeV}",
+    eprint = "1803.01749",
+    archivePrefix = "arXiv",
+    primaryClass = "hep-ex",
+    doi = "10.1103/PhysRevC.99.054903",
+    journal = "Phys. Rev. C",
+    volume = "99",
+    number = "5",
+    pages = "054903",
+    year = "2019"
+}'
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
