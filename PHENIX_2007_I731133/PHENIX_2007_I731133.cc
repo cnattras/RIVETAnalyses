@@ -55,9 +55,11 @@ namespace Rivet {
           //declaration for collision systems that are not p+p
           if (!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-          //Counters, for N_{evt}
+          //Counters
           book(sow["sow_pp"], "_sow_pp");
-          //book(sow["sow_dAu"], "_sow_dAu");
+          book(sow["sow_dAu"], "_sow_dAu");
+          book(sow["sow_dAuc0020"], "_sow_dAuc0020");
+          
           
           //figure 13 (12.1 in hepdata)
           //d01-x01-y01
@@ -72,6 +74,24 @@ namespace Rivet {
           string refname2 = mkAxisCode(2, 1, 1);
           const Scatter2D& refdata2 = refData(refname2);
           book(hCrossSec["ppEtatoPion"], refname2 + "_pp_Pion", refdata2);
+          
+          //d03-x01-y01 FOR NIK
+          
+          //d04-x01-y01 FOR NIK
+          
+          
+          //Figure 14
+          //d05-x01-y01
+          string refname5 = mkAxisCode(5, 1, 1);
+          const Scatter2D& refdata5 = refData(refname5);
+          book(hdAuYields["ptyieldsdAuc0020"], refname5 + "_dAuc0020_Eta", refdata5);
+          
+          //d05-x01-y02
+          
+          //d05-x01-y03
+          
+          //d05-x01-y04
+          
           
     }
 
@@ -129,13 +149,19 @@ namespace Rivet {
               }
           }
           
+          const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+          const double c = cent();
+          
+          
           //Nik, SEE HERE: down below is where you will do your edit for figure 13.1 and 13.2
           if (collSys == dAu200){
               
-              //sow["sow_dAu"]->fill();
+              if ((c < 0.) && (c > 100.)) vetoEvent; //veto all nonexisting events
+              
+              sow["sow_dAu"]->fill();
               
               for (Particle p : chargedParticles) {
-                  //comment these next two lines out; they are only commented to avoid an unused variable warning
+                  //comment these next two lines are only commented to avoid an unused variable warning
                   //double partPt = p.pT() / GeV;
                   //double pt_weight = 1. / (partPt * 2. * M_PI);
                   
@@ -163,7 +189,43 @@ namespace Rivet {
                   //double pt_weight = 1. / (partPt * 2. * M_PI);
                   break;
               }
+              
+              
+              //Centrality inclusion begins here:
+              if ((c >= 0.) && (c < 20.)){
+                  
+                  //fill our counter for this centrality
+                  sow["sow_dAuc0020"]->fill();
+                  
+                  
+                  for (Particle p : chargedParticles) {
+                      //comment these next two lines are only commented to avoid an unused variable warning
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_dAuc0020"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hdAuYields["ptyieldsdAuc0020"]->fill(partPt, pt_weight);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+              }
           }
+          
+          
       }
 
 
@@ -181,13 +243,15 @@ namespace Rivet {
           
           //Figure 13: d03-x01-y01
           
-          //Figure 14: d04-x01-y01
+          //Figure 13: d04-x01-y01
           
+          //Figure 14: d05-x01-y01
+          hdAuYields["ptyieldsdAuc0020"]->scaleW(1. / sow["sow_dAuc0020"]->sumW());
       }
 
       //histograms
       map<string, Histo1DPtr> hCrossSec;
-      //map<string, Histo1DPtr> hdAuYields;
+      map<string, Histo1DPtr> hdAuYields;
       //map<string, Histo1DPtr> hAuAuYields;
       
       //ratios
