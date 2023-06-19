@@ -59,7 +59,9 @@ namespace Rivet {
           book(sow["sow_pp"], "_sow_pp");
           book(sow["sow_dAu"], "_sow_dAu");
           book(sow["sow_dAuc0020"], "_sow_dAuc0020");
-          
+          book(sow["sow_dAuc2040"], "_sow_dAuc2040");
+          book(sow["sow_dAuc4060"], "_sow_dAuc4060");
+          book(sow["sow_dAuc6088"], "_sow_dAuc6088");
           
           //figure 13 (12.1 in hepdata)
           //d01-x01-y01
@@ -87,11 +89,55 @@ namespace Rivet {
           book(hdAuYields["ptyieldsdAuc0020"], refname5 + "_dAuc0020_Eta", refdata5);
           
           //d05-x01-y02
+          string refname6 = mkAxisCode(5, 1, 2);
+          const Scatter2D& refdata6 = refData(refname6);
+          book(hdAuYields["ptyieldsdAuc2040"], refname6 + "_dAuc2040_Eta", refdata6);
           
           //d05-x01-y03
+          string refname7 = mkAxisCode(5, 1, 3);
+          const Scatter2D& refdata7 = refData(refname7);
+          book(hdAuYields["ptyieldsdAuc4060"], refname7 + "_dAuc4060_Eta", refdata7);
           
           //d05-x01-y04
+          string refname8 = mkAxisCode(5, 1, 4);
+          const Scatter2D& refdata8 = refData(refname8);
+          book(hdAuYields["ptyieldsdAuc6088"], refname8 + "_dAuc6088_Eta", refdata8);
           
+          //Figure 15
+          //d06-x01-y01
+          
+          //d06-x01-y02
+          
+          //d06-x01-y03
+          
+          //d06-x01-y04
+          
+          
+          //Figure 16
+          //d07-x01-y01
+          string refname13 = mkAxisCode(7, 1, 1);
+          const Scatter2D& refdata13 = refData(refname13);
+          book(hdAuYields["ptyieldsdAuc6088"], refname13 + "_dAuc6088_Eta", refdata13);
+          
+          //d07-x01-y02
+          string refname14 = mkAxisCode(7, 1, 2);
+          const Scatter2D& refdata14 = refData(refname14);
+          book(hdAuYields["ptyieldsdAuc6088"], refname14 + "_dAuc6088_Eta", refdata14);
+          
+          //d07-x01-y03
+          string refname15 = mkAxisCode(7, 1, 3);
+          const Scatter2D& refdata15 = refData(refname15);
+          book(hdAuYields["ptyieldsdAuc6088"], refname15 + "_dAuc6088_Eta", refdata15);
+          
+          //d07-x01-y04
+          string refname16 = mkAxisCode(7, 1, 4);
+          const Scatter2D& refdata16 = refData(refname16);
+          book(hdAuYields["ptyieldsdAuc6088"], refname16 + "_dAuc6088_Eta", refdata16);
+          
+          //d07-x01-y05
+          string refname17 = mkAxisCode(7, 1, 5);
+          const Scatter2D& refdata17 = refData(refname17);
+          book(hdAuYields["ptyieldsdAuc6088"], refname17 + "_dAuc6088_Eta", refdata17);
           
     }
 
@@ -199,7 +245,7 @@ namespace Rivet {
                   
                   
                   for (Particle p : chargedParticles) {
-                      //comment these next two lines are only commented to avoid an unused variable warning
+                      
                       double partPt = p.pT() / GeV;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
@@ -223,6 +269,85 @@ namespace Rivet {
                       }
                   }
               }
+              if ((c >= 20.) && (c < 40.)){
+                  for (Particle p : chargedParticles) {
+                      
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_dAuc2040"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hdAuYields["ptyieldsdAuc2040"]->fill(partPt, pt_weight);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+              }
+              if ((c >= 40.) && (c < 60.)){
+                  for (Particle p : chargedParticles) {
+                      
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_dAuc4060"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hdAuYields["ptyieldsdAuc4060"]->fill(partPt, pt_weight);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+              }
+              if ((c >= 60.) && (c < 88.)){
+                  for (Particle p : chargedParticles) {
+                      
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_dAuc6088"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hdAuYields["ptyieldsdAuc6088"]->fill(partPt, pt_weight);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+              }
+
           }
           
           
@@ -233,20 +358,25 @@ namespace Rivet {
       void finalize() {
           double cross = crossSection() / picobarn;
           
-          //Figure 13: d01-x01-y01
+          //Figure 13:
+          //d01-x01-y01
           hCrossSec["ppEtatoGamma"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtatoGamma"]->scaleW(cross);
           
-          //Figure 13: d02-x01-y01
+          //d02-x01-y01
           hCrossSec["ppEtatoPion"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtatoPion"]->scaleW(cross);
           
-          //Figure 13: d03-x01-y01
+          //d03-x01-y01
           
-          //Figure 13: d04-x01-y01
+          //d04-x01-y01
           
-          //Figure 14: d05-x01-y01
+          //Figure 14:
+          //d05-x01-y01
           hdAuYields["ptyieldsdAuc0020"]->scaleW(1. / sow["sow_dAuc0020"]->sumW());
+          hdAuYields["ptyieldsdAuc2040"]->scaleW(1. / sow["sow_dAuc2040"]->sumW());
+          hdAuYields["ptyieldsdAuc4060"]->scaleW(1. / sow["sow_dAuc4060"]->sumW());
+          hdAuYields["ptyieldsdAuc6088"]->scaleW(1. / sow["sow_dAuc6088"]->sumW());
       }
 
       //histograms
