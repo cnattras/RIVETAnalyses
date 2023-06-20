@@ -1,6 +1,6 @@
 Name: PHENIX_2007_I731133
 Year: 2006
-Summary: <High transverse momentum $\eta$ meson production in p+p, d+Au and Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV>
+Summary: High transverse momentum $\eta$ meson production in p+p, d+Au and Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy-Ion Collider (RHIC)
 InspireID: 0611006
@@ -10,9 +10,9 @@ Authors:
  - Lauren Kasper <lauren.n.kasper@vanderbilt.edu>
  - Christine Nattrass <cnattras@utk.edu>
 References:
- - '<Phys. Rev. C 75, 024909 (2007)>'
- - '<DOI:10.1103/PhysRevC.75.024909>'
- - '<arXiv:nucl-ex/0611006>'
+ - Phys. Rev. C 75, 024909 (2007)
+ - DOI:10.1103/PhysRevC.75.024909
+ - arXiv:nucl-ex/0611006
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
