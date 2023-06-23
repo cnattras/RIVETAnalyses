@@ -62,6 +62,10 @@ namespace Rivet {
           book(sow["sow_dAuc2040"], "_sow_dAuc2040");
           book(sow["sow_dAuc4060"], "_sow_dAuc4060");
           book(sow["sow_dAuc6088"], "_sow_dAuc6088");
+          book(sow["sow_AuAuc0092"], "_sow_AuAuc0092");
+          book(sow["sow_AuAuc0020"], "_sow_AuAuc0020");
+          book(sow["sow_AuAuc2060"], "_sow_AuAuc2060");
+          book(sow["sow_AuAuc6092"], "_sow_AuAuc6092");
           
           //figure 13 (12.1 in hepdata)
           //d01-x01-y01
@@ -78,7 +82,11 @@ namespace Rivet {
           //book(hCrossSec["ppEtatoPiona"], refname2 + "_pp_Pion", refdata2);
           
           //d03-x01-y01 FOR NIK
-          
+          string refname2 = mkAxisCode(3, 1, 1);
+          //mkAxisCode gives us the internal histogram name for a given d, x, and y
+          const Scatter2D& refdata2 = refData(refname2);
+          //here we have to define a Scatter2D& for the next part, we can use the refData function on refname
+          book(hCrossSec["dAuEta"], refname2 + "_dAu_Eta", refdata2);
           
           //Figure 14: Invariant yields of eta in d+Au collisions
           //d05-x01-y01: 00-20% centrality
@@ -102,14 +110,22 @@ namespace Rivet {
           book(hEtaPt["ptyieldsdAuc6088a"], refname8 + "_dAuc6088_Eta", refdata8);
           
           //Figure 15
-          //d06-x01-y01
-          
-          //d06-x01-y02
-          
-          //d06-x01-y03
-          
-          //d06-x01-y04
-          
+          //d06-x01-y01 min. bias
+          string refname9 = mkAxisCode(6, 1, 1);
+          const Scatter2D& refdata9 = refData(refname9);
+          book(hEtaPt["ptyieldsAuAuc0092a"], refname9 + "_AuAuc0092_Eta", refdata9);         
+          //d06-x01-y02 0-20%
+          string refname10 = mkAxisCode(6, 1, 2);
+          const Scatter2D& refdata10 = refData(refname10);
+          book(hEtaPt["ptyieldsAuAuc0020a"], refname10 + "_AuAuc0020_Eta", refdata10);         
+          //d06-x01-y03 20-40%
+          string refname11 = mkAxisCode(6, 1, 3);
+          const Scatter2D& refdata11 = refData(refname11);
+          book(hEtaPt["ptyieldsAuAuc2060a"], refname11 + "_AuAuc2060_Eta", refdata11);          
+          //d06-x01-y04 60-92%
+          string refname12 = mkAxisCode(6, 1, 4);
+          const Scatter2D& refdata12 = refData(refname12);
+          book(hEtaPt["ptyieldsAuAuc6092a"], refname12 + "_AuAuc6092_Eta", refdata12);         
           
           //Figure 16: Rda for measured etas
           //d07-x01-y01: 00-88% centrality (minimum bias)
@@ -147,9 +163,27 @@ namespace Rivet {
           book(hCrossSec["ppEtadAuc6088"], refname17 + "_pp_Eta", refdata17);
           book(hRda["EtadAuc6088"], refname17);
           
-          
           //Figure 17
+          //d08-x01-y01: 00-20% centrality
+          string refname18 = mkAxisCode(8, 1, 1);
+          const Scatter2D& refdata18 = refData(refname18);
+          book(hEtaPt["ptyieldsAuAuc0020b"], refname18 + "_AuAuc0020_Eta", refdata18);
+          book(hCrossSec["ppEtaAuAuc0020"], refname18 + "_pp_Eta", refdata18);
+          book(hRaa["EtaAuAuc0020"], refname18);
           
+          //d08-x01-y02: 20-60% centrality
+          string refname19 = mkAxisCode(8, 1, 2);
+          const Scatter2D& refdata19 = refData(refname19);
+          book(hEtaPt["ptyieldsAuAuc2060b"], refname19 + "_AuAuc2060_Eta", refdata19);
+          book(hCrossSec["ppEtaAuAuc2060"], refname19 + "_pp_Eta", refdata19);
+          book(hRaa["EtaAuAuc2060"], refname19);
+          
+          //d08-x01-y03: 60-92% centrality
+          string refname20 = mkAxisCode(8, 1, 3);
+          const Scatter2D& refdata20 = refData(refname20);
+          book(hEtaPt["ptyieldsAuAuc6092b"], refname20 + "_AuAuc6092_Eta", refdata20);
+          book(hCrossSec["ppEtaAuAuc6092"], refname20 + "_pp_Eta", refdata20);
+          book(hRaa["EtaAuAuc6092"], refname20);    
           
           //Figure 18: eta/pion^0 ratio in pp collisions
           //d09-x01-y01
@@ -195,7 +229,35 @@ namespace Rivet {
           book(hEtaPt["ptyieldsdAuc6088c"], refname26 + "_pp_Eta", refdata26);
           book(hPionPt["ptyieldsdAuc6088"], refname26 + "_pp_Pion", refdata26);
           book(RatiodAu["EtaToPion6088"], refname26);
+
+          //Figure 20: eta/pion^0 ratios in AuAu collisions
+          //d11-x01-y01: 00-92% centrality (minimum bias)
+          string refname27 = mkAxisCode(11, 1, 1);
+          const Scatter2D& refdata27 = refData(refname27);
+          book(hEtaPt["ptyieldsAuAuc0092c"], refname27 + "_pp_Eta", refdata27);
+          book(hPionPt["ptyieldsAuAuc0092"], refname27 + "_pp_Pion", refdata27);
+          book(RatioAuAu["EtaToPion0092"], refname27);
           
+          //d11-x01-y02: 00-20% centrality
+          string refname28 = mkAxisCode(11, 1, 2);
+          const Scatter2D& refdata28 = refData(refname28);
+          book(hEtaPt["ptyieldsAuAuc0020c"], refname28 + "_pp_Eta", refdata28);
+          book(hPionPt["ptyieldsAuAuc0020"], refname28 + "_pp_Pion", refdata28);
+          book(RatioAuAu["EtaToPion0020"], refname28);
+          
+          //d11-x01-y03: 20-60% centrality
+          string refname29 = mkAxisCode(11, 1, 3);
+          const Scatter2D& refdata29 = refData(refname29);
+          book(hEtaPt["ptyieldsAuAuc2060c"], refname29 + "_pp_Eta", refdata29);
+          book(hPionPt["ptyieldsAuAuc2060"], refname29 + "_pp_Pion", refdata29);
+          book(RatioAuAu["EtaToPion2060"], refname29);
+          
+          //d11-x01-y04: 60-92% centrality
+          string refname30 = mkAxisCode(11, 1, 4);
+          const Scatter2D& refdata30 = refData(refname30);
+          book(hEtaPt["ptyieldsAuAuc6092c"], refname30 + "_pp_Eta", refdata30);
+          book(hPionPt["ptyieldsAuAuc6092"], refname30 + "_pp_Pion", refdata30);
+          book(RatioAuAu["EtaToPion6092"], refname30); 
     }
 
 
@@ -284,6 +346,7 @@ namespace Rivet {
                   
                   switch (p.pid()) {
                       case 221: {  //eta
+                          hCrossSec["dAuEta"]->fill(partPt, pt_weight);
                           hEtaPt["ptyieldsdAuc0088b"]->fill(partPt, pt_weight);
                           hEtaPt["ptyieldsdAuc0088c"]->fill(partPt);
                           break;
@@ -493,11 +556,190 @@ namespace Rivet {
                   }
               }
 
-          }
-          
-          
-      }
+          } 
 
+          if (collSys == AuAu200){
+            
+              const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+              const double c = cent();
+              
+              if ((c < 0.) || (c > 92.)) vetoEvent;
+              
+              sow["sow_AuAuc0092"]->fill();
+              
+              for (Particle p : chargedParticles) {
+                  //comment these next two lines are only commented to avoid an unused variable warning
+                  double partPt = p.pT() / GeV;
+                  double pt_weight = 1. / (partPt * 2. * M_PI);
+                  
+                  switch (p.pid()) {
+                      case 221: {  //eta
+                          hEtaPt["ptyieldsAuAuc0092a"]->fill(partPt, pt_weight);
+                          hEtaPt["ptyieldsAuAuc0092c"]->fill(partPt);
+                          break;
+                      }
+                      case 211: { //pi+
+                          break;
+                      }
+                      case -211: { //pi-
+                          break;
+                      }
+                      case 22: { //gamma
+                          break;
+                      }
+                  }
+              }
+              
+              //a conditional for the neutral particles: pi^0
+              for (Particle p : neutralParticles){
+                  //define what we will fill our histograms with below
+                  //we technically don't have to do this, but it's convenient
+                  double partPt = p.pT() / GeV;
+                  //double pt_weight = 1. / (partPt * 2. * M_PI);
+                  
+                  switch(p.pid()) {
+                      case 111: { //pi0
+                          hPionPt["ptyieldsAuAuc0092"]->fill(partPt);
+                          break;
+                      }
+                          
+                  }
+              }
+              
+              
+              //Centrality inclusion begins here:
+              if ((c >= 0.) && (c < 20.)){
+                  for (Particle p : chargedParticles) {
+                      
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_AuAuc0020"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hEtaPt["ptyieldsAuAuc0020a"]->fill(partPt, pt_weight);
+                              hEtaPt["ptyieldsAuAuc0020b"]->fill(partPt, pt_weight);
+                              hEtaPt["ptyieldsAuAuc0020c"]->fill(partPt);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+                  
+                  for (Particle p : neutralParticles){
+                      //define what we will fill our histograms with below
+                      //we technically don't have to do this, but it's convenient
+                      double partPt = p.pT() / GeV;
+                      //double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      switch(p.pid()) {
+                          case 111: { //pi0
+                              hPionPt["ptyieldsAuAuc0020"]->fill(partPt);
+                              break;
+                          }
+                              
+                      }
+                  }
+              }
+              else if ((c >= 20.) && (c < 60.)){
+                  for (Particle p : chargedParticles) {
+                      
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_AuAuc2060"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hEtaPt["ptyieldsAuAuc2060a"]->fill(partPt, pt_weight);
+                              hEtaPt["ptyieldsAuAuc2060b"]->fill(partPt, pt_weight);
+                              hEtaPt["ptyieldsAuAuc2060c"]->fill(partPt);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+                  for (Particle p : neutralParticles){
+                      //define what we will fill our histograms with below
+                      //we technically don't have to do this, but it's convenient
+                      double partPt = p.pT() / GeV;
+                      //double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      switch(p.pid()) {
+                          case 111: { //pi0
+                              hPionPt["ptyieldsAuAuc2060"]->fill(partPt);
+                              break;
+                          }
+                              
+                      }
+                  }
+              }
+              else if ((c >= 60.) && (c < 92.)){
+                  for (Particle p : chargedParticles) {
+                      
+                      double partPt = p.pT() / GeV;
+                      double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      sow["sow_AuAuc6092"]->fill();
+                      
+                      //switch statement for each charged particle
+                      switch (p.pid()) {
+                          case 221: {  //eta
+                              hEtaPt["ptyieldsAuAuc6092a"]->fill(partPt, pt_weight);
+                              hEtaPt["ptyieldsAuAuc6092b"]->fill(partPt, pt_weight);
+                              hEtaPt["ptyieldsAuAuc6092c"]->fill(partPt);
+                              break;
+                          }
+                          case 211: { //pi+
+                              break;
+                          }
+                          case -211: { //pi-
+                              break;
+                          }
+                          case 22: { //gamma
+                              break;
+                          }
+                      }
+                  }
+                  for (Particle p : neutralParticles){
+                      //define what we will fill our histograms with below
+                      //we technically don't have to do this, but it's convenient
+                      double partPt = p.pT() / GeV;
+                      //double pt_weight = 1. / (partPt * 2. * M_PI);
+                      
+                      switch(p.pid()) {
+                          case 111: { //pi0
+                              hPionPt["ptyieldsAuAuc6092"]->fill(partPt);
+                              break;
+                          }
+                              
+                      }
+                  }
+
+              }
+          
+          }
+
+      }
 
     /// Normalise histograms etc., after the run
       void finalize() {
@@ -509,7 +751,8 @@ namespace Rivet {
           hCrossSec["ppEtaa"]->scaleW(cross);
           
           //d03-x01-y01
-          
+          hCrossSec["dAuEta"]->scaleW(1. / sow["sow_dAu"]->sumW());
+          hCrossSec["dAuEta"]->scaleW(cross);          
           
           //Figure 14:
           //d05-x01-y01
@@ -518,6 +761,13 @@ namespace Rivet {
           hEtaPt["ptyieldsdAuc4060a"]->scaleW(1. / sow["sow_dAuc4060"]->sumW());
           hEtaPt["ptyieldsdAuc6088a"]->scaleW(1. / sow["sow_dAuc6088"]->sumW());
           
+          //Figure 15:
+          //d05-x01-y01
+          hEtaPt["ptyieldsAuAuc0092a"]->scaleW(1. / sow["sow_AuAuc0092"]->sumW());
+          hEtaPt["ptyieldsAuAuc0020a"]->scaleW(1. / sow["sow_AuAuc0020"]->sumW());
+          hEtaPt["ptyieldsAuAuc2060a"]->scaleW(1. / sow["sow_AuAuc2060"]->sumW());
+          hEtaPt["ptyieldsAuAuc6092a"]->scaleW(1. / sow["sow_AuAuc6092"]->sumW());
+
           //Figure 16: Rda
           //d07-x01-y01:
           //denominator: must do our process to our cross section as done in Figure 13 plus multiplying it by <Tda>
@@ -565,8 +815,36 @@ namespace Rivet {
           hEtaPt["ptyieldsdAuc6088b"]->scaleW(1. / sow["sow_dAuc6088"]->sumW());
           //Rda
           divide(hEtaPt["ptyieldsdAuc6088b"], hCrossSec["ppEtadAuc6088"],hRda["EtadAuc6088"]);
+
+          //Figure 17: RAA  
+          //d08-x01-y01:       
+          hCrossSec["ppEtaAuAuc0020"]->scaleW(1. / sow["sow_pp"]->sumW());
+          hCrossSec["ppEtaAuAuc0020"]->scaleW(cross);
+          hCrossSec["ppEtaAuAuc0020"]->scaleW(0.2); //scaling by <TdA> as shown in Table II
+          //numerator: must do our process to our invariant yield like in Figure 14
+          hEtaPt["ptyieldsAuAuc0020b"]->scaleW(1. / sow["sow_AuAuc0020"]->sumW());
+          //RAA
+          divide(hEtaPt["ptyieldsAuAuc0020b"], hCrossSec["ppEtaAuAuc0020"], hRaa["EtaAuAuc0020"]);
           
+          //d08-x01-y02
+          //denominator
+          hCrossSec["ppEtaAuAuc2060"]->scaleW(1. / sow["sow_pp"]->sumW());
+          hCrossSec["ppEtaAuAuc2060"]->scaleW(cross);
+          hCrossSec["ppEtaAuAuc2060"]->scaleW(0.36); //scaling by <TdA> as shown in Table II
+          //numerator
+          hEtaPt["ptyieldsAuAuc2060b"]->scaleW(1. / sow["sow_AuAuc2060"]->sumW());
+          //RAA
+          divide(hEtaPt["ptyieldsAuAuc2060b"], hCrossSec["ppEtaAuAuc2060"], hRaa["EtaAuAuc2060"]);
           
+          //d08-x01-y03
+          hCrossSec["ppEtaAuAuc6092"]->scaleW(1. / sow["sow_pp"]->sumW());
+          hCrossSec["ppEtaAuAuc6092"]->scaleW(cross);
+          hCrossSec["ppEtaAuAuc6092"]->scaleW(0.25); //scaling by <TdA> as shown in Table II
+          //numerator
+          hEtaPt["ptyieldsAuAuc6092b"]->scaleW(1. / sow["sow_AuAuc6092"]->sumW());
+          //RAA
+          divide(hEtaPt["ptyieldsAuAuc6092b"], hCrossSec["ppEtaAuAuc6092"], hRaa["EtaAuAuc6092"]);
+
           //Figure 18: ratio
           //d09-x01-y01
           divide(hEtaPt["ptyieldsEta"], hPionPt["ptyieldsPion"], Ratiopp["EtaToPion"]);
@@ -587,6 +865,19 @@ namespace Rivet {
           
           //d10-x01-y05
           divide(hEtaPt["ptyieldsdAuc6088c"], hPionPt["ptyieldsdAuc6088"], RatiodAu["EtaToPion6088"]);
+
+          //Figure 20: ratios
+          //d11-x01-y01
+          divide(hEtaPt["ptyieldsAuAuc0092c"], hPionPt["ptyieldsAuAuc0092"], RatioAuAu["EtaToPion0092"]);
+          
+          //d11-x01-y02
+          divide(hEtaPt["ptyieldsAuAuc0020c"], hPionPt["ptyieldsAuAuc0020"], RatioAuAu["EtaToPion0020"]);
+    
+          //d11-x01-y03
+          divide(hEtaPt["ptyieldsAuAuc2060c"], hPionPt["ptyieldsAuAuc2060"], RatioAuAu["EtaToPion2060"]);
+
+          //d11-x01-y04
+          divide(hEtaPt["ptyieldsAuAuc6092c"], hPionPt["ptyieldsAuAuc6092"], RatioAuAu["EtaToPion6092"]);
           
       }
 
@@ -596,13 +887,13 @@ namespace Rivet {
       map<string, Histo1DPtr> hEtaPt;
       
       //ratios
-      //map<string, Scatter2DPtr> RatioAuAu;
+      map<string, Scatter2DPtr> RatioAuAu;
       map<string, Scatter2DPtr> RatiodAu;
       map<string, Scatter2DPtr> Ratiopp;
       
       //RdA, Raa
       map<string, Scatter2DPtr> hRda;
-      //map<string, Scatter2DPtr> hRaa;
+      map<string, Scatter2DPtr> hRaa;
       
       //Counters
       map<string, CounterPtr> sow;
