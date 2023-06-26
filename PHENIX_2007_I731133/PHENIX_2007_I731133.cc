@@ -820,7 +820,7 @@ namespace Rivet {
           //d08-x01-y01:       
           hCrossSec["ppEtaAuAuc0020"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaAuAuc0020"]->scaleW(cross);
-          hCrossSec["ppEtaAuAuc0020"]->scaleW(0.2); //scaling by <TdA> as shown in Table II
+          hCrossSec["ppEtaAuAuc0020"]->scaleW(18.5); //scaling by <TdA> as shown in Table II
           //numerator: must do our process to our invariant yield like in Figure 14
           hEtaPt["ptyieldsAuAuc0020b"]->scaleW(1. / sow["sow_AuAuc0020"]->sumW());
           //RAA
@@ -830,7 +830,7 @@ namespace Rivet {
           //denominator
           hCrossSec["ppEtaAuAuc2060"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaAuAuc2060"]->scaleW(cross);
-          hCrossSec["ppEtaAuAuc2060"]->scaleW(0.36); //scaling by <TdA> as shown in Table II
+          hCrossSec["ppEtaAuAuc2060"]->scaleW(4.6); //scaling by <TdA> as shown in Table II
           //numerator
           hEtaPt["ptyieldsAuAuc2060b"]->scaleW(1. / sow["sow_AuAuc2060"]->sumW());
           //RAA
@@ -839,7 +839,7 @@ namespace Rivet {
           //d08-x01-y03
           hCrossSec["ppEtaAuAuc6092"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaAuAuc6092"]->scaleW(cross);
-          hCrossSec["ppEtaAuAuc6092"]->scaleW(0.25); //scaling by <TdA> as shown in Table II
+          hCrossSec["ppEtaAuAuc6092"]->scaleW(0.3); //scaling by <TdA> as shown in Table II
           //numerator
           hEtaPt["ptyieldsAuAuc6092b"]->scaleW(1. / sow["sow_AuAuc6092"]->sumW());
           //RAA
