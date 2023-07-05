@@ -16,6 +16,9 @@ References:
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU200
 Description: We present the first measurement of photoproduction of $J/\psi$ and of two-photon production of high-mass $e^+e^−$ pairs in electromagnetic (or ultra-peripheral) nucleus–nucleus interactions, using Au + Au data at $\sqrt{s_{NN}}$ = 200 GeV . The events are tagged with forward neutrons emitted following Coulomb excitation of one or both Au ⋆ nuclei. The event sample consists of 28 events with $m_{e^+e^-}$ > 2 (GeV/$c^2$) with zero like-sign background. The measured cross sections at midrapidity of $d\sigma/dy$($J/\psi$+$X_n$,$y$=0)=76$\pm$33(stat)$\pm$11(syst) $\mu$b and $d^2\sigma/dmdy$($e^+e^−$+$X_n$,$y$=0)=86$\pm$23(stat)$\pm$16(syst) $\mu$b/(GeV/$c^2$) for $m_{e^+e^−}\epsilon$[2.0,2.8] (GeV/$c^2$) have been compared and found to be consistent with models for photoproduction of $J/\psi$ and QED based calculations of two-photon production of $e^+e^−$ pairs.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against

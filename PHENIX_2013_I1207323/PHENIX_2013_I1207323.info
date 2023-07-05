@@ -16,6 +16,9 @@ RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: <Insert beam pair(s), e.g. [p+, p+] or [[p-, e-], [p-, e+]]>
 #Energies: <Run energies or beam energy pairs in GeV, e.g. [13000] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=PP200,AUAU200
 Description: The jet fragmentation function is measured with direct photon-hadron correlations in p+p and Au+Au collisions at sNN=200  GeV. The pT of the photon is an excellent approximation to the initial pT of the jet and the ratio zT=pTh/pTγ is used as a proxy for the jet fragmentation function. A statistical subtraction is used to extract the direct photon-hadron yields in Au+Au collisions while a photon isolation cut is applied in p+p. IAA, the ratio of hadron yield opposite the photon in Au+Au to that in p+p, indicates modification of the jet fragmentation function. Suppression, most likely due to energy loss in the medium, is seen at high zT. The associated hadron yield at low zT is enhanced at large angles. Such a trend is expected from redistribution of the lost energy into increased production of low-momentum particles.
 Keywords: []
 BibKey: 

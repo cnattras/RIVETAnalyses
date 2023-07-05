@@ -14,6 +14,9 @@ References:
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU200
 Description: We report the measurement of direct photons at midrapidity in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV. The direct photon signal was extracted for the transverse-momentum range of 4 GeV/$c$ < $p_T$ < 22 GeV/$c$, using a statistical method to subtract decay photons from the inclusive-photon sample. The direct-photon nuclear-modification factor $R_{AA}$ was calculated as a function of $p_T$ for different Au+Au collision centralities using the measured $p$+$p$ direct-photon spectrum and compared to theoretical predictions. $R_{AA}$ was found to be consistent with unity for all centralities over the entire measured $p_T$ range. Theoretical models that account for modifications of initial-direct-photon production due to modified-parton-distribution functions in Au and the different isospin composition of the nuclei, predict a modest change of $R_{AA}$ from unity and are consistent with the data. Models with compensating effects of the quark-gluon plasma on high-energy photons, such as suppression of jet-fragmentation photons and induced-photon bremsstrahlung from partons traversing the medium, are also consistent with this measurement.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against

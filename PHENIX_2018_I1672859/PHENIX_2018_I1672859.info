@@ -5,6 +5,7 @@ Experiment: <PHENIX>
 Collider: Relativisitc Heavy Ion Collider (RHIC)
 InspireID: <1672859>
 Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Reentrant: false
 Authors:
  - Kip Hunt <nhunt5@vols.utk.edu>
  - Antonio Silva <antonio.silva@cern.ch>

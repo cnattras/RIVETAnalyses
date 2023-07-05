@@ -5,6 +5,7 @@ Experiment: STAR
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 943192
 Status: UNVALIDATED
+Reentrant: false
 Authors:
  - Christine Nattrass <cnattras@utk.edu>
 References: 
@@ -16,6 +17,7 @@ Energies: [39400, 3931.2, 200]
 #Luminosity_fb: <Insert integrated luminosity, in inverse fb>
 Options:
  - cent=REF,GEN,IMP,USR
+ - beam=PP200,CUCU63,dAU200
 Description: Two-particle azimuthal ($\Delta\phi$) and pseudorapidity ($\Delta\eta$) correlations using a trigger particle with large transverse momentum ($p_T$) in $d$+Au, Cu+Cu and Au+Au collisions at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV and 200~GeV from the STAR experiment at RHIC are presented. The \ns correlation is separated into a jet-like component, narrow in both $\Delta\phi$ and $\Delta\eta$, and the ridge, narrow in $\Delta\phi$ but broad in $\Delta\eta$. Both components are studied as a function of collision centrality, and the jet-like correlation is studied as a function of the trigger and associated $p_T$. The behavior of the jet-like component is remarkably consistent for different collision systems, suggesting it is produced by fragmentation. The width of the jet-like correlation is found to increase with the system size. The ridge, previously observed in Au+Au collisions at $\sqrt{s_{{NN}}}$ = 200 GeV, is also found in Cu+Cu collisions and in collisions at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV, but is found to be substantially smaller at $\sqrt{s_{{NN}}}$ =\xspace 62.4 GeV than at $\sqrt{s_{{NN}}}$ = 200 GeV for the same average number of participants ($ \langle N_{\mathrm{part}}\rangle$). Measurements of the ridge are compared to models.
 Keywords: []
 BibKey: Agakishiev:2011st
