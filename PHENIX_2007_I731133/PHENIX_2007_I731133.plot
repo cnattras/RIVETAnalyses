@@ -1,244 +1,197 @@
-#Table 12.1
+#All labels in comments correspond to the actual PRC and NOT the HEPData entry
+#Figure 13.1
 BEGIN PLOT /PHENIX_2007_I731133/d01-x01-y01
-Title=$\eta$ inelastic cross section in p+p versus $p_T$
-XLabel=$p_T$
-YLabel=$\sigma$, $\eta \rightarrow \gamma \gamma$
+Title=Inelastic cross section measured in $p+p$ at $\sqrt{s}=200$ GeV
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$Ed^3\sigma/dp^3$ (mb $GeV^{-2}c^3$)
 END PLOT
 
-#Table 12.2
-BEGIN PLOT /PHENIX_2007_I731133/d01-x01-y02
-Title= $\eta$ inelastic cross section in p+p versus $p_T$
-XLabel=$p_T$
-YLabel=$\sigma$, $\eta \rightarrow \pi^{0} \pi^{+} \pi^{-}$
-END PLOT
-
-#Table 13.1
-BEGIN PLOT /PHENIX_2007_I731133/d02-x01-y01
-Title= $\eta$ inelastic cross section in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$\sigma$, $\eta \rightarrow \gamma \gamma$
-END PLOT
-
-#Table 13.2
-BEGIN PLOT /PHENIX_2007_I731133/d02-x01-y02
-Title= $\eta$ inelastic cross section in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$\sigma$, $\eta \rightarrow \pi^{0} \pi^{+} \pi^{-}$
-END PLOT
-
-#Table 14
+#Figure 13.2
 BEGIN PLOT /PHENIX_2007_I731133/d03-x01-y01
-Title= $\eta$ invariant yields in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $0-20\%$ centrality
+Title=Inelastic cross section measured in $d$+Au at $\sqrt{s}=200$ GeV
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$Ed^3\sigma/dp^3$ (mb $GeV^{-2}c^3$)
 END PLOT
 
-BEGIN PLOT /PHENIX_2007_I731133/d03-x01-y02
-Title= $\eta$ invariant yields in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $20-40\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d03-x01-y03
-Title= $\eta$ invariant yields in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $40-60\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d03-x01-y04
-Title= $\eta$ invariant yields in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $60-88\%$ centrality
-END PLOT
-
-#Table 15
-BEGIN PLOT /PHENIX_2007_I731133/d04-x01-y01
-Title= $\eta$ invariant yields in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $0-92\%$ centrality (MB)
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d04-x01-y02
-Title= $\eta$ invariant yields in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $0-20\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d04-x01-y03
-Title= $\eta$ invariant yields in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $20-40\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d04-x01-y04
-Title= $\eta$ invariant yields in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Yields, $\eta$ $60-92\%$ centrality
-END PLOT
-
-#Table 16
+#Figure 14.1
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y01
-Title= $R_{dAu}$ for $\eta$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{dAu}$, $\eta$ $0-88\%$ centrality (MB)
+Title=Invariant yeilds measured in d+Au for $0-20\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
+#Figure 14.2
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y02
-Title= $R_{dAu}$ for $\eta$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{dAu}$, $\eta$ $0-20\%$ centrality
+Title=Invariant yeilds measured in d+Au for $20-40\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
+#Figure 14.3
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y03
-Title= $R_{dAu}$ for $\eta$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{dAu}$, $\eta$ $19-40\%$ centrality
+Title=Invariant yeilds measured in d+Au for $40-60\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
+#Figure 14.4
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y04
-Title= $R_{dAu}$ for $\eta$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{dAu}$, $\eta$ $40-60\%$ centrality
+Title=Invariant yeilds measured in d+Au for $60-88\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
-BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y05
-Title= $R_{dAu}$ for $\eta$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{dAu}$, $\eta$ $60-88\%$ centrality
-END PLOT
-
-#Table 17
+#Figure 15.1
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y01
-Title= $R_{AuAu}$ for $\eta$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{AuAu}$, $\eta$ $0-20\%$ centrality
+Title=Invariant yeilds measured in d+Au for $0-92\%$ centrality (MB)
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
+#Figure 15.2
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y02
-Title= $R_{AuAu}$ for $\eta$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{AuAu}$, $\eta$ $20-60\%$ centrality
+Title=Invariant yeilds measured in d+Au for $0-20\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
+#Figure 15.3
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y03
-Title= $R_{AuAu}$ for $\eta$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=$R_{AuAu}$, $\eta$ $60-92\%$ centrality
+Title=Invariant yeilds measured in d+Au for $20-60\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
 END PLOT
 
-#Table 18
+#Figure 15.4
+BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y04
+Title=Invariant yeilds measured in d+Au for $60-92\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+END PLOT
+
+#Figure 17
 BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y01
-Title= Ratio $\eta/\pi^{0}$ in p+p versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$
+Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $0-88\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{dA}$
 END PLOT
 
-#Table 19
+#Figure 16.1
+BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y02
+Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $0-20\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{dA}$
+END PLOT
+
+#Figure 16.2
+BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y03
+Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $20-40\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{dA}$
+END PLOT
+
+#Figure 16.3
+BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y04
+Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $40-60\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{dA}$
+END PLOT
+
+#Figure 16.4
+BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y05
+Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $60-88\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{dA}$
+END PLOT
+
+#Figure 19.1
 BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y01
-Title= Ratio $\eta/\pi^{0}$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $0-88\%$ centrality (MB)
+Title=$R_{AA}$ for $\eta$ measured in $d$+Au collisions for $0-20\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{AA}$
 END PLOT
 
+#Figure 19.2
 BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y02
-Title= Ratio $\eta/\pi^{0}$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $0-20\%$ centrality
+Title=$R_{AA}$ for $\eta$ measured in $d$+Au collisions for $20-60\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{AA}$
 END PLOT
 
+#Figure 19.3
 BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y03
-Title= Ratio $\eta/\pi^{0}$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $20-40\%$ centrality
+Title=$R_{AA}$ for $\eta$ measured in $d$+Au collisions for $60-92\%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{AA}$
 END PLOT
 
-BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y04
-Title= Ratio $\eta/\pi^{0}$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $40-60\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y05
-Title= Ratio $\eta/\pi^{0}$ in d+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $60-88\%$ centrality
-END PLOT
-
-#Table 20
+#Figure 21
 BEGIN PLOT /PHENIX_2007_I731133/d09-x01-y01
-Title= Ratio $\eta/\pi^{0}$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $0-92\%$ centrality (MB)
+Title=$\eta/\pi^0$  in $p$+$p$ collisions
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
-BEGIN PLOT /PHENIX_2007_I731133/d09-x01-y02
-Title= Ratio $\eta/\pi^{0}$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $0-20\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d09-x01-y03
-Title= Ratio $\eta/\pi^{0}$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $20-60\%$ centrality
-END PLOT
-
-BEGIN PLOT /PHENIX_2007_I731133/d09-x01-y04
-Title= Ratio $\eta/\pi^{0}$ in Au+Au versus $p_T$
-XLabel=$p_T$
-YLabel=Ratio of Yields, $\eta/\pi^{0}$ $60-92\%$ centrality
-END PLOT
-
+#Figure 22.1
 BEGIN PLOT /PHENIX_2007_I731133/d10-x01-y01
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for $0-88\%$ MB Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $0-88\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 22.2
 BEGIN PLOT /PHENIX_2007_I731133/d10-x01-y02
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for $0-20\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $0-20\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 22.3
 BEGIN PLOT /PHENIX_2007_I731133/d10-x01-y03
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for $20-40\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $20-40\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 22.4
 BEGIN PLOT /PHENIX_2007_I731133/d10-x01-y04
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for $40-60\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $40-60\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 22.5
 BEGIN PLOT /PHENIX_2007_I731133/d10-x01-y05
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in $d$+Au for $60-88\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $60-88\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 23.1
 BEGIN PLOT /PHENIX_2007_I731133/d11-x01-y01
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for $0-92\%$ MB Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $0-92\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 23.2
 BEGIN PLOT /PHENIX_2007_I731133/d11-x01-y02
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for $0-20\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $0-20\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 23.3
 BEGIN PLOT /PHENIX_2007_I731133/d11-x01-y03
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for $20-60\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $20-60\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
 
+#Figure 23.4
 BEGIN PLOT /PHENIX_2007_I731133/d11-x01-y04
-Title=Ratio $\eta$ and $\pi^{0}$ Measured in Au+Au for $60-92\%$ Centrality
-XLabel=$p_T$
-YLabel=
+Title=$\eta/\pi^0$  in Au+Au collisions for $60-92\%$
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$\eta/\pi^0$
 END PLOT
+
