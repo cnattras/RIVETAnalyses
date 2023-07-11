@@ -45,15 +45,16 @@ public:
 
         
         //Charged particles
-        const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.35 && Cuts::phi == 0.392);
+        //consider adding back && Cuts::phi == 0.392
+        const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.35 && Cuts::pT > 0.5*GeV);
         declare(cp,"cp");
         //Neutral particles
-        const UnstableParticles np(Cuts::absrap < 0.35 && Cuts::phi == 0.392 && Cuts::abspid == 111);
+        const UnstableParticles np(Cuts::absrap < 0.35 && Cuts::abspid == 111 && Cuts::pT > 0.5*GeV);
         declare(np,"np");
         
         
         //Collision system
-        //if (beamOpt == "PP") collSys = pp;
+        //if (beamOpt == "PP200") collSys = pp;
         //else if (beamOpt == "AUAU200") collSys = AuAu200;
         
         // Declare centrality projection for centrality estimation
@@ -147,36 +148,36 @@ public:
         
         //d03-x01-y01
         string refname13 = mkAxisCode(3, 1, 1);
-        const Scatter2D& refdata13 = refData(refname13);
-        book(hProtonPt["ptyieldsAuAuc0010"], refname13 + "_AuAuc0010_Proton",refdata13);
+        //const Scatter2D& refdata13 = refData(refname13);
+        book(hProtonPt["ptyieldsAuAuc0010"], 3, 1, 1);
         //d03-x01-y02
         string refname14 = mkAxisCode(3, 1, 2);
-        const Scatter2D& refdata14 = refData(refname14);
-        book(hProtonPt["ptyieldsAuAuc2030"], refname14 + "_AuAuc2030_Proton",refdata14);
+        //const Scatter2D& refdata14 = refData(refname14);
+        book(hProtonPt["ptyieldsAuAuc2030"], 3, 1, 2);
         //d03-x01-y03
         string refname15 = mkAxisCode(3, 1, 3);
-        const Scatter2D& refdata15 = refData(refname15);
-        book(hProtonPt["ptyieldsAuAuc4050"], refname15 + "_AuAuc4050_Proton",refdata15);
+        //const Scatter2D& refdata15 = refData(refname15);
+        book(hProtonPt["ptyieldsAuAuc4050"], 3, 1, 3);
         //d03-x01-y04
         string refname16 = mkAxisCode(3, 1, 4);
-        const Scatter2D& refdata16 = refData(refname16);
-        book(hProtonPt["ptyieldsAuAuc6092"], refname16 + "_AuAuc6092_Proton",refdata16);
+        //const Scatter2D& refdata16 = refData(refname16);
+        book(hProtonPt["ptyieldsAuAuc6092"], 3, 1, 4);
         //d03-x01-y05
         string refname17 = mkAxisCode(3, 1, 5);
-        const Scatter2D& refdata17 = refData(refname17);
-        book(hProBarPt["ptyieldsAuAuc0010"], refname17 + "_AuAuc0010_Proton",refdata17);
+        //const Scatter2D& refdata17 = refData(refname17);
+        book(hProBarPt["ptyieldsAuAuc0010"], 3, 1, 5);
         //d03-x01-y06
         string refname18 = mkAxisCode(3, 1, 6);
-        const Scatter2D& refdata18 = refData(refname18);
-        book(hProBarPt["ptyieldsAuAuc2030"], refname18 + "_AuAuc2030_Proton",refdata18);
+        //const Scatter2D& refdata18 = refData(refname18);
+        book(hProBarPt["ptyieldsAuAuc2030"], 3, 1, 6);
         //d03-x01-y07
         string refname19 = mkAxisCode(3, 1, 7);
-        const Scatter2D& refdata19 = refData(refname19);
-        book(hProBarPt["ptyieldsAuAuc4050"], refname19 + "_AuAuc4050_Proton",refdata19);
+        //const Scatter2D& refdata19 = refData(refname19);
+        book(hProBarPt["ptyieldsAuAuc4050"], 3, 1, 7);
         //d03-x01-y08
         string refname20 = mkAxisCode(3, 1, 8);
-        const Scatter2D& refdata20 = refData(refname20);
-        book(hProBarPt["ptyieldsAuAuc6092"], refname20 + "_AuAuc6092_Proton",refdata20);
+        //const Scatter2D& refdata20 = refData(refname20);
+        book(hProBarPt["ptyieldsAuAuc6092"], 3, 1, 8);
         
         //Rcp
         //Figure 3a
@@ -190,10 +191,10 @@ public:
         //Figure 3b
         //d05-x01-y01
         string refname22 = mkAxisCode(5, 1, 1);
-        //const Scatter2D& refdata22 = refData(refname22);
+        const Scatter2D& refdata22 = refData(refname22);
         //next two lines: not needed since hPionPt is already booked and filled for //d02
-        //book(hPionPt["AuAuc0010"], refname22 + "_AuAuc0010",refdata22);
-        //book(hPionPt["AuAuc6092"], refname22 + "_AuAuc6092",refdata22);
+        book(hPionPt["AuAuc0010b"], refname22 + "_AuAuc0010",refdata22);
+        book(hPionPt["AuAuc6092b"], refname22 + "_AuAuc6092",refdata22);
         book(hRcp["pion"], refname22);
         
         //Figure 4a
@@ -201,7 +202,7 @@ public:
         string refname23 = mkAxisCode(6, 1, 1);
         const Scatter2D& refdata23 = refData(refname23);
         book(hChHadrons["AuAuc0010"], refname23 + "_AuAuc0010",refdata23);
-        book(hPionPt["AuAuc0010b"], refname23 + "_AuAuc0010_Pion",refdata23);
+        book(hPionPt["AuAuc0010c"], refname23 + "_AuAuc0010_Pion",refdata23);
         book(RatioHadtoPion["AuAuc0010"], refname23);
         
         //Figure 4b
@@ -209,7 +210,7 @@ public:
         string refname24 = mkAxisCode(7, 1, 1);
         const Scatter2D& refdata24 = refData(refname24);
         book(hChHadrons["AuAuc6092"], refname24 + "_AuAuc6092",refdata24);
-        book(hPionPt["AuAuc6092b"], refname24 + "_AuAuc6092_Pion",refdata24);
+        book(hPionPt["AuAuc6092c"], refname24 + "_AuAuc6092_Pion",refdata24);
         book(RatioHadtoPion["AuAuc6092"], refname24);
     }
     
@@ -434,6 +435,7 @@ public:
                         {
                             hPionPt["AuAuc0010a"]->fill(partPt);
                             hPionPt["AuAuc0010b"]->fill(partPt);
+                            hPionPt["AuAuc0010c"]->fill(partPt);
                             break;
                         }
                     }
@@ -490,6 +492,7 @@ public:
                         {
                             hPionPt["AuAuc6092a"]->fill(partPt);
                             hPionPt["AuAuc6092b"]->fill(partPt);
+                            hPionPt["AuAuc6092c"]->fill(partPt);
                             break;
                         }
                     }
@@ -563,20 +566,20 @@ public:
         
         //d05
         //0-10%
-        hPionPt["AuAuc0010a"]->scaleW(1. / 955.4);
+        hPionPt["AuAuc0010b"]->scaleW(1. / 955.4);
         //60-92%
-        hPionPt["AuAuc6092a"]->scaleW(1. / 14.5);
+        hPionPt["AuAuc6092b"]->scaleW(1. / 14.5);
         
         //Rcp
-        divide(hPionPt["AuAuc0010a"], hPionPt["AuAuc6092a"], hRcp["pion"]);
+        divide(hPionPt["AuAuc0010b"], hPionPt["AuAuc6092b"], hRcp["pion"]);
         
         //d06
         hChHadrons["AuAuc0010"]->scaleW(1. / 2.); //scale by two before divide
-        divide(hChHadrons["AuAuc0010"], hPionPt["AuAuc0010b"], RatioHadtoPion["AuAuc0010"]);
+        divide(hChHadrons["AuAuc0010"], hPionPt["AuAuc0010c"], RatioHadtoPion["AuAuc0010"]);
         
         //d07
         hChHadrons["AuAuc6092"]->scaleW(1. / 2.); //scale by two before divide
-        divide(hChHadrons["AuAuc6092"], hPionPt["AuAuc6092b"], RatioHadtoPion["AuAuc6092"]);
+        divide(hChHadrons["AuAuc6092"], hPionPt["AuAuc6092c"], RatioHadtoPion["AuAuc6092"]);
         
     }
     
