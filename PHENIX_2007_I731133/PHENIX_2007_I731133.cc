@@ -34,23 +34,19 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
       void init() {
           //Particles: eta, pi^+, pi^-, pi^0, gamma (respectively)
-          std::initializer_list<int> pdgIds = { 221, 211, -211, 111, 22};
+          std::initializer_list<int> pdgIds = { 221 };
           
           //declare cuts; most of these are found in section II of the paper
           //For charged particles:
-          const PrimaryParticles cp(pdgIds, Cuts::abseta < 2.2 && Cuts::abseta > 1.2 && Cuts::abscharge > 0 && Cuts::absrap < 0.35);
+          //consider adding: && Cuts::pT < 12*GeV, && Cuts::abscharge == 0, && Cuts::abscharge > 0 Cuts::abseta < 2.2 && Cuts::abseta > 1.2 &&
+          const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.35 && Cuts::pT > 1*GeV);
           declare(cp, "cp");
           
           //Uncharged particles
-          const UnstableParticles np(Cuts::abspid == 111 && Cuts::abseta < 2.2 && Cuts::abseta > 1.2 && Cuts::abscharge == 0 && Cuts::absrap < 0.35);
+          const UnstableParticles np(Cuts::abspid == 111 && Cuts::absrap < 0.35 && Cuts::pT > 1*GeV);
           declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
-
-          //check the collision system
-          if (beamOpt == "PP") collSys = pp;
-          else if (beamOpt == "AUAU200") collSys = AuAu200;
-          else if (beamOpt == "dAU200") collSys = dAu200;
 	
           //declaration for collision systems that are not p+p
           if (!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
@@ -71,9 +67,9 @@ namespace Rivet {
           //d01-x01-y01
           string refname1 = mkAxisCode(1, 1, 1);
           //mkAxisCode gives us the internal histogram name for a given d, x, and y
-          const Scatter2D& refdata1 = refData(refname1);
+          //const Scatter2D& refdata1 = refData(refname1);
           //here we have to define a Scatter2D& for the next part, we can use the refData function on refname
-          book(hCrossSec["ppEtaa"], refname1 + "_pp_Eta", refdata1);
+          book(hCrossSec["ppEtaa"], 1, 1, 1);
           //here, we are using book() as: book(1DPtr&, const string &name, const Scatter2D), and this books a histograms with binning using d01-x01-y01 from our yoda as a reference.
           
           //d02-x01-y01 We don't worry about the decay channels, so we won't need this one since it is a duplicate
@@ -84,48 +80,48 @@ namespace Rivet {
           //d03-x01-y01 FOR NIK
           string refname2 = mkAxisCode(3, 1, 1);
           //mkAxisCode gives us the internal histogram name for a given d, x, and y
-          const Scatter2D& refdata2 = refData(refname2);
+          //const Scatter2D& refdata2 = refData(refname2);
           //here we have to define a Scatter2D& for the next part, we can use the refData function on refname
-          book(hCrossSec["dAuEta"], refname2 + "_dAu_Eta", refdata2);
+          book(hCrossSec["dAuEta"], 3, 1, 1);
           
           //Figure 14: Invariant yields of eta in d+Au collisions
           //d05-x01-y01: 00-20% centrality
           string refname5 = mkAxisCode(5, 1, 1);
-          const Scatter2D& refdata5 = refData(refname5);
-          book(hEtaPt["ptyieldsdAuc0020a"], refname5 + "_dAuc0020_Eta", refdata5);
+          //const Scatter2D& refdata5 = refData(refname5);
+          book(hEtaPt["ptyieldsdAuc0020a"], 5, 1, 1);
           
           //d05-x01-y02: 20-40% centrality
           string refname6 = mkAxisCode(5, 1, 2);
-          const Scatter2D& refdata6 = refData(refname6);
-          book(hEtaPt["ptyieldsdAuc2040a"], refname6 + "_dAuc2040_Eta", refdata6);
+          //const Scatter2D& refdata6 = refData(refname6);
+          book(hEtaPt["ptyieldsdAuc2040a"], 5, 1, 2);
           
           //d05-x01-y03: 40-60% centrality
           string refname7 = mkAxisCode(5, 1, 3);
-          const Scatter2D& refdata7 = refData(refname7);
-          book(hEtaPt["ptyieldsdAuc4060a"], refname7 + "_dAuc4060_Eta", refdata7);
+          //const Scatter2D& refdata7 = refData(refname7);
+          book(hEtaPt["ptyieldsdAuc4060a"], 5, 1, 3);
           
           //d05-x01-y04: 60-88% centrality
           string refname8 = mkAxisCode(5, 1, 4);
-          const Scatter2D& refdata8 = refData(refname8);
-          book(hEtaPt["ptyieldsdAuc6088a"], refname8 + "_dAuc6088_Eta", refdata8);
+          //const Scatter2D& refdata8 = refData(refname8);
+          book(hEtaPt["ptyieldsdAuc6088a"], 5, 1, 4);
           
           //Figure 15
           //d06-x01-y01 min. bias
           string refname9 = mkAxisCode(6, 1, 1);
-          const Scatter2D& refdata9 = refData(refname9);
-          book(hEtaPt["ptyieldsAuAuc0092a"], refname9 + "_AuAuc0092_Eta", refdata9);         
+          //const Scatter2D& refdata9 = refDa6, 1, 1
+          book(hEtaPt["ptyieldsAuAuc0092a"], 6, 1, 1);         
           //d06-x01-y02 0-20%
           string refname10 = mkAxisCode(6, 1, 2);
-          const Scatter2D& refdata10 = refData(refname10);
-          book(hEtaPt["ptyieldsAuAuc0020a"], refname10 + "_AuAuc0020_Eta", refdata10);         
+          //const Scatter2D& refdata10 = refData(refname10);
+          book(hEtaPt["ptyieldsAuAuc0020a"], 6, 1, 2);         
           //d06-x01-y03 20-40%
           string refname11 = mkAxisCode(6, 1, 3);
-          const Scatter2D& refdata11 = refData(refname11);
-          book(hEtaPt["ptyieldsAuAuc2060a"], refname11 + "_AuAuc2060_Eta", refdata11);          
+          //const Scatter2D& refdata11 = refData(refname11);
+          book(hEtaPt["ptyieldsAuAuc2060a"], 6, 1, 3);          
           //d06-x01-y04 60-92%
           string refname12 = mkAxisCode(6, 1, 4);
-          const Scatter2D& refdata12 = refData(refname12);
-          book(hEtaPt["ptyieldsAuAuc6092a"], refname12 + "_AuAuc6092_Eta", refdata12);         
+          //const Scatter2D& refdata12 = refData(refname12);
+          book(hEtaPt["ptyieldsAuAuc6092a"], 6, 1, 4);         
           
           //Figure 16: Rda for measured etas
           //d07-x01-y01: 00-88% centrality (minimum bias)
@@ -267,6 +263,17 @@ namespace Rivet {
           Particles chargedParticles = applyProjection<PrimaryParticles>(event,"cp").particles();
           Particles neutralParticles = applyProjection<UnstableParticles>(event,"np").particles();
           
+          const ParticlePair& beam = beams();
+
+          if (beamOpt == "NONE") {
+          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+          else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+          else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = dAu200;
+          }
+          //check the collision system
+          if (beamOpt == "PP200") collSys = pp;
+          else if (beamOpt == "AUAU200") collSys = AuAu200;
+          else if (beamOpt == "dAU200") collSys = dAu200;
           
           if (collSys == pp)
           {
@@ -293,15 +300,6 @@ namespace Rivet {
                           hCrossSec["ppEtadAuc2040"]->fill(partPt, pt_weight);
                           hCrossSec["ppEtadAuc4060"]->fill(partPt, pt_weight);
                           hCrossSec["ppEtadAuc6088"]->fill(partPt, pt_weight);
-                          break;
-                      }
-                      case 211: { //pi+
-                          break;
-                      }
-                      case -211: { //pi-
-                          break;
-                      }
-                      case 22: { //gamma
                           break;
                       }
                   }
@@ -351,15 +349,6 @@ namespace Rivet {
                           hEtaPt["ptyieldsdAuc0088c"]->fill(partPt);
                           break;
                       }
-                      case 211: { //pi+
-                          break;
-                      }
-                      case -211: { //pi-
-                          break;
-                      }
-                      case 22: { //gamma
-                          break;
-                      }
                   }
               }
               
@@ -402,15 +391,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsdAuc0020c"]->fill(partPt);
                               break;
                           }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
-                              break;
-                          }
                       }
                   }
                   
@@ -443,15 +423,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsdAuc2040a"]->fill(partPt, pt_weight);
                               hEtaPt["ptyieldsdAuc2040b"]->fill(partPt, pt_weight);
                               hEtaPt["ptyieldsdAuc2040c"]->fill(partPt);
-                              break;
-                          }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
                               break;
                           }
                       }
@@ -487,15 +458,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsdAuc4060c"]->fill(partPt);
                               break;
                           }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
-                              break;
-                          }
                       }
                   }
                   for (Particle p : neutralParticles){
@@ -527,15 +489,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsdAuc6088a"]->fill(partPt, pt_weight);
                               hEtaPt["ptyieldsdAuc6088b"]->fill(partPt, pt_weight);
                               hEtaPt["ptyieldsdAuc6088c"]->fill(partPt);
-                              break;
-                          }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
                               break;
                           }
                       }
@@ -578,15 +531,6 @@ namespace Rivet {
                           hEtaPt["ptyieldsAuAuc0092c"]->fill(partPt);
                           break;
                       }
-                      case 211: { //pi+
-                          break;
-                      }
-                      case -211: { //pi-
-                          break;
-                      }
-                      case 22: { //gamma
-                          break;
-                      }
                   }
               }
               
@@ -624,15 +568,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsAuAuc0020c"]->fill(partPt);
                               break;
                           }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
-                              break;
-                          }
                       }
                   }
                   
@@ -667,15 +602,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsAuAuc2060c"]->fill(partPt);
                               break;
                           }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
-                              break;
-                          }
                       }
                   }
                   for (Particle p : neutralParticles){
@@ -707,15 +633,6 @@ namespace Rivet {
                               hEtaPt["ptyieldsAuAuc6092a"]->fill(partPt, pt_weight);
                               hEtaPt["ptyieldsAuAuc6092b"]->fill(partPt, pt_weight);
                               hEtaPt["ptyieldsAuAuc6092c"]->fill(partPt);
-                              break;
-                          }
-                          case 211: { //pi+
-                              break;
-                          }
-                          case -211: { //pi-
-                              break;
-                          }
-                          case 22: { //gamma
                               break;
                           }
                       }
