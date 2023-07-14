@@ -42,14 +42,20 @@ public:
         // the given eta acceptance
         /// Found the cuts on page 3, paragraph 3
         std::initializer_list<int> pdgIds = { 211, -211, 2212, -2212 };
+        
+        //Charged hadrons: protons, antiprotons, pions+, pions-, kaons+, kaons-
+        std::initializer_list<int> chHIds = { 211, -211, 2212, -2212 , 321, -321};
 
         
         //Charged particles
         //consider adding back && Cuts::phi == 0.392
-        const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.35 && Cuts::pT > 0.5*GeV);
+        const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
         declare(cp,"cp");
+        //Inclusive charged hadrons
+        const ALICE::PrimaryParticles ich(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
+        declare(ich,"ich");
         //Neutral particles
-        const UnstableParticles np(Cuts::absrap < 0.35 && Cuts::abspid == 111 && Cuts::pT > 0.5*GeV);
+        const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::abspid == 111 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
         declare(np,"np");
         
         
@@ -223,10 +229,11 @@ public:
         //pids (respectively): 211, -211, 111, 2212, -2212
         
         Particles chargedParticles = applyProjection<PrimaryParticles>(event,"cp").particles();
+        Particles inclusiveParticles = applyProjection<PrimaryParticles>(event,"ich").particles();
         Particles neutralParticles = applyProjection<UnstableParticles>(event,"np").particles();
         // All figures are for S_NN = 200 GeV collisions, so no if statement required for collSys
         
-        /// Case for charged particles
+        /// Case for identified charged particles
         for(Particle p : chargedParticles)
         {
             // We will need to write for centrality
@@ -239,7 +246,7 @@ public:
             // 0-10% centrality
             if ((c > 0.) && (c < 10.))
             {
-                //sow["sow_AuAuc0010"]->fill();
+                sow["AuAuc0010"]->fill();
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
@@ -249,14 +256,12 @@ public:
                         case 211: //pi^+
                         {
                             hPionPosPt["AuAuc0010"]->fill(partPt);
-                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                         case -211: //pi^-
                         {
                             hPionNegPt["AuAuc0010a"]->fill(partPt);
                             hPionNegPt["AuAuc0010b"]->fill(partPt);
-                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
@@ -265,7 +270,6 @@ public:
                             hProtonPt["AuAuc0010b"]->fill(partPt);
                             hProtonPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc0010"]->fill(partPt);
-                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
@@ -274,7 +278,6 @@ public:
                             hProBarPt["AuAuc0010b"]->fill(partPt);
                             hProBarPt["ptyieldsAuAuc0010"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc0010"]->fill(partPt);
-                            hChHadrons["AuAuc0010"]->fill(partPt);
                             break;
                         }
                     }
@@ -287,6 +290,7 @@ public:
             
             else if ((c >= 20.) && (c < 30.))
             {
+                sow["AuAuc2030"]->fill();
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
@@ -331,6 +335,7 @@ public:
             
             else if ((c >= 40.) && (c < 50.))
             {
+                sow["AuAuc4050"]->fill();
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
@@ -365,6 +370,7 @@ public:
             }
             
             else if ((c >= 60.) && (c < 92.)){
+                sow["AuAuc6092"]->fill();
                 for (const Particle& p : chargedParticles)
                 {
                     double partPt = p.pT() / GeV;
@@ -374,14 +380,12 @@ public:
                         case 211: //pi^+
                         {
                             hPionPosPt["AuAuc6092"]->fill(partPt);
-                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                         case -211: //pi^-
                         {
                             hPionNegPt["AuAuc6092a"]->fill(partPt);
                             hPionNegPt["AuAuc6092b"]->fill(partPt);
-                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                         case 2212: //p
@@ -390,7 +394,6 @@ public:
                             hProtonPt["AuAuc6092b"]->fill(partPt);
                             hProtonPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc6092"]->fill(partPt);
-                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                         case -2212: //p_bar
@@ -399,7 +402,6 @@ public:
                             hProBarPt["AuAuc6092b"]->fill(partPt);
                             hProBarPt["ptyieldsAuAuc6092"]->fill(partPt, pt_weight);
                             hPPlusPBarPt["ppluspbarAuAuc6092"]->fill(partPt);
-                            hChHadrons["AuAuc6092"]->fill(partPt);
                             break;
                         }
                     }
@@ -412,6 +414,127 @@ public:
             }
         }
         
+
+        for(Particle p : inclusiveParticles)
+        {
+            // We will need to write for centrality
+            const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
+            const double c = cent();
+
+            // events with centrality < 0 or > 92 are invalid. We use vetoEvent.
+            if (c < 0. || c > 92.) vetoEvent;
+
+            // 0-10% centrality
+            if ((c > 0.) && (c < 10.))
+            {
+                for (const Particle& p : inclusiveParticles)
+                {
+                    double partPt = p.pT() / GeV;
+                    double pt_weight = 1. / (partPt * 2. * M_PI);
+
+                    switch(p.pid()) {
+                        case 211: //pi^+
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                        case -211: //pi^-
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                        case 2212: //p
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                        case -2212: //p_bar
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                        case 321: //kaon^+
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                        case -321: //kaon^-
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                    }
+
+                }
+            }
+            else if ((c >= 10.) && (c < 20.)){
+                break;
+            }
+
+            else if ((c >= 20.) && (c < 30.)){
+                break;
+            }        
+
+            else if ((c >= 30.) && (c < 40.))
+            {
+                break;
+            }
+
+            else if ((c >= 40.) && (c < 50.))
+            {
+                break;
+            }
+
+            else if ((c >= 50.) && (c < 60.)){
+                break;
+            }
+
+            else if ((c >= 60.) && (c < 92.)){
+                for (const Particle& p : inclusiveParticles)
+                {
+                    double partPt = p.pT() / GeV;
+                    double pt_weight = 1. / (partPt * 2. * M_PI);
+
+                    switch(p.pid()) {
+                        case 211: //pi^+
+                        {
+                            hChHadrons["AuAuc6092"]->fill(partPt);
+                            break;
+                        }
+                        case -211: //pi^-
+                        {
+                            hChHadrons["AuAuc6092"]->fill(partPt);
+                            break;
+                        }
+                        case 2212: //p
+                        {
+                            hChHadrons["AuAuc6092"]->fill(partPt);
+                            break;
+                        }
+                        case -2212: //p_bar
+                        {
+                            hChHadrons["AuAuc6092"]->fill(partPt);
+                            break;
+                        }
+                        case 321: //kaon^+
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                        case -321: //kaon^-
+                        {
+                            hChHadrons["AuAuc0010"]->fill(partPt);
+                            break;
+                        }
+                    }
+
+                }
+            }
+
+            else{
+                break;
+            }
+        }
         /// Case for neutral particles
         for(Particle p : neutralParticles)
         {
@@ -541,16 +664,16 @@ public:
         hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
         
         hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
-        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+        hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
         
         hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
-        hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+        hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
         
         hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
-        hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+        hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
         
         hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
-        hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+        hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
         
         //d04
         //0-10%
