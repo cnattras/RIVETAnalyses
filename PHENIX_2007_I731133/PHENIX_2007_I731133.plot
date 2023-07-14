@@ -17,56 +17,56 @@ END PLOT
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y01
 Title=Invariant yeilds measured in d+Au for $0-20\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 14.2
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y02
 Title=Invariant yeilds measured in d+Au for $20-40\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 14.3
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y03
 Title=Invariant yeilds measured in d+Au for $40-60\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 14.4
 BEGIN PLOT /PHENIX_2007_I731133/d05-x01-y04
 Title=Invariant yeilds measured in d+Au for $60-88\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.1
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y01
 Title=Invariant yeilds measured in d+Au for $0-92\%$ centrality (MB)
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.2
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y02
 Title=Invariant yeilds measured in d+Au for $0-20\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.3
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y03
 Title=Invariant yeilds measured in d+Au for $20-60\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.4
 BEGIN PLOT /PHENIX_2007_I731133/d06-x01-y04
 Title=Invariant yeilds measured in d+Au for $60-92\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
-YLabel=1/2$\pi p_T N_{evt}$] $d^2N/[dp_Tdy]$ [$(GeV/$c$)^{-2}]
+YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 17

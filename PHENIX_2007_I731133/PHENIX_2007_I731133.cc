@@ -33,17 +33,17 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
       void init() {
-          //Particles: eta, pi^+, pi^-, pi^0, gamma (respectively)
+          //Particles: eta (respectively)
           std::initializer_list<int> pdgIds = { 221 };
           
           //declare cuts; most of these are found in section II of the paper
           //For charged particles:
           //consider adding: && Cuts::pT < 12*GeV, && Cuts::abscharge == 0, && Cuts::abscharge > 0 Cuts::abseta < 2.2 && Cuts::abseta > 1.2 &&
-          const PrimaryParticles cp(pdgIds, Cuts::absrap < 0.35 && Cuts::pT > 1*GeV);
+          const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 1*GeV);
           declare(cp, "cp");
           
           //Uncharged particles
-          const UnstableParticles np(Cuts::abspid == 111 && Cuts::absrap < 0.35 && Cuts::pT > 1*GeV);
+          const UnstableParticles np(Cuts::abspid == 111 && Cuts::absrap < 0.5 && Cuts::pT > 1*GeV);
           declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
