@@ -651,7 +651,9 @@ public:
         divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);
         
         //d03 p and p_bar yields
-        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+        //first scalling is commented out because this is actually scaling by the N_coll provided in the paper
+        //sow is our N_coll in this simulation
+        //hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
         
         hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
@@ -678,11 +680,13 @@ public:
         //d04
         //0-10%
         //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.); //Scale by two to account for sum
-        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / (2. * 955.4)); //Scaling by N_coll and 2 for sum
+        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2. * 955.4); //Scaling by N_coll and 2 for sum
+        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW()); 
         //60-92%
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
-        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / (2. * 14.5)); //Scaling by N_coll and 2 for sum
-        
+        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2. * 14.5); //Scaling by N_coll and 2 for sum
+        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+
         //Rcp
         divide(hPPlusPBarPt["ppluspbarAuAuc0010"], hPPlusPBarPt["ppluspbarAuAuc6092"], hRcp["ppluspbar"]);
         //divide(hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4), hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5), hRcp["ppluspbar"]);    >>>not successful when ran
@@ -690,8 +694,10 @@ public:
         //d05
         //0-10%
         hPionPt["AuAuc0010b"]->scaleW(1. / 955.4);
+        hPionPt["AuAuc0010b"]->scaleW(1. / sow["AuAuc0010"]->sumW());
         //60-92%
         hPionPt["AuAuc6092b"]->scaleW(1. / 14.5);
+        hPionPt["AuAuc6092b"]->scaleW(1. / sow["AuAuc6092"]->sumW());
         
         //Rcp
         divide(hPionPt["AuAuc0010b"], hPionPt["AuAuc6092b"], hRcp["pion"]);
