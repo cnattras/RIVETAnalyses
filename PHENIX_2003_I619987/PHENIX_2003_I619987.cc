@@ -653,7 +653,7 @@ public:
         //d03 p and p_bar yields
         //first scalling is commented out because this is actually scaling by the N_coll provided in the paper
         //sow is our N_coll in this simulation
-        //hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
         
         hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
@@ -680,11 +680,15 @@ public:
         //d04
         //0-10%
         //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.); //Scale by two to account for sum
-        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2. * 955.4); //Scaling by N_coll and 2 for sum
+        //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4); //Scaling by N_coll and 2 for sum
+        //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.);
+        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / (2. * 955.4));
         hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW()); 
         //60-92%
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
-        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2. * 14.5); //Scaling by N_coll and 2 for sum
+        //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5); //Scaling by N_coll and 2 for sum
+        //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.);
+        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / (2. * 14.5));
         hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
 
         //Rcp
