@@ -84,7 +84,7 @@ namespace Rivet {
 		book(hKaon0SPt["ptyieldsAuAuc12"], 6, 1, 1);
 
 		//Figure 2 Yield Ratio pp
-		string refname1 = mkAxisCode(7, 1, 1);
+		string refname1 = mkAxisCode(7, 1, 1); //why so different from other book section?
 		const Scatter2D& refdata1 = refData(refname1);
 		book(hPionNegPt["pp1"], refname1 + "_PionNeg", refdata1);
 		book(hPionPosPt["pp1"], refname1 + "_PionPos", refdata1);
@@ -206,16 +206,16 @@ namespace Rivet {
       if (beamOpt == "NONE") {
 
         if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
-        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp200;
       }
 
       else if (beamOpt == "AUAU200") collSys = AuAu200;
-      else if (beamOpt == "PP200") collSys = pp;
+      else if (beamOpt == "PP200") collSys = pp200;
 
       Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
   		Particles neutralParticles = applyProjection<UnstableParticles>(event, "np").particles();
 
-      if (collSys == pp)
+      if (collSys == pp200)
       {
           sow["sow_pp"]->fill();
           for (Particle p : chargedParticles)
@@ -585,7 +585,7 @@ namespace Rivet {
 
 
 	map<string, CounterPtr> sow;
-	enum CollisionSystem { pp, AuAu200 };
+	enum CollisionSystem { pp200, AuAu200 };
 	CollisionSystem collSys;
         string beamOpt = "NONE";
 	

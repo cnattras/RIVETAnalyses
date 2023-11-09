@@ -11,7 +11,7 @@ Authors:
  - Christine Nattrass <cnattras@utk.edu>
 References: 
 - arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+- 10.1103/PhysRevLett.108.072302
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [AU, AU]
 #Energies: [[6500,6500]]
@@ -41,6 +41,4 @@ BibTeX: '@article{STAR:2011iap,
     pages = "072302",
     year = "2012"
 }'
-ToDo:
- - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 

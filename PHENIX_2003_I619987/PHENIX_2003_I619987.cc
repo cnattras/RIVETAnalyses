@@ -28,12 +28,50 @@ public:
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2003_I619987);
     
+        //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //cout << "Lower bin: " << p_low << " | Upper bin: " << p_high << endl;
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) {
+                cout << n << endl;
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                //cout << "b is = " << b << " f_corr is = " << f_corr << endl;
+                //bins.scaleW(f_corr);
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){
+                cout << n << endl;
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                //cout << "b is = " << b << " f_corr is = " << f_corr << endl;
+                //bins.scaleW(f_corr);
+                histogram.bin(n).scaleW(f_corr);
+            } else {
+                cout << n << endl;
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                //cout << "b is = " << b << " f_corr is = " << f_corr << endl;
+                n += 1;
+                //bins.scaleW(f_corr);
+                //cout << histogram.bin(n).height() << endl;
+                histogram.bin(n).scaleW(f_corr);
+                //cout << histogram.bin(n).height() << endl;
+            }
+        }
+    }
     
     
     
     /// Book histograms and initialise projections before the run
     void init() {
         
+
         // Initialise and register projections
         
         // Particles: pi^+, pi^-, pi^0, p, p_bar
@@ -635,13 +673,27 @@ public:
     void finalize() {
         
         //d01: p and p_bar ratios
+        //divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
+        
+        //Trying to apply the bin shift correction:
+        cout << hProtonPt["AuAuc0010a"]->bin(17).height() << endl;
+        binShift(*hProtonPt["AuAuc0010a"]);
+        cout << hProtonPt["AuAuc0010a"]->bin(17).height() << endl;
+        cout << hPionPosPt["AuAuc0010"]->bin(17).height() << endl;
+        binShift(*hPionPosPt["AuAuc0010"]);
+        cout << hPionPosPt["AuAuc0010"]->bin(17).height() << endl;
         divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
+        ////trying to use binShift as a function from PHENIXBinShift.hh
+        //binShift(*hProtonPt["AuAuc2030a"]);
+        //binShift(*hPionPosPt["AuAuc2030"]);
+        //Code continues here as normal
+        
         divide(hProtonPt["AuAuc2030a"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
         divide(hProtonPt["AuAuc6092a"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
         divide(hProBarPt["AuAuc0010a"], hPionNegPt["AuAuc0010a"], RatioPBartoPiNeg["AuAuc0010"]);
         divide(hProBarPt["AuAuc2030a"], hPionNegPt["AuAuc2030a"], RatioPBartoPiNeg["AuAuc2030"]);
         divide(hProBarPt["AuAuc6092a"], hPionNegPt["AuAuc6092a"], RatioPBartoPiNeg["AuAuc6092"]);
-        
+
         //d02 p and p_bar ratios
         divide(hProtonPt["AuAuc0010b"], hPionNegPt["AuAuc0010b"], RatioPtoPiNeg["AuAuc0010"]);
         divide(hProtonPt["AuAuc2030b"], hPionNegPt["AuAuc2030b"], RatioPtoPiNeg["AuAuc2030"]);
