@@ -35,33 +35,21 @@ public:
         for (YODA::HistoBin1D bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
-            //cout << "Lower bin: " << p_low << " | Upper bin: " << p_high << endl;
             //Now calculate f_corr
-            if (bins.xMin() == binlist[0].xMin()) {
-                cout << n << endl;
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
                 float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                //cout << "b is = " << b << " f_corr is = " << f_corr << endl;
-                //bins.scaleW(f_corr);
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){
-                cout << n << endl;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
                 float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                //cout << "b is = " << b << " f_corr is = " << f_corr << endl;
-                //bins.scaleW(f_corr);
                 histogram.bin(n).scaleW(f_corr);
-            } else {
-                cout << n << endl;
+            } else { //Check if we are working with any middle bin
                 float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                //cout << "b is = " << b << " f_corr is = " << f_corr << endl;
-                n += 1;
-                //bins.scaleW(f_corr);
-                //cout << histogram.bin(n).height() << endl;
                 histogram.bin(n).scaleW(f_corr);
-                //cout << histogram.bin(n).height() << endl;
+                n += 1;
             }
         }
     }
@@ -675,31 +663,53 @@ public:
         //d01: p and p_bar ratios
         //divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
         
-        //Trying to apply the bin shift correction:
-        cout << hProtonPt["AuAuc0010a"]->bin(17).height() << endl;
         binShift(*hProtonPt["AuAuc0010a"]);
-        cout << hProtonPt["AuAuc0010a"]->bin(17).height() << endl;
-        cout << hPionPosPt["AuAuc0010"]->bin(17).height() << endl;
         binShift(*hPionPosPt["AuAuc0010"]);
-        cout << hPionPosPt["AuAuc0010"]->bin(17).height() << endl;
         divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
-        ////trying to use binShift as a function from PHENIXBinShift.hh
-        //binShift(*hProtonPt["AuAuc2030a"]);
-        //binShift(*hPionPosPt["AuAuc2030"]);
-        //Code continues here as normal
-        
+
+        binShift(*hProtonPt["AuAuc2030a"]);
+        binShift(*hPionPosPt["AuAuc2030"]);
         divide(hProtonPt["AuAuc2030a"], hPionPosPt["AuAuc2030"], RatioPtoPiPos["AuAuc2030"]);
+
+        binShift(*hProtonPt["AuAuc6092a"]);
+        binShift(*hPionPosPt["AuAuc6092"]);
         divide(hProtonPt["AuAuc6092a"], hPionPosPt["AuAuc6092"], RatioPtoPiPos["AuAuc6092"]);
+
+        binShift(*hProBarPt["AuAuc0010a"]);
+        binShift(*hPionNegPt["AuAuc0010a"]);
         divide(hProBarPt["AuAuc0010a"], hPionNegPt["AuAuc0010a"], RatioPBartoPiNeg["AuAuc0010"]);
+
+        binShift(*hProBarPt["AuAuc2030a"]);
+        binShift(*hPionNegPt["AuAuc2030a"]);
         divide(hProBarPt["AuAuc2030a"], hPionNegPt["AuAuc2030a"], RatioPBartoPiNeg["AuAuc2030"]);
+
+        binShift(*hProBarPt["AuAuc6092a"]);
+        binShift(*hPionNegPt["AuAuc6092a"]);
         divide(hProBarPt["AuAuc6092a"], hPionNegPt["AuAuc6092a"], RatioPBartoPiNeg["AuAuc6092"]);
 
         //d02 p and p_bar ratios
+        binShift(*hProtonPt["AuAuc0010b"]);
+        binShift(*hPionNegPt["AuAuc0010b"]);
         divide(hProtonPt["AuAuc0010b"], hPionNegPt["AuAuc0010b"], RatioPtoPiNeg["AuAuc0010"]);
+
+        binShift(*hProtonPt["AuAuc2030b"]);
+        binShift(*hPionNegPt["AuAuc2030b"]);
         divide(hProtonPt["AuAuc2030b"], hPionNegPt["AuAuc2030b"], RatioPtoPiNeg["AuAuc2030"]);
+
+        binShift(*hProtonPt["AuAuc6092b"]);
+        binShift(*hPionNegPt["AuAuc6092b"]);
         divide(hProtonPt["AuAuc6092b"], hPionNegPt["AuAuc6092b"], RatioPtoPiNeg["AuAuc6092"]);
+
+        binShift(*hProBarPt["AuAuc0010b"]);
+        binShift(*hPionPt["AuAuc0010a"]);
         divide(hProBarPt["AuAuc0010b"], hPionPt["AuAuc0010a"], RatioPBartoPion["AuAuc0010"]);
+
+        binShift(*hProBarPt["AuAuc2030b"]);
+        binShift(*hPionPt["AuAuc2030a"]);
         divide(hProBarPt["AuAuc2030b"], hPionPt["AuAuc2030a"], RatioPBartoPion["AuAuc2030"]);
+
+        binShift(*hProBarPt["AuAuc6092b"]);
+        binShift(*hPionPt["AuAuc6092a"]);
         divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);
         
         //d03 p and p_bar yields
@@ -707,27 +717,35 @@ public:
         //sow is our N_coll in this simulation
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
         hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+        binShift(*hProtonPt["ptyieldsAuAuc0010"]);
         
         hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
         hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+        binShift(*hProtonPt["ptyieldsAuAuc2030"]);
         
         hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
         hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+        binShift(*hProtonPt["ptyieldsAuAuc4050"]);
         
         hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
         hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+        binShift(*hProtonPt["ptyieldsAuAuc6092"]);
         
         hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
         hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+        binShift(*hProBarPt["ptyieldsAuAuc0010"]);
         
         hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
         hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+        binShift(*hProBarPt["ptyieldsAuAuc2030"]);
         
         hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
         hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+        binShift(*hProBarPt["ptyieldsAuAuc4050"]);
         
         hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
         hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+        binShift(*hProBarPt["ptyieldsAuAuc6092"]);
         
         //d04
         //0-10%
@@ -736,14 +754,18 @@ public:
         //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.);
         hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / (2. * 955.4));
         hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW()); 
+        binShift(*hPPlusPBarPt["ppluspbarAuAuc0010"]);
         //60-92%
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5); //Scaling by N_coll and 2 for sum
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.);
         hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / (2. * 14.5));
         hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+        binShift(*hPPlusPBarPt["ppluspbarAuAuc6092"]);
 
         //Rcp
+        binShift(*hPPlusPBarPt["ppluspbarAuAuc0010"]);
+        binShift(*hPPlusPBarPt["ppluspbarAuAuc6092"]);
         divide(hPPlusPBarPt["ppluspbarAuAuc0010"], hPPlusPBarPt["ppluspbarAuAuc6092"], hRcp["ppluspbar"]);
         //divide(hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4), hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5), hRcp["ppluspbar"]);    >>>not successful when ran
         
@@ -751,19 +773,27 @@ public:
         //0-10%
         hPionPt["AuAuc0010b"]->scaleW(1. / 955.4);
         hPionPt["AuAuc0010b"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+        binShift(*hPionPt["AuAuc0010b"]);
         //60-92%
         hPionPt["AuAuc6092b"]->scaleW(1. / 14.5);
         hPionPt["AuAuc6092b"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+        binShift(*hPionPt["AuAuc6092b"]);
         
         //Rcp
+        binShift(*hPionPt["AuAuc0010b"]);
+        binShift(*hPionPt["AuAuc6092b"]);
         divide(hPionPt["AuAuc0010b"], hPionPt["AuAuc6092b"], hRcp["pion"]);
         
         //d06
         hChHadrons["AuAuc0010"]->scaleW(1. / 2.); //scale by two before divide
+        binShift(*hChHadrons["AuAuc0010"]);
+        binShift(*hPionPt["AuAuc0010c"]);
         divide(hChHadrons["AuAuc0010"], hPionPt["AuAuc0010c"], RatioHadtoPion["AuAuc0010"]);
         
         //d07
         hChHadrons["AuAuc6092"]->scaleW(1. / 2.); //scale by two before divide
+        binShift(*hChHadrons["AuAuc6092"]);
+        binShift(*hPionPt["AuAuc6092c"]);
         divide(hChHadrons["AuAuc6092"], hPionPt["AuAuc6092c"], RatioHadtoPion["AuAuc6092"]);
         
     }
