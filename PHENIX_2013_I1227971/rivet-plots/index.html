@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="PHENIX_2013_I1227971/index.html" style="text-decoration:none;">Spectra and ratios of identified particles in Au+Au and $d$+Au collisions at $\sqrt{s_{NN}}=200$ GeV (PHENIX_2013_I1227971)</a></h3>
+<p><a href="https://inspirehep.net/literature/1227971">Inspire</a> &#124; <a href="http://hepdata.net/record/ins1227971">HepData</a> &#124; <a href="https://arxiv.org/abs/1603.05477">arXiv:1603.05477</a> &#124; 10.1103/PhysRevC.94.014910</p>
+<p style="font-size:smaller;">The transverse momentum ($p_T$) spectra and ratios of identified charged hadrons ($\pi^{\pm}$, $K^{\pm}$, $p$, $\bar{p}$) produced in $\sqrt{s_{NN}} = 200$ GeV Au+Au and d+Au collisions are reported in five different centrality classes for each collision species. The measurements of pions and protons are reported up to $p_T = 6$ GeV/c (5 GeV/c), and the measurements of kaons are reported up to $p_T = 4$ GeV/c (3.5 GeV/c) in Au+Au (d+Au) collisions. In the intermediate $p_T$ region, between 2-5 GeV/c, a significant enhancement of baryon to meson ratios compared to those measured in $p$+$p$ collisions is observed. This enhancement is present in both Au+Au and d+Au collisions, and increases as the collisions become more central. We compare a class of peripheral Au+Au collisions with a class central d+Au collisions which have a comparable number of participating nucleons and binary nucleon-nucleon collisions. The $p_T$ dependent particle ratios for these classes display a remarkable similarity, which is then  discussed.</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Thursday, 29. February 2024 09:18PM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd --errs Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>
