@@ -135,6 +135,7 @@ Title= $R_{CP}$ for $(p+\bar{p})/2$
 XLabel=$p_T$
 YLabel=$R_{CP}$
 LogY=0
+Legend=0
 END PLOT
 
 BEGIN PLOT /PHENIX_2003_I619987/d05-x01-y01

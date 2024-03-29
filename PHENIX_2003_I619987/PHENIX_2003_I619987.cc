@@ -84,10 +84,14 @@ public:
         const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::abspid == 111 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
         declare(np,"np");
         
-        
-        //Collision system
-        //if (beamOpt == "PP200") collSys = pp;
-        //else if (beamOpt == "AUAU200") collSys = AuAu200;
+        //Reading in the beam option
+        beamOpt = getOption<string>("beam","NONE");
+        if (beamOpt == "AUAU200") collSys = AuAu200;
+        //In case "NONE" is given as option
+        const ParticlePair& beam = beams();
+        if (beamOpt == "NONE"){
+            if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+        }
         
         // Declare centrality projection for centrality estimation
         //if (!(collSys == pp))
@@ -258,7 +262,7 @@ public:
         Particles inclusiveParticles = applyProjection<PrimaryParticles>(event,"ich").particles();
         Particles neutralParticles = applyProjection<UnstableParticles>(event,"np").particles();
         // All figures are for S_NN = 200 GeV collisions, so no if statement required for collSys
-        
+        if (collSys == AuAu200){
         /// Case for identified charged particles
         for(Particle p : chargedParticles)
         {
@@ -654,6 +658,7 @@ public:
                 break;
             }
         }
+        }
         
     }
     
@@ -822,9 +827,9 @@ public:
     map<string, CounterPtr> sow;
     
     //Initialize collision system and AUAU centrality bins
-    string beamOpt;
     enum CollisionSystem {AuAu200};
     CollisionSystem collSys;
+    string beamOpt = "NONE";
     vector<int> AUAUCentralityBins{ 10, 20, 30, 40, 50, 60, 92};
     
     

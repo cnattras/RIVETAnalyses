@@ -18,7 +18,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP200,AUAU200
+ - beam=AUAU200
 Description: 'We report on the yield of protons and anti-protons, as a function of centrality and transverse momentum, in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV measured at mid-rapidity by the PHENIX experiment at RHIC. In central collisions at intermediate transverse momenta (1.5 < $p_T$ < 4.5 GeV/$c$) a significant fraction of all produced particles are protons and anti-protons. They show a centrality-scaling behavior different from that of pions. The $\bar{p}$/$\pi$ and $p$/$\pi$ ratios are enhanced compared to peripheral Au+Au, $p$+$p$, and $e^+$$e^-$ collisions. This enhancement is limited to $p_T$ < 5 GeV/$c$ as deduced from the ratio of charged hadrons to $\pi^0$ measured in the range 1.5 < $p_T$ < 9 GeV/c.'
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
