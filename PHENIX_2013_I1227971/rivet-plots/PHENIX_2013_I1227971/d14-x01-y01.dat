@@ -1,6 +1,10 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
+Title=d+Au $K^+/\pi^+$ $0-20%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=Ratio $K^+/\pi^+$
+Options=LogY=<0>
 DrawOnly=/PHENIX_2013_I1227971/d14-x01-y01 //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d14-x01-y01
 LegendOnly=/PHENIX_2013_I1227971/d14-x01-y01 //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d14-x01-y01
 RatioPlot=1

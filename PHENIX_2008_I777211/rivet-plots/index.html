@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="PHENIX_2008_I777211/index.html" style="text-decoration:none;">Quantitative Constraints on the Opacity of Hot Partonic Matter from Semi-Inclusive Single High Transverse Momentum Pion Suppression in Au+Au collisions at $\sqrt{s_{NN}}$ = 200-GeV (PHENIX_2008_I777211)</a></h3>
+<p><a href="https://inspirehep.net/literature/777211">Inspire</a> &#124; <a href="http://hepdata.net/record/ins777211">HepData</a> &#124; <a href="https://arxiv.org/abs/0801.1665">arXiv:0801.1665</a> &#124; Phys.Rev.C77:064907,2008</p>
+<p style="font-size:smaller;">The PHENIX experiment has measured the suppression of semi-inclusive single high transverse momentum $\pi^0$'s in Au+Au collisions at $\sqrt(s_{NN})$ = 200 GeV. The present understanding of this suppression is in terms of energy-loss of the parent (fragmenting) parton in a dense color-charge medium. We have performed a quantitative comparison between various parton energy-loss models and our experimental data. The statistical point-to-point uncorrelated as well as correlated systematic uncertainties are taken into account in the comparison. We detail this methodology and the resulting constraint on the model parameters, such as the initial color-charge density $dN^g/dy$, the medium transport coefficient $\langle \hat{q} \rangle$, or the initial energy-loss parameter $\epsilon_0$. We find that high transverse momentum $\pi^0$ suppression in Au+Au collisions has sufficient precision to constrain these model dependent parameters at the $\pm 20-25$% (one standard deviation) level. These constraints include only the experimental uncertainties, and further studies are needed to compute the corresponding theoretical uncertainties.</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Friday, 22. March 2024 03:52PM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd --errs Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>

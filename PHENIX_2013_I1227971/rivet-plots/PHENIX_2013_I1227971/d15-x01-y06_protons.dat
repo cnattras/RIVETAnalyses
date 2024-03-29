@@ -1,6 +1,10 @@
 # BEGIN PLOT
 Legend=1
 LogY=1
+Title=Au+Au $\bar{p}/\pi ^-$ $0-10%$ centrality
+XLabel=$p_T$ (GeV/$c$)
+YLabel=Ratio $\bar{p}/\pi ^-$
+Options=LogY=<0>
 DrawOnly=//lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d15-x01-y06_protons
 LegendOnly=//lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d15-x01-y06_protons
 # END PLOT

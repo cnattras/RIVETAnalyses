@@ -1,8 +1,8 @@
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -7.8829e-06, up: 7.8829e-06}, stat: {dn: -5.6337e-07, up: 5.6337e-07}}, 1: {$p_T$-Corr: {dn: -3.7871e-06, up: 3.7871e-06}, stat: {dn: -3.3974e-07, up: 3.3974e-07}}, 2: {$p_T$-Corr: {dn: -1.9275e-06, up: 1.9275e-06}, stat: {dn: -2.1602e-07, up: 2.1602e-07}}, 3: {$p_T$-Corr: {dn: -1.0455e-06, up: 1.0455e-06}, stat: {dn: -1.444e-07, up: 1.444e-07}}, 4: {$p_T$-Corr: {dn: -5.9219e-07, up: 5.9219e-07}, stat: {dn: -1.0018e-07, up: 1.0018e-07}}, 5: {$p_T$-Corr: {dn: -3.5708e-07, up: 3.5708e-07}, stat: {dn: -7.247e-08, up: 7.247e-08}}, 6: {$p_T$-Corr: {dn: -1.8424e-07, up: 1.8424e-07}, stat: {dn: -5.2884e-08, up: 5.2884e-08}}, 7: {$p_T$-Corr: {dn: -1.1633e-07, up: 1.1633e-07}, stat: {dn: -3.9789e-08, up: 3.9789e-08}}, 8: {$p_T$-Corr: {dn: -8.2062e-08, up: 8.2062e-08}, stat: {dn: -3.1187e-08, up: 3.1187e-08}}, 9: {$p_T$-Corr: {dn: -5.4915e-08, up: 5.4915e-08}, stat: {dn: -2.3618e-08, up: 2.3618e-08}}, 10: {$p_T$-Corr: {dn: -3.034e-08, up: 3.034e-08}, stat: {dn: -6.6585e-09, up: 6.6585e-09}}, 11: {$p_T$-Corr: {dn: -1.3519e-08, up: 1.3519e-08}, stat: {dn: -3.2876e-09, up: 3.2876e-09}}, 12: {$p_T$-Corr: {dn: -6.5442e-09, up: 6.5442e-09}, stat: {dn: -2.0432e-09, up: 2.0432e-09}}, 13: {$p_T$-Corr: {dn: -3.3871e-09, up: 3.3871e-09}, stat: {dn: -1.4291e-09, up: 1.4291e-09}}, 14: {$p_T$-Corr: {dn: -1.2998e-09, up: 1.2998e-09}, stat: {dn: -1.01e-09, up: 1.01e-09}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y01
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -25,11 +25,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -7.0779e-06, up: 7.0779e-06}, stat: {dn: -4.6079e-07, up: 4.6079e-07}}, 1: {$p_T$-Corr: {dn: -3.3448e-06, up: 3.3448e-06}, stat: {dn: -2.8164e-07, up: 2.8164e-07}}, 2: {$p_T$-Corr: {dn: -1.654e-06, up: 1.654e-06}, stat: {dn: -1.8054e-07, up: 1.8054e-07}}, 3: {$p_T$-Corr: {dn: -9.0626e-07, up: 9.0626e-07}, stat: {dn: -1.2273e-07, up: 1.2273e-07}}, 4: {$p_T$-Corr: {dn: -5.207e-07, up: 5.207e-07}, stat: {dn: -8.6818e-08, up: 8.6818e-08}}, 5: {$p_T$-Corr: {dn: -3.0488e-07, up: 3.0488e-07}, stat: {dn: -6.2494e-08, up: 6.2494e-08}}, 6: {$p_T$-Corr: {dn: -1.6206e-07, up: 1.6206e-07}, stat: {dn: -4.6738e-08, up: 4.6738e-08}}, 7: {$p_T$-Corr: {dn: -1.0087e-07, up: 1.0087e-07}, stat: {dn: -3.4631e-08, up: 3.4631e-08}}, 8: {$p_T$-Corr: {dn: -6.6916e-08, up: 6.6916e-08}, stat: {dn: -2.6976e-08, up: 2.6976e-08}}, 9: {$p_T$-Corr: {dn: -4.7157e-08, up: 4.7157e-08}, stat: {dn: -2.1145e-08, up: 2.1145e-08}}, 10: {$p_T$-Corr: {dn: -2.5217e-08, up: 2.5217e-08}, stat: {dn: -5.876e-09, up: 5.876e-09}}, 11: {$p_T$-Corr: {dn: -1.0851e-08, up: 1.0851e-08}, stat: {dn: -2.9031e-09, up: 2.9031e-09}}, 12: {$p_T$-Corr: {dn: -4.9555e-09, up: 4.9555e-09}, stat: {dn: -1.7253e-09, up: 1.7253e-09}}, 13: {$p_T$-Corr: {dn: -2.2853e-09, up: 2.2853e-09}, stat: {dn: -1.2517e-09, up: 1.2517e-09}}, 14: {$p_T$-Corr: {dn: -1.0132e-09, up: 1.0132e-09}, stat: {dn: -8.802e-10, up: 8.802e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y02
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -52,11 +52,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -5.8825e-06, up: 5.8825e-06}, stat: {dn: -3.8214e-07, up: 3.8214e-07}}, 1: {$p_T$-Corr: {dn: -2.711e-06, up: 2.711e-06}, stat: {dn: -2.3451e-07, up: 2.3451e-07}}, 2: {$p_T$-Corr: {dn: -1.3741e-06, up: 1.3741e-06}, stat: {dn: -1.5293e-07, up: 1.5293e-07}}, 3: {$p_T$-Corr: {dn: -7.2346e-07, up: 7.2346e-07}, stat: {dn: -1.039e-07, up: 1.039e-07}}, 4: {$p_T$-Corr: {dn: -4.0865e-07, up: 4.0865e-07}, stat: {dn: -7.2877e-08, up: 7.2877e-08}}, 5: {$p_T$-Corr: {dn: -2.4586e-07, up: 2.4586e-07}, stat: {dn: -5.3702e-08, up: 5.3702e-08}}, 6: {$p_T$-Corr: {dn: -1.2787e-07, up: 1.2787e-07}, stat: {dn: -3.9806e-08, up: 3.9806e-08}}, 7: {$p_T$-Corr: {dn: -7.5886e-08, up: 7.5886e-08}, stat: {dn: -2.9551e-08, up: 2.9551e-08}}, 8: {$p_T$-Corr: {dn: -4.9327e-08, up: 4.9327e-08}, stat: {dn: -2.2768e-08, up: 2.2768e-08}}, 9: {$p_T$-Corr: {dn: -3.8464e-08, up: 3.8464e-08}, stat: {dn: -1.8355e-08, up: 1.8355e-08}}, 10: {$p_T$-Corr: {dn: -2.0022e-08, up: 2.0022e-08}, stat: {dn: -5.2041e-09, up: 5.2041e-09}}, 11: {$p_T$-Corr: {dn: -9.0403e-09, up: 9.0403e-09}, stat: {dn: -2.6177e-09, up: 2.6177e-09}}, 12: {$p_T$-Corr: {dn: -4.1391e-09, up: 4.1391e-09}, stat: {dn: -1.558e-09, up: 1.558e-09}}, 13: {$p_T$-Corr: {dn: -1.3144e-09, up: 1.3144e-09}, stat: {dn: -8.7266e-10, up: 8.7266e-10}}, 14: {$p_T$-Corr: {dn: -8.8158e-10, up: 8.8158e-10}, stat: {dn: -8.1875e-10, up: 8.1875e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y03
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -79,11 +79,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -4.3591e-06, up: 4.3591e-06}, stat: {dn: -3.0165e-07, up: 3.0165e-07}}, 1: {$p_T$-Corr: {dn: -2.0162e-06, up: 2.0162e-06}, stat: {dn: -1.8939e-07, up: 1.8939e-07}}, 2: {$p_T$-Corr: {dn: -1.0497e-06, up: 1.0497e-06}, stat: {dn: -1.2623e-07, up: 1.2623e-07}}, 3: {$p_T$-Corr: {dn: -5.5066e-07, up: 5.5066e-07}, stat: {dn: -8.6569e-08, up: 8.6569e-08}}, 4: {$p_T$-Corr: {dn: -3.0311e-07, up: 3.0311e-07}, stat: {dn: -6.0807e-08, up: 6.0807e-08}}, 5: {$p_T$-Corr: {dn: -1.8623e-07, up: 1.8623e-07}, stat: {dn: -4.4973e-08, up: 4.4973e-08}}, 6: {$p_T$-Corr: {dn: -9.4977e-08, up: 9.4977e-08}, stat: {dn: -3.3365e-08, up: 3.3365e-08}}, 7: {$p_T$-Corr: {dn: -5.94e-08, up: 5.94e-08}, stat: {dn: -2.5431e-08, up: 2.5431e-08}}, 8: {$p_T$-Corr: {dn: -3.5815e-08, up: 3.5815e-08}, stat: {dn: -1.9137e-08, up: 1.9137e-08}}, 9: {$p_T$-Corr: {dn: -2.4431e-08, up: 2.4431e-08}, stat: {dn: -1.4615e-08, up: 1.4615e-08}}, 10: {$p_T$-Corr: {dn: -1.4217e-08, up: 1.4217e-08}, stat: {dn: -4.3353e-09, up: 4.3353e-09}}, 11: {$p_T$-Corr: {dn: -6.2505e-09, up: 6.2505e-09}, stat: {dn: -2.1518e-09, up: 2.1518e-09}}, 12: {$p_T$-Corr: {dn: -2.8089e-09, up: 2.8089e-09}, stat: {dn: -1.4617e-09, up: 1.4617e-09}}, 13: {$p_T$-Corr: {dn: -1.0501e-09, up: 1.0501e-09}, stat: {dn: -7.7492e-10, up: 7.7492e-10}}, 14: {$p_T$-Corr: {dn: -6.2305e-10, up: 6.2305e-10}, stat: {dn: -6.8466e-10, up: 6.8466e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y04
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -106,11 +106,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -2.9842e-06, up: 2.9842e-06}, stat: {dn: -2.3479e-07, up: 2.3479e-07}}, 1: {$p_T$-Corr: {dn: -1.4169e-06, up: 1.4169e-06}, stat: {dn: -1.5013e-07, up: 1.5013e-07}}, 2: {$p_T$-Corr: {dn: -7.356e-07, up: 7.356e-07}, stat: {dn: -1.0163e-07, up: 1.0163e-07}}, 3: {$p_T$-Corr: {dn: -3.9058e-07, up: 3.9058e-07}, stat: {dn: -7.0292e-08, up: 7.0292e-08}}, 4: {$p_T$-Corr: {dn: -2.1067e-07, up: 2.1067e-07}, stat: {dn: -4.9765e-08, up: 4.9765e-08}}, 5: {$p_T$-Corr: {dn: -1.311e-07, up: 1.311e-07}, stat: {dn: -3.6835e-08, up: 3.6835e-08}}, 6: {$p_T$-Corr: {dn: -6.4976e-08, up: 6.4976e-08}, stat: {dn: -2.7118e-08, up: 2.7118e-08}}, 7: {$p_T$-Corr: {dn: -4.1833e-08, up: 4.1833e-08}, stat: {dn: -2.0746e-08, up: 2.0746e-08}}, 8: {$p_T$-Corr: {dn: -2.5984e-08, up: 2.5984e-08}, stat: {dn: -1.5594e-08, up: 1.5594e-08}}, 9: {$p_T$-Corr: {dn: -1.9204e-08, up: 1.9204e-08}, stat: {dn: -1.2585e-08, up: 1.2585e-08}}, 10: {$p_T$-Corr: {dn: -9.1468e-09, up: 9.1468e-09}, stat: {dn: -3.4874e-09, up: 3.4874e-09}}, 11: {$p_T$-Corr: {dn: -4.1567e-09, up: 4.1567e-09}, stat: {dn: -1.8161e-09, up: 1.8161e-09}}, 12: {$p_T$-Corr: {dn: -1.1427e-09, up: 1.1427e-09}, stat: {dn: -2.5578e-09, up: 2.5578e-09}}, 13: {$p_T$-Corr: {dn: -7.3385e-10, up: 7.3385e-10}, stat: {dn: -6.4455e-10, up: 6.4455e-10}}, 14: {$p_T$-Corr: {dn: -6.1749e-10, up: 6.1749e-10}, stat: {dn: -6.7855e-10, up: 6.7855e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y05
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -133,11 +133,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -1.8874e-06, up: 1.8874e-06}, stat: {dn: -1.8003e-07, up: 1.8003e-07}}, 1: {$p_T$-Corr: {dn: -8.8511e-07, up: 8.8511e-07}, stat: {dn: -1.1549e-07, up: 1.1549e-07}}, 2: {$p_T$-Corr: {dn: -4.6168e-07, up: 4.6168e-07}, stat: {dn: -7.8868e-08, up: 7.8868e-08}}, 3: {$p_T$-Corr: {dn: -2.448e-07, up: 2.448e-07}, stat: {dn: -5.4229e-08, up: 5.4229e-08}}, 4: {$p_T$-Corr: {dn: -1.3493e-07, up: 1.3493e-07}, stat: {dn: -3.9046e-08, up: 3.9046e-08}}, 5: {$p_T$-Corr: {dn: -7.9264e-08, up: 7.9264e-08}, stat: {dn: -2.8486e-08, up: 2.8486e-08}}, 6: {$p_T$-Corr: {dn: -4.2212e-08, up: 4.2212e-08}, stat: {dn: -2.2159e-08, up: 2.2159e-08}}, 7: {$p_T$-Corr: {dn: -2.5141e-08, up: 2.5141e-08}, stat: {dn: -1.6446e-08, up: 1.6446e-08}}, 8: {$p_T$-Corr: {dn: -1.5443e-08, up: 1.5443e-08}, stat: {dn: -1.2729e-08, up: 1.2729e-08}}, 9: {$p_T$-Corr: {dn: -1.1783e-08, up: 1.1783e-08}, stat: {dn: -9.988e-09, up: 9.988e-09}}, 10: {$p_T$-Corr: {dn: -5.7789e-09, up: 5.7789e-09}, stat: {dn: -2.8136e-09, up: 2.8136e-09}}, 11: {$p_T$-Corr: {dn: -2.7624e-09, up: 2.7624e-09}, stat: {dn: -1.6567e-09, up: 1.6567e-09}}, 12: {$p_T$-Corr: {dn: -1.1031e-09, up: 1.1031e-09}, stat: {dn: -7.7552e-10, up: 7.7552e-10}}, 13: {$p_T$-Corr: {dn: -3.0527e-10, up: 3.0527e-10}, stat: {dn: -4.1538e-10, up: 4.1538e-10}}, 14: {$p_T$-Corr: {dn: -1.233e-10, up: 1.233e-10}, stat: {dn: -3.0298e-10, up: 3.0298e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y06
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -160,11 +160,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y07
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y07
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -1.0149e-06, up: 1.0149e-06}, stat: {dn: -1.2864e-07, up: 1.2864e-07}}, 1: {$p_T$-Corr: {dn: -4.9657e-07, up: 4.9657e-07}, stat: {dn: -8.4193e-08, up: 8.4193e-08}}, 2: {$p_T$-Corr: {dn: -2.4249e-07, up: 2.4249e-07}, stat: {dn: -5.6591e-08, up: 5.6591e-08}}, 3: {$p_T$-Corr: {dn: -1.395e-07, up: 1.395e-07}, stat: {dn: -4.0483e-08, up: 4.0483e-08}}, 4: {$p_T$-Corr: {dn: -7.2045e-08, up: 7.2045e-08}, stat: {dn: -2.791e-08, up: 2.791e-08}}, 5: {$p_T$-Corr: {dn: -4.261e-08, up: 4.261e-08}, stat: {dn: -2.0771e-08, up: 2.0771e-08}}, 6: {$p_T$-Corr: {dn: -2.2227e-08, up: 2.2227e-08}, stat: {dn: -1.5517e-08, up: 1.5517e-08}}, 7: {$p_T$-Corr: {dn: -1.397e-08, up: 1.397e-08}, stat: {dn: -1.2185e-08, up: 1.2185e-08}}, 8: {$p_T$-Corr: {dn: -7.6531e-09, up: 7.6531e-09}, stat: {dn: -9.1428e-09, up: 9.1428e-09}}, 9: {$p_T$-Corr: {dn: -7.1927e-09, up: 7.1927e-09}, stat: {dn: -8.1172e-09, up: 8.1172e-09}}, 10: {$p_T$-Corr: {dn: -2.9775e-09, up: 2.9775e-09}, stat: {dn: -1.9937e-09, up: 1.9937e-09}}, 11: {$p_T$-Corr: {dn: -1.6274e-09, up: 1.6274e-09}, stat: {dn: -1.0564e-09, up: 1.0564e-09}}, 12: {$p_T$-Corr: {dn: -7.8689e-10, up: 7.8689e-10}, stat: {dn: -6.5254e-10, up: 6.5254e-10}}, 13: {$p_T$-Corr: {dn: -6.6696e-10, up: 6.6696e-10}, stat: {dn: -6.1184e-10, up: 6.1184e-10}}, 14: {$p_T$-Corr: {dn: -1.2271e-10, up: 1.2271e-10}, stat: {dn: -3.0152e-10, up: 3.0152e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y07
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y07
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -187,11 +187,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y08
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y08
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -4.8216e-07, up: 4.8216e-07}, stat: {dn: -8.7174e-08, up: 8.7174e-08}}, 1: {$p_T$-Corr: {dn: -2.3297e-07, up: 2.3297e-07}, stat: {dn: -5.7248e-08, up: 5.7248e-08}}, 2: {$p_T$-Corr: {dn: -1.1694e-07, up: 1.1694e-07}, stat: {dn: -3.8546e-08, up: 3.8546e-08}}, 3: {$p_T$-Corr: {dn: -6.1195e-08, up: 6.1195e-08}, stat: {dn: -2.6358e-08, up: 2.6358e-08}}, 4: {$p_T$-Corr: {dn: -3.7728e-08, up: 3.7728e-08}, stat: {dn: -2.0255e-08, up: 2.0255e-08}}, 5: {$p_T$-Corr: {dn: -2.1127e-08, up: 2.1127e-08}, stat: {dn: -1.5481e-08, up: 1.5481e-08}}, 6: {$p_T$-Corr: {dn: -1.068e-08, up: 1.068e-08}, stat: {dn: -1.0798e-08, up: 1.0798e-08}}, 7: {$p_T$-Corr: {dn: -7.3476e-09, up: 7.3476e-09}, stat: {dn: -8.2504e-09, up: 8.2504e-09}}, 8: {$p_T$-Corr: {dn: -4.2588e-09, up: 4.2588e-09}, stat: {dn: -6.5798e-09, up: 6.5798e-09}}, 9: {$p_T$-Corr: {dn: -3.2669e-09, up: 3.2669e-09}, stat: {dn: -4.9783e-09, up: 4.9783e-09}}, 10: {$p_T$-Corr: {dn: -1.3295e-09, up: 1.3295e-09}, stat: {dn: -1.2374e-09, up: 1.2374e-09}}, 11: {$p_T$-Corr: {dn: -7.8603e-10, up: 7.8603e-10}, stat: {dn: -7.3128e-10, up: 7.3128e-10}}, 12: {$p_T$-Corr: {dn: -1.7004e-10, up: 1.7004e-10}, stat: {dn: -3.0243e-10, up: 3.0243e-10}}, 13: {$p_T$-Corr: {dn: -1.2038e-10, up: 1.2038e-10}, stat: {dn: -2.5898e-10, up: 2.5898e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y08
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y08
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -213,11 +213,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y09
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y09
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -1.5365e-07, up: 1.5365e-07}, stat: {dn: -4.2854e-08, up: 4.2854e-08}}, 1: {$p_T$-Corr: {dn: -7.4755e-08, up: 7.4755e-08}, stat: {dn: -2.8207e-08, up: 2.8207e-08}}, 2: {$p_T$-Corr: {dn: -3.8184e-08, up: 3.8184e-08}, stat: {dn: -1.9596e-08, up: 1.9596e-08}}, 3: {$p_T$-Corr: {dn: -2.1546e-08, up: 2.1546e-08}, stat: {dn: -1.356e-08, up: 1.356e-08}}, 4: {$p_T$-Corr: {dn: -1.2831e-08, up: 1.2831e-08}, stat: {dn: -1.0224e-08, up: 1.0224e-08}}, 5: {$p_T$-Corr: {dn: -6.7913e-09, up: 6.7913e-09}, stat: {dn: -7.2323e-09, up: 7.2323e-09}}, 6: {$p_T$-Corr: {dn: -3.6554e-09, up: 3.6554e-09}, stat: {dn: -5.6114e-09, up: 5.6114e-09}}, 7: {$p_T$-Corr: {dn: -1.7804e-09, up: 1.7804e-09}, stat: {dn: -4.4393e-09, up: 4.4393e-09}}, 8: {$p_T$-Corr: {dn: -1.2099e-09, up: 1.2099e-09}, stat: {dn: -2.8268e-09, up: 2.8268e-09}}, 9: {$p_T$-Corr: {dn: -6.8438e-10, up: 6.8438e-10}, stat: {dn: -1.997e-09, up: 1.997e-09}}, 10: {$p_T$-Corr: {dn: -5.5273e-10, up: 5.5273e-10}, stat: {dn: -6.9899e-10, up: 6.9899e-10}}, 11: {$p_T$-Corr: {dn: -1.631e-10, up: 1.631e-10}, stat: {dn: -2.9188e-10, up: 2.9188e-10}}, 12: {$p_T$-Corr: {dn: -2.6109e-11, up: 2.6109e-11}, stat: {dn: -1.0384e-10, up: 1.0384e-10}}, 13: {$p_T$-Corr: {dn: -4.6247e-11, up: 4.6247e-11}, stat: {dn: -1.4071e-10, up: 1.4071e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y09
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y09
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -239,11 +239,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y10
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y10
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -3.5487e-06, up: 3.5487e-06}, stat: {dn: -1.0327e-07, up: 1.0327e-07}}, 1: {$p_T$-Corr: {dn: -1.6524e-06, up: 1.6524e-06}, stat: {dn: -6.2823e-08, up: 6.2823e-08}}, 2: {$p_T$-Corr: {dn: -8.3185e-07, up: 8.3185e-07}, stat: {dn: -4.0517e-08, up: 4.0517e-08}}, 3: {$p_T$-Corr: {dn: -4.4363e-07, up: 4.4363e-07}, stat: {dn: -2.7377e-08, up: 2.7377e-08}}, 4: {$p_T$-Corr: {dn: -2.4794e-07, up: 2.4794e-07}, stat: {dn: -1.9172e-08, up: 1.9172e-08}}, 5: {$p_T$-Corr: {dn: -1.4833e-07, up: 1.4833e-07}, stat: {dn: -1.397e-08, up: 1.397e-08}}, 6: {$p_T$-Corr: {dn: -7.6649e-08, up: 7.6649e-08}, stat: {dn: -1.0343e-08, up: 1.0343e-08}}, 7: {$p_T$-Corr: {dn: -4.7329e-08, up: 4.7329e-08}, stat: {dn: -7.7628e-09, up: 7.7628e-09}}, 8: {$p_T$-Corr: {dn: -3.0832e-08, up: 3.0832e-08}, stat: {dn: -5.9821e-09, up: 5.9821e-09}}, 9: {$p_T$-Corr: {dn: -2.2166e-08, up: 2.2166e-08}, stat: {dn: -4.6909e-09, up: 4.6909e-09}}, 10: {$p_T$-Corr: {dn: -1.1765e-08, up: 1.1765e-08}, stat: {dn: -1.3153e-09, up: 1.3153e-09}}, 11: {$p_T$-Corr: {dn: -5.2454e-09, up: 5.2454e-09}, stat: {dn: -6.5882e-10, up: 6.5882e-10}}, 12: {$p_T$-Corr: {dn: -2.3771e-09, up: 2.3771e-09}, stat: {dn: -3.9716e-10, up: 3.9716e-10}}, 13: {$p_T$-Corr: {dn: -1.0543e-09, up: 1.0543e-09}, stat: {dn: -2.5969e-10, up: 2.5969e-10}}, 14: {$p_T$-Corr: {dn: -4.9812e-10, up: 4.9812e-10}, stat: {dn: -2.0122e-10, up: 2.0122e-10}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y10
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y10
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -266,11 +266,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d01-x01-y11
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d01-x01-y11
 Variations: [""]
 ErrorBreakdown: {0: {$p_T$-Corr: {dn: -8.2567e-06, up: 8.2567e-06}, stat: {dn: -8.6757e-07, up: 8.6757e-07}}, 1: {$p_T$-Corr: {dn: -3.9763e-06, up: 3.9763e-06}, stat: {dn: -5.1663e-07, up: 5.1663e-07}}, 2: {$p_T$-Corr: {dn: -1.9981e-06, up: 1.9981e-06}, stat: {dn: -3.2479e-07, up: 3.2479e-07}}, 3: {$p_T$-Corr: {dn: -1.1015e-06, up: 1.1015e-06}, stat: {dn: -2.1669e-07, up: 2.1669e-07}}, 4: {$p_T$-Corr: {dn: -6.031e-07, up: 6.031e-07}, stat: {dn: -1.4735e-07, up: 1.4735e-07}}, 5: {$p_T$-Corr: {dn: -3.66e-07, up: 3.66e-07}, stat: {dn: -1.061e-07, up: 1.061e-07}}, 6: {$p_T$-Corr: {dn: -1.9483e-07, up: 1.9483e-07}, stat: {dn: -7.8155e-08, up: 7.8155e-08}}, 7: {$p_T$-Corr: {dn: -1.1587e-07, up: 1.1587e-07}, stat: {dn: -5.7515e-08, up: 5.7515e-08}}, 8: {$p_T$-Corr: {dn: -8.4616e-08, up: 8.4616e-08}, stat: {dn: -4.4668e-08, up: 4.4668e-08}}, 9: {$p_T$-Corr: {dn: -6.2069e-08, up: 6.2069e-08}, stat: {dn: -3.5421e-08, up: 3.5421e-08}}, 10: {$p_T$-Corr: {dn: -3.1114e-08, up: 3.1114e-08}, stat: {dn: -9.6036e-09, up: 9.6036e-09}}, 11: {$p_T$-Corr: {dn: -1.5347e-08, up: 1.5347e-08}, stat: {dn: -4.9366e-09, up: 4.9366e-09}}, 12: {$p_T$-Corr: {dn: -6.6854e-09, up: 6.6854e-09}, stat: {dn: -3.0437e-09, up: 3.0437e-09}}, 13: {$p_T$-Corr: {dn: -3.1377e-09, up: 3.1377e-09}, stat: {dn: -1.9487e-09, up: 1.9487e-09}}, 14: {$p_T$-Corr: {dn: -1.8108e-09, up: 1.8108e-09}, stat: {dn: -1.6818e-09, up: 1.6818e-09}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d01-x01-y11
+Path: /REF/PHENIX_2013_I1127262/d01-x01-y11
 Title: Figure 5
 Type: Scatter2D
 ---
@@ -293,11 +293,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d02-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.048098, up: 0.048098}, '$p_{T}$ Uncorr': {dn: -0.026834, up: 0.026834}, '$p_{T}$ typeC': {dn: -0.0069292, up: 0.0069292}}, 1: {'$p_{T}$ Corr': {dn: -0.042743, up: 0.042743}, '$p_{T}$ Uncorr': {dn: -0.031577, up: 0.031577}, '$p_{T}$ typeC': {dn: -0.0061577, up: 0.0061577}}, 2: {'$p_{T}$ Corr': {dn: -0.048961, up: 0.048961}, '$p_{T}$ Uncorr': {dn: -0.039008, up: 0.039008}, '$p_{T}$ typeC': {dn: -0.0070536, up: 0.0070536}}, 3: {'$p_{T}$ Corr': {dn: -0.052187, up: 0.052187}, '$p_{T}$ Uncorr': {dn: -0.0472, up: 0.0472}, '$p_{T}$ typeC': {dn: -0.0083328, up: 0.0083328}}, 4: {'$p_{T}$ Corr': {dn: -0.042076, up: 0.042076}, '$p_{T}$ Uncorr': {dn: -0.053741, up: 0.053741}, '$p_{T}$ typeC': {dn: -0.0067184, up: 0.0067184}}, 5: {'$p_{T}$ Corr': {dn: -0.04883, up: 0.04883}, '$p_{T}$ Uncorr': {dn: -0.049027, up: 0.049027}, '$p_{T}$ typeC': {dn: -0.0077969, up: 0.0077969}}, 6: {'$p_{T}$ Corr': {dn: -0.055498, up: 0.055498}, '$p_{T}$ Uncorr': {dn: -0.073435, up: 0.073435}, '$p_{T}$ typeC': {dn: -0.0088617, up: 0.0088617}}, 7: {'$p_{T}$ Corr': {dn: -0.027223, up: 0.027223}, '$p_{T}$ Uncorr': {dn: -0.085438, up: 0.085438}, '$p_{T}$ typeC': {dn: -0.0043468, up: 0.0043468}}, 8: {'$p_{T}$ Corr': {dn: -0.041248, up: 0.041248}, '$p_{T}$ Uncorr': {dn: -0.13536, up: 0.13536}, '$p_{T}$ typeC': {dn: -0.0065863, up: 0.0065863}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d02-x01-y01
 Title: Figure 8
 Type: Scatter2D
 ---
@@ -314,11 +314,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d02-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.053598, up: 0.053598}, '$p_{T}$ Uncorr': {dn: -0.020629, up: 0.020629}, '$p_{T}$ typeC': {dn: -0.0077216, up: 0.0077216}}, 1: {'$p_{T}$ Corr': {dn: -0.05526, up: 0.05526}, '$p_{T}$ Uncorr': {dn: -0.023336, up: 0.023336}, '$p_{T}$ typeC': {dn: -0.0079609, up: 0.0079609}}, 2: {'$p_{T}$ Corr': {dn: -0.052381, up: 0.052381}, '$p_{T}$ Uncorr': {dn: -0.026865, up: 0.026865}, '$p_{T}$ typeC': {dn: -0.0075462, up: 0.0075462}}, 3: {'$p_{T}$ Corr': {dn: -0.045347, up: 0.045347}, '$p_{T}$ Uncorr': {dn: -0.032162, up: 0.032162}, '$p_{T}$ typeC': {dn: -0.0072407, up: 0.0072407}}, 4: {'$p_{T}$ Corr': {dn: -0.051592, up: 0.051592}, '$p_{T}$ Uncorr': {dn: -0.041658, up: 0.041658}, '$p_{T}$ typeC': {dn: -0.0082379, up: 0.0082379}}, 5: {'$p_{T}$ Corr': {dn: -0.047172, up: 0.047172}, '$p_{T}$ Uncorr': {dn: -0.040903, up: 0.040903}, '$p_{T}$ typeC': {dn: -0.0075322, up: 0.0075322}}, 6: {'$p_{T}$ Corr': {dn: -0.04482, up: 0.04482}, '$p_{T}$ Uncorr': {dn: -0.062042, up: 0.062042}, '$p_{T}$ typeC': {dn: -0.0071566, up: 0.0071566}}, 7: {'$p_{T}$ Corr': {dn: -0.032802, up: 0.032802}, '$p_{T}$ Uncorr': {dn: -0.10502, up: 0.10502}, '$p_{T}$ typeC': {dn: -0.0052376, up: 0.0052376}}, 8: {'$p_{T}$ Corr': {dn: -0.051403, up: 0.051403}, '$p_{T}$ Uncorr': {dn: -0.21836, up: 0.21836}, '$p_{T}$ typeC': {dn: -0.0082077, up: 0.0082077}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d02-x01-y02
 Title: Figure 8
 Type: Scatter2D
 ---
@@ -335,11 +335,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d02-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.051591, up: 0.051591}, '$p_{T}$ Uncorr': {dn: -0.025516, up: 0.025516}, '$p_{T}$ typeC': {dn: -0.0074324, up: 0.0074324}}, 1: {'$p_{T}$ Corr': {dn: -0.055714, up: 0.055714}, '$p_{T}$ Uncorr': {dn: -0.036166, up: 0.036166}, '$p_{T}$ typeC': {dn: -0.0080264, up: 0.0080264}}, 2: {'$p_{T}$ Corr': {dn: -0.058972, up: 0.058972}, '$p_{T}$ Uncorr': {dn: -0.048791, up: 0.048791}, '$p_{T}$ typeC': {dn: -0.0084958, up: 0.0084958}}, 3: {'$p_{T}$ Corr': {dn: -0.049429, up: 0.049429}, '$p_{T}$ Uncorr': {dn: -0.066206, up: 0.066206}, '$p_{T}$ typeC': {dn: -0.0078925, up: 0.0078925}}, 4: {'$p_{T}$ Corr': {dn: -0.032971, up: 0.032971}, '$p_{T}$ Uncorr': {dn: -0.083621, up: 0.083621}, '$p_{T}$ typeC': {dn: -0.0052646, up: 0.0052646}}, 5: {'$p_{T}$ Corr': {dn: -0.055237, up: 0.055237}, '$p_{T}$ Uncorr': {dn: -0.1117, up: 0.1117}, '$p_{T}$ typeC': {dn: -0.0088199, up: 0.0088199}}, 6: {'$p_{T}$ Corr': {dn: -0.029551, up: 0.029551}, '$p_{T}$ Uncorr': {dn: -0.142, up: 0.142}, '$p_{T}$ typeC': {dn: -0.0047186, up: 0.0047186}}, 7: {'$p_{T}$ Corr': {dn: -0.087665, up: 0.087665}, '$p_{T}$ Uncorr': {dn: -0.38026, up: 0.38026}, '$p_{T}$ typeC': {dn: -0.013998, up: 0.013998}}, 8: {'$p_{T}$ Corr': {dn: -0.046008, up: 0.046008}, '$p_{T}$ Uncorr': {dn: -0.32213, up: 0.32213}, '$p_{T}$ typeC': {dn: -0.0073463, up: 0.0073463}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d02-x01-y03
 Title: Figure 8
 Type: Scatter2D
 ---
@@ -356,11 +356,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d02-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d02-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.046956, up: 0.046956}, '$p_{T}$ Uncorr': {dn: -0.017699, up: 0.017699}, '$p_{T}$ typeC': {dn: -0.0067646, up: 0.0067646}}, 1: {'$p_{T}$ Corr': {dn: -0.045985, up: 0.045985}, '$p_{T}$ Uncorr': {dn: -0.0194, up: 0.0194}, '$p_{T}$ typeC': {dn: -0.0066249, up: 0.0066249}}, 2: {'$p_{T}$ Corr': {dn: -0.046959, up: 0.046959}, '$p_{T}$ Uncorr': {dn: -0.022266, up: 0.022266}, '$p_{T}$ typeC': {dn: -0.0067652, up: 0.0067652}}, 3: {'$p_{T}$ Corr': {dn: -0.044292, up: 0.044292}, '$p_{T}$ Uncorr': {dn: -0.025916, up: 0.025916}, '$p_{T}$ typeC': {dn: -0.0070722, up: 0.0070722}}, 4: {'$p_{T}$ Corr': {dn: -0.040695, up: 0.040695}, '$p_{T}$ Uncorr': {dn: -0.030154, up: 0.030154}, '$p_{T}$ typeC': {dn: -0.006498, up: 0.006498}}, 5: {'$p_{T}$ Corr': {dn: -0.043629, up: 0.043629}, '$p_{T}$ Uncorr': {dn: -0.028441, up: 0.028441}, '$p_{T}$ typeC': {dn: -0.0069665, up: 0.0069665}}, 6: {'$p_{T}$ Corr': {dn: -0.044279, up: 0.044279}, '$p_{T}$ Uncorr': {dn: -0.040469, up: 0.040469}, '$p_{T}$ typeC': {dn: -0.0070701, up: 0.0070701}}, 7: {'$p_{T}$ Corr': {dn: -0.029651, up: 0.029651}, '$p_{T}$ Uncorr': {dn: -0.053707, up: 0.053707}, '$p_{T}$ typeC': {dn: -0.0047344, up: 0.0047344}}, 8: {'$p_{T}$ Corr': {dn: -0.042279, up: 0.042279}, '$p_{T}$ Uncorr': {dn: -0.092687, up: 0.092687}, '$p_{T}$ typeC': {dn: -0.0067509, up: 0.0067509}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d02-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d02-x01-y04
 Title: Figure 8
 Type: Scatter2D
 ---
@@ -377,11 +377,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.023779, up: 0.023779}, '$p_{T}$ Uncorr': {dn: -0.0013671, up: 0.0013671}, Global: {dn: -0.022616, up: 0.022616}}, 1: {'$p_{T}$ Corr': {dn: -0.023779, up: 0.023779}, '$p_{T}$ Uncorr': {dn: -0.0017548, up: 0.0017548}, Global: {dn: -0.022564, up: 0.022564}}, 2: {'$p_{T}$ Corr': {dn: -0.024178, up: 0.024178}, '$p_{T}$ Uncorr': {dn: -0.0022771, up: 0.0022771}, Global: {dn: -0.022893, up: 0.022893}}, 3: {'$p_{T}$ Corr': {dn: -0.024751, up: 0.024751}, '$p_{T}$ Uncorr': {dn: -0.0029342, up: 0.0029342}, Global: {dn: -0.023381, up: 0.023381}}, 4: {'$p_{T}$ Corr': {dn: -0.024628, up: 0.024628}, '$p_{T}$ Uncorr': {dn: -0.0036067, up: 0.0036067}, Global: {dn: -0.023203, up: 0.023203}}, 5: {'$p_{T}$ Corr': {dn: -0.02547, up: 0.02547}, '$p_{T}$ Uncorr': {dn: -0.0045438, up: 0.0045438}, Global: {dn: -0.023925, up: 0.023925}}, 6: {'$p_{T}$ Corr': {dn: -0.024184, up: 0.024184}, '$p_{T}$ Uncorr': {dn: -0.0056201, up: 0.0056201}, Global: {dn: -0.0242, up: 0.0242}}, 7: {'$p_{T}$ Corr': {dn: -0.024053, up: 0.024053}, '$p_{T}$ Uncorr': {dn: -0.0066363, up: 0.0066363}, Global: {dn: -0.023961, up: 0.023961}}, 8: {'$p_{T}$ Corr': {dn: -0.027549, up: 0.027549}, '$p_{T}$ Uncorr': {dn: -0.0088675, up: 0.0088675}, Global: {dn: -0.027258, up: 0.027258}}, 9: {'$p_{T}$ Corr': {dn: -0.028444, up: 0.028444}, '$p_{T}$ Uncorr': {dn: -0.010915, up: 0.010915}, Global: {dn: -0.027361, up: 0.027361}}, 10: {'$p_{T}$ Corr': {dn: -0.033706, up: 0.033706}, '$p_{T}$ Uncorr': {dn: -0.0076901, up: 0.0076901}, Global: {dn: -0.027398, up: 0.027398}}, 11: {'$p_{T}$ Corr': {dn: -0.05017, up: 0.05017}, '$p_{T}$ Uncorr': {dn: -0.015137, up: 0.015137}, Global: {dn: -0.029222, up: 0.029222}}, 12: {'$p_{T}$ Corr': {dn: -0.090579, up: 0.090579}, '$p_{T}$ Uncorr': {dn: -0.036734, up: 0.036734}, Global: {dn: -0.039451, up: 0.039451}}, 13: {'$p_{T}$ Corr': {dn: -0.13431, up: 0.13431}, '$p_{T}$ Uncorr': {dn: -0.072167, up: 0.072167}, Global: {dn: -0.045769, up: 0.045769}}, 14: {'$p_{T}$ Corr': {dn: -0.11517, up: 0.11517}, '$p_{T}$ Uncorr': {dn: -0.099973, up: 0.099973}, Global: {dn: -0.032093, up: 0.032093}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y01
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -404,11 +404,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.033637, up: 0.033637}, '$p_{T}$ Uncorr': {dn: -0.0018098, up: 0.0018098}, Global: {dn: -0.031671, up: 0.031671}}, 1: {'$p_{T}$ Corr': {dn: -0.033088, up: 0.033088}, '$p_{T}$ Uncorr': {dn: -0.0023387, up: 0.0023387}, Global: {dn: -0.031082, up: 0.031082}}, 2: {'$p_{T}$ Corr': {dn: -0.032687, up: 0.032687}, '$p_{T}$ Uncorr': {dn: -0.0030254, up: 0.0030254}, Global: {dn: -0.030639, up: 0.030639}}, 3: {'$p_{T}$ Corr': {dn: -0.0338, up: 0.0338}, '$p_{T}$ Uncorr': {dn: -0.0039579, up: 0.0039579}, Global: {dn: -0.031609, up: 0.031609}}, 4: {'$p_{T}$ Corr': {dn: -0.034117, up: 0.034117}, '$p_{T}$ Uncorr': {dn: -0.0049517, up: 0.0049517}, Global: {dn: -0.03182, up: 0.03182}}, 5: {'$p_{T}$ Corr': {dn: -0.034261, up: 0.034261}, '$p_{T}$ Uncorr': {dn: -0.0061485, up: 0.0061485}, Global: {dn: -0.03186, up: 0.03186}}, 6: {'$p_{T}$ Corr': {dn: -0.033513, up: 0.033513}, '$p_{T}$ Uncorr': {dn: -0.0078097, up: 0.0078097}, Global: {dn: -0.033199, up: 0.033199}}, 7: {'$p_{T}$ Corr': {dn: -0.032859, up: 0.032859}, '$p_{T}$ Uncorr': {dn: -0.0090856, up: 0.0090856}, Global: {dn: -0.032406, up: 0.032406}}, 8: {'$p_{T}$ Corr': {dn: -0.035392, up: 0.035392}, '$p_{T}$ Uncorr': {dn: -0.011763, up: 0.011763}, Global: {dn: -0.034667, up: 0.034667}}, 9: {'$p_{T}$ Corr': {dn: -0.038481, up: 0.038481}, '$p_{T}$ Uncorr': {dn: -0.015093, up: 0.015093}, Global: {dn: -0.036645, up: 0.036645}}, 10: {'$p_{T}$ Corr': {dn: -0.044135, up: 0.044135}, '$p_{T}$ Uncorr': {dn: -0.010383, up: 0.010383}, Global: {dn: -0.035516, up: 0.035516}}, 11: {'$p_{T}$ Corr': {dn: -0.063441, up: 0.063441}, '$p_{T}$ Uncorr': {dn: -0.020055, up: 0.020055}, Global: {dn: -0.036581, up: 0.036581}}, 12: {'$p_{T}$ Corr': {dn: -0.10806, up: 0.10806}, '$p_{T}$ Uncorr': {dn: -0.046316, up: 0.046316}, Global: {dn: -0.046594, up: 0.046594}}, 13: {'$p_{T}$ Corr': {dn: -0.14276, up: 0.14276}, '$p_{T}$ Uncorr': {dn: -0.089403, up: 0.089403}, Global: {dn: -0.048163, up: 0.048163}}, 14: {'$p_{T}$ Corr': {dn: -0.14144, up: 0.14144}, '$p_{T}$ Uncorr': {dn: -0.13303, up: 0.13303}, Global: {dn: -0.039017, up: 0.039017}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y02
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -431,11 +431,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.045116, up: 0.045116}, '$p_{T}$ Uncorr': {dn: -0.0024238, up: 0.0024238}, Global: {dn: -0.043422, up: 0.043422}}, 1: {'$p_{T}$ Corr': {dn: -0.04328, up: 0.04328}, '$p_{T}$ Uncorr': {dn: -0.0031151, up: 0.0031151}, Global: {dn: -0.041559, up: 0.041559}}, 2: {'$p_{T}$ Corr': {dn: -0.043824, up: 0.043824}, '$p_{T}$ Uncorr': {dn: -0.0041083, up: 0.0041083}, Global: {dn: -0.04199, up: 0.04199}}, 3: {'$p_{T}$ Corr': {dn: -0.043545, up: 0.043545}, '$p_{T}$ Uncorr': {dn: -0.0052932, up: 0.0052932}, Global: {dn: -0.041626, up: 0.041626}}, 4: {'$p_{T}$ Corr': {dn: -0.043212, up: 0.043212}, '$p_{T}$ Uncorr': {dn: -0.006542, up: 0.006542}, Global: {dn: -0.041197, up: 0.041197}}, 5: {'$p_{T}$ Corr': {dn: -0.044589, up: 0.044589}, '$p_{T}$ Uncorr': {dn: -0.0083213, up: 0.0083213}, Global: {dn: -0.042384, up: 0.042384}}, 6: {'$p_{T}$ Corr': {dn: -0.042675, up: 0.042675}, '$p_{T}$ Uncorr': {dn: -0.010412, up: 0.010412}, Global: {dn: -0.043214, up: 0.043214}}, 7: {'$p_{T}$ Corr': {dn: -0.039895, up: 0.039895}, '$p_{T}$ Uncorr': {dn: -0.011915, up: 0.011915}, Global: {dn: -0.040218, up: 0.040218}}, 8: {'$p_{T}$ Corr': {dn: -0.042103, up: 0.042103}, '$p_{T}$ Uncorr': {dn: -0.015157, up: 0.015157}, Global: {dn: -0.042156, up: 0.042156}}, 9: {'$p_{T}$ Corr': {dn: -0.050655, up: 0.050655}, '$p_{T}$ Uncorr': {dn: -0.020558, up: 0.020558}, Global: {dn: -0.049308, up: 0.049308}}, 10: {'$p_{T}$ Corr': {dn: -0.056553, up: 0.056553}, '$p_{T}$ Uncorr': {dn: -0.014135, up: 0.014135}, Global: {dn: -0.046519, up: 0.046519}}, 11: {'$p_{T}$ Corr': {dn: -0.085299, up: 0.085299}, '$p_{T}$ Uncorr': {dn: -0.028125, up: 0.028125}, Global: {dn: -0.050276, up: 0.050276}}, 12: {'$p_{T}$ Corr': {dn: -0.14566, up: 0.14566}, '$p_{T}$ Uncorr': {dn: -0.065192, up: 0.065192}, Global: {dn: -0.0642, up: 0.0642}}, 13: {'$p_{T}$ Corr': {dn: -0.13251, up: 0.13251}, '$p_{T}$ Uncorr': {dn: -0.094778, up: 0.094778}, Global: {dn: -0.045696, up: 0.045696}}, 14: {'$p_{T}$ Corr': {dn: -0.19861, up: 0.19861}, '$p_{T}$ Uncorr': {dn: -0.19645, up: 0.19645}, Global: {dn: -0.056004, up: 0.056004}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y03
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -458,11 +458,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.056375, up: 0.056375}, '$p_{T}$ Uncorr': {dn: -0.0031664, up: 0.0031664}, Global: {dn: -0.057412, up: 0.057412}}, 1: {'$p_{T}$ Corr': {dn: -0.054276, up: 0.054276}, '$p_{T}$ Uncorr': {dn: -0.0041374, up: 0.0041374}, Global: {dn: -0.055146, up: 0.055146}}, 2: {'$p_{T}$ Corr': {dn: -0.05645, up: 0.05645}, '$p_{T}$ Uncorr': {dn: -0.0055768, up: 0.0055768}, Global: {dn: -0.05723, up: 0.05723}}, 3: {'$p_{T}$ Corr': {dn: -0.055889, up: 0.055889}, '$p_{T}$ Uncorr': {dn: -0.0072185, up: 0.0072185}, Global: {dn: -0.05653, up: 0.05653}}, 4: {'$p_{T}$ Corr': {dn: -0.054047, up: 0.054047}, '$p_{T}$ Uncorr': {dn: -0.0088532, up: 0.0088532}, Global: {dn: -0.054521, up: 0.054521}}, 5: {'$p_{T}$ Corr': {dn: -0.05695, up: 0.05695}, '$p_{T}$ Uncorr': {dn: -0.01135, up: 0.01135}, Global: {dn: -0.05728, up: 0.05728}}, 6: {'$p_{T}$ Corr': {dn: -0.053449, up: 0.053449}, '$p_{T}$ Uncorr': {dn: -0.014103, up: 0.014103}, Global: {dn: -0.057269, up: 0.057269}}, 7: {'$p_{T}$ Corr': {dn: -0.052658, up: 0.052658}, '$p_{T}$ Uncorr': {dn: -0.016747, up: 0.016747}, Global: {dn: -0.056169, up: 0.056169}}, 8: {'$p_{T}$ Corr': {dn: -0.051548, up: 0.051548}, '$p_{T}$ Uncorr': {dn: -0.020429, up: 0.020429}, Global: {dn: -0.054612, up: 0.054612}}, 9: {'$p_{T}$ Corr': {dn: -0.054252, up: 0.054252}, '$p_{T}$ Uncorr': {dn: -0.02532, up: 0.02532}, Global: {dn: -0.055878, up: 0.055878}}, 10: {'$p_{T}$ Corr': {dn: -0.067716, up: 0.067716}, '$p_{T}$ Uncorr': {dn: -0.018683, up: 0.018683}, Global: {dn: -0.058938, up: 0.058938}}, 11: {'$p_{T}$ Corr': {dn: -0.099448, up: 0.099448}, '$p_{T}$ Uncorr': {dn: -0.036342, up: 0.036342}, Global: {dn: -0.062022, up: 0.062022}}, 12: {'$p_{T}$ Corr': {dn: -0.16669, up: 0.16669}, '$p_{T}$ Uncorr': {dn: -0.092052, up: 0.092052}, Global: {dn: -0.077736, up: 0.077736}}, 13: {'$p_{T}$ Corr': {dn: -0.17852, up: 0.17852}, '$p_{T}$ Uncorr': {dn: -0.13823, up: 0.13823}, Global: {dn: -0.065141, up: 0.065141}}, 14: {'$p_{T}$ Corr': {dn: -0.23669, up: 0.23669}, '$p_{T}$ Uncorr': {dn: -0.26761, up: 0.26761}, Global: {dn: -0.07062, up: 0.07062}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y04
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -485,11 +485,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.069334, up: 0.069334}, '$p_{T}$ Uncorr': {dn: -0.0042834, up: 0.0042834}, Global: {dn: -0.079321, up: 0.079321}}, 1: {'$p_{T}$ Corr': {dn: -0.068524, up: 0.068524}, '$p_{T}$ Uncorr': {dn: -0.0057088, up: 0.0057088}, Global: {dn: -0.078213, up: 0.078213}}, 2: {'$p_{T}$ Corr': {dn: -0.071068, up: 0.071068}, '$p_{T}$ Uncorr': {dn: -0.0077608, up: 0.0077608}, Global: {dn: -0.08094, up: 0.08094}}, 3: {'$p_{T}$ Corr': {dn: -0.071215, up: 0.071215}, '$p_{T}$ Uncorr': {dn: -0.010136, up: 0.010136}, Global: {dn: -0.080921, up: 0.080921}}, 4: {'$p_{T}$ Corr': {dn: -0.067481, up: 0.067481}, '$p_{T}$ Uncorr': {dn: -0.012451, up: 0.012451}, Global: {dn: -0.076472, up: 0.076472}}, 5: {'$p_{T}$ Corr': {dn: -0.072023, up: 0.072023}, '$p_{T}$ Uncorr': {dn: -0.015979, up: 0.015979}, Global: {dn: -0.081377, up: 0.081377}}, 6: {'$p_{T}$ Corr': {dn: -0.06569, up: 0.06569}, '$p_{T}$ Uncorr': {dn: -0.019592, up: 0.019592}, Global: {dn: -0.079068, up: 0.079068}}, 7: {'$p_{T}$ Corr': {dn: -0.066623, up: 0.066623}, '$p_{T}$ Uncorr': {dn: -0.023534, up: 0.023534}, Global: {dn: -0.079834, up: 0.079834}}, 8: {'$p_{T}$ Corr': {dn: -0.067187, up: 0.067187}, '$p_{T}$ Uncorr': {dn: -0.028924, up: 0.028924}, Global: {dn: -0.079962, up: 0.079962}}, 9: {'$p_{T}$ Corr': {dn: -0.076612, up: 0.076612}, '$p_{T}$ Uncorr': {dn: -0.038079, up: 0.038079}, Global: {dn: -0.088645, up: 0.088645}}, 10: {'$p_{T}$ Corr': {dn: -0.078265, up: 0.078265}, '$p_{T}$ Uncorr': {dn: -0.025272, up: 0.025272}, Global: {dn: -0.076524, up: 0.076524}}, 11: {'$p_{T}$ Corr': {dn: -0.11881, up: 0.11881}, '$p_{T}$ Uncorr': {dn: -0.051153, up: 0.051153}, Global: {dn: -0.08324, up: 0.08324}}, 12: {'$p_{T}$ Corr': {dn: -0.12182, up: 0.12182}, '$p_{T}$ Uncorr': {dn: -0.2481, up: 0.2481}, Global: {dn: -0.063819, up: 0.063819}}, 13: {'$p_{T}$ Corr': {dn: -0.22412, up: 0.22412}, '$p_{T}$ Uncorr': {dn: -0.19945, up: 0.19945}, Global: {dn: -0.09187, up: 0.09187}}, 14: {'$p_{T}$ Corr': {dn: -0.42141, up: 0.42141}, '$p_{T}$ Uncorr': {dn: -0.47647, up: 0.47647}, Global: {dn: -0.14125, up: 0.14125}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y05
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -512,11 +512,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.08557, up: 0.08557}, '$p_{T}$ Uncorr': {dn: -0.0061648, up: 0.0061648}, Global: {dn: -0.11418, up: 0.11418}}, 1: {'$p_{T}$ Corr': {dn: -0.083529, up: 0.083529}, '$p_{T}$ Uncorr': {dn: -0.0082129, up: 0.0082129}, Global: {dn: -0.1112, up: 0.1112}}, 2: {'$p_{T}$ Corr': {dn: -0.087038, up: 0.087038}, '$p_{T}$ Uncorr': {dn: -0.011231, up: 0.011231}, Global: {dn: -0.11562, up: 0.11562}}, 3: {'$p_{T}$ Corr': {dn: -0.087097, up: 0.087097}, '$p_{T}$ Uncorr': {dn: -0.014583, up: 0.014583}, Global: {dn: -0.11543, up: 0.11543}}, 4: {'$p_{T}$ Corr': {dn: -0.084337, up: 0.084337}, '$p_{T}$ Uncorr': {dn: -0.018283, up: 0.018283}, Global: {dn: -0.11147, up: 0.11147}}, 5: {'$p_{T}$ Corr': {dn: -0.084974, up: 0.084974}, '$p_{T}$ Uncorr': {dn: -0.022857, up: 0.022857}, Global: {dn: -0.11198, up: 0.11198}}, 6: {'$p_{T}$ Corr': {dn: -0.083274, up: 0.083274}, '$p_{T}$ Uncorr': {dn: -0.029741, up: 0.029741}, Global: {dn: -0.11691, up: 0.11691}}, 7: {'$p_{T}$ Corr': {dn: -0.078132, up: 0.078132}, '$p_{T}$ Uncorr': {dn: -0.034364, up: 0.034364}, Global: {dn: -0.1092, up: 0.1092}}, 8: {'$p_{T}$ Corr': {dn: -0.077918, up: 0.077918}, '$p_{T}$ Uncorr': {dn: -0.043123, up: 0.043123}, Global: {dn: -0.10816, up: 0.10816}}, 9: {'$p_{T}$ Corr': {dn: -0.09173, up: 0.09173}, '$p_{T}$ Uncorr': {dn: -0.055419, up: 0.055419}, Global: {dn: -0.12379, up: 0.12379}}, 10: {'$p_{T}$ Corr': {dn: -0.096489, up: 0.096489}, '$p_{T}$ Uncorr': {dn: -0.037804, up: 0.037804}, Global: {dn: -0.11003, up: 0.11003}}, 11: {'$p_{T}$ Corr': {dn: -0.15408, up: 0.15408}, '$p_{T}$ Uncorr': {dn: -0.085261, up: 0.085261}, Global: {dn: -0.1259, up: 0.1259}}, 12: {'$p_{T}$ Corr': {dn: -0.22947, up: 0.22947}, '$p_{T}$ Uncorr': {dn: -0.16, up: 0.16}, Global: {dn: -0.14022, up: 0.14022}}, 13: {'$p_{T}$ Corr': {dn: -0.18193, up: 0.18193}, '$p_{T}$ Uncorr': {dn: -0.23775, up: 0.23775}, Global: {dn: -0.086978, up: 0.086978}}, 14: {'$p_{T}$ Corr': {dn: -0.1642, up: 0.1642}, '$p_{T}$ Uncorr': {dn: -0.3843, up: 0.3843}, Global: {dn: -0.064193, up: 0.064193}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y06
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -539,11 +539,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y07
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y07
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.098807, up: 0.098807}, '$p_{T}$ Uncorr': {dn: -0.0091, up: 0.0091}, Global: {dn: -0.15736, up: 0.15736}}, 1: {'$p_{T}$ Corr': {dn: -0.10063, up: 0.10063}, '$p_{T}$ Uncorr': {dn: -0.012398, up: 0.012398}, Global: {dn: -0.1599, up: 0.1599}}, 2: {'$p_{T}$ Corr': {dn: -0.098169, up: 0.098169}, '$p_{T}$ Uncorr': {dn: -0.016569, up: 0.016569}, Global: {dn: -0.15564, up: 0.15564}}, 3: {'$p_{T}$ Corr': {dn: -0.10659, up: 0.10659}, '$p_{T}$ Uncorr': {dn: -0.022461, up: 0.022461}, Global: {dn: -0.1686, up: 0.1686}}, 4: {'$p_{T}$ Corr': {dn: -0.096703, up: 0.096703}, '$p_{T}$ Uncorr': {dn: -0.026962, up: 0.026962}, Global: {dn: -0.15256, up: 0.15256}}, 5: {'$p_{T}$ Corr': {dn: -0.098092, up: 0.098092}, '$p_{T}$ Uncorr': {dn: -0.034308, up: 0.034308}, Global: {dn: -0.15429, up: 0.15429}}, 6: {'$p_{T}$ Corr': {dn: -0.09416, up: 0.09416}, '$p_{T}$ Uncorr': {dn: -0.042964, up: 0.042964}, Global: {dn: -0.15778, up: 0.15778}}, 7: {'$p_{T}$ Corr': {dn: -0.093226, up: 0.093226}, '$p_{T}$ Uncorr': {dn: -0.05266, up: 0.05266}, Global: {dn: -0.15551, up: 0.15551}}, 8: {'$p_{T}$ Corr': {dn: -0.08292, up: 0.08292}, '$p_{T}$ Uncorr': {dn: -0.06367, up: 0.06367}, Global: {dn: -0.13738, up: 0.13738}}, 9: {'$p_{T}$ Corr': {dn: -0.12024, up: 0.12024}, '$p_{T}$ Uncorr': {dn: -0.092479, up: 0.092479}, Global: {dn: -0.19368, up: 0.19368}}, 10: {'$p_{T}$ Corr': {dn: -0.10676, up: 0.10676}, '$p_{T}$ Uncorr': {dn: -0.055163, up: 0.055163}, Global: {dn: -0.14531, up: 0.14531}}, 11: {'$p_{T}$ Corr': {dn: -0.19492, up: 0.19492}, '$p_{T}$ Uncorr': {dn: -0.11539, up: 0.11539}, Global: {dn: -0.19011, up: 0.19011}}, 12: {'$p_{T}$ Corr': {dn: -0.35152, up: 0.35152}, '$p_{T}$ Uncorr': {dn: -0.28186, up: 0.28186}, Global: {dn: -0.25637, up: 0.25637}}, 13: {'$p_{T}$ Corr': {dn: -0.85354, up: 0.85354}, '$p_{T}$ Uncorr': {dn: -0.78757, up: 0.78757}, Global: {dn: -0.48706, up: 0.48706}}, 14: {'$p_{T}$ Corr': {dn: -0.35091, up: 0.35091}, '$p_{T}$ Uncorr': {dn: -0.82128, up: 0.82128}, Global: {dn: -0.16374, up: 0.16374}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y07
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y07
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -566,11 +566,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y08
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y08
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.11127, up: 0.11127}, '$p_{T}$ Uncorr': {dn: -0.014221, up: 0.014221}, Global: {dn: -0.21285, up: 0.21285}}, 1: {'$p_{T}$ Corr': {dn: -0.11192, up: 0.11192}, '$p_{T}$ Uncorr': {dn: -0.019402, up: 0.019402}, Global: {dn: -0.21358, up: 0.21358}}, 2: {'$p_{T}$ Corr': {dn: -0.11222, up: 0.11222}, '$p_{T}$ Uncorr': {dn: -0.026043, up: 0.026043}, Global: {dn: -0.2137, up: 0.2137}}, 3: {'$p_{T}$ Corr': {dn: -0.11083, up: 0.11083}, '$p_{T}$ Uncorr': {dn: -0.033547, up: 0.033547}, Global: {dn: -0.21056, up: 0.21056}}, 4: {'$p_{T}$ Corr': {dn: -0.12004, up: 0.12004}, '$p_{T}$ Uncorr': {dn: -0.045199, up: 0.045199}, Global: {dn: -0.22745, up: 0.22745}}, 5: {'$p_{T}$ Corr': {dn: -0.11529, up: 0.11529}, '$p_{T}$ Uncorr': {dn: -0.058816, up: 0.058816}, Global: {dn: -0.21781, up: 0.21781}}, 6: {'$p_{T}$ Corr': {dn: -0.10725, up: 0.10725}, '$p_{T}$ Uncorr': {dn: -0.068828, up: 0.068828}, Global: {dn: -0.21584, up: 0.21584}}, 7: {'$p_{T}$ Corr': {dn: -0.11623, up: 0.11623}, '$p_{T}$ Uncorr': {dn: -0.082823, up: 0.082823}, Global: {dn: -0.23288, up: 0.23288}}, 8: {'$p_{T}$ Corr': {dn: -0.10938, up: 0.10938}, '$p_{T}$ Uncorr': {dn: -0.10679, up: 0.10679}, Global: {dn: -0.21766, up: 0.21766}}, 9: {'$p_{T}$ Corr': {dn: -0.12946, up: 0.12946}, '$p_{T}$ Uncorr': {dn: -0.13071, up: 0.13071}, Global: {dn: -0.25045, up: 0.25045}}, 10: {'$p_{T}$ Corr': {dn: -0.113, up: 0.113}, '$p_{T}$ Uncorr': {dn: -0.079215, up: 0.079215}, Global: {dn: -0.18473, up: 0.18473}}, 11: {'$p_{T}$ Corr': {dn: -0.22317, up: 0.22317}, '$p_{T}$ Uncorr': {dn: -0.18246, up: 0.18246}, Global: {dn: -0.26142, up: 0.26142}}, 12: {'$p_{T}$ Corr': {dn: -0.18006, up: 0.18006}, '$p_{T}$ Uncorr': {dn: -0.29312, up: 0.29312}, Global: {dn: -0.15773, up: 0.15773}}, 13: {'$p_{T}$ Corr': {dn: -0.36518, up: 0.36518}, '$p_{T}$ Uncorr': {dn: -0.73607, up: 0.73607}, Global: {dn: -0.25029, up: 0.25029}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y08
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y08
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -592,11 +592,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y09
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y09
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.10612, up: 0.10612}, '$p_{T}$ Uncorr': {dn: -0.020588, up: 0.020588}, Global: {dn: -0.17305, up: 0.17305}}, 1: {'$p_{T}$ Corr': {dn: -0.10747, up: 0.10747}, '$p_{T}$ Uncorr': {dn: -0.02815, up: 0.02815}, Global: {dn: -0.17485, up: 0.17485}}, 2: {'$p_{T}$ Corr': {dn: -0.10967, up: 0.10967}, '$p_{T}$ Uncorr': {dn: -0.038972, up: 0.038972}, Global: {dn: -0.17803, up: 0.17803}}, 3: {'$p_{T}$ Corr': {dn: -0.11679, up: 0.11679}, '$p_{T}$ Uncorr': {dn: -0.050871, up: 0.050871}, Global: {dn: -0.18915, up: 0.18915}}, 4: {'$p_{T}$ Corr': {dn: -0.12219, up: 0.12219}, '$p_{T}$ Uncorr': {dn: -0.067196, up: 0.067196}, Global: {dn: -0.19737, up: 0.19737}}, 5: {'$p_{T}$ Corr': {dn: -0.11091, up: 0.11091}, '$p_{T}$ Uncorr': {dn: -0.081155, up: 0.081155}, Global: {dn: -0.17863, up: 0.17863}}, 6: {'$p_{T}$ Corr': {dn: -0.10986, up: 0.10986}, '$p_{T}$ Uncorr': {dn: -0.10537, up: 0.10537}, Global: {dn: -0.18849, up: 0.18849}}, 7: {'$p_{T}$ Corr': {dn: -0.084292, up: 0.084292}, '$p_{T}$ Uncorr': {dn: -0.12998, up: 0.12998}, Global: {dn: -0.14397, up: 0.14397}}, 8: {'$p_{T}$ Corr': {dn: -0.093001, up: 0.093001}, '$p_{T}$ Uncorr': {dn: -0.13531, up: 0.13531}, Global: {dn: -0.15777, up: 0.15777}}, 9: {'$p_{T}$ Corr': {dn: -0.081164, up: 0.081164}, '$p_{T}$ Uncorr': {dn: -0.15285, up: 0.15285}, Global: {dn: -0.13386, up: 0.13386}}, 10: {'$p_{T}$ Corr': {dn: -0.1406, up: 0.1406}, '$p_{T}$ Uncorr': {dn: -0.13227, up: 0.13227}, Global: {dn: -0.19595, up: 0.19595}}, 11: {'$p_{T}$ Corr': {dn: -0.13859, up: 0.13859}, '$p_{T}$ Uncorr': {dn: -0.21209, up: 0.21209}, Global: {dn: -0.1384, up: 0.1384}}, 12: {'$p_{T}$ Corr': {dn: -0.082745, up: 0.082745}, '$p_{T}$ Uncorr': {dn: -0.29729, up: 0.29729}, Global: {dn: -0.061791, up: 0.061791}}, 13: {'$p_{T}$ Corr': {dn: -0.41988, up: 0.41988}, '$p_{T}$ Uncorr': {dn: -1.1867, up: 1.1867}, Global: {dn: -0.24533, up: 0.24533}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y09
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y09
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -618,11 +618,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y10
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y10
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.039704, up: 0.039704}, '$p_{T}$ Uncorr': {dn: -0.0014276, up: 0.0014276}, Global: {dn: -0.043782, up: 0.043782}}, 1: {'$p_{T}$ Corr': {dn: -0.038482, up: 0.038482}, '$p_{T}$ Uncorr': {dn: -0.0018622, up: 0.0018622}, Global: {dn: -0.042338, up: 0.042338}}, 2: {'$p_{T}$ Corr': {dn: -0.038702, up: 0.038702}, '$p_{T}$ Uncorr': {dn: -0.0024782, up: 0.0024782}, Global: {dn: -0.042486, up: 0.042486}}, 3: {'$p_{T}$ Corr': {dn: -0.038953, up: 0.038953}, '$p_{T}$ Uncorr': {dn: -0.003245, up: 0.003245}, Global: {dn: -0.042662, up: 0.042662}}, 4: {'$p_{T}$ Corr': {dn: -0.038246, up: 0.038246}, '$p_{T}$ Uncorr': {dn: -0.0040024, up: 0.0040024}, Global: {dn: -0.041776, up: 0.041776}}, 5: {'$p_{T}$ Corr': {dn: -0.039242, up: 0.039242}, '$p_{T}$ Uncorr': {dn: -0.0051066, up: 0.0051066}, Global: {dn: -0.042738, up: 0.042738}}, 6: {'$p_{T}$ Corr': {dn: -0.037317, up: 0.037317}, '$p_{T}$ Uncorr': {dn: -0.0064169, up: 0.0064169}, Global: {dn: -0.043294, up: 0.043294}}, 7: {'$p_{T}$ Corr': {dn: -0.036297, up: 0.036297}, '$p_{T}$ Uncorr': {dn: -0.00745, up: 0.00745}, Global: {dn: -0.041924, up: 0.041924}}, 8: {'$p_{T}$ Corr': {dn: -0.038391, up: 0.038391}, '$p_{T}$ Uncorr': {dn: -0.0096474, up: 0.0096474}, Global: {dn: -0.04404, up: 0.04404}}, 9: {'$p_{T}$ Corr': {dn: -0.042584, up: 0.042584}, '$p_{T}$ Uncorr': {dn: -0.012778, up: 0.012778}, Global: {dn: -0.047493, up: 0.047493}}, 10: {'$p_{T}$ Corr': {dn: -0.048477, up: 0.048477}, '$p_{T}$ Uncorr': {dn: -0.0087928, up: 0.0087928}, Global: {dn: -0.045686, up: 0.045686}}, 11: {'$p_{T}$ Corr': {dn: -0.0722, up: 0.0722}, '$p_{T}$ Uncorr': {dn: -0.017682, up: 0.017682}, Global: {dn: -0.048757, up: 0.048757}}, 12: {'$p_{T}$ Corr': {dn: -0.12203, up: 0.12203}, '$p_{T}$ Uncorr': {dn: -0.040117, up: 0.040117}, Global: {dn: -0.061625, up: 0.061625}}, 13: {'$p_{T}$ Corr': {dn: -0.15506, up: 0.15506}, '$p_{T}$ Uncorr': {dn: -0.067447, up: 0.067447}, Global: {dn: -0.061264, up: 0.061264}}, 14: {'$p_{T}$ Corr': {dn: -0.1637, up: 0.1637}, '$p_{T}$ Uncorr': {dn: -0.099637, up: 0.099637}, Global: {dn: -0.052889, up: 0.052889}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y10
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y10
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -645,11 +645,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d03-x01-y11
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d03-x01-y11
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.022416, up: 0.022416}, '$p_{T}$ Uncorr': {dn: -0.0017519, up: 0.0017519}, Global: {dn: -0.021445, up: 0.021445}}, 1: {'$p_{T}$ Corr': {dn: -0.02247, up: 0.02247}, '$p_{T}$ Uncorr': {dn: -0.0022016, up: 0.0022016}, Global: {dn: -0.021447, up: 0.021447}}, 2: {'$p_{T}$ Corr': {dn: -0.022557, up: 0.022557}, '$p_{T}$ Uncorr': {dn: -0.0027955, up: 0.0027955}, Global: {dn: -0.021483, up: 0.021483}}, 3: {'$p_{T}$ Corr': {dn: -0.023469, up: 0.023469}, '$p_{T}$ Uncorr': {dn: -0.0035744, up: 0.0035744}, Global: {dn: -0.0223, up: 0.0223}}, 4: {'$p_{T}$ Corr': {dn: -0.022574, up: 0.022574}, '$p_{T}$ Uncorr': {dn: -0.0042741, up: 0.0042741}, Global: {dn: -0.021392, up: 0.021392}}, 5: {'$p_{T}$ Corr': {dn: -0.023496, up: 0.023496}, '$p_{T}$ Uncorr': {dn: -0.0053353, up: 0.0053353}, Global: {dn: -0.0222, up: 0.0222}}, 6: {'$p_{T}$ Corr': {dn: -0.023016, up: 0.023016}, '$p_{T}$ Uncorr': {dn: -0.0066669, up: 0.0066669}, Global: {dn: -0.023167, up: 0.023167}}, 7: {'$p_{T}$ Corr': {dn: -0.021562, up: 0.021562}, '$p_{T}$ Uncorr': {dn: -0.007622, up: 0.007622}, Global: {dn: -0.021606, up: 0.021606}}, 8: {'$p_{T}$ Corr': {dn: -0.025566, up: 0.025566}, '$p_{T}$ Uncorr': {dn: -0.010048, up: 0.010048}, Global: {dn: -0.025444, up: 0.025444}}, 9: {'$p_{T}$ Corr': {dn: -0.028934, up: 0.028934}, '$p_{T}$ Uncorr': {dn: -0.01309, up: 0.01309}, Global: {dn: -0.027996, up: 0.027996}}, 10: {'$p_{T}$ Corr': {dn: -0.031109, up: 0.031109}, '$p_{T}$ Uncorr': {dn: -0.0086523, up: 0.0086523}, Global: {dn: -0.025436, up: 0.025436}}, 11: {'$p_{T}$ Corr': {dn: -0.051257, up: 0.051257}, '$p_{T}$ Uncorr': {dn: -0.01796, up: 0.01796}, Global: {dn: -0.03003, up: 0.03003}}, 12: {'$p_{T}$ Corr': {dn: -0.08328, up: 0.08328}, '$p_{T}$ Uncorr': {dn: -0.041929, up: 0.041929}, Global: {dn: -0.036485, up: 0.036485}}, 13: {'$p_{T}$ Corr': {dn: -0.11198, up: 0.11198}, '$p_{T}$ Uncorr': {dn: -0.076345, up: 0.076345}, Global: {dn: -0.038383, up: 0.038383}}, 14: {'$p_{T}$ Corr': {dn: -0.14441, up: 0.14441}, '$p_{T}$ Uncorr': {dn: -0.14284, up: 0.14284}, Global: {dn: -0.040475, up: 0.040475}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d03-x01-y11
+Path: /REF/PHENIX_2013_I1127262/d03-x01-y11
 Title: Figure 11
 Type: Scatter2D
 ---
@@ -672,11 +672,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d04-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0031944, up: 0.0031944}, '$p_{T}$ Uncorr': {dn: -0.0021838, up: 0.0021838}}, 1: {'$p_{T}$ Corr': {dn: -0.0024487, up: 0.0024487}, '$p_{T}$ Uncorr': {dn: -0.0033598, up: 0.0033598}}, 2: {'$p_{T}$ Corr': {dn: -0.0033376, up: 0.0033376}, '$p_{T}$ Uncorr': {dn: -0.0049257, up: 0.0049257}}, 3: {'$p_{T}$ Corr': {dn: -0.004105, up: 0.004105}, '$p_{T}$ Uncorr': {dn: -0.0074934, up: 0.0074934}}, 4: {'$p_{T}$ Corr': {dn: -0.005668, up: 0.005668}, '$p_{T}$ Uncorr': {dn: -0.011929, up: 0.011929}}, 5: {'$p_{T}$ Corr': {dn: -0.0053359, up: 0.0053359}, '$p_{T}$ Uncorr': {dn: -0.012187, up: 0.012187}}, 6: {'$p_{T}$ Corr': {dn: -0.011766, up: 0.011766}, '$p_{T}$ Uncorr': {dn: -0.025912, up: 0.025912}}, 7: {'$p_{T}$ Corr': {dn: -0.026591, up: 0.026591}, '$p_{T}$ Uncorr': {dn: -0.065138, up: 0.065138}}, 8: {'$p_{T}$ Corr': {dn: -0.043117, up: 0.043117}, '$p_{T}$ Uncorr': {dn: -0.1235, up: 0.1235}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d04-x01-y01
 Title: Figure 20-1
 Type: Scatter2D
 ---
@@ -693,11 +693,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d04-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0034235, up: 0.0034235}, '$p_{T}$ Uncorr': {dn: -0.0029222, up: 0.0029222}}, 1: {'$p_{T}$ Corr': {dn: -0.0030836, up: 0.0030836}, '$p_{T}$ Uncorr': {dn: -0.0045686, up: 0.0045686}}, 2: {'$p_{T}$ Corr': {dn: -0.0034458, up: 0.0034458}, '$p_{T}$ Uncorr': {dn: -0.0070685, up: 0.0070685}}, 3: {'$p_{T}$ Corr': {dn: -0.0035171, up: 0.0035171}, '$p_{T}$ Uncorr': {dn: -0.010619, up: 0.010619}}, 4: {'$p_{T}$ Corr': {dn: -0.0052547, up: 0.0052547}, '$p_{T}$ Uncorr': {dn: -0.017027, up: 0.017027}}, 5: {'$p_{T}$ Corr': {dn: -0.0043809, up: 0.0043809}, '$p_{T}$ Uncorr': {dn: -0.018062, up: 0.018062}}, 6: {'$p_{T}$ Corr': {dn: -0.0080468, up: 0.0080468}, '$p_{T}$ Uncorr': {dn: -0.036685, up: 0.036685}}, 7: {'$p_{T}$ Corr': {dn: -0.016758, up: 0.016758}, '$p_{T}$ Uncorr': {dn: -0.088156, up: 0.088156}}, 8: {'$p_{T}$ Corr': {dn: -0.032273, up: 0.032273}, '$p_{T}$ Uncorr': {dn: -0.10091, up: 0.10091}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d04-x01-y02
 Title: Figure 20-1
 Type: Scatter2D
 ---
@@ -714,11 +714,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d04-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0059038, up: 0.0059038}, '$p_{T}$ Uncorr': {dn: -0.0039868, up: 0.0039868}}, 1: {'$p_{T}$ Corr': {dn: -0.005155, up: 0.005155}, '$p_{T}$ Uncorr': {dn: -0.0064577, up: 0.0064577}}, 2: {'$p_{T}$ Corr': {dn: -0.0049932, up: 0.0049932}, '$p_{T}$ Uncorr': {dn: -0.0098434, up: 0.0098434}}, 3: {'$p_{T}$ Corr': {dn: -0.0045617, up: 0.0045617}, '$p_{T}$ Uncorr': {dn: -0.0147, up: 0.0147}}, 4: {'$p_{T}$ Corr': {dn: -0.0052404, up: 0.0052404}, '$p_{T}$ Uncorr': {dn: -0.022198, up: 0.022198}}, 5: {'$p_{T}$ Corr': {dn: -0.0054432, up: 0.0054432}, '$p_{T}$ Uncorr': {dn: -0.025027, up: 0.025027}}, 6: {'$p_{T}$ Corr': {dn: -0.0092496, up: 0.0092496}, '$p_{T}$ Uncorr': {dn: -0.047825, up: 0.047825}}, 7: {'$p_{T}$ Corr': {dn: -0.023466, up: 0.023466}, '$p_{T}$ Uncorr': {dn: -0.11305, up: 0.11305}}, 8: {'$p_{T}$ Corr': {dn: -0.028231, up: 0.028231}, '$p_{T}$ Uncorr': {dn: -0.20413, up: 0.20413}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d04-x01-y03
 Title: Figure 20-1
 Type: Scatter2D
 ---
@@ -735,11 +735,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d04-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0081871, up: 0.0081871}, '$p_{T}$ Uncorr': {dn: -0.0054141, up: 0.0054141}}, 1: {'$p_{T}$ Corr': {dn: -0.0078447, up: 0.0078447}, '$p_{T}$ Uncorr': {dn: -0.0092439, up: 0.0092439}}, 2: {'$p_{T}$ Corr': {dn: -0.0074204, up: 0.0074204}, '$p_{T}$ Uncorr': {dn: -0.014111, up: 0.014111}}, 3: {'$p_{T}$ Corr': {dn: -0.0078496, up: 0.0078496}, '$p_{T}$ Uncorr': {dn: -0.021865, up: 0.021865}}, 4: {'$p_{T}$ Corr': {dn: -0.0094496, up: 0.0094496}, '$p_{T}$ Uncorr': {dn: -0.032676, up: 0.032676}}, 5: {'$p_{T}$ Corr': {dn: -0.0091286, up: 0.0091286}, '$p_{T}$ Uncorr': {dn: -0.035895, up: 0.035895}}, 6: {'$p_{T}$ Corr': {dn: -0.01617, up: 0.01617}, '$p_{T}$ Uncorr': {dn: -0.072972, up: 0.072972}}, 7: {'$p_{T}$ Corr': {dn: -0.029489, up: 0.029489}, '$p_{T}$ Uncorr': {dn: -0.18429, up: 0.18429}}, 8: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d04-x01-y04
 Title: Figure 20-1
 Type: Scatter2D
 ---
@@ -756,11 +756,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d04-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.017012, up: 0.017012}, '$p_{T}$ Uncorr': {dn: -0.0076953, up: 0.0076953}}, 1: {'$p_{T}$ Corr': {dn: -0.015218, up: 0.015218}, '$p_{T}$ Uncorr': {dn: -0.013463, up: 0.013463}}, 2: {'$p_{T}$ Corr': {dn: -0.014759, up: 0.014759}, '$p_{T}$ Uncorr': {dn: -0.021104, up: 0.021104}}, 3: {'$p_{T}$ Corr': {dn: -0.017003, up: 0.017003}, '$p_{T}$ Uncorr': {dn: -0.033485, up: 0.033485}}, 4: {'$p_{T}$ Corr': {dn: -0.024742, up: 0.024742}, '$p_{T}$ Uncorr': {dn: -0.055091, up: 0.055091}}, 5: {'$p_{T}$ Corr': {dn: -0.022619, up: 0.022619}, '$p_{T}$ Uncorr': {dn: -0.05528, up: 0.05528}}, 6: {'$p_{T}$ Corr': {dn: -0.037925, up: 0.037925}, '$p_{T}$ Uncorr': {dn: -0.11004, up: 0.11004}}, 7: {'$p_{T}$ Corr': {dn: -0.053594, up: 0.053594}, '$p_{T}$ Uncorr': {dn: -0.15159, up: 0.15159}}, 8: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d04-x01-y05
 Title: Figure 20-1
 Type: Scatter2D
 ---
@@ -777,11 +777,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d04-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d04-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.024775, up: 0.024775}, '$p_{T}$ Uncorr': {dn: -0.011903, up: 0.011903}}, 1: {'$p_{T}$ Corr': {dn: -0.027571, up: 0.027571}, '$p_{T}$ Uncorr': {dn: -0.021518, up: 0.021518}}, 2: {'$p_{T}$ Corr': {dn: -0.023848, up: 0.023848}, '$p_{T}$ Uncorr': {dn: -0.032769, up: 0.032769}}, 3: {'$p_{T}$ Corr': {dn: -0.035498, up: 0.035498}, '$p_{T}$ Uncorr': {dn: -0.054108, up: 0.054108}}, 4: {'$p_{T}$ Corr': {dn: -0.046478, up: 0.046478}, '$p_{T}$ Uncorr': {dn: -0.083437, up: 0.083437}}, 5: {'$p_{T}$ Corr': {dn: -0.050003, up: 0.050003}, '$p_{T}$ Uncorr': {dn: -0.08828, up: 0.08828}}, 6: {'$p_{T}$ Corr': {dn: -0.076514, up: 0.076514}, '$p_{T}$ Uncorr': {dn: -0.18071, up: 0.18071}}, 7: {'$p_{T}$ Corr': {dn: -0.14646, up: 0.14646}, '$p_{T}$ Uncorr': {dn: -0.27378, up: 0.27378}}, 8: {'$p_{T}$ Corr': {dn: -0.17327, up: 0.17327}, '$p_{T}$ Uncorr': {dn: -0.48761, up: 0.48761}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d04-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d04-x01-y06
 Title: Figure 20-1
 Type: Scatter2D
 ---
@@ -798,11 +798,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d05-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0023394, up: 0.0023394}, '$p_{T}$ Uncorr': {dn: -0.0021305, up: 0.0021305}}, 1: {'$p_{T}$ Corr': {dn: -0.0017777, up: 0.0017777}, '$p_{T}$ Uncorr': {dn: -0.0032898, up: 0.0032898}}, 2: {'$p_{T}$ Corr': {dn: -0.0024945, up: 0.0024945}, '$p_{T}$ Uncorr': {dn: -0.0048608, up: 0.0048608}}, 3: {'$p_{T}$ Corr': {dn: -0.002762, up: 0.002762}, '$p_{T}$ Uncorr': {dn: -0.0070652, up: 0.0070652}}, 4: {'$p_{T}$ Corr': {dn: -0.0038117, up: 0.0038117}, '$p_{T}$ Uncorr': {dn: -0.011235, up: 0.011235}}, 5: {'$p_{T}$ Corr': {dn: -0.003881, up: 0.003881}, '$p_{T}$ Uncorr': {dn: -0.012138, up: 0.012138}}, 6: {'$p_{T}$ Corr': {dn: -0.0069347, up: 0.0069347}, '$p_{T}$ Uncorr': {dn: -0.022795, up: 0.022795}}, 7: {'$p_{T}$ Corr': {dn: -0.024703, up: 0.024703}, '$p_{T}$ Uncorr': {dn: -0.067897, up: 0.067897}}, 8: {'$p_{T}$ Corr': {dn: -0.027628, up: 0.027628}, '$p_{T}$ Uncorr': {dn: -0.11045, up: 0.11045}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d05-x01-y01
 Title: Figure 20-2
 Type: Scatter2D
 ---
@@ -819,11 +819,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d05-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0024991, up: 0.0024991}, '$p_{T}$ Uncorr': {dn: -0.0028282, up: 0.0028282}}, 1: {'$p_{T}$ Corr': {dn: -0.0023092, up: 0.0023092}, '$p_{T}$ Uncorr': {dn: -0.0044716, up: 0.0044716}}, 2: {'$p_{T}$ Corr': {dn: -0.002522, up: 0.002522}, '$p_{T}$ Uncorr': {dn: -0.0068616, up: 0.0068616}}, 3: {'$p_{T}$ Corr': {dn: -0.0026637, up: 0.0026637}, '$p_{T}$ Uncorr': {dn: -0.010471, up: 0.010471}}, 4: {'$p_{T}$ Corr': {dn: -0.0037749, up: 0.0037749}, '$p_{T}$ Uncorr': {dn: -0.016286, up: 0.016286}}, 5: {'$p_{T}$ Corr': {dn: -0.0033456, up: 0.0033456}, '$p_{T}$ Uncorr': {dn: -0.017937, up: 0.017937}}, 6: {'$p_{T}$ Corr': {dn: -0.0056544, up: 0.0056544}, '$p_{T}$ Uncorr': {dn: -0.034183, up: 0.034183}}, 7: {'$p_{T}$ Corr': {dn: -0.012025, up: 0.012025}, '$p_{T}$ Uncorr': {dn: -0.083443, up: 0.083443}}, 8: {'$p_{T}$ Corr': {dn: -0.028108, up: 0.028108}, '$p_{T}$ Uncorr': {dn: -0.12674, up: 0.12674}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d05-x01-y02
 Title: Figure 20-2
 Type: Scatter2D
 ---
@@ -840,11 +840,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d05-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.004283, up: 0.004283}, '$p_{T}$ Uncorr': {dn: -0.003816, up: 0.003816}}, 1: {'$p_{T}$ Corr': {dn: -0.0037469, up: 0.0037469}, '$p_{T}$ Uncorr': {dn: -0.0062297, up: 0.0062297}}, 2: {'$p_{T}$ Corr': {dn: -0.0036665, up: 0.0036665}, '$p_{T}$ Uncorr': {dn: -0.0095519, up: 0.0095519}}, 3: {'$p_{T}$ Corr': {dn: -0.003251, up: 0.003251}, '$p_{T}$ Uncorr': {dn: -0.014104, up: 0.014104}}, 4: {'$p_{T}$ Corr': {dn: -0.004019, up: 0.004019}, '$p_{T}$ Uncorr': {dn: -0.022023, up: 0.022023}}, 5: {'$p_{T}$ Corr': {dn: -0.0041775, up: 0.0041775}, '$p_{T}$ Uncorr': {dn: -0.025082, up: 0.025082}}, 6: {'$p_{T}$ Corr': {dn: -0.0068853, up: 0.0068853}, '$p_{T}$ Uncorr': {dn: -0.047253, up: 0.047253}}, 7: {'$p_{T}$ Corr': {dn: -0.013878, up: 0.013878}, '$p_{T}$ Uncorr': {dn: -0.10057, up: 0.10057}}, 8: {'$p_{T}$ Corr': {dn: -0.019369, up: 0.019369}, '$p_{T}$ Uncorr': {dn: -0.24881, up: 0.24881}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d05-x01-y03
 Title: Figure 20-2
 Type: Scatter2D
 ---
@@ -861,11 +861,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d05-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0062872, up: 0.0062872}, '$p_{T}$ Uncorr': {dn: -0.0052649, up: 0.0052649}}, 1: {'$p_{T}$ Corr': {dn: -0.0054709, up: 0.0054709}, '$p_{T}$ Uncorr': {dn: -0.0087167, up: 0.0087167}}, 2: {'$p_{T}$ Corr': {dn: -0.0056631, up: 0.0056631}, '$p_{T}$ Uncorr': {dn: -0.013895, up: 0.013895}}, 3: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 4: {'$p_{T}$ Corr': {dn: -0.0063174, up: 0.0063174}, '$p_{T}$ Uncorr': {dn: -0.029999, up: 0.029999}}, 5: {'$p_{T}$ Corr': {dn: -0.0072205, up: 0.0072205}, '$p_{T}$ Uncorr': {dn: -0.035932, up: 0.035932}}, 6: {'$p_{T}$ Corr': {dn: -0.012006, up: 0.012006}, '$p_{T}$ Uncorr': {dn: -0.069768, up: 0.069768}}, 7: {'$p_{T}$ Corr': {dn: -0.019331, up: 0.019331}, '$p_{T}$ Uncorr': {dn: -0.14254, up: 0.14254}}, 8: {'$p_{T}$ Corr': {dn: -0.014765, up: 0.014765}, '$p_{T}$ Uncorr': {dn: -0.15618, up: 0.15618}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d05-x01-y04
 Title: Figure 20-2
 Type: Scatter2D
 ---
@@ -882,11 +882,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d05-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.012895, up: 0.012895}, '$p_{T}$ Uncorr': {dn: -0.0074549, up: 0.0074549}}, 1: {'$p_{T}$ Corr': {dn: -0.011347, up: 0.011347}, '$p_{T}$ Uncorr': {dn: -0.013045, up: 0.013045}}, 2: {'$p_{T}$ Corr': {dn: -0.010949, up: 0.010949}, '$p_{T}$ Uncorr': {dn: -0.020486, up: 0.020486}}, 3: {'$p_{T}$ Corr': {dn: -0.011512, up: 0.011512}, '$p_{T}$ Uncorr': {dn: -0.030943, up: 0.030943}}, 4: {'$p_{T}$ Corr': {dn: -0.016075, up: 0.016075}, '$p_{T}$ Uncorr': {dn: -0.049403, up: 0.049403}}, 5: {'$p_{T}$ Corr': {dn: -0.013914, up: 0.013914}, '$p_{T}$ Uncorr': {dn: -0.048574, up: 0.048574}}, 6: {'$p_{T}$ Corr': {dn: -0.028812, up: 0.028812}, '$p_{T}$ Uncorr': {dn: -0.1055, up: 0.1055}}, 7: {'$p_{T}$ Corr': {dn: -0.0296, up: 0.0296}, '$p_{T}$ Uncorr': {dn: -0.14543, up: 0.14543}}, 8: {'$p_{T}$ Corr': {dn: -0.10904, up: 0.10904}, '$p_{T}$ Uncorr': {dn: -0.32495, up: 0.32495}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d05-x01-y05
 Title: Figure 20-2
 Type: Scatter2D
 ---
@@ -903,11 +903,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d05-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d05-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.018817, up: 0.018817}, '$p_{T}$ Uncorr': {dn: -0.011481, up: 0.011481}}, 1: {'$p_{T}$ Corr': {dn: -0.020263, up: 0.020263}, '$p_{T}$ Uncorr': {dn: -0.02044, up: 0.02044}}, 2: {'$p_{T}$ Corr': {dn: -0.017135, up: 0.017135}, '$p_{T}$ Uncorr': {dn: -0.031172, up: 0.031172}}, 3: {'$p_{T}$ Corr': {dn: -0.025601, up: 0.025601}, '$p_{T}$ Uncorr': {dn: -0.050577, up: 0.050577}}, 4: {'$p_{T}$ Corr': {dn: -0.029791, up: 0.029791}, '$p_{T}$ Uncorr': {dn: -0.073867, up: 0.073867}}, 5: {'$p_{T}$ Corr': {dn: -0.029829, up: 0.029829}, '$p_{T}$ Uncorr': {dn: -0.076304, up: 0.076304}}, 6: {'$p_{T}$ Corr': {dn: -0.073333, up: 0.073333}, '$p_{T}$ Uncorr': {dn: -0.19211, up: 0.19211}}, 7: {'$p_{T}$ Corr': {dn: -0.12495, up: 0.12495}, '$p_{T}$ Uncorr': {dn: -0.30904, up: 0.30904}}, 8: {'$p_{T}$ Corr': {dn: -0.21224, up: 0.21224}, '$p_{T}$ Uncorr': {dn: -0.57127, up: 0.57127}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d05-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d05-x01-y06
 Title: Figure 20-2
 Type: Scatter2D
 ---
@@ -924,11 +924,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d06-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 1: {'$p_{T}$ Corr': {dn: -0.00064618, up: 0.00064618}, '$p_{T}$ Uncorr': {dn: -0.003172, up: 0.003172}}, 2: {'$p_{T}$ Corr': {dn: -0.00091728, up: 0.00091728}, '$p_{T}$ Uncorr': {dn: -0.0046605, up: 0.0046605}}, 3: {'$p_{T}$ Corr': {dn: -0.0010422, up: 0.0010422}, '$p_{T}$ Uncorr': {dn: -0.006929, up: 0.006929}}, 4: {'$p_{T}$ Corr': {dn: -0.0015012, up: 0.0015012}, '$p_{T}$ Uncorr': {dn: -0.011227, up: 0.011227}}, 5: {'$p_{T}$ Corr': {dn: -0.0015109, up: 0.0015109}, '$p_{T}$ Uncorr': {dn: -0.012342, up: 0.012342}}, 6: {'$p_{T}$ Corr': {dn: -0.0032716, up: 0.0032716}, '$p_{T}$ Uncorr': {dn: -0.024731, up: 0.024731}}, 7: {'$p_{T}$ Corr': {dn: -0.006695, up: 0.006695}, '$p_{T}$ Uncorr': {dn: -0.053226, up: 0.053226}}, 8: {'$p_{T}$ Corr': {dn: -0.013352, up: 0.013352}, '$p_{T}$ Uncorr': {dn: -0.11224, up: 0.11224}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d06-x01-y01
 Title: Figure 20-3
 Type: Scatter2D
 ---
@@ -945,11 +945,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d06-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.00090017, up: 0.00090017}, '$p_{T}$ Uncorr': {dn: -0.0026437, up: 0.0026437}}, 1: {'$p_{T}$ Corr': {dn: -0.00082709, up: 0.00082709}, '$p_{T}$ Uncorr': {dn: -0.0042219, up: 0.0042219}}, 2: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 3: {'$p_{T}$ Corr': {dn: -0.0010135, up: 0.0010135}, '$p_{T}$ Uncorr': {dn: -0.010148, up: 0.010148}}, 4: {'$p_{T}$ Corr': {dn: -0.0013059, up: 0.0013059}, '$p_{T}$ Uncorr': {dn: -0.01489, up: 0.01489}}, 5: {'$p_{T}$ Corr': {dn: -0.0012086, up: 0.0012086}, '$p_{T}$ Uncorr': {dn: -0.017017, up: 0.017017}}, 6: {'$p_{T}$ Corr': {dn: -0.0028908, up: 0.0028908}, '$p_{T}$ Uncorr': {dn: -0.037208, up: 0.037208}}, 7: {'$p_{T}$ Corr': {dn: -0.0048121, up: 0.0048121}, '$p_{T}$ Uncorr': {dn: -0.078202, up: 0.078202}}, 8: {'$p_{T}$ Corr': {dn: -0.012371, up: 0.012371}, '$p_{T}$ Uncorr': {dn: -0.14543, up: 0.14543}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d06-x01-y02
 Title: Figure 20-3
 Type: Scatter2D
 ---
@@ -966,11 +966,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d06-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0015748, up: 0.0015748}, '$p_{T}$ Uncorr': {dn: -0.0035488, up: 0.0035488}}, 1: {'$p_{T}$ Corr': {dn: -0.0013351, up: 0.0013351}, '$p_{T}$ Uncorr': {dn: -0.0057754, up: 0.0057754}}, 2: {'$p_{T}$ Corr': {dn: -0.0013642, up: 0.0013642}, '$p_{T}$ Uncorr': {dn: -0.0090132, up: 0.0090132}}, 3: {'$p_{T}$ Corr': {dn: -0.0011911, up: 0.0011911}, '$p_{T}$ Uncorr': {dn: -0.013402, up: 0.013402}}, 4: {'$p_{T}$ Corr': {dn: -0.0013962, up: 0.0013962}, '$p_{T}$ Uncorr': {dn: -0.020503, up: 0.020503}}, 5: {'$p_{T}$ Corr': {dn: -0.0014313, up: 0.0014313}, '$p_{T}$ Uncorr': {dn: -0.023191, up: 0.023191}}, 6: {'$p_{T}$ Corr': {dn: -0.0028118, up: 0.0028118}, '$p_{T}$ Uncorr': {dn: -0.048751, up: 0.048751}}, 7: {'$p_{T}$ Corr': {dn: -0.0057674, up: 0.0057674}, '$p_{T}$ Uncorr': {dn: -0.10671, up: 0.10671}}, 8: {'$p_{T}$ Corr': {dn: -0.0076048, up: 0.0076048}, '$p_{T}$ Uncorr': {dn: -0.15933, up: 0.15933}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d06-x01-y03
 Title: Figure 20-3
 Type: Scatter2D
 ---
@@ -987,11 +987,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d06-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0022059, up: 0.0022059}, '$p_{T}$ Uncorr': {dn: -0.0047951, up: 0.0047951}}, 1: {'$p_{T}$ Corr': {dn: -0.0019753, up: 0.0019753}, '$p_{T}$ Uncorr': {dn: -0.0081033, up: 0.0081033}}, 2: {'$p_{T}$ Corr': {dn: -0.0019985, up: 0.0019985}, '$p_{T}$ Uncorr': {dn: -0.012773, up: 0.012773}}, 3: {'$p_{T}$ Corr': {dn: -0.0020477, up: 0.0020477}, '$p_{T}$ Uncorr': {dn: -0.019368, up: 0.019368}}, 4: {'$p_{T}$ Corr': {dn: -0.002483, up: 0.002483}, '$p_{T}$ Uncorr': {dn: -0.028838, up: 0.028838}}, 5: {'$p_{T}$ Corr': {dn: -0.0028708, up: 0.0028708}, '$p_{T}$ Uncorr': {dn: -0.034636, up: 0.034636}}, 6: {'$p_{T}$ Corr': {dn: -0.0044372, up: 0.0044372}, '$p_{T}$ Uncorr': {dn: -0.065327, up: 0.065327}}, 7: {'$p_{T}$ Corr': {dn: -0.014398, up: 0.014398}, '$p_{T}$ Uncorr': {dn: -0.17841, up: 0.17841}}, 8: {'$p_{T}$ Corr': {dn: -0.018374, up: 0.018374}, '$p_{T}$ Uncorr': {dn: -0.38985, up: 0.38985}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d06-x01-y04
 Title: Figure 20-3
 Type: Scatter2D
 ---
@@ -1008,11 +1008,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d06-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.004487, up: 0.004487}, '$p_{T}$ Uncorr': {dn: -0.0067019, up: 0.0067019}}, 1: {'$p_{T}$ Corr': {dn: -0.0040701, up: 0.0040701}, '$p_{T}$ Uncorr': {dn: -0.012058, up: 0.012058}}, 2: {'$p_{T}$ Corr': {dn: -0.0041684, up: 0.0041684}, '$p_{T}$ Uncorr': {dn: -0.019324, up: 0.019324}}, 3: {'$p_{T}$ Corr': {dn: -0.0038753, up: 0.0038753}, '$p_{T}$ Uncorr': {dn: -0.027701, up: 0.027701}}, 4: {'$p_{T}$ Corr': {dn: -0.0059316, up: 0.0059316}, '$p_{T}$ Uncorr': {dn: -0.045337, up: 0.045337}}, 5: {'$p_{T}$ Corr': {dn: -0.0059613, up: 0.0059613}, '$p_{T}$ Uncorr': {dn: -0.048209, up: 0.048209}}, 6: {'$p_{T}$ Corr': {dn: -0.0086566, up: 0.0086566}, '$p_{T}$ Uncorr': {dn: -0.091338, up: 0.091338}}, 7: {'$p_{T}$ Corr': {dn: -0.012582, up: 0.012582}, '$p_{T}$ Uncorr': {dn: -0.13806, up: 0.13806}}, 8: {'$p_{T}$ Corr': {dn: -0.058721, up: 0.058721}, '$p_{T}$ Uncorr': {dn: -0.40065, up: 0.40065}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d06-x01-y05
 Title: Figure 20-3
 Type: Scatter2D
 ---
@@ -1029,11 +1029,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d06-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d06-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0068515, up: 0.0068515}, '$p_{T}$ Uncorr': {dn: -0.010339, up: 0.010339}}, 1: {'$p_{T}$ Corr': {dn: -0.0074255, up: 0.0074255}, '$p_{T}$ Uncorr': {dn: -0.018413, up: 0.018413}}, 2: {'$p_{T}$ Corr': {dn: -0.0060032, up: 0.0060032}, '$p_{T}$ Uncorr': {dn: -0.028216, up: 0.028216}}, 3: {'$p_{T}$ Corr': {dn: -0.0098757, up: 0.0098757}, '$p_{T}$ Uncorr': {dn: -0.04637, up: 0.04637}}, 4: {'$p_{T}$ Corr': {dn: -0.01423, up: 0.01423}, '$p_{T}$ Uncorr': {dn: -0.072772, up: 0.072772}}, 5: {'$p_{T}$ Corr': {dn: -0.013644, up: 0.013644}, '$p_{T}$ Uncorr': {dn: -0.07657, up: 0.07657}}, 6: {'$p_{T}$ Corr': {dn: -0.026177, up: 0.026177}, '$p_{T}$ Uncorr': {dn: -0.163, up: 0.163}}, 7: {'$p_{T}$ Corr': {dn: -0.064925, up: 0.064925}, '$p_{T}$ Uncorr': {dn: -0.318, up: 0.318}}, 8: {'$p_{T}$ Corr': {dn: -0.031796, up: 0.031796}, '$p_{T}$ Uncorr': {dn: -0.59886, up: 0.59886}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d06-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d06-x01-y06
 Title: Figure 20-3
 Type: Scatter2D
 ---
@@ -1050,11 +1050,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d07-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0008408, up: 0.0008408}, '$p_{T}$ Uncorr': {dn: -0.0019402, up: 0.0019402}}, 1: {'$p_{T}$ Corr': {dn: -0.00066152, up: 0.00066152}, '$p_{T}$ Uncorr': {dn: -0.003106, up: 0.003106}}, 2: {'$p_{T}$ Corr': {dn: -0.00095675, up: 0.00095675}, '$p_{T}$ Uncorr': {dn: -0.0045484, up: 0.0045484}}, 3: {'$p_{T}$ Corr': {dn: -0.0010625, up: 0.0010625}, '$p_{T}$ Uncorr': {dn: -0.0066804, up: 0.0066804}}, 4: {'$p_{T}$ Corr': {dn: -0.0014714, up: 0.0014714}, '$p_{T}$ Uncorr': {dn: -0.01068, up: 0.01068}}, 5: {'$p_{T}$ Corr': {dn: -0.0015894, up: 0.0015894}, '$p_{T}$ Uncorr': {dn: -0.012601, up: 0.012601}}, 6: {'$p_{T}$ Corr': {dn: -0.0026999, up: 0.0026999}, '$p_{T}$ Uncorr': {dn: -0.020985, up: 0.020985}}, 7: {'$p_{T}$ Corr': {dn: -0.0083154, up: 0.0083154}, '$p_{T}$ Uncorr': {dn: -0.05207, up: 0.05207}}, 8: {'$p_{T}$ Corr': {dn: -0.012983, up: 0.012983}, '$p_{T}$ Uncorr': {dn: -0.094746, up: 0.094746}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d07-x01-y01
 Title: Figure 20-4
 Type: Scatter2D
 ---
@@ -1071,11 +1071,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d07-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.00090945, up: 0.00090945}, '$p_{T}$ Uncorr': {dn: -0.0024666, up: 0.0024666}}, 1: {'$p_{T}$ Corr': {dn: -0.00082591, up: 0.00082591}, '$p_{T}$ Uncorr': {dn: -0.0039669, up: 0.0039669}}, 2: {'$p_{T}$ Corr': {dn: -0.00092334, up: 0.00092334}, '$p_{T}$ Uncorr': {dn: -0.0061442, up: 0.0061442}}, 3: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 4: {'$p_{T}$ Corr': {dn: -0.0014223, up: 0.0014223}, '$p_{T}$ Uncorr': {dn: -0.014256, up: 0.014256}}, 5: {'$p_{T}$ Corr': {dn: -0.001437, up: 0.001437}, '$p_{T}$ Uncorr': {dn: -0.017282, up: 0.017282}}, 6: {'$p_{T}$ Corr': {dn: -0.0023125, up: 0.0023125}, '$p_{T}$ Uncorr': {dn: -0.029601, up: 0.029601}}, 7: {'$p_{T}$ Corr': {dn: -0.0035306, up: 0.0035306}, '$p_{T}$ Uncorr': {dn: -0.063577, up: 0.063577}}, 8: {'$p_{T}$ Corr': {dn: -0.01242, up: 0.01242}, '$p_{T}$ Uncorr': {dn: -0.16378, up: 0.16378}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d07-x01-y02
 Title: Figure 20-4
 Type: Scatter2D
 ---
@@ -1092,11 +1092,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d07-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0015659, up: 0.0015659}, '$p_{T}$ Uncorr': {dn: -0.0032309, up: 0.0032309}}, 1: {'$p_{T}$ Corr': {dn: -0.0013424, up: 0.0013424}, '$p_{T}$ Uncorr': {dn: -0.0053578, up: 0.0053578}}, 2: {'$p_{T}$ Corr': {dn: -0.0014081, up: 0.0014081}, '$p_{T}$ Uncorr': {dn: -0.0085193, up: 0.0085193}}, 3: {'$p_{T}$ Corr': {dn: -0.0012419, up: 0.0012419}, '$p_{T}$ Uncorr': {dn: -0.012823, up: 0.012823}}, 4: {'$p_{T}$ Corr': {dn: -0.0016715, up: 0.0016715}, '$p_{T}$ Uncorr': {dn: -0.020859, up: 0.020859}}, 5: {'$p_{T}$ Corr': {dn: -0.0015051, up: 0.0015051}, '$p_{T}$ Uncorr': {dn: -0.022459, up: 0.022459}}, 6: {'$p_{T}$ Corr': {dn: -0.0025347, up: 0.0025347}, '$p_{T}$ Uncorr': {dn: -0.044504, up: 0.044504}}, 7: {'$p_{T}$ Corr': {dn: -0.0059069, up: 0.0059069}, '$p_{T}$ Uncorr': {dn: -0.10656, up: 0.10656}}, 8: {'$p_{T}$ Corr': {dn: -0.0028479, up: 0.0028479}, '$p_{T}$ Uncorr': {dn: -0.080694, up: 0.080694}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d07-x01-y03
 Title: Figure 20-4
 Type: Scatter2D
 ---
@@ -1113,11 +1113,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d07-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0022296, up: 0.0022296}, '$p_{T}$ Uncorr': {dn: -0.0043276, up: 0.0043276}}, 1: {'$p_{T}$ Corr': {dn: -0.00208, up: 0.00208}, '$p_{T}$ Uncorr': {dn: -0.0075827, up: 0.0075827}}, 2: {'$p_{T}$ Corr': {dn: -0.0021735, up: 0.0021735}, '$p_{T}$ Uncorr': {dn: -0.012064, up: 0.012064}}, 3: {'$p_{T}$ Corr': {dn: -0.0022451, up: 0.0022451}, '$p_{T}$ Uncorr': {dn: -0.018522, up: 0.018522}}, 4: {'$p_{T}$ Corr': {dn: -0.0028068, up: 0.0028068}, '$p_{T}$ Uncorr': {dn: -0.027634, up: 0.027634}}, 5: {'$p_{T}$ Corr': {dn: -0.0032988, up: 0.0032988}, '$p_{T}$ Uncorr': {dn: -0.033422, up: 0.033422}}, 6: {'$p_{T}$ Corr': {dn: -0.004771, up: 0.004771}, '$p_{T}$ Uncorr': {dn: -0.059217, up: 0.059217}}, 7: {'$p_{T}$ Corr': {dn: -0.010419, up: 0.010419}, '$p_{T}$ Uncorr': {dn: -0.13125, up: 0.13125}}, 8: {'$p_{T}$ Corr': {dn: -0.025038, up: 0.025038}, '$p_{T}$ Uncorr': {dn: -0.3903, up: 0.3903}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d07-x01-y04
 Title: Figure 20-4
 Type: Scatter2D
 ---
@@ -1134,11 +1134,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d07-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0045425, up: 0.0045425}, '$p_{T}$ Uncorr': {dn: -0.006052, up: 0.006052}}, 1: {'$p_{T}$ Corr': {dn: -0.0041935, up: 0.0041935}, '$p_{T}$ Uncorr': {dn: -0.011069, up: 0.011069}}, 2: {'$p_{T}$ Corr': {dn: -0.0043287, up: 0.0043287}, '$p_{T}$ Uncorr': {dn: -0.017922, up: 0.017922}}, 3: {'$p_{T}$ Corr': {dn: -0.0047659, up: 0.0047659}, '$p_{T}$ Uncorr': {dn: -0.027823, up: 0.027823}}, 4: {'$p_{T}$ Corr': {dn: -0.0060935, up: 0.0060935}, '$p_{T}$ Uncorr': {dn: -0.040594, up: 0.040594}}, 5: {'$p_{T}$ Corr': {dn: -0.0056323, up: 0.0056323}, '$p_{T}$ Uncorr': {dn: -0.041895, up: 0.041895}}, 6: {'$p_{T}$ Corr': {dn: -0.011832, up: 0.011832}, '$p_{T}$ Uncorr': {dn: -0.099842, up: 0.099842}}, 7: {'$p_{T}$ Corr': {dn: -0.014641, up: 0.014641}, '$p_{T}$ Uncorr': {dn: -0.13344, up: 0.13344}}, 8: {'$p_{T}$ Corr': {dn: -0.038294, up: 0.038294}, '$p_{T}$ Uncorr': {dn: -0.32958, up: 0.32958}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d07-x01-y05
 Title: Figure 20-4
 Type: Scatter2D
 ---
@@ -1155,11 +1155,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d07-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d07-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0066434, up: 0.0066434}, '$p_{T}$ Uncorr': {dn: -0.00888, up: 0.00888}}, 1: {'$p_{T}$ Corr': {dn: -0.0072721, up: 0.0072721}, '$p_{T}$ Uncorr': {dn: -0.015754, up: 0.015754}}, 2: {'$p_{T}$ Corr': {dn: -0.0067753, up: 0.0067753}, '$p_{T}$ Uncorr': {dn: -0.026821, up: 0.026821}}, 3: {'$p_{T}$ Corr': {dn: -0.0086291, up: 0.0086291}, '$p_{T}$ Uncorr': {dn: -0.037541, up: 0.037541}}, 4: {'$p_{T}$ Corr': {dn: -0.015225, up: 0.015225}, '$p_{T}$ Uncorr': {dn: -0.062352, up: 0.062352}}, 5: {'$p_{T}$ Corr': {dn: -0.014398, up: 0.014398}, '$p_{T}$ Uncorr': {dn: -0.068164, up: 0.068164}}, 6: {'$p_{T}$ Corr': {dn: -0.0283, up: 0.0283}, '$p_{T}$ Uncorr': {dn: -0.13325, up: 0.13325}}, 7: {'$p_{T}$ Corr': {dn: -0.058313, up: 0.058313}, '$p_{T}$ Uncorr': {dn: -0.27768, up: 0.27768}}, 8: {'$p_{T}$ Corr': {dn: -0.083103, up: 0.083103}, '$p_{T}$ Uncorr': {dn: -0.56992, up: 0.56992}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d07-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d07-x01-y06
 Title: Figure 20-4
 Type: Scatter2D
 ---
@@ -1176,11 +1176,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d08-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0023745, up: 0.0023745}, '$p_{T}$ Uncorr': {dn: -0.0018736, up: 0.0018736}}, 1: {'$p_{T}$ Corr': {dn: -0.0018542, up: 0.0018542}, '$p_{T}$ Uncorr': {dn: -0.003008, up: 0.003008}}, 2: {'$p_{T}$ Corr': {dn: -0.0024707, up: 0.0024707}, '$p_{T}$ Uncorr': {dn: -0.0043073, up: 0.0043073}}, 3: {'$p_{T}$ Corr': {dn: -0.0030416, up: 0.0030416}, '$p_{T}$ Uncorr': {dn: -0.0065619, up: 0.0065619}}, 4: {'$p_{T}$ Corr': {dn: -0.0045789, up: 0.0045789}, '$p_{T}$ Uncorr': {dn: -0.010897, up: 0.010897}}, 5: {'$p_{T}$ Corr': {dn: -0.0039322, up: 0.0039322}, '$p_{T}$ Uncorr': {dn: -0.011959, up: 0.011959}}, 6: {'$p_{T}$ Corr': {dn: -0.0083401, up: 0.0083401}, '$p_{T}$ Uncorr': {dn: -0.021136, up: 0.021136}}, 7: {'$p_{T}$ Corr': {dn: -0.026154, up: 0.026154}, '$p_{T}$ Uncorr': {dn: -0.047452, up: 0.047452}}, 8: {'$p_{T}$ Corr': {dn: -0.022813, up: 0.022813}, '$p_{T}$ Uncorr': {dn: -0.069122, up: 0.069122}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d08-x01-y01
 Title: Figure 20-5
 Type: Scatter2D
 ---
@@ -1197,11 +1197,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d08-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0024751, up: 0.0024751}, '$p_{T}$ Uncorr': {dn: -0.0022991, up: 0.0022991}}, 1: {'$p_{T}$ Corr': {dn: -0.0023287, up: 0.0023287}, '$p_{T}$ Uncorr': {dn: -0.0037825, up: 0.0037825}}, 2: {'$p_{T}$ Corr': {dn: -0.0025496, up: 0.0025496}, '$p_{T}$ Uncorr': {dn: -0.0057727, up: 0.0057727}}, 3: {'$p_{T}$ Corr': {dn: -0.0027351, up: 0.0027351}, '$p_{T}$ Uncorr': {dn: -0.0089099, up: 0.0089099}}, 4: {'$p_{T}$ Corr': {dn: -0.0039781, up: 0.0039781}, '$p_{T}$ Uncorr': {dn: -0.013317, up: 0.013317}}, 5: {'$p_{T}$ Corr': {dn: -0.0033611, up: 0.0033611}, '$p_{T}$ Uncorr': {dn: -0.015271, up: 0.015271}}, 6: {'$p_{T}$ Corr': {dn: -0.0067424, up: 0.0067424}, '$p_{T}$ Uncorr': {dn: -0.027438, up: 0.027438}}, 7: {'$p_{T}$ Corr': {dn: -0.017829, up: 0.017829}, '$p_{T}$ Uncorr': {dn: -0.067846, up: 0.067846}}, 8: {'$p_{T}$ Corr': {dn: -0.01374, up: 0.01374}, '$p_{T}$ Uncorr': {dn: -0.11415, up: 0.11415}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d08-x01-y02
 Title: Figure 20-5
 Type: Scatter2D
 ---
@@ -1218,11 +1218,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d08-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0043247, up: 0.0043247}, '$p_{T}$ Uncorr': {dn: -0.0029724, up: 0.0029724}}, 1: {'$p_{T}$ Corr': {dn: -0.0036934, up: 0.0036934}, '$p_{T}$ Uncorr': {dn: -0.0049883, up: 0.0049883}}, 2: {'$p_{T}$ Corr': {dn: -0.0037279, up: 0.0037279}, '$p_{T}$ Uncorr': {dn: -0.0078239, up: 0.0078239}}, 3: {'$p_{T}$ Corr': {dn: -0.0032842, up: 0.0032842}, '$p_{T}$ Uncorr': {dn: -0.011865, up: 0.011865}}, 4: {'$p_{T}$ Corr': {dn: -0.004395, up: 0.004395}, '$p_{T}$ Uncorr': {dn: -0.019365, up: 0.019365}}, 5: {'$p_{T}$ Corr': {dn: -0.0044929, up: 0.0044929}, '$p_{T}$ Uncorr': {dn: -0.022268, up: 0.022268}}, 6: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 7: {'$p_{T}$ Corr': {dn: -0.016787, up: 0.016787}, '$p_{T}$ Uncorr': {dn: -0.10558, up: 0.10558}}, 8: {'$p_{T}$ Corr': {dn: -0.020463, up: 0.020463}, '$p_{T}$ Uncorr': {dn: -0.10683, up: 0.10683}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d08-x01-y03
 Title: Figure 20-5
 Type: Scatter2D
 ---
@@ -1239,11 +1239,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d08-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0060793, up: 0.0060793}, '$p_{T}$ Uncorr': {dn: -0.003908, up: 0.003908}}, 1: {'$p_{T}$ Corr': {dn: -0.0057561, up: 0.0057561}, '$p_{T}$ Uncorr': {dn: -0.0069459, up: 0.0069459}}, 2: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 3: {'$p_{T}$ Corr': {dn: -0.0063174, up: 0.0063174}, '$p_{T}$ Uncorr': {dn: -0.017242, up: 0.017242}}, 4: {'$p_{T}$ Corr': {dn: -0.0072527, up: 0.0072527}, '$p_{T}$ Uncorr': {dn: -0.024348, up: 0.024348}}, 5: {'$p_{T}$ Corr': {dn: -0.0080531, up: 0.0080531}, '$p_{T}$ Uncorr': {dn: -0.028903, up: 0.028903}}, 6: {'$p_{T}$ Corr': {dn: -0.014584, up: 0.014584}, '$p_{T}$ Uncorr': {dn: -0.056074, up: 0.056074}}, 7: {'$p_{T}$ Corr': {dn: -0.028272, up: 0.028272}, '$p_{T}$ Uncorr': {dn: -0.11177, up: 0.11177}}, 8: {'$p_{T}$ Corr': {dn: -0.0048427, up: 0.0048427}, '$p_{T}$ Uncorr': {dn: -0.26474, up: 0.26474}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d08-x01-y04
 Title: Figure 20-5
 Type: Scatter2D
 ---
@@ -1260,11 +1260,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d08-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.012731, up: 0.012731}, '$p_{T}$ Uncorr': {dn: -0.0054627, up: 0.0054627}}, 1: {'$p_{T}$ Corr': {dn: -0.011414, up: 0.011414}, '$p_{T}$ Uncorr': {dn: -0.010027, up: 0.010027}}, 2: {'$p_{T}$ Corr': {dn: -0.011157, up: 0.011157}, '$p_{T}$ Uncorr': {dn: -0.01578, up: 0.01578}}, 3: {'$p_{T}$ Corr': {dn: -0.013571, up: 0.013571}, '$p_{T}$ Uncorr': {dn: -0.025887, up: 0.025887}}, 4: {'$p_{T}$ Corr': {dn: -0.018956, up: 0.018956}, '$p_{T}$ Uncorr': {dn: -0.038271, up: 0.038271}}, 5: {'$p_{T}$ Corr': {dn: -0.019531, up: 0.019531}, '$p_{T}$ Uncorr': {dn: -0.041492, up: 0.041492}}, 6: {'$p_{T}$ Corr': {dn: -0.025856, up: 0.025856}, '$p_{T}$ Uncorr': {dn: -0.086564, up: 0.086564}}, 7: {'$p_{T}$ Corr': {dn: -0.030602, up: 0.030602}, '$p_{T}$ Uncorr': {dn: -0.11368, up: 0.11368}}, 8: {'$p_{T}$ Corr': {dn: -0.12833, up: 0.12833}, '$p_{T}$ Uncorr': {dn: -0.37082, up: 0.37082}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d08-x01-y05
 Title: Figure 20-5
 Type: Scatter2D
 ---
@@ -1281,11 +1281,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d08-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d08-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.019121, up: 0.019121}, '$p_{T}$ Uncorr': {dn: -0.0077955, up: 0.0077955}}, 1: {'$p_{T}$ Corr': {dn: -0.021783, up: 0.021783}, '$p_{T}$ Uncorr': {dn: -0.014022, up: 0.014022}}, 2: {'$p_{T}$ Corr': {dn: -0.01991, up: 0.01991}, '$p_{T}$ Uncorr': {dn: -0.025004, up: 0.025004}}, 3: {'$p_{T}$ Corr': {dn: -0.02951, up: 0.02951}, '$p_{T}$ Uncorr': {dn: -0.035657, up: 0.035657}}, 4: {'$p_{T}$ Corr': {dn: -0.042742, up: 0.042742}, '$p_{T}$ Uncorr': {dn: -0.051401, up: 0.051401}}, 5: {'$p_{T}$ Corr': {dn: -0.039467, up: 0.039467}, '$p_{T}$ Uncorr': {dn: -0.060032, up: 0.060032}}, 6: {'$p_{T}$ Corr': {dn: -0.078834, up: 0.078834}, '$p_{T}$ Uncorr': {dn: -0.10045, up: 0.10045}}, 7: {'$p_{T}$ Corr': {dn: -0.17039, up: 0.17039}, '$p_{T}$ Uncorr': {dn: -0.26595, up: 0.26595}}, 8: {'$p_{T}$ Corr': {dn: -0.29609, up: 0.29609}, '$p_{T}$ Uncorr': {dn: -0.28908, up: 0.28908}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d08-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d08-x01-y06
 Title: Figure 20-5
 Type: Scatter2D
 ---
@@ -1302,11 +1302,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d09-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.003222, up: 0.003222}, '$p_{T}$ Uncorr': {dn: -0.0018154, up: 0.0018154}}, 1: {'$p_{T}$ Corr': {dn: -0.0024664, up: 0.0024664}, '$p_{T}$ Uncorr': {dn: -0.0029455, up: 0.0029455}}, 2: {'$p_{T}$ Corr': {dn: -0.0035478, up: 0.0035478}, '$p_{T}$ Uncorr': {dn: -0.0042523, up: 0.0042523}}, 3: {'$p_{T}$ Corr': {dn: -0.0041835, up: 0.0041835}, '$p_{T}$ Uncorr': {dn: -0.0064109, up: 0.0064109}}, 4: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 5: {'$p_{T}$ Corr': {dn: -0.0053193, up: 0.0053193}, '$p_{T}$ Uncorr': {dn: -0.011857, up: 0.011857}}, 6: {'$p_{T}$ Corr': {dn: -0.012888, up: 0.012888}, '$p_{T}$ Uncorr': {dn: -0.02147, up: 0.02147}}, 7: {'$p_{T}$ Corr': {dn: -0.036317, up: 0.036317}, '$p_{T}$ Uncorr': {dn: -0.061813, up: 0.061813}}, 8: {'$p_{T}$ Corr': {dn: -0.073647, up: 0.073647}, '$p_{T}$ Uncorr': {dn: -0.092721, up: 0.092721}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d09-x01-y01
 Title: Figure 20-6
 Type: Scatter2D
 ---
@@ -1323,11 +1323,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d09-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0034817, up: 0.0034817}, '$p_{T}$ Uncorr': {dn: -0.0022223, up: 0.0022223}}, 1: {'$p_{T}$ Corr': {dn: -0.0031783, up: 0.0031783}, '$p_{T}$ Uncorr': {dn: -0.0036238, up: 0.0036238}}, 2: {'$p_{T}$ Corr': {dn: -0.0037043, up: 0.0037043}, '$p_{T}$ Uncorr': {dn: -0.0056772, up: 0.0056772}}, 3: {'$p_{T}$ Corr': {dn: -0.0040025, up: 0.0040025}, '$p_{T}$ Uncorr': {dn: -0.00885, up: 0.00885}}, 4: {'$p_{T}$ Corr': {dn: -0.005996, up: 0.005996}, '$p_{T}$ Uncorr': {dn: -0.013246, up: 0.013246}}, 5: {'$p_{T}$ Corr': {dn: -0.0050899, up: 0.0050899}, '$p_{T}$ Uncorr': {dn: -0.01546, up: 0.01546}}, 6: {'$p_{T}$ Corr': {dn: -0.010849, up: 0.010849}, '$p_{T}$ Uncorr': {dn: -0.027598, up: 0.027598}}, 7: {'$p_{T}$ Corr': {dn: -0.022422, up: 0.022422}, '$p_{T}$ Uncorr': {dn: -0.061392, up: 0.061392}}, 8: {'$p_{T}$ Corr': {dn: -0.029122, up: 0.029122}, '$p_{T}$ Uncorr': {dn: -0.1493, up: 0.1493}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d09-x01-y02
 Title: Figure 20-6
 Type: Scatter2D
 ---
@@ -1344,11 +1344,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d09-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0059184, up: 0.0059184}, '$p_{T}$ Uncorr': {dn: -0.0028164, up: 0.0028164}}, 1: {'$p_{T}$ Corr': {dn: -0.0053379, up: 0.0053379}, '$p_{T}$ Uncorr': {dn: -0.0048702, up: 0.0048702}}, 2: {'$p_{T}$ Corr': {dn: -0.0051964, up: 0.0051964}, '$p_{T}$ Uncorr': {dn: -0.0074976, up: 0.0074976}}, 3: {'$p_{T}$ Corr': {dn: -0.0051085, up: 0.0051085}, '$p_{T}$ Uncorr': {dn: -0.012134, up: 0.012134}}, 4: {'$p_{T}$ Corr': {dn: -0.0056715, up: 0.0056715}, '$p_{T}$ Uncorr': {dn: -0.018024, up: 0.018024}}, 5: {'$p_{T}$ Corr': {dn: -0.0061504, up: 0.0061504}, '$p_{T}$ Uncorr': {dn: -0.021654, up: 0.021654}}, 6: {'$p_{T}$ Corr': {dn: -0.01014, up: 0.01014}, '$p_{T}$ Uncorr': {dn: -0.044489, up: 0.044489}}, 7: {'$p_{T}$ Corr': {dn: -0.022162, up: 0.022162}, '$p_{T}$ Uncorr': {dn: -0.10417, up: 0.10417}}, 8: {'$p_{T}$ Corr': {dn: -0.062719, up: 0.062719}, '$p_{T}$ Uncorr': {dn: -0.14687, up: 0.14687}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d09-x01-y03
 Title: Figure 20-6
 Type: Scatter2D
 ---
@@ -1365,11 +1365,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d09-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.0084654, up: 0.0084654}, '$p_{T}$ Uncorr': {dn: -0.0036868, up: 0.0036868}}, 1: {'$p_{T}$ Corr': {dn: -0.0077253, up: 0.0077253}, '$p_{T}$ Uncorr': {dn: -0.0064842, up: 0.0064842}}, 2: {'$p_{T}$ Corr': {dn: -0.0080135, up: 0.0080135}, '$p_{T}$ Uncorr': {dn: -0.010395, up: 0.010395}}, 3: {'$p_{T}$ Corr': {dn: -0.0081884, up: 0.0081884}, '$p_{T}$ Uncorr': {dn: -0.0159, up: 0.0159}}, 4: {'$p_{T}$ Corr': {dn: -0.01073, up: 0.01073}, '$p_{T}$ Uncorr': {dn: -0.023617, up: 0.023617}}, 5: {'$p_{T}$ Corr': {dn: -0.010749, up: 0.010749}, '$p_{T}$ Uncorr': {dn: -0.026888, up: 0.026888}}, 6: {'$p_{T}$ Corr': {dn: -0.020876, up: 0.020876}, '$p_{T}$ Uncorr': {dn: -0.053317, up: 0.053317}}, 7: {'$p_{T}$ Corr': {dn: -0.047783, up: 0.047783}, '$p_{T}$ Uncorr': {dn: -0.19022, up: 0.19022}}, 8: {'$p_{T}$ Corr': {dn: -0.10124, up: 0.10124}, '$p_{T}$ Uncorr': {dn: -0.23908, up: 0.23908}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d09-x01-y04
 Title: Figure 20-6
 Type: Scatter2D
 ---
@@ -1386,11 +1386,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y05
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d09-x01-y05
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.017302, up: 0.017302}, '$p_{T}$ Uncorr': {dn: -0.0050396, up: 0.0050396}}, 1: {'$p_{T}$ Corr': {dn: -0.015605, up: 0.015605}, '$p_{T}$ Uncorr': {dn: -0.0094644, up: 0.0094644}}, 2: {'$p_{T}$ Corr': {dn: -0.015782, up: 0.015782}, '$p_{T}$ Uncorr': {dn: -0.015244, up: 0.015244}}, 3: {'$p_{T}$ Corr': {dn: -0.016855, up: 0.016855}, '$p_{T}$ Uncorr': {dn: -0.023224, up: 0.023224}}, 4: {'$p_{T}$ Corr': {dn: -0.02821, up: 0.02821}, '$p_{T}$ Uncorr': {dn: -0.037053, up: 0.037053}}, 5: {'$p_{T}$ Corr': {dn: -0.023641, up: 0.023641}, '$p_{T}$ Uncorr': {dn: -0.036383, up: 0.036383}}, 6: {'$p_{T}$ Corr': {dn: -0.046128, up: 0.046128}, '$p_{T}$ Uncorr': {dn: -0.096933, up: 0.096933}}, 7: {'$p_{T}$ Corr': {dn: -0.059887, up: 0.059887}, '$p_{T}$ Uncorr': {dn: -0.12905, up: 0.12905}}, 8: {'$p_{T}$ Corr': {dn: -0.069365, up: 0.069365}, '$p_{T}$ Uncorr': {dn: -0.23537, up: 0.23537}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y05
+Path: /REF/PHENIX_2013_I1127262/d09-x01-y05
 Title: Figure 20-6
 Type: Scatter2D
 ---
@@ -1407,11 +1407,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d09-x01-y06
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d09-x01-y06
 Variations: [""]
 ErrorBreakdown: {0: {'$p_{T}$ Corr': {dn: -0.025468, up: 0.025468}, '$p_{T}$ Uncorr': {dn: -0.0069687, up: 0.0069687}}, 1: {'$p_{T}$ Corr': {dn: -0.0286, up: 0.0286}, '$p_{T}$ Uncorr': {dn: -0.012311, up: 0.012311}}, 2: {'$p_{T}$ Corr': {dn: -0.024901, up: 0.024901}, '$p_{T}$ Uncorr': {dn: -0.022448, up: 0.022448}}, 3: {'$p_{T}$ Corr': {dn: -0.044169, up: 0.044169}, '$p_{T}$ Uncorr': {dn: -0.033443, up: 0.033443}}, 4: {'$p_{T}$ Corr': {dn: -0.051703, up: 0.051703}, '$p_{T}$ Uncorr': {dn: -0.042031, up: 0.042031}}, 5: {'$p_{T}$ Corr': {}, '$p_{T}$ Uncorr': {}}, 6: {'$p_{T}$ Corr': {dn: -0.13442, up: 0.13442}, '$p_{T}$ Uncorr': {dn: -0.092122, up: 0.092122}}, 7: {'$p_{T}$ Corr': {dn: -0.14534, up: 0.14534}, '$p_{T}$ Uncorr': {dn: -0.20047, up: 0.20047}}, 8: {'$p_{T}$ Corr': {dn: -0.24004, up: 0.24004}, '$p_{T}$ Uncorr': {dn: -0.16811, up: 0.16811}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d09-x01-y06
+Path: /REF/PHENIX_2013_I1127262/d09-x01-y06
 Title: Figure 20-6
 Type: Scatter2D
 ---
@@ -1428,11 +1428,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y01
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d10-x01-y01
 Variations: [""]
 ErrorBreakdown: {0: {Stat: {dn: -0.002549, up: 0.002549}, Syst: {dn: -0.0017, up: 0.0017}}, 1: {Stat: {dn: -0.003552, up: 0.003552}, Syst: {dn: -0.002, up: 0.002}}, 2: {Stat: {dn: -0.005015, up: 0.005015}, Syst: {dn: -0.0031, up: 0.0031}}, 3: {Stat: {dn: -0.007235, up: 0.007235}, Syst: {dn: -0.0047, up: 0.0047}}, 4: {Stat: {dn: -0.0109, up: 0.0109}, Syst: {dn: -0.0092, up: 0.0092}}, 5: {Stat: {dn: -0.01744, up: 0.01744}, Syst: {dn: -0.016, up: 0.016}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y01
+Path: /REF/PHENIX_2013_I1127262/d10-x01-y01
 Title: Figure 21
 Type: Scatter2D
 ---
@@ -1446,11 +1446,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y02
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d10-x01-y02
 Variations: [""]
 ErrorBreakdown: {0: {Stat: {dn: -0.0022, up: 0.0022}, Syst: {dn: -0.0018, up: 0.0018}}, 1: {Stat: {dn: -0.0029, up: 0.0029}, Syst: {dn: -0.0021, up: 0.0021}}, 2: {Stat: {dn: -0.0039, up: 0.0039}, Syst: {dn: -0.0031, up: 0.0031}}, 3: {Stat: {dn: -0.0053, up: 0.0053}, Syst: {dn: -0.0046, up: 0.0046}}, 4: {Stat: {dn: -0.008, up: 0.008}, Syst: {dn: -0.0092, up: 0.0092}}, 5: {Stat: {dn: -0.011, up: 0.011}, Syst: {dn: -0.017, up: 0.017}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y02
+Path: /REF/PHENIX_2013_I1127262/d10-x01-y02
 Title: Figure 21
 Type: Scatter2D
 ---
@@ -1464,11 +1464,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y03
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d10-x01-y03
 Variations: [""]
 ErrorBreakdown: {0: {Stat: {dn: -0.011, up: 0.011}, Syst: {dn: -0.0048, up: 0.0048}}, 1: {Stat: {dn: -0.016, up: 0.016}, Syst: {dn: -0.0038, up: 0.0038}}, 2: {Stat: {dn: -0.022, up: 0.022}, Syst: {dn: -0.0046, up: 0.0046}}, 3: {Stat: {dn: -0.032, up: 0.032}, Syst: {dn: -0.0078, up: 0.0078}}, 4: {Stat: {dn: -0.046, up: 0.046}, Syst: {dn: -0.018, up: 0.018}}, 5: {Stat: {dn: -0.075, up: 0.075}, Syst: {dn: -0.04, up: 0.04}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y03
+Path: /REF/PHENIX_2013_I1127262/d10-x01-y03
 Title: Figure 21
 Type: Scatter2D
 ---
@@ -1482,11 +1482,11 @@ Type: Scatter2D
 END YODA_SCATTER2D_V2
 
 
-BEGIN YODA_SCATTER2D_V2 /REF/RIVET_ANALYSIS_NAME/d10-x01-y04
+BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2013_I1127262/d10-x01-y04
 Variations: [""]
 ErrorBreakdown: {0: {Stat: {dn: -0.01019, up: 0.01019}, Syst: {dn: -0.005, up: 0.005}}, 1: {Stat: {dn: -0.01312, up: 0.01312}, Syst: {dn: -0.0045, up: 0.0045}}, 2: {Stat: {dn: -0.01898, up: 0.01898}, Syst: {dn: -0.0052, up: 0.0052}}, 3: {Stat: {dn: -0.0237, up: 0.0237}, Syst: {dn: -0.0094, up: 0.0094}}, 4: {Stat: {dn: -0.0327, up: 0.0327}, Syst: {dn: -0.02, up: 0.02}}, 5: {Stat: {dn: -0.04523, up: 0.04523}, Syst: {dn: 0, up: 0}}}
 IsRef: 1
-Path: /REF/RIVET_ANALYSIS_NAME/d10-x01-y04
+Path: /REF/PHENIX_2013_I1127262/d10-x01-y04
 Title: Figure 21
 Type: Scatter2D
 ---
