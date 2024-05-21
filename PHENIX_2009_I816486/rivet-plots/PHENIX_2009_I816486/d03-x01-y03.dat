@@ -1,0 +1,58 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=Rebinned $R_{AA}$ for $\Delta\phi$, $p_{T}$, and path length dependence.
+XLabel=$p_T$ (GeV/$c$)
+YLabel=$R_{AA}$
+Options=LogY=<0>
+DrawOnly=/PHENIX_2009_I816486/d03-x01-y03 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2009_I816486/Rivet.yoda/PHENIX_2009_I816486:beam=AUAU:cent=GEN/d03-x01-y03
+LegendOnly=/PHENIX_2009_I816486/d03-x01-y03 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2009_I816486/Rivet.yoda/PHENIX_2009_I816486:beam=AUAU:cent=GEN/d03-x01-y03
+RatioPlot=1
+RatioPlotReference=/PHENIX_2009_I816486/d03-x01-y03
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2009_I816486/d03-x01-y03
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2009_I816486/d03-x01-y03
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+1.000000e+00	1.500000e+00	4.523820e-01	4.500686e-02	4.500686e-02
+1.500000e+00	2.000000e+00	5.142200e-01	5.207136e-02	5.207136e-02
+2.000000e+00	2.500000e+00	5.024600e-01	5.420394e-02	5.420394e-02
+2.500000e+00	3.000000e+00	4.535070e-01	5.107199e-02	5.107199e-02
+3.000000e+00	3.500000e+00	3.990480e-01	4.623156e-02	4.623156e-02
+3.500000e+00	4.000000e+00	3.801760e-01	4.448676e-02	4.448676e-02
+4.000000e+00	5.000000e+00	3.559790e-01	6.145091e-02	6.145091e-02
+5.000000e+00	6.000000e+00	3.252560e-01	5.650635e-02	5.650635e-02
+6.000000e+00	7.000000e+00	3.306580e-01	5.771739e-02	5.771739e-02
+7.000000e+00	8.000000e+00	3.052720e-01	5.424736e-02	5.424736e-02
+8.000000e+00	9.000000e+00	3.445200e-01	6.386657e-02	6.386657e-02
+9.000000e+00	1.000000e+01	3.473470e-01	7.117919e-02	7.117919e-02
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2009_I816486/Rivet.yoda/PHENIX_2009_I816486:beam=AUAU:cent=GEN/d03-x01-y03
+ErrorBars=1
+ErrorBreakdown={0: {"": {up: .nan, dn: .nan}}, 1: {"": {up: .nan, dn: .nan}}, 2: {"": {up: .nan, dn: .nan}}, 3: {"": {up: .nan, dn: .nan}}, 4: {"": {up: .nan, dn: .nan}}, 5: {"": {up: .nan, dn: .nan}}, 6: {"": {up: .nan, dn: .nan}}, 7: {"": {up: .nan, dn: .nan}}, 8: {"": {up: .nan, dn: .nan}}, 9: {"": {up: .nan, dn: .nan}}, 10: {"": {up: .nan, dn: .nan}}, 11: {"": {up: .nan, dn: .nan}}}
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2009_I816486/Rivet.yoda/PHENIX_2009_I816486:beam=AUAU:cent=GEN/d03-x01-y03
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+1.000000e+00	1.500000e+00	-nan	-nan	-nan
+1.500000e+00	2.000000e+00	-nan	-nan	-nan
+2.000000e+00	2.500000e+00	-nan	-nan	-nan
+2.500000e+00	3.000000e+00	nan	nan	nan
+3.000000e+00	3.500000e+00	nan	nan	nan
+3.500000e+00	4.000000e+00	-nan	-nan	-nan
+4.000000e+00	5.000000e+00	nan	nan	nan
+5.000000e+00	6.000000e+00	nan	nan	nan
+6.000000e+00	7.000000e+00	nan	nan	nan
+7.000000e+00	8.000000e+00	nan	nan	nan
+8.000000e+00	9.000000e+00	nan	nan	nan
+9.000000e+00	1.000000e+01	nan	nan	nan
+# END HISTO1D
+

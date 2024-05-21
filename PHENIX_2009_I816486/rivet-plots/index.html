@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="PHENIX_2009_I816486/index.html" style="text-decoration:none;">High-pT pi0 Production with Respect to the Reaction Plane in Au + Au Collisions at s(NN)**(1/2) = 200-GeV (PHENIX_2009_I816486)</a></h3>
+<p><a href="https://inspirehep.net/literature/816486">Inspire</a> &#124; <a href="http://hepdata.net/record/ins816486">HepData</a> &#124; <a href="https://arxiv.org/abs/1603.05477">arXiv:1603.05477</a> &#124; 10.1103/PhysRevC.94.014910</p>
+<p style="font-size:smaller;">Measurements of the azimuthal anisotropy of high-p_\perp neutral pion neutral pion production in Au+Au collisions at sqrt(s_NN) = 200 GeV by the PHENIX experiment are presented. The data included in this paper were collected during the 2004 RHIC running period and represent approximately an order of magnitude increase in the number of analyzed events relative to previously published results. Azimuthal angle distributions of pi^0s detected in the PHENIX electromagnetic calorimeters are measured relative to the reaction plane determined event-by-event using the forward and backward beam-beam counters. Amplitudes of the second Fourier component (v_2) of the angular distributions are presented as a function of pi^0 transverse momentum p_T for different bins in collision centrality. Measured reaction plane dependent pi^0 yields are used to determine the azimuthal dependence of the pi^0 suppression as a function of p_T, R_AA (Delta phi,p_T). A jet-quenching motivated geometric analysis is presented that attempts to simultaneously describe the centrality dependence and reaction plane angle dependence of the pi^0 suppression in terms of the path lengths of hypothetical parent partons in the medium. This set of results allows for a detailed examination of the influence of geometry in the collision region, and of the interplay between collective flow and jet-quenching effects along the azimuthal axis.</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Tuesday, 21. May 2024 04:30PM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd --errs Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>
