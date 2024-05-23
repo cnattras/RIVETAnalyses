@@ -1,0 +1,78 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=/PHENIX_2013_I1227971/d16-x01-y05 //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d16-x01-y05
+LegendOnly=/PHENIX_2013_I1227971/d16-x01-y05 //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d16-x01-y05
+RatioPlot=1
+RatioPlotReference=/PHENIX_2013_I1227971/d16-x01-y05
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2013_I1227971/d16-x01-y05
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2013_I1227971/d16-x01-y05
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	6.000000e-01	4.796440e-02	2.619059e-03	2.619059e-03
+6.000000e-01	7.000000e-01	7.644770e-02	4.102414e-03	4.102414e-03
+7.000000e-01	8.000000e-01	1.068750e-01	5.699775e-03	5.699775e-03
+8.000000e-01	9.000000e-01	1.332820e-01	7.075116e-03	7.075116e-03
+9.000000e-01	1.000000e+00	1.680670e-01	8.924950e-03	8.924950e-03
+1.000000e+00	1.100000e+00	1.869490e-01	9.924400e-03	9.924400e-03
+1.100000e+00	1.200000e+00	2.188650e-01	1.166761e-02	1.166761e-02
+1.200000e+00	1.300000e+00	2.334920e-01	1.249307e-02	1.249307e-02
+1.300000e+00	1.400000e+00	2.464440e-01	1.324696e-02	1.324696e-02
+1.400000e+00	1.500000e+00	2.756140e-01	1.490325e-02	1.490325e-02
+1.500000e+00	1.600000e+00	2.826500e-01	1.539852e-02	1.539852e-02
+1.600000e+00	1.700000e+00	2.839670e-01	1.561300e-02	1.561300e-02
+1.700000e+00	1.800000e+00	2.941370e-01	1.637530e-02	1.637530e-02
+1.800000e+00	1.900000e+00	3.012140e-01	1.702661e-02	1.702661e-02
+1.900000e+00	2.000000e+00	2.961130e-01	1.701795e-02	1.701795e-02
+2.000000e+00	2.200000e+00	2.968670e-01	1.630349e-02	1.630349e-02
+2.200000e+00	2.400000e+00	2.940630e-01	1.672834e-02	1.672834e-02
+2.400000e+00	2.600000e+00	3.037920e-01	1.826756e-02	1.826756e-02
+2.600000e+00	2.800000e+00	2.652420e-01	1.731513e-02	1.731513e-02
+2.800000e+00	3.000000e+00	2.624870e-01	1.916618e-02	1.916618e-02
+3.000000e+00	3.500000e+00	2.853930e-01	1.973294e-02	1.973294e-02
+3.500000e+00	4.000000e+00	2.384820e-01	2.316942e-02	2.316942e-02
+4.000000e+00	4.500000e+00	3.210080e-01	4.700914e-02	4.700914e-02
+4.500000e+00	5.000000e+00	3.935450e-01	8.918229e-02	8.918229e-02
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d16-x01-y05
+ErrorBars=1
+ErrorBreakdown={0: {"": {up: .nan, dn: .nan}}, 1: {"": {up: .nan, dn: .nan}}, 2: {"": {up: .nan, dn: .nan}}, 3: {"": {up: .nan, dn: .nan}}, 4: {"": {up: .nan, dn: .nan}}, 5: {"": {up: .nan, dn: .nan}}, 6: {"": {up: .nan, dn: .nan}}, 7: {"": {up: .nan, dn: .nan}}, 8: {"": {up: .nan, dn: .nan}}, 9: {"": {up: .nan, dn: .nan}}, 10: {"": {up: .nan, dn: .nan}}, 11: {"": {up: .nan, dn: .nan}}, 12: {"": {up: .nan, dn: .nan}}, 13: {"": {up: .nan, dn: .nan}}, 14: {"": {up: .nan, dn: .nan}}, 15: {"": {up: .nan, dn: .nan}}, 16: {"": {up: .nan, dn: .nan}}, 17: {"": {up: .nan, dn: .nan}}, 18: {"": {up: .nan, dn: .nan}}, 19: {"": {up: .nan, dn: .nan}}, 20: {"": {up: .nan, dn: .nan}}, 21: {"": {up: .nan, dn: .nan}}, 22: {"": {up: .nan, dn: .nan}}, 23: {"": {up: .nan, dn: .nan}}}
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d16-x01-y05
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	6.000000e-01	nan	nan	nan
+6.000000e-01	7.000000e-01	nan	nan	nan
+7.000000e-01	8.000000e-01	nan	nan	nan
+8.000000e-01	9.000000e-01	nan	nan	nan
+9.000000e-01	1.000000e+00	nan	nan	nan
+1.000000e+00	1.100000e+00	nan	nan	nan
+1.100000e+00	1.200000e+00	nan	nan	nan
+1.200000e+00	1.300000e+00	nan	nan	nan
+1.300000e+00	1.400000e+00	nan	nan	nan
+1.400000e+00	1.500000e+00	nan	nan	nan
+1.500000e+00	1.600000e+00	nan	nan	nan
+1.600000e+00	1.700000e+00	nan	nan	nan
+1.700000e+00	1.800000e+00	nan	nan	nan
+1.800000e+00	1.900000e+00	nan	nan	nan
+1.900000e+00	2.000000e+00	nan	nan	nan
+2.000000e+00	2.200000e+00	nan	nan	nan
+2.200000e+00	2.400000e+00	nan	nan	nan
+2.400000e+00	2.600000e+00	nan	nan	nan
+2.600000e+00	2.800000e+00	nan	nan	nan
+2.800000e+00	3.000000e+00	nan	nan	nan
+3.000000e+00	3.500000e+00	nan	nan	nan
+3.500000e+00	4.000000e+00	nan	nan	nan
+4.000000e+00	4.500000e+00	nan	nan	nan
+4.500000e+00	5.000000e+00	nan	nan	nan
+# END HISTO1D
+

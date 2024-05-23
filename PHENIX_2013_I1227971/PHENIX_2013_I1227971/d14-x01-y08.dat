@@ -1,0 +1,72 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+DrawOnly=/PHENIX_2013_I1227971/d14-x01-y08 //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d14-x01-y08
+LegendOnly=/PHENIX_2013_I1227971/d14-x01-y08 //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d14-x01-y08
+RatioPlot=1
+RatioPlotReference=/PHENIX_2013_I1227971/d14-x01-y08
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2013_I1227971/d14-x01-y08
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2013_I1227971/d14-x01-y08
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	6.000000e-01	1.629770e-01	9.349093e-03	9.349093e-03
+6.000000e-01	7.000000e-01	1.808030e-01	1.002556e-02	1.002556e-02
+7.000000e-01	8.000000e-01	2.129280e-01	1.167518e-02	1.167518e-02
+8.000000e-01	9.000000e-01	2.263240e-01	1.229387e-02	1.229387e-02
+9.000000e-01	1.000000e+00	2.482260e-01	1.343580e-02	1.343580e-02
+1.000000e+00	1.100000e+00	2.632270e-01	1.423020e-02	1.423020e-02
+1.100000e+00	1.200000e+00	2.751200e-01	1.485781e-02	1.485781e-02
+1.200000e+00	1.300000e+00	2.877830e-01	1.554266e-02	1.554266e-02
+1.300000e+00	1.400000e+00	2.952620e-01	1.595133e-02	1.595133e-02
+1.400000e+00	1.500000e+00	3.024950e-01	1.634955e-02	1.634955e-02
+1.500000e+00	1.600000e+00	3.253050e-01	1.763735e-02	1.763735e-02
+1.600000e+00	1.700000e+00	3.440130e-01	1.870157e-02	1.870157e-02
+1.700000e+00	1.800000e+00	3.505530e-01	1.912276e-02	1.912276e-02
+1.800000e+00	1.900000e+00	3.771920e-01	2.066485e-02	2.066485e-02
+1.900000e+00	2.000000e+00	3.764680e-01	2.072641e-02	2.072641e-02
+2.000000e+00	2.200000e+00	4.154270e-01	2.199403e-02	2.199403e-02
+2.200000e+00	2.400000e+00	4.738670e-01	2.532806e-02	2.532806e-02
+2.400000e+00	2.600000e+00	4.642670e-01	2.543957e-02	2.543957e-02
+2.600000e+00	2.800000e+00	4.935850e-01	2.808639e-02	2.808639e-02
+2.800000e+00	3.000000e+00	5.052600e-01	3.044358e-02	3.044358e-02
+3.000000e+00	3.500000e+00	5.998570e-01	3.549425e-02	3.549425e-02
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d14-x01-y08
+ErrorBars=1
+ErrorBreakdown={0: {"": {up: .nan, dn: .nan}}, 1: {"": {up: .nan, dn: .nan}}, 2: {"": {up: .nan, dn: .nan}}, 3: {"": {up: .nan, dn: .nan}}, 4: {"": {up: .nan, dn: .nan}}, 5: {"": {up: .nan, dn: .nan}}, 6: {"": {up: .nan, dn: .nan}}, 7: {"": {up: .nan, dn: .nan}}, 8: {"": {up: .nan, dn: .nan}}, 9: {"": {up: .nan, dn: .nan}}, 10: {"": {up: .nan, dn: .nan}}, 11: {"": {up: .nan, dn: .nan}}, 12: {"": {up: .nan, dn: .nan}}, 13: {"": {up: .nan, dn: .nan}}, 14: {"": {up: .nan, dn: .nan}}, 15: {"": {up: .nan, dn: .nan}}, 16: {"": {up: .nan, dn: .nan}}, 17: {"": {up: .nan, dn: .nan}}, 18: {"": {up: .nan, dn: .nan}}, 19: {"": {up: .nan, dn: .nan}}, 20: {"": {up: .nan, dn: .nan}}}
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/RIVETAnalyses/PHENIX_2013_I1227971/Rivet.yoda/PHENIX_2013_I1227971:beam=AUAU200:cent=GEN/d14-x01-y08
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+5.000000e-01	6.000000e-01	nan	nan	nan
+6.000000e-01	7.000000e-01	nan	nan	nan
+7.000000e-01	8.000000e-01	nan	nan	nan
+8.000000e-01	9.000000e-01	nan	nan	nan
+9.000000e-01	1.000000e+00	nan	nan	nan
+1.000000e+00	1.100000e+00	nan	nan	nan
+1.100000e+00	1.200000e+00	nan	nan	nan
+1.200000e+00	1.300000e+00	nan	nan	nan
+1.300000e+00	1.400000e+00	nan	nan	nan
+1.400000e+00	1.500000e+00	nan	nan	nan
+1.500000e+00	1.600000e+00	nan	nan	nan
+1.600000e+00	1.700000e+00	nan	nan	nan
+1.700000e+00	1.800000e+00	nan	nan	nan
+1.800000e+00	1.900000e+00	nan	nan	nan
+1.900000e+00	2.000000e+00	nan	nan	nan
+2.000000e+00	2.200000e+00	nan	nan	nan
+2.200000e+00	2.400000e+00	nan	nan	nan
+2.400000e+00	2.600000e+00	nan	nan	nan
+2.600000e+00	2.800000e+00	nan	nan	nan
+2.800000e+00	3.000000e+00	nan	nan	nan
+3.000000e+00	3.500000e+00	nan	nan	nan
+# END HISTO1D
+
