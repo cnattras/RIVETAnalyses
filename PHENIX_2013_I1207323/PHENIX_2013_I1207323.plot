@@ -2,7 +2,7 @@
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y01
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -10,7 +10,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y02
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -18,7 +18,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y03
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -26,7 +26,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y04
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -34,7 +34,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y05
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -42,7 +42,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y06
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -50,7 +50,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y07
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -58,7 +58,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y08
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -66,7 +66,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y09
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -74,7 +74,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y10
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -82,7 +82,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y11
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
@@ -90,7 +90,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2013_I1207323/d01-x01-y12
 Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
 XLabel=$\Delta \phi$ [rad]
-YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ $[rad]^{-1}$
 Options=LogY=<0>
 END PLOT
 
