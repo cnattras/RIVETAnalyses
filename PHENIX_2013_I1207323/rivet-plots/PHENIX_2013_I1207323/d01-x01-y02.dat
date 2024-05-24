@@ -1,0 +1,54 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=Direct photon-hadron pair per-trigger yields vs $\Delta \phi$ (Au+Au and $p+p$)
+XLabel=$\Delta \phi$ [rad]
+YLabel=1/$N_{trig}$ dn/d$\Delta \phi$ [rad]$^{-1}$
+Options=LogY=<0>
+DrawOnly=/PHENIX_2013_I1207323/d01-x01-y02 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2013_I1207323/Rivet.yoda/PHENIX_2013_I1207323:cent=GEN/d01-x01-y02
+LegendOnly=/PHENIX_2013_I1207323/d01-x01-y02 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2013_I1207323/Rivet.yoda/PHENIX_2013_I1207323:cent=GEN/d01-x01-y02
+RatioPlot=1
+RatioPlotReference=/PHENIX_2013_I1207323/d01-x01-y02
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2013_I1207323/d01-x01-y02
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2013_I1207323/d01-x01-y02
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	3.000000e-01	1.710000e-03	7.180063e-04	7.180063e-04
+3.000000e-01	6.000000e-01	1.320000e-03	5.785819e-04	5.785819e-04
+6.000000e-01	9.000000e-01	5.520000e-04	4.366440e-04	4.366440e-04
+9.000000e-01	1.200000e+00	2.340000e-04	4.768071e-04	4.768071e-04
+1.200000e+00	1.500000e+00	3.930000e-04	8.138532e-04	8.138532e-04
+1.500000e+00	1.800000e+00	-4.410000e-05	7.535688e-04	7.535688e-04
+1.800000e+00	2.100000e+00	8.230000e-04	9.774927e-04	9.774927e-04
+2.100000e+00	2.400000e+00	2.320000e-03	1.215527e-03	1.215527e-03
+2.400000e+00	2.700000e+00	4.180000e-03	1.714789e-03	1.714789e-03
+2.700000e+00	3.000000e+00	7.420000e-03	2.688215e-03	2.688215e-03
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2013_I1207323/Rivet.yoda/PHENIX_2013_I1207323:cent=GEN/d01-x01-y02
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2013_I1207323/Rivet.yoda/PHENIX_2013_I1207323:cent=GEN/d01-x01-y02
+ScaledBy=1.00000000000000000e+00
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	3.000000e-01	-nan	-nan	-nan
+3.000000e-01	6.000000e-01	-nan	-nan	-nan
+6.000000e-01	9.000000e-01	-nan	-nan	-nan
+9.000000e-01	1.200000e+00	-nan	-nan	-nan
+1.200000e+00	1.500000e+00	-nan	-nan	-nan
+1.500000e+00	1.800000e+00	-nan	-nan	-nan
+1.800000e+00	2.100000e+00	-nan	-nan	-nan
+2.100000e+00	2.400000e+00	-nan	-nan	-nan
+2.400000e+00	2.700000e+00	-nan	-nan	-nan
+2.700000e+00	3.000000e+00	-nan	-nan	-nan
+# END HISTO1D
+
