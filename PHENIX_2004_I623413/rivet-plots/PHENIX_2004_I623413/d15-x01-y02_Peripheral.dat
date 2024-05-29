@@ -1,0 +1,30 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=Minimum-bias invariant yields for $\pi^{pm}$ in equal $p_{T}$ bins.
+XLabel=$p_{T}$ (GeV/$c$)
+YLabel=central/peripheral
+DrawOnly=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d15-x01-y02_Peripheral
+LegendOnly=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d15-x01-y02_Peripheral
+# END PLOT
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d15-x01-y02_Peripheral
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d15-x01-y02_Peripheral
+ScaledBy=inf
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+2.000000e-01	3.000000e-01	-nan	-nan	-nan
+3.000000e-01	4.000000e-01	-nan	-nan	-nan
+4.000000e-01	5.000000e-01	-nan	-nan	-nan
+5.000000e-01	6.000000e-01	-nan	-nan	-nan
+6.000000e-01	8.000000e-01	-nan	-nan	-nan
+8.000000e-01	1.000000e+00	-nan	-nan	-nan
+1.000000e+00	1.400000e+00	-nan	-nan	-nan
+1.400000e+00	1.800000e+00	-nan	-nan	-nan
+1.800000e+00	2.200000e+00	-nan	-nan	-nan
+2.200000e+00	2.700000e+00	-nan	-nan	-nan
+# END HISTO1D
+

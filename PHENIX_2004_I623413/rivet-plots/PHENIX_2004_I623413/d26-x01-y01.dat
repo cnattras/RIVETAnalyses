@@ -1,0 +1,43 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity in each centrality class.
+XLabel=Centrality (%)
+YLabel=$N_{coll}$
+DrawOnly=/PHENIX_2004_I623413/d26-x01-y01 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d26-x01-y01
+LegendOnly=/PHENIX_2004_I623413/d26-x01-y01 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d26-x01-y01
+RatioPlot=1
+RatioPlotReference=/PHENIX_2004_I623413/d26-x01-y01
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2004_I623413/d26-x01-y01
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2004_I623413/d26-x01-y01
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	5.000000e+00	1.008800e+03	0.000000e+00	0.000000e+00
+5.000000e+00	1.500000e+01	7.122000e+02	0.000000e+00	0.000000e+00
+1.500000e+01	3.000000e+01	4.055000e+02	0.000000e+00	0.000000e+00
+3.000000e+01	6.000000e+01	1.315000e+02	0.000000e+00	0.000000e+00
+6.000000e+01	9.200000e+01	1.420000e+01	0.000000e+00	0.000000e+00
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d26-x01-y01
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d26-x01-y01
+ScaledBy=1.00000000000000000e+00
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	5.000000e+00	0.000000e+00	0.000000e+00	0.000000e+00
+5.000000e+00	1.500000e+01	0.000000e+00	0.000000e+00	0.000000e+00
+1.500000e+01	3.000000e+01	0.000000e+00	0.000000e+00	0.000000e+00
+3.000000e+01	6.000000e+01	0.000000e+00	0.000000e+00	0.000000e+00
+6.000000e+01	9.200000e+01	0.000000e+00	0.000000e+00	0.000000e+00
+# END HISTO1D
+

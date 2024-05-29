@@ -1,0 +1,53 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=For minimum-bias collisions, the inclusive $\Lambda$, inclusive $p$, and direct $p$ transverse momentum distributions are plotted together in the left panel. The equivalent comparison for inclusive $\bar{\Lambda}$, $\bar{p}$, and direct $\bar{p}$ transverse momentum distributions is in the right panel.
+XLabel=$p_{T}$ (GeV/$c$)
+YLabel=(1/2 $p_{T}$) d$^{2}$N/d$p_{T}$dy ($c^{2}$/GeV$^{2}$)
+DrawOnly=/PHENIX_2004_I623413/d18-x01-y04 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d18-x01-y04
+LegendOnly=/PHENIX_2004_I623413/d18-x01-y04 //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d18-x01-y04
+RatioPlot=1
+RatioPlotReference=/PHENIX_2004_I623413/d18-x01-y04
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2004_I623413/d18-x01-y04
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2004_I623413/d18-x01-y04
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+2.000000e-01	3.000000e-01	8.100000e+01	2.000000e+00	2.000000e+00
+3.000000e-01	4.000000e-01	3.660000e+01	8.000000e-01	8.000000e-01
+4.000000e-01	5.000000e-01	1.750000e+01	5.000000e-01	5.000000e-01
+5.000000e-01	6.000000e-01	1.010000e+01	3.000000e-01	3.000000e-01
+6.000000e-01	8.000000e-01	4.400000e+00	1.000000e-01	1.000000e-01
+8.000000e-01	1.000000e+00	1.790000e+00	6.000000e-02	6.000000e-02
+1.000000e+00	1.400000e+00	5.800000e-01	2.000000e-02	2.000000e-02
+1.400000e+00	1.800000e+00	1.420000e-01	9.000000e-03	9.000000e-03
+1.800000e+00	2.200000e+00	2.700000e-02	3.000000e-03	3.000000e-03
+2.200000e+00	2.700000e+00	1.700000e-03	6.000000e-04	6.000000e-04
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d18-x01-y04
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/bhakans1/Rivet.2/RIVETAnalyses/PHENIX_2004_I623413/Rivet.yoda/PHENIX_2004_I623413:beam=AUAU130:cent=GEN/d18-x01-y04
+ScaledBy=-5.55645375762797374e-14
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+2.000000e-01	3.000000e-01	1.000922e+02	3.169584e+01	3.169584e+01
+3.000000e-01	4.000000e-01	9.018459e+01	3.006927e+01	3.006927e+01
+4.000000e-01	5.000000e-01	8.016147e+01	2.834958e+01	2.834958e+01
+5.000000e-01	6.000000e-01	6.004608e+01	2.455149e+01	2.455149e+01
+6.000000e-01	8.000000e-01	2.001146e+01	1.002311e+01	1.002311e+01
+8.000000e-01	1.000000e+00	1.502308e+01	8.680255e+00	8.680255e+00
+1.000000e+00	1.400000e+00	5.011533e+00	3.543696e+00	3.543696e+00
+1.400000e+00	1.800000e+00	-0.000000e+00	-0.000000e+00	-0.000000e+00
+1.800000e+00	2.200000e+00	2.505772e+00	2.505772e+00	2.505772e+00
+2.200000e+00	2.700000e+00	-0.000000e+00	-0.000000e+00	-0.000000e+00
+# END HISTO1D
+
