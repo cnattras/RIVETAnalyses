@@ -134,28 +134,28 @@ namespace Rivet {
       book(_h["Fig12AntiProtonCent30_60"], 21, 1, 8);
       book(_h["Fig12ProtonCent60_92"], 22, 1, 1);
       book(_h["Fig12AntiProtonCent60_92"], 22, 1, 2);
-      book(_h["PionPlusParticle"], 25, 1, 1);
-      book(_h["PionMinusParticle"], 25, 1, 2);
-      book(_h["KaonPlusParticle"], 25, 1, 3);
-      book(_h["KaonMinusParticle"], 25, 1, 4);
-      book(_h["ProtonParticle"], 25, 1, 5);
-      book(_h["AntiProtonParticle"], 25, 1, 6);
-      book(_h["N_collCentrality"], 26, 1, 1);
-      book(_h["N_partCentrality"], 27, 1, 1);
-      book(_p["PionPlusCentrality"], 28, 1, 1);
-      book(_p["PionMinusCentrality"], 28, 1, 2);
-      book(_p["KaonPlusCentrality"], 28, 1, 3);
-      book(_p["KaonMinusCentrality"], 28, 1, 4);
-      book(_p["ProtonCentrality"], 28, 1, 5);
-      book(_p["AntiProtonCentrality"], 28, 1, 6);
-      /*
-      book(_h["Table4PionPlusCentrality"], 29, 1, 1);
-      book(_h["Table4PionMinusCentrality"], 29, 1, 2);
-      book(_h["Table4KaonPlusCentrality"], 29, 1, 3);
-      book(_h["Table4KaonMinusCentrality"], 29, 1, 4);
-      book(_h["Table4ProtonCentrality"], 29, 1, 5);
-      book(_h["Table4AntiProtonCentrality"], 29, 1, 6);
-      */
+      // book(_h["PionPlusParticle"], 25, 1, 1);
+      // book(_h["PionMinusParticle"], 25, 1, 2);
+      // book(_h["KaonPlusParticle"], 25, 1, 3);
+      // book(_h["KaonMinusParticle"], 25, 1, 4);
+      // book(_h["ProtonParticle"], 25, 1, 5);
+      // book(_h["AntiProtonParticle"], 25, 1, 6);
+      // book(_h["N_collCentrality"], 26, 1, 1);
+      // book(_h["N_partCentrality"], 27, 1, 1);
+      // book(_p["PionPlusCentrality"], 28, 1, 1);
+      // book(_p["PionMinusCentrality"], 28, 1, 2);
+      // book(_p["KaonPlusCentrality"], 28, 1, 3);
+      // book(_p["KaonMinusCentrality"], 28, 1, 4);
+      // book(_p["ProtonCentrality"], 28, 1, 5);
+      // book(_p["AntiProtonCentrality"], 28, 1, 6);
+      
+      // book(_h["Table4PionPlusCentrality"], 29, 1, 1);
+      // book(_h["Table4PionMinusCentrality"], 29, 1, 2);
+      // book(_h["Table4KaonPlusCentrality"], 29, 1, 3);
+      // book(_h["Table4KaonMinusCentrality"], 29, 1, 4);
+      // book(_h["Table4ProtonCentrality"], 29, 1, 5);
+      // book(_h["Table4AntiProtonCentrality"], 29, 1, 6);
+      
       book(_c["MinBias"], "_MinBias");
       book(_c["Cent0_5"], "_Cent0_5");
       book(_c["Cent5_15"], "_Cent5_15");
@@ -182,9 +182,9 @@ namespace Rivet {
       for(Particle& p : particles){
         if(p.pid() == 321)
         {
-          _h["KaonPlusMinBias"]->fill(p.pT()/GeV);
-          _h["KaonPlusParticle"]->fill(cent);
-          _p["KaonPlusCentrality"]->fill(cent, p.pT()/GeV);
+          // _h["KaonPlusMinBias"]->fill(p.pT()/GeV);
+          // _h["KaonPlusParticle"]->fill(cent);
+          // _p["KaonPlusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10KaonPlusCent0_5"]->fill(p.pT()/GeV);
@@ -213,9 +213,9 @@ namespace Rivet {
         }
         if(p.pid() == -321)
         {
-          _h["KaonMinusMinBias"]->fill(p.pT()/GeV);
-          _h["KaonMinusParticle"]->fill(cent);
-          _p["KaonMinusCentrality"]->fill(cent, p.pT()/GeV);
+          // _h["KaonMinusMinBias"]->fill(p.pT()/GeV);
+          // _h["KaonMinusParticle"]->fill(cent);
+          // _p["KaonMinusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10KaonMinusCent0_5"]->fill(p.pT()/GeV);
@@ -248,9 +248,9 @@ namespace Rivet {
         }
         if(p.pid() == 2212)
         {
-          _h["ProtonMinBias"]->fill(p.pT()/GeV);
-          _h["ProtonParticle"]->fill(cent);
-          _p["ProtonCentrality"]->fill(cent, p.pT()/GeV);
+          // _h["ProtonMinBias"]->fill(p.pT()/GeV);
+          // _h["ProtonParticle"]->fill(cent);
+          // _p["ProtonCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10ProtonCent0_5"]->fill(p.pT()/GeV);
@@ -277,9 +277,9 @@ namespace Rivet {
         }
         if(p.pid() == -2212)
         {
-          _h["AntiProtonMinBias"]->fill(p.pT()/GeV);
-          _h["AntiProtonParticle"]->fill(cent);
-          _p["AntiProtonCentrality"]->fill(cent, p.pT()/GeV);
+          // _h["AntiProtonMinBias"]->fill(p.pT()/GeV);
+          // _h["AntiProtonParticle"]->fill(cent);
+          // _p["AntiProtonCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10AntiProtonCent0_5"]->fill(p.pT()/GeV);
@@ -308,9 +308,9 @@ namespace Rivet {
         if(p.pid() == 211)
         {
 
-          _h["PionPlusMinBias"]->fill(p.pT()/GeV);
-          _h["PionPlusParticle"]->fill(cent);
-          _p["PionPlusCentrality"]->fill(cent, p.pT()/GeV);
+          // _h["PionPlusMinBias"]->fill(p.pT()/GeV);
+          // _h["PionPlusParticle"]->fill(cent);
+          // _p["PionPlusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionPlusCent0_5"]->fill(p.pT()/GeV);
@@ -339,9 +339,9 @@ namespace Rivet {
         }
         if(p.pid() == -211)
         {
-          _h["PionMinusMinBias"]->fill(p.pT()/GeV);
-          _h["PionMinusParticle"]->fill(cent);
-          _p["PionMinusCentrality"]->fill(cent, p.pT()/GeV);
+          // _h["PionMinusMinBias"]->fill(p.pT()/GeV);
+          // _h["PionMinusParticle"]->fill(cent);
+          // _p["PionMinusCentrality"]->fill(cent, p.pT()/GeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionMinusCent0_5"]->fill(p.pT()/GeV);
@@ -373,12 +373,12 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      _h["KaonPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["KaonMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["ProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["AntiProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["PionPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
-      _h["PionMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      // _h["KaonPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      // _h["KaonMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      // _h["ProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      // _h["AntiProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      // _h["PionPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
+      // _h["PionMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
       _h["Fig10KaonPlusCent0_5"] ->scaleW(1./_c["Cent0_5"]->sumW());
       _h["Fig10KaonPlusCent5_15"] ->scaleW(1./_c["Cent5_15"]->sumW());
       _h["Fig10KaonPlusCent15_30"] ->scaleW(1./_c["Cent15_30"]->sumW());
@@ -458,17 +458,17 @@ namespace Rivet {
 
       vector<int> centBins = {0, 5, 15, 30, 60, 92};
 
-      for(int i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
-      {
-              string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
-              double normCent = 1./_c[scounter]->sumW();
-              _h["PionPlusParticle"]->bin(i).scaleW(normCent);
-              _h["PionMinusParticle"]->bin(i).scaleW(normCent);
-              _h["KaonPlusParticle"]->bin(i).scaleW(normCent);
-              _h["KaonMinusParticle"]->bin(i).scaleW(normCent);
-              _h["ProtonParticle"]->bin(i).scaleW(normCent);
-              _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
-      }
+      // for(int i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
+      // {
+              // string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
+              // double normCent = 1./_c[scounter]->sumW();
+              // _h["PionPlusParticle"]->bin(i).scaleW(normCent);
+              // _h["PionMinusParticle"]->bin(i).scaleW(normCent);
+              // _h["KaonPlusParticle"]->bin(i).scaleW(normCent);
+              // _h["KaonMinusParticle"]->bin(i).scaleW(normCent);
+              // _h["ProtonParticle"]->bin(i).scaleW(normCent);
+              // _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
+      // }
 
 
 
