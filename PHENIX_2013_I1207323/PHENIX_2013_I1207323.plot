@@ -149,3 +149,843 @@ XLabel=$\xi$
 YLabel=ratio
 Options=LogY=<0>
 END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0111xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0112xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0113xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0114xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0115xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0116xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0117xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0118xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_0119xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01110xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_2.100000_2.400000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_2.400000_2.700000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01111xi_2.700000_3.000000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_0.000000_0.300000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_0.300000_0.600000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_0.600000_0.900000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_0.900000_1.200000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_1.200000_1.500000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_1.500000_1.800000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
+
+BEGIN PLOT /PHENIX_2013_I1207323/DeltaPhi_01112xi_1.800000_2.100000
+Title=Title of delta phi
+XLabel=$\Delta\Phi$
+YLabel=Y of delta phi
+Options=LogY=<0>
+END PLOT
