@@ -8,3 +8,5 @@ This analysis is in good shape except that some of the plots have poor names and
 The titles for the RAA and RCP plots need to be improved because they aren't accurate.  Better to make them conform to the styles of the other plots.
 
 Needs flags set so it can either work with beams from the generator or set by hand.
+
+Update: fixed .plot file for RAA and RCP plots
