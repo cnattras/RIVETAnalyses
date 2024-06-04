@@ -9,4 +9,4 @@ The titles for the RAA and RCP plots need to be improved because they aren't acc
 
 Needs flags set so it can either work with beams from the generator or set by hand.
 
-Update: fixed .plot file for RAA and RCP plots. Added binshift function still needs implemented.
+Update: fixed .plot file for RAA and RCP plots. Added binshift function and added section to finalize. Needs to be checked for correctness.
