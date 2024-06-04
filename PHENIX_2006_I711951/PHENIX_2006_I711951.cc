@@ -547,6 +547,124 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+//d01-x01-y01
+        binShift(*hPP_Yields["PiplusPP"]);
+	
+	//d01-x01-y01
+	
+	      binShift(*hPP_Yields["PiminusPP"]);
+
+	//d05-x01-y01
+	
+	      binShift(*hPP_Yields["KplusPP"]);
+	
+	//d05-x01-y02
+	
+	      binShift(*hPP_Yields["KminusPP"]);
+
+	//d09-x01-y01
+	
+	      binShift(*hPP_Yields["PPP"]);
+	
+	//d09-x01-y02
+	
+	      binShift(*hPP_Yields["P_barPP"]);
+	
+	//d03-x01-y01
+	
+	      binShift(*hdAu_Yields["PiplusC20"]);
+	
+	//d03-x01-y02
+	
+	      binShift(*hdAu_Yields["PiminusC20"]);
+	
+	//d07-x01-y01
+	
+	      binShift(*hdAu_Yields["KplusC20"]);
+	
+	
+	//d07-x01-y02
+	
+	      binShift(*hdAu_Yields["KminusC20"]);
+	
+	//d10-x01-y01
+	
+	      binShift(*hdAu_Yields["PC20"]);
+
+	//d10-x01-y02
+	
+	      binShift(*hdAu_Yields["P_barC20"]);
+
+	//d03-x01-y03
+
+	      binShift(*hdAu_Yields["PiplusC40"]);
+	
+	
+	//d03-x01-y04
+
+	      binShift(*hdAu_Yields["PiminusC40"]);
+
+	//d08-x01-y01
+
+	      binShift(*hdAu_Yields["KplusC40"]);
+
+
+	//d08-x01-y02
+
+	      binShift(*hdAu_Yields["KminusC40"]);
+
+	//d10-x01-y04
+
+	      binShift(*hdAu_Yields["P_barC40"]);
+
+	//d04-x01-y01
+	
+	      binShift(*hdAu_Yields["PiplusC60"]);
+
+	//d03-x01-y05
+	
+	      binShift(*hdAu_Yields["PiminusC60"]);
+
+	//d07-x01-y03
+	
+	      binShift(*hdAu_Yields["KplusC60"]);
+
+	//d07-x01-y04
+	
+	      binShift(*hdAu_Yields["KminusC60"]);
+
+	//d10-x01-y05
+	
+	      binShift(*hdAu_Yields["PC60"]);
+
+	//d10-x01-y06
+	
+	      binShift(*hdAu_Yields["P_barC60"]);
+
+	//d03-x01-y06
+	
+	      binShift(*hdAu_Yields["PiplusC88"]);
+
+	//d03-x01-y07
+  
+	      binShift(*hdAu_Yields["PiminusC88"]);
+
+	//d07-x01-y05
+	
+	      binShift(*hdAu_Yields["KplusC88"]);
+
+	//d07-x01-y06
+	
+	      binShift(*hdAu_Yields["KminusC88"]);
+
+	//d10-x01-y07
+	
+	      binShift(*hdAu_Yields["PC88"]);
+
+	//d10-x01-y08
+	
+	      binShift(*hdAu_Yields["P_barC88"]);
+
 
       //****Scale Histos****
 
