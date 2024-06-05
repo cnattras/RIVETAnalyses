@@ -245,12 +245,12 @@ if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       divide(_h["c10Pt_AuAu130_t10"], _h["p80Pt130_AuAu130_t10"], _s["RCP_AuAu130_t10"]);
       divide(_h["c10Pt_AuAu130_t11"], _h["p80Pt130_AuAu130_t11"], _s["RCP_AuAu130_t11"]);
       divide(_h["c10Pt_AuAu130_t12"], _h["p80Pt130_AuAu130_t12"], _s["RCP_AuAu130_t12"]);
-     /*_s["Raa_c010_AuAu130_t7"]->scaleY(1./905.);
+     _s["Raa_c010_AuAu130_t7"]->scaleY(1./905.);
      _s["Raa_c010_AuAu130_t8"]->scaleY(1./905.);
      _s["Raa_c010_AuAu130_t9"]->scaleY(1./905.);
      _s["RCP_AuAu130_t10"]->scaleY(1./45.);
      _s["RCP_AuAu130_t11"]->scaleY(1./45.);
-     _s["RCP_AuAu130_t12"]->scaleY(1./45.);*/
+     _s["RCP_AuAu130_t12"]->scaleY(1./45.);
     }
 
       ///@}

@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="PHENIX_2001_I562409/index.html" style="text-decoration:none;">Suppression of hadrons with large transverse momentum in central Au+Au collisions at $\sqrt{s_{NN}}$ = 130-GeV (PHENIX_2001_I562409)</a></h3>
+<p><a href="https://inspirehep.net/literature/562409">Inspire</a> &#124; <a href="http://hepdata.net/record/ins562409">HepData</a> &#124; <a href="https://arxiv.org/abs/1603.05477">arXiv:1603.05477</a> &#124; 10.1103/PhysRevC.94.014910</p>
+<p style="font-size:smaller;">Transverse momentum spectra for charged hadrons and for neutral pions in the range 1 GeV/c $&lt; p_T &lt;$ 5 GeV/c have been measured by the PHENIX experiment at RHIC in Au+Au collisions at $\sqrt{s_{_{NN}}}=130$ GeV. At high $p_T$ the spectra from peripheral nuclear collisions are consistent with the naive expectation of scaling the spectra from p+p collisions by the average number of binary nucleon- nucleon collisions. The spectra from central collisions are significantly suppressed when compared to the binary- scaled p+p expectation, and also when compared to similarly binary-scaled peripheral collisions, indicating a novel nuclear effect in central nuclear collisions at RHIC energies.</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Wednesday, 05. June 2024 11:11AM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd --errs Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>

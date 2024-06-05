@@ -1,0 +1,41 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=$\frac{1}{N_{Event}2\pi p_{T}}\frac{dN^{2}}{dp_{T}dy}$ of $\pi^0$ mesons in $PbGl$ in Au+Au at $\sqrt{s_{NN}}=$ 130GeV ($60-80\%$)
+XLabel=$p_{T}$(GeV/c)
+YLabel=$\frac{1}{N_{Event}2\pi p_{T}}\frac{dN^{2}}{dp_{T}dy}$
+DrawOnly=/PHENIX_2001_I562409/d04-x01-y01 //lustre/isaac/proj/UTK0019/aidan/RIVETAnalyses/PHENIX_2001_I562409/Rivet.yoda/PHENIX_2001_I562409:beam=dAU200:cent=GEN/d04-x01-y01
+LegendOnly=/PHENIX_2001_I562409/d04-x01-y01 //lustre/isaac/proj/UTK0019/aidan/RIVETAnalyses/PHENIX_2001_I562409/Rivet.yoda/PHENIX_2001_I562409:beam=dAU200:cent=GEN/d04-x01-y01
+RatioPlot=1
+RatioPlotReference=/PHENIX_2001_I562409/d04-x01-y01
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2001_I562409/d04-x01-y01
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2001_I562409/d04-x01-y01
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+1.000000e+00	1.500000e+00	8.700000e-02	3.003331e-02	3.003331e-02
+1.500000e+00	2.000000e+00	1.360000e-02	4.708503e-03	4.708503e-03
+2.000000e+00	2.500000e+00	3.490000e-03	1.210826e-03	1.210826e-03
+2.500000e+00	3.000000e+00	9.800000e-04	4.308132e-04	4.308132e-04
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/aidan/RIVETAnalyses/PHENIX_2001_I562409/Rivet.yoda/PHENIX_2001_I562409:beam=dAU200:cent=GEN/d04-x01-y01
+ErrorBars=1
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/aidan/RIVETAnalyses/PHENIX_2001_I562409/Rivet.yoda/PHENIX_2001_I562409:beam=dAU200:cent=GEN/d04-x01-y01
+ScaledBy=inf
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+1.000000e+00	1.500000e+00	-nan	nan	nan
+1.500000e+00	2.000000e+00	-nan	nan	nan
+2.000000e+00	2.500000e+00	-nan	nan	nan
+2.500000e+00	3.000000e+00	-nan	nan	nan
+# END HISTO1D
+
