@@ -30,6 +30,32 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2007_I731133);
 
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    int n = 0;
+    for (YODA::HistoBin1D bins : binlist) {
+        double p_high = bins.xMax();
+        double p_low = bins.xMin();
+        //Now calculate f_corr
+        if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+        } else { //Check if we are working with any middle bin
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        }
+    }
+}
+
 
     /// Book histograms and initialise projections before the run
       void init() {
@@ -664,15 +690,21 @@ namespace Rivet {
           
           //Figure 13:
           //d01-x01-y01
+          binShift(*hCrossSec["ppEtaa"]);
           hCrossSec["ppEtaa"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaa"]->scaleW(cross);
           
           //d03-x01-y01
+          binShift(*hCrossSec["dAuEta"]);
           hCrossSec["dAuEta"]->scaleW(1. / sow["sow_dAu"]->sumW());
           hCrossSec["dAuEta"]->scaleW(cross);          
           
           //Figure 14:
           //d05-x01-y01
+          binShift(*hEtaPt["ptyieldsdAuc0020a"]);
+          binShift(*hEtaPt["ptyieldsdAuc2040a"]);
+          binShift(*hEtaPt["ptyieldsdAuc4060a"]);
+          binShift(*hEtaPt["ptyieldsdAuc6088a"]);
           hEtaPt["ptyieldsdAuc0020a"]->scaleW(1. / sow["sow_dAuc0020"]->sumW());
           hEtaPt["ptyieldsdAuc2040a"]->scaleW(1. / sow["sow_dAuc2040"]->sumW());
           hEtaPt["ptyieldsdAuc4060a"]->scaleW(1. / sow["sow_dAuc4060"]->sumW());
@@ -680,6 +712,10 @@ namespace Rivet {
           
           //Figure 15:
           //d05-x01-y01
+          binShift(*hEtaPt["ptyieldsAuAuc0092a"]);
+          binShift(*hEtaPt["ptyieldsAuAuc0020a"]);
+          binShift(*hEtaPt["ptyieldsAuAuc2060a"]);
+          binShift(*hEtaPt["ptyieldsAuAuc6092a"]);
           hEtaPt["ptyieldsAuAuc0092a"]->scaleW(1. / sow["sow_AuAuc0092"]->sumW());
           hEtaPt["ptyieldsAuAuc0020a"]->scaleW(1. / sow["sow_AuAuc0020"]->sumW());
           hEtaPt["ptyieldsAuAuc2060a"]->scaleW(1. / sow["sow_AuAuc2060"]->sumW());
@@ -688,6 +724,8 @@ namespace Rivet {
           //Figure 16: Rda
           //d07-x01-y01:
           //denominator: must do our process to our cross section as done in Figure 13 plus multiplying it by <Tda>
+          binShift(*hCrossSec["ppEtadAuc0088"]);
+          binShift(*hEtaPt["ptyieldsdAuc0088b"]);
           hCrossSec["ppEtadAuc0088"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtadAuc0088"]->scaleW(cross);
           hCrossSec["ppEtadAuc0088"]->scaleW(0.2); //scaling by <TdA> as shown in Table II
@@ -698,102 +736,136 @@ namespace Rivet {
           
           //d07-x01-y02
           //denominator
+          binShift(*hCrossSec["ppEtadAuc0020"]);
           hCrossSec["ppEtadAuc0020"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtadAuc0020"]->scaleW(cross);
           hCrossSec["ppEtadAuc0020"]->scaleW(0.36); //scaling by <TdA> as shown in Table II
           //numerator
+          binShift(*hEtaPt["ptyieldsdAuc0020b"]);
           hEtaPt["ptyieldsdAuc0020b"]->scaleW(1. / sow["sow_dAuc0020"]->sumW());
           //Rda
           divide(hEtaPt["ptyieldsdAuc0020b"], hCrossSec["ppEtadAuc0020"], hRda["EtadAuc0020"]);
           
           //d07-x01-y03
+          binShift(*hCrossSec["ppEtadAuc2040"]);
           hCrossSec["ppEtadAuc2040"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtadAuc2040"]->scaleW(cross);
           hCrossSec["ppEtadAuc2040"]->scaleW(0.25); //scaling by <TdA> as shown in Table II
           //numerator
+          binShift(*hEtaPt["ptyieldsdAuc2040b"]);
           hEtaPt["ptyieldsdAuc2040b"]->scaleW(1. / sow["sow_dAuc2040"]->sumW());
           //Rda
           divide(hEtaPt["ptyieldsdAuc2040b"], hCrossSec["ppEtadAuc2040"], hRda["EtadAuc2040"]);
           
           //d07-x01-y04
+          binShift(*hCrossSec["ppEtadAuc4060"]);
           hCrossSec["ppEtadAuc4060"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtadAuc4060"]->scaleW(cross);
           hCrossSec["ppEtadAuc4060"]->scaleW(0.17); //scaling by <TdA> as shown in Table II
           //numerator
+          binShift(*hEtaPt["ptyieldsdAuc4060b"]);
           hEtaPt["ptyieldsdAuc4060b"]->scaleW(1. / sow["sow_dAuc4060"]->sumW());
           //Rda
           divide(hEtaPt["ptyieldsdAuc4060b"], hCrossSec["ppEtadAuc4060"], hRda["EtadAuc4060"]);
           
           //d07-x01-y05
+          binShift(*hCrossSec["ppEtadAuc6088"]);
           hCrossSec["ppEtadAuc6088"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtadAuc6088"]->scaleW(cross);
           hCrossSec["ppEtadAuc6088"]->scaleW(0.073); //scaling by <TdA> as shown in Table II
           //numerator
+          binShift(*hEtaPt["ptyieldsdAuc6088b"]);
           hEtaPt["ptyieldsdAuc6088b"]->scaleW(1. / sow["sow_dAuc6088"]->sumW());
           //Rda
           divide(hEtaPt["ptyieldsdAuc6088b"], hCrossSec["ppEtadAuc6088"],hRda["EtadAuc6088"]);
 
           //Figure 17: RAA  
           //d08-x01-y01:       
+          binShift(*hCrossSec["ppEtaAuAuc0020"]);
           hCrossSec["ppEtaAuAuc0020"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaAuAuc0020"]->scaleW(cross);
           hCrossSec["ppEtaAuAuc0020"]->scaleW(18.5); //scaling by <TdA> as shown in Table II
           //numerator: must do our process to our invariant yield like in Figure 14
+          binShift(*hEtaPt["ptyieldsAuAuc0020b"]);
           hEtaPt["ptyieldsAuAuc0020b"]->scaleW(1. / sow["sow_AuAuc0020"]->sumW());
           //RAA
           divide(hEtaPt["ptyieldsAuAuc0020b"], hCrossSec["ppEtaAuAuc0020"], hRaa["EtaAuAuc0020"]);
           
           //d08-x01-y02
           //denominator
+          binShift(*hCrossSec["ppEtaAuAuc2060"]);
           hCrossSec["ppEtaAuAuc2060"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaAuAuc2060"]->scaleW(cross);
           hCrossSec["ppEtaAuAuc2060"]->scaleW(4.6); //scaling by <TdA> as shown in Table II
           //numerator
+          binShift(*hEtaPt["ptyieldsAuAuc2060b"]);
           hEtaPt["ptyieldsAuAuc2060b"]->scaleW(1. / sow["sow_AuAuc2060"]->sumW());
           //RAA
           divide(hEtaPt["ptyieldsAuAuc2060b"], hCrossSec["ppEtaAuAuc2060"], hRaa["EtaAuAuc2060"]);
           
           //d08-x01-y03
+          binShift(*hCrossSec["ppEtaAuAuc6092"]);
           hCrossSec["ppEtaAuAuc6092"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaAuAuc6092"]->scaleW(cross);
           hCrossSec["ppEtaAuAuc6092"]->scaleW(0.3); //scaling by <TdA> as shown in Table II
           //numerator
+          binShift(*hEtaPt["ptyieldsAuAuc6092b"]);
           hEtaPt["ptyieldsAuAuc6092b"]->scaleW(1. / sow["sow_AuAuc6092"]->sumW());
           //RAA
           divide(hEtaPt["ptyieldsAuAuc6092b"], hCrossSec["ppEtaAuAuc6092"], hRaa["EtaAuAuc6092"]);
 
           //Figure 18: ratio
           //d09-x01-y01
+          binShift(*hEtaPt["ptyieldsEta"]);
+          binShift(*hPionPt["ptyieldsPion"]);
           divide(hEtaPt["ptyieldsEta"], hPionPt["ptyieldsPion"], Ratiopp["EtaToPion"]);
           
           
           //Figure 19: ratios
           //d10-x01-y01
+          binShift(*hEtaPt["ptyieldsdAuc0088c"]);
+          binShift(*hPionPt["ptyieldsdAuc0088"]);
           divide(hEtaPt["ptyieldsdAuc0088c"], hPionPt["ptyieldsdAuc0088"], RatiodAu["EtaToPion0088"]);
           
           //d10-x01-y02
+          binShift(*hEtaPt["ptyieldsdAuc0020c"]);
+          binShift(*hPionPt["ptyieldsdAuc0020"]);
           divide(hEtaPt["ptyieldsdAuc0020c"], hPionPt["ptyieldsdAuc0020"], RatiodAu["EtaToPion0020"]);
     
           //d10-x01-y03
+          binShift(*hEtaPt["ptyieldsdAuc2040c"]);
+          binShift(*hPionPt["ptyieldsdAuc2040"]);
           divide(hEtaPt["ptyieldsdAuc2040c"], hPionPt["ptyieldsdAuc2040"], RatiodAu["EtaToPion2040"]);
           
           //d10-x01-y04
+          binShift(*hEtaPt["ptyieldsdAuc4060c"]);
+          binShift(*hPionPt["ptyieldsdAuc4060"]);
           divide(hEtaPt["ptyieldsdAuc4060c"], hPionPt["ptyieldsdAuc4060"], RatiodAu["EtaToPion4060"]);
           
           //d10-x01-y05
+          binShift(*hEtaPt["ptyieldsdAuc6088c"]);
+          binShift(*hPionPt["ptyieldsdAuc6088"]);
           divide(hEtaPt["ptyieldsdAuc6088c"], hPionPt["ptyieldsdAuc6088"], RatiodAu["EtaToPion6088"]);
 
           //Figure 20: ratios
           //d11-x01-y01
+          binShift(*hEtaPt["ptyieldsAuAuc0092c"]);
+          binShift(*hPionPt["ptyieldsAuAuc0092"]);
           divide(hEtaPt["ptyieldsAuAuc0092c"], hPionPt["ptyieldsAuAuc0092"], RatioAuAu["EtaToPion0092"]);
           
           //d11-x01-y02
+          binShift(*hEtaPt["ptyieldsAuAuc0020c"]);
+          binShift(*hPionPt["ptyieldsAuAuc0020"]);
           divide(hEtaPt["ptyieldsAuAuc0020c"], hPionPt["ptyieldsAuAuc0020"], RatioAuAu["EtaToPion0020"]);
     
           //d11-x01-y03
+          binShift(*hEtaPt["ptyieldsAuAuc2060c"]);
+          binShift(*hPionPt["ptyieldsAuAuc2060"]);
           divide(hEtaPt["ptyieldsAuAuc2060c"], hPionPt["ptyieldsAuAuc2060"], RatioAuAu["EtaToPion2060"]);
 
           //d11-x01-y04
+          binShift(*hEtaPt["ptyieldsAuAuc6092c"]);
+          binShift(*hPionPt["ptyieldsAuAuc6092"]);
           divide(hEtaPt["ptyieldsAuAuc6092c"], hPionPt["ptyieldsAuAuc6092"], RatioAuAu["EtaToPion6092"]);
           
       }
