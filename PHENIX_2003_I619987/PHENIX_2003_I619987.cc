@@ -668,7 +668,7 @@ public:
         //d01: p and p_bar ratios
         //divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
         
-        binShift(*hProtonPt["AuAuc0010a"]);
+        /*binShift(*hProtonPt["AuAuc0010a"]);
         binShift(*hPionPosPt["AuAuc0010"]);
         divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
 
@@ -715,58 +715,99 @@ public:
 
         binShift(*hProBarPt["AuAuc6092b"]);
         binShift(*hPionPt["AuAuc6092a"]);
-        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);
+        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);*/
         
         //d03 p and p_bar yields
         //first scalling is commented out because this is actually scaling by the N_coll provided in the paper
         //sow is our N_coll in this simulation
-        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
-        hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
-        binShift(*hProtonPt["ptyieldsAuAuc0010"]);
         
-        hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
-        hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+        if(sow["AuAuc0010"]->sumW() != 0){
+            hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+            hProtonPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+            binShift(*hProtonPt["ptyieldsAuAuc0010"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
+
+        if(sow["AuAuc2030"]->sumW() != 0){
+            hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
+            hProtonPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
         binShift(*hProtonPt["ptyieldsAuAuc2030"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
+
+        if(sow["AuAuc4050"]->sumW() != 0){
+            hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
+            hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+            binShift(*hProtonPt["ptyieldsAuAuc4050"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         
-        hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
-        hProtonPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
-        binShift(*hProtonPt["ptyieldsAuAuc4050"]);
+        if(sow["AuAuc6092"]->sumW() != 0){
+            hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
+            hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+            binShift(*hProtonPt["ptyieldsAuAuc6092"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         
-        hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
-        hProtonPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
-        binShift(*hProtonPt["ptyieldsAuAuc6092"]);
+        if(sow["AuAuc0010"]->sumW() != 0){
+            hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
+            hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+            binShift(*hProBarPt["ptyieldsAuAuc0010"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         
-        hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / 955.4);
-        hProBarPt["ptyieldsAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW());
-        binShift(*hProBarPt["ptyieldsAuAuc0010"]);
+        if(sow["AuAuc2030"]->sumW() != 0){
+            hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
+            hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
+            binShift(*hProBarPt["ptyieldsAuAuc2030"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         
-        hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / 373.8);
-        hProBarPt["ptyieldsAuAuc2030"]->scaleW(1. / sow["AuAuc2030"]->sumW());
-        binShift(*hProBarPt["ptyieldsAuAuc2030"]);
+        if(sow["AuAuc4050"]->sumW() != 0){
+            hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
+            hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
+            binShift(*hProBarPt["ptyieldsAuAuc4050"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         
-        hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / 120.3);
-        hProBarPt["ptyieldsAuAuc4050"]->scaleW(1. / sow["AuAuc4050"]->sumW());
-        binShift(*hProBarPt["ptyieldsAuAuc4050"]);
-        
-        hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
-        hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
-        binShift(*hProBarPt["ptyieldsAuAuc6092"]);
+        if(sow["AuAuc6092"]->sumW() != 0){
+            hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / 14.5);
+            hProBarPt["ptyieldsAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+            binShift(*hProBarPt["ptyieldsAuAuc6092"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         
         //d04
         //0-10%
         //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.); //Scale by two to account for sum
         //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 955.4); //Scaling by N_coll and 2 for sum
         //hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / 2.);
-        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / (2. * 955.4));
-        hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW()); 
-        binShift(*hPPlusPBarPt["ppluspbarAuAuc0010"]);
+        if(sow["AuAuc0010"]->sumW() != 0){
+            hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / (2. * 955.4));
+            hPPlusPBarPt["ppluspbarAuAuc0010"]->scaleW(1. / sow["AuAuc0010"]->sumW()); 
+            binShift(*hPPlusPBarPt["ppluspbarAuAuc0010"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
         //60-92%
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.); //Scale by two to account for sum
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 14.5); //Scaling by N_coll and 2 for sum
         //hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / 2.);
-        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / (2. * 14.5));
-        hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
-        binShift(*hPPlusPBarPt["ppluspbarAuAuc6092"]);
+        if(sow["AuAuc6092"]->sumW() != 0){
+            hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / (2. * 14.5));
+            hPPlusPBarPt["ppluspbarAuAuc6092"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+            binShift(*hPPlusPBarPt["ppluspbarAuAuc6092"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
 
         //Rcp
         binShift(*hPPlusPBarPt["ppluspbarAuAuc0010"]);
