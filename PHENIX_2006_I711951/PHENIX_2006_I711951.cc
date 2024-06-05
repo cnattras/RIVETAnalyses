@@ -68,8 +68,11 @@ namespace Rivet {
       //Particles: pi^+, pi^-, k^+, k^-, p, p_bar
       //std::initializer_list<int> pdgIds = {221};
 
-      const FinalState fs(Cuts::absrap<0.35&&Cuts::abscharge>0);
-      declare(fs,"fs");
+    // Alice projection? 
+      const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
+      declare(cp,"cp");
+    //const FinalState fs(Cuts::absrap<0.35&&Cuts::abscharge>0);
+    //declare(fs,"fs");
 
       beamOpt = getOption<string>("beam","NONE");
       if (beamOpt =="pp") collSys = pp;
@@ -188,7 +191,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       //sow->fill();
-      Particles chargedP = applyProjection<FinalState>(event,"fs").particles();
+      Particles chargedP = applyProjection<PrimaryParticles>(event,"cp").particles();
 
       if (collSys == pp) {
         sow["sow_pp"]->fill();
