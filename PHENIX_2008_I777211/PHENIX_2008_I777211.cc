@@ -18,6 +18,32 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I777211);
 
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+            } else { //Check if we are working with any middle bin
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            }
+        }
+    }
+
     void init() {
 
       beamOpt = getOption<string>("beam", "NONE");
@@ -80,7 +106,8 @@ namespace Rivet {
     }
 
     void finalize() {
-
+      binShift(*hPion0Pt["Pion0Pt_AuAu"]);
+      binShift(*hPion0Pt["Pion0Pt_pp"]);
       hPion0Pt["Pion0Pt_AuAu"]->scaleW(1./sow["sow_AuAu"]->sumW());
       hPion0Pt["Pion0Pt_pp"]->scaleW(1./sow["sow_pp"]->sumW());
 

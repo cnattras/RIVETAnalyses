@@ -3,3 +3,5 @@ Title=$\pi^0$ for $0-5\%$ centrality
 XLabel=$p_T$ (GeV/c)
 YLabel=$R_{AA}$
 END PLOT
+
+DrawOnly = [d01-x01-y01]
