@@ -5,4 +5,7 @@ This is a high priority analysis because it is fairly straightforward and someth
 
 There were two versions, one written by Christal Martin and one written by Andi Mankoli.  I think we kept Christal's version.  This was worked on as well by Adam Tilley and Josie Hakanson, with small contributions from Antonio Da Silva and Sean Grace.
 
+Needs beams set up so that it can pick up beams both ways.
+RAA, ratio plots need to be on linear scale.  Input histograms for these RAAs & particle ratios need to be turned off in output.
+
 Analysis plots now - Josie Hakanson (5-24-2024).
