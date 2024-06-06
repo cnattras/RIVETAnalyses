@@ -72,7 +72,7 @@ YLabel=[$\frac{1}{N_{Event}2\pi p_{T}}\frac{d^{2}N}{dp_{T}dy}$]
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d01-x01-y13
-Title=[$p_{T}$ of $\pi^{+}$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($60-92.2\%)]
+Title=[$p_{T}$ of $\pi^{+}$ in Au+Au at $\sqrt{s_{NN}}=$ 200GeV ($60-92.2\%$)]
 XLabel=[$p_{T}$(GeV/c)]
 YLabel=[$\frac{1}{N_{Event}2\pi p_{T}}\frac{d^{2}N}{dp_{T}dy}$]
 END PLOT
