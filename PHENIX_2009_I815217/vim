@@ -1,5 +1,0 @@
-#!/bin/bash
-rm RivetPHENIX_2009_I0903.2041.so
-rivet-build RivetPHENIX_2013_I0903.2041.so PHENIX_2009_I0903.2041.cc
-export RIVET_ANALYSIS_PATH=$PWD
-rivet --pwd -p ../Centralities/Calibration/calibration_PHENIX_AuAu200GeV.yoda -a PHENIX_2009_I0903.2041:cent=GEN -o Rivet.yoda ../testfiles/PYTHIAAuAuFileSMALLTEST.dat
