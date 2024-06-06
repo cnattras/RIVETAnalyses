@@ -817,13 +817,23 @@ public:
         
         //d05
         //0-10%
-        hPionPt["AuAuc0010b"]->scaleW(1. / 955.4);
-        hPionPt["AuAuc0010b"]->scaleW(1. / sow["AuAuc0010"]->sumW());
-        binShift(*hPionPt["AuAuc0010b"]);
+        if(sow["AuAuc6092"]->sumW() != 0){
+            hPionPt["AuAuc0010b"]->scaleW(1. / 955.4);
+            hPionPt["AuAuc0010b"]->scaleW(1. / sow["AuAuc0010"]->sumW());
+            binShift(*hPionPt["AuAuc0010b"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
+        
         //60-92%
-        hPionPt["AuAuc6092b"]->scaleW(1. / 14.5);
-        hPionPt["AuAuc6092b"]->scaleW(1. / sow["AuAuc6092"]->sumW());
-        binShift(*hPionPt["AuAuc6092b"]);
+        if(sow["AuAuc6092"]->sumW() != 0){
+            hPionPt["AuAuc6092b"]->scaleW(1. / 14.5);
+            hPionPt["AuAuc6092b"]->scaleW(1. / sow["AuAuc6092"]->sumW());
+            binShift(*hPionPt["AuAuc6092b"]);
+        }else{
+            std::cerr << "Error: Divide by zero encountered. Unable to scale histogram." << std::endl;
+        }
+        
         
         //Rcp
         binShift(*hPionPt["AuAuc0010b"]);
