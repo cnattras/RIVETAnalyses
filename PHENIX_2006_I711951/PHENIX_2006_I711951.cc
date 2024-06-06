@@ -71,22 +71,29 @@ namespace Rivet {
     // Alice projection? 
       const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
       declare(cp,"cp");
-    //const FinalState fs(Cuts::absrap<0.35&&Cuts::abscharge>0);
-    //declare(fs,"fs");
+   
     
       const ParticlePair& beam = beams();
+
+      
+      beamOpt = getOption<string>("beam","NONE");
+      /*if (beamOpt =="pp") collSys = pp;
+      else if (beamOpt == "DAu200") collSys = DAu200;
+      else if (beamOpt == "AuAu200") collSys = AuAU200;*/
+
 
       if (beamOpt == "NONE") {
       if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
       else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
       else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = DAu200;
+      else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = DAu200;
       }
 
-      beamOpt = getOption<string>("beam","NONE");
-      /*if (beamOpt =="pp") collSys = pp;
-      else if (beamOpt == "dAU200") collSys = DAu200;
-      else if (beamOpt == "AuAu200") collSys = AuAU200;*/
 
+      if (beamOpt =="pp") collSys = pp;
+      else if (beamOpt == "DAu200") collSys = DAu200;
+      else if (beamOpt == "AuAu200") collSys = AuAu200;
+      
       if (collSys != pp) {
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       }
@@ -94,10 +101,10 @@ namespace Rivet {
 
       //****Counters****
       book(sow["sow_pp"],"_sow_pp");
-      book(sow["sow_dAU20"],"_sow_dAU20");
-      book(sow["sow_dAU40"],"_sow_dAU40");
-      book(sow["sow_dAU60"],"_sow_dAU60");
-      book(sow["sow_dAU88"],"_sow_dAU88");
+      book(sow["sow_DAu20"],"_sow_DAu20");
+      book(sow["sow_DAu40"],"_sow_DAu40");
+      book(sow["sow_DAu60"],"_sow_DAu60");
+      book(sow["sow_DAu88"],"_sow_DAu88");
       //book(sow,"sow");
 
       //****Book Histos****
@@ -122,76 +129,76 @@ namespace Rivet {
       //Invariant Yield in pp (p_bar)
       book(hPP_Yields["P_barPP"], 9,1,2);
 
-      //Invariant Yield in dAU 0-20% (piplus)
+      //Invariant Yield in DAu 0-20% (piplus)
       book(hDAu_Yields["PiplusC20"], 3,1,1);
 
-      //Invariant Yield in dAU 0-20% (piminus)
+      //Invariant Yield in DAu 0-20% (piminus)
       book(hDAu_Yields["PiminusC20"], 3,1,2);
 
-      //Invariant Yield in dAU 0-20% (kplus)
+      //Invariant Yield in DAu 0-20% (kplus)
       book(hDAu_Yields["KplusC20"], 7,1,1);
 
-      //Invariant Yield in dAU 0-20% (kminus)
+      //Invariant Yield in DAu 0-20% (kminus)
       book(hDAu_Yields["KminusC20"], 7,1,2);
 
-      //Invariant Yield in dAU 0-20% (p)
+      //Invariant Yield in DAu 0-20% (p)
       book(hDAu_Yields["PC20"], 10,1,1);
 
-      //Invariant Yield in dAU 0-20% (p_bar)
+      //Invariant Yield in DAu 0-20% (p_bar)
       book(hDAu_Yields["P_barC20"], 10,1,2);
 
-      //Invariant Yield in dAU 20-40% (piplus)
+      //Invariant Yield in DAu 20-40% (piplus)
       book(hDAu_Yields["PiplusC40"], 3,1,3);
 
-      //Invariant Yield in dAU 20-40% (piminus)
+      //Invariant Yield in DAu 20-40% (piminus)
       book(hDAu_Yields["PiminusC40"], 3,1,4);
 
-      //Invariant Yield in dAU 20-40% (kplus)
+      //Invariant Yield in DAu 20-40% (kplus)
       book(hDAu_Yields["KplusC40"], 8,1,1);
 
-      //Invariant Yield in dAU 20-40% (kminus)
+      //Invariant Yield in DAu 20-40% (kminus)
       book(hDAu_Yields["KminusC40"], 8,1,2);
 
-      //Invariant Yield in dAU 20-40% (p)
+      //Invariant Yield in DAu 20-40% (p)
       book(hDAu_Yields["PC40"], 10,1,3);
 
-      //Invariant Yield in dAU 20-40% (p_bar)
+      //Invariant Yield in DAu 20-40% (p_bar)
       book(hDAu_Yields["P_barC40"], 10,1,4);
 
-      //Invariant Yield in dAU 40-60% (piplus)
+      //Invariant Yield in DAu 40-60% (piplus)
       book(hDAu_Yields["PiplusC60"], 4,1,1);
 
-      //Invariant Yield in dAU 40-60% (piminus)
+      //Invariant Yield in DAu 40-60% (piminus)
       book(hDAu_Yields["PiminusC60"], 3,1,5);
 
-      //Invariant Yield in dAU 40-60% (kplus)
+      //Invariant Yield in DAu 40-60% (kplus)
       book(hDAu_Yields["KplusC60"], 7,1,3);
 
-      //Invariant Yield in dAU 40-60% (kminus)
+      //Invariant Yield in DAu 40-60% (kminus)
       book(hDAu_Yields["KminusC60"], 7,1,4);
 
-      //Invariant Yield in dAU 40-60% (p)
+      //Invariant Yield in DAu 40-60% (p)
       book(hDAu_Yields["PC60"], 10,1,5);
 
-      //Invariant Yield in dAU 40-60% (p_bar)
+      //Invariant Yield in DAu 40-60% (p_bar)
       book(hDAu_Yields["P_barC60"], 10,1,6);
 
-      //Invariant Yield in dAU 60-88.5% (piplus)
+      //Invariant Yield in DAu 60-88.5% (piplus)
       book(hDAu_Yields["PiplusC88"], 3,1,6);
 
-      //Invariant Yield in dAU 60-88.5% (piminus)
+      //Invariant Yield in DAu 60-88.5% (piminus)
       book(hDAu_Yields["PiminusC88"], 3,1,7);
 
-      //Invariant Yield in dAU 60-88.5% (kplus)
+      //Invariant Yield in DAu 60-88.5% (kplus)
       book(hDAu_Yields["KplusC88"], 7,1,5);
 
-      //Invariant Yield in dAU 60-88.5% (kminus)
+      //Invariant Yield in DAu 60-88.5% (kminus)
       book(hDAu_Yields["KminusC88"], 7,1,6);
 
-      //Invariant Yield in dAU 60-88.5% (p)
+      //Invariant Yield in DAu 60-88.5% (p)
       book(hDAu_Yields["PC88"], 10,1,7);
 
-      //Invariant Yield in dAU 60-88.5% (p_bar)
+      //Invariant Yield in DAu 60-88.5% (p_bar)
       book(hDAu_Yields["P_barC88"], 10,1,8);
 
     }
@@ -202,9 +209,7 @@ namespace Rivet {
       //sow->fill();
       Particles chargedP = applyProjection<PrimaryParticles>(event,"cp").particles();
 
-      if (beamOpt =="pp") collSys = pp;
-      else if (beamOpt == "dAU200") collSys = DAu200;
-      else if (beamOpt == "AuAu200") collSys = AuAu200;
+      
         
       if (collSys == pp) {
         sow["sow_pp"]->fill();
@@ -282,7 +287,7 @@ namespace Rivet {
         if (cent < 0. || cent > 88.5) vetoEvent;
 
         if (cent > 0. && cent < 20.) {
-          sow["sow_dAU20"]->fill();
+          sow["sow_DAu20"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
@@ -351,7 +356,7 @@ namespace Rivet {
         }
 
         if (cent > 20. && cent < 40.) {
-          sow["sow_dAU40"]->fill();
+          sow["sow_DAu40"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
@@ -421,7 +426,7 @@ namespace Rivet {
         }
 
         if (cent > 40. && cent < 60.) {
-          sow["sow_dAU60"]->fill();
+          sow["sow_DAu60"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
@@ -490,7 +495,7 @@ namespace Rivet {
         }
 
         if (cent > 60. && cent < 88.5) {
-          sow["sow_dAU88"]->fill();
+          sow["sow_DAu88"]->fill();
           for (const Particle& p :chargedP) {
             double partPt = p.pT() / GeV;
             double pt_weight = 1. / (partPt*2.*M_PI);
@@ -684,33 +689,33 @@ namespace Rivet {
 
       //****Scale Histos****
 
-      hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hDAu_Yields["KplusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hDAu_Yields["KminusC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hDAu_Yields["PC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hDAu_Yields["P_barC20"]->scaleW(1./sow["sow_dAU20"]->sumW());
+      hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["KplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["KminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["P_barC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
 
-      hDAu_Yields["PiplusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hDAu_Yields["PiminusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hDAu_Yields["KplusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hDAu_Yields["KminusC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
-      hDAu_Yields["PC40"]->scaleW(1./sow["sow_dAU20"]->sumW());
-      hDAu_Yields["P_barC40"]->scaleW(1./sow["sow_dAU40"]->sumW());
+      hDAu_Yields["PiplusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PiminusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["KplusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["KminusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PC40"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["P_barC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
 
-      hDAu_Yields["PiplusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hDAu_Yields["PiminusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hDAu_Yields["KplusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hDAu_Yields["KminusC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hDAu_Yields["PC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
-      hDAu_Yields["P_barC60"]->scaleW(1./sow["sow_dAU60"]->sumW());
+      hDAu_Yields["PiplusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PiminusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["KplusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["KminusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["P_barC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
 
-      hDAu_Yields["PiplusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hDAu_Yields["PiminusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hDAu_Yields["KplusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hDAu_Yields["KminusC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hDAu_Yields["PC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
-      hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_dAU88"]->sumW());
+      hDAu_Yields["PiplusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PiminusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["KplusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["KminusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
 
       hPP_Yields["PiplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
       hPP_Yields["PiminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
