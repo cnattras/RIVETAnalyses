@@ -73,7 +73,19 @@ namespace Rivet {
           declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
-	
+          
+          if (beamOpt == "NONE") {
+          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+          else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+          else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = DAu200;
+          else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = DAu200;
+          }
+
+          //check the collision system
+          if (beamOpt == "PP200") collSys = pp;
+          else if (beamOpt == "AUAU200") collSys = AuAu200;
+          else if (beamOpt == "DAU200") collSys = DAu200;
+          
           //declaration for collision systems that are not p+p
           if (!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
@@ -291,7 +303,7 @@ namespace Rivet {
           
           const ParticlePair& beam = beams();
 
-          if (beamOpt == "NONE") {
+          /*if (beamOpt == "NONE") {
           if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
           else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
           else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = DAu200;
@@ -300,7 +312,7 @@ namespace Rivet {
           //check the collision system
           if (beamOpt == "PP200") collSys = pp;
           else if (beamOpt == "AUAU200") collSys = AuAu200;
-          else if (beamOpt == "DAU200") collSys = DAu200;
+          else if (beamOpt == "DAU200") collSys = DAu200;*/
           
           if (collSys == pp)
           {
