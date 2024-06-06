@@ -51,10 +51,22 @@ namespace Rivet {
 
     /// Book histograms and initialise projections before the run
     void init() {
+      
+      beamOpt = getOption<string>("beam", "NONE");
 
+      const ParticlePair& beam = beams();
+      
+      if (beamOpt == "NONE"){
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu130;
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      }
+      if (beamOpt == "PP") collSys = pp;
+      else if (beamOpt == "AUAU") collSys = AuAu130;
+      
       // Initialise and register projections
+      if (collSys != pp){
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-
+      }
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
@@ -125,7 +137,7 @@ namespace Rivet {
       const Particles pi0UPParticles = pi0UP.particles();
 
       double inv2PI = 1./(2.*M_PI);
-      const ParticlePair& beam = beams();
+      /*const ParticlePair& beam = beams();
       string collSys;
 
       if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
@@ -135,8 +147,8 @@ namespace Rivet {
 if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
     {
     collSys = "pp";
-    }
-            if (collSys == "pp")
+    }*/
+            if (collSys == pp)
             {
               _c["pp_130"]->fill();
               for(auto p : hfsParticles) //loop over charged hadrons
@@ -151,7 +163,7 @@ if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
          
               }
             }
-          else if (collSys == "AuAu")
+          else if (collSys == AuAu130)
           {
              if(cent < 10.) //Check centrality of the event
       {
@@ -261,6 +273,10 @@ if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       map<string, CounterPtr> _c;
       map<string, Scatter2DPtr> _s;
       ///@}
+
+      string beamOpt;
+      enum CollisionSystem { pp, AuAu130 };
+      CollisionSystem collSys;
   };
 
 
