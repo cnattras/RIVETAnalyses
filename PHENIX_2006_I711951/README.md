@@ -5,7 +5,9 @@ Identified particle spectra in d+Au
 
 Primarily written by Adam Tilley.  Contributions by Christian Reckziegel, Antonio Da Silva, Sean Grace, Nik Nelson.
 
+
+Problems fixed by Olivia Bartoshesky, analysis pending higher statistics.
 - Plots labeled and are linear. 
-Uses final state particles, which is not correct because this doesn't include some of the subtleties of identifying particles.  Should use ALICE projection.
-Identifies particles through flags.  Should be set up so it can either use generator or flags.
+- updated to use ALICE projection. 
+- Identifies particles through generator or flags.
 - Bin shift correction added. 
