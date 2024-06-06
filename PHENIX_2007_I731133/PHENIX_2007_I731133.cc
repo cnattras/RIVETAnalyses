@@ -294,12 +294,13 @@ namespace Rivet {
           if (beamOpt == "NONE") {
           if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
           else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
-          else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = dAu200;
+          else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = DAu200;
+          else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = DAu200;
           }
           //check the collision system
           if (beamOpt == "PP200") collSys = pp;
           else if (beamOpt == "AUAU200") collSys = AuAu200;
-          else if (beamOpt == "dAU200") collSys = dAu200;
+          else if (beamOpt == "DAU200") collSys = DAu200;
           
           if (collSys == pp)
           {
@@ -354,7 +355,7 @@ namespace Rivet {
           
           
           //Nik, SEE HERE: down below is where you will do your edit for figure 13.1 and 13.2
-          if (collSys == dAu200){
+          if (collSys == DAu200){
             
               const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
               const double c = cent();
@@ -889,7 +890,7 @@ namespace Rivet {
       
       
       string beamOpt;
-      enum CollisionSystem { pp, AuAu200, dAu200 };
+      enum CollisionSystem { pp, AuAu200, DAu200 };
       CollisionSystem collSys;
       
       //these two vectors are only initialized if we would like to for loop over centrality bins

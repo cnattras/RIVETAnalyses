@@ -21,7 +21,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP200,AUAU200,dAU200
+ - beam=PP200,AUAU200,DAU200
 Description:
   'Inclusive transverse momentum spectra of $\eta$ mesons in the range $p_T\approx$ 2-12 GeV/$c$ have been measured at mid-rapidity (|$\eta$| < 0.35) by the PHENIX experiment at RHIC in p+p, d+Au and Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV. The $\eta$ mesons are reconstructed through their $\eta\rightarrow\gamma\gamma$ channel for the three colliding systems as well as through the $\eta\rightarrow\pi^{0}\pi^{+}\pi^{-}$ decay mode in p+p and d+Au collisions. The nuclear modification factor in d+Au collisions, $R_{dAu}(p_T)\approx$ 1.0-1.1, suggests at most only modest $p_T$ broadening ("Cronin enhancement"). In central Au+Au reactions, the $\eta$ yields are significantly suppressed, with $R_{AuAu}(p_T)\approx$ 0.2. The ratio of $\eta$ to $\pi^{0}$ yields is approximately constant as a function of $p_T$ for the three colliding systems in agreement with the high-$p_T$ world average of $R_{\eta/\pi^{0}}\approx$ 0.5 in hadron-hadron, hadron-nucleus, and nucleus-nucleus collisions for a wide range of center-of-mass energies [$\sqrt{s_{NN}}\approx$ 3-1800 GeV] as well as, for high scaled momentum $x_p$, in $e^{+}e^{-}$ annihilations at $\sqrt{s}$ = 91.2 GeV. These results are consistent with a scenario where high-$p_T$ $\eta$ production in nuclear collisions at RHIC is largely unaffected by initial-state effects, but where light-quark mesons ($\pi^{0}$;$\eta$) are equally suppressed due to final-state interactions of the parent partons in the dense medium produced in Au+Au reactions.'
 ValidationInfo:
