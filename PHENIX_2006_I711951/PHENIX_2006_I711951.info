@@ -19,7 +19,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP,AUAU200,PBPB,DAU200
+ - beam=PP,AUAU200,DAU200
 Description: PHENIX has measured the centrality dependence of mid-rapidity pion, kaon and proton transverse momentum distributions in $d$+Au and $p$+$p$ collisions at $\sqrt{s_{NN}}$ = 200 GeV. The $p$+$p$ data provide a reference for nuclear effects in $d$+Au and previously measured Au+Au collisions. Hadron production is enhanced in $d$+Au, relative to independent nucleon-nucleon scattering, as was observed in lower energy collisions. The nuclear modification factor for (anti) protons is larger than that for pions. The difference increases with centrality, but is not sufficient to account for the abundance of baryon production observed in central Au+Au collisions at RHIC. The centrality dependence in $d$+Au shows that the nuclear modification factor increases gradually with the number of collisions suffered by each participant nucleon. We also present comparisons with lower energy data as well as with parton recombination and other theoretical models of nuclear effects on particle production.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
