@@ -343,17 +343,17 @@ namespace Rivet {
 	book(hPi["AUAU60_92GeV1_5"], refnameRcpPi1_5 + "_60_92Pion1_5", refdataRcpPi1_5);
 	book(hRcp["Pions1_5"], refnameRcpPi1_5);
 	//These two need to be added to yoda and uncommented
-	//string refnameRcpK1_5 = mkAxisCode(24,1,2);
-	//const Scatter2D& refdataRcpK1_5 = refData(refnameRcpK1_5);
-	//book(hK["AUAU0_10GeV1_5"], refnameRcpK1_5 + "_0_10Kaon1_5", refdataRcpK1_5);
-	//book(hK["AUAU60_92GeV1_5"], refnameRcpK1_5 + "_60_92Kaon1_5", refdataRcpK1_5);
-	//book(hRcp["Kaons1_5"], refnameRcpK1_5);
+	string refnameRcpK1_5 = mkAxisCode(24,1,2);
+	const Scatter2D& refdataRcpK1_5 = refData(refnameRcpK1_5);
+	book(hK["AUAU0_10GeV1_5"], refnameRcpK1_5 + "_0_10Kaon1_5", refdataRcpK1_5);
+	book(hK["AUAU60_92GeV1_5"], refnameRcpK1_5 + "_60_92Kaon1_5", refdataRcpK1_5);
+	book(hRcp["Kaons1_5"], refnameRcpK1_5);
 
-	//string refnameRcpP1_5 = mkAxisCode(24,1,3);
-	//const Scatter2D& refdataRcpP1_5 = refData(refnameRcpP1_5);
-	//book(hP["AUAU0_10GeV1_5"], refnameRcpP1_5 + "_0_10Proton1_5", refdataRcpP1_5);
-	//book(hP["AUAU60_92GeV1_5"], refnameRcpP1_5 + "_60_92Proton1_5", refdataRcpP1_5);
-	//book(hRcp["Pbar+P1_5"], refnameRcpP1_5);
+	string refnameRcpP1_5 = mkAxisCode(24,1,3);
+	const Scatter2D& refdataRcpP1_5 = refData(refnameRcpP1_5);
+	book(hP["AUAU0_10GeV1_5"], refnameRcpP1_5 + "_0_10Proton1_5", refdataRcpP1_5);
+	book(hP["AUAU60_92GeV1_5"], refnameRcpP1_5 + "_60_92Proton1_5", refdataRcpP1_5);
+	book(hRcp["Pbar+P1_5"], refnameRcpP1_5);
 
 	//____mean Pt____
 	
