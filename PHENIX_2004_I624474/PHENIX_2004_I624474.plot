@@ -483,13 +483,13 @@ YLabel=Mean $p_{T}$(GeV/c)
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d12-x01-y03
-Title=Mean transverse momentum as a function of centrality for $K^{+}
+Title=Mean transverse momentum as a function of centrality for $K^{+}$
 XLabel=$N_{part}$
 YLabel=Mean $p_{T}$(GeV/c)
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d12-x01-y04
-Title=Mean transverse momentum as a function of centrality for $K^{-}
+Title=Mean transverse momentum as a function of centrality for $K^{-}$
 XLabel=$N_{part}$
 YLabel=Mean $p_{T}$(GeV/c)
 END PLOT
@@ -515,32 +515,32 @@ END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d13-x01-y02
 Title=$\frac{dN}{dy}$ of as a function of centrality for $\pi^{-}$ 
-XLabel=N_{part}
+XLabel=$N_{part}$
 YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d13-x01-y03
 Title=$\frac{dN}{dy}$ of as a function of centrality for $K^{+}$ 
-XLabel=N_{part}
-YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}
+XLabel=$N_{part}$
+YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d13-x01-y04
 Title=$\frac{dN}{dy}$ of as a function of centrality for $K^{-}$ 
-XLabel=N_{part}
-YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}
+XLabel=$N_{part}$
+YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d13-x01-y05
 Title=$\frac{dN}{dy}$ of as a function of centrality for protons 
-XLabel=N_{part}
-YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}
+XLabel=$N_{part}$
+YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2004_I624474/d13-x01-y06
 Title=$\frac{dN}{dy}$ of as a function of centrality for antiprotons 
-XLabel=N_{part}
-YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}
+XLabel=$N_{part}$
+YLabel=$\frac{\frac{dN/dy}}{0.5N_{part}}$
 END PLOT
 
 #Pi-/Pi+
