@@ -71,11 +71,6 @@ namespace Rivet {
       const ALICE::PrimaryParticles fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
       declare(fsP, "fsP");
 
-      // Beam options
-      beamOpt = getOption<string>("beam", "NONE");
-      if (beamOpt == "PP200") collsys = pp200;
-      if (beamOpt == "PP62") collsys = pp62;
-
       // Book histograms
       // Histos from HEPdata at 200GeV
       book(_h["xsec_piplus_200"], 1, 1, 1);
@@ -127,9 +122,15 @@ namespace Rivet {
 
       pair<double,double> cs = HepMCUtils::crossSection(*event.genEvent());
 
-      if(beamOpt == "NONE")
-        		{
+       // Beam options
+      beamOpt = getOption<string>("beam", "NONE");
+      const ParticlePair& beam = beams();
+      
+      if(beamOpt == "NONE"){
 
+      //check for proton proton
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
   			int NN = 1.;
   			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3))
         {
@@ -143,7 +144,14 @@ namespace Rivet {
           _c["sow_pp62"]->fill();
           _c["xsec_pp62"]->fill(cs.first);
         }
-  		}
+  		}else{
+        std::cerr << "Error: Not PP beam" << std::endl;
+      }
+    }
+     
+      
+      if (beamOpt == "PP200") collsys = pp200;
+      if (beamOpt == "PP62") collsys = pp62;
 
 
       // Pions
@@ -482,7 +490,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Scatter2DPtr> _s;
-    string beamOpt = "NONE";
+    string beamOpt;
     enum CollisionSystem {pp200, pp62};
     CollisionSystem collsys;
     //@}
