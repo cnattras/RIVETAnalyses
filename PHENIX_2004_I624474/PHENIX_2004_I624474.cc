@@ -20,6 +20,31 @@ namespace Rivet {
 	/// Constructor
 	DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2004_I624474);
 
+	//create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+            } else { //Check if we are working with any middle bin
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            }
+        }
+    }
 	/// Book histograms and initialise projections before the run
 	void init() {
 	
@@ -568,7 +593,6 @@ namespace Rivet {
 		const UnstableParticles np = apply<UnstableParticles>(event, "np");
 		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
 		const double c = cent();
-		const ParticlePair& beam = beams();
 		const Particles chargedParticles = cp.particles();
 		const Particles neutralParticles = np.particles();
 		const Particles Piplus = cp.particles(Cuts::pid == 211);
@@ -577,6 +601,16 @@ namespace Rivet {
 		const Particles Kminus = cp.particles(Cuts::pid == -321);
 		const Particles Protons = cp.particles(Cuts::pid == 2212);
 		const Particles Pbar = cp.particles(Cuts::pid == -2212);
+
+		const ParticlePair& beam = beams();
+	
+
+		beamOpt = getOption<string>("beam","NONE");
+
+
+    	if (beamOpt == "NONE") {
+    	if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+		}
 
 		pdN_dy["Piplus"]->fill(c, Piplus.size());
 		pdN_dy["Piminus"]->fill(c, Piminus.size());
@@ -1747,6 +1781,113 @@ namespace Rivet {
 
 
 	void finalize() {
+		binShift(*hAUAU_Yields["Piplusmin"]);
+		binShift(*hAUAU_Yields["Piplus5"]);
+		binShift(*hAUAU_Yields["Piplus10"]);
+		binShift(*hAUAU_Yields["Piplus15"]);
+		binShift(*hAUAU_Yields["Piplus20"]);
+		binShift(*hAUAU_Yields["Piplus30"]);
+		binShift(*hAUAU_Yields["Piplus40"]);
+		binShift(*hAUAU_Yields["Piplus50"]);
+		binShift(*hAUAU_Yields["Piplus60"]);
+		binShift(*hAUAU_Yields["Piplus70"]);
+		binShift(*hAUAU_Yields["Piplus80"]);
+		binShift(*hAUAU_Yields["Piplus92"]);
+		binShift(*hAUAU_Yields["Piplus60_92"]);
+
+		binShift(*hAUAU_Yields["Piminusmin"]);
+		binShift(*hAUAU_Yields["Piminus5"]);
+		binShift(*hAUAU_Yields["Piminus10"]);
+		binShift(*hAUAU_Yields["Piminus15"]);
+		binShift(*hAUAU_Yields["Piminus20"]);
+		binShift(*hAUAU_Yields["Piminus30"]);
+		binShift(*hAUAU_Yields["Piminus40"]);
+		binShift(*hAUAU_Yields["Piminus50"]);
+		binShift(*hAUAU_Yields["Piminus60"]);
+		binShift(*hAUAU_Yields["Piminus70"]);
+		binShift(*hAUAU_Yields["Piminus80"]);
+		binShift(*hAUAU_Yields["Piminus92"]);
+		binShift(*hAUAU_Yields["Piminus60_92"]);
+
+		binShift(*hAUAU_Yields["Kplusmin"]);
+		binShift(*hAUAU_Yields["Kplus5"]);
+		binShift(*hAUAU_Yields["Kplus10"]);
+		binShift(*hAUAU_Yields["Kplus15"]);
+		binShift(*hAUAU_Yields["Kplus20"]);
+		binShift(*hAUAU_Yields["Kplus30"]);
+		binShift(*hAUAU_Yields["Kplus40"]);
+		binShift(*hAUAU_Yields["Kplus50"]);
+		binShift(*hAUAU_Yields["Kplus60"]);
+		binShift(*hAUAU_Yields["Kplus70"]);
+		binShift(*hAUAU_Yields["Kplus80"]);
+		binShift(*hAUAU_Yields["Kplus92"]);
+		binShift(*hAUAU_Yields["Kplus60_92"]);
+
+		binShift(*hAUAU_Yields["Kminusmin"]);
+		binShift(*hAUAU_Yields["Kminus5"]);
+		binShift(*hAUAU_Yields["Kminus10"]);
+		binShift(*hAUAU_Yields["Kminus15"]);
+		binShift(*hAUAU_Yields["Kminus20"]);
+		binShift(*hAUAU_Yields["Kminus30"]);
+		binShift(*hAUAU_Yields["Kminus40"]);
+		binShift(*hAUAU_Yields["Kminus50"]);
+		binShift(*hAUAU_Yields["Kminus60"]);
+		binShift(*hAUAU_Yields["Kminus70"]);
+		binShift(*hAUAU_Yields["Kminus80"]);
+		binShift(*hAUAU_Yields["Kminus92"]);
+		binShift(*hAUAU_Yields["Kminus60_92"]);
+
+		binShift(*hAUAU_Yields["Protonsmin"]);
+		binShift(*hAUAU_Yields["Protons5"]);
+		binShift(*hAUAU_Yields["Protons10"]);
+		binShift(*hAUAU_Yields["Protons15"]);
+		binShift(*hAUAU_Yields["Protons20"]);
+		binShift(*hAUAU_Yields["Protons30"]);
+		binShift(*hAUAU_Yields["Protons40"]);
+		binShift(*hAUAU_Yields["Protons50"]);
+		binShift(*hAUAU_Yields["Protons60"]);
+		binShift(*hAUAU_Yields["Protons70"]);
+		binShift(*hAUAU_Yields["Protons80"]);
+		binShift(*hAUAU_Yields["Protons92"]);
+		binShift(*hAUAU_Yields["Protons60_92"]);
+
+		binShift(*hAUAU_Yields["Pbarmin"]);
+		binShift(*hAUAU_Yields["Pbar5"]);
+		binShift(*hAUAU_Yields["Pbar10"]);
+		binShift(*hAUAU_Yields["Pbar15"]);
+		binShift(*hAUAU_Yields["Pbar20"]);
+		binShift(*hAUAU_Yields["Pbar30"]);
+		binShift(*hAUAU_Yields["Pbar40"]);
+		binShift(*hAUAU_Yields["Pbar50"]);
+		binShift(*hAUAU_Yields["Pbar60"]);
+		binShift(*hAUAU_Yields["Pbar70"]);
+		binShift(*hAUAU_Yields["Pbar80"]);
+		binShift(*hAUAU_Yields["Pbar92"]);
+		binShift(*hAUAU_Yields["Pbar60_92"]);
+
+		binShift(*hPiPi["AUAU0_5Piminus"]); 
+		binShift(*hPiPi["AUAU0_5Piplus"]); 
+
+		binShift(*hK["AUAU0_10"]);
+		binShift(*hK["AUAU0_92"]);
+
+		binShift(*hP["AUAU0_10"]);
+		binShift(*hP["AUAU60_92"]);
+
+		binShift(*hPi0["AUAU0_10"]);
+		binShift(*hPi0["AUAU60_92"]);
+
+		binShift(*hPiPi["AUAU0_5Piminus"]);
+		binShift(*hPiPi["AUAU0_5Piplus"]);
+
+		binShift(*hPiPi["AUAU0_92Piminus"]);
+		binShift(*hPiPi["AUAU0_92Piplus"]);
+
+		binShift(*hPiPi["AUAU0_5Kminus"]);
+		binShift(*hPiPi["AUAU0_5kplus"]);
+		
+		
+
 
 		//____Yields____
 		hAUAU_Yields["Piplusmin"]->scaleW(1./sow["sow_AUAUmin"]->sumW());	//minimum bias centrality
@@ -1951,6 +2092,10 @@ namespace Rivet {
 	map<string, Histo1DPtr> hPP;
 	map<string, Histo1DPtr> hKPi;
 	map<string, Histo1DPtr> hPPi;
+
+	string beamOpt;
+    enum CollisionSystem {AuAu200};
+    CollisionSystem collSys;
 	};
 
 	DECLARE_RIVET_PLUGIN(PHENIX_2004_I624474);
