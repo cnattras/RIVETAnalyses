@@ -10,4 +10,4 @@ This should be written so it can either take a beam option set on the command li
 
 This needs the bin shift correction applied.
 
-Update: Added bin shift correction and divide by zero protection. Added beam options. The (sow_) counters are turned off in the output, but the RunAnalysis.sh file is only printing one of the .yoda files called in the MakePlots.sh.
+Update: Added bin shift correction and divide by zero protection. Added beam options.
