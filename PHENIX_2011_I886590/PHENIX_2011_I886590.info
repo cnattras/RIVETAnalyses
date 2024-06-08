@@ -16,7 +16,7 @@ References:
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options:
- - beam=pp200,pp62
+ - beam=PP200,PP62
 Description: Transverse momentum distributions and yields for $\pi^{\pm}$, $K^{\pm}$, $p$ and $\bar{p}$ in $p+p$ collisions at $\sqrt{s}$=200 and 62.4 GeV at midrapidity are measured by the PHENIX experiment at the Relativistic Heavy Ion Collider (RHIC). These data provide important baseline spectra for comparisons with identified particle spectra in heavy ion collisions at RHIC. We present the inverse slope parameter $T_{\rm inv}$, mean transverse momentum $<p_T>$ and yield per unit rapidity $dN/dy$ at each energy, and compare them to other measurements at different $\sqrt{s}$ in $p+p$ and $p+\bar{p}$ collisions. We also present the scaling properties such as $m_T$ scaling, $x_T$ scaling on the $p_T$ spectra between different energies. To discuss the mechanism of the particle production in $p+p$ collisions, the measured spectra are compared to next-to-leading-order or next-to-leading-logarithmic perturbative quantum chromodynamics calculations.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against

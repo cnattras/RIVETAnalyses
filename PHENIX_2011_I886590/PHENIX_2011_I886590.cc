@@ -18,6 +18,32 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2011_I886590);
 
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+            } else { //Check if we are working with any middle bin
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            }
+        }
+    }
+
     // Function to get bin centers for scaling
     bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
     {
@@ -44,11 +70,6 @@ namespace Rivet {
 
       const ALICE::PrimaryParticles fsP(Cuts::abseta < 0.35 && Cuts::pT > 0.5*GeV && Cuts::pT < 4.5*GeV);
       declare(fsP, "fsP");
-
-      // Beam options
-      beamOpt = getOption<string>("beam", "NONE");
-      if (beamOpt == "PP200") collsys = pp200;
-      if (beamOpt == "PP62") collsys = pp62;
 
       // Book histograms
       // Histos from HEPdata at 200GeV
@@ -101,9 +122,15 @@ namespace Rivet {
 
       pair<double,double> cs = HepMCUtils::crossSection(*event.genEvent());
 
-      if(beamOpt == "NONE")
-        		{
+       // Beam options
+      beamOpt = getOption<string>("beam", "NONE");
+      const ParticlePair& beam = beams();
+      
+      if(beamOpt == "NONE"){
 
+      //check for proton proton
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
   			int NN = 1.;
   			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3))
         {
@@ -117,7 +144,14 @@ namespace Rivet {
           _c["sow_pp62"]->fill();
           _c["xsec_pp62"]->fill(cs.first);
         }
-  		}
+  		}else{
+        std::cerr << "Error: Not PP beam" << std::endl;
+      }
+    }
+     
+      
+      if (beamOpt == "PP200") collsys = pp200;
+      if (beamOpt == "PP62") collsys = pp62;
 
 
       // Pions
@@ -383,32 +417,67 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+      
 
-      double xsec200 = (_c["xsec_pp200"]->sumW()/millibarn)/_c["sow_pp200"]->sumW();
-      double xsec62 = (_c["xsec_pp62"]->sumW()/millibarn)/_c["sow_pp62"]->sumW();
+      binShift(*_h["xsec_piplus_200"]);
+      binShift(*_h["xsec_piminus_200"]);
+      binShift(*_h["xsec_kplus_200"]);
+      binShift(*_h["xsec_kminus_200"]);
+      binShift(*_h["xsec_p_noFD_200_1"]);
+      binShift(*_h["xsec_p_noFD_200_2"]);
+      binShift(*_h["xsec_pbar_noFD_200_1"]);
+      binShift(*_h["xsec_pbar_noFD_200_2"]);
+      binShift(*_h["xsec_p_withFD_200_1"]);
+      binShift(*_h["xsec_p_withFD_200_2"]);
+      binShift(*_h["xsec_pbar_withFD_200_1"]);
+      binShift(*_h["xsec_pbar_withFD_200_2"]);
+      binShift(*_h["xsec_piplus_62"]);
+      binShift(*_h["xsec_piminus_62"]);
+      binShift(*_h["xsec_kplus_62"]);
+      binShift(*_h["xsec_kminus_62"]);
+      binShift(*_h["xsec_p_noFD_62"]);
+      binShift(*_h["xsec_pbar_noFD_62"]);
+      binShift(*_h["xsec_p_withFD_62"]);
+      binShift(*_h["xsec_pbar_withFD_62"]);
 
-		_h["xsec_piplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_piminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_kplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_kminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_p_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_p_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_p_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_p_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+      if (_c["sow_pp200"]->sumW() != 0){
+        double xsec200 = (_c["xsec_pp200"]->sumW()/millibarn)/_c["sow_pp200"]->sumW();
+        _h["xsec_piplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_piminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_kplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_kminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+      }else{
+        std::cerr << "Error: Divide by zero encountered." << std::endl;
+      }
+		  
 
-
-		_h["xsec_piplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_piminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_kplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_kminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_p_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_p_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-                _h["xsec_pbar_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+      if (_c["sow_pp62"]->sumW() != 0){
+        double xsec62 = (_c["xsec_pp62"]->sumW()/millibarn)/_c["sow_pp62"]->sumW();
+        if(_c["sow_pp200"]->sumW() !=0){
+          _h["xsec_piplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_piminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_kplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_kminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_p_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_pbar_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_p_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_pbar_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+        }else{
+          std::cerr << "Error: Divide by zero encountered. Cannot Scale Histogram" << std::endl;
+        }
+      }else{
+        std::cerr << "Error: Divide by zero encountered. Cannot define xsec62" << std::endl;
+      }
+        
+		  
 
 
     }
@@ -421,7 +490,7 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Scatter2DPtr> _s;
-    string beamOpt = "NONE";
+    string beamOpt;
     enum CollisionSystem {pp200, pp62};
     CollisionSystem collsys;
     //@}
