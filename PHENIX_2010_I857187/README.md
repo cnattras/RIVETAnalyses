@@ -5,3 +5,6 @@ Unclear who the original author was because the original name was wrong.  Contri
 Needs many, many histograms' axis labels written.
 
 Needs beams set up so that it will take either the generator beams or what is set on the command line.
+
+.plot written by olivia bartoshesky
+.yoda needs to be updated to match .plot and hep data.
