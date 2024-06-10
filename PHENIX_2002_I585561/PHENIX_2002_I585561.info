@@ -1,35 +1,41 @@
 Name: PHENIX_2002_I585561
 Year: 2002
-Summary: <A one-line informative PHENIX_2002_I585561 headline>
+Summary: Measurement of the Lambda and anti-Lambda particles in Au+Au collisions at $\sqrt{s_{NN}}$= 130-GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
+Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 585561
 Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Reentrant: false
 Authors:
  - Your Name <your@email.address>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - DOI:10.1103/PhysRevLett.89.092302
+ -arXiv:nucl-ex/0204007
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options:
  - cent = REF,GEN,IMP,USR
-Description:
-  'A brief description of what is measured and what it is useful for.
-   Use LaTeX for maths, e.g. $\pT > 50\;\GeV$.'
+ - beam = AuAu130
+Description: We present results on the measurement of $\Lambda$ and $\bar{\Lambda} production in Au+Au collisions at $\sqrt{s_{NN}}$=130 GeV with the PHENIX detector at RHIC. The transverse momentum spectra were measured for minimum bias and for the $5\%$ most central events. The $\bar{\Lambda}/\Lambda$ ratios are constant as a function of $p_T$ and the number of participants. The measured net $\Lambda$ density is significantly larger than predicted by models based on hadronic strings (e.g. HIJING) but in approximate agreement with models which include the gluon junction mechanism.
 ValidationInfo:
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: ''
+BibTeX: @article{PHENIX:2002svd,
+    author = "Adcox, K. and others",
+    collaboration = "PHENIX",
+    title = "{Measurement of the Lambda and anti-Lambda particles in Au+Au collisions at s(NN)**(1/2) = 130-GeV}",
+    eprint = "nucl-ex/0204007",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.89.092302",
+    journal = "Phys. Rev. Lett.",
+    volume = "89",
+    pages = "092302",
+    year = "2002"
+}
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 
