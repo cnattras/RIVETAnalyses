@@ -1,6 +1,6 @@
 Name: PHENIX_2009_I815217
 Year: 2009
-Summary: Photoproduction of $J/\psi$ and of high mass $e^+e^-$ in ultra-peripheral Au+Au collisions at $\sqrt{s}$ = 200-GeV
+Summary: Photoproduction of $J/\psi$ and of high mass $e^+e^-$ in ultra-peripheral Au+Au collisions at $\sqrt{s_{NN}}$ = 200-GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 815217
@@ -10,8 +10,8 @@ Authors:
  - Antonio Silva <antonio.silva@cern.ch>
  - Christine Nattrass <cnattras@utk.edu>
 References: 
-- arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+- arXiv:0903.2041
+- 10.1016/j.physletb.2009.07.061 
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
