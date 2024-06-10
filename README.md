@@ -121,6 +121,14 @@ STAR_2016_I1420183/STAR_2016_I1420183
 STAR_2020_I1771348/STAR_2020_I1771348
 
 
+
+Analyses with all problems fixed, just needs Histograms turned off: 
+PHENIX_2012_I1107625
+PHENIX_2008_I777211
+PHENIX_2008_I778168
+PHENIX_2011_I886590
+
+
 Analyses ready for higher stats with collision system:
 PHENIX_2001_I562409: pp130 and AuAu130
 PHENIX_2006_I711951: pp200, AuAu200, and DAu200
