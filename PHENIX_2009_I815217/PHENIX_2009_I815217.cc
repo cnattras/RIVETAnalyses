@@ -26,10 +26,14 @@ namespace Rivet {
       const FinalState fs(Cuts::abseta < 0.35);
 
       // Book histograms
-      // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["MyHisName1"], 1, 1, 1);
-      book(_h["MyHisName2"], 2, 1, 1);
+      book(_s["Placeholder1"], 1, 1, 1);
+      book(_s["Placeholder2"], 2, 1, 1);
+      book(_s["Placeholder3"], 2, 1, 2);
+      book(_s["Placeholder4"], 2, 1, 3);
+      book(_s["Placeholder5"], 3, 1, 1);
+      book(_s["Placeholder6"], 4, 1, 1);
+      book(_s["Placeholder7"], 4, 1, 2);
+      book(_s["Placeholder8"], 4, 1, 3);
 
     }
 
@@ -59,6 +63,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    map<string, Scatter2DPtr> _s;
     //@}
 
 
