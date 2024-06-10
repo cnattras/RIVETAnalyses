@@ -202,10 +202,15 @@ namespace Rivet {
 
     void analyze(const Event& event) {
 
-      const ParticlePair& beam = beams();
-      int NN = 0;
+        const ParticlePair& beam = beams();
+        int NN = 0;
+        
+        beamOpt = getOption<string>("beam","NONE");
 
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+
+        if (beamOpt == "NONE") {
+        
+            if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           NN = 197.;
           if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSys = AuAu39;
@@ -216,6 +221,7 @@ namespace Rivet {
           if (fuzzyEquals(sqrtS()/GeV, 39, 1E-3)) collSys = pp39;
           if (fuzzyEquals(sqrtS()/GeV, 62.4, 1E-3)) collSys = pp62;
       }
+    }
 
 
             Particles neutralParticles = applyProjection<UnstableParticles>(event,"ufs").particles();
@@ -401,8 +407,9 @@ namespace Rivet {
                 }
                 return;
             }
-
+        
     }
+    
 
     void finalize() {
 
