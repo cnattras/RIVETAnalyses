@@ -17,16 +17,49 @@ namespace Rivet {
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2012_I1116179);
 
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+            } else { //Check if we are working with any middle bin
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            }
+        }
+    }
 
     /// @name Analysis methods
     //@{
 
     /// Book histograms and initialise projections before the run
     void init() {
+    
+    beamOpt = getOption<string>("beam", "NONE");
+    const ParticlePair& beam = beams();
+          
+          if (beamOpt == "NONE") {
+          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu;
+          }
+          
+          if (beamOpt == "AUAU200"){collSys = AuAu;}
 
 	  declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-    beamOpt = getOption<string>("beam", "NONE");
-
+    
 	  //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV);
 	  //declare(fs, "fs");
 
@@ -156,6 +189,17 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       
+      binShift(*_h["dir_photon_AuAu0005"]);
+      binShift(*_h["dir_photon_AuAu0510"]);
+      binShift(*_h["dir_photon_AuAu1015"]);
+      binShift(*_h["dir_photon_AuAu1520"]);
+      binShift(*_h["dir_photon_AuAu2030"]);
+      binShift(*_h["dir_photon_AuAu3040"]);
+      binShift(*_h["dir_photon_AuAu4050"]);
+      binShift(*_h["dir_photon_AuAu5060"]);
+      binShift(*_h["dir_photon_AuAu6092"]);
+      binShift(*_h["dir_photon_AuAu0092"]);
+
       _h["dir_photon_AuAu0005"]->scaleW(1./_c["sow_AuAu0005"]->sumW());
       _h["dir_photon_AuAu0510"]->scaleW(1./_c["sow_AuAu0510"]->sumW());
       _h["dir_photon_AuAu1015"]->scaleW(1./_c["sow_AuAu1015"]->sumW());
@@ -178,8 +222,10 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-	map<string, Scatter2DPtr> _s;
-  string beamOpt = "";
+	  map<string, Scatter2DPtr> _s;
+    string beamOpt;
+    enum CollisionSystem {AuAu};
+    CollisionSystem collSys;
     //@}
 
 
