@@ -30,7 +30,32 @@ namespace Rivet {
 
     /// Constructor
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I778168);
-
+    
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+            } else { //Check if we are working with any middle bin
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            }
+        }
+    }
 
     void init() {
 
@@ -43,12 +68,29 @@ namespace Rivet {
       declare(up, "up");
 
       beamOpt = getOption<string>("beam","NONE");
+      
+      const ParticlePair& beam = beams();
 
+
+        if (beamOpt == "NONE") {
+
+          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+          {
+                  collSys = AuAu;
+          }
+          if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+          {
+                  collSys = pp;
+          }
+        }
+
+        else if (beamOpt == "PP200") collSys = pp;
+	    else if (beamOpt == "AUAU200") collSys = AuAu;
 
       //if(beamOpt=="PP") collSys = pp;
       //else if(beamOpt=="AUAU") collSys = AuAu;
 
-      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+     if(!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
 
  //Yields_________________
@@ -185,7 +227,7 @@ namespace Rivet {
 
         Particles neutralParticles = applyProjection<UnstableParticles>(event,"up").particles();
 
-        const ParticlePair& beam = beams();
+        /*const ParticlePair& beam = beams();
         string CollSystem = "Empty";
 
         if (beamOpt == "NONE") {
@@ -201,9 +243,9 @@ namespace Rivet {
         }
 
         else if (beamOpt == "PP200") CollSystem = "pp";
-	else if (beamOpt == "AUAU200") CollSystem = "AuAu";
+	else if (beamOpt == "AUAU200") CollSystem = "AuAu";*/
 
-        if(CollSystem == "pp")
+        if(collSys == pp)
         {
                  _c["sow_pp"]->fill();
                  for(Particle p : neutralParticles)
@@ -228,7 +270,7 @@ namespace Rivet {
 
         if ((c < 0.) || (c >= 92.)) vetoEvent;
 
-        if (CollSystem == "AuAu")
+        if (collSys == AuAu)
         {
             _c["sow_AuAu_call"]->fill();
 
@@ -368,6 +410,18 @@ namespace Rivet {
     void finalize() {
 
  //Yields_________________
+        binShift(*_h["ptyieldsc5"]);
+        binShift(*_h["ptyieldsc10"]);
+        binShift(*_h["ptyieldsc20"]);
+        binShift(*_h["ptyieldsc30"]);
+        binShift(*_h["ptyieldsc40"]);
+        binShift(*_h["ptyieldsc50"]);
+        binShift(*_h["ptyieldsc60"]);
+        binShift(*_h["ptyieldsc70"]);
+        binShift(*_h["ptyieldsc80"]);
+        binShift(*_h["ptyieldsc92"]);
+        binShift(*_h["ptyieldscall"]);
+
        _h["ptyieldsc5"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
        _h["ptyieldsc10"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
        _h["ptyieldsc20"]->scaleW(1./_c["sow_AuAu_c20"]->sumW());
@@ -381,6 +435,17 @@ namespace Rivet {
        _h["ptyieldscall"]->scaleW(1./_c["sow_AuAu_call"]->sumW());
 
  //RAA _______________________________
+        binShift(*_h["c5Pt_AuAu"]);
+        binShift(*_h["c10Pt_AuAu"]);
+        binShift(*_h["c20Pt_AuAu"]);
+        binShift(*_h["c30Pt_AuAu"]);
+        binShift(*_h["c40Pt_AuAu"]);
+        binShift(*_h["c50Pt_AuAu"]);
+        binShift(*_h["c60Pt_AuAu"]);
+        binShift(*_h["c70Pt_AuAu"]);
+        binShift(*_h["c80Pt_AuAu"]);
+        binShift(*_h["c92Pt_AuAu"]);
+        binShift(*_h["callPt_AuAu"]);
        _h["c5Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
        _h["c10Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
        _h["c20Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c20"]->sumW());
@@ -393,6 +458,18 @@ namespace Rivet {
        _h["c92Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c92"]->sumW());
        _h["callPt_AuAu"]->scaleW(1./_c["sow_AuAu_call"]->sumW());
 
+
+        binShift(*_h["c5Pt_pp"]);
+        binShift(*_h["c10Pt_pp"]);
+        binShift(*_h["c20Pt_pp"]);
+        binShift(*_h["c30Pt_pp"]);
+        binShift(*_h["c40Pt_pp"]);
+        binShift(*_h["c50Pt_pp"]);
+        binShift(*_h["c60Pt_pp"]);
+        binShift(*_h["c70Pt_pp"]);
+        binShift(*_h["c80Pt_pp"]);
+        binShift(*_h["c92Pt_pp"]);
+        binShift(*_h["callPt_pp"]);
        _h["c5Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
        _h["c10Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
        _h["c20Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
@@ -517,9 +594,9 @@ namespace Rivet {
 
      map<string, Scatter2DPtr> hRaaNpart;
      //map<string, int> centBins;
-    string beamOpt = "NONE";
-    //enum CollisionSystem {pp, AuAu};
-    //CollisionSystem collSys;
+    string beamOpt;
+    enum CollisionSystem {pp, AuAu};
+    CollisionSystem collSys;
 
   };
 
