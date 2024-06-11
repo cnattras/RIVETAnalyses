@@ -192,17 +192,29 @@ namespace Rivet {
       /// Book histograms and initialise projections before the run
       void init() {
 
-        // Initialise and register projections
-        // Declare beamOpt
-        beamOpt = getOption<string>("beam", "NONE");
-
-        // Declare Centrality
-        declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-
+        
         // Declare Particles in this RIVET Analysis
         // Charged Particles for EP determination and Vn measurements
         const FinalState fs(Cuts::abseta < 2.8);
         declare(fs,"fs");
+
+
+// Initialise and register projections
+        // Declare beamOpt
+
+        const ParticlePair& beam = beams();
+
+        
+        beamOpt = getOption<string>("beam", "NONE");
+
+        if (beamOpt == "NONE") {
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+        }
+
+        if (beamOpt == "AuAu200") collSys = AuAu200;
+
+        // Declare Centrality
+        declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
         // Book Histograms
         for(int icen = 0; icen<NCEN; icen++){
@@ -342,7 +354,9 @@ namespace Rivet {
       map<string, Profile1DPtr> _p_vn_pt;
       map<string, Profile1DPtr> _p_vn_cen;
       map<string, Profile1DPtr> _p_epcor_cen;
-      string beamOpt = "";
+      string beamOpt; 
+      enum CollisionSystem {AuAu200};
+	    CollisionSystem collSys;
 
       /// @name Histograms
       //@{
