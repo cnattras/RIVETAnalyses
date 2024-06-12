@@ -209,14 +209,14 @@ YLabel=$I_{AA}$
 LogY=0
 END PLOT
 
-BEGIN PLOT /PHENIX_2009_I815824/d18-x01-y01
+BEGIN PLOT /PHENIX_2009_I815824/d19-x01-y01
 Title=$I_{AA}(Z_T)% for the 20$\%$ most central Au+Au data at 9<$p_T^{\gamma}$<12 GeV/c comapred to predictions from an energy loss. 
 XLabel=$z_T$
 YLabel=$I_{AA}$
 LogY=0
 END PLOT
 
-BEGIN PLOT /PHENIX_2009_I815824/d18-x01-y01
+BEGIN PLOT /PHENIX_2009_I815824/d20-x01-y01
 Title=$I_{AA}(Z_T)% for the 20$\%$ most central Au+Au data at 12<$p_T^{\gamma}$<15 GeV/c comapred to predictions from an energy loss. 
 XLabel=$z_T$
 YLabel=$I_{AA}$
