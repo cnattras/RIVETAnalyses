@@ -954,30 +954,35 @@ BEGIN PLOT /PHENIX_2013_I1227971/d20-x01-y01
 Title=AuAu kaon $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 10-20% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d20-x01-y02
 Title=AuAu kaon $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 20-40% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d20-x01-y03
 Title=AuAu kaon $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 40-60% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d20-x01-y04
 Title=AuAu kaon $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 60-92% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d20-x01-y05
 Title=AuAu kaon $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 # Figure 11: raa pion
@@ -986,30 +991,35 @@ BEGIN PLOT /PHENIX_2013_I1227971/d21-x01-y01
 Title=AuAu pion $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 10-20% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d21-x01-y02
 Title=AuAu pion $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 20-40% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d21-x01-y03
 Title=AuAu pion $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 40-60% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d21-x01-y04
 Title=AuAu pion $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 60-92% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d21-x01-y05
 Title=AuAu pion $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 # Figure 11: raa proton
@@ -1018,30 +1028,35 @@ BEGIN PLOT /PHENIX_2013_I1227971/d22-x01-y01
 Title=AuAu proton $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 10-20% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d22-x01-y02
 Title=AuAu proton $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 20-40% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d22-x01-y03
 Title=AuAu proton $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 40-60% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d22-x01-y04
 Title=AuAu proton $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 # 60-92% Centrality
 BEGIN PLOT /PHENIX_2013_I1227971/d22-x01-y05
 Title=AuAu proton $R_{AA}$ versus $p_{T}$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 # Figure 12: rda kaon

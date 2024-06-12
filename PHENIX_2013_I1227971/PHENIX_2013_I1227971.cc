@@ -24,6 +24,32 @@ namespace Rivet {
 
 			DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2013_I1227971);
 
+			//create binShift function
+			void binShift(YODA::Histo1D& histogram) {
+    		std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    		int n = 0;
+    		for (YODA::HistoBin1D bins : binlist) {
+        		double p_high = bins.xMax();
+        		double p_low = bins.xMin();
+        		//Now calculate f_corr
+        		if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+            		float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            		float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            		histogram.bin(n).scaleW(f_corr);
+            		n += 1;
+        		} else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+            		float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            		float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            		histogram.bin(n).scaleW(f_corr);
+        		} else { //Check if we are working with any middle bin
+            		float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            		float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            		histogram.bin(n).scaleW(f_corr);
+            		n += 1;
+        		}
+    		}
+		}
+
 
 			void init() {
 
@@ -33,6 +59,14 @@ namespace Rivet {
 				declare(fs, "fs");
 
 				beamOpt = getOption<string>("beam", "NONE");
+				const ParticlePair& beam = beams();
+          
+          		if (beamOpt == "NONE") {
+          		if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+          		else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+          		else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = dAu200;
+          		else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = dAu200;
+          		}
 
 				if (beamOpt == "PP") collSys = pp;
 				else if (beamOpt == "AUAU200") collSys = AuAu200;
@@ -1129,7 +1163,21 @@ namespace Rivet {
 			void finalize() {
 
 				for (int i = 0, N = AUAUCentralityBins.size(); i < N; ++i)
-				{
+				{	
+
+					//binshift
+					binShift(*hKaonNegPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*hPionNegPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*hProtNegPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*hKaonPosPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*hPionPosPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*hProtPosPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*hKaonNegPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*hPionNegPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*hProtNegPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*hKaonPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*hPionPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*hProtPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]);
 					//yields (fig 4)_________________
 					hKaonNegPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 					hPionNegPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
@@ -1145,50 +1193,90 @@ namespace Rivet {
 					hProtPosPt["ptyieldsdAuc" + std::to_string(dAUCentralityBins[i])]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 
 					//Ratio of yields (figs 5-9)_________________(Do I need to scale Neg and Pos particles first (like yields section)?)
+					binShift(*rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioKaon["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioKaon["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
+					binShift(*rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioPion["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioPion["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
+					binShift(*rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioProt["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioProt["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
+					binShift(*rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pipos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
+					binShift(*rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], RatioK_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], RatioK_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
+					binShift(*rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pipos["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
+					binShift(*rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
+					binShift(*rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
+					binShift(*rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 					divide(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], Ratiop_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])]);
 					divide(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], Ratiop_pineg["dAuc" + std::to_string(dAUCentralityBins[i])]);
 
 					//RAA (fig 11)_________________
+					binShift(*hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
+					binShift(*hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]);
 					hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 					hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
 
+					binShift(*hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
+					binShift(*hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]);
 					hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 					hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], hRaa["pi_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
 
+					binShift(*hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
+					binShift(*hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]);
 					hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 					hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"]);
 
 					//RdA (fig 12)________________
-
+					
+					binShift(*hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
+					binShift(*hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]);
 					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
 
+					binShift(*hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
+					binShift(*hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]);
 					hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
 
+					binShift(*hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
+					binShift(*hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]);
 					hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]->scaleW(1. / sow["sow_dAUc" + std::to_string(dAUCentralityBins[i])]->sumW());
 					hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 					divide(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"]);
@@ -1196,62 +1284,87 @@ namespace Rivet {
 				}
 
 				//RCP (fig 10) _________________(is ->scaleY needed?)
-
+				
+				binShift(*hKaonPosPt["AuAuc0010a"]);
+				binShift(*hKaonPosPt["AuAuc4060"]);
 				hKaonPosPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hKaonPosPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hKaonPosPt["AuAuc0010a"], hKaonPosPt["AuAuc4060"], hRcp["Kpos_c00104060_AuAu"]);
 
+				binShift(*hKaonPosPt["AuAuc0010b"]);
+				binShift(*hKaonPosPt["AuAuc6092"]);
 				hKaonPosPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hKaonPosPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hKaonPosPt["AuAuc0010b"], hKaonPosPt["AuAuc6092"], hRcp["Kpos_c00106092_AuAu"]);
 
+				binShift(*hKaonNegPt["AuAuc0010a"]);
+				binShift(*hKaonNegPt["AuAuc4060"]);
 				hKaonNegPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hKaonNegPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hKaonNegPt["AuAuc0010a"], hKaonNegPt["AuAuc4060"], hRcp["Kneg_c00104060_AuAu"]);
 
+				binShift(*hKaonNegPt["AuAuc0010b"]);
+				binShift(*hKaonNegPt["AuAuc6092"]);
 				hKaonNegPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hKaonNegPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hKaonNegPt["AuAuc0010b"], hKaonNegPt["AuAuc6092"], hRcp["Kneg_c00106092_AuAu"]);
 
-
+				binShift(*hPionPosPt["AuAuc0010a"]);
+				binShift(*hPionPosPt["AuAuc4060"]);
 				hPionPosPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionPosPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionPosPt["AuAuc0010a"], hPionPosPt["AuAuc4060"], hRcp["pipos_c00104060_AuAu"]);
 
-
+				binShift(*hPionPosPt["AuAuc0010b"]);
+				binShift(*hPionPosPt["AuAuc6092"]);
 				hPionPosPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionPosPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionPosPt["AuAuc0010b"], hPionPosPt["AuAuc6092"], hRcp["pipos_c00106092_AuAu"]);
 
-
+				binShift(*hPionNegPt["AuAuc0010a"]);
+				binShift(*hPionNegPt["AuAuc4060"]);
 				hPionNegPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionNegPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionNegPt["AuAuc0010a"], hPionNegPt["AuAuc4060"], hRcp["pineg_c00104060_AuAu"]);
 
-
+				binShift(*hPionNegPt["AuAuc0010b"]);
+				binShift(*hPionNegPt["AuAuc6092"]);
 				hPionNegPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hPionNegPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hPionNegPt["AuAuc0010b"], hPionNegPt["AuAuc6092"], hRcp["pineg_c00106092_AuAu"]);
 
-
+				binShift(*hProtPosPt["AuAuc0010a"]);
+				binShift(*hProtPosPt["AuAuc4060"]);
 				hProtPosPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hProtPosPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hProtPosPt["AuAuc0010a"], hProtPosPt["AuAuc4060"], hRcp["ppos_c00104060_AuAu"]);
 
+				binShift(*hProtPosPt["AuAuc0010b"]);
+				binShift(*hProtPosPt["AuAuc6092"]);
 				hProtPosPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hProtPosPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hProtPosPt["AuAuc0010b"], hProtPosPt["AuAuc6092"], hRcp["ppos_c00106092_AuAu"]);
 
+				binShift(*hProtNegPt["AuAuc0010a"]);
+				binShift(*hProtNegPt["AuAuc4060"]);
 				hProtNegPt["AuAuc0010a"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hProtNegPt["AuAuc4060"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hProtNegPt["AuAuc0010a"], hProtNegPt["AuAuc4060"], hRcp["pneg_c00104060_AuAu"]);
 
+				binShift(*hProtNegPt["AuAuc0010b"]);
+				binShift(*hProtNegPt["AuAuc6092"]);
 				hProtNegPt["AuAuc0010b"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
 				hProtNegPt["AuAuc6092"]->scaleW(1. / sow["sow_AUAUc60"]->sumW());
 				divide(hProtNegPt["AuAuc0010b"], hProtNegPt["AuAuc6092"], hRcp["pneg_c00106092_AuAu"]);
 
 				// Ratio of Spectra(fig 15)_________________(Do I treat this the same as ratio of yields section?)
 
+				binShift(*hKaonPt["AuAuc6092"]);
+				binShift(*hKaonPt["dAuc0020"]);
+				binShift(*hPionPt["AuAuc6092"]);
+				binShift(*hPionPt["dAuc0020"]);
+				binShift(*hProtPt["AuAuc6092"]);
+				binShift(*hProtPt["dAuc0020"]);
 				divide(hKaonPt["AuAuc6092"], hKaonPt["dAuc0020"], RatioK["AuAuc/dAU"]);
 				divide(hPionPt["AuAuc6092"], hPionPt["dAuc0020"], Ratiopi["AuAuc/dAU"]);
 				divide(hProtPt["AuAuc6092"], hProtPt["dAuc0020"], Ratiop["AuAuc/dAU"]);
