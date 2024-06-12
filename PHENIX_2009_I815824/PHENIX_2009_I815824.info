@@ -15,11 +15,12 @@ References:
 - arXiv:0903.3399
 - 10.1103/PhysRevC.80.024908
 RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: <Insert beam pair(s), e.g. [p+, p+] or [[p-, e-], [p-, e+]]>
-#Energies: <Run energies or beam energy pairs in GeV, e.g. [13000] or [[8.0, 3.5]] or [630, 1800]. Order pairs to match "Beams">
-#Luminosity_fb: <Insert integrated luminosity, in inverse fb>
+#Beams:[p+, p+]
+#Energies: [6500,6500]
+#Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
+ -beam=pp200,AUAU200
 Description: We report the observation at the Relativistic Heavy Ion Collider (RHIC) of suppression of back-to-back correlations in the direct photon+jet channel in Au+Au relative to $p$+$p$ collisions. Two-particle correlations of direct photon triggers with associated hadrons are obtained by statistical subtraction of the decay photon-hadron background. The initial momentum of the away-side parton is tightly constrained, because the parton-photon pair exactly balance in momentum at leading order in perturbative quantum chromodynamics (pQCD), making such correlations a powerful probe of the in-medium parton energy loss. The away-side nuclear suppression factor, $I_{AA}$, in central Au+Au collisions, is 0.32 $\pm$ 0.12(stat) $\pm$ 0.09(syst) for hadrons of 3 < $p_T$ < 5 in coincidence with photons of 5 < $p_T$ < 15 GeV/$c$. The suppression is comparable to that observed for high-$p_T$ single hadrons and dihadrons. The direct photon associated yields in $p$+$p$ collisions scale approximately with the momentum balance, $z_T$ = $p_T^{hadron/{p_T^{photon}}}$, as expected for a measure of the away-side parton fragmentation function. We compare to Au+Au collisions for which the momentum balance dependence of the nuclear modification should be sensitive to the path-length dependence of parton energy loss.
 Keywords: []
 BibKey: 
