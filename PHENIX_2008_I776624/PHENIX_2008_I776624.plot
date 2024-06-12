@@ -1,8 +1,7 @@
 BEGIN PLOT /PHENIX_2008_I776624/d01-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow e^{+}e^{-}$ for 0-20\% at $|y|<0.35$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 1
@@ -10,8 +9,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d02-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow e^{+}e^{-}$ for 20-40\% at $|y|<0.35$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 2
@@ -19,8 +17,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d03-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow e^{+}e^{-}$ for 40-60\% at $|y|<0.35$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 3
@@ -28,8 +25,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d04-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow e^{+}e^{-}$ for 60-94\% at $|y|<0.35$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 4
@@ -37,8 +33,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d05-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow \mu^{+}\mu^{-}$ for 0-20\% at $1.2< |y|<2.2$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 5
@@ -47,8 +42,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d06-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow \mu^{+}\mu^{-}$ for 20-40\% at $1.2< |y|<2.2$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 6
@@ -57,8 +51,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d07-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow \mu^{+}\mu^{-}$ for 40-60\% at $1.2< |y|<2.2$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 7
@@ -67,8 +60,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d08-x01-y01
 Title=$p_{\rm T}$-diff. inv. yield of J/$\psi \rightarrow \mu^{+}\mu^{-}$ for 60-94\% at $1.2< |y|<2.2$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{1}{2\pi p_{T} \Delta p_{T} \Delta y} \frac{c_\mathrm{BBC}}{\varepsilon_\mathrm{Ae} \varepsilon_\mathrm{trig}} \frac{N_{J/\psi}}{N_\mathrm{evt}}$
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$\frac{1}{2\pi p_T}\frac{Bd^2N}{dydp_T}$[$(GeV/c)^{-2}]$
 END PLOT
 
 ### 8
@@ -77,10 +69,9 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d09-x01-y01
 Title=$ \langle p_{T}^{2} \rangle$ of J/$\psi \rightarrow e^{+}e^{-}$ at $|y|<0.35$
 XLabel=$\langle N_{part} \rangle$
-YLabel=$ \angle p_{T}^{2} \rangle$, for $p_{\rm T} < 5$ GeV/c
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$ \angle p_{T}^{2} \rangle$ $(GeV/c)^2$, for $p_{\rm T} < 5$ GeV/c
 XMin = 0.0
-XMax = 100.0
+XMax = 1000.0
 END PLOT
 
 ### 9
@@ -89,10 +80,9 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d10-x01-y01
 Title=$ \angle p_{T}^{2} \rangle$ of J/$\psi \rightarrow \mu^{+}\mu^{-}$ at $1.2< |y|<2.2$
 XLabel=$\langle N_{part} \rangle$
-YLabel=$ \angle p_{T}^{2} \rangle$, for $p_{\rm T} < 5$ GeV/c
+YLabel=$ \angle p_{T}^{2} \rangle$ $(GeV/c)^2$, for $p_{\rm T} < 5$ GeV/c
 XMin = 0.0
-XMax = 100.0
-# + any additional plot settings you might like, see make-plots documentation
+XMax = 1000.0
 END PLOT
 
 ### 10
@@ -101,10 +91,9 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d11-x01-y01
 Title= $R_{CuCu}$ of J/$\psi \rightarrow \mu^{+}\mu^{-}$ for 0-20\% at $1.2< |y|<2.2$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{d^{2}N^{AB}/dydp_{T}}{\langle N_{part} \rangle d^{2}N^{pp}/dydp_{T}}$ 
+YLabel=$R_{AA}$
 XMin = 0.0
 XMax = 5.5
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 ### 11
@@ -113,10 +102,9 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d12-x01-y01
 Title= $R_{CuCu}$ of J/$\psi \rightarrow e^{+} e^{-}$ for 0-20\% at $|y|<0.35$
 XLabel=$p_{\rm T}$ [GeV/c]
-YLabel=$\frac{d^{2}N^{AB}/dydp_{T}}{\langle N_{part} \rangle d^{2}N^{pp}/dydp_{T}}$
+YLabel=$R_{AA}$
 XMin = 0.0
 XMax = 5.5
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 ### 12
@@ -124,11 +112,10 @@ END PLOT
 
 BEGIN PLOT /PHENIX_2008_I776624/d13-x01-y01
 Title=  $R_{CuCu}$ of J/$\psi \rightarrow e^{+}e^{-}$ and J/$\psi \rightarrow \mu^{+}\mu^{-}$ 
-XLabel=$y$
-YLabel=$\frac{dN^{AB}/dy}{\langle N_{part} \rangle dN^{pp}/dy}$ 
+XLabel=Rapidity $y$
+YLabel=$R_{AA}$ 
 XMin = -2.5
 XMax = 2.5
-# + any additional plot settings you might like, see make-plots documentation
 END PLOT
 
 ### 13
@@ -137,10 +124,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d14-x01-y01
 Title=$R_{CuCu}$ of J/$\psi \rightarrow e^{+}e^{-}$ at $|y|<0.35$
 XLabel=$\langle N_{part} \rangle$
-YLabel=$\frac{dN^{CuCu}/dy}{\langle N_{part} \rangle dN^{pp}/dy}$
-XMin = 0.0
-XMax = 110.0
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$R_{AA}$
 END PLOT
 
 ### 14
@@ -149,14 +133,7 @@ END PLOT
 BEGIN PLOT /PHENIX_2008_I776624/d15-x01-y01
 Title= $R_{CuCu}$ of $J/$\psi \rightarrow \mu^{+}\mu^{-}$ at $1.2< |y|<2.2$
 XLabel=$\langle N_{part} \rangle$
-YLabel=$\frac{dN^{CuCu}/dy}{\langle N_{part} \rangle dN^{pp}/dy}$
-XMin = 0.0
-XMax = 110.0
-# + any additional plot settings you might like, see make-plots documentation
+YLabel=$R_{AA}$
 END PLOT
 
-### 15
 
-
-
-# ... add more histograms as you need them ...
