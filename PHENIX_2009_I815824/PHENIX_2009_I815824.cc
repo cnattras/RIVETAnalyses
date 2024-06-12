@@ -814,6 +814,9 @@ namespace Rivet {
     vector<int> nTriggers;
     vector<int> nEvents;
     vector<Correlator> Correlators;
+    string beamOpt;
+    enum CollisionSystem { pp, AuAu, CuCu};
+    CollisionSystem collSys;
 
   };
 
