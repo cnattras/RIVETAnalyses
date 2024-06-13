@@ -53,43 +53,43 @@ YLabel=$\frac{1}{N_{jet}}\frac{dN}{dz_g}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d03-x01-y01
-Title=$\eta$ distribution for $p_T$ bin 9.0-10.0
+Title=$\xi$ distribution for $p_T$ bin 9.0-10.0
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d04-x01-y01
-Title=$\eta$ distribution for $p_T$ bin 9.0-10.0
+Title=$\xi$ distribution for $p_T$ bin 9.0-10.0
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d04-x01-y02
-Title=$\eta$ distribution for $p_T$ bin 12.0-14.5
+Title=$\xi$ distribution for $p_T$ bin 12.0-14.5
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d04-x01-y03
-Title=$\eta$ distribution for $p_T$ bin 14.5-17.5
+Title=$\xi$ distribution for $p_T$ bin 14.5-17.5
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d04-x01-y04
-Title=$\eta$ distribution for $p_T$ bin 17.5-20.5
+Title=$\xi$ distribution for $p_T$ bin 17.5-20.5
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d04-x01-y05
-Title=$\eta$ distribution for $p_T$ bin 20.5-24.5
+Title=$\xi$ distribution for $p_T$ bin 20.5-24.5
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2024_IPPG252/d04-x01-y06
-Title=$\eta$ distribution for $p_T$ bin 24.5-29.0
+Title=$\xi$ distribution for $p_T$ bin 24.5-29.0
 XLabel=$\xi$
 YLabel=$\frac{1}{N_{jet}}\frac{dN}{d\xi}$
 END PLOT
