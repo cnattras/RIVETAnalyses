@@ -8,8 +8,8 @@ Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
 Authors:
  - Ejiro Umaka <eumaka@iastate.edu>
 References: 
-- arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+- arXiv:1509.06727
+- 10.1103/PhysRevC.93.024901
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
