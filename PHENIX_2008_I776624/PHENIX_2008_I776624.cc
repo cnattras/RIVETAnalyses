@@ -19,6 +19,32 @@ namespace Rivet {
     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I776624);
 
     /////////////////////////////////////////////////////////////////////////
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    int n = 0;
+    for (YODA::HistoBin1D bins : binlist) {
+        double p_high = bins.xMax();
+        double p_low = bins.xMin();
+        //Now calculate f_corr
+        if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+        } else { //Check if we are working with any middle bin
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        }
+    }
+}
+
     void init() {
 
       const UnstableParticles up_fwd(Cuts::absrap < 2.2 && Cuts::absrap > 1.2 && Cuts::abspid == 443 && Cuts::abscharge == 0);  // fwd rap
@@ -29,7 +55,12 @@ namespace Rivet {
       declare(up_mid,"up_all");
 
       beamOpt = getOption<string>("beam","NONE");
-      
+      const ParticlePair& beam = beams();
+
+      if (beamOpt == "NONE") {    
+      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630) CollSys = CuCu200;
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) CollSys = pp200;
+      }
       if(beamOpt=="PP200") CollSys = pp200;
       else if(beamOpt=="CUCU200") CollSys = CuCu200;
      
@@ -64,6 +95,7 @@ namespace Rivet {
    
      //  /////////////////////////////////////////////////////////////
    //    // FIGURE 2
+   //    These are functions of N_{part}
    //    // x-axis for CuCu ptsq Table 9 as function of Npart - up to 5 GeV
    //    vector<double> centBins3{0.0, 20.0, 40.0, 60.0};   // no 60-94 provided for mid rapidity
    //    book(_h1D_npart3["ptsq_mid_cent"], "ptsq_mid_cent", centBins3);  
@@ -450,6 +482,14 @@ namespace Rivet {
 
 
       // Figure 1  - yields vs pT
+      binShift(*_h_1D["YAA_pT_mid_020"]);
+      binShift(*_h_1D["YAA_pT_mid_2040"]);
+      binShift(*_h_1D["YAA_pT_mid_4060"]);
+      binShift(*_h_1D["YAA_pT_mid_6094"]);
+      binShift(*_h_1D["YAA_pT_fwd_020"]);
+      binShift(*_h_1D["YAA_pT_fwd_2040"]);
+      binShift(*_h_1D["YAA_pT_fwd_4060"]);
+      binShift(*_h_1D["YAA_pT_fwd_6094"]);
       _h_1D["YAA_pT_mid_020"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
       _h_1D["YAA_pT_mid_2040"]->scaleW(1./_c["c_YAA_pT_mid_2040"]->sumW());
       _h_1D["YAA_pT_mid_4060"]->scaleW(1./_c["c_YAA_pT_mid_4060"]->sumW());
@@ -466,17 +506,23 @@ namespace Rivet {
       /////////////////////////
 
       // Figure 3a - RAA mid and fwd vs pT
+      binShift(*_h_RAA_1D["020_pT_mid_CuCu"]);
+      binShift(*_h_RAA_1D["pT_mid_pp"]);
       _h_RAA_1D["020_pT_mid_CuCu"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
       _h_RAA_1D["pT_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
       divide(_h_RAA_1D["020_pT_mid_CuCu"], _h_RAA_1D["pT_mid_pp"],_h2D_RAA["RAA_pT_mid_020"]);
       _h2D_RAA["RAA_pT_mid_020"]->scaleY(1./151.8);  // Ncoll from PHENIX AN 638, page 100
 
+      binShift(*_h_RAA_1D["020_pT_fwd_CuCu"]);
+      binShift(*_h_RAA_1D["pT_fwd_pp"]);
        _h_RAA_1D["020_pT_fwd_CuCu"]->scaleW(1./_c["c_YAA_pT_fwd_020"]->sumW());
        _h_RAA_1D["pT_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
        divide(_h_RAA_1D["020_pT_fwd_CuCu"], _h_RAA_1D["pT_fwd_pp"],_h2D_RAA["RAA_pT_fwd_020"]);
        _h2D_RAA["RAA_pT_fwd_020"]->scaleY(1./151.8);
 
       // // Figure 3b - RAA vs rap
+      binShift(*_h_RAA_1D_rap["020_rap_all_CuCu"]);
+      binShift(*_h_RAA_1D_rap["rap_all_pp"]);
        _h_RAA_1D_rap["020_rap_all_CuCu"]->scaleW(1./_c["c_CuCu_rap_all_020"]->sumW());
        _h_RAA_1D_rap["rap_all_pp"]->scaleW(1./_c["c_pp"]->sumW());
        divide(_h_RAA_1D_rap["020_rap_all_CuCu"], _h_RAA_1D_rap["rap_all_pp"],_h2D_RAA_rap["RAA_rap_all_020"]);

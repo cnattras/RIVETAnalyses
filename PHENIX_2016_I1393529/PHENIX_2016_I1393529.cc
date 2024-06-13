@@ -20,6 +20,31 @@ namespace Rivet {
     
     /// @name Analysis methods
     //@{
+    //create binShift function
+    void binShift(YODA::Histo1D& histogram) {
+        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        int n = 0;
+        for (YODA::HistoBin1D bins : binlist) {
+            double p_high = bins.xMax();
+            double p_low = bins.xMin();
+            //Now calculate f_corr
+            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+            } else { //Check if we are working with any middle bin
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+                histogram.bin(n).scaleW(f_corr);
+                n += 1;
+            }
+        }
+    }
     
     /// Book histograms and initialise projections before the run
     void init() {
@@ -156,19 +181,27 @@ namespace Rivet {
       double scale = 1./(2*M_PI);
       if(has_pp){
 	//denominators for the RAA Plots -- Fig 3
+  binShift(*_h["RAA_c2ed"]);
+  binShift(*_h["RAA_b2ed"]);
 	_h["RAA_c2ed"]->scaleW(scale/_c["pp"]->sumW());
 	_h["RAA_b2ed"]->scaleW(scale/_c["pp"]->sumW());
       }
       else if(has_AuAu){
 	//Figure 1
+  binShift(*_h["InvYield_charm"]);
+  binShift(*_h["InvYield_bottom"]);
 	_h["InvYield_charm"]->scaleW(scale/_c["AuAu"]->sumW());
 	_h["InvYield_bottom"]->scaleW(scale/_c["AuAu"]->sumW());
 	
 	//numerator and denominator for Figure 2
+  binShift(*_h["bfracn"]);
+  binShift(*_h["bfracd"]);
 	_h["bfracn"]->scaleW(scale/_c["AuAu"]->sumW());
 	_h["bfracd"]->scaleW(scale/_c["AuAu"]->sumW());
 	
 	//numerators for the RAA Plots -- Fig 3
+  binShift(*_h["RAA_c2en"]);
+  binShift(*_h["RAA_b2en"]);
 	_h["RAA_c2en"]->scaleW(scale/_c["AuAu"]->sumW());
 	_h["RAA_b2en"]->scaleW(scale/_c["AuAu"]->sumW());
 	
@@ -185,6 +218,10 @@ namespace Rivet {
 	divide(_h["RAA_b2en"], _h["RAA_b2ed"], _s["RAA_b2e"]);
 	
 	//Figure 4
+  binShift(*_h["RAA_ratio_c2en"]);
+  binShift(*_h["RAA_ratio_c2ed"]);
+  binShift(*_h["RAA_ratio_b2en"]);
+  binShift(*_h["RAA_ratio_b2ed"]);
 	divide(_h["RAA_ratio_c2en"], _h["RAA_ratio_c2ed"], _s["RAA_ratio_c2e"]);
 	divide(_h["RAA_ratio_b2en"], _h["RAA_ratio_b2ed"], _s["RAA_ratio_b2e"]);
 	DivideScatter2D(_s["RAA_b2e"], _s["RAA_c2e"], _s["RAA_ratio"]);

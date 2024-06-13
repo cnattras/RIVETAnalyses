@@ -8,3 +8,5 @@ Bottom fractions and RAA should be plotted on a linear scale.
 Some of the histograms which do not have data should be turned off, perhaps all of them.
 
 Needs bin shift correction
+
+Update: added beam shift and fixed .plot
