@@ -482,6 +482,14 @@ namespace Rivet {
 
 
       // Figure 1  - yields vs pT
+      binShift(*_h_1D["YAA_pT_mid_020"]);
+      binShift(*_h_1D["YAA_pT_mid_2040"]);
+      binShift(*_h_1D["YAA_pT_mid_4060"]);
+      binShift(*_h_1D["YAA_pT_mid_6094"]);
+      binShift(*_h_1D["YAA_pT_fwd_020"]);
+      binShift(*_h_1D["YAA_pT_fwd_2040"]);
+      binShift(*_h_1D["YAA_pT_fwd_4060"]);
+      binShift(*_h_1D["YAA_pT_fwd_6094"]);
       _h_1D["YAA_pT_mid_020"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
       _h_1D["YAA_pT_mid_2040"]->scaleW(1./_c["c_YAA_pT_mid_2040"]->sumW());
       _h_1D["YAA_pT_mid_4060"]->scaleW(1./_c["c_YAA_pT_mid_4060"]->sumW());
@@ -498,17 +506,23 @@ namespace Rivet {
       /////////////////////////
 
       // Figure 3a - RAA mid and fwd vs pT
+      binShift(*_h_RAA_1D["020_pT_mid_CuCu"]);
+      binShift(*_h_RAA_1D["pT_mid_pp"]);
       _h_RAA_1D["020_pT_mid_CuCu"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
       _h_RAA_1D["pT_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
       divide(_h_RAA_1D["020_pT_mid_CuCu"], _h_RAA_1D["pT_mid_pp"],_h2D_RAA["RAA_pT_mid_020"]);
       _h2D_RAA["RAA_pT_mid_020"]->scaleY(1./151.8);  // Ncoll from PHENIX AN 638, page 100
 
+      binShift(*_h_RAA_1D["020_pT_fwd_CuCu"]);
+      binShift(*_h_RAA_1D["pT_fwd_pp"]);
        _h_RAA_1D["020_pT_fwd_CuCu"]->scaleW(1./_c["c_YAA_pT_fwd_020"]->sumW());
        _h_RAA_1D["pT_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
        divide(_h_RAA_1D["020_pT_fwd_CuCu"], _h_RAA_1D["pT_fwd_pp"],_h2D_RAA["RAA_pT_fwd_020"]);
        _h2D_RAA["RAA_pT_fwd_020"]->scaleY(1./151.8);
 
       // // Figure 3b - RAA vs rap
+      binShift(*_h_RAA_1D_rap["020_rap_all_CuCu"]);
+      binShift(*_h_RAA_1D_rap["rap_all_pp"]);
        _h_RAA_1D_rap["020_rap_all_CuCu"]->scaleW(1./_c["c_CuCu_rap_all_020"]->sumW());
        _h_RAA_1D_rap["rap_all_pp"]->scaleW(1./_c["c_pp"]->sumW());
        divide(_h_RAA_1D_rap["020_rap_all_CuCu"], _h_RAA_1D_rap["rap_all_pp"],_h2D_RAA_rap["RAA_rap_all_020"]);
