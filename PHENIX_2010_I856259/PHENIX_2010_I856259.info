@@ -1,6 +1,6 @@
 Name: PHENIX_2010_I856259
 Year: 2010
-Summary: Transverse momentum dependence of meson suppression $\eta$ suppression in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV
+Summary: Transverse momentum dependence of $\eta$ meson suppression in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 856259
@@ -11,8 +11,8 @@ Authors:
  - Antonio Silva <antonio.silva@cern.ch>
  - Christine Nattrass <cnattras@utk.edu>
 References: 
-- arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+- arXiv:1005.4916
+- 10.1103/PhysRevC.82.011902
 #RunInfo: <Absolute eta cuts at .35.>
 #Beams: [p+, p+; Au, Au]
 #Energies: [[6500,6500]]
@@ -20,7 +20,7 @@ References:
 Options:
 - cent=REF,GEN,IMP,USR
 - beam=PP200, AUAU200
-Description: New measurements by the PHENIX experiment at RHIC for $\eta$ production at midrapidity as a function of transverse momentum ($p_T$) and collision centrality in $\sqrt{s_{NN}}$ = 200 GeV Au+Au and $p$+$p$ collisions are presented. They indicate nuclear modification factors ($R_AA$) that are similar both in magnitude and trend to those found in earlier $\pi^0$ measurements. Linear fits to $R_{AA}$ in the 5-20 (GeV/$c$) $p_T$ region show that the slope is consistent with zero within two standard deviations at all centralities although a slow rise cannot be excluded. Having different statistical and systematic uncertainties the $\pi^0$ and $\eta$ measurements are complementary at high $p_T$ thus, along with the extended $p_T$ range of these data they can provide additional constraints for theoretical modeling and the extraction of transport properties.
+Description: New measurements by the PHENIX experiment at RHIC for $\eta$ production at midrapidity as a function of transverse momentum ($p_T$) and collision centrality in $\sqrt{s_{NN}}$ = 200 GeV Au+Au and $p$+$p$ collisions are presented. They indicate nuclear modification factors ($R_{AA}$) that are similar both in magnitude and trend to those found in earlier $\pi^0$ measurements. Linear fits to $R_{AA}$ in the 5-20 (GeV/$c$) $p_T$ region show that the slope is consistent with zero within two standard deviations at all centralities although a slow rise cannot be excluded. Having different statistical and systematic uncertainties the $\pi^0$ and $\eta$ measurements are complementary at high $p_T$ thus, along with the extended $p_T$ range of these data they can provide additional constraints for theoretical modeling and the extraction of transport properties.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
   the original experimental analysis. Cut-flow tables and similar information
