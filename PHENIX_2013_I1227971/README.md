@@ -10,3 +10,5 @@ RAA, ratio plots need to be on linear scale.  Input histograms for these RAAs & 
 Needs bin shift correction
 
 Analysis plots now - Josie Hakanson (5-24-2024).
+
+Update: Added binshift and beams. Maybe fixed .plot?
