@@ -9,8 +9,8 @@ Reentrant: false
 Authors:
  - Stacyann Nelson <stacyann1.nelson@famu.edu>
 References: 
-- arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+-	arXiv:1912.13424
+- 10.1103/PhysRevD.101.052006
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
