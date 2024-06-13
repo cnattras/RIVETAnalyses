@@ -7,9 +7,10 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include "Rivet/Projections/Beam.hh"
 
 
-namespace Rivet {
+namespace Rivet { 
 
 
   /// @brief Add a short analysis description here
@@ -36,6 +37,13 @@ namespace Rivet {
 
         declare(up, "up");
         beamOpt = getOption<string>("beam","NONE");
+
+        const ParticlePair& beam = beams();
+
+        if (beamOpt == "NONE") {
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collsys = AuAu200;
+        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collsys = pp510;
+        }
 
         if(beamOpt=="PP510") collsys = pp510;
         else if(beamOpt=="AUAU200") collsys = AuAu200;
@@ -98,7 +106,7 @@ namespace Rivet {
       map<string, Histo1DPtr> _h;
       map<string, Profile1DPtr> _p;
       map<string, CounterPtr> _c;
-      string beamOpt = "";
+      string beamOpt;
       enum CollisionSystem {pp510, AuAu200};
       CollisionSystem collsys;
 
