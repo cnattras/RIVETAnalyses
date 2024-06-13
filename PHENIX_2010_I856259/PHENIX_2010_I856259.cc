@@ -20,6 +20,31 @@ namespace Rivet {
 		/// Constructor
 		RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2010_I856259);
 
+	//create binShift function
+void binShift(YODA::Histo1D& histogram) {
+    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    int n = 0;
+    for (YODA::HistoBin1D bins : binlist) {
+        double p_high = bins.xMax();
+        double p_low = bins.xMin();
+        //Now calculate f_corr
+        if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+        } else { //Check if we are working with any middle bin
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        }
+    }
+}
 
 		/// Book histograms and initialise projections before the run
 		void init() {
@@ -367,6 +392,39 @@ namespace Rivet {
 				xsec = pcross["cross_section"]->bin(0).mean()/millibarn;
 			}
 
+
+			binShift(*hEta["AUAUyield0_5"]); 
+			binShift(*hEta["PPcross0_5"]);
+		
+		
+			binShift(*hEta["AUAUyield0_10"]);
+			binShift(*hEta["PPcross0_10"]);
+			
+
+			binShift(*hEta["AUAUyield10_20"]);
+			binShift(*hEta["PPcross10_20"]);
+
+			binShift(*hEta["AUAUyield0_20"]);
+			binShift(*hEta["PPcross0_20"]);
+			
+
+			binShift(*hEta["AUAUyield20_40"]);
+			binShift(*hEta["PPcross20_40"]);
+
+			binShift(*hEta["AUAUyield40_60"]);
+			binShift(*hEta["PPcross40_60"]);
+
+			binShift(*hEta["AUAUyield20_60"]);
+			binShift(*hEta["PPcross20_60"]);
+
+			binShift(*hEta["AUAUyield60_92"]);
+			binShift(*hEta["PPcross60_92"]);
+
+			binShift(*hEta["AUAUyield0_92"]);
+			binShift(*hEta["PPcross0_92"]);
+			binShift(*hPi["AUAUyield0_92Pi"]);
+			binShift(*hPi["PPcross0_92Pi"]);
+
 			//____Yields vs. pT____
 			AUAU_yieldEta["yield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
 			AUAU_yieldEta["yield0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
@@ -380,6 +438,86 @@ namespace Rivet {
 			PP_yieldEta["yieldPP"]->scaleW(1./sow["sow_PP"]->sumW());
 
 			//____Raa____
+			
+		if (sow["sow_AUAU0_5"]->sumW() != 0) {
+    		hEta["AUAUyield0_5"]->scaleW(1. / sow["sow_AUAU0_5"]->sumW());
+   		 	hEta["PPcross0_5"]->scaleW(25.37 * xsec / sow["sow_PP"]->sumW());
+   		 	divide(hEta["AUAUyield0_5"], hEta["PPcross0_5"], sRaa["RaaEta0_5"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU0_5. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU0_10"]->sumW() != 0) {
+    		hEta["AUAUyield0_10"]->scaleW(1. / sow["sow_AUAU0_10"]->sumW());
+    		hEta["PPcross0_10"]->scaleW(22.75 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield0_10"], hEta["PPcross0_10"], sRaa["RaaEta0_10"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU0_10. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU10_20"]->sumW() != 0) {
+   			hEta["AUAUyield10_20"]->scaleW(1. / sow["sow_AUAU10_20"]->sumW());
+    		hEta["PPcross10_20"]->scaleW(14.35 * xsec / sow["sow_PP"]->sumW());
+   			divide(hEta["AUAUyield10_20"], hEta["PPcross10_20"], sRaa["RaaEta10_20"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU10_20. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU0_20"]->sumW() != 0) {
+    		hEta["AUAUyield0_20"]->scaleW(1. / sow["sow_AUAU0_20"]->sumW());
+    		hEta["PPcross0_20"]->scaleW(18.55 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield0_20"], hEta["PPcross0_20"], sRaa["RaaEta0_20"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU0_20. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU20_40"]->sumW() != 0) {
+    		hEta["AUAUyield20_40"]->scaleW(1. / sow["sow_AUAU20_40"]->sumW());
+    		hEta["PPcross20_40"]->scaleW(7.065 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield20_40"], hEta["PPcross20_40"], sRaa["RaaEta20_40"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU20_40. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU40_60"]->sumW() != 0) {
+   			hEta["AUAUyield40_60"]->scaleW(1. / sow["sow_AUAU40_60"]->sumW());
+    		hEta["PPcross40_60"]->scaleW(2.155 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield40_60"], hEta["PPcross40_60"], sRaa["RaaEta40_60"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU40_60. Unable to scale histogram." << std::endl;
+}		
+
+		if (sow["sow_AUAU20_60"]->sumW() != 0) {
+   			hEta["AUAUyield20_60"]->scaleW(1. / sow["sow_AUAU20_60"]->sumW());
+    		hEta["PPcross20_60"]->scaleW(4.61 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield20_60"], hEta["PPcross20_60"], sRaa["RaaEta20_60"]);
+} 		else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU20_60. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU60_92"]->sumW() != 0) {
+    		hEta["AUAUyield60_92"]->scaleW(1. / sow["sow_AUAU60_92"]->sumW());
+    		hEta["PPcross60_92"]->scaleW(.35 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield60_92"], hEta["PPcross60_92"], sRaa["RaaEta60_92"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU60_92. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU0_92"]->sumW() != 0) {
+    		hEta["AUAUyield0_92"]->scaleW(1. / sow["sow_AUAU0_92"]->sumW());
+    		hEta["PPcross0_92"]->scaleW(6.14 * xsec / sow["sow_PP"]->sumW());
+    		divide(hEta["AUAUyield0_92"], hEta["PPcross0_92"], sRaa["RaaEta0_92"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU0_92. Unable to scale histogram." << std::endl;
+}
+
+		if (sow["sow_AUAU0_92Pi"]->sumW() != 0) {
+    		hPi["AUAUyield0_92Pi"]->scaleW(1. / sow["sow_AUAU0_92Pi"]->sumW());
+    		hPi["PPcross0_92Pi"]->scaleW(6.14 * xsec / sow["sow_PP"]->sumW());
+    		divide(hPi["AUAUyield0_92Pi"], hPi["PPcross0_92Pi"], sRaa["RaaPi0_92"]);
+		} else {
+    		std::cerr << "Error: Divide by zero encountered for sow_AUAU0_92Pi. Unable to scale histogram." << std::endl;
+}
 
 			hEta["AUAUyield0_5"]->scaleW(1./sow["sow_AUAU0_5"]->sumW());
 			hEta["PPcross0_5"]->scaleW(25.37*xsec/sow["sow_PP"]->sumW());
