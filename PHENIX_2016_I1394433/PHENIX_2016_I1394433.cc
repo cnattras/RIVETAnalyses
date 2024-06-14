@@ -5,9 +5,8 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
-//#include "../Centralities/RHICCentrality.hh"
-#include "Centralities/RHICCentrality.hh"
-
+#include "../Centralities/RHICCentrality.hh"
+//#include "Centralities/RHICCentrality.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
