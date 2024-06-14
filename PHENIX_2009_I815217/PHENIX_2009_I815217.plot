@@ -18,7 +18,7 @@ YLabel= Yield
 END PLOT
 
 BEGIN PLOT /PHENIX_2009_I815217/d02-x01-y03
-Title=$e^+e^-$ pairs N in ultra peripherals in Au+Au reactions for 2.0-2.8
+Title=$e^+e^-$ pairs N in ultra peripherals in Au+Au reactions for 2.0-2.8 GeV
 XLabel= $m_{e^+e^-}[GeV/c^2]$
 YLabel= Yield
 END PLOT

@@ -186,7 +186,7 @@ namespace Rivet {
       const char *name_epcor[NHAR] =
       {
         // Psi2    Psi3       Psi4
-        "Psi2Cor", "Psi3Cor", "Psi4Cor"
+        "_Psi2Cor", "_Psi3Cor", "_Psi4Cor"
       };
 
       /// Book histograms and initialise projections before the run

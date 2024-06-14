@@ -11,3 +11,4 @@ This should be written so it can either take a beam option set on the command li
 This needs the bin shift correction applied.
 
 Update: Added bin shift correction and divide by zero protection. Added beam options.
+    - histograms turned off

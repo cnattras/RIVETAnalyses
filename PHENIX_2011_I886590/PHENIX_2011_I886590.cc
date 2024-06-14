@@ -107,8 +107,8 @@ namespace Rivet {
       book(_c["sow_pp62"], "_sow_pp62");
 
       //Cross sections
-      book(_c["xsec_pp200"], "xsec_pp200");
-      book(_c["xsec_pp62"], "xsec_pp62");
+      book(_c["_xsec_pp200"], "_xsec_pp200");
+      book(_c["_xsec_pp62"], "_xsec_pp62");
 
     }
 

@@ -56,8 +56,8 @@ namespace Rivet {
       string refnameRaa = mkAxisCode(1,1,1);
       const Scatter2D& refdataRaa =refData(refnameRaa);
 
-      book(hPion0Pt["_Pion0Pt_AuAu"], refnameRaa + "_AuAu", refdataRaa);
-      book(hPion0Pt["_Pion0Pt_pp"], refnameRaa + "_pp", refdataRaa);
+      book(hPion0Pt["Pion0Pt_AuAu"], "_" + refnameRaa + "_AuAu", refdataRaa);
+      book(hPion0Pt["Pion0Pt_pp"], "_" + refnameRaa + "_pp", refdataRaa);
       book(hRaa, refnameRaa);
 
       book(sow["sow_AuAu"],"_sow_AuAu");
@@ -86,7 +86,7 @@ namespace Rivet {
           sow["sow_pp"]->fill();
           for(Particle p : neutralParticles)
           {
-              hPion0Pt["_Pion0Pt_pp"]->fill(p.pT()/GeV);
+              hPion0Pt["Pion0Pt_pp"]->fill(p.pT()/GeV);
           }
           return;
       }
@@ -99,19 +99,19 @@ namespace Rivet {
 
       for(const Particle& p : neutralParticles)
       {
-          hPion0Pt["_Pion0Pt_AuAu"]->fill(p.pT()/GeV);
+          hPion0Pt["Pion0Pt_AuAu"]->fill(p.pT()/GeV);
       }
 
 
     }
 
     void finalize() {
-      binShift(*hPion0Pt["_Pion0Pt_AuAu"]);
-      binShift(*hPion0Pt["_Pion0Pt_pp"]);
-      hPion0Pt["_Pion0Pt_AuAu"]->scaleW(1./sow["sow_AuAu"]->sumW());
-      hPion0Pt["_Pion0Pt_pp"]->scaleW(1./sow["sow_pp"]->sumW());
+      binShift(*hPion0Pt["Pion0Pt_AuAu"]);
+      binShift(*hPion0Pt["Pion0Pt_pp"]);
+      hPion0Pt["Pion0Pt_AuAu"]->scaleW(1./sow["sow_AuAu"]->sumW());
+      hPion0Pt["Pion0Pt_pp"]->scaleW(1./sow["sow_pp"]->sumW());
       
-      divide(hPion0Pt["_Pion0Pt_AuAu"],hPion0Pt["_Pion0Pt_pp"],hRaa);
+      divide(hPion0Pt["Pion0Pt_AuAu"],hPion0Pt["Pion0Pt_pp"],hRaa);
       hRaa->scaleY(1./1051.3);
       // Ensure the histograms are not written to output
       /*hPion0Pt["_Pion0Pt_AuAu"]->setPath("/IGNORE");

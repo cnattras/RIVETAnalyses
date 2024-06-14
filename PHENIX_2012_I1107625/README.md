@@ -5,7 +5,7 @@ done:
 -bin shift correction implemented 
 -Added options to set beams manually
 -Made nuclear modification factors plot on linear scale and not on a log scale
+-Turned off histograms with input spectra
 
 needs: 
-Turn off histograms with input spectra
 Needs higher statistics test
