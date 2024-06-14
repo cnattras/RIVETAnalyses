@@ -94,74 +94,74 @@ namespace Rivet {
 
       string refnameRaa1 = mkAxisCode(5,1,1);
       const Scatter2D& refdataRaa1 =refData(refnameRaa1);
-      book(hPion0Pt["c10Pt_AuAu39"], refnameRaa1 + "_AuAu39", refdataRaa1);
-      book(hPion0Pt["c10Pt39_pp"], refnameRaa1 + "_pp39", refdataRaa1);
+      book(_hPion0Pt["c10Pt_AuAu39"], "_" + refnameRaa1 + "_AuAu39", refdataRaa1);
+      book(hPion0Pt["c10Pt39_pp"], "_" + refnameRaa1 + "_pp39", refdataRaa1);
       book(hRaa["Raa_c010_AuAu39"], refnameRaa1);
 
       string refnameRaa2 = mkAxisCode(5,1,2);
       const Scatter2D& refdataRaa2 =refData(refnameRaa2);
-      book(hPion0Pt["c20Pt_AuAu39"], refnameRaa2 + "_AuAu39", refdataRaa2);
-      book(hPion0Pt["c20Pt39_pp"], refnameRaa2 + "_pp39", refdataRaa2);
+      book(hPion0Pt["c20Pt_AuAu39"], "_" + refnameRaa2 + "_AuAu39", refdataRaa2);
+      book(hPion0Pt["c20Pt39_pp"], "_" + refnameRaa2 + "_pp39", refdataRaa2);
       book(hRaa["Raa_c1020_AuAu39"], refnameRaa2);
 
       string refnameRaa3 = mkAxisCode(6,1,1);
       const Scatter2D& refdataRaa3 =refData(refnameRaa3);
-      book(hPion0Pt["c40Pt_AuAu39"], refnameRaa3 + "_AuAu39", refdataRaa3);
-      book(hPion0Pt["c40Pt39_pp"], refnameRaa3 + "_pp39", refdataRaa3);
+      book(hPion0Pt["c40Pt_AuAu39"], "_" + refnameRaa3 + "_AuAu39", refdataRaa3);
+      book(hPion0Pt["c40Pt39_pp"], "_" + refnameRaa3 + "_pp39", refdataRaa3);
       book(hRaa["Raa_c2040_AuAu39"], refnameRaa3);
 
       string refnameRaa4 = mkAxisCode(5,1,3);
       const Scatter2D& refdataRaa4 =refData(refnameRaa4);
-      book(hPion0Pt["c60Pt_AuAu39"], refnameRaa4 + "_AuAu39", refdataRaa4);
-      book(hPion0Pt["c60Pt39_pp"], refnameRaa4 + "_pp39", refdataRaa4);
+      book(hPion0Pt["c60Pt_AuAu39"], "_" + refnameRaa4 + "_AuAu39", refdataRaa4);
+      book(hPion0Pt["c60Pt39_pp"], "_" + refnameRaa4 + "_pp39", refdataRaa4);
       book(hRaa["Raa_c4060_AuAu39"], refnameRaa4);
 
       string refnameRaa5 = mkAxisCode(5,1,4);
       const Scatter2D& refdataRaa5 =refData(refnameRaa5);
-      book(hPion0Pt["c86Pt_AuAu39"], refnameRaa5 + "_AuAu39", refdataRaa5);
-      book(hPion0Pt["c86Pt39_pp"], refnameRaa5 + "_pp39", refdataRaa5);
+      book(hPion0Pt["c86Pt_AuAu39"], "_" + refnameRaa5 + "_AuAu39", refdataRaa5);
+      book(hPion0Pt["c86Pt39_pp"], "_" + refnameRaa5 + "_pp39", refdataRaa5);
       book(hRaa["Raa_c6086_AuAu39"], refnameRaa5);
 
       string refnameRaa6 = mkAxisCode(6,1,2);
       const Scatter2D& refdataRaa6 =refData(refnameRaa6);
-      book(hPion0Pt["callPt_AuAu39"], refnameRaa6 + "_AuAu39", refdataRaa6);
-      book(hPion0Pt["callPt39_pp"], refnameRaa6 + "_pp39", refdataRaa6);
+      book(hPion0Pt["callPt_AuAu39"], "_" + refnameRaa6 + "_AuAu39", refdataRaa6);
+      book(hPion0Pt["callPt39_pp"], "_" + refnameRaa6 + "_pp39", refdataRaa6);
       book(hRaa["Raa_minbias_AuAu39"], refnameRaa6);
 
       string refnameRaa7 = mkAxisCode(7,1,1);
       const Scatter2D& refdataRaa7 =refData(refnameRaa7);
-      book(hPion0Pt["c10Pt_AuAu62"], refnameRaa7 + "_AuAu62", refdataRaa7);
-      book(hPion0Pt["c10Pt62_pp"], refnameRaa7 + "_pp62", refdataRaa7);
+      book(hPion0Pt["c10Pt_AuAu62"], "_" + refnameRaa7 + "_AuAu62", refdataRaa7);
+      book(hPion0Pt["c10Pt62_pp"], "_" + refnameRaa7 + "_pp62", refdataRaa7);
       book(hRaa["Raa_c010_AuAu62"], refnameRaa7);
 
       string refnameRaa8 = mkAxisCode(7,1,2);
       const Scatter2D& refdataRaa8 =refData(refnameRaa8);
-      book(hPion0Pt["c20Pt_AuAu62"], refnameRaa8 + "_AuAu62", refdataRaa8);
-      book(hPion0Pt["c20Pt62_pp"], refnameRaa8 + "_pp62", refdataRaa8);
+      book(hPion0Pt["c20Pt_AuAu62"], "_" + refnameRaa8 + "_AuAu62", refdataRaa8);
+      book(hPion0Pt["c20Pt62_pp"], "_" + refnameRaa8 + "_pp62", refdataRaa8);
       book(hRaa["Raa_c1020_AuAu62"], refnameRaa8);
 
       string refnameRaa9 = mkAxisCode(7,1,3);
       const Scatter2D& refdataRaa9 =refData(refnameRaa9);
-      book(hPion0Pt["c40Pt_AuAu62"], refnameRaa9 + "_AuAu62", refdataRaa9);
-      book(hPion0Pt["c40Pt62_pp"], refnameRaa9 + "_pp62", refdataRaa9);
+      book(hPion0Pt["c40Pt_AuAu62"], "_" + refnameRaa9 + "_AuAu62", refdataRaa9);
+      book(hPion0Pt["c40Pt62_pp"], "_" + refnameRaa9 + "_pp62", refdataRaa9);
       book(hRaa["Raa_c2040_AuAu62"], refnameRaa9);
 
       string refnameRaa10 = mkAxisCode(7,1,4);
       const Scatter2D& refdataRaa10 =refData(refnameRaa10);
-      book(hPion0Pt["c60Pt_AuAu62"], refnameRaa10 + "_AuAu62", refdataRaa10);
-      book(hPion0Pt["c60Pt62_pp"], refnameRaa10 + "_pp62", refdataRaa10);
+      book(hPion0Pt["c60Pt_AuAu62"], "_" + refnameRaa10 + "_AuAu62", refdataRaa10);
+      book(hPion0Pt["c60Pt62_pp"], "_" + refnameRaa10 + "_pp62", refdataRaa10);
       book(hRaa["Raa_c4060_AuAu62"], refnameRaa10);
 
       string refnameRaa11 = mkAxisCode(8,1,1);
       const Scatter2D& refdataRaa11 =refData(refnameRaa11);
-      book(hPion0Pt["c86Pt_AuAu62"], refnameRaa11 + "_AuAu62", refdataRaa11);
-      book(hPion0Pt["c86Pt62_pp"], refnameRaa11 + "_pp62", refdataRaa11);
+      book(hPion0Pt["c86Pt_AuAu62"], "_" + refnameRaa11 + "_AuAu62", refdataRaa11);
+      book(hPion0Pt["c86Pt62_pp"], "_" + refnameRaa11 + "_pp62", refdataRaa11);
       book(hRaa["Raa_c6086_AuAu62"], refnameRaa11);
 
       string refnameRaa12 = mkAxisCode(7,1,5);
       const Scatter2D& refdataRaa12 =refData(refnameRaa12);
-      book(hPion0Pt["callPt_AuAu62"], refnameRaa12 + "_AuAu62", refdataRaa12);
-      book(hPion0Pt["callPt62_pp"], refnameRaa12 + "_pp62", refdataRaa12);
+      book(hPion0Pt["callPt_AuAu62"], "_" + refnameRaa12 + "_AuAu62", refdataRaa12);
+      book(hPion0Pt["callPt62_pp"], "_" + refnameRaa12 + "_pp62", refdataRaa12);
       book(hRaa["Raa_minbias_AuAu62"], refnameRaa12);
 
       book(sow["sow_pp39"],"_sow_pp39");
@@ -275,7 +275,7 @@ namespace Rivet {
                         double partPt = p.pT()/GeV;
                         double pt_weight = 1./(partPt*2.*M_PI);
                         hPion0Pt["ptyields39c10"]->fill(partPt, pt_weight);
-                        hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
+                        _hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
                         hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
                         hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
                     }
@@ -427,7 +427,7 @@ namespace Rivet {
         binShift(*hPion0Pt["ptyields62c86"]);
         binShift(*hPion0Pt["ptyields62call"]);
 
-        binShift(*hPion0Pt["c10Pt_AuAu39"]);
+        binShift(*_hPion0Pt["c10Pt_AuAu39"]);
         binShift(*hPion0Pt["c20Pt_AuAu39"]);
         binShift(*hPion0Pt["c40Pt_AuAu39"]);
         binShift(*hPion0Pt["c60Pt_AuAu39"]);
@@ -503,7 +503,7 @@ namespace Rivet {
 
 //RAA _______________________________
 
-      hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
+      _hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
       hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c20"]->sumW());
       hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c40"]->sumW());
       hPion0Pt["c60Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c60"]->sumW());
@@ -531,7 +531,7 @@ namespace Rivet {
       hPion0Pt["c86Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
       hPion0Pt["callPt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
 
-      divide(hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa["Raa_c010_AuAu39"]);
+      divide(_hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa["Raa_c010_AuAu39"]);
       divide(hPion0Pt["c20Pt_AuAu39"],hPion0Pt["c20Pt39_pp"],hRaa["Raa_c1020_AuAu39"]);
       divide(hPion0Pt["c40Pt_AuAu39"],hPion0Pt["c40Pt39_pp"],hRaa["Raa_c2040_AuAu39"]);
       divide(hPion0Pt["c60Pt_AuAu39"],hPion0Pt["c60Pt39_pp"],hRaa["Raa_c4060_AuAu39"]);
