@@ -121,68 +121,68 @@ namespace Rivet {
  //RAA _______________________________
        string refnameRaa1 = mkAxisCode(7,1,3);
              const Scatter2D& refdataRaa1 =refData(refnameRaa1);
-       book(_h["c5Pt_AuAu"], refnameRaa1 + "_AuAu", refdataRaa1);
-       book(_h["c5Pt_pp"], refnameRaa1 + "_pp", refdataRaa1);
+       book(_h["c5Pt_AuAu"],"_" + refnameRaa1 + "_AuAu", refdataRaa1);
+       book(_h["c5Pt_pp"], "_" +refnameRaa1 + "_pp", refdataRaa1);
        book(hRaa["Raa_c05_AuAu"], refnameRaa1);
 
        string refnameRaa2 = mkAxisCode(6,1,1);
              const Scatter2D& refdataRaa2 =refData(refnameRaa2);
-       book(_h["c10Pt_AuAu"], refnameRaa2 + "_AuAu", refdataRaa2);
-       book(_h["c10Pt_pp"], refnameRaa2 + "_pp", refdataRaa2);
+       book(_h["c10Pt_AuAu"],"_" + refnameRaa2 + "_AuAu", refdataRaa2);
+       book(_h["c10Pt_pp"],"_" + refnameRaa2 + "_pp", refdataRaa2);
        book(hRaa["Raa_c010_AuAu"], refnameRaa2);
 
        string refnameRaa3 = mkAxisCode(6,1,2);
              const Scatter2D& refdataRaa3 =refData(refnameRaa3);
-       book(_h["c20Pt_AuAu"], refnameRaa3 + "_AuAu", refdataRaa3);
-       book(_h["c20Pt_pp"], refnameRaa3 + "_pp", refdataRaa3);
-       book(hRaa["Raa_c1020_AuAu"], refnameRaa3);
+       book(_h["c20Pt_AuAu"],"_" + refnameRaa3 + "_AuAu", refdataRaa3);
+       book(_h["c20Pt_pp"],  "_" +refnameRaa3 + "_pp", refdataRaa3);
+       book(hRaa["Raa_c1020_AuAu"],"_" + refnameRaa3);
 
        string refnameRaa4 = mkAxisCode(7,1,1);
              const Scatter2D& refdataRaa4 =refData(refnameRaa4);
-       book(_h["c30Pt_AuAu"], refnameRaa4 + "_AuAu", refdataRaa4);
-       book(_h["c30Pt_pp"], refnameRaa4 + "_pp", refdataRaa4);
+       book(_h["c30Pt_AuAu"],"_" + refnameRaa4 + "_AuAu", refdataRaa4);
+       book(_h["c30Pt_pp"],"_" + refnameRaa4 + "_pp", refdataRaa4);
        book(hRaa["Raa_c2030_AuAu"], refnameRaa4);
 
        string refnameRaa5 = mkAxisCode(7,1,2);
              const Scatter2D& refdataRaa5 =refData(refnameRaa5);
-       book(_h["c40Pt_AuAu"], refnameRaa5 + "_AuAu", refdataRaa5);
-       book(_h["c40Pt_pp"], refnameRaa5 + "_pp", refdataRaa5);
+       book(_h["c40Pt_AuAu"], "_" + refnameRaa5 + "_AuAu", refdataRaa5);
+       book(_h["c40Pt_pp"], "_" + refnameRaa5 + "_pp", refdataRaa5);
        book(hRaa["Raa_c3040_AuAu"], refnameRaa5);
 
        string refnameRaa6 = mkAxisCode(8,1,1);
              const Scatter2D& refdataRaa6 =refData(refnameRaa6);
-       book(_h["c50Pt_AuAu"], refnameRaa6 + "_AuAu", refdataRaa6);
-       book(_h["c50Pt_pp"], refnameRaa6 + "_pp", refdataRaa6);
+       book(_h["c50Pt_AuAu"], "_" + refnameRaa6 + "_AuAu", refdataRaa6);
+       book(_h["c50Pt_pp"], "_" + refnameRaa6 + "_pp", refdataRaa6);
        book(hRaa["Raa_c4050_AuAu"], refnameRaa6);
 
        string refnameRaa7 = mkAxisCode(8,1,2);
              const Scatter2D& refdataRaa7 =refData(refnameRaa7);
-       book(_h["c60Pt_AuAu"], refnameRaa7 + "_AuAu", refdataRaa7);
-       book(_h["c60Pt_pp"], refnameRaa7 + "_pp", refdataRaa7);
+       book(_h["c60Pt_AuAu"], "_" + refnameRaa7 + "_AuAu", refdataRaa7);
+       book(_h["c60Pt_pp"], "_" + refnameRaa7 + "_pp", refdataRaa7);
        book(hRaa["Raa_c5060_AuAu"], refnameRaa7);
 
        string refnameRaa8 = mkAxisCode(9,1,1);
              const Scatter2D& refdataRaa8 =refData(refnameRaa8);
-       book(_h["c70Pt_AuAu"], refnameRaa8 + "_AuAu", refdataRaa8);
-       book(_h["c70Pt_pp"], refnameRaa8 + "_pp", refdataRaa8);
+       book(_h["c70Pt_AuAu"], "_" + refnameRaa8 + "_AuAu", refdataRaa8);
+       book(_h["c70Pt_pp"], "_" + refnameRaa8 + "_pp", refdataRaa8);
        book(hRaa["Raa_c6070_AuAu"], refnameRaa8);
 
        string refnameRaa9 = mkAxisCode(10,1,1);
              const Scatter2D& refdataRaa9 =refData(refnameRaa9);
-       book(_h["c80Pt_AuAu"], refnameRaa9 + "_AuAu", refdataRaa9);
-       book(_h["c80Pt_pp"], refnameRaa9 + "_pp", refdataRaa9);
+       book(_h["c80Pt_AuAu"], "_" + refnameRaa9 + "_AuAu", refdataRaa9);
+       book(_h["c80Pt_pp"], "_" + refnameRaa9 + "_pp", refdataRaa9);
        book(hRaa["Raa_c7080_AuAu"], refnameRaa9);
 
        string refnameRaa10 = mkAxisCode(10,1,2);
              const Scatter2D& refdataRaa10 =refData(refnameRaa10);
-       book(_h["c92Pt_AuAu"], refnameRaa10 + "_AuAu", refdataRaa10);
-       book(_h["c92Pt_pp"], refnameRaa10 + "_pp", refdataRaa10);
+       book(_h["c92Pt_AuAu"], "_" + refnameRaa10 + "_AuAu", refdataRaa10);
+       book(_h["c92Pt_pp"], "_" + refnameRaa10 + "_pp", refdataRaa10);
        book(hRaa["Raa_c8092_AuAu"], refnameRaa10);
 
        string refnameRaa11 = mkAxisCode(6,1,3);
              const Scatter2D& refdataRaa11 =refData(refnameRaa11);
-       book(_h["callPt_AuAu"], refnameRaa11 + "_AuAu", refdataRaa11);
-       book(_h["callPt_pp"], refnameRaa11 + "_pp", refdataRaa11);
+       book(_h["callPt_AuAu"], "_" + refnameRaa11 + "_AuAu", refdataRaa11);
+       book(_h["callPt_pp"], "_" + refnameRaa11 + "_pp", refdataRaa11);
        book(hRaa["Raa_minbias_AuAu"], refnameRaa11);
 
 
