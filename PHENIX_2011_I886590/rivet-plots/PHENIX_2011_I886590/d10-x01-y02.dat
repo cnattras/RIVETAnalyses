@@ -1,0 +1,48 @@
+# BEGIN PLOT
+Legend=1
+LogY=1
+Title=antiprotons in p+p with FD at $\sqrt{s_{NN}}=$ 200GeV
+XLabel=$p_{T}$(GeV/c)
+YLabel=$\frac{1}{N_{Event}2\pi p_{T}}\frac{d^{2}N}{dp_{T}dy}$
+DrawOnly=/PHENIX_2011_I886590/d10-x01-y02 //lustre/isaac/proj/UTK0019/olivia/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp200.yoda/PHENIX_2011_I886590:beam=pp200/d10-x01-y02
+LegendOnly=/PHENIX_2011_I886590/d10-x01-y02 //lustre/isaac/proj/UTK0019/olivia/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp200.yoda/PHENIX_2011_I886590:beam=pp200/d10-x01-y02
+RatioPlot=1
+RatioPlotReference=/PHENIX_2011_I886590/d10-x01-y02
+# END PLOT
+
+# BEGIN HISTO1D /PHENIX_2011_I886590/d10-x01-y02
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/PHENIX_2011_I886590/d10-x01-y02
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+3.000000e+00	3.200000e+00	2.280000e-04	2.193171e-05	2.193171e-05
+3.200000e+00	3.400000e+00	1.600000e-04	1.612452e-05	1.612452e-05
+3.400000e+00	3.600000e+00	9.420000e-05	1.015480e-05	1.015480e-05
+3.600000e+00	3.800000e+00	6.030000e-05	7.121798e-06	7.121798e-06
+3.800000e+00	4.000000e+00	3.720000e-05	4.951767e-06	4.951767e-06
+4.000000e+00	4.200000e+00	3.240000e-05	4.738143e-06	4.738143e-06
+4.200000e+00	4.400000e+00	2.230000e-05	3.820995e-06	3.820995e-06
+4.400000e+00	4.600000e+00	1.560000e-05	3.124100e-06	3.124100e-06
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/olivia/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp200.yoda/PHENIX_2011_I886590:beam=pp200/d10-x01-y02
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/olivia/RIVETAnalyses/PHENIX_2011_I886590/Rivet_pp200.yoda/PHENIX_2011_I886590:beam=pp200/d10-x01-y02
+ScaledBy=1.00000000000000000e+00
+Title=Rivet_pp200
+# xlow	 xhigh	 val	 errminus	 errplus
+3.000000e+00	3.200000e+00	nan	nan	nan
+3.200000e+00	3.400000e+00	nan	nan	nan
+3.400000e+00	3.600000e+00	nan	nan	nan
+3.600000e+00	3.800000e+00	nan	nan	nan
+3.800000e+00	4.000000e+00	nan	nan	nan
+4.000000e+00	4.200000e+00	nan	nan	nan
+4.200000e+00	4.400000e+00	nan	nan	nan
+4.400000e+00	4.600000e+00	nan	nan	nan
+# END HISTO1D
+
