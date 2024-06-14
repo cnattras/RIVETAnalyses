@@ -96,43 +96,63 @@ namespace Rivet {
             h["jetcross"]->fill(jet.pT());
 
             if(jet.pT()>PTBINS[0]){
+
+              //fill counters
+              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
+                c["ptbin0"]->fill();
+              }
+              if(jet.pT()>PTBINS[1]&& jet.pT()<PTBINS[2]){//bin 1
+                c["ptbin1"]->fill();
+              }
+              if(jet.pT()>PTBINS[2]&& jet.pT()<PTBINS[3]){//bin 2
+                c["ptbin2"]->fill();
+              }
+              if(jet.pT()>PTBINS[3]&& jet.pT()<PTBINS[4]){//bin 3
+                c["ptbin3"]->fill();
+              }
+              if(jet.pT()>PTBINS[4]&& jet.pT()<PTBINS[5]){//bin 4
+                c["ptbin4"]->fill();
+              }
+              if(jet.pT()>PTBINS[5]&& jet.pT()<PTBINS[6]){//bin 5
+                c["ptbin5"]->fill();
+              }
+              if(jet.pT()>PTBINS[6]&& jet.pT()<PTBINS[7]){//bin 6
+                c["ptbin6"]->fill();
+              }
+
+
+
             for (const Particle& p : jet.particles()) {
               double xi = - log( p.pT() / jet.pT());
               double dr = deltaR(p, jet);
+              // cout<<"xi "<<xi<<" dr "<<dr<<endl;
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 h["Xi910"]->fill(xi);
                 h["R910"]->fill(dr);
-                c["ptbin0"]->fill();
               }
               if(jet.pT()>PTBINS[1]&& jet.pT()<PTBINS[2]){//bin 1
                 h["Xi1012"]->fill(xi);
                 h["R1012"]->fill(dr);
-                c["ptbin1"]->fill();
               }
               if(jet.pT()>PTBINS[2]&& jet.pT()<PTBINS[3]){//bin 2
                 h["Xi1214"]->fill(xi);
                 h["R1214"]->fill(dr);
-                c["ptbin2"]->fill();
               }
               if(jet.pT()>PTBINS[3]&& jet.pT()<PTBINS[4]){//bin 3
                 h["Xi1417"]->fill(xi);
                 h["R1417"]->fill(dr);
-                c["ptbin3"]->fill();
               }
               if(jet.pT()>PTBINS[4]&& jet.pT()<PTBINS[5]){//bin 4
                 h["Xi1720"]->fill(xi);
                 h["R1720"]->fill(dr);
-                c["ptbin4"]->fill();
               }
               if(jet.pT()>PTBINS[5]&& jet.pT()<PTBINS[6]){//bin 5
                 h["Xi2024"]->fill(xi);
                 h["R2024"]->fill(dr);
-                c["ptbin5"]->fill();
               }
               if(jet.pT()>PTBINS[6]&& jet.pT()<PTBINS[7]){//bin 6
                 h["Xi2429"]->fill(xi);
                 h["R2429"]->fill(dr);
-                c["ptbin6"]->fill();
               }
             }
           
@@ -187,13 +207,22 @@ namespace Rivet {
 
        const double sf = crossSectionPerEvent()/millibarn;
        // factor 0.3 needed because it is differential in deta
-      // scale(h["jetcross"], sf/0.3);
+      scale(h["jetcross"], sf/0.3);
+       cout<<"Counters ";
+       cout<<c["ptbin0"]->sumW();
+       cout<<c["ptbin1"]->sumW();
+       cout<<c["ptbin2"]->sumW();
+       cout<<c["ptbin3"]->sumW();
+       cout<<c["ptbin4"]->sumW();
+       cout<<c["ptbin5"]->sumW();
+       cout<<c["ptbin6"]->sumW();
+       cout<<endl;
 
-      // for (int i = 0; i < NPTBINS; ++i) {
-      //   scale(h["zg" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
-      //   scale(h["xi" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
-      //   scale(h["R" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
-      // }
+      for (int i = 0; i < NPTBINS; ++i) {
+        scale(h["zg" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
+        scale(h["xi" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
+        scale(h["R" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
+      }
  
       //normalize(h["XXXX"]); // normalize to unity
       //normalize(h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
