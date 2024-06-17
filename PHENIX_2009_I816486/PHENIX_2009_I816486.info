@@ -1,6 +1,6 @@
 Name: PHENIX_2009_I816486
 Year: 2009
-Summary: High-pT pi0 Production with Respect to the Reaction Plane in Au + Au Collisions at s(NN)**(1/2) = 200-GeV
+Summary: High-$p_T \pi^0$ Production with Respect to the Reaction Plane in Au + Au Collisions at $\sqrt{s_{NN}}$= 200-GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 816486
@@ -10,8 +10,8 @@ Authors:
  - Christal Martin <cbaillar@vols.utk.edu> 
  - Christine Nattrass <cnattras@utk.edu>
 References: 
-- arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+- arXiv:0903.4886 
+- 10.1103/PhysRevC.80.054907
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams:  [AU, AU]
 #Energies: [[6500,6500]]

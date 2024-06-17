@@ -33,11 +33,18 @@ namespace Rivet {
       const PrimaryParticles fs(pdgIds, Cuts::abseta < 0.35 && Cuts::abscharge == 0);
       declare(fs, "fs");
 
+
+      const ParticlePair& beam = beams();
       beamOpt = getOption<string>("beam","NONE");
+
+    
+      if (beamOpt == "NONE"){
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      }
 
       if(beamOpt=="PP") collSys = pp;
       else if(beamOpt=="AUAU200") collSys = AuAu200;
-
 
       if(!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
@@ -64,14 +71,14 @@ namespace Rivet {
       {
         string refnameRaa=mkAxisCode(3,1,i+1);
         const Scatter2D& refdataRaa =refData(refnameRaa);
-        book(hPion0Pt["c" + std::to_string(CentralityBins[i+2]) + "pt_AuAu200"], refnameRaa + "_AuAu200", refdataRaa);
-        book(hPion0Pt["c" + std::to_string(CentralityBins[i+2]) + "pt_pp"], refnameRaa + "_pp", refdataRaa);
+        book(hPion0Pt["c" + std::to_string(CentralityBins[i+2]) + "pt_AuAu200"],"_" + refnameRaa + "_AuAu200", refdataRaa);
+        book(hPion0Pt["c" + std::to_string(CentralityBins[i+2]) + "pt_pp"], "_" + refnameRaa + "_pp", refdataRaa);
         book(hRaa["Raa" + std::to_string(CentralityBins[i+2])], refnameRaa);
 
-        book(sow["sow_c" + std::to_string(CentralityBins[i+2])],"sow_c" + std::to_string(CentralityBins[i+2]));
+        book(sow["sow_c" + std::to_string(CentralityBins[i+2])], "_sow_c" + std::to_string(CentralityBins[i+2]));
       }
 
-        book(sow["sow_pp"],"sow_pp");
+        book(sow["sow_pp"],"_sow_pp");
 
 
 

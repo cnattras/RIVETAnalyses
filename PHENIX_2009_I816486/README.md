@@ -8,3 +8,7 @@ This one needs to have beams implemented with both options, either picked up by 
 
 Please add protection so that we do not divide by zero in finalyze.
 
+update: 
+-RAA all on linear scale
+- all sows are turned off 
+- beams added

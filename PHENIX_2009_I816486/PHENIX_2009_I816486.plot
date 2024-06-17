@@ -1,6 +1,6 @@
 # Figure 4 0-5% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y01
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 0-5$\%$ centrality.
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -8,7 +8,7 @@ END PLOT
 
 # Figure 4 5-10% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y02
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 5-10$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -16,7 +16,7 @@ END PLOT
 
 # Figure 4 0-10% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y03
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 0-10$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -24,7 +24,7 @@ END PLOT
 
 # Figure 4 10-20% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y04
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 10-20$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -32,7 +32,7 @@ END PLOT
 
 # Figure 4 20-30% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y05
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 20-30$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -40,7 +40,7 @@ END PLOT
 
 # Figure 4 30-40% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y06
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 30-40$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -48,7 +48,7 @@ END PLOT
 
 # Figure 4 40-50% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y07
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 40-50$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -56,7 +56,7 @@ END PLOT
 
 # Figure 4 50-60% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d01-x01-y08
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 40-50$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -64,7 +64,7 @@ END PLOT
 
 # Figure 5 0-20% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d02-x01-y01
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 0-20$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -72,7 +72,7 @@ LogY=0
 # Figure 5 20-40% centrality
 END PLOT
 BEGIN PLOT /PHENIX_2009_I816486/d02-x01-y02
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 20-40$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -80,7 +80,7 @@ END PLOT
 
 # Figure 5 40-60% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d02-x01-y03
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 40-60$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
@@ -88,7 +88,7 @@ END PLOT
 
 # Figure 5 60-92% centrality
 BEGIN PLOT /PHENIX_2009_I816486/d02-x01-y04
-Title=$\pi ^{0} v_{2}$ as a function of centrality. All errors are absolute.
+Title=$\pi ^{0} v_{2}$ as a function of 60-92$\%$ centrality. 
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$v_{2}$
 LogY=0
