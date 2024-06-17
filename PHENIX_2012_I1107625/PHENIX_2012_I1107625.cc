@@ -94,7 +94,7 @@ namespace Rivet {
 
       string refnameRaa1 = mkAxisCode(5,1,1);
       const Scatter2D& refdataRaa1 =refData(refnameRaa1);
-      book(_hPion0Pt["c10Pt_AuAu39"], "_" + refnameRaa1 + "_AuAu39", refdataRaa1);
+      book(hPion0Pt["c10Pt_AuAu39"], "_" + refnameRaa1 + "_AuAu39", refdataRaa1);
       book(hPion0Pt["c10Pt39_pp"], "_" + refnameRaa1 + "_pp39", refdataRaa1);
       book(hRaa["Raa_c010_AuAu39"], refnameRaa1);
 
@@ -275,7 +275,7 @@ namespace Rivet {
                         double partPt = p.pT()/GeV;
                         double pt_weight = 1./(partPt*2.*M_PI);
                         hPion0Pt["ptyields39c10"]->fill(partPt, pt_weight);
-                        _hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
+                        hPion0Pt["c10Pt_AuAu39"]->fill(p.pT()/GeV);
                         hPion0Pt["callPt_AuAu39"]->fill(p.pT()/GeV);
                         hPion0Pt["ptyields39call"]->fill(p.pT()/GeV, pt_weight);
                     }
@@ -427,7 +427,7 @@ namespace Rivet {
         binShift(*hPion0Pt["ptyields62c86"]);
         binShift(*hPion0Pt["ptyields62call"]);
 
-        binShift(*_hPion0Pt["c10Pt_AuAu39"]);
+        binShift(*hPion0Pt["c10Pt_AuAu39"]);
         binShift(*hPion0Pt["c20Pt_AuAu39"]);
         binShift(*hPion0Pt["c40Pt_AuAu39"]);
         binShift(*hPion0Pt["c60Pt_AuAu39"]);
@@ -503,7 +503,7 @@ namespace Rivet {
 
 //RAA _______________________________
 
-      _hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
+      hPion0Pt["c10Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c10"]->sumW());
       hPion0Pt["c20Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c20"]->sumW());
       hPion0Pt["c40Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c40"]->sumW());
       hPion0Pt["c60Pt_AuAu39"]->scaleW(1./sow["sow_AuAu39c60"]->sumW());
@@ -531,7 +531,7 @@ namespace Rivet {
       hPion0Pt["c86Pt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
       hPion0Pt["callPt62_pp"]->scaleW(1./sow["sow_pp62"]->sumW());
 
-      divide(_hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa["Raa_c010_AuAu39"]);
+      divide(hPion0Pt["c10Pt_AuAu39"],hPion0Pt["c10Pt39_pp"],hRaa["Raa_c010_AuAu39"]);
       divide(hPion0Pt["c20Pt_AuAu39"],hPion0Pt["c20Pt39_pp"],hRaa["Raa_c1020_AuAu39"]);
       divide(hPion0Pt["c40Pt_AuAu39"],hPion0Pt["c40Pt39_pp"],hRaa["Raa_c2040_AuAu39"]);
       divide(hPion0Pt["c60Pt_AuAu39"],hPion0Pt["c60Pt39_pp"],hRaa["Raa_c4060_AuAu39"]);
