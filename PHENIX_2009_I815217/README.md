@@ -11,3 +11,5 @@ myh1 needs to be removed.  This does not actually do anything.
 
 updates: 
 -.info file is fixed 
+-. histograms are booked not filled or finalized
+
