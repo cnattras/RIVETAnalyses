@@ -40,7 +40,7 @@ namespace Rivet {
       // all final-state particles within
       // the given eta acceptance
       const FinalState fs(Cuts::abseta < 0.35);
-      declare(fs, "fs")
+      declare(fs, "fs");
 
       const ParticlePair& beam = beams();
 
