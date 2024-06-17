@@ -1,6 +1,6 @@
 Name: PHENIX_2019_I1658594
 Year: 2019
-Summary: Measurement of two-particle correlations with respect to second- and third-order event planes in Au$+$Au collisions at $\sqrt{s_{_{NN}}}=200$ GeV
+Summary: Measurement of two-particle correlations with respect to second- and third-order event planes in Au$+$Au collisions at $\sqrt{s_{NN}}=200$ GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1658594
@@ -10,8 +10,8 @@ Authors:
  - Antonio Silva <antonio.silva@cern.ch>
  - Christine Nattrass <cnattras@utk.edu>
 References: 
-- arXiv:1603.05477
-- 10.1103/PhysRevC.94.014910
+- arXiv:1803.01749
+- 10.1103/PhysRevC.99.054903
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
