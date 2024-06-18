@@ -2,6 +2,9 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Projections/CentralityProjection.hh"
+#include "Rivet/Tools/AliceCommon.hh"
 
 namespace Rivet {
 
@@ -17,6 +20,32 @@ namespace Rivet {
     /// @name Analysis methods
     ///@{
 
+
+//create binShift function
+void binShift(YODA::Histo1D& histogram) {
+    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    int n = 0;
+    for (YODA::HistoBin1D bins : binlist) {
+        double p_high = bins.xMax();
+        double p_low = bins.xMin();
+        //Now calculate f_corr
+        if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
+            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+        } else { //Check if we are working with any middle bin
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        }
+    }
+}
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -25,11 +54,21 @@ namespace Rivet {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const FinalState fs(Cuts::abseta < 0.35);
-      declare(fs, "fs");
+      const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
+      declare(cp,"cp");  
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
+      beamOpt = getOption<string>("beam", "NONE");
+      const ParticlePair& beam = beams();
+
+     
+      if (beamOpt == "NONE"){
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu130;
+      }
+      
+      if (beamOpt == "AUAU130") collSys = AuAu130; 
+
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       book(_h["KaonPlusMinBias"], 1, 1, 1);
       book(_h["KaonMinusMinBias"], 1, 1, 2);
@@ -170,7 +209,7 @@ namespace Rivet {
     void analyze(const Event& event) {
       const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
       const double cent = centProj();
-      Particles particles = applyProjection<FinalState>(event,"fs").particles();
+      Particles particles = applyProjection<FinalState>(event,"cp").particles();
       if(cent > 92.) vetoEvent;
         _c["MinBias"]->fill();
         if(cent >= 0. && cent < 5.) _c["Cent0_5"]->fill();
@@ -373,6 +412,76 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
+
+    binShift(*_h["KaonPlusMinBias"]);
+    binShift(*_h["KaonMinusMinBias"]);
+    binShift(*_h["ProtonMinBias"]);
+    binShift(*_h["AntiProtonMinBias"]);
+    binShift(*_h["PionPlusMinBias"]);
+    binShift(*_h["PionMinusMinBias"]);
+    binShift(*_h["Fig10KaonPlusCent0_5"]);
+    binShift(*_h["Fig10KaonPlusCent5_15"]);
+    binShift(*_h["Fig10KaonPlusCent15_30"]);
+    binShift(*_h["Fig10KaonPlusCent30_60"]);
+    binShift(*_h["Fig10KaonPlusCent60_92"]);
+    binShift(*_h["Fig10KaonMinusCent0_5"]);
+    binShift(*_h["Fig10KaonMinusCent5_15"]);
+    binShift(*_h["Fig10KaonMinusCent15_30"]);
+    binShift(*_h["Fig10KaonMinusCent30_60"]);
+    binShift(*_h["Fig10KaonMinusCent60_92"]);
+    binShift(*_h["Fig10ProtonCent0_5"]);
+    binShift(*_h["Fig10AntiProtonCent0_5"]);
+    binShift(*_h["Fig10ProtonCent5_15"]);
+    binShift(*_h["Fig10AntiProtonCent5_15"]);
+    binShift(*_h["Fig10ProtonCent15_30"]);
+    binShift(*_h["Fig10AntiProtonCent15_30"]);
+    binShift(*_h["Fig10ProtonCent30_60"]);
+    binShift(*_h["Fig10AntiProtonCent30_60"]);
+    binShift(*_h["Fig10ProtonCent60_92"]);
+    binShift(*_h["Fig10AntiProtonCent60_92"]);
+    binShift(*_h["Fig11PionPlusCentral"]);
+    binShift(*_h["Fig11PionPlusPeripheral"]);
+    binShift(*_h["Fig11PionMinusCentral"]);
+    binShift(*_h["Fig11PionMinusPeripheral"]);
+    binShift(*_h["Fig11KaonPlusCentral"]);
+    binShift(*_h["Fig11KaonPlusPeripheral"]);
+    binShift(*_h["Fig11KaonMinusCentral"]);
+    binShift(*_h["Fig11KaonMinusPeripheral"]);
+    binShift(*_h["Fig11ProtonCentral"]);
+    binShift(*_h["Fig11ProtonPeripheral"]);
+    binShift(*_h["Fig11AntiProtonCentral"]);
+    binShift(*_h["Fig11AntiProtonPeripheral"]);
+    binShift(*_h["Fig12PionPlusCent0_5"]);
+    binShift(*_h["Fig12PionPlusCent5_15"]);
+    binShift(*_h["Fig12PionPlusCent15_30"]);
+    binShift(*_h["Fig12PionPlusCent30_60"]);
+    binShift(*_h["Fig12PionMinusCent0_5"]);
+    binShift(*_h["Fig12PionMinusCent5_15"]);
+    binShift(*_h["Fig12PionMinusCent15_30"]);
+    binShift(*_h["Fig12PionMinusCent30_60"]);
+    binShift(*_h["Fig12PionPlusCent60_92"]);
+    binShift(*_h["Fig12PionMinusCent60_92"]);
+    binShift(*_h["Fig12KaonPlusCent0_5"]);
+    binShift(*_h["Fig12KaonPlusCent5_15"]);
+    binShift(*_h["Fig12KaonPlusCent15_30"]);
+    binShift(*_h["Fig12KaonPlusCent30_60"]);
+    binShift(*_h["Fig12KaonPlusCent60_92"]);
+    binShift(*_h["Fig12KaonMinusCent0_5"]);
+    binShift(*_h["Fig12KaonMinusCent5_15"]);
+    binShift(*_h["Fig12KaonMinusCent15_30"]);
+    binShift(*_h["Fig12KaonMinusCent30_60"]);
+    binShift(*_h["Fig12KaonMinusCent60_92"]);
+    binShift(*_h["Fig12ProtonCent0_5"]);
+    binShift(*_h["Fig12ProtonCent5_15"]);
+    binShift(*_h["Fig12ProtonCent15_30"]);
+    binShift(*_h["Fig12ProtonCent30_60"]);
+    binShift(*_h["Fig12AntiProtonCent0_5"]);
+    binShift(*_h["Fig12AntiProtonCent5_15"]);
+    binShift(*_h["Fig12AntiProtonCent15_30"]);
+    binShift(*_h["Fig12AntiProtonCent30_60"]);
+    binShift(*_h["Fig12ProtonCent60_92"]);
+    binShift(*_h["Fig12AntiProtonCent60_92"]);
+
       _h["KaonPlusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
       _h["KaonMinusMinBias"]->scaleW(1./_c["MinBias"]->sumW());
       _h["ProtonMinBias"]->scaleW(1./_c["MinBias"]->sumW());
@@ -485,6 +594,9 @@ namespace Rivet {
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
     map<string, Scatter2DPtr> _s;
+    string beamOpt;
+    enum CollisionSystem {AuAu130};
+    CollisionSystem collSys;
     ///@}
 
 
