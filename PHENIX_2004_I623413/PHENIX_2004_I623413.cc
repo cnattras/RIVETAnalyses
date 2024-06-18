@@ -209,7 +209,7 @@ void binShift(YODA::Histo1D& histogram) {
     void analyze(const Event& event) {
       const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
       const double cent = centProj();
-      Particles particles = applyProjection<FinalState>(event,"cp").particles();
+      Particles particles = applyProjection<PrimaryParticles>(event,"cp").particles();
       if(cent > 92.) vetoEvent;
         _c["MinBias"]->fill();
         if(cent >= 0. && cent < 5.) _c["Cent0_5"]->fill();
