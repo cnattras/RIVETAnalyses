@@ -2,7 +2,7 @@ PHENIX_2004_I623413
 
 Primarily done by Ralph Davenport.  Contributions by Adam Tilley, Nik Nelson, Sean Grace, and Joesph Beller.
 
-This one is almost done but needs plot clean up.  Needs beams added as options and needs bin shift correction applied.
+(done) This one is almost done but needs plot clean up.  Needs beams added as options and needs bin shift correction applied.
 
 Line 28 uses the final state particles projection.  That is not the right projection!  We are copying the ALICE projection, which we need to mention in the approvals, but that gets the gist correctly while this does not.
 This doesn't implement ANY beam check; it needs to have the beam check implemented.
