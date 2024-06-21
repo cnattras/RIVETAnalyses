@@ -16,3 +16,4 @@ Double check output - I don't know if this is calculating the average per event 
 
 Update: Fixed the .info file.
 Update: Fixed the calibration location.
+Update: Fixed beams set up.

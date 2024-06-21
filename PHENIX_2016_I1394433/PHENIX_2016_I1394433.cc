@@ -14,6 +14,7 @@
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Projections/HepMCHeavyIon.hh"
 
+
 namespace Rivet {
 
 
@@ -29,6 +30,53 @@ namespace Rivet {
     //@{
 
     void init() {
+
+        beamOpt = getOption<string>("beam", "NONE");
+
+        const ParticlePair& beam = beams();
+        int NN = 0;
+
+        if (beamOpt == "NONE") {
+        
+            if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 7.7*NN, 1E-3)) collSys = AuAu7;
+          if (fuzzyEquals(sqrtS()/GeV, 14.5*NN, 1E-3)) collSys = AuAu14;
+          if (fuzzyEquals(sqrtS()/GeV, 19.6*NN, 1E-3)) collSys = AuAu19;
+          if (fuzzyEquals(sqrtS()/GeV, 27*NN, 1E-3)) collSys = AuAu27;
+          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSys = AuAu39;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSys = AuAu62;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+      }
+      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
+      {
+          NN = 63.;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSys = CuCu62;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = CuCu200;
+      }
+      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970)
+      {
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = CuAu200;
+      }
+      if (beam.first.pid() == 1000922380 && beam.second.pid() == 1000922380)
+      {
+          if (fuzzyEquals(sqrtS()/GeV, 193*NN, 1E-3)) collSys = UU193;
+      }
+      if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
+      {
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = DAu200;
+      }
+      if (beam.first.pid() == 1000020030 && beam.second.pid() == 1000791970)
+      {
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = HeAu200;
+      }
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = pp200;
+      }    
+        }
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
         
@@ -174,6 +222,9 @@ namespace Rivet {
     Profile1DPtr _hist_E_39;
 
     //@}
+    string beamOpt;
+    enum CollisionSystem {AuAu7,AuAu14,AuAu19,AuAu27,AuAu39,AuAu62,AuAu130,AuAu200,CuCu62,CuCu200,CuAu200,UU193,DAu200,HeAu200,pp200};
+    CollisionSystem collSys;
 
 
   };
