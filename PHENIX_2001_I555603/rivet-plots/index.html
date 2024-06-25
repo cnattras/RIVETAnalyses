@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="PHENIX_2001_I555603/index.html" style="text-decoration:none;">Measurement of the mid-rapidity transverse energy distribution from $\sqrt{s_{NN}}$ = 130-GeV Au + Au collisions at RHIC (PHENIX_2001_I555603)</a></h3>
+<p><a href="https://inspirehep.net/literature/555603">Inspire</a> &#124; <a href="http://hepdata.net/record/ins555603">HepData</a> &#124; <a href="https://arxiv.org/abs/nucl-ex/0104015">arXiv:nucl-ex/0104015</a> &#124; 10.1103/PhysRevLett.87.052301</p>
+<p style="font-size:smaller;">The first measurement of energy produced transverse to the beam direction at RHIC is presented. The mid-rapidity transverse energy density per participating nucleon rises steadily with the number of participants, closely paralleling the rise in charged-particle density, such that $E_{T} / N_{ch}$ remains relatively constant as a function of centrality. The energy density calculated via Bjorken's prescription for the 2% most central $Au+Au$ collisions at $\sqrt{s_{NN}}=130$ GeV is at least $\epsilon{_Bj}$ = $4.6$ GeV/fm$^3$ which is a factor of 1.6 larger than found at $\sqrt{s_{NN}}=17.2$ GeV ($Pb+Pb$ at CERN).</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Tuesday, 25. June 2024 02:42PM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>

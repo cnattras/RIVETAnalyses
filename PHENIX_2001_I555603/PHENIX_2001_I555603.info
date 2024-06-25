@@ -1,0 +1,45 @@
+Name: PHENIX_2001_I555603
+Year: 2001
+Summary: Measurement of the mid-rapidity transverse energy distribution from $\sqrt{s_{NN}}$ = 130-GeV Au + Au collisions at RHIC
+Experiment: PHENIX
+Collider: RHIC
+InspireID: 555603
+Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Reentrant: false
+Authors:
+ - Your Name <your@email.address>
+References:
+ - 'arXiv:nucl-ex/0104015'
+ - 10.1103/PhysRevLett.87.052301
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU
+Description:
+  The first measurement of energy produced transverse to the beam direction at RHIC is presented. The mid-rapidity transverse energy density per participating nucleon rises steadily with the number of participants, closely paralleling the rise in charged-particle density, such that $E_{T} / N_{ch}$ remains relatively constant as a function of centrality. The energy density calculated via Bjorken's prescription for the 2% most central $Au+Au$ collisions at $\sqrt{s_{NN}}=130$ GeV is at least $\epsilon{_Bj}$ = $4.6$ GeV/fm$^3$ which is a factor of 1.6 larger than found at $\sqrt{s_{NN}}=17.2$ GeV ($Pb+Pb$ at CERN).
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: 
+BibTeX: '@article{PHENIX:2001kdi,
+    author = "Adcox, K. and others",
+    collaboration = "PHENIX",
+    title = "{Measurement of the mid-rapidity transverse energy distribution from s(NN)**(1/2) = 130-GeV Au + Au collisions at RHIC}",
+    eprint = "nucl-ex/0104015",
+    archivePrefix = "arXiv",
+    doi = "10.1103/PhysRevLett.87.052301",
+    journal = "Phys. Rev. Lett.",
+    volume = "87",
+    pages = "052301",
+    year = "2001"
+}'
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
