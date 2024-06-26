@@ -18,3 +18,4 @@ Update: Fixed the .info file.
 Update: Fixed the calibration location.
 Update: Fixed beams set up.
 Update: Fixed logic in init.
+Update: Fixed booking histogram 
