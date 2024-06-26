@@ -46,7 +46,7 @@ namespace Rivet {
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       // ALICE Projection
-      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.35 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
+      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.38 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
 
       // Book histograms
       book(_h["dEtdEta"], 1, 1, 1);
@@ -58,7 +58,7 @@ namespace Rivet {
     void analyze(const Event& event) {
 
         double totalEt = 0;
-        double deltaeta = .7;
+        double deltaeta = .76; //does this relate to the abseta in the ALICE declaration?
 
         Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
 
@@ -78,10 +78,6 @@ namespace Rivet {
         if (collSys == AuAu130){
           _h["dEtdEta"]->fill(c,totalEt/deltaeta);
         }
-
-
-
-      
     }
 
 
