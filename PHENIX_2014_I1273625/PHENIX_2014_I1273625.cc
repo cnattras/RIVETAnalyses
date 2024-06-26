@@ -5,6 +5,7 @@
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/DirectFinalState.hh"
+#include "../Centralities/RHICCentrality.hh"
 
 namespace Rivet {
 
@@ -23,25 +24,30 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      // Initialise and register projections
-
+      // Initialise and register projection
       // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
+    
       const FinalState fs(Cuts::abseta < 4.9);
+      declare(fs,"fs");
 
-      // The final-state particles declared above are clustered using FastJet with
-      // the anti-kT algorithm and a jet-radius parameter 0.4
-      // muons and neutrinos are excluded from the clustering
+      const ParticlePair& beam = beams();
+
       
-      // FinalState of direct photons and bare muons and electrons in the event
+      beamOpt = getOption<string>("beam","NONE");
+
+      if (beamOpt == "NONE") {
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AUAU;
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = PP;
+      else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = dAU200;
+      else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = dAU200;
+      }
+
+
+      if (beamOpt =="PP") collSys = PP;
+      else if (beamOpt == "dAU200") collSys = dAU200;
+      else if (beamOpt == "AUAU") collSys = AUAU;
       
-
-      // Dress the bare direct leptons with direct photons within dR < 0.1,
-      // and apply some fiducial cuts on the dressed leptons
-     
-
-
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
     
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       book(h["ETEMC62AUAU"], 1, 1, 1);
@@ -111,6 +117,9 @@ namespace Rivet {
     map<string, Histo1DPtr> h;
     map<string, Profile1DPtr> p;
     map<string, CounterPtr> _h;
+    string beamOpt;
+    enum CollisionSystem { PP, AUAU, dAU200 };
+    CollisionSystem collSys;
     /// @}
 
 
