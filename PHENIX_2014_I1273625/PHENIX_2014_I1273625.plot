@@ -71,19 +71,19 @@ YLabel= $\frac{dY}{dE_{T EMC}}(Gev^{-1})$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d13-x01-y01
-Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s{NN}}$ = 200 GeV for five sectors of PbSc in Au+Au collisions.
+Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s_{NN}}$ = 200 GeV for five sectors of PbSc in Au+Au collisions.
 XLabel= $E_{T}$ (GeV)
 YLabel= $\frac{dY}{dE_{T}}(Gev^{-1})$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d14-x01-y01
-Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s{NN}}$ = 200 GeV for five sectors of PbSc in p+p collisions.
+Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s_{NN}}$ = 200 GeV for five sectors of PbSc in p+p collisions.
 XLabel= $E_{T}$ (GeV)
 YLabel= $\frac{dY}{dE_{T}}(Gev^{-1})$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d15-x01-y01
-Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s{NN}}$ = 200 GeV for five sectors of PbSc in d+Au collisions.
+Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s_{NN}}$ = 200 GeV for five sectors of PbSc in d+Au collisions.
 XLabel= $E_{T}$ (GeV)
 YLabel= $\frac{dY}{dE_{T}}(Gev^{-1})$
 END PLOT 
@@ -179,7 +179,7 @@ YLabel= $\frac{dE_T}{d\eta}$[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d31-x01-y01
-Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s{NN}}$ = 200 GeV for five sectors of PbSc in p+p collisions.
+Title= Corrected $\frac{dE_T}{d\eta}$ distributions at $\sqrt{s_{NN}}$ = 200 GeV for five sectors of PbSc in p+p collisions.
 XLabel= $E_{T}$
 YLabel= $\frac{dY}{dE_T}(GeV^{-1})$
 END PLOT 
