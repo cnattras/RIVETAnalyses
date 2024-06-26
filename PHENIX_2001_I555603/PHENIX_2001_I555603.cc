@@ -6,8 +6,13 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
-#include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Projections/HadronicFinalState.hh"
+//#include "Centralities/RHICCentrality.hh"
+#include "Rivet/Projections/ChargedFinalState.hh"
+#include "Rivet/Tools/Cuts.hh"
+#include "Rivet/Projections/SingleValueProjection.hh"
+#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Projections/AliceCommon.hh"
+#include "Rivet/Projections/HepMCHeavyIon.hh"
 
 namespace Rivet {
 
@@ -26,12 +31,7 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
     void init() {
 
-      // Initialise and register projections
-
-      // The basic final-state projection:
-      // all final-state particles within
-      // the given eta acceptance
-      //const FinalState fs(Cuts::abseta < 4.9);
+      // Implement beam options
       beamOpt = getOption<string>("beam", "NONE");
 
       const ParticlePair& beam = beams();
@@ -42,17 +42,44 @@ namespace Rivet {
 
       if (beamOpt == "AUAU130") collSys = AuAu130;
 
-      //declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      // Declare Centrality
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
+      // ALICE Projection
+      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.35 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
 
       // Book histograms
-      book(_h["avgenergydensity"], 1, 1, 1);
+      book(_h["dEtdEta"], 1, 1, 1);
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+
+        double totalEt = 0;
+        double deltaeta = .7;
+
+        Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+
+        const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
+        const double c = cent();
+        if (c > 50) vetoEvent;
+
+        for(const Particle& p : chargedParticles)
+        {
+            const int id = abs(p.pid());
+            if(id==11 || id==13) continue; //exclude electron & muon
+
+            totalEt += p.Et()/GeV;
+        }
+
+
+        if (collSys == AuAu130){
+          _h["dEtdEta"]->fill(c,totalEt/deltaeta);
+        }
+
+
 
       
     }
