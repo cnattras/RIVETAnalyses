@@ -6,7 +6,6 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
-//#include "Centralities/RHICCentrality.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
@@ -68,15 +67,12 @@ namespace Rivet {
 
         for(const Particle& p : chargedParticles)
         {
-            const int id = abs(p.pid());
-            if(id==11 || id==13) continue; //exclude electron & muon
-
             totalEt += p.Et()/GeV;
         }
 
 
         if (collSys == AuAu130){
-          _h["dEtdEta"]->fill(c,totalEt/deltaeta);
+          _hist_E->fill(c,totalEt/deltaeta);
         }
     }
 
@@ -95,6 +91,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
+    Profile1DPtr _hist_E;
     string beamOpt;
     enum CollisionSystem {AuAu130};
     CollisionSystem collSys;
