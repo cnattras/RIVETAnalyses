@@ -17,7 +17,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=AUAU
+ - beam=AUAU130
 Description:
   The first measurement of energy produced transverse to the beam direction at RHIC is presented. The mid-rapidity transverse energy density per participating nucleon rises steadily with the number of participants, closely paralleling the rise in charged-particle density, such that $E_{T} / N_{ch}$ remains relatively constant as a function of centrality. The energy density calculated via Bjorken's prescription for the 2% most central $Au+Au$ collisions at $\sqrt{s_{NN}}=130$ GeV is at least $\epsilon{_Bj}$ = $4.6$ GeV/fm$^3$ which is a factor of 1.6 larger than found at $\sqrt{s_{NN}}=17.2$ GeV ($Pb+Pb$ at CERN).
 ValidationInfo:
