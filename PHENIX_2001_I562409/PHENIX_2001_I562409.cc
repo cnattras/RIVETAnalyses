@@ -64,9 +64,9 @@ namespace Rivet {
       else if (beamOpt == "AUAU") collSys = AuAu130;
       
       // Initialise and register projections
-      if (collSys != pp){
+      //if (collSys != pp){
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-      }
+      //}
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
