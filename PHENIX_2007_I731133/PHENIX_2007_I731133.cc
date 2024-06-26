@@ -89,7 +89,7 @@ namespace Rivet {
           else if (beamOpt == "DAU200") collSys = DAu200;
 
           //declaration for collision systems that are not p+p
-          if (!(collSys == pp)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+          declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
           //Counters
           book(sow["sow_pp"], "_sow_pp");
