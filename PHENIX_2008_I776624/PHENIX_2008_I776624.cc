@@ -64,7 +64,7 @@ namespace Rivet {
       if(beamOpt=="PP200") CollSys = pp200;
       else if(beamOpt=="CUCU200") CollSys = CuCu200;
      
-      if(!(CollSys == pp200)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       //declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 

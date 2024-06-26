@@ -94,9 +94,8 @@ namespace Rivet {
       else if (beamOpt == "DAu200") collSys = DAu200;
       else if (beamOpt == "AuAu200") collSys = AuAu200;
       
-      if (collSys != pp) {
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
-      }
+      
 
 
       //****Counters****

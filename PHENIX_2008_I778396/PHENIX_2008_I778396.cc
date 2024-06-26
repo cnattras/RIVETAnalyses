@@ -425,7 +425,7 @@ namespace Rivet {
         if (beamOpt == "PP") collSys = pp0;
         else if (beamOpt == "AUAU") collSys = AuAu;
         
-        if (!(collSys == pp0)) declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+        declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
 
       int pta;
