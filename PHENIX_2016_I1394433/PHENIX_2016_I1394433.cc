@@ -80,50 +80,52 @@ namespace Rivet {
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
         
-     if(fuzzyEquals(sqrtS()/GeV, 200*197, 1E-3))
-     {
-        book(_hist_E_200, 1, 1, 3);
-        book(_hist_Ch_200, 2, 1, 3);
-     }
-     if(fuzzyEquals(sqrtS()/GeV, 62.4*197, 1E-3))
-     {
-      book(_hist_E_62, 5, 1, 3);
-      book(_hist_Ch_62, 6, 1, 3);
-     }
-     if(fuzzyEquals(sqrtS()/GeV, 39*197, 1E-3))
-     {
-        book(_hist_E_39, 7, 1, 3);
-        book(_hist_Ch_39, 8, 1, 3);
-     }
+     //Au+Au collisions
+
+        book(_h["hist_E_200"], 1, 1, 3);
+        book(_h["hist_Ch_200"], 2, 1, 3);
+        book(_h["hist_E_130"], 3, 1, 3);
+        book(_h["hist_Ch_130"], 4, 1, 3);
+        book(_h["hist_E_62.4"], 5, 1, 3);
+        book(_h["hist_Ch_62.4"], 6, 1, 3);
+        book(_h["hist_E_39"], 7, 1, 3);
+        book(_h["hist_Ch_39"], 8, 1, 3);
+        book(_h["hist_E_27"],9,1,3);
+        book(_h["hist_Ch_27"],10,1,3);
+        book(_h["hist_E_19.6"],11,1,3);
+        book(_h["hist_Ch_19.6"],12,1,3);
+        book(_h["hist_E_14.5"],13,1,3);
+        book(_h["hist_Ch_14.5"],14,1,3);
+        book(_h["hist_E_7.7"],15,1,3);
+        book(_h["hist_Ch_7.7"],16,1,3);
       
+     //Cu+Cu collisions   
       
-      /*
-      book(_h["hist_E_130"],3,1,3);
-      book(_h["hist_Ch_130"],4,1,3);
-      book(_h["hist_E_27"],9,1,3);
-      book(_h["hist_Ch_27"],10,1,3);
-      book(_h["hist_E_19.6"],11,1,3);
-      book(_h["hist_Ch_19.6"],12,1,3);
-      book(_h["hist_E_14.5"],13,1,3);
-      book(_h["hist_Ch_14.5"],14,1,3);
-      book(_h["hist_E_7.7"],15,1,3);
-      book(_h["hist_Ch_7.7"],16,1,3);
-      */
-        
-      /*
-      book(_h["hist_E_200_Cu"],17,1,3);
-      book(_h["hist_Ch_200_Cu"],18,1,3);
-      book(_h["hist_E_62.4_Cu"],19,1,3);
-      book(_h["hist_Ch_62.4_Cu"],20,1,3);
-      book(_h["hist_E_200_Cu_Au"],21,1,3);
-      book(_h["hist_Ch_200_Cu_Au"],22,1,3);
-      book(_h["hist_E_193_UU"],23,1,3);
-      book(_h["hist_Ch_193_UU"],24,1,3);
-      book(_h["hist_E_200_dAu"],25,1,3);
-      book(_h["hist_Ch_200_dAu"],26,1,3);
-      book(_h["hist_E_200_He_A"],27,1,3);
-      book(_h["hist_Ch_200_He_A"],28,1,3);
-      */
+        book(_h["hist_E_200_Cu"],17,1,3);
+        book(_h["hist_Ch_200_Cu"],18,1,3);
+        book(_h["hist_E_62.4_Cu"],19,1,3);
+        book(_h["hist_Ch_62.4_Cu"],20,1,3);
+
+    //Cu+Au collisions
+
+        book(_h["hist_E_200_Cu_Au"],21,1,3);
+        book(_h["hist_Ch_200_Cu_Au"],22,1,3);
+
+    //U+U collisions
+
+        book(_h["hist_E_193_UU"],23,1,3);
+        book(_h["hist_Ch_193_UU"],24,1,3);
+
+    //d+Au collisions
+
+        book(_h["hist_E_200_dAu"],25,1,3);
+        book(_h["hist_Ch_200_dAu"],26,1,3);
+
+    //He+Au collisions
+    
+        book(_h["hist_E_200_He_A"],27,1,3);
+        book(_h["hist_Ch_200_He_A"],28,1,3);
+      
         
      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.35 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
     }
