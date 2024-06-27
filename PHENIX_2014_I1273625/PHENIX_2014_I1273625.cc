@@ -33,7 +33,8 @@ namespace Rivet {
       // Initialise and register projection
       // The basic final-state projection:
     
-      declare(ALICE::PrimaryParticles (Cuts::abseta < 0.35 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
+      const FinalState fs(Cuts::pT > 1*GeV && Cuts::abseta < 0.35);
+      declare(fs, "fs");
   
       const ParticlePair& beam = beams();
       int NN = 0;
@@ -66,7 +67,7 @@ namespace Rivet {
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
 
       //Figure 2
-      book(h["ETEMC62AUAU"], 1, 1, 1);
+      /*book(h["ETEMC62AUAU"], 1, 1, 1);
       book(h["ETEMC62AUAU05"], 2, 1, 1);
       book(h["ETEMC62AUAU510"], 3, 1, 1);
       book(h["ETEMC62AUAU1015"], 4, 1, 1);
@@ -104,15 +105,15 @@ namespace Rivet {
       //figure 6
       book(h["NORMALQUARK200AUAU"], 25, 1, 1);
       book(h["NORMALQUARK130AUAU"], 26, 1, 1);
-      book(h["NORMALQUARK62AUAU"], 27, 1, 1);
+      book(h["NORMALQUARK62AUAU"], 27, 1, 1);*/
 
       //figure 7 
-      book(h["DETDETAQUARK200AUAU"], 28, 1, 1);
-      book(h["DETDETAQUARK130AUAU"], 29, 1, 1);
-      book(h["DETDETAQUARK62AUAU"], 30, 1, 1);
+      book(_hist_200, "d28-x01-y01", refData(28, 1, 1));
+      book(_hist_130, "d29-x01-y01", refData(29, 1, 1));
+      book(_hist_62, "d30-x01-y01", refData(30, 1, 1));
 
       //figure 8
-      book(h["PP200GAMMA"], 31, 1, 1);
+     /* book(h["PP200GAMMA"], 31, 1, 1);
 
       //figure 9 
       book(h["QUARKPART200AUAU"], 32, 1, 1);
@@ -142,7 +143,7 @@ namespace Rivet {
 
       //figure 17 
       book(h["NPARTAUAU200"], 42, 1, 1);
-      book(h["NAPRTPP200"], 43, 1, 1);
+      book(h["NAPRTPP200"], 43, 1, 1);*/
 
     }
 
@@ -152,52 +153,30 @@ namespace Rivet {
     double totalEt = 0;
     double deltaeta = 1; 
 
-    Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+    Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
 
     const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
         const double c = cent();
         if (c > 65) vetoEvent;
     
-    for(const Particle& p : chargedParticles)
+    for(const Particle& p : fsParticles)
         {
             totalEt += p.Et()/GeV;
         }
 
 
-       if(collSys == "AUAU62")
+        if(collSys == AUAU62)
         {
-          h["QUARK62AUAU"]->fill(); 
-          h["RATIO62AUAU"]->fill();
-          h["NORMALDETDETA62AUAU"]->fill(c,totalEt/deltaeta);
-          h["NORMALQUARK62AUAU"]->fill(c,totalEt/deltaeta);
-          h["DETDETAQUARK62AUAU"]->fill(c,totalEt/deltaeta);
+          _hist_62->fill(c,totalEt/deltaeta);
         }
-        else if(collSys == "AUAU130")
+        else if(collSys == AUAU130)
         {
-           h["QUARK130AUAU"]->fill(); 
-           h["RATIO130AUAU"]->fill();  
-           h["NORMALDETDETA130AUAU"]->fill(c,totalEt/deltaeta);
-           h["NORMALQUARK130AUAU"]->fill(c,totalEt/deltaeta);
-           h["DETDETAQUARK130AUAU"]->fill(c,totalEt/deltaeta);
+           _hist_130->fill(c,totalEt/deltaeta);
         }
-        else if(collSys == "AUAU200")
+        else if(collSys == AUAU200)
         {
-           h["QUARK200AUAU"]->fill();
-           h["RATIO200AUAU"]->fill();
-           h["NORMALDETDETA200AUAU"]->fill(c,totalEt/deltaeta);
-           h["NORMALQUARK200AUAU"]->fill(c,totalEt/deltaeta);
-           h["DETDETAQUARK200AUAU"]->fill(c,totalEt/deltaeta);
+           _hist_200->fill(c,totalEt/deltaeta); 
 
-        }
-        
-        else if(collSys == "PP200")
-        {
-           
-        }
-
-        else if(collSys == "dAU200")
-        {
-            
         }
 
     }
@@ -219,6 +198,9 @@ namespace Rivet {
     map<string, Profile1DPtr> p;
     map<string, CounterPtr> _h;
     map<string, Scatter2DPtr> s;
+    Profile1DPtr _hist_130;
+    Profile1DPtr _hist_200;
+    Profile1DPtr _hist_62;
 
     string beamOpt;
     enum CollisionSystem {PP200, AUAU62, AUAU130, AUAU200, dAU200};
