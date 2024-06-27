@@ -44,12 +44,12 @@ namespace Rivet {
       // Declare Centrality
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-      // ALICE Projection
-      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.38 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
+      // Final State projection
+      const FinalState fs(Cuts::abseta < 0.5);
+      declare(fs, "fs");
 
       // Book histograms
-      book(_h["dEtdEta"], 1, 1, 1);
-      book(_hist_E, "d01-x01-y01-test", refData(1, 1, 1));
+      book(_hist_E, "d01-x01-y01", refData(1, 1, 1));
 
     }
 
@@ -58,15 +58,15 @@ namespace Rivet {
     void analyze(const Event& event) {
 
         double totalEt = 0;
-        double deltaeta = .76; //does this relate to the abseta in the ALICE declaration?
+        double deltaeta = 1; 
 
-        Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
 
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
         const double c = cent();
         if (c > 50) vetoEvent;
 
-        for(const Particle& p : chargedParticles)
+        for(const Particle& p : fsParticles) // loop over all final state particles
         {
             totalEt += p.Et()/GeV;
         }
