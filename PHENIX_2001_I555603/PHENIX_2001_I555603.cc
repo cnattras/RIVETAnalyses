@@ -49,6 +49,7 @@ namespace Rivet {
 
       // Book histograms
       book(_h["dEtdEta"], 1, 1, 1);
+      book(_hist_E, "d01-x01-y01-test", refData(1, 1, 1));
 
     }
 
@@ -79,7 +80,7 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
+    
 
     }
 
