@@ -28,7 +28,7 @@ namespace Rivet {
       // Initialise and register projection
       // The basic final-state projection:
     
-      const FinalState fs(Cuts::pT > 1*GeV && Cuts::abseta < 0.5);
+      const FinalState fs(Cuts::abseta < 0.5);
       declare(fs, "fs");
   
       const ParticlePair& beam = beams();
@@ -76,8 +76,13 @@ namespace Rivet {
 
     const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
         const double c = cent();
+        if (collSys == AUAU62){
+          if (c > 55) vetoEvent;
+        }
+        else{
         if (c > 65) vetoEvent;
-    
+        }
+
     for(const Particle& p : fsParticles)
         {
             totalEt += p.Et()/GeV;
