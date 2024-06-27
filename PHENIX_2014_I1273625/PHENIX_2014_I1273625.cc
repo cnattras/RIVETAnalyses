@@ -6,7 +6,6 @@
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
-//#include "Centralities/RHICCentrality.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
@@ -159,25 +158,36 @@ namespace Rivet {
         const double c = cent();
         if (c > 65) vetoEvent;
     
-
-
-
-      
-
-
+    for(const Particle& p : chargedParticles)
+        {
+            totalEt += p.Et()/GeV;
+        }
 
 
        if(collSys == "AUAU62")
         {
-            
+          h["QUARK62AUAU"]->fill(); 
+          h["RATIO62AUAU"]->fill();
+          h["NORMALDETDETA62AUAU"]->fill(c,totalEt/deltaeta);
+          h["NORMALQUARK62AUAU"]->fill(c,totalEt/deltaeta);
+          h["DETDETAQUARK62AUAU"]->fill(c,totalEt/deltaeta);
         }
         else if(collSys == "AUAU130")
         {
-            
+           h["QUARK130AUAU"]->fill(); 
+           h["RATIO130AUAU"]->fill();  
+           h["NORMALDETDETA130AUAU"]->fill(c,totalEt/deltaeta);
+           h["NORMALQUARK130AUAU"]->fill(c,totalEt/deltaeta);
+           h["DETDETAQUARK130AUAU"]->fill(c,totalEt/deltaeta);
         }
         else if(collSys == "AUAU200")
         {
-            
+           h["QUARK200AUAU"]->fill();
+           h["RATIO200AUAU"]->fill();
+           h["NORMALDETDETA200AUAU"]->fill(c,totalEt/deltaeta);
+           h["NORMALQUARK200AUAU"]->fill(c,totalEt/deltaeta);
+           h["DETDETAQUARK200AUAU"]->fill(c,totalEt/deltaeta);
+
         }
         
         else if(collSys == "PP200")
@@ -189,7 +199,6 @@ namespace Rivet {
         {
             
         }
-
 
     }
     /// Normalise histograms etc., after the run
@@ -212,7 +221,7 @@ namespace Rivet {
     map<string, Scatter2DPtr> s;
 
     string beamOpt;
-    enum CollisionSystem { PP200, AUAU62, AUAU130, AUAU200, dAU200 };
+    enum CollisionSystem {PP200, AUAU62, AUAU130, AUAU200, dAU200};
     CollisionSystem collSys;
     /// @}
 
