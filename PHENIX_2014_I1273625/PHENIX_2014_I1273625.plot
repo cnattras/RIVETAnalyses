@@ -90,91 +90,91 @@ END PLOT
 
 BEGIN PLOT /PHENIX_2014_I1273625/d16-x01-y01
 Title= The number of quark participants as a function of the number of nucleon participants for 200 GeV Au+Au. 
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $N_{qp}$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d17-x01-y01
 Title= The number of quark participants as a function of the number of nucleon participants for 130 GeV Au+Au. 
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $N_{qp}$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d18-x01-y01
 Title= The number of quark participants as a function of the number of nucleon participants for 62 Gev Au+Au. 
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $N_{qp}$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d19-x01-y01
 Title= The ratio of the number of quark participants to the number of nucleon participants as a function of the number of nucleon participants for 200 GeV Au+Au.
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{N_{qp}}{N_{part}}$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d20-x01-y01
 Title= The ratio of the number of quark participants to the number of nucleon participants as a function of the number of nucleon participants for 130 GeV Au+Au.
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{N_{qp}}{N_{part}}$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d21-x01-y01
 Title= The ratio of the number of quark participants to the number of nucleon participants as a function of the number of nucleon participants for 62 GeV Au+Au.
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{N_{qp}}{N_{part}}$
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d22-x01-y01
 Title= $\frac{dE_T}{d\eta}$ normalized by the number of participant pairs as a function of the number of participants for 200 GeV Au+Au 
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$ / (0.5 $N_{part}$)[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d23-x01-y01
 Title= $\frac{dE_T}{d\eta}$ normalized by the number of participant pairs as a function of the number of participants for 130 GeV Au+Au 
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$ / (0.5 $N_{part}$)[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d24-x01-y01
 Title= $\frac{dE_T}{d\eta}$ normalized by the number of participant pairs as a function of the number of participants for 62 GeV Au+Au 
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$ / (0.5 $N_{part}$)[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d25-x01-y01
 Title= $\frac{dE_T}{d\eta}$ normalized by the number of participant quark pairs as a function of the number of nucleon participants for 200 GeV Au+Au.
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$ / (0.5 $N_{qp}$)[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d26-x01-y01
 Title= $\frac{dE_T}{d\eta}$ normalized by the number of participant quark pairs as a function of the number of nucleon participants for 130 GeV Au+Au.
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$ / (0.5 $N_{qp}$)[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d27-x01-y01
 Title= $\frac{dE_T}{d\eta}$ normalized by the number of participant quark pairs as a function of the number of nucleon participants for 62 GeV Au+Au.
-XLabel= $N_{part}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$ / (0.5 $N_{qp}$)[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d28-x01-y01
 Title= $\frac{dE_T}{d\eta}$ as a function of the number of quark participants for 200 GeV Au+Au.
-XLabel= $N_{qp}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d29-x01-y01
 Title= $\frac{dE_T}{d\eta}$ as a function of the number of quark participants for 130 GeV Au+Au.
-XLabel= $N_{qp}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$[GeV]
 END PLOT 
 
 BEGIN PLOT /PHENIX_2014_I1273625/d30-x01-y01
 Title= $\frac{dE_T}{d\eta}$ as a function of the number of quark participants for 62 GeV Au+Au.
-XLabel= $N_{qp}$
+XLabel= Centrality ($\%$)
 YLabel= $\frac{dE_T}{d\eta}$[GeV]
 END PLOT 
 
