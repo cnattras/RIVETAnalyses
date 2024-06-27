@@ -1,16 +1,11 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
 #include "Rivet/Projections/SingleValueProjection.hh"
-#include "Rivet/Tools/AliceCommon.hh"
-#include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Projections/HepMCHeavyIon.hh"
 
 namespace Rivet {
@@ -34,9 +29,14 @@ namespace Rivet {
       beamOpt = getOption<string>("beam", "NONE");
 
       const ParticlePair& beam = beams();
-
-      if (beamOpt == "NONE"){
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu130;
+      int NN = 0.;
+      if (beamOpt == "NONE") {
+        
+            if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+      }
       }
 
       if (beamOpt == "AUAU130") collSys = AuAu130;
