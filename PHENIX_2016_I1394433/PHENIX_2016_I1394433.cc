@@ -73,11 +73,23 @@ namespace Rivet {
       {
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = HeAu200;
       }
-      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-      {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = pp200;
-      }    
+          
         }
+    
+    if (beamOpt == "AUAU200") collSys = AuAu200;
+    else if (beamOpt == "AUAU130") collSys = AuAu130;
+    else if (beamOpt == "AUAU62") collSys = AuAu62;
+    else if (beamOpt == "AUAU39") collSys = AuAu39;
+    else if (beamOpt == "AUAU27") collSys = AuAu27;
+    else if (beamOpt == "AUAU19") collSys = AuAu19;
+    else if (beamOpt == "AUAU14") collSys = AuAu14;
+    else if (beamOpt == "AUAU7") collSys = AuAu7;
+    else if (beamOpt == "CUCU200") collSys = CuCu200;
+    else if (beamOpt == "CUCU62") collSys = CuCu62;
+    else if (beamOpt == "UU193") collSys = UU193;
+    else if (beamOpt == "dAU200") collSys = dAu200;
+    else if (beamOpt == "HeAU200") collSys = HeAu200;
+
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
         
