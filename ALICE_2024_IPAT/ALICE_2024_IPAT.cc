@@ -46,14 +46,14 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["dphi_k"], "dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["dphi_ktopi"], "dphi_ktopi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-
-      book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
-      book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
-      book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
+      _histos["dphi_pi"] = bookHisto1D("dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      _histos["dphi_p"] = bookHisto1D("dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      _histos["dphi_k"] = bookHisto1D("dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      _histos["dphi_ktopi"] = bookHisto1D("dphi_ktopi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      _histos["deta_pi"] = bookHisto1D("deta_pi", 60 , - 1.5, 1.5);
+      _histos["deta_p"] = bookHisto1D("deta_p", 60 , - 1.5, 1.5);
+      _histos["deta_k"] = bookHisto1D("deta_k", 60 , - 1.5, 1.5);
+      
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       // book(_histos["AAAA"], 1, 1, 1);
       // book(_profilesrofiles["BBBB"], 2, 1, 1);
