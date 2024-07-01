@@ -46,8 +46,8 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      book(_histos["dphi"], "dphi", -3.14/2, 3*3.14/2, 48);
-      book(_histos["deta"], "deta", -1.5, 1.5, 60);
+      book(_histos["dphi"], "dphi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta"], "deta", 60 , - 1.5, 1.5);
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       // book(_histos["AAAA"], 1, 1, 1);
       // book(_profilesrofiles["BBBB"], 2, 1, 1);
