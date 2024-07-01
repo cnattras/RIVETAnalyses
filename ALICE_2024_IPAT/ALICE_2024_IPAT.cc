@@ -46,8 +46,12 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      book(_histos["dphi"], "dphi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta"], "deta", 60 , - 1.5, 1.5);
+      book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["dphi_k"], "dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
+      book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
+      book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
       // book(_histos["AAAA"], 1, 1, 1);
       // book(_profilesrofiles["BBBB"], 2, 1, 1);
@@ -87,8 +91,34 @@ namespace Rivet {
         {
             auto dphi = jet.phi()-particle.phi();
             auto deta = jet.eta()-particle.eta();
-            _histos["dphi"]->fill(dphi);
-            _histos["deta"]->fill(deta);
+            // make sure dphi is in [-pi/2,3pi/2] range
+            if (dphi > 3.14159) dphi -= 2*3.14159;
+            if (dphi < -3.14159) dphi += 2*3.14159;
+            if (particle.pid() == PID::PIPLUS)
+            {
+                _histos["dphi_pi"]->fill(dphi);
+                _histos["deta_pi"]->fill(deta);
+            }
+            if (particle.pid() == PID::PIMINUS)
+            {
+                _histos["dphi_pi"]->fill(dphi);
+                _histos["deta_pi"]->fill(deta);
+            }
+            if (particle.pid() == PID::PROTON)
+            {
+                _histos["dphi_p"]->fill(dphi);
+                _histos["deta_p"]->fill(deta);
+            }
+            if (particle.pid() == PID::KPLUS)
+            {
+                _histos["dphi_k"]->fill(dphi);
+                _histos["deta_k"]->fill(deta);
+            }
+            if (particle.pid() == PID::KMINUS)
+            {
+                _histos["dphi_k"]->fill(dphi);
+                _histos["deta_k"]->fill(deta);
+            }
         }
         
       }
