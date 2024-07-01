@@ -49,7 +49,7 @@ namespace Rivet {
       book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_k"], "dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["dphi_ktopi"], "dphi_ktopi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_scatters["dphi_ktopi"], "dphi_ktopi");
 
       book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
       book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
@@ -139,7 +139,7 @@ namespace Rivet {
       _histos["deta_p"]->scaleW(1/(nanobarn*numJets));
       _histos["dphi_k"]->scaleW(1/(nanobarn*numJets));
       _histos["deta_k"]->scaleW(1/(nanobarn*numJets));
-      divide(_histos["dphi_k"], _histos["dphi_pi"], _histos["dphi_ktopi"]);
+      divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
 
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
@@ -154,6 +154,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _histos;
     map<string, Profile1DPtr> _profiles;
     map<string, CounterPtr> _counters;
+    map<string, Scatter2DPtr> _scatters;
     /// @}
     fastjet::AreaDefinition *fjAreaDef;
 
