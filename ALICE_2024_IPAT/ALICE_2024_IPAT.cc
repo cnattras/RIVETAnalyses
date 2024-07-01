@@ -80,7 +80,7 @@ namespace Rivet {
 
       for(auto jet : jets)
       {
-        _counters["number_of_jets"].fill();
+        _counters["number_of_jets"]->fill();
         for(auto particle : ALICEparticles)
         {
             auto dphi = jet.phi()-particle.phi();
