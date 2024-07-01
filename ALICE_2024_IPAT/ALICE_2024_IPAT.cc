@@ -53,8 +53,8 @@ namespace Rivet {
       // book(_profilesrofiles["BBBB"], 2, 1, 1);
       // book(_counters["CCCC"], 3, 1, 1);
       // book(_counters["sow"], "sow"); // what in tarnation? This probably stands for sum of weights and I hate that a lot. Commented and renamed.
-      book(_counters['number_of_events'], 'number_of_events');
-      book(_counters['number_of_jets'], 'number_of_jets');
+      book(_counters["number_of_events"], "number_of_events");
+      book(_counters["number_of_jets"], "number_of_jets");
 
     }
 
@@ -97,8 +97,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      scale(_histos["dphi"], 1/_counters['number_of_jets']); // normalize by number of jets
-      scale(_histos["eta"], 1/_counters['number_of_jets']); // normalize by number of jets
+      scale(_histos["dphi"], 1/_counters["number_of_jets"]); // normalize by number of jets
+      scale(_histos["eta"], 1/_counters["number_of_jets"]); // normalize by number of jets
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
