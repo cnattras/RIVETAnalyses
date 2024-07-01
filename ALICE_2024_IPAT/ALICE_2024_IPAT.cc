@@ -131,8 +131,12 @@ namespace Rivet {
     void finalize() {
 
       float numJets = _counters["number_of_jets"]->sumW();
-      _histos["dphi"]->scaleW(1/(picobarn*numJets));
-      _histos["deta"]->scaleW(1/(nanobarn*numJets));
+      _histos["dphi_pi"]->scaleW(1/(picobarn*numJets));
+      _histos["deta_pi"]->scaleW(1/(nanobarn*numJets));
+      _histos["dphi_p"]->scaleW(1/(picobarn*numJets));
+      _histos["deta_p"]->scaleW(1/(nanobarn*numJets));
+      _histos["dphi_k"]->scaleW(1/(picobarn*numJets));
+      _histos["deta_k"]->scaleW(1/(nanobarn*numJets));
 
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
