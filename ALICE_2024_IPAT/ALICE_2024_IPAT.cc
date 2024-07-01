@@ -92,8 +92,8 @@ namespace Rivet {
             auto dphi = jet.phi()-particle.phi();
             auto deta = jet.eta()-particle.eta();
             // make sure dphi is in [-pi/2,3pi/2] range
-            if (dphi > 3.14159) dphi -= 2*3.14159;
-            if (dphi < -3.14159) dphi += 2*3.14159;
+            if (dphi > 3*3.14159/2) dphi -= 2*3.14159;
+            if (dphi < -3*3.14159/2) dphi += 2*3.14159;
             if (particle.pid() == PID::PIPLUS)
             {
                 _histos["dphi_pi"]->fill(dphi);
