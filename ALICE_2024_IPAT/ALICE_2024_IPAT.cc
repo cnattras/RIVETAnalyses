@@ -61,6 +61,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      std::cout << "Event number: " << event.genEvent()->event_number() << std::endl;
       _counters["number_of_events"]->fill();
 
       const FinalState fs = apply<FinalState>(event, "fs");
@@ -77,7 +78,8 @@ namespace Rivet {
       jetsfs.calc(ALICEparticlesall);
 
       Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV);
-
+      std::cout << "Number of jets: " << jets.size() << std::endl;
+      std::cout << "Number of particles: " << ALICEparticles.size() << std::endl;
       for(auto jet : jets)
       {
         _counters["number_of_jets"]->fill();
@@ -88,6 +90,7 @@ namespace Rivet {
             _histos["dphi"]->fill(dphi);
             _histos["deta"]->fill(deta);
         }
+        
       }
       if(jets.size() == 0) vetoEvent;
 
