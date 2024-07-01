@@ -325,109 +325,109 @@ END PLOT
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y01_AuAu_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/2$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y01_AuAu_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/2$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y01_IAA_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/2$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y01_IAA_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/2$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y01_pp_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/2$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y01_pp_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/2$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y02_AuAu_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/3$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y02_AuAu_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/3$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y02_IAA_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/3$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y02_IAA_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/3$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y02_pp_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/3$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y02_pp_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/3$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y03_AuAu_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/6$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y03_AuAu_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/6$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y03_IAA_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/6$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y03_IAA_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/6$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y03_pp_less
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/6$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/d11-x01-y03_pp_over
 Title=$I_{AA}$ ratios for direct photon $p^{\gamma}_T$ 0.5-7 GeV on $|\Delta\phi - \pi|$ $<$ $\pi/6$
 XLabel=$p^{\gamma}_T$ [GeV/$c$]
-YLabel=${I_{AA},$\xi$$>$1.2}$/${I_{AA},$\xi$$<$1.2}$
+YLabel=${I_{AA}$,$\xi$$>$1.2}$/${I_{AA},$\xi$$<$$1.2}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2020_I1798493/dphi_AUAU200_GammaDirhPertriggerVsXiAUAU0.0to0.4
