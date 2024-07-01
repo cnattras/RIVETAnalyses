@@ -41,7 +41,7 @@ namespace Rivet {
       fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
       fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
       fjAreaDef = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef);
       declare(jetfs, "jetsfs");
 
       // Book histograms
@@ -82,10 +82,12 @@ namespace Rivet {
       {
         _counters['number_of_jets'].fill();
         for(auto particle : ALICEparticles)
+        {
             auto dphi = jet.phi()-particle.phi();
             auto deta = jet.eta()-particle.eta();
             _histos["dphi"]->fill(dphi);
             _histos["deta"]->fill(deta);
+        }
       }
       if(jets.size() == 0) vetoEvent;
 
@@ -95,8 +97,8 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      scale(_histos["dphi"], 1/_c['number_of_jets']); // normalize by number of jets
-      scale(_histos["eta"], 1/_c['number_of_jets']); // normalize by number of jets
+      scale(_histos["dphi"], 1/_counters['number_of_jets']); // normalize by number of jets
+      scale(_histos["eta"], 1/_counters['number_of_jets']); // normalize by number of jets
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
@@ -109,7 +111,7 @@ namespace Rivet {
     /// @{
     map<string, Histo1DPtr> _histos;
     map<string, Profile1DPtr> _profiles;
-    map<string, CounterPtr> _countersounters;
+    map<string, CounterPtr> _counters;
     /// @}
     fastjet::AreaDefinition *fjAreaDef;
 
