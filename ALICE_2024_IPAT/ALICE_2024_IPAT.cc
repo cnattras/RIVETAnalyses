@@ -147,11 +147,11 @@ namespace Rivet {
 
         if (binContent2 != 0.0)
         {
-          _histos["dphi_ktopi"]->bin(i).setHeight(binContent1 / binContent2);
+          _histos["dphi_ktopi"]->bin(i).setY(binContent1 / binContent2);
         }
         else
         {
-          _histos["dhpi_ktopi"]->bin(i).setHeight(0.0); // Handle division by zero
+          _histos["dhpi_ktopi"]->bin(i).setY(0.0); // Handle division by zero
         }
       }
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
