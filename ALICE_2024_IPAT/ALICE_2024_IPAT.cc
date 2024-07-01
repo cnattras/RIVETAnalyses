@@ -49,6 +49,8 @@ namespace Rivet {
       book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_k"], "dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["dphi_ktopi"], "dphi_ktopi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+
       book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
       book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
       book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
@@ -131,12 +133,13 @@ namespace Rivet {
     void finalize() {
 
       float numJets = _counters["number_of_jets"]->sumW();
-      _histos["dphi_pi"]->scaleW(1/(picobarn*numJets));
+      _histos["dphi_pi"]->scaleW(1/(nanobarn*numJets));
       _histos["deta_pi"]->scaleW(1/(nanobarn*numJets));
-      _histos["dphi_p"]->scaleW(1/(picobarn*numJets));
+      _histos["dphi_p"]->scaleW(1/(nanobarn*numJets));
       _histos["deta_p"]->scaleW(1/(nanobarn*numJets));
-      _histos["dphi_k"]->scaleW(1/(picobarn*numJets));
+      _histos["dphi_k"]->scaleW(1/(nanobarn*numJets));
       _histos["deta_k"]->scaleW(1/(nanobarn*numJets));
+      divide(_histos["dphi_k"], _histos["dphi_pi"], _histos["dphi_ktopi"]);
 
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
