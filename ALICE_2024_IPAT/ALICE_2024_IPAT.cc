@@ -46,21 +46,22 @@ namespace Rivet {
 
       // Book histograms
       // specify custom binning
-      book(_h["XXXX"], "myh1", 20, 0.0, 100.0);
-      book(_h["YYYY"], "myh2", logspace(20, 1e-2, 1e3));
-      book(_h["ZZZZ"], "myh3", {0.0, 1.0, 2.0, 4.0, 8.0, 16.0});
+      book(_histos["dphi"], "dphi", -3.14/2, 3*3.14/2, 48);
+      book(_histos["deta"], "deta", -1.5, 1.5, 60);
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      // book(_h["AAAA"], 1, 1, 1);
-      // book(_p["BBBB"], 2, 1, 1);
-      // book(_c["CCCC"], 3, 1, 1);
-      book(_c["sow"], "sow");
+      // book(_histos["AAAA"], 1, 1, 1);
+      // book(_profilesrofiles["BBBB"], 2, 1, 1);
+      // book(_counters["CCCC"], 3, 1, 1);
+      // book(_counters["sow"], "sow"); // what in tarnation? This probably stands for sum of weights and I hate that a lot. Commented and renamed.
+      book(_counters['number_of_events'], 'number_of_events');
+      book(_counters['number_of_jets'], 'number_of_jets');
 
     }
 
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      _c["sow"]->fill();
+      _counters["number_of_events"]->fill();
 
       const FinalState fs = apply<FinalState>(event, "fs");
       FastJets jetsfs = apply<FastJets>(event, "jetsfs");
@@ -79,9 +80,12 @@ namespace Rivet {
 
       for(auto jet : jets)
       {
-            _h["XXXX"]->fill(jet.pT());
-            _h["YYYY"]->fill(10.0*jet.pT());
-            _h["ZZZZ"]->fill(jet.pT());
+        _counters['number_of_jets'].fill();
+        for(auto particle : ALICEparticles)
+            auto dphi = jet.phi()-particle.phi();
+            auto deta = jet.eta()-particle.eta();
+            _histos["dphi"]->fill(dphi);
+            _histos["deta"]->fill(deta);
       }
       if(jets.size() == 0) vetoEvent;
 
@@ -91,9 +95,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      // normalize(_h["XXXX"]); // normalize to unity
-      // normalize(_h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
-      // scale(_h["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
+      scale(_histos["dphi"], 1/_c['number_of_jets']); // normalize by number of jets
+      scale(_histos["eta"], 1/_c['number_of_jets']); // normalize by number of jets
+      // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
+      // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
     }
 
@@ -102,9 +107,9 @@ namespace Rivet {
 
     /// @name Histograms
     /// @{
-    map<string, Histo1DPtr> _h;
-    map<string, Profile1DPtr> _p;
-    map<string, CounterPtr> _c;
+    map<string, Histo1DPtr> _histos;
+    map<string, Profile1DPtr> _profiles;
+    map<string, CounterPtr> _countersounters;
     /// @}
     fastjet::AreaDefinition *fjAreaDef;
 
