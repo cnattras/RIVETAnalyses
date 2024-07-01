@@ -49,7 +49,7 @@ namespace Rivet {
       book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_k"], "dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_scatters["dphi_ktopi"], "dphi_ktopi");
+      book(_scatters["dphi_ktopi"], "dphi_ktopi", 48 , - 3.14 / 2, 3 * 3.14 / 2, 48 , - 3.14 / 2, 3 * 3.14 / 2);
 
       book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
       book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
