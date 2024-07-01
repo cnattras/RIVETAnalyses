@@ -80,7 +80,7 @@ namespace Rivet {
 
       for(auto jet : jets)
       {
-        _counters['number_of_jets'].fill();
+        _counters["number_of_jets"].fill();
         for(auto particle : ALICEparticles)
         {
             auto dphi = jet.phi()-particle.phi();
@@ -97,8 +97,9 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      scale(_histos["dphi"], 1/_counters["number_of_jets"]); // normalize by number of jets
-      scale(_histos["eta"], 1/_counters["number_of_jets"]); // normalize by number of jets
+      float numJets = _counters["number_of_jets"]->sumW();
+      scale(_histos["dphi"], 1/numJets); // normalize by number of jets
+      scale(_histos["eta"], 1/numJets); // normalize by number of jets
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
