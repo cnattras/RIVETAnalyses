@@ -140,6 +140,7 @@ namespace Rivet {
       _histos["dphi_k"]->scaleW(1/(nanobarn*numJets));
       _histos["deta_k"]->scaleW(1/(nanobarn*numJets));
       divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
+      // a change
       
       // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
       // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
