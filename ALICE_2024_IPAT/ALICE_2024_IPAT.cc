@@ -101,7 +101,7 @@ namespace Rivet {
       //jetsfs.calc(ALICEparticles);
       jetsfs.calc(ALICEparticlesall);
 
-      Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 20.*GeV && Cuts::pT <= 40.*GeV);
+      Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV && Cuts::pT <= 40.*GeV);
       std::cout << "Number of jets: " << jets.size() << std::endl;
       std::cout << "Number of particles: " << ALICEparticles.size() << std::endl;
       for(auto jet : jets)
@@ -163,12 +163,14 @@ namespace Rivet {
       _histos["deta_p"]->scaleW(1/(numJets));
       _histos["dphi_k"]->scaleW(1/(numJets));
       _histos["deta_k"]->scaleW(1/(numJets));
+      // determine the minimum value of the dphi histograms and subtract that value from all bins
+
+      // Integrate the dphi histograms from -pi/2 to pi/2 and from pi/2 to 3pi/2, for the near-side and away-side respectively for each momentum bin and particle type and fill yield histograms
+
+      // divide the yield histograms for K/pi and p/pi on the near-side and away-side
+
 
       divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
-      // a change
-      
-      // normalize(_histos["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
-      // scale(_histos["ZZZZ"], crossSection()/picobarn/sumW()); // norm to generated cross-section in pb (after cuts)
 
     }
 
