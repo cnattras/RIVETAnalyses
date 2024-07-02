@@ -152,12 +152,12 @@ namespace Rivet {
     void finalize() {
 
       float numJets = _counters["number_of_jets"]->effNumEntries();
-      _histos["dphi_pi"]->scaleW(1/(nanobarn*numJets));
-      _histos["deta_pi"]->scaleW(1/(nanobarn*numJets));
-      _histos["dphi_p"]->scaleW(1/(nanobarn*numJets));
-      _histos["deta_p"]->scaleW(1/(nanobarn*numJets));
-      _histos["dphi_k"]->scaleW(1/(nanobarn*numJets));
-      _histos["deta_k"]->scaleW(1/(nanobarn*numJets));
+      _histos["dphi_pi"]->scaleW(1/(numJets));
+      _histos["deta_pi"]->scaleW(1/(numJets));
+      _histos["dphi_p"]->scaleW(1/(numJets));
+      _histos["deta_p"]->scaleW(1/(numJets));
+      _histos["dphi_k"]->scaleW(1/(numJets));
+      _histos["deta_k"]->scaleW(1/(numJets));
       divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
       // a change
       
