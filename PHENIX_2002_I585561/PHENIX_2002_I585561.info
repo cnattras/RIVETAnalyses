@@ -10,7 +10,7 @@ Authors:
  - Your Name <your@email.address>
 References:
  - DOI:10.1103/PhysRevLett.89.092302
- -arXiv:nucl-ex/0204007
+ - arXiv:nucl-ex/0204007
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
@@ -24,7 +24,7 @@ ValidationInfo:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
 BibKey: 
-BibTeX: @article{PHENIX:2002svd,
+BibTeX: '@article{PHENIX:2002svd,
     author = "Adcox, K. and others",
     collaboration = "PHENIX",
     title = "{Measurement of the Lambda and anti-Lambda particles in Au+Au collisions at s(NN)**(1/2) = 130-GeV}",
@@ -35,7 +35,7 @@ BibTeX: @article{PHENIX:2002svd,
     volume = "89",
     pages = "092302",
     year = "2002"
-}
+}'
 ToDo:
  - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
 
