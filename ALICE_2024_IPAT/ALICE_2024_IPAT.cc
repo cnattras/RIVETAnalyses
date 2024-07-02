@@ -75,8 +75,8 @@ namespace Rivet {
       book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
 
 
-      book(_histos["number_of_events"], "number_of_events", 1, 0, 1);
-      book(_histos["number_of_jets"], "number_of_jets", 1, 0, 1);
+      book(_histos["number_of_events"], "number_of_events", 1, 0.0, 1.0);
+      book(_histos["number_of_jets"], "number_of_jets", 1, 0.0, 1.0);
 
     }
 
