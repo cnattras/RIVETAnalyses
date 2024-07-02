@@ -17,8 +17,8 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent = REF,GEN,IMP,USR
- - beam = AuAu130
-Description: We present results on the measurement of $\Lambda$ and $\bar{\Lambda} production in Au+Au collisions at $\sqrt{s_{NN}}$=130 GeV with the PHENIX detector at RHIC. The transverse momentum spectra were measured for minimum bias and for the $5\%$ most central events. The $\bar{\Lambda}/\Lambda$ ratios are constant as a function of $p_T$ and the number of participants. The measured net $\Lambda$ density is significantly larger than predicted by models based on hadronic strings (e.g. HIJING) but in approximate agreement with models which include the gluon junction mechanism.
+ - beam = AUAU130
+Description: We present results on the measurement of $\Lambda$ and $\bar{\Lambda}$ production in Au+Au collisions at $\sqrt{s_{NN}}$=130 GeV with the PHENIX detector at RHIC. The transverse momentum spectra were measured for minimum bias and for the $5\%$ most central events. The $\bar{\Lambda}/\Lambda$ ratios are constant as a function of $p_T$ and the number of participants. The measured net $\Lambda$ density is significantly larger than predicted by models based on hadronic strings (e.g. HIJING) but in approximate agreement with models which include the gluon junction mechanism.
 ValidationInfo:
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
