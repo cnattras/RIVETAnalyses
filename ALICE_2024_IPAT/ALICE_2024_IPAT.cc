@@ -45,7 +45,7 @@ namespace Rivet {
       fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
       fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
       fjAreaDef = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jetfs(aprimall, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef);
+      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef);
       declare(jetfs, "jetsfs");
 
       // Book histograms
@@ -90,10 +90,10 @@ namespace Rivet {
       const FinalState fs = apply<FinalState>(event, "fs");
       //Get jets
       FastJets jetsfs = apply<FastJets>(event, "jetsfs");
-      //For spectra
+      //Get particles in ALICE EMCAL acceptance for jets
       const ALICE::PrimaryParticles aprimall = apply<ALICE::PrimaryParticles>(event, "aprimall");
       const Particles ALICEparticlesall = aprimall.particles();
-      //For fragmentation functions
+      //Get particles in ALICE TPC acceptance for associated hadrons
       const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
       const Particles ALICEparticles = aprim.particles();
 
@@ -101,11 +101,12 @@ namespace Rivet {
       //jetsfs.calc(ALICEparticles);
       jetsfs.calc(ALICEparticlesall);
 
-      Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV);
+      Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 20.*GeV && Cuts::pT <= 40.*GeV);
       std::cout << "Number of jets: " << jets.size() << std::endl;
       std::cout << "Number of particles: " << ALICEparticles.size() << std::endl;
       for(auto jet : jets)
       {
+        // why is this not counting the number of events?
         _counters["number_of_jets"]->fill();
         for(auto particle : ALICEparticles)
         {
@@ -150,7 +151,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      float numJets = _counters["number_of_jets"]->sumW();
+      float numJets = _counters["number_of_jets"]->effNumEntries();
       _histos["dphi_pi"]->scaleW(1/(nanobarn*numJets));
       _histos["deta_pi"]->scaleW(1/(nanobarn*numJets));
       _histos["dphi_p"]->scaleW(1/(nanobarn*numJets));
