@@ -155,7 +155,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _histos;
     map<string, Profile1DPtr> _profiles;
     map<string, CounterPtr> _counters;
-    map<string, Scatter1DPtr> _scatters;
+    map<string, Scatter2DPtr> _scatters;
     /// @}
     fastjet::AreaDefinition *fjAreaDef;
 
