@@ -27,24 +27,43 @@ namespace Rivet {
 
       const FinalState fs(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(fs, "fs");
+      // associated particles
       const ALICE::PrimaryParticles aprim(Cuts::abseta < 0.9 && Cuts::pT > 0.15*GeV && Cuts::abscharge > 0);
       declare(aprim, "aprim");
       //The second primary particles is so that the jet specctra goes over all particles instead of cutting out pT < 0.15GeV
       //const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.9 && Cuts::abscharge > 0 && (Cuts::abspid == Rivet::PID::PIPLUS || Cuts::abspid == Rivet::PID::KPLUS || Cuts::abspid == Rivet::PID::PROTON || Cuts::abspid == Rivet::PID::ELECTRON || Cuts::abspid == Rivet::PID::MUON));
-      //This is the jet constituents
+
+
       //Pat, change this so that it accepts charged primary particles OR photons
       //You also want to 
+      //This is the jet constituents
       const ALICE::PrimaryParticles aprimall(Cuts::abseta < 0.7 && Cuts::abscharge > 0);
       declare(aprimall, "aprimall");
+
 
       // jets à la ALICE - Jet area will be available using the pseudojet
       fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
       fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
       fjAreaDef = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef);
+      FastJets jetfs(aprimall, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef);
       declare(jetfs, "jetsfs");
 
       // Book histograms
+
+      //particle types: (pi+ + pi-), (p), (K+ + K-)
+      //particle momentum: (1, 1.5), (1.5, 2), (2,3), (3,4), (4,5), (5,6), (6,10)
+      // jet momentum: 20-40 GeV
+
+      // Desired plots
+      // Deta and Dphi for each particle type and particle momentum
+      // Deta: 60 bins from -1.5 to 1.5
+      // Dphi: 48 bins from -pi/2 to 3pi/2
+
+      // Integrated yield for each particle type as a function of momentum
+      // Yield: [(1, 1.5), (1.5, 2), (2,3), (3,4), (4,5), (5,6), (6,10)]
+      // Ratio of K to pi and p to pi as a function of momentum
+      // Ratio: [(1, 1.5), (1.5, 2), (2,3), (3,4), (4,5), (5,6), (6,10)]
+
       // specify custom binning
       book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
@@ -54,11 +73,8 @@ namespace Rivet {
       book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
       book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
       book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
-      // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
-      // book(_histos["AAAA"], 1, 1, 1);
-      // book(_profilesrofiles["BBBB"], 2, 1, 1);
-      // book(_counters["CCCC"], 3, 1, 1);
-      // book(_counters["sow"], "sow"); // what in tarnation? This probably stands for sum of weights and I hate that a lot. Commented and renamed.
+
+
       book(_counters["number_of_events"], "number_of_events");
       book(_counters["number_of_jets"], "number_of_jets");
 
@@ -70,7 +86,9 @@ namespace Rivet {
       std::cout << "Event number: " << event.genEvent()->event_number() << std::endl;
       _counters["number_of_events"]->fill();
 
+      //Get final state particles, e.g. all particles "detected"
       const FinalState fs = apply<FinalState>(event, "fs");
+      //Get jets
       FastJets jetsfs = apply<FastJets>(event, "jetsfs");
       //For spectra
       const ALICE::PrimaryParticles aprimall = apply<ALICE::PrimaryParticles>(event, "aprimall");
