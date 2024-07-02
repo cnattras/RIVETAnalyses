@@ -152,6 +152,7 @@ namespace Rivet {
     void finalize() {
 
       float numJets = _counters["number_of_jets"]->effNumEntries();
+      std::cout << "Number of jets: " << numJets << std::endl;
       _histos["dphi_pi"]->scaleW(1/(numJets));
       _histos["deta_pi"]->scaleW(1/(numJets));
       _histos["dphi_p"]->scaleW(1/(numJets));
