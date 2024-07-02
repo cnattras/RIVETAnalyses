@@ -75,8 +75,8 @@ namespace Rivet {
       book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
 
 
-      book(_counters["number_of_events"], "number_of_events");
-      book(_counters["number_of_jets"], "number_of_jets");
+      book(_histos["number_of_events"], "number_of_events", 1, 0, 1);
+      book(_histos["number_of_jets"], "number_of_jets", 1, 0, 1);
 
     }
 
@@ -84,7 +84,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       std::cout << "Event number: " << event.genEvent()->event_number() << std::endl;
-      _counters["number_of_events"]->fill();
+      _histos["number_of_events"]->fill(0.5);
 
       //Get final state particles, e.g. all particles "detected"
       const FinalState fs = apply<FinalState>(event, "fs");
@@ -107,7 +107,7 @@ namespace Rivet {
       for(auto jet : jets)
       {
         // why is this not counting the number of events?
-        _counters["number_of_jets"]->fill();
+        _histos["number_of_jets"]->fill(0.5);
         for(auto particle : ALICEparticles)
         {
             auto dphi = jet.phi()-particle.phi();
@@ -115,6 +115,8 @@ namespace Rivet {
             // make sure dphi is in [-pi/2,3pi/2] range
             if (dphi > 3*3.14159/2) dphi -= 2*3.14159;
             if (dphi < -3*3.14159/2) dphi += 2*3.14159;
+            //put logic to fill the appropriate associated hadron momentum
+            // according to the definition above
             if (particle.pid() == PID::PIPLUS)
             {
                 _histos["dphi_pi"]->fill(dphi);
@@ -151,14 +153,17 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-      float numJets = _counters["number_of_jets"]->effNumEntries();
+      float numJets = _histos["number_of_jets"]->bin(0).numEntries();
+      // why is number of jets = 0?
       std::cout << "Number of jets: " << numJets << std::endl;
+      // extend for all histograms
       _histos["dphi_pi"]->scaleW(1/(numJets));
       _histos["deta_pi"]->scaleW(1/(numJets));
       _histos["dphi_p"]->scaleW(1/(numJets));
       _histos["deta_p"]->scaleW(1/(numJets));
       _histos["dphi_k"]->scaleW(1/(numJets));
       _histos["deta_k"]->scaleW(1/(numJets));
+
       divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
       // a change
       
