@@ -84,7 +84,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       std::cout << "Event number: " << event.genEvent()->event_number() << std::endl;
-      _histos["number_of_events"]->fill(0.5);
+      _histos["number_of_events"]->fill(0.5, 1.0);
 
       //Get final state particles, e.g. all particles "detected"
       const FinalState fs = apply<FinalState>(event, "fs");
@@ -107,7 +107,7 @@ namespace Rivet {
       for(auto jet : jets)
       {
         // why is this not counting the number of events?
-        _histos["number_of_jets"]->fill(0.5);
+        _histos["number_of_jets"]->fill(0.5, 1.0);
         for(auto particle : ALICEparticles)
         {
             auto dphi = jet.phi()-particle.phi();
