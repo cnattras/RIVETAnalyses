@@ -39,14 +39,14 @@ namespace Rivet {
 
       declareCentrality(ALICE::V0MMultiplicity(), "ALICE_2015_PBPBCentrality", "V0M", "V0M");
       
-      book(_h["et"], 1, 1, 2);
-      book(_h["etovernpart"], 1, 1, 3);
+      book(_h["ET"], 1, 1, 2);
+      book(_h["EToverNpart"], 1, 1, 3);
       
-      string refnameEtChpart = mkAxisCode(3,1,1);
-      const Scatter2D& refdataEtChpart = refData(refnameEtChpart);
-      book(_h["mean_et_ratio"],refnameEtChpart + "_et", refdataEtChpart);
-      book(_h["mean_chpart_ratio"],refnameEtChpart + "_chpart", refdataEtChpart);
-      book(MeanEtChpart,refnameEtChpart);
+      string refnameETChpart = mkAxisCode(3,1,1);
+      const Scatter2D& refdataETChpart = refData(refnameETChpart);
+      book(_h["mean_ET_ratio"],refnameETChpart + "_ET", refdataETChpart);
+      book(_h["mean_Chpart_ratio"],refnameETChpart + "_Chpart", refdataETChpart);
+      book(MeanETChpart,refnameETChpart);
 
       // The centrality bins upper bin edges.
       centralityBins = { 2.5,5.0,7.5,10., 12.5,15.0,17.5, 20.,22.5,25.0,27.5,30., 32.5,35.0,37.5,40., 45.0,50., 55.0,60., 65.0,70., 75.0,80.};
@@ -84,28 +84,28 @@ namespace Rivet {
       
       double mynpart = npart[centbin];
             
-      double et = 0.;
+      double ET = 0.;
       for(const Particle& p : fs.particles())
       {
-          et += p.Et()/GeV;
+          ET += p.Et()/GeV;
       }
       double mult = cfs.size();
       
-      _h["et"]->fill(centr,et);
-      _h["etovernpart"]->fill(centr,et/(mynpart/2.));
-      _h["mean_et_ratio"]->fill(centr,et);
-      _h["mean_chpart_ratio"]->fill(centr,mult);
+      _h["ET"]->fill(centr,ET);
+      _h["EToverNpart"]->fill(centr,ET/(mynpart/2.));
+      _h["mean_ET_ratio"]->fill(centr,ET);
+      _h["mean_Chpart_ratio"]->fill(centr,mult);
     }
 
 
     /// Normalise histograms etc., after the run
     void finalize() {
 
-        _h["et"]->scaleY(1./1.2);
-        _h["etovernpart"]->scaleY(1./1.2);
-        _h["mean_et_ratio"]->scaleY(1./1.2);
-        _h["mean_chpart_ratio"]->scaleY(1./1.2);
-        divide(_h["mean_et_ratio"],_h["mean_chpart_ratio"],MeanEtChpart);
+        _h["ET"]->scaleY(1./1.2);
+        _h["EToverNpart"]->scaleY(1./1.2);
+        _h["mean_ET_ratio"]->scaleY(1./1.2);
+        _h["mean_Chpart_ratio"]->scaleY(1./1.2);
+        divide(_h["mean_ET_ratio"],_h["mean_Chpart_ratio"],MeanETChpart);
     }
 
     //@}
@@ -115,7 +115,7 @@ namespace Rivet {
     /// @name Histograms
     //@{
     map<string, Profile1DPtr> _h;
-    Scatter2DPtr MeanEtChpart;
+    Scatter2DPtr MeanETChpart;
     //@}
 
 

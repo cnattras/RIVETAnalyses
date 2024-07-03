@@ -1,0 +1,83 @@
+<html>
+<head>
+<title>Plots from Rivet analyses &ndash; ALICE_2016_I1427723</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body>
+<section id="ana_ALICE_2016_I1427723">
+<h3>ALICE_2016_I1427723</h3>
+<p><a href="../index.html">Back to index</a></p>
+<p>
+  We report the transverse energy (ET) measured with ALICE at midrapidity in Pb-Pb collisions at sNN=2.76 TeV as a function of centrality. The transverse energy was measured using identified single-particle tracks. The measurement was cross checked using the electromagnetic calorimeters and the transverse momentum distributions of identified particles previously reported by ALICE. The results are compared to theoretical models as well as to results from other experiments. The mean ET per unit pseudorapidity (η), 〈dET/dη〉, in 0%–5% central collisions is 1737±6(stat.)±97(sys.) GeV. We find a similar centrality dependence of the shape of 〈dET/dη〉 as a function of the number of participating nucleons to that seen at lower energies. The growth in 〈dET/dη〉 at the LHC energies exceeds extrapolations of low-energy data. We observe a nearly linear scaling of 〈dET/dη〉 with the number of quark participants. With the canonical assumption of a 1 fm/c formation time, we estimate that the energy density in 0%–5% central Pb-Pb collisions at sNN=2.76 TeV is 12.3±1.0GeV/fm3 and that the energy density at the most central 80fm2 of the collision is at least 21.5±1.7GeV/fm3. This is roughly 2.3 times that observed in 0%–5% central Au-Au collisions at sNN=200 GeV.
+</p>
+<form onsubmit="var patt = document.getElementById('patt_ALICE_2016_I1427723').value; filterPlots('ALICE_2016_I1427723', patt); return false;">
+<span>Filter plots:&nbsp;</span><input id="patt_ALICE_2016_I1427723" type="search">
+<input type="submit" value="Filter">
+</form>
+
+  <div class="plot" id="plot_d01-x01-y02" style="float:left; font-size:smaller; font-weight:bold;">
+    <a href="#ALICE_2016_I1427723-d01-x01-y02">&#9875;</a><a href="d01-x01-y02.dat">&#8984</a> d01-x01-y02:<br/>
+    <a name="ALICE_2016_I1427723-d01-x01-y02"><a href="d01-x01-y02.pdf">
+      <img src="d01-x01-y02.png">
+    </a></a>
+  </div>
+  <div class="plot" id="plot_d01-x01-y03" style="float:left; font-size:smaller; font-weight:bold;">
+    <a href="#ALICE_2016_I1427723-d01-x01-y03">&#9875;</a><a href="d01-x01-y03.dat">&#8984</a> d01-x01-y03:<br/>
+    <a name="ALICE_2016_I1427723-d01-x01-y03"><a href="d01-x01-y03.pdf">
+      <img src="d01-x01-y03.png">
+    </a></a>
+  </div>
+  <div class="plot" id="plot_d03-x01-y01" style="float:left; font-size:smaller; font-weight:bold;">
+    <a href="#ALICE_2016_I1427723-d03-x01-y01">&#9875;</a><a href="d03-x01-y01.dat">&#8984</a> d03-x01-y01:<br/>
+    <a name="ALICE_2016_I1427723-d03-x01-y01"><a href="d03-x01-y01.pdf">
+      <img src="d03-x01-y01.png">
+    </a></a>
+  </div>
+  <div class="plot" id="plot_d03-x01-y01_chpart" style="float:left; font-size:smaller; font-weight:bold;">
+    <a href="#ALICE_2016_I1427723-d03-x01-y01_chpart">&#9875;</a><a href="d03-x01-y01_chpart.dat">&#8984</a> d03-x01-y01_chpart:<br/>
+    <a name="ALICE_2016_I1427723-d03-x01-y01_chpart"><a href="d03-x01-y01_chpart.pdf">
+      <img src="d03-x01-y01_chpart.png">
+    </a></a>
+  </div>
+  <div class="plot" id="plot_d03-x01-y01_et" style="float:left; font-size:smaller; font-weight:bold;">
+    <a href="#ALICE_2016_I1427723-d03-x01-y01_et">&#9875;</a><a href="d03-x01-y01_et.dat">&#8984</a> d03-x01-y01_et:<br/>
+    <a name="ALICE_2016_I1427723-d03-x01-y01_et"><a href="d03-x01-y01_et.pdf">
+      <img src="d03-x01-y01_et.png">
+    </a></a>
+  </div>
+</section>
+
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Wednesday, 03. July 2024 12:36PM</p>
+</footer>
+
+</body>
+</html>

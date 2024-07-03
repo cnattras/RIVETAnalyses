@@ -1,0 +1,27 @@
+# BEGIN PLOT
+Legend=1
+LogY=0 
+Title=$\langle $d$E_{\mathrm T}/$d$\eta \rangle/\langle $d$N_{\mathrm{ch}}/$d$\eta \rangle$ versus $N_{part}$.  
+XLabel=centrality
+YLabel=$\langle$d$E_{\mathrm T}/$d$\eta\rangle/\langle $d$N_{\mathrm{ch}}/$d$\eta \rangle$
+DrawOnly=//lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01_et
+LegendOnly=//lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01_et
+# END PLOT
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01_et
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01_et
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	5.000000e+00	nan	nan	nan
+5.000000e+00	1.000000e+01	nan	nan	nan
+1.000000e+01	2.000000e+01	nan	nan	nan
+2.000000e+01	3.000000e+01	nan	nan	nan
+3.000000e+01	4.000000e+01	nan	nan	nan
+4.000000e+01	5.000000e+01	nan	nan	nan
+5.000000e+01	6.000000e+01	4.208023e+02	1.150090e+03	1.150090e+03
+6.000000e+01	7.000000e+01	nan	nan	nan
+7.000000e+01	8.000000e+01	1.542426e+02	nan	nan
+# END HISTO1D
+

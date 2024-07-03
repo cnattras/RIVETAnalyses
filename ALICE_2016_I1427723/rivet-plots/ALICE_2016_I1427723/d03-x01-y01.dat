@@ -1,0 +1,50 @@
+# BEGIN PLOT
+Legend=1
+LogY=0 
+Title=$\langle $d$E_{\mathrm T}/$d$\eta \rangle/\langle $d$N_{\mathrm{ch}}/$d$\eta \rangle$ versus $N_{part}$.  
+XLabel=centrality
+YLabel=$\langle$d$E_{\mathrm T}/$d$\eta\rangle/\langle $d$N_{\mathrm{ch}}/$d$\eta \rangle$
+DrawOnly=/ALICE_2016_I1427723/d03-x01-y01 //lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01
+LegendOnly=/ALICE_2016_I1427723/d03-x01-y01 //lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01
+RatioPlot=1
+RatioPlotReference=/ALICE_2016_I1427723/d03-x01-y01
+# END PLOT
+
+# BEGIN HISTO1D /ALICE_2016_I1427723/d03-x01-y01
+ConnectBins=0
+ErrorBars=1
+IsRef=1
+Path=/ALICE_2016_I1427723/d03-x01-y01
+PolyMarker=*
+Title=Data
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	5.000000e+00	1.085000e+00	7.310951e-02	7.310951e-02
+5.000000e+00	1.000000e+01	1.117000e+00	7.510659e-02	7.510659e-02
+1.000000e+01	2.000000e+01	1.134000e+00	7.705842e-02	7.705842e-02
+2.000000e+01	3.000000e+01	1.130000e+00	7.505998e-02	7.505998e-02
+3.000000e+01	4.000000e+01	1.104000e+00	7.306162e-02	7.306162e-02
+4.000000e+01	5.000000e+01	1.100000e+00	7.206247e-02	7.206247e-02
+5.000000e+01	6.000000e+01	1.062000e+00	7.306162e-02	7.306162e-02
+6.000000e+01	7.000000e+01	1.056000e+00	8.109871e-02	8.109871e-02
+7.000000e+01	8.000000e+01	1.040000e+00	8.315047e-02	8.315047e-02
+# END HISTO1D
+
+
+# BEGIN HISTO1D //lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01
+ErrorBreakdown={0: {"": {up: .nan, dn: .nan}}, 1: {"": {up: .nan, dn: .nan}}, 2: {"": {up: .nan, dn: .nan}}, 3: {"": {up: .nan, dn: .nan}}, 4: {"": {up: .nan, dn: .nan}}, 5: {"": {up: .nan, dn: .nan}}, 6: {"": {up: .nan, dn: .nan}}, 7: {"": {up: .nan, dn: .nan}}, 8: {"": {up: .nan, dn: .nan}}}
+LineColor=red
+LineStyle=solid
+Path=//lustre/isaac/proj/UTK0019/Ifti/RIVETAnalyses/ALICE_2016_I1427723/Rivet.yoda/ALICE_2016_I1427723:beam=AUAU:cent=GEN/d03-x01-y01
+Title=Rivet
+# xlow	 xhigh	 val	 errminus	 errplus
+0.000000e+00	5.000000e+00	nan	nan	nan
+5.000000e+00	1.000000e+01	nan	nan	nan
+1.000000e+01	2.000000e+01	nan	nan	nan
+2.000000e+01	3.000000e+01	nan	nan	nan
+3.000000e+01	4.000000e+01	nan	nan	nan
+4.000000e+01	5.000000e+01	nan	nan	nan
+5.000000e+01	6.000000e+01	8.197449e-01	nan	nan
+6.000000e+01	7.000000e+01	nan	nan	nan
+7.000000e+01	8.000000e+01	8.689722e-01	nan	nan
+# END HISTO1D
+

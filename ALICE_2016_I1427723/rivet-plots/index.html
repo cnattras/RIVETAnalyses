@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Plots from Rivet analyses</title>
+<style>
+      html { font-family: sans-serif; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+    </style>
+            <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          tex2jax: {inlineMath: [["$","$"]]}
+        });
+        </script>
+        <script type="text/javascript" async
+          src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+        </script>
+        
+
+        <script type="text/javascript">
+            function filterPlots(ana, patt) {
+                var regex = new RegExp(patt);
+                var sec = document.getElementById('ana_'+ana);
+                var plots = sec.getElementsByClassName('plot');
+                var i; for (i = 0; i < plots.length; ++i) {
+                    // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+                    // plots[i].style.visibility = viz;
+                    var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+                    plots[i].style.display = dis;
+                }
+                return false;
+           }
+        </script>
+        </head>
+<body><h2>Plots from Rivet analyses</h2>
+
+
+<h3><a href="ALICE_2016_I1427723/index.html" style="text-decoration:none;">Measurement of transverse energy at midrapidity in Pb-Pb collisions at $\sqrt{s_{\rm NN}} = 2.76$ TeV (ALICE_2016_I1427723)</a></h3>
+<p><a href="https://inspirehep.net/literature/1427723">Inspire</a> &#124; <a href="http://hepdata.net/record/ins1427723">HepData</a> &#124; <a href="https://arxiv.org/abs/1603.05477">arXiv:1603.05477</a> &#124; 10.1103/PhysRevC.94.014910</p>
+<p style="font-size:smaller;">We report the transverse energy (ET) measured with ALICE at midrapidity in Pb-Pb collisions at sNN=2.76 TeV as a function of centrality. The transverse energy was measured using identified single-particle tracks. The measurement was cross checked using the electromagnetic calorimeters and the transverse momentum distributions of identified particles previously reported by ALICE. The results are compared to theoretical models as well as to results from other experiments. The mean ET per unit pseudorapidity (η), 〈dET/dη〉, in 0%–5% central collisions is 1737±6(stat.)±97(sys.) GeV. We find a similar centrality dependence of the shape of 〈dET/dη〉 as a function of the number of participating nucleons to that seen at lower energies. The growth in 〈dET/dη〉 at the LHC energies exceeds extrapolations of low-energy data. We observe a nearly linear scaling of 〈dET/dη〉 with the number of quark participants. With the canonical assumption of a 1 fm/c formation time, we estimate that the energy density in 0%–5% central Pb-Pb collisions at sNN=2.76 TeV is 12.3±1.0GeV/fm3 and that the energy density at the most central 80fm2 of the collision is at least 21.5±1.7GeV/fm3. This is roughly 2.3 times that observed in 0%–5% central Au-Au collisions at sNN=200 GeV.</p>
+<footer style="clear:both; margin-top:3em; padding-top:3em">
+<p>Generated at Wednesday, 03. July 2024 12:36PM</p>
+<p>Created with command: <pre>rivet-mkhtml --pwd Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>
