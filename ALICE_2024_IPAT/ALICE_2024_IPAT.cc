@@ -330,21 +330,26 @@ namespace Rivet {
       _histos["deta_k"]->scaleW(1/(numJets));*/
       // determine the minimum value of the dphi histograms and subtract that value from all bins
 // Loop over all histograms for dphi, find minimum value for dphi
+    double min_value = std::numeric_limits<double>::max();
     for (const auto& hist : _histos) {
         if (hist.first.find("dphi_") != std::string::npos) { // Check if histogram is for dphi_pi
             // Find the minimum value in the histogram bins
-            double min_value = hist.second->bin(0).height(); // Initialize with the height of the first bin
+            double bins_min_value = hist.second->bin(0).height(); // Initialize with the height of the first bin
             for (size_t i = 1; i < hist.second->numBins(); ++i) {
                 double bin_value = hist.second->bin(i).height();
-                if (bin_value < min_value) {
-                    min_value = bin_value;
+                if (bin_value < bins_min_value) {
+                    bins_min_value = bin_value;
                 }
-    //subract that value from all bins 
-            
-          
        }
+       if (bins_min_value < min_value) {
+            min_value = bins_min_value;
+      }
     }
   }
+std::cout << "Overall minimum value: " << min_value << std::endl;
+  //subract that value from all bins 
+
+
       // Integrate the dphi histograms from -pi/2 to pi/2 and from pi/2 to 3pi/2, for the near-side and away-side respectively for each momentum bin and particle type and fill yield histograms
 
       // divide the yield histograms for K/pi and p/pi on the near-side and away-side
