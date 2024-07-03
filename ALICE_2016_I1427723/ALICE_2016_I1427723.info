@@ -22,21 +22,19 @@ Energies: [574080]
 Description: We report the transverse energy (ET) measured with ALICE at midrapidity in Pb-Pb collisions at sNN=2.76 TeV as a function of centrality. The transverse energy was measured using identified single-particle tracks. The measurement was cross checked using the electromagnetic calorimeters and the transverse momentum distributions of identified particles previously reported by ALICE. The results are compared to theoretical models as well as to results from other experiments. The mean ET per unit pseudorapidity (η), 〈dET/dη〉, in 0%–5% central collisions is 1737±6(stat.)±97(sys.) GeV. We find a similar centrality dependence of the shape of 〈dET/dη〉 as a function of the number of participating nucleons to that seen at lower energies. The growth in 〈dET/dη〉 at the LHC energies exceeds extrapolations of low-energy data. We observe a nearly linear scaling of 〈dET/dη〉 with the number of quark participants. With the canonical assumption of a 1 fm/c formation time, we estimate that the energy density in 0%–5% central Pb-Pb collisions at sNN=2.76 TeV is 12.3±1.0GeV/fm3 and that the energy density at the most central 80fm2 of the collision is at least 21.5±1.7GeV/fm3. This is roughly 2.3 times that observed in 0%–5% central Au-Au collisions at sNN=200 GeV.
 Keywords: []
 BibKey: Adam:2016thv
-BibTeX: '@article{Adam:2016thv,
-      author         = "Adam, Jaroslav and others",
-      title          = "{Measurement of transverse energy at midrapidity in Pb-Pb
-                        collisions at $\sqrt{s_{\rm NN}} = 2.76$ TeV}",
-      collaboration  = "ALICE",
-      journal        = "Phys. Rev.",
-      volume         = "C94",
-      year           = "2016",
-      number         = "3",
-      pages          = "034903",
-      doi            = "10.1103/PhysRevC.94.034903",
-      eprint         = "1603.04775",
-      archivePrefix  = "arXiv",
-      primaryClass   = "nucl-ex",
-      reportNumber   = "CERN-EP-2016-071",
-      SLACcitation   = "%%CITATION = ARXIV:1603.04775;%%"
+BibTeX: @article{ALICE:2016igk,
+    author = "Adam, Jaroslav and others",
+    collaboration = "ALICE",
+    title = "{Measurement of transverse energy at midrapidity in Pb-Pb collisions at $\sqrt{s_{\rm NN}} = 2.76$ TeV}",
+    eprint = "1603.04775",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    reportNumber = "CERN-EP-2016-071",
+    doi = "10.1103/PhysRevC.94.034903",
+    journal = "Phys. Rev. C",
+    volume = "94",
+    number = "3",
+    pages = "034903",
+    year = "2016"
 }'
 
