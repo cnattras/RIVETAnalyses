@@ -65,16 +65,89 @@ namespace Rivet {
       // Ratio: [(1, 1.5), (1.5, 2), (2,3), (3,4), (4,5), (5,6), (6,10)]
 
       // specify custom binning
-      book(_histos["dphi_pi"], "dphi_pi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["dphi_p"], "dphi_p", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["dphi_k"], "dphi_k", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_scatters["dphi_ktopi"], "dphi_ktopi", 48 , - 3.14 / 2, 3 * 3.14 / 2);
 
-      book(_histos["deta_pi"], "deta_pi", 60 , - 1.5, 1.5);
-      book(_histos["deta_p"], "deta_p", 60 , - 1.5, 1.5);
-      book(_histos["deta_k"], "deta_k", 60 , - 1.5, 1.5);
+      // Booking proton histos
+      // Momenta (1, 1.5)
+      book(_histos["dphi_p_1_1.5"], "dphi_p_1_1.5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_1_1.5"], "deta_p_1_1.5", 60, -1.5, 1.5);
+      // Momenta (1.5, 2)
+      book(_histos["dphi_p_1.5_2"], "dphi_p_1.5_2", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_1.5_2"], "deta_p_1.5_2", 60, -1.5, 1.5);
+      // Momenta (2, 3)
+      book(_histos["dphi_p_2_3"], "dphi_p_2_3", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_2_3"], "deta_p_2_3", 60, -1.5, 1.5);
+      // Momenta (3, 4)
+      book(_histos["dphi_p_3_4"], "dphi_p_3_4", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_3_4"], "deta_p_3_4", 60, -1.5, 1.5);
+      // Momenta (4,5)
+      book(_histos["dphi_p_4_5"], "dphi_p_4_5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_4_5"], "deta_p_4_5", 60, -1.5, 1.5);
+      // Momenta (5, 6)
+      book(_histos["dphi_p_5_6"], "dphi_p_5_6", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_5_6"], "deta_p_5_6", 60, -1.5, 1.5);
+      // Momenta (6, 10)
+      book(_histos["dphi_p_6_10"], "dphi_p_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_p_6_10"], "deta_p_6_10", 60, -1.5, 1.5);
+      // Yield
+      book(_histos["yield_p"], "yield_p", {1, 1.5, 2, 3, 4, 5, 6, 10});
 
 
+      // Booking pion histos
+      // Momenta (1, 1.5)
+      book(_histos["dphi_pi_1_1.5"], "dphi_pi_1_1.5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_1_1.5"], "deta_pi_1_1.5", 60, -1.5, 1.5);
+      // Momenta (1.5, 2)
+      book(_histos["dphi_pi_1.5_2"], "dphi_pi_1.5_2", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_1.5_2"], "deta_pi_1.5_2", 60, -1.5, 1.5);
+      // Momenta (2, 3)
+      book(_histos["dphi_pi_2_3"], "dphi_pi_2_3", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_2_3"], "deta_pi_2_3", 60, -1.5, 1.5);
+      // Momenta (3, 4)
+      book(_histos["dphi_pi_3_4"], "dphi_pi_3_4", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_3_4"], "deta_pi_3_4", 60, -1.5, 1.5);
+      // Momenta (4,5)
+      book(_histos["dphi_pi_4_5"], "dphi_pi_4_5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_4_5"], "deta_pi_4_5", 60, -1.5, 1.5);
+      // Momenta (5, 6)
+      book(_histos["dphi_pi_5_6"], "dphi_pi_5_6", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_5_6"], "deta_pi_5_6", 60, -1.5, 1.5);
+      // Momenta (6, 10)
+      book(_histos["dphi_pi_6_10"], "dphi_pi_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_pi_6_10"], "deta_pi_6_10", 60, -1.5, 1.5);
+      // Yield
+      book(_histos["yield_pi"], "yield_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
+
+
+      // Booking Kaon histos
+      // Momenta (1, 1.5)
+      book(_histos["dphi_K_1_1.5"], "dphi_K_1_1.5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_1_1.5"], "deta_K_1_1.5", 60, -1.5, 1.5);
+      // Momenta (1.5, 2)
+      book(_histos["dphi_K_1.5_2"], "dphi_K_1.5_2", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_1.5_2"], "deta_K_1.5_2", 60, -1.5, 1.5);
+      // Momenta (2, 3)
+      book(_histos["dphi_K_2_3"], "dphi_K_2_3", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_2_3"], "deta_K_2_3", 60, -1.5, 1.5);
+      // Momenta (3, 4)
+      book(_histos["dphi_K_3_4"], "dphi_K_3_4", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_3_4"], "deta_K_3_4", 60, -1.5, 1.5);
+      // Momenta (4,5)
+      book(_histos["dphi_K_4_5"], "dphi_K_4_5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_4_5"], "deta_K_4_5", 60, -1.5, 1.5);
+      // Momenta (5, 6)
+      book(_histos["dphi_K_5_6"], "dphi_K_5_6", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_5_6"], "deta_K_5_6", 60, -1.5, 1.5);
+      // Momenta (6, 10)
+      book(_histos["dphi_K_6_10"], "dphi_K_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_K_6_10"], "deta_K_6_10", 60, -1.5, 1.5);
+      // Yield
+      book(_histos["yield_K"], "yield_K", {1, 1.5, 2, 3, 4, 5, 6, 10});
+
+      // Book ratios
+      book(_scatters["ratio_K_to_pi"], "ratio_K_to_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
+      book(_scatters["ratio_p_to_pi"], "ratio_p_to_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
+
+      // Counters (still need work)
       book(_histos["number_of_events"], "number_of_events", 1, 0.0, 1.0);
       book(_histos["number_of_jets"], "number_of_jets", 1, 0.0, 1.0);
 
