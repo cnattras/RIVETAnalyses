@@ -336,7 +336,53 @@ namespace Rivet {
 
 
       //divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
+// proton normalization (1, 1.5), (1.5, 2), (2,3), (3,4), (4,5), (5,6), (6,10)
+      _histos["dphi_p_1_1.5"]->scaleW(1/(numJets));
+      _histos["deta_p_1_1.5"]->scaleW(1/(numJets));
+      _histos["dphi_p_1.5_2"]->scaleW(1/(numJets));
+      _histos["deta_p_1.5_2"]->scaleW(1/(numJets));
+      _histos["dphi_p_2_3"]->scaleW(1/(numJets));
+      _histos["deta_p_2_3"]->scaleW(1/(numJets));
+      _histos["dphi_p_3_4"]->scaleW(1/(numJets));
+      _histos["deta_p_3_4"]->scaleW(1/(numJets));
+      _histos["dphi_p_4_5"]->scaleW(1/(numJets));
+      _histos["deta_p_4_5"]->scaleW(1/(numJets));
+      _histos["dphi_p_5_6"]->scaleW(1/(numJets));
+      _histos["deta_p_5_6"]->scaleW(1/(numJets));
+      _histos["dphi_p_6_10"]->scaleW(1/(numJets));
+      _histos["deta_p_6_10"]->scaleW(1/(numJets));
 
+// pion normalization
+      _histos["dphi_pi_1_1.5"]->scaleW(1/(numJets));
+      _histos["deta_pi_1_1.5"]->scaleW(1/(numJets));
+      _histos["dphi_pi_1.5_2"]->scaleW(1/(numJets));
+      _histos["deta_pi_1.5_2"]->scaleW(1/(numJets));
+      _histos["dphi_pi_2_3"]->scaleW(1/(numJets));
+      _histos["deta_pi_2_3"]->scaleW(1/(numJets));
+      _histos["dphi_pi_3_4"]->scaleW(1/(numJets));
+      _histos["deta_pi_3_4"]->scaleW(1/(numJets));
+      _histos["dphi_pi_4_5"]->scaleW(1/(numJets));
+      _histos["deta_pi_4_5"]->scaleW(1/(numJets));
+      _histos["dphi_pi_5_6"]->scaleW(1/(numJets));
+      _histos["deta_pi_5_6"]->scaleW(1/(numJets));
+      _histos["dphi_pi_6_10"]->scaleW(1/(numJets));
+      _histos["deta_pi_6_10"]->scaleW(1/(numJets));
+
+// kaon normalization
+      _histos["dphi_K_1_1.5"]->scaleW(1/(numJets));
+      _histos["deta_K_1_1.5"]->scaleW(1/(numJets));
+      _histos["dphi_K_1.5_2"]->scaleW(1/(numJets));
+      _histos["deta_K_1.5_2"]->scaleW(1/(numJets));
+      _histos["dphi_K_2_3"]->scaleW(1/(numJets));
+      _histos["deta_K_2_3"]->scaleW(1/(numJets));
+      _histos["dphi_K_3_4"]->scaleW(1/(numJets));
+      _histos["deta_K_3_4"]->scaleW(1/(numJets));
+      _histos["dphi_K_4_5"]->scaleW(1/(numJets));
+      _histos["deta_K_4_5"]->scaleW(1/(numJets));
+      _histos["dphi_K_5_6"]->scaleW(1/(numJets));
+      _histos["deta_K_5_6"]->scaleW(1/(numJets));
+      _histos["dphi_K_6_10"]->scaleW(1/(numJets));
+      _histos["deta_K_6_10"]->scaleW(1/(numJets));
     }
 
     /// @}
