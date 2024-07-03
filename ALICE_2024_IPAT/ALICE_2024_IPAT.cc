@@ -336,7 +336,7 @@ namespace Rivet {
 
 
       //divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
-// proton normalization (1, 1.5), (1.5, 2), (2,3), (3,4), (4,5), (5,6), (6,10)
+// proton normalization
       _histos["dphi_p_1_1.5"]->scaleW(1/(numJets));
       _histos["deta_p_1_1.5"]->scaleW(1/(numJets));
       _histos["dphi_p_1.5_2"]->scaleW(1/(numJets));
