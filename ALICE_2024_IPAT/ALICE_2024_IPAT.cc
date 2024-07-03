@@ -4,7 +4,7 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Tools/AliceCommon.hh"
-//PAT: Add header for centrality. 
+#include "../Centralities/RHICCentrality.hh"
 
 namespace Rivet {
 
