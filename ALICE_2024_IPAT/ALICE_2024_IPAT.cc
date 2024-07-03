@@ -170,6 +170,8 @@ namespace Rivet {
       const ALICE::PrimaryParticles aprim = apply<ALICE::PrimaryParticles>(event, "aprim");
       const Particles ALICEparticles = aprim.particles();
 
+    
+
 
       //jetsfs.calc(ALICEparticles);
       jetsfs.calc(ALICEparticlesall);
@@ -190,31 +192,121 @@ namespace Rivet {
             if (dphi < -3*3.14159/2) dphi += 2*3.14159;
             //put logic to fill the appropriate associated hadron momentum
             // according to the definition above
-            if (particle.pid() == PID::PIPLUS)
+            if (particle.pid() == PID::PIPLUS || particle.pid() == PID::PIMINUS)
             {
-                _histos["dphi_pi"]->fill(dphi);
-                _histos["deta_pi"]->fill(deta);
-            }
-            if (particle.pid() == PID::PIMINUS)
-            {
-                _histos["dphi_pi"]->fill(dphi);
-                _histos["deta_pi"]->fill(deta);
+              if (particle.pt() > 1 && particle.pt() < 1.5)
+              {
+                _histos["dphi_pi_1_1.5"]->fill(dphi);
+                _histos["deta_pi_1_1.5"]->fill(deta);
+              }
+              else if (particle.pt() > 1.5 && particle.pt() < 2)
+              {
+                _histos["dphi_pi_1.5_2"]->fill(dphi);
+                _histos["deta_pi_1.5_2"]->fill(deta);
+              }
+              else if (particle.pt() > 2 && particle.pt() < 3)
+              {
+                _histos["dphi_pi_2_3"]->fill(dphi);
+                _histos["deta_pi_2_3"]->fill(deta);
+              }
+              else if (particle.pt() > 3 && particle.pt() < 4)
+              {
+                _histos["dphi_pi_3_4"]->fill(dphi);
+                _histos["deta_pi_3_4"]->fill(deta);
+              }
+              else if (particle.pt() > 4 && particle.pt() < 5)
+              {
+                _histos["dphi_pi_4_5"]->fill(dphi);
+                _histos["deta_pi_4_5"]->fill(deta);
+              }
+              else if (particle.pt() > 5 && particle.pt() < 6)
+              {
+                _histos["dphi_pi_5_6"]->fill(dphi);
+                _histos["deta_pi_5_6"]->fill(deta);
+              }
+              else if (particle.pt() > 6 && particle.pt() < 10)
+              {
+                _histos["dphi_pi_6_10"]->fill(dphi);
+                _histos["deta_pi_6_10"]->fill(deta);
+              }
             }
             if (particle.pid() == PID::PROTON)
             {
-                _histos["dphi_p"]->fill(dphi);
-                _histos["deta_p"]->fill(deta);
+                if (particle.pt() > 1 && particle.pt() < 1.5)
+              {
+                _histos["dphi_p_1_1.5"]->fill(dphi);
+                _histos["deta_p_1_1.5"]->fill(deta);
+              }
+              else if (particle.pt() > 1.5 && particle.pt() < 2)
+              {
+                _histos["dphi_p_1.5_2"]->fill(dphi);
+                _histos["deta_p_1.5_2"]->fill(deta);
+              }
+              else if (particle.pt() > 2 && particle.pt() < 3)
+              {
+                _histos["dphi_p_2_3"]->fill(dphi);
+                _histos["deta_p_2_3"]->fill(deta);
+              }
+              else if (particle.pt() > 3 && particle.pt() < 4)
+              {
+                _histos["dphi_p_3_4"]->fill(dphi);
+                _histos["deta_p_3_4"]->fill(deta);
+              }
+              else if (particle.pt() > 4 && particle.pt() < 5)
+              {
+                _histos["dphi_p_4_5"]->fill(dphi);
+                _histos["deta_p_4_5"]->fill(deta);
+              }
+              else if (particle.pt() > 5 && particle.pt() < 6)
+              {
+                _histos["dphi_p_5_6"]->fill(dphi);
+                _histos["deta_p_5_6"]->fill(deta);
+              }
+              else if (particle.pt() > 6 && particle.pt() < 10)
+              {
+                _histos["dphi_p_6_10"]->fill(dphi);
+                _histos["deta_p_6_10"]->fill(deta);
+              }
             }
-            if (particle.pid() == PID::KPLUS)
+            if (particle.pid() == PID::KPLUS || particle.pid() == PID::KMINUS)
             {
-                _histos["dphi_k"]->fill(dphi);
-                _histos["deta_k"]->fill(deta);
+                if (particle.pt() > 1 && particle.pt() < 1.5)
+              {
+                _histos["dphi_K_1_1.5"]->fill(dphi);
+                _histos["deta_K_1_1.5"]->fill(deta);
+              }
+              else if (particle.pt() > 1.5 && particle.pt() < 2)
+              {
+                _histos["dphi_K_1.5_2"]->fill(dphi);
+                _histos["deta_K_1.5_2"]->fill(deta);
+              }
+              else if (particle.pt() > 2 && particle.pt() < 3)
+              {
+                _histos["dphi_K_2_3"]->fill(dphi);
+                _histos["deta_K_2_3"]->fill(deta);
+              }
+              else if (particle.pt() > 3 && particle.pt() < 4)
+              {
+                _histos["dphi_K_3_4"]->fill(dphi);
+                _histos["deta_K_3_4"]->fill(deta);
+              }
+              else if (particle.pt() > 4 && particle.pt() < 5)
+              {
+                _histos["dphi_K_4_5"]->fill(dphi);
+                _histos["deta_K_4_5"]->fill(deta);
+              }
+              else if (particle.pt() > 5 && particle.pt() < 6)
+              {
+                _histos["dphi_K_5_6"]->fill(dphi);
+                _histos["deta_K_5_6"]->fill(deta);
+              }
+              else if (particle.pt() > 6 && particle.pt() < 10)
+              {
+                _histos["dphi_K_6_10"]->fill(dphi);
+                _histos["deta_K_6_10"]->fill(deta);
+              }
             }
-            if (particle.pid() == PID::KMINUS)
-            {
-                _histos["dphi_k"]->fill(dphi);
-                _histos["deta_k"]->fill(deta);
-            }
+           
         }
         
       }
@@ -230,12 +322,12 @@ namespace Rivet {
       // why is number of jets = 0?
       std::cout << "Number of jets: " << numJets << std::endl;
       // extend for all histograms
-      _histos["dphi_pi"]->scaleW(1/(numJets));
+      /*_histos["dphi_pi"]->scaleW(1/(numJets));
       _histos["deta_pi"]->scaleW(1/(numJets));
       _histos["dphi_p"]->scaleW(1/(numJets));
       _histos["deta_p"]->scaleW(1/(numJets));
       _histos["dphi_k"]->scaleW(1/(numJets));
-      _histos["deta_k"]->scaleW(1/(numJets));
+      _histos["deta_k"]->scaleW(1/(numJets));*/
       // determine the minimum value of the dphi histograms and subtract that value from all bins
 
       // Integrate the dphi histograms from -pi/2 to pi/2 and from pi/2 to 3pi/2, for the near-side and away-side respectively for each momentum bin and particle type and fill yield histograms
@@ -243,7 +335,7 @@ namespace Rivet {
       // divide the yield histograms for K/pi and p/pi on the near-side and away-side
 
 
-      divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
+      //divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
 
     }
 
