@@ -331,6 +331,7 @@ namespace Rivet {
       // determine the minimum value of the dphi histograms and subtract that value from all bins
 // Loop over all histograms for dphi, find minimum value for dphi
     for (const auto& hist : _histos) {
+      //+++Find minimum value+++//
         if (hist.first.find("dphi_") != std::string::npos) { // Check if histogram is for dphi_pi
             // Find the minimum value in the histogram bins
             double min_value = hist.second->bin(0).height(); // Initialize with the height of the first bin
@@ -338,11 +339,17 @@ namespace Rivet {
                 double bin_value = hist.second->bin(i).height();
                 if (bin_value < min_value) {
                     min_value = bin_value;
-                  
-
                 }
-       }
-  std::cout << "Min values: " << min_value << std::endl;
+            }
+          //+++End find minimum value+++//
+          std::cout << "Min value: " << min_value << std::endl;
+          
+          //+++subtract that value from the bin content of each bin+++//
+
+          for (size_t i = 0; i < hist.second->numBins(); ++i) {
+            double bin_value = hist.second->bin(i).height();
+            hist.second->bin(i).fillBin(bin_value - min_value, hist.second->bin(i).numEntries());
+          }
     }
   }
   
