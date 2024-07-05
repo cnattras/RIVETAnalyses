@@ -120,31 +120,31 @@ namespace Rivet {
 
       // Booking Kaon histos
       // Momenta (1, 1.5)
-      book(_histos["dphi_K_1_1.5"], "dphi_K_1_1.5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_1_1.5"], "deta_K_1_1.5", 60, -1.5, 1.5);
+      book(_histos["dphi_k_1_1.5"], "dphi_k_1_1.5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_1_1.5"], "deta_k_1_1.5", 60, -1.5, 1.5);
       // Momenta (1.5, 2)
-      book(_histos["dphi_K_1.5_2"], "dphi_K_1.5_2", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_1.5_2"], "deta_K_1.5_2", 60, -1.5, 1.5);
+      book(_histos["dphi_k_1.5_2"], "dphi_k_1.5_2", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_1.5_2"], "deta_k_1.5_2", 60, -1.5, 1.5);
       // Momenta (2, 3)
-      book(_histos["dphi_K_2_3"], "dphi_K_2_3", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_2_3"], "deta_K_2_3", 60, -1.5, 1.5);
+      book(_histos["dphi_k_2_3"], "dphi_k_2_3", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_2_3"], "deta_k_2_3", 60, -1.5, 1.5);
       // Momenta (3, 4)
-      book(_histos["dphi_K_3_4"], "dphi_K_3_4", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_3_4"], "deta_K_3_4", 60, -1.5, 1.5);
+      book(_histos["dphi_k_3_4"], "dphi_k_3_4", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_3_4"], "deta_k_3_4", 60, -1.5, 1.5);
       // Momenta (4,5)
-      book(_histos["dphi_K_4_5"], "dphi_K_4_5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_4_5"], "deta_K_4_5", 60, -1.5, 1.5);
+      book(_histos["dphi_k_4_5"], "dphi_k_4_5", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_4_5"], "deta_k_4_5", 60, -1.5, 1.5);
       // Momenta (5, 6)
-      book(_histos["dphi_K_5_6"], "dphi_K_5_6", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_5_6"], "deta_K_5_6", 60, -1.5, 1.5);
+      book(_histos["dphi_k_5_6"], "dphi_k_5_6", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_5_6"], "deta_k_5_6", 60, -1.5, 1.5);
       // Momenta (6, 10)
-      book(_histos["dphi_K_6_10"], "dphi_K_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
-      book(_histos["deta_K_6_10"], "deta_K_6_10", 60, -1.5, 1.5);
+      book(_histos["dphi_k_6_10"], "dphi_k_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
+      book(_histos["deta_k_6_10"], "deta_k_6_10", 60, -1.5, 1.5);
       // Yield
-      book(_histos["yield_K"], "yield_K", {1, 1.5, 2, 3, 4, 5, 6, 10});
+      book(_histos["yield_k"], "yield_k", {1, 1.5, 2, 3, 4, 5, 6, 10});
 
       // Book ratios
-      book(_scatters["ratio_K_to_pi"], "ratio_K_to_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
+      book(_scatters["ratio_k_to_pi"], "ratio_k_to_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
       book(_scatters["ratio_p_to_pi"], "ratio_p_to_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
 
       // Counters (still need work)
@@ -272,38 +272,38 @@ namespace Rivet {
             {
                 if (particle.pt() > 1 && particle.pt() < 1.5)
               {
-                _histos["dphi_K_1_1.5"]->fill(dphi);
-                _histos["deta_K_1_1.5"]->fill(deta);
+                _histos["dphi_k_1_1.5"]->fill(dphi);
+                _histos["deta_k_1_1.5"]->fill(deta);
               }
               else if (particle.pt() > 1.5 && particle.pt() < 2)
               {
-                _histos["dphi_K_1.5_2"]->fill(dphi);
-                _histos["deta_K_1.5_2"]->fill(deta);
+                _histos["dphi_k_1.5_2"]->fill(dphi);
+                _histos["deta_k_1.5_2"]->fill(deta);
               }
               else if (particle.pt() > 2 && particle.pt() < 3)
               {
-                _histos["dphi_K_2_3"]->fill(dphi);
-                _histos["deta_K_2_3"]->fill(deta);
+                _histos["dphi_k_2_3"]->fill(dphi);
+                _histos["deta_k_2_3"]->fill(deta);
               }
               else if (particle.pt() > 3 && particle.pt() < 4)
               {
-                _histos["dphi_K_3_4"]->fill(dphi);
-                _histos["deta_K_3_4"]->fill(deta);
+                _histos["dphi_k_3_4"]->fill(dphi);
+                _histos["deta_k_3_4"]->fill(deta);
               }
               else if (particle.pt() > 4 && particle.pt() < 5)
               {
-                _histos["dphi_K_4_5"]->fill(dphi);
-                _histos["deta_K_4_5"]->fill(deta);
+                _histos["dphi_k_4_5"]->fill(dphi);
+                _histos["deta_k_4_5"]->fill(deta);
               }
               else if (particle.pt() > 5 && particle.pt() < 6)
               {
-                _histos["dphi_K_5_6"]->fill(dphi);
-                _histos["deta_K_5_6"]->fill(deta);
+                _histos["dphi_k_5_6"]->fill(dphi);
+                _histos["deta_k_5_6"]->fill(deta);
               }
               else if (particle.pt() > 6 && particle.pt() < 10)
               {
-                _histos["dphi_K_6_10"]->fill(dphi);
-                _histos["deta_K_6_10"]->fill(deta);
+                _histos["dphi_k_6_10"]->fill(dphi);
+                _histos["deta_k_6_10"]->fill(deta);
               }
             }
            
@@ -353,7 +353,7 @@ namespace Rivet {
     }
   }
   
-  //subract that value from all bins 
+ 
 
 
       // Integrate the dphi histograms from -pi/2 to pi/2 and from pi/2 to 3pi/2, for the near-side and away-side respectively for each momentum bin and particle type and fill yield histograms
@@ -361,7 +361,8 @@ namespace Rivet {
       // divide the yield histograms for K/pi and p/pi on the near-side and away-side
 
 
-      //divide(_histos["dphi_k"], _histos["dphi_pi"], _scatters["dphi_ktopi"]);
+      divide(_histos["yield_p"], _histos["yield_pi"], _scatters["ratio_p_to_pi"]);
+      divide(_histos["yield_k"], _histos["yield_pi"], _scatters["ratio_k_to_pi"]);
 // proton normalization
       _histos["dphi_p_1_1.5"]->scaleW(1/(numJets));
       _histos["deta_p_1_1.5"]->scaleW(1/(numJets));
@@ -395,20 +396,20 @@ namespace Rivet {
       _histos["deta_pi_6_10"]->scaleW(1/(numJets));
 
 // kaon normalization
-      _histos["dphi_K_1_1.5"]->scaleW(1/(numJets));
-      _histos["deta_K_1_1.5"]->scaleW(1/(numJets));
-      _histos["dphi_K_1.5_2"]->scaleW(1/(numJets));
-      _histos["deta_K_1.5_2"]->scaleW(1/(numJets));
-      _histos["dphi_K_2_3"]->scaleW(1/(numJets));
-      _histos["deta_K_2_3"]->scaleW(1/(numJets));
-      _histos["dphi_K_3_4"]->scaleW(1/(numJets));
-      _histos["deta_K_3_4"]->scaleW(1/(numJets));
-      _histos["dphi_K_4_5"]->scaleW(1/(numJets));
-      _histos["deta_K_4_5"]->scaleW(1/(numJets));
-      _histos["dphi_K_5_6"]->scaleW(1/(numJets));
-      _histos["deta_K_5_6"]->scaleW(1/(numJets));
-      _histos["dphi_K_6_10"]->scaleW(1/(numJets));
-      _histos["deta_K_6_10"]->scaleW(1/(numJets));
+      _histos["dphi_k_1_1.5"]->scaleW(1/(numJets));
+      _histos["deta_k_1_1.5"]->scaleW(1/(numJets));
+      _histos["dphi_k_1.5_2"]->scaleW(1/(numJets));
+      _histos["deta_k_1.5_2"]->scaleW(1/(numJets));
+      _histos["dphi_k_2_3"]->scaleW(1/(numJets));
+      _histos["deta_k_2_3"]->scaleW(1/(numJets));
+      _histos["dphi_k_3_4"]->scaleW(1/(numJets));
+      _histos["deta_k_3_4"]->scaleW(1/(numJets));
+      _histos["dphi_k_4_5"]->scaleW(1/(numJets));
+      _histos["deta_k_4_5"]->scaleW(1/(numJets));
+      _histos["dphi_k_5_6"]->scaleW(1/(numJets));
+      _histos["deta_k_5_6"]->scaleW(1/(numJets));
+      _histos["dphi_k_6_10"]->scaleW(1/(numJets));
+      _histos["deta_k_6_10"]->scaleW(1/(numJets));
     }
 
     /// @}
