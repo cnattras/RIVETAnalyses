@@ -45,35 +45,6 @@ namespace Rivet {
     }
 
 
-
-
-
-
-
-
-
-    double test(YODA::Histo1D& hist, double vmin, double vmax, double &n)
-    {        
-        double integral = 0.;
-        double entries = 0.;
-                
-        int bmin = 0;
-        int bmax = 47;
-        if(bmax < 0) bmax = (int)hist.numBins()-1;
-        
-        for(int i = bmin; i <= bmax; i++)
-        {
-            integral += (hist.bin(i).height() * 2*3.14/48);
-            entries += hist.bin(i).numEntries();
-        }
-        
-        n = entries;
-        
-        return integral;
-        
-    }
-
-
     /// @name Analysis methods
     /// @{
 
@@ -409,7 +380,6 @@ namespace Rivet {
           }
     }
   }
-       // attempt at proton yield histos
         
         
         
@@ -476,6 +446,8 @@ namespace Rivet {
       _histos["dphi_k_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
       _histos["deta_k_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
 
+
+    // get proton yields
     char *bins[] = {"1_1.5", "1.5_2", "2_3", "3_4", "4_5", "5_6", "6_10"};
     float midbin[] = {1.25, 1.75, 2.5, 3.5, 4.5, 5.5, 8};
     for (int i = 0; i<7; i++){
@@ -487,6 +459,8 @@ namespace Rivet {
       _histos["yield_p"]->fillBin(_histos["yield_p"]->binIndexAt(midbin[i]), yield, 1);
     }
 
+
+    // get pion yields 
     for (int i = 0; i<7; i++){
       double entries = 0.;
       char histo_name[100];
@@ -496,6 +470,8 @@ namespace Rivet {
       _histos["yield_pi"]->fillBin(_histos["yield_pi"]->binIndexAt(midbin[i]), yield, 1);
     }
 
+
+    // get kaon yields
     for (int i = 0; i<7; i++){
       double entries = 0.;
       char histo_name[100];
@@ -505,7 +481,7 @@ namespace Rivet {
       _histos["yield_k"]->fillBin(_histos["yield_k"]->binIndexAt(midbin[i]), yield, 1);
     }
 
-
+    // get ratios
     divide(_histos["yield_p"], _histos["yield_pi"], _scatters["ratio_p_to_pi"]);
     divide(_histos["yield_k"], _histos["yield_pi"], _scatters["ratio_k_to_pi"]);
       
