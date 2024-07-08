@@ -5,6 +5,7 @@
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Tools/AliceCommon.hh"
 #include "../Centralities/RHICCentrality.hh"
+#include <math.h>
 
 namespace Rivet {
 
@@ -15,6 +16,62 @@ namespace Rivet {
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(ALICE_2024_IPAT);
+
+    double GetYieldInUserRange(YODA::Histo1D& hist, double vmin, double vmax, double &n)
+    {        
+        double integral = 0.;
+        double entries = 0.;
+        
+        if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
+        {
+            MSG_ERROR("Out of range!");
+            return 0.;
+        }
+                
+        int bmin = hist.binIndexAt(vmin);
+        int bmax = hist.binIndexAt(vmax);
+        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += hist.bin(i).sumW();
+            entries += hist.bin(i).numEntries();
+        }
+        
+        n = entries;
+        
+        return integral;
+        
+    }
+
+
+
+
+
+
+
+
+
+    double test(YODA::Histo1D& hist, double vmin, double vmax, double &n)
+    {        
+        double integral = 0.;
+        double entries = 0.;
+                
+        int bmin = 0;
+        int bmax = 47;
+        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        
+        for(int i = bmin; i <= bmax; i++)
+        {
+            integral += (hist.bin(i).height() * 2*3.14/48);
+            entries += hist.bin(i).numEntries();
+        }
+        
+        n = entries;
+        
+        return integral;
+        
+    }
 
 
     /// @name Analysis methods
@@ -342,7 +399,7 @@ namespace Rivet {
                 }
             }
           //+++End find minimum value+++//
-          std::cout << "Min value: " << min_value << std::endl;
+          //std::cout << "Min value: " << min_value << std::endl;
           
           //+++subtract that value from the bin content of each bin+++//
 
@@ -352,7 +409,16 @@ namespace Rivet {
           }
     }
   }
-  
+       // attempt at proton yield histos
+        
+        
+        
+        
+      /*// attempt 2
+      double entries2 = 0.;
+        double yield2 = test(*_histos["dphi_p_2_3"], -3.14/2, 3.14/2, entries2);
+        //_histos["yield_p"]->fillBin(_histos["yield_p"]->binIndexAt(2.5),yield2/entries2, entries2);
+        std::cout << "yield2:" << yield <<std::endl;*/
  
 
 
@@ -361,56 +427,93 @@ namespace Rivet {
       // divide the yield histograms for K/pi and p/pi on the near-side and away-side
 
 
-      divide(_histos["yield_p"], _histos["yield_pi"], _scatters["ratio_p_to_pi"]);
-      divide(_histos["yield_k"], _histos["yield_pi"], _scatters["ratio_k_to_pi"]);
+      
 // proton normalization
-      _histos["dphi_p_1_1.5"]->scaleW(1/(numJets));
-      _histos["deta_p_1_1.5"]->scaleW(1/(numJets));
-      _histos["dphi_p_1.5_2"]->scaleW(1/(numJets));
-      _histos["deta_p_1.5_2"]->scaleW(1/(numJets));
-      _histos["dphi_p_2_3"]->scaleW(1/(numJets));
-      _histos["deta_p_2_3"]->scaleW(1/(numJets));
-      _histos["dphi_p_3_4"]->scaleW(1/(numJets));
-      _histos["deta_p_3_4"]->scaleW(1/(numJets));
-      _histos["dphi_p_4_5"]->scaleW(1/(numJets));
-      _histos["deta_p_4_5"]->scaleW(1/(numJets));
-      _histos["dphi_p_5_6"]->scaleW(1/(numJets));
-      _histos["deta_p_5_6"]->scaleW(1/(numJets));
-      _histos["dphi_p_6_10"]->scaleW(1/(numJets));
-      _histos["deta_p_6_10"]->scaleW(1/(numJets));
+      _histos["deta_p_1_1.5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_1.5_2"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_1_1.5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_p_1.5_2"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_2_3"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_p_2_3"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_3_4"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_p_3_4"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_4_5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_p_4_5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_5_6"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_p_5_6"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_p_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_p_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
 
-// pion normalization
-      _histos["dphi_pi_1_1.5"]->scaleW(1/(numJets));
-      _histos["deta_pi_1_1.5"]->scaleW(1/(numJets));
-      _histos["dphi_pi_1.5_2"]->scaleW(1/(numJets));
-      _histos["deta_pi_1.5_2"]->scaleW(1/(numJets));
-      _histos["dphi_pi_2_3"]->scaleW(1/(numJets));
-      _histos["deta_pi_2_3"]->scaleW(1/(numJets));
-      _histos["dphi_pi_3_4"]->scaleW(1/(numJets));
-      _histos["deta_pi_3_4"]->scaleW(1/(numJets));
-      _histos["dphi_pi_4_5"]->scaleW(1/(numJets));
-      _histos["deta_pi_4_5"]->scaleW(1/(numJets));
-      _histos["dphi_pi_5_6"]->scaleW(1/(numJets));
-      _histos["deta_pi_5_6"]->scaleW(1/(numJets));
-      _histos["dphi_pi_6_10"]->scaleW(1/(numJets));
-      _histos["deta_pi_6_10"]->scaleW(1/(numJets));
+//*crossSection()/millibarn pion normalization
+      _histos["dphi_pi_1_1.5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_1_1.5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_pi_1.5_2"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_1.5_2"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_pi_2_3"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_2_3"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_pi_3_4"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_3_4"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_pi_4_5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_4_5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_pi_5_6"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_5_6"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_pi_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_pi_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
 
 // kaon normalization
-      _histos["dphi_k_1_1.5"]->scaleW(1/(numJets));
-      _histos["deta_k_1_1.5"]->scaleW(1/(numJets));
-      _histos["dphi_k_1.5_2"]->scaleW(1/(numJets));
-      _histos["deta_k_1.5_2"]->scaleW(1/(numJets));
-      _histos["dphi_k_2_3"]->scaleW(1/(numJets));
-      _histos["deta_k_2_3"]->scaleW(1/(numJets));
-      _histos["dphi_k_3_4"]->scaleW(1/(numJets));
-      _histos["deta_k_3_4"]->scaleW(1/(numJets));
-      _histos["dphi_k_4_5"]->scaleW(1/(numJets));
-      _histos["deta_k_4_5"]->scaleW(1/(numJets));
-      _histos["dphi_k_5_6"]->scaleW(1/(numJets));
-      _histos["deta_k_5_6"]->scaleW(1/(numJets));
-      _histos["dphi_k_6_10"]->scaleW(1/(numJets));
-      _histos["deta_k_6_10"]->scaleW(1/(numJets));
+      _histos["dphi_k_1_1.5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_1_1.5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_k_1.5_2"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_1.5_2"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_k_2_3"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_2_3"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_k_3_4"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_3_4"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_k_4_5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_4_5"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_k_5_6"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_5_6"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["dphi_k_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
+      _histos["deta_k_6_10"]->scaleW(1/(numJets*crossSection()/picobarn));
+
+    char *bins[] = {"1_1.5", "1.5_2", "2_3", "3_4", "4_5", "5_6", "6_10"};
+    float midbin[] = {1.25, 1.75, 2.5, 3.5, 4.5, 5.5, 8};
+    for (int i = 0; i<7; i++){
+      double entries = 0.;
+      char histo_name[100];
+      sprintf(histo_name,"dphi_p_%s",bins[i]);
+      std::cout<< histo_name << std::endl;
+      double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
+      _histos["yield_p"]->fillBin(_histos["yield_p"]->binIndexAt(midbin[i]), yield, 1);
     }
+
+    for (int i = 0; i<7; i++){
+      double entries = 0.;
+      char histo_name[100];
+      sprintf(histo_name,"dphi_pi_%s",bins[i]);
+      std::cout<< histo_name << std::endl;
+      double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
+      _histos["yield_pi"]->fillBin(_histos["yield_pi"]->binIndexAt(midbin[i]), yield, 1);
+    }
+
+    for (int i = 0; i<7; i++){
+      double entries = 0.;
+      char histo_name[100];
+      sprintf(histo_name,"dphi_k_%s",bins[i]);
+      std::cout<< histo_name << std::endl;
+      double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
+      _histos["yield_k"]->fillBin(_histos["yield_k"]->binIndexAt(midbin[i]), yield, 1);
+    }
+
+
+    divide(_histos["yield_p"], _histos["yield_pi"], _scatters["ratio_p_to_pi"]);
+    divide(_histos["yield_k"], _histos["yield_pi"], _scatters["ratio_k_to_pi"]);
+      
+    }
+
+
+
+   
 
     /// @}
 
