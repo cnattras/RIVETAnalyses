@@ -64,7 +64,11 @@ void binShift(YODA::Histo1D& histogram) {
 
      
       if (beamOpt == "NONE"){
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu130;
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          float NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 5)) collSys = AuAu130;
+      }
       }
       
       if (beamOpt == "AUAU130") collSys = AuAu130; 

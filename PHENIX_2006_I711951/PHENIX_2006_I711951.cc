@@ -83,16 +83,30 @@ namespace Rivet {
 
 
       if (beamOpt == "NONE") {
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
-      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
-      else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = DAu200;
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          float NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
+      }
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      {
+        float NN = 1.;
+        if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
+      }
+      else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970 || beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020)
+      {
+        if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2), 5)) collSys = DAu200;
+      }
       else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = DAu200;
+      {
+        if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2), 5)) collSys = DAu200;
+      }
       }
 
 
-      if (beamOpt =="pp") collSys = pp;
-      else if (beamOpt == "DAu200") collSys = DAu200;
-      else if (beamOpt == "AuAu200") collSys = AuAu200;
+      if (beamOpt =="PP200") collSys = pp;
+      else if (beamOpt == "DAU200") collSys = DAu200;
+      else if (beamOpt == "AUAU200") collSys = AuAu200;
       
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       

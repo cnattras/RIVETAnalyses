@@ -57,11 +57,21 @@ namespace Rivet {
       const ParticlePair& beam = beams();
       
       if (beamOpt == "NONE"){
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu130;
-      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+       if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          float NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
       }
-      if (beamOpt == "PP") collSys = pp;
-      else if (beamOpt == "AUAU") collSys = AuAu130;
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          float NN = 1.;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = pp;
+      }
+      
+      }
+      if (beamOpt == "PP130") collSys = pp;
+      else if (beamOpt == "AUAU130") collSys = AuAu130;
       
       // Initialise and register projections
       //if (collSys != pp){

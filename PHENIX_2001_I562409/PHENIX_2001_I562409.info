@@ -19,7 +19,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP,AUAU
+ - beam=PP130,AUAU130
 Description: Transverse momentum spectra for charged hadrons and for neutral pions in the range 1 GeV/c $< p_T <$ 5 GeV/c have been measured by the PHENIX experiment at RHIC in Au+Au collisions at $\sqrt{s_{_{NN}}}=130$ GeV. At high $p_T$ the spectra from peripheral nuclear collisions are consistent with the naive expectation of scaling the spectra from p+p collisions by the average number of binary nucleon- nucleon collisions. The spectra from central collisions are significantly suppressed when compared to the binary- scaled p+p expectation, and also when compared to similarly binary-scaled peripheral collisions, indicating a novel nuclear effect in central nuclear collisions at RHIC energies.
 ValidationInfo:
 #ReleaseTests:

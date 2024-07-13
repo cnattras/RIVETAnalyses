@@ -132,13 +132,13 @@ namespace Rivet {
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
   			int NN = 1.;
-  			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3))
+  			if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5))
         {
           collsys = pp200;
           _c["sow_pp200"]->fill();
           _c["xsec_pp200"]->fill(cs.first);
         }
-  			if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3))
+  			if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 5))
         {
           collsys = pp62;
           _c["sow_pp62"]->fill();

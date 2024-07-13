@@ -35,7 +35,7 @@ namespace Rivet {
             if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 5)) collSys = AuAu130;
       }
       }
 

@@ -41,8 +41,16 @@ namespace Rivet {
         const ParticlePair& beam = beams();
 
         if (beamOpt == "NONE") {
-        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collsys = AuAu200;
-        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collsys = pp510;
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+        {
+          float NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 510*NN, 1E-3)) collsys = AuAu200;
+        }
+        else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+        {
+          float NN = 1.;
+          if (fuzzyEquals(sqrtS()/GeV, 510*NN, 1E-3)) collsys = pp510;
+        }
         }
 
         if(beamOpt=="PP510") collsys = pp510;

@@ -18,7 +18,7 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
 Options:
- - beam=AUAU,PP
+ - beam=AUAU200
 Description: Flow coefficients $v_n$ for $n$ = 2, 3, 4, characterizing the anisotropic collective flow in Au+Au collisions at $\sqrt{s_{NN}}$ = 200 GeV, are measured relative to event planes $\Psi{_n}$ determined at large rapidity. We report $v_n$ as a function of transverse momentum and collision centrality, and study the correlations among the event planes of different order $n$. The $v_n$ are well described by hydrodynamic models which employ a Glauber Monte Carlo initial state geometry with fluctuations, providing additional constraining power on the interplay between initial conditions and the effects of viscosity as the system evolves. This new constraint improves precision of the extracted viscosity to entropy density ratio ${\eta}/s$.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against

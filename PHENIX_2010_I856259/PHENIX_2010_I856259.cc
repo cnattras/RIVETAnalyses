@@ -175,9 +175,17 @@ void binShift(YODA::Histo1D& histogram) {
 
 			if (beamOpt == "NONE") {
 
-				if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+				if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+				{
+					float NN = 197.;
+            		if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
+				}
 			
 				else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+				{
+					float NN = 1.;
+            		if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
+				}
 			}
 
 			else if (beamOpt == "PP200") collSys = pp;

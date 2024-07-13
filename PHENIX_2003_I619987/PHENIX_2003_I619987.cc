@@ -90,7 +90,11 @@ public:
         //In case "NONE" is given as option
         const ParticlePair& beam = beams();
         if (beamOpt == "NONE"){
-            if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+            if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+                {
+                    float NN = 197.;
+                    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
+                }
         }
         
         // Declare centrality projection for centrality estimation

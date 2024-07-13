@@ -77,10 +77,25 @@ namespace Rivet {
           const ParticlePair& beam = beams();
           
           if (beamOpt == "NONE") {
-          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
-          else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
-          else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) collSys = DAu200;
-          else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = DAu200;
+          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+          {
+            float NN = 197.;
+            if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+          }  
+          else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+          {
+            float NN = 1.;
+            if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = pp;
+          }
+          else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
+          {
+            // checking energy using form sqrt{s_{NN}}/(num_nucleons1*num_nucleons2)
+            if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2), 1)) collSys = DAu200;
+          }
+          else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020)
+          {
+            if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2) , 1)) collSys = DAu200;
+          }
           }
 
           //check the collision system
