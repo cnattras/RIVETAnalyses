@@ -615,7 +615,7 @@ namespace Rivet {
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
       }
 		}
-
+		if (collSys == AuAu200){
 		pdN_dy["Piplus"]->fill(c, Piplus.size());
 		pdN_dy["Piminus"]->fill(c, Piminus.size());
 		pdN_dy["Kplus"]->fill(c, Kplus.size());
@@ -1781,6 +1781,7 @@ namespace Rivet {
 				hPi0["AUAU60_92"]->fill(p.pT()/GeV);	//Rcp denominator for Pi0
 			}
 		}
+	}
 	}
 
 

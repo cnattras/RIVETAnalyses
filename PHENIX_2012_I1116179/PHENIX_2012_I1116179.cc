@@ -112,7 +112,7 @@ namespace Rivet {
 	  //cout << "c=" << c << endl;
     //for (auto& w : event.weights()) cout << " " << w << endl;
 
- //   if(beam=="AUAU")
+    if(collSys==AUAU)
     {
 
       if(c > 0. && c < 5.) 

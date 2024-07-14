@@ -211,6 +211,7 @@ void binShift(YODA::Histo1D& histogram) {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (collSys == AuAu130){
       const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
       const double cent = centProj();
       Particles particles = applyProjection<PrimaryParticles>(event,"cp").particles();
@@ -411,6 +412,7 @@ void binShift(YODA::Histo1D& histogram) {
           }
         }
         }
+    }
     }
 
 

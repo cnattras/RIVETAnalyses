@@ -208,7 +208,11 @@ namespace Rivet {
         beamOpt = getOption<string>("beam", "NONE");
 
         if (beamOpt == "NONE") {
-        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970) collSys = AuAu200;
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+        {
+          float NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+        }
         }
 
         if (beamOpt == "AuAu200") collSys = AuAu200;
@@ -245,7 +249,7 @@ namespace Rivet {
 
       /// Perform the per-event analysis
       void analyze(const Event& event) {
-
+        if (collSys == AuAu200){
         // A. Get Centrality
         const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
         const double cent = centProj();
@@ -317,6 +321,7 @@ namespace Rivet {
           }
         }
 
+      }
       }
 
       /// Normalise histograms etc., after the run

@@ -56,6 +56,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (collSys == AuAu130){
 
         double totalEt = 0;
         double deltaeta = 1; 
@@ -75,6 +76,7 @@ namespace Rivet {
         if (collSys == AuAu130){
           _hist_E->fill(c,totalEt/deltaeta);
         }
+    }
     }
 
 
