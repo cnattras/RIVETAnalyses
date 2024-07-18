@@ -10,3 +10,5 @@ Nearly done!
 - bin shift correction added
 
 -new plots added from .yoda file from hep data, some were missing. 
+
+running fine but segfaulting in RunAnalysis.sh, won't run jobs - Josie Hakanson 7/18/24
