@@ -573,7 +573,7 @@ void binShift(YODA::Histo1D& histogram) {
 
       vector<int> centBins = {0, 5, 15, 30, 60, 92};
 
-      for(int i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
+      for(size_t i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
       {
               string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
               double normCent = 1./_c[scounter]->sumW();
