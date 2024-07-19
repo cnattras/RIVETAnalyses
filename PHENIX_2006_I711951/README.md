@@ -11,3 +11,8 @@ Problems fixed by Olivia Bartoshesky, analysis pending higher statistics.
 - updated to use ALICE projection. 
 - Identifies particles through generator or flags.
 - Bin shift correction added. 
+
+To Do:
+Make spectra plots logarithmic!
+Double check if it should be 1/2pi pT in the denominator
+Double check that the data look like they are in agreement with the HEPData entry - the plots in Rivet appear to have unusually large uncertainties
