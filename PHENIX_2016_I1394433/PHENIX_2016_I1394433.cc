@@ -138,6 +138,10 @@ namespace Rivet {
     
         book(_hist_HeAu_E_200, "d27-x01-y03", refData(27,1,3));
         book(_hist_HeAu_Ch_200, "d28-x01-y03", refData(28,1,3));
+
+    // Final State projection
+      const FinalState fs(Cuts::abseta < 0.35);
+      declare(fs, "fs");
       
         
      declare(ALICE::PrimaryParticles(Cuts::abseta < 0.35 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
@@ -157,6 +161,9 @@ namespace Rivet {
         
         //get charged particles
         Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+
+        //get fs particles
+        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
         
         //get centrality info
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
@@ -167,7 +174,11 @@ namespace Rivet {
         for(const Particle& p : chargedParticles)
         {
                 nchcounter ++;
-                sumET += p.Et()/GeV;
+        }
+
+        for(const Particle& part : fsParticles)
+        {
+            sumET += part.Et()/GeV;
         }
         
         
