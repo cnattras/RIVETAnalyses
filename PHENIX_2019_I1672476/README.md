@@ -7,6 +7,13 @@ bin shift correction added
 
 "vs cent0" and similar needs to be removed in titles.
 
-These two plots are not consistent:
-d04-x01-y02, d18-x01-y01
-I think the profile does not do the right thing.  They are both filled the same way with the same observable.  I think this is a bug.
+Please turn off the following plots in the output:
+*_norm
+Take these out - these are NOT as labeled: 
+d03-x01-y01, d04-x01-y01, d04-x01-y02, d06-x01-y01 -  d11-x01-y01
+
+Please double check that there really are (real) charged particle multiplicities in 62.4 and 39 GeV implemented.
+
+Note that the HEPData are here
+https://www.hepdata.net/record/ins1672476
+but the order got scrambled.
