@@ -620,10 +620,10 @@ namespace Rivet {
     	if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           float NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AUAU200;
       }
 		}
-		if (collSys == AuAu200){
+		if (collSys == AUAU200){
 		pdN_dy["Piplus"]->fill(c, Piplus.size());
 		pdN_dy["Piminus"]->fill(c, Piminus.size());
 		pdN_dy["Kplus"]->fill(c, Kplus.size());
@@ -2107,7 +2107,7 @@ namespace Rivet {
 	map<string, Histo1DPtr> hPPi;
 
 	string beamOpt;
-    enum CollisionSystem {AuAu200};
+    enum CollisionSystem {AUAU200};
     CollisionSystem collSys;
 	};
 
