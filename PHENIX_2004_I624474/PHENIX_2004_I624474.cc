@@ -1,14 +1,22 @@
 // -*- C++ -*-
 #include "Rivet/Analysis.hh"
+#include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
-#include "Rivet/Projections/PrimaryParticles.hh"
-#include "Rivet/Projections/UnstableParticles.hh"
+#include "Rivet/Projections/PromptFinalState.hh"
+#include "Rivet/Tools/Cuts.hh"
+#include "Rivet/Projections/SingleValueProjection.hh"
+#include "Rivet/Projections/CentralityProjection.hh"
+#include "Rivet/Tools/AliceCommon.hh"
+#include "Rivet/Projections/AliceCommon.hh"
 #include "../Centralities/RHICCentrality.hh"
 #include <math.h>
+#include <fstream>
 #include <iostream>
+#include <string>
 #define _USE_MATH_DEFINES
 namespace Rivet {
 
