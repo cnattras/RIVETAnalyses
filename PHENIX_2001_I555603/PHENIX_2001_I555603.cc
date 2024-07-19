@@ -96,7 +96,7 @@ namespace Rivet {
     map<string, CounterPtr> _c;
     Profile1DPtr _hist_E;
     string beamOpt;
-    enum CollisionSystem {AuAu130};
+    enum CollisionSystem {NONE, AuAu130};
     CollisionSystem collSys;
     /// @}
 
