@@ -10,3 +10,5 @@ update:
 - Nuclear modification factors plotted on a linear scale.
 - The bin shift correction applied.
 - Turned off plots
+
+With Au+Au higher statistics - so far it looks good!
