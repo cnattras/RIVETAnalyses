@@ -12,3 +12,5 @@ This needs the bin shift correction applied.
 
 Update: Added bin shift correction and divide by zero protection. Added beam options.
     - histograms turned off
+
+This has some bug with the spectra.  The normalization is off by orders of magnitudes.
