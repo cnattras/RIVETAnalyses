@@ -1901,7 +1901,7 @@ namespace Rivet {
 		binShift(*hPiPi["AUAU60_92Piplus"]);
 
 		//binShift(*hPiPi["AUAU0_5Kminus"]);
-		//binShift(*hPiPi["AUAU0_5kplus"]);
+		binShift(*hPiPi["AUAU0_5Kplus"]);
 		
 		
 
