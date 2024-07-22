@@ -1882,10 +1882,10 @@ namespace Rivet {
 		binShift(*hAUAU_Yields["Pbar92"]);
 		binShift(*hAUAU_Yields["Pbar60_92"]);
 
-		/*binShift(*hPiPi["AUAU0_5Piminus"]); 
+		binShift(*hPiPi["AUAU0_5Piminus"]); 
 		binShift(*hPiPi["AUAU0_5Piplus"]); 
 
-		binShift(*hK["AUAU0_10"]);
+		/*binShift(*hK["AUAU0_10"]);
 		binShift(*hK["AUAU0_92"]);
 
 		binShift(*hP["AUAU0_10"]);
