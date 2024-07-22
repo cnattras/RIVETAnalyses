@@ -1868,7 +1868,7 @@ namespace Rivet {
 		binShift(*hAUAU_Yields["Protons92"]);
 		binShift(*hAUAU_Yields["Protons60_92"]);
 
-		/*binShift(*hAUAU_Yields["Pbarmin"]);
+		binShift(*hAUAU_Yields["Pbarmin"]);
 		binShift(*hAUAU_Yields["Pbar5"]);
 		binShift(*hAUAU_Yields["Pbar10"]);
 		binShift(*hAUAU_Yields["Pbar15"]);
@@ -1882,7 +1882,7 @@ namespace Rivet {
 		binShift(*hAUAU_Yields["Pbar92"]);
 		binShift(*hAUAU_Yields["Pbar60_92"]);
 
-		binShift(*hPiPi["AUAU0_5Piminus"]); 
+		/*binShift(*hPiPi["AUAU0_5Piminus"]); 
 		binShift(*hPiPi["AUAU0_5Piplus"]); 
 
 		binShift(*hK["AUAU0_10"]);
