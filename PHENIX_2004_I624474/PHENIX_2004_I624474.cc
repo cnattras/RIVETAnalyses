@@ -1826,8 +1826,8 @@ namespace Rivet {
 		binShift(*hAUAU_Yields["Piminus92"]);
 		binShift(*hAUAU_Yields["Piminus60_92"]);
 
-		/*binShift(*hAUAU_Yields["Kplusmin"]);
-		binShift(*hAUAU_Yields["Kplus5"]);
+		binShift(*hAUAU_Yields["Kplusmin"]);
+		/*binShift(*hAUAU_Yields["Kplus5"]);
 		binShift(*hAUAU_Yields["Kplus10"]);
 		binShift(*hAUAU_Yields["Kplus15"]);
 		binShift(*hAUAU_Yields["Kplus20"]);
