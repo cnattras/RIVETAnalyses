@@ -1840,7 +1840,7 @@ namespace Rivet {
 		binShift(*hAUAU_Yields["Kplus92"]);
 		binShift(*hAUAU_Yields["Kplus60_92"]);
 
-		/*binShift(*hAUAU_Yields["Kminusmin"]);
+		binShift(*hAUAU_Yields["Kminusmin"]);
 		binShift(*hAUAU_Yields["Kminus5"]);
 		binShift(*hAUAU_Yields["Kminus10"]);
 		binShift(*hAUAU_Yields["Kminus15"]);
@@ -1854,7 +1854,7 @@ namespace Rivet {
 		binShift(*hAUAU_Yields["Kminus92"]);
 		binShift(*hAUAU_Yields["Kminus60_92"]);
 
-		binShift(*hAUAU_Yields["Protonsmin"]);
+		/*binShift(*hAUAU_Yields["Protonsmin"]);
 		binShift(*hAUAU_Yields["Protons5"]);
 		binShift(*hAUAU_Yields["Protons10"]);
 		binShift(*hAUAU_Yields["Protons15"]);
