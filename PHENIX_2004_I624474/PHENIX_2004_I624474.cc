@@ -70,9 +70,6 @@ namespace Rivet {
 	const UnstableParticles np(Cuts::abseta < .35 && Cuts::abspid == 111);
 	declare(np, "np");
 
-	// added this line - josie hakanson - not sure what it'll do, hopefully help!
-	beamOpt = getOption<string>("beam", "NONE");
-
 	declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
 	// Book histograms
@@ -1801,7 +1798,7 @@ namespace Rivet {
 
 
 	void finalize() {
-		binShift(*hAUAU_Yields["Piplusmin"]);
+		/*binShift(*hAUAU_Yields["Piplusmin"]);
 		binShift(*hAUAU_Yields["Piplus5"]);
 		binShift(*hAUAU_Yields["Piplus10"]);
 		binShift(*hAUAU_Yields["Piplus15"]);
@@ -1904,7 +1901,7 @@ namespace Rivet {
 		binShift(*hPiPi["AUAU0_92Piplus"]);
 
 		binShift(*hPiPi["AUAU0_5Kminus"]);
-		binShift(*hPiPi["AUAU0_5kplus"]);
+		binShift(*hPiPi["AUAU0_5kplus"]);*/
 		
 		
 
