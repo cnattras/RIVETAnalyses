@@ -54,7 +54,7 @@ void binShift(YODA::Histo1D& histogram) {
       // The basic final-state projection:
       // all final-state particles within
       // the given eta acceptance
-      const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
+      const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5);
       declare(cp,"cp");  
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
