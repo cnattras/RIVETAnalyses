@@ -1892,7 +1892,7 @@ namespace Rivet {
 		binShift(*hP["AUAU60_92"]);
 
 		binShift(*hPi0["AUAU0_10"]);
-		//binShift(*hPi0["AUAU60_92"]);
+		binShift(*hPi0["AUAU60_92"]);
 
 		binShift(*hPiPi["AUAU0_5Piminus"]);
 		binShift(*hPiPi["AUAU0_5Piplus"]);
