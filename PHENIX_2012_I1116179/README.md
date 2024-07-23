@@ -8,3 +8,6 @@ Update: Added bin shift and beam options
 
 To do:
 This does not actually look at prompt photons.  It looks at all prompt particles.  That is helpful for debugging because it helps us see that histograms are filled, but it needs to be updated so it selects the CORRECT particles.  Please see PHENIX_2019_I1672476 for correct selection of direct photons.
+
+Update:
+Changed the selection to just be prompt photons.

@@ -67,8 +67,8 @@ namespace Rivet {
 	  //const FinalState fs(Cuts::abseta < 0.5 && Cuts::pT > 0.15*GeV);
 	  //declare(fs, "fs");
 
-	  const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pT > 4.0 && Cuts::pT < 22.0);
-	  declare(pfs, "pfs");
+	  const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
+		declare(pfs, "pfs");
 
 //	  const UnstableParticles up(Cuts::abseta < 0.5 && Cuts::abspid == 421);
 //	  declare(up, "up");
@@ -106,13 +106,14 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
 
-      Particles pfsParticles = applyProjection<FinalState>(event,"pfs").particles();
+      const PromptFinalState pfs = apply<PromptFinalState>(event, "pfs");
+      const Particles photons = pfs.particles(Cuts::pT > 4.*GeV && Cuts::pT < 22.*GeV);
 
 
 	  //cout << "c=" << c << endl;
     //for (auto& w : event.weights()) cout << " " << w << endl;
 
-    if(collSys==AUAU)
+    if(collSys==AuAu)
     {
 
       if(c > 0. && c < 5.) 
@@ -157,19 +158,19 @@ namespace Rivet {
 
       
 
-      for(const Particle& p : pfsParticles) 
+      for(const Particle& p : photons)
       {
-        if(c >= 0. && c < 5. && p.pid() == 22) _h["dir_photon_AuAu0005"]->fill(p.pT()/GeV);
-        else if (c < 10. && p.pid() == 22) _h["dir_photon_AuAu0510"]->fill(p.pT()/GeV);
-        else if (c < 15. && p.pid() == 22) _h["dir_photon_AuAu1015"]->fill(p.pT()/GeV);
-        else if (c < 20. && p.pid() == 22) _h["dir_photon_AuAu1520"]->fill(p.pT()/GeV);
-        else if (c < 30. && p.pid() == 22) _h["dir_photon_AuAu2030"]->fill(p.pT()/GeV);
-        else if (c < 40. && p.pid() == 22) _h["dir_photon_AuAu3040"]->fill(p.pT()/GeV);
-        else if (c < 50. && p.pid() == 22) _h["dir_photon_AuAu4050"]->fill(p.pT()/GeV);
-        else if (c < 60. && p.pid() == 22) _h["dir_photon_AuAu5060"]->fill(p.pT()/GeV);
-        else if (c < 92. && p.pid() == 22) _h["dir_photon_AuAu6092"]->fill(p.pT()/GeV);
+        if(c >= 0. && c < 5.) _h["dir_photon_AuAu0005"]->fill(p.pT()/GeV);
+        else if (c < 10.) _h["dir_photon_AuAu0510"]->fill(p.pT()/GeV);
+        else if (c < 15.) _h["dir_photon_AuAu1015"]->fill(p.pT()/GeV);
+        else if (c < 20.) _h["dir_photon_AuAu1520"]->fill(p.pT()/GeV);
+        else if (c < 30.) _h["dir_photon_AuAu2030"]->fill(p.pT()/GeV);
+        else if (c < 40.) _h["dir_photon_AuAu3040"]->fill(p.pT()/GeV);
+        else if (c < 50.) _h["dir_photon_AuAu4050"]->fill(p.pT()/GeV);
+        else if (c < 60.) _h["dir_photon_AuAu5060"]->fill(p.pT()/GeV);
+        else if (c < 92.) _h["dir_photon_AuAu6092"]->fill(p.pT()/GeV);
         
-        if(c > 0. && c < 92. && p.pid() == 22 ) 
+        if(c > 0. && c < 92.) 
           _h["dir_photon_AuAu0092"]->fill(p.pT()/GeV);
 
       }
