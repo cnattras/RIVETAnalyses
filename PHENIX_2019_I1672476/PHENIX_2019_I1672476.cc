@@ -89,9 +89,9 @@ public:
 		//stores number of events for later normalization of inv yields
 		
 
-		book(_p["AuAu62_c0-20_norm"], "AuAu62_c0-20_norm", 1, 0., 1.);
-		book(_p["AuAu62_c0-86_norm"], "AuAu62_C0-86_norm", 1, 0., 1.);
-		book(_p["AuAu39_c0-86_norm"], "AuAu39_c0-86_norm", 1, 0., 1.);
+		book(_p["AuAu62_c0-20_norm"], "_AuAu62_c0-20_norm", 1, 0., 1.);
+		book(_p["AuAu62_c0-86_norm"], "_AuAu62_C0-86_norm", 1, 0., 1.);
+		book(_p["AuAu39_c0-86_norm"], "_AuAu39_c0-86_norm", 1, 0., 1.);
 		//these are used to store the charged particle muliplicity dN(ch)/dEta, for later normalization of inv. yields
 	}
 

@@ -6,9 +6,12 @@ Counters need to be turned off in output.
 bin shift correction added
 
 "vs cent0" and similar needs to be removed in titles.
+- removed
 
 Please turn off the following plots in the output:
 *_norm
+- turned off 
+
 Take these out - these are NOT as labeled: 
 d03-x01-y01, d04-x01-y01, d04-x01-y02, d06-x01-y01 -  d11-x01-y01
   - removed by Josie Hakanson (7-23-24)
