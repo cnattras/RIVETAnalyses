@@ -184,7 +184,7 @@ namespace Rivet {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      std::cout << "Event number: " << event.genEvent()->event_number() << std::endl;
+   
       _histos["number_of_events"]->fill(0.5, 1.0);
 
       //Get final state particles, e.g. all particles "detected"
@@ -205,8 +205,8 @@ namespace Rivet {
       jetsfs.calc(ALICEparticlesall);
 
       Jets jets = jetsfs.jetsByPt(Cuts::abseta < 0.5 && Cuts::pT >= 5.*GeV && Cuts::pT <= 40.*GeV);
-      std::cout << "Number of jets: " << jets.size() << std::endl;
-      std::cout << "Number of particles: " << ALICEparticles.size() << std::endl;
+      //std::cout << "Number of jets: " << jets.size() << std::endl;
+      //std::cout << "Number of particles: " << ALICEparticles.size() << std::endl;
       for(auto jet : jets)
       {
         // why is this not counting the number of events?
@@ -218,6 +218,22 @@ namespace Rivet {
             // make sure dphi is in [-pi/2,3pi/2] range
             if (dphi > 3*3.14159/2) dphi -= 2*3.14159;
             if (dphi < -3*3.14159/2) dphi += 2*3.14159;
+
+            // find a
+            double a = 1.;
+            if (deta >= 1.4 || deta <= -1.4){
+              a = 0.;
+            }
+            else if (deta <= 0.5 || deta >= -0.5){
+              a = 1.;
+            }
+            else if (deta > 0.5 && deta < 1.4){
+              a = (-1*deta + 0.5)*(1/0.9);
+            }
+            else if (deta < -0.5 && deta > -1.4){
+              a = -1*(-1*deta + 0.5)*(1/0.9);
+            }
+
             //put logic to fill the appropriate associated hadron momentum
             // according to the definition above
             if (particle.pid() == PID::PIPLUS || particle.pid() == PID::PIMINUS)
@@ -225,37 +241,37 @@ namespace Rivet {
               if (particle.pt() > 1 && particle.pt() < 1.5)
               {
                 _histos["dphi_pi_1_1.5"]->fill(dphi);
-                _histos["deta_pi_1_1.5"]->fill(deta);
+                _histos["deta_pi_1_1.5"]->fill(deta,1/a);
               }
               else if (particle.pt() > 1.5 && particle.pt() < 2)
               {
                 _histos["dphi_pi_1.5_2"]->fill(dphi);
-                _histos["deta_pi_1.5_2"]->fill(deta);
+                _histos["deta_pi_1.5_2"]->fill(deta,1/a);
               }
               else if (particle.pt() > 2 && particle.pt() < 3)
               {
                 _histos["dphi_pi_2_3"]->fill(dphi);
-                _histos["deta_pi_2_3"]->fill(deta);
+                _histos["deta_pi_2_3"]->fill(deta,1/a);
               }
               else if (particle.pt() > 3 && particle.pt() < 4)
               {
                 _histos["dphi_pi_3_4"]->fill(dphi);
-                _histos["deta_pi_3_4"]->fill(deta);
+                _histos["deta_pi_3_4"]->fill(deta,1/a);
               }
               else if (particle.pt() > 4 && particle.pt() < 5)
               {
                 _histos["dphi_pi_4_5"]->fill(dphi);
-                _histos["deta_pi_4_5"]->fill(deta);
+                _histos["deta_pi_4_5"]->fill(deta,1/a);
               }
               else if (particle.pt() > 5 && particle.pt() < 6)
               {
                 _histos["dphi_pi_5_6"]->fill(dphi);
-                _histos["deta_pi_5_6"]->fill(deta);
+                _histos["deta_pi_5_6"]->fill(deta,1/a);
               }
               else if (particle.pt() > 6 && particle.pt() < 10)
               {
                 _histos["dphi_pi_6_10"]->fill(dphi);
-                _histos["deta_pi_6_10"]->fill(deta);
+                _histos["deta_pi_6_10"]->fill(deta,1/a);
               }
             }
             if (particle.pid() == PID::PROTON)
@@ -263,37 +279,37 @@ namespace Rivet {
                 if (particle.pt() > 1 && particle.pt() < 1.5)
               {
                 _histos["dphi_p_1_1.5"]->fill(dphi);
-                _histos["deta_p_1_1.5"]->fill(deta);
+                _histos["deta_p_1_1.5"]->fill(deta,1/a);
               }
               else if (particle.pt() > 1.5 && particle.pt() < 2)
               {
                 _histos["dphi_p_1.5_2"]->fill(dphi);
-                _histos["deta_p_1.5_2"]->fill(deta);
+                _histos["deta_p_1.5_2"]->fill(deta,1/a);
               }
               else if (particle.pt() > 2 && particle.pt() < 3)
               {
                 _histos["dphi_p_2_3"]->fill(dphi);
-                _histos["deta_p_2_3"]->fill(deta);
+                _histos["deta_p_2_3"]->fill(deta,1/a);
               }
               else if (particle.pt() > 3 && particle.pt() < 4)
               {
                 _histos["dphi_p_3_4"]->fill(dphi);
-                _histos["deta_p_3_4"]->fill(deta);
+                _histos["deta_p_3_4"]->fill(deta,1/a);
               }
               else if (particle.pt() > 4 && particle.pt() < 5)
               {
                 _histos["dphi_p_4_5"]->fill(dphi);
-                _histos["deta_p_4_5"]->fill(deta);
+                _histos["deta_p_4_5"]->fill(deta,1/a);
               }
               else if (particle.pt() > 5 && particle.pt() < 6)
               {
                 _histos["dphi_p_5_6"]->fill(dphi);
-                _histos["deta_p_5_6"]->fill(deta);
+                _histos["deta_p_5_6"]->fill(deta,1/a);
               }
               else if (particle.pt() > 6 && particle.pt() < 10)
               {
                 _histos["dphi_p_6_10"]->fill(dphi);
-                _histos["deta_p_6_10"]->fill(deta);
+                _histos["deta_p_6_10"]->fill(deta,1/a);
               }
             }
             if (particle.pid() == PID::KPLUS || particle.pid() == PID::KMINUS)
@@ -301,37 +317,37 @@ namespace Rivet {
                 if (particle.pt() > 1 && particle.pt() < 1.5)
               {
                 _histos["dphi_k_1_1.5"]->fill(dphi);
-                _histos["deta_k_1_1.5"]->fill(deta);
+                _histos["deta_k_1_1.5"]->fill(deta,1/a);
               }
               else if (particle.pt() > 1.5 && particle.pt() < 2)
               {
                 _histos["dphi_k_1.5_2"]->fill(dphi);
-                _histos["deta_k_1.5_2"]->fill(deta);
+                _histos["deta_k_1.5_2"]->fill(deta,1/a);
               }
               else if (particle.pt() > 2 && particle.pt() < 3)
               {
                 _histos["dphi_k_2_3"]->fill(dphi);
-                _histos["deta_k_2_3"]->fill(deta);
+                _histos["deta_k_2_3"]->fill(deta,1/a);
               }
               else if (particle.pt() > 3 && particle.pt() < 4)
               {
                 _histos["dphi_k_3_4"]->fill(dphi);
-                _histos["deta_k_3_4"]->fill(deta);
+                _histos["deta_k_3_4"]->fill(deta,1/a);
               }
               else if (particle.pt() > 4 && particle.pt() < 5)
               {
                 _histos["dphi_k_4_5"]->fill(dphi);
-                _histos["deta_k_4_5"]->fill(deta);
+                _histos["deta_k_4_5"]->fill(deta,1/a);
               }
               else if (particle.pt() > 5 && particle.pt() < 6)
               {
                 _histos["dphi_k_5_6"]->fill(dphi);
-                _histos["deta_k_5_6"]->fill(deta);
+                _histos["deta_k_5_6"]->fill(deta,1/a);
               }
               else if (particle.pt() > 6 && particle.pt() < 10)
               {
                 _histos["dphi_k_6_10"]->fill(dphi);
-                _histos["deta_k_6_10"]->fill(deta);
+                _histos["deta_k_6_10"]->fill(deta,1/a);
               }
             }
            
@@ -348,7 +364,7 @@ namespace Rivet {
 
       float numJets = _histos["number_of_jets"]->bin(0).numEntries();
       // why is number of jets = 0?
-      std::cout << "Number of jets: " << numJets << std::endl;
+      //std::cout << "Number of jets: " << numJets << std::endl;
       // extend for all histograms
       /*_histos["dphi_pi"]->scaleW(1/(numJets));
       _histos["deta_pi"]->scaleW(1/(numJets));
@@ -454,7 +470,6 @@ namespace Rivet {
       double entries = 0.;
       char histo_name[100];
       sprintf(histo_name,"dphi_p_%s",bins[i]);
-      std::cout<< histo_name << std::endl;
       double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
       _histos["yield_p"]->fillBin(_histos["yield_p"]->binIndexAt(midbin[i]), yield, 1);
     }
@@ -465,7 +480,6 @@ namespace Rivet {
       double entries = 0.;
       char histo_name[100];
       sprintf(histo_name,"dphi_pi_%s",bins[i]);
-      std::cout<< histo_name << std::endl;
       double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
       _histos["yield_pi"]->fillBin(_histos["yield_pi"]->binIndexAt(midbin[i]), yield, 1);
     }
@@ -476,7 +490,6 @@ namespace Rivet {
       double entries = 0.;
       char histo_name[100];
       sprintf(histo_name,"dphi_k_%s",bins[i]);
-      std::cout<< histo_name << std::endl;
       double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
       _histos["yield_k"]->fillBin(_histos["yield_k"]->binIndexAt(midbin[i]), yield, 1);
     }
