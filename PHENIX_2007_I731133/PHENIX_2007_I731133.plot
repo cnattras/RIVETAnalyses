@@ -74,6 +74,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y01
 Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $0-88\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{dA}$
+LogY=0
 END PLOT
 
 #Figure 16.1
@@ -81,6 +82,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y02
 Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $0-20\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{dA}$
+LogY=0
 END PLOT
 
 #Figure 16.2
@@ -88,6 +90,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y03
 Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $20-40\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{dA}$
+LogY=0
 END PLOT
 
 #Figure 16.3
@@ -95,6 +98,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y04
 Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $40-60\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{dA}$
+LogY=0
 END PLOT
 
 #Figure 16.4
@@ -102,6 +106,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y05
 Title=$R_{dA}$ for $\eta$ measured in $d$+Au collisions for $60-88\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{dA}$
+LogY=0
 END PLOT
 
 #Figure 19.1
@@ -109,6 +114,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y01
 Title=$R_{AA}$ for $\eta$ measured in $d$+Au collisions for $0-20\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 #Figure 19.2
@@ -116,6 +122,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y02
 Title=$R_{AA}$ for $\eta$ measured in $d$+Au collisions for $20-60\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 #Figure 19.3
@@ -123,6 +130,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y03
 Title=$R_{AA}$ for $\eta$ measured in $d$+Au collisions for $60-92\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 #Figure 21
