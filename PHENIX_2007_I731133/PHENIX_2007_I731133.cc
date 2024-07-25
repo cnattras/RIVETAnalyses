@@ -182,66 +182,66 @@ namespace Rivet {
           //d07-x01-y01: 00-88% centrality (minimum bias)
           string refname13 = mkAxisCode(7, 1, 1);
           const Scatter2D& refdata13 = refData(refname13);
-          book(hEtaPt["ptyieldsdAuc0088b"], refname13 + "_dAuc0088_Eta", refdata13);
-          book(hCrossSec["ppEtadAuc0088"], refname13 + "_pp_Eta", refdata13);
+          book(hEtaPt["ptyieldsdAuc0088b"],  "_" + refname13 + "_dAuc0088_Eta", refdata13);
+          book(hCrossSec["ppEtadAuc0088"],  "_" + refname13 + "_pp_Eta", refdata13);
           book(hRda["EtadAuc0088"], refname13);
           
           //d07-x01-y02: 00-20% centrality
           string refname14 = mkAxisCode(7, 1, 2);
           const Scatter2D& refdata14 = refData(refname14);
-          book(hEtaPt["ptyieldsdAuc0020b"], refname14 + "_dAuc0020_Eta", refdata14);
-          book(hCrossSec["ppEtadAuc0020"], refname14 + "_pp_Eta", refdata14);
+          book(hEtaPt["ptyieldsdAuc0020b"],  "_" + refname14 + "_dAuc0020_Eta", refdata14);
+          book(hCrossSec["ppEtadAuc0020"],  "_" + refname14 + "_pp_Eta", refdata14);
           book(hRda["EtadAuc0020"], refname14);
           
           //d07-x01-y03: 20-40% centrality
           string refname15 = mkAxisCode(7, 1, 3);
           const Scatter2D& refdata15 = refData(refname15);
-          book(hEtaPt["ptyieldsdAuc2040b"], refname15 + "_dAuc2040_Eta", refdata15);
-          book(hCrossSec["ppEtadAuc2040"], refname15 + "_pp_Eta", refdata15);
+          book(hEtaPt["ptyieldsdAuc2040b"],  "_" + refname15 + "_dAuc2040_Eta", refdata15);
+          book(hCrossSec["ppEtadAuc2040"],  "_" + refname15 + "_pp_Eta", refdata15);
           book(hRda["EtadAuc2040"], refname15);
           
           //d07-x01-y04: 40-60% centrality
           string refname16 = mkAxisCode(7, 1, 4);
           const Scatter2D& refdata16 = refData(refname16);
-          book(hEtaPt["ptyieldsdAuc4060b"], refname16 + "_dAuc4060_Eta", refdata16);
-          book(hCrossSec["ppEtadAuc4060"], refname16 + "_pp_Eta", refdata16);
+          book(hEtaPt["ptyieldsdAuc4060b"],  "_" + refname16 + "_dAuc4060_Eta", refdata16);
+          book(hCrossSec["ppEtadAuc4060"],  "_" + refname16 + "_pp_Eta", refdata16);
           book(hRda["EtadAuc4060"], refname16);
           
           //d07-x01-y05: 60-88% centrality
           string refname17 = mkAxisCode(7, 1, 5);
           const Scatter2D& refdata17 = refData(refname17);
-          book(hEtaPt["ptyieldsdAuc6088b"], refname17 + "_dAuc6088_Eta", refdata17);
-          book(hCrossSec["ppEtadAuc6088"], refname17 + "_pp_Eta", refdata17);
+          book(hEtaPt["ptyieldsdAuc6088b"],  "_" + refname17 + "_dAuc6088_Eta", refdata17);
+          book(hCrossSec["ppEtadAuc6088"],  "_" + refname17 + "_pp_Eta", refdata17);
           book(hRda["EtadAuc6088"], refname17);
           
           //Figure 17
           //d08-x01-y01: 00-20% centrality
           string refname18 = mkAxisCode(8, 1, 1);
           const Scatter2D& refdata18 = refData(refname18);
-          book(hEtaPt["ptyieldsAuAuc0020b"], refname18 + "_AuAuc0020_Eta", refdata18);
-          book(hCrossSec["ppEtaAuAuc0020"], refname18 + "_pp_Eta", refdata18);
+          book(hEtaPt["ptyieldsAuAuc0020b"],  "_" + refname18 + "_AuAuc0020_Eta", refdata18);
+          book(hCrossSec["ppEtaAuAuc0020"],  "_" + refname18 + "_pp_Eta", refdata18);
           book(hRaa["EtaAuAuc0020"], refname18);
           
           //d08-x01-y02: 20-60% centrality
           string refname19 = mkAxisCode(8, 1, 2);
           const Scatter2D& refdata19 = refData(refname19);
-          book(hEtaPt["ptyieldsAuAuc2060b"], refname19 + "_AuAuc2060_Eta", refdata19);
-          book(hCrossSec["ppEtaAuAuc2060"], refname19 + "_pp_Eta", refdata19);
+          book(hEtaPt["ptyieldsAuAuc2060b"],  "_" + refname19 + "_AuAuc2060_Eta", refdata19);
+          book(hCrossSec["ppEtaAuAuc2060"],  "_" + refname19 + "_pp_Eta", refdata19);
           book(hRaa["EtaAuAuc2060"], refname19);
           
           //d08-x01-y03: 60-92% centrality
           string refname20 = mkAxisCode(8, 1, 3);
           const Scatter2D& refdata20 = refData(refname20);
-          book(hEtaPt["ptyieldsAuAuc6092b"], refname20 + "_AuAuc6092_Eta", refdata20);
-          book(hCrossSec["ppEtaAuAuc6092"], refname20 + "_pp_Eta", refdata20);
+          book(hEtaPt["ptyieldsAuAuc6092b"],  "_" + refname20 + "_AuAuc6092_Eta", refdata20);
+          book(hCrossSec["ppEtaAuAuc6092"],  "_" + refname20 + "_pp_Eta", refdata20);
           book(hRaa["EtaAuAuc6092"], refname20);    
           
           //Figure 18: eta/pion^0 ratio in pp collisions
           //d09-x01-y01
           string refname21 = mkAxisCode(9, 1, 1);
           const Scatter2D& refdata21 = refData(refname21);
-          book(hEtaPt["ptyieldsEta"], refname21 + "_pp_Eta", refdata21);
-          book(hPionPt["ptyieldsPion"], refname21 + "_pp_Pion", refdata21);
+          book(hEtaPt["ptyieldsEta"],  "_" + refname21 + "_pp_Eta", refdata21);
+          book(hPionPt["ptyieldsPion"],  "_" + refname21 + "_pp_Pion", refdata21);
           book(Ratiopp["EtaToPion"], refname21);
           
           
@@ -249,65 +249,65 @@ namespace Rivet {
           //d10-x01-y01: 00-88% centrality (minimum bias)
           string refname22 = mkAxisCode(10, 1, 1);
           const Scatter2D& refdata22 = refData(refname22);
-          book(hEtaPt["ptyieldsdAuc0088c"], refname22 + "_pp_Eta", refdata22);
-          book(hPionPt["ptyieldsdAuc0088"], refname22 + "_pp_Pion", refdata22);
+          book(hEtaPt["ptyieldsdAuc0088c"], "_" +  refname22 + "_pp_Eta", refdata22);
+          book(hPionPt["ptyieldsdAuc0088"],  "_" + refname22 + "_pp_Pion", refdata22);
           book(RatiodAu["EtaToPion0088"], refname22);
           
           //d10-x01-y02: 00-20% centrality
           string refname23 = mkAxisCode(10, 1, 2);
           const Scatter2D& refdata23 = refData(refname23);
-          book(hEtaPt["ptyieldsdAuc0020c"], refname23 + "_pp_Eta", refdata23);
-          book(hPionPt["ptyieldsdAuc0020"], refname23 + "_pp_Pion", refdata23);
+          book(hEtaPt["ptyieldsdAuc0020c"],  "_" + refname23 + "_pp_Eta", refdata23);
+          book(hPionPt["ptyieldsdAuc0020"],  "_" + refname23 + "_pp_Pion", refdata23);
           book(RatiodAu["EtaToPion0020"], refname23);
           
           //d10-x01-y03: 20-40% centrality
           string refname24 = mkAxisCode(10, 1, 3);
           const Scatter2D& refdata24 = refData(refname24);
-          book(hEtaPt["ptyieldsdAuc2040c"], refname24 + "_pp_Eta", refdata24);
-          book(hPionPt["ptyieldsdAuc2040"], refname24 + "_pp_Pion", refdata24);
+          book(hEtaPt["ptyieldsdAuc2040c"],  "_" + refname24 + "_pp_Eta", refdata24);
+          book(hPionPt["ptyieldsdAuc2040"],  "_" + refname24 + "_pp_Pion", refdata24);
           book(RatiodAu["EtaToPion2040"], refname24);
           
           //d10-x01-y04: 40-60% centrality
           string refname25 = mkAxisCode(10, 1, 4);
           const Scatter2D& refdata25 = refData(refname25);
-          book(hEtaPt["ptyieldsdAuc4060c"], refname25 + "_pp_Eta", refdata25);
-          book(hPionPt["ptyieldsdAuc4060"], refname25 + "_pp_Pion", refdata25);
+          book(hEtaPt["ptyieldsdAuc4060c"],  "_" + refname25 + "_pp_Eta", refdata25);
+          book(hPionPt["ptyieldsdAuc4060"],  "_" + refname25 + "_pp_Pion", refdata25);
           book(RatiodAu["EtaToPion4060"], refname25);
           
           //d10-x01-y05: 60-88% centrality
           string refname26 = mkAxisCode(10, 1, 5);
           const Scatter2D& refdata26 = refData(refname26);
-          book(hEtaPt["ptyieldsdAuc6088c"], refname26 + "_pp_Eta", refdata26);
-          book(hPionPt["ptyieldsdAuc6088"], refname26 + "_pp_Pion", refdata26);
+          book(hEtaPt["ptyieldsdAuc6088c"],  "_" + refname26 + "_pp_Eta", refdata26);
+          book(hPionPt["ptyieldsdAuc6088"],  "_" + refname26 + "_pp_Pion", refdata26);
           book(RatiodAu["EtaToPion6088"], refname26);
 
           //Figure 20: eta/pion^0 ratios in AuAu collisions
           //d11-x01-y01: 00-92% centrality (minimum bias)
           string refname27 = mkAxisCode(11, 1, 1);
           const Scatter2D& refdata27 = refData(refname27);
-          book(hEtaPt["ptyieldsAuAuc0092c"], refname27 + "_pp_Eta", refdata27);
-          book(hPionPt["ptyieldsAuAuc0092"], refname27 + "_pp_Pion", refdata27);
+          book(hEtaPt["ptyieldsAuAuc0092c"],  "_" + refname27 + "_pp_Eta", refdata27);
+          book(hPionPt["ptyieldsAuAuc0092"],  "_" + refname27 + "_pp_Pion", refdata27);
           book(RatioAuAu["EtaToPion0092"], refname27);
           
           //d11-x01-y02: 00-20% centrality
           string refname28 = mkAxisCode(11, 1, 2);
           const Scatter2D& refdata28 = refData(refname28);
-          book(hEtaPt["ptyieldsAuAuc0020c"], refname28 + "_pp_Eta", refdata28);
-          book(hPionPt["ptyieldsAuAuc0020"], refname28 + "_pp_Pion", refdata28);
+          book(hEtaPt["ptyieldsAuAuc0020c"],  "_" + refname28 + "_pp_Eta", refdata28);
+          book(hPionPt["ptyieldsAuAuc0020"],  "_" + refname28 + "_pp_Pion", refdata28);
           book(RatioAuAu["EtaToPion0020"], refname28);
           
           //d11-x01-y03: 20-60% centrality
           string refname29 = mkAxisCode(11, 1, 3);
           const Scatter2D& refdata29 = refData(refname29);
-          book(hEtaPt["ptyieldsAuAuc2060c"], refname29 + "_pp_Eta", refdata29);
-          book(hPionPt["ptyieldsAuAuc2060"], refname29 + "_pp_Pion", refdata29);
+          book(hEtaPt["ptyieldsAuAuc2060c"],  "_" + refname29 + "_pp_Eta", refdata29);
+          book(hPionPt["ptyieldsAuAuc2060"],  "_" + refname29 + "_pp_Pion", refdata29);
           book(RatioAuAu["EtaToPion2060"], refname29);
           
           //d11-x01-y04: 60-92% centrality
           string refname30 = mkAxisCode(11, 1, 4);
           const Scatter2D& refdata30 = refData(refname30);
-          book(hEtaPt["ptyieldsAuAuc6092c"], refname30 + "_pp_Eta", refdata30);
-          book(hPionPt["ptyieldsAuAuc6092"], refname30 + "_pp_Pion", refdata30);
+          book(hEtaPt["ptyieldsAuAuc6092c"],  "_" + refname30 + "_pp_Eta", refdata30);
+          book(hPionPt["ptyieldsAuAuc6092"],  "_" + refname30 + "_pp_Pion", refdata30);
           book(RatioAuAu["EtaToPion6092"], refname30); 
     }
 
