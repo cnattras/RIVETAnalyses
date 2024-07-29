@@ -59,18 +59,18 @@ public:
 		book(_h["AuAu62_c0-20"], 1, 1, 1);
 		book(_h["AuAu62_c0-86"], 1, 1, 2);
 		book(_h["AuAu39_c0-86"], 2, 1, 1);
-		book(_p["AuAu39_chPMult_c0-55"], 3, 1, 1);
-		book(_p["AuAu62_chPMult_c0-60"], 4, 1, 1);
+		//book(_p["AuAu39_chPMult_c0-55"], 3, 1, 1);
+		//book(_p["AuAu62_chPMult_c0-60"], 4, 1, 1);
 		book(_p["AuAu200_chPMult_c0-60"], 4, 1, 2);      
 		// book(_h["fig2-2-a"], 5, 1, 1); //these cannot be done with rivet
 		// book(_h["fig2-2-b"], 5, 1, 2);
 		// book(_h["fig2-2-c"], 5, 1, 3);
-		book(_p["AuAu62_chPMult_c0-40"], 6, 1, 1);
+		//book(_p["AuAu62_chPMult_c0-40"], 6, 1, 1);
 		book(_p["AuAu62_chPMult_c0-86"], 7, 1, 1);
 		book(_p["AuAu39_chPMult_c0-86"], 8, 1, 1);
 		book(_p["CuCu200_chPMult_c0-40"], 9, 1, 1);
 		book(_p["CuCu200_chPMult_c0-94"], 10, 1, 1);
-		book(_p["pp200_chPMult"], 11, 1, 1);
+		//book(_p["pp200_chPMult"], 11, 1, 1);
 		book(_p["AuAu62_phtYld_c0-40"], 12, 1, 1);
 		book(_p["AuAu62_phtYld_c0-86"], 13, 1, 1);
 		book(_p["AuAu39_phtYld_c0-86"], 14, 1, 1);
