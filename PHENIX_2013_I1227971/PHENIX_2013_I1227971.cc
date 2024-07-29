@@ -116,88 +116,88 @@ namespace Rivet {
 					//Histograms for the ratios Neg/Pos
 					string refname1 = mkAxisCode(7, 1, 1 + i);
 					const Scatter2D& refdata1 = refData(refname1);
-					book(rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1 + "_KaonNeg", refdata1);
-					book(rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1 + "_KaonPos", refdata1);
+					book(rKK_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname1 + "_KaonNeg", refdata1);
+					book(rKK_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname1 + "_KaonPos", refdata1);
 					book(RatioKaon["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1);
 
 					string refname2 = mkAxisCode(8, 1, 1 + i);
 					const Scatter2D& refdata2 = refData(refname2);
-					book(rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname2 + "_KaonNeg", refdata2);
-					book(rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname2 + "_KaonPos", refdata2);
+					book(rKK_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname2 + "_KaonNeg", refdata2);
+					book(rKK_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname2 + "_KaonPos", refdata2);
 					book(RatioKaon["dAuc" + std::to_string(dAUCentralityBins[i])], refname2);
 
 					string refname3 = mkAxisCode(9, 1, 1 + i);
 					const Scatter2D& refdata3 = refData(refname3);
-					book(rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname3 + "_PionNeg", refdata3);
-					book(rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname3 + "_PionPos", refdata3);
+					book(rpipi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname3 + "_PionNeg", refdata3);
+					book(rpipi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname3 + "_PionPos", refdata3);
 					book(RatioPion["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname3);
 
 					string refname4 = mkAxisCode(10, 1, 1 + i);
 					const Scatter2D& refdata4 = refData(refname4);
-					book(rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname4 + "_PionNeg", refdata4);
-					book(rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname4 + "_PionPos", refdata4);
+					book(rpipi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname4 + "_PionNeg", refdata4);
+					book(rpipi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname4 + "_PionPos", refdata4);
 					book(RatioPion["dAuc" + std::to_string(dAUCentralityBins[i])], refname4);
 
 					string refname5 = mkAxisCode(11, 1, 1 + i);
 					const Scatter2D& refdata5 = refData(refname5);
-					book(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname5 + "_ProtNeg", refdata5);
-					book(rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname5 + "_ProtPos", refdata5);
+					book(rpp_ProtNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname5 + "_ProtNeg", refdata5);
+					book(rpp_ProtPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname5 + "_ProtPos", refdata5);
 					book(RatioProt["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname5);
 
 					string refname6 = mkAxisCode(12, 1, 1 + i);
 					const Scatter2D& refdata6 = refData(refname6);
-					book(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname6 + "_ProtNeg", refdata6);
-					book(rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname6 + "_ProtPos", refdata6);
+					book(rpp_ProtNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname6 + "_ProtNeg", refdata6);
+					book(rpp_ProtPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname6 + "_ProtPos", refdata6);
 					book(RatioProt["dAuc" + std::to_string(dAUCentralityBins[i])], refname6);
 
 					//Histograms for the ratios Kaon/Pion
 					string refname7 = mkAxisCode(13, 1, 1 + i);
 					const Scatter2D& refdata7 = refData(refname7);
-					book(rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname7 + "_kaons", refdata7);
-					book(rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname7 + "_pions", refdata7);
+					book(rKpi_KaonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname7 + "_kaons", refdata7);
+					book(rKpi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname7 + "_pions", refdata7);
 					book(RatioK_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname7);
 
 					string refname8 = mkAxisCode(13, 1, 6 + i);
 					const Scatter2D& refdata8 = refData(refname8);
-					book(rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname8 + "_kaons", refdata8);
-					book(rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname8 + "_pions", refdata8);
+					book(rKpi_KaonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname8 + "_kaons", refdata8);
+					book(rKpi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname8 + "_pions", refdata8);
 					book(RatioK_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname8);
 
 					string refname9 = mkAxisCode(14, 1, 1 + i);
 					const Scatter2D& refdata9 = refData(refname9);
-					book(rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname9 + "_kaons", refdata9);
-					book(rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname9 + "_pions", refdata9);
+					book(rKpi_KaonPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname9 + "_kaons", refdata9);
+					book(rKpi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname9 + "_pions", refdata9);
 					book(RatioK_pipos["dAuc" + std::to_string(dAUCentralityBins[i])], refname9);
 
 					string refname10 = mkAxisCode(14, 1, 6 + i);
 					const Scatter2D& refdata10 = refData(refname10);
-					book(rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname10 + "_kaons", refdata10);
-					book(rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname10 + "_pions", refdata10);
+					book(rKpi_KaonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname10 + "_kaons", refdata10);
+					book(rKpi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname10 + "_pions", refdata10);
 					book(RatioK_pineg["dAuc" + std::to_string(dAUCentralityBins[i])], refname10);
 
 					//Histograms for the ratios Proton/Pion
 					string refname11 = mkAxisCode(15, 1, 1 + i);
 					const Scatter2D& refdata11 = refData(refname11);
-					book(rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname11 + "_protons", refdata11);
-					book(rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname11 + "_pions", refdata11);
+					book(rppi_ProtonPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname11 + "_protons", refdata11);
+					book(rppi_PionPos["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname11 + "_pions", refdata11);
 					book(Ratiop_pipos["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname11);
 
 					string refname12 = mkAxisCode(15, 1, 6 + i);
 					const Scatter2D& refdata12 = refData(refname12);
-					book(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname12 + "_protons", refdata12);
-					book(rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname12 + "_pions", refdata12);
+					book(rppi_ProtonNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname12 + "_protons", refdata12);
+					book(rppi_PionNeg["AuAuc" + std::to_string(AUAUCentralityBins[i])], "_" + refname12 + "_pions", refdata12);
 					book(Ratiop_pineg["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname12);
 
 					string refname13 = mkAxisCode(16, 1, 1 + i);
 					const Scatter2D& refdata13 = refData(refname13);
-					book(rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname13 + "_protons", refdata13);
-					book(rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], refname13 + "_pions", refdata13);
+					book(rppi_ProtonPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname13 + "_protons", refdata13);
+					book(rppi_PionPos["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname13 + "_pions", refdata13);
 					book(Ratiop_pipos["dAuc" + std::to_string(dAUCentralityBins[i])], refname13);
 
 					string refname14 = mkAxisCode(16, 1, 6 + i);
 					const Scatter2D& refdata14 = refData(refname14);
-					book(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14 + "_protons", refdata14);
-					book(rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14 + "_pions", refdata14);
+					book(rppi_ProtonNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname14 + "_protons", refdata14);
+					book(rppi_PionNeg["dAuc" + std::to_string(dAUCentralityBins[i])], "_" + refname14 + "_pions", refdata14);
 					book(Ratiop_pineg["dAuc" + std::to_string(dAUCentralityBins[i])], refname14);
 
 
@@ -205,20 +205,20 @@ namespace Rivet {
 
 					string refname15 = mkAxisCode(20, 1, 1 + i);
 					const Scatter2D& refdata15 = refData(refname15);
-					book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname15 + "_AuAu", refdata15);
-					book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refname15 + "_pp", refdata15);
+					book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], "_" + refname15 + "_AuAu", refdata15);
+					book(hKaonPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], "_" + refname15 + "_pp", refdata15);
 					book(hRaa["K_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname15);
 
 					string refname16 = mkAxisCode(21, 1, 1 + i);
 					const Scatter2D& refdata16 = refData(refname16);
-					book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname16 + "_AuAu", refdata16);
-					book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refname16 + "_pp", refdata16);
+					book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], "_" + refname16 + "_AuAu", refdata16);
+					book(hPionPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], "_" + refname16 + "_pp", refdata16);
 					book(hRaa["pi_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname16);
 
 					string refname17 = mkAxisCode(22, 1, 1 + i);
 					const Scatter2D& refdata17 = refData(refname17);
-					book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname17 + "_AuAu", refdata17);
-					book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], refname17 + "_pp", refdata17);
+					book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], "_" + refname17 + "_AuAu", refdata17);
+					book(hProtPt["Raa_c" + std::to_string(AUAUCentralityBins[i]) + "_pp"], "_" + refname17 + "_pp", refdata17);
 					book(hRaa["p_c" + std::to_string(AUAUCentralityBins[i]) + "_AuAu"], refname17);
 
 
@@ -226,20 +226,20 @@ namespace Rivet {
 
 					string refname18 = mkAxisCode(23, 1, 1 + i);
 					const Scatter2D& refdata18 = refData(refname18);
-					book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname18 + "_dAu", refdata18);
-					book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refname18 + "_pp", refdata18);
+					book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], "_" + refname18 + "_dAu", refdata18);
+					book(hKaonPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], "_" + refname18 + "_pp", refdata18);
 					book(hRda["K_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname18);
 
 					string refname19 = mkAxisCode(24, 1, 1 + i);
 					const Scatter2D& refdata19 = refData(refname19);
-					book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname19 + "_dAu", refdata19);
-					book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refname19 + "_pp", refdata19);
+					book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], "_" + refname19 + "_dAu", refdata19);
+					book(hPionPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], "_" + refname19 + "_pp", refdata19);
 					book(hRda["pi_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname19);
 
 					string refname20 = mkAxisCode(25, 1, 1 + i);
 					const Scatter2D& refdata20 = refData(refname20);
-					book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname20 + "_dAu", refdata20);
-					book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], refname20 + "_pp", refdata20);
+					book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], "_" + refname20 + "_dAu", refdata20);
+					book(hProtPt["Rda_c" + std::to_string(dAUCentralityBins[i]) + "_pp"], "_" + refname20 + "_pp", refdata20);
 					book(hRda["p_c" + std::to_string(dAUCentralityBins[i]) + "_dAu"], refname20);
 
 
@@ -249,74 +249,74 @@ namespace Rivet {
 
 				string refname21 = mkAxisCode(17, 1, 1);
 				const Scatter2D& refdata21 = refData(refname21);
-				book(hKaonPosPt["AuAuc0010a"], refname21 + "_AuAuc0010a_KaonPos", refdata21);
-				book(hKaonPosPt["AuAuc4060"], refname21 + "_AuAuc4060_KaonPos", refdata21);
+				book(hKaonPosPt["AuAuc0010a"], "_" + refname21 + "_AuAuc0010a_KaonPos", refdata21);
+				book(hKaonPosPt["AuAuc4060"], "_" + refname21 + "_AuAuc4060_KaonPos", refdata21);
 				book(hRcp["Kpos_c00104060_AuAu"], refname21);
 
 				string refname22 = mkAxisCode(17, 1, 2);
 				const Scatter2D& refdata22 = refData(refname22);
-				book(hKaonPosPt["AuAuc0010b"], refname22 + "_AuAuc0010b_KaonPos", refdata22);
-				book(hKaonPosPt["AuAuc6092"], refname22 + "_AuAuc6092_KaonPos", refdata22);
+				book(hKaonPosPt["AuAuc0010b"], "_" + refname22 + "_AuAuc0010b_KaonPos", refdata22);
+				book(hKaonPosPt["AuAuc6092"], "_" + refname22 + "_AuAuc6092_KaonPos", refdata22);
 				book(hRcp["Kpos_c00106092_AuAu"], refname22);
 
 				string refname23 = mkAxisCode(17, 1, 3);
 				const Scatter2D& refdata23 = refData(refname23);
-				book(hKaonNegPt["AuAuc0010a"], refname23 + "_AuAuc0010a_KaonNeg", refdata23);
-				book(hKaonNegPt["AuAuc4060"], refname23 + "_AuAuc4060_KaonNeg", refdata23);
+				book(hKaonNegPt["AuAuc0010a"], "_" + refname23 + "_AuAuc0010a_KaonNeg", refdata23);
+				book(hKaonNegPt["AuAuc4060"], "_" + refname23 + "_AuAuc4060_KaonNeg", refdata23);
 				book(hRcp["Kneg_c00104060_AuAu"], refname23);
 
 				string refname24 = mkAxisCode(17, 1, 4);
 				const Scatter2D& refdata24 = refData(refname24);
-				book(hKaonNegPt["AuAuc0010b"], refname24 + "_AuAuc0010b_KaonNeg", refdata24);
-				book(hKaonNegPt["AuAuc6092"], refname24 + "_AuAuc6092_KaonNeg", refdata24);
+				book(hKaonNegPt["AuAuc0010b"], "_" + refname24 + "_AuAuc0010b_KaonNeg", refdata24);
+				book(hKaonNegPt["AuAuc6092"], "_" + refname24 + "_AuAuc6092_KaonNeg", refdata24);
 				book(hRcp["Kneg_c00106092_AuAu"], refname24);
 
 				string refname25 = mkAxisCode(18, 1, 1);
 				const Scatter2D& refdata25 = refData(refname25);
-				book(hPionPosPt["AuAuc0010a"], refname25 + "_AuAuc0010a_PionPos", refdata25);
-				book(hPionPosPt["AuAuc4060"], refname25 + "_AuAuc4060_PionPos", refdata25);
+				book(hPionPosPt["AuAuc0010a"], "_" + refname25 + "_AuAuc0010a_PionPos", refdata25);
+				book(hPionPosPt["AuAuc4060"], "_" + refname25 + "_AuAuc4060_PionPos", refdata25);
 				book(hRcp["pipos_c00104060_AuAu"], refname25);
 
 				string refname26 = mkAxisCode(18, 1, 2);
 				const Scatter2D& refdata26 = refData(refname26);
-				book(hPionPosPt["AuAuc0010b"], refname26 + "_AuAuc0010b_PionPos", refdata26);
-				book(hPionPosPt["AuAuc6092"], refname26 + "_AuAuc6092_PionPos", refdata26);
+				book(hPionPosPt["AuAuc0010b"], "_" + refname26 + "_AuAuc0010b_PionPos", refdata26);
+				book(hPionPosPt["AuAuc6092"], "_" + refname26 + "_AuAuc6092_PionPos", refdata26);
 				book(hRcp["pipos_c00106092_AuAu"], refname26);
 
 				string refname27 = mkAxisCode(18, 1, 3);
 				const Scatter2D& refdata27 = refData(refname27);
-				book(hPionNegPt["AuAuc0010a"], refname27 + "_AuAuc0010a_PionNeg", refdata27);
-				book(hPionNegPt["AuAuc4060"], refname27 + "_AuAuc4060_PionNeg", refdata27);
+				book(hPionNegPt["AuAuc0010a"], "_" + refname27 + "_AuAuc0010a_PionNeg", refdata27);
+				book(hPionNegPt["AuAuc4060"], "_" + refname27 + "_AuAuc4060_PionNeg", refdata27);
 				book(hRcp["pineg_c00104060_AuAu"], refname27);
 
 				string refname28 = mkAxisCode(18, 1, 4);
 				const Scatter2D& refdata28 = refData(refname28);
-				book(hPionNegPt["AuAuc0010b"], refname28 + "_AuAuc0010b_PionNeg", refdata28);
-				book(hPionNegPt["AuAuc6092"], refname28 + "_AuAuc6092_PionNeg", refdata28);
+				book(hPionNegPt["AuAuc0010b"], "_" + refname28 + "_AuAuc0010b_PionNeg", refdata28);
+				book(hPionNegPt["AuAuc6092"], "_" + refname28 + "_AuAuc6092_PionNeg", refdata28);
 				book(hRcp["pineg_c00106092_AuAu"], refname28);
 
 				string refname29 = mkAxisCode(19, 1, 1);
 				const Scatter2D& refdata29 = refData(refname29);
-				book(hProtPosPt["AuAuc0010a"], refname29 + "_AuAuc0010a_ProtPos", refdata29);
-				book(hProtPosPt["AuAuc4060"], refname29 + "_AuAuc4060_ProtPos", refdata29);
+				book(hProtPosPt["AuAuc0010a"], "_" + refname29 + "_AuAuc0010a_ProtPos", refdata29);
+				book(hProtPosPt["AuAuc4060"], "_" + refname29 + "_AuAuc4060_ProtPos", refdata29);
 				book(hRcp["ppos_c00104060_AuAu"], refname29);
 
 				string refname30 = mkAxisCode(19, 1, 2);
 				const Scatter2D& refdata30 = refData(refname30);
-				book(hProtPosPt["AuAuc0010b"], refname30 + "_AuAuc0010b_ProtPos", refdata30);
-				book(hProtPosPt["AuAuc6092"], refname30 + "_AuAuc6092_ProtPos", refdata30);
+				book(hProtPosPt["AuAuc0010b"], "_" + refname30 + "_AuAuc0010b_ProtPos", refdata30);
+				book(hProtPosPt["AuAuc6092"], "_" + refname30 + "_AuAuc6092_ProtPos", refdata30);
 				book(hRcp["ppos_c00106092_AuAu"], refname30);
 
 				string refname31 = mkAxisCode(19, 1, 3);
 				const Scatter2D& refdata31 = refData(refname31);
-				book(hProtNegPt["AuAuc0010a"], refname31 + "_AuAuc0010a_ProtNeg", refdata31);
-				book(hProtNegPt["AuAuc4060"], refname31 + "_AuAuc4060_ProtNeg", refdata31);
+				book(hProtNegPt["AuAuc0010a"], "_" + refname31 + "_AuAuc0010a_ProtNeg", refdata31);
+				book(hProtNegPt["AuAuc4060"], "_" + refname31 + "_AuAuc4060_ProtNeg", refdata31);
 				book(hRcp["pneg_c00104060_AuAu"], refname31);
 
 				string refname32 = mkAxisCode(19, 1, 4);
 				const Scatter2D& refdata32 = refData(refname32);
-				book(hProtNegPt["AuAuc0010b"], refname32 + "_AuAuc0010b_ProtNeg", refdata32);
-				book(hProtNegPt["AuAuc6092"], refname32 + "_AuAuc6092_ProtNeg", refdata32);
+				book(hProtNegPt["AuAuc0010b"], "_" + refname32 + "_AuAuc0010b_ProtNeg", refdata32);
+				book(hProtNegPt["AuAuc6092"], "_" + refname32 + "_AuAuc6092_ProtNeg", refdata32);
 				book(hRcp["pneg_c00106092_AuAu"], refname32);
 
 
@@ -324,20 +324,20 @@ namespace Rivet {
 
 				string refname33 = mkAxisCode(26, 1, 1);
 				const Scatter2D& refdata33 = refData(refname33);
-				book(hKaonPt["AuAuc6092"], refname33 + "_AuAuc6092_Kaon", refdata33);
-				book(hKaonPt["dAuc0020"], refname33 + "_dAuc0020_Kaon", refdata33);
+				book(hKaonPt["AuAuc6092"], "_" + refname33 + "_AuAuc6092_Kaon", refdata33);
+				book(hKaonPt["dAuc0020"], "_" + refname33 + "_dAuc0020_Kaon", refdata33);
 				book(RatioK["AuAuc/dAU"], refname33);
 
 				string refname34 = mkAxisCode(27, 1, 1);
 				const Scatter2D& refdata34 = refData(refname34);
-				book(hPionPt["AuAuc6092"], refname34 + "_AuAuc6092_Pion", refdata34);
-				book(hPionPt["dAuc0020"], refname34 + "_dAuc0020_Pion", refdata34);
+				book(hPionPt["AuAuc6092"], "_" + refname34 + "_AuAuc6092_Pion", refdata34);
+				book(hPionPt["dAuc0020"], "_" + refname34 + "_dAuc0020_Pion", refdata34);
 				book(Ratiopi["AuAuc/dAU"], refname34);
 
 				string refname35 = mkAxisCode(28, 1, 1);
 				const Scatter2D& refdata35 = refData(refname35);
-				book(hProtPt["AuAuc6092"], refname35 + "_AuAuc6092_Prot", refdata35);
-				book(hProtPt["dAuc0020"], refname35 + "_dAuc0020_Prot", refdata35);
+				book(hProtPt["AuAuc6092"], "_" + refname35 + "_AuAuc6092_Prot", refdata35);
+				book(hProtPt["dAuc0020"], "_" + refname35 + "_dAuc0020_Prot", refdata35);
 				book(Ratiop["AuAuc/dAU"], refname35);
 
 			}
