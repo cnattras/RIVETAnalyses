@@ -14,7 +14,7 @@ Please turn off the following plots in the output:
 
 Take these out - these are NOT as labeled: 
 d03-x01-y01, d04-x01-y01, d04-x01-y02, d06-x01-y01 -  d11-x01-y01
-  - removed by Josie Hakanson (7-23-24)
+  - commented out these but getting errors - under investigation (Josie Hakanson 7-29-24)
 
 Please double check that there really are (real) charged particle multiplicities in 62.4 and 39 GeV implemented.
 
