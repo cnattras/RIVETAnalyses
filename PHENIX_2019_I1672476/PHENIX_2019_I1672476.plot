@@ -17,30 +17,6 @@ XLabel=$p_{\rm T}$ (GeV/c)
 YLabel=$\frac{1}{N_{evt}2\pi p_{\rm T}}\frac{{\rm d}^3N}{{\rm d}^2p_{\rm T}{\rm d}y}\frac{1}{dN_{ch}/d\eta}$(GeV/c)$^{-2}$
 END PLOT
 
-BEGIN PLOT /PHENIX_2019_I1672476/d03-x01-y01
-Title=Charged particle multiplicity - AuAu $\sqrt{s_{NN}}=$ 39GeV 
-XLabel=Centrality $0-55\%$
-YLabel=$\frac{dN_{ch}}{d\eta}$
-END PLOT
-
-BEGIN PLOT /PHENIX_2019_I1672476/d04-x01-y01
-Title=Charged particle multiplicity - AuAu $\sqrt{s_{NN}}=$ 62.4GeV  
-XLabel=Centrality $0-60\%$
-YLabel=$\frac{dN_{ch}}{d\eta}$
-END PLOT
-
-BEGIN PLOT /PHENIX_2019_I1672476/d04-x01-y02
-Title=Charged particle multiplicity - AuAu $\sqrt{s_{NN}}=$ 200GeV  
-XLabel=Centrality $0-60\%$
-YLabel=$\frac{dN_{ch}}{d\eta}$
-END PLOT
-
-BEGIN PLOT /PHENIX_2019_I1672476/d06-x01-y01
-Title=Charged particle multiplicity - AuAu $\sqrt{s_{NN}}=$ 62.4GeV  
-XLabel=Centrality $0-40\%$
-YLabel=$\frac{dN_{ch}}{d\eta}$
-END PLOT
-
 BEGIN PLOT /PHENIX_2019_I1672476/d07-x01-y01
 Title=Charged particle multiplicity - AuAu $\sqrt{s_{NN}}=$ 62.4GeV  
 XLabel=Centrality $0-86\%$
@@ -62,12 +38,6 @@ END PLOT
 BEGIN PLOT /PHENIX_2019_I1672476/d10-x01-y01
 Title=Charged particle multiplicity - CuCu $\sqrt{s_{NN}}=$ 200GeV  
 XLabel=Centrality $0-94\%$
-YLabel=$\frac{dN_{ch}}{d\eta}$
-END PLOT
-
-BEGIN PLOT /PHENIX_2019_I1672476/d11-x01-y01
-Title=Charged particle multiplicity - pp $\sqrt{s_{NN}}=$ 200GeV  
-XLabel=Centrality $0-100\%$
 YLabel=$\frac{dN_{ch}}{d\eta}$
 END PLOT
 
