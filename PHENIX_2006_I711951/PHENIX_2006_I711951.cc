@@ -93,7 +93,7 @@ namespace Rivet {
         float NN = 1.;
         if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
       }
-      else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970 || beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020)
+      else if ((beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020))
       {
         if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2), 5)) collSys = DAu200;
       }
@@ -125,94 +125,94 @@ namespace Rivet {
       //for (i=0, i<4, i++){
 
       //Invariant Yield in pp (piplus)
-      book(hPP_Yields["PiplusPP"], 1,1,1);
+      book(hPP_Yields["PiplusPP"], 2,1,1);
 
       //Invariant Yield in pp (piminus)
-      book(hPP_Yields["PiminusPP"], 1,1,2);
+      book(hPP_Yields["PiminusPP"], 2,1,2);
 
       //Invariant Yield in pp (kplus)
-      book(hPP_Yields["KplusPP"], 5,1,1);
+      book(hPP_Yields["KplusPP"], 4,1,1);
 
       //Invariant Yield in pp (kminus)
-      book(hPP_Yields["KminusPP"], 5,1,2);
+      book(hPP_Yields["KminusPP"], 4,1,2);
 
       //Invariant Yield in pp (p)
-      book(hPP_Yields["PPP"], 9,1,1);
+      book(hPP_Yields["PPP"], 6,1,1);
 
       //Invariant Yield in pp (p_bar)
-      book(hPP_Yields["P_barPP"], 9,1,2);
+      book(hPP_Yields["P_barPP"], 6,1,2);
 
       //Invariant Yield in DAu 0-20% (piplus)
-      book(hDAu_Yields["PiplusC20"], 3,1,1);
+      book(hDAu_Yields["PiplusC20"], 2,1,5);
 
       //Invariant Yield in DAu 0-20% (piminus)
-      book(hDAu_Yields["PiminusC20"], 3,1,2);
+      book(hDAu_Yields["PiminusC20"], 2,1,6);
 
       //Invariant Yield in DAu 0-20% (kplus)
-      book(hDAu_Yields["KplusC20"], 7,1,1);
+      book(hDAu_Yields["KplusC20"], 4,1,5);
 
       //Invariant Yield in DAu 0-20% (kminus)
-      book(hDAu_Yields["KminusC20"], 7,1,2);
+      book(hDAu_Yields["KminusC20"], 4,1,6);
 
       //Invariant Yield in DAu 0-20% (p)
-      book(hDAu_Yields["PC20"], 10,1,1);
+      book(hDAu_Yields["PC20"], 6,1,5);
 
       //Invariant Yield in DAu 0-20% (p_bar)
-      book(hDAu_Yields["P_barC20"], 10,1,2);
+      book(hDAu_Yields["P_barC20"], 6,1,6);
 
       //Invariant Yield in DAu 20-40% (piplus)
-      book(hDAu_Yields["PiplusC40"], 3,1,3);
+      book(hDAu_Yields["PiplusC40"], 2,1,7);
 
       //Invariant Yield in DAu 20-40% (piminus)
-      book(hDAu_Yields["PiminusC40"], 3,1,4);
+      book(hDAu_Yields["PiminusC40"], 2,1,8);
 
       //Invariant Yield in DAu 20-40% (kplus)
-      book(hDAu_Yields["KplusC40"], 8,1,1);
+      book(hDAu_Yields["KplusC40"], 5,1,1);
 
       //Invariant Yield in DAu 20-40% (kminus)
-      book(hDAu_Yields["KminusC40"], 8,1,2);
+      book(hDAu_Yields["KminusC40"], 5,1,2);
 
       //Invariant Yield in DAu 20-40% (p)
-      book(hDAu_Yields["PC40"], 10,1,3);
+      book(hDAu_Yields["PC40"], 6,1,7);
 
       //Invariant Yield in DAu 20-40% (p_bar)
-      book(hDAu_Yields["P_barC40"], 10,1,4);
+      book(hDAu_Yields["P_barC40"], 6,1,8);
 
       //Invariant Yield in DAu 40-60% (piplus)
-      book(hDAu_Yields["PiplusC60"], 4,1,1);
+      book(hDAu_Yields["PiplusC60"], 3,1,1);
 
       //Invariant Yield in DAu 40-60% (piminus)
-      book(hDAu_Yields["PiminusC60"], 3,1,5);
+      book(hDAu_Yields["PiminusC60"], 2,1,9);
 
       //Invariant Yield in DAu 40-60% (kplus)
-      book(hDAu_Yields["KplusC60"], 7,1,3);
+      book(hDAu_Yields["KplusC60"], 4,1,7);
 
       //Invariant Yield in DAu 40-60% (kminus)
-      book(hDAu_Yields["KminusC60"], 7,1,4);
+      book(hDAu_Yields["KminusC60"], 4,1,8);
 
       //Invariant Yield in DAu 40-60% (p)
-      book(hDAu_Yields["PC60"], 10,1,5);
+      book(hDAu_Yields["PC60"], 6,1,9);
 
       //Invariant Yield in DAu 40-60% (p_bar)
-      book(hDAu_Yields["P_barC60"], 10,1,6);
+      book(hDAu_Yields["P_barC60"], 6,1,10);
 
       //Invariant Yield in DAu 60-88.5% (piplus)
-      book(hDAu_Yields["PiplusC88"], 3,1,6);
+      book(hDAu_Yields["PiplusC88"], 2,1,10);
 
       //Invariant Yield in DAu 60-88.5% (piminus)
-      book(hDAu_Yields["PiminusC88"], 3,1,7);
+      book(hDAu_Yields["PiminusC88"], 2,1,11);
 
       //Invariant Yield in DAu 60-88.5% (kplus)
-      book(hDAu_Yields["KplusC88"], 7,1,5);
+      book(hDAu_Yields["KplusC88"], 4,1,9);
 
       //Invariant Yield in DAu 60-88.5% (kminus)
-      book(hDAu_Yields["KminusC88"], 7,1,6);
+      book(hDAu_Yields["KminusC88"], 4,1,10);
 
       //Invariant Yield in DAu 60-88.5% (p)
-      book(hDAu_Yields["PC88"], 10,1,7);
+      book(hDAu_Yields["PC88"], 6,1,11);
 
       //Invariant Yield in DAu 60-88.5% (p_bar)
-      book(hDAu_Yields["P_barC88"], 10,1,8);
+      book(hDAu_Yields["P_barC88"], 6,1,12);
 
     }
 
@@ -701,41 +701,42 @@ namespace Rivet {
 
 
       //****Scale Histos****
+      double scaleFactor = 1.0 / (2 * M_PI ); 
 
-      hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["KplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["KminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["PC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["P_barC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PiplusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PiminusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["KplusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["KminusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["P_barC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
 
-      hDAu_Yields["PiplusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["PiminusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["KplusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["KminusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["PC40"]->scaleW(1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["P_barC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PiplusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PiminusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["KplusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["KminusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PC40"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["P_barC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
 
-      hDAu_Yields["PiplusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["PiminusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["KplusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["KminusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["PC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["P_barC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PiplusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PiminusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["KplusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["KminusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["P_barC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
 
-      hDAu_Yields["PiplusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["PiminusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["KplusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["KminusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["PC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PiplusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PiminusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["KplusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["KminusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["P_barC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
 
-      hPP_Yields["PiplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["PiminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["KplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["KminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["PPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["P_barPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiplusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiminusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
+      hPP_Yields["KplusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
+      hPP_Yields["KminusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
+      hPP_Yields["P_barPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
 
 
 
@@ -750,7 +751,7 @@ namespace Rivet {
 
     map<string, CounterPtr> sow;
     string beamOpt;
-    enum CollisionSystem { pp, AuAu200, DAu200 };
+    enum CollisionSystem { pp, AuAu200, DAu200, NONE };
     CollisionSystem collSys;
 
     ///@}
