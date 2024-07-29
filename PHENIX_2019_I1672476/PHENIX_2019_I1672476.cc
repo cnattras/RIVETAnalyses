@@ -61,7 +61,7 @@ public:
 		book(_h["AuAu39_c0-86"], 2, 1, 1);
 		//book(_p["AuAu39_chPMult_c0-55"], 3, 1, 1);
 		//book(_p["AuAu62_chPMult_c0-60"], 4, 1, 1);
-		book(_p["AuAu200_chPMult_c0-60"], 4, 1, 2);      
+		//book(_p["AuAu200_chPMult_c0-60"], 4, 1, 2);      
 		// book(_h["fig2-2-a"], 5, 1, 1); //these cannot be done with rivet
 		// book(_h["fig2-2-b"], 5, 1, 2);
 		// book(_h["fig2-2-c"], 5, 1, 3);
