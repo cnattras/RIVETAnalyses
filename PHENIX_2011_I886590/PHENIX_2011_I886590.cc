@@ -418,7 +418,7 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
       
-
+      
       binShift(*_h["xsec_piplus_200"]);
       binShift(*_h["xsec_piminus_200"]);
       binShift(*_h["xsec_kplus_200"]);
@@ -440,20 +440,22 @@ namespace Rivet {
       binShift(*_h["xsec_p_withFD_62"]);
       binShift(*_h["xsec_pbar_withFD_62"]);
 
+      double scaleFactor = 1.0 / (2 * M_PI );
+
       if (_c["sow_pp200"]->sumW() != 0){
         double xsec200 = (_c["xsec_pp200"]->sumW()/millibarn)/_c["sow_pp200"]->sumW();
-        _h["xsec_piplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_piminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_kplus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_kminus_200"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_p_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_p_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_pbar_noFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_pbar_noFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_p_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_p_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_pbar_withFD_200_1"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
-        _h["xsec_pbar_withFD_200_2"]->scaleW(xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_piplus_200"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_piminus_200"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_kplus_200"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_kminus_200"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_noFD_200_1"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_noFD_200_2"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_noFD_200_1"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_noFD_200_2"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_withFD_200_1"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_p_withFD_200_2"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_withFD_200_1"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
+        _h["xsec_pbar_withFD_200_2"]->scaleW(scaleFactor*xsec200/_c["sow_pp200"]->sumW());
       }else{
         std::cerr << "Error: Divide by zero encountered." << std::endl;
       }
@@ -462,14 +464,14 @@ namespace Rivet {
       if (_c["sow_pp62"]->sumW() != 0){
         double xsec62 = (_c["xsec_pp62"]->sumW()/millibarn)/_c["sow_pp62"]->sumW();
         if(_c["sow_pp200"]->sumW() !=0){
-          _h["xsec_piplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_piminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_kplus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_kminus_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_p_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_pbar_noFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_p_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
-          _h["xsec_pbar_withFD_62"]->scaleW(xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_piplus_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_piminus_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_kplus_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_kminus_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_p_noFD_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_pbar_noFD_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_p_withFD_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
+          _h["xsec_pbar_withFD_62"]->scaleW(scaleFactor*xsec62/_c["sow_pp200"]->sumW());
         }else{
           std::cerr << "Error: Divide by zero encountered. Cannot Scale Histogram" << std::endl;
         }

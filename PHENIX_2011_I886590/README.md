@@ -14,3 +14,5 @@ Update: Added bin shift correction and divide by zero protection. Added beam opt
     - histograms turned off
 
 This has some bug with the spectra.  The normalization is off by orders of magnitudes.
+
+Update: I believe this is off for the same reason as some of the other analyses and is not being divided by 2pi in the normalization. I have added it and we will see if it fixes it in our next higher stats test.
