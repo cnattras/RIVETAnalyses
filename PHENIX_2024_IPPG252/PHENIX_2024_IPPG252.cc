@@ -33,7 +33,7 @@ namespace Rivet {
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
       }
 
-      if (beamOpt =="pp") collSys = pp;
+      if (beamOpt =="PP200") collSys = pp;
       
 
       // The final-state particles declared above are clustered using FastJet with
