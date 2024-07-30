@@ -212,10 +212,10 @@ public:
 	//fill histos with cent c and charged particle count/abs val of Eta
 	if (collSystem == AuAu39)
 	{
-		if((c >= 0.) && (c < 55.))
-		{ 
-			_p["AuAu39_chPMult_c0-55"]->fill(c,chargedParticles.size()/absEta);
-		}
+		//if((c >= 0.) && (c < 55.))
+		//{ 
+		//	_p["AuAu39_chPMult_c0-55"]->fill(c,chargedParticles.size()/absEta);
+		//}
 
 		if((c >= 0.) && (c < 86.))
 		{
@@ -226,14 +226,14 @@ public:
 
 	else if(collSystem == AuAu62)
 	{
-		if((c >= 0.) && (c < 60.))
-		{   
-			_p["AuAu62_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
-		}
+		//if((c >= 0.) && (c < 60.))
+		//{   
+		//	_p["AuAu62_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
+		//}
 
 		if((c >= 0.) && (c < 40.))
 		{
-			_p["AuAu62_chPMult_c0-40"]->fill(c,chargedParticles.size()/absEta);
+			//_p["AuAu62_chPMult_c0-40"]->fill(c,chargedParticles.size()/absEta);
 			_p["AuAu62_phtYld_c0-40"]->fill(c,photons.size()/absEta);
 		}
 
@@ -246,11 +246,11 @@ public:
 
 	else if(collSystem == AuAu200)
 	{
-		if((c >= 0.) && (c < 60.))
-		{
-			_p["AuAu200_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
+		//if((c >= 0.) && (c < 60.))
+		//{
+		//	_p["AuAu200_chPMult_c0-60"]->fill(c,chargedParticles.size()/absEta);
 		
-		}
+		//}
 		
 		if((c >= 0.) && (c < 92.))
 		{
@@ -276,7 +276,7 @@ public:
 	
 	else if(collSystem == pp_200)
 	{
-		_p["pp200_chPMult"]->fill(c,chargedParticles.size()/absEta);
+		//_p["pp200_chPMult"]->fill(c,chargedParticles.size()/absEta);
 		_p["pp200_phtYld"]->fill(c,photons.size()/absEta);
 	}
 
