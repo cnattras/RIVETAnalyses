@@ -108,74 +108,74 @@ public:
         //d01-x01-y01
         string refname1 = mkAxisCode(1, 1, 1);
         const Scatter2D& refdata1 = refData(refname1);
-        book(hProtonPt["AuAuc0010a"], refname1 + "_AuAuc0010_Proton",refdata1);
-        book(hPionPosPt["AuAuc0010"], refname1 + "_AuAuc0010_PiPos",refdata1);
+        book(hProtonPt["AuAuc0010a"], "_" + refname1 + "_AuAuc0010_Proton",refdata1);
+        book(hPionPosPt["AuAuc0010"], "_" + refname1 + "_AuAuc0010_PiPos",refdata1);
         book(RatioPtoPiPos["AuAuc0010"], refname1);
         //d01-x01-y02
         string refname2 = mkAxisCode(1, 1, 2);
         const Scatter2D& refdata2 = refData(refname2);
-        book(hProtonPt["AuAuc2030a"], refname2 + "_AuAuc2030_Proton",refdata2);
-        book(hPionPosPt["AuAuc2030"], refname2 + "_AuAuc2030_PiPos",refdata2);
+        book(hProtonPt["AuAuc2030a"], "_" + refname2 + "_AuAuc2030_Proton",refdata2);
+        book(hPionPosPt["AuAuc2030"], "_" + refname2 + "_AuAuc2030_PiPos",refdata2);
         book(RatioPtoPiPos["AuAuc2030"], refname2);
         //d01-x01-y03
         string refname3 = mkAxisCode(1, 1, 3);
         const Scatter2D& refdata3 = refData(refname3);
-        book(hProtonPt["AuAuc6092a"], refname3 + "_AuAuc6092_Proton",refdata3);
-        book(hPionPosPt["AuAuc6092"], refname3 + "_AuAuc6092_PiPos",refdata3);
+        book(hProtonPt["AuAuc6092a"], "_" + refname3 + "_AuAuc6092_Proton",refdata3);
+        book(hPionPosPt["AuAuc6092"], "_" + refname3 + "_AuAuc6092_PiPos",refdata3);
         book(RatioPtoPiPos["AuAuc6092"], refname3);
         //d01-x01-y04
         string refname4 = mkAxisCode(1, 1, 4);
         const Scatter2D& refdata4 = refData(refname4);
-        book(hProBarPt["AuAuc0010a"], refname4 + "_AuAuc0010_ProBar",refdata4);
-        book(hPionNegPt["AuAuc0010a"], refname4 + "_AuAuc0010_PiNeg",refdata4);
+        book(hProBarPt["AuAuc0010a"], "_" + refname4 + "_AuAuc0010_ProBar",refdata4);
+        book(hPionNegPt["AuAuc0010a"], "_" + refname4 + "_AuAuc0010_PiNeg",refdata4);
         book(RatioPBartoPiNeg["AuAuc0010"], refname4);
         //d01-x01-y05
         string refname5 = mkAxisCode(1, 1, 5);
         const Scatter2D& refdata5 = refData(refname5);
-        book(hProBarPt["AuAuc2030a"], refname5 + "_AuAuc2030_ProBar",refdata5);
-        book(hPionNegPt["AuAuc2030a"], refname5 + "_AuAuc2030_PiNeg",refdata5);
+        book(hProBarPt["AuAuc2030a"], "_" + refname5 + "_AuAuc2030_ProBar",refdata5);
+        book(hPionNegPt["AuAuc2030a"], "_" + refname5 + "_AuAuc2030_PiNeg",refdata5);
         book(RatioPBartoPiNeg["AuAuc2030"], refname5);
         //d01-x01-y06
         string refname6 = mkAxisCode(1, 1, 6);
         const Scatter2D& refdata6 = refData(refname6);
-        book(hProBarPt["AuAuc6092a"], refname6 + "_AuAuc6092_ProBar",refdata6);
-        book(hPionNegPt["AuAuc6092a"], refname6 + "_AuAuc6092_PiNeg",refdata6);
+        book(hProBarPt["AuAuc6092a"], "_" + refname6 + "_AuAuc6092_ProBar",refdata6);
+        book(hPionNegPt["AuAuc6092a"], "_" + refname6 + "_AuAuc6092_PiNeg",refdata6);
         book(RatioPBartoPiNeg["AuAuc6092"], refname6);
         //d02-x01-y01
         string refname7 = mkAxisCode(2, 1, 1);
         const Scatter2D& refdata7 = refData(refname7);
-        book(hProtonPt["AuAuc0010b"], refname7 + "_AuAuc0010_Proton",refdata7);
-        book(hPionNegPt["AuAuc0010b"], refname7 + "_AuAuc0010_PiNeg",refdata7);
+        book(hProtonPt["AuAuc0010b"], "_" + refname7 + "_AuAuc0010_Proton",refdata7);
+        book(hPionNegPt["AuAuc0010b"], "_" + refname7 + "_AuAuc0010_PiNeg",refdata7);
         book(RatioPtoPiNeg["AuAuc0010"], refname7);
         //d02-x01-y02
         string refname8 = mkAxisCode(2, 1, 2);
         const Scatter2D& refdata8 = refData(refname8);
-        book(hProtonPt["AuAuc2030b"], refname8 + "_AuAuc2030_Proton",refdata8);
-        book(hPionNegPt["AuAuc2030b"], refname8 + "_AuAuc2030_PiNeg",refdata8);
+        book(hProtonPt["AuAuc2030b"], "_" + refname8 + "_AuAuc2030_Proton",refdata8);
+        book(hPionNegPt["AuAuc2030b"], "_" + refname8 + "_AuAuc2030_PiNeg",refdata8);
         book(RatioPtoPiNeg["AuAuc2030"], refname8);
         //d02-x01-y03
         string refname9 = mkAxisCode(2, 1, 3);
         const Scatter2D& refdata9 = refData(refname9);
-        book(hProtonPt["AuAuc6092b"], refname9 + "_AuAuc6092_Proton",refdata9);
-        book(hPionNegPt["AuAuc6092b"], refname9 + "_AuAuc6092_PiNeg",refdata9);
+        book(hProtonPt["AuAuc6092b"], "_" + refname9 + "_AuAuc6092_Proton",refdata9);
+        book(hPionNegPt["AuAuc6092b"], "_" + refname9 + "_AuAuc6092_PiNeg",refdata9);
         book(RatioPtoPiNeg["AuAuc6092"], refname9);
         //d02-x01-y04
         string refname10 = mkAxisCode(2, 1, 4);
         const Scatter2D& refdata10 = refData(refname10);
-        book(hProBarPt["AuAuc0010b"], refname10 + "_AuAuc0010_ProBar",refdata10);
-        book(hPionPt["AuAuc0010a"], refname10 + "_AuAuc0010_Pion",refdata10);
+        book(hProBarPt["AuAuc0010b"], "_" + refname10 + "_AuAuc0010_ProBar",refdata10);
+        book(hPionPt["AuAuc0010a"], "_" + refname10 + "_AuAuc0010_Pion",refdata10);
         book(RatioPBartoPion["AuAuc0010"], refname10);
         //d02-x01-y05
         string refname11 = mkAxisCode(2, 1, 5);
         const Scatter2D& refdata11 = refData(refname11);
-        book(hProBarPt["AuAuc2030b"], refname11 + "_AuAuc2030_ProBar",refdata11);
-        book(hPionPt["AuAuc2030a"], refname11 + "_AuAuc2030_Pion",refdata11);
+        book(hProBarPt["AuAuc2030b"], "_" + refname11 + "_AuAuc2030_ProBar",refdata11);
+        book(hPionPt["AuAuc2030a"], "_" + refname11 + "_AuAuc2030_Pion",refdata11);
         book(RatioPBartoPion["AuAuc2030"], refname11);
         //d02-x01-y06
         string refname12 = mkAxisCode(2, 1, 6);
         const Scatter2D& refdata12 = refData(refname12);
-        book(hProBarPt["AuAuc6092b"], refname12 + "_AuAuc6092_ProBar",refdata12);
-        book(hPionPt["AuAuc6092a"], refname12 + "_AuAuc6092_Pion",refdata12);
+        book(hProBarPt["AuAuc6092b"], "_" + refname12 + "_AuAuc6092_ProBar",refdata12);
+        book(hPionPt["AuAuc6092a"], "_" + refname12 + "_AuAuc6092_Pion",refdata12);
         book(RatioPBartoPion["AuAuc6092"], refname12);
         
         //yields
@@ -224,8 +224,8 @@ public:
         //d04-x01-y01
         string refname21 = mkAxisCode(4, 1, 1);
         const Scatter2D& refdata21 = refData(refname21);
-        book(hPPlusPBarPt["ppluspbarAuAuc0010"], refname21 + "_AuAuc0010",refdata21);
-        book(hPPlusPBarPt["ppluspbarAuAuc6092"], refname21 + "_AuAuc6092",refdata21);
+        book(hPPlusPBarPt["ppluspbarAuAuc0010"], "_" + refname21 + "_AuAuc0010",refdata21);
+        book(hPPlusPBarPt["ppluspbarAuAuc6092"], "_" + refname21 + "_AuAuc6092",refdata21);
         book(hRcp["ppluspbar"], refname21);
         
         //Figure 3b
@@ -233,24 +233,24 @@ public:
         string refname22 = mkAxisCode(5, 1, 1);
         const Scatter2D& refdata22 = refData(refname22);
         //next two lines: not needed since hPionPt is already booked and filled for //d02
-        book(hPionPt["AuAuc0010b"], refname22 + "_AuAuc0010",refdata22);
-        book(hPionPt["AuAuc6092b"], refname22 + "_AuAuc6092",refdata22);
+        book(hPionPt["AuAuc0010b"], "_" + refname22 + "_AuAuc0010",refdata22);
+        book(hPionPt["AuAuc6092b"], "_" + refname22 + "_AuAuc6092",refdata22);
         book(hRcp["pion"], refname22);
         
         //Figure 4a
         //d06-x01-y01
         string refname23 = mkAxisCode(6, 1, 1);
         const Scatter2D& refdata23 = refData(refname23);
-        book(hChHadrons["AuAuc0010"], refname23 + "_AuAuc0010",refdata23);
-        book(hPionPt["AuAuc0010c"], refname23 + "_AuAuc0010_Pion",refdata23);
+        book(hChHadrons["AuAuc0010"], "_" + refname23 + "_AuAuc0010",refdata23);
+        book(hPionPt["AuAuc0010c"], "_" + refname23 + "_AuAuc0010_Pion",refdata23);
         book(RatioHadtoPion["AuAuc0010"], refname23);
         
         //Figure 4b
         //d07-x01-y01
         string refname24 = mkAxisCode(7, 1, 1);
         const Scatter2D& refdata24 = refData(refname24);
-        book(hChHadrons["AuAuc6092"], refname24 + "_AuAuc6092",refdata24);
-        book(hPionPt["AuAuc6092c"], refname24 + "_AuAuc6092_Pion",refdata24);
+        book(hChHadrons["AuAuc6092"], "_" + refname24 + "_AuAuc6092",refdata24);
+        book(hPionPt["AuAuc6092c"], "_" + refname24 + "_AuAuc6092_Pion",refdata24);
         book(RatioHadtoPion["AuAuc6092"], refname24);
     }
     
@@ -672,7 +672,7 @@ public:
         //d01: p and p_bar ratios
         //divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
         
-        /*binShift(*hProtonPt["AuAuc0010a"]);
+        binShift(*hProtonPt["AuAuc0010a"]);
         binShift(*hPionPosPt["AuAuc0010"]);
         divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
 
@@ -719,7 +719,7 @@ public:
 
         binShift(*hProBarPt["AuAuc6092b"]);
         binShift(*hPionPt["AuAuc6092a"]);
-        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);*/
+        divide(hProBarPt["AuAuc6092b"], hPionPt["AuAuc6092a"], RatioPBartoPion["AuAuc6092"]);
         
         //d03 p and p_bar yields
         //first scalling is commented out because this is actually scaling by the N_coll provided in the paper

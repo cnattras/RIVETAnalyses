@@ -11,3 +11,5 @@ To Do:
 Ratio plots are not filled correctly.  It looks like the ratio is calculated but it's not ending up in the right histogram.  Rcp is getting filled correctly.  This looks like logic errors in finalize - it should be possible to fix it.
 
 Please also suppress output which does not include data points.
+
+Update: Suppressed intermediate data. Testing DVIPS error with higher stats
