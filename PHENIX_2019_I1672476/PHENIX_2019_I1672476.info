@@ -19,7 +19,7 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=AuAu62,AuAu39
+ - beam=AUAU62,AUAU39,AUAU200,CUCU200,PP200,PP62
 Description: The PHENIX collaboration presents first measurements of low-momentum (0.4 < $p_T$ < 3  GeV/$c$) direct-photon yields from Au+Au collisions at $\sqrt{s_{NN}}$ = 39 and 62.4 GeV. For both beam energies the direct-photon yields are substantially enhanced with respect to expectations from prompt processes, similar to the yields observed in Au+Au collisions at $\sqrt{s_{NN}}$ = 200. Analyzing the photon yield as a function of the experimental observable ${dN_{ch}}/{d\eta}$ reveals that the low-momentum (> 1 GeV/$c$) direct-photon yield ${dN_{\gamma^{dir}}}/{d\eta}$ is a smooth function of ${dN_{ch}}/{d\eta}$ and can be well described as proportional to ($dN_{ch}}/{d\eta}$) $\alpha$ with $\alpha$ ≈ 1.25. This scaling behavior holds for a wide range of beam energies at the Relativistic Heavy Ion Collider and the Large Hadron Collider, for centrality selected samples, as well as for different A+A collision systems. At a given beam energy, the scaling also holds for high $p_T$ (> 5 GeV/$c$), but when results from different collision energies are compared, an additional $\sqrt{s_{NN}}$-dependent multiplicative factor is needed to describe the integrated-direct-photon yield.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
