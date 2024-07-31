@@ -239,7 +239,7 @@ namespace Rivet {
     map<string, Profile1DPtr> p;
     map<string, CounterPtr> c;
     string beamOpt;
-    enum CollisionSystem {pp};
+    enum CollisionSystem {pp,NONE};
     CollisionSystem collSys;
     /// @}
   private:
