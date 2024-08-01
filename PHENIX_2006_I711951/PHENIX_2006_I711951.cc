@@ -69,7 +69,7 @@ namespace Rivet {
       //std::initializer_list<int> pdgIds = {221};
 
     // Alice projection? 
-      const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
+      const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5);
       declare(cp,"cp");
    
     
