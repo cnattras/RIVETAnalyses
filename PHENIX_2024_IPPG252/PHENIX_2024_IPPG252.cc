@@ -92,14 +92,14 @@ namespace Rivet {
 
       // Retrieve clustered jets, sorted by pT, with a minimum pT cut
       Jets jets = apply<FastJets>(event, "jets").jetsByPt(Cuts::pT > 5*GeV);
-
+      if (collSys == pp){
       // Loop over all jets
       for (const Jet& jet : jets) {
           if(jet.abseta()<0.15){
             h["jetcross"]->fill(jet.pT());
 
             if(jet.pT()>PTBINS[0]){
-              if (collSys == pp){
+              
               //fill counters
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 c["ptbin0"]->fill();
@@ -243,7 +243,7 @@ namespace Rivet {
     map<string, Profile1DPtr> p;
     map<string, CounterPtr> c;
     string beamOpt;
-    enum CollisionSystem {pp,NONE};
+    enum CollisionSystem {NONE, pp};
     CollisionSystem collSys;
     /// @}
   private:
