@@ -16,6 +16,6 @@ Update: Added binshift and beams. Maybe fixed .plot?
 Looks right for pions but it is a little suspicious for kaons.
 
 TODO
-Please turn off *KaonNeg, *KaonPos (complete)
-Please label the Y-axes for the plots labeled "Ratio" what the ratio IS (complete)
-Please make ratios on a linear scale, not a log scale. (complete)
+Add centralities to the plot names 
+Look at normalization of Rcp
+RAA is not filling
