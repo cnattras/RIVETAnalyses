@@ -30,7 +30,10 @@ namespace Rivet {
         
 
       if (beamOpt == "NONE") {
-      if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212){
+        float NN = 1.;
+        if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp
+      }
       }
 
       if (beamOpt =="PP200") collSys = pp;
@@ -96,7 +99,7 @@ namespace Rivet {
             h["jetcross"]->fill(jet.pT());
 
             if(jet.pT()>PTBINS[0]){
-
+              if (collSys == pp){
               //fill counters
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 c["ptbin0"]->fill();
@@ -199,6 +202,7 @@ namespace Rivet {
 }
       }
 
+    }
     }
 
 
