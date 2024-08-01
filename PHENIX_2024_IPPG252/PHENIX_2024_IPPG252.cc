@@ -32,7 +32,7 @@ namespace Rivet {
       if (beamOpt == "NONE") {
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212){
         float NN = 1.;
-        if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp
+        if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
       }
       }
 
