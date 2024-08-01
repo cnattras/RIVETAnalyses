@@ -161,7 +161,7 @@ void binShift(YODA::Histo1D& histogram) {
 			//book(sRaa["RaaEtapT5"], refnameRaaEtapT5);
 
 
-			book(pcross["cross_section"],"cross_section",1,0,1);	//cross section binning profile
+			book(pcross["cross_section"],"_cross_section",1,0,1);	//cross section binning profile
 
 
 
