@@ -1529,7 +1529,7 @@ namespace Rivet {
 	if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           CollSystem = "AuAu200GeV";
-          //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
+          //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) CollSystem += "200GeV";
       }
 
       if(CollSystem == "AuAu200GeV" && c > 50)

@@ -213,13 +213,13 @@ namespace Rivet {
             if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSys = AuAu39;
-          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSys = AuAu62;
+          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 5)) collSys = AuAu39;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 5)) collSys = AuAu62;
       }
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
-          if (fuzzyEquals(sqrtS()/GeV, 39, 1E-3)) collSys = pp39;
-          if (fuzzyEquals(sqrtS()/GeV, 62.4, 1E-3)) collSys = pp62;
+          if (fuzzyEquals(sqrtS()/GeV, 39, 5)) collSys = pp39;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4, 5)) collSys = pp62;
       }
     }
 

@@ -113,22 +113,22 @@ public:
 			{
 				NN = 197.;
 
-				if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSystem = AuAu39;
-				if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSystem = AuAu62;
-				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = AuAu200;
+				if (fuzzyEquals(sqrtS()/GeV, 39*NN, 5)) collSystem = AuAu39;
+				if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 5)) collSystem = AuAu62;
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSystem = AuAu200;
 			}
 
 			if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
 			{
 				NN = 63.;
 
-				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = CuCu200;
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSystem = CuCu200;
 			}
 		
 			if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
 			{
-				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSystem = pp_200;
-				if (fuzzyEquals(sqrtS()/GeV, 62*NN, 1E-3)) collSystem = pp_62;
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSystem = pp_200;
+				if (fuzzyEquals(sqrtS()/GeV, 62*NN, 5)) collSystem = pp_62;
 			}
 		}
 

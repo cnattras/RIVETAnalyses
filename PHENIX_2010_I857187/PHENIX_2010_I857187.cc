@@ -474,7 +474,7 @@ namespace Rivet {
       //if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000290630) CollSystem = "dAu";
       
       string cmsEnergy = "Empty";
-      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
+      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 5)) cmsEnergy = "200GeV";
       
       string SysAndEnergy = CollSystem + cmsEnergy;
 

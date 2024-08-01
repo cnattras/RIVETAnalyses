@@ -232,24 +232,24 @@ public:
 			if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
 			{
 				float NN = 197.;
-            	if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+            	if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
 			}
 
 			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
 			{
 				float NN = 1.;
-            	if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = pp;
+            	if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
 			}
 
 			else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
 			{
 				float NN = 63.;
-				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = CuCu200;
+				if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = CuCu200;
 			}
 
 			else if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970)
 			{
-				if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(63*197), 1E-3)) collSys = CuAu200;
+				if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(63*197), 5)) collSys = CuAu200;
 			}
 		}
 

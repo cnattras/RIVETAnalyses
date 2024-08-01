@@ -299,13 +299,13 @@ namespace Rivet {
       {
               CollSystem = "AuAu";
               nNucleons = 197.;
-              if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) CollSystem += "200GeV";
+              if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 5)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
               CollSystem = "pp";
               nNucleons = 1.;
-              if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) CollSystem += "200GeV";
+              if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 5)) CollSystem += "200GeV";
       }
 
       const FinalState& fs = apply<FinalState>(event, "fs");

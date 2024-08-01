@@ -762,17 +762,17 @@ namespace Rivet {
       if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
         CollSystem = "AUAU200";
-        //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) CollSystem += "200GeV";
+        //if(fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
         CollSystem = "PP200";
-        //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+        //if(fuzzyEquals(sqrtS()/GeV, 200., 5)) CollSystem += "200GeV";
       }
       if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
       {
         CollSystem = "dAU200";
-        //if(fuzzyEquals(sqrtS()/GeV, 200., 1E-3)) CollSystem += "200GeV";
+        //if(fuzzyEquals(sqrtS()/GeV, 200., 5)) CollSystem += "200GeV";
       }
       if(CollSystem == "AUAU200" && c > 40)
       {

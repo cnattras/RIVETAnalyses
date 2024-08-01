@@ -65,20 +65,20 @@ namespace Rivet {
           		if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
 				{
 					float NN = 197.;
-            		if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+            		if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
 				}
           		else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
 				{
 					float NN = 1.;
-            		if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = pp;
+            		if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
 				}
           		else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
 				{
-            		if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(2*197), 1E-3)) collSys = dAu200;
+            		if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(2*197), 5)) collSys = dAu200;
 				}
           		else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020)
 				{
-            		if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(2*197), 1E-3)) collSys = dAu200;
+            		if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(2*197), 5)) collSys = dAu200;
 				}
           		}
 

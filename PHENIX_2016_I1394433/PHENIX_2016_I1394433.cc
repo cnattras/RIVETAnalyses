@@ -42,36 +42,36 @@ namespace Rivet {
       {
           NN = 197.;
           if (fuzzyEquals(sqrtS()/GeV, 7.7*
-          NN, 1E-3)) collSys = AuAu7;
-          if (fuzzyEquals(sqrtS()/GeV, 14.5*NN, 1E-3)) collSys = AuAu14;
-          if (fuzzyEquals(sqrtS()/GeV, 19.6*NN, 1E-3)) collSys = AuAu19;
-          if (fuzzyEquals(sqrtS()/GeV, 27*NN, 1E-3)) collSys = AuAu27;
-          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 1E-3)) collSys = AuAu39;
-          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSys = AuAu62;
-          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1E-3)) collSys = AuAu130;
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = AuAu200;
+          NN, 5)) collSys = AuAu7;
+          if (fuzzyEquals(sqrtS()/GeV, 14.5*NN, 5)) collSys = AuAu14;
+          if (fuzzyEquals(sqrtS()/GeV, 19.6*NN, 5)) collSys = AuAu19;
+          if (fuzzyEquals(sqrtS()/GeV, 27*NN, 5)) collSys = AuAu27;
+          if (fuzzyEquals(sqrtS()/GeV, 39*NN, 5)) collSys = AuAu39;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 5)) collSys = AuAu62;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 5)) collSys = AuAu130;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
       }
       if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000290630)
       {
           NN = 63.;
-          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1E-3)) collSys = CuCu62;
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = CuCu200;
+          if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 5)) collSys = CuCu62;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = CuCu200;
       }
       if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970)
       {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = CuAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = CuAu200;
       }
       if (beam.first.pid() == 1000922380 && beam.second.pid() == 1000922380)
       {
-          if (fuzzyEquals(sqrtS()/GeV, 193*NN, 1E-3)) collSys = UU193;
+          if (fuzzyEquals(sqrtS()/GeV, 193*NN, 5)) collSys = UU193;
       }
       if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
       {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = dAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = dAu200;
       }
       if (beam.first.pid() == 1000020030 && beam.second.pid() == 1000791970)
       {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1E-3)) collSys = HeAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = HeAu200;
       }
           
         }

@@ -574,8 +574,8 @@ namespace Rivet {
       if(CollSystem.compare("Empty") == 0) return;
 
       string cmsEnergy = "Empty";
-      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 1E-3)) cmsEnergy = "200GeV";
-      if (fuzzyEquals(sqrtS()/GeV, 62.3*nNucleons, 1E-3)) cmsEnergy = "62GeV";
+      if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 5)) cmsEnergy = "200GeV";
+      if (fuzzyEquals(sqrtS()/GeV, 62.3*nNucleons, 5)) cmsEnergy = "62GeV";
       if(cmsEnergy.compare("Empty") == 0) return;
       
       string SysAndEnergy = CollSystem + cmsEnergy;
