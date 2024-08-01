@@ -86,16 +86,16 @@ namespace Rivet {
 
     //book(_h["dir_photon_pp"], 1, 1, 10);
     
-	  book(_c["sow_AuAu0005"], "sow_AuAu0005");
-	  book(_c["sow_AuAu0510"], "sow_AuAu0510");
-	  book(_c["sow_AuAu1015"], "sow_AuAu1015");
-	  book(_c["sow_AuAu1520"], "sow_AuAu1520");
-	  book(_c["sow_AuAu2030"], "sow_AuAu2030");
-	  book(_c["sow_AuAu3040"], "sow_AuAu3040");
-	  book(_c["sow_AuAu4050"], "sow_AuAu4050");
-	  book(_c["sow_AuAu5060"], "sow_AuAu5060");
-	  book(_c["sow_AuAu6092"], "sow_AuAu6092");
-	  book(_c["sow_AuAu0092"], "sow_AuAu0092");
+	  book(_c["sow_AuAu0005"], "_sow_AuAu0005");
+	  book(_c["sow_AuAu0510"], "_sow_AuAu0510");
+	  book(_c["sow_AuAu1015"], "_sow_AuAu1015");
+	  book(_c["sow_AuAu1520"], "_sow_AuAu1520");
+	  book(_c["sow_AuAu2030"], "_sow_AuAu2030");
+	  book(_c["sow_AuAu3040"], "_sow_AuAu3040");
+	  book(_c["sow_AuAu4050"], "_sow_AuAu4050");
+	  book(_c["sow_AuAu5060"], "_sow_AuAu5060");
+	  book(_c["sow_AuAu6092"], "_sow_AuAu6092");
+	  book(_c["sow_AuAu0092"], "_sow_AuAu0092");
 	  //book(_c["sow_pp"], "sow_pp");
 
     }
