@@ -86,7 +86,7 @@ public:
         
         //Reading in the beam option
         beamOpt = getOption<string>("beam","NONE");
-        if (beamOpt == "AUAU200") collSys = AuAu200;
+        
         //In case "NONE" is given as option
         const ParticlePair& beam = beams();
         if (beamOpt == "NONE"){
@@ -97,6 +97,7 @@ public:
                 }
         }
         
+        if (beamOpt == "AUAU200") collSys = AuAu200;
         // Declare centrality projection for centrality estimation
         //if (!(collSys == pp))
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
@@ -882,7 +883,7 @@ public:
     map<string, CounterPtr> sow;
     
     //Initialize collision system and AUAU centrality bins
-    enum CollisionSystem {AuAu200};
+    enum CollisionSystem {NONE, AuAu200};
     CollisionSystem collSys;
     string beamOpt = "NONE";
     vector<int> AUAUCentralityBins{ 10, 20, 30, 40, 50, 60, 92};
