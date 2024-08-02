@@ -701,42 +701,40 @@ namespace Rivet {
 
 
       //****Scale Histos****
-      double scaleFactor = 1.0 / (2 * M_PI ); 
+      hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["KplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["KminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["P_barC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
 
-      hDAu_Yields["PiplusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["PiminusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["KplusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["KminusC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["PC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["P_barC20"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["PiplusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PiminusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["KplusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["KminusC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PC40"]->scaleW(1./sow["sow_DAu20"]->sumW());
+      hDAu_Yields["P_barC40"]->scaleW(1./sow["sow_DAu40"]->sumW());
 
-      hDAu_Yields["PiplusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["PiminusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["KplusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["KminusC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
-      hDAu_Yields["PC40"]->scaleW(scaleFactor*1./sow["sow_DAu20"]->sumW());
-      hDAu_Yields["P_barC40"]->scaleW(scaleFactor*1./sow["sow_DAu40"]->sumW());
+      hDAu_Yields["PiplusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PiminusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["KplusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["KminusC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["P_barC60"]->scaleW(1./sow["sow_DAu60"]->sumW());
 
-      hDAu_Yields["PiplusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["PiminusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["KplusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["KminusC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["PC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
-      hDAu_Yields["P_barC60"]->scaleW(scaleFactor*1./sow["sow_DAu60"]->sumW());
+      hDAu_Yields["PiplusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PiminusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["KplusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["KminusC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["PC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
+      hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
 
-      hDAu_Yields["PiplusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["PiminusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["KplusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["KminusC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["PC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
-      hDAu_Yields["P_barC88"]->scaleW(scaleFactor*1./sow["sow_DAu88"]->sumW());
-
-      hPP_Yields["PiplusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
-      hPP_Yields["PiminusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
-      hPP_Yields["KplusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
-      hPP_Yields["KminusPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
-      hPP_Yields["PPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
-      hPP_Yields["P_barPP"]->scaleW(scaleFactor*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["KplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["KminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["PPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["P_barPP"]->scaleW(1./sow["sow_pp"]->sumW());
 
 
 
@@ -751,7 +749,7 @@ namespace Rivet {
 
     map<string, CounterPtr> sow;
     string beamOpt;
-    enum CollisionSystem { pp, AuAu200, DAu200, NONE };
+    enum CollisionSystem { NONE, pp, AuAu200, DAu200 };
     CollisionSystem collSys;
 
     ///@}
