@@ -16,6 +16,5 @@ Update: Added binshift and beams. Maybe fixed .plot?
 Looks right for pions but it is a little suspicious for kaons.
 
 TODO
-Add centralities to the plot names 
 Look at normalization of Rcp
 RAA is not filling
