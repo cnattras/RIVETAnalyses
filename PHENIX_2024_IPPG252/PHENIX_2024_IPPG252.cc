@@ -209,9 +209,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-       const double sf = crossSectionPerEvent()/millibarn;
+       const double sf = crossSection()/millibarn;
+       std::cout<< "sf: " << sf << std::endl;
        // factor 0.3 needed because it is differential in deta
-      scale(h["jetcross"], sf/0.3);
+      scale(h["jetcross"], 0.3/sf);
        cout<<"Counters ";
        cout<<c["ptbin0"]->sumW();
        cout<<c["ptbin1"]->sumW();
@@ -223,9 +224,9 @@ namespace Rivet {
        cout<<endl;
 
       for (int i = 0; i < NPTBINS; ++i) {
-        scale(h["zg" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
-        scale(h["xi" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
-        scale(h["R" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / c["ptbin" + std::to_string(i)]->sumW());
+        scale(h["zg" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
+        scale(h["xi" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
+        scale(h["R" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
       }
  
       //normalize(h["XXXX"]); // normalize to unity
