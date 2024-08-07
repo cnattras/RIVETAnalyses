@@ -87,8 +87,8 @@ namespace Rivet {
     else if (beamOpt == "CUCU200") collSys = CuCu200;
     else if (beamOpt == "CUCU62") collSys = CuCu62;
     else if (beamOpt == "UU193") collSys = UU193;
-    else if (beamOpt == "dAU200") collSys = dAu200;
-    else if (beamOpt == "HeAU200") collSys = HeAu200;
+    else if (beamOpt == "DAU200") collSys = dAu200;
+    else if (beamOpt == "HEAU200") collSys = HeAu200;
 
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
@@ -325,7 +325,7 @@ namespace Rivet {
     Profile1DPtr _hist_HeAu_E_200;
     //@}
     string beamOpt;
-    enum CollisionSystem {AuAu7,AuAu14,AuAu19,AuAu27,AuAu39,AuAu62,AuAu130,AuAu200,CuCu62,CuCu200,CuAu200,UU193,dAu200,HeAu200,pp200};
+    enum CollisionSystem {NONE, AuAu7,AuAu14,AuAu19,AuAu27,AuAu39,AuAu62,AuAu130,AuAu200,CuCu62,CuCu200,CuAu200,UU193,dAu200,HeAu200,pp200};
     CollisionSystem collSys;
 
 

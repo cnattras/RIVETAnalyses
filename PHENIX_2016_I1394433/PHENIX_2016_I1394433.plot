@@ -10,6 +10,18 @@ XLabel=centrality
 YLabel=$dN_{ch}/d_{\eta}$
 END PLOT
 
+BEGIN PLOT /PHENIX_2016_I1394433/d03-x01-y03
+Title= Transverse energy in Au+Au collisions at 130 GeV
+XLabel=centrality
+YLabel=$dN_{ch}/d_{\eta}$
+END PLOT
+
+BEGIN PLOT /PHENIX_2016_I1394433/d04-x01-y03
+Title= Multiplicity in Au+Au collisions at 130 GeV
+XLabel=centrality
+YLabel=$dN_{ch}/d_{\eta}$
+END PLOT
+
 BEGIN PLOT /PHENIX_2016_I1394433/d05-x01-y03
 Title=Transverse energy in 62.4 GeV Au+Au collisions
 XLabel=centrality
