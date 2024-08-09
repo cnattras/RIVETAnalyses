@@ -233,7 +233,7 @@ namespace Rivet {
             else if (deta < -0.5 && deta > -1.4){
               a = -1*(-1*deta + 0.5)*(1/0.9);
             }
-
+            std::cout<< "a = "<< a <<std::endl;
             //put logic to fill the appropriate associated hadron momentum
             // according to the definition above
             if (particle.pid() == PID::PIPLUS || particle.pid() == PID::PIMINUS)
