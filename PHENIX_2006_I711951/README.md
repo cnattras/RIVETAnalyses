@@ -12,5 +12,4 @@ Primarily written by Adam Tilley.  Contributions by Christian Reckziegel, Antoni
 - Bin shift correction added. 
 
 To Do:
-Double check if it should be 1/2pi pT in the denominator (complete)
-Double check that the data look like they are in agreement with the HEPData entry - the plots in Rivet appear to have unusually large uncertainties (complete: changed .yoda to match the HEPData entry)
+Check scaling for DAu and AuAu

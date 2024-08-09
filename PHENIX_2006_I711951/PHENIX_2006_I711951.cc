@@ -700,6 +700,8 @@ namespace Rivet {
 	      binShift(*hDAu_Yields["P_barC88"]);
 
 
+      double xs = crossSection()/barn;
+      double sf = 1.0 / (2 * M_PI );
       //****Scale Histos****
       hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
       hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
@@ -729,12 +731,12 @@ namespace Rivet {
       hDAu_Yields["PC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
       hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
 
-      hPP_Yields["PiplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["PiminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["KplusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["KminusPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["PPP"]->scaleW(1./sow["sow_pp"]->sumW());
-      hPP_Yields["P_barPP"]->scaleW(1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiplusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiminusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
+      hPP_Yields["KplusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
+      hPP_Yields["KminusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
+      hPP_Yields["P_barPP"]->scaleW(sf*1./sow["sow_pp"]->sumW());
 
 
 
