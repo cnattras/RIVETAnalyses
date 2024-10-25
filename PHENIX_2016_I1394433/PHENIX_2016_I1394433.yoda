@@ -2447,10 +2447,9 @@ END YODA_SCATTER2D_V2
 
 
 BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2016_I1394433/d24-x01-y01
-ErrorBreakdown: {0: {sys: {dn: -5.0, up: 5.0}}, 1: {sys: {dn: -6.0, up: 6.0}}, 2: {sys: {dn: -6.1, up: 6.1}}, 3: {sys: {dn: -6.8, up: 6.8}}, 4: {sys: {dn: -6.7, up: 6.7}}, 5: {sys: {dn: -6.5, up: 6.5}}, 6: {sys: {dn: -6.8, up: 6.8}}, 7: {sys: {dn: -6.9, up: 6.9}}, 8: {sys: {dn: -6.4, up: 6.4}}, 9: {sys: {dn: -6.2, up: 6.2}}}
 IsRef: 1
 Path: /REF/PHENIX_2016_I1394433/d24-x01-y01
-Title: doi:10.17182/hepdata.96601.v1/t24
+Title: Table 30
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -2468,10 +2467,9 @@ END YODA_SCATTER2D_V2
 
 
 BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2016_I1394433/d24-x01-y02
-ErrorBreakdown: {0: {sys: {dn: -67.8, up: 67.8}}, 1: {sys: {dn: -55.5, up: 55.5}}, 2: {sys: {dn: -44.9, up: 44.9}}, 3: {sys: {dn: -36.1, up: 36.1}}, 4: {sys: {dn: -28.7, up: 28.7}}, 5: {sys: {dn: -22.6, up: 22.6}}, 6: {sys: {dn: -17.5, up: 17.5}}, 7: {sys: {dn: -13.4, up: 13.4}}, 8: {sys: {dn: -10.1, up: 10.1}}, 9: {sys: {dn: -7.4, up: 7.4}}}
 IsRef: 1
 Path: /REF/PHENIX_2016_I1394433/d24-x01-y02
-Title: doi:10.17182/hepdata.96601.v1/t24
+Title: Table 30
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -2489,10 +2487,9 @@ END YODA_SCATTER2D_V2
 
 
 BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2016_I1394433/d24-x01-y03
-ErrorBreakdown: {0: {sys: {dn: -0.33, up: 0.33}}, 1: {sys: {dn: -0.32, up: 0.32}}, 2: {sys: {dn: -0.31, up: 0.31}}, 3: {sys: {dn: -0.31, up: 0.31}}, 4: {sys: {dn: -0.3, up: 0.3}}, 5: {sys: {dn: -0.29, up: 0.29}}, 6: {sys: {dn: -0.29, up: 0.29}}, 7: {sys: {dn: -0.3, up: 0.3}}, 8: {sys: {dn: -0.3, up: 0.3}}, 9: {sys: {dn: -0.32, up: 0.32}}}
 IsRef: 1
 Path: /REF/PHENIX_2016_I1394433/d24-x01-y03
-Title: doi:10.17182/hepdata.96601.v1/t24
+Title: Table 30
 Type: Scatter2D
 ---
 # xval	 xerr-	 xerr+	 yval	 yerr-	 yerr+	
@@ -2507,6 +2504,7 @@ Type: Scatter2D
 4.250000e+01	2.500000e+00	2.500000e+00	2.940000e+00	3.000000e-01	3.000000e-01
 4.750000e+01	2.500000e+00	2.500000e+00	2.780000e+00	3.200000e-01	3.200000e-01
 END YODA_SCATTER2D_V2
+
 
 
 BEGIN YODA_SCATTER2D_V2 /REF/PHENIX_2016_I1394433/d24-x01-y04
