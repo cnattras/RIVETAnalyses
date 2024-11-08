@@ -57,7 +57,7 @@ namespace Rivet {
           if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 5)) collSys = CuCu62;
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = CuCu200;
       }
-      if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970)
+      if ((beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000290630) )
       {
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = CuAu200;
       }
@@ -66,11 +66,11 @@ namespace Rivet {
         NN = 238.;
           if (fuzzyEquals(sqrtS()/GeV, 193*NN, 5)) collSys = UU193;
       }
-      if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
+      if ((beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020))
       {
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = dAu200;
       }
-      if (beam.first.pid() == 1000020030 && beam.second.pid() == 1000791970)
+      if ((beam.first.pid() == 1000020030 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000020030))
       {
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = HeAu200;
       }
@@ -90,6 +90,7 @@ namespace Rivet {
     else if (beamOpt == "UU193") collSys = UU193;
     else if (beamOpt == "DAU200") collSys = dAu200;
     else if (beamOpt == "HEAU200") collSys = HeAu200;
+    else if (beamOpt == "CUAU200") collSys = CuAu200;
 
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
