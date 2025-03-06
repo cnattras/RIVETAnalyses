@@ -105,7 +105,7 @@ namespace Rivet {
 
       if (c > 5.) vetoEvent;
       sow["sow_AuAu"]->fill();
-
+        
       for(const Particle& p : neutralParticles)
       {
           hPion0Pt["Pion0Pt_AuAu"]->fill(p.pT()/GeV);
@@ -131,7 +131,7 @@ namespace Rivet {
     map<string, Histo1DPtr> hPion0Pt;
     Scatter2DPtr hRaa;
     map<string, CounterPtr> sow;
-    enum CollisionSystem {pp, AuAu200};
+    enum CollisionSystem {NONE, pp, AuAu200};
     CollisionSystem collSys;
     string beamOpt;
 
