@@ -13,7 +13,9 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #define _USE_MATH_DEFINES
 
+
 namespace Rivet {  
+
   /// @brief Centrality projection for PHENIX AuAu.
 class RHIC_2019_CentralityCalibration : public Analysis {
   
@@ -73,6 +75,11 @@ class RHIC_2019_CentralityCalibration : public Analysis {
   };
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(RHIC_2019_CentralityCalibration); 
+    //DECLARE_RIVET_PLUGIN(RHIC_2019_CentralityCalibration); 
+
+  RIVET_DECLARE_PLUGIN(RHIC_2019_CentralityCalibration);
+
 }
   
+
+//  Rivet::DECLARE_RIVET_PLUGIN(RHIC_2019_CentralityCalibration); 

@@ -27,6 +27,11 @@ public:
         c = Cuts::abseta > 3.1 && Cuts::abseta < 3.9;
         expName = "RHIC";
     }
+    else if(name == "sPHENIX")
+    {
+        c = Cuts::abseta > 3.51 && Cuts::abseta < 4.61;
+        expName = "RHIC";
+    }
     else if(name == "CMS")
     {
         c = Cuts::abseta > 3 && Cuts::abseta < 5;
@@ -38,8 +43,12 @@ public:
 
 }
 
-
-  DEFAULT_RIVET_PROJ_CLONE(RHICCentrality);
+  //Rivet 3.1
+  //DEFAULT_RIVET_PROJ_CLONE(RHICCentrality);
+  //Rivet 4.1 
+  std::unique_ptr<Projection> clone() const override {
+  return std::make_unique<RHICCentrality>(*this);
+  }
 
   /// @BRIEF Add a new centality estimate.
   ///
@@ -65,7 +74,10 @@ public:
       }
       else if(expName == "CMS")
       {
-          const Particles& particles = applyProjection<ChargedFinalState>(e, "CFS").particles();
+          //Rivet 3.1
+          //const Particles& particles = applyProjection<ChargedFinalState>(e, "CFS").particles();
+          //Rivet 4.1
+          const Particles& particles = apply<ChargedFinalState>(e, "CFS").particles();
           for(const Particle& p : particles)
           {
               estimate += p.Et();
@@ -75,7 +87,8 @@ public:
       }
       
       //cout << "Estimate: " << estimate << endl;
-      set(estimate);
+
+      setValue(estimate);
     }
 
   /// Cheek if no internal projections have been added.
