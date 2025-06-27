@@ -22,7 +22,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ALICE_2019_JETV2);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ALICE_2019_JETV2);
 
 
     /// @name Analysis methods
@@ -42,7 +42,7 @@ namespace Rivet {
       // the final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
-      FastJets jetcfs(cfs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetcfs(cfs, JetAlg::ANTIKT, 0.2, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetcfs, "jets");
 
       // Book histograms
@@ -241,6 +241,6 @@ namespace Rivet {
   };
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(ALICE_2019_JETV2);
+  RIVET_DECLARE_PLUGIN(ALICE_2019_JETV2);
 
 }

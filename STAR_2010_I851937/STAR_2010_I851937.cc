@@ -23,7 +23,6 @@ static const float CentBins[] = {0.0,12.0,20.0,40.0,60.0,80.0};
 static const int numAssocPtBins6 = 13;
 static const float pTAssocBins6[] = {0.4,0.6,0.8,1.0,1.2,1.4,1.6,1.8,2.0,2.4,2.8,3.2,3.6,4.0};
 static const int numAssocPtBins6b = 7;
-static const float pTAssocPtBins6b[] = {0.4,0.8,1.2,1.6,2.0,2.8,3.6,4.0};
 using namespace std;
 namespace Rivet {
 
@@ -155,7 +154,7 @@ class Correlator {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2010_I851937);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2010_I851937);
 
 
       /// name Analysis methods
@@ -172,13 +171,13 @@ class Correlator {
       bool isSecondary(Particle p)
       {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-          p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-          p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-          p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-          p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-          p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-          p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+          p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+          p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+          p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+          p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+          p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+          p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
           return true;
         else return false;
 
@@ -283,13 +282,13 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
             if(std::isnan(minValue))
             {
                 minValue = bin.sumW();
-                binWidth = bin.width();
+                binWidth = bin.xWidth();
                 minValueEntries = bin.numEntries();
             }
-            if(bin.sumW()/bin.width() < minValue/binWidth)
+            if(bin.sumW()/bin.xWidth() < minValue/binWidth)
             {
                 minValue = bin.sumW();
-                binWidth = bin.width();
+                binWidth = bin.xWidth();
                 minValueEntries = bin.numEntries();
             }
         }
@@ -298,10 +297,10 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
 
         for(auto &bin : hist.bins())
         {
-            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+            hist.fill(bin.xMid(), (minValue*bin.xWidth())/(minValueEntries*binWidth), minValueEntries);
         }
 
-        *histo = YODA::subtract(*histo, hist);
+        *histo -= hist;
 
         return histo;
 
@@ -313,7 +312,6 @@ double GetDeltaPhi(Particle pAssoc, Particle pTrig)
     /// Book histograms and initialise projections before the run
     void init() {
 
-	char bookName[200];
 	int iterator=1;
 	string name_raw="", name_eta="", name_sub="";
 
@@ -985,33 +983,6 @@ Particles chargedParticles = cfs.particles();
 
     /// Normalise histograms etc., after the run
     void finalize() {
-      bool AuAu200_available = false;
-      bool dAu_available = false;
-
-      for (auto element : _h)
-      {
-        string name = element.second->name();
-        if (name.find("AuAu") != std::string::npos)
-        {
-          if (element.second->numEntries()>0) AuAu200_available=true;
-          else
-          {
-            AuAu200_available=false;
-            break;
-          }
-
-        }
-         else if (name.find("dAu") != std::string::npos)
-        {
-          if (element.second->numEntries()>0) dAu_available=true;
-          else
-          {
-            dAu_available=false;
-            break;
-          }
-
-        }
-      }
 
       //if((!AuAu200_available) || (!dAu_available)) return;
 
@@ -1027,7 +998,7 @@ Particles chargedParticles = cfs.particles();
 
 
     map<string, Histo1DPtr> _h;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     map<string, CounterPtr> sow;
     map<string, Histo1DPtr> _DeltaPhixE;
     map<int, Histo1DPtr> _DeltaPhiSub;
@@ -1049,6 +1020,6 @@ Particles chargedParticles = cfs.particles();
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2010_I851937);
+  RIVET_DECLARE_PLUGIN(STAR_2010_I851937);
 
 }

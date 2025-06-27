@@ -13,15 +13,6 @@
 #include "../Centralities/RHICCentrality.hh"
 #define _USE_MATH_DEFINES
 
-static const int numDelPhiBins = 10;
-static const float DelPhiBins[] = {0.16,0.47,0.79,1.10,1.41,1.73,2.04,2.36,2.67,2.98};
-
-static const int numXiBins = 6;
-static const float XiBins[] = {0.10,0.50,1.10,1.50,1.90,2.30};
-
-static const int numTrigPtBins = 1;
-static const float pTTrigBins[] = {5.0,9.0};
-
 using namespace std;
 namespace Rivet {
 
@@ -122,7 +113,7 @@ namespace Rivet {
    public:
 
      /// Constructor
-     DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2013_I1207323);
+     RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2013_I1207323);
 
 
     /// name Analysis methods
@@ -139,13 +130,13 @@ namespace Rivet {
     bool isSecondary(Particle p)
     {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-            p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-            p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-            p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-            p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-            p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-            p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+            p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+            p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+            p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+            p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+            p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+            p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
         return true;
         else return false;
         
@@ -224,7 +215,7 @@ namespace Rivet {
     {
         double maxDeltaEta = 2.;
         
-        int binEta = hist.binIndexAt(deltaEta);
+        int binEta = hist.indexAt(deltaEta);
         
         if(binEta < 0)
         {
@@ -264,13 +255,13 @@ namespace Rivet {
     {
         double integral = 0.;
         
-        if(hist.binIndexAt(vmin) < 0 || hist.binIndexAt(vmax) < 0)
+        if(hist.indexAt(vmin) < 0 || hist.indexAt(vmax) < 0)
         {
             MSG_ERROR("Out of range!");
             return 0.;
         }
         
-        for(int i = hist.binIndexAt(vmin); i < hist.binIndexAt(vmax); i++)
+        for(int i = hist.indexAt(vmin); i < hist.indexAt(vmax); i++)
         {
             integral += hist.bin(i).sumW();
         }
@@ -292,8 +283,8 @@ namespace Rivet {
             return 0.;
         }
                 
-        int bmin = hist.binIndexAt(vmin);
-        int bmax = hist.binIndexAt(vmax);
+        int bmin = hist.indexAt(vmin);
+        int bmax = hist.indexAt(vmax);
         if(bmax < 0) bmax = (int)hist.numBins()-1;
         
         for(int i = bmin; i <= bmax; i++)
@@ -319,8 +310,8 @@ namespace Rivet {
             return 0.;
         }
                 
-        int bmin = hist.binIndexAt(vmin);
-        int bmax = hist.binIndexAt(vmax);
+        int bmin = hist.indexAt(vmin);
+        int bmax = hist.indexAt(vmax);
         if(bmax < 0) bmax = (int)hist.numBins()-1;
         
         double nbins = 0.;
@@ -531,8 +522,7 @@ namespace Rivet {
         book(_h["011" + to_string(corr.GetSubIndex())], 1, 1, corr.GetSubIndex());
 
         string refname = mkAxisCode(1, 1, corr.GetSubIndex());
-          const Histo1D& refdata = refData(refname);
-          for(auto &bin : refdata.bins())
+          for(auto &bin : refData(refname).bins())
           {
               book(_DeltaPhixi["011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, 0, M_PI);          
           }
@@ -664,13 +654,12 @@ namespace Rivet {
         for(Correlator& corr : Correlators)
       {
         string refname = mkAxisCode(1, 1, corr.GetSubIndex());
-        const Histo1D& refdata = refData(refname);
-        for(auto &bin : refdata.bins())
+        for(auto &bin : refData(refname).bins())
           {
               _DeltaPhixi["011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
               double entries = 0.;
               double yield = GetYieldInUserRangeZYAM(*_DeltaPhixi["011" + to_string(corr.GetSubIndex()) + "xi_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], M_PI/2., M_PI, entries);
-              _h["011" + to_string(corr.GetSubIndex())]->fillBin(_h["011" + to_string(corr.GetSubIndex())]->binIndexAt(bin.xMid()),yield/entries, entries);
+              _h["011" + to_string(corr.GetSubIndex())]->fill(bin.xMid(),yield/entries, entries);
           }
 
           //_h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
@@ -703,6 +692,6 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(PHENIX_2013_I1207323);
+  RIVET_DECLARE_PLUGIN(PHENIX_2013_I1207323);
 
 }

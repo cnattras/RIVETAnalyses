@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -25,23 +24,24 @@ namespace Rivet {
 
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        const auto& binlist = histogram.bins();
+        const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
-        for (YODA::HistoBin1D bins : binlist) {
+        for (auto& bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
             //Now calculate f_corr
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
@@ -97,35 +97,35 @@ namespace Rivet {
       book(_h["Pi0PbGlCent0_10"], 3, 1, 1);
       book(_h["Pi0PbGlCent60_80"], 4, 1, 1);
       string refnameRaa1  = mkAxisCode(7,1,1);
-      const Scatter2D& refdataRaa1 =refData(refnameRaa1);
+      const Estimate1D& refdataRaa1 =refData(refnameRaa1);
       book(_h["c10Pt_AuAu130_t7"], "_" + refnameRaa1 + "_AuAu130", refdataRaa1);
       book(_h["c10Pt130_pp_t7"], "_" + refnameRaa1 + "_pp130", refdataRaa1);
       book(_s["Raa_c010_AuAu130_t7"], refnameRaa1);
       string refnameRaa2  = mkAxisCode(8,1,1);
-      const Scatter2D& refdataRaa2 =refData(refnameRaa2);
+      const Estimate1D& refdataRaa2 =refData(refnameRaa2);
       book(_h["c10Pt_AuAu130_t8"], "_" + refnameRaa2 + "_AuAu130", refdataRaa2);
       book(_h["c10Pt130_pp_t8"], "_" + refnameRaa2 + "_pp130", refdataRaa2);
       book(_s["Raa_c010_AuAu130_t8"], refnameRaa2);
       string refnameRaa3  = mkAxisCode(9,1,1);
-      const Scatter2D& refdataRaa3 =refData(refnameRaa3);
+      const Estimate1D& refdataRaa3 =refData(refnameRaa3);
       book(_h["c10Pt_AuAu130_t9"], "_" + refnameRaa3 + "_AuAu130", refdataRaa3);
       book(_h["c10Pt130_pp_t9"], "_" + refnameRaa3 + "_pp130", refdataRaa3);
       book(_s["Raa_c010_AuAu130_t9"], refnameRaa3);
       
       string refnameRCP1  = mkAxisCode(10,1,1);
-      const Scatter2D& refdataRCP1 =refData(refnameRCP1);
+      const Estimate1D& refdataRCP1 =refData(refnameRCP1);
       book(_h["c10Pt_AuAu130_t10"], "_" + refnameRCP1 + "_cAuAu130", refdataRCP1);
       book(_h["p80Pt130_AuAu130_t10"], "_" + refnameRCP1 + "_pAuAu130", refdataRCP1);
       book(_s["RCP_AuAu130_t10"], refnameRCP1);
 
       string refnameRCP2  = mkAxisCode(11,1,1);
-      const Scatter2D& refdataRCP2 =refData(refnameRCP2);
+      const Estimate1D& refdataRCP2 =refData(refnameRCP2);
       book(_h["c10Pt_AuAu130_t11"], "_" + refnameRCP2 + "_cAuAu130", refdataRCP2);
       book(_h["p80Pt130_AuAu130_t11"], "_" + refnameRCP2 + "_pAuAu130", refdataRCP2);
       book(_s["RCP_AuAu130_t11"], refnameRCP2);
 
       string refnameRCP3  = mkAxisCode(12,1,1);
-      const Scatter2D& refdataRCP3 =refData(refnameRCP3);
+      const Estimate1D& refdataRCP3 =refData(refnameRCP3);
       book(_h["c10Pt_AuAu130_t12"], "_" + refnameRCP3 + "_cAuAu130", refdataRCP3);
       book(_h["p80Pt130_AuAu130_t12"], "_" + refnameRCP3 + "_pAuAu130", refdataRCP3);
       book(_s["RCP_AuAu130_t12"], refnameRCP3);
@@ -267,12 +267,12 @@ if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       divide(_h["c10Pt_AuAu130_t10"], _h["p80Pt130_AuAu130_t10"], _s["RCP_AuAu130_t10"]);
       divide(_h["c10Pt_AuAu130_t11"], _h["p80Pt130_AuAu130_t11"], _s["RCP_AuAu130_t11"]);
       divide(_h["c10Pt_AuAu130_t12"], _h["p80Pt130_AuAu130_t12"], _s["RCP_AuAu130_t12"]);
-     _s["Raa_c010_AuAu130_t7"]->scaleY(1./905.);
-     _s["Raa_c010_AuAu130_t8"]->scaleY(1./905.);
-     _s["Raa_c010_AuAu130_t9"]->scaleY(1./905.);
-     _s["RCP_AuAu130_t10"]->scaleY(1./45.);
-     _s["RCP_AuAu130_t11"]->scaleY(1./45.);
-     _s["RCP_AuAu130_t12"]->scaleY(1./45.);
+     _s["Raa_c010_AuAu130_t7"]->scale(1./905.);
+     _s["Raa_c010_AuAu130_t8"]->scale(1./905.);
+     _s["Raa_c010_AuAu130_t9"]->scale(1./905.);
+     _s["RCP_AuAu130_t10"]->scale(1./45.);
+     _s["RCP_AuAu130_t11"]->scale(1./45.);
+     _s["RCP_AuAu130_t12"]->scale(1./45.);
     }
 
       ///@}
@@ -281,7 +281,7 @@ if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       map<string, Histo1DPtr> _h;
       map<string, Profile1DPtr> _p;
       map<string, CounterPtr> _c;
-      map<string, Scatter2DPtr> _s;
+      map<string, Estimate1DPtr> _s;
       ///@}
 
       string beamOpt;

@@ -13,27 +13,28 @@ class PHENIX_2019_I1672476 : public Analysis {
 public:
 
 	/// Constructor
-	DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2019_I1672476);
+	RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2019_I1672476);
     
 //create binShift function
 	void binShift(YODA::Histo1D& histogram) {
-    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    const auto& binlist = histogram.bins();
+    const auto& lastBin = histogram.bin(histogram.numBins());
     int n = 0;
-    for (YODA::HistoBin1D bins : binlist) {
+    for (auto& bins : binlist) {
         double p_high = bins.xMax();
         double p_low = bins.xMin();
         //Now calculate f_corr
         if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
-        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
         } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
@@ -303,15 +304,15 @@ public:
 
 	if(_p["AuAu62_c0-20_norm"]->bin(0).numEntries() > 0)
 	{
-		_h["AuAu62_c0-20"]->scaleW(1./(_p["AuAu62_c0-20_norm"]->bin(0).mean()*sow["AuAu62_c0-20_Nevent"]->sumW()));
+		_h["AuAu62_c0-20"]->scaleW(1./(_p["AuAu62_c0-20_norm"]->bin(0).xMean()*sow["AuAu62_c0-20_Nevent"]->sumW()));
 	}
 	if(_p["AuAu62_c0-86_norm"]->bin(0).numEntries() > 0)
 	{	
-		_h["AuAu62_c0-86"]->scaleW(1./(_p["AuAu62_c0-86_norm"]->bin(0).mean()*sow["AuAu62_c0-86_Nevent"]->sumW()));
+		_h["AuAu62_c0-86"]->scaleW(1./(_p["AuAu62_c0-86_norm"]->bin(0).xMean()*sow["AuAu62_c0-86_Nevent"]->sumW()));
 	}
 	if(_p["AuAu39_c0-86_norm"]->bin(0).numEntries() > 0)
 	{
-		_h["AuAu39_c0-86"]->scaleW(1./(_p["AuAu39_c0-86_norm"]->bin(0).mean()*sow["AuAu39_c0-86_Nevent"]->sumW()));
+		_h["AuAu39_c0-86"]->scaleW(1./(_p["AuAu39_c0-86_norm"]->bin(0).xMean()*sow["AuAu39_c0-86_Nevent"]->sumW()));
 	}
 
 	}
@@ -334,6 +335,6 @@ public:
 	};
 
 
-	DECLARE_RIVET_PLUGIN(PHENIX_2019_I1672476);
+	RIVET_DECLARE_PLUGIN(PHENIX_2019_I1672476);
 
 }

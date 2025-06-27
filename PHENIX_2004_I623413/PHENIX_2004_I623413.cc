@@ -23,23 +23,24 @@ namespace Rivet {
 
 //create binShift function
 void binShift(YODA::Histo1D& histogram) {
-    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    const auto& binlist = histogram.bins();
+    const auto& lastBin = histogram.bin(histogram.numBins());
     int n = 0;
-    for (YODA::HistoBin1D bins : binlist) {
+    for (auto& bins : binlist) {
         double p_high = bins.xMax();
         double p_low = bins.xMin();
         //Now calculate f_corr
         if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
-        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
         } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
@@ -112,37 +113,37 @@ void binShift(YODA::Histo1D& histogram) {
       book(_h["Fig10AntiProtonCent60_92"], 14, 1, 2);
 
       string refnameRcpPionPlus = mkAxisCode(15,1,1);
-      const Scatter2D& refdataRcpPionPlus =refData(refnameRcpPionPlus);
+      const Estimate1D& refdataRcpPionPlus =refData(refnameRcpPionPlus);
       book(_h["Fig11PionPlusCentral"], refnameRcpPionPlus + "_Central", refdataRcpPionPlus);
       book(_h["Fig11PionPlusPeripheral"], refnameRcpPionPlus + "_Peripheral", refdataRcpPionPlus);
       book(_s["Fig11PionPlus"], refnameRcpPionPlus);
 
       string refnameRcpPionMinus = mkAxisCode(15,1,2);
-      const Scatter2D& refdataRcpPionMinus =refData(refnameRcpPionMinus);
+      const Estimate1D& refdataRcpPionMinus =refData(refnameRcpPionMinus);
       book(_h["Fig11PionMinusCentral"], refnameRcpPionMinus + "_Central", refdataRcpPionMinus);
       book(_h["Fig11PionMinusPeripheral"], refnameRcpPionMinus + "_Peripheral", refdataRcpPionMinus);
       book(_s["Fig11PionMinus"], refnameRcpPionMinus);
 
       string refnameRcpKaonPlus = mkAxisCode(16,1,1);
-      const Scatter2D& refdataRcpKaonPlus =refData(refnameRcpKaonPlus);
+      const Estimate1D& refdataRcpKaonPlus =refData(refnameRcpKaonPlus);
       book(_h["Fig11KaonPlusCentral"], refnameRcpKaonPlus + "_Central", refdataRcpKaonPlus);
       book(_h["Fig11KaonPlusPeripheral"], refnameRcpKaonPlus + "_Peripheral", refdataRcpKaonPlus);
       book(_s["Fig11KaonPlus"], refnameRcpKaonPlus);
 
       string refnameRcpKaonMinus = mkAxisCode(16,1,2);
-      const Scatter2D& refdataRcpKaonMinus =refData(refnameRcpKaonMinus);
+      const Estimate1D& refdataRcpKaonMinus =refData(refnameRcpKaonMinus);
       book(_h["Fig11KaonMinusCentral"], refnameRcpKaonMinus + "_Central", refdataRcpKaonMinus);
       book(_h["Fig11KaonMinusPeripheral"], refnameRcpKaonMinus + "_Peripheral", refdataRcpKaonMinus);
       book(_s["Fig11KaonMinus"], refnameRcpKaonMinus);
 
       string refnameRcpProton = mkAxisCode(17,1,1);
-      const Scatter2D& refdataRcpProton =refData(refnameRcpProton);
+      const Estimate1D& refdataRcpProton =refData(refnameRcpProton);
       book(_h["Fig11ProtonCentral"], refnameRcpProton + "_Central", refdataRcpProton);
       book(_h["Fig11ProtonPeripheral"], refnameRcpProton + "_Peripheral", refdataRcpProton);
       book(_s["Fig11Proton"], refnameRcpProton);
 
       string refnameRcpAntiProton = mkAxisCode(17,1,2);
-      const Scatter2D& refdataRcpAntiProton =refData(refnameRcpAntiProton);
+      const Estimate1D& refdataRcpAntiProton =refData(refnameRcpAntiProton);
       book(_h["Fig11AntiProtonCentral"], refnameRcpAntiProton + "_Central", refdataRcpAntiProton);
       book(_h["Fig11AntiProtonPeripheral"], refnameRcpAntiProton + "_Peripheral", refdataRcpAntiProton);
       book(_s["Fig11AntiProton"], refnameRcpAntiProton);
@@ -214,7 +215,7 @@ void binShift(YODA::Histo1D& histogram) {
       if (collSys == AuAu130){
       const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
       const double cent = centProj();
-      Particles particles = applyProjection<PrimaryParticles>(event,"cp").particles();
+      Particles particles = apply<PrimaryParticles>(event,"cp").particles();
       if(cent > 92.) vetoEvent;
         _c["MinBias"]->fill();
         if(cent >= 0. && cent < 5.) _c["Cent0_5"]->fill();
@@ -602,7 +603,7 @@ double scaleFactor = 1.0 / (2 * M_PI );
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     string beamOpt;
     enum CollisionSystem {AuAu130};
     CollisionSystem collSys;

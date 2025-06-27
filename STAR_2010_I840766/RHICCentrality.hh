@@ -39,7 +39,7 @@ public:
 }
 
 
-  DEFAULT_RIVET_PROJ_CLONE(RHICCentrality);
+  RIVET_DEFAULT_PROJ_CLONE(RHICCentrality);
 
   /// @BRIEF Add a new centality estimate.
   ///
@@ -65,7 +65,7 @@ public:
       }
       else if(expName == "CMS")
       {
-          const Particles& particles = applyProjection<ChargedFinalState>(e, "CFS").particles();
+          const Particles& particles = apply<ChargedFinalState>(e, "CFS").particles();
           for(const Particle& p : particles)
           {
               estimate += p.Et();
@@ -75,7 +75,7 @@ public:
       }
       
       //cout << "Estimate: " << estimate << endl;
-      set(estimate);
+      setValue(estimate);
     }
 
   /// Cheek if no internal projections have been added.

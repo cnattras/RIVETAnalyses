@@ -4,7 +4,6 @@
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/AliceCommon.hh"
 #include "Rivet/Tools/AliceCommon.hh"
-#include <stdio.h>
 
 namespace Rivet {
 
@@ -24,12 +23,12 @@ namespace Rivet {
 				for(auto p : jet.particles())
 				{
 					double r = deltaR(p.eta(), p.phi(), jet.eta(), jet.phi());
-					int bin = prof1D->binIndexAt(r);
-					if(bin >= 0) sum[bin] += p.pT()/GeV;
+					size_t bin = prof1D->indexAt(r);
+					sum[bin-1] += p.pT()/GeV;
 				}
-				for(unsigned int i = 0; i < sum.size(); i++) {
-					prof1D->fill(prof1D->bin(i).xMid(),sum[i]/prof1D->bin(i).xWidth());
-				}
+        for (auto& b : prof1D->bins()) {
+          prof1D->fill(b.xMid(), sum[b.index()-1]/b.xWidth());
+        }
 			}
 
 			void FillRadius80PercPt(Profile1DPtr prof1D, Jet jet)
@@ -109,9 +108,7 @@ namespace Rivet {
 
                         void Subtract(Histo1DPtr Histo, Histo1DPtr hSub)
                         {
-                                const string path = Histo->path();
-                                *Histo = YODA::subtract(*Histo, *hSub);
-                                Histo->setPath(path);
+                                *Histo -= *hSub;
                         }
 
 			/// Book histograms and initialise projections before the run
@@ -130,26 +127,26 @@ namespace Rivet {
 				fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
 
 				fjAreaDef02 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-				FastJets jetsAKTR02FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				FastJets jetsAKTR02FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02, JetMuons::NONE, JetInvisibles::NONE);
 				declare(jetsAKTR02FJ, "jetsAKTR02FJ");
 
 				fjAreaDef03 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-				FastJets jetsAKTR03FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.3, fjAreaDef03, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				FastJets jetsAKTR03FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.3, fjAreaDef03, JetMuons::NONE, JetInvisibles::NONE);
 				declare(jetsAKTR03FJ, "jetsAKTR03FJ");
 
 				fjAreaDef04 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-				FastJets jetsAKTR04FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				FastJets jetsAKTR04FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04, JetMuons::NONE, JetInvisibles::NONE);
 				declare(jetsAKTR04FJ, "jetsAKTR04FJ");
 
 				fjAreaDef04KT = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-				FastJets jetsKTR04FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04KT, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				FastJets jetsKTR04FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04KT, JetMuons::NONE, JetInvisibles::NONE);
 				declare(jetsKTR04FJ, "jetsKTR04FJ");
 
-				FastJets jetsCONER04FJ(fs, FastJets::SISCONE, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				FastJets jetsCONER04FJ(fs, JetAlg::SISCONE, 0.4, JetMuons::NONE, JetInvisibles::NONE);
 				declare(jetsCONER04FJ, "jetsCONER04FJ");
 
 				fjAreaDef06 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-				FastJets jetsAKTR06FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.6, fjAreaDef06, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+				FastJets jetsAKTR06FJ(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.6, fjAreaDef06, JetMuons::NONE, JetInvisibles::NONE);
 				declare(jetsAKTR06FJ, "jetsAKTR06FJ");
 
 				// Initialize ALICE primary particles
@@ -189,12 +186,12 @@ namespace Rivet {
 
 				// Figure 6 - Ratios
 				string refname0204 = mkAxisCode(13, 1, 1);
-				const Scatter2D& refdata0204 = refData(refname0204);
+				const Estimate1D& refdata0204 = refData(refname0204);
 				book(_h["Ratio02_Numerator"], refname0204 + "Ratio02_Numerator", refdata0204);
 				book(_h["Ratio04_Denominator"], refname0204 + "Ratio04_Denominator", refdata0204);
 				book(_s["Ratio0204"], refname0204);
 				string refname0206 = mkAxisCode(14, 1, 1);
-				const Scatter2D& refdata0206 = refData(refname0206);
+				const Estimate1D& refdata0206 = refData(refname0206);
 				book(_h["Ratio06_Denominator"], refname0206 + "Ratio06_Denominator", refdata0206);
 				book(_s["Ratio0206"], refname0206);
 
@@ -228,64 +225,64 @@ namespace Rivet {
 
 				// Figure 12
                                 string refnameFig12_33 = mkAxisCode(33, 1, 1);
-				const Scatter2D& refdataFig12_33 = refData(refnameFig12_33);
+				const Estimate1D& refdataFig12_33 = refData(refnameFig12_33);
                                 book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC"], refnameFig12_33, refdataFig12_33);
                                 book(_h["pTSpectraR04_Eta05_2030_ALICEvsMC_UE"], refnameFig12_33 + "_UE", refdataFig12_33);
 
                                 string refnameFig12_34 = mkAxisCode(34, 1, 1);
-				const Scatter2D& refdataFig12_34 = refData(refnameFig12_34);
+				const Estimate1D& refdataFig12_34 = refData(refnameFig12_34);
                                 book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC"], refnameFig12_34, refdataFig12_34);
                                 book(_h["pTSpectraR04_Eta05_3040_ALICEvsMC_UE"], refnameFig12_34 + "_UE", refdataFig12_34);
 
                                 string refnameFig12_35 = mkAxisCode(35, 1, 1);
-				const Scatter2D& refdataFig12_35 = refData(refnameFig12_35);
+				const Estimate1D& refdataFig12_35 = refData(refnameFig12_35);
                                 book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC"], refnameFig12_35, refdataFig12_35);
                                 book(_h["pTSpectraR04_Eta05_4060_ALICEvsMC_UE"], refnameFig12_35 + "_UE", refdataFig12_35);
 
                                 string refnameFig12_36 = mkAxisCode(36, 1, 1);
-				const Scatter2D& refdataFig12_36 = refData(refnameFig12_36);
+				const Estimate1D& refdataFig12_36 = refData(refnameFig12_36);
                                 book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC"], refnameFig12_36, refdataFig12_36);
                                 book(_h["pTSpectraR04_Eta05_6080_ALICEvsMC_UE"], refnameFig12_36 + "_UE", refdataFig12_36);
 
 				// Figure 13
                                 string refnameFig13_37 = mkAxisCode(37, 1, 1);
-				const Scatter2D& refdataFig13_37 = refData(refnameFig13_37);
+				const Estimate1D& refdataFig13_37 = refData(refnameFig13_37);
 				book(_h["pTSpectraR04_Eta05_2030_0to1"], refnameFig13_37, refdataFig13_37);
                                 book(_h["pTSpectraR04_Eta05_2030_0to1_UE"], refnameFig13_37 + "_UE", refdataFig13_37);
 
                                 string refnameFig13_38 = mkAxisCode(38, 1, 1);
-				const Scatter2D& refdataFig13_38 = refData(refnameFig13_38);
+				const Estimate1D& refdataFig13_38 = refData(refnameFig13_38);
 				book(_h["pTSpectraR04_Eta05_3040_0to1"], refnameFig13_38, refdataFig13_38);
                                 book(_h["pTSpectraR04_Eta05_3040_0to1_UE"], refnameFig13_38 + "_UE", refdataFig13_38);
 
                                 string refnameFig13_39 = mkAxisCode(39, 1, 1);
-				const Scatter2D& refdataFig13_39 = refData(refnameFig13_39);
+				const Estimate1D& refdataFig13_39 = refData(refnameFig13_39);
 				book(_h["pTSpectraR04_Eta05_4060_0to1"], refnameFig13_39, refdataFig13_39);
                                 book(_h["pTSpectraR04_Eta05_4060_0to1_UE"], refnameFig13_39 + "_UE", refdataFig13_39);
 
                                 string refnameFig13_40 = mkAxisCode(40, 1, 1);
-				const Scatter2D& refdataFig13_40 = refData(refnameFig13_40);
+				const Estimate1D& refdataFig13_40 = refData(refnameFig13_40);
 				book(_h["pTSpectraR04_Eta05_6080_0to1"], refnameFig13_40, refdataFig13_40);
                                 book(_h["pTSpectraR04_Eta05_6080_0to1_UE"], refnameFig13_40 + "_UE", refdataFig13_40);
 
 				// Figure 14
                                 string refnameFig14_41 = mkAxisCode(41, 1, 1);
-				const Scatter2D& refdataFig14_41 = refData(refnameFig14_41);
+				const Estimate1D& refdataFig14_41 = refData(refnameFig14_41);
 				book(_h["pTSpectraR04_Eta05_2030_0to6"], refnameFig14_41, refdataFig14_41);
                                 book(_h["pTSpectraR04_Eta05_2030_0to6_UE"], refnameFig14_41 + "_UE", refdataFig14_41);
 
                                 string refnameFig14_42 = mkAxisCode(42, 1, 1);
-				const Scatter2D& refdataFig14_42 = refData(refnameFig14_42);
+				const Estimate1D& refdataFig14_42 = refData(refnameFig14_42);
 				book(_h["pTSpectraR04_Eta05_3040_0to6"], refnameFig14_42, refdataFig14_42);
                                 book(_h["pTSpectraR04_Eta05_3040_0to6_UE"], refnameFig14_42 + "_UE", refdataFig14_42);
 
                                 string refnameFig14_43 = mkAxisCode(43, 1, 1);
-				const Scatter2D& refdataFig14_43 = refData(refnameFig14_43);
+				const Estimate1D& refdataFig14_43 = refData(refnameFig14_43);
 				book(_h["pTSpectraR04_Eta05_4060_0to6"], refnameFig14_43, refdataFig14_43);
                                 book(_h["pTSpectraR04_Eta05_4060_0to6_UE"], refnameFig14_43 + "_UE", refdataFig14_43);
 
                                 string refnameFig14_44 = mkAxisCode(44, 1, 1);
-				const Scatter2D& refdataFig14_44 = refData(refnameFig14_44);
+				const Estimate1D& refdataFig14_44 = refData(refnameFig14_44);
 				book(_h["pTSpectraR04_Eta05_6080_0to6"], refnameFig14_44, refdataFig14_44);
                                 book(_h["pTSpectraR04_Eta05_6080_0to6_UE"], refnameFig14_44 + "_UE", refdataFig14_44);
 
@@ -703,7 +700,7 @@ namespace Rivet {
 			map<string, Histo1DPtr> _h;
 			map<string, Profile1DPtr> _p;
 			map<string, CounterPtr> _c;
-			map<string, Scatter2DPtr> _s;
+			map<string, Estimate1DPtr> _s;
 
 			fastjet::AreaDefinition *fjAreaDef02;
 			fastjet::AreaDefinition *fjAreaDef03;

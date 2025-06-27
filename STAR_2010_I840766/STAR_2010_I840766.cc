@@ -3,7 +3,6 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
@@ -30,7 +29,7 @@ namespace Rivet {
 	public:
 
 		/// Constructor
-		DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2010_I840766);
+		RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2010_I840766);
 
 
 		/// @name Analysis methods
@@ -55,14 +54,14 @@ namespace Rivet {
 
 			//book(_h["Table3"], 3, 1, 2);
 			string refname = mkAxisCode(3, 1, 2);
-			const Scatter2D& EtaPi_pp = refData(refname);
+			const Estimate1D& EtaPi_pp = refData(refname);
 			book(_h["Table3_eta"], refname + "_eta", EtaPi_pp);
 			book(_h["Table3_pi"], refname + "_pi", EtaPi_pp);
 			book(_s["Table3"], refname);
 
 			//book(_h["Table4"], 4, 1, 2);
          refname = mkAxisCode(4, 1, 2);
-         const Scatter2D& EtaPi_dAu = refData(refname);
+         const Estimate1D& EtaPi_dAu = refData(refname);
          book(_h["Table4_eta"], refname + "_eta", EtaPi_dAu);
          book(_h["Table4_pi"], refname + "_pi", EtaPi_dAu);
          book(_s["Table4"], refname);
@@ -70,21 +69,21 @@ namespace Rivet {
 
 			//book(_h["Table5"], 5, 1, 2);
          refname = mkAxisCode(5, 1, 2); // pi0
-         const Scatter2D& R_dAu_pi = refData(refname);
+         const Estimate1D& R_dAu_pi = refData(refname);
          book(_h["Table5_pp"], refname + "_pp", R_dAu_pi);
          book(_h["Table5_dAu"], refname + "_dAu", R_dAu_pi);
          book(_s["Table5"], refname);
 
 			//book(_h["Table6"], 6, 1, 2);
          refname = mkAxisCode(6, 1, 2); // eta
-         const Scatter2D& R_dAu_eta = refData(refname);
+         const Estimate1D& R_dAu_eta = refData(refname);
          book(_h["Table6_pp"], refname + "_pp", R_dAu_eta);
          book(_h["Table6_dAu"], refname + "_dAu", R_dAu_eta);
          book(_s["Table6"], refname);
 
 			//book(_h["Table7"], 7, 1, 2);
          refname = mkAxisCode(7, 1, 2);
-         const Scatter2D& R_CP_pi = refData(refname);
+         const Estimate1D& R_CP_pi = refData(refname);
          book(_h["Table7_Central"], refname + "_C", R_CP_pi);
          book(_h["Table7_Peripheral"], refname + "_P", R_CP_pi);
          book(_s["Table7"], refname);
@@ -93,7 +92,7 @@ namespace Rivet {
 
 			//book(_h["Table8"], 8, 1, 2);
          refname = mkAxisCode(8, 1, 2);
-         const Scatter2D& R_gamma_pp = refData(refname);
+         const Estimate1D& R_gamma_pp = refData(refname);
          book(_h["Gamma_inclusive_pp"], refname + "_inclusive_pp", R_gamma_pp);
          book(_h["Gamma_decay_pp"], refname + "_decay_pp", R_gamma_pp);
          book(_h["Gamma_prompt_pp"], refname + "_prompt_pp", R_gamma_pp);
@@ -101,7 +100,7 @@ namespace Rivet {
 
          //book(_h["Table9"], 9, 1, 2);
          refname = mkAxisCode(9, 1, 2);
-         const Scatter2D& R_gamma_dAu = refData(refname);
+         const Estimate1D& R_gamma_dAu = refData(refname);
          book(_h["Gamma_inclusive_dAu"], refname + "_inclusive_dAu", R_gamma_dAu);
          book(_h["Gamma_decay_dAu"], refname + "_decay_dAu", R_gamma_dAu);
          book(_h["Gamma_prompt_dAu"], refname + "_prompt_dAu", R_gamma_dAu);
@@ -121,9 +120,9 @@ namespace Rivet {
 		/// Perform the per-event analysis
 		void analyze(const Event& event) {
 
-			Particles upParticles = applyProjection<UnstableParticles>(event,"up").particles();
-         Particles promtParticles = applyProjection<PromptFinalState>(event,"pfs").particles();
-         Particles fsParticles = applyProjection<FinalState>(event,"pfs").particles();
+			Particles upParticles = apply<UnstableParticles>(event,"up").particles();
+         Particles promtParticles = apply<PromptFinalState>(event,"pfs").particles();
+         Particles fsParticles = apply<FinalState>(event,"pfs").particles();
 
 			if(beamOpt=="pp")
 			{
@@ -258,8 +257,8 @@ namespace Rivet {
          divide(_h["Table6_pp"], _h["Table6_dAu"], _s["Table6"]);
          divide(_h["Table7_Central"], _h["Table7_Peripheral"], _s["Table7"]);
 
-         *_h["Gamma_decay_pp"] = YODA::subtract(*_h["Gamma_inclusive_pp"], *_h["Gamma_prompt_pp"]);
-         *_h["Gamma_decay_dAu"] = YODA::subtract(*_h["Gamma_inclusive_dAu"], *_h["Gamma_prompt_dAu"]);
+         *_h["Gamma_decay_pp"] = *_h["Gamma_inclusive_pp"] - *_h["Gamma_prompt_pp"];
+         *_h["Gamma_decay_dAu"] = *_h["Gamma_inclusive_dAu"] - *_h["Gamma_prompt_dAu"];
 
          divide(_h["Gamma_inclusive_pp"], _h["Gamma_decay_pp"], _s["Table8"]);
          divide(_h["Gamma_inclusive_dAu"], _h["Gamma_decay_dAu"], _s["Table9"]);
@@ -276,7 +275,7 @@ namespace Rivet {
 		map<string, Histo1DPtr> _h;
 		map<string, Profile1DPtr> _p;
 		map<string, CounterPtr> _c;
-		map<string, Scatter2DPtr> _s;
+		map<string, Estimate1DPtr> _s;
 		string beamOpt = "";
 		///@}
 
@@ -284,6 +283,6 @@ namespace Rivet {
 	};
 
 
-	DECLARE_RIVET_PLUGIN(STAR_2010_I840766);
+	RIVET_DECLARE_PLUGIN(STAR_2010_I840766);
 
 }

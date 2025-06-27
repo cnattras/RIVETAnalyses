@@ -5,7 +5,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 
@@ -24,7 +23,7 @@ namespace Rivet {
     public:
 
       /// Constructor
-      DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2011_I900703);
+      RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2011_I900703);
 
       /// @name Analysis methods
       //@{
@@ -257,12 +256,12 @@ namespace Rivet {
         if (icen < 0 || icen >= 6) vetoEvent;
 
         // B. Calculate Event Plane
-        double Qx[NHAR][NSBE]={0.}; // Q-vector in x
-        double Qy[NHAR][NSBE]={0.}; // Q-vector in y
-        double ep[NHAR][NSBE]={0.}; // Event Plane
+        double Qx[NHAR][NSBE]{{0.}}; // Q-vector in x
+        double Qy[NHAR][NSBE]{{0.}}; // Q-vector in y
+        double ep[NHAR][NSBE]{{0.}}; // Event Plane
 
         // Fill Q-vectors
-        Particles particles = applyProjection<FinalState>(event,"fs").particles();
+        Particles particles = apply<FinalState>(event,"fs").particles();
         for (const Particle& p :particles) {
           double eta = p.pseudorapidity();
           double phi = p.phi();
@@ -332,10 +331,10 @@ namespace Rivet {
           for(int ihar = 0; ihar<NHAR; ihar++){
             if(icen==5 && ihar==2) continue; // No $v_4$ measurment in 50-60%
             if(_p_epcor_cen[name_epcor[ihar]]-> bin(icen).sumWY() == 0) continue;
-            double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).mean();
+            double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).xMean();
             double chi_sub = chi(sqrt(epcor));
             double res = resEventPlane(sqrt(2.0)*chi_sub);
-            _p_vn_pt[name_vn_pt[icen][ihar]] -> scaleY(1./res);
+            _p_vn_pt[name_vn_pt[icen][ihar]] -> scale(1, 1./res);
           }
         }
 
@@ -344,10 +343,10 @@ namespace Rivet {
             for(int icen = 0; icen<NCEN; icen++){
               if(icen==5 && ihar==2) continue; // No $v_4$ measurment in 50-60%
               if(_p_epcor_cen[name_epcor[ihar]]-> bin(icen).sumWY() == 0) continue;
-              double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).mean();
+              double epcor = _p_epcor_cen[name_epcor[ihar]]-> bin(icen).xMean();
               double chi_sub = chi(sqrt(epcor));
               double res = resEventPlane(sqrt(2.0)*chi_sub);
-              _p_vn_cen[name_vn_cen[iptb][ihar]] -> bin(icen).scaleY(1./res);
+              _p_vn_cen[name_vn_cen[iptb][ihar]] -> bin(icen).scale(1, 1./res);
             }
           }
         }
@@ -371,6 +370,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2011_I900703);
+  RIVET_DECLARE_PLUGIN(PHENIX_2011_I900703);
 
 }

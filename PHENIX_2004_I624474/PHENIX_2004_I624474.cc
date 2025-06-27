@@ -4,7 +4,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -28,27 +27,28 @@ namespace Rivet {
 	public:
 
 	/// Constructor
-	DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2004_I624474);
+	RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2004_I624474);
 
 	//create binShift function
     void binShift(YODA::Histo1D& histogram) {
-    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    const auto& binlist = histogram.bins();
+    const auto& lastBin = histogram.bin(histogram.numBins());
     int n = 0;
-    for (YODA::HistoBin1D bins : binlist) {
+    for (auto& bins : binlist) {
         double p_high = bins.xMax();
         double p_low = bins.xMin();
         //Now calculate f_corr
         if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
-        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
         } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
@@ -349,25 +349,25 @@ namespace Rivet {
 	//____Rcp____
 	
 	string refnameRcpPi = mkAxisCode(21,1,1);
-	const Scatter2D& refdataRcpPi = refData(refnameRcpPi);
+	const Estimate1D& refdataRcpPi = refData(refnameRcpPi);
 	book(hPi["AUAU0_10"], refnameRcpPi + "_0_10Pion", refdataRcpPi);
 	book(hPi["AUAU60_92"], refnameRcpPi + "_60_92Pion", refdataRcpPi);
 	book(hRcp["Pions"], refnameRcpPi);
 
 	string refnameRcpK = mkAxisCode(22,1,1);
-	const Scatter2D& refdataRcpK = refData(refnameRcpK);
+	const Estimate1D& refdataRcpK = refData(refnameRcpK);
 	book(hK["AUAU0_10"], refnameRcpK + "_0_10Kaon", refdataRcpK);
 	book(hK["AUAU60_92"], refnameRcpK + "_60_92Kaon", refdataRcpK);
 	book(hRcp["Kaons"], refnameRcpK);
 
 	string refnameRcpP = mkAxisCode(23,1,1);
-	const Scatter2D& refdataRcpP = refData(refnameRcpP);
+	const Estimate1D& refdataRcpP = refData(refnameRcpP);
 	book(hP["AUAU0_10"], refnameRcpP + "_0_10Proton", refdataRcpP);
 	book(hP["AUAU60_92"], refnameRcpP + "_60_92Proton", refdataRcpP);
 	book(hRcp["Pbar+P"], refnameRcpP);
 
 	string refnameRcpPi0 = mkAxisCode(24,1,1);
-	const Scatter2D& refdataRcpPi0 = refData(refnameRcpPi0);
+	const Estimate1D& refdataRcpPi0 = refData(refnameRcpPi0);
 	book(hPi0["AUAU0_10"], refnameRcpPi0 + "_0_10Pion0", refdataRcpPi0);
 	book(hPi0["AUAU60_92"], refnameRcpPi0 + "_60_92Pion0", refdataRcpPi0);
 	book(hRcp["Pi0"], refnameRcpPi0);
@@ -375,19 +375,19 @@ namespace Rivet {
 	//____ Rcp 1.5GeV+____
 	
 	string refnameRcpPi1_5 = mkAxisCode(25,1,1);
-	const Scatter2D& refdataRcpPi1_5 = refData(refnameRcpPi1_5);
+	const Estimate1D& refdataRcpPi1_5 = refData(refnameRcpPi1_5);
 	book(hPi["AUAU0_10GeV1_5"], refnameRcpPi1_5 + "_0_10Pion1_5", refdataRcpPi1_5);
 	book(hPi["AUAU60_92GeV1_5"], refnameRcpPi1_5 + "_60_92Pion1_5", refdataRcpPi1_5);
 	book(hRcp["Pions1_5"], refnameRcpPi1_5);
 	//These two need to be added to yoda and uncommented
 	string refnameRcpK1_5 = mkAxisCode(25,1,2);
-	const Scatter2D& refdataRcpK1_5 = refData(refnameRcpK1_5);
+	const Estimate1D& refdataRcpK1_5 = refData(refnameRcpK1_5);
 	book(hK["AUAU0_10GeV1_5"], refnameRcpK1_5 + "_0_10Kaon1_5", refdataRcpK1_5);
 	book(hK["AUAU60_92GeV1_5"], refnameRcpK1_5 + "_60_92Kaon1_5", refdataRcpK1_5);
 	book(hRcp["Kaons1_5"], refnameRcpK1_5);
 
 	string refnameRcpP1_5 = mkAxisCode(25,1,3);
-	const Scatter2D& refdataRcpP1_5 = refData(refnameRcpP1_5);
+	const Estimate1D& refdataRcpP1_5 = refData(refnameRcpP1_5);
 	book(hP["AUAU0_10GeV1_5"], refnameRcpP1_5 + "_0_10Proton1_5", refdataRcpP1_5);
 	book(hP["AUAU60_92GeV1_5"], refnameRcpP1_5 + "_60_92Proton1_5", refdataRcpP1_5);
 	book(hRcp["Pbar+P1_5"], refnameRcpP1_5);
@@ -415,139 +415,139 @@ namespace Rivet {
 	//____Ratios____
 	
 	string refnameratio0_5PiPi = mkAxisCode(14,1,1);	//Pi-/Pi+
-	const Scatter2D& refdataratio0_5PiPi = refData(refnameratio0_5PiPi);
+	const Estimate1D& refdataratio0_5PiPi = refData(refnameratio0_5PiPi);
 	book(hPiPi["AUAU0_5Piminus"], refnameratio0_5PiPi + "_0_5Piminus", refdataratio0_5PiPi);
 	book(hPiPi["AUAU0_5Piplus"], refnameratio0_5PiPi + "_0_5Piplus", refdataratio0_5PiPi);
 	book(hRatio["Piminus_Piplus0_5"], refnameratio0_5PiPi);
 
 	string refnameratio60_92PiPi = mkAxisCode(14,1,2);
-	const Scatter2D& refdataratio60_92PiPi = refData(refnameratio60_92PiPi);
+	const Estimate1D& refdataratio60_92PiPi = refData(refnameratio60_92PiPi);
 	book(hPiPi["AUAU60_92Piminus"], refnameratio60_92PiPi + "_60_92Piminus", refdataratio60_92PiPi);
 	book(hPiPi["AUAU60_92Piplus"], refnameratio60_92PiPi + "_60_92Piplus", refdataratio60_92PiPi);
 	book(hRatio["Piminus_Piplus60_92"], refnameratio60_92PiPi);
 
 	string refnameratio0_5KK = mkAxisCode(15,1,1);	//Kaon-/Kaon+
-	const Scatter2D& refdataratio0_5KK = refData(refnameratio0_5KK);
+	const Estimate1D& refdataratio0_5KK = refData(refnameratio0_5KK);
 	book(hKK["AUAU0_5Kminus"], refnameratio0_5KK + "_0_5Kminus", refdataratio0_5KK);
 	book(hKK["AUAU0_5Kplus"], refnameratio0_5KK + "_0_5Kplus", refdataratio0_5KK);
 	book(hRatio["Kiminus_Kiplus0_5"], refnameratio0_5KK);
 
 	string refnameratio60_92KK = mkAxisCode(15,1,2);
-	const Scatter2D& refdataratio60_92KK = refData(refnameratio60_92KK);
+	const Estimate1D& refdataratio60_92KK = refData(refnameratio60_92KK);
 	book(hKK["AUAU60_92Kminus"], refnameratio60_92KK + "_60_92Kminus", refdataratio60_92KK);
 	book(hKK["AUAU60_92Kplus"], refnameratio60_92KK + "_60_92Kplus", refdataratio60_92KK);
 	book(hRatio["Kiminus_Kiplus60_92"], refnameratio60_92KK);
 
 	string refnameratio0_5PbarP = mkAxisCode(16,1,1);	//Antiproton/Proton
-	const Scatter2D& refdataratio0_5PbarP = refData(refnameratio0_5PbarP);
+	const Estimate1D& refdataratio0_5PbarP = refData(refnameratio0_5PbarP);
 	book(hPP["AUAU0_5Pbar"], refnameratio0_5PbarP + "_0_5Pbar", refdataratio0_5PbarP);
 	book(hPP["AUAU0_5P"], refnameratio0_5PbarP + "_0_5P", refdataratio0_5PbarP);
 	book(hRatio["Pbar_P0_5"], refnameratio0_5PbarP);
 
 	string refnameratio60_92PbarP = mkAxisCode(16,1,2);
-	const Scatter2D& refdataratio60_92PbarP = refData(refnameratio60_92PbarP);
+	const Estimate1D& refdataratio60_92PbarP = refData(refnameratio60_92PbarP);
 	book(hPP["AUAU60_92Pbar"], refnameratio60_92PbarP + "_60_92Pbar", refdataratio60_92PbarP);
 	book(hPP["AUAU60_92P"], refnameratio60_92PbarP + "_60_92P", refdataratio60_92PbarP);
 	book(hRatio["Pbar_P60_92"], refnameratio60_92PbarP);
 
 	string refnameratiominPbarP = mkAxisCode(16,1,3);
-	const Scatter2D& refdataratiominPbarP = refData(refnameratiominPbarP);
+	const Estimate1D& refdataratiominPbarP = refData(refnameratiominPbarP);
 	book(hPP["AUAUminPbar"], refnameratiominPbarP + "_minPbar", refdataratiominPbarP);
 	book(hPP["AUAUminP"], refnameratiominPbarP + "_minP", refdataratiominPbarP);
 	book(hRatio["Pbar_Pmin"], refnameratiominPbarP);
 
 	string refnameratio0_5KplusPiplus = mkAxisCode(17,1,1);	//Kaon+/Pi+
-	const Scatter2D& refdataratio0_5KplusPiplus = refData(refnameratio0_5KplusPiplus);
+	const Estimate1D& refdataratio0_5KplusPiplus = refData(refnameratio0_5KplusPiplus);
 	book(hKPi["AUAU0_5Kplus"], refnameratio0_5KplusPiplus + "_0_5Kplus", refdataratio0_5KplusPiplus);
 	book(hKPi["AUAU0_5Piplus"], refnameratio0_5KplusPiplus + "_0_5Piplus", refdataratio0_5KplusPiplus);
 	book(hRatio["Kplus_Piplus0_5"], refnameratio0_5KplusPiplus);
 
 	string refnameratio60_92KplusPiplus = mkAxisCode(17,1,2);
-	const Scatter2D& refdataratio60_92KplusPiplus = refData(refnameratio60_92KplusPiplus);
+	const Estimate1D& refdataratio60_92KplusPiplus = refData(refnameratio60_92KplusPiplus);
 	book(hKPi["AUAU60_92Kplus"], refnameratio60_92KplusPiplus + "_60_92Kplus", refdataratio60_92KplusPiplus);
 	book(hKPi["AUAU60_92Piplus"], refnameratio60_92KplusPiplus + "_60_92Piplus", refdataratio60_92KplusPiplus);
 	book(hRatio["Kplus_Piplus60_92"], refnameratio60_92KplusPiplus);
 	
 	string refnameratio0_5KminusPiminus = mkAxisCode(17,1,3);	//Kaon-/Pi-
-	const Scatter2D& refdataratio0_5KminusPiminus = refData(refnameratio0_5KminusPiminus);
+	const Estimate1D& refdataratio0_5KminusPiminus = refData(refnameratio0_5KminusPiminus);
 	book(hKPi["AUAU0_5Kminus"], refnameratio0_5KminusPiminus + "_0_5Kminus", refdataratio0_5KminusPiminus);
 	book(hKPi["AUAU0_5Piminus"], refnameratio0_5KminusPiminus + "_0_5Piminus", refdataratio0_5KminusPiminus);
 	book(hRatio["Kminus_Piminus0_5"], refnameratio0_5KminusPiminus);
 
 	string refnameratio60_92KminusPiminus = mkAxisCode(17,1,4);
-	const Scatter2D& refdataratio60_92KminusPiminus = refData(refnameratio60_92KminusPiminus);
+	const Estimate1D& refdataratio60_92KminusPiminus = refData(refnameratio60_92KminusPiminus);
 	book(hKPi["AUAU60_92Kminus"], refnameratio60_92KminusPiminus + "_60_92Kminus", refdataratio60_92KminusPiminus);
 	book(hKPi["AUAU60_92Piminus"], refnameratio60_92KminusPiminus + "_60_92Piminus", refdataratio60_92KminusPiminus);
 	book(hRatio["Kminus_Piminus60_92"], refnameratio60_92KminusPiminus);
 
 	string refnameratio0_10PPiplus = mkAxisCode(18,1,1);	//Proton/Pi+
-	const Scatter2D& refdataratio0_10PPiplus = refData(refnameratio0_10PPiplus);
+	const Estimate1D& refdataratio0_10PPiplus = refData(refnameratio0_10PPiplus);
 	book(hPPi["AUAU0_10ProtonPiplus"], refnameratio0_10PPiplus + "_0_10P", refdataratio0_10PPiplus);
 	book(hPPi["AUAU0_10Piplus"], refnameratio0_10PPiplus + "_0_10Piplus", refdataratio0_10PPiplus);
 	book(hRatio["P_Piplus0_10"], refnameratio0_10PPiplus);
 
 	string refnameratio20_30PPiplus = mkAxisCode(18,1,2);
-	const Scatter2D& refdataratio20_30PPiplus = refData(refnameratio20_30PPiplus);
+	const Estimate1D& refdataratio20_30PPiplus = refData(refnameratio20_30PPiplus);
 	book(hPPi["AUAU20_30ProtonPiplus"], refnameratio20_30PPiplus + "_20_30P", refdataratio20_30PPiplus);
 	book(hPPi["AUAU20_30Piplus"], refnameratio20_30PPiplus + "_20_30Piplus", refdataratio20_30PPiplus);
 	book(hRatio["P_Piplus20_30"], refnameratio20_30PPiplus);
 
 	string refnameratio60_92PPiplus = mkAxisCode(18,1,3);
-	const Scatter2D& refdataratio60_92PPiplus = refData(refnameratio60_92PPiplus);
+	const Estimate1D& refdataratio60_92PPiplus = refData(refnameratio60_92PPiplus);
 	book(hPPi["AUAU60_92ProtonPiplus"], refnameratio60_92PPiplus + "_60_92P", refdataratio60_92PPiplus);
 	book(hPPi["AUAU60_92Piplus"], refnameratio60_92PPiplus + "_60_92Piplus", refdataratio60_92PPiplus);
 	book(hRatio["P_Piplus60_92"], refnameratio60_92PPiplus);
 	
 	string refnameratio0_10PbarPiminus = mkAxisCode(18,1,4);	//Antiproton/Pi-
-	const Scatter2D& refdataratio0_10PbarPiminus = refData(refnameratio0_10PbarPiminus);
+	const Estimate1D& refdataratio0_10PbarPiminus = refData(refnameratio0_10PbarPiminus);
 	book(hPPi["AUAU0_10PbarPiminus"], refnameratio0_10PbarPiminus + "_0_10Pbar", refdataratio0_10PbarPiminus);
 	book(hPPi["AUAU0_10Piminus"], refnameratio0_10PbarPiminus + "_0_10Piminus", refdataratio0_10PbarPiminus);
 	book(hRatio["Pbar_Piminus0_10"], refnameratio0_10PbarPiminus);
 
 	string refnameratio20_30PbarPiminus = mkAxisCode(18,1,5);
-	const Scatter2D& refdataratio20_30PbarPiminus = refData(refnameratio20_30PbarPiminus);
+	const Estimate1D& refdataratio20_30PbarPiminus = refData(refnameratio20_30PbarPiminus);
 	book(hPPi["AUAU20_30PbarPiminus"], refnameratio20_30PbarPiminus + "_20_30Pbar", refdataratio20_30PbarPiminus);
 	book(hPPi["AUAU20_30Piminus"], refnameratio20_30PbarPiminus + "_20_30Piminus", refdataratio20_30PbarPiminus);
 	book(hRatio["Pbar_Piminus20_30"], refnameratio20_30PbarPiminus);
 
 	string refnameratio60_92PbarPiminus = mkAxisCode(18,1,6);
-	const Scatter2D& refdataratio60_92PbarPiminus = refData(refnameratio60_92PbarPiminus);
+	const Estimate1D& refdataratio60_92PbarPiminus = refData(refnameratio60_92PbarPiminus);
 	book(hPPi["AUAU60_92PbarPiminus"], refnameratio60_92PbarPiminus + "_60_92Pbar", refdataratio60_92PbarPiminus);
 	book(hPPi["AUAU60_92Piminus"], refnameratio60_92PbarPiminus + "_60_92Piminus", refdataratio60_92PbarPiminus);
 	book(hRatio["Pbar_Piminus60_92"], refnameratio60_92PbarPiminus);
 
 	string refnameratio0_10PPi0 = mkAxisCode(19,1,1);	//Proton/Pi0
-	const Scatter2D& refdataratio0_10PPi0 = refData(refnameratio0_10PPi0);
+	const Estimate1D& refdataratio0_10PPi0 = refData(refnameratio0_10PPi0);
 	book(hPPi["AUAU0_10P"], refnameratio0_10PPi0 + "_0_10P", refdataratio0_10PPi0);
 	book(hPPi["AUAU0_10PPi0"], refnameratio0_10PPi0 + "_0_10Pi0", refdataratio0_10PPi0);
 	book(hRatio["P_Pi00_10"], refnameratio0_10PPi0);
 
 	string refnameratio20_30PPi0 = mkAxisCode(19,1,2);
-	const Scatter2D& refdataratio20_30PPi0 = refData(refnameratio20_30PPi0);
+	const Estimate1D& refdataratio20_30PPi0 = refData(refnameratio20_30PPi0);
 	book(hPPi["AUAU20_30P"], refnameratio20_30PPi0 + "_20_30P", refdataratio20_30PPi0);
 	book(hPPi["AUAU20_30PPi0"], refnameratio20_30PPi0 + "_20_30Pi0", refdataratio20_30PPi0);
 	book(hRatio["P_Pi020_30"], refnameratio20_30PPi0);
 
 	string refnameratio60_92PPi0 = mkAxisCode(19,1,3);
-	const Scatter2D& refdataratio60_92PPi0 = refData(refnameratio60_92PPi0);
+	const Estimate1D& refdataratio60_92PPi0 = refData(refnameratio60_92PPi0);
 	book(hPPi["AUAU60_92P"], refnameratio60_92PPi0 + "_60_92P", refdataratio60_92PPi0);
 	book(hPPi["AUAU60_92PPi0"], refnameratio60_92PPi0 + "_60_92Pi0", refdataratio60_92PPi0);
 	book(hRatio["P_Pi060_92"], refnameratio60_92PPi0);
 	
 	string refnameratio0_10PbarPi0 = mkAxisCode(19,1,4);	//Antiproton/Pi0
-	const Scatter2D& refdataratio0_10PbarPi0 = refData(refnameratio0_10PbarPi0);
+	const Estimate1D& refdataratio0_10PbarPi0 = refData(refnameratio0_10PbarPi0);
 	book(hPPi["AUAU0_10Pbar"], refnameratio0_10PbarPi0 + "_0_10Pbar", refdataratio0_10PbarPi0);
 	book(hPPi["AUAU0_10PbarPi0"], refnameratio0_10PbarPi0 + "_0_10Pi0", refdataratio0_10PbarPi0);
 	book(hRatio["Pbar_Pi00_10"], refnameratio0_10PbarPi0);
 
 	string refnameratio20_30PbarPi0 = mkAxisCode(19,1,5);
-	const Scatter2D& refdataratio20_30PbarPi0 = refData(refnameratio20_30PbarPi0);
+	const Estimate1D& refdataratio20_30PbarPi0 = refData(refnameratio20_30PbarPi0);
 	book(hPPi["AUAU20_30Pbar"], refnameratio20_30PbarPi0 + "_20_30Pbar", refdataratio20_30PbarPi0);
 	book(hPPi["AUAU20_30PbarPi0"], refnameratio20_30PbarPi0 + "_20_30Pi0", refdataratio20_30PbarPi0);
 	book(hRatio["Pbar_Pi020_30"], refnameratio20_30PbarPi0);
 
 	string refnameratio60_92PbarPi0 = mkAxisCode(19,1,6);
-	const Scatter2D& refdataratio60_92PbarPi0 = refData(refnameratio60_92PbarPi0);
+	const Estimate1D& refdataratio60_92PbarPi0 = refData(refnameratio60_92PbarPi0);
 	book(hPPi["AUAU60_92Pbar"], refnameratio60_92PbarPi0 + "_60_92Pbar", refdataratio60_92PbarPi0);
 	book(hPPi["AUAU60_92PbarPi0"], refnameratio60_92PbarPi0 + "_60_92Pi0", refdataratio60_92PbarPi0);
 	book(hRatio["Pbar_Pi060_92"], refnameratio60_92PbarPi0);
@@ -556,43 +556,43 @@ namespace Rivet {
 	//____Ratios vs Centrality____
 	
 	string refnamePiminusPiplus = mkAxisCode(20,1,1);	//Pi-/Pi+
-	const Scatter2D& refdataPiminusPiplus = refData(refnamePiminusPiplus);
+	const Estimate1D& refdataPiminusPiplus = refData(refnamePiminusPiplus);
 	book(hPiPi["AUAUPiminus"], refnamePiminusPiplus + "Piminus", refdataPiminusPiplus);
 	book(hPiPi["AUAUPiplus"], refnamePiminusPiplus + "Piplus", refdataPiminusPiplus);
 	book(hRatio["PiminusPiplus"], refnamePiminusPiplus);
 
 	string refnameKminusKplus = mkAxisCode(20,1,2);		//K-/K+
-	const Scatter2D& refdataKminusKplus = refData(refnameKminusKplus);
+	const Estimate1D& refdataKminusKplus = refData(refnameKminusKplus);
 	book(hKK["AUAUKminus"], refnameKminusKplus + "Kminus", refdataKminusKplus);
 	book(hKK["AUAUKplus"], refnameKminusKplus + "Kplus", refdataKminusKplus);
 	book(hRatio["KminusKplus"], refnameKminusKplus);
 
 	string refnamePbarP = mkAxisCode(20,1,3);
-	const Scatter2D& refdataPbarP = refData(refnamePbarP);	//Antiproton/Proton
+	const Estimate1D& refdataPbarP = refData(refnamePbarP);	//Antiproton/Proton
 	book(hPP["AUAUPbar"], refnamePbarP + "Pbar", refdataPbarP);
 	book(hPP["AUAUP"], refnamePbarP + "P", refdataPbarP);
 	book(hRatio["PbarP"], refnamePbarP);
 
 	string refnameKplusPiplus = mkAxisCode(20,1,4);		//K+/Pi+
-	const Scatter2D& refdataKplusPiplus = refData(refnameKplusPiplus);
+	const Estimate1D& refdataKplusPiplus = refData(refnameKplusPiplus);
 	book(hKPi["AUAUKplus"], refnameKplusPiplus + "Kplus", refdataKplusPiplus);
 	book(hKPi["AUAUPiplus"], refnameKplusPiplus + "Piplus", refdataKplusPiplus);
 	book(hRatio["KplusPiplus"], refnameKplusPiplus);
 
 	string refnameKminusPiminus = mkAxisCode(20,1,5);	//K-/Pi-
-	const Scatter2D& refdataKminusPiminus = refData(refnameKminusPiminus);
+	const Estimate1D& refdataKminusPiminus = refData(refnameKminusPiminus);
 	book(hKPi["AUAUKminus"], refnameKminusPiminus + "Kminus", refdataKminusPiminus);
 	book(hKPi["AUAUPiminus"], refnameKminusPiminus + "Piminus", refdataKminusPiminus);
 	book(hRatio["KminusPiminus"], refnameKminusPiminus);
 
 	string refnamePPiplus = mkAxisCode(20,1,6);		//Proton/Pi+
-	const Scatter2D& refdataPPiplus = refData(refnamePPiplus);
+	const Estimate1D& refdataPPiplus = refData(refnamePPiplus);
 	book(hPPi["AUAUP"], refnamePPiplus + "P", refdataPPiplus);
 	book(hPPi["AUAUPiplus"], refnamePPiplus + "Pi", refdataPPiplus);
 	book(hRatio["PPiplus"], refnamePPiplus);
 
 	string refnamePbarPiminus = mkAxisCode(20,1,7);		//Antiproton/Pi-
-	const Scatter2D& refdataPbarPiminus = refData(refnamePbarPiminus);
+	const Estimate1D& refdataPbarPiminus = refData(refnamePbarPiminus);
 	book(hPPi["AUAUPbar"], refnamePbarPiminus + "Pbar", refdataPbarPiminus);
 	book(hPPi["AUAUPiminus"], refnamePbarPiminus + "Pi", refdataPbarPiminus);
 	book(hRatio["PbarPiminus"], refnamePbarPiminus);
@@ -2101,10 +2101,10 @@ namespace Rivet {
 	map<string, Histo1DPtr> hPi;
 	map<string, Histo1DPtr> hK;
 	map<string, Histo1DPtr> hP;
-	map<string, Scatter2DPtr> hRcp;
+	map<string, Estimate1DPtr> hRcp;
 	map<string, Histo1DPtr> hPi0;
 	map<string, Histo1DPtr> hPiPi;
-	map<string, Scatter2DPtr> hRatio;
+	map<string, Estimate1DPtr> hRatio;
 	map<string, Histo1DPtr> hKK;
 	map<string, Histo1DPtr> hPP;
 	map<string, Histo1DPtr> hKPi;
@@ -2115,5 +2115,5 @@ namespace Rivet {
     CollisionSystem collSys;
 	};
 
-	DECLARE_RIVET_PLUGIN(PHENIX_2004_I624474);
+	RIVET_DECLARE_PLUGIN(PHENIX_2004_I624474);
 }

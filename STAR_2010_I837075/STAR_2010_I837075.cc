@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/AliceCommon.hh"
@@ -15,7 +14,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2010_I837075);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2010_I837075);
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -80,13 +79,13 @@ namespace Rivet {
             /* book( _h4["P"      ][i], 2, 1, i_plus [i] ); // [A] */
 
             // FIG 2a : ratio pi- to pi+
-            book( _s4["PIminusOverPIplus"][i], mkAxisCode(3,1,i+1), true); // (f)
+            book( _s4["PIminusOverPIplus"][i], mkAxisCode(3,1,i+1)); // (f)
 
             // FIG 2b : ratio pbar to p
-            book( _s4["PBARoverP"][i], mkAxisCode(4,1,i+1), true); // (f)
+            book( _s4["PBARoverP"][i], mkAxisCode(4,1,i+1)); // (f)
 
             // FIG 3a : Pion Raa(pT) (range 3-6 GeV/c in data, although paper has 3-8 GeV/c)
-            book(_s4["Raa_pion_pT"][i], mkAxisCode(5,1,i+1), true); // (f)
+            book(_s4["Raa_pion_pT"][i], mkAxisCode(5,1,i+1)); // (f)
             book(_h4["_pion_pT_CuCu"][i], "_pion_Pt_CuCu"+i_str[i], refData(5,1,i+1)); // [A]
             if (i==0) {
                 book(_h["_pion_pT_pp"], "_pion_pT_pp", refData(5,1,i+1)); // [A]
@@ -99,7 +98,7 @@ namespace Rivet {
             }
 
             // FIG 4a : Proton Raa(pT)
-            book(_s4["Raa_proton_pT"][i], mkAxisCode(7,1,i+1), true); // (f)
+            book(_s4["Raa_proton_pT"][i], mkAxisCode(7,1,i+1)); // (f)
             book( _h4["_PPBAR"]  [i], "_ppbar"+i_str[i], refData(7,1,i+1)); //  (f)
             if (i==0) {
                 book(_h["_proton_pT_pp"],   "_proton_pt_pp", refData(7,1,1));// [A]
@@ -109,13 +108,13 @@ namespace Rivet {
 
             // FIG 5a : p+p over pi+pi in 3-6 GeV range -- will use spectra from and FIG 1b for p+pbar
             //          and collect, newly, pions in 3-6 GeV
-            book (_s4["ratio_PtoPI"][i], mkAxisCode(8,1,i+1), true); // (f)
+            book (_s4["ratio_PtoPI"][i], mkAxisCode(8,1,i+1)); // (f)
             // use _h4["PPBAR"] for protons
             book (_h4["_PI_3_to_6"][i], "_PI_3_to_6"+i_str[i], refData(8,1,i+1) ); // (f)
 
             // FIG 5b : ppbar and pions centrality
             if (i==0) {
-                book(_s["PItoP_34"],  mkAxisCode(9,1,2), true); // (f)
+                book(_s["PItoP_34"],  mkAxisCode(9,1,2)); // (f)
                 book(_h["_PI_Cent_34"], "_PI_Cent_34", refData(9,1,2)); // [A]
                 book(_h["_P_Cent_34"],  "_P_Cent_34",  refData(9,1,2)); // [A]
             }
@@ -144,8 +143,8 @@ namespace Rivet {
         // move to init -- init uses data from the first event and fill a global flag
         // assumes all events are the same in analyze
 
-        /* const ChargedFinalState& bbc_east = applyProjection<ChargedFinalState>(event,"BBC_East"); */
-        /* const ChargedFinalState& bbc_west = applyProjection<ChargedFinalState>(event,"BBC_West"); */
+        /* const ChargedFinalState& bbc_east = apply<ChargedFinalState>(event,"BBC_East"); */
+        /* const ChargedFinalState& bbc_west = apply<ChargedFinalState>(event,"BBC_West"); */
         /* if (!bbc_east.size() && !bbc_west.size()){ */
         /*     cout << " n_events vetoed " << temp_nVetoEvent++ << endl; */
         /*     cout << " sizes: " << bbc_east.size() << " " << bbc_west.size() << endl; */
@@ -268,7 +267,7 @@ namespace Rivet {
           if(i==0) _h["_pion_pT_pp"]->scaleW(1./_c["pp"]->sumW());
           _h4["_pion_pT_CuCu"][i]->scaleW(1./_c4[i]->sumW()); //_c4_dummy[i]);
           divide(_h4["_pion_pT_CuCu"][i], _h["_pion_pT_pp"], _s4["Raa_pion_pT"][i]);
-          _s4["Raa_pion_pT"][i]->scaleY(1./Npart[i]);
+          _s4["Raa_pion_pT"][i]->scale(1./Npart[i]);
 
           // FIG 3b : Pion RAA in centrality bins
           if(i==0)
@@ -291,7 +290,7 @@ namespace Rivet {
           // FIG 4a : Proton Raa(pT)
           if(i==0) _h["_proton_pT_pp"]->scaleW(1./_c["pp"]->sumW());
           divide(_h4["_PPBAR"][i],_h["_proton_pT_pp"],_s4["Raa_proton_pT"][i]);
-          _s4["Raa_proton_pT"][i]->scaleY(1./Npart[i]);
+          _s4["Raa_proton_pT"][i]->scale(1./Npart[i]);
 
 
           // FIG 4b -- no data for this figure
@@ -320,8 +319,8 @@ namespace Rivet {
     array<double,4>              _c4_dummy; // Counts of 4 bins of Cu+Cu centralities
     array<double,4> event_ctr;
 
-    map<string, array<Scatter2DPtr,4>> _s4; // Scatterplots of divisions at 4 bins of Cu+Cu centralities
-    map<string, Scatter2DPtr> _s;           // Ratio plots for ratio events
+    map<string, array<Estimate1DPtr,4>> _s4; // Scatterplots of divisions at 4 bins of Cu+Cu centralities
+    map<string, Estimate1DPtr> _s;           // Ratio plots for ratio events
 
     string beamOpt = "NONE";
 
@@ -330,5 +329,5 @@ namespace Rivet {
     /* double temp_nVetoEvent {0.}; */
   };
 
-  DECLARE_RIVET_PLUGIN(STAR_2010_I837075);
+  RIVET_DECLARE_PLUGIN(STAR_2010_I837075);
 }

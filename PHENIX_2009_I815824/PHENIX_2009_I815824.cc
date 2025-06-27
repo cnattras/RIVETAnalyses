@@ -13,13 +13,6 @@
 
 #define _USE_MATH_DEFINES
 
-static const int numTrigPtBins = 3;
-static const float pTTrigBins[] = {2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0};
-static const int numAssocPtBins = 10;
-static const float pTAssocBins[] = {1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0};
-static const int numCentBins = 8;
-static const int centBins[] = {0,5,10,20, 30,40, 50,60};
-
 using namespace std;
 namespace Rivet {
 
@@ -112,7 +105,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2009_I815824);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2009_I815824);
 
 
     /// name Analysis methods
@@ -129,13 +122,13 @@ namespace Rivet {
     bool isSecondary(Particle p)
     {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-	           p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-	           p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-	           p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-	           p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-	           p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+	           p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+	           p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+	           p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+	           p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+	           p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+	           p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
         return true;
         else return false;
         
@@ -214,7 +207,7 @@ namespace Rivet {
     {
         double maxDeltaEta = 2.;
         
-        int binEta = hist.binIndexAt(deltaEta);
+        int binEta = hist.indexAt(deltaEta);
         
         if(binEta < 0)
         {
@@ -254,13 +247,13 @@ namespace Rivet {
     {
         double integral = 0.;
         
-        if(hist.binIndexAt(vmin) < 0 || hist.binIndexAt(vmax) < 0)
+        if(hist.indexAt(vmin) < 0 || hist.indexAt(vmax) < 0)
         {
             MSG_ERROR("Out of range!");
             return 0.;
         }
         
-        for(int i = hist.binIndexAt(vmin); i < hist.binIndexAt(vmax); i++)
+        for(int i = hist.indexAt(vmin); i < hist.indexAt(vmax); i++)
         {
             integral += hist.bin(i).sumW();
         }
@@ -822,7 +815,7 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(PHENIX_2009_I815824);
+  RIVET_DECLARE_PLUGIN(PHENIX_2009_I815824);
 
 
 }

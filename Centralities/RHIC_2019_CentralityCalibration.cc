@@ -13,66 +13,68 @@
 #include "Rivet/Projections/CentralityProjection.hh"
 #define _USE_MATH_DEFINES
 
-namespace Rivet {  
+namespace Rivet {
+
   /// @brief Centrality projection for PHENIX AuAu.
-class RHIC_2019_CentralityCalibration : public Analysis {
-  
+  class RHIC_2019_CentralityCalibration : public Analysis {
+
   public:
-    
-    RHIC_2019_CentralityCalibration() : Analysis("RHIC_2019_CentralityCalibration") { };
-  /// Book histograms and initialise projections before the run
-  void init() {
-    // One projection for the actual observable, and one for the
-    // generated impact parameter.
-      
-    string experiment = getOption<string>("exp","STAR");
-    set<string> done;  
-    MSG_INFO("RHIC Experiment: " << experiment);  
-    declare(RHICCentrality(experiment), "Centrality");
-    declare(ImpactParameterProjection(), "IMP");
 
-    // The calibration histogram:
-    book(_calib, "CMULT", 100, 0.0, 2000.0);
+    RIVET_DEFAULT_ANALYSIS_CTOR(RHIC_2019_CentralityCalibration);
 
-    // If histogram was pre-loaded, the calibration is done.
-    //_done = ( _calib->numEntries() > 0 );
+    /// Book histograms and initialise projections before the run
+    void init() {
+      // One projection for the actual observable, and one for the
+      // generated impact parameter.
 
-    // The alternative histogram based on impact parameter. Note that
-    // it MUST be named the same as the histogram for the experimental
-    // observable with an added _IMP suffix for the Pecentile<>
-    // binning to work properly.
-    book(_impcalib, "CMULT_IMP", 400, 0.0, 20.0);
+      string experiment = getOption<string>("exp","STAR");
+      set<string> done;
+      MSG_INFO("RHIC Experiment: " << experiment);
+      declare(RHICCentrality(experiment), "Centrality");
+      declare(ImpactParameterProjection(), "IMP");
+
+      // The calibration histogram:
+      book(_calib, "CMULT", 100, 0.0, 2000.0);
+
+      // If histogram was pre-loaded, the calibration is done.
+      //_done = ( _calib->numEntries() > 0 );
+
+      // The alternative histogram based on impact parameter. Note that
+      // it MUST be named the same as the histogram for the experimental
+      // observable with an added _IMP suffix for the Pecentile<>
+      // binning to work properly.
+      book(_impcalib, "CMULT_IMP", 400, 0.0, 20.0);
 
 
-  }
-  
-  /// Perform the per-event analysis
-  void analyze(const Event& event) {
-    
-    // The alternative centrality based on generated impact
-    // parameter, assumes that the generator does not describe the
-    // full final state, and should therefore be filled even if the
-    // event is not triggered.
-      _impcalib->fill(apply<SingleValueProjection>(event, "IMP")());
-      
-      _calib->fill(apply<SingleValueProjection>(event, "Centrality")());
-    
-  }
-  
-  /// Finalize
-  void finalize() {
+    }
 
-    _calib->normalize();
-    _impcalib->normalize();
+    /// Perform the per-event analysis
+    void analyze(const Event& event) {
 
-  }
+      // The alternative centrality based on generated impact
+      // parameter, assumes that the generator does not describe the
+      // full final state, and should therefore be filled even if the
+      // event is not triggered.
+        _impcalib->fill(apply<SingleValueProjection>(event, "IMP")());
 
-  /// The calibration histograms.
-  Histo1DPtr _calib;
-  Histo1DPtr _impcalib;
-  };
+        _calib->fill(apply<SingleValueProjection>(event, "Centrality")());
 
-  // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(RHIC_2019_CentralityCalibration); 
+    }
+
+    /// Finalize
+    void finalize() {
+
+      _calib->normalize();
+      _impcalib->normalize();
+
+    }
+
+    /// The calibration histograms.
+    Histo1DPtr _calib;
+    Histo1DPtr _impcalib;
+    };
+
+    // The hook for the plugin system
+    RIVET_DECLARE_PLUGIN(RHIC_2019_CentralityCalibration);
 }
-  
+

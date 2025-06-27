@@ -85,32 +85,32 @@ namespace Rivet {
       fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
       fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
 
-      FastJets jet01(fs, FastJets::ANTIKT, 0.1, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet01(fs, JetAlg::ANTIKT, 0.1, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet01, "jets01");
-      //FastJets jet02(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      //FastJets jet02(fs, JetAlg::ANTIKT, 0.2, JetMuons::NONE, JetInvisibles::NONE);
       //declare(jet02, "jets02");
       fjAreaDef02 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jet02(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet02(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet02, "jets02");
-      FastJets jet03(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet03(fs, JetAlg::ANTIKT, 0.3, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet03, "jets03");
-      //FastJets jet04(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      //FastJets jet04(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       //declare(jet04, "jets04");
       fjAreaDef04 = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jet04(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet04(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet04, "jets04");
-      FastJets jet05(fs, FastJets::ANTIKT, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet05(fs, JetAlg::ANTIKT, 0.5, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet05, "jets05");
-      FastJets jet06(fs, FastJets::ANTIKT, 0.6, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jet06(fs, JetAlg::ANTIKT, 0.6, JetMuons::NONE, JetInvisibles::NONE);
       declare(jet06, "jets06");
 
       //Background in PbPb
       fjAreaDef02KT = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jetsKTR02FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02KT, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetsKTR02FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.2, fjAreaDef02KT, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetsKTR02FJ, "jetsKTR02FJ");
 
       fjAreaDef04KT = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jetsKTR04FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04KT, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetsKTR04FJ(fs, fastjet::JetAlgorithm::kt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef04KT, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetsKTR04FJ, "jetsKTR04FJ");
 
       // Book histograms
@@ -146,84 +146,84 @@ namespace Rivet {
       // book(_s["jetRaa7GeVpbleadtrackR0.4"], 33, 1, 1);
 
 string refname13 = mkAxisCode(13, 1, 1);
-const Scatter2D& refdata13 = refData(refname13);
+const Estimate1D& refdata13 = refData(refname13);
 book(_h["ppratioR0.1divR0.2_R0.1"], refname13 + "_R0.1", refdata13);
 book(_h["ppratioR0.1divR0.2_R0.2"], refname13 + "_R0.2", refdata13);
 book(_s["ppratioR0.1divR0.2"], refname13);
 
 string refname14 = mkAxisCode(14, 1, 1);
-const Scatter2D& refdata14 = refData(refname14);
+const Estimate1D& refdata14 = refData(refname14);
 book(_h["ppratioR0.1divR0.3_R0.1"], refname14 + "_R0.1", refdata14);
 book(_h["ppratioR0.1divR0.3_R0.3"], refname14 + "_R0.3", refdata14);
 book(_s["ppratioR0.1divR0.3"], refname14);
 
 string refname15 = mkAxisCode(15, 1, 1);
-const Scatter2D& refdata15 = refData(refname15);
+const Estimate1D& refdata15 = refData(refname15);
 book(_h["ppratioR0.1divR0.4_R0.1"], refname15 + "_R0.1", refdata15);
 book(_h["ppratioR0.1divR0.4_R0.4"], refname15 + "_R0.4", refdata15);
 book(_s["ppratioR0.1divR0.4"], refname15);
 
 string refname16 = mkAxisCode(16, 1, 1);
-const Scatter2D& refdata16 = refData(refname16);
+const Estimate1D& refdata16 = refData(refname16);
 book(_h["ppratioR0.1divR0.5_R0.1"], refname16 + "_R0.1", refdata16);
 book(_h["ppratioR0.1divR0.5_R0.5"], refname16 + "_R0.5", refdata16);
 book(_s["ppratioR0.1divR0.5"], refname16);
 
 string refname17 = mkAxisCode(17, 1, 1);
-const Scatter2D& refdata17 = refData(refname17);
+const Estimate1D& refdata17 = refData(refname17);
 book(_h["ppratioR0.1divR0.6_R0.1"], refname17 + "_R0.1", refdata17);
 book(_h["ppratioR0.1divR0.6_R0.6"], refname17 + "_R0.6", refdata17);
 book(_s["ppratioR0.1divR0.6"], refname17);
 
 string refname18 = mkAxisCode(18, 1, 1);
-const Scatter2D& refdata18 = refData(refname18);
+const Estimate1D& refdata18 = refData(refname18);
 book(_h["ppratioR0.2divR0.3_R0.2"], refname18 + "_R0.2", refdata18);
 book(_h["ppratioR0.2divR0.3_R0.3"], refname18 + "_R0.3", refdata18);
 book(_s["ppratioR0.2divR0.3"], refname18);
 
 string refname19 = mkAxisCode(19, 1, 1);
-const Scatter2D& refdata19 = refData(refname19);
+const Estimate1D& refdata19 = refData(refname19);
 book(_h["ppratioR0.2divR0.4_R0.2"], refname19 + "_R0.2", refdata19);
 book(_h["ppratioR0.2divR0.4_R0.4"], refname19 + "_R0.4", refdata19);
 book(_s["ppratioR0.2divR0.4"], refname19);
 
 string refname20 = mkAxisCode(20, 1, 1);
-const Scatter2D& refdata20 = refData(refname20);
+const Estimate1D& refdata20 = refData(refname20);
 book(_h["ppratioR0.2divR0.5_R0.2"], refname20 + "_R0.2", refdata20);
 book(_h["ppratioR0.2divR0.5_R0.5"], refname20 + "_R0.5", refdata20);
 book(_s["ppratioR0.2divR0.5"], refname20);
 
 string refname21 = mkAxisCode(21, 1, 1);
-const Scatter2D& refdata21 = refData(refname21);
+const Estimate1D& refdata21 = refData(refname21);
 book(_h["ppratioR0.2divR0.6_R0.2"], refname21 + "_R0.2", refdata21);
 book(_h["ppratioR0.2divR0.6_R0.6"], refname21 + "_R0.6", refdata21);
 book(_s["ppratioR0.2divR0.6"], refname21);
 
 string refname26 = mkAxisCode(26, 1, 1);
-const Scatter2D& refdata26 = refData(refname26);
+const Estimate1D& refdata26 = refData(refname26);
 book(_h["ppcrossleadtrackbias5"], refname26 + "_5GeV_R0.2", refdata26);
 book(_s["ppcrossleadtrackbias5div0"], refname26);
 
 string refname27 = mkAxisCode(27, 1, 1);
-const Scatter2D& refdata27 = refData(refname27);
+const Estimate1D& refdata27 = refData(refname27);
 book(_h["ppcrossleadtrackbias7"], refname27 + "_7GeV_R0.4", refdata27);
 book(_s["ppcrossleadtrackbias7div0"], refname27);
 
 string refname29 = mkAxisCode(29, 1, 1);
-const Scatter2D& refdata29 = refData(refname29);
+const Estimate1D& refdata29 = refData(refname29);
 book(_h["pbcrossleadtrackbias7R0.2"], refname29 + "_7GeV_R0.2", refdata29);
 book(_h["pbcrossleadtrackbias5R0.2"], refname29 + "_5GeV_R0.2", refdata29);
 book(_s["pbcrossleadtrackbias7div5"], refname29);
 
 
 string refname30 = mkAxisCode(30, 1, 1);
-const Scatter2D& refdata30 = refData(refname30);
+const Estimate1D& refdata30 = refData(refname30);
 book(_h["pbscaledspectrumtrackbias5R0.2Table30Figure6"], refname30 + "_5GeV_R0.2pb", refdata30);
 book(_h["ppcrossleadtrackbias5R0.2Table30Figure6"], refname30 + "_5GeV_R0.2pp", refdata30);
 book(_s["RAAbias5R0.2"], refname30);
 
 string refname31 = mkAxisCode(31, 1, 1);
-const Scatter2D& refdata31 = refData(refname31);
+const Estimate1D& refdata31 = refData(refname31);
 book(_h["pbscaledspectrumtrackbias7R0.4Table31Figure6"], refname31 + "_7GeV_R0.4pb", refdata31);
 book(_h["ppcrossleadtrackbias7R0.4Table31Figure6"], refname31 + "_7GeV_R0.4pp", refdata31);
 book(_s["RAAbias7R0.4"], refname31);
@@ -231,13 +231,13 @@ book(_s["RAAbias7R0.4"], refname31);
 
 
 string refname32 = mkAxisCode(32, 1, 1);
-const Scatter2D& refdata32 = refData(refname32);
+const Estimate1D& refdata32 = refData(refname32);
 book(_h["pbscaledspectrumtrackbias5R0.2Table32Figure6"], refname32 + "_5GeV_R0.2pb", refdata32);
 book(_h["ppcrossleadtrackbias0R0.2Table32Figure6"], refname32 + "_0GeV_R0.2pp", refdata32);
 book(_s["RAAbias0and5R0.2"], refname32);
 
 string refname33 = mkAxisCode(33, 1, 1);
-const Scatter2D& refdata33 = refData(refname33);
+const Estimate1D& refdata33 = refData(refname33);
 book(_h["pbscaledspectrumtrackbias7R0.4Table33Figure6"], refname33 + "_7GeV_R0.4pb", refdata33);
 book(_h["ppcrossleadtrackbias0R0.4Table33Figure6"], refname33 + "_0GeV_R0.4pp", refdata33);
 book(_s["RAAbias0and7R0.4"], refname33);
@@ -506,7 +506,7 @@ book(_s["RAAbias0and7R0.4"], refname33);
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
 
     fastjet::AreaDefinition *fjAreaDef02;
     fastjet::AreaDefinition *fjAreaDef04;

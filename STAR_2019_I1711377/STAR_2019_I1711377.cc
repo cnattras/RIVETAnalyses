@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -22,7 +21,7 @@ namespace Rivet {
 	class STAR_2019_I1711377 : public Analysis {
 	public:
 
-		DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2019_I1711377);
+		RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2019_I1711377);
 
 
 		void init() {
@@ -56,7 +55,7 @@ namespace Rivet {
 
 				//ratios (fig 34)_________________
 				string refname1 = mkAxisCode(7, 1, 1 + i);
-				const Scatter2D& refdata1 = refData(refname1);
+				const Estimate1D& refdata1 = refData(refname1);
 				book(r_D0bar["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1 + "_D0bar", refdata1);
 				book(r_D0["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1 + "_D0", refdata1);
 				book(RatioD0barD0["AuAuc" + std::to_string(AUAUCentralityBins[i])], refname1);
@@ -69,13 +68,13 @@ namespace Rivet {
 
 			//RAA (fig 31)_________________
 			string refname2 = mkAxisCode(5, 1, 1);
-			const Scatter2D& refdata2 = refData(refname2);
+			const Estimate1D& refdata2 = refData(refname2);
 			book(hD0Pt["Raa_c10_AuAu"], refname2 + "_AuAu", refdata2);
 			book(hD0Pt["Raa_c10_pp"], refname2 + "_pp", refdata2);
 			book(hRaa["D0_c10_AuAu"], refname2);
 
 			string refname3 = mkAxisCode(5, 1, 2);
-			const Scatter2D& refdata3 = refData(refname3);
+			const Estimate1D& refdata3 = refData(refname3);
 			book(hD0Pt["Raa_c40_AuAu"], refname3 + "_AuAu", refdata3);
 			book(hD0Pt["Raa_c40_pp"], refname3 + "_pp", refdata3);
 			book(hRaa["D0_c40_AuAu"], refname3);
@@ -83,7 +82,7 @@ namespace Rivet {
 			book(sow["sow_AUAUc1040"], "sow_AUAUc1040");
 
 			string refname4 = mkAxisCode(5, 1, 3);
-			const Scatter2D& refdata4 = refData(refname4);
+			const Estimate1D& refdata4 = refData(refname4);
 			book(hD0Pt["Raa_c80_AuAu"], refname4 + "_AuAu", refdata4);
 			book(hD0Pt["Raa_c80_pp"], refname4 + "_pp", refdata4);
 			book(hRaa["D0_c80_AuAu"], refname4);
@@ -92,44 +91,44 @@ namespace Rivet {
 
 			//RCP ref 6080 (figs 29 & 35)_________________
 			string refname5 = mkAxisCode(8, 1, 1);
-			const Scatter2D& refdata5 = refData(refname5);
+			const Estimate1D& refdata5 = refData(refname5);
 			book(hD0Pt["AuAuc0010a"], refname5 + "_D0", refdata5);
 			book(hD0Pt["AuAuc6080a"], refname5 + "_D0", refdata5);
 			book(hRcp["D0_c00106080_AuAu"], refname5);
 
 			string refname6 = mkAxisCode(8, 1, 2);
-			const Scatter2D& refdata6 = refData(refname6);
+			const Estimate1D& refdata6 = refData(refname6);
 			book(hD0Pt["AuAuc1020a"], refname6 + "_D0", refdata6);
 			book(hD0Pt["AuAuc6080b"], refname6 + "_D0", refdata6);
 			book(hRcp["D0_c10206080_AuAu"], refname6);
 
 			string refname7 = mkAxisCode(8, 1, 3);
-			const Scatter2D& refdata7 = refData(refname7);
+			const Estimate1D& refdata7 = refData(refname7);
 			book(hD0Pt["AuAuc2040a"], refname7 + "_D0", refdata7);
 			book(hD0Pt["AuAuc6080c"], refname7 + "_D0", refdata7);
 			book(hRcp["D0_c20406080_AuAu"], refname7);
 
 			string refname8 = mkAxisCode(8, 1, 4);
-			const Scatter2D& refdata8 = refData(refname8);
+			const Estimate1D& refdata8 = refData(refname8);
 			book(hD0Pt["AuAuc4060a"], refname8 + "_D0", refdata8);
 			book(hD0Pt["AuAuc6080d"], refname8 + "_D0", refdata8);
 			book(hRcp["D0_c40606080_AuAu"], refname8);
 
 			//RCP ref 4060 (figs 30 & 36)_________________
 			string refname9 = mkAxisCode(9, 1, 1);
-			const Scatter2D& refdata9 = refData(refname9);
+			const Estimate1D& refdata9 = refData(refname9);
 			book(hD0Pt["AuAuc0010b"], refname9 + "_D0", refdata9);
 			book(hD0Pt["AuAuc4060b"], refname9 + "_D0", refdata9);
 			book(hRcp["D0_c00104060_AuAu"], refname9);
 
 			string refname10 = mkAxisCode(9, 1, 2);
-			const Scatter2D& refdata10 = refData(refname10);
+			const Estimate1D& refdata10 = refData(refname10);
 			book(hD0Pt["AuAuc1020b"], refname10 + "_D0", refdata10);
 			book(hD0Pt["AuAuc4060c"], refname10 + "_D0", refdata10);
 			book(hRcp["D0_c10204060_AuAu"], refname10);
 
 			string refname11 = mkAxisCode(9, 1, 3);
-			const Scatter2D& refdata11 = refData(refname11);
+			const Estimate1D& refdata11 = refData(refname11);
 			book(hD0Pt["AuAuc2040b"], refname11 + "_D0", refdata11);
 			book(hD0Pt["AuAuc4060d"], refname11 + "_D0", refdata11);
 			book(hRcp["D0_c20404060_AuAu"], refname11);
@@ -144,7 +143,7 @@ namespace Rivet {
 
 
 		void analyze(const Event& event) {
-			Particles neutralParticles = applyProjection<PrimaryParticles>(event, "fs").particles();
+			Particles neutralParticles = apply<PrimaryParticles>(event, "fs").particles();
 
 			if (collSys == pp)
 			{
@@ -414,7 +413,7 @@ namespace Rivet {
 			for (int i = 0, N = AUAUCentralityBins.size(); i < N; ++i)
 			{
 				//yields _________________
-				hD0D0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / (2. * sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])])->sumW());
+				hD0D0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / (sow["sow_AUAUc" +  std::to_string(AUAUCentralityBins[i])])->sumW()*2);
 				hD0Pt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 				hD0barPt["ptyieldsAuAuc" + std::to_string(AUAUCentralityBins[i])]->scaleW(1. / sow["sow_AUAUc" + std::to_string(AUAUCentralityBins[i])]->sumW());
 
@@ -423,8 +422,8 @@ namespace Rivet {
 			}
 			
 			//yields _________________
-			hD0D0barPt["ptyieldsAuAuc1040"]->scaleW(1. / (2. * sow["sow_AUAUc1040"])->sumW());
-			hD0D0barPt["ptyieldsAuAuc4080"]->scaleW(1. / (2. * sow["sow_AUAUc4080"])->sumW());
+			hD0D0barPt["ptyieldsAuAuc1040"]->scaleW(1. / (sow["sow_AUAUc1040"])->sumW()*2);
+			hD0D0barPt["ptyieldsAuAuc4080"]->scaleW(1. / (sow["sow_AUAUc4080"])->sumW()*2);
 
 			//RAA
 			hD0Pt["Raa_c10_AuAu"]->scaleW(1. / sow["sow_AUAUc10"]->sumW());
@@ -473,9 +472,9 @@ namespace Rivet {
 			hD0Pt["ptyieldspp"]->scaleW(1. / sow["sow_pp"]->sumW());
 
 			//scaling for RAA 
-			hRaa["D0_c10_AuAu"]->scaleY(1. / 938.8);
-			//hRaa["D0_c40_AuAu"]->scaleY(1. / 609.5); \\ 10-20: 579.9 and 20-40: 288.3
-			//hRaa["D0_c80_AuAu"]->scaleY(1. / 300.8); \\ 40-60: 91.3 and 60-80: 21.3
+			hRaa["D0_c10_AuAu"]->scale(1. / 938.8);
+			//hRaa["D0_c40_AuAu"]->scale(1. / 609.5); \\ 10-20: 579.9 and 20-40: 288.3
+			//hRaa["D0_c80_AuAu"]->scale(1. / 300.8); \\ 40-60: 91.3 and 60-80: 21.3
 
 		}
 
@@ -485,11 +484,11 @@ namespace Rivet {
 
 		map<string, Histo1DPtr> r_D0bar;
 		map<string, Histo1DPtr> r_D0;
-		map<string, Scatter2DPtr> RatioD0barD0;
+		map<string, Estimate1DPtr> RatioD0barD0;
 
 
-		map<string, Scatter2DPtr> hRaa;
-		map<string, Scatter2DPtr> hRcp;
+		map<string, Estimate1DPtr> hRaa;
+		map<string, Estimate1DPtr> hRcp;
 		map<string, CounterPtr> sow;
 		string beamOpt;
 		enum CollisionSystem { pp, AuAu200 };
@@ -500,6 +499,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2019_I1711377);
+  RIVET_DECLARE_PLUGIN(STAR_2019_I1711377);
 
 }

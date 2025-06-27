@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/AliceCommon.hh"
@@ -16,7 +15,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ALICE_2019_I1693308);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ALICE_2019_I1693308);
 
 
     /// @name Analysis methods
@@ -37,7 +36,7 @@ namespace Rivet {
       fastjet::AreaType fjAreaType = fastjet::active_area_explicit_ghosts;
       fastjet::GhostedAreaSpec fjGhostAreaSpec = fastjet::GhostedAreaSpec(1., 1, 0.005, 1., 0.1, 1e-100);
       fjAreaDef = new fastjet::AreaDefinition(fjGhostAreaSpec, fjAreaType);
-      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetfs(fs, fastjet::JetAlgorithm::antikt_algorithm, fastjet::RecombinationScheme::pt_scheme, 0.4, fjAreaDef, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "jetsfs");
 
       book(_h["PPS7"],1,1,1);
@@ -170,6 +169,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(ALICE_2019_I1693308);
+  RIVET_DECLARE_PLUGIN(ALICE_2019_I1693308);
 
 }

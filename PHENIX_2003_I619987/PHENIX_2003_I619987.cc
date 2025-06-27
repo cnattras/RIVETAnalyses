@@ -3,7 +3,6 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -26,27 +25,28 @@ class PHENIX_2003_I619987 : public Analysis {
 public:
     
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2003_I619987);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2003_I619987);
     
         //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        const auto& binlist = histogram.bins();
+        const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
-        for (YODA::HistoBin1D bins : binlist) {
+        for (auto& bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
             //Now calculate f_corr
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
@@ -61,18 +61,6 @@ public:
         
 
         // Initialise and register projections
-        
-        // Particles: pi^+, pi^-, pi^0, p, p_bar
-        //pids (respectively): 211, -211, 111, 2212, -2212
-        // all final-state particles within
-        // the given eta acceptance
-        /// Found the cuts on page 3, paragraph 3
-        std::initializer_list<int> pdgIds = { 211, -211, 2212, -2212 };
-        
-        //Charged hadrons: protons, antiprotons, pions+, pions-, kaons+, kaons-
-        std::initializer_list<int> chHIds = { 211, -211, 2212, -2212 , 321, -321};
-
-        
         //Charged particles
         //consider adding back && Cuts::phi == 0.392
         const ALICE::PrimaryParticles cp(Cuts::absrap < 0.5 && Cuts::pT > 0.5*GeV && Cuts::pT < 9*GeV);
@@ -108,73 +96,73 @@ public:
         //Figure 1
         //d01-x01-y01
         string refname1 = mkAxisCode(1, 1, 1);
-        const Scatter2D& refdata1 = refData(refname1);
+        const Estimate1D& refdata1 = refData(refname1);
         book(hProtonPt["AuAuc0010a"], "_" + refname1 + "_AuAuc0010_Proton",refdata1);
         book(hPionPosPt["AuAuc0010"], "_" + refname1 + "_AuAuc0010_PiPos",refdata1);
         book(RatioPtoPiPos["AuAuc0010"], refname1);
         //d01-x01-y02
         string refname2 = mkAxisCode(1, 1, 2);
-        const Scatter2D& refdata2 = refData(refname2);
+        const Estimate1D& refdata2 = refData(refname2);
         book(hProtonPt["AuAuc2030a"], "_" + refname2 + "_AuAuc2030_Proton",refdata2);
         book(hPionPosPt["AuAuc2030"], "_" + refname2 + "_AuAuc2030_PiPos",refdata2);
         book(RatioPtoPiPos["AuAuc2030"], refname2);
         //d01-x01-y03
         string refname3 = mkAxisCode(1, 1, 3);
-        const Scatter2D& refdata3 = refData(refname3);
+        const Estimate1D& refdata3 = refData(refname3);
         book(hProtonPt["AuAuc6092a"], "_" + refname3 + "_AuAuc6092_Proton",refdata3);
         book(hPionPosPt["AuAuc6092"], "_" + refname3 + "_AuAuc6092_PiPos",refdata3);
         book(RatioPtoPiPos["AuAuc6092"], refname3);
         //d01-x01-y04
         string refname4 = mkAxisCode(1, 1, 4);
-        const Scatter2D& refdata4 = refData(refname4);
+        const Estimate1D& refdata4 = refData(refname4);
         book(hProBarPt["AuAuc0010a"], "_" + refname4 + "_AuAuc0010_ProBar",refdata4);
         book(hPionNegPt["AuAuc0010a"], "_" + refname4 + "_AuAuc0010_PiNeg",refdata4);
         book(RatioPBartoPiNeg["AuAuc0010"], refname4);
         //d01-x01-y05
         string refname5 = mkAxisCode(1, 1, 5);
-        const Scatter2D& refdata5 = refData(refname5);
+        const Estimate1D& refdata5 = refData(refname5);
         book(hProBarPt["AuAuc2030a"], "_" + refname5 + "_AuAuc2030_ProBar",refdata5);
         book(hPionNegPt["AuAuc2030a"], "_" + refname5 + "_AuAuc2030_PiNeg",refdata5);
         book(RatioPBartoPiNeg["AuAuc2030"], refname5);
         //d01-x01-y06
         string refname6 = mkAxisCode(1, 1, 6);
-        const Scatter2D& refdata6 = refData(refname6);
+        const Estimate1D& refdata6 = refData(refname6);
         book(hProBarPt["AuAuc6092a"], "_" + refname6 + "_AuAuc6092_ProBar",refdata6);
         book(hPionNegPt["AuAuc6092a"], "_" + refname6 + "_AuAuc6092_PiNeg",refdata6);
         book(RatioPBartoPiNeg["AuAuc6092"], refname6);
         //d02-x01-y01
         string refname7 = mkAxisCode(2, 1, 1);
-        const Scatter2D& refdata7 = refData(refname7);
+        const Estimate1D& refdata7 = refData(refname7);
         book(hProtonPt["AuAuc0010b"], "_" + refname7 + "_AuAuc0010_Proton",refdata7);
         book(hPionNegPt["AuAuc0010b"], "_" + refname7 + "_AuAuc0010_PiNeg",refdata7);
         book(RatioPtoPiNeg["AuAuc0010"], refname7);
         //d02-x01-y02
         string refname8 = mkAxisCode(2, 1, 2);
-        const Scatter2D& refdata8 = refData(refname8);
+        const Estimate1D& refdata8 = refData(refname8);
         book(hProtonPt["AuAuc2030b"], "_" + refname8 + "_AuAuc2030_Proton",refdata8);
         book(hPionNegPt["AuAuc2030b"], "_" + refname8 + "_AuAuc2030_PiNeg",refdata8);
         book(RatioPtoPiNeg["AuAuc2030"], refname8);
         //d02-x01-y03
         string refname9 = mkAxisCode(2, 1, 3);
-        const Scatter2D& refdata9 = refData(refname9);
+        const Estimate1D& refdata9 = refData(refname9);
         book(hProtonPt["AuAuc6092b"], "_" + refname9 + "_AuAuc6092_Proton",refdata9);
         book(hPionNegPt["AuAuc6092b"], "_" + refname9 + "_AuAuc6092_PiNeg",refdata9);
         book(RatioPtoPiNeg["AuAuc6092"], refname9);
         //d02-x01-y04
         string refname10 = mkAxisCode(2, 1, 4);
-        const Scatter2D& refdata10 = refData(refname10);
+        const Estimate1D& refdata10 = refData(refname10);
         book(hProBarPt["AuAuc0010b"], "_" + refname10 + "_AuAuc0010_ProBar",refdata10);
         book(hPionPt["AuAuc0010a"], "_" + refname10 + "_AuAuc0010_Pion",refdata10);
         book(RatioPBartoPion["AuAuc0010"], refname10);
         //d02-x01-y05
         string refname11 = mkAxisCode(2, 1, 5);
-        const Scatter2D& refdata11 = refData(refname11);
+        const Estimate1D& refdata11 = refData(refname11);
         book(hProBarPt["AuAuc2030b"], "_" + refname11 + "_AuAuc2030_ProBar",refdata11);
         book(hPionPt["AuAuc2030a"], "_" + refname11 + "_AuAuc2030_Pion",refdata11);
         book(RatioPBartoPion["AuAuc2030"], refname11);
         //d02-x01-y06
         string refname12 = mkAxisCode(2, 1, 6);
-        const Scatter2D& refdata12 = refData(refname12);
+        const Estimate1D& refdata12 = refData(refname12);
         book(hProBarPt["AuAuc6092b"], "_" + refname12 + "_AuAuc6092_ProBar",refdata12);
         book(hPionPt["AuAuc6092a"], "_" + refname12 + "_AuAuc6092_Pion",refdata12);
         book(RatioPBartoPion["AuAuc6092"], refname12);
@@ -189,42 +177,42 @@ public:
         
         //d03-x01-y01
         string refname13 = mkAxisCode(3, 1, 1);
-        //const Scatter2D& refdata13 = refData(refname13);
+        //const Estimate1D& refdata13 = refData(refname13);
         book(hProtonPt["ptyieldsAuAuc0010"], 3, 1, 1);
         //d03-x01-y02
         string refname14 = mkAxisCode(3, 1, 2);
-        //const Scatter2D& refdata14 = refData(refname14);
+        //const Estimate1D& refdata14 = refData(refname14);
         book(hProtonPt["ptyieldsAuAuc2030"], 3, 1, 2);
         //d03-x01-y03
         string refname15 = mkAxisCode(3, 1, 3);
-        //const Scatter2D& refdata15 = refData(refname15);
+        //const Estimate1D& refdata15 = refData(refname15);
         book(hProtonPt["ptyieldsAuAuc4050"], 3, 1, 3);
         //d03-x01-y04
         string refname16 = mkAxisCode(3, 1, 4);
-        //const Scatter2D& refdata16 = refData(refname16);
+        //const Estimate1D& refdata16 = refData(refname16);
         book(hProtonPt["ptyieldsAuAuc6092"], 3, 1, 4);
         //d03-x01-y05
         string refname17 = mkAxisCode(3, 1, 5);
-        //const Scatter2D& refdata17 = refData(refname17);
+        //const Estimate1D& refdata17 = refData(refname17);
         book(hProBarPt["ptyieldsAuAuc0010"], 3, 1, 5);
         //d03-x01-y06
         string refname18 = mkAxisCode(3, 1, 6);
-        //const Scatter2D& refdata18 = refData(refname18);
+        //const Estimate1D& refdata18 = refData(refname18);
         book(hProBarPt["ptyieldsAuAuc2030"], 3, 1, 6);
         //d03-x01-y07
         string refname19 = mkAxisCode(3, 1, 7);
-        //const Scatter2D& refdata19 = refData(refname19);
+        //const Estimate1D& refdata19 = refData(refname19);
         book(hProBarPt["ptyieldsAuAuc4050"], 3, 1, 7);
         //d03-x01-y08
         string refname20 = mkAxisCode(3, 1, 8);
-        //const Scatter2D& refdata20 = refData(refname20);
+        //const Estimate1D& refdata20 = refData(refname20);
         book(hProBarPt["ptyieldsAuAuc6092"], 3, 1, 8);
         
         //Rcp
         //Figure 3a
         //d04-x01-y01
         string refname21 = mkAxisCode(4, 1, 1);
-        const Scatter2D& refdata21 = refData(refname21);
+        const Estimate1D& refdata21 = refData(refname21);
         book(hPPlusPBarPt["ppluspbarAuAuc0010"], "_" + refname21 + "_AuAuc0010",refdata21);
         book(hPPlusPBarPt["ppluspbarAuAuc6092"], "_" + refname21 + "_AuAuc6092",refdata21);
         book(hRcp["ppluspbar"], refname21);
@@ -232,7 +220,7 @@ public:
         //Figure 3b
         //d05-x01-y01
         string refname22 = mkAxisCode(5, 1, 1);
-        const Scatter2D& refdata22 = refData(refname22);
+        const Estimate1D& refdata22 = refData(refname22);
         //next two lines: not needed since hPionPt is already booked and filled for //d02
         book(hPionPt["AuAuc0010b"], "_" + refname22 + "_AuAuc0010",refdata22);
         book(hPionPt["AuAuc6092b"], "_" + refname22 + "_AuAuc6092",refdata22);
@@ -241,7 +229,7 @@ public:
         //Figure 4a
         //d06-x01-y01
         string refname23 = mkAxisCode(6, 1, 1);
-        const Scatter2D& refdata23 = refData(refname23);
+        const Estimate1D& refdata23 = refData(refname23);
         book(hChHadrons["AuAuc0010"], "_" + refname23 + "_AuAuc0010",refdata23);
         book(hPionPt["AuAuc0010c"], "_" + refname23 + "_AuAuc0010_Pion",refdata23);
         book(RatioHadtoPion["AuAuc0010"], refname23);
@@ -249,7 +237,7 @@ public:
         //Figure 4b
         //d07-x01-y01
         string refname24 = mkAxisCode(7, 1, 1);
-        const Scatter2D& refdata24 = refData(refname24);
+        const Estimate1D& refdata24 = refData(refname24);
         book(hChHadrons["AuAuc6092"], "_" + refname24 + "_AuAuc6092",refdata24);
         book(hPionPt["AuAuc6092c"], "_" + refname24 + "_AuAuc6092_Pion",refdata24);
         book(RatioHadtoPion["AuAuc6092"], refname24);
@@ -263,9 +251,9 @@ public:
         // Particles: pi^+, pi^-, pi^0, p, p_bar
         //pids (respectively): 211, -211, 111, 2212, -2212
         
-        Particles chargedParticles = applyProjection<PrimaryParticles>(event,"cp").particles();
-        Particles inclusiveParticles = applyProjection<PrimaryParticles>(event,"ich").particles();
-        Particles neutralParticles = applyProjection<UnstableParticles>(event,"np").particles();
+        Particles chargedParticles = apply<PrimaryParticles>(event,"cp").particles();
+        Particles inclusiveParticles = apply<PrimaryParticles>(event,"ich").particles();
+        Particles neutralParticles = apply<UnstableParticles>(event,"np").particles();
         // All figures are for S_NN = 200 GeV collisions, so no if statement required for collSys
         if (collSys == AuAu200){
         /// Case for identified charged particles
@@ -465,7 +453,6 @@ public:
                 for (const Particle& p : inclusiveParticles)
                 {
                     double partPt = p.pT() / GeV;
-                    double pt_weight = 1. / (partPt * 2. * M_PI);
 
                     switch(p.pid()) {
                         case 211: //pi^+
@@ -528,7 +515,6 @@ public:
                 for (const Particle& p : inclusiveParticles)
                 {
                     double partPt = p.pT() / GeV;
-                    double pt_weight = 1. / (partPt * 2. * M_PI);
 
                     switch(p.pid()) {
                         case 211: //pi^+
@@ -869,15 +855,15 @@ public:
     map<string, Histo1DPtr> hChHadrons; //p + p_bar + pi^+ + pi^-
     
     //Ratios
-    map<string, Scatter2DPtr> RatioPtoPiPos;
-    map<string, Scatter2DPtr> RatioPBartoPiNeg;
-    map<string, Scatter2DPtr> RatioPtoPiNeg;
-    map<string, Scatter2DPtr> RatioPBartoPion;
-    map<string, Scatter2DPtr> RatioHadtoPion;
+    map<string, Estimate1DPtr> RatioPtoPiPos;
+    map<string, Estimate1DPtr> RatioPBartoPiNeg;
+    map<string, Estimate1DPtr> RatioPtoPiNeg;
+    map<string, Estimate1DPtr> RatioPBartoPion;
+    map<string, Estimate1DPtr> RatioHadtoPion;
     
     //Rcp, Raa **TBD**
-    map<string, Scatter2DPtr> hRcp;
-    //map<string, Scatter2DPtr> hRaa;
+    map<string, Estimate1DPtr> hRcp;
+    //map<string, Estimate1DPtr> hRaa;
     
     //Counter
     map<string, CounterPtr> sow;
@@ -891,5 +877,5 @@ public:
     
     
   };
-  DECLARE_RIVET_PLUGIN(PHENIX_2003_I619987);
+  RIVET_DECLARE_PLUGIN(PHENIX_2003_I619987);
 }

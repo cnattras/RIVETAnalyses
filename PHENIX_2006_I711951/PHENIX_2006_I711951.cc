@@ -3,7 +3,6 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -26,13 +25,13 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2006_I711951);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2006_I711951);
 
     bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
     {
       if(pT > hist.xMin() && pT < hist.xMax())
       {
-        deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+        deltaPt = hist.binAt(pT).xMid();
         return true;
       }
       else return false;
@@ -40,23 +39,24 @@ namespace Rivet {
     }
 //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        const auto& binlist = histogram.bins();
+        const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
-        for (YODA::HistoBin1D bins : binlist) {
+        for (auto& bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
             //Now calculate f_corr
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
@@ -220,7 +220,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
       //sow->fill();
-      Particles chargedP = applyProjection<PrimaryParticles>(event,"cp").particles();
+      Particles chargedP = apply<PrimaryParticles>(event,"cp").particles();
 
       
         
@@ -260,13 +260,13 @@ namespace Rivet {
             }
           }
           if (p.pid() == 2212) {
-            if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                 p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                 p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                 p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                 p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                 p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                 p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas                        //Omega-
+            if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                 p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                 p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                 p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                 p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                 p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                 p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas                        //Omega-
                     if (getDeltaPt(*hPP_Yields["PPP"], partPt, deltaPt))
                     {
                       pt_weight /= deltaPt;
@@ -275,13 +275,13 @@ namespace Rivet {
                   }
           }
           if (p.pid() == -2212) {
-            if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                 p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                 p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                 p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                 p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                 p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                 p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+            if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                 p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                 p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                 p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                 p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                 p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                 p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                     if (getDeltaPt(*hPP_Yields["P_barPP"], partPt, deltaPt))
                     {
                       pt_weight /= deltaPt;
@@ -335,13 +335,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["PC20"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -350,13 +350,13 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["P_barC20"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -404,13 +404,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["PC40"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -419,13 +419,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["P_barC40"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -474,13 +474,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["PC60"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -489,13 +489,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["P_barC60"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -543,13 +543,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas
                       if (getDeltaPt(*hDAu_Yields["PC88"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -558,13 +558,13 @@ namespace Rivet {
               }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(-3122) || // Lambda, Anti-Lambda
-                   p.hasAncestor(3212) || p.hasAncestor(-3212) || // Sigma0
-                   p.hasAncestor(3222) || p.hasAncestor(-3222) || // Sigmas
-                   p.hasAncestor(3112) || p.hasAncestor(-3112) || // Sigmas
-                   p.hasAncestor(3322) || p.hasAncestor(-3322) || // Cascades
-                   p.hasAncestor(3312) || p.hasAncestor(-3312) || // Cascades
-                   p.hasAncestor(3334) || p.hasAncestor(-3334))) { // Omegas 
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) || // Lambda, Anti-Lambda
+                   p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == -3212) || // Sigma0
+                   p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3112) || p.hasAncestorWith(Cuts::pid == -3112) || // Sigmas
+                   p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) || // Cascades
+                   p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334))) { // Omegas 
                       if (getDeltaPt(*hDAu_Yields["P_barC88"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -759,6 +759,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2006_I711951);
+  RIVET_DECLARE_PLUGIN(PHENIX_2006_I711951);
 
 }

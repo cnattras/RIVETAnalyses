@@ -19,7 +19,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(ALICE_2016_I1427723);
+    RIVET_DEFAULT_ANALYSIS_CTOR(ALICE_2016_I1427723);
 
 
     /// @name Analysis methods
@@ -43,9 +43,9 @@ namespace Rivet {
       book(_h["EToverNpart"], 1, 1, 3);
       
       string refnameETChpart = mkAxisCode(3,1,1);
-      const Scatter2D& refdataETChpart = refData(refnameETChpart);
-      book(_h["mean_ET_ratio"],refnameETChpart + "_ET", refdataETChpart);
-      book(_h["mean_Chpart_ratio"],refnameETChpart + "_Chpart", refdataETChpart);
+      const Estimate1D& refdataETChpart = refData(refnameETChpart);
+      book(_h["mean_ET_ratio"],refnameETChpart + "_ET", refdataETChpart.xEdges());
+      book(_h["mean_Chpart_ratio"],refnameETChpart + "_Chpart", refdataETChpart.xEdges());
       book(MeanETChpart,refnameETChpart);
 
       // The centrality bins upper bin edges.
@@ -101,10 +101,10 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-        _h["ET"]->scaleY(1./1.2);
-        _h["EToverNpart"]->scaleY(1./1.2);
-        _h["mean_ET_ratio"]->scaleY(1./1.2);
-        _h["mean_Chpart_ratio"]->scaleY(1./1.2);
+        _h["ET"]->scale(1, 1./1.2);
+        _h["EToverNpart"]->scale(1, 1./1.2);
+        _h["mean_ET_ratio"]->scale(1, 1./1.2);
+        _h["mean_Chpart_ratio"]->scale(1, 1./1.2);
         divide(_h["mean_ET_ratio"],_h["mean_Chpart_ratio"],MeanETChpart);
     }
 
@@ -115,7 +115,7 @@ namespace Rivet {
     /// @name Histograms
     //@{
     map<string, Profile1DPtr> _h;
-    Scatter2DPtr MeanETChpart;
+    Estimate1DPtr MeanETChpart;
     //@}
 
 
@@ -123,7 +123,7 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(ALICE_2016_I1427723);
+  RIVET_DECLARE_PLUGIN(ALICE_2016_I1427723);
 
 
 }

@@ -49,7 +49,7 @@ namespace Rivet {
       declare(fs, "fs");
 
       // Book histograms
-      book(_hist_E, "d01-x01-y01", refData(1, 1, 1));
+      book(_hist_E, 1, 1, 1);
 
     }
 
@@ -61,7 +61,7 @@ namespace Rivet {
         double totalEt = 0;
         double deltaeta = 1; 
 
-        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+        Particles fsParticles = apply<FinalState>(event,"fs").particles();
 
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
         const double c = cent();

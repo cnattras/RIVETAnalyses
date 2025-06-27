@@ -13,14 +13,6 @@
 #include <vector>
 #include "../Centralities/RHICCentrality.hh"
 #define _USE_MATH_DEFINES
-static const int numTrigPtBins = 4;
-static const float pTTrigBins[] = {5.0,7.0,9.0,12.0,15.0};
-static const int numXeBins = 14;
-static const float XeBins[] = {0.1,0.16,0.2,0.26,0.3,0.36,0.4,0.46,0.5,0.56,0.71,0.85,0.95,1.2,1.5};
-static const int numAssocPtBins = 4;
-static const float pTAssocBins[] = {5.0,7.0,9.0,12.0,15.0};
-static const int numPoutBins = 8;
-static const float PoutBins[] = {0.2,0.3,0.8,1.5,2.0,3.0,4.5,6.5,9.0};
 
 using namespace std;
 namespace Rivet {
@@ -140,7 +132,7 @@ namespace Rivet {
     public:
 
      /// Constructor
-      DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2010_I857187);
+      RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2010_I857187);
 
 
       /// name Analysis methods
@@ -157,13 +149,13 @@ namespace Rivet {
       bool isSecondary(Particle p)
       {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-          p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-          p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-          p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-          p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-          p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-          p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+          p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+          p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+          p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+          p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+          p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+          p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
           return true;
         else return false;
         
@@ -274,8 +266,8 @@ namespace Rivet {
             return 0.;
         }
                 
-        int bmin = hist.binIndexAt(vmin);
-        int bmax = hist.binIndexAt(vmax);
+        int bmin = hist.indexAt(vmin);
+        int bmax = hist.indexAt(vmax);
         if(bmax < 0) bmax = (int)hist.numBins()-1;
         
         for(int i = bmin; i <= bmax; i++)
@@ -301,8 +293,8 @@ namespace Rivet {
             return 0.;
         }
                 
-        int bmin = hist.binIndexAt(vmin);
-        int bmax = hist.binIndexAt(vmax);
+        int bmin = hist.indexAt(vmin);
+        int bmax = hist.indexAt(vmax);
         if(bmax < 0) bmax = (int)hist.numBins()-1;
         
         double nbins = 0.;
@@ -353,7 +345,7 @@ namespace Rivet {
         const ChargedFinalState cfs(Cuts::abseta < 0.35);
         declare(cfs, "CFS");
         
-        const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
+        const PrimaryParticles pp({111, -111}, Cuts::abseta < 0.35);
         declare(pp, "PP");
         
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
@@ -378,7 +370,7 @@ namespace Rivet {
       c1.SetCentrality(0., 100.);
       c1.SetTriggerRange(5., 7.);
       //c1.SetAssociatedRange(0., 999.);
-      c1.SetPID(pdgPi0);
+      c1.SetPID({111, -111});
       Correlators.push_back(c1);
       
       Correlator c2(1,2);
@@ -386,7 +378,7 @@ namespace Rivet {
       c2.SetCentrality(0., 100.);
       c2.SetTriggerRange(5., 7.);
       //c2.SetAssociatedRange(0., 7.);
-      c2.SetPID(pdgPhoton);
+      c2.SetPID({22});
       Correlators.push_back(c2);
       
       Correlator c3(2,1);
@@ -394,7 +386,7 @@ namespace Rivet {
       c3.SetCentrality(0., 100.);
       c3.SetTriggerRange(7., 9.);
       //c3.SetAssociatedRange(0., 999.);
-      c3.SetPID(pdgPi0);
+      c3.SetPID({111, -111});
       Correlators.push_back(c3);
       
       Correlator c4(2,2);
@@ -402,7 +394,7 @@ namespace Rivet {
       c4.SetCentrality(0., 100.);
       c4.SetTriggerRange(7., 9.);
       //c4.SetAssociatedRange(0., 9.);
-      c4.SetPID(pdgPhoton);
+      c4.SetPID({22});
       Correlators.push_back(c4);
       
       Correlator c5(3,1);
@@ -410,7 +402,7 @@ namespace Rivet {
       c5.SetCentrality(0., 100.);
       c5.SetTriggerRange(9., 12.);
       //c5.SetAssociatedRange(0., 999.);
-      c5.SetPID(pdgPi0);
+      c5.SetPID({111, -111});
       Correlators.push_back(c5);
       
       Correlator c6(3,2);
@@ -418,7 +410,7 @@ namespace Rivet {
       c6.SetCentrality(0., 100.);
       c6.SetTriggerRange(9., 12.);
       //c6.SetAssociatedRange(0., 12.);
-      c6.SetPID(pdgPhoton);
+      c6.SetPID({22});
       Correlators.push_back(c6);
       
       Correlator c7(4,1);
@@ -426,7 +418,7 @@ namespace Rivet {
       c7.SetCentrality(0., 100.);
       c7.SetTriggerRange(12., 15.);
       //c7.SetAssociatedRange(0., 999.);
-      c7.SetPID(pdgPi0);
+      c7.SetPID({111, -111});
       Correlators.push_back(c7);
       
       Correlator c8(4,2);
@@ -434,7 +426,7 @@ namespace Rivet {
       c8.SetCentrality(0., 100.);
       c8.SetTriggerRange(12., 15.);
       //c8.SetAssociatedRange(0., 15.);
-      c8.SetPID(pdgPhoton);
+      c8.SetPID({22});
       Correlators.push_back(c8);
 
       for(Correlator& corr : Correlators)
@@ -444,7 +436,7 @@ namespace Rivet {
           book(_h["0" + to_string(corr.GetIndex()+4) + "1" + to_string(corr.GetSubIndex())], corr.GetIndex()+4, 1, corr.GetSubIndex());
           
           string refname = mkAxisCode(corr.GetIndex(), 1, corr.GetSubIndex());
-          const Histo1D& refdata = refData(refname);
+          const Estimate1D& refdata = refData(refname);
           for(auto &bin : refdata.bins())
           {
               book(_DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, 0, M_PI);
@@ -467,7 +459,6 @@ namespace Rivet {
       //==================================================
       double nNucleons = 0.;
       string CollSystem = "Empty";
-      const ParticlePair& beam = beams();
           CollSystem = "pp";
           nNucleons = 1.;
       //if (beam.first.pid() == 1000290630 && beam.second.pid() == 1000010020) CollSystem = "dAu";
@@ -515,7 +506,7 @@ namespace Rivet {
         
         for(Correlator& corr : Correlators)
         {
-            if(!corr.CheckPID(pdgPi0)) continue;
+            if(!corr.CheckPID({111, -111})) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
             nTriggers[corr.GetFullIndex()]++;
         }
@@ -537,7 +528,7 @@ namespace Rivet {
             
             for(Correlator& corr : Correlators)
             {
-                if(!corr.CheckPID(pdgPi0)) continue;
+                if(!corr.CheckPID({111, -111})) continue;
                 
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 
@@ -570,7 +561,7 @@ namespace Rivet {
         
         for(Correlator& corr : Correlators)
         {
-            if(!corr.CheckPID(pdgPhoton)) continue;
+            if(!corr.CheckPID({22})) continue;
             if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;  
             nTriggers[corr.GetFullIndex()]++;
         }
@@ -594,7 +585,7 @@ namespace Rivet {
             
             for(Correlator& corr : Correlators)
             {
-                if(!corr.CheckPID(pdgPhoton)) continue;
+                if(!corr.CheckPID({22})) continue;
                 
                 if(!corr.CheckTriggerRange(pTrig.pT()/GeV)) continue;
                 
@@ -633,13 +624,14 @@ namespace Rivet {
         for(Correlator& corr : Correlators)
         {
             string refname = mkAxisCode(corr.GetIndex(), 1, corr.GetSubIndex());
-            const Histo1D& refdata = refData(refname);
+            const Estimate1D& refdata = refData(refname);
             for(auto &bin : refdata.bins())
             {
                 _DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())]->scaleW(sow[corr.GetFullIndex()]->numEntries()/(nTriggers[corr.GetFullIndex()]*sow[corr.GetFullIndex()]->sumW()));
                 double entries = 0.;
                 double yield = GetYieldInUserRangeZYAM(*_DeltaPhixE["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex()) + "xE_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], M_PI/2., M_PI, entries);
-                _h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())]->fillBin(_h["0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex())]->binIndexAt(bin.xMid()),yield/entries, entries);
+                string hname = "0" + to_string(corr.GetIndex()) + "1" + to_string(corr.GetSubIndex());
+                _h[hname]->fill(bin.xMid(),yield/entries);
                     
             }
             
@@ -659,13 +651,11 @@ namespace Rivet {
     map<int, Histo1DPtr> _DeltaPhiSub;
     map<string, int> nTriggers;
     vector<Correlator> Correlators;
-    std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
-    std::initializer_list<int> pdgPhoton = {22};  // Pion 0
 
 
   };
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(PHENIX_2010_I857187);
+  RIVET_DECLARE_PLUGIN(PHENIX_2010_I857187);
   }

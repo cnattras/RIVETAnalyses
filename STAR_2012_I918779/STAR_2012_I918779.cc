@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -25,7 +24,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2012_I918779);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2012_I918779);
 
 	void init() {
 		std::initializer_list<int> pdgIds = { 310, 3122, -3122, 3312, -3312, 3334, -3334 };  // 310 K0S , 3122 LAMBDA, -3122 ANTILAMBDA, 3312 XI-, -3312 ANTIXI+, 3334 OMEGA-,	-3334 ANTIOMEGA+	 
@@ -96,8 +95,8 @@ namespace Rivet {
 
 
 	void analyze(const Event& event) {
-		Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
-		Particles neutralParticles = applyProjection<PrimaryParticles>(event, "np").particles();
+		Particles chargedParticles = apply<PrimaryParticles>(event, "cp").particles();
+		Particles neutralParticles = apply<PrimaryParticles>(event, "np").particles();
 
 
 		//pp for figure 3
@@ -106,9 +105,6 @@ namespace Rivet {
 			sow["sow_pp"]->fill();
 			for (Particle p : chargedParticles)
 			{
-				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
-
 				switch (p.pid()) {
 
 				case 3312: //Xi
@@ -136,9 +132,6 @@ namespace Rivet {
 
 			for (Particle p : neutralParticles)
 			{
-				double partPt = p.pT() / GeV;
-				double pt_weight = 1. / (partPt * 2. * M_PI);
-
 				switch (p.pid()) {
 
 				case 310: // K0S
@@ -493,9 +486,6 @@ namespace Rivet {
 				sow["sow_AuAuc5"]->fill();
 				for (Particle p : chargedParticles)
 				{
-					double partPt = p.pT() / GeV;
-					double pt_weight = 1. / (partPt * 2. * M_PI);
-
 					switch (p.pid()) {
 
 					case 3312: //Xi
@@ -553,9 +543,6 @@ namespace Rivet {
 
 				for (Particle p : chargedParticles)
 				{
-					double partPt = p.pT() / GeV;
-					double pt_weight = 1. / (partPt * 2. * M_PI);
-
 					switch (p.pid()) {
 
 					case 3312: //Xi
@@ -678,9 +665,6 @@ namespace Rivet {
 
 				for (Particle p : chargedParticles)
 				{
-					double partPt = p.pT() / GeV;
-					double pt_weight = 1. / (partPt * 2. * M_PI);
-
 					switch (p.pid()) {
 
 					case 3312: //Xi
@@ -739,9 +723,6 @@ namespace Rivet {
 
 				for (Particle p : chargedParticles)
 				{
-					double partPt = p.pT() / GeV;
-					double pt_weight = 1. / (partPt * 2. * M_PI);
-
 					switch (p.pid()) {
 
 					case 3312: //Xi
@@ -985,6 +966,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2012_I918779);
+  RIVET_DECLARE_PLUGIN(STAR_2012_I918779);
 
 }

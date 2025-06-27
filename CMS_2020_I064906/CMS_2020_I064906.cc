@@ -3,7 +3,6 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -24,13 +23,13 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(CMS_2020_I064906);
+    RIVET_DEFAULT_ANALYSIS_CTOR(CMS_2020_I064906);
     
     /// Function to get bin center to weight entries with
         bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt) {
         if(pT > hist.xMin() && pT < hist.xMax())
         {
-            deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+            deltaPt = hist.bin(hist.indexAt(pT)).xMid();
 
             return true;
         }
@@ -135,123 +134,123 @@ namespace Rivet {
 	
 	//R_pPB for -1.8<y_CM<1.8 in pPB (fig 3)
 	string refname1 = mkAxisCode(5, 1, 1);
-	const Scatter2D& refdata1 = refData(refname1);
+	const Estimate1D& refdata1 = refData(refname1);
 	book(hInvariantPTK0S["pT_K0S_pPB_full"], refname1 + "_-1.8<yCM<1.8_pPB", refdata1);
 	book(hInvariantPTK0S["pT_K0S_pp_full"], refname1 + "_-1.8<yCM<1.8_pp", refdata1);
 	book(RpPBFullyCM["pPB_pT_K0S/pp_pT_K0S_full"], refname1);
 	
 	string refname2 = mkAxisCode(5, 1, 2);
-	const Scatter2D& refdata2 = refData(refname2);
+	const Estimate1D& refdata2 = refData(refname2);
 	book(hInvariantPTLambda["pT_Lambda_pPB_full"], refname2 + "_-1.8<yCM<1.8_pPB", refdata2);
 	book(hInvariantPTLambda["pT_Lambda_pp_full"], refname2 + "_-1.8<yCM<1.8_pp", refdata2);
 	book(RpPBFullyCM["pPB_pT_Lambda/pp_pT_Lambda_full"], refname2);
 	
 	string refname3 = mkAxisCode(5, 1, 3);
-	const Scatter2D& refdata3 = refData(refname3);
+	const Estimate1D& refdata3 = refData(refname3);
 	book(hInvariantPTXi["pT_Xi_pPB_full"], refname3 + "_-1.8<yCM<1.8_pPB", refdata3);
 	book(hInvariantPTXi["pT_Xi_pp_full"], refname3 + "_-1.8<yCM<1.8_pp", refdata3);
 	book(RpPBFullyCM["pPB_pT_Xi/pp_pT_Xi_full"], refname3);
 	
 	string refname4 = mkAxisCode(5, 1, 4);
-	const Scatter2D& refdata4 = refData(refname4);
+	const Estimate1D& refdata4 = refData(refname4);
 	book(hInvariantPTOmega["pT_Omega_pPB_full"], refname4 + "_-1.8<yCM<1.8_pPB", refdata4);
 	book(hInvariantPTOmega["pT_Omega_pp_full"], refname4 + "_-1.8<yCM<1.8_pp", refdata4);
 	book(RpPBFullyCM["pPB_pT_Omega/pp_pT_Omega_full"], refname4);
 	
 	//R_pPB for -1.8<y_CM<0 in pPB (fig 4.1)
 	string refname5 = mkAxisCode(6, 1, 1);
-	const Scatter2D& refdata5 = refData(refname5);
+	const Estimate1D& refdata5 = refData(refname5);
 	book(hInvariantPTK0S["pT_K0S_pPB_low"], refname5 + "_-1.8<yCM<0_pPB", refdata5);
 	book(hInvariantPTK0S["pT_K0S_pp_low"], refname5 + "_-1.8<yCM<0_pp", refdata5);
 	book(RpPBLowyCM["pPB_pT_K0S/pp_pT_K0S_low"], refname5);
 	
 	string refname6 = mkAxisCode(6, 1, 2);
-	const Scatter2D& refdata6 = refData(refname6);
+	const Estimate1D& refdata6 = refData(refname6);
 	book(hInvariantPTLambda["pT_Lambda_pPB_low"], refname6 + "_-1.8<yCM<0_pPB", refdata6);
 	book(hInvariantPTLambda["pT_Lambda_pp_low"], refname6 + "_-1.8<yCM<0_pp", refdata6);
 	book(RpPBLowyCM["pPB_pT_Lambda/pp_pT_Lambda_low"], refname6);
 	
 	string refname7 = mkAxisCode(6, 1, 3);
-	const Scatter2D& refdata7 = refData(refname7);
+	const Estimate1D& refdata7 = refData(refname7);
 	book(hInvariantPTXi["pT_Xi_pPB_low"], refname7 + "_-1.8<yCM<0_pPB", refdata7);
 	book(hInvariantPTXi["pT_Xi_pp_low"], refname7 + "_-1.8<yCM<0_pp", refdata7);
 	book(RpPBLowyCM["pPB_pT_Xi/pp_pT_Xi_low"], refname7);
 	
 	//R_pPB for 0<y_CM<1.8 in pPB (fig 4.2)
 	string refname8 = mkAxisCode(7, 1, 1);
-	const Scatter2D& refdata8 = refData(refname8);
+	const Estimate1D& refdata8 = refData(refname8);
 	book(hInvariantPTK0S["pT_K0S_pPB_high"], refname8 + "_0<yCM<1.8_pPB", refdata8);
 	book(hInvariantPTK0S["pT_K0S_pp_high"], refname8 + "_0<yCM<1.8_pp", refdata8);
 	book(RpPBHighyCM["pPB_pT_K0S/pp_pT_K0S_high"], refname8);
 	
 	string refname9 = mkAxisCode(7, 1, 2);
-	const Scatter2D& refdata9 = refData(refname9);
+	const Estimate1D& refdata9 = refData(refname9);
 	book(hInvariantPTLambda["pT_Lambda_pPB_high"], refname9 + "_0<yCM<1.8_pPB", refdata9);
 	book(hInvariantPTLambda["pT_Lambda_pp_high"], refname9 + "_0<yCM<1.8_pp", refdata9);
 	book(RpPBHighyCM["pPB_pT_Lambda/pp_pT_Lambda_high"], refname9);
 	
 	string refname10 = mkAxisCode(7, 1, 3);
-	const Scatter2D& refdata10 = refData(refname10);
+	const Estimate1D& refdata10 = refData(refname10);
 	book(hInvariantPTXi["pT_Xi_pPB_high"], refname10 + "_0<yCM<1.8_pPB", refdata10);
 	book(hInvariantPTXi["pT_Xi_pp_high"], refname10 + "_0<yCM<1.8_pp", refdata10);
 	book(RpPBHighyCM["pPB_pT_Xi/pp_pT_Xi_high"], refname10);
 	
 	//Y_asym for 0.3 < |yCM| < 0.8
 	string refname11 = mkAxisCode(10, 1, 1);
-	const Scatter2D& refdata11 = refData(refname11);
+	const Estimate1D& refdata11 = refData(refname11);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"], refname11 + "_-0.8<yCM<-0.3", refdata11);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"], refname11 + "_0.3<yCM<0.8", refdata11);
 	book(YasymLow["K0S_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname11);
 	
 	string refname12 = mkAxisCode(10, 1, 2);
-	const Scatter2D& refdata12 = refData(refname12);
+	const Estimate1D& refdata12 = refData(refname12);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"], refname12 + "_-0.8<yCM<-0.3", refdata12);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"], refname12 + "_0.3<yCM<0.8", refdata12);
 	book(YasymLow["Lambda_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname12);
 	
 	//Y_asym Low for h+/-
 	string refname17 = mkAxisCode(10, 1, 3);
-	const Scatter2D& refdata17 = refData(refname17);
+	const Estimate1D& refdata17 = refData(refname17);
 	book(h["negative_charged_yCM_low"], refname17 + "_-0.8<yCM<-0.3", refdata17);
 	book(h["positive_charged_yCM_low"], refname17 + "_0.3<yCM<0.8", refdata17);
 	book(YasymLow["h+/-_-0.8<yCM<-0.3/0.3<yCM<0.8"], refname17);
 	
 	//Y_asym for 0.8 < |yCM| < 1.3
 	string refname13 = mkAxisCode(11, 1, 1);
-	const Scatter2D& refdata13 = refData(refname13);
+	const Estimate1D& refdata13 = refData(refname13);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"], refname13 + "_-1.3<yCM<-0.8", refdata13);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"], refname13 + "_0.8<yCM<1.3", refdata13);
 	book(YasymMid["K0S_-1.3<yCM<-0.8/0.8<yCM<1.3"], refname13);
 	
 	string refname14 = mkAxisCode(11, 1, 2);
-	const Scatter2D& refdata14 = refData(refname14);
+	const Estimate1D& refdata14 = refData(refname14);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"], refname14 + "_-1.3<yCM<-0.8", refdata14);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"], refname14 + "_0.8<yCM<1.3", refdata14);
 	book(YasymMid["Lambda_-1.3<yCM<-0.8/0.8<yCM<1.3"], refname14);
 	
 	//Y_asym Mid for h+/-
 	string refname18 = mkAxisCode(11, 1, 3);
-	const Scatter2D& refdata18 = refData(refname18);
+	const Estimate1D& refdata18 = refData(refname18);
 	book(h["negative_charged_yCM_mid"], refname18 + "_-1.3<yCM<-0.8", refdata18);
 	book(h["positive_charged_yCM_mid"], refname18 + "_0.8<yCM<1.3", refdata18);
 	book(YasymMid["h+/-_-1.3<yCM<-0.8/0.8<yCM<1.3"], refname18);
 	
 	//Y_asym for 1.3 < |yCM| < 1.8
 	string refname15 = mkAxisCode(12, 1, 1);
-	const Scatter2D& refdata15 = refData(refname15);
+	const Estimate1D& refdata15 = refData(refname15);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"], refname15 + "_-1.8<yCM<-1.3", refdata15);
 	book(hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"], refname15 + "_1.3<yCM<1.8", refdata15);
 	book(YasymHigh["K0S_-1.8<yCM<-1.3/1.3<yCM<1.8"], refname15);
 	
 	string refname16 = mkAxisCode(12, 1, 2);
-	const Scatter2D& refdata16 = refData(refname16);
+	const Estimate1D& refdata16 = refData(refname16);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"], refname16 + "_-1.8<yCM<-1.3", refdata16);
 	book(hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"], refname16 + "_1.3<yCM<1.8", refdata16);
 	book(YasymHigh["Lambda_-1.8<yCM<-1.3/1.3<yCM<1.8"], refname16);
 	
 	//Y_asym High for h+/-
 	string refname19 = mkAxisCode(12, 1, 3);
-	const Scatter2D& refdata19 = refData(refname19);
+	const Estimate1D& refdata19 = refData(refname19);
 	book(h["negative_charged_yCM_high"], refname19 + "_-1.8<yCM<-1.3", refdata19);
 	book(h["positive_charged_yCM_high"], refname19 + "_1.3<yCM<1.8", refdata19);
 	book(YasymHigh["h+/-_-1.8<yCM<-1.3/1.3<yCM<1.8"], refname19);
@@ -262,8 +261,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Particles chargedParticles = applyProjection<PrimaryParticles>(event, "fs").particles();
-      Particles neutralParticles = applyProjection<PrimaryParticles>(event, "ns").particles();
+      Particles chargedParticles = apply<PrimaryParticles>(event, "fs").particles();
+      Particles neutralParticles = apply<PrimaryParticles>(event, "ns").particles();
       
 //      // The centrality projection.
 //      const CentralityProjection& centProj = apply<CentralityProjection>(event,"V0M");
@@ -279,7 +278,6 @@ namespace Rivet {
 		{
 			double partPt = p.pT() / GeV;
 			double pt_weight = 1. / (partPt * 2. * M_PI);
-			double deltaPt = 0.;
 			switch (p.pid()) {
 			case 310: // K0S
 			{
@@ -383,20 +381,20 @@ namespace Rivet {
 				//hRpPBHighyCM["RpPB_K0S_0<yCM<1.8"]->fill(partPt);
 				
 				if(p.rap() < -1.3001)hInvariantPTK0SpPB["pT_K0S_pPB_-1.8<yCM<-1.3"]->fill(partPt, pt_weight);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)hInvariantPTK0SpPB["pT_K0S_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)hInvariantPTK0SpPB["pT_K0S_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)hInvariantPTK0SpPB["pT_K0S_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)hInvariantPTK0SpPB["pT_K0S_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
 				if(p.rap() > 1.2999)hInvariantPTK0SpPB["pT_K0S_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
 	
 				hInvariantPTK0S["pT_K0S_pPB_full"]->fill(partPt, pt_weight);
 				if(p.rap() < 0)hInvariantPTK0S["pT_K0S_pPB_low"]->fill(partPt, pt_weight);
 				if(p.rap() > 0)hInvariantPTK0S["pT_K0S_pPB_high"]->fill(partPt, pt_weight);
 				
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"]->fill(partPt, pt_weight);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)hInvariantPTK0SpPB["K0S_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)hInvariantPTK0SpPB["K0S_pT_pPB_LowPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)hInvariantPTK0SpPB["K0S_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)hInvariantPTK0SpPB["K0S_pT_pPB_MidPos"]->fill(partPt, pt_weight);
 				if(p.rap() < -1.3001)hInvariantPTK0SpPB["K0S_pT_pPB_HighNeg"]->fill(partPt, pt_weight);
 				if(p.rap() > 1.2999)hInvariantPTK0SpPB["K0S_pT_pPB_HighPos"]->fill(partPt, pt_weight);
 				
@@ -413,20 +411,20 @@ namespace Rivet {
 				//hRpPBHighyCM["RpPB_Lambda_0<yCM<1.8"]->fill(partPt);
 				
 				if(p.rap() < -1.3001)hInvariantPTLambdapPB["pT_Lambda_pPB_-1.8<yCM<-1.3"]->fill(partPt, pt_weight);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)hInvariantPTLambdapPB["pT_Lambda_pPB_-1.3<yCM<-0.8"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)hInvariantPTLambdapPB["pT_Lambda_pPB_-0.8<yCM<-0.3"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)hInvariantPTLambdapPB["pT_Lambda_pPB_0.3<yCM<0.8"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)hInvariantPTLambdapPB["pT_Lambda_pPB_0.8<yCM<1.3"]->fill(partPt, pt_weight);
 				if(p.rap() > 1.2999)hInvariantPTLambdapPB["pT_Lambda_pPB_1.3<yCM<1.8"]->fill(partPt, pt_weight);
 	
 				hInvariantPTLambda["pT_Lambda_pPB_full"]->fill(partPt, pt_weight);
 				if(p.rap() < 0)hInvariantPTLambda["pT_Lambda_pPB_low"]->fill(partPt, pt_weight);
 				if(p.rap() > 0)hInvariantPTLambda["pT_Lambda_pPB_high"]->fill(partPt, pt_weight);
 				
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"]->fill(partPt, pt_weight);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)hInvariantPTLambdapPB["Lambda_pT_pPB_LowNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)hInvariantPTLambdapPB["Lambda_pT_pPB_LowPos"]->fill(partPt, pt_weight);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)hInvariantPTLambdapPB["Lambda_pT_pPB_MidNeg"]->fill(partPt, pt_weight);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)hInvariantPTLambdapPB["Lambda_pT_pPB_MidPos"]->fill(partPt, pt_weight);
 				if(p.rap() < -1.3001)hInvariantPTLambdapPB["Lambda_pT_pPB_HighNeg"]->fill(partPt, pt_weight);
 				if(p.rap() > 1.2999)hInvariantPTLambdapPB["Lambda_pT_pPB_HighPos"]->fill(partPt, pt_weight);
 				
@@ -454,10 +452,10 @@ namespace Rivet {
 				if(p.rap() < 0)hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
 				if(p.rap() > 0)hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
 				
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
 				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
 				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
@@ -477,10 +475,10 @@ namespace Rivet {
 				if(p.rap() < 0)hInvariantPTXi["pT_Xi_pPB_low"]->fill(partPt, pt_weight);
 				if(p.rap() > 0)hInvariantPTXi["pT_Xi_pPB_high"]->fill(partPt, pt_weight);
 				
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
 				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
 				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
@@ -495,10 +493,10 @@ namespace Rivet {
 				
 				hInvariantPTOmega["pT_Omega_pPB_full"]->fill(partPt, pt_weight);
 				
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
 				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
 				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
@@ -513,10 +511,10 @@ namespace Rivet {
 				
 				hInvariantPTOmega["pT_Omega_pPB_full"]->fill(partPt, pt_weight);
 				
-				if(p.rap() < -0.3001 & p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
-				if(p.rap() > 0.2999 & p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
-				if(p.rap() < -0.8001 & p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
-				if(p.rap() > 0.7999 & p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() < -0.3001 && p.rap() > -0.7999)h["negative_charged_yCM_low"]->fill(partPt);
+				if(p.rap() > 0.2999 && p.rap() < 0.8001)h["positive_charged_yCM_low"]->fill(partPt);
+				if(p.rap() < -0.8001 && p.rap() > -1.2999)h["negative_charged_yCM_mid"]->fill(partPt);
+				if(p.rap() > 0.7999 && p.rap() < 1.3001)h["positive_charged_yCM_mid"]->fill(partPt);
 				if(p.rap() < -1.3001)h["negative_charged_yCM_high"]->fill(partPt);
 				if(p.rap() > 1.2999)h["positive_charged_yCM_high"]->fill(partPt);
 				
@@ -729,12 +727,12 @@ namespace Rivet {
     	map<string, Histo1DPtr> hInvariantPTLambdapPB;
     	map<string, Histo1DPtr> h;
     	
-	map<string, Scatter2DPtr> RpPBFullyCM;
-	map<string, Scatter2DPtr> RpPBLowyCM;
-	map<string, Scatter2DPtr> RpPBHighyCM;
-	map<string, Scatter2DPtr> YasymLow;
-	map<string, Scatter2DPtr> YasymMid;
-	map<string, Scatter2DPtr> YasymHigh;
+	map<string, Estimate1DPtr> RpPBFullyCM;
+	map<string, Estimate1DPtr> RpPBLowyCM;
+	map<string, Estimate1DPtr> RpPBHighyCM;
+	map<string, Estimate1DPtr> YasymLow;
+	map<string, Estimate1DPtr> YasymMid;
+	map<string, Estimate1DPtr> YasymHigh;
 	
 	map<string, CounterPtr> sow;
 	string beamOpt;
@@ -743,6 +741,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(CMS_2020_I064906);
+  RIVET_DECLARE_PLUGIN(CMS_2020_I064906);
 
 }

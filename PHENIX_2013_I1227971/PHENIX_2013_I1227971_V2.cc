@@ -3,7 +3,6 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -25,13 +24,13 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2013_I1227971);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2013_I1227971);
 
     bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt)
     {
       if(pT > hist.xMin() && pT < hist.xMax())
       {
-        deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+        deltaPt = hist.bin(hist.indexAt(pT)).xMid();
         return true;
       }
       else return false;
@@ -330,7 +329,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Particles chargedP = applyProjection<FinalState>(event,"fs").particles();
+      Particles chargedP = apply<FinalState>(event,"fs").particles();
 
       if (collSys == AuAu200) {
 
@@ -426,10 +425,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC10_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -448,10 +447,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC10_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -560,10 +559,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC20_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -582,10 +581,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC20_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -695,10 +694,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC40_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -717,10 +716,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC40_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -829,10 +828,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC60_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -851,10 +850,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC60_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -963,10 +962,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC92_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -985,10 +984,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_AuAu["PC92_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1177,10 +1176,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC20_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1214,10 +1213,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC20_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1412,10 +1411,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC40_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1449,10 +1448,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC40_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1646,10 +1645,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC60_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1683,10 +1682,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC60_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1881,10 +1880,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC88_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -1918,10 +1917,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC88_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -2045,10 +2044,10 @@ namespace Rivet {
               }
             }
             if (p.pid() == 2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC100_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -2067,10 +2066,10 @@ namespace Rivet {
                     }
             }
             if (p.pid() == -2212) {
-              if (!(p.hasAncestor(3122) || p.hasAncestor(3122) ||   //Lambda+/-
-                    p.hasAncestor(3212) || p.hasAncestor(3222) ||   //Sigma0, Sigma+
-                    p.hasAncestor(3322) || p.hasAncestor(3312) ||   //Xi0, Xi-
-                    p.hasAncestor(3334) )) {                        //Omega-
+              if (!(p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == 3122) ||   //Lambda+/-
+                    p.hasAncestorWith(Cuts::pid == 3212) || p.hasAncestorWith(Cuts::pid == 3222) ||   //Sigma0, Sigma+
+                    p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == 3312) ||   //Xi0, Xi-
+                    p.hasAncestorWith(Cuts::pid == 3334) )) {                        //Omega-
                       if (getDeltaPt(*hTemp_ratio_dAu["PC100_2"], partPt, deltaPt))
                       {
                         pt_weight /= deltaPt;
@@ -2098,57 +2097,6 @@ namespace Rivet {
 
     /// Normalise histograms etc., after the run
     void finalize() {
-
-      //****Scale Histos****
-
-      bool dAu200_available = false;
-      bool AuAu200_available = false;
-
-      for (auto element : hdAu_Yields)
-      {
-        string name = element.second->name();
-        if (name.find("AuAu") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) AuAu200_available = true;
-          else
-          {
-            AuAu200_available = false;
-            break;
-          }
-        }
-        else if (name.find("dAu") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) dAu200_available = true;
-          else
-          {
-            dAu200_available = false;
-            break;
-          }
-        }
-      }
-
-      for (auto element : hAuAu_Yields)
-      {
-        string name = element.second->name();
-        if (name.find("AuAu") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) AuAu200_available = true;
-          else
-          {
-            AuAu200_available = false;
-            break;
-          }
-        }
-        else if (name.find("dAu") != std::string::npos)
-        {
-          if (element.second->numEntries() > 0) dAu200_available = true;
-          else
-          {
-            dAu200_available = false;
-            break;
-          }
-        }
-      }
 
     //if (!(dAu200_available && AuAu200_available)) return;
 
@@ -2397,8 +2345,8 @@ namespace Rivet {
 
     map<string, Histo1DPtr> hTemp_ratio_dAu;
     map<string, Histo1DPtr> hTemp_ratio_AuAu;
-    map<string, Scatter2DPtr> RatiodAu;
-    map<string, Scatter2DPtr> RatioAuAu;
+    map<string, Estimate1DPtr> RatiodAu;
+    map<string, Estimate1DPtr> RatioAuAu;
 
     map<string, CounterPtr> sow;
 
@@ -2410,6 +2358,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2013_I1227971);
+  RIVET_DECLARE_PLUGIN(PHENIX_2013_I1227971);
 
 }

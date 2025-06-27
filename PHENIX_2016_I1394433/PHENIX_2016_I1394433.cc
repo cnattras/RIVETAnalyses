@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -23,7 +22,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2016_I1394433);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2016_I1394433);
 
 
     /// @name Analysis methods
@@ -152,20 +151,14 @@ namespace Rivet {
 
     void analyze(const Event& event)
     {
-        const ParticlePair& beam = beams();
-        
-        
-        //track beams
-
-        
         int nchcounter = 0;  
         double sumET = 0.; 
         
         //get charged particles
-        Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+        Particles chargedParticles = apply<ALICE::PrimaryParticles>(event,"APRIM").particles();
 
         //get fs particles
-        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+        Particles fsParticles = apply<FinalState>(event,"fs").particles();
         
         //get centrality info
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
@@ -173,10 +166,7 @@ namespace Rivet {
         if (c > 60) vetoEvent;
         
         //loop over particles to get total charged particles & Et
-        for(const Particle& p : chargedParticles)
-        {
-                nchcounter ++;
-        }
+        nchcounter = chargedParticles.size();
 
         for(const Particle& part : fsParticles)
         {
@@ -334,6 +324,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2016_I1394433);
+  RIVET_DECLARE_PLUGIN(PHENIX_2016_I1394433);
 
 }

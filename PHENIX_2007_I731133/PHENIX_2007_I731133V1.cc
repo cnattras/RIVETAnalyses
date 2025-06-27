@@ -27,7 +27,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2006_I731133);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2006_I731133);
 
 
     /// Book histograms and initialise projections before the run
@@ -215,8 +215,8 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
     
-      Particles chargedParticles = applyProjection<PrimaryParticles>(event, "fs").particles();
-      Particles neutralParticles = applyProjection<PrimaryParticles>(event, "ns").particles();
+      Particles chargedParticles = apply<PrimaryParticles>(event, "fs").particles();
+      Particles neutralParticles = apply<PrimaryParticles>(event, "ns").particles();
     
       if (collSys == pp)
 	{
@@ -1627,6 +1627,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2006_I731133);
+  RIVET_DECLARE_PLUGIN(PHENIX_2006_I731133);
 
 }
