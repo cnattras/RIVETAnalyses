@@ -2,8 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
 //#include "Centralities/RHICCentrality.hh"
@@ -19,11 +17,14 @@ namespace Rivet {
 
 
   /// @brief Add a short analysis description here
-  class PHENIX_2016_I1394433 : public Analysis {
+class PHENIX_2016_I1394433 : public Analysis {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2016_I1394433);
+    //DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2016_I1394433);
+
+
+    PHENIX_2016_I1394433() : Analysis("PHENIX_2016_I1394433") { }
 
 
     /// @name Analysis methods
@@ -162,10 +163,10 @@ namespace Rivet {
         double sumET = 0.; 
         
         //get charged particles
-        Particles chargedParticles = applyProjection<ALICE::PrimaryParticles>(event,"APRIM").particles();
+        Particles chargedParticles = apply<ALICE::PrimaryParticles>(event,"APRIM").particles();
 
         //get fs particles
-        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+        Particles fsParticles = apply<FinalState>(event,"fs").particles();
         
         //get centrality info
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
@@ -334,6 +335,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2016_I1394433);
+  RIVET_DECLARE_PLUGIN(PHENIX_2016_I1394433);
 
 }
