@@ -72,7 +72,7 @@ namespace Rivet {
     double totalEt = 0;
     double deltaeta = 1; 
 
-    Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+    Particles fsParticles = apply<FinalState>(event,"fs").particles();
 
     const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
         const double c = cent();
