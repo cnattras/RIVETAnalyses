@@ -34,7 +34,7 @@ class RHIC_2019_CentralityCalibration : public Analysis {
     declare(ImpactParameterProjection(), "IMP");
 
     // The calibration histogram:
-    book(_calib, "CMULT", 100, 0.0, 2000.0);
+    book(_calib, "CMULT", 3000, 0.0, 3000.0);
 
     // If histogram was pre-loaded, the calibration is done.
     //_done = ( _calib->numEntries() > 0 );
