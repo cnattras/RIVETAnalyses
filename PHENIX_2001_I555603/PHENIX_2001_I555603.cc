@@ -35,11 +35,11 @@ namespace Rivet {
             if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
       {
           NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 5)) collSys = AuAu130;
+          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1e-3)){ collSys = AuAu130;        }
       }
       }
 
-      if (beamOpt == "AUAU130") collSys = AuAu130;
+      if (beamOpt == "AUAU130"){ collSys = AuAu130; cout<<"Here I am!!"<<endl;}
 
       // Declare Centrality
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
