@@ -1,0 +1,28 @@
+! Command file for testing different functionalities of main144.  Note
+! that for the various output functionalities to work, HepMC, RIVET
+! and ROOT respectively needs to either be installed to system path,
+! or appended before compiling.
+
+! 1) Settings related to the physics processes generated. Here
+! AuAu200
+Beams:idA = 1000791970              ! Gold-197 nucleus: Z=79, A=197
+Beams:idB = 1000791970              ! Gold-197 nucleus: Z=79, A=197
+Beams:eCM = 200.                  ! CM energy of collision
+SoftQCD:all = on                   ! All soft QCD processes are on,
+
+! 2) Settings related to the run
+Init:showChangedSettings = on      ! list changed settings
+Init:showAllSettings = off         ! list all settings
+Init:showChangedParticleData = on  ! list changed particle data
+Init:showAllParticleData = off     ! list all particle data
+Next:numberCount = 1            ! print message every n events
+Next:numberShowLHA = 1             ! print LHA information n times
+Next:numberShowInfo = 1            ! print event information n times
+Next:numberShowProcess = 1         ! print process record n times
+Next:numberShowEvent = 1           ! print event record n times
+Stat:showPartonLevel = on          ! additional statistics on MPI
+
+! 3) Settings related to output.
+! See main144HepMC.cmnd, main144Root.cmnd, and main144Rivet.cmnd for
+! additional output options.
+Main:writeLog = on                 ! Write all printed output to a log file.

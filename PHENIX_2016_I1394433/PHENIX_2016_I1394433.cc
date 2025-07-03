@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
 //#include "Centralities/RHICCentrality.hh"
@@ -18,7 +17,7 @@ namespace Rivet {
 
 
   /// @brief Add a short analysis description here
-  class PHENIX_2016_I1394433 : public Analysis {
+class PHENIX_2016_I1394433 : public Analysis {
   public:
 
     /// Constructor

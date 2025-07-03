@@ -24,8 +24,16 @@ namespace Rivet {
       else if (name == "PHENIX") {
         c = Cuts::abseta > 3.1 && Cuts::abseta < 3.9;
         expName = "RHIC";
-      }
-      else if (name == "CMS") {
+
+    }
+    else if(name == "sPHENIX")
+    {
+        c = Cuts::abseta > 3.51 && Cuts::abseta < 4.61;
+        expName = "RHIC";
+    }
+    else if(name == "CMS")
+    {
+
         c = Cuts::abseta > 3 && Cuts::abseta < 5;
         expName = "CMS";
       }
