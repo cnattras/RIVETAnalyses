@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/AliceCommon.hh"
@@ -16,27 +15,28 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2011_I886590);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2011_I886590);
 
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        const auto& binlist = histogram.bins();
+        const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
-        for (YODA::HistoBin1D bins : binlist) {
+        for (auto& bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
             //Now calculate f_corr
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
@@ -49,7 +49,7 @@ namespace Rivet {
     {
         if(pT > hist.xMin() && pT < hist.xMax())
         {
-        	deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+        	deltaPt = hist.binAt(pT).xMid();
                 return true;
         }
         else return false;
@@ -116,9 +116,9 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-      Particles fsPIParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsPI").particles();
-      Particles fsKParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsK").particles();
-      Particles fsPParticles = applyProjection<ALICE::PrimaryParticles>(event,"fsP").particles();
+      Particles fsPIParticles = apply<ALICE::PrimaryParticles>(event,"fsPI").particles();
+      Particles fsKParticles = apply<ALICE::PrimaryParticles>(event,"fsK").particles();
+      Particles fsPParticles = apply<ALICE::PrimaryParticles>(event,"fsP").particles();
 
       pair<double,double> cs = HepMCUtils::crossSection(*event.genEvent());
 
@@ -500,6 +500,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2011_I886590);
+  RIVET_DECLARE_PLUGIN(PHENIX_2011_I886590);
 
 }

@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -25,7 +24,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2009_I816486);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2009_I816486);
 
     void init() {
       std::initializer_list<int> pdgIds = {111};  // Pion 0
@@ -78,7 +77,7 @@ namespace Rivet {
       for(int i = 0, N = CentralityBins.size();i < N-2; ++i)
       {
         string refnameRaa=mkAxisCode(3,1,i+1);
-        const Scatter2D& refdataRaa =refData(refnameRaa);
+        const Estimate1D& refdataRaa =refData(refnameRaa);
         book(hPion0Pt["c" + std::to_string(CentralityBins[i+2]) + "pt_AuAu200"],"_" + refnameRaa + "_AuAu200", refdataRaa);
         book(hPion0Pt["c" + std::to_string(CentralityBins[i+2]) + "pt_pp"], "_" + refnameRaa + "_pp", refdataRaa);
         book(hRaa["Raa" + std::to_string(CentralityBins[i+2])], refnameRaa);
@@ -99,14 +98,14 @@ namespace Rivet {
         {
           h=i+(j*5);
           string refnameRaa = mkAxisCode(4,1,h+1);
-          const Scatter2D& refdataRaa =refData(refnameRaa);
-          book(hRaadphi["Raa_c"+ std::to_string(CentralityBins[i+3]) + "_pt" + std::to_string(PtBins[j]) + std::to_string(PtBins[j+1]) + "_AuAu200"], refnameRaa, refdataRaa);
+          const Estimate1D& refdataRaa =refData(refnameRaa);
+          book(hRaadphi["Raa_c"+ std::to_string(CentralityBins[i+3]) + "_pt" + std::to_string(PtBins[j]) + std::to_string(PtBins[j+1]) + "_AuAu200"], refnameRaa, refdataRaa.xEdges());
         }
       }
     }
 
     void analyze(const Event& event) {
-      Particles neutralParticles = applyProjection<PrimaryParticles>(event,"fs").particles();
+      Particles neutralParticles = apply<PrimaryParticles>(event,"fs").particles();
 
             if(collSys==pp)
             {
@@ -216,12 +215,12 @@ namespace Rivet {
       }
 
       //need to be fixed
-      hRaa["Raa10"]->scaleY(1./777.2);
-      hRaa["Raa20"]->scaleY(1./777.2);
-      hRaa["Raa30"]->scaleY(1./777.2);
-      hRaa["Raa40"]->scaleY(1./777.2);
-      hRaa["Raa50"]->scaleY(1./777.2);
-      hRaa["Raa60"]->scaleY(1./777.2);
+      hRaa["Raa10"]->scale(1./777.2);
+      hRaa["Raa20"]->scale(1./777.2);
+      hRaa["Raa30"]->scale(1./777.2);
+      hRaa["Raa40"]->scale(1./777.2);
+      hRaa["Raa50"]->scale(1./777.2);
+      hRaa["Raa60"]->scale(1./777.2);
 
 
       //dphi vs RAA_______________________________NEEDS TO BE IMPLEMENTED
@@ -232,9 +231,9 @@ namespace Rivet {
 
 
     map<string, Histo1DPtr> hPion0Pt;
-    map<string, Scatter2DPtr> hRaa;
+    map<string, Estimate1DPtr> hRaa;
     map<string, CounterPtr> sow;
-    map<string, Scatter2DPtr> hRaadphi;
+    map<string, Estimate1DPtr> hRaadphi;
     string beamOpt;
     enum CollisionSystem {pp, AuAu200};
     CollisionSystem collSys;
@@ -245,6 +244,6 @@ namespace Rivet {
 
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2009_I816486);
+  RIVET_DECLARE_PLUGIN(PHENIX_2009_I816486);
 
 }

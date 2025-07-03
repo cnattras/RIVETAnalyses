@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
@@ -16,7 +15,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2016_I1420183);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2016_I1420183);
 
 
     /// @name Analysis methods
@@ -48,7 +47,7 @@ namespace Rivet {
 
 		
 		// string refname = mkAxisCode(5, 1, 1);
-		// const Scatter2D& refdata = refData(refname);
+		// const Estimate1D& refdata = refData(refname);
 		// book(_h["Kaon"], refname + "_Kaon", refdata);
 		// book(_h["Pion"], refname + "_Pion", refdata);
 		// book(_s["KaonOverPion"], refname);
@@ -71,7 +70,7 @@ namespace Rivet {
 		beamOpt = getOption<string>("beam", "NONE");
 
 		string refname = mkAxisCode(1, 1, 1);
-		const Scatter2D& refdata = refData(refname);
+		const Estimate1D& refdata = refData(refname);
 		book(_h["dAu"], refname + "_dAu", refdata);
 		book(_h["pp"], refname + "_pp", refdata);
 		book(_s["Raa"], refname);
@@ -88,9 +87,6 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 		
-		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-		const double c = cent();
-
 		// if(c < 10.)
 		// {
 		// _c["sow_AuAu0010"]->fill();
@@ -101,7 +97,7 @@ namespace Rivet {
 		// }
 		// if(c > 50.) vetoEvent;
 
-		// Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+		// Particles fsParticles = apply<FinalState>(event,"fs").particles();
 
 		// for(const Particle& p : fsParticles) 
 		// {
@@ -112,15 +108,15 @@ namespace Rivet {
 		
 		_c["eventW"]->fill();
 		
-		Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
-		Particles pfsParticles = applyProjection<PromptFinalState>(event,"pfs").particles();
+		Particles fsParticles = apply<FinalState>(event,"fs").particles();
+		Particles pfsParticles = apply<PromptFinalState>(event,"pfs").particles();
 		
 		for(const Particle& fs : fsParticles) 
 		{
 			_h["particles"]->fill(fs.pT()/GeV);
 		}
 
-		Particles upParticles = applyProjection<UnstableParticles>(event,"up").particles();
+		Particles upParticles = apply<UnstableParticles>(event,"up").particles();
 
 		for(const Particle& p : upParticles) 
 		{
@@ -194,7 +190,6 @@ namespace Rivet {
 		
 		
 		
-		double scale = 1./(2*M_PI);
 		_h["Jpsi"]->scaleW(1.0/_c["eventW"]->sumW());
 		//_h["Jpsi"]->scaleW(scale/_c["eventW"]->sumW());
 		//_h["Jpsi"]->scaleW(scale);
@@ -210,13 +205,13 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-	map<string, Scatter2DPtr> _s;
+	map<string, Estimate1DPtr> _s;
 	string beamOpt = "";
     //@}
 
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2016_I1420183);
+  RIVET_DECLARE_PLUGIN(STAR_2016_I1420183);
 
 }

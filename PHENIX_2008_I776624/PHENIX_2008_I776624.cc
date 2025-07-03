@@ -3,7 +3,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -16,28 +15,29 @@ namespace Rivet {
   class PHENIX_2008_I776624 : public Analysis {
   public:
 
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I776624);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2008_I776624);
 
     /////////////////////////////////////////////////////////////////////////
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    const auto& binlist = histogram.bins();
+    const auto& lastBin = histogram.bin(histogram.numBins());
     int n = 0;
-    for (YODA::HistoBin1D bins : binlist) {
+    for (auto& bins : binlist) {
         double p_high = bins.xMax();
         double p_low = bins.xMin();
         //Now calculate f_corr
         if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
-        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
         } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
@@ -119,13 +119,13 @@ namespace Rivet {
       // FIGURE 3 - Only 0-20% Events shown in figures
     
       string refnameRaa1 = mkAxisCode(11,1,1);
-      const Scatter2D& refdataRaa1 =refData(refnameRaa1);
+      const Estimate1D& refdataRaa1 =refData(refnameRaa1);
       book(_h_RAA_1D["020_pT_mid_CuCu"], refnameRaa1 + "_CuCu200", refdataRaa1);
       book(_h_RAA_1D["pT_mid_pp"], refnameRaa1 + "_pp200", refdataRaa1);
       book(_h2D_RAA["RAA_pT_mid_020"], refnameRaa1);
 
       string refnameRaa2 = mkAxisCode(12,1,1);
-      const Scatter2D& refdataRaa2 =refData(refnameRaa2);
+      const Estimate1D& refdataRaa2 =refData(refnameRaa2);
       book(_h_RAA_1D["020_pT_fwd_CuCu"], refnameRaa2 + "_CuCu200", refdataRaa2);
       book(_h_RAA_1D["pT_fwd_pp"], refnameRaa2 + "_pp200", refdataRaa2);
       book(_h2D_RAA["RAA_pT_fwd_020"], refnameRaa2);
@@ -136,7 +136,7 @@ namespace Rivet {
       book(_c["c_CuCu_rap_all_020"], "_c_CuCu_rap_all_020");
 
       string refnameRaa3 = mkAxisCode(13,1,1);
-      const Scatter2D& refdataRaa3 =refData(refnameRaa3);
+      const Estimate1D& refdataRaa3 =refData(refnameRaa3);
       book(_h_RAA_1D_rap["020_rap_all_CuCu"], refnameRaa3 + "_CuCu200", refdataRaa3);
       book(_h_RAA_1D_rap["rap_all_pp"], refnameRaa3 + "_pp200", refdataRaa3);
       book(_h2D_RAA_rap["RAA_rap_all_020"], refnameRaa3);
@@ -209,13 +209,13 @@ namespace Rivet {
 
       // for pT integrated results using SetPoint
       // string refnameRaa4 = mkAxisCode(14,1,1);
-      // const Scatter2D& refdataRaa4 =refData(refnameRaa4);
+      // const Estimate1D& refdataRaa4 =refData(refnameRaa4);
       // book(_h_RAA_1D_cent["Cent_mid_CuCu"], refnameRaa4 + "_CuCu200", refdataRaa4);
       // book(_h_RAA_1D_cent["mid_pp"], refnameRaa4 + "_pp200", refdataRaa4);
       // book(_h2D_RAA_mid_Npart["RAA_mid_Npart"], refnameRaa4);
 
       // string refnameRaa5 = mkAxisCode(15,1,1);
-      // const Scatter2D& refdataRaa5 =refData(refnameRaa5);
+      // const Estimate1D& refdataRaa5 =refData(refnameRaa5);
       // book(_h_RAA_1D_cent["Cent_fwd_CuCu"], refnameRaa5 + "_CuCu200", refdataRaa5);
       // book(_h_RAA_1D_cent["fwd_pp"], refnameRaa5 + "_pp200", refdataRaa5);
       // book(_h2D_RAA_fwd_Npart["RAA_fwd_Npart"], refnameRaa5);
@@ -233,9 +233,9 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
     
-      Particles FwdParticles = applyProjection<UnstableParticles>(event,"up_fwd").particles();  // muons
-      Particles MidParticles = applyProjection<UnstableParticles>(event,"up_mid").particles();  // electrons
-      Particles AllParticles = applyProjection<UnstableParticles>(event,"up_all").particles();  // electrons
+      Particles FwdParticles = apply<UnstableParticles>(event,"up_fwd").particles();  // muons
+      Particles MidParticles = apply<UnstableParticles>(event,"up_mid").particles();  // electrons
+      Particles AllParticles = apply<UnstableParticles>(event,"up_all").particles();  // electrons
 
       if(CollSys==CuCu200)
       	{
@@ -519,14 +519,14 @@ namespace Rivet {
       _h_RAA_1D["020_pT_mid_CuCu"]->scaleW(1./_c["c_YAA_pT_mid_020"]->sumW());
       _h_RAA_1D["pT_mid_pp"]->scaleW(1./_c["c_pp"]->sumW());
       divide(_h_RAA_1D["020_pT_mid_CuCu"], _h_RAA_1D["pT_mid_pp"],_h2D_RAA["RAA_pT_mid_020"]);
-      _h2D_RAA["RAA_pT_mid_020"]->scaleY(1./151.8);  // Ncoll from PHENIX AN 638, page 100
+      _h2D_RAA["RAA_pT_mid_020"]->scale(1./151.8);  // Ncoll from PHENIX AN 638, page 100
 
       binShift(*_h_RAA_1D["020_pT_fwd_CuCu"]);
       binShift(*_h_RAA_1D["pT_fwd_pp"]);
        _h_RAA_1D["020_pT_fwd_CuCu"]->scaleW(1./_c["c_YAA_pT_fwd_020"]->sumW());
        _h_RAA_1D["pT_fwd_pp"]->scaleW(1./_c["c_pp"]->sumW());
        divide(_h_RAA_1D["020_pT_fwd_CuCu"], _h_RAA_1D["pT_fwd_pp"],_h2D_RAA["RAA_pT_fwd_020"]);
-       _h2D_RAA["RAA_pT_fwd_020"]->scaleY(1./151.8);
+       _h2D_RAA["RAA_pT_fwd_020"]->scale(1./151.8);
 
       // // Figure 3b - RAA vs rap
       binShift(*_h_RAA_1D_rap["020_rap_all_CuCu"]);
@@ -534,7 +534,7 @@ namespace Rivet {
        _h_RAA_1D_rap["020_rap_all_CuCu"]->scaleW(1./_c["c_CuCu_rap_all_020"]->sumW());
        _h_RAA_1D_rap["rap_all_pp"]->scaleW(1./_c["c_pp"]->sumW());
        divide(_h_RAA_1D_rap["020_rap_all_CuCu"], _h_RAA_1D_rap["rap_all_pp"],_h2D_RAA_rap["RAA_rap_all_020"]);
-       _h2D_RAA_rap["RAA_rap_all_020"]->scaleY(1./151.8);  // Ncoll from PHENIX AN 638, page 100
+       _h2D_RAA_rap["RAA_rap_all_020"]->scale(1./151.8);  // Ncoll from PHENIX AN 638, page 100
 
       // Figure 4 - RAA vs Npart
       /////////////////////
@@ -631,7 +631,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_010") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -660,7 +660,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_1020") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -685,7 +685,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_2030") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -710,7 +710,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_3040") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -735,7 +735,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_4050") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -760,7 +760,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_5060") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -785,7 +785,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_mid_6094") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -811,7 +811,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_010") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -836,7 +836,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_1020") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -861,7 +861,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_2030") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -886,7 +886,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_3040") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -911,7 +911,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_4050") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -936,7 +936,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_5060") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -961,7 +961,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_6070") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -986,7 +986,7 @@ namespace Rivet {
       // 	  string name = element.first;
       // 	  if(name.find("RAA_pT_fwd_7094") != std::string::npos) continue;
 
-      // 	  YODA::Scatter2D yoda_RAA = *element.second;
+      // 	  YODA::Estimate1D yoda_RAA = *element.second;
 
       // 	  double sum_RAA_pT = 0.;
       // 	  double sum_RAA_pTErr = 0.;
@@ -1015,24 +1015,24 @@ namespace Rivet {
     map<string, CounterPtr> _c;  // for tables 1-8  inv yield
     
     // FIGURE 2
-    //map<string, Scatter2DPtr> hRaaNpart;
+    //map<string, Estimate1DPtr> hRaaNpart;
  
     // FIGURE 3
     map<string, int> centBins1;
     map<string, int> centBins2;
     map<string, Histo1DPtr> _h_RAA_1D;
-    map<string, Scatter2DPtr> _h2D_RAA;
+    map<string, Estimate1DPtr> _h2D_RAA;
     map<string, Histo1DPtr> _h_RAA_1D_rap;
-    map<string, Scatter2DPtr> _h2D_RAA_rap;   
+    map<string, Estimate1DPtr> _h2D_RAA_rap;   
 
     // FIGURE 4
     map<string, int> centBins3;
     map<string, int> centBins4;
     map<string, Histo1DPtr> _h_RAA_1D_cent_pT;
-    map<string, Scatter2DPtr> _h2D_RAA_cent_pT;   
-    map<string, Scatter2DPtr> _h_RAA_1D_cent; 
-    map<string, Scatter2DPtr> _h2D_RAA_mid_Npart;
-    map<string, Scatter2DPtr> _h2D_RAA_fwd_Npart;
+    map<string, Estimate1DPtr> _h2D_RAA_cent_pT;   
+    map<string, Estimate1DPtr> _h_RAA_1D_cent; 
+    map<string, Estimate1DPtr> _h2D_RAA_mid_Npart;
+    map<string, Estimate1DPtr> _h2D_RAA_fwd_Npart;
      
     /////////////////////////////////////////////////////////////////////////
     string beamOpt = "NONE";
@@ -1043,7 +1043,7 @@ namespace Rivet {
     }; // public analysis
 
 
-    DECLARE_RIVET_PLUGIN(PHENIX_2008_I776624);
+    RIVET_DECLARE_PLUGIN(PHENIX_2008_I776624);
 
   } // namespace Rivet
 

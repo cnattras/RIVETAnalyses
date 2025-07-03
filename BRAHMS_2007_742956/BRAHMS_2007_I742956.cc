@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "math.h"
@@ -15,7 +14,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(BRAHMS_2007_I742956);
+    RIVET_DEFAULT_ANALYSIS_CTOR(BRAHMS_2007_I742956);
 
 
     /// @name Analysis methods
@@ -48,7 +47,7 @@ namespace Rivet {
     /// Perform the per-event analysis
     void analyze(const Event& event) {
 
-        Particles fsParticles = applyProjection<FinalState>(event,"fs").particles(); //At some point we will want to look at primary vs final state particles instead. The problem is BHRAMS experiment did no feed down correction.
+        Particles fsParticles = apply<FinalState>(event,"fs").particles(); //At some point we will want to look at primary vs final state particles instead. The problem is BHRAMS experiment did no feed down correction.
 
         for(const Particle& p : fsParticles)
         {
@@ -115,7 +114,7 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(BRAHMS_2007_I742956);
+  RIVET_DECLARE_PLUGIN(BRAHMS_2007_I742956);
 
 }
 

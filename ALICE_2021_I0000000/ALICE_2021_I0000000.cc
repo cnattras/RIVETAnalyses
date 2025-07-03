@@ -41,17 +41,17 @@ namespace Rivet {
       // the anti-kT algorithm and a jet-radius parameter 0.2, 0.3, 0.4, 0.5, 0.6, 0.7
       // muons and neutrinos are excluded from the clustering
       
-      FastJets JetPtR02(fs, FastJets::ANTIKT, 0.2, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets JetPtR02(fs, JetAlg::ANTIKT, 0.2, JetMuons::NONE, JetInvisibles::NONE);
       declare(JetPtR02, "JetPtR02");
-      FastJets JetPtR03(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets JetPtR03(fs, JetAlg::ANTIKT, 0.3, JetMuons::NONE, JetInvisibles::NONE);
       declare(JetPtR03, "JetPtR03");
-      FastJets JetPtR04(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets JetPtR04(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(JetPtR04, "JetPtR04");
-      FastJets JetPtR05(fs, FastJets::ANTIKT, 0.5, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets JetPtR05(fs, JetAlg::ANTIKT, 0.5, JetMuons::NONE, JetInvisibles::NONE);
       declare(JetPtR05, "JetPtR05");
-      FastJets JetPtR06(fs, FastJets::ANTIKT, 0.6, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets JetPtR06(fs, JetAlg::ANTIKT, 0.6, JetMuons::NONE, JetInvisibles::NONE);
       declare(JetPtR06, "JetPtR06");
-      FastJets JetPtR07(fs, FastJets::ANTIKT, 0.7, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets JetPtR07(fs, JetAlg::ANTIKT, 0.7, JetMuons::NONE, JetInvisibles::NONE);
       declare(JetPtR07, "JetPtR07");
       
       // Book histograms

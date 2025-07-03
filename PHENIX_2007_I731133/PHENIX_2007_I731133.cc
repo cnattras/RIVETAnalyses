@@ -4,7 +4,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -28,27 +27,28 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2007_I731133);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2007_I731133);
 
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-    std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+    const auto& binlist = histogram.bins();
+    const auto& lastBin = histogram.bin(histogram.numBins());
     int n = 0;
-    for (YODA::HistoBin1D bins : binlist) {
+    for (auto& bins : binlist) {
         double p_high = bins.xMax();
         double p_low = bins.xMin();
         //Now calculate f_corr
         if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
-        } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
         } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
@@ -60,7 +60,6 @@ namespace Rivet {
     /// Book histograms and initialise projections before the run
       void init() {
           //Particles: eta (respectively)
-          std::initializer_list<int> pdgIds = { 221 };
           
           //declare cuts; most of these are found in section II of the paper
           //For charged particles:
@@ -122,94 +121,94 @@ namespace Rivet {
           //d01-x01-y01
           string refname1 = mkAxisCode(1, 1, 1);
           //mkAxisCode gives us the internal histogram name for a given d, x, and y
-          //const Scatter2D& refdata1 = refData(refname1);
-          //here we have to define a Scatter2D& for the next part, we can use the refData function on refname
+          //const Estimate1D& refdata1 = refData(refname1);
+          //here we have to define a Estimate1D& for the next part, we can use the refData function on refname
           book(hCrossSec["ppEtaa"], 1, 1, 1);
-          //here, we are using book() as: book(1DPtr&, const string &name, const Scatter2D), and this books a histograms with binning using d01-x01-y01 from our yoda as a reference.
+          //here, we are using book() as: book(1DPtr&, const string &name, const Estimate1D), and this books a histograms with binning using d01-x01-y01 from our yoda as a reference.
           
           //d02-x01-y01 We don't worry about the decay channels, so we won't need this one since it is a duplicate
           //string refname2 = mkAxisCode(2, 1, 1);
-          //const Scatter2D& refdata2 = refData(refname2);
+          //const Estimate1D& refdata2 = refData(refname2);
           //book(hCrossSec["ppEtatoPiona"], refname2 + "_pp_Pion", refdata2);
           
           //d03-x01-y01 FOR NIK
           string refname2 = mkAxisCode(3, 1, 1);
           //mkAxisCode gives us the internal histogram name for a given d, x, and y
-          //const Scatter2D& refdata2 = refData(refname2);
-          //here we have to define a Scatter2D& for the next part, we can use the refData function on refname
+          //const Estimate1D& refdata2 = refData(refname2);
+          //here we have to define a Estimate1D& for the next part, we can use the refData function on refname
           book(hCrossSec["dAuEta"], 3, 1, 1);
           
           //Figure 14: Invariant yields of eta in d+Au collisions
           //d05-x01-y01: 00-20% centrality
           string refname5 = mkAxisCode(5, 1, 1);
-          //const Scatter2D& refdata5 = refData(refname5);
+          //const Estimate1D& refdata5 = refData(refname5);
           book(hEtaPt["ptyieldsdAuc0020a"], 5, 1, 1);
           
           //d05-x01-y02: 20-40% centrality
           string refname6 = mkAxisCode(5, 1, 2);
-          //const Scatter2D& refdata6 = refData(refname6);
+          //const Estimate1D& refdata6 = refData(refname6);
           book(hEtaPt["ptyieldsdAuc2040a"], 5, 1, 2);
           
           //d05-x01-y03: 40-60% centrality
           string refname7 = mkAxisCode(5, 1, 3);
-          //const Scatter2D& refdata7 = refData(refname7);
+          //const Estimate1D& refdata7 = refData(refname7);
           book(hEtaPt["ptyieldsdAuc4060a"], 5, 1, 3);
           
           //d05-x01-y04: 60-88% centrality
           string refname8 = mkAxisCode(5, 1, 4);
-          //const Scatter2D& refdata8 = refData(refname8);
+          //const Estimate1D& refdata8 = refData(refname8);
           book(hEtaPt["ptyieldsdAuc6088a"], 5, 1, 4);
           
           //Figure 15
           //d06-x01-y01 min. bias
           string refname9 = mkAxisCode(6, 1, 1);
-          //const Scatter2D& refdata9 = refDa6, 1, 1
+          //const Estimate1D& refdata9 = refDa6, 1, 1
           book(hEtaPt["ptyieldsAuAuc0092a"], 6, 1, 1);         
           //d06-x01-y02 0-20%
           string refname10 = mkAxisCode(6, 1, 2);
-          //const Scatter2D& refdata10 = refData(refname10);
+          //const Estimate1D& refdata10 = refData(refname10);
           book(hEtaPt["ptyieldsAuAuc0020a"], 6, 1, 2);         
           //d06-x01-y03 20-40%
           string refname11 = mkAxisCode(6, 1, 3);
-          //const Scatter2D& refdata11 = refData(refname11);
+          //const Estimate1D& refdata11 = refData(refname11);
           book(hEtaPt["ptyieldsAuAuc2060a"], 6, 1, 3);          
           //d06-x01-y04 60-92%
           string refname12 = mkAxisCode(6, 1, 4);
-          //const Scatter2D& refdata12 = refData(refname12);
+          //const Estimate1D& refdata12 = refData(refname12);
           book(hEtaPt["ptyieldsAuAuc6092a"], 6, 1, 4);         
           
           //Figure 16: Rda for measured etas
           //d07-x01-y01: 00-88% centrality (minimum bias)
           string refname13 = mkAxisCode(7, 1, 1);
-          const Scatter2D& refdata13 = refData(refname13);
+          const Estimate1D& refdata13 = refData(refname13);
           book(hEtaPt["ptyieldsdAuc0088b"],  "_" + refname13 + "_dAuc0088_Eta", refdata13);
           book(hCrossSec["ppEtadAuc0088"],  "_" + refname13 + "_pp_Eta", refdata13);
           book(hRda["EtadAuc0088"], refname13);
           
           //d07-x01-y02: 00-20% centrality
           string refname14 = mkAxisCode(7, 1, 2);
-          const Scatter2D& refdata14 = refData(refname14);
+          const Estimate1D& refdata14 = refData(refname14);
           book(hEtaPt["ptyieldsdAuc0020b"],  "_" + refname14 + "_dAuc0020_Eta", refdata14);
           book(hCrossSec["ppEtadAuc0020"],  "_" + refname14 + "_pp_Eta", refdata14);
           book(hRda["EtadAuc0020"], refname14);
           
           //d07-x01-y03: 20-40% centrality
           string refname15 = mkAxisCode(7, 1, 3);
-          const Scatter2D& refdata15 = refData(refname15);
+          const Estimate1D& refdata15 = refData(refname15);
           book(hEtaPt["ptyieldsdAuc2040b"],  "_" + refname15 + "_dAuc2040_Eta", refdata15);
           book(hCrossSec["ppEtadAuc2040"],  "_" + refname15 + "_pp_Eta", refdata15);
           book(hRda["EtadAuc2040"], refname15);
           
           //d07-x01-y04: 40-60% centrality
           string refname16 = mkAxisCode(7, 1, 4);
-          const Scatter2D& refdata16 = refData(refname16);
+          const Estimate1D& refdata16 = refData(refname16);
           book(hEtaPt["ptyieldsdAuc4060b"],  "_" + refname16 + "_dAuc4060_Eta", refdata16);
           book(hCrossSec["ppEtadAuc4060"],  "_" + refname16 + "_pp_Eta", refdata16);
           book(hRda["EtadAuc4060"], refname16);
           
           //d07-x01-y05: 60-88% centrality
           string refname17 = mkAxisCode(7, 1, 5);
-          const Scatter2D& refdata17 = refData(refname17);
+          const Estimate1D& refdata17 = refData(refname17);
           book(hEtaPt["ptyieldsdAuc6088b"],  "_" + refname17 + "_dAuc6088_Eta", refdata17);
           book(hCrossSec["ppEtadAuc6088"],  "_" + refname17 + "_pp_Eta", refdata17);
           book(hRda["EtadAuc6088"], refname17);
@@ -217,21 +216,21 @@ namespace Rivet {
           //Figure 17
           //d08-x01-y01: 00-20% centrality
           string refname18 = mkAxisCode(8, 1, 1);
-          const Scatter2D& refdata18 = refData(refname18);
+          const Estimate1D& refdata18 = refData(refname18);
           book(hEtaPt["ptyieldsAuAuc0020b"],  "_" + refname18 + "_AuAuc0020_Eta", refdata18);
           book(hCrossSec["ppEtaAuAuc0020"],  "_" + refname18 + "_pp_Eta", refdata18);
           book(hRaa["EtaAuAuc0020"], refname18);
           
           //d08-x01-y02: 20-60% centrality
           string refname19 = mkAxisCode(8, 1, 2);
-          const Scatter2D& refdata19 = refData(refname19);
+          const Estimate1D& refdata19 = refData(refname19);
           book(hEtaPt["ptyieldsAuAuc2060b"],  "_" + refname19 + "_AuAuc2060_Eta", refdata19);
           book(hCrossSec["ppEtaAuAuc2060"],  "_" + refname19 + "_pp_Eta", refdata19);
           book(hRaa["EtaAuAuc2060"], refname19);
           
           //d08-x01-y03: 60-92% centrality
           string refname20 = mkAxisCode(8, 1, 3);
-          const Scatter2D& refdata20 = refData(refname20);
+          const Estimate1D& refdata20 = refData(refname20);
           book(hEtaPt["ptyieldsAuAuc6092b"],  "_" + refname20 + "_AuAuc6092_Eta", refdata20);
           book(hCrossSec["ppEtaAuAuc6092"],  "_" + refname20 + "_pp_Eta", refdata20);
           book(hRaa["EtaAuAuc6092"], refname20);    
@@ -239,7 +238,7 @@ namespace Rivet {
           //Figure 18: eta/pion^0 ratio in pp collisions
           //d09-x01-y01
           string refname21 = mkAxisCode(9, 1, 1);
-          const Scatter2D& refdata21 = refData(refname21);
+          const Estimate1D& refdata21 = refData(refname21);
           book(hEtaPt["ptyieldsEta"],  "_" + refname21 + "_pp_Eta", refdata21);
           book(hPionPt["ptyieldsPion"],  "_" + refname21 + "_pp_Pion", refdata21);
           book(Ratiopp["EtaToPion"], refname21);
@@ -248,35 +247,35 @@ namespace Rivet {
           //Figure 19: eta/pion^0 ratios in dAu collisions
           //d10-x01-y01: 00-88% centrality (minimum bias)
           string refname22 = mkAxisCode(10, 1, 1);
-          const Scatter2D& refdata22 = refData(refname22);
+          const Estimate1D& refdata22 = refData(refname22);
           book(hEtaPt["ptyieldsdAuc0088c"], "_" +  refname22 + "_pp_Eta", refdata22);
           book(hPionPt["ptyieldsdAuc0088"],  "_" + refname22 + "_pp_Pion", refdata22);
           book(RatiodAu["EtaToPion0088"], refname22);
           
           //d10-x01-y02: 00-20% centrality
           string refname23 = mkAxisCode(10, 1, 2);
-          const Scatter2D& refdata23 = refData(refname23);
+          const Estimate1D& refdata23 = refData(refname23);
           book(hEtaPt["ptyieldsdAuc0020c"],  "_" + refname23 + "_pp_Eta", refdata23);
           book(hPionPt["ptyieldsdAuc0020"],  "_" + refname23 + "_pp_Pion", refdata23);
           book(RatiodAu["EtaToPion0020"], refname23);
           
           //d10-x01-y03: 20-40% centrality
           string refname24 = mkAxisCode(10, 1, 3);
-          const Scatter2D& refdata24 = refData(refname24);
+          const Estimate1D& refdata24 = refData(refname24);
           book(hEtaPt["ptyieldsdAuc2040c"],  "_" + refname24 + "_pp_Eta", refdata24);
           book(hPionPt["ptyieldsdAuc2040"],  "_" + refname24 + "_pp_Pion", refdata24);
           book(RatiodAu["EtaToPion2040"], refname24);
           
           //d10-x01-y04: 40-60% centrality
           string refname25 = mkAxisCode(10, 1, 4);
-          const Scatter2D& refdata25 = refData(refname25);
+          const Estimate1D& refdata25 = refData(refname25);
           book(hEtaPt["ptyieldsdAuc4060c"],  "_" + refname25 + "_pp_Eta", refdata25);
           book(hPionPt["ptyieldsdAuc4060"],  "_" + refname25 + "_pp_Pion", refdata25);
           book(RatiodAu["EtaToPion4060"], refname25);
           
           //d10-x01-y05: 60-88% centrality
           string refname26 = mkAxisCode(10, 1, 5);
-          const Scatter2D& refdata26 = refData(refname26);
+          const Estimate1D& refdata26 = refData(refname26);
           book(hEtaPt["ptyieldsdAuc6088c"],  "_" + refname26 + "_pp_Eta", refdata26);
           book(hPionPt["ptyieldsdAuc6088"],  "_" + refname26 + "_pp_Pion", refdata26);
           book(RatiodAu["EtaToPion6088"], refname26);
@@ -284,28 +283,28 @@ namespace Rivet {
           //Figure 20: eta/pion^0 ratios in AuAu collisions
           //d11-x01-y01: 00-92% centrality (minimum bias)
           string refname27 = mkAxisCode(11, 1, 1);
-          const Scatter2D& refdata27 = refData(refname27);
+          const Estimate1D& refdata27 = refData(refname27);
           book(hEtaPt["ptyieldsAuAuc0092c"],  "_" + refname27 + "_pp_Eta", refdata27);
           book(hPionPt["ptyieldsAuAuc0092"],  "_" + refname27 + "_pp_Pion", refdata27);
           book(RatioAuAu["EtaToPion0092"], refname27);
           
           //d11-x01-y02: 00-20% centrality
           string refname28 = mkAxisCode(11, 1, 2);
-          const Scatter2D& refdata28 = refData(refname28);
+          const Estimate1D& refdata28 = refData(refname28);
           book(hEtaPt["ptyieldsAuAuc0020c"],  "_" + refname28 + "_pp_Eta", refdata28);
           book(hPionPt["ptyieldsAuAuc0020"],  "_" + refname28 + "_pp_Pion", refdata28);
           book(RatioAuAu["EtaToPion0020"], refname28);
           
           //d11-x01-y03: 20-60% centrality
           string refname29 = mkAxisCode(11, 1, 3);
-          const Scatter2D& refdata29 = refData(refname29);
+          const Estimate1D& refdata29 = refData(refname29);
           book(hEtaPt["ptyieldsAuAuc2060c"],  "_" + refname29 + "_pp_Eta", refdata29);
           book(hPionPt["ptyieldsAuAuc2060"],  "_" + refname29 + "_pp_Pion", refdata29);
           book(RatioAuAu["EtaToPion2060"], refname29);
           
           //d11-x01-y04: 60-92% centrality
           string refname30 = mkAxisCode(11, 1, 4);
-          const Scatter2D& refdata30 = refData(refname30);
+          const Estimate1D& refdata30 = refData(refname30);
           book(hEtaPt["ptyieldsAuAuc6092c"],  "_" + refname30 + "_pp_Eta", refdata30);
           book(hPionPt["ptyieldsAuAuc6092"],  "_" + refname30 + "_pp_Pion", refdata30);
           book(RatioAuAu["EtaToPion6092"], refname30); 
@@ -315,8 +314,8 @@ namespace Rivet {
 
     /// Perform the per-event analysis
       void analyze(const Event& event) {
-          Particles chargedParticles = applyProjection<PrimaryParticles>(event,"cp").particles();
-          Particles neutralParticles = applyProjection<UnstableParticles>(event,"np").particles();
+          Particles chargedParticles = apply<PrimaryParticles>(event,"cp").particles();
+          Particles neutralParticles = apply<UnstableParticles>(event,"np").particles();
           
           /*const ParticlePair& beam = beams();
 
@@ -906,13 +905,13 @@ namespace Rivet {
       map<string, Histo1DPtr> hEtaPt;
       
       //ratios
-      map<string, Scatter2DPtr> RatioAuAu;
-      map<string, Scatter2DPtr> RatiodAu;
-      map<string, Scatter2DPtr> Ratiopp;
+      map<string, Estimate1DPtr> RatioAuAu;
+      map<string, Estimate1DPtr> RatiodAu;
+      map<string, Estimate1DPtr> Ratiopp;
       
       //RdA, Raa
-      map<string, Scatter2DPtr> hRda;
-      map<string, Scatter2DPtr> hRaa;
+      map<string, Estimate1DPtr> hRda;
+      map<string, Estimate1DPtr> hRaa;
       
       //Counters
       map<string, CounterPtr> sow;
@@ -929,6 +928,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2007_I731133);
+  RIVET_DECLARE_PLUGIN(PHENIX_2007_I731133);
 
 }

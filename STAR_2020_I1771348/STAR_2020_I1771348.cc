@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -14,7 +13,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2020_I1771348);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2020_I1771348);
 
 
     /// @name Analysis methods
@@ -88,6 +87,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2020_I1771348);
+  RIVET_DECLARE_PLUGIN(STAR_2020_I1771348);
 
 }

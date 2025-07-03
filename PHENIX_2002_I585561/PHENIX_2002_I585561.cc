@@ -2,7 +2,7 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/DirectFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -37,7 +37,7 @@ namespace Rivet {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "jets");
 
       // FinalState of direct photons and bare muons and electrons in the event
@@ -47,7 +47,7 @@ namespace Rivet {
       // Dress the bare direct leptons with direct photons within dR < 0.1,
       // and apply some fiducial cuts on the dressed leptons
       Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-      DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
+      LeptonFinder dressed_leps(bare_leps, photons, 0.1, lepton_cuts);
       declare(dressed_leps, "leptons");
 
       // Missing momentum
@@ -79,7 +79,7 @@ namespace Rivet {
       idiscardIfAnyDeltaRLess(jets, leptons, 0.2);
 
       // Select jets ghost-associated to B-hadrons with a certain fiducial selection
-      Jets bjets = filter_select(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
+      Jets bjets = select(jets, hasBTag(Cuts::pT > 5*GeV && Cuts::abseta < 2.5));
 
       // Veto event if there are no b-jets
       if (bjets.empty()) vetoEvent;

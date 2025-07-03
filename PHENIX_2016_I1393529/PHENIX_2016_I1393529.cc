@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -15,30 +14,31 @@ namespace Rivet {
   public:
     
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2016_I1393529);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2016_I1393529);
     
     
     /// @name Analysis methods
     //@{
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        const auto& binlist = histogram.bins();
+        const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
-        for (YODA::HistoBin1D bins : binlist) {
+        for (auto& bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
             //Now calculate f_corr
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
@@ -67,32 +67,32 @@ namespace Rivet {
       //+++++++++++++++++++//
       //Figure 2
       string refname_1 = mkAxisCode(2, 1, 1);
-      const Scatter2D& refdata_1 = refData(2, 1, 1);
+      const Estimate1D& refdata_1 = refData(2, 1, 1);
 
       book(_h["bfracn"], refname_1 + "_num", refdata_1);
       book(_h["bfracd"], refname_1 + "_den", refdata_1);
-      book(_s["bfrac"], refname_1, true);
+      book(_s["bfrac"], refname_1);
 
       //+++++++++++++++++++//
       //Figure 3
       string refname_2 = mkAxisCode(3, 1, 1);
-      const Scatter2D& refdata_2 = refData(3, 1, 1);
+      const Estimate1D& refdata_2 = refData(3, 1, 1);
 
       book(_h["RAA_c2en"], refname_2 + "_num", refdata_2);
       book(_h["RAA_c2ed"], refname_2 + "_den", refdata_2);
-      book(_s["RAA_c2e"], refname_2, true);
+      book(_s["RAA_c2e"], refname_2);
 
       
       string refname_3 = mkAxisCode(3, 1, 2);
-      const Scatter2D& refdata_3 = refData(3, 1, 2);
+      const Estimate1D& refdata_3 = refData(3, 1, 2);
       
       book(_h["RAA_b2en"], refname_3 + "_num", refdata_3);
       book(_h["RAA_b2ed"], refname_3 + "_den", refdata_3);
-      book(_s["RAA_b2e"], refname_3, true);
+      book(_s["RAA_b2e"], refname_3);
       
       //+++++++++++++++++++//
       string refname_4 = mkAxisCode(4, 1, 1);
-      const Scatter2D& refdata_4 = refData(4, 1, 1);
+      const Estimate1D& refdata_4 = refData(4, 1, 1);
       
       book(_h["RAA_ratio_c2en"], refname_4 + "_c2e_num", refdata_4);
       book(_h["RAA_ratio_c2ed"], refname_4 + "_c2e_den", refdata_4);
@@ -109,10 +109,6 @@ namespace Rivet {
     
     /// Perform the per-event analysis
     void analyze(const Event& event) {
-      
-      const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
-      const double c=cent();
-//      cout<<"cent: "<<c<<endl;
       
       const ParticlePair& beam = beams();
       double NN=0;
@@ -133,7 +129,7 @@ namespace Rivet {
       else if (beamOpt == "AUAU200") collSys = AuAu200;
       else if (beamOpt == "PP200") collSys = pp_200;      
 
-      Particles fsParticles = applyProjection<FinalState>(event,"fs").particles();
+      Particles fsParticles = apply<FinalState>(event,"fs").particles();
       
       for(const Particle& p : fsParticles) 
 	{
@@ -224,22 +220,14 @@ namespace Rivet {
   binShift(*_h["RAA_ratio_b2ed"]);
 	divide(_h["RAA_ratio_c2en"], _h["RAA_ratio_c2ed"], _s["RAA_ratio_c2e"]);
 	divide(_h["RAA_ratio_b2en"], _h["RAA_ratio_b2ed"], _s["RAA_ratio_b2e"]);
-	DivideScatter2D(_s["RAA_b2e"], _s["RAA_c2e"], _s["RAA_ratio"]);
+	DivideEstimate1D(_s["RAA_b2e"], _s["RAA_c2e"], _s["RAA_ratio"]);
       }
       
       
     }
-    void DivideScatter2D(Scatter2DPtr s1, Scatter2DPtr s2, Scatter2DPtr s)
+    void DivideEstimate1D(Estimate1DPtr s1, Estimate1DPtr s2, Estimate1DPtr s)
     {
-      for(unsigned int i =0; i<s2->numPoints(); i++){
-	if(s2->point(i).y() == 0)
-	  {
-	    s->addPoint(s2->point(i).x(), std::numeric_limits<double>::quiet_NaN());
-	    continue; 
-	  }
-	double yErr = (s1->point(i).y()/s2->point(i).y())*std::sqrt(std::pow(s1->point(i).yErrPlus()/s1->point(i).y(), 2) + std::pow(s2->point(i).yErrPlus()/s2->point(i).y(), 2));
-	s->addPoint(s2->point(i).x(), s1->point(i).y()/s2->point(i).y(), s1->point(i).xErrPlus(), yErr);
-      }    
+      *s = *s1 / *s2;
     }
     
     /// @name Histograms
@@ -247,7 +235,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h; 
     map<string, Profile1DPtr> _p; 
     map<string, CounterPtr> _c; 
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     enum CollisionSystem {pp_200, AuAu200};
     CollisionSystem collSys;
     string beamOpt = "NONE";
@@ -256,6 +244,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2016_I1393529);
+  RIVET_DECLARE_PLUGIN(PHENIX_2016_I1393529);
 
 }

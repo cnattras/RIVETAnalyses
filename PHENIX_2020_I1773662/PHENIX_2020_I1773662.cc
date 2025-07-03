@@ -3,7 +3,6 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -18,7 +17,7 @@ namespace Rivet {
     public:
 
       /// Constructor
-      DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2020_I1773662);
+      RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2020_I1773662);
 
 
       /// @name Analysis methods
@@ -73,7 +72,7 @@ namespace Rivet {
         const double c = cent();
 
       
-        Particles upParticles = applyProjection<UnstableParticles>(event,"up").particles();
+        Particles upParticles = apply<UnstableParticles>(event,"up").particles();
 
         if(collsys==pp510)
         {
@@ -124,6 +123,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2020_I1773662);
+  RIVET_DECLARE_PLUGIN(PHENIX_2020_I1773662);
 
 }

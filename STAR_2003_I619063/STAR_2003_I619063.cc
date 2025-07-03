@@ -9,14 +9,14 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2003_I619063);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2003_I619063);
     /// @name Analysis methods
     //@{
     bool getBinCenter(YODA::Histo1D hist, double pT, double &binCenter)
     {
         if(pT > hist.xMin() && pT < hist.xMax())
         {
-            binCenter = hist.bin(hist.binIndexAt(pT)).xMid();
+            binCenter = hist.bin(hist.indexAt(pT)).xMid();
             return true;
         }
         else return false;
@@ -34,35 +34,35 @@ namespace Rivet {
       declare(cpp,"cpp");
       //Ratios using AuAu at 130 GeV
       string refnameEnergyRatio05 = mkAxisCode(2,1,1);
-      const Scatter2D& refdataEnergyRatio05 =refData(refnameEnergyRatio05);
+      const Estimate1D& refdataEnergyRatio05 =refData(refnameEnergyRatio05);
 
       string refnameEnergyRatio2030 = mkAxisCode(2,1,2);
-      const Scatter2D& refdataEnergyRatio2030 =refData(refnameEnergyRatio2030);
+      const Estimate1D& refdataEnergyRatio2030 =refData(refnameEnergyRatio2030);
 
       string refnameEnergyRatio3040 = mkAxisCode(2,1,3);
-      const Scatter2D& refdataEnergyRatio3040 =refData(refnameEnergyRatio3040);
+      const Estimate1D& refdataEnergyRatio3040 =refData(refnameEnergyRatio3040);
 
       string refnameEnergyRatio4060 = mkAxisCode(2,1,4);
-      const Scatter2D& refdataEnergyRatio4060 =refData(refnameEnergyRatio4060);
+      const Estimate1D& refdataEnergyRatio4060 =refData(refnameEnergyRatio4060);
 
       //Ratios using pp at 200 GeV
       string refnameppRatio05 = mkAxisCode(3,1,1);
-      const Scatter2D& refdatappRatio05 =refData(refnameppRatio05);
+      const Estimate1D& refdatappRatio05 =refData(refnameppRatio05);
 
       string refnameppRatio1020 = mkAxisCode(3,1,2);
-      const Scatter2D& refdatappRatio1020 =refData(refnameppRatio1020);
+      const Estimate1D& refdatappRatio1020 =refData(refnameppRatio1020);
 
       string refnameppRatio2030 = mkAxisCode(3,1,3);
-      const Scatter2D& refdatappRatio2030 =refData(refnameppRatio2030);
+      const Estimate1D& refdatappRatio2030 =refData(refnameppRatio2030);
 
       string refnameppRatio3040 = mkAxisCode(3,1,4);
-      const Scatter2D& refdatappRatio3040 =refData(refnameppRatio3040);
+      const Estimate1D& refdatappRatio3040 =refData(refnameppRatio3040);
 
       string refnameppRatio4060 = mkAxisCode(3,1,5);
-      const Scatter2D& refdatappRatio4060 =refData(refnameppRatio4060);
+      const Estimate1D& refdatappRatio4060 =refData(refnameppRatio4060);
 
       string refnameppRatio6080 = mkAxisCode(3,1,6);
-      const Scatter2D& refdatappRatio6080 =refData(refnameppRatio6080);
+      const Estimate1D& refdatappRatio6080 =refData(refnameppRatio6080);
 
       //Centrality
       declareCentrality(RHICCentrality("STAR"), "RHIC_2019_CentralityCalibration:exp=STAR", "CMULT", "CMULT");
@@ -171,7 +171,7 @@ namespace Rivet {
 
 
 
-      PrimaryParticles cpp = applyProjection<PrimaryParticles>(event,"cpp");
+      PrimaryParticles cpp = apply<PrimaryParticles>(event,"cpp");
       Particles particles = cpp.particles();
 
       if(collSys == pp)
@@ -371,10 +371,10 @@ namespace Rivet {
       chSpectrum["chSpectrum_C6080_S200pp"]->scaleW(1./sow["sow60_80"]->sumW());
 
       divide(chSpectrum["chSpectrum0_5"], chSpectrum["chSpectrum40_60"], R_AB["Rcp0_5_over_40_60"]);
-      R_AB["Rcp0_5_over_40_60"]->scaleY(93.6/1051.3);
+      R_AB["Rcp0_5_over_40_60"]->scale(93.6/1051.3);
 
       divide(chSpectrum["chSpectrum0_5"], chSpectrum["chSpectrum60_80"], R_AB["Rcp0_5_over_60_80"]);
-      R_AB["Rcp0_5_over_60_80"]->scaleY(21.2/1051.3);
+      R_AB["Rcp0_5_over_60_80"]->scale(21.2/1051.3);
 
       chSpectrum["chSpectrum0_5_130"]->scaleW(1./sow["sow0_5_130"]->sumW());
       chSpectrum["chSpectrum20_30_130"]->scaleW(1./sow["sow20_30_130"]->sumW());
@@ -394,22 +394,22 @@ namespace Rivet {
       chSpectrum["chSpectrum60_80_pp"]->scaleW(1./sow["sow_pp"]->sumW());
 
       divide(chSpectrum["chSpectrum_C05_S200pp"],chSpectrum["chSpectrum0_5_pp"],R_AB["R_200_pp_05"]);
-      R_AB["R_200_pp_05"]->scaleY(1./1051.3);
+      R_AB["R_200_pp_05"]->scale(1./1051.3);
 
       divide(chSpectrum["chSpectrum_C1020_S200pp"],chSpectrum["chSpectrum10_20_pp"],R_AB["R_200_pp_1020"]);
-      R_AB["R_200_pp_1020"]->scaleY(1./591.3);
+      R_AB["R_200_pp_1020"]->scale(1./591.3);
 
       divide(chSpectrum["chSpectrum_C2030_S200pp"],chSpectrum["chSpectrum20_30_pp"],R_AB["R_200_pp_2030"]);
-      R_AB["R_200_pp_2030"]->scaleY(1./368.6);
+      R_AB["R_200_pp_2030"]->scale(1./368.6);
 
       divide(chSpectrum["chSpectrum_C3040_S200pp"],chSpectrum["chSpectrum30_40_pp"],R_AB["R_200_pp_3040"]);
-      R_AB["R_200_pp_3040"]->scaleY(1./220.2);
+      R_AB["R_200_pp_3040"]->scale(1./220.2);
 
       divide(chSpectrum["chSpectrum_C4060_S200pp"],chSpectrum["chSpectrum40_60_pp"],R_AB["R_200_pp_4060"]);
-      R_AB["R_200_pp_4060"]->scaleY(1./93.6);
+      R_AB["R_200_pp_4060"]->scale(1./93.6);
 
       divide(chSpectrum["chSpectrum_C6080_S200pp"],chSpectrum["chSpectrum60_80_pp"],R_AB["R_200_pp_6080"]);
-      R_AB["R_200_pp_6080"]->scaleY(1./21.2);
+      R_AB["R_200_pp_6080"]->scale(1./21.2);
 
     }
 
@@ -420,7 +420,7 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> chSpectrum;
     map<string, CounterPtr> sow;
-    map<string, Scatter2DPtr> R_AB;
+    map<string, Estimate1DPtr> R_AB;
     enum CollisionSystem {pp, AuAu130, AuAu200};
     CollisionSystem collSys;
     string beamOpt = "NONE";
@@ -431,7 +431,7 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(STAR_2003_I619063);
+  RIVET_DECLARE_PLUGIN(STAR_2003_I619063);
 
 
 }

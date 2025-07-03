@@ -18,32 +18,21 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2012_I930463);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2012_I930463);
 
   bool getBinCenter(YODA::Histo1D hist, double pT, double &binCenter)
   {
       if(pT > hist.xMin() && pT < hist.xMax())
       {
-          binCenter = hist.bin(hist.binIndexAt(pT)).xMid();
+          binCenter = hist.binAt(pT).xMid();
           return true;
       }
       else return false;
   }
 
-  void DivideScatter2D(Scatter2DPtr s1, Scatter2DPtr s2, Scatter2DPtr s)
+  void DivideEstimate1D(Estimate1DPtr s1, Estimate1DPtr s2, Estimate1DPtr s)
   {
-      for(unsigned int i = 0; i < s2->numPoints(); i++)
-      {
-          if(s2->point(i).y() == 0)
-          {
-              s->addPoint(s2->point(i).x(), std::numeric_limits<double>::quiet_NaN());
-              continue;
-          }
-
-          double yErr = (s1->point(i).y()/s2->point(i).y())*std::sqrt(std::pow(s1->point(i).yErrPlus()/s1->point(i).y(), 2) + std::pow(s2->point(i).yErrPlus()/s2->point(i).y(), 2));
-
-          s->addPoint(s2->point(i).x(), s1->point(i).y()/s2->point(i).y(), s1->point(i).xErrPlus(), yErr);
-      }
+    *s = *s1 / *s2;
 
   }
 
@@ -85,56 +74,56 @@ namespace Rivet {
 
 		//Figure 2 Yield Ratio pp
 		string refname1 = mkAxisCode(7, 1, 1); //why so different from other book section?
-		const Scatter2D& refdata1 = refData(refname1);
+		const Estimate1D& refdata1 = refData(refname1);
 		book(hPionNegPt["pp1"], refname1 + "_PionNeg", refdata1);
 		book(hPionPosPt["pp1"], refname1 + "_PionPos", refdata1);
 		book(RatioPion["pp"], refname1);
 
 		string refname2 = mkAxisCode(7, 1, 2);
-		const Scatter2D& refdata2 = refData(refname2);
+		const Estimate1D& refdata2 = refData(refname2);
 		book(hProtNegPt["pp1"], refname2 + "_ProtNeg", refdata2);
 		book(hProtPosPt["pp1"], refname2 + "_ProtPos", refdata2);
 		book(RatioProt["pp"], refname2);
 
 		string refname3 = mkAxisCode(7, 1, 3);
-		const Scatter2D& refdata3 = refData(refname3);
+		const Estimate1D& refdata3 = refData(refname3);
 		book(hKaonNegPt["pp"], refname3 + "_KaonNeg", refdata3);
 		book(hKaonPosPt["pp"], refname3 + "_KaonPos", refdata3);
 		book(RatioKaon["pp"], refname3);
 
 		string refname4 = mkAxisCode(7, 1, 4);
-		const Scatter2D& refdata4 = refData(refname4);
+		const Estimate1D& refdata4 = refData(refname4);
 		book(hProtPosPt["pp2"], refname4 + "_ProtPos", refdata4);
 		book(hPionPosPt["pp2"], refname4 + "_PionPos", refdata4);
 		book(Ratioppipos["pp"], refname4);
 
 		string refname5 = mkAxisCode(7, 1, 5);
-		const Scatter2D& refdata5 = refData(refname5);
+		const Estimate1D& refdata5 = refData(refname5);
 		book(hProtNegPt["pp2"], refname5 + "_ProtNeg", refdata5);
 		book(hPionNegPt["pp2"], refname5 + "_PionNeg", refdata5);
 		book(Ratioppineg["pp"], refname5);
 
 		string refname6 = mkAxisCode(7, 1, 6);
-		const Scatter2D& refdata6 = refData(refname6);
+		const Estimate1D& refdata6 = refData(refname6);
 		book(hKaonPt["pp"], refname6 + "_Kaon", refdata6);
 		book(hPionPt["pp1"], refname6 + "_Pion", refdata6);
 		book(RatioKpi["pp"], refname6);
 
 		string refname7 = mkAxisCode(8, 1, 1);
-		const Scatter2D& refdata7 = refData(refname7);
+		const Estimate1D& refdata7 = refData(refname7);
 		book(hKaon0SPt["pp"], refname7 + "_Kaon0S", refdata7);
 		book(hPionPt["pp2"], refname7 + "_Pion", refdata7);
 		book(RatioK0spi["pp"], refname7);
 
 		//Figure 2 Yield Ratio AUAU
 		string refname8 = mkAxisCode(9, 1, 1);
-		const Scatter2D& refdata8 = refData(refname8);
+		const Estimate1D& refdata8 = refData(refname8);
 		book(hProtPosPt["AuAuc12"], refname8 + "_ProtPos", refdata8);
 		book(hPionPosPt["AuAuc12"], refname8 + "_PionPos", refdata8);
 		book(Ratioppipos["AuAuc12"], refname8);
 
 		string refname9 = mkAxisCode(9, 1, 2);
-		const Scatter2D& refdata9 = refData(refname9);
+		const Estimate1D& refdata9 = refData(refname9);
 		book(hProtNegPt["AuAuc12"], refname9 + "_ProtNeg", refdata9);
 		book(hPionNegPt["AuAuc12"], refname9 + "_PionNeg", refdata9);
 		book(Ratioppineg["AuAuc12"], refname9);
@@ -142,25 +131,25 @@ namespace Rivet {
 		//Figure 3 RAA
 
 		string refname10 = mkAxisCode(10, 1, 1);
-		const Scatter2D& refdata10 = refData(refname10);
+		const Estimate1D& refdata10 = refData(refname10);
 		book(hPionPt["Raa_c12_AuAu"], refname10 + "_AuAu", refdata10);
 		book(hPionPt["Raa_c12_pp"], refname10 + "_pp", refdata10);
 		book(hRaa["pi_c12_AuAu"], refname10);
 
 		string refname11 = mkAxisCode(11, 1, 1);
-		const Scatter2D& refdata11 = refData(refname11);
+		const Estimate1D& refdata11 = refData(refname11);
 		book(hKpPt["Raa_c12_AuAu"], refname11 + "_AuAu", refdata11);
 		book(hKpPt["Raa_c12_pp"], refname11 + "_pp", refdata11);
 		book(hRaa["Kp_c12_AuAu"], refname11);
 
 		string refname12 = mkAxisCode(12, 1, 1);
-		const Scatter2D& refdata12 = refData(refname12);
+		const Estimate1D& refdata12 = refData(refname12);
 		book(hKaon0SPt["Raa_c12_AuAu"], refname12 + "_AuAu", refdata12);
 		book(hKaon0SPt["Raa_c12_pp"], refname12 + "_pp", refdata12);
 		book(hRaa["K0S_c12_AuAu"], refname12);
 
 		string refname13 = mkAxisCode(13, 1, 1);
-		const Scatter2D& refdata13 = refData(refname13);
+		const Estimate1D& refdata13 = refData(refname13);
 		book(hRho0Pt["Raa_c12_AuAu"], refname13 + "_AuAu", refdata13);
 		book(hRho0Pt["Raa_c12_pp"], refname13 + "_pp", refdata13);
 		book(hRaa["Rho0_c12_AuAu"], refname13);
@@ -168,7 +157,7 @@ namespace Rivet {
 		//Figure 3 RAA double ratios
 
     string refname14 = mkAxisCode(14, 1, 1);
-		const Scatter2D& refdata14 = refData(refname14);
+		const Estimate1D& refdata14 = refData(refname14);
 		book(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"], refname14 + "_AuAu_KpOverPion_Kp", refdata14);
     book(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"], refname14 + "_AuAu_KpOverPion_Pion", refdata14);
 		book(hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"], refname14 + "_pp_Kp", refdata14);
@@ -178,7 +167,7 @@ namespace Rivet {
 		book(hDoubleRaa["Kp_c12_KpOverPion"], refname14);
 
     string refname15 = mkAxisCode(15, 1, 1);
-		const Scatter2D& refdata15 = refData(refname15);
+		const Estimate1D& refdata15 = refData(refname15);
 		book(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Neg"], refname15 + "_AuAu_KpNegOverPos_Neg", refdata15);
     book(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Pos"], refname15 + "_AuAu_KpNegOverPos_Pos", refdata15);
 		book(hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Neg"], refname15 + "_pp_Neg", refdata15);
@@ -188,7 +177,7 @@ namespace Rivet {
 		book(hDoubleRaa["Kp_c12_KpNegOverPos"], refname15);
 
     string refname16 = mkAxisCode(16, 1, 1);
-		const Scatter2D& refdata16 = refData(refname16);
+		const Estimate1D& refdata16 = refData(refname16);
 		book(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Rho"], refname16 + "_AuAu_RhoOverPion_Rho", refdata16);
     book(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Pion"], refname16 + "_AuAu_RhoOverPion_Pion", refdata16);
 		book(hHistos1DRaa["Raa_c12_pp_RhoOverPion_Rho"], refname16 + "_pp_RhoOverPion_Rho", refdata16);
@@ -212,8 +201,8 @@ namespace Rivet {
       else if (beamOpt == "AUAU200") collSys = AuAu200;
       else if (beamOpt == "PP200") collSys = pp200;
 
-      Particles chargedParticles = applyProjection<PrimaryParticles>(event, "cp").particles();
-  		Particles neutralParticles = applyProjection<UnstableParticles>(event, "np").particles();
+      Particles chargedParticles = apply<PrimaryParticles>(event, "cp").particles();
+  		Particles neutralParticles = apply<UnstableParticles>(event, "np").particles();
 
       if (collSys == pp200)
       {
@@ -516,22 +505,22 @@ namespace Rivet {
 		hPionPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hPionPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hPionPt["Raa_c12_AuAu"], hPionPt["Raa_c12_pp"], hRaa["pi_c12_AuAu"]);
-		hRaa["pi_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["pi_c12_AuAu"]->scale(1. / 960.2);
 
 		hKpPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hKpPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hKpPt["Raa_c12_AuAu"], hKpPt["Raa_c12_pp"], hRaa["Kp_c12_AuAu"]);
-		hRaa["Kp_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["Kp_c12_AuAu"]->scale(1. / 960.2);
 
 		hKaon0SPt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hKaon0SPt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hKaon0SPt["Raa_c12_AuAu"], hKaon0SPt["Raa_c12_pp"], hRaa["K0S_c12_AuAu"]);
-		hRaa["K0S_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["K0S_c12_AuAu"]->scale(1. / 960.2);
 
 		hRho0Pt["Raa_c12_AuAu"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
 		hRho0Pt["Raa_c12_pp"]->scaleW(1. / sow["sow_pp"]->sumW());
 		divide(hRho0Pt["Raa_c12_AuAu"], hRho0Pt["Raa_c12_pp"], hRaa["Rho0_c12_AuAu"]);
-		hRaa["Rho0_c12_AuAu"]->scaleY(1. / 960.2);
+		hRaa["Rho0_c12_AuAu"]->scale(1. / 960.2);
 
 	  //Figure 3 RAA Ratio_____________Need to implement
     hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"]->scaleW(1. / sow["sow_AuAuc12"]->sumW());
@@ -542,15 +531,15 @@ namespace Rivet {
 
     divide(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Kp"], hHistos1DRaa["Raa_c12_pp_KpOverPion_Kp"], hDoubleRaa["Raa_c12_KpOverPion_Kp"]);
     divide(hHistos1DRaa["Raa_c12_AuAu_KpOverPion_Pion"], hHistos1DRaa["Raa_c12_pp_KpOverPion_Pion"], hDoubleRaa["Raa_c12_KpOverPion_Pion"]);
-    DivideScatter2D(hDoubleRaa["Raa_c12_KpOverPion_Kp"], hDoubleRaa["Raa_c12_KpOverPion_Pion"], hDoubleRaa["Kp_c12_KpOverPion"]);
+    DivideEstimate1D(hDoubleRaa["Raa_c12_KpOverPion_Kp"], hDoubleRaa["Raa_c12_KpOverPion_Pion"], hDoubleRaa["Kp_c12_KpOverPion"]);
 
     divide(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Neg"], hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Neg"], hDoubleRaa["Raa_c12_KpNeg"]);
     divide(hHistos1DRaa["Raa_c12_AuAu_KpNegOverPos_Pos"], hHistos1DRaa["Raa_c12_pp_KpNegOverPos_Pos"], hDoubleRaa["Raa_c12_KpPos"]);
-    DivideScatter2D(hDoubleRaa["Raa_c12_KpNeg"], hDoubleRaa["Raa_c12_KpPos"], hDoubleRaa["Kp_c12_KpNegOverPos"]);
+    DivideEstimate1D(hDoubleRaa["Raa_c12_KpNeg"], hDoubleRaa["Raa_c12_KpPos"], hDoubleRaa["Kp_c12_KpNegOverPos"]);
 
     divide(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Rho"], hHistos1DRaa["Raa_c12_pp_RhoOverPion_Rho"], hDoubleRaa["Raa_c12_RhoOverPion_Rho"]);
     divide(hHistos1DRaa["Raa_c12_AuAu_RhoOverPion_Pion"], hHistos1DRaa["Raa_c12_pp_RhoOverPion_Pion"], hDoubleRaa["Raa_c12_RhoOverPion_Pion"]);
-    DivideScatter2D(hDoubleRaa["Raa_c12_RhoOverPion_Rho"], hDoubleRaa["Raa_c12_RhoOverPion_Pion"], hDoubleRaa["Kp_c12__RhoOverPion"]);
+    DivideEstimate1D(hDoubleRaa["Raa_c12_RhoOverPion_Rho"], hDoubleRaa["Raa_c12_RhoOverPion_Pion"], hDoubleRaa["Kp_c12__RhoOverPion"]);
     }
 
 
@@ -567,21 +556,21 @@ namespace Rivet {
 	map<string, Histo1DPtr> hKpPt;
 
   map<string, Histo1DPtr> hHistos1DRaa;
-  map<string, Scatter2DPtr> hDoubleRaa;
+  map<string, Estimate1DPtr> hDoubleRaa;
 
 	map<string, Histo1DPtr> hKaonPt;
 	map<string, Histo1DPtr> hPionPt;
 	map<string, Histo1DPtr> hProtPt;
 
-	map<string, Scatter2DPtr> RatioPion;
-	map<string, Scatter2DPtr> RatioProt;
-	map<string, Scatter2DPtr> RatioKaon;
-	map<string, Scatter2DPtr> Ratioppipos;
-	map<string, Scatter2DPtr> Ratioppineg;
-  map<string, Scatter2DPtr> RatioKpi;
-  map<string, Scatter2DPtr> RatioK0spi;
+	map<string, Estimate1DPtr> RatioPion;
+	map<string, Estimate1DPtr> RatioProt;
+	map<string, Estimate1DPtr> RatioKaon;
+	map<string, Estimate1DPtr> Ratioppipos;
+	map<string, Estimate1DPtr> Ratioppineg;
+  map<string, Estimate1DPtr> RatioKpi;
+  map<string, Estimate1DPtr> RatioK0spi;
 
-	map<string, Scatter2DPtr> hRaa;
+	map<string, Estimate1DPtr> hRaa;
 
 
 	map<string, CounterPtr> sow;
@@ -592,6 +581,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2012_I930463);
+  RIVET_DECLARE_PLUGIN(STAR_2012_I930463);
 
 }

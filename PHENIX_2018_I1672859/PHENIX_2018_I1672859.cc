@@ -18,7 +18,7 @@ class PHENIX_2018_I1672859 : public Analysis {
 public:
 
 	/// Constructor
-	DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2018_I1672859);
+	RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2018_I1672859);
 
 	/// Book histograms and initialise projections before the run
 	void init()
@@ -56,31 +56,31 @@ public:
 		// Histos for ratio plots
  
 		string refname13 = mkAxisCode(13, 1, 1);
- 		const Scatter2D& refdata13 = refData(refname13);
+ 		const Estimate1D& refdata13 = refData(refname13);
 		book(_h["eta_mb"], refname13 + "_eta_mb", refdata13);
 		book(_h["pi0_mb"], refname13 + "_pi0_mb", refdata13);
 		book(_s["eta_over_pi0_mb"], refname13); 
 
 		string refname14 = mkAxisCode(14, 1, 1);
-		const Scatter2D& refdata14 = refData(refname14);
+		const Estimate1D& refdata14 = refData(refname14);
 		book(_h["eta_0p"], refname14 + "_eta_0p", refdata14);
 		book(_h["pi0_0p"], refname14 + "_pi0_0p", refdata14);
 		book(_s["eta_over_pi0_0p"], refname14);
       
 		string refname15 = mkAxisCode(15, 1, 1);
-		const Scatter2D& refdata15 = refData(refname15);
+		const Estimate1D& refdata15 = refData(refname15);
 		book(_h["eta_20p"], refname15 + "_eta_20p", refdata15);
 		book(_h["pi0_20p"], refname15 + "_pi0_20p", refdata15);
 		book(_s["eta_over_pi0_20p"], refname15);
       
 		string refname16 = mkAxisCode(16, 1, 1);
-		const Scatter2D& refdata16 = refData(refname16);
+		const Estimate1D& refdata16 = refData(refname16);
 		book(_h["eta_40p"], refname16 + "_eta_40p", refdata16);
 		book(_h["pi0_40p"], refname16 + "_pi0_40p", refdata16);
 		book(_s["eta_over_pi0_40p"], refname16);
       
 		string refname17 = mkAxisCode(17, 1, 1);
-		const Scatter2D& refdata17 = refData(refname17);
+		const Estimate1D& refdata17 = refData(refname17);
 		book(_h["eta_60p"], refname17 + "_eta_60p", refdata17);
 		book(_h["pi0_60p"], refname17 + "_pi0_60p", refdata17);
 		book(_s["eta_over_pi0_60p"], refname17);
@@ -88,103 +88,103 @@ public:
 		//RAB plots
       
 		string refname18 = mkAxisCode(18, 1, 1);
-		const Scatter2D& refdata18 = refData(refname18);
+		const Estimate1D& refdata18 = refData(refname18);
 		book(_h["CuAu_minbias_pi0"], refname18 + "_CuAu_minbias", refdata18);
 		book(_h["pp_pi0_minbias"], refname18 + "_pp_minbias", refdata18);
 		book(_s["R_AB_pi0_minbias"], refname18);
 
 		string refname19 = mkAxisCode(19, 1, 1);
-		const Scatter2D& refdata19 = refData(refname19);
+		const Estimate1D& refdata19 = refData(refname19);
 		book(_h["CuAu_0020_pi0"], refname19 + "_CuAu_0020", refdata19);
 		book(_h["pp_pi0_0020"], refname19 + "_pp", refdata19);
 		book(_s["R_AB_pi0_0020"], refname19);
 
 		string refname20 = mkAxisCode(20, 1, 1);
-		const Scatter2D& refdata20 = refData(refname20);
+		const Estimate1D& refdata20 = refData(refname20);
 		book(_h["CuAu_2040_pi0"], refname20 + "_CuAu_2040", refdata20);
 		book(_h["pp_pi0_2040"], refname20 + "_pp", refdata20);
 		book(_s["R_AB_pi0_2040"], refname20);
 
 		string refname21 = mkAxisCode(21, 1, 1);
-		const Scatter2D& refdata21 = refData(refname21);
+		const Estimate1D& refdata21 = refData(refname21);
 		book(_h["CuAu_4060_pi0"], refname21 + "_CuAu_4060", refdata21);
 		book(_h["pp_pi0_4060"], refname21 + "_pp", refdata21);
 		book(_s["R_AB_pi0_4060"], refname21);
 
 		string refname22 = mkAxisCode(22, 1, 1);
-		const Scatter2D& refdata22 = refData(refname22);
+		const Estimate1D& refdata22 = refData(refname22);
 		book(_h["CuAu_6090_pi0"], refname22 + "_CuAu_6090", refdata22);
 		book(_h["pp_pi0_6090"], refname22 + "_pp", refdata22);
 		book(_s["R_AB_pi0_6090"], refname22);
 
 		string refname23 = mkAxisCode(23, 1, 1);
-		const Scatter2D& refdata23 = refData(refname23);
+		const Estimate1D& refdata23 = refData(refname23);
 		book(_h["CuAu_minbias_eta"], refname23 + "_CuAu_minbias", refdata23);
 		book(_h["pp_eta_minbias"], refname23 + "_pp", refdata23);
 		book(_s["R_AB_eta_minbias"], refname23);
 
 		string refname24 = mkAxisCode(24, 1, 1);
-		const Scatter2D& refdata24 = refData(refname24);
+		const Estimate1D& refdata24 = refData(refname24);
 		book(_h["CuAu_0020_eta"], refname24 + "_CuAu_0020", refdata24);
 		book(_h["pp_eta_0020"], refname24 + "_pp", refdata24);
 		book(_s["R_AB_eta_0020"], refname24);
 
 		string refname25 = mkAxisCode(25, 1, 1);
-		const Scatter2D& refdata25 = refData(refname25);
+		const Estimate1D& refdata25 = refData(refname25);
 		book(_h["CuAu_2040_eta"], refname25 + "_CuAu_2040", refdata25);
 		book(_h["pp_eta_2040"], refname25 + "_pp", refdata25);
 		book(_s["R_AB_eta_2040"], refname25);
 
 		string refname26 = mkAxisCode(26, 1, 1);
-		const Scatter2D& refdata26 = refData(refname26);
+		const Estimate1D& refdata26 = refData(refname26);
 		book(_h["CuAu_4060_eta"], refname26 + "_CuAu_4060", refdata26);
 		book(_h["pp_eta_4060"], refname26 + "_pp", refdata26);
 		book(_s["R_AB_eta_4060"], refname26);
 
 		string refname27 = mkAxisCode(27, 1, 1);
-		const Scatter2D& refdata27 = refData(refname27);
+		const Estimate1D& refdata27 = refData(refname27);
 		book(_h["CuAu_6090_eta"], refname27 + "_CuAu_6090", refdata27);
 		book(_h["pp_eta_6090"], refname27 + "_pp", refdata27);
 		book(_s["R_AB_eta_6090"], refname27);
 
 		string refname42 = mkAxisCode(42, 1, 1);
-		const Scatter2D& refdata42 = refData(refname42);
+		const Estimate1D& refdata42 = refData(refname42);
 		book(_h["AuAu_2030_pi0"], refname42 + "_AuAu_2030", refdata42);
 		book(_h["pp_pi0_2030"], refname42 + "_pp", refdata42);
 		book(_s["R_AB_pi0_2030_AuAu"], refname42);
 
 		string refname43 = mkAxisCode(43, 1, 1);
-		const Scatter2D& refdata43 = refData(refname43);
+		const Estimate1D& refdata43 = refData(refname43);
 		book(_h["CuCu_0010_pi0"], refname43 + "_CuCu_0010", refdata43);
 		book(_h["pp_pi0_0010"], refname43 + "_pp", refdata43);
 		book(_s["R_AB_pi0_0010_CuCu"], refname43);
 
 		string refname44 = mkAxisCode(44, 1, 1);
-		const Scatter2D& refdata44 = refData(refname44);
+		const Estimate1D& refdata44 = refData(refname44);
 		book(_h["AuAu_4050_pi0"], refname44 + "_AuAu_4050", refdata44);
 		book(_h["pp_pi0_4050"], refname44 + "_pp", refdata44);
 		book(_s["R_AB_pi0_4050_AuAu"], refname44);
 
 		string refname45 = mkAxisCode(45, 1, 1);
-		const Scatter2D& refdata45 = refData(refname45);
+		const Estimate1D& refdata45 = refData(refname45);
 		book(_h["CuAu_pi0_int5"], refname45 + "_CuAu_int5", refdata45);
 		book(_h["pp_pi0_int5_CuAu"], refname45 + "pp", refdata45);
 		book(_s["R_AB_pi0_int5_CuAu"], refname45);
 
 		string refname46 = mkAxisCode(46, 1, 1);
-		const Scatter2D& refdata46 = refData(refname46);
+		const Estimate1D& refdata46 = refData(refname46);
 		book(_h["AuAu_pi0_int5"], refname46 + "_AuAu_int5", refdata46);
 		book(_h["pp_pi0_int5_AuAu"], refname46 + "pp", refdata46);
 		book(_s["R_AB_pi0_int5_AuAu"], refname46);
 
 		string refname47 = mkAxisCode(47, 1, 1);
-		const Scatter2D& refdata47 = refData(refname47);
+		const Estimate1D& refdata47 = refData(refname47);
 		book(_h["CuAu_pi0_int10"], refname47 + "_CuAu_int10", refdata47);
 		book(_h["pp_pi0_int10_CuAu"], refname47 + "pp", refdata47);
 		book(_s["R_AB_pi0_int10_CuAu"], refname47);
 
 		string refname48 = mkAxisCode(48, 1, 1);
-		const Scatter2D& refdata48 = refData(refname48);
+		const Estimate1D& refdata48 = refData(refname48);
 		book(_h["AuAu_pi0_int10"], refname48 + "_AuAu_int10", refdata48);
 		book(_h["pp_pi0_int10_AuAu"], refname48 + "pp", refdata48);
 		book(_s["R_AB_pi0_int10_AuAu"], refname48);
@@ -223,7 +223,7 @@ public:
 	{
 
 		const ParticlePair& beam = beams();
-		const UnstableParticles& usp = applyProjection<UnstableParticles>(event, "UFS");
+		const UnstableParticles& usp = apply<UnstableParticles>(event, "UFS");
 		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
 		const double c = cent();
       
@@ -235,7 +235,7 @@ public:
             	if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
 			}
 
-			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212) collSys = pp;
+			else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
 			{
 				float NN = 1.;
             	if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
@@ -624,21 +624,21 @@ public:
 
 		//RAB normalization by TAb Nuclear overlap 
 
-		_s["R_AB_pi0_minbias"]->scaleY(1./TAB[0]);
-		_s["R_AB_pi0_0020"]->scaleY(1./TAB[3]);
-		_s["R_AB_pi0_2040"]->scaleY(1./TAB[4]);
-		_s["R_AB_pi0_4060"]->scaleY(1./TAB[5]);
-		_s["R_AB_pi0_6090"]->scaleY(1./TAB[6]);
+		_s["R_AB_pi0_minbias"]->scale(1./TAB[0]);
+		_s["R_AB_pi0_0020"]->scale(1./TAB[3]);
+		_s["R_AB_pi0_2040"]->scale(1./TAB[4]);
+		_s["R_AB_pi0_4060"]->scale(1./TAB[5]);
+		_s["R_AB_pi0_6090"]->scale(1./TAB[6]);
 
 
-		_s["R_AB_eta_minbias"]->scaleY(1./TAB[0]);
-		_s["R_AB_eta_0020"]->scaleY(1./TAB[3]);
-		_s["R_AB_eta_2040"]->scaleY(1./TAB[4]);
-		_s["R_AB_eta_4060"]->scaleY(1./TAB[5]);
-		_s["R_AB_eta_4060"]->scaleY(1./TAB[6]);
+		_s["R_AB_eta_minbias"]->scale(1./TAB[0]);
+		_s["R_AB_eta_0020"]->scale(1./TAB[3]);
+		_s["R_AB_eta_2040"]->scale(1./TAB[4]);
+		_s["R_AB_eta_4060"]->scale(1./TAB[5]);
+		_s["R_AB_eta_4060"]->scale(1./TAB[6]);
 
-		_s["R_AB_pi0_2030_AuAu"]->scaleY(1./TAB[7]);
-		_s["R_AB_pi0_4050_AuAu"]->scaleY(1./TAB[8]);
+		_s["R_AB_pi0_2030_AuAu"]->scale(1./TAB[7]);
+		_s["R_AB_pi0_4050_AuAu"]->scale(1./TAB[8]);
 
 /*
 
@@ -716,7 +716,7 @@ public:
 	map<string, Histo1DPtr> _h;
 	map<string, Profile1DPtr> _p;
 	map<string, CounterPtr> sow;
-	map<string, Scatter2DPtr> _s;
+	map<string, Estimate1DPtr> _s;
 	string beamOpt = "NONE";
 	enum CollisionSystem {pp, AuAu200, CuCu200, CuAu200};
 	CollisionSystem collSys;
@@ -725,6 +725,6 @@ public:
 
 };
 
-	DECLARE_RIVET_PLUGIN(PHENIX_2018_I1672859);
+	RIVET_DECLARE_PLUGIN(PHENIX_2018_I1672859);
 
 }

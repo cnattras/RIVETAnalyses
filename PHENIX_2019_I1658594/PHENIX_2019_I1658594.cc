@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -21,7 +20,6 @@ namespace Rivet {
       pair<double,double> _associatedRange;
 	pair<int,int> _RxnPlaneAngleRange;
       vector<int> _pid;
-	int _RxnPlaneAngle = 0;
 	int _eventPlaneMethod = 0;
       bool _noCentrality = false;
       bool _noAssoc = false;
@@ -186,7 +184,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2019_I1658594);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2019_I1658594);
 
 
     /// @name Analysis methods
@@ -205,13 +203,13 @@ namespace Rivet {
 	            if(std::isnan(minValue))
 	            {
 	                minValue = bin.sumW();
-	                binWidth = bin.width();
+	                binWidth = bin.xWidth();
 	                minValueEntries = bin.numEntries();
 	            }
-	            if(bin.sumW()/bin.width() < minValue/binWidth)
+	            if(bin.sumW()/bin.xWidth() < minValue/binWidth)
 	            {
 	                minValue = bin.sumW();
-	                binWidth = bin.width();
+	                binWidth = bin.xWidth();
 	                minValueEntries = bin.numEntries();
 	            }
         	}
@@ -223,10 +221,10 @@ namespace Rivet {
 
 	        for(auto &bin : hist.bins())
 	        {
-	            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+	            hist.fill(bin.xMid(), (minValue*bin.xWidth())/(minValueEntries*binWidth));
 	        }
 
-	        *histo = YODA::subtract(*histo, hist);
+	        *histo -= hist;
 
 	        return histo;
 	}
@@ -437,7 +435,7 @@ namespace Rivet {
 
 
 	//initialize iterators and varibles
-	int minCent=0, maxCent=0, minPlane=0, maxPlane=0, a=0, e=0, iterator=1;
+	int minCent=0, maxCent=0, a=0, iterator=1;
 	float min_pT=0, max_pT=0, min_pA=0, max_pA=0, minV=0, maxV=0, b=0, c=0, d=0;
 	char corrName[200], bookName[200], corrNameTrigger[200];
 /*
@@ -1658,9 +1656,9 @@ namespace Rivet {
 		if(bin.numEntries() > 0)
                     {
                          double RxPPosRes;
-                         if(bin.mean()>0)
+                         if(bin.xMean()>0)
                          {
-                                 RxPPosRes = sqrt(bin.mean());
+                                 RxPPosRes = sqrt(bin.xMean());
                                  double chiRxPPos = CalculateChi(RxPPosRes);
         			 double res = Resolution(sqrt(2)*chiRxPPos);
                                  EPres[centBin] = res;
@@ -1679,10 +1677,10 @@ namespace Rivet {
 		if(bin.numEntries() > 0)
                     {
                          double RxPPosRes;
-			 if(bin.mean()>0)
+			 if(bin.xMean()>0)
                          {
 
-                                 RxPPosRes = sqrt(bin.mean());
+                                 RxPPosRes = sqrt(bin.xMean());
                                  double chiRxPPos = CalculateChi(RxPPosRes);
         			 double res = Resolution(sqrt(2)*chiRxPPos);
                                  EPres3[centBin] = res;
@@ -1701,9 +1699,9 @@ namespace Rivet {
 		if(bin.numEntries() > 0)
                     {
                         double RxPPosRes;
-			if (bin.mean()>0)
+			if (bin.xMean()>0)
                         {
-                                RxPPosRes = sqrt(bin.mean());
+                                RxPPosRes = sqrt(bin.xMean());
                                 double chiRxPPos = CalculateChi(RxPPosRes);
                                 double res = Resolution(sqrt(2)*chiRxPPos);
                                 EPres4[centBin] = res;
@@ -1717,19 +1715,19 @@ namespace Rivet {
             for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
             {
                     string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    if(EPres[icent]>0) _p[v2string]->scaleY(1./EPres[icent]);
+                    if(EPres[icent]>0) _p[v2string]->scale(1, 1./EPres[icent]);
                     else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
 
                     string v3string = "v3_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    if(EPres3[icent]>0) _p[v3string]->scaleY(1./EPres3[icent]);
+                    if(EPres3[icent]>0) _p[v3string]->scale(1, 1./EPres3[icent]);
                     else throw UserError("EPres3[icent] is less than/equal to 0, scaling not occuring");
 
                     string v4string = "v4_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    if(EPres4[icent]>0) _p[v4string]->scaleY(1./EPres4[icent]);
+                    if(EPres4[icent]>0) _p[v4string]->scale(1, 1./EPres4[icent]);
                     else throw UserError("EPres4[icent] is less than/equal to 0, scaling not occuring");
 
                     string v4ep2string = "v4ep2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-                    if(EPres[icent]>0) _p[v4ep2string]->scaleY(1./EPres[icent]);
+                    if(EPres[icent]>0) _p[v4ep2string]->scale(1, 1./EPres[icent]);
                     else throw UserError("EPres[icent] is less than/equal to 0, scaling not occuring");
 
             }
@@ -1753,7 +1751,7 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     map<string, CounterPtr> _c;
     std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50.};
     //@}
@@ -1766,6 +1764,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2019_I1658594);
+  RIVET_DECLARE_PLUGIN(PHENIX_2019_I1658594);
 
 }

@@ -42,7 +42,7 @@ namespace Rivet {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.3
       // muons and neutrinos are excluded from the clustering
-      FastJets jetfs(fs, FastJets::ANTIKT, 0.3, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+      FastJets jetfs(fs, JetAlg::ANTIKT, 0.3, JetMuons::NONE, JetInvisibles::NONE);
       declare(jetfs, "jets");
 
 
@@ -171,10 +171,8 @@ namespace Rivet {
               if (sdJet.pieces().size() < 2) continue;
 
               // Calculate zg
-              const fastjet::PseudoJet& subjet1 = sdJet.pieces()[0];
-              const fastjet::PseudoJet& subjet2 = sdJet.pieces()[1];
-              double pt1 = subjet1.pt();
-              double pt2 = subjet2.pt();
+              double pt1 = sdJet.pieces()[0].pt();
+              double pt2 = sdJet.pieces()[1].pt();
               double zg = std::min(pt1, pt2) / (pt1 + pt2);
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 h["zg910"]->fill(zg);

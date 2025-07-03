@@ -21,10 +21,7 @@ class PHENIX_2016_I1394433 : public Analysis {
   public:
 
     /// Constructor
-    //DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2016_I1394433);
-
-
-    PHENIX_2016_I1394433() : Analysis("PHENIX_2016_I1394433") { }
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2016_I1394433);
 
 
     /// @name Analysis methods
@@ -153,12 +150,6 @@ class PHENIX_2016_I1394433 : public Analysis {
 
     void analyze(const Event& event)
     {
-        const ParticlePair& beam = beams();
-        
-        
-        //track beams
-
-        
         int nchcounter = 0;  
         double sumET = 0.; 
         
@@ -174,10 +165,7 @@ class PHENIX_2016_I1394433 : public Analysis {
         if (c > 60) vetoEvent;
         
         //loop over particles to get total charged particles & Et
-        for(const Particle& p : chargedParticles)
-        {
-                nchcounter ++;
-        }
+        nchcounter = chargedParticles.size();
 
         for(const Particle& part : fsParticles)
         {

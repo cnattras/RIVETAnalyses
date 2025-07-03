@@ -3,7 +3,6 @@
 #include "Rivet/Projections/PrimaryParticles.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Tools/Cuts.hh"
@@ -24,7 +23,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2009_I815217);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2009_I815217);
 
 
     /// @name Analysis methods
@@ -105,6 +104,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2009_I815217);
+  RIVET_DECLARE_PLUGIN(PHENIX_2009_I815217);
 
 }

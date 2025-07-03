@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "Rivet/Projections/UnstableParticles.hh"
@@ -17,7 +16,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2013_I1127262);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2013_I1127262);
 
     //adding a function to get the acc of the event plant dectector
     //so that reaction plant dependency can be calculated
@@ -79,7 +78,7 @@ namespace Rivet {
 	}
     }
 
-    /*void FillRAA(Scatter2DPtr RAAHisto, const Particles& particles, double eventPlane, int n)
+    /*void FillRAA(Estimate1DPtr RAAHisto, const Particles& particles, double eventPlane, int n)
     {
         for(const Particle &p : particles){
                 RAAHisto->fill(p.pT()/GeV, cos(n*(p.phi() - eventPlane)));
@@ -225,9 +224,6 @@ namespace Rivet {
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
-      const FinalState fs(Cuts::pT > 1*GeV && Cuts::abseta < 0.35);
-      declare(fs, "fs");
-
       const UnstableParticles ufs(Cuts::abseta < 0.35 && Cuts::pT > 1*GeV && Cuts::pid == 111);
       declare(ufs, "ufs");
 
@@ -246,7 +242,7 @@ namespace Rivet {
       for(int icent = 0; icent < 6; icent++)
       {
               string refnameCent = mkAxisCode(4, 1, icent+1);
-              const Scatter2D& refdataCent = refData(refnameCent);
+              const Estimate1D& refdataCent = refData(refnameCent);
               book(_h["RAA_pt_AuAu" + to_string(icent)], refnameCent + "_AuAu" + to_string(icent), refdataCent);
               book(_c["sow_AuAu" + to_string(icent)], "sow_AuAu" + to_string(icent));
 
@@ -255,17 +251,16 @@ namespace Rivet {
               for(int idelta = 0; idelta < 6; idelta++)
               {
                       string refname = mkAxisCode(idelta+4, 1, icent+1);
-                      //const Scatter2D& refdata = refData(refname);
+                      //const Estimate1D& refdata = refData(refname);
                       book(_s["RAA_pt_" + to_string(idelta+4) + "1" + to_string(icent+1)], refname);
               }
 
       }
 
       string refnamePP = mkAxisCode(4, 1, 1);
-      const Scatter2D& refdataPP = refData(refnamePP);
+      const Estimate1D& refdataPP = refData(refnamePP);
       book(_h["RAA_pt_pp"], refnamePP + "_pp", refdataPP);
       book(_c["sow_pp"], "sow_pp");
-      binRef = YODA::Histo1D(refdataPP);
 
       for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
       {
@@ -273,7 +268,7 @@ namespace Rivet {
             book(_p[v2string], v2string, refdataPP);
       }
 
-      for(unsigned int ipt = 0; ipt < binRef.numBins(); ipt++)
+      for(unsigned int ipt = 0; ipt < refdataPP.numBins(); ipt++)
       {
               for(int idelta = 0; idelta < 6; idelta++)
               {
@@ -308,7 +303,6 @@ namespace Rivet {
               if (fuzzyEquals(sqrtS()/GeV, 200*nNucleons, 5)) CollSystem += "200GeV";
       }
 
-      const FinalState& fs = apply<FinalState>(event, "fs");
       const UnstableParticles& ufs = apply<UnstableParticles>(event, "ufs");
       const Particles particles = ufs.particles();
 
@@ -351,10 +345,10 @@ namespace Rivet {
               for(const auto& p : particles)
               {
                       int n = GetNDeltaPhi(evPPosNeg, p);
-                      int ptbin = binRef.binIndexAt(p.pt()/GeV);
-                      if(ptbin >= 0)
+                      int ptbin = binRef.indexAt(p.pt()/GeV);
+                      if(ptbin >= 1)
                       {
-                              _c["DeltaPhi" + to_string(n) + "_pt" + to_string(ptbin)  + "_cent" + to_string(int(floor(c/10.)))]->fill();
+                              _c["DeltaPhi" + to_string(n) + "_pt" + to_string(ptbin-1)  + "_cent" + to_string(int(floor(c/10.)))]->fill();
                       }
                       _h["RAA_pt_AuAu" + to_string(int(floor(c/10.)))]->fill(p.pT()/GeV);
               }
@@ -384,8 +378,8 @@ namespace Rivet {
       {
 	if(bin.numEntries() > 0)
         {
-                if(bin.mean() <=0) continue;
-		double RxPPosRes = sqrt(bin.mean());
+                if(bin.xMean() <=0) continue;
+		double RxPPosRes = sqrt(bin.xMean());
 		double chiRxPPos = CalculateChi(RxPPosRes);
 		double res = Resolution(sqrt(2)*chiRxPPos);
 		EPres[centBin] = res;
@@ -397,7 +391,7 @@ namespace Rivet {
       for(unsigned int icent = 0; icent < v2centBins.size()-1; icent++)
       {
                string v2string = "v2_cent" + Form(v2centBins[icent], 0) + Form(v2centBins[icent+1], 0);
-	       if(EPres[icent] > 0) _p[v2string]->scaleY(1./EPres[icent]);
+	       if(EPres[icent] > 0) _p[v2string]->scale(1, 1./EPres[icent]);
       }
 
       _h["RAA_pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
@@ -418,14 +412,14 @@ namespace Rivet {
               for(int icent = 0; icent < 6; icent++)
               {
                       divide(_h["RAA_pt_AuAu" + to_string(icent)], _h["RAA_pt_pp"], _s["RAA_pt_" + to_string(idelta+4) + "1" + to_string(icent+1)]);
-                      for(unsigned int ipoint = 0; ipoint < _s["RAA_pt_" + to_string(idelta+4) + "1" + to_string(icent+1)]->numPoints(); ipoint++)
+                      for(unsigned int ipoint = 0; ipoint < _s["RAA_pt_" + to_string(idelta+4) + "1" + to_string(icent+1)]->numBins(); ipoint++)
                       {
                               double sumDeltaPhi = 0.;
                               for(int jdelta = 0; jdelta < 6; jdelta++)
                               {
                                       sumDeltaPhi += (1/6.)*_c["DeltaPhi" + to_string(jdelta) + "_pt" + to_string(ipoint) + "_cent" + to_string(icent)]->effNumEntries();
                               }
-                              if(sumDeltaPhi > 0.) _s["RAA_pt_" + to_string(idelta+4) + "1" + to_string(icent+1)]->point(ipoint).scaleY(_c["DeltaPhi" + to_string(idelta) + "_pt" + to_string(ipoint) + "_cent" + to_string(icent)]->effNumEntries()/sumDeltaPhi);
+                              if(sumDeltaPhi > 0.) _s["RAA_pt_" + to_string(idelta+4) + "1" + to_string(icent+1)]->bin(ipoint+1).scale(_c["DeltaPhi" + to_string(idelta) + "_pt" + to_string(ipoint) + "_cent" + to_string(icent)]->effNumEntries()/sumDeltaPhi);
                       }
               }
 
@@ -440,7 +434,7 @@ namespace Rivet {
     //@{
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     map<string, CounterPtr> _c;
     std::vector<double> v2centBins = {0., 10., 20., 30., 40., 50., 60.};
     YODA::Histo1D binRef;
@@ -450,6 +444,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2013_I1127262);
+  RIVET_DECLARE_PLUGIN(PHENIX_2013_I1127262);
 
 }

@@ -123,7 +123,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2016_I1442357);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2016_I1442357);
 
 
  bool isSameParticle(const Particle& p1, const Particle& p2)
@@ -140,13 +140,13 @@ namespace Rivet {
     bool isSecondary(Particle p)
     {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-             p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-             p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-             p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-             p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-             p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-             p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+             p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+             p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+             p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+             p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+             p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+             p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
         return true;
         else return false;
         
@@ -228,7 +228,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     {
         double maxDeltaEta = 2.;
         
-        int binEta = hist.binIndexAt(deltaEta);
+        int binEta = hist.indexAt(deltaEta);
         
         if(binEta < 0)
         {
@@ -268,13 +268,13 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     {
         double integral = 0.;
         
-        if(hist.binIndexAt(vmin) < 0 || hist.binIndexAt(vmax) < 0)
+        if(hist.indexAt(vmin) < 0 || hist.indexAt(vmax) < 0)
         {
             MSG_ERROR("Out of range!");
             return 0.;
         }
         
-        for(int i = hist.binIndexAt(vmin); i < hist.binIndexAt(vmax); i++)
+        for(int i = hist.indexAt(vmin); i < hist.indexAt(vmax); i++)
         {
             integral += hist.bin(i).sumW();
         }
@@ -332,7 +332,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
       declare(pfsTrig, "PFSTrig");
       // pi0 also
       
-      const PrimaryParticles primp(pdgPi0, Cuts::abseta < 1.);
+      const PrimaryParticles primp({111, -111}, Cuts::abseta < 1.);
       declare(primp, "PP");
         
       const PromptFinalState pfs(Cuts::abseta < 1. && Cuts::pid == 22);
@@ -363,7 +363,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
 	b1.SetCentrality(0., 12.);
 	b1.SetTriggerRange(1., 20.);  //pT_trig
 	b1.SetAssociatedRange(1.2, 3.); // zT
-	b1.SetPID(pdgPhoton);
+	b1.SetPID({22});
 	CorrelatorsB.push_back(b1);
 
 	Correlator b2(2);
@@ -371,7 +371,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b2.SetCentrality(0., 12.);
     b2.SetTriggerRange(1., 20.);  //pT_trig
     b2.SetAssociatedRange(1.2, 3.); // zT
-    b2.SetPID(pdgPi0);
+    b2.SetPID({111, -111});
     CorrelatorsB.push_back(b2);
 
 	Correlator b3(3);
@@ -379,7 +379,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b3.SetCentrality(0., 12.);
     b3.SetTriggerRange(1., 20.);  //pT_trig
     b3.SetAssociatedRange(3., 5.); // zT
-    b3.SetPID(pdgPhoton);
+    b3.SetPID({22});
     CorrelatorsB.push_back(b3);
 
 	Correlator b4(4);
@@ -387,7 +387,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b4.SetCentrality(0., 12.);
     b4.SetTriggerRange(1., 20.);  //pT_trig
     b4.SetAssociatedRange(3., 5.); // zT
-    b4.SetPID(pdgPi0);
+    b4.SetPID({111, -111});
     CorrelatorsB.push_back(b4);
 
 	Correlator b5(5);
@@ -395,7 +395,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b5.SetNoCentrality();
     b5.SetTriggerRange(1., 20.);  //pT_trig
     b5.SetAssociatedRange(1.2, 3.); // zT
-    b5.SetPID(pdgPhoton);
+    b5.SetPID({22});
     CorrelatorsB.push_back(b5);
 
 	Correlator b6(6);
@@ -403,7 +403,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b6.SetNoCentrality();
     b6.SetTriggerRange(1., 20.);  //pT_trig
     b6.SetAssociatedRange(1.2, 3.); // zT
-    b6.SetPID(pdgPi0);
+    b6.SetPID({111, -111});
     CorrelatorsB.push_back(b6);
 
 	Correlator b7(7);
@@ -411,7 +411,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b7.SetNoCentrality();
     b7.SetTriggerRange(1., 20.);  //pT_trig
     b7.SetAssociatedRange(3., 5.); // zT
-    b7.SetPID(pdgPhoton);
+    b7.SetPID({22});
     CorrelatorsB.push_back(b7);
 
 	Correlator b8(8);
@@ -419,7 +419,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     b8.SetNoCentrality();
     b8.SetTriggerRange(1., 20.);  //pT_trig
     b8.SetAssociatedRange(3., 5.); // zT
-    b8.SetPID(pdgPi0);
+    b8.SetPID({111, -111});
     CorrelatorsB.push_back(b8);
     
     //This will book the histograms of figure 1
@@ -436,7 +436,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     c9.SetCentrality(0., 12.);
     c9.SetTriggerRange(1., 20.);  //pT_trig
     c9.SetAssociatedRange(1.2, 999.); // zT
-    c9.SetPID(pdgPi0);
+    c9.SetPID({111, -111});
     CorrelatorsPi0.push_back(c9);
 
 	Correlator c10(10);	//12,1 & 14,1 are the same
@@ -444,7 +444,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     c10.SetNoCentrality();
     c10.SetTriggerRange(1., 20.);  //pT_trig
     c10.SetAssociatedRange(1.2, 999.); // zT
-    c10.SetPID(pdgPi0);
+    c10.SetPID({111, -111});
     CorrelatorsPi0.push_back(c10);
     
     for(Correlator& corr : CorrelatorsPi0)
@@ -453,8 +453,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
         book(_h["0" + to_string(corr.GetIndex()+2) + "11"], corr.GetIndex(), 1, 1);
         
         string refname = mkAxisCode(corr.GetIndex(), 1, 1);
-        const Histo1D& refdata = refData(refname);
-        for(auto &bin : refdata.bins())
+        for(auto &bin : refData(refname).bins())
         {
             book(_DeltaPhizT["0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, -M_PI/2., 3.*M_PI/2.);
         }
@@ -468,7 +467,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     c11.SetCentrality(0., 12.);
     c11.SetTriggerRange(1., 20.);  //pT_trig
     c11.SetAssociatedRange(1.2, 999.); // zT
-    c11.SetPID(pdgPhoton);
+    c11.SetPID({22});
     CorrelatorsPhoton.push_back(c11);
 
 	Correlator c12(14);	//18,1 is the same
@@ -476,7 +475,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     c12.SetNoCentrality();
     c12.SetTriggerRange(1., 20.);  //pT_trig
     c12.SetAssociatedRange(1.2, 999.); // zT
-    c12.SetPID(pdgPhoton);
+    c12.SetPID({22});
     CorrelatorsPhoton.push_back(c12);
     
     for(Correlator& corr : CorrelatorsPhoton)
@@ -484,8 +483,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
         book(_h["0" + to_string(corr.GetIndex()) + "11"], corr.GetIndex(), 1, 1);
         
         string refname = mkAxisCode(corr.GetIndex(), 1, 1);
-        const Histo1D& refdata = refData(refname);
-        for(auto &bin : refdata.bins())
+        for(auto &bin : refData(refname).bins())
         {
             book(_DeltaPhizT["0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax())], "DeltaPhi_0" + to_string(corr.GetIndex()) + "11zT_" + to_string(bin.xMin()) + "_" + to_string(bin.xMax()), 24, -M_PI/2., 3.*M_PI/2);
         }
@@ -626,8 +624,6 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
         //cout<<"We are analyzing"<<endl; // NEW 7/15/20
 
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      const PromptFinalState& pfsTrig = apply<PromptFinalState>(event, "PFSTrig");
-      const ChargedFinalState& cfsTrig = apply<ChargedFinalState>(event, "CFSTrig");
       
       const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
       const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
@@ -731,7 +727,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
             for(Correlator& corr : CorrelatorsB)
             {
                 if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
-                if(!corr.CheckPID(pdgPhoton)) continue;
+                if(!corr.CheckPID({22})) continue;
                 nTriggers[corr.GetIndex()]++;
             }
             
@@ -756,7 +752,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
                 
                 for(Correlator& corr : CorrelatorsB)
                 {
-                    if(!corr.CheckPID(pdgPhoton)) continue;
+                    if(!corr.CheckPID({22})) continue;
                     if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
                 
                     if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
@@ -766,7 +762,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
 
                 for(Correlator& corr : CorrelatorsPhoton)
                 {
-                    if(!corr.CheckPID(pdgPhoton)) continue;
+                    if(!corr.CheckPID({22})) continue;
                     if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
                     if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
                 
@@ -795,7 +791,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
             for(Correlator& corr : CorrelatorsB)
             {
                 if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
-                if(!corr.CheckPID(pdgPi0)) continue;
+                if(!corr.CheckPID({111, -111})) continue;
                 nTriggers[corr.GetIndex()]++;
             }
             
@@ -822,7 +818,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
                 for(Correlator& corr : CorrelatorsB)
                 {
                     if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
-                    if(!corr.CheckPID(pdgPi0)) continue;
+                    if(!corr.CheckPID({111, -111})) continue;
                     if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
                         
                     _h["0" + to_string(corr.GetIndex()) + "11"]->fill(dPhi);
@@ -831,7 +827,7 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
                 for(Correlator& corr : CorrelatorsPi0)
                 {
                     if(!corr.CheckConditions(SysAndEnergy, centr, pTrig.pt()/GeV)) continue;
-                    if(!corr.CheckPID(pdgPi0)) continue;
+                    if(!corr.CheckPID({111, -111})) continue;
                     if(!corr.CheckAssociatedRange(pAssoc.pt()/GeV)) continue;
                 
                     double zT = pAssoc.pT()/pTrig.pT();
@@ -896,13 +892,11 @@ double CalculateVn(YODA::Histo1D& hist, int nth)
     vector<Correlator> CorrelatorsPhoton;
     vector<Correlator> CorrelatorsB;
     
-    initializer_list<int> pdgPi0={111, -111};
-    initializer_list<int> pdgPhoton={22};
     enum CollisionSystem {pp, AuAu};
     CollisionSystem collSys;
     string SysAndEnergy = "";
     string beamOpt;
 
 };
-  DECLARE_RIVET_PLUGIN(STAR_2016_I1442357);
+  RIVET_DECLARE_PLUGIN(STAR_2016_I1442357);
 }

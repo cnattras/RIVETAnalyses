@@ -22,15 +22,15 @@ namespace Rivet {
         double integral = 0.;
         double entries = 0.;
         
-        if(vmin < hist.bin(0).xMin() || vmax > hist.bin((int)hist.numBins()-1).xMax())
+        if(vmin < hist.bin(1).xMin() || vmax > hist.bin((int)hist.numBins()).xMax())
         {
             MSG_ERROR("Out of range!");
             return 0.;
         }
                 
-        int bmin = hist.binIndexAt(vmin);
-        int bmax = hist.binIndexAt(vmax);
-        if(bmax < 0) bmax = (int)hist.numBins()-1;
+        int bmin = hist.indexAt(vmin);
+        int bmax = hist.indexAt(vmax);
+        if(bmax < 0) bmax = (int)hist.numBins();
         
         for(int i = bmin; i <= bmax; i++)
         {
@@ -117,7 +117,7 @@ namespace Rivet {
       book(_histos["dphi_p_6_10"], "dphi_p_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["deta_p_6_10"], "deta_p_6_10", 60, -1.5, 1.5);
       // Yield
-      book(_histos["yield_p"], "yield_p", {1, 1.5, 2, 3, 4, 5, 6, 10});
+      book(_histos["yield_p"], "yield_p", {1., 1.5, 2., 3., 4., 5., 6., 10.});
 
 
       // Booking pion histos
@@ -143,7 +143,7 @@ namespace Rivet {
       book(_histos["dphi_pi_6_10"], "dphi_pi_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["deta_pi_6_10"], "deta_pi_6_10", 60, -1.5, 1.5);
       // Yield
-      book(_histos["yield_pi"], "yield_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
+      book(_histos["yield_pi"], "yield_pi", {1., 1.5, 2., 3., 4., 5., 6., 10.});
 
 
       // Booking Kaon histos
@@ -169,7 +169,7 @@ namespace Rivet {
       book(_histos["dphi_k_6_10"], "dphi_k_6_10", 48 , - 3.14 / 2, 3 * 3.14 / 2);
       book(_histos["deta_k_6_10"], "deta_k_6_10", 60, -1.5, 1.5);
       // Yield
-      book(_histos["yield_k"], "yield_k", {1, 1.5, 2, 3, 4, 5, 6, 10});
+      book(_histos["yield_k"], "yield_k", {1., 1.5, 2., 3., 4., 5., 6., 10.});
 
       // Book ratios
       book(_scatters["ratio_k_to_pi"], "ratio_k_to_pi", {1, 1.5, 2, 3, 4, 5, 6, 10});
@@ -378,9 +378,9 @@ namespace Rivet {
       //+++Find minimum value+++//
         if (hist.first.find("dphi_") != std::string::npos) { // Check if histogram is for dphi_pi
             // Find the minimum value in the histogram bins
-            double min_value = hist.second->bin(0).height(); // Initialize with the height of the first bin
+            double min_value = hist.second->bin(0).sumW(); // Initialize with the height of the first bin
             for (size_t i = 1; i < 35; ++i) {
-                double bin_value = hist.second->bin(i).height();
+                double bin_value = hist.second->bin(i).sumW();
                 if (bin_value < min_value) {
                     min_value = bin_value;
                 }
@@ -391,8 +391,9 @@ namespace Rivet {
           //+++subtract that value from the bin content of each bin+++//
 
           for (size_t i = 0; i < hist.second->numBins(); ++i) {
-            double bin_value = hist.second->bin(i).height();
-            hist.second->bin(i).fillBin(bin_value - min_value, hist.second->bin(i).numEntries());
+            double bin_value = hist.second->bin(i).sumW();
+            double bval = hist.second->bin(i).xMid();
+            hist.second->fill(bval, bin_value - min_value);
           }
     }
   }
@@ -464,14 +465,13 @@ namespace Rivet {
 
 
     // get proton yields
-    char *bins[] = {"1_1.5", "1.5_2", "2_3", "3_4", "4_5", "5_6", "6_10"};
+    vector<string> bins = {"1_1.5", "1.5_2", "2_3", "3_4", "4_5", "5_6", "6_10"};
     float midbin[] = {1.25, 1.75, 2.5, 3.5, 4.5, 5.5, 8};
     for (int i = 0; i<7; i++){
       double entries = 0.;
       char histo_name[100];
-      sprintf(histo_name,"dphi_p_%s",bins[i]);
       double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
-      _histos["yield_p"]->fillBin(_histos["yield_p"]->binIndexAt(midbin[i]), yield, 1);
+      _histos["yield_p"]->fill(midbin[i], yield);
     }
 
 
@@ -479,9 +479,8 @@ namespace Rivet {
     for (int i = 0; i<7; i++){
       double entries = 0.;
       char histo_name[100];
-      sprintf(histo_name,"dphi_pi_%s",bins[i]);
       double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
-      _histos["yield_pi"]->fillBin(_histos["yield_pi"]->binIndexAt(midbin[i]), yield, 1);
+      _histos["yield_pi"]->fill(midbin[i], yield);
     }
 
 
@@ -489,9 +488,8 @@ namespace Rivet {
     for (int i = 0; i<7; i++){
       double entries = 0.;
       char histo_name[100];
-      sprintf(histo_name,"dphi_k_%s",bins[i]);
       double yield = GetYieldInUserRange(*_histos[histo_name], -3.14/2, 3.14/2, entries);
-      _histos["yield_k"]->fillBin(_histos["yield_k"]->binIndexAt(midbin[i]), yield, 1);
+      _histos["yield_k"]->fill(midbin[i], yield);
     }
 
     // get ratios
@@ -512,7 +510,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _histos;
     map<string, Profile1DPtr> _profiles;
     map<string, CounterPtr> _counters;
-    map<string, Scatter2DPtr> _scatters;
+    map<string, Estimate1DPtr> _scatters;
     /// @}
     fastjet::AreaDefinition *fjAreaDef;
 

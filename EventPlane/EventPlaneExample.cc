@@ -20,7 +20,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(EventPlaneExample);
+    RIVET_DEFAULT_ANALYSIS_CTOR(EventPlaneExample);
 
     double GetEventPlanePtWeight(int n, Particles particles)
     {
@@ -468,6 +468,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(EventPlaneExample);
+  RIVET_DECLARE_PLUGIN(EventPlaneExample);
 
 }

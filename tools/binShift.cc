@@ -9,16 +9,16 @@ void binShift(YODA::Histo1D& histogram) {
         double p_low = bins.xMin();
         //Now calculate f_corr
         if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;
         } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / binlist.back().sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
         } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
             float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
             histogram.bin(n).scaleW(f_corr);
             n += 1;

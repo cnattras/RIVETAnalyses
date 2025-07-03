@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -15,14 +14,14 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2009_I793126);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2009_I793126);
 
     bool getDeltaPt(YODA::Histo1D hist, double pT, double &deltaPt) //Antonio function for dividing by pT bin center
        {
            //cout << "pT: " << pT << endl;
            if(pT > hist.xMin() && pT < hist.xMax())
            {
-               deltaPt = hist.bin(hist.binIndexAt(pT)).xMid();
+               deltaPt = hist.binAt(pT).xMid();
                //cout << "DeltapT: " << deltaPt << endl;
                return true;
            }
@@ -436,7 +435,7 @@ namespace Rivet {
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
 
-      Particles fsParticles = applyProjection<FinalState>(event, "fs").particles();
+      Particles fsParticles = apply<FinalState>(event, "fs").particles();
 
       if(beamOpt == "NONE")
       {
@@ -827,6 +826,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2009_I793126);
+  RIVET_DECLARE_PLUGIN(STAR_2009_I793126);
 
 }

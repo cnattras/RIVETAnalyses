@@ -16,27 +16,28 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I777211);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2008_I777211);
 
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-        std::vector<YODA::HistoBin1D> binlist = histogram.bins();
+        const auto& binlist = histogram.bins();
+        const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
-        for (YODA::HistoBin1D bins : binlist) {
+        for (auto& bins : binlist) {
             double p_high = bins.xMax();
             double p_low = bins.xMin();
             //Now calculate f_corr
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].height()/binlist[1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
-            } else if (bins.xMin() == binlist.back().xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].height() / binlist.back().height());
+            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].height() / binlist[n+1].height());
+                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
                 histogram.bin(n).scaleW(f_corr);
                 n += 1;
@@ -54,7 +55,7 @@ namespace Rivet {
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
       string refnameRaa = mkAxisCode(1,1,1);
-      const Scatter2D& refdataRaa =refData(refnameRaa);
+      const Estimate1D& refdataRaa =refData(refnameRaa);
 
       book(hPion0Pt["Pion0Pt_AuAu"], "_" + refnameRaa + "_AuAu", refdataRaa);
       book(hPion0Pt["Pion0Pt_pp"], "_" + refnameRaa + "_pp", refdataRaa);
@@ -88,7 +89,7 @@ namespace Rivet {
       else if (beamOpt == "PP200") collSys = pp;
       else if (beamOpt == "AUAU200") collSys = AuAu200;
 
-      Particles neutralParticles = applyProjection<UnstableParticles>(event,"pi0").particles();
+      Particles neutralParticles = apply<UnstableParticles>(event,"pi0").particles();
 
       if(collSys==pp)
       {
@@ -121,7 +122,7 @@ namespace Rivet {
       hPion0Pt["Pion0Pt_pp"]->scaleW(1./sow["sow_pp"]->sumW());
       
       divide(hPion0Pt["Pion0Pt_AuAu"],hPion0Pt["Pion0Pt_pp"],hRaa);
-      hRaa->scaleY(1./1051.3);
+      hRaa->scale(1./1051.3);
       // Ensure the histograms are not written to output
       /*hPion0Pt["_Pion0Pt_AuAu"]->setPath("/IGNORE");
       hPion0Pt["_Pion0Pt_pp"]->setPath("/IGNORE");*/
@@ -129,7 +130,7 @@ namespace Rivet {
     }
 
     map<string, Histo1DPtr> hPion0Pt;
-    Scatter2DPtr hRaa;
+    Estimate1DPtr hRaa;
     map<string, CounterPtr> sow;
     enum CollisionSystem {NONE, pp, AuAu200};
     CollisionSystem collSys;
@@ -138,6 +139,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2008_I777211);
+  RIVET_DECLARE_PLUGIN(PHENIX_2008_I777211);
 
 }

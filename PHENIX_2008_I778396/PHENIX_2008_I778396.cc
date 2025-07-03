@@ -18,11 +18,6 @@ static const int numTrigPtBins = 4;
 static const float pTTrigBins[] = {2.0,3.0,4.0,5.0,10.0};
 static const int numAssocPtBins = 6;
 static const float pTAssocBins[] = {0.4,1.0,2.0,3.0,4.0,5.0,10.0};
-static const int numCentBins = 5;
-static const float CentBins[] = {0.0,12.0,20.0,40.0,60.0,92.0};
-static const int numDeltaPhiBins = 26;
-static const float DeltaPhiBins[] = {-1.5048,-1.275,-0.98,-0.685,-0.415,-0.22,-0.1,0,0.1,0.22,0.415,0.685,0.98,
-1.275,1.595,1.965,2.305,2.55,2.75,2.945,3.14,3.44,3.535,3.73,3.935,4.32,4.7012};
 static const int numpTAssocBins2 = 4;
 static const float pTAssocBins2[] = {1.0,1.5,2.0,2.5,3.0};
 //For figure 12
@@ -166,7 +161,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2008_I778396);
+    RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2008_I778396);
     
     Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
     {
@@ -182,25 +177,24 @@ namespace Rivet {
             if(std::isnan(minValue))
             {
                 minValue = bin.sumW();
-                binWidth = bin.width();
+                binWidth = bin.xWidth();
                 minValueEntries = bin.numEntries();
             }
-            if(bin.sumW()/bin.width() < minValue/binWidth)
+            if(bin.sumW()/bin.xWidth() < minValue/binWidth)
             {
                 minValue = bin.sumW();
-                binWidth = bin.width();
+                binWidth = bin.xWidth();
                 minValueEntries = bin.numEntries();
             }
         }
                 
         hist.reset();
         
-        for(auto &bin : hist.bins())
-        {
-            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+        for (size_t idx=1; idx<=hist.numBins(); ++idx) {
+          hist.fill(hist.bin(idx).xMid(), (minValue*hist.bin(idx).xWidth())/(minValueEntries*binWidth));
         }
         
-        *histo = YODA::subtract(*histo, hist);
+        *histo -= hist;
         
         return histo;
                 
@@ -301,13 +295,13 @@ namespace Rivet {
       bool isSecondary(Particle p)
       {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-          p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-          p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-          p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-          p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-          p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-          p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+          p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+          p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+          p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+          p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+          p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+          p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
           return true;
         else return false;
        
@@ -414,7 +408,7 @@ namespace Rivet {
         const ChargedFinalState cfs(Cuts::abseta < 0.35 && Cuts::abscharge > 0);
         declare(cfs, "CFS");
         
-        const PrimaryParticles pp(pdgPi0, Cuts::abseta < 0.35);
+        const PrimaryParticles pp({111, -111}, Cuts::abseta < 0.35);
         declare(pp, "PP");
         
         const PromptFinalState pfs(Cuts::abseta < 0.35 && Cuts::pid == 22);
@@ -1193,14 +1187,14 @@ for(Correlator& corr : Correlators11)
   {
 
 	if(corr.GetSubSubIndex()==0){
-        string name = (18 + corr.GetSubIndex()) + "0101" + to_string(corr.GetIndex());
-        book(_h[name], (18 + corr.GetSubIndex()),01,(corr.GetIndex()));
+        string name = to_string(18 + corr.GetSubIndex()) + "0101" + to_string(corr.GetIndex());
+        book(_h[name], name);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     }
     else if(corr.GetSubSubIndex()==1){
-        string name = (15 + corr.GetSubIndex()) + "01" + to_string(corr.GetIndex());
-        book(_h[name], (15 + corr.GetSubIndex()),01,(corr.GetIndex()));
+        string name = to_string(15 + corr.GetSubIndex()) + "01" + to_string(corr.GetIndex());
+        book(_h[name], name);
         book(sow[name],"sow" + name);
         nTriggers[name] = 0;
     }
@@ -1236,13 +1230,12 @@ for(i=0;i<1;i++){
       //c1.SetPID(pdgPi0);
       Correlators9.push_back(c1);
 }
-for(Correlator& corr : Correlators9)
-  {
-        string name = "130101";
-        book(_h[name], 13,01,01);
-        book(sow[name],"sow" + name);
-        nTriggers[name] = 0;
-  }
+{
+      string name = "130101";
+      book(_h[name], 13,01,01);
+      book(sow[name],"sow" + name);
+      nTriggers[name] = 0;
+}
  
 //*****************************************************************************
 // The following will book the histograms for Figure 8 
@@ -1461,8 +1454,6 @@ for(Correlator& corr : Correlators4)
     }
     void analyze(const Event& event) {
       const ChargedFinalState& cfs = apply<ChargedFinalState>(event, "CFS");
-      const PrimaryParticles& ppTrigPi0 = apply<PrimaryParticles>(event, "PP");
-      const PromptFinalState& pfsTrigPhotons = apply<PromptFinalState>(event, "PFS");
       //==================================================
       // Select the histograms accordingly to the collision system, beam energy and centrality
       // WARNING: Still not implemented for d-Au
@@ -1475,13 +1466,6 @@ for(Correlator& corr : Correlators4)
     
       //SysAndEnergy = collSys + cmsEnergy;
    
-      double triggerptMin = 999.;
-      double triggerptMax = -999.;
-      double associatedptMin = 999.;
-      double associatedptMax = -999.;
-   
-      bool isVeto = true;
-
       const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
       const double c = cent();
       
@@ -2072,8 +2056,6 @@ for(Correlator& corr : Correlators4)
                   
                   if(!corr.CheckCentrality(c)) continue;
                   
-                  double DeltaPhi = GetDeltaPhi(pTrig, pTAssoc);
-
                     string namehead = "Fig8CorrFunc_H_12_1_1_Centrality_" + to_string(corr.GetIndex() + 1);
                     _h[namehead]->fill(corr.GetIndex(), pTAssoc.pT()/GeV);
                   
@@ -2148,7 +2130,7 @@ for(Correlator& corr : Correlators4)
 
               }
 
-               for(Correlator& corr : Correlators25)
+               //for(Correlator& corr : Correlators25)
      		 {
 			//string name = "Fig25CorrFunc_42_1_" + to_string(corr.GetSubIndex()+1)  + "_Centrality_" + to_string(1+corr.GetIndex());
 			//string name1 = "Figure25_AuAu_40_1_" + to_string(ptt+1); // + 41, 42 
@@ -2226,34 +2208,6 @@ for(Correlator& corr : Correlators4)
 
     void finalize() {
 
-      bool AuAu200_available = false;
-      bool pp_available = false;
-
-      for (auto element : _h)
-      {
-        string name = element.second->name();
-        if (name.find("AuAu") != std::string::npos)
-        {
-          if (element.second->numEntries()>0) AuAu200_available=true;
-          else
-          {
-            AuAu200_available=false;
-            break;
-          }
-
-        }
-         else if (name.find("pp") != std::string::npos)
-        {
-          if (element.second->numEntries()>0) pp_available=true;
-          else
-          {
-            pp_available=false;
-            break;
-          }
-          
-        }
-      }
-      
       //*****************************************************************************
       // Background subtraction for Figures 36-8
       for(Correlator& corr : Correlators38)
@@ -2293,14 +2247,16 @@ for(Correlator& corr : Correlators4)
             string nameFig12 = "Figure12_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
-            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            double bval = _h[nameFig12]->bin(corr.GetIndex()).xMid();
+            _h[nameFig12]->fill(bval, yield/fraction, fraction);
             
             string nameFig12SH = "Figure12_AuAu_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             yield = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
             double fraction2 = 0.;
             yield += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
             fraction += fraction2;
-            _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            bval = _h[nameFig12]->bin(corr.GetIndex()).xMid();
+            _h[nameFig12SH]->fill(bval, yield/fraction, fraction);
             
           }
           else if(corr.GetSubSubIndex() == 4){
@@ -2311,14 +2267,16 @@ for(Correlator& corr : Correlators4)
             string nameFig12 = "Figure12_pp_25_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
-            _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            double bval = _h[nameFig12]->bin(corr.GetIndex()).xMid();
+            _h[nameFig12]->fill(bval, yield/fraction, fraction);
             
             string nameFig12SH = "Figure12_pp_" + to_string(26+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             yield = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
             double fraction2 = 0.;
             yield += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
             fraction += fraction2;
-            _h[nameFig12SH]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            bval = _h[nameFig12]->bin(corr.GetIndex()).xMid();
+            _h[nameFig12SH]->fill(bval, yield/fraction, fraction);
           }
               
           
@@ -2339,7 +2297,7 @@ for(Correlator& corr : Correlators4)
             //string nameFig12 = "Figure18_AuAu_" + to_string(21+corr.GetSubSubIndex()) + "_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
-            _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            _h[nameFig18]->fill(_h[nameFig18]->bin(corr.GetIndex()).xMid(), yield/fraction, fraction);
             
           }
           else if(corr.GetSubSubIndex() == 1){
@@ -2351,7 +2309,7 @@ for(Correlator& corr : Correlators4)
             //string nameFig12 = "Figure18_pp_25_1_" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yield = getYieldRangeUser(_h[name], (-M_PI/3.), (M_PI/3.), fraction); // Near-side 
-            _h[nameFig18]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
+            _h[nameFig18]->fill(_h[nameFig18]->bin(corr.GetIndex()).xMid(), yield/fraction, fraction);
 
           }
           
@@ -2399,22 +2357,22 @@ for(Correlator& corr : Correlators4)
             //_p[name] = SubtractBackgroundZYAM(_p[name]);
             
             if(_p[name1]->bin(0).numEntries() > 0){
-            	_p[name1]->bin(corr.GetIndex()).mean();
-            	if(_p[name1]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	_p[name1]->bin(corr.GetIndex()).xMean();
+            	if(_p[name1]->bin(corr.GetIndex()).xMean() < minpTAssoc)
             	{
-            		minpTAssoc = _p[name1]->bin(corr.GetIndex()).mean();
+            		minpTAssoc = _p[name1]->bin(corr.GetIndex()).xMean();
             	}
 
             	string namehead = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
             	int i = corr.GetIndex();
-            	_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+            	_h[namehead]->fill(_h[namehead]->bin(i).xMid(), (_p[name1]->bin(i).xMean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
 
 
             	/*for(int i=0; i < 2; i++){
 
             		string namehead = "Figure25_AuAu_40_1_" + to_string(corr.GetSubIndex()+1);
-            		//_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
-            		_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+            		//_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).xMean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+            		_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).xMean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
 
             	}*/
             	
@@ -2429,15 +2387,15 @@ for(Correlator& corr : Correlators4)
             //_p[name] = SubtractBackgroundZYAM(_p[name]);
             
             if(_p[name2]->bin(0).numEntries() > 0){
-            	_p[name2]->bin(corr.GetIndex()).mean();
-            	if(_p[name2]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	_p[name2]->bin(corr.GetIndex()).xMean();
+            	if(_p[name2]->bin(corr.GetIndex()).xMean() < minpTAssoc)
             	{
-            		minpTAssoc = _p[name2]->bin(corr.GetIndex()).mean();
+            		minpTAssoc = _p[name2]->bin(corr.GetIndex()).xMean();
             	}
 
             	string nameshoulder = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
             	int j = corr.GetIndex();
-            	_h[nameshoulder]->bin(j).fillBin((_p[name2]->bin(j).mean()-minpTAssoc)/_p[name2]->bin(j).numEntries(), _p[name2]->bin(j).numEntries());
+            	_h[nameshoulder]->fill(_h[nameshoulder]->bin(j).xMid(), (_p[name2]->bin(j).xMean()-minpTAssoc)/_p[name2]->bin(j).numEntries(), _p[name2]->bin(j).numEntries());
             	/*for(int i=0; i < 10; i++){
 
             		string nameshoulder = "Figure25_AuAu_41_1_" + to_string(corr.GetSubIndex()+1);
@@ -2452,14 +2410,14 @@ for(Correlator& corr : Correlators4)
             //_p[name] = SubtractBackgroundZYAM(_p[name]);
             
             if(_p[name3]->bin(0).numEntries() > 0){
-            	_p[name3]->bin(corr.GetIndex()).mean();
-            	if(_p[name3]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	_p[name3]->bin(corr.GetIndex()).xMean();
+            	if(_p[name3]->bin(corr.GetIndex()).xMean() < minpTAssoc)
             	{
-            		minpTAssoc = _p[name3]->bin(corr.GetIndex()).mean();
+            		minpTAssoc = _p[name3]->bin(corr.GetIndex()).xMean();
             	}
             	string namenearside = "Figure25_AuAu_42_1_" + to_string(corr.GetSubIndex()+1);
             	int k = corr.GetIndex();
-            	_h[namenearside]->bin(k).fillBin((_p[name3]->bin(k).mean()-minpTAssoc)/_p[name3]->bin(k).numEntries(), _p[name3]->bin(k).numEntries());
+            	_h[namenearside]->fill(_h[namenearside]->bin(k).xMid(), (_p[name3]->bin(k).xMean()-minpTAssoc)/_p[name3]->bin(k).numEntries(), _p[name3]->bin(k).numEntries());
             	/*
             	for(int i=0; i < 10; i++){
 
@@ -2520,21 +2478,21 @@ for(Correlator& corr : Correlators4)
             //_p[name] = SubtractBackgroundZYAM(_p[name]);
             
             if(_p[name1]->bin(0).numEntries() > 0){
-            	_p[name1]->bin(corr.GetIndex()).mean();
-            	if(_p[name1]->bin(corr.GetIndex()).mean() < minpTAssoc)
+            	_p[name1]->bin(corr.GetIndex()).xMean();
+            	if(_p[name1]->bin(corr.GetIndex()).xMean() < minpTAssoc)
             	{
-            		minpTAssoc = _p[name1]->bin(corr.GetIndex()).mean();
+            		minpTAssoc = _p[name1]->bin(corr.GetIndex()).xMean();
             	}
 
             	if(corr.GetSubIndex() == 0) {
             		string namehead = "43010" + to_string(corr.GetSubSubIndex()+1);
             	int i = corr.GetIndex();
-            	_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+            	_h[namehead]->fill(_h[namehead]->bin(i).xMid(), (_p[name1]->bin(i).xMean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
             	}
             	else if(corr.GetSubIndex() == 1) {
             		string namehead = "44010" + to_string(corr.GetSubSubIndex()+1);
             	int i = corr.GetIndex();
-            	_h[namehead]->bin(i).fillBin((_p[name1]->bin(i).mean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
+            	_h[namehead]->fill(_h[namehead]->bin(i).xMid(), (_p[name1]->bin(i).xMean()-minpTAssoc)/_p[name1]->bin(i).numEntries(), _p[name1]->bin(i).numEntries());
             	}
             
             	
@@ -2596,7 +2554,7 @@ for(Correlator& corr : Correlators4)
             double yieldpp = getYieldRangeUser(_h[namepp], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
 
             string nameFig31 = to_string(49 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
-            _h[nameFig31]->bin(corr.GetIndex()).fillBin((yieldauau*nTriggers[name]/sow[name]->numEntries())/(yieldpp*nTriggers[namepp]/sow[namepp]->numEntries())/Ncoll[corr.GetSubSubIndex()], fraction);
+            _h[nameFig31]->fill(_h[nameFig31]->bin(corr.GetIndex()).xMid(), (yieldauau*nTriggers[name]/sow[name]->numEntries())/(yieldpp*nTriggers[namepp]/sow[namepp]->numEntries())/Ncoll[corr.GetSubSubIndex()], fraction);
             }
 
       
@@ -2622,7 +2580,7 @@ for(Correlator& corr : Correlators4)
             double yieldpp = getYieldRangeUser(_h[namepp], (-M_PI/3.), (M_PI/3.), fraction);
 
             string nameFig30 = to_string(45 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
-            _h[nameFig30]->bin(corr.GetIndex()).fillBin((yieldauau*nTriggers[name]/sow[name]->numEntries())/(yieldpp*nTriggers[namepp]/sow[namepp]->numEntries())/Ncoll[corr.GetSubSubIndex()], fraction);
+            _h[nameFig30]->fill(_h[nameFig30]->bin(corr.GetIndex()).xMid(), (yieldauau*nTriggers[name]/sow[name]->numEntries())/(yieldpp*nTriggers[namepp]/sow[namepp]->numEntries())/Ncoll[corr.GetSubSubIndex()], fraction);
             }
 
       
@@ -2652,8 +2610,9 @@ for(Correlator& corr : Correlators4)
           fractionshoulder += fractionshoulder2;
 
           string nameFig8 = "120101";
+            string nameFig30 = to_string(45 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
 
-            _h[nameFig8]->bin(corr.GetIndex()).fillBin((yieldhead/fractionhead)/(yieldshoulder/fractionshoulder), fractionhead/fractionshoulder);
+            _h[nameFig8]->fill(_h[nameFig30]->bin(corr.GetIndex()).xMid(), (yieldhead/fractionhead)/(yieldshoulder/fractionshoulder), fractionhead/fractionshoulder);
 
           }
 
@@ -2668,13 +2627,14 @@ for(Correlator& corr : Correlators4)
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
             string nameFig8 = "90101";
+            string nameFig30 = to_string(45 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yieldhead = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
             double yieldshoulder = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
             double fraction2 = 0.;
             yieldshoulder += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
             fraction += fraction2;
-            _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
+            _h[nameFig8]->fill(_h[nameFig30]->bin(corr.GetIndex()).xMid(), (yieldhead/yieldshoulder)/fraction, fraction);
             
           }
           else if(corr.GetSubSubIndex() == 4){
@@ -2683,13 +2643,14 @@ for(Correlator& corr : Correlators4)
             _h[name] = SubtractBackgroundZYAM(_h[name]);
             
             string nameFig8 = "80101";
+            string nameFig30 = to_string(45 + corr.GetSubSubIndex()) + "010" + to_string(corr.GetSubIndex()+1);
             double fraction = 0.;
             double yieldhead = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fraction);
             double yieldshoulder = getYieldRangeUser(_h[name], M_PI/2., M_PI-(M_PI/6.), fraction);
             double fraction2 = 0.;
             yieldshoulder += getYieldRangeUser(_h[name], M_PI+(M_PI/6.), 3.*M_PI/2., fraction2);
             fraction += fraction2;
-            _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
+            _h[nameFig8]->fill(_h[nameFig30]->bin(corr.GetIndex()).xMid(), (yieldhead/yieldshoulder)/fraction, fraction);
 
           }
               
@@ -2730,8 +2691,7 @@ for(Correlator& corr : Correlators4)
     vector<Correlator> Correlators6;
     vector<Correlator> Correlators4;
 
-    std::initializer_list<int> pdgPi0 = {111, -111};  // Pion 0
-    std::initializer_list<int> pdgPhoton = {22};  // Pion 0
+    std::vector<int> pdgPhoton = {22};  // Pion 0
 
     string beamOpt;
     enum CollisionSystem {pp0, AuAu};
@@ -2739,6 +2699,6 @@ for(Correlator& corr : Correlators4)
   };
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2008_I778396);
+  RIVET_DECLARE_PLUGIN(PHENIX_2008_I778396);
   
 }

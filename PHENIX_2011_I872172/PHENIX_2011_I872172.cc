@@ -8,8 +8,8 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/ChargedFinalState.hh"
+#include "Rivet/Projections/LeptonFinder.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 
@@ -124,13 +124,12 @@ namespace Rivet {
       // This is because y-axis values are not unique and using the full histogram index is easier.
       map<int, int> nTriggers;
       map<int, int> nEvents;
-      bool fillTrigger = true;
       vector<Correlator> Correlators;
 
     public:
 
       /// Constructor
-      DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2011_I872172);
+      RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2011_I872172);
       
       /// name Analysis methods
       bool isSameParticle(const Particle& p1, const Particle& p2)
@@ -146,13 +145,13 @@ namespace Rivet {
       bool isSecondary(Particle p)
       {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-          p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-          p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-          p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-          p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-          p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-          p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+          p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+          p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+          p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+          p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+          p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+          p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
           return true;
         else return false;    
       }
@@ -169,7 +168,7 @@ namespace Rivet {
         // the final-state particles declared above are clustered using FastJet with
         // the anti-kT algorithm and a jet-radius parameter 0.4
         // muons and neutrinos are excluded from the clustering
-        FastJets jetfs(fs, FastJets::ANTIKT, 0.4, JetAlg::Muons::NONE, JetAlg::Invisibles::NONE);
+        FastJets jetfs(fs, JetAlg::ANTIKT, 0.4, JetMuons::NONE, JetInvisibles::NONE);
         declare(jetfs, "jets");
 
         // FinalState of prompt photons and bare muons and electrons in the event
@@ -181,7 +180,7 @@ namespace Rivet {
         // dress the prompt bare leptons with prompt photons within dR < 0.1
         // apply some fiducial cuts on the dressed leptons
         Cut lepton_cuts = Cuts::abseta < 2.5 && Cuts::pT > 20*GeV;
-        DressedLeptons dressed_leps(photons, bare_leps, 0.1, lepton_cuts);
+        LeptonFinder dressed_leps(bare_leps, photons, 0.1, lepton_cuts);
         declare(dressed_leps, "leptons");
 
         // missing momentum
@@ -442,5 +441,5 @@ namespace Rivet {
   }; // End of PHENIX_2011_I872172
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(PHENIX_2011_I872172);
+  RIVET_DECLARE_PLUGIN(PHENIX_2011_I872172);
 }

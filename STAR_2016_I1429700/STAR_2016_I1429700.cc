@@ -13,12 +13,6 @@
 #include "../Centralities/RHICCentrality.hh"
 
 #define _USE_MATH_DEFINES
-static const int numTrigPtBins = 8;
-static const float pTTrigBins[] = {2.0,2.5,3.0,3.5,4.0,4.5,5.0};
-static const int numAssocPtBins = 5;
-static const float pTAssocBins[] = {1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,6.0};
-static const int numCentBins = 5;
-static const int centBins[] = {0,12,20,30,40,50,60,70,80,90};
 
 using namespace std;
 namespace Rivet {
@@ -36,6 +30,7 @@ Correlator(int index) {
     void SetCentrality(double cmin, double cmax){ _centrality = make_pair(cmin, cmax); }
     void SetTriggerRange(double tmin, double tmax){ _triggerRange = make_pair(tmin, tmax); }
     void SetAssociatedRange(double amin, double amax){ _associatedRange = make_pair(amin, amax); }
+    void SetDeltaEtaRange(double emin, double emax) { _etarange = make_pair(emin, emax); }
     
     string GetCollSystemAndEnergy(){ return _collSystemAndEnergy; }
     pair<double,double> GetCentrality(){ return _centrality; }
@@ -95,17 +90,12 @@ bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) 
     pair<double,double> _centrality;
     pair<double,double> _triggerRange;
     pair<double,double> _associatedRange;
+    pair<double,double> _etarange;
 
   
   }; 
 
 
-
- class STAR_2016_I1429700 : public Analysis {
-  public:
-
-    /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2016_I1429700);
 
 
     /// name Analysis methods
@@ -122,13 +112,13 @@ bool CheckCollSystemAndEnergy(string s){ return _collSystemAndEnergy.compare(s) 
     bool isSecondary(Particle p)
     {
 	//return true if is secondary
-	if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-		   p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-	           p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-	           p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-	           p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-	           p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+	if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+		   p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+	           p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+	           p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+	           p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+	           p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+	           p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
 	return true;
         else return false;
         
@@ -208,11 +198,10 @@ double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
     {
         double maxDeltaEta = 2.;
         
-        int binEta = hist.binIndexAt(deltaEta);
+        int binEta = hist.indexAt(deltaEta);
         
         if(binEta < 0)
         {
-            MSG_INFO("Eta is out of bounds!");
             return 0.;
         }
         
@@ -221,10 +210,17 @@ double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
         return 1. - (1./maxDeltaEta)*abs(binCenterEta);
     }
 
+ class STAR_2016_I1429700 : public Analysis {
+  public:
+
+    /// Constructor
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2016_I1429700);
+
 /// Book histograms and initialise projections before the ruvoid init() {
 
       // the basic final-state projection: all final-state particles within the given eta acceptance
      
+     void init() {
       const ChargedFinalState cfs(Cuts::pT > 1*GeV); //Not cutting in eta, so no need to correct for pair acceptance
       declare(cfs, "CFS");
       const ChargedFinalState cfsTrig(Cuts::abseta < 1.0 && Cuts::pT > 2*GeV);
@@ -708,7 +704,6 @@ double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
       Correlators.push_back(c55);
 
 //There is no HEPDATA for centralities 0-12% Au+Au collisions 
-============================================================================
     /*  // Figure 4
       // Au+Au charged mesons
       Correlator c1(1);
@@ -748,7 +743,6 @@ double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
       c2.SetAssociatedRange(1.5, 999.);
       Correlators.push_back(c2);
     */
-===========================================================================
 
   
      //Figure 6
@@ -883,7 +877,6 @@ double EtaEffCorrection(double deltaEta, YODA::Histo1D& hist)
  	 book(_h["1113"], 11, 1, 3);
  	 book(_h["1114"], 11, 1, 4);
 */ 
-   }
 
 for(unsigned int i = 1; i<= Correlators.size(); i++)
       {
@@ -896,7 +889,7 @@ for(unsigned int i = 1; i<= Correlators.size(); i++)
           book(_DeltaEta[i], "DeltaEta" + to_string(i), 20, 0, 2);
       }
           nEvents.assign(Correlators.size()+1, 0); 
-          nTriggers.aissign(Correlators.size()+1, 0); 
+          nTriggers.assign(Correlators.size()+1, 0); 
       
     }
 
@@ -930,13 +923,13 @@ double nNucleons = 0.;
           CollSystem = "pp";
           nNucleons = 1.;
       }
-     if (beam.first.pid == 100029053 && beam.second.pid() == 1000010020)
+     if (beam.first.pid() == 100029053 && beam.second.pid() == 1000010020)
       {
-	CollSystem = "dAu"
+	CollSystem = "dAu";
       }
-     if (beam.first.pid == 1000010020  && beam.second.pid() == 100029053)
+     if (beam.first.pid() == 1000010020  && beam.second.pid() == 100029053)
       {
-        CollSystem = "dAu"
+        CollSystem = "dAu";
       }
 
 
@@ -1091,7 +1084,7 @@ map<string, Histo1DPtr> _h;
   };
 
 // The hook for the plugin system
-DECLARE_RIVET_PLUGIN(STAR_2012_I943192);
+RIVET_DECLARE_PLUGIN(STAR_2016_I1429700);
 
 
 }
@@ -1108,13 +1101,13 @@ DECLARE_RIVET_PLUGIN(STAR_2012_I943192);
       for(const Particle& p : cfs.particles()) {
 
 	       // protections against mc generators decaying long-lived particles
-	        if (!( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-	           p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-	           p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-	           p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-	           p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-	           p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+	        if (!( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+	           p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+	           p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+	           p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+	           p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+	           p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+	           p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
 	        {
           if (centr >= 0. && centr <= 5.) {
             switch (p.pid()) {
@@ -1492,7 +1485,7 @@ DECLARE_RIVET_PLUGIN(STAR_2012_I943192);
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(STAR_2016_I1429700);
+  RIVET_DECLARE_PLUGIN(STAR_2016_I1429700);
 
 
 }

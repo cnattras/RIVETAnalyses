@@ -2,7 +2,6 @@
 #include "Rivet/Analysis.hh"
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
-#include "Rivet/Projections/DressedLeptons.hh"
 #include "Rivet/Projections/MissingMomentum.hh"
 #include "Rivet/Projections/PromptFinalState.hh"
 #include "../Centralities/RHICCentrality.hh"
@@ -209,25 +208,16 @@ namespace Rivet {
 
       }
   };
-  void DivideScatter2D(Scatter2DPtr s1, Scatter2DPtr s2, Scatter2DPtr s)
+  void DivideEstimate1D(Estimate1DPtr s1, Estimate1DPtr s2, Estimate1DPtr s)
   {
-    for(unsigned int i = 0; i < s2->numPoints(); i++)
-    {
-      if(s2->point(i).y() == 0)
-      {
-        s->addPoint(s2->point(i).x(), std::numeric_limits<double>::quiet_NaN());
-        continue;
-      }
-      double yErr = (s1->point(i).y()/s2->point(i).y())*std::sqrt(std::pow(s1->point(i).yErrPlus()/s1->point(i).y(), 2) + std::pow(s2->point(i).yErrPlus()/s2->point(i).y(), 2));
-      s->addPoint(s2->point(i).x(), s1->point(i).y()/s2->point(i).y(), s1->point(i).xErrPlus(), yErr);
-    }
+    *s = *s1 / *s2;
   }
 	/// @brief Add a short analysis description here
   class PHENIX_2020_I1798493 : public Analysis {
     public:
 
     /// Constructor
-      DEFAULT_RIVET_ANALYSIS_CTOR(PHENIX_2020_I1798493);
+      RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2020_I1798493);
 
       Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
       {
@@ -243,13 +233,13 @@ namespace Rivet {
           if (std::isnan(minValue))
           {
             minValue = bin.sumW();
-            binWidth = bin.width();
+            binWidth = bin.xWidth();
             minValueEntries = bin.numEntries();
           }
-          if (bin.sumW() / bin.width() < minValue / binWidth)
+          if (bin.sumW() / bin.xWidth() < minValue / binWidth)
           {
             minValue = bin.sumW();
-            binWidth = bin.width();
+            binWidth = bin.xWidth();
             minValueEntries = bin.numEntries();
           }
         }
@@ -259,10 +249,10 @@ namespace Rivet {
 
         for (auto &bin : hist.bins())
         {
-          bin.fillBin((minValue * bin.width()) / (minValueEntries * binWidth), minValueEntries);
+          histo->fill(bin.xMid(), (minValue * bin.xWidth()) / (minValueEntries * binWidth));
         }
 
-        *histo = YODA::subtract(*histo, hist);
+        *histo -= hist;
 
         return histo;
       }
@@ -322,9 +312,9 @@ namespace Rivet {
 
       //fig 4 b
       string refname = mkAxisCode(4,1,1);
-      const Scatter2D& refdata = refData(refname);
+      const Estimate1D& refdata = refData(refname);
       string refname1 = mkAxisCode(4,1,2);
-      const Scatter2D& refdata1 = refData(refname1);
+      const Estimate1D& refdata1 = refData(refname1);
       book(_h["IAA_AuAu_4.b"], refname + "_AuAu", refdata);
       book(_h["IAA_pp_4.b"], refname + "_pp", refdata);
       book(_h["IdA_dAu_4.b"], refname1 + "_dAu", refdata1);
@@ -338,7 +328,7 @@ namespace Rivet {
         if (i==1){pt="3";};
         if (i==2){pt="6";};
         string refname = mkAxisCode(11,1,1+i);
-        const Scatter2D& refdata = refData(refname);
+        const Estimate1D& refdata = refData(refname);
         string hAA = "IAA_AuAu_7.less." + pt;
         string hpp = "IAA_pp_7.less." + pt;
         string siaa = "IAA_7.less."+ pt;
@@ -370,7 +360,7 @@ namespace Rivet {
           string hpp = "IAA_pp_6." + pt + pii;
           string siaa = "IAA_6."+ pt + pii;
           string refname = mkAxisCode(8+i,1,1+k);
-          const Scatter2D& refdata = refData(refname);
+          const Estimate1D& refdata = refData(refname);
           book(_h[hAA], refname + "_AuAu", refdata);
           book(_h[hpp], refname + "_pp", refdata);
           book(_s[siaa], refname);
@@ -386,7 +376,6 @@ namespace Rivet {
 
       //corrolators
       int dphibinNum = 60;
-      int dphibinNumCor = 20;
       //fig 4 a
       for (int i=0;i<6;i++){
         float xilower= 0+i*.4;
@@ -829,13 +818,13 @@ namespace Rivet {
         double yield6 = getYieldRangeUser(h, 5.*M_PI/6., 7.*M_PI/6., fraction);
 
         //figure 4 a
-        if(corr.GetIndex(0) == 4010) _h["GammaDirhPertriggerVsXiAUAU"]->bin(_h["GammaDirhPertriggerVsXiAUAU"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
-        if(corr.GetIndex(0) == 4030) _h["GammaDirhPertriggerVsXidAU"]->bin(_h["GammaDirhPertriggerVsXidAU"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4010) _h["GammaDirhPertriggerVsXiAUAU"]->fill(_h["GammaDirhPertriggerVsXiAUAU"]->binAt((corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4030) _h["GammaDirhPertriggerVsXidAU"]->fill(_h["GammaDirhPertriggerVsXidAU"]->binAt((corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), yield/fraction, fraction);
 
         //figure 4.b
-        if(corr.GetIndex(0) == 4110) _h["IAA_AuAu_4.b"]->bin(_h["IAA_AuAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
-        if(corr.GetIndex(0) == 4120) _h["IdA_dAu_4.b"]->bin(_h["IdA_dAu_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
-        if(corr.GetIndex(0) == 4130) _h["IAA_pp_4.b"]->bin(_h["IAA_pp_4.b"]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4110) _h["IAA_AuAu_4.b"]->fill(_h["IAA_AuAu_4.b"]->binAt((corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4120) _h["IdA_dAu_4.b"]->fill(_h["IdA_dAu_4.b"]->binAt((corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), yield/fraction, fraction);
+        if(corr.GetIndex(0) == 4130) _h["IAA_pp_4.b"]->fill(_h["IAA_pp_4.b"]->binAt((corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), yield/fraction, fraction);
 
         //figure 6
         for (int i=0;i<3;i++){
@@ -853,8 +842,8 @@ namespace Rivet {
             if (k==2){y=yield6; pii = ".6";};
             string hAA = "IAA_AuAu_6." + pt + pii;
             string hpp = "IAA_pp_6." + pt + pii;
-            if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(y/fraction, fraction);
-            if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. )).fillBin(y/fraction, fraction);
+            if(corr.GetIndex(0) == aaid) _h[hAA]->fill(_h[hAA]->binAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), y/fraction, fraction);
+            if(corr.GetIndex(0) == ppid) _h[hpp]->fill(_h[hpp]->binAt( (corr.GetXiRangeMin()+corr.GetXiRangeMax())/2. ).xMid(), y/fraction, fraction);
           }
         }
 
@@ -870,15 +859,15 @@ namespace Rivet {
           int ppid = (7030);
           string hAA = "IAA_AuAu_7.less." + pt;
           string hpp = "IAA_pp_7.less." + pt;
-          if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
-          if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
+          if(corr.GetIndex(0) == aaid) _h[hAA]->fill(_h[hAA]->binAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2.).xMid(), y/fraction, fraction);
+          if(corr.GetIndex(0) == ppid) _h[hpp]->fill(_h[hpp]->binAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2.).xMid(), y/fraction, fraction);
           //>1.2
           aaid = (7110);
           ppid = (7130);
           hAA = "IAA_AuAu_7.over." + pt;
           hpp = "IAA_pp_7.over." + pt;
-          if(corr.GetIndex(0) == aaid) _h[hAA]->bin(_h[hAA]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
-          if(corr.GetIndex(0) == ppid) _h[hpp]->bin(_h[hpp]->binIndexAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2. )).fillBin(y/fraction, fraction);
+          if(corr.GetIndex(0) == aaid) _h[hAA]->fill(_h[hAA]->binAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2.).xMid(), y/fraction, fraction);
+          if(corr.GetIndex(0) == ppid) _h[hpp]->fill(_h[hpp]->binAt( (corr.GetTriggerRangeMin()+corr.GetTriggerRangeMax())/2.).xMid(), y/fraction, fraction);
         }
 
       }
@@ -928,7 +917,7 @@ namespace Rivet {
         string siaam = "IAA_7.over."+ pt;
         divide(_h[hAA], _h[hpp], _s[siaam]);
         string siaa = "IAA_7."+ pt;
-        DivideScatter2D(_s[siaal], _s[siaam], _s[siaa]);
+        DivideEstimate1D(_s[siaal], _s[siaam], _s[siaa]);
       }
 
     }
@@ -941,7 +930,7 @@ namespace Rivet {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    map<string, Scatter2DPtr> _s;
+    map<string, Estimate1DPtr> _s;
     //@}
 
     vector<Correlator> Correlators;
@@ -952,6 +941,6 @@ namespace Rivet {
 
 
 
-  DECLARE_RIVET_PLUGIN(PHENIX_2020_I1798493);
+  RIVET_DECLARE_PLUGIN(PHENIX_2020_I1798493);
 
 }

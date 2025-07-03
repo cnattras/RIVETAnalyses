@@ -199,7 +199,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(CorrelatorExample);
+    RIVET_DEFAULT_ANALYSIS_CTOR(CorrelatorExample);
 
     Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
     {
@@ -523,6 +523,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(CorrelatorExample);
+  RIVET_DECLARE_PLUGIN(CorrelatorExample);
 
 }

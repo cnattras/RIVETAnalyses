@@ -145,7 +145,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2012_I943192);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2012_I943192);
 
 
     /// name Analysis methods
@@ -162,13 +162,13 @@ namespace Rivet {
     bool isSecondary(Particle p)
     {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-	           p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-	           p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-	           p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-	           p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-	           p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-	           p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+	           p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+	           p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+	           p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+	           p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+	           p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+	           p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
         return true;
         else return false;
 
@@ -252,7 +252,7 @@ namespace Rivet {
 
         double maxDeltaEta = 2.;
 
-        int binEta = hist.binIndexAt(deltaEta);
+        int binEta = hist.indexAt(deltaEta);
 
         if(binEta < 0 && abs(deltaEta) < 2)
         {
@@ -305,8 +305,8 @@ namespace Rivet {
             return 0.;
         }
 
-        int bmin = hist.binIndexAt(vmin);
-        int bmax = hist.binIndexAt(vmax);
+        int bmin = hist.indexAt(vmin);
+        int bmax = hist.indexAt(vmax);
         if(bmax < 0) bmax = (int)hist.numBins()-1;
 
         for(int i = bmin; i <= bmax; i++)
@@ -771,7 +771,7 @@ namespace Rivet {
                     double yields = GetYieldInUserRange(*_DeltaEtaForYieldsTriggerBinsCorr[index][itr],-0.78,0., entries);
 
 
-                    (*_YieldsDeltaEtaTriggerBins[index]).bin(itr).fillBin(yields*2);
+                    _YieldsDeltaEtaTriggerBins[index]->fill(_YieldsDeltaEtaTriggerBins[index]->bin(itr).xMid(), yields*2);
 
 
 
@@ -828,7 +828,7 @@ namespace Rivet {
 
 
   // The hook for the plugin system
-  DECLARE_RIVET_PLUGIN(STAR_2012_I943192);
+  RIVET_DECLARE_PLUGIN(STAR_2012_I943192);
 
 
 }

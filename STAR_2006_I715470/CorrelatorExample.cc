@@ -215,7 +215,7 @@ namespace Rivet {
   public:
 
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2006_I715470);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2006_I715470);
 
     Histo1DPtr SubtractBackgroundZYAM(Histo1DPtr histo)
     {
@@ -540,6 +540,6 @@ namespace Rivet {
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2006_I715470);
+  RIVET_DECLARE_PLUGIN(STAR_2006_I715470);
 
 }

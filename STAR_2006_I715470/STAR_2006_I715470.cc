@@ -14,15 +14,12 @@
 #include "../Centralities/RHICCentrality.hh"
 
 #define _USE_MATH_DEFINES
-static const int numTrigPtBins = 3;
-static const float pTTrigBins[] = {4.0,6.0,8.0,15.0};
 static const int numAssocPtBins = 3;
 static const float pTAssocBins[] = {3.0,4.0,6.0,10};
 static const int numzTBins = 7;
 static const float zTBins[] = {0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0};
 static const int numCentBins = 6;
 static const float centBins[] = {0.0,5.0,10,20,30,40,80};
-static const double pi = 2*acos(0.0);
 
 using namespace std;
 namespace Rivet {
@@ -40,8 +37,6 @@ namespace Rivet {
       pair<double,double> _associatedRange;
       pair<double,double> _zTRange;
       vector<int> _pid;
-	  bool _noCentrality = false; //added
-	  bool _noAssoc = false; //added
 	  Histo1DPtr _deltaPhi; //added
 	  CounterPtr _counter; //added
 	  CounterPtr _cTriggers; //added
@@ -191,13 +186,13 @@ namespace Rivet {
       bool isSecondary(Particle p)
       {
         //return true if is secondary
-        if (( p.hasAncestor(310) || p.hasAncestor(-310)  ||     // K0s
-          p.hasAncestor(130)  || p.hasAncestor(-130)  ||     // K0l
-          p.hasAncestor(3322) || p.hasAncestor(-3322) ||     // Xi0
-          p.hasAncestor(3122) || p.hasAncestor(-3122) ||     // Lambda
-          p.hasAncestor(3222) || p.hasAncestor(-3222) ||     // Sigma+/-
-          p.hasAncestor(3312) || p.hasAncestor(-3312) ||     // Xi-/+
-          p.hasAncestor(3334) || p.hasAncestor(-3334) ))    // Omega-/+
+        if (( p.hasAncestorWith(Cuts::pid == 310) || p.hasAncestorWith(Cuts::pid == -310)  ||     // K0s
+          p.hasAncestorWith(Cuts::pid == 130)  || p.hasAncestorWith(Cuts::pid == -130)  ||     // K0l
+          p.hasAncestorWith(Cuts::pid == 3322) || p.hasAncestorWith(Cuts::pid == -3322) ||     // Xi0
+          p.hasAncestorWith(Cuts::pid == 3122) || p.hasAncestorWith(Cuts::pid == -3122) ||     // Lambda
+          p.hasAncestorWith(Cuts::pid == 3222) || p.hasAncestorWith(Cuts::pid == -3222) ||     // Sigma+/-
+          p.hasAncestorWith(Cuts::pid == 3312) || p.hasAncestorWith(Cuts::pid == -3312) ||     // Xi-/+
+          p.hasAncestorWith(Cuts::pid == 3334) || p.hasAncestorWith(Cuts::pid == -3334) ))    // Omega-/+
           return true;
         else return false;
        
@@ -298,13 +293,13 @@ namespace Rivet {
             if(std::isnan(minValue))
             {
                 minValue = bin.sumW();
-                binWidth = bin.width();
+                binWidth = bin.xWidth();
                 minValueEntries = bin.numEntries();
             }
-            if(bin.sumW()/bin.width() < minValue/binWidth)
+            if(bin.sumW()/bin.xWidth() < minValue/binWidth)
             {
                 minValue = bin.sumW();
-                binWidth = bin.width();
+                binWidth = bin.xWidth();
                 minValueEntries = bin.numEntries();
             }
         }
@@ -313,10 +308,10 @@ namespace Rivet {
         
         for(auto &bin : hist.bins())
         {
-            bin.fillBin((minValue*bin.width())/(minValueEntries*binWidth), minValueEntries);
+            hist.fill(bin.xWidth(), (minValue*bin.xWidth())/(minValueEntries*binWidth));
         }
         
-        *histo = YODA::subtract(*histo, hist);
+        *histo -= hist;
         
         return histo;
                 
@@ -339,21 +334,21 @@ namespace Rivet {
         {
             if((bin.xMin() > xmin) && (bin.xMax() < xmax))
             {
-                integral += bin.sumW()/bin.width();
-                fraction += bin.numEntries()/bin.width();
+                integral += bin.sumW()/bin.xWidth();
+                fraction += bin.numEntries()/bin.xWidth();
             }
             else if((bin.xMin() < xmin) && (bin.xMax() > xmin))
             {
-                double perc = (bin.xMax() - xmin)/bin.width();
-                integral += perc*(bin.sumW()/bin.width());
-                fraction += perc*(bin.numEntries()/bin.width());
+                double perc = (bin.xMax() - xmin)/bin.xWidth();
+                integral += perc*(bin.sumW()/bin.xWidth());
+                fraction += perc*(bin.numEntries()/bin.xWidth());
                 
             }
             else if((bin.xMin() < xmax) && (bin.xMax() > xmax))
             {
-                double perc = (xmax - bin.xMin())/bin.width();
-                integral += perc*(bin.sumW()/bin.width());
-                fraction += perc*(bin.numEntries()/bin.width());
+                double perc = (xmax - bin.xMin())/bin.xWidth();
+                integral += perc*(bin.sumW()/bin.xWidth());
+                fraction += perc*(bin.numEntries()/bin.xWidth());
             }
         }
         
@@ -362,7 +357,7 @@ namespace Rivet {
     }
    
     /// Constructor
-    DEFAULT_RIVET_ANALYSIS_CTOR(STAR_2006_I715470);
+    RIVET_DEFAULT_ANALYSIS_CTOR(STAR_2006_I715470);
     void init() {
       const ChargedFinalState cfs(Cuts::abseta < 0.35);
       declare(cfs, "CFS");
@@ -566,39 +561,6 @@ cout<<"This loop repeats some names for histograms which are made above.  I did 
 
     }
     void finalize() {
-        
-        bool AuAu200_available = false;
-        bool dAu_available = false;
-
-        for (auto element : _h)
-        {
-            string name = element.second->name();
-            if (name.find("AuAu200") != std::string::npos)
-            {
-            if (element.second->numEntries()>0) AuAu200_available=true;
-            else
-            {
-                AuAu200_available=false;
-                break;
-            }
-
-        }
-        else if (name.find("dAu200") != std::string::npos)
-        {
-          if (element.second->numEntries()>0) dAu_available=true;
-          else
-          {
-            dAu_available=false;
-            break;
-          }
-          
-        }
-      }
-      
-      //if((!AuAu200_available) || (!dAu_available)) return;
-        
-        
-        
         for(Correlator& corr : Correlators)
         {
             
@@ -614,17 +576,9 @@ cout<<"This loop repeats some names for histograms which are made above.  I did 
                   //AJ work on this
                   //1.  Just calculate the yield but adjust the range so that it matched the paper.
                   //2.  Try to fill the histogram as below, except you'll need to figure out what the name is.
-                  double fractionawayside = 0;
-            double yieldawayside = getYieldRangeUser(_h[name], M_PI-(M_PI/6.), M_PI+(M_PI/6.), fractionawayside);
       //      _h[nameFig12]->bin(corr.GetIndex()).fillBin(yield/fraction, fraction);
-            double fractionnearside = 0;
-            double yieldnearside = getYieldRangeUser(_h[name], M_PI - (M_PI / 6.), M_PI + (M_PI / 6.), fractionnearside);
             //  _h[nameFig8]->bin(corr.GetSubIndex()).fillBin((yieldhead/yieldshoulder)/fraction, fraction);
-            cout<<name<<endl;
             //Histogram 1: all correlators with pTassoc = 3-4 GeV, trigger 8-15
-            if(corr.CheckConditions("AuAu200",2.5,10,3.5)){
-              cout<<" name "<<name<<" "<<corr.GetFullIndex()<<"  "<<corr.GetCollSystemAndEnergy()<<" "<<corr.GetCentrality()<<endl;
-            }
 
 
 if(corr.CheckConditions("AuAu200",2.5)){//Central Au+Au
@@ -653,6 +607,6 @@ if(corr.CheckConditions("dAu200",2.5)){//Central Au+Au
   };
 
 
-  DECLARE_RIVET_PLUGIN(STAR_2006_I715470);
+  RIVET_DECLARE_PLUGIN(STAR_2006_I715470);
 
 }
