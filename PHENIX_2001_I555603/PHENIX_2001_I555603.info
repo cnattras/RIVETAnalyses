@@ -5,7 +5,7 @@ Experiment: PHENIX
 Collider: RHIC
 InspireID: 555603
 Status: UNVALIDATED REENTRANT
-Reentrant: false
+Reentrant: true
 Authors:
  - Aidan Hill <ahill117@vols.utk.edu>
  - Christine Nattrass <cnattras@utk.edu>
