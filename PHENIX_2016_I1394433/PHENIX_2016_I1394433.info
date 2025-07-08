@@ -4,7 +4,8 @@ Summary: Transverse energy production and charged-particle multiplicity at midra
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1394433
-Status: UNVALIDATED REENTRANT
+Status: REENTRANT
+Reentrant: true
 Authors:
  - Ejiro Umaka <eumaka@iastate.edu>
  - Iftekhar Ahmed <iahmed11@vols.utk.edu>
@@ -12,8 +13,33 @@ References:
 - arXiv:1509.06727
 - 10.1103/PhysRevC.93.024901
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
-#Energies: [[6500,6500]]
+Beams: [
+  [Au, Au],
+  [Cu, Cu],
+  [Cu, Au],
+  [U, U],
+  [d, Au],
+  [He3, Au],
+  [p, p]
+]
+# This is _total_ energy of beams
+Energies: [
+  39400,   # Au+Au 200 GeV * 197 nucleons
+  25610,   # Au+Au 130 GeV * 197
+  12293,   # Au+Au 62.4 GeV * 197
+  7683,    # Au+Au 39 GeV * 197
+  5319,    # Au+Au 27 GeV * 197
+  3861,    # Au+Au 19.6 GeV * 197
+  2857,    # Au+Au 14.5 GeV * 197
+  1517,    # Au+Au 7.7 GeV * 197
+  12600,   # Cu+Cu 200 GeV * 63
+  3931,    # Cu+Cu 62.4 GeV * 63
+  22281,   # Cu+Au 200 GeV * sqrt(63*197)
+  45934,   # U+U 193 GeV * 238
+  3970,     # d+Au 200 GeV * sqrt(2*197)
+  4862,     # He3+Au 200 GeV * sqrt(3*197)
+  200      # p+p 200 GeV * 1
+]
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
