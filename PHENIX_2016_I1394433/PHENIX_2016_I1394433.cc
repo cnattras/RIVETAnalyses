@@ -33,6 +33,7 @@ class PHENIX_2016_I1394433 : public Analysis {
 
         const ParticlePair& beam = beams();
         int NN = 0;
+        cout<<"sqrts = "<<sqrtS()<<endl;
 
         if (beamOpt == "NONE") {
         
@@ -55,9 +56,11 @@ class PHENIX_2016_I1394433 : public Analysis {
           if (fuzzyEquals(sqrtS()/GeV, 62.4*NN, 1e-3)) collSys = CuCu62;
           if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = CuCu200;
       }
-      if ((beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000290630) )
+      if ((beam.first.pid() == 1000290630 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000290630 ) )
       {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = CuAu200;
+          // NN = std::sqrt(63.*197.0);
+          // if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = CuAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 22281.3, 1e-3)) collSys = CuAu200;
       }
       if (beam.first.pid() == 1000922380 && beam.second.pid() == 1000922380)
       {
@@ -66,11 +69,15 @@ class PHENIX_2016_I1394433 : public Analysis {
       }
       if ((beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020))
       {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = dAu200;
+          // NN = std::sqrt(2.*197.0);
+          // if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = dAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 3974.0, 1e-3)) collSys = dAu200;
       }
       if ((beam.first.pid() == 1000020030 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000020030))
       {
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = HeAu200;
+          // NN = std::sqrt(2.*197.0);
+          // if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = HeAu200;
+          if (fuzzyEquals(sqrtS()/GeV, 5617.1, 1e-3)) collSys = HeAu200;
       }
           
         }
@@ -90,6 +97,7 @@ class PHENIX_2016_I1394433 : public Analysis {
     else if (beamOpt == "HEAU200") collSys = HeAu200;
     else if (beamOpt == "CUAU200") collSys = CuAu200;
 
+cout<<"Collision system "<<collSys<<endl;
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
         
