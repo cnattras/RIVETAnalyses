@@ -4,8 +4,8 @@ Summary: Transverse-energy distributions at midrapidity in p+p , d+Au , and Au+A
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 1273625
-Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
-Reentrant: false
+Status: UNVALIDATED REENTRANT
+Reentrant: true
 Authors:
  - Olivia Bartoshesky <obartosh@vols.utk.edu>
  - Christine Nattrass <cnattras@utk.edu>
@@ -13,12 +13,24 @@ References:
  - 'DOI: 10.1103/PhysRevC.89.044905'
  - 'arXiv:1312.6676'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
+Beams: [
+  [Au, Au],
+  [p, p]
+]
+# This is _total_ energy of beams
+Energies: [
+  39400,   # Au+Au 200 GeV * 197 nucleons
+  25610,   # Au+Au 130 GeV * 197
+  12293,   # Au+Au 62.4 GeV * 197
+  200      # p+p 200 GeV * 1
+]
+#Luminosity_
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Options: 
 - cent=REF,GEN,IMP,USR
-- beam=PP200,AUAU62,AUAU130,AUAU200,dAU200
+- beam=PP200,AUAU62,AUAU130,AUAU200
 Description: Measurements of the midrapidity transverse-energy distribution, dET/d$\eta$, are presented for p+p, d+Au, and Au+Au collisions at sNN=200 GeV and additionally for Au+Au collisions at sNN=62.4 and 130 GeV. The dET/$\eta$ distributions are first compared with the number of nucleon participants Npart, number of binary collisions Ncoll, and number of constituent-quark participants Nqp calculated from a Glauber model based on the nuclear geometry. For Au+Au, (dET/d$\eta$)/Npart increases with Npart, while (dET/d$\eta$)/Nqp is approximately constant for all three energies. This indicates that the two-component ansatz, dET/d$\eta \propto$ (1−x)Npart/2+xNcoll, which was used to represent ET distributions, is simply a proxy for Nqp, and that the Ncoll term does not represent a hard-scattering component in ET distributions. The dET/d$\eta$ distributions of Au+Au and d+Au are then calculated from the measured p+p ET distribution using two models that both reproduce the Au+Au data. However, while the number-of-constituent-quark-participant model agrees well with the d+Au data, the additive-quark model does not.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
