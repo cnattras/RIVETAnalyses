@@ -19,12 +19,11 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=AUAU130
+ - fixedcentrality=0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,NONE
 Description:
   The first measurement of energy produced transverse to the beam direction at RHIC is presented. The mid-rapidity transverse energy density per participating nucleon rises steadily with the number of participants, closely paralleling the rise in charged-particle density, such that $E_{T} / N_{ch}$ remains relatively constant as a function of centrality. The energy density calculated via Bjorken's prescription for the 2% most central $Au+Au$ collisions at $\sqrt{s_{NN}}=130$ GeV is at least $\epsilon{_Bj}$ = $4.6$ GeV/fm$^3$ which is a factor of 1.6 larger than found at $\sqrt{s_{NN}}=17.2$ GeV ($Pb+Pb$ at CERN).
 ValidationInfo:
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
+  'Note: this analysis was written well after the paper was written and without the participation of the original authors.  The analysis was approved by the collaboration after tests with PYTHIA Angantyr, HIJING, and AMPT.  See list of options for collision systems and energies.  This analysis will detect beams and energies if they have been set in the HEPMC; otherwise the collision system and energy can be set with the beam option.  This is designed to be used with the output from the RHIC centrality calibration class.  The GEN and IMP modes for centralities have been tested.  If a fixed centrality is set, this will override the centrality option.'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []

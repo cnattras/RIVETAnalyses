@@ -27,6 +27,7 @@ namespace Rivet {
 
       // Implement beam options
       beamOpt = getOption<string>("beam", "NONE");
+      fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");
 
       const ParticlePair& beam = beams();
       int NN = 0.;
@@ -39,10 +40,12 @@ namespace Rivet {
       }
       }
 
-      if (beamOpt == "AUAU130"){ collSys = AuAu130; cout<<"Here I am!!"<<endl;}
 
       // Declare Centrality
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      if(fixedcentralityOpt!= "NONE"){
+        manualCentrality = std::stof(fixedcentralityOpt);
+      }
 
       // Final State projection
       const FinalState fs(Cuts::abseta < 0.5);
@@ -61,10 +64,14 @@ namespace Rivet {
         double totalEt = 0;
         double deltaeta = 1; 
 
+
         Particles fsParticles = apply<FinalState>(event,"fs").particles();
 
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-        const double c = cent();
+         double c = cent();
+      if(fixedcentralityOpt!= "NONE"){
+           c = manualCentrality; // Use the float value set in init()
+      }
         if (c > 50) vetoEvent;
 
         for(const Particle& p : fsParticles) // loop over all final state particles
@@ -96,6 +103,8 @@ namespace Rivet {
     map<string, CounterPtr> _c;
     Profile1DPtr _hist_E;
     string beamOpt;
+    string fixedcentralityOpt;
+    double manualCentrality = -1.0;
     enum CollisionSystem {NONE, AuAu130};
     CollisionSystem collSys;
     /// @}
