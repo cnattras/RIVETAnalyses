@@ -52,8 +52,12 @@ namespace Rivet {
       if (beamOpt == "AUAU62") collSys = AUAU62;
       else if (beamOpt == "AUAU130") collSys = AUAU130;
       else if (beamOpt == "AUAU200") collSys = AUAU200;
+      fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      if(fixedcentralityOpt!= "NONE"){
+        manualCentrality = std::stof(fixedcentralityOpt);
+      }
     
       // take binning from reference data using HEPData ID (digits in "d01-x01-y01" etc.)
 
@@ -75,7 +79,10 @@ namespace Rivet {
     Particles fsParticles = apply<FinalState>(event,"fs").particles();
 
     const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-        const double c = cent();
+      double c = cent();
+      if(fixedcentralityOpt!= "NONE"){
+           c = manualCentrality; // Use the float value set in init()
+      }
         if (collSys == AUAU62){
           if (c > 55) vetoEvent;
         }
@@ -123,6 +130,8 @@ namespace Rivet {
     Profile1DPtr _hist_62;
 
     string beamOpt;
+    string fixedcentralityOpt;
+    double manualCentrality = -1.0;
     enum CollisionSystem {PP200, AUAU62, AUAU130, AUAU200, dAU200};
     CollisionSystem collSys;
     /// @}

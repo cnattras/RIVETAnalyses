@@ -31,11 +31,10 @@ Energies: [
 Options: 
 - cent=REF,GEN,IMP,USR
 - beam=PP200,AUAU62,AUAU130,AUAU200
+- fixedcentrality=0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,NONE
 Description: Measurements of the midrapidity transverse-energy distribution, dET/d$\eta$, are presented for p+p, d+Au, and Au+Au collisions at sNN=200 GeV and additionally for Au+Au collisions at sNN=62.4 and 130 GeV. The dET/$\eta$ distributions are first compared with the number of nucleon participants Npart, number of binary collisions Ncoll, and number of constituent-quark participants Nqp calculated from a Glauber model based on the nuclear geometry. For Au+Au, (dET/d$\eta$)/Npart increases with Npart, while (dET/d$\eta$)/Nqp is approximately constant for all three energies. This indicates that the two-component ansatz, dET/d$\eta \propto$ (1-x)Npart/2+xNcoll, which was used to represent ET distributions, is simply a proxy for Nqp, and that the Ncoll term does not represent a hard-scattering component in ET distributions. The dET/d$\eta$ distributions of Au+Au and d+Au are then calculated from the measured p+p ET distribution using two models that both reproduce the Au+Au data. However, while the number-of-constituent-quark-participant model agrees well with the d+Au data, the additive-quark model does not.
 ValidationInfo:
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
+  'Note: this analysis was written well after the paper was written and without the participation of the original authors.  The analysis was approved by the collaboration after tests with PYTHIA Angantyr, HIJING, and AMPT.  See list of options for collision systems and energies.  This analysis will detect beams and energies if they have been set in the HEPMC; otherwise the collision system and energy can be set with the beam option.  This is designed to be used with the output from the RHIC centrality calibration class.  The GEN and IMP modes for centralities have been tested.  If a fixed centrality is set, this will override the centrality option.'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
