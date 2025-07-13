@@ -30,10 +30,10 @@ class PHENIX_2016_I1394433 : public Analysis {
     void init() {
 
         beamOpt = getOption<string>("beam", "NONE");
+      fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");
 
         const ParticlePair& beam = beams();
         int NN = 0;
-        cout<<"sqrts = "<<sqrtS()<<endl;
 
         if (beamOpt == "NONE") {
         
@@ -97,10 +97,12 @@ class PHENIX_2016_I1394433 : public Analysis {
     else if (beamOpt == "HEAU200") collSys = HeAu200;
     else if (beamOpt == "CUAU200") collSys = CuAu200;
 
-cout<<"Collision system "<<collSys<<endl;
 
     declareCentrality(RHICCentrality("PHENIX"),"RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
         
+      if(fixedcentralityOpt!= "NONE"){
+        manualCentrality = std::stof(fixedcentralityOpt);
+      }
      //Au+Au collisions
 
         book(_hist_AuAu_E_200, "d01-x01-y03", refData(1, 1, 3));
@@ -169,7 +171,10 @@ cout<<"Collision system "<<collSys<<endl;
         
         //get centrality info
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-        const double c = cent();
+        double c = cent();
+      if(fixedcentralityOpt!= "NONE"){
+           c = manualCentrality; // Use the float value set in init()
+      }
         if (c > 60) vetoEvent;
         
         //loop over particles to get total charged particles & Et
@@ -324,6 +329,8 @@ cout<<"Collision system "<<collSys<<endl;
     Profile1DPtr _hist_HeAu_E_200;
     //@}
     string beamOpt;
+    string fixedcentralityOpt;
+    double manualCentrality = -1.0;
     enum CollisionSystem {NONE, AuAu7,AuAu14,AuAu19,AuAu27,AuAu39,AuAu62,AuAu130,AuAu200,CuCu62,CuCu200,CuAu200,UU193,dAu200,HeAu200,pp200};
     CollisionSystem collSys;
 
