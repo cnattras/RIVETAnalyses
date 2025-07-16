@@ -1,0 +1,46 @@
+Name: SPHENIX_2025_I2907537
+Year: 2025
+Summary: <A one-line informative SPHENIX_2025_I2907537 headline>
+Experiment: SPHENIX
+Collider: <Insert the collider name>
+InspireID: 2907537
+Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Reentrant: true
+Authors:
+ - Your Name <your@email.address>
+References:
+ - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
+ - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
+ - 'Example: arXiv:1605.03814'
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+#Beams: [p+, p+]
+#Energies: [[6500,6500]]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU130
+ - fixedcentrality=0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,NONE
+Description:
+  'A brief description of what is measured and what it is useful for.
+   Use LaTeX for maths, e.g. $p_\mathrm{T} > 50~\mathrm{GeV}$.'
+ValidationInfo:
+  'A description of the process used to validate the Rivet code against
+  the original experimental analysis. Cut-flow tables and similar information
+  are welcome'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: sPHENIX:2025uhi
+BibTeX: '@article{sPHENIX:2025uhi,
+    author = "Abdulhamid, M. I. and others",
+    collaboration = "sPHENIX",
+    title = "{Measurement of charged hadron multiplicity in Au+Au collisions at $\sqrt{\text{s}_{\text{NN}}} = 200$ GeV with the sPHENIX detector}",
+    eprint = "2504.02240",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    month = "4",
+    year = "2025"
+}'
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
