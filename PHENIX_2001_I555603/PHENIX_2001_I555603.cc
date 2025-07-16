@@ -39,6 +39,7 @@ namespace Rivet {
           if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1e-3)){ collSys = AuAu130;        }
       }
       }
+    if (beamOpt == "AUAU130") collSys = AuAu130;
 
 
       // Declare Centrality
