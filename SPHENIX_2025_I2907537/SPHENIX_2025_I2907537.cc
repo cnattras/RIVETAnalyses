@@ -24,6 +24,58 @@ namespace Rivet {
     /// @name Analysis methods
     /// @{
 
+//Class for finding the centrality bin 
+    int findCentBin(float c) {
+    // Number of bins is (number of edges - 1)
+    const int nBins = 15;
+
+    // Handle out-of-range values explicitly (optional)
+    if (c <= centBinEdges[0]) return -1;      // below range (no bin)
+    if (c > centBinEdges[nBins]) return -1;  // above range (no bin)
+
+    // Binary search for efficiency
+    int low = 0, high = nBins - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (c > centBinEdges[mid] && c <= centBinEdges[mid + 1]) {
+            return mid;
+        } else if (c <= centBinEdges[mid]) {
+            high = mid - 1;
+        } else { // c > centBinEdges[mid+1]
+            low = mid + 1;
+        }
+    }
+
+    // If no bin found (should not happen), return -1
+    return -1;
+}
+
+//Class for finding the centrality bin 
+    int findEtaBin(float c) {
+    // Number of bins is (number of edges - 1)
+    const int nBins = 12;
+
+    // Handle out-of-range values explicitly (optional)
+    if (c <= etaBinEdges[0]) return -1;      // below range (no bin)
+    if (c > etaBinEdges[nBins]) return -1;  // above range (no bin)
+
+    // Binary search for efficiency
+    int low = 0, high = nBins - 1;
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (c > etaBinEdges[mid] && c <= etaBinEdges[mid + 1]) {
+            return mid;
+        } else if (c <= etaBinEdges[mid]) {
+            high = mid - 1;
+        } else { // c > centBinEdges[mid+1]
+            low = mid + 1;
+        }
+    }
+
+    // If no bin found (should not happen), return -1
+    return -1;
+}
+
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -48,7 +100,6 @@ namespace Rivet {
       if(fixedcentralityOpt!= "NONE"){
         manualCentrality = std::stof(fixedcentralityOpt);
       }
-      cout<<"Hello! system "<<collSys<<endl;
 
       // Initialise and register projections
 
@@ -60,8 +111,22 @@ namespace Rivet {
      declare(ALICE::PrimaryParticles(Cuts::abseta < 1.1 && Cuts::pT > 0.0*MeV && Cuts::abscharge > 0), "APRIM");
 
 
-      book(_hist_NchCent, 1, 1, 1);
-      book(_hist_NchEta, 2, 1, 1);//Note this actually needs to be fleshed out so that it has the eta distributions in all of the centralities
+        book(_hist_NchCent, "d01-x01-y01", refData(1, 1, 1));
+
+        for(int i=0;i<nCB;i++){
+          string histoname = "_hist_NchEta_Cent_"+std::to_string(centBinEdges[i])+"_"+std::to_string(centBinEdges[i+1]);
+
+          std::ostringstream oss;
+          oss << std::setw(2) << std::setfill('0') << i;
+          string rivethistoname = "d02-x01-y"+oss.str();
+
+          book(_p[histoname], rivethistoname, refData(2, 1, i+1)); 
+          //cout<<rivethistoname<<" "<<histoname<<endl;
+        }
+        //book(_hist_NchEta, "d02-x01-y01", refData(2, 1, 1));
+      // book(_TEST, "NchCent", 10, 0.0, 100.0); 
+      // book(_hist_NchCent, 1, 1, 1);
+      // book(_hist_NchEta, 2, 1, 1);//Note this actually needs to be fleshed out so that it has the eta distributions in all of the centralities
 
     }
 
@@ -70,11 +135,13 @@ namespace Rivet {
     void analyze(const Event& event) {
       if (collSys == AuAu200){
 
-        double totalEt = 0;
-        double deltaeta = 2.2; 
+        double deltaeta = 0.6;//2.2; 
+        int nchcounter = 0;//chargedParticles.size();
+        int nchcounters[11] = {0,0,0,0,0, 0,0,0,0,0, 0};
 
 
         Particles fsParticles = apply<FinalState>(event,"fs").particles();
+        Particles chargedParticles = apply<ALICE::PrimaryParticles>(event,"APRIM").particles();
 
         const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
          double c = cent();
@@ -83,17 +150,25 @@ namespace Rivet {
       }
         if (c > 70) vetoEvent;
 
-        for(const Particle& p : fsParticles) // loop over all final state particles
-        {
-            totalEt += p.Et()/GeV;
+
+        for(const Particle& p : chargedParticles) // loop over all final state particles
+        {   
+            int myetabin = findEtaBin(p.eta());
+            nchcounters[myetabin]++;
+            cout<<"eta bin "<<myetabin<<" eta "<<p.eta()<<endl;
+            if(abs(p.eta())<0.3) nchcounter++;
+        }
+        int mycentbin = findCentBin(c);
+        string histoname = "_hist_NchEta_Cent_"+std::to_string(centBinEdges[mycentbin])+"_"+std::to_string(centBinEdges[mycentbin+1]);
+        for(int i=0;i<nEB;i++){
+          _p[histoname]->fill((etaBinEdges[i]+etaBinEdges[i+1])/2,((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i]));
+          cout<<"Filling eta "<<(etaBinEdges[i]+etaBinEdges[i+1])/2<<" dNch/deta "<<((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i])<<endl;
         }
 
-        //get charged particles
-        Particles chargedParticles = apply<ALICE::PrimaryParticles>(event,"APRIM").particles();
-        int nchcounter = chargedParticles.size();
-          _hist_NchCent->fill(c,nchcounter/deltaeta);
+        //get charged particles;
+          _hist_NchCent->fill(c,((double)nchcounter)/deltaeta);
 
-cout<<"Centrality CATS "<<c<<" dNch/deta "<<nchcounter/deltaeta<<endl;
+//cout<<"Centrality MEOW "<<c<<" dNch/deta "<<nchcounter/deltaeta<<endl;
       
     }
     }
@@ -110,6 +185,10 @@ cout<<"Centrality CATS "<<c<<" dNch/deta "<<nchcounter/deltaeta<<endl;
 
     /// @name Histograms
     /// @{
+    const double etaBinEdges[12] =  {-1.100000e+00, -9.000000e-01, -7.000000e-01, -5.000000e-01, -3.000000e-01, -1.000000e-01, 1.000000e-01, 3.000000e-01, 5.000000e-01, 7.000000e-01, 9.000000e-01, 1.100000e+00};
+    const int nEB = 11;
+    const int centBinEdges[16] = {0,3,6,10,15,  20,25,30,35,40,  45,50,55,60,65,  70};
+    const int nCB = 15;
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
