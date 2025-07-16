@@ -93,7 +93,7 @@ namespace Rivet {
         int nchcounter = chargedParticles.size();
           _hist_NchCent->fill(c,nchcounter/deltaeta);
 
-cout<<"Centrality "<<c<<" dNch/deta "<<nchcounter/deltaeta<<endl;
+cout<<"Centrality CATS "<<c<<" dNch/deta "<<nchcounter/deltaeta<<endl;
       
     }
     }

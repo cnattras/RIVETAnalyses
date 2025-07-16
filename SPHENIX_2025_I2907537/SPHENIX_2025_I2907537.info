@@ -4,7 +4,7 @@ Summary: <A one-line informative SPHENIX_2025_I2907537 headline>
 Experiment: SPHENIX
 Collider: <Insert the collider name>
 InspireID: 2907537
-Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Status: UNVALIDATED REENTRANT
 Reentrant: true
 Authors:
  - Your Name <your@email.address>
