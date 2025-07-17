@@ -1,32 +1,33 @@
 Name: SPHENIX_2025_I2907537
 Year: 2025
-Summary: <A one-line informative SPHENIX_2025_I2907537 headline>
+Summary: Measurement of charged hadron multiplicity in Au+Au collisions at $\sqrt{\text{s}_{\text{NN}}}$ =200~GeV with the sPHENIX detector
 Experiment: SPHENIX
 Collider: <Insert the collider name>
 InspireID: 2907537
-Status: UNVALIDATED REENTRANT
+Status: Relativistic Heavy Ion Collider (RHIC)
 Reentrant: true
 Authors:
- - Your Name <your@email.address>
+ - Christal Martin <cbaillar@vols.utk.edu>
+ - Antonio Da Silva <antonio.sphenix@gmail.com>
+ - Christine Nattrass <christine.nattrass@utk.edu>
 References:
  - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
  - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
  - 'Example: arXiv:1605.03814'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [p+, p+]
-#Energies: [[6500,6500]]
+Beams: [Au, Au]
+Energies: [
+39400   # Au+Au 200 GeV * 197 nucleons
+]
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=AUAU130
- - fixedcentrality=0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,NONE
+ - beam=AUAU200
+ - fixedcentrality=0,3,6,10,15,20,25,30,35,40,45,50,55,60,65,NONE
 Description:
-  'A brief description of what is measured and what it is useful for.
-   Use LaTeX for maths, e.g. $p_\mathrm{T} > 50~\mathrm{GeV}$.'
+  The pseudorapidity distribution of charged hadrons produced in Au+Au collisions at a center-of-mass energy of $\sqrt{s_{\scriptscriptstyle NN}}=200{\rm~GeV}$ is measured using data collected by the sPHENIX detector. Charged hadron yields are extracted by counting cluster pairs in the inner and outer layers of the Intermediate Silicon Tracker, with corrections applied for detector acceptance, reconstruction efficiency, combinatorial pairs, and contributions from secondary decays. The measured distributions cover $|\eta|<1.1$ across various centralities, and the average pseudorapidity density of charged hadrons at mid-rapidity is compared to predictions from Monte Carlo heavy-ion event generators. This result, featuring full azimuthal coverage at mid-rapidity, is consistent with previous experimental measurements at the Relativistic Heavy Ion Collider, thereby supporting the broader sPHENIX physics program.
 ValidationInfo:
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
+  'This analysis was approved by the collaboration with an internal review committee.'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []

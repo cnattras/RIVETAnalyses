@@ -27,14 +27,13 @@ namespace Rivet {
 //Class for finding the centrality bin 
     int findCentBin(float c) {
     // Number of bins is (number of edges - 1)
-    const int nBins = 15;
 
     // Handle out-of-range values explicitly (optional)
     if (c <= centBinEdges[0]) return -1;      // below range (no bin)
-    if (c > centBinEdges[nBins]) return -1;  // above range (no bin)
+    if (c > centBinEdges[nCB]) return -1;  // above range (no bin)
 
     // Binary search for efficiency
-    int low = 0, high = nBins - 1;
+    int low = 0, high = nCB - 1;
     while (low <= high) {
         int mid = (low + high) / 2;
         if (c > centBinEdges[mid] && c <= centBinEdges[mid + 1]) {
@@ -50,30 +49,33 @@ namespace Rivet {
     return -1;
 }
 
-//Class for finding the centrality bin 
-    int findEtaBin(float c) {
-    // Number of bins is (number of edges - 1)
-    const int nBins = 12;
+int findEtaBin(double c) {
+    //cout<<"starting search "<<etaBinEdges[0]<<" - "<<etaBinEdges[nEB]<<endl;
+    // Out of range checks:
+    if (c <= etaBinEdges[0]) return -1;        // < lowest edge — no bin
+    if (c > etaBinEdges[nEB]) return -1;    // > highest edge — no bin
 
-    // Handle out-of-range values explicitly (optional)
-    if (c <= etaBinEdges[0]) return -1;      // below range (no bin)
-    if (c > etaBinEdges[nBins]) return -1;  // above range (no bin)
+    // Binary search to find bin
+    int low = 0;
+    int high = nEB; // bin indices [0..10]
+    //cout<<"low "<<low<<" high "<<high<<endl;
 
-    // Binary search for efficiency
-    int low = 0, high = nBins - 1;
     while (low <= high) {
         int mid = (low + high) / 2;
         if (c > etaBinEdges[mid] && c <= etaBinEdges[mid + 1]) {
-            return mid;
+    //cout<<"low "<<low<< " "<<etaBinEdges[low]<<" high "<<high<< " "<<etaBinEdges[high]<<" returning "<<mid<<endl; 
+            return mid; // found bin
         } else if (c <= etaBinEdges[mid]) {
-            high = mid - 1;
-        } else { // c > centBinEdges[mid+1]
-            low = mid + 1;
+    //cout<<"low "<<low<< " "<<etaBinEdges[low]<<" high "<<high<< " "<<etaBinEdges[high]<<endl; 
+            high = mid - 1; // search left
+        } else {
+    //cout<<"low "<<low<< " "<<etaBinEdges[low]<<" high "<<high<< " "<<etaBinEdges[high]<<endl; 
+            low = mid + 1;  // search right
         }
     }
+    //cout<<"low "<<low<< " "<<etaBinEdges[low]<<" high "<<high<< " "<<etaBinEdges[high]<<" FAIL "<<endl;
 
-    // If no bin found (should not happen), return -1
-    return -1;
+    return -1; // should never happen if bounds are respected
 }
 
     /// Book histograms and initialise projections before the run
@@ -117,7 +119,7 @@ namespace Rivet {
           string histoname = "_hist_NchEta_Cent_"+std::to_string(centBinEdges[i])+"_"+std::to_string(centBinEdges[i+1]);
 
           std::ostringstream oss;
-          oss << std::setw(2) << std::setfill('0') << i;
+          oss << std::setw(2) << std::setfill('0') << i+1;
           string rivethistoname = "d02-x01-y"+oss.str();
 
           book(_p[histoname], rivethistoname, refData(2, 1, i+1)); 
@@ -154,15 +156,16 @@ namespace Rivet {
         for(const Particle& p : chargedParticles) // loop over all final state particles
         {   
             int myetabin = findEtaBin(p.eta());
-            nchcounters[myetabin]++;
-            cout<<"eta bin "<<myetabin<<" eta "<<p.eta()<<endl;
+            if(myetabin!=-1) nchcounters[myetabin]++;
+            //cout<<"eta bin "<<myetabin<<" eta "<<p.eta()<<endl;
             if(abs(p.eta())<0.3) nchcounter++;
         }
         int mycentbin = findCentBin(c);
-        string histoname = "_hist_NchEta_Cent_"+std::to_string(centBinEdges[mycentbin])+"_"+std::to_string(centBinEdges[mycentbin+1]);
+       string histoname = "_hist_NchEta_Cent_"+std::to_string(centBinEdges[mycentbin])+"_"+std::to_string(centBinEdges[mycentbin+1]);
+       cout<<"CB :"<<mycentbin<<" centrality "<<c<<endl;
         for(int i=0;i<nEB;i++){
-          _p[histoname]->fill((etaBinEdges[i]+etaBinEdges[i+1])/2,((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i]));
-          cout<<"Filling eta "<<(etaBinEdges[i]+etaBinEdges[i+1])/2<<" dNch/deta "<<((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i])<<endl;
+            if(mycentbin!=-1) _p[histoname]->fill((etaBinEdges[i]+etaBinEdges[i+1])/2,((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i]));
+          //cout<<"Filling eta "<<(etaBinEdges[i]+etaBinEdges[i+1])/2<<" dNch/deta "<<((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i])<<endl;
         }
 
         //get charged particles;
