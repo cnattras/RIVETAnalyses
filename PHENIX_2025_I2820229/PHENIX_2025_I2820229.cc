@@ -3,6 +3,7 @@
 #include "Rivet/Projections/FinalState.hh"
 #include "Rivet/Projections/FastJets.hh"
 #include "fastjet/contrib/SoftDrop.hh"
+#include "Rivet/Math/Math.hh"
 
 namespace Rivet {
 
@@ -13,7 +14,6 @@ namespace Rivet {
 
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2025_I2820229);
-
 
 
     /// Book histograms and initialise projections before the run
@@ -132,10 +132,10 @@ namespace Rivet {
               }
 
 
-
             for (const Particle& p : jet.particles()) {
               double xi = - log( p.pT() / jet.pT());
               double dr = deltaR(p, jet);
+
               // cout<<"xi "<<xi<<" dr "<<dr<<endl;
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 h["Xi910"]->fill(xi);
@@ -215,19 +215,22 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
-       const double sf = crossSection()/millibarn;
-       std::cout<< "sf: " << sf << std::endl;
        // factor 0.3 needed because it is differential in deta
-      scale(h["jetcross"], 0.3/sf);
+       // const double sf =0.3* crossSection()/millibarn;
+
+      double normalization = crossSection()/millibarn/sumOfWeights()/(0.3); 
+       // std::cout<< "sf: " << sf << std::endl;
+      scale(h["jetcross"], normalization);
        cout<<"Counters ";
-       cout<<c["ptbin0"]->sumW();
-       cout<<c["ptbin1"]->sumW();
-       cout<<c["ptbin2"]->sumW();
-       cout<<c["ptbin3"]->sumW();
-       cout<<c["ptbin4"]->sumW();
-       cout<<c["ptbin5"]->sumW();
+       cout<<c["ptbin0"]->sumW()<<"; ";
+       cout<<c["ptbin1"]->sumW()<<"; ";
+       cout<<c["ptbin2"]->sumW()<<"; ";
+       cout<<c["ptbin3"]->sumW()<<"; ";
+       cout<<c["ptbin4"]->sumW()<<"; ";
+       cout<<c["ptbin5"]->sumW()<<"; ";
        cout<<c["ptbin6"]->sumW();
        cout<<endl;
+       cout<<" Sum of weights: "<<sumOfWeights()<<endl;
 
       for (int i = 0; i < NPTBINS; ++i) {
         scale(h["zg" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
@@ -235,6 +238,7 @@ namespace Rivet {
         scale(h["R" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
         scale(h["jT" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
       }
+
  
       //normalize(h["XXXX"]); // normalize to unity
       //normalize(h["YYYY"], crossSection()/picobarn); // normalize to generated cross-section in pb (no cuts)
