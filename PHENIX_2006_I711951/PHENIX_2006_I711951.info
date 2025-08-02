@@ -1,17 +1,18 @@
 Name: PHENIX_2006_I711951
 Year: 2006
-Summary: Nuclear effects on hadron production in d = Au and p + p collisions at $\sqrt{s_{NN}}$ = 200-GeV
+Summary: Nuclear effects on hadron production in d+Au and p+p collisions at $\sqrt{s_{NN}}$ = 200-GeV
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 711951
-Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Status: UNVALIDATED REENTRANT
+Reentrant: true
 Authors:
  - Andi Mankolli <andi.mankolli@vanderbilt.edu>
  - Christine Nattrass <cnattrass@utk.edu> 
  - Antonio Silva <antonio.silva@cern.ch>
 References:
  - 'Phys.Rev. C74, 024904 (2006)'
- - 'DOI:10.1103/PhysRevC.74.024904'
+ - 'doi.org/10.1103/PhysRevC.74.024904'
  - 'arXiv:nucl-ex/0603010'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
@@ -19,7 +20,8 @@ References:
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
- - beam=PP200,AUAU200,DAU200
+ - beam=PP200,DAU200
+ - fixedcentrality=0,10, 20, 30, 40, 50, 60, 92, NONE
 Description: PHENIX has measured the centrality dependence of mid-rapidity pion, kaon and proton transverse momentum distributions in $d$+Au and $p$+$p$ collisions at $\sqrt{s_{NN}}$ = 200 GeV. The $p$+$p$ data provide a reference for nuclear effects in $d$+Au and previously measured Au+Au collisions. Hadron production is enhanced in $d$+Au, relative to independent nucleon-nucleon scattering, as was observed in lower energy collisions. The nuclear modification factor for (anti) protons is larger than that for pions. The difference increases with centrality, but is not sufficient to account for the abundance of baryon production observed in central Au+Au collisions at RHIC. The centrality dependence in $d$+Au shows that the nuclear modification factor increases gradually with the number of collisions suffered by each participant nucleon. We also present comparisons with lower energy data as well as with parton recombination and other theoretical models of nuclear effects on particle production.
 ValidationInfo:
   'A description of the process used to validate the Rivet code against
