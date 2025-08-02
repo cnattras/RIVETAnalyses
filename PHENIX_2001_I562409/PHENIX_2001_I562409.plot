@@ -39,40 +39,42 @@ BEGIN PLOT /PHENIX_2001_I562409/d07-x01-y01
 Title=$R_{AA}$ for neutral pions in central $Au+Au$ collisions from the $PbSc$ detector
 XLabel=$p_{T}$(GeV/c)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /PHENIX_2001_I562409/d08-x01-y01
 Title=$R_{AA}$ for neutral pions in central $Au+Au$ collisions from the $PbGl$ detector
 XLabel=$p_{T}$(GeV/c)
 YLabel=$R_{AA}$
+LogY=0
 END PLOT
 
 BEGIN PLOT /PHENIX_2001_I562409/d09-x01-y01
 Title=$R_{AA}$ for charged hadrons in central $Au+Au$ collisions
 XLabel=$p_{T}$(GeV/c)
 YLabel=$R_{AA}$
-Options=LogY<0>
+LogY=0
 END PLOT
 
 BEGIN PLOT /PHENIX_2001_I562409/d10-x01-y01
 Title=$PbSc$ $R_{CP}$
 XLabel=$p_{T}$(GeV/c)
 YLabel=$R_{CP}$
-Options=LogY<0>
+LogY=0
 END PLOT
 
 BEGIN PLOT /PHENIX_2001_I562409/d11-x01-y01
 Title=$PbGl$ $R_{CP}$
 XLabel=$p_{T}$(GeV/c)
 YLabel=$R_{CP}$
-Options=LogY<0>
+LogY=0
 END PLOT
 
 BEGIN PLOT /PHENIX_2001_I562409/d12-x01-y01
 Title=Charged Hadrons $R_{CP}$
 XLabel=$p_{T}$(GeV/c)
 YLabel=$R_{CP}$
-Options=LogY<0>
+LogY=0
 END PLOT
 
 list = [d03-x01-y01 d04-x01-y01 d05-x01-y01 d06-x01-y01 d07-x01-y01 d08-x01-y01 d09-x01-y01 d10-x01-y01 d11-x01-y01 d12-x01-y01]
