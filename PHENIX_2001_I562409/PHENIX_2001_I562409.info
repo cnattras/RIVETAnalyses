@@ -4,8 +4,8 @@ Summary: Suppression of hadrons with large transverse momentum in central Au+Au 
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 562409
-Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
-Reentrant: False
+Status: UNVALIDATED REENTRANT
+Reentrant: true
 Authors:
  - Taylor Sussmane <tsussma1@vols.utk.edu>
  - Antonio Silva <antonio.silva@cern.ch>
@@ -20,8 +20,10 @@ References:
 Options:
  - cent=REF,GEN,IMP,USR
  - beam=PP130,AUAU130
+ - fixedcentrality=0,5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,NONE
 Description: Transverse momentum spectra for charged hadrons and for neutral pions in the range 1 GeV/c $< p_T <$ 5 GeV/c have been measured by the PHENIX experiment at RHIC in Au+Au collisions at $\sqrt{s_{_{NN}}}=130$ GeV. At high $p_T$ the spectra from peripheral nuclear collisions are consistent with the naive expectation of scaling the spectra from p+p collisions by the average number of binary nucleon- nucleon collisions. The spectra from central collisions are significantly suppressed when compared to the binary- scaled p+p expectation, and also when compared to similarly binary-scaled peripheral collisions, indicating a novel nuclear effect in central nuclear collisions at RHIC energies.
 ValidationInfo:
+  'Note: this analysis was written well after the paper was written and without the participation of the original authors.  The analysis was approved by the collaboration after tests with PYTHIA Angantyr.  See list of options for collision systems and energies.  This analysis will detect beams and energies if they have been set in the HEPMC; otherwise the collision system and energy can be set with the beam option.  This is designed to be used with the output from the RHIC centrality calibration class.  The GEN and IMP modes for centralities have been tested.  If a fixed centrality is set, this will override the centrality option.'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
