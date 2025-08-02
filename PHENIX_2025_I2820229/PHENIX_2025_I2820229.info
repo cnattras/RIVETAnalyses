@@ -1,28 +1,43 @@
 Name: PHENIX_2025_I2820229
 Year: 2025
-Summary: <A one-line informative PHENIX_2025_I2820229 headline>
+Summary: Measurement of inclusive jet cross section and substructure in $p$+$p$ collisions at $\sqrt{s}=200$ GeV
 Experiment: PHENIX
-Collider: <Insert the collider name>
 InspireID: 2820229
-Status: UNVALIDATED NOHEPDATA SINGLEWEIGHT UNPHYSICAL
+Collider: Relativistic Heavy Ion Collider (RHIC)
+Status: UNVALIDATED REENTRANT
 Reentrant: true
 Authors:
- - Your Name <your@email.address>
+ - Christine Nattrass <christine.nattrass@utk.edu>
 References:
- - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
- - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
- - 'Example: arXiv:1605.03814'
+ - 'Phys.Rev.D 111 (2025) 11, 112008'
+ - 'DOI:10.1103/hpm9-qfp6'
+ - '2408.11144'
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
 #Beams: [p+, p+]
 #Energies: [[6500,6500]]
 #Luminosity_fb: 139.0
 Description:
-  'A brief description of what is measured and what it is useful for.
-   Use LaTeX for maths, e.g. $p_\mathrm{T} > 50~\mathrm{GeV}$.'
+  'The jet cross section and jet-substructure observables in $p$$+$$p$ 
+collisions at $\sqrt{s}=200$ GeV were measured by the PHENIX 
+Collaboration at the Relativistic Heavy Ion Collider (RHIC). Jets are 
+reconstructed from charged-particle tracks and 
+electromagnetic-calorimeter clusters using the anti-$k_{t}$ algorithm 
+with a jet radius $R=0.3$ for jets with transverse momentum within 
+$8.0<p_T<40.0$ GeV/$c$ and pseudorapidity $|\eta|<0.15$.  Measurements 
+include the jet cross section, as well as distributions of 
+SoftDrop-groomed momentum fraction ($z_g$), charged-particle transverse 
+momentum with respect to jet axis ($j_T$), and radial distributions of 
+charged particles within jets ($r$).  Also measured was the 
+distribution of $\xi=-ln(z)$, where $z$ is the fraction of the jet 
+momentum carried by the charged particle. The measurements are compared 
+to theoretical next-to and next-to-next-to-leading-order calculations, 
+the PYTHIA and HERWIG event generators, and to other 
+existing experimental results. Indicated from these measurements is a 
+lower particle multiplicity in jets at RHIC energies when compared to 
+models.  Also noted are implications for future jet measurements with 
+sPHENIX at RHIC as well as at the future Electron-Ion Collider.'
 ValidationInfo:
-  'A description of the process used to validate the Rivet code against
-  the original experimental analysis. Cut-flow tables and similar information
-  are welcome'
+  'This analysis was tested in PYTHIA 8 before approval by the collaboration.'
 #ReleaseTests:
 # - $A my-hepmc-prefix :MODE=some_rivet_flag
 Keywords: []
