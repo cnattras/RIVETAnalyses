@@ -39,16 +39,16 @@ public:
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
                 float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
+                if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
                 n += 1;
             } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
                 float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
+                if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
                 float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
+                if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
                 n += 1;
             }
         }
@@ -74,6 +74,7 @@ public:
         
         //Reading in the beam option
         beamOpt = getOption<string>("beam","NONE");
+        fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");   
         
         //In case "NONE" is given as option
         const ParticlePair& beam = beams();
@@ -81,7 +82,7 @@ public:
             if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
                 {
                     float NN = 197.;
-                    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
+                    if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5e-3)) collSys = AuAu200;
                 }
         }
         
@@ -89,6 +90,9 @@ public:
         // Declare centrality projection for centrality estimation
         //if (!(collSys == pp))
         declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX","CMULT","CMULT");
+        if(fixedcentralityOpt!= "NONE"){
+            manualCentrality = std::stof(fixedcentralityOpt);
+        }
         
         
         //Ratio of protons/pions
@@ -872,6 +876,8 @@ public:
     enum CollisionSystem {NONE, AuAu200};
     CollisionSystem collSys;
     string beamOpt = "NONE";
+    string fixedcentralityOpt;
+    double manualCentrality = -1.0;
     vector<int> AUAUCentralityBins{ 10, 20, 30, 40, 50, 60, 92};
     
     
