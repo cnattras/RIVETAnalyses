@@ -49,16 +49,16 @@ namespace Rivet {
             if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
                 float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
+                if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
                 n += 1;
             } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
                 float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
+                if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
             } else { //Check if we are working with any middle bin
                 float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
                 float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
+                if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
                 n += 1;
             }
         }
@@ -83,7 +83,12 @@ namespace Rivet {
 
 
       if (beamOpt == "NONE") {
-      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+      {
+          float NN = 197.;
+          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5e-3)) collSys = AuAu200;
+      }
+      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
         float NN = 1.;
         if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5e-3)) collSys = pp;
@@ -101,9 +106,12 @@ namespace Rivet {
 
       if (beamOpt =="PP200") collSys = pp;
       else if (beamOpt == "DAU200") collSys = DAu200;
-      
+      else if (beamOpt == "AUAU200") collSys = AuAu200;
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       
+        if(fixedcentralityOpt!= "NONE"){
+            manualCentrality = std::stof(fixedcentralityOpt);
+        }
 
 
       //****Counters****
@@ -289,8 +297,11 @@ namespace Rivet {
       if (collSys == DAu200) {
 
         const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
-        const double cent = centProj();
-
+        
+    double cent = centProj();
+    if(fixedcentralityOpt!= "NONE"){
+            cent = manualCentrality;
+        }
         if (cent < 0. || cent > 88.5) vetoEvent;
 
         if (cent > 0. && cent < 20.) {
@@ -694,8 +705,8 @@ namespace Rivet {
 	      binShift(*hDAu_Yields["P_barC88"]);
 
 
-      double xs = crossSection()/barn;
-      double sf = 1.0 / (2 * M_PI );
+      double xs = crossSection()/millibarn;
+      //  double sf = 1.0 / (2 * M_PI ); Not needed because this was added in the for loop
       //****Scale Histos****
       hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
       hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
@@ -725,12 +736,13 @@ namespace Rivet {
       hDAu_Yields["PC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
       hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
 
-      hPP_Yields["PiplusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
-      hPP_Yields["PiminusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
-      hPP_Yields["KplusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
-      hPP_Yields["KminusPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
-      hPP_Yields["PPP"]->scaleW(xs*sf*1./sow["sow_pp"]->sumW());
-      hPP_Yields["P_barPP"]->scaleW(sf*1./sow["sow_pp"]->sumW());
+      //These are cross sections
+      hPP_Yields["PiplusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiminusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
+      hPP_Yields["KplusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
+      hPP_Yields["KminusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
+      hPP_Yields["P_barPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
 
 
 
@@ -745,7 +757,9 @@ namespace Rivet {
 
     map<string, CounterPtr> sow;
     string beamOpt;
-    enum CollisionSystem { NONE, pp, AuAu200, DAu200 };
+    string fixedcentralityOpt;
+    double manualCentrality = -1.0;
+    enum CollisionSystem { NONE, pp, DAu200 , AuAu200};
     CollisionSystem collSys;
 
     ///@}
