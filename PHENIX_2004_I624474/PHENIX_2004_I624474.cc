@@ -624,7 +624,10 @@ namespace Rivet {
 		const PrimaryParticles cp = apply<PrimaryParticles>(event, "cp");
 		const UnstableParticles np = apply<UnstableParticles>(event, "np");
 		const CentralityProjection& cent = apply<CentralityProjection>(event, "CMULT");
-		const double c = cent();
+		double c = cent();
+		if(fixedcentralityOpt!= "NONE"){
+            c = manualCentrality;
+        }
 		const Particles chargedParticles = cp.particles();
 		const Particles neutralParticles = np.particles();
 		const Particles Piplus = cp.particles(Cuts::pid == 211);
@@ -712,7 +715,7 @@ namespace Rivet {
 						hAUAU_Yields["Kminus5"]->fill(partPt, pt_weight);
 						pmeanPt["Kminus"]->fill(c, partPtM);
 						hK["AUAU0_10"]->fill(p.pT()/GeV);	//Rcp numerator for K
-						hKK["AUAU0_5Kplus"]->fill(partPt);	//ratio numerator for K-/K+ 0-5%
+						hKK["AUAU0_5Kminus"]->fill(partPt);	//ratio numerator for K-/K+ 0-5%
 						hKPi["AUAU0_5Kminus"]->fill(partPt);	//ratio numerator for K-/Pi- 0-5%
 						hKK["AUAUKminus"]->fill(c);	//ratio numerator for K-/K+ vs c
 						hKPi["AUAUKminus"]->fill(c);	//ratio numerator for K-/Pi- vs c
@@ -1725,7 +1728,7 @@ namespace Rivet {
 						
 						hAUAU_Yields["Kminus60_92"]->fill(partPt, pt_weight);
 						hK["AUAU60_92"]->fill(p.pT()/GeV);	//Rcp denominator for K
-						hKK["AUAU60_92Kplus"]->fill(partPt);	//ratio numerator for K-/K+ 60-92%
+						hKK["AUAU60_92Kminus"]->fill(partPt);	//ratio numerator for K-/K+ 60-92%
 						hKPi["AUAU60_92Kminus"]->fill(partPt);	//ratio numerator for K-/Pi- 60-92%
 
 						break;
@@ -1910,8 +1913,8 @@ namespace Rivet {
 		binShift(*hPiPi["AUAU60_92Piminus"]);
 		binShift(*hPiPi["AUAU60_92Piplus"]);
 
-		//binShift(*hPiPi["AUAU0_5Kminus"]);
-		//binShift(*hPiPi["AUAU0_5Kplus"]);
+		binShift(*hKK["AUAU0_5Kminus"]);
+		binShift(*hKK["AUAU0_5Kplus"]);
 		
 		
 
@@ -2010,31 +2013,47 @@ namespace Rivet {
 
 
 		//____Rcp____
+//For the RCP, we have to scale by Ncoll[60-92%]/Ncoll[0-5%] = [14.5]/1065.4 =0.013609912
+		//These are the NColl #'s out of PHENIX internal note 169, which is what was used in the original paper.
+		double ncollscale = 0.013609912;
 
 		hPi["AUAU0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
 		hPi["AUAU60_92"]->scaleW(1./sow["sow_AUAU_60_92"]->sumW());
 		divide(hPi["AUAU0_10"], hPi["AUAU60_92"], hRcp["Pions"]);	//Rcp Pi
+		hRcp["Pions"]->scale(ncollscale);
 		
 		hK["AUAU0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
 		hK["AUAU60_92"]->scaleW(1./sow["sow_AUAU_60_92"]->sumW());
 		divide(hK["AUAU0_10"], hK["AUAU60_92"], hRcp["Kaons"]);		//Rcp K
+		hRcp["Kaons"]->scale(ncollscale);
 		
 		hP["AUAU0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
 		hP["AUAU60_92"]->scaleW(1./sow["sow_AUAU_60_92"]->sumW());
 		divide(hP["AUAU0_10"], hP["AUAU60_92"], hRcp["Pbar+P"]);	//Rcp Pbar+P
+		hRcp["Pbar+P"]->scale(ncollscale);
 
 		hPi0["AUAU0_10"]->scaleW(1./sow["sow_AUAU0_10"]->sumW());
 		hPi0["AUAU60_92"]->scaleW(1./sow["sow_AUAU_60_92"]->sumW());
-		divide(hPi0["AUAU0_10"], hPi0["AUAU60_92"], hRcp["Pi0"]);	//Rcp Pi0		
+		divide(hPi0["AUAU0_10"], hPi0["AUAU60_92"], hRcp["Pi0"]);	//Rcp Pi0			
+		hRcp["Pi0"]->scale(ncollscale);
 
 
 		//____Rcp 1.5GeV+____
 
 		divide(hPi["AUAU0_10GeV1_5"], hPi["AUAU60_92GeV1_5"], hRcp["Pions1_5"]);	//Rcp Pi 1.5GeV
 
-		//divide(hK["AUAU0_10GeV1_5"], hK["AUAU60_92GeV1_5"], hRcp["Kaons1_5"]);	//Rcp K 1.5GeV
+		divide(hK["AUAU0_10GeV1_5"], hK["AUAU60_92GeV1_5"], hRcp["Kaons1_5"]);	//Rcp K 1.5GeV
 
-		//divide(hP["AUAU0_10GeV1_5"], hP["AUAU60_92GeV1_5"], hRcp["Pbar+P1_5"]);	//RcP Proton 1.5GeV
+		divide(hP["AUAU0_10GeV1_5"], hP["AUAU60_92GeV1_5"], hRcp["Pbar+P1_5"]);	//RcP Proton 1.5GeV
+		// double scales[] = {1065.4,845.4,672.4,532.7,373.8,219.8,120.3,61.0,14.5};
+		// int nbins = 9;
+		// for (auto& b : hRcp["Pions1_5"].bins()) {
+		//     // Possibly, for each binned 1D histogram bin:
+		//     double val = b.data().value();    // 'data()' gives you the Estimate object
+		//     double err = b.data().error();    // See if these are public
+		//     // Set new value/error as needed, if you have setters
+		// }
+
 
 
 		//____Particle Ratios____

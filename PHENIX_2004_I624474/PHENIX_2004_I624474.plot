@@ -769,7 +769,7 @@ END PLOT
 
 #Rcp Pions
 BEGIN PLOT /PHENIX_2004_I624474/d21-x01-y01
-Title=$R_{CP}$ of as a function of centrality for $\frac{\pi^{+}+\pi^{-}}{2}$ 
+Title=$R_{CP}$ for $\frac{\pi^{+}+\pi^{-}}{2}$ 
 XLabel= $p_{T}$(GeV/c)
 YLabel=$R_{CP}$
 LogY=0
@@ -777,7 +777,7 @@ END PLOT
 
 #Rcp Kaons
 BEGIN PLOT /PHENIX_2004_I624474/d22-x01-y01
-Title=$R_{CP}$ of as a function of centrality for $\frac{K^{+}+K^{-}}{2}$ 
+Title=$R_{CP}$ for $\frac{K^{+}+K^{-}}{2}$ 
 XLabel= $p_{T}$(GeV/c)
 YLabel=$R_{CP}$
 LogY=0
@@ -785,7 +785,7 @@ END PLOT
 
 #Rcp Protons
 BEGIN PLOT /PHENIX_2004_I624474/d23-x01-y01
-Title=$R_{CP}$ of as a function of centrality for $\frac{p+\bar{p}}{2}$ 
+Title=$R_{CP}$ for $\frac{p+\bar{p}}{2}$ 
 XLabel= $p_{T}$(GeV/c)
 YLabel=$R_{CP}$
 LogY=0
@@ -793,7 +793,7 @@ END PLOT
 
 #Rcp Pi0
 BEGIN PLOT /PHENIX_2004_I624474/d24-x01-y01
-Title=$R_{CP}$ of as a function of centrality for $\pi^{0}$ 
+Title=$R_{CP}$ for $\pi^{0}$ 
 XLabel= $p_{T}$(GeV/c)
 YLabel=$R_{CP}$
 LogY=0
