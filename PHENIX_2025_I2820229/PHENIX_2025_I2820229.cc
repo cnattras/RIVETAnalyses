@@ -96,7 +96,7 @@ static double deltaPhi(double phi1, double phi2) {
       book(h["R2429"], 8, 1, 7);//bin 6
       // Book counters
       for (int i = 0; i < NPTBINS; ++i) {
-        book(c["ptbin" + std::to_string(i)], "ptbin" + std::to_string(i));
+        book(c["ptbin" + std::to_string(i)], "_ptbin" + std::to_string(i));
       }
 
     }
@@ -152,37 +152,37 @@ static double deltaPhi(double phi1, double phi2) {
               // cout<<"xi "<<xi<<" dr "<<dr<<endl;
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 h["Xi910"]->fill(xi);
-                h["R910"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R910"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT910"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
               if(jet.pT()>PTBINS[1]&& jet.pT()<PTBINS[2]){//bin 1
                 h["Xi1012"]->fill(xi);
-                h["R1012"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R1012"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT1012"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
               if(jet.pT()>PTBINS[2]&& jet.pT()<PTBINS[3]){//bin 2
                 h["Xi1214"]->fill(xi);
-                h["R1214"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R1214"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT1214"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
               if(jet.pT()>PTBINS[3]&& jet.pT()<PTBINS[4]){//bin 3
                 h["Xi1417"]->fill(xi);
-                h["R1417"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R1417"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT1417"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
               if(jet.pT()>PTBINS[4]&& jet.pT()<PTBINS[5]){//bin 4
                 h["Xi1720"]->fill(xi);
-                h["R1720"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R1720"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT1720"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
               if(jet.pT()>PTBINS[5]&& jet.pT()<PTBINS[6]){//bin 5
                 h["Xi2024"]->fill(xi);
-                h["R2024"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R2024"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT2024"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
               if(jet.pT()>PTBINS[6]&& jet.pT()<PTBINS[7]){//bin 6
                 h["Xi2429"]->fill(xi);
-                h["R2429"]->fill(dr);
+                if (std::isfinite(dr) && dr > 0 && std::isfinite(1.0/dr)) {h["R2429"]->fill(dr,1.0/dr);}
                 if (std::isfinite(jTOverpTjet) && jTOverpTjet > 0 && std::isfinite(1.0/jTOverpTjet)) {h["jT2429"]->fill(jTOverpTjet,1.0/jTOverpTjet);}
               }
             }
