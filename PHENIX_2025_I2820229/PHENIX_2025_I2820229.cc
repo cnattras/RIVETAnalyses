@@ -15,6 +15,14 @@ namespace Rivet {
     /// Constructor
     RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2025_I2820229);
 
+// Helper to compute deltaPhi in [-π, π]
+static double deltaPhi(double phi1, double phi2) {
+    double dphi = phi1 - phi2;
+    while (dphi > M_PI) dphi -= 2*M_PI;
+    while (dphi <= -M_PI) dphi += 2*M_PI;
+    return dphi;
+}
+
 
     /// Book histograms and initialise projections before the run
     void init() {
@@ -133,37 +141,49 @@ namespace Rivet {
 
 
             for (const Particle& p : jet.particles()) {
-              double xi = - log( p.pT() / jet.pT());
-              double dr = deltaR(p, jet);
-
+              double xi = - log( p.p() / jet.p());
+              //double dr = deltaR(p, jet);
+              double deta = p.eta() - jet.eta();
+              double dphi = deltaPhi(jet.phi(), p.phi());
+              double dr =  sqrt(deta*deta + dphi*dphi);
+              //There are edge cases where jT is infinite so we protect against that when filling the histos
+              double jTOverpTjet = jet.p3().cross(p.p3()).mod()/jet.p()/jet.pT();
+              //cout<<"p "<<p.p()<<" pjet "<<jet.p()<<" jTOverpTjet "<< jet.p3().cross(p.p3()).mod()/jet.p()<<" jTOverpTjet/pTjet "<<jT<<endl;
               // cout<<"xi "<<xi<<" dr "<<dr<<endl;
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 h["Xi910"]->fill(xi);
                 h["R910"]->fill(dr);
+                h["jT910"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
               if(jet.pT()>PTBINS[1]&& jet.pT()<PTBINS[2]){//bin 1
                 h["Xi1012"]->fill(xi);
                 h["R1012"]->fill(dr);
+                h["jT1012"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
               if(jet.pT()>PTBINS[2]&& jet.pT()<PTBINS[3]){//bin 2
                 h["Xi1214"]->fill(xi);
                 h["R1214"]->fill(dr);
+                h["jT1214"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
               if(jet.pT()>PTBINS[3]&& jet.pT()<PTBINS[4]){//bin 3
                 h["Xi1417"]->fill(xi);
                 h["R1417"]->fill(dr);
+                h["jT1417"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
               if(jet.pT()>PTBINS[4]&& jet.pT()<PTBINS[5]){//bin 4
                 h["Xi1720"]->fill(xi);
                 h["R1720"]->fill(dr);
+                h["jT1720"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
               if(jet.pT()>PTBINS[5]&& jet.pT()<PTBINS[6]){//bin 5
                 h["Xi2024"]->fill(xi);
                 h["R2024"]->fill(dr);
+                h["jT2024"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
               if(jet.pT()>PTBINS[6]&& jet.pT()<PTBINS[7]){//bin 6
                 h["Xi2429"]->fill(xi);
                 h["R2429"]->fill(dr);
+                h["jT2429"]->fill(jTOverpTjet,1.0/jTOverpTjet);
               }
             }
           
@@ -185,22 +205,22 @@ namespace Rivet {
               if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 0
                 h["zg910"]->fill(zg);
               }
-              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 1
+              if(jet.pT()>PTBINS[1]&& jet.pT()<PTBINS[2]){//bin 1
                 h["zg1012"]->fill(zg);
               }
-              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 2
+              if(jet.pT()>PTBINS[2]&& jet.pT()<PTBINS[3]){//bin 2
                 h["zg1214"]->fill(zg);
               }
-              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 3
+              if(jet.pT()>PTBINS[3]&& jet.pT()<PTBINS[4]){//bin 3
                 h["zg1417"]->fill(zg);
               }
-              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 4
+              if(jet.pT()>PTBINS[4]&& jet.pT()<PTBINS[5]){//bin 4
                 h["zg1720"]->fill(zg);
               }
-              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 5
+              if(jet.pT()>PTBINS[5]&& jet.pT()<PTBINS[6]){//bin 5
                 h["zg2024"]->fill(zg);
               }
-              if(jet.pT()>PTBINS[0]&& jet.pT()<PTBINS[1]){//bin 6
+              if(jet.pT()>PTBINS[6]&& jet.pT()<PTBINS[7]){//bin 6
                 h["zg2429"]->fill(zg);
               }
             
@@ -221,20 +241,11 @@ namespace Rivet {
       double normalization = crossSection()/millibarn/sumOfWeights()/(0.3); 
        // std::cout<< "sf: " << sf << std::endl;
       scale(h["jetcross"], normalization);
-       cout<<"Counters ";
-       cout<<c["ptbin0"]->sumW()<<"; ";
-       cout<<c["ptbin1"]->sumW()<<"; ";
-       cout<<c["ptbin2"]->sumW()<<"; ";
-       cout<<c["ptbin3"]->sumW()<<"; ";
-       cout<<c["ptbin4"]->sumW()<<"; ";
-       cout<<c["ptbin5"]->sumW()<<"; ";
-       cout<<c["ptbin6"]->sumW();
-       cout<<endl;
-       cout<<" Sum of weights: "<<sumOfWeights()<<endl;
+
 
       for (int i = 0; i < NPTBINS; ++i) {
         scale(h["zg" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
-        scale(h["xi" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
+        scale(h["Xi" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
         scale(h["R" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
         scale(h["jT" + std::to_string(static_cast<int>(PTBINS[i])) + std::to_string(static_cast<int>(PTBINS[i + 1]))], 1.0 / (c["ptbin" + std::to_string(i)]->sumW()));
       }
