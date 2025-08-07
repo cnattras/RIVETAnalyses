@@ -139,73 +139,44 @@ END PLOT
 
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y01
-Title= R distributions for $p_T$ bin 9.0-10.0
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 9.0-10.0
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y02
-Title= R distributions for $p_T$ bin 10.0-12.0
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 10.0-12.0
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y03
-Title= R distributions for $p_T$ bin 12.0-14.5
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 12.0-14.5
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y04
-Title= R distributions for $p_T$ bin 14.5-17.5
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 14.5-17.5
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y05
-Title= R distributions for $p_T$ bin 17.5-20.5
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 17.5-20.5
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y06
-Title= R distributions for $p_T$ bin 20.5-24.5
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 20.5-24.5
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2025_I2820229/d08-x01-y07
-Title= R distributions for $p_T$ bin 24.5-29.0
-XLabel= R
-YLabel= $\frac{1}{N_{jet}}\frac{dN}{dR}$
+Title= r distributions for $p_T$ bin 24.5-29.0
+XLabel= r
+YLabel= $\frac{1}{N_{jet}}\frac{dN}{rdr}$
 END PLOT
 
-
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin0
-YMin=1
-YMax=10
-END PLOT
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin1
-YMin=1
-YMax=10
-END PLOT
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin2
-YMin=1
-YMax=10
-END PLOT
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin3
-YMin=1
-YMax=10
-END PLOT
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin4
-YMin=1
-YMax=10
-END PLOT
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin5
-YMin=1
-YMax=10
-END PLOT
-BEGIN PLOT /PHENIX_2025_I2820229/ptbin6
-YMin=1
-YMax=10
-END PLOT
