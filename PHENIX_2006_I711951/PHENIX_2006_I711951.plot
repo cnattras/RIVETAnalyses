@@ -131,7 +131,7 @@ YLabel = $\frac{d^{2}\sigma}{dp_{T}dy}$
 END PLOT
 
 BEGIN PLOT /PHENIX_2006_I711951/d06-x01-y05
-Title = protons in p+p for centrality $0-20\%$
+Title = protons in d+Au for centrality $0-20\%$
 XLabel = $p_{T}$(GeV/c)
 YLabel = $\frac{1}{2\pi}\frac{1}{N_{Event}}\frac{1}{p_{T}}\frac{d^{2}N}{dp_{T}dy}$
 END PLOT

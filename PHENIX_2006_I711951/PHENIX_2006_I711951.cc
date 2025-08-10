@@ -83,18 +83,15 @@ namespace Rivet {
 
 
       if (beamOpt == "NONE") {
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-      {
-          float NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5e-3)) collSys = AuAu200;
-      }
-      else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
+      if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
       {
         float NN = 1.;
         if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5e-3)) collSys = pp;
       }
       else if ((beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970) || (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020))
       {
+       cout<<"energy "<<sqrtS()/GeV<<endl;
+
         if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2), 5e-3)) collSys = DAu200;
       }
       else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020) collSys = DAu200;
@@ -106,12 +103,14 @@ namespace Rivet {
 
       if (beamOpt =="PP200") collSys = pp;
       else if (beamOpt == "DAU200") collSys = DAu200;
-      else if (beamOpt == "AUAU200") collSys = AuAu200;
+      
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       
-        if(fixedcentralityOpt!= "NONE"){
+      fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");
+              if(fixedcentralityOpt!= "NONE"){
             manualCentrality = std::stof(fixedcentralityOpt);
         }
+
 
 
       //****Counters****
@@ -297,11 +296,11 @@ namespace Rivet {
       if (collSys == DAu200) {
 
         const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
-        
     double cent = centProj();
     if(fixedcentralityOpt!= "NONE"){
             cent = manualCentrality;
         }
+
         if (cent < 0. || cent > 88.5) vetoEvent;
 
         if (cent > 0. && cent < 20.) {
@@ -706,7 +705,6 @@ namespace Rivet {
 
 
       double xs = crossSection()/millibarn;
-      //  double sf = 1.0 / (2 * M_PI ); Not needed because this was added in the for loop
       //****Scale Histos****
       hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
       hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
@@ -759,7 +757,7 @@ namespace Rivet {
     string beamOpt;
     string fixedcentralityOpt;
     double manualCentrality = -1.0;
-    enum CollisionSystem { NONE, pp, DAu200 , AuAu200};
+    enum CollisionSystem { NONE, pp, AuAu200, DAu200 };
     CollisionSystem collSys;
 
     ///@}
