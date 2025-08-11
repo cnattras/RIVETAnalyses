@@ -17,8 +17,13 @@ References:
 - arXiv:nucl-ex/0307022
 - 10.1103/PhysRevC.69.034909
 #RunInfo: <Absolute Eta is below .35 for all identified particles. Charged particles are sorted using absolute charge above 0.>
-#Beams: [Au, Au]
-#Energies: [[6500,6500]]
+Beams: [
+  [Au, Au],
+]
+# This is _total_ energy of beams
+Energies: [
+  39400,   # Au+Au 200 GeV * 197 nucleons
+]
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
