@@ -4,13 +4,12 @@
 ! or appended before compiling.
 
 ! 1) Settings related to the physics processes generated. Here
-! a simple pp soft QCD run at 7 TeV.
+! a simple pp soft QCD run at 200 GeV.
 Beams:idA = 2212                   ! first beam p = 2212
 Beams:idB = 2212                   ! second beam p = 2212
 Beams:eCM = 200.                  ! CM energy of collision
-SoftQCD:all = on                   ! All soft QCD processes are on,
-!PhaseSpace:pTHatMin = 50.
-!PhaseSpace:pTHatMax = 50.
+HardQCD:all = on                   ! All hard QCD processes are on,
+PhaseSpace:pTHatMin = 70.
 
 
 ! 2) Settings related to the run
