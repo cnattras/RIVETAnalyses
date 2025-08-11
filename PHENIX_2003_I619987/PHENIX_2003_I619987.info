@@ -14,8 +14,11 @@ References:
  - arXiv:0305036
  - Phys.Rev. Lett. 91, 172301 (2003)
 #RunInfo: <Describe event types, cuts, and other general generator config tips.>
-#Beams: [AU, AU]
-#Energies: [[6500,6500]]
+Beams: [  [Au, Au],]
+# This is _total_ energy of beams
+Energies: [
+  39400,   # Au+Au 200 GeV * 197 nucleons
+]
 #Luminosity_fb: 139.0
 Options:
  - cent=REF,GEN,IMP,USR
