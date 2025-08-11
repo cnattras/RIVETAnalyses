@@ -2,9 +2,9 @@ Name: SPHENIX_2025_I2907537
 Year: 2025
 Summary: Measurement of charged hadron multiplicity in Au+Au collisions at $\sqrt{\text{s}_{\text{NN}}}$ =200~GeV with the sPHENIX detector
 Experiment: SPHENIX
-Collider: <Insert the collider name>
 InspireID: 2907537
-Status: Relativistic Heavy Ion Collider (RHIC)
+Collider: Relativistic Heavy Ion Collider (RHIC)
+Status: UNVALIDATED REENTRANT
 Reentrant: true
 Authors:
  - Christal Martin <cbaillar@vols.utk.edu>
