@@ -6,4 +6,3 @@ Initially written by Adam Tilley.  Contributions from Nik Nelson, Joesph Beller,
 
 Rivet 4.1 compatible.  Needs higher statistics tests.
 
-Last three histograms need to be scaled by bin-dependent factors.  Then this is done.
