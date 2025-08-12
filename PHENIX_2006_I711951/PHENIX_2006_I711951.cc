@@ -705,6 +705,10 @@ namespace Rivet {
 
 
       double xs = crossSection()/millibarn;
+      double sf = xs/sumOfWeights();
+      scale(sow, sf);
+      scale(hDAu_Yields, sf);
+
       //****Scale Histos****
       hDAu_Yields["PiplusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
       hDAu_Yields["PiminusC20"]->scaleW(1./sow["sow_DAu20"]->sumW());
@@ -735,12 +739,12 @@ namespace Rivet {
       hDAu_Yields["P_barC88"]->scaleW(1./sow["sow_DAu88"]->sumW());
 
       //These are cross sections
-      hPP_Yields["PiplusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
-      hPP_Yields["PiminusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
-      hPP_Yields["KplusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
-      hPP_Yields["KminusPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
-      hPP_Yields["PPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
-      hPP_Yields["P_barPP"]->scaleW(xs*1./sow["sow_pp"]->sumW());
+      hPP_Yields["PiplusPP"]->scaleW(xs/sumOfWeights());
+      hPP_Yields["PiminusPP"]->scaleW(xs/sumOfWeights());
+      hPP_Yields["KplusPP"]->scaleW(xs/sumOfWeights());
+      hPP_Yields["KminusPP"]->scaleW(xs/sumOfWeights());
+      hPP_Yields["PPP"]->scaleW(xs/sumOfWeights());
+      hPP_Yields["P_barPP"]->scaleW(xs/sumOfWeights());
 
 
 
