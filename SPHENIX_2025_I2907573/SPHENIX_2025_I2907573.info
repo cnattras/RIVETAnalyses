@@ -1,0 +1,47 @@
+Name: SPHENIX_2025_I2907573
+Year: 2025
+Summary: Measurement of the transverse energy density in Au+Au collisions at $\sqrt{s_{_{NN}}}$ = 200 GeV with the sPHENIX detector
+Experiment: SPHENIX
+InspireID: 2907573
+Collider: Relativistic Heavy Ion Collider (RHIC)
+Status: UNVALIDATED REENTRANT
+Reentrant: true
+Authors:
+ - Christal Martin <cbaillar@vols.utk.edu>
+ - Antonio Da Silva <antonio.sphenix@gmail.com>
+ - Christine Nattrass <christine.nattrass@utk.edu>
+References:
+ - 'Example: Eur.Phys.J. C76 (2016) no.7, 392'
+ - 'Example: DOI:10.1140/epjc/s10052-016-4184-8'
+ - 'Example: arXiv:1605.03814'
+#RunInfo: <Describe event types, cuts, and other general generator config tips.>
+Beams: [Au, Au]
+Energies: [
+39400   # Au+Au 200 GeV * 197 nucleons
+]
+#Luminosity_fb: 139.0
+Options:
+ - cent=REF,GEN,IMP,USR
+ - beam=AUAU200
+ - fixedcentrality=0,3,6,10,15,20,25,30,35,40,45,50,55,60,65,NONE
+Description:
+  'This paper reports measurements of the transverse energy per unit pseudorapidity ($dE_{T}/d\eta$) produced in $Au+Au$ collisions at $\sqrt{s_{NN}} = 200$ GeV, performed with the sPHENIX detector at the Relativistic Heavy Ion Collider (RHIC). The results cover the pseudorapidity range $\left|\eta\right| < 1.1$ and constitute the first such measurement performed using a hadronic calorimeter at RHIC. Measurements of $dE_{T}/d\eta$ are presented for a range of centrality intervals and the average $dE_{T}/d\eta$ as a function of the number of participating nucleons, $N_{part}$, is compared to a variety of Monte Carlo heavy-ion event generators. The results are in agreement with previous measurements at RHIC, and feature an improved granularity in $\eta$ and improved precision in low-$N_{part}$ events.'
+ValidationInfo:
+  'This analysis was approved by the collaboration with an internal review committee.'
+#ReleaseTests:
+# - $A my-hepmc-prefix :MODE=some_rivet_flag
+Keywords: []
+BibKey: sPHENIX:2025nbg
+BibTeX: '@article{sPHENIX:2025nbg,
+    author = "Abdulhamid, M. I. and others",
+    collaboration = "sPHENIX",
+    title = "{Measurement of the transverse energy density in Au+Au collisions at $\sqrt{s_{NN}} = 200$ GeV with the sPHENIX detector}",
+    eprint = "2504.02242",
+    archivePrefix = "arXiv",
+    primaryClass = "nucl-ex",
+    month = "4",
+    year = "2025"
+}'
+ToDo:
+ - Implement the analysis, test it, remove this ToDo, and mark as VALIDATED :-)
+
