@@ -222,6 +222,12 @@ namespace Rivet {
     /// Normalise histograms etc., after the run
     void finalize() {
 
+      //This is to get the yields to add correctly when merging output, for instance, in pThat bins (in the case of PYTHIA)
+      double xs = crossSection()/millibarn;
+      double sf = xs/sumOfWeights();
+      scale(_c, sf);//This scales the sum of weights by the corss section
+      scale(_h, sf);//and then undoes this for the yields
+
       //Divide histograms by number of events
       _h["ChHadronsCent0_10"]->scaleW(1./_c["Cent0_10"]->sumW());
       _h["ChHadronsCent60_80"]->scaleW(1./_c["Cent60_80"]->sumW());

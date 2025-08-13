@@ -1910,6 +1910,15 @@ namespace Rivet {
 		binShift(*hKK["AUAU0_5Kplus"]);
 		
 		
+      double xs = crossSection()/millibarn;
+      double sf = xs/sumOfWeights();
+      scale(sow, sf);
+      scale(hAUAU_Yields, sf);
+      scale(hPiPi, sf);
+      scale(hK, sf);
+      scale(hP, sf);
+      scale(hPi0, sf);
+      scale(hKK, sf);
 
 
 		//____Yields____

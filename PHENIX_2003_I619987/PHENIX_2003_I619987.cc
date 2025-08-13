@@ -659,6 +659,17 @@ public:
     
     /// Normalise histograms etc., after the run
     void finalize() {
+
+      double xs = crossSection()/millibarn;
+      double sf = xs/sumOfWeights();
+      scale(sow, sf);
+      scale(hProtonPt, sf);
+      scale(hPionPosPt, sf);
+      scale(hProBarPt, sf);
+      scale(hPionNegPt, sf);
+      scale(hPPlusPBarPt, sf);
+      scale(hChHadrons, sf);
+      scale(hPionPt,sf);
         
         //d01: p and p_bar ratios
         //divide(hProtonPt["AuAuc0010a"], hPionPosPt["AuAuc0010"], RatioPtoPiPos["AuAuc0010"]);
