@@ -8,6 +8,7 @@ Status: UNVALIDATED REENTRANT
 Reentrant: true
 Authors:
  - Joesph Beller <josdbell@vols.utk.edu>
+ - Olivia Bartoshesky <obartosh@vols.utk.edu>
  - Christal Martin <cbaillar@vols.utk.edu>
  - Christine Nattrass <cnattrass@utk.edu>
 References:

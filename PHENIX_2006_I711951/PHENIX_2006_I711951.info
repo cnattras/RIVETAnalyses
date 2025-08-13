@@ -8,6 +8,8 @@ Status: UNVALIDATED REENTRANT
 Reentrant: true
 Authors:
  - Andi Mankolli <andi.mankolli@vanderbilt.edu>
+ - Aidan Hill <ahill117@vols.utk.edu>
+ - Olivia Bartoshesky <obartosh@vols.utk.edu>
  - Christine Nattrass <cnattrass@utk.edu> 
  - Antonio Silva <antonio.silva@cern.ch>
 References:
