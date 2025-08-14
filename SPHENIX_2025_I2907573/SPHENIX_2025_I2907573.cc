@@ -130,9 +130,9 @@ int findEtaBin(double c) {
         }
 
 
-        book(_p["histETEmcalCent"], "d06-x01-y01", refData(6, 1, 1));
-        book(_p["histETHcalCent"], "d06-x01-y02", refData(6, 1, 2));
-        book(_p["histETCentDependence"], "d07-x01-y01", refData(6, 1, 2));
+        // book(_p["histETEmcalCent"], "d06-x01-y01", refData(6, 1, 1));
+        // book(_p["histETHcalCent"], "d06-x01-y02", refData(6, 1, 2));
+        book(_p["histETCentDependence"], "d07-x01-y02", refData(6, 1, 2));
     }
 
 
@@ -148,15 +148,15 @@ int findEtaBin(double c) {
         if (c > 70) vetoEvent;
 
 
-    double totalEt = 0;
+    // double totalEt = 0;
     double totalEtMidRap = 0;
     double eTEta[7] = {0,0,0,0,0, 0,0};
     for(const Particle& p : fsParticles)
         {
-            totalEt += p.Et()/GeV;
-            if(abs(p.eta())<0.5) totalEtMidRap += p.Et()/GeV;
+            // if(abs(p.eta())<etaMax)totalEt += p.Et()/GeV;
+            if(abs(p.eta())<etaMax) totalEtMidRap += p.Et()/GeV;
             int myetabin = findEtaBin(p.eta());
-            if(myetabin!=-1) eTEta[myetabin]++;
+            if(myetabin!=-1) eTEta[myetabin]+= p.Et()/GeV;
         }
 
         int mycentbin = findCentBin(c);
@@ -169,15 +169,12 @@ int findEtaBin(double c) {
                 _p[histoname]->fill((etaBinEdges[i]+etaBinEdges[i+1])/2,((double) eTEta[i])/(etaBinEdges[i+1]-etaBinEdges[i]));
                 _p[histoname2]->fill((etaBinEdges[i]+etaBinEdges[i+1])/2,((double) eTEta[i])/(etaBinEdges[i+1]-etaBinEdges[i]));
                 _p[histoname3]->fill((etaBinEdges[i]+etaBinEdges[i+1])/2,((double) eTEta[i])/(etaBinEdges[i+1]-etaBinEdges[i]));
+          //cout<<"Filling eta cent "<<mycentbin<<" "<<(etaBinEdges[i]+etaBinEdges[i+1])/2<<" dNch/deta "<<((double) eTEta[i])/(etaBinEdges[i+1]-etaBinEdges[i])<<endl;
             } 
-          //cout<<"Filling eta "<<(etaBinEdges[i]+etaBinEdges[i+1])/2<<" dNch/deta "<<((double) nchcounters[i])/(etaBinEdges[i+1]-etaBinEdges[i])<<endl;
+            //cout<<"totalEtMidRap "<<totalEtMidRap<<" total ET "<<totalEt<<endl;
         }
-        if(mycentbin==0){
-          _p["histETEmcalCent"]->fill(totalEt,2.0/etaMax);
-          _p["histETHcalCent"]->fill(totalEt,2.0/etaMax);
-        }
-        _p["histETCentDependence"]->fill(totalEtMidRap,2.0/npart[mycentbin]);
-
+        _p["histETCentDependence"]->fill(c,totalEtMidRap*2.0/npart[mycentbin]/2.0/etaMax);
+        cout<<" cb "<<mycentbin<<" c "<<c<<" ET/npart "<<totalEtMidRap*2.0/npart[mycentbin]/2.0/etaMax<<endl;
     }
 
 
@@ -207,7 +204,6 @@ int findEtaBin(double c) {
     map<string, Histo1DPtr> _h;
     map<string, Profile1DPtr> _p;
     map<string, CounterPtr> _c;
-    Profile1DPtr _hist_NchCent,_hist_NchEta;
     string beamOpt;
     string fixedcentralityOpt;
     double manualCentrality = -1.0;
