@@ -15,3 +15,5 @@ CN 5/31/24: It is not plotting nicely - it hangs on certain plots.  I narrowed d
 -plots are cleaned
 
 Plots are plotting, not freezing, but not plotting nicely
+
+Rivet4.1 adjustments: This has issues with the YODA file.  Unfortunately, it looks like this HEPData was nearly completely rewritten, with new tables, so it's not as simple as just downloading the new plot.  I think the easiest way to fix this is to go through and change the reference histograms to the current entries.  That will take a while reading through the plots.
