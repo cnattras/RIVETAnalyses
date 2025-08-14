@@ -132,7 +132,7 @@ int findEtaBin(double c) {
 
         // book(_p["histETEmcalCent"], "d06-x01-y01", refData(6, 1, 1));
         // book(_p["histETHcalCent"], "d06-x01-y02", refData(6, 1, 2));
-        book(_p["histETCentDependence"], "d07-x01-y02", refData(6, 1, 2));
+        book(_p["histETCentDependence"], "d07-x01-y02", refData(7, 1, 2));
     }
 
 
