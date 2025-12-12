@@ -7,4 +7,6 @@ Started by Andi Mankoli Primarily written by Adam Tilley.  Contributions by Chri
 
 Note that for the ratio plots, the ratios are not in HEPData.
 
-Rivet 4.1 compatible.  Needs higher statistics for review.
+Rivet 4.1 compatible.
+
+Submitted to PHENIX for approval.
