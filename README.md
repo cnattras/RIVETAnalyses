@@ -3,6 +3,15 @@ This repository is for RIVET analyses developed at UTK and in the 2020 Rivetizin
 
 Please see individual READMEs for status on PHENIX papers.  Please make sure to check the .info file before use as well.
 
+Analyses which have been submitted to PHENIX for approval:
+ PHENIX_2001_I562409 PHENIX_2003_I619987 PHENIX_2004_I624474 PHENIX_2006_I711951
+ PHENIX_2001_I555603 PHENIX_2014_I1273625 PHENIX_2016_I1394433 PHENIX_2025_I2820229 
+
+Analyses which have been submitted to sPHENIX for approval:
+
+
+
+Below are old notes which I am not sure how much to trust: 
 Analyses which need work (see README for individual analyses): PHENIX_2024_IPPG252, PHENIX_2019_I1672476, PHENIX_2013_I1227971
 
 Analysis ready for higher statistics sorted into collision system and energy: 
