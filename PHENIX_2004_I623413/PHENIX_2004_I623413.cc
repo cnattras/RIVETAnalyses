@@ -200,12 +200,12 @@ void binShift(YODA::Histo1D& histogram) {
       // // book(_h["Table4ProtonCentrality"], 29, 1, 5);
       // // book(_h["Table4AntiProtonCentrality"], 29, 1, 6);
       
-      // book(_c["MinBias"], "_MinBias");
-      // book(_c["Cent0_5"], "_Cent0_5");
-      // book(_c["Cent5_15"], "_Cent5_15");
-      // book(_c["Cent15_30"], "_Cent15_30");
-      // book(_c["Cent30_60"], "_Cent30_60");
-      // book(_c["Cent60_92"], "_Cent60_92");
+      book(_c["MinBias"], "_MinBias");
+      book(_c["Cent0_5"], "_Cent0_5");
+      book(_c["Cent5_15"], "_Cent5_15");
+      book(_c["Cent15_30"], "_Cent15_30");
+      book(_c["Cent30_60"], "_Cent30_60");
+      book(_c["Cent60_92"], "_Cent60_92");
 
     }
 
