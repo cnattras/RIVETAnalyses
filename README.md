@@ -8,9 +8,9 @@ Analyses which have been submitted to PHENIX for approval:
  PHENIX_2001_I555603 PHENIX_2014_I1273625 PHENIX_2016_I1394433 PHENIX_2025_I2820229 
 
 Analyses which have been submitted to sPHENIX for approval:
+SPHENIX_2025_I2907537 SPHENIX_2025_I2907573
 
-
-
+------------------------------
 Below are old notes which I am not sure how much to trust: 
 Analyses which need work (see README for individual analyses): PHENIX_2024_IPPG252, PHENIX_2019_I1672476, PHENIX_2013_I1227971
 
