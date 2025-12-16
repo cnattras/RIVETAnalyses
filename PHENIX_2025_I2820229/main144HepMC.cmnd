@@ -1,4 +1,4 @@
 # This command file enables writing out HepMC files with
 # main144. Note that .hepmc files can become rather large.
 Main:writeHepMC = off
-Main:numberOfEvents = 200000
+Main:numberOfEvents = 10
