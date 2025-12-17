@@ -31,30 +31,36 @@ namespace Rivet {
 
     //create binShift function
     void binShift(YODA::Histo1D& histogram) {
-    const auto& binlist = histogram.bins();
-    const auto& lastBin = histogram.bin(histogram.numBins());
-    int n = 0;
-    for (auto& bins : binlist) {
+      const auto& binlist = histogram.bins();
+      const auto& lastBin = histogram.bin(histogram.numBins());
+      int n = 0;
+      for (auto& bins : binlist) {
         double p_high = bins.xMax();
         double p_low = bins.xMin();
-        //Now calculate f_corr
-        if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-            n += 1;
-        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-        } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-            n += 1;
-        }
+  //Now calculate f_corr
+        float b = 1;
+        float f_corr = 1;
+  if (n==0) { //Check if we are working with first bin
+     b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
+    f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+    //When statistics are low, the bins will not be filled and the correction factor will be nan.  We check this just to be sure.
+      if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
+    n += 1;
+  } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+    b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
+    f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+    if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
+  
+  } else { //Check if we are working with any middle bin
+   b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
+   f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+    if(! std::isnan(f_corr)) histogram.bin(n).scaleW(f_corr);
+  
+    n += 1;
+  }
+      }
+
     }
-}
 
 
     /// Book histograms and initialise projections before the run
@@ -74,34 +80,33 @@ namespace Rivet {
           beamOpt = getOption<string>("beam", "NONE");
 
           const ParticlePair& beam = beams();
-          
           if (beamOpt == "NONE") {
           if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
           {
             float NN = 197.;
-            if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = AuAu200;
+            if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = AuAu200;
           }  
           else if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
           {
             float NN = 1.;
-            if (fuzzyEquals(sqrtS()/GeV, 200*NN, 5)) collSys = pp;
+            if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)){ collSys = pp;}
+            cout<<collSys<<endl;
           }
           else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
           {
             // checking energy using form sqrt{s_{NN}}/(num_nucleons1*num_nucleons2)
-            if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2), 1)) collSys = DAu200;
+            if (fuzzyEquals(sqrtS()/GeV, 3974., 1e-3)) collSys = DAu200;
           }
           else if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000010020)
           {
-            if (fuzzyEquals(sqrtS()/GeV, 200*sqrt(197*2) , 1)) collSys = DAu200;
+            if (fuzzyEquals(sqrtS()/GeV, 3974. , 1e-3)) collSys = DAu200;
           }
           }
-
           //check the collision system
           if (beamOpt == "PP200") collSys = pp;
           else if (beamOpt == "AUAU200") collSys = AuAu200;
           else if (beamOpt == "DAU200") collSys = DAu200;
-
+          
           //declaration for collision systems that are not p+p
           declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
@@ -718,15 +723,19 @@ namespace Rivet {
           double cross = crossSection() / picobarn;
           
           //Figure 13:
+          if(sow["sow_pp"]->sumW()>0){
           //d01-x01-y01
           binShift(*hCrossSec["ppEtaa"]);
           hCrossSec["ppEtaa"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaa"]->scaleW(cross);
+        }
           
+          if(sow["sow_dAu"]->sumW()>0){
           //d03-x01-y01
           binShift(*hCrossSec["dAuEta"]);
           hCrossSec["dAuEta"]->scaleW(1. / sow["sow_dAu"]->sumW());
-          hCrossSec["dAuEta"]->scaleW(cross);          
+          hCrossSec["dAuEta"]->scaleW(cross);  
+          }        
           
           //Figure 14:
           //d05-x01-y01
@@ -755,13 +764,19 @@ namespace Rivet {
           //denominator: must do our process to our cross section as done in Figure 13 plus multiplying it by <Tda>
           binShift(*hCrossSec["ppEtadAuc0088"]);
           binShift(*hEtaPt["ptyieldsdAuc0088b"]);
+          if(sow["sow_pp"]->sumW()>0){
           hCrossSec["ppEtadAuc0088"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtadAuc0088"]->scaleW(cross);
           hCrossSec["ppEtadAuc0088"]->scaleW(0.2); //scaling by <TdA> as shown in Table II
+        }
+         if(sow["sow_dAu"]->sumW()>0){
           //numerator: must do our process to our invariant yield like in Figure 14
           hEtaPt["ptyieldsdAuc0088b"]->scaleW(1. / sow["sow_dAu"]->sumW());
+        }
+        if(sow["sow_dAu"]->sumW()>0 && sow["sow_pp"]->sumW()>0){
           //Rda
           divide(hEtaPt["ptyieldsdAuc0088b"], hCrossSec["ppEtadAuc0088"], hRda["EtadAuc0088"]);
+        }
           
           //d07-x01-y02
           //denominator
@@ -918,7 +933,7 @@ namespace Rivet {
       
       
       string beamOpt;
-      enum CollisionSystem { pp, AuAu200, DAu200 };
+      enum CollisionSystem { Unidentified, pp, AuAu200, DAu200 };
       CollisionSystem collSys;
       
       //these two vectors are only initialized if we would like to for loop over centrality bins
