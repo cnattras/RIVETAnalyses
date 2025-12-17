@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Plots from Rivet analyses</title>
+        <style>
+      html { font-family: arial black, sans-serif; color: #333333; }
+      img { border: 0; }
+      a { text-decoration: none; font-weight: bold; }
+      footer { clear:both; margin-top:2em; margin-bottom:2em; padding-top:2em; color: #999999; }
+
+      .anasumm, .indexanasumm { margin-bottom: 2.5em; line-height: 1.4; font-size: 120%; font-family: georgia, palatino, serif; }
+      .back, .back a { font-weight: bold; color: gray; font-variant: small-caps; text-transform: uppercase; margin-bottom: 2em; }
+
+      .filterform { position: fixed; top: 1em; right: 1em; background: white; opacity: 0.2; }
+      .filterform { padding: 1em; padding-bottom: 0.1em; border: 2px solid gray; border-radius: 0.7em; }
+      .filterform:hover, .filterform:focus-within { opacity: 1.0; -webkit-transition: opacity 1s; transition: opacity 1s; drop-shadow(gray 0.5em 0.5em 10px); }
+      .filterpatt { padding: 0.3em; font-size: 100%; border: 1px solid #85C1E9; border-radius: 0.1em; }
+      .filterbutton { padding: 0.3em; font-size: 100%; border: 2px solid #85C1E9; background:#D6EAF8; border-radius: 0.3em; }
+
+      .plot { float: left; font-weight: bold; }
+      .plotlinks {  }
+      .plotname { font-size: smaller; }
+
+      .firstana h2 { break-before: avoid;  }
+      .ana h2 { break-before: page; page-break-before: always; }
+      .plot { page-break-inside: avoid; break-inside: avoid; }
+
+      @media print {
+        .noprint { display: none; }
+        .back { display: none; }
+        .filterform { display: none; }
+        .plotlinks { display: none; }
+        .plot { width: 40%; padding: 5mm; }
+        .plots { text-align: center; }
+        .plotthumb { max-width: 95%; padding: 0mm; margin: 0mm; }
+      }
+    </style>
+    <script type="text/javascript">
+      window.MathJax = { tex: { inlineMath: [['$','$']] },
+                         options: { menuOptions: { settings: { inTabOrder: false } } } };
+    </script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-chtml-full.min.js">
+    </script>
+
+
+    <script type="text/javascript">
+      function filterPlots(ana, patt) {
+        var regex = new RegExp(patt);
+        var sec = document.getElementById('ana_'+ana);
+        var plots = sec.getElementsByClassName('plot');
+        var i; for (i = 0; i < plots.length; ++i) {
+            // var viz = (regex.test(plots[i].id)) ? 'visible' : 'hidden';
+            // plots[i].style.visibility = viz;
+            var dis = (regex.test(plots[i].id)) ? 'block' : 'none';
+            plots[i].style.display = dis;
+        }
+        return false;
+      }
+    </script>
+</head>
+
+<body><h1>Plots from Rivet analyses</h1>
+
+
+<h2><a href="PHENIX_2004_I623413/index.html" style="text-decoration:none;">Single identified hadron spectra from s(NN)**(1/2) = 130-GeV Au+Au collisions (PHENIX_2004_I623413)</a></h2>
+<p><a href="https://inspirehep.net/literature/623413">Inspire</a> &#124; <a href="http://hepdata.net/record/ins623413">HepData</a> &#124; <a href="https://arxiv.org/abs/nucl-ex/0307010">arXiv:nucl-ex/0307010</a> &#124; 10.1103/PhysRevC.69.024904</p>
+<p class="indexanasumm">Transverse momentum spectra and yields of hadrons are measured by the PHENIX collaboration in Au + Au collisions at $\sqrt{s_{NN}}$ = 130 GeV at the Relativistic Heavy Ion Collider (RHIC). The time-of-flight resolution allows identification of pions to transverse momenta of 2 GeV/$c$ and protons and antiprotons to 4 GeV/$c$. The yield of pions rises approximately linearly with the number of nucleons participating in the collision, while the number of kaons, protons, and antiprotons increases more rapidly. The shape of the momentum distribution changes between peripheral and central collisions. Simultaneous analysis of all the $p_T$ spectra indicates radial collective expansion, consistent with predictions of hydrodynamic models. Hydrodynamic analysis of the spectra shows that the expansion velocity increases with collision centrality and collision energy. This expansion boosts the particle momenta, causing the yield from soft processes to exceed that for hard to large transverse momentum, perhaps as large as 3 GeV/$c$.</p>
+<footer>
+<p id="timestamp">Generated at Tuesday, 16. December 2025 09:30PM</p>
+<p id="command">Created with command: <pre>rivet-mkhtml --pwd Rivet.yoda</pre></p>
+</footer>
+
+</body>
+</html>

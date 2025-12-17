@@ -1,0 +1,55 @@
+# font and font sizes
+font.family: serif
+font.serif: Palatino
+mathtext.fontset: custom
+mathtext.rm: Palatino
+mathtext.bf: Palatino:bold
+mathtext.it: Palatino:italic
+mathtext.default: it
+text.usetex: True
+font.size: 10
+axes.titlesize: 9
+axes.labelsize: 10
+xtick.labelsize: 8
+ytick.labelsize: 8
+legend.fontsize: 10
+figure.titlesize:  10
+lines.linewidth: 0.8
+
+# figure layout
+figure.figsize: 4.67, 4.21
+figure.subplot.bottom: 0.092
+figure.subplot.top: 0.934
+figure.subplot.left: 0.125
+figure.subplot.right: 0.968
+figure.subplot.hspace: 0
+
+# axes
+axes.axisbelow: False
+axes.titlepad: 7.5
+axes.labelpad: 2
+axes.linewidth: 0.3
+xaxis.labellocation: right
+lines.markersize: 2.5
+axes.formatter.min_exponent: 1  # 10^0 should not be in sci. notation
+axes.prop_cycle : cycler(color=['EE3311', '3366FF', '109618', 'FF9900', '990099'])
+
+# axis ticks
+xtick.major.width: 0.3
+ytick.major.width: 0.3
+xtick.minor.width: 0.3
+ytick.minor.width: 0.3
+xtick.major.size: 9
+ytick.major.size: 9
+xtick.minor.size: 4
+ytick.minor.size: 4
+xtick.direction: in
+ytick.direction: in
+xtick.minor.visible: True
+ytick.minor.visible: True
+xtick.top: True
+ytick.right: True
+
+# legend
+legend.frameon: False
+legend.labelspacing: 0.2
