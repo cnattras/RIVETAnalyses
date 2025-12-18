@@ -1,3 +1,1 @@
-This needs the bin shift correction and for d01-x01-y01_AuAu and d01-x01-y01_pp to be turned off in the output.
-
-Update: added bin shift correction and turned off plots
+CN 12/18/25: Runs fine in Rivet 4.1.  This one only needs all of the standard checks.
