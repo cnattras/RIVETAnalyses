@@ -1,5 +1,7 @@
 This analysis is a shell, but a shell with the grunt work done, oddly enough.  None of the histograms are filled correctly.
 
+This is J/psi photoproduction in UPC.  This is not feasible to use so it's tabled for now.
+
 Unsure who was the original author.  Christal Martin fixed the file name because it had been named wrong.  Contributions from Sean Grace, Nik Nelson, Joesph Beller, Josie Hakanson.
 
 This info file needs to be fixed because it 
