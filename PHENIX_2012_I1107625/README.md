@@ -1,11 +1,10 @@
+Good high priority target!  May be fine.
+
 pi0 spectra
 This originally was written by someone else but with the wrong name.  Contributions from Adam Tilley, Antonio Da Silva, Sean Grace, Olivia Bartoshesky.
 
-done: 
--bin shift correction implemented 
--Added options to set beams manually
--Made nuclear modification factors plot on linear scale and not on a log scale
--Turned off histograms with input spectra
-
 needs: 
+Double check histogram mapping since upgrade to YODA2
+Add checks for division by zero in bin shift correction
+make yield plots NOT on linear scale
 Needs higher statistics test
