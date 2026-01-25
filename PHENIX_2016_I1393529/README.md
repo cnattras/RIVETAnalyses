@@ -1,3 +1,5 @@
+Medium priority.  It may be correct.  It needs bin shift corrections and the histogram mapping probably needs updating. 
+
 Heavy flavor electron analysis
 
 Originally written by Ajeeta Khatiwada.  Contributions from Adam Tilley and Kip Hunt.
