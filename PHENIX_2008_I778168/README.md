@@ -1,7 +1,5 @@
-This analysis has several extraneous plots which need to be turned off or properly normalized with correct axis labels.  These are the numerator and denominator in RAA.
+This is a measurement of neutral pions in Au+Au collisions at sqrt(sNN)=200 GeV.
 
-This needs bin shift corrections applied and beam options added.
+It should be nearly done but it needs to be updated for YODA2, which probably means going through and updating the indexing of the histograms.
 
-Update: Added bin shift correction and beam options.
-
-Looks good so far!
+This appears to have been initially written by Christal Martin, with updates by Adam Tilley, Olivia Bartoshesky, Aidan Hill.
