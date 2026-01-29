@@ -119,7 +119,7 @@ namespace Rivet {
        book(_c["sow_AuAu_call"],"_sow_AuAu_call");
 
  //RAA _______________________________
-       string refnameRaa1 = mkAxisCode(7,1,3);
+       string refnameRaa1 = mkAxisCode(11,1,1);
              const Estimate1D& refdataRaa1 =refData(refnameRaa1);
        book(_h["c5Pt_AuAu"],"_" + refnameRaa1 + "_AuAu", refdataRaa1);
        book(_h["c5Pt_pp"], "_" +refnameRaa1 + "_pp", refdataRaa1);
