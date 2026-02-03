@@ -409,7 +409,61 @@ namespace Rivet {
 
     void finalize() {
 
-// Yields, don't forget the Yields ya wanker.
+// Yields
+    binShift(*_h["ptyieldsc5"]);
+    if (_c["sow_AuAu_c5"]->sumW() > 0) {
+        _h["ptyieldsc5"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc10"]);
+    if (_c["sow_AuAu_c10"]->sumW() > 0) {
+        _h["ptyieldsc10"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc20"]);
+    if (_c["sow_AuAu_c20"]->sumW() > 0) {
+        _h["ptyieldsc20"]->scaleW(1./_c["sow_AuAu_c20"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc30"]);
+    if (_c["sow_AuAu_c30"]->sumW() > 0) {
+        _h["ptyieldsc30"]->scaleW(1./_c["sow_AuAu_c30"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc40"]);
+    if (_c["sow_AuAu_c40"]->sumW() > 0) {
+        _h["ptyieldsc40"]->scaleW(1./_c["sow_AuAu_c40"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc50"]);
+    if (_c["sow_AuAu_c50"]->sumW() > 0) {
+        _h["ptyieldsc50"]->scaleW(1./_c["sow_AuAu_c50"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc60"]);
+    if (_c["sow_AuAu_c60"]->sumW() > 0) {
+        _h["ptyieldsc60"]->scaleW(1./_c["sow_AuAu_c60"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc70"]);
+    if (_c["sow_AuAu_c70"]->sumW() > 0) {
+        _h["ptyieldsc70"]->scaleW(1./_c["sow_AuAu_c70"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc80"]);
+    if (_c["sow_AuAu_c80"]->sumW() > 0) {
+        _h["ptyieldsc80"]->scaleW(1./_c["sow_AuAu_c80"]->sumW());
+        }
+
+    binShift(*_h["ptyieldsc92"]);
+    if (_c["sow_AuAu_c92"]->sumW() > 0) {
+        _h["ptyieldsc92"]->scaleW(1./_c["sow_AuAu_c92"]->sumW());
+        }
+
+    binShift(*_h["ptyieldscall"]);
+    if (_c["sow_AuAu_call"]->sumW() > 0) {
+        _h["ptyieldscall"]->scaleW(1./_c["sow_AuAu_call"]->sumW());
+        }
 
 // R_AA for 0_5% Au+Au
     // Normalize Au+Au yield
