@@ -409,102 +409,206 @@ namespace Rivet {
 
     void finalize() {
 
- //Yields_________________
-        binShift(*_h["ptyieldsc5"]);
-        binShift(*_h["ptyieldsc10"]);
-        binShift(*_h["ptyieldsc20"]);
-        binShift(*_h["ptyieldsc30"]);
-        binShift(*_h["ptyieldsc40"]);
-        binShift(*_h["ptyieldsc50"]);
-        binShift(*_h["ptyieldsc60"]);
-        binShift(*_h["ptyieldsc70"]);
-        binShift(*_h["ptyieldsc80"]);
-        binShift(*_h["ptyieldsc92"]);
-        binShift(*_h["ptyieldscall"]);
+// Yields, don't forget the Yields ya wanker.
 
-       _h["ptyieldsc5"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
-       _h["ptyieldsc10"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
-       _h["ptyieldsc20"]->scaleW(1./_c["sow_AuAu_c20"]->sumW());
-       _h["ptyieldsc30"]->scaleW(1./_c["sow_AuAu_c30"]->sumW());
-       _h["ptyieldsc40"]->scaleW(1./_c["sow_AuAu_c40"]->sumW());
-       _h["ptyieldsc50"]->scaleW(1./_c["sow_AuAu_c50"]->sumW());
-       _h["ptyieldsc60"]->scaleW(1./_c["sow_AuAu_c60"]->sumW());
-       _h["ptyieldsc70"]->scaleW(1./_c["sow_AuAu_c70"]->sumW());
-       _h["ptyieldsc80"]->scaleW(1./_c["sow_AuAu_c80"]->sumW());
-       _h["ptyieldsc92"]->scaleW(1./_c["sow_AuAu_c92"]->sumW());
-       _h["ptyieldscall"]->scaleW(1./_c["sow_AuAu_call"]->sumW());
-
- //RAA _______________________________
+// R_AA for 0_5% Au+Au
+    // Normalize Au+Au yield
         binShift(*_h["c5Pt_AuAu"]);
-        binShift(*_h["c10Pt_AuAu"]);
-        binShift(*_h["c20Pt_AuAu"]);
-        binShift(*_h["c30Pt_AuAu"]);
-        binShift(*_h["c40Pt_AuAu"]);
-        binShift(*_h["c50Pt_AuAu"]);
-        binShift(*_h["c60Pt_AuAu"]);
-        binShift(*_h["c70Pt_AuAu"]);
-        binShift(*_h["c80Pt_AuAu"]);
-        binShift(*_h["c92Pt_AuAu"]);
-        binShift(*_h["callPt_AuAu"]);
-       _h["c5Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
-       _h["c10Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
-       _h["c20Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c20"]->sumW());
-       _h["c30Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c30"]->sumW());
-       _h["c40Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c40"]->sumW());
-       _h["c50Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c50"]->sumW());
-       _h["c60Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c60"]->sumW());
-       _h["c70Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c70"]->sumW());
-       _h["c80Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c80"]->sumW());
-       _h["c92Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c92"]->sumW());
-       _h["callPt_AuAu"]->scaleW(1./_c["sow_AuAu_call"]->sumW());
-
-
+        if (_c["sow_AuAu_c5"]->sumW() > 0) {
+        _h["c5Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c5Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c5Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c5"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c5Pt_AuAu"],_h["c5Pt_pp"],hRaa["Raa_c05_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c05_AuAu"]->scale(1./1065.4);
+        }
+
+// R_AA for 0_10% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c10Pt_AuAu"]);
+        if (_c["sow_AuAu_c10"]->sumW() > 0) {
+        _h["c10Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c10Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c10Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c10"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c10Pt_AuAu"],_h["c10Pt_pp"],hRaa["Raa_c010_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c010_AuAu"]->scale(1./955.4);
+        }
+
+// R_AA for 10_20% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c20Pt_AuAu"]);
+        if (_c["sow_AuAu_c20"]->sumW() > 0) {
+        _h["c20Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c20"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c20Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c20Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c20"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c20Pt_AuAu"],_h["c20Pt_pp"],hRaa["Raa_c1020_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c1020_AuAu"]->scale(1./602.6);
+        }
+
+// R_AA for 20_30% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c30Pt_AuAu"]);
+        if (_c["sow_AuAu_c30"]->sumW() > 0) {
+        _h["c30Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c30"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c30Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c30Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c30"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c30Pt_AuAu"],_h["c30Pt_pp"],hRaa["Raa_c2030_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c2030_AuAu"]->scale(1./373.8);
+        }
+
+// R_AA for 30_40% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c40Pt_AuAu"]);
+        if (_c["sow_AuAu_c40"]->sumW() > 0) {
+        _h["c40Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c40"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c40Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c40Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c40"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c40Pt_AuAu"],_h["c40Pt_pp"],hRaa["Raa_c3040_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c3040_AuAu"]->scale(1./219.8);
+        }
+
+// R_AA for 40_50% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c50Pt_AuAu"]);
+        if (_c["sow_AuAu_c50"]->sumW() > 0) {
+        _h["c50Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c50"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c50Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c50Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c50"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c50Pt_AuAu"],_h["c50Pt_pp"],hRaa["Raa_c4050_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c4050_AuAu"]->scale(1./120.3);
+        }
+
+// R_AA for 50_60% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c60Pt_AuAu"]);
+        if (_c["sow_AuAu_c60"]->sumW() > 0) {
+        _h["c60Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c60"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c60Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c60Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c60"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c60Pt_AuAu"],_h["c60Pt_pp"],hRaa["Raa_c5060_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c5060_AuAu"]->scale(1./61.0);
+        }
+
+// R_AA for 60_70% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c70Pt_AuAu"]);
+        if (_c["sow_AuAu_c70"]->sumW() > 0) {
+        _h["c70Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c70"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c70Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c70Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c70"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c70Pt_AuAu"],_h["c70Pt_pp"],hRaa["Raa_c6070_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c6070_AuAu"]->scale(1./28.5);
+        }
+
+// R_AA for 70_80% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c80Pt_AuAu"]);
+        if (_c["sow_AuAu_c80"]->sumW() > 0) {
+        _h["c80Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c80"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c80Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c80Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c80"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c80Pt_AuAu"],_h["c80Pt_pp"],hRaa["Raa_c7080_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c7080_AuAu"]->scale(1./12.4);
+        }
+
+// R_AA for 80_92% Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["c92Pt_AuAu"]);
+        if (_c["sow_AuAu_c92"]->sumW() > 0) {
+        _h["c92Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c92"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["c92Pt_pp"]);
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["c92Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_c92"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c92Pt_AuAu"],_h["c92Pt_pp"],hRaa["Raa_c8092_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_c8092_AuAu"]->scale(1./4.9);
+        }
+
+// R_AA for 0_92% min_bias Au+Au
+    // Normalize Au+Au yield
+        binShift(*_h["callPt_AuAu"]);
+        if (_c["sow_AuAu_call"]->sumW() > 0) {
+        _h["callPt_AuAu"]->scaleW(1./_c["sow_AuAu_call"]->sumW());
+        }
+    // Normalize p+p yield
         binShift(*_h["callPt_pp"]);
-       _h["c5Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c10Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c20Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c30Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c40Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c50Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c60Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c70Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c80Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["c92Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
-       _h["callPt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        if (_c["sow_pp"]->sumW() > 0) {
+        _h["callPt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        }
+    // Only divide if BOTH are valid
+        if (_c["sow_AuAu_call"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["callPt_AuAu"],_h["callPt_pp"],hRaa["Raa_minbias_AuAu"]);
+    // Scale by <T_AA>
+        hRaa["Raa_minbias_AuAu"]->scale(1./257.8);
+        }
 
-       divide(_h["c5Pt_AuAu"],_h["c5Pt_pp"],hRaa["Raa_c05_AuAu"]);
-       divide(_h["c10Pt_AuAu"],_h["c10Pt_pp"],hRaa["Raa_c010_AuAu"]);
-       divide(_h["c20Pt_AuAu"],_h["c20Pt_pp"],hRaa["Raa_c1020_AuAu"]);
-       divide(_h["c30Pt_AuAu"],_h["c30Pt_pp"],hRaa["Raa_c2030_AuAu"]);
-       divide(_h["c40Pt_AuAu"],_h["c40Pt_pp"],hRaa["Raa_c3040_AuAu"]);
-       divide(_h["c50Pt_AuAu"],_h["c50Pt_pp"],hRaa["Raa_c4050_AuAu"]);
-       divide(_h["c60Pt_AuAu"],_h["c60Pt_pp"],hRaa["Raa_c5060_AuAu"]);
-       divide(_h["c70Pt_AuAu"],_h["c70Pt_pp"],hRaa["Raa_c6070_AuAu"]);
-       divide(_h["c80Pt_AuAu"],_h["c80Pt_pp"],hRaa["Raa_c7080_AuAu"]);
-       divide(_h["c92Pt_AuAu"],_h["c92Pt_pp"],hRaa["Raa_c8092_AuAu"]);
-       divide(_h["callPt_AuAu"],_h["callPt_pp"],hRaa["Raa_minbias_AuAu"]);
-
-       hRaa["Raa_c05_AuAu"]->scale(1./1065.4);
-       hRaa["Raa_c010_AuAu"]->scale(1./955.4);
-       hRaa["Raa_c1020_AuAu"]->scale(1./602.6);
-       hRaa["Raa_c2030_AuAu"]->scale(1./373.8);
-       hRaa["Raa_c3040_AuAu"]->scale(1./219.8);
-       hRaa["Raa_c4050_AuAu"]->scale(1./120.3);
-       hRaa["Raa_c5060_AuAu"]->scale(1./61.0);
-       hRaa["Raa_c6070_AuAu"]->scale(1./28.5);
-       hRaa["Raa_c7080_AuAu"]->scale(1./12.4);
-       hRaa["Raa_c8092_AuAu"]->scale(1./4.9);
-       hRaa["Raa_minbias_AuAu"]->scale(1./257.8);
 
 // // Scale???
 // // Directly copy/pasted?
