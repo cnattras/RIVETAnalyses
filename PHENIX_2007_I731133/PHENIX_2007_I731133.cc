@@ -169,14 +169,17 @@ namespace Rivet {
           string refname9 = mkAxisCode(7, 1, 1);
           //const Estimate1D& refdata9 = refDa6, 1, 1
           book(hEtaPt["ptyieldsAuAuc0092a"], 7, 1, 1);         
+          
           //d06-x01-y02 0-20%
           string refname10 = mkAxisCode(7, 1, 2);
           //const Estimate1D& refdata10 = refData(refname10);
           book(hEtaPt["ptyieldsAuAuc0020a"], 7, 1, 2);         
+          
           //d06-x01-y03 20-40%
           string refname11 = mkAxisCode(7, 1, 3);
           //const Estimate1D& refdata11 = refData(refname11);
           book(hEtaPt["ptyieldsAuAuc2060a"], 7, 1, 3);          
+          
           //d06-x01-y04 60-92%
           string refname12 = mkAxisCode(8, 1, 1);
           //const Estimate1D& refdata12 = refData(refname12);
@@ -197,7 +200,7 @@ namespace Rivet {
           book(hCrossSec["ppEtadAuc0020"],  "_" + refname14 + "_pp_Eta", refdata14);
           book(hRda["EtadAuc0020"], refname14);
           
-          //d07-x01-y03: 20-40% centrality
+          //d07-x01-y03: 19-40% centrality
           string refname15 = mkAxisCode(9, 1, 3);
           const Estimate1D& refdata15 = refData(refname15);
           book(hEtaPt["ptyieldsdAuc2040b"],  "_" + refname15 + "_dAuc2040_Eta", refdata15);
@@ -348,6 +351,7 @@ namespace Rivet {
                   //define what we will fill our histograms with
                   //we technically don't have to do this, but it's convenient
                   double partPt = p.pT() / GeV;
+                  if (!std::isfinite(partPt) || partPt <= 0.) continue;
                   double pt_weight = 1. / (partPt * 2. * M_PI);
                   
                   switch (p.pid()) {
@@ -372,6 +376,7 @@ namespace Rivet {
                   //define what we will fill our histograms with
                   //we technically don't have to do this, but it's convenient
                   double partPt = p.pT() / GeV;
+                  if (!std::isfinite(partPt) || partPt <= 0.) continue;
                   //double pt_weight = 1. / (partPt * 2. * M_PI);
                 
                   switch(p.pid()) {
@@ -400,6 +405,7 @@ namespace Rivet {
               for (Particle p : chargedParticles) {
                   //comment these next two lines are only commented to avoid an unused variable warning
                   double partPt = p.pT() / GeV;
+                  if (!std::isfinite(partPt) || partPt <= 0.) continue;
                   double pt_weight = 1. / (partPt * 2. * M_PI);
                   
                   switch (p.pid()) {
@@ -417,6 +423,7 @@ namespace Rivet {
                   //define what we will fill our histograms with below
                   //we technically don't have to do this, but it's convenient
                   double partPt = p.pT() / GeV;
+                  if (!std::isfinite(partPt) || partPt <= 0.) continue;
                   //double pt_weight = 1. / (partPt * 2. * M_PI);
                   
                   switch(p.pid()) {
@@ -433,12 +440,13 @@ namespace Rivet {
               if ((c >= 0.) && (c < 20.)){
                   
                   //fill our counter for this centrality
-                  sow["sow_dAuc0020"]->fill();
+                  //sow["sow_dAuc0020"]->fill(); //This was double filling the sow counter as it is below as well
                   
                   
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_dAuc0020"]->fill();
@@ -458,6 +466,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -473,6 +482,7 @@ namespace Rivet {
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_dAuc2040"]->fill();
@@ -491,6 +501,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -506,6 +517,7 @@ namespace Rivet {
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_dAuc4060"]->fill();
@@ -524,6 +536,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -539,6 +552,7 @@ namespace Rivet {
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_dAuc6088"]->fill();
@@ -557,6 +571,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -583,6 +598,7 @@ namespace Rivet {
               for (Particle p : chargedParticles) {
                   //comment these next two lines are only commented to avoid an unused variable warning
                   double partPt = p.pT() / GeV;
+                  if (!std::isfinite(partPt) || partPt <= 0.) continue;
                   double pt_weight = 1. / (partPt * 2. * M_PI);
                   
                   switch (p.pid()) {
@@ -599,6 +615,7 @@ namespace Rivet {
                   //define what we will fill our histograms with below
                   //we technically don't have to do this, but it's convenient
                   double partPt = p.pT() / GeV;
+                  if (!std::isfinite(partPt) || partPt <= 0.) continue;
                   //double pt_weight = 1. / (partPt * 2. * M_PI);
                   
                   switch(p.pid()) {
@@ -616,6 +633,7 @@ namespace Rivet {
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_AuAuc0020"]->fill();
@@ -635,6 +653,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -650,6 +669,7 @@ namespace Rivet {
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_AuAuc2060"]->fill();
@@ -668,6 +688,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -683,6 +704,7 @@ namespace Rivet {
                   for (Particle p : chargedParticles) {
                       
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       sow["sow_AuAuc6092"]->fill();
@@ -701,6 +723,7 @@ namespace Rivet {
                       //define what we will fill our histograms with below
                       //we technically don't have to do this, but it's convenient
                       double partPt = p.pT() / GeV;
+                      if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       //double pt_weight = 1. / (partPt * 2. * M_PI);
                       
                       switch(p.pid()) {
@@ -719,7 +742,7 @@ namespace Rivet {
       }
 
     /// Normalise histograms etc., after the run
-      void finalize() {
+/*      void finalize() {
           double cross = crossSection() / picobarn;
           
           //Figure 13:
@@ -954,7 +977,7 @@ if (sow["sow_pp"]->sumW() > 0 && sow["sow_AuAuc6092"]->sumW() > 0) {
           binShift(*hPionPt["ptyieldsAuAuc6092"]);
           divide(hEtaPt["ptyieldsAuAuc6092c"], hPionPt["ptyieldsAuAuc6092"], RatioAuAu["EtaToPion6092"]);
           
-      }
+      } */
 
       //histograms
       map<string, Histo1DPtr> hCrossSec;
