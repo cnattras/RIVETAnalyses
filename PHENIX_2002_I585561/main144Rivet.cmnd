@@ -1,0 +1,18 @@
+# Turn on Rivet inside main144.
+Main:runRivet = on
+
+# Keep the generator beam info.
+Main:rivetIgnoreBeams = off
+
+# Don't dump intermediate histograms.
+Main:rivetDumpPeriod = -1
+Main:rivetDumpFile =
+
+# No special run label.
+Main:rivetRunName =
+
+# Run this analysis with generator-based centrality and the right beam tag.
+Main:rivetAnalyses = {PHENIX_2002_I585561:cent=GEN:beam=AUAU130}
+
+# Preload the centrality calibration.
+Main:rivetPreload = {../Centralities/Calibration/AuAu130GeV.yoda}
