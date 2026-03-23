@@ -48,13 +48,14 @@ namespace Rivet {
 
     void analyze(const Event& event) override {
       const CentralityProjection& centProj = apply<CentralityProjection>(event, "CENT");
-      if (!centProj.isValueSet()) vetoEvent;
+      //if (!centProj.isValueSet()) vetoEvent;
 
       const double cent = centProj();
       const bool isCentral = (cent >= 0.0 && cent < 5.0);
+      cout<<"centrality "<<cent<<endl;
 
-      const RHICCentrality& rhicCent = apply<RHICCentrality>(event, "RHIC_CENT");
-      const double npart = rhicCent.npart();
+       // const RHICCentrality& rhicCent = apply<RHICCentrality>(event, "RHIC_CENT");
+      //const double npart = rhicCent.npart();
 
       _cAllEvents->fill();
       if (isCentral) _cCentralEvents->fill();
@@ -62,6 +63,7 @@ namespace Rivet {
       for (const Particle& p : apply<FinalState>(event, "FS").particles()) {
         if (p.abspid() != PID::LAMBDA) continue;
         if (std::abs(p.rapidity()) > 0.5) continue;
+        cout<<"Found Lambda"<<endl;
 
         const double pt = p.pT() / GeV;
         if (!std::isfinite(pt)) continue;
@@ -71,13 +73,13 @@ namespace Rivet {
           if (isCentral) _hLambdaCentral->fill(pt);
 
           _hRatioPtDen->fill(pt);
-          if (std::isfinite(npart)) _hRatioNpartDen->fill(npart);
+          //if (std::isfinite(npart)) _hRatioNpartDen->fill(npart);
         } else {
           _hLambdaBarMB->fill(pt);
           if (isCentral) _hLambdaBarCentral->fill(pt);
 
           _hRatioPtNum->fill(pt);
-          if (std::isfinite(npart)) _hRatioNpartNum->fill(npart);
+          //if (std::isfinite(npart)) _hRatioNpartNum->fill(npart);
         }
       }
     }
