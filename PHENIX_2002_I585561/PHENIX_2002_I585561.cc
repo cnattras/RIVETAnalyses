@@ -1,10 +1,7 @@
 // -*- C++ -*-
 
 #include "Rivet/Analysis.hh"
-#include "Rivet/Projections/FinalState.hh"
-#include "Rivet/Projections/CentralityProjection.hh"
-#include "Rivet/Tools/ParticleIdUtils.hh"
-#include "../Centralities/RHICCentrality.hh"
+#include "Rivet/Projections/UnstableParticles.hh"
 
 #include <cmath>
 
@@ -18,68 +15,37 @@ namespace Rivet {
 
 
     void init() override {
-      declare(FinalState(), "FS");
+      declare(UnstableParticles(), "UFS");
 
-      const RHICCentrality rhicCent("PHENIX");
-      declare(rhicCent, "RHIC_CENT");
-      declareCentrality(rhicCent,
-                        "RHIC_2019_CentralityCallibration:exp=PHENIX",
-                        "CMULT", "CENT");
-
-      // Figure 2 spectra from the reference data.
+      // Minimum-bias spectra
       book(_hLambdaMB, 1, 1, 1);
       book(_hLambdaBarMB, 1, 1, 2);
-      book(_hLambdaCentral, 1, 1, 3);
-      book(_hLambdaBarCentral, 1, 1, 4);
 
-      // Keep the temporary ratio histograms on the same binning as the reference plots.
-      book(_hRatioPtNum, "TMP/LambdaRatioPtNum", refData(2, 1, 1));
-      book(_hRatioPtDen, "TMP/LambdaRatioPtDen", refData(2, 1, 1));
-      book(_sRatioPt, 2, 1, 1);
-
-      book(_hRatioNpartNum, "TMP/LambdaRatioNpartNum", refData(3, 1, 1));
-      book(_hRatioNpartDen, "TMP/LambdaRatioNpartDen", refData(3, 1, 1));
-      book(_sRatioNpart, 3, 1, 1);
+      // Ratio vs pT
+      book(_hRatioPtNum, "TMP/LambdaRatioPtNum", refData(1, 1, 3));
+      book(_hRatioPtDen, "TMP/LambdaRatioPtDen", refData(1, 1, 3));
+      book(_sRatioPt, 1, 1, 3);
 
       book(_cAllEvents, "TMP/AllEvents");
-      book(_cCentralEvents, "TMP/CentralEvents");
     }
 
 
     void analyze(const Event& event) override {
-      const CentralityProjection& centProj = apply<CentralityProjection>(event, "CENT");
-      //if (!centProj.isValueSet()) vetoEvent;
-
-      const double cent = centProj();
-      const bool isCentral = (cent >= 0.0 && cent < 5.0);
-      cout<<"centrality "<<cent<<endl;
-
-       // const RHICCentrality& rhicCent = apply<RHICCentrality>(event, "RHIC_CENT");
-      //const double npart = rhicCent.npart();
-
       _cAllEvents->fill();
-      if (isCentral) _cCentralEvents->fill();
 
-      for (const Particle& p : apply<FinalState>(event, "FS").particles()) {
+      for (const Particle& p : apply<UnstableParticles>(event, "UFS").particles()) {
         if (p.abspid() != PID::LAMBDA) continue;
         if (std::abs(p.rapidity()) > 0.5) continue;
-        cout<<"Found Lambda"<<endl;
 
         const double pt = p.pT() / GeV;
         if (!std::isfinite(pt)) continue;
 
         if (p.pid() == PID::LAMBDA) {
           _hLambdaMB->fill(pt);
-          if (isCentral) _hLambdaCentral->fill(pt);
-
           _hRatioPtDen->fill(pt);
-          //if (std::isfinite(npart)) _hRatioNpartDen->fill(npart);
-        } else {
+        } else if (p.pid() == -PID::LAMBDA) {
           _hLambdaBarMB->fill(pt);
-          if (isCentral) _hLambdaBarCentral->fill(pt);
-
           _hRatioPtNum->fill(pt);
-          //if (std::isfinite(npart)) _hRatioNpartNum->fill(npart);
         }
       }
     }
@@ -87,20 +53,19 @@ namespace Rivet {
 
     void finalize() override {
       const double nAll = _cAllEvents->sumW();
-      const double nCentral = _cCentralEvents->sumW();
+      if (nAll <= 0.0) return;
 
-      if (nAll > 0.0) {
-        scaleInvariantYield(_hLambdaMB, nAll);
-        scaleInvariantYield(_hLambdaBarMB, nAll);
-      }
+      scaleInvariantYield(_hLambdaMB, nAll);
+      scaleInvariantYield(_hLambdaBarMB, nAll);
+      scaleInvariantYield(_hRatioPtNum, nAll);
+      scaleInvariantYield(_hRatioPtDen, nAll);
 
-      if (nCentral > 0.0) {
-        scaleInvariantYield(_hLambdaCentral, nCentral);
-        scaleInvariantYield(_hLambdaBarCentral, nCentral);
-      }
+      binShift(_hLambdaMB);
+      binShift(_hLambdaBarMB);
+      binShift(_hRatioPtNum);
+      binShift(_hRatioPtDen);
 
       fillRatio(_sRatioPt, _hRatioPtNum, _hRatioPtDen);
-      fillRatio(_sRatioNpart, _hRatioNpartNum, _hRatioNpartDen);
     }
 
 
@@ -120,36 +85,59 @@ namespace Rivet {
         if (pt <= 0.0 || dpt <= 0.0) continue;
 
         const double factor = 1.0 / (nEvents * TWOPI * pt * dpt * DY);
-        if (std::isfinite(factor) && factor > 0.0) {
-          bin.scaleW(factor);
-        }
+        if (std::isfinite(factor) && factor > 0.0) bin.scaleW(factor);
       }
     }
 
 
-    void fillRatio(Scatter2DPtr scatter, Histo1DPtr num, Histo1DPtr den) const {
-      if (!scatter || !num || !den) return;
+    double binHeight(Histo1DPtr hist, size_t i) const {
+      const auto& bin = hist->bin(i);
+      const double width = bin.xWidth();
+      return (width > 0.0) ? bin.sumW() / width : 0.0;
+    }
 
-      scatter->reset();
 
-      for (size_t i = 0; i < num->numBins(); ++i) {
-        const auto& numBin = num->bin(i);
-        const auto& denBin = den->bin(i);
+    void binShift(Histo1DPtr hist) const {
+      if (!hist || hist->numBins() < 2) return;
 
-        const double numerator = numBin.sumW();
-        const double denominator = denBin.sumW();
-        if (numerator <= 0.0 || denominator <= 0.0) continue;
+      for (size_t i = 0; i < hist->numBins(); ++i) {
+        const auto& bin = hist->bin(i);
+        const double pHigh = bin.xMax();
+        const double pLow = bin.xMin();
+        const double width = pHigh - pLow;
+        if (width <= 0.0) continue;
 
-        const double x = numBin.xMid();
-        const double dx = 0.5 * numBin.xWidth();
-        const double ratio = numerator / denominator;
-        const double err = ratioError(numerator, numBin.sumW2(),
-                                      denominator, denBin.sumW2());
+        const double yThis = binHeight(hist, i);
+        if (yThis <= 0.0) continue;
 
-        if (!std::isfinite(x) || !std::isfinite(dx)) continue;
-        if (!std::isfinite(ratio) || !std::isfinite(err)) continue;
+        double yLo = yThis;
+        double yHi = yThis;
 
-        scatter->addPoint(x, ratio, dx, err);
+        if (i == 0) {
+          yHi = binHeight(hist, i + 1);
+        } else if (i + 1 == hist->numBins()) {
+          yLo = binHeight(hist, i - 1);
+        } else {
+          yLo = binHeight(hist, i - 1);
+          yHi = binHeight(hist, i + 1);
+        }
+
+        if (yLo <= 0.0 || yHi <= 0.0) continue;
+
+        const double b = std::log(yLo / yHi) / width;
+        if (!std::isfinite(b)) continue;
+
+        const double expLow = std::exp(-b * pLow);
+        const double expHigh = std::exp(-b * pHigh);
+        const double denom = expHigh - expLow;
+        if (fuzzyEquals(denom, 0.0)) continue;
+
+        const double fCorr =
+          -b * width * std::exp(-b * 0.5 * (pHigh + pLow)) / denom;
+
+        if (std::isfinite(fCorr) && fCorr > 0.0 && fCorr < 10.0) {
+          hist->bin(i).scaleW(fCorr);
+        }
       }
     }
 
@@ -167,21 +155,45 @@ namespace Rivet {
     }
 
 
+    void fillRatio(Scatter2DPtr scatter, Histo1DPtr num, Histo1DPtr den) const {
+      if (!scatter || !num || !den) return;
+
+      scatter->reset();
+
+      for (size_t i = 0; i < num->numBins(); ++i) {
+        const auto& numBin = num->bin(i);
+        const auto& denBin = den->bin(i);
+
+        const double numerator = numBin.sumW();
+        const double denominator = denBin.sumW();
+        const double x = numBin.xMid();
+        const double dx = 0.5 * numBin.xWidth();
+
+        double ratio = 0.0;
+        double err = 0.0;
+
+        if (numerator > 0.0 && denominator > 0.0) {
+          ratio = numerator / denominator;
+          err = ratioError(numerator, numBin.sumW2(), denominator, denBin.sumW2());
+        }
+
+        if (!std::isfinite(x) || !std::isfinite(dx)) continue;
+        if (!std::isfinite(ratio)) ratio = 0.0;
+        if (!std::isfinite(err)) err = 0.0;
+
+        scatter->addPoint(x, ratio, dx, err);
+      }
+    }
+
+
     Histo1DPtr _hLambdaMB;
     Histo1DPtr _hLambdaBarMB;
-    Histo1DPtr _hLambdaCentral;
-    Histo1DPtr _hLambdaBarCentral;
 
     Histo1DPtr _hRatioPtNum;
     Histo1DPtr _hRatioPtDen;
-    Histo1DPtr _hRatioNpartNum;
-    Histo1DPtr _hRatioNpartDen;
-
     Scatter2DPtr _sRatioPt;
-    Scatter2DPtr _sRatioNpart;
 
     CounterPtr _cAllEvents;
-    CounterPtr _cCentralEvents;
   };
 
 
