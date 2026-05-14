@@ -74,7 +74,7 @@ namespace Rivet {
           declare(cp, "cp");
           
           //Uncharged particles
-          const UnstableParticles np(Cuts::abspid == 111 && Cuts::absrap < 0.5 && Cuts::pT > 1*GeV);
+          const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::pT > 1*GeV);
           declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
@@ -249,7 +249,7 @@ namespace Rivet {
           const Estimate1D& refdata21 = refData(refname21);
           book(hEtaPt["ptyieldsEta"],  "_" + refname21 + "_pp_Eta", refdata21);
           book(hPionPt["ptyieldsPion"],  "_" + refname21 + "_pp_Pion", refdata21);
-          book(Ratiopp["EtaToPion"], refname21);
+          book(Ratiopp["EtaToPion"], 13, 1, 1);
           
           
           //Figure 19: eta/pion^0 ratios in dAu collisions
@@ -345,7 +345,7 @@ namespace Rivet {
               sow["sow_pp"]->fill();
               
               //a conditional for the charged particles: eta, pi+, pi-, gamma
-              for (Particle p : chargedParticles) {
+              for (Particle p : neutralParticles) {
                   
                   
                   //define what we will fill our histograms with
@@ -385,7 +385,7 @@ namespace Rivet {
                           break;
                       }
                   }
-                  break;
+                  //break;
               }
               
           }
@@ -402,7 +402,7 @@ namespace Rivet {
               
               sow["sow_dAu"]->fill();
               
-              for (Particle p : chargedParticles) {
+              for (Particle p : neutralParticles) {
                   //comment these next two lines are only commented to avoid an unused variable warning
                   double partPt = p.pT() / GeV;
                   if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -440,16 +440,16 @@ namespace Rivet {
               if ((c >= 0.) && (c < 20.)){
                   
                   //fill our counter for this centrality
-                  //sow["sow_dAuc0020"]->fill(); //This was double filling the sow counter as it is below as well
+                  sow["sow_dAuc0020"]->fill(); //This was double filling the sow counter as it is below as well
                   
                   
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
                       double pt_weight = 1. / (partPt * 2. * M_PI);
                       
-                      sow["sow_dAuc0020"]->fill();
+                      //sow["sow_dAuc0020"]->fill();
                       
                       //switch statement for each charged particle
                       switch (p.pid()) {
@@ -479,7 +479,7 @@ namespace Rivet {
                   }
               }
               else if ((c >= 20.) && (c < 40.)){
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -514,7 +514,7 @@ namespace Rivet {
                   }
               }
               else if ((c >= 40.) && (c < 60.)){
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -549,7 +549,7 @@ namespace Rivet {
                   }
               }
               else if ((c >= 60.) && (c < 88.)){
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -595,7 +595,7 @@ namespace Rivet {
               
               sow["sow_AuAuc0092"]->fill();
               
-              for (Particle p : chargedParticles) {
+              for (Particle p : neutralParticles) {
                   //comment these next two lines are only commented to avoid an unused variable warning
                   double partPt = p.pT() / GeV;
                   if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -630,7 +630,7 @@ namespace Rivet {
               
               //Centrality inclusion begins here:
               if ((c >= 0.) && (c < 20.)){
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -666,7 +666,7 @@ namespace Rivet {
                   }
               }
               else if ((c >= 20.) && (c < 60.)){
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -701,7 +701,7 @@ namespace Rivet {
                   }
               }
               else if ((c >= 60.) && (c < 92.)){
-                  for (Particle p : chargedParticles) {
+                  for (Particle p : neutralParticles) {
                       
                       double partPt = p.pT() / GeV;
                       if (!std::isfinite(partPt) || partPt <= 0.) continue;
@@ -742,7 +742,7 @@ namespace Rivet {
       }
 
     /// Normalise histograms etc., after the run
-/*      void finalize() {
+/**/      void finalize() {
           double cross = crossSection() / picobarn;
           
           //Figure 13:
@@ -919,9 +919,24 @@ namespace Rivet {
           //d09-x01-y01
           binShift(*hEtaPt["ptyieldsEta"]);
           binShift(*hPionPt["ptyieldsPion"]);
-          if(hEtaPt["ptyieldsEta"]->sumW()>0 && hPionPt["ptyieldsPion"]->sumW()>0){
+          /*if(hEtaPt["ptyieldsEta"]->sumW()>0 && hPionPt["ptyieldsPion"]->sumW()>0){
           divide(hEtaPt["ptyieldsEta"], hPionPt["ptyieldsPion"], Ratiopp["EtaToPion"]);}
-          
+          */
+          auto& etaH  = *hEtaPt["ptyieldsEta"];
+          auto& pionH = *hPionPt["ptyieldsPion"];
+          auto& ratio = *Ratiopp["EtaToPion"];
+
+          for (size_t i = 0; i < etaH.numBins(); ++i) {
+
+          double e = etaH.bin(i).sumW();
+          double p = pionH.bin(i).sumW();
+
+          if (p > 0) {
+            ratio.bin(i).set(e / p, 0.0);
+          } else {
+            ratio.bin(i).set(0.0, 0.0);
+            }
+          }
           
           //Figure 19: ratios
           //d10-x01-y01
@@ -980,7 +995,7 @@ namespace Rivet {
           divide(hEtaPt["ptyieldsAuAuc6092c"], hPionPt["ptyieldsAuAuc6092"], RatioAuAu["EtaToPion6092"]);}
           
       }
-*/
+/**/
       //histograms
       map<string, Histo1DPtr> hCrossSec;
       map<string, Histo1DPtr> hPionPt;
