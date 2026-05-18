@@ -74,7 +74,7 @@ namespace Rivet {
           declare(cp, "cp");
           
           //Uncharged particles
-          const UnstableParticles np(Cuts::absrap < 0.5 && Cuts::pT > 1*GeV);
+          const UnstableParticles np((Cuts::abspid == 111 || Cuts::abspid == 221) && Cuts::absrap < 0.5 && Cuts::pT > 1*GeV);
           declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
@@ -919,10 +919,10 @@ namespace Rivet {
           //d09-x01-y01
           binShift(*hEtaPt["ptyieldsEta"]);
           binShift(*hPionPt["ptyieldsPion"]);
-          /*if(hEtaPt["ptyieldsEta"]->sumW()>0 && hPionPt["ptyieldsPion"]->sumW()>0){
+          if(hEtaPt["ptyieldsEta"]->sumW()>0 && hPionPt["ptyieldsPion"]->sumW()>0){
           divide(hEtaPt["ptyieldsEta"], hPionPt["ptyieldsPion"], Ratiopp["EtaToPion"]);}
-          */
-          auto& etaH  = *hEtaPt["ptyieldsEta"];
+          
+        /*auto& etaH  = *hEtaPt["ptyieldsEta"];
           auto& pionH = *hPionPt["ptyieldsPion"];
           auto& ratio = *Ratiopp["EtaToPion"];
 
@@ -937,7 +937,7 @@ namespace Rivet {
             ratio.bin(i).set(0.0, 0.0);
             }
           }
-          
+        */  
           //Figure 19: ratios
           //d10-x01-y01
           binShift(*hEtaPt["ptyieldsdAuc0088c"]);
