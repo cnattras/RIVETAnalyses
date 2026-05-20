@@ -30,7 +30,44 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2007_I731133);
 
     //create binShift function
-    void binShift(YODA::Histo1D& histogram) {
+void binShift(YODA::Histo1D& histogram) {
+
+    const auto& binlist = histogram.bins();
+
+    // Skip if too few physical bins
+    if (histogram.numBins() < 3) return;
+
+    // Loop only over physical bins:
+    // omit first and last bins from correction
+    for (size_t n = 1; n < histogram.numBins()-1; ++n) {
+
+        const auto& bin = binlist[n];
+
+        double p_high = bin.xMax();
+        double p_low  = bin.xMin();
+
+        double left  = binlist[n-1].sumW();
+        double right = binlist[n+1].sumW();
+
+        // Protect against invalid logs/divisions
+        if (left <= 0 || right <= 0) continue;
+
+        double b = (1.0 / (p_high - p_low)) * log(left / right);
+
+        double denom =
+            exp(-b * p_high) - exp(-b * p_low);
+
+        if (std::abs(denom) < 1e-12) continue;
+
+        double f_corr =
+            -b * (p_high - p_low)
+            * exp(-b * (p_high + p_low) / 2.0)
+            / denom;
+
+        histogram.bin(n).scaleW(f_corr);
+    }
+}
+    /*    void binShift(YODA::Histo1D& histogram) {
       const auto& binlist = histogram.bins();
       const auto& lastBin = histogram.bin(histogram.numBins());
       int n = 0;
@@ -61,7 +98,7 @@ namespace Rivet {
       }
 
     }
-
+*/
 
     /// Book histograms and initialise projections before the run
       void init() {
