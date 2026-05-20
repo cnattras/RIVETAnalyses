@@ -225,12 +225,12 @@ void binShift(YODA::Histo1D& histogram) {
        book(_p["AntiProtonCentrality"], 29, 1, 6);
 //       book(_h["N_collCentrality"], 2, 1, 2); //Not being filled
 //       book(_h["N_partCentrality"], 2, 1, 1); //Not being filled
-       book(_h["PionPlusParticle"], 2, 1, 3);
-       book(_h["PionMinusParticle"], 2, 1, 4);
-       book(_h["KaonPlusParticle"], 2, 1, 5);
-       book(_h["KaonMinusParticle"], 2, 1, 6);
-       book(_h["ProtonParticle"], 2, 1, 7);
-       book(_h["AntiProtonParticle"], 2, 1, 8);
+       book(_p["PionPlusParticle"], 2, 1, 3);
+       book(_p["PionMinusParticle"], 2, 1, 4);
+       book(_p["KaonPlusParticle"], 2, 1, 5);
+       book(_p["KaonMinusParticle"], 2, 1, 6);
+       book(_p["ProtonParticle"], 2, 1, 7);
+       book(_p["AntiProtonParticle"], 2, 1, 8);
 /* Unable to simulate or simply don't care      
        book(_h["Table4PionPlusCentrality"], 3, 1, 1);
        book(_h["Table4PionMinusCentrality"], 3, 1, 2);
@@ -245,6 +245,7 @@ void binShift(YODA::Histo1D& histogram) {
       book(_c["Cent15_30"], "_Cent15_30");
       book(_c["Cent30_60"], "_Cent30_60");
       book(_c["Cent60_92"], "_Cent60_92");
+
 
     }
 
@@ -262,12 +263,18 @@ void binShift(YODA::Histo1D& histogram) {
         else if(cent >= 15. && cent < 30.) _c["Cent15_30"]->fill();
         else if(cent >= 30. && cent < 60.) _c["Cent30_60"]->fill();
         else if(cent >= 60. && cent < 92.) _c["Cent60_92"]->fill();
-
+//replace with counter for npi+. Define npi+ above 4loop. Move current to bottom, with (cent, npi+) in analyze, but out outside of if loop
+      int N_KaonPlus = 0;
+      int N_KaonMinus = 0;
+      int N_Proton = 0;
+      int N_AntiProton = 0;
+      int N_PionPlus = 0;
+      int N_PionMinus = 0;
       for(Particle& p : particles){
         if(p.pid() == 321)
         {
           _h["KaonPlusMinBias"]->fill(p.pT()/GeV);
-          _h["KaonPlusParticle"]->fill(cent);
+          ++N_KaonPlus;
           _p["KaonPlusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
@@ -299,7 +306,7 @@ void binShift(YODA::Histo1D& histogram) {
         if(p.pid() == -321)
         {
           _h["KaonMinusMinBias"]->fill(p.pT()/GeV);
-          _h["KaonMinusParticle"]->fill(cent);
+          ++N_KaonMinus;
           _p["KaonMinusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
@@ -334,7 +341,7 @@ void binShift(YODA::Histo1D& histogram) {
         if(p.pid() == 2212)
         {
           _h["ProtonMinBias"]->fill(p.pT()/GeV);
-          _h["ProtonParticle"]->fill(cent);
+          ++N_Proton;
           _p["ProtonCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
@@ -363,7 +370,7 @@ void binShift(YODA::Histo1D& histogram) {
         if(p.pid() == -2212)
         {
           _h["AntiProtonMinBias"]->fill(p.pT()/GeV);
-          _h["AntiProtonParticle"]->fill(cent);
+          ++N_AntiProton;
           _p["AntiProtonCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
@@ -394,7 +401,7 @@ void binShift(YODA::Histo1D& histogram) {
         {
 
           _h["PionPlusMinBias"]->fill(p.pT()/GeV);
-          _h["PionPlusParticle"]->fill(cent); //replace with counter for npi+. Define npi+ above 4loop. Move current to bottom, with (cent, npi+) in analyze, but out outside of if loop
+          ++N_PionPlus;
           _p["PionPlusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
@@ -425,7 +432,7 @@ void binShift(YODA::Histo1D& histogram) {
         if(p.pid() == -211)
         {
           _h["PionMinusMinBias"]->fill(p.pT()/GeV);
-          _h["PionMinusParticle"]->fill(cent);
+          ++N_PionMinus;
           _p["PionMinusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
@@ -452,6 +459,12 @@ void binShift(YODA::Histo1D& histogram) {
 //            _h["Fig11PionMinusPeripheral"]->fill(p.pT()/GeV);
           }
         }
+    _p["KaonPlusParticle"]->fill(cent, N_KaonPlus);
+    _p["KaonMinusParticle"]->fill(cent, N_KaonMinus);
+    _p["ProtonParticle"]->fill(cent, N_Proton);
+    _p["AntiProtonParticle"]->fill(cent, N_AntiProton);
+    _p["PionPlusParticle"]->fill(cent, N_PionPlus);
+    _p["PionMinusParticle"]->fill(cent, N_PionMinus);
         }
     }
     }
@@ -625,7 +638,7 @@ double scaleFactor = 1.0 / (2 * M_PI );
       _h["Fig12AntiProtonCent60_92"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
 
       vector<int> centBins = {0, 5, 15, 30, 60, 92};
-
+/*
       for(size_t i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
       {
               string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
@@ -637,7 +650,7 @@ double scaleFactor = 1.0 / (2 * M_PI );
               _h["ProtonParticle"]->bin(i).scaleW(normCent);
               _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
       }
-
+*/
 auto printC = [&](const string& name) {
   double v = _c[name]->sumW();
   cout << name << " = " << v << (v == 0 ? "  <<< WARNING ZERO" : "") << endl;
