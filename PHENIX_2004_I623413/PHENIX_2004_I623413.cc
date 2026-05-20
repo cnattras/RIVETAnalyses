@@ -23,8 +23,46 @@ namespace Rivet {
 
 //create binShift function
 void binShift(YODA::Histo1D& histogram) {
+
     const auto& binlist = histogram.bins();
-    const auto& lastBin = histogram.bin(histogram.numBins());
+
+    // Skip if too few physical bins
+    if (histogram.numBins() < 3) return;
+
+    // Loop only over physical bins:
+    // omit first and last bins from correction
+    for (size_t n = 1; n < histogram.numBins()-1; ++n) {
+
+        const auto& bin = binlist[n];
+
+        double p_high = bin.xMax();
+        double p_low  = bin.xMin();
+
+        double left  = binlist[n-1].sumW();
+        double right = binlist[n+1].sumW();
+
+        // Protect against invalid logs/divisions
+        if (left <= 0 || right <= 0) continue;
+
+        double b = (1.0 / (p_high - p_low)) * log(left / right);
+
+        double denom =
+            exp(-b * p_high) - exp(-b * p_low);
+
+        if (std::abs(denom) < 1e-12) continue;
+
+        double f_corr =
+            -b * (p_high - p_low)
+            * exp(-b * (p_high + p_low) / 2.0)
+            / denom;
+
+        histogram.bin(n).scaleW(f_corr);
+    }
+}
+/*
+void binShift(YODA::Histo1D& histogram) {
+    const auto& binlist = histogram.bins();
+    const auto& lastBin = histogram.bin(histogram.numBins()-1);
     int n = 0;
     for (auto& bins : binlist) {
         double p_high = bins.xMax();
@@ -47,6 +85,7 @@ void binShift(YODA::Histo1D& histogram) {
         }
     }
 }
+*/
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -178,28 +217,28 @@ void binShift(YODA::Histo1D& histogram) {
        book(_h["Fig12AntiProtonCent30_60"], 27, 1, 8);
        book(_h["Fig12ProtonCent60_92"], 28, 1, 1);
        book(_h["Fig12AntiProtonCent60_92"], 28, 1, 2);
-       book(_h["PionPlusParticle"], 29, 1, 1);
-       book(_h["PionMinusParticle"], 29, 1, 2);
-       book(_h["KaonPlusParticle"], 29, 1, 3);
-       book(_h["KaonMinusParticle"], 29, 1, 4);
-       book(_h["ProtonParticle"], 29, 1, 5);
-       book(_h["AntiProtonParticle"], 29, 1, 6);
-       book(_h["N_collCentrality"], 2, 1, 2);
-       book(_h["N_partCentrality"], 2, 1, 1);
-       book(_p["PionPlusCentrality"], 2, 1, 3);
-       book(_p["PionMinusCentrality"], 2, 1, 4);
-       book(_p["KaonPlusCentrality"], 2, 1, 5);
-       book(_p["KaonMinusCentrality"], 2, 1, 6);
-       book(_p["ProtonCentrality"], 2, 1, 7);
-       book(_p["AntiProtonCentrality"], 2, 1, 8);
-      
+       book(_p["PionPlusCentrality"], 29, 1, 1);
+       book(_p["PionMinusCentrality"], 29, 1, 2);
+       book(_p["KaonPlusCentrality"], 29, 1, 3);
+       book(_p["KaonMinusCentrality"], 29, 1, 4);
+       book(_p["ProtonCentrality"], 29, 1, 5);
+       book(_p["AntiProtonCentrality"], 29, 1, 6);
+//       book(_h["N_collCentrality"], 2, 1, 2); //Not being filled
+//       book(_h["N_partCentrality"], 2, 1, 1); //Not being filled
+       book(_h["PionPlusParticle"], 2, 1, 3);
+       book(_h["PionMinusParticle"], 2, 1, 4);
+       book(_h["KaonPlusParticle"], 2, 1, 5);
+       book(_h["KaonMinusParticle"], 2, 1, 6);
+       book(_h["ProtonParticle"], 2, 1, 7);
+       book(_h["AntiProtonParticle"], 2, 1, 8);
+/* Unable to simulate or simply don't care      
        book(_h["Table4PionPlusCentrality"], 3, 1, 1);
        book(_h["Table4PionMinusCentrality"], 3, 1, 2);
        book(_h["Table4KaonPlusCentrality"], 3, 1, 3);
        book(_h["Table4KaonMinusCentrality"], 3, 1, 4);
        book(_h["Table4ProtonCentrality"], 3, 1, 5);
        book(_h["Table4AntiProtonCentrality"], 3, 1, 6);
-      
+*/      
       book(_c["MinBias"], "_MinBias");
       book(_c["Cent0_5"], "_Cent0_5");
       book(_c["Cent5_15"], "_Cent5_15");
@@ -229,7 +268,7 @@ void binShift(YODA::Histo1D& histogram) {
         {
           _h["KaonPlusMinBias"]->fill(p.pT()/GeV);
           _h["KaonPlusParticle"]->fill(cent);
-          _p["KaonPlusCentrality"]->fill(cent, p.pT()/GeV);
+          _p["KaonPlusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10KaonPlusCent0_5"]->fill(p.pT()/GeV);
@@ -261,7 +300,7 @@ void binShift(YODA::Histo1D& histogram) {
         {
           _h["KaonMinusMinBias"]->fill(p.pT()/GeV);
           _h["KaonMinusParticle"]->fill(cent);
-          _p["KaonMinusCentrality"]->fill(cent, p.pT()/GeV);
+          _p["KaonMinusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10KaonMinusCent0_5"]->fill(p.pT()/GeV);
@@ -296,7 +335,7 @@ void binShift(YODA::Histo1D& histogram) {
         {
           _h["ProtonMinBias"]->fill(p.pT()/GeV);
           _h["ProtonParticle"]->fill(cent);
-          _p["ProtonCentrality"]->fill(cent, p.pT()/GeV);
+          _p["ProtonCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10ProtonCent0_5"]->fill(p.pT()/GeV);
@@ -325,7 +364,7 @@ void binShift(YODA::Histo1D& histogram) {
         {
           _h["AntiProtonMinBias"]->fill(p.pT()/GeV);
           _h["AntiProtonParticle"]->fill(cent);
-          _p["AntiProtonCentrality"]->fill(cent, p.pT()/GeV);
+          _p["AntiProtonCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10AntiProtonCent0_5"]->fill(p.pT()/GeV);
@@ -355,8 +394,8 @@ void binShift(YODA::Histo1D& histogram) {
         {
 
           _h["PionPlusMinBias"]->fill(p.pT()/GeV);
-          _h["PionPlusParticle"]->fill(cent);
-          _p["PionPlusCentrality"]->fill(cent, p.pT()/GeV);
+          _h["PionPlusParticle"]->fill(cent); //replace with counter for npi+. Define npi+ above 4loop. Move current to bottom, with (cent, npi+) in analyze, but out outside of if loop
+          _p["PionPlusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionPlusCent0_5"]->fill(p.pT()/GeV);
@@ -387,7 +426,7 @@ void binShift(YODA::Histo1D& histogram) {
         {
           _h["PionMinusMinBias"]->fill(p.pT()/GeV);
           _h["PionMinusParticle"]->fill(cent);
-          _p["PionMinusCentrality"]->fill(cent, p.pT()/GeV);
+          _p["PionMinusCentrality"]->fill(cent, p.pT()/MeV);
 
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionMinusCent0_5"]->fill(p.pT()/GeV);
