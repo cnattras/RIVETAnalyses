@@ -454,45 +454,46 @@ YLabel=1/(2$\pi p_{T}$) d$^{2}$N/d$p_{T}$dy ($c^{2}$/GeV$^{2}$)
 END PLOT
 
 # Table 2
-BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y01
-Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
-XLabel=Centrality ($\%$)
-YLabel=$N_{part}$
-END PLOT
-BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y02
-Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
-XLabel=Centrality ($\%$)
-YLabel=$N_{coll}$
-END PLOT
 BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y03
 Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
 XLabel=Centrality ($\%$)
 YLabel=$\pi ^+$
+#LogY=1
 END PLOT
+
 BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y04
 Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
 XLabel=Centrality ($\%$)
 YLabel=$\pi ^-$
+#LogY=1
 END PLOT
+
 BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y05
 Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
 XLabel=Centrality ($\%$)
 YLabel=$K^+$
+#LogY=1
 END PLOT
+
 BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y06
 Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
 XLabel=Centrality ($\%$)
 YLabel=$K^-$
+#LogY=1
 END PLOT
+
 BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y07
 Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
 XLabel=Centrality ($\%$)
 YLabel=$p$
+#LogY=1
 END PLOT
+
 BEGIN PLOT /PHENIX_2004_I623413/d02-x01-y08
 Title=The $dN/dy$ at midrapidity for hadrons produced at midrapidity.
 XLabel=Centrality ($\%$)
 YLabel=$\bar{p}$
+#LogY=1
 END PLOT
 
 # Figure 13 (HEPData) or Table 3 of Paper
