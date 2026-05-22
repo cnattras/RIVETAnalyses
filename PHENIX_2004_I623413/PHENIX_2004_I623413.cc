@@ -102,16 +102,20 @@ void binShift(YODA::Histo1D& histogram) {
       beamOpt = getOption<string>("beam", "NONE");
       const ParticlePair& beam = beams();
 
-     
-      if (beamOpt == "NONE"){
-      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-      {
+      if (beamOpt == "AUAU130") {collSys = AuAu130; }
+      else if (beamOpt == "NONE"){
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970){
           float NN = 197.;
           if (fuzzyEquals(sqrtS()/GeV, 130*NN, 5)) collSys = AuAu130;
+        }
       }
+      else {
+        throw Error("Unknown beam option: " + beamOpt);
       }
-      
-      if (beamOpt == "AUAU130") collSys = AuAu130; 
+    // HARD FAIL if not recognized
+      if (collSys == UNKNOWN) {
+        throw Error("Unsupported beam configuration for PHENIX_2004_I623413");
+      }
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
        book(_h["KaonPlusMinBias"], 8, 1, 1);
@@ -252,6 +256,7 @@ void binShift(YODA::Histo1D& histogram) {
 
     /// Perform the per-event analysis
     void analyze(const Event& event) {
+      if (collSys != AuAu130) {vetoEvent;}
       if (collSys == AuAu130){
       const CentralityProjection& centProj = apply<CentralityProjection>(event,"CMULT");
       const double cent = centProj();
@@ -677,8 +682,8 @@ printC("Cent60_92");
     map<string, CounterPtr> _c;
     map<string, Estimate1DPtr> _s;
     string beamOpt;
-    enum CollisionSystem {AuAu130};
-    CollisionSystem collSys;
+    enum CollisionSystem { UNKNOWN, AuAu130 };
+    CollisionSystem collSys = UNKNOWN;
     ///@}
 
 
