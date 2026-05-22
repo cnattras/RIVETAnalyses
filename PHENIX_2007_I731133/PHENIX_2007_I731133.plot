@@ -43,28 +43,28 @@ END PLOT
 
 #Figure 15.1
 BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y01
-Title=Invariant yeilds measured in d+Au for $0-92\%$ centrality (MB)
+Title=Invariant yeilds measured in Au+Au for $0-92\%$ centrality (MB)
 XLabel=$p_T$ (GeV/$c$)
 YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.1
 BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y02
-Title=Invariant yeilds measured in d+Au for $0-20\%$ centrality
+Title=Invariant yeilds measured in Au+Au for $0-20\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.1
 BEGIN PLOT /PHENIX_2007_I731133/d07-x01-y03
-Title=Invariant yeilds measured in d+Au for $20-60\%$ centrality
+Title=Invariant yeilds measured in Au+Au for $20-60\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
 
 #Figure 15.2
 BEGIN PLOT /PHENIX_2007_I731133/d08-x01-y01
-Title=Invariant yeilds measured in d+Au for $60-92\%$ centrality
+Title=Invariant yeilds measured in Au+Au for $60-92\%$ centrality
 XLabel=$p_T$ (GeV/$c$)
 YLabel=1/2$\pi p_T N_{evt}$ $d^2N/dp_Tdy$ (GeV/$c^{-2})$
 END PLOT
@@ -138,41 +138,47 @@ BEGIN PLOT /PHENIX_2007_I731133/d13-x01-y01
 Title=$\eta/\pi^0$  in $p$+$p$ collisions
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 19.1
 BEGIN PLOT /PHENIX_2007_I731133/d14-x01-y01
-Title=$\eta/\pi^0$  in Au+Au collisions for $0-88\%$
+Title=$\eta/\pi^0$  in d+Au collisions for $0-88\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 19.1
 BEGIN PLOT /PHENIX_2007_I731133/d14-x01-y02
-Title=$\eta/\pi^0$  in Au+Au collisions for $0-20\%$
+Title=$\eta/\pi^0$  in d+Au collisions for $0-20\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 19.1
 BEGIN PLOT /PHENIX_2007_I731133/d14-x01-y03
-Title=$\eta/\pi^0$  in Au+Au collisions for $20-40\%$
+Title=$\eta/\pi^0$  in d+Au collisions for $20-40\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 19.1
 BEGIN PLOT /PHENIX_2007_I731133/d14-x01-y04
-Title=$\eta/\pi^0$  in Au+Au collisions for $40-60\%$
+Title=$\eta/\pi^0$  in d+Au collisions for $40-60\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 19.2
 BEGIN PLOT /PHENIX_2007_I731133/d15-x01-y01
-Title=$\eta/\pi^0$  in Au+Au collisions for $60-88\%$
+Title=$\eta/\pi^0$  in d+Au collisions for $60-88\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 20.1
@@ -180,6 +186,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d16-x01-y01
 Title=$\eta/\pi^0$  in Au+Au collisions for $0-92\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 20.1
@@ -187,6 +194,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d16-x01-y02
 Title=$\eta/\pi^0$  in Au+Au collisions for $0-20\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 20.1
@@ -194,6 +202,7 @@ BEGIN PLOT /PHENIX_2007_I731133/d16-x01-y03
 Title=$\eta/\pi^0$  in Au+Au collisions for $20-60\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
 #Figure 20.2
@@ -201,5 +210,6 @@ BEGIN PLOT /PHENIX_2007_I731133/d17-x01-y01
 Title=$\eta/\pi^0$  in Au+Au collisions for $60-92\%$
 XLabel=$p_T$ (GeV/$c$)
 YLabel=$\eta/\pi^0$
+LogY=0
 END PLOT
 
