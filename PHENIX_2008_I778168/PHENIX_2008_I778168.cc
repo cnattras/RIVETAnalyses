@@ -31,7 +31,44 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2008_I778168);
     
     //create binShift function
-    void binShift(YODA::Histo1D& histogram) {
+void binShift(YODA::Histo1D& histogram) {
+
+    const auto& binlist = histogram.bins();
+
+    // Skip if too few physical bins
+    if (histogram.numBins() < 3) return;
+
+    // Loop only over physical bins:
+    // omit first and last bins from correction
+    for (size_t n = 1; n < histogram.numBins()-1; ++n) {
+
+        const auto& bin = binlist[n];
+
+        double p_high = bin.xMax();
+        double p_low  = bin.xMin();
+
+        double left  = binlist[n-1].sumW();
+        double right = binlist[n+1].sumW();
+
+        // Protect against invalid logs/divisions
+        if (left <= 0 || right <= 0) continue;
+
+        double b = (1.0 / (p_high - p_low)) * log(left / right);
+
+        double denom =
+            exp(-b * p_high) - exp(-b * p_low);
+
+        if (std::abs(denom) < 1e-12) continue;
+
+        double f_corr =
+            -b * (p_high - p_low)
+            * exp(-b * (p_high + p_low) / 2.0)
+            / denom;
+
+        histogram.bin(n).scaleW(f_corr);
+    }
+}
+    /*    void binShift(YODA::Histo1D& histogram) {
         const auto& binlist = histogram.bins();
         const auto& lastBin = histogram.bin(histogram.numBins());
         int n = 0;
@@ -55,7 +92,7 @@ namespace Rivet {
                 n += 1;
             }
         }
-    }
+    } */
 
     void init() {
 
@@ -93,21 +130,21 @@ namespace Rivet {
     declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
 
- //Yields_________________
-       book(_h["ptyieldsc5"], 2, 1, 3);
-       book(_h["ptyieldsc10"], 1, 1, 1);
-       book(_h["ptyieldsc20"], 1, 1, 2);
-       book(_h["ptyieldsc30"], 2, 1, 1);
-       book(_h["ptyieldsc40"], 2, 1, 2);
-       book(_h["ptyieldsc50"], 3, 1, 1);
-       book(_h["ptyieldsc60"], 3, 1, 2);
-       book(_h["ptyieldsc70"], 4, 1, 1);
-       book(_h["ptyieldsc80"], 5, 1, 1);
-       book(_h["ptyieldsc92"], 5, 1, 2);
+ //Yields_________________ (Figure 1)
+       book(_h["ptyieldsc0_5"], 2, 1, 3); //make this 0_5
+       book(_h["ptyieldsc0_10"], 1, 1, 1); //make this 0_10
+       book(_h["ptyieldsc20"], 1, 1, 2); //10_20
+       book(_h["ptyieldsc30"], 2, 1, 1); //20_30
+       book(_h["ptyieldsc40"], 2, 1, 2); //30_40
+       book(_h["ptyieldsc50"], 3, 1, 1); //40_50
+       book(_h["ptyieldsc60"], 3, 1, 2); //50_60
+       book(_h["ptyieldsc70"], 4, 1, 1); //60_70
+       book(_h["ptyieldsc80"], 5, 1, 1); //70_80
+       book(_h["ptyieldsc92"], 5, 1, 2); //80_92
        book(_h["ptyieldscall"], 1, 1, 3);
 
-       book(_c["sow_AuAu_c5"],"_sow_AuAu_c5");
-       book(_c["sow_AuAu_c10"],"_sow_AuAu_c10");
+       book(_c["sow_AuAu_c0_5"],"_sow_AuAu_c0_5");
+       book(_c["sow_AuAu_c0_10"],"_sow_AuAu_c0_10");
        book(_c["sow_AuAu_c20"],"_sow_AuAu_c20");
        book(_c["sow_AuAu_c30"],"_sow_AuAu_c30");
        book(_c["sow_AuAu_c40"],"_sow_AuAu_c40");
@@ -121,13 +158,13 @@ namespace Rivet {
  //RAA _______________________________
        string refnameRaa1 = mkAxisCode(11,1,1);
              const Estimate1D& refdataRaa1 =refData(refnameRaa1);
-       book(_h["c5Pt_AuAu"],"_" + refnameRaa1 + "_AuAu", refdataRaa1);
-       book(_h["c5Pt_pp"], "_" +refnameRaa1 + "_pp", refdataRaa1);
+       book(_h["c0_5Pt_AuAu"],"_" + refnameRaa1 + "_AuAu", refdataRaa1);
+       book(_h["c0_5Pt_pp"], "_" +refnameRaa1 + "_pp", refdataRaa1);
        book(hRaa["Raa_c05_AuAu"], refnameRaa1);
 
        string refnameRaa2 = mkAxisCode(6,1,1);
              const Estimate1D& refdataRaa2 =refData(refnameRaa2);
-       book(_h["c10Pt_AuAu"],"_" + refnameRaa2 + "_AuAu", refdataRaa2);
+       book(_h["c0_10Pt_AuAu"],"_" + refnameRaa2 + "_AuAu", refdataRaa2);
        book(_h["c10Pt_pp"],"_" + refnameRaa2 + "_pp", refdataRaa2);
        book(hRaa["Raa_c010_AuAu"], refnameRaa2);
 
@@ -187,6 +224,7 @@ namespace Rivet {
 
 
        book(_c["sow_pp"],"_sow_pp");
+       //Figure 12: Integrated nuclear modification factor (R_AA) for pi0 as a function of collision centrality IS NOT IN HERE
 
  //Centrality vs RAA
        /*
@@ -250,7 +288,7 @@ namespace Rivet {
                  _c["sow_pp"]->fill();
                  for(Particle p : neutralParticles)
                  {
-                     _h["c5Pt_pp"]->fill(p.pT()/GeV);
+                     _h["c0_5Pt_pp"]->fill(p.pT()/GeV);
                      _h["c10Pt_pp"]->fill(p.pT()/GeV);
                      _h["c20Pt_pp"]->fill(p.pT()/GeV);
                      _h["c30Pt_pp"]->fill(p.pT()/GeV);
@@ -276,25 +314,25 @@ namespace Rivet {
 
             if((c >= 0.) && (c < 5.))
             {
-                _c["sow_AuAu_c5"]->fill();
+                _c["sow_AuAu_c0_5"]->fill();
                 for(const Particle& p : neutralParticles)
                 {
                     double partPt = p.pT()/GeV;
                     double pt_weight = 1./(partPt*2.*M_PI);
 
-                    _h["ptyieldsc5"]->fill(partPt, pt_weight);
-                    _h["c5Pt_AuAu"]->fill(p.pT()/GeV);
+                    _h["ptyieldsc0_5"]->fill(partPt, pt_weight);
+                    _h["c0_5Pt_AuAu"]->fill(p.pT()/GeV);
                 }
             }
             else if((c >= 0.) && (c < 10.))
             {
-                _c["sow_AuAu_c10"]->fill();
+                _c["sow_AuAu_c0_10"]->fill();
                 for(const Particle& p : neutralParticles)
                 {
                     double partPt = p.pT()/GeV;
                     double pt_weight = 1./(partPt*2.*M_PI);
-                    _h["ptyieldsc10"]->fill(partPt, pt_weight);
-                    _h["c10Pt_AuAu"]->fill(p.pT()/GeV);
+                    _h["ptyieldsc0_10"]->fill(partPt, pt_weight);
+                    _h["c0_10Pt_AuAu"]->fill(p.pT()/GeV);
                     _h["callPt_AuAu"]->fill(p.pT()/GeV);
                     _h["ptyieldscall"]->fill(p.pT()/GeV, pt_weight);
                 }
@@ -410,14 +448,14 @@ namespace Rivet {
     void finalize() {
 
 // Yields
-    binShift(*_h["ptyieldsc5"]);
-    if (_c["sow_AuAu_c5"]->sumW() > 0) {
-        _h["ptyieldsc5"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
+    binShift(*_h["ptyieldsc0_5"]);
+    if (_c["sow_AuAu_c0_5"]->sumW() > 0) {
+        _h["ptyieldsc0_5"]->scaleW(1./_c["sow_AuAu_c0_5"]->sumW());
         }
 
-    binShift(*_h["ptyieldsc10"]);
-    if (_c["sow_AuAu_c10"]->sumW() > 0) {
-        _h["ptyieldsc10"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
+    binShift(*_h["ptyieldsc0_10"]);
+    if (_c["sow_AuAu_c0_10"]->sumW() > 0) {
+        _h["ptyieldsc0_10"]->scaleW(1./_c["sow_AuAu_c0_10"]->sumW());
         }
 
     binShift(*_h["ptyieldsc20"]);
@@ -467,27 +505,27 @@ namespace Rivet {
 
 // R_AA for 0_5% Au+Au
     // Normalize Au+Au yield
-        binShift(*_h["c5Pt_AuAu"]);
-        if (_c["sow_AuAu_c5"]->sumW() > 0) {
-        _h["c5Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c5"]->sumW());
+        binShift(*_h["c0_5Pt_AuAu"]);
+        if (_c["sow_AuAu_c0_5"]->sumW() > 0) {
+        _h["c0_5Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c0_5"]->sumW());
         }
     // Normalize p+p yield
-        binShift(*_h["c5Pt_pp"]);
+        binShift(*_h["c0_5Pt_pp"]);
         if (_c["sow_pp"]->sumW() > 0) {
-        _h["c5Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+        _h["c0_5Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
         }
     // Only divide if BOTH are valid
-        if (_c["sow_AuAu_c5"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
-        divide(_h["c5Pt_AuAu"],_h["c5Pt_pp"],hRaa["Raa_c05_AuAu"]);
+        if (_c["sow_AuAu_c0_5"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c0_5Pt_AuAu"],_h["c0_5Pt_pp"],hRaa["Raa_c05_AuAu"]);
     // Scale by <T_AA>
         hRaa["Raa_c05_AuAu"]->scale(1./1065.4);
         }
 
 // R_AA for 0_10% Au+Au
     // Normalize Au+Au yield
-        binShift(*_h["c10Pt_AuAu"]);
-        if (_c["sow_AuAu_c10"]->sumW() > 0) {
-        _h["c10Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c10"]->sumW());
+        binShift(*_h["c0_10Pt_AuAu"]);
+        if (_c["sow_AuAu_c0_10"]->sumW() > 0) {
+        _h["c0_10Pt_AuAu"]->scaleW(1./_c["sow_AuAu_c0_10"]->sumW());
         }
     // Normalize p+p yield
         binShift(*_h["c10Pt_pp"]);
@@ -495,8 +533,8 @@ namespace Rivet {
         _h["c10Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
         }
     // Only divide if BOTH are valid
-        if (_c["sow_AuAu_c10"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
-        divide(_h["c10Pt_AuAu"],_h["c10Pt_pp"],hRaa["Raa_c010_AuAu"]);
+        if (_c["sow_AuAu_c0_10"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c0_10Pt_AuAu"],_h["c10Pt_pp"],hRaa["Raa_c010_AuAu"]);
     // Scale by <T_AA>
         hRaa["Raa_c010_AuAu"]->scale(1./955.4);
         }
