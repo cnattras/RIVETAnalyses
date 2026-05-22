@@ -4,8 +4,8 @@ Summary: High transverse momentum $\eta$ meson production in p+p, d+Au and Au+Au
 Experiment: PHENIX
 Collider: Relativistic Heavy-Ion Collider (RHIC)
 InspireID: 731133
-Status: UNVALIDATED NOTREENTRY NOHEPDATA SINGLEWEIGHT UNPHYSICAL
-Reentrant: false
+Status: UNVALIDATED REENTRANT SINGLEWEIGHT
+Reentrant: true
 Authors:
  - Joesph Beller <josdbell@vols.utk.edu>
  - Nikolas Nelson <nnelso13@vols.utk.edu>
