@@ -134,25 +134,20 @@ END PLOT
 
 #Fig3
 BEGIN PLOT /PHENIX_2008_I778168/d11-x01-y01
-Title= Nuclear modification factor (RAA) of $\pi^0$ in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $5 < p_T < 20$ GeV/c
-XLabel= Centrality ($0-5\%$)
+Title= Nuclear modification factor (RAA) of the most central ($0-5\%$) $\pi^0$ collisions in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $1 < p_T < 18$ GeV/c
+XLabel= $p_{T}$
 YLabel= $R_{AA}$
 END PLOT
 
+#Fig4
 BEGIN PLOT /PHENIX_2008_I778168/d12-x01-y01
-Title= Nuclear modification factor (RAA) of $\pi^0$ in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $5 < p_T < 20$ GeV/c
-XLabel= Centrality ($0-10\%$)
+Title= Integrated Nuclear modification factor (RAA) of $\pi^0$ in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $p_T > 5$ GeV/c
+XLabel= Centrality
 YLabel= $R_{AA}$
 END PLOT
 
-BEGIN PLOT /PHENIX_2008_I778168/d13-x01-y01
-Title= Nuclear modification factor (RAA) of $\pi^0$ in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $10 < p_T < 20$ GeV/c
-XLabel= Centrality ($0-5\%$)
-YLabel= $R_{AA}$
-END PLOT
-
-BEGIN PLOT /PHENIX_2008_I778168/d14-x01-y01
-Title= Nuclear modification factor (RAA) of $\pi^0$ in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $10 < p_T < 20$ GeV/c
-XLabel= Centrality ($0-10\%$)
+BEGIN PLOT /PHENIX_2008_I778168/d12-x01-y02
+Title= Integrated Nuclear modification factor (RAA) of $\pi^0$ in Au+Au at $\sqrt{s_{NN}}=$ 200 GeV for $p_T > 10$ GeV/c
+XLabel= Centrality
 YLabel= $R_{AA}$
 END PLOT
