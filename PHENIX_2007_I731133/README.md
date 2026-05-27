@@ -20,3 +20,5 @@ Right now what's happening is that all histograms are always scaled by the cross
 
 Merging needs to be checked (For now table because this is something I need to do)
 Needs checking with high statistics
+
+Arthur: When running rivet-merge, the cross sections are being summed and causing stats issues. Also, there is a scaling issue with R_AA and R_dA that needs addressing.

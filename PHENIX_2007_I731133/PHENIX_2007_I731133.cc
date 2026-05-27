@@ -626,8 +626,13 @@ void binShift(YODA::Histo1D& histogram) {
     /// Normalise histograms etc., after the run
       void finalize() {
           double cross = crossSection() / millibarn;
-          
-          //Figure 13:
+/*        double sf = cross/sumOfWeights()
+          scale(sow, sf)
+          scale(hCrossSec, sf)
+          scale(hPionPt, sf
+          scale(hEtaPt, sf)
+
+*/          //Figure 13:
           if(sow["sow_pp"]->sumW()>0){
           //d01-x01-y01
           binShift(*hCrossSec["ppEtaa"]);
@@ -827,22 +832,6 @@ void binShift(YODA::Histo1D& histogram) {
           binShift(*hPionPt["ptyieldsPion"]);
           if(hEtaPt["ptyieldsEta"]->sumW()>0 && hPionPt["ptyieldsPion"]->sumW()>0){
           divide(hEtaPt["ptyieldsEta"], hPionPt["ptyieldsPion"], Ratiopp["EtaToPion"]);}
-          
-        /*  auto& etaH  = *hEtaPt["ptyieldsEta"];
-          auto& pionH = *hPionPt["ptyieldsPion"];
-          auto& ratio = *Ratiopp["EtaToPion"];
-
-          for (size_t i = 0; i < etaH.numBins(); ++i) {
-
-          double e = etaH.bin(i).sumW();
-          double p = pionH.bin(i).sumW();
-
-          if (p > 0) {
-            ratio.bin(i).set(e / p, 0.0);
-          } else {
-            ratio.bin(i).set(0.0, 0.0);
-            }
-          } */
         
           //Figure 19.1: eta/pion^0 ratios in dAu collisions
           //d14-x01-y01

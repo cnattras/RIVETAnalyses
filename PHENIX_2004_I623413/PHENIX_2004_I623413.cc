@@ -99,25 +99,37 @@ void binShift(YODA::Histo1D& histogram) {
       // The final-state particles declared above are clustered using FastJet with
       // the anti-kT algorithm and a jet-radius parameter 0.4
       // muons and neutrinos are excluded from the clustering
+
       beamOpt = getOption<string>("beam", "NONE");
+      fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");
+
       const ParticlePair& beam = beams();
 
-      if (beamOpt == "AUAU130") {collSys = AuAu130; }
-      else if (beamOpt == "NONE"){
-        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970){
-          float NN = 197.;
-          if (fuzzyEquals(sqrtS()/GeV, 130*NN, 5)) collSys = AuAu130;
-        }
+      if (beamOpt == "NONE"){
+	if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+	  {
+	    float NN = 197.;
+	    if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1e-3)) collSys = AuAu130;
+	  }
       }
-      else {
-        throw Error("Unknown beam option: " + beamOpt);
-      }
-    // HARD FAIL if not recognized
-      if (collSys == UNKNOWN) {
-        throw Error("Unsupported beam configuration for PHENIX_2004_I623413");
-      }
+      if (beamOpt == "AUAU130") collSys = AuAu130;
+      
+auto printC = [&]() {
+  cerr << "sqrtS = " << sqrtS()/GeV
+       << " GeV, collSys = "
+       << (collSys == AuAu130 ? "AuAu130" : "UNKNOWN")
+       << ", fixed centrality = "
+       << fixedcentralityOpt
+       << endl;
+};
+
+printC();
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+      if(fixedcentralityOpt!= "NONE"){
+	    manualCentrality = std::stof(fixedcentralityOpt);}
+//cout << "sqrtS = " << sqrtS()/GeV << " GeV, collSys = " << (collSys == AuAu130 ? "AuAu130" : "UNKNOWN") << ", fixed centrality = " << fixedcentralityOpt << endl;
+
        book(_h["KaonPlusMinBias"], 8, 1, 1);
        book(_h["KaonMinusMinBias"], 8, 1, 2);
        book(_h["PionPlusMinBias"], 7, 1, 1);
@@ -682,8 +694,10 @@ printC("Cent60_92");
     map<string, CounterPtr> _c;
     map<string, Estimate1DPtr> _s;
     string beamOpt;
+    string fixedcentralityOpt;
+    double manualCentrality = -1.0;
     enum CollisionSystem { UNKNOWN, AuAu130 };
-    CollisionSystem collSys = UNKNOWN;
+    CollisionSystem collSys;
     ///@}
 
 
