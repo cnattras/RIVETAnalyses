@@ -4,7 +4,8 @@ Summary: Suppression pattern of neutral pions at high transverse momentum in Au$
 Experiment: PHENIX
 Collider: Relativistic Heavy Ion Collider (RHIC)
 InspireID: 778168
-Status: UNVALIDATED
+Status: UNVALIDATED REENTRANT
+Reentrant: true
 Authors:
  - Antonio Silva <antonio.silva@cern.ch> 
  - Immanuel Schmidt <ischmid1@vols.utk.edu> 

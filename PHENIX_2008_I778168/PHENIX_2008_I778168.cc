@@ -154,8 +154,16 @@ void binShift(YODA::Histo1D& histogram) {
        book(_c["sow_AuAu_c80"],"_sow_AuAu_c80");
        book(_c["sow_AuAu_c92"],"_sow_AuAu_c92");
        book(_c["sow_AuAu_call"],"_sow_AuAu_call");
-
+       book(_c["sow_pp"],"_sow_pp");
+       // Do I need a counter for the pt ranges I'm in? No, just reuse the ones given. YES, because of the given pT ranges
+       book(_c["sow_pT>5_pp"],"_sow_pT>5_pp");
+       book(_c["sow_pT>10_pp"],"_sow_pT>10_pp");
+       book(_c["sow_pT>5_AuAu"],"_sow_pT>5_AuAu");
+       book(_c["sow_pT>10_AuAu"],"_sow_pT>10_AuAu");
+//counter just keeps track of number of somthing, like events or particles produced.
+//sow when you are not counting everything. needed if binning the cross section in cent. This keeps track of number of events in a given section.       
  //RAA _______________________________
+    //Figure 3: Nuclear modification factor (R_AA) for the most central (0-5%) for pi0 as a function of pt bins
        string refnameRaa1 = mkAxisCode(11,1,1);
              const Estimate1D& refdataRaa1 =refData(refnameRaa1);
        book(_h["c0_5Pt_AuAu"],"_" + refnameRaa1 + "_AuAu", refdataRaa1);
@@ -171,8 +179,8 @@ void binShift(YODA::Histo1D& histogram) {
        string refnameRaa3 = mkAxisCode(6,1,2);
              const Estimate1D& refdataRaa3 =refData(refnameRaa3);
        book(_h["c20Pt_AuAu"],"_" + refnameRaa3 + "_AuAu", refdataRaa3);
-       book(_h["c20Pt_pp"],  "_" +refnameRaa3 + "_pp", refdataRaa3);
-       book(hRaa["Raa_c1020_AuAu"],"_" + refnameRaa3);
+       book(_h["c20Pt_pp"],  "_" + refnameRaa3 + "_pp", refdataRaa3);
+       book(hRaa["Raa_c1020_AuAu"], refnameRaa3);
 
        string refnameRaa4 = mkAxisCode(7,1,1);
              const Estimate1D& refdataRaa4 =refData(refnameRaa4);
@@ -221,30 +229,22 @@ void binShift(YODA::Histo1D& histogram) {
        book(_h["callPt_AuAu"], "_" + refnameRaa11 + "_AuAu", refdataRaa11);
        book(_h["callPt_pp"], "_" + refnameRaa11 + "_pp", refdataRaa11);
        book(hRaa["Raa_minbias_AuAu"], refnameRaa11);
-
-
-       book(_c["sow_pp"],"_sow_pp");
-       //Figure 12: Integrated nuclear modification factor (R_AA) for pi0 as a function of collision centrality IS NOT IN HERE
-
+       
+    //Figure 4: Integrated nuclear modification factor (R_AA) for pi0 as a function of collision centrality IS NOT IN HERE
  //Centrality vs RAA
-       /*
-       string refnameRaa13 = mkAxisCode(11,1,1);
+/*       
+       string refnameRaa13 = mkAxisCode(12,1,1);
        const Estimate1D& refdataRaa13 =refData(refnameRaa13);
-       book(hRaaNpart["Raa_pt520c05_AuAu"], refnameRaa13, refdataRaa13);
+       book(_h["c_0_92_pT>5_AuAu"], "_" + refnameRaa13 + "_AuAu", refdataRaa13);
+       book(_h["c_0_92_pT>5_pp"], "_" + refnameRaa13 + "_pp", refdataRaa13);
+       book(_s["Int_Raa_pT>5_AuAu"], refnameRaa13);
 
-      string refnameRaa14 = mkAxisCode(12,1,1);
+      string refnameRaa14 = mkAxisCode(12,1,2);
        const Estimate1D& refdataRaa14 =refData(refnameRaa14);
-       book(hRaaNpart["Raa_pt520c010_AuAu"], refnameRaa14, refdataRaa14);
-
-      string refnameRaa15 = mkAxisCode(13,1,1);
-       const Estimate1D& refdataRaa15 =refData(refnameRaa15);
-       book(hRaaNpart["Raa_pt1020c05_AuAu"], refnameRaa15, refdataRaa15);
-
-      string refnameRaa16 = mkAxisCode(14,1,1);
-       const Estimate1D& refdataRaa16 =refData(refnameRaa16);
-       book(hRaaNpart["Raa_pt1020c010_AuAu"], refnameRaa16, refdataRaa16);
-       */
-
+       book(_h["c_0_92_pT>10_AuAu"], "_" + refnameRaa14 + "_AuAu", refdataRaa14);
+       book(_h["c_0_92_pT>10_pp"], "_" + refnameRaa14 + "_pp", refdataRaa14);
+       book(_s["Int_Raa_pT>10_AuAu"], refnameRaa14);       
+*/
 // // Mani: Is this correct?? Is there no need for 'all' centralities?
       /*
        centBins.insert(pair<string, int>("Raa_c010_AuAu",0));
@@ -282,9 +282,9 @@ void binShift(YODA::Histo1D& histogram) {
 
         else if (beamOpt == "PP200") CollSystem = "pp";
 	else if (beamOpt == "AUAU200") CollSystem = "AuAu";*/
+    
 
-        if(collSys == pp)
-        {
+        if(collSys == pp){
                  _c["sow_pp"]->fill();
                  for(Particle p : neutralParticles)
                  {
@@ -299,10 +299,34 @@ void binShift(YODA::Histo1D& histogram) {
                      _h["c80Pt_pp"]->fill(p.pT()/GeV);
                      _h["c92Pt_pp"]->fill(p.pT()/GeV);
                      _h["callPt_pp"]->fill(p.pT()/GeV);
+                    if (p.pT()/GeV > 5.) {
+                        _h["c_0_92_pT>5_pp"]->fill(2.5);
+                        _h["c_0_92_pT>5_pp"]->fill(5.);
+                        _h["c_0_92_pT>5_pp"]->fill(15.);
+                        _h["c_0_92_pT>5_pp"]->fill(25.);
+                        _h["c_0_92_pT>5_pp"]->fill(35.);
+                        _h["c_0_92_pT>5_pp"]->fill(45.);
+                        _h["c_0_92_pT>5_pp"]->fill(55.);
+                        _h["c_0_92_pT>5_pp"]->fill(65.);
+                        _h["c_0_92_pT>5_pp"]->fill(75.);
+                        _h["c_0_92_pT>5_pp"]->fill(86.);
+                        _c["sow_pT>5_pp"]->fill();
+                    }
+                    if (p.pT()/GeV > 10.) {
+                        _h["c_0_92_pT>10_pp"]->fill(2.5);
+                        _h["c_0_92_pT>10_pp"]->fill(5.);
+                        _h["c_0_92_pT>10_pp"]->fill(15.);
+                        _h["c_0_92_pT>10_pp"]->fill(25.);
+                        _h["c_0_92_pT>10_pp"]->fill(35.);
+                        _h["c_0_92_pT>10_pp"]->fill(45.);
+                        _h["c_0_92_pT>10_pp"]->fill(55.);
+                        _h["c_0_92_pT>10_pp"]->fill(65.);
+                        _h["c_0_92_pT>10_pp"]->fill(75.);
+                        _h["c_0_92_pT>10_pp"]->fill(86.);
+                        _c["sow_pT>10_pp"]->fill();
                  }
                  return;
-        }
-
+    }
         const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
         const double c = cent();
 
@@ -310,11 +334,12 @@ void binShift(YODA::Histo1D& histogram) {
 
         if (collSys == AuAu)
         {
-            _c["sow_AuAu_call"]->fill();
-
-            if((c >= 0.) && (c < 5.))
-            {
-                _c["sow_AuAu_c0_5"]->fill();
+            if((c >= 0.) && (c <= 92.)){
+                for(const Particle& p : neutralParticles)
+                _c["sow_AuAu_call"]->fill();
+            }
+            
+            if((c >= 0.) && (c < 5.)){
                 for(const Particle& p : neutralParticles)
                 {
                     double partPt = p.pT()/GeV;
@@ -322,7 +347,14 @@ void binShift(YODA::Histo1D& histogram) {
 
                     _h["ptyieldsc0_5"]->fill(partPt, pt_weight);
                     _h["c0_5Pt_AuAu"]->fill(p.pT()/GeV);
-                }
+                    if (p.pT()/GeV > 5.) {
+                        _h["c_0_92_pT>5_AuAu"]->fill(c);
+                        _c["sow_pT>5_AuAu"]->fill();}
+                    if (p.pT()/GeV > 10.) {
+                        _h["c_0_92_pT>10_AuAu"]->fill(c);
+                        _c["sow_pT>10_AuAu"]->fill();}
+                    }
+                _c["sow_AuAu_c0_5"]->fill();
             }
             else if((c >= 0.) && (c < 10.))
             {
@@ -444,7 +476,7 @@ void binShift(YODA::Histo1D& histogram) {
 
  	  }
     }
-
+    }
     void finalize() {
 
 // Yields
@@ -700,8 +732,26 @@ void binShift(YODA::Histo1D& histogram) {
     // Scale by <T_AA>
         hRaa["Raa_minbias_AuAu"]->scale(1./257.8);
         }
-
-
+/*
+// R_AA but in centrality bins
+  //pT>5
+    // Denomiator
+        binShift(*_h["c_0_92_pT>5_pp"]);
+    // Numerator
+        binShift(*_h["c_0_92_pT>5_AuAu"]);
+    // Only Divide is BOTH are valid
+        if (_c["sow_AuAu_call"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c_0_92_pT>5_AuAu"],_h["c_0_92_pT>5_pp"],hRaa["Int_Raa_pT>5_AuAu"]);}
+  //pT>5
+    // Denomiator
+        binShift(*_h["c_0_92_pT>10_pp"]);
+    // Numerator
+        binShift(*_h["c_0_92_pT>10_AuAu"]);
+    // Only Divide is BOTH are valid
+        if (_c["sow_AuAu_call"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
+        divide(_h["c_0_92_pT>10_AuAu"],_h["c_0_92_pT>10_pp"],hRaa["Int_Raa_pT>10_AuAu"]);}
+//R is scaled by number of pp events by number of AA events per centrality, which i loop over, dividded by N binary.
+*/
 // // Scale???
 // // Directly copy/pasted?
        /*
@@ -789,6 +839,7 @@ void binShift(YODA::Histo1D& histogram) {
     map<string, CounterPtr> _c;
 
      map<string, Estimate1DPtr> hRaaNpart;
+     map<string, Estimate1DPtr> _s;
      //map<string, int> centBins;
     string beamOpt;
     enum CollisionSystem {pp, AuAu};
@@ -798,6 +849,5 @@ void binShift(YODA::Histo1D& histogram) {
 
 
 
-  RIVET_DECLARE_PLUGIN(PHENIX_2008_I778168);
-
+ RIVET_DECLARE_PLUGIN(PHENIX_2008_I778168);
 }
