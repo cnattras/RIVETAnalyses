@@ -22,6 +22,62 @@ namespace Rivet {
 
 
 //create binShift function
+
+void binShift(YODA::Histo1D& histogram) {
+
+    const auto& binlist = histogram.bins();
+
+    for (size_t n = 1; n < binlist.size()-1; ++n) {
+
+        const auto& bins = binlist[n];
+
+        double p_high = bins.xMax();
+        double p_low  = bins.xMin();
+
+    // First physical bin
+        if (n == 1) {
+
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[1].sumW() / binlist[2].sumW());
+
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+
+            histogram.bin(n).scaleW(f_corr);
+
+    // Last physical bin
+        } else if (n == binlist.size()-2) {
+
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[binlist.size()-3].sumW()
+                          / binlist[binlist.size()-2].sumW());
+
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+
+            histogram.bin(n).scaleW(f_corr);
+
+    // Middle physical bins
+        } else {
+
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[n-1].sumW() / binlist[n+1].sumW());
+
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+
+            histogram.bin(n).scaleW(f_corr);
+        }
+    }
+}
+
+/*
 void binShift(YODA::Histo1D& histogram) {
 
     const auto& binlist = histogram.bins();
@@ -58,8 +114,32 @@ void binShift(YODA::Histo1D& histogram) {
 
         histogram.bin(n).scaleW(f_corr);
     }
-}
+} */
 /*
+void binShift(YODA::Histo1D& histogram) {
+    const auto& binlist = histogram.bins();
+    for (size_t n = 1; n < binlist.size()-1; ++n) {
+        double p_high = bins.xMax();
+        double p_low = bins.xMin();
+        //Now calculate f_corr
+        if (bins.xMin() == binlist[1].xMin()) { //Check if we are working with first physical bin
+            float b = 1 / (p_high - p_low) * log(binlist[1].sumW()/binlist[2].sumW());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
+            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-3].sumW() / binlist[binlist.size()-2].sumW());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+        } else { //Check if we are working with any middle bin
+            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
+            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+            histogram.bin(n).scaleW(f_corr);
+            n += 1;
+        }
+    }
+}
+
 void binShift(YODA::Histo1D& histogram) {
     const auto& binlist = histogram.bins();
     const auto& lastBin = histogram.bin(histogram.numBins()-1);
@@ -106,29 +186,27 @@ void binShift(YODA::Histo1D& histogram) {
       const ParticlePair& beam = beams();
 
       if (beamOpt == "NONE"){
-	if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-	  {
+	      if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970){
 	    float NN = 197.;
 	    if (fuzzyEquals(sqrtS()/GeV, 130*NN, 1e-3)) collSys = AuAu130;
-	  }
+	      }
       }
       if (beamOpt == "AUAU130") collSys = AuAu130;
-      
-auto printC = [&]() {
-  cerr << "sqrtS = " << sqrtS()/GeV
+/*      
+      auto printC = [&]() {
+      cerr << "sqrtS = " << sqrtS()/GeV
        << " GeV, collSys = "
        << (collSys == AuAu130 ? "AuAu130" : "UNKNOWN")
        << ", fixed centrality = "
        << fixedcentralityOpt
        << endl;
-};
+      };
 
-printC();
+printC();*/
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       if(fixedcentralityOpt!= "NONE"){
 	    manualCentrality = std::stof(fixedcentralityOpt);}
-//cout << "sqrtS = " << sqrtS()/GeV << " GeV, collSys = " << (collSys == AuAu130 ? "AuAu130" : "UNKNOWN") << ", fixed centrality = " << fixedcentralityOpt << endl;
 
        book(_h["KaonPlusMinBias"], 8, 1, 1);
        book(_h["KaonMinusMinBias"], 8, 1, 2);
@@ -668,7 +746,7 @@ double scaleFactor = 1.0 / (2 * M_PI );
               _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
       }
 */
-auto printC = [&](const string& name) {
+/*auto printC = [&](const string& name) {
   double v = _c[name]->sumW();
   cout << name << " = " << v << (v == 0 ? "  <<< WARNING ZERO" : "") << endl;
 };
@@ -678,7 +756,7 @@ printC("Cent0_5");
 printC("Cent5_15");
 printC("Cent15_30");
 printC("Cent30_60");
-printC("Cent60_92");
+printC("Cent60_92");*/
 
 
 
