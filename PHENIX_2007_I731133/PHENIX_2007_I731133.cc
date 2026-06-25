@@ -658,23 +658,17 @@ if (!sow["pp_xsec"]->numEntries()) {
 
     /// Normalise histograms etc., after the run
       void finalize() {
-//     double cross = crossSection() / millibarn;
-/*        double sf = cross/sumOfWeights()
-          scale(sow, sf)
-          scale(hCrossSec, sf)
-          scale(hPionPt, sf
-          scale(hEtaPt, sf)
-*/
-double normPP = sow["pp_xsec"]->sumW() / sow["sow_pp"]->sumW();
+      double cross = crossSection() / millibarn;
+
           //Figure 13:
           if(sow["sow_pp"]->sumW()>0){
           //d01-x01-y01
           binShift(*hCrossSec["ppEtaa"]);
           hCrossSec["ppEtaa"]->scaleW(1. / sow["sow_pp"]->sumW());
-//          hCrossSec["ppEtaa"]->scaleW(cross);
-//          hCrossSec["ppEtaa"]->scaleW(normPP);
+          hCrossSec["ppEtaa"]->scaleW(cross);
+          hCrossSec["ppEtaa"]->scaleW(normPP);
         }
- /*         
+          
           if(sow["sow_dAu"]->sumW()>0){
           //d03-x01-y01
           binShift(*hCrossSec["dAuEta"]);
@@ -923,7 +917,7 @@ double normPP = sow["pp_xsec"]->sumW() / sow["sow_pp"]->sumW();
           binShift(*hPionPt["ptyieldsAuAuc6092"]);
           if(hEtaPt["ptyieldsAuAuc6092c"]->sumW()>0 && hPionPt["ptyieldsAuAuc6092"]->sumW()>0){
           divide(hEtaPt["ptyieldsAuAuc6092c"], hPionPt["ptyieldsAuAuc6092"], RatioAuAu["EtaToPion6092"]);}
-          */
+          
       }
 
       //histograms
