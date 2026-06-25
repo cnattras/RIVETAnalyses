@@ -41,43 +41,45 @@ void binShift(YODA::Histo1D& histogram) {
         double p_high = bins.xMax();
         double p_low  = bins.xMin();
 
-    // First physical bin
+        double left;
+        double right;
+
+        // Define neighboring bins
         if (n == 1) {
+            left  = binlist[1].sumW();
+            right = binlist[2].sumW();
 
-            float b = 1 / (p_high - p_low) *
-                      log(binlist[1].sumW() / binlist[2].sumW());
-            float f_corr =
-                -b * (p_high - p_low)
-                * pow(M_E, -b * (p_high+p_low) / 2)
-                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-
-            histogram.bin(n).scaleW(f_corr);
-
-    // Last physical bin
         } else if (n == binlist.size()-2) {
+            left  = binlist[binlist.size()-3].sumW();
+            right = binlist[binlist.size()-2].sumW();
 
-            float b = 1 / (p_high - p_low) *
-                      log(binlist[binlist.size()-3].sumW()
-                          / binlist[binlist.size()-2].sumW());
-            float f_corr =
-                -b * (p_high - p_low)
-                * pow(M_E, -b * (p_high+p_low) / 2)
-                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-
-            histogram.bin(n).scaleW(f_corr);
-
-    // Middle physical bins
         } else {
-
-            float b = 1 / (p_high - p_low) *
-                      log(binlist[n-1].sumW() / binlist[n+1].sumW());
-            float f_corr =
-                -b * (p_high - p_low)
-                * pow(M_E, -b * (p_high+p_low) / 2)
-                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-
-            histogram.bin(n).scaleW(f_corr);
+            left  = binlist[n-1].sumW();
+            right = binlist[n+1].sumW();
         }
+
+        // Protect logarithm
+        if (left <= 0 || right <= 0) {
+            continue;
+        }
+
+        double b = 1.0 / (p_high - p_low) * log(left / right);
+
+        double denom =
+            pow(M_E, -b * p_high) -
+            pow(M_E, -b * p_low);
+
+        // Protect division by zero
+        if (std::abs(denom) < 1e-12) {
+            continue;
+        }
+
+        double f_corr =
+            -b * (p_high - p_low)
+            * pow(M_E, -b * (p_high+p_low) / 2)
+            / denom;
+
+        histogram.bin(n).scaleW(f_corr);
     }
 }
 
