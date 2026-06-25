@@ -31,7 +31,7 @@ namespace Rivet {
     RIVET_DEFAULT_ANALYSIS_CTOR(PHENIX_2008_I778168);
     
     //create binShift function
-void binShift(YODA::Histo1D& histogram) {
+/* void binShift(YODA::Histo1D& histogram) {
 
     const auto& binlist = histogram.bins();
 
@@ -79,6 +79,59 @@ void binShift(YODA::Histo1D& histogram) {
 
             histogram.bin(n).scaleW(f_corr);
         }
+    }
+} */
+
+void binShift(YODA::Histo1D& histogram) {
+
+    const auto& binlist = histogram.bins();
+
+    for (size_t n = 1; n < binlist.size()-1; ++n) {
+
+        const auto& bins = binlist[n];
+
+        double p_high = bins.xMax();
+        double p_low  = bins.xMin();
+
+        double left;
+        double right;
+
+        // Define neighboring bins
+        if (n == 1) {
+            left  = binlist[1].sumW();
+            right = binlist[2].sumW();
+
+        } else if (n == binlist.size()-2) {
+            left  = binlist[binlist.size()-3].sumW();
+            right = binlist[binlist.size()-2].sumW();
+
+        } else {
+            left  = binlist[n-1].sumW();
+            right = binlist[n+1].sumW();
+        }
+
+        // Protect logarithm
+        if (left <= 0 || right <= 0) {
+            continue;
+        }
+
+        double b = 1.0 / (p_high - p_low) * log(left / right);
+
+        double denom =
+            pow(M_E, -b * p_high) -
+            pow(M_E, -b * p_low);
+
+        // Protect division by zero
+        if (std::abs(denom) < 1e-12) {
+            continue;
+        }
+
+        double f_corr =
+            -b * (p_high - p_low)
+            * pow(M_E, -b * (p_high+p_low) / 2)
+            / denom;
+
+        histogram.bin(n).scaleW(f_corr);
     }
 }
 
@@ -253,7 +306,7 @@ void binShift(YODA::Histo1D& histogram) {
 
         if(collSys == pp){
                  _c["sow_pp"]->fill();
-                 for(Particle p : neutralParticles)
+                for(const Particle& p : neutralParticles)
                  {
                      _h["c0_5Pt_pp"]->fill(p.pT()/GeV);
                      _h["c10Pt_pp"]->fill(p.pT()/GeV);
@@ -265,7 +318,7 @@ void binShift(YODA::Histo1D& histogram) {
                      _h["c70Pt_pp"]->fill(p.pT()/GeV);
                      _h["c80Pt_pp"]->fill(p.pT()/GeV);
                      _h["c92Pt_pp"]->fill(p.pT()/GeV);
-                     _h["callPt_pp"]->fill(p.pT()/GeV);
+                     _h["callPt_pp"]->fill(p.pT()/GeV); /*
                     if (p.pT()/GeV > 5.) {
                         _h["c_0_92_pT>5_pp"]->fill(2.5);
                         _h["c_0_92_pT>5_pp"]->fill(5.);
@@ -291,7 +344,7 @@ void binShift(YODA::Histo1D& histogram) {
                         _h["c_0_92_pT>10_pp"]->fill(75.);
                         _h["c_0_92_pT>10_pp"]->fill(86.);
                         _c["sow_pT>10_pp"]->fill();
-                 }
+                 } */
                  return;
     }
         const CentralityProjection& cent = apply<CentralityProjection>(event,"CMULT");
@@ -302,7 +355,7 @@ void binShift(YODA::Histo1D& histogram) {
         if (collSys == AuAu)
         {
             if((c >= 0.) && (c <= 92.)){
-                for(const Particle& p : neutralParticles)
+//                for(const Particle& p : neutralParticles)
                 _c["sow_AuAu_call"]->fill();
             }
             
@@ -315,10 +368,10 @@ void binShift(YODA::Histo1D& histogram) {
                     _h["ptyieldsc0_5"]->fill(partPt, pt_weight);
                     _h["c0_5Pt_AuAu"]->fill(p.pT()/GeV);
                     if (p.pT()/GeV > 5.) {
-                        _h["c_0_92_pT>5_AuAu"]->fill(c);
+                        //_h["c_0_92_pT>5_AuAu"]->fill(c);
                         _c["sow_pT>5_AuAu"]->fill();}
                     if (p.pT()/GeV > 10.) {
-                        _h["c_0_92_pT>10_AuAu"]->fill(c);
+                    //    _h["c_0_92_pT>10_AuAu"]->fill(c);
                         _c["sow_pT>10_AuAu"]->fill();}
                     }
                 _c["sow_AuAu_c0_5"]->fill();
@@ -530,6 +583,7 @@ void binShift(YODA::Histo1D& histogram) {
         binShift(*_h["c10Pt_pp"]);
         if (_c["sow_pp"]->sumW() > 0) {
         _h["c10Pt_pp"]->scaleW(1./_c["sow_pp"]->sumW());
+//NOTE: why tf are we not scalling by the cross section here, like we do in the 07 data?
         }
     // Only divide if BOTH are valid
         if (_c["sow_AuAu_c0_10"]->sumW() > 0 && _c["sow_pp"]->sumW() > 0) {
