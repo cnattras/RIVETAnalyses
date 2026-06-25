@@ -666,7 +666,6 @@ if (!sow["pp_xsec"]->numEntries()) {
           binShift(*hCrossSec["ppEtaa"]);
           hCrossSec["ppEtaa"]->scaleW(1. / sow["sow_pp"]->sumW());
           hCrossSec["ppEtaa"]->scaleW(cross);
-          hCrossSec["ppEtaa"]->scaleW(normPP);
         }
           
           if(sow["sow_dAu"]->sumW()>0){
