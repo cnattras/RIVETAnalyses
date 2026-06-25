@@ -34,37 +34,50 @@ void binShift(YODA::Histo1D& histogram) {
 
     const auto& binlist = histogram.bins();
 
-    // Skip if too few physical bins
-    if (histogram.numBins() < 3) return;
+    for (size_t n = 1; n < binlist.size()-1; ++n) {
 
-    // Loop only over physical bins:
-    // omit first and last bins from correction
-    for (size_t n = 1; n < histogram.numBins()-1; ++n) {
+        const auto& bins = binlist[n];
 
-        const auto& bin = binlist[n];
+        double p_high = bins.xMax();
+        double p_low  = bins.xMin();
 
-        double p_high = bin.xMax();
-        double p_low  = bin.xMin();
+    // First physical bin
+        if (n == 1) {
 
-        double left  = binlist[n-1].sumW();
-        double right = binlist[n+1].sumW();
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[1].sumW() / binlist[2].sumW());
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
 
-        // Protect against invalid logs/divisions
-        if (left <= 0 || right <= 0) continue;
+            histogram.bin(n).scaleW(f_corr);
 
-        double b = (1.0 / (p_high - p_low)) * log(left / right);
+    // Last physical bin
+        } else if (n == binlist.size()-2) {
 
-        double denom =
-            exp(-b * p_high) - exp(-b * p_low);
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[binlist.size()-3].sumW()
+                          / binlist[binlist.size()-2].sumW());
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
 
-        if (std::abs(denom) < 1e-12) continue;
+            histogram.bin(n).scaleW(f_corr);
 
-        double f_corr =
-            -b * (p_high - p_low)
-            * exp(-b * (p_high + p_low) / 2.0)
-            / denom;
+    // Middle physical bins
+        } else {
 
-        histogram.bin(n).scaleW(f_corr);
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[n-1].sumW() / binlist[n+1].sumW());
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+
+            histogram.bin(n).scaleW(f_corr);
+        }
     }
 }
 
@@ -83,10 +96,11 @@ void binShift(YODA::Histo1D& histogram) {
           declare(np, "np");
           
           beamOpt = getOption<string>("beam", "NONE");
+          fixedcentralityOpt = getOption<string>("fixedcentrality", "NONE");
 
           const ParticlePair& beam = beams();
           if (beamOpt == "NONE") {
-          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
+        if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
           {
             float NN = 197.;
             if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)) collSys = AuAu200;
@@ -95,7 +109,6 @@ void binShift(YODA::Histo1D& histogram) {
           {
             float NN = 1.;
             if (fuzzyEquals(sqrtS()/GeV, 200*NN, 1e-3)){ collSys = pp;}
-            cout<<collSys<<endl;
           }
           else if (beam.first.pid() == 1000010020 && beam.second.pid() == 1000791970)
           {
@@ -111,9 +124,24 @@ void binShift(YODA::Histo1D& histogram) {
           if (beamOpt == "PP200") collSys = pp;
           else if (beamOpt == "AUAU200") collSys = AuAu200;
           else if (beamOpt == "DAU200") collSys = DAu200;
+
+          auto printC = [&]() {
+          cerr << "sqrtS = " << sqrtS()/GeV
+           << " GeV, collSys = "
+          << (collSys == pp ? "pp" :
+           collSys == AuAu200 ? "AuAu200" :
+           collSys == DAu200 ? "DAu200" :
+           "UNKNOWN")
+          << ", fixed centrality = "
+          << fixedcentralityOpt
+          << endl;
+          };
+            printC();
           
           //declaration for collision systems that are not p+p
           declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
+          if(fixedcentralityOpt!= "NONE"){
+	        manualCentrality = std::stof(fixedcentralityOpt);}
 
           //Counters
           book(sow["sow_pp"], "_sow_pp");
@@ -126,6 +154,8 @@ void binShift(YODA::Histo1D& histogram) {
           book(sow["sow_AuAuc0020"], "_sow_AuAuc0020");
           book(sow["sow_AuAuc2060"], "_sow_AuAuc2060");
           book(sow["sow_AuAuc6092"], "_sow_AuAuc6092");
+
+          book(sow["pp_xsec"], "_pp_xsec");
           
           //figure 13 (12.1 in hepdata) pp-eta_pt_bins
           //d01-x01-y01
@@ -321,8 +351,7 @@ void binShift(YODA::Histo1D& histogram) {
           book(hEtaPt["ptyieldsAuAuc6092c"],  /* "_" + */ refname30 + "_pp_Eta", refdata30);
           book(hPionPt["ptyieldsAuAuc6092"],  /* "_" + */ refname30 + "_pp_Pion", refdata30);
           book(RatioAuAu["EtaToPion6092"], refname30); 
-    }
-
+        }
 
     /// Perform the per-event analysis
       void analyze(const Event& event) {
@@ -346,6 +375,11 @@ void binShift(YODA::Histo1D& histogram) {
               //Fill our counter; this will be useful at the end when we want to run ->sumW()
               sow["sow_pp"]->fill();
               
+              //sow["pp_xsec"]->fill(crossSection()/millibarn);
+if (!sow["pp_xsec"]->numEntries()) {
+  sow["pp_xsec"]->fill(crossSection()/millibarn);
+}
+
               //a conditional for the charged particles: eta, pi+, pi-, gamma
               for (Particle p : neutralParticles) {
                   
@@ -620,26 +654,27 @@ void binShift(YODA::Histo1D& histogram) {
               }
           
           }
-
       }
 
     /// Normalise histograms etc., after the run
       void finalize() {
-          double cross = crossSection() / millibarn;
+//     double cross = crossSection() / millibarn;
 /*        double sf = cross/sumOfWeights()
           scale(sow, sf)
           scale(hCrossSec, sf)
           scale(hPionPt, sf
           scale(hEtaPt, sf)
-
-*/          //Figure 13:
+*/
+double normPP = sow["pp_xsec"]->sumW() / sow["sow_pp"]->sumW();
+          //Figure 13:
           if(sow["sow_pp"]->sumW()>0){
           //d01-x01-y01
           binShift(*hCrossSec["ppEtaa"]);
           hCrossSec["ppEtaa"]->scaleW(1. / sow["sow_pp"]->sumW());
-          hCrossSec["ppEtaa"]->scaleW(cross);
+//          hCrossSec["ppEtaa"]->scaleW(cross);
+//          hCrossSec["ppEtaa"]->scaleW(normPP);
         }
-          
+ /*         
           if(sow["sow_dAu"]->sumW()>0){
           //d03-x01-y01
           binShift(*hCrossSec["dAuEta"]);
@@ -888,13 +923,14 @@ void binShift(YODA::Histo1D& histogram) {
           binShift(*hPionPt["ptyieldsAuAuc6092"]);
           if(hEtaPt["ptyieldsAuAuc6092c"]->sumW()>0 && hPionPt["ptyieldsAuAuc6092"]->sumW()>0){
           divide(hEtaPt["ptyieldsAuAuc6092c"], hPionPt["ptyieldsAuAuc6092"], RatioAuAu["EtaToPion6092"]);}
-          
+          */
       }
 
       //histograms
       map<string, Histo1DPtr> hCrossSec;
       map<string, Histo1DPtr> hPionPt;
       map<string, Histo1DPtr> hEtaPt;
+      map<string, Histo1DPtr> sigma_pp;
       
       //ratios
       map<string, Estimate1DPtr> RatioAuAu;
@@ -908,8 +944,9 @@ void binShift(YODA::Histo1D& histogram) {
       //Counters
       map<string, CounterPtr> sow;
       
-      
       string beamOpt;
+      string fixedcentralityOpt;
+      double manualCentrality = -1.0;
       enum CollisionSystem { Unidentified, pp, AuAu200, DAu200 };
       CollisionSystem collSys;
       

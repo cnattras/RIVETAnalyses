@@ -35,64 +35,52 @@ void binShift(YODA::Histo1D& histogram) {
 
     const auto& binlist = histogram.bins();
 
-    // Skip if too few physical bins
-    if (histogram.numBins() < 3) return;
+    for (size_t n = 1; n < binlist.size()-1; ++n) {
 
-    // Loop only over physical bins:
-    // omit first and last bins from correction
-    for (size_t n = 1; n < histogram.numBins()-1; ++n) {
+        const auto& bins = binlist[n];
 
-        const auto& bin = binlist[n];
+        double p_high = bins.xMax();
+        double p_low  = bins.xMin();
 
-        double p_high = bin.xMax();
-        double p_low  = bin.xMin();
+    // First physical bin
+        if (n == 1) {
 
-        double left  = binlist[n-1].sumW();
-        double right = binlist[n+1].sumW();
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[1].sumW() / binlist[2].sumW());
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
 
-        // Protect against invalid logs/divisions
-        if (left <= 0 || right <= 0) continue;
+            histogram.bin(n).scaleW(f_corr);
 
-        double b = (1.0 / (p_high - p_low)) * log(left / right);
+    // Last physical bin
+        } else if (n == binlist.size()-2) {
 
-        double denom =
-            exp(-b * p_high) - exp(-b * p_low);
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[binlist.size()-3].sumW()
+                          / binlist[binlist.size()-2].sumW());
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
 
-        if (std::abs(denom) < 1e-12) continue;
+            histogram.bin(n).scaleW(f_corr);
 
-        double f_corr =
-            -b * (p_high - p_low)
-            * exp(-b * (p_high + p_low) / 2.0)
-            / denom;
+    // Middle physical bins
+        } else {
 
-        histogram.bin(n).scaleW(f_corr);
+            float b = 1 / (p_high - p_low) *
+                      log(binlist[n-1].sumW() / binlist[n+1].sumW());
+            float f_corr =
+                -b * (p_high - p_low)
+                * pow(M_E, -b * (p_high+p_low) / 2)
+                / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
+
+            histogram.bin(n).scaleW(f_corr);
+        }
     }
 }
-    /*    void binShift(YODA::Histo1D& histogram) {
-        const auto& binlist = histogram.bins();
-        const auto& lastBin = histogram.bin(histogram.numBins());
-        int n = 0;
-        for (auto& bins : binlist) {
-            double p_high = bins.xMax();
-            double p_low = bins.xMin();
-            //Now calculate f_corr
-            if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-                float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
-                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
-                n += 1;
-            } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
-                float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
-                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
-            } else { //Check if we are working with any middle bin
-                float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
-                float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-                histogram.bin(n).scaleW(f_corr);
-                n += 1;
-            }
-        }
-    } */
 
     void init() {
 
@@ -124,8 +112,6 @@ void binShift(YODA::Histo1D& histogram) {
         else if (beamOpt == "PP200") collSys = pp;
 	    else if (beamOpt == "AUAU200") collSys = AuAu;
 
-      //if(beamOpt=="PP") collSys = pp;
-      //else if(beamOpt=="AUAU") collSys = AuAu;
 
     declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
 
@@ -264,25 +250,6 @@ void binShift(YODA::Histo1D& histogram) {
     void analyze(const Event& event) {
 
         Particles neutralParticles = apply<UnstableParticles>(event,"up").particles();
-
-        /*const ParticlePair& beam = beams();
-        string CollSystem = "Empty";
-
-        if (beamOpt == "NONE") {
-
-          if (beam.first.pid() == 1000791970 && beam.second.pid() == 1000791970)
-          {
-                  CollSystem = "AuAu";
-          }
-          if (beam.first.pid() == 2212 && beam.second.pid() == 2212)
-          {
-                  CollSystem = "pp";
-          }
-        }
-
-        else if (beamOpt == "PP200") CollSystem = "pp";
-	else if (beamOpt == "AUAU200") CollSystem = "AuAu";*/
-    
 
         if(collSys == pp){
                  _c["sow_pp"]->fill();
