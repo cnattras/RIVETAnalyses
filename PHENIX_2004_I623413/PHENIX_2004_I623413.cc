@@ -39,7 +39,6 @@ void binShift(YODA::Histo1D& histogram) {
 
             float b = 1 / (p_high - p_low) *
                       log(binlist[1].sumW() / binlist[2].sumW());
-
             float f_corr =
                 -b * (p_high - p_low)
                 * pow(M_E, -b * (p_high+p_low) / 2)
@@ -53,7 +52,6 @@ void binShift(YODA::Histo1D& histogram) {
             float b = 1 / (p_high - p_low) *
                       log(binlist[binlist.size()-3].sumW()
                           / binlist[binlist.size()-2].sumW());
-
             float f_corr =
                 -b * (p_high - p_low)
                 * pow(M_E, -b * (p_high+p_low) / 2)
@@ -66,7 +64,6 @@ void binShift(YODA::Histo1D& histogram) {
 
             float b = 1 / (p_high - p_low) *
                       log(binlist[n-1].sumW() / binlist[n+1].sumW());
-
             float f_corr =
                 -b * (p_high - p_low)
                 * pow(M_E, -b * (p_high+p_low) / 2)
@@ -77,95 +74,6 @@ void binShift(YODA::Histo1D& histogram) {
     }
 }
 
-/*
-void binShift(YODA::Histo1D& histogram) {
-
-    const auto& binlist = histogram.bins();
-
-    // Skip if too few physical bins
-    if (histogram.numBins() < 3) return;
-
-    // Loop only over physical bins:
-    // omit first and last bins from correction
-    for (size_t n = 1; n < histogram.numBins()-1; ++n) {
-
-        const auto& bin = binlist[n];
-
-        double p_high = bin.xMax();
-        double p_low  = bin.xMin();
-
-        double left  = binlist[n-1].sumW();
-        double right = binlist[n+1].sumW();
-
-        // Protect against invalid logs/divisions
-        if (left <= 0 || right <= 0) continue;
-
-        double b = (1.0 / (p_high - p_low)) * log(left / right);
-
-        double denom =
-            exp(-b * p_high) - exp(-b * p_low);
-
-        if (std::abs(denom) < 1e-12) continue;
-
-        double f_corr =
-            -b * (p_high - p_low)
-            * exp(-b * (p_high + p_low) / 2.0)
-            / denom;
-
-        histogram.bin(n).scaleW(f_corr);
-    }
-} */
-/*
-void binShift(YODA::Histo1D& histogram) {
-    const auto& binlist = histogram.bins();
-    for (size_t n = 1; n < binlist.size()-1; ++n) {
-        double p_high = bins.xMax();
-        double p_low = bins.xMin();
-        //Now calculate f_corr
-        if (bins.xMin() == binlist[1].xMin()) { //Check if we are working with first physical bin
-            float b = 1 / (p_high - p_low) * log(binlist[1].sumW()/binlist[2].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-            n += 1;
-        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-3].sumW() / binlist[binlist.size()-2].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-        } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-            n += 1;
-        }
-    }
-}
-
-void binShift(YODA::Histo1D& histogram) {
-    const auto& binlist = histogram.bins();
-    const auto& lastBin = histogram.bin(histogram.numBins()-1);
-    int n = 0;
-    for (auto& bins : binlist) {
-        double p_high = bins.xMax();
-        double p_low = bins.xMin();
-        //Now calculate f_corr
-        if (bins.xMin() == binlist[0].xMin()) { //Check if we are working with first bin
-            float b = 1 / (p_high - p_low) * log(binlist[0].sumW()/binlist[1].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-            n += 1;
-        } else if (bins.xMin() == lastBin.xMin()){ //Check if we are working with last bin
-            float b = 1 / (p_high - p_low) * log(binlist[binlist.size()-2].sumW() / lastBin.sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-        } else { //Check if we are working with any middle bin
-            float b = 1 / (p_high - p_low) * log(binlist[n-1].sumW() / binlist[n+1].sumW());
-            float f_corr = -b * (p_high - p_low) * pow(M_E, -b * (p_high+p_low) / 2) / (pow(M_E, -b * p_high) - pow(M_E, -b*p_low));
-            histogram.bin(n).scaleW(f_corr);
-            n += 1;
-        }
-    }
-}
-*/
     /// Book histograms and initialise projections before the run
     void init() {
 
@@ -192,17 +100,6 @@ void binShift(YODA::Histo1D& histogram) {
 	      }
       }
       if (beamOpt == "AUAU130") collSys = AuAu130;
-/*      
-      auto printC = [&]() {
-      cerr << "sqrtS = " << sqrtS()/GeV
-       << " GeV, collSys = "
-       << (collSys == AuAu130 ? "AuAu130" : "UNKNOWN")
-       << ", fixed centrality = "
-       << fixedcentralityOpt
-       << endl;
-      };
-
-printC();*/
 
       declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
       if(fixedcentralityOpt!= "NONE"){
@@ -244,43 +141,6 @@ printC();*/
        book(_h["Fig10AntiProtonCent30_60"], 19, 1, 1);
        book(_h["Fig10ProtonCent60_92"], 20, 1, 1);
        book(_h["Fig10AntiProtonCent60_92"], 20, 1, 2);
-/*
-       string refnameRcpPionPlus = mkAxisCode(21,1,1);
-       const Estimate1D& refdataRcpPionPlus =refData(refnameRcpPionPlus);
-       book(_h["Fig11PionPlusCentral"], refnameRcpPionPlus + "_Central", refdataRcpPionPlus);
-       book(_h["Fig11PionPlusPeripheral"], refnameRcpPionPlus + "_Peripheral", refdataRcpPionPlus);
-       book(_s["Fig11PionPlus"], refnameRcpPionPlus);
-
-       string refnameRcpPionMinus = mkAxisCode(21,1,2);
-       const Estimate1D& refdataRcpPionMinus =refData(refnameRcpPionMinus);
-       book(_h["Fig11PionMinusCentral"], refnameRcpPionMinus + "_Central", refdataRcpPionMinus);
-       book(_h["Fig11PionMinusPeripheral"], refnameRcpPionMinus + "_Peripheral", refdataRcpPionMinus);
-       book(_s["Fig11PionMinus"], refnameRcpPionMinus);
-
-       string refnameRcpKaonPlus = mkAxisCode(22,1,1);
-       const Estimate1D& refdataRcpKaonPlus =refData(refnameRcpKaonPlus);
-       book(_h["Fig11KaonPlusCentral"], refnameRcpKaonPlus + "_Central", refdataRcpKaonPlus);
-       book(_h["Fig11KaonPlusPeripheral"], refnameRcpKaonPlus + "_Peripheral", refdataRcpKaonPlus);
-       book(_s["Fig11KaonPlus"], refnameRcpKaonPlus);
-
-       string refnameRcpKaonMinus = mkAxisCode(22,1,2);
-       const Estimate1D& refdataRcpKaonMinus =refData(refnameRcpKaonMinus);
-       book(_h["Fig11KaonMinusCentral"], refnameRcpKaonMinus + "_Central", refdataRcpKaonMinus);
-       book(_h["Fig11KaonMinusPeripheral"], refnameRcpKaonMinus + "_Peripheral", refdataRcpKaonMinus);
-       book(_s["Fig11KaonMinus"], refnameRcpKaonMinus);
-
-       string refnameRcpProton = mkAxisCode(23,1,1);
-       const Estimate1D& refdataRcpProton =refData(refnameRcpProton);
-       book(_h["Fig11ProtonCentral"], refnameRcpProton + "_Central", refdataRcpProton);
-       book(_h["Fig11ProtonPeripheral"], refnameRcpProton + "_Peripheral", refdataRcpProton);
-       book(_s["Fig11Proton"], refnameRcpProton);
-
-       string refnameRcpAntiProton = mkAxisCode(23,1,2);
-       const Estimate1D& refdataRcpAntiProton =refData(refnameRcpAntiProton);
-       book(_h["Fig11AntiProtonCentral"], refnameRcpAntiProton + "_Central", refdataRcpAntiProton);
-       book(_h["Fig11AntiProtonPeripheral"], refnameRcpAntiProton + "_Peripheral", refdataRcpAntiProton);
-       book(_s["Fig11AntiProton"], refnameRcpAntiProton);
-*/
        book(_h["Fig12PionPlusCent0_5"], 24, 1, 1);
        book(_h["Fig12PionPlusCent5_15"], 24, 1, 3);
        book(_h["Fig12PionPlusCent15_30"], 24, 1, 5);
@@ -317,22 +177,12 @@ printC();*/
        book(_p["KaonMinusCentrality"], 29, 1, 4);
        book(_p["ProtonCentrality"], 29, 1, 5);
        book(_p["AntiProtonCentrality"], 29, 1, 6);
-//       book(_h["N_collCentrality"], 2, 1, 2); //Not being filled
-//       book(_h["N_partCentrality"], 2, 1, 1); //Not being filled
        book(_p["PionPlusParticle"], 2, 1, 3);
        book(_p["PionMinusParticle"], 2, 1, 4);
        book(_p["KaonPlusParticle"], 2, 1, 5);
        book(_p["KaonMinusParticle"], 2, 1, 6);
        book(_p["ProtonParticle"], 2, 1, 7);
-       book(_p["AntiProtonParticle"], 2, 1, 8);
-/* Unable to simulate or simply don't care      
-       book(_h["Table4PionPlusCentrality"], 3, 1, 1);
-       book(_h["Table4PionMinusCentrality"], 3, 1, 2);
-       book(_h["Table4KaonPlusCentrality"], 3, 1, 3);
-       book(_h["Table4KaonMinusCentrality"], 3, 1, 4);
-       book(_h["Table4ProtonCentrality"], 3, 1, 5);
-       book(_h["Table4AntiProtonCentrality"], 3, 1, 6);
-*/      
+       book(_p["AntiProtonParticle"], 2, 1, 8);  
       book(_c["MinBias"], "_MinBias");
       book(_c["Cent0_5"], "_Cent0_5");
       book(_c["Cent5_15"], "_Cent5_15");
@@ -375,8 +225,6 @@ printC();*/
           if(cent >= 0. && cent < 5.) {
             _h["Fig10KaonPlusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent0_5"]->fill(p.pT()/GeV);
-//            _h["Fig11KaonPlusCentral"]->fill(p.pT()/GeV);
-
             }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10KaonPlusCent5_15"]->fill(p.pT()/GeV);
@@ -393,7 +241,6 @@ printC();*/
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10KaonPlusCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12KaonPlusCent60_92"]->fill(p.pT()/GeV);
-//            _h["Fig11KaonPlusPeripheral"]->fill(p.pT()/GeV);
             }
 
 
@@ -407,30 +254,22 @@ printC();*/
           if(cent >= 0. && cent < 5.) {
             _h["Fig10KaonMinusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12KaonMinusCent0_5"]->fill(p.pT()/GeV);
-//            _h["Fig11KaonMinusCentral"]->fill(p.pT()/GeV);
-
-            //_h["Table4KaonMinusCentrality0_5"]->fill(p.pT()/GeV);
             }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10KaonMinusCent5_15"]->fill(p.pT()/GeV);
             _h["Fig12KaonMinusCent5_15"]->fill(p.pT()/GeV);
-            //_h["Table4KaonMinusCentrality5_15"]->fill(p.pT()/GeV);
             }
           else if(cent >= 15. && cent < 30.)  {
             _h["Fig10KaonMinusCent15_30"]->fill(p.pT()/GeV);
             _h["Fig12KaonMinusCent15_30"]->fill(p.pT()/GeV);
-            //_h["Table4KaonMinusCentrality15_30"]->fill(p.pT()/GeV);
             }
             else if(cent >= 30. && cent < 60.)  {
               _h["Fig10KaonMinusCent30_60"]->fill(p.pT()/GeV);
               _h["Fig12KaonMinusCent30_60"]->fill(p.pT()/GeV);
-             // _h["Table4KaonMinusCentrality30_60"]->fill(p.pT()/GeV);
             }
             else if(cent >= 60. && cent < 92.)  {
               _h["Fig10KaonMinusCent60_92"]->fill(p.pT()/GeV);
               _h["Fig12KaonMinusCent60_92"]->fill(p.pT()/GeV);
-//              _h["Fig11KaonMinusPeripheral"]->fill(p.pT()/GeV);
-             // _h["Table4KaonMinusCentrality60_92"]->fill(p.pT()/GeV);
             }
         }
         if(p.pid() == 2212)
@@ -442,7 +281,6 @@ printC();*/
           if(cent >= 0. && cent < 5.) {
             _h["Fig10ProtonCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12ProtonCent0_5"]->fill(p.pT()/GeV);
-//            _h["Fig11ProtonCentral"]->fill(p.pT()/GeV);
           }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10ProtonCent5_15"]->fill(p.pT()/GeV);
@@ -459,7 +297,6 @@ printC();*/
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10ProtonCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12ProtonCent60_92"]->fill(p.pT()/GeV);
-//            _h["Fig11ProtonPeripheral"]->fill(p.pT()/GeV);
           }
         }
         if(p.pid() == -2212)
@@ -471,7 +308,6 @@ printC();*/
           if(cent >= 0. && cent < 5.) {
             _h["Fig10AntiProtonCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12AntiProtonCent0_5"]->fill(p.pT()/GeV);
-//            _h["Fig11AntiProtonCentral"]->fill(p.pT()/GeV);
             }
             else if(cent >= 5. && cent < 15.)  {
               _h["Fig10AntiProtonCent5_15"]->fill(p.pT()/GeV);
@@ -488,7 +324,6 @@ printC();*/
             else if(cent >= 60. && cent < 92.)  {
               _h["Fig10AntiProtonCent60_92"]->fill(p.pT()/GeV);
               _h["Fig12AntiProtonCent60_92"]->fill(p.pT()/GeV);
-//              _h["Fig11AntiProtonPeripheral"]->fill(p.pT()/GeV);
             }
            }
 
@@ -502,7 +337,6 @@ printC();*/
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionPlusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent0_5"]->fill(p.pT()/GeV);
-//            _h["Fig11PionPlusCentral"]->fill(p.pT()/GeV);
 
           }
           else if(cent >= 5. && cent < 15.)  {
@@ -521,7 +355,6 @@ printC();*/
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10PionPlusCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12PionPlusCent60_92"]->fill(p.pT()/GeV);
-//            _h["Fig11PionPlusPeripheral"]->fill(p.pT()/GeV);
           }
         }
         if(p.pid() == -211)
@@ -533,8 +366,6 @@ printC();*/
           if(cent >= 0. && cent < 5.) {
             _h["Fig10PionMinusCent0_5"]->fill(p.pT()/GeV);
             _h["Fig12PionMinusCent0_5"]->fill(p.pT()/GeV);
-//            _h["Fig11PionMinusCentral"]->fill(p.pT()/GeV);
-
           }
           else if(cent >= 5. && cent < 15.)  {
             _h["Fig10PionMinusCent5_15"]->fill(p.pT()/GeV);
@@ -551,7 +382,6 @@ printC();*/
           else if(cent >= 60. && cent < 92.)  {
             _h["Fig10PionMinusCent60_92"]->fill(p.pT()/GeV);
             _h["Fig12PionMinusCent60_92"]->fill(p.pT()/GeV);
-//            _h["Fig11PionMinusPeripheral"]->fill(p.pT()/GeV);
           }
         }
     _p["KaonPlusParticle"]->fill(cent, N_KaonPlus);
@@ -594,18 +424,6 @@ printC();*/
     binShift(*_h["Fig10AntiProtonCent30_60"]);
     binShift(*_h["Fig10ProtonCent60_92"]);
     binShift(*_h["Fig10AntiProtonCent60_92"]);
-//    binShift(*_h["Fig11PionPlusCentral"]);
-//    binShift(*_h["Fig11PionPlusPeripheral"]);
-//    binShift(*_h["Fig11PionMinusCentral"]);
-//    binShift(*_h["Fig11PionMinusPeripheral"]);
-//    binShift(*_h["Fig11KaonPlusCentral"]);
-//    binShift(*_h["Fig11KaonPlusPeripheral"]);
-//    binShift(*_h["Fig11KaonMinusCentral"]);
-//    binShift(*_h["Fig11KaonMinusPeripheral"]);
-//    binShift(*_h["Fig11ProtonCentral"]);
-//    binShift(*_h["Fig11ProtonPeripheral"]);
-//    binShift(*_h["Fig11AntiProtonCentral"]);
-//    binShift(*_h["Fig11AntiProtonPeripheral"]);
     binShift(*_h["Fig12PionPlusCent0_5"]);
     binShift(*_h["Fig12PionPlusCent5_15"]);
     binShift(*_h["Fig12PionPlusCent15_30"]);
@@ -676,31 +494,6 @@ double scaleFactor = 1.0 / (2 * M_PI );
       _h["Fig10AntiProtonCent30_60"] ->scaleW(scaleFactor * 1./_c["Cent30_60"]->sumW());
       _h["Fig10ProtonCent60_92"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
       _h["Fig10AntiProtonCent60_92"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-
-//      _h["Fig11PionPlusCentral"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
-//      _h["Fig11PionPlusPeripheral"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-//      divide(_h["Fig11PionPlusCentral"], _h["Fig11PionPlusPeripheral"], _s["Fig11PionPlus"]);
-
-//      _h["Fig11PionMinusCentral"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
-//      _h["Fig11PionMinusPeripheral"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-//      divide(_h["Fig11PionMinusCentral"], _h["Fig11PionMinusPeripheral"], _s["Fig11PionMinus"]);
-
-//      _h["Fig11KaonPlusCentral"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
-//      _h["Fig11KaonPlusPeripheral"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-//      divide(_h["Fig11KaonPlusCentral"], _h["Fig11KaonPlusPeripheral"], _s["Fig11KaonPlus"]);
-
-//      _h["Fig11KaonMinusCentral"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
-//      _h["Fig11KaonMinusPeripheral"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-//      divide(_h["Fig11KaonMinusCentral"], _h["Fig11KaonMinusPeripheral"], _s["Fig11KaonMinus"]);
-
-//      _h["Fig11ProtonCentral"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
-//      _h["Fig11ProtonPeripheral"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-//      divide(_h["Fig11ProtonCentral"], _h["Fig11ProtonPeripheral"], _s["Fig11Proton"]);
-
-//      _h["Fig11AntiProtonCentral"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
-//      _h["Fig11AntiProtonPeripheral"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
-//      divide(_h["Fig11AntiProtonCentral"], _h["Fig11AntiProtonPeripheral"], _s["Fig11AntiProton"]);
-
       _h["Fig12PionPlusCent0_5"]->scaleW(scaleFactor * 1./_c["Cent0_5"]->sumW());
       _h["Fig12PionPlusCent5_15"]->scaleW(scaleFactor * 1./_c["Cent5_15"]->sumW());
       _h["Fig12PionPlusCent15_30"]->scaleW(scaleFactor * 1./_c["Cent15_30"]->sumW());
@@ -732,33 +525,7 @@ double scaleFactor = 1.0 / (2 * M_PI );
       _h["Fig12ProtonCent60_92"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
       _h["Fig12AntiProtonCent60_92"]->scaleW(scaleFactor * 1./_c["Cent60_92"]->sumW());
 
-      vector<int> centBins = {0, 5, 15, 30, 60, 92};
-/*
-      for(size_t i = 0; i < _h["PionPlusParticle"]->numBins(); i++)
-      {
-              string scounter = "Cent" + to_string(centBins[i]) + "_" + to_string(centBins[i+1]);
-              double normCent = 1./_c[scounter]->sumW();
-              _h["PionPlusParticle"]->bin(i).scaleW(normCent);
-              _h["PionMinusParticle"]->bin(i).scaleW(normCent);
-              _h["KaonPlusParticle"]->bin(i).scaleW(normCent);
-              _h["KaonMinusParticle"]->bin(i).scaleW(normCent);
-              _h["ProtonParticle"]->bin(i).scaleW(normCent);
-              _h["AntiProtonParticle"]->bin(i).scaleW(normCent);
-      }
-*/
-/*auto printC = [&](const string& name) {
-  double v = _c[name]->sumW();
-  cout << name << " = " << v << (v == 0 ? "  <<< WARNING ZERO" : "") << endl;
-};
-
-printC("MinBias");
-printC("Cent0_5");
-printC("Cent5_15");
-printC("Cent15_30");
-printC("Cent30_60");
-printC("Cent60_92");*/
-
-
+      vector<int> centBins = {0, 5, 15, 30, 60, 92}; 
 
     }
 
