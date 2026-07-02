@@ -18,9 +18,7 @@
 #include <string>
 #define _USE_MATH_DEFINES
 
-
 namespace Rivet {
-
 
   /// @brief Add a short analysis description here
   class PHENIX_2007_I731133 : public Analysis {
@@ -127,7 +125,7 @@ void binShift(YODA::Histo1D& histogram) {
           else if (beamOpt == "AUAU200") collSys = AuAu200;
           else if (beamOpt == "DAU200") collSys = DAu200;
 
-          auto printC = [&]() {
+/*          auto printC = [&]() {
           cerr << "sqrtS = " << sqrtS()/GeV
            << " GeV, collSys = "
           << (collSys == pp ? "pp" :
@@ -139,7 +137,7 @@ void binShift(YODA::Histo1D& histogram) {
           << endl;
           };
             printC();
-          
+*/          
           //declaration for collision systems that are not p+p
           declareCentrality(RHICCentrality("PHENIX"), "RHIC_2019_CentralityCalibration:exp=PHENIX", "CMULT", "CMULT");
           if(fixedcentralityOpt!= "NONE"){
@@ -156,9 +154,7 @@ void binShift(YODA::Histo1D& histogram) {
           book(sow["sow_AuAuc0020"], "_sow_AuAuc0020");
           book(sow["sow_AuAuc2060"], "_sow_AuAuc2060");
           book(sow["sow_AuAuc6092"], "_sow_AuAuc6092");
-
-          book(sow["pp_xsec"], "_pp_xsec");
-          
+         
           //figure 13 (12.1 in hepdata) pp-eta_pt_bins
           //d01-x01-y01
           string refname1 = mkAxisCode(1, 1, 1);
@@ -374,14 +370,6 @@ void binShift(YODA::Histo1D& histogram) {
           else if (beamOpt == "DAU200") collSys = DAu200;*/
           
           if (collSys == pp){    
-              //Fill our counter; this will be useful at the end when we want to run ->sumW()
-              sow["sow_pp"]->fill();
-              
-              //sow["pp_xsec"]->fill(crossSection()/millibarn);
-if (!sow["pp_xsec"]->numEntries()) {
-  sow["pp_xsec"]->fill(crossSection()/millibarn);
-}
-
               //a conditional for the charged particles: eta, pi+, pi-, gamma
               for (Particle p : neutralParticles) {
                   
@@ -661,6 +649,7 @@ if (!sow["pp_xsec"]->numEntries()) {
     /// Normalise histograms etc., after the run
       void finalize() {
       double cross = crossSection() / millibarn;
+
 
           //Figure 13:
           if(sow["sow_pp"]->sumW()>0){
